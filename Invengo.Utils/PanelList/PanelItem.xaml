@@ -1,0 +1,20 @@
+﻿<local:BorderControlBase x:Class="Invengo.Utils.PanelItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Invengo.Utils"
+             mc:Ignorable="d">
+    <Grid Margin="0,1">
+        <Border BorderBrush="#CCC" CornerRadius="3" Name="border" BorderThickness="1"
+                TouchDown="Blue_MouseMove" TouchUp="Trans_MouseLeave"
+                MouseDown="Blue_MouseDown" MouseMove="Blue_MouseMove" MouseLeave="Trans_MouseLeave">
+            <DockPanel Margin="10,7">
+                <TextBlock Name="lbDesc" Text="Desc" FontFamily="Microsoft YaHei" FontSize="18" 
+                       Opacity="0.8" VerticalAlignment="Center" HorizontalAlignment="Right" DockPanel.Dock="Right"/>
+                <TextBlock Name="lbName" Text="Name" FontFamily="Microsoft YaHei" FontSize="18" Margin="1,0"
+                       Opacity="0.9" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+            </DockPanel>
+        </Border>
+    </Grid>
+</local:BorderControlBase>

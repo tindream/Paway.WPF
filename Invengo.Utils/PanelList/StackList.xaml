@@ -1,0 +1,14 @@
+﻿<local:PanelListBase x:Class="Invengo.Utils.StackList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Invengo.Utils"
+             mc:Ignorable="d">
+    <local:ScrollViewerRound x:Name="scrollViewer">
+        <StackPanel Name="stackPanel" Margin="1,1">
+            <local:PanelItem/>
+            <local:PanelItem Selected="True"/>
+        </StackPanel>
+    </local:ScrollViewerRound>
+</local:PanelListBase>
