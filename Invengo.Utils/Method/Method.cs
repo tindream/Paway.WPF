@@ -7,12 +7,29 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Threading;
 using Paway.Helper;
 
 namespace Invengo.Utils
 {
     public class Method
     {
+        #region 一般方法
+        public static void DoEvents()
+        {
+            var frame = new DispatcherFrame();
+            Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background, new DispatcherOperationCallback(ExitFrame), frame);
+            Dispatcher.PushFrame(frame);
+        }
+        private static Object ExitFrame(Object state)
+        {
+            ((DispatcherFrame)state).Continue = false;
+            return null;
+        }
+
+        #endregion
+
+        #region Window弹出
         public static void Debug(DependencyObject parent, string msg)
         {
             Show(parent, msg, LeveType.Debug);
@@ -102,5 +119,7 @@ namespace Invengo.Utils
             child = null;
             return false;
         }
+
+        #endregion
     }
 }

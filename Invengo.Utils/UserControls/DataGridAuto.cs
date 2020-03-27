@@ -14,6 +14,7 @@ namespace Invengo.Utils
 {
     public partial class DataGridAuto : DataGrid
     {
+        #region 基本样式
         public DataGridAuto()
         {
             //AutoGenerateColumns = true;
@@ -29,6 +30,8 @@ namespace Invengo.Utils
         {
             ColumnHeaderStyle = (Style)FindResource("ColumnHeaderBase");
         }
+
+        #endregion
 
         #region 绑定数据
         /// <summary>
@@ -66,6 +69,21 @@ namespace Invengo.Utils
                 column.Visibility = property.IShow() ? Visibility.Visible : Visibility.Collapsed;
                 this.Columns.Add(column);
             }
+        }
+
+        #endregion
+
+        #region 扩展公共方法
+        public DataGridColumn GetColumn(string name)
+        {
+            foreach (var item in Columns)
+            {
+                if (item.ClipboardContentBinding is Binding binding && binding.Path.Path == name)
+                {
+                    return item;
+                }
+            }
+            return new DataGridTextColumn();
         }
 
         #endregion
