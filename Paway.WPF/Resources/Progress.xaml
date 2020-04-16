@@ -1,0 +1,81 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Paway.WPF;assembly=Paway.WPF">
+
+    <Style TargetType="{x:Type ProgressBar}">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <!--控件模板-->
+                <ControlTemplate TargetType="{x:Type ProgressBar}" >
+                    <Grid>
+                        <Border Name="PART_Track"
+                                    CornerRadius="3"
+                                    BorderBrush="LightGray"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Background="{TemplateBinding Background}" >
+                        </Border>
+                        <Border x:Name="PART_Indicator"
+                                    CornerRadius="3"
+                                    HorizontalAlignment="Left">
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                                    <GradientStop Color="#FF398FB4"
+                                                      Offset="0" />
+                                    <GradientStop Color="#FF6AD2D8"
+                                                      Offset="1" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type local:MKProgressBar}">
+        <Setter Property="local:MKProgressBar.IsMonitoring" Value="True"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <!--控件模板-->
+                <ControlTemplate TargetType="{x:Type local:MKProgressBar}" >
+                    <Grid>
+                        <Border Name="PART_Track"
+                                    CornerRadius="{TemplateBinding Radius}"
+                                    BorderBrush="LightGray"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Background="{TemplateBinding Background}" />
+                        <Border x:Name="PART_Indicator"
+                                    CornerRadius="{TemplateBinding Radius}"
+                                    HorizontalAlignment="Left">
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                                    <GradientStop 
+                                        Offset="0"
+                                        Color="{Binding ForegroundStartColor, RelativeSource={RelativeSource TemplatedParent}}" />
+                                    <GradientStop 
+                                        Offset="1"
+                                        Color="{Binding ForegroundEndColor, RelativeSource={RelativeSource TemplatedParent}}" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+                        <Grid>
+                            <Label Opacity="0.4"
+                                           Padding="12,0,0,0"
+                                           Foreground="#000000"
+                                           Margin="0,0,5,0"
+                                           Content="{Binding ProgressValue, RelativeSource={RelativeSource TemplatedParent}}"
+                                           FontFamily="Microsoft YaHei"
+                                           HorizontalAlignment="Right"
+                                           VerticalContentAlignment="Center"/>
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>
