@@ -2,14 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Paway.WPF;assembly=Paway.WPF">
 
-    <!--ComBoBox项选中背景色-->
-    <SolidColorBrush x:Key="ComboBoxSelectedBackground" Color="#E623AFFF"/>
-    <!--ComBoBox项鼠标经过背景色-->
-    <SolidColorBrush x:Key="ComboBoxMouseOverBackground" Color="#AA23AFFF"/>
-    <!--ComBoBox项选中前景色-->
-    <SolidColorBrush x:Key="ComboBoxSelectedForeground" Color="White"/>
-    <!--ComBoBox项鼠标经过前景色-->
-    <SolidColorBrush x:Key="ComboBoxMouseOverForeground" Color="White"/>
     <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
         <Grid Height="30">
             <Border Grid.Column="1" Background="White" Opacity="0"   Cursor="Hand"/>
@@ -93,7 +85,6 @@
         <Setter Property="ItemContainerStyle">
             <Setter.Value>
                 <Style TargetType="ComboBoxItem">
-                    <Setter Property="local:ComboBoxMonitor.IsMonitoring" Value="True"/>
                     <Setter Property="Height" Value="30"/>
                     <Setter Property="Template">
                         <Setter.Value>
@@ -107,9 +98,9 @@
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsSelected" Value="true">
                                         <Setter TargetName="_borderbg" Property="Background" 
-                                                Value="{StaticResource ComboBoxSelectedBackground}" />
+                                                Value="{Binding SelectedBackground,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxRound}}}" />
                                         <Setter TargetName="_txt" Property="Foreground" 
-                                                Value="{StaticResource ComboBoxSelectedForeground}"/>
+                                                Value="{Binding SelectedForeground,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxRound}}}"/>
                                     </Trigger>
                                     <MultiTrigger>
                                         <MultiTrigger.Conditions>
@@ -117,9 +108,9 @@
                                             <Condition Property="IsMouseOver" Value="true"/>
                                         </MultiTrigger.Conditions>
                                         <Setter TargetName="_borderbg" Property="Background" 
-                                                Value="{StaticResource ComboBoxMouseOverBackground}" />
+                                                Value="{Binding MouseOverBackground,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxRound}}}" />
                                         <Setter TargetName="_txt" Property="Foreground" 
-                                                Value="{StaticResource ComboBoxMouseOverForeground}"/>
+                                                Value="{Binding MouseOverForeground,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxRound}}}"/>
                                     </MultiTrigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>

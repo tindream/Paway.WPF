@@ -32,7 +32,6 @@ namespace Paway.WPF
             set { SetValue(RadiusProperty, value); }
         }
         [Category("扩展")]
-        [Description("Item项不可用。仅用于控件激活后边框颜色")]
         public Brush SelectedBackground
         {
             get { return (Brush)GetValue(SelectedBackgroundProperty); }

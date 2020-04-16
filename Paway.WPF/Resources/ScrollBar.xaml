@@ -114,7 +114,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style x:Key="for_scrollviewer" TargetType="{x:Type local:ScrollViewerRound}">
+    <Style TargetType="{x:Type local:ScrollViewerRound}">
         <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="PanningMode" Value="VerticalOnly"/>
         <Setter Property="Template">
@@ -252,7 +252,4 @@
 
     <!--默认ScrollBar-->
     <Style TargetType="ScrollBar" BasedOn="{StaticResource for_scrollbar}"/>
-
-    <!--默认local:ScrollViewerRound-->
-    <Style TargetType="local:ScrollViewerRound" BasedOn="{StaticResource for_scrollviewer}"/>
 </ResourceDictionary>

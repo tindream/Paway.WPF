@@ -41,7 +41,7 @@
         </Grid.ColumnDefinitions>
         <utils:ProgressBarRound Grid.Row="1" Margin="5" Height="32" Value="50" />
 
-        <utils:ComboBoxRound Grid.Row="2" Margin="5"  >
+        <utils:ComboBoxRound Grid.Row="2" Margin="5" >
             <ComboBoxItem Content="A" IsSelected="True"/>
             <ComboBoxItem Content="B"/>
             <ComboBoxItem Content="C"/>
