@@ -2,21 +2,21 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Paway.WPF;assembly=Paway.WPF">
 
-    <Style x:Key="txtWater" TargetType="{x:Type local:TextBoxWater}">
+    <Style x:Key="txtWater" TargetType="{x:Type local:TextBoxRound}">
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="BorderBrush" Value="#D8D8D8"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Cursor" Value="IBeam"/>
-        <Setter Property="Padding" Value="10,2,0,2"/>
+        <Setter Property="Padding" Value="5,2,0,2"/>
         <Setter Property="Margin" Value="0,2"/>
         <Setter Property="FontFamily" Value="Microsoft YaHei"/>
         <Setter Property="FontSize" Value="18"/>
         <!--修改模板属性-->
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:TextBoxWater}">
+                <ControlTemplate TargetType="{x:Type local:TextBoxRound}">
                     <Border Name="border" 
                                 SnapsToDevicePixels="true"
                                 Background="{TemplateBinding Background}"
@@ -31,7 +31,7 @@
                                             Visibility="Collapsed"
                                             Orientation="Horizontal">
                                 <Label Opacity="0.4"
-                                           Padding="12,0,0,0"
+                                           Padding="7,0,0,0"
                                            FontSize="{Binding WaterSize, RelativeSource={RelativeSource TemplatedParent}}"
                                            Foreground="#000000"
                                            FontFamily="Microsoft YaHei"
@@ -63,5 +63,5 @@
     </Style>
 
     <!--默认local:TextBoxWater-->
-    <Style TargetType="local:TextBoxWater" BasedOn="{StaticResource txtWater}"/>
+    <Style TargetType="local:TextBoxRound" BasedOn="{StaticResource txtWater}"/>
 </ResourceDictionary>

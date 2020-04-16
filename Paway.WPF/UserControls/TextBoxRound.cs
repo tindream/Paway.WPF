@@ -8,16 +8,16 @@ using System.Windows.Media;
 
 namespace Paway.WPF
 {
-    public partial class TextBoxWater : TextBox
+    public partial class TextBoxRound : TextBox
     {
         public static readonly DependencyProperty WaterProperty =
-            DependencyProperty.RegisterAttached("Water", typeof(string), typeof(TextBoxWater), new PropertyMetadata("请输入.."));
+            DependencyProperty.RegisterAttached("Water", typeof(string), typeof(TextBoxRound), new PropertyMetadata("请输入.."));
         public static readonly DependencyProperty WaterSizeProperty =
-            DependencyProperty.RegisterAttached("WaterSize", typeof(double), typeof(TextBoxWater), new PropertyMetadata(16d));
+            DependencyProperty.RegisterAttached("WaterSize", typeof(double), typeof(TextBoxRound), new PropertyMetadata(16d));
         public static readonly DependencyProperty RadiusProperty =
-            DependencyProperty.RegisterAttached("Radius", typeof(CornerRadius), typeof(TextBoxWater), new PropertyMetadata(new CornerRadius(3)));
+            DependencyProperty.RegisterAttached("Radius", typeof(CornerRadius), typeof(TextBoxRound), new PropertyMetadata(new CornerRadius(3)));
         public static readonly DependencyProperty FocusedBrushProperty =
-            DependencyProperty.RegisterAttached("FocusedBrush", typeof(Brush), typeof(TextBoxWater), new PropertyMetadata(new SolidColorBrush(Color.FromRgb(35, 175, 255))));
+            DependencyProperty.RegisterAttached("FocusedBrush", typeof(Brush), typeof(TextBoxRound), new PropertyMetadata(new SolidColorBrush(Color.FromRgb(35, 175, 255))));
 
         [Category("扩展")]
         public string Water
@@ -44,6 +44,6 @@ namespace Paway.WPF
             set { SetValue(FocusedBrushProperty, value); }
         }
 
-        public TextBoxWater() { }
+        public TextBoxRound() { }
     }
 }

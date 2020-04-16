@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paway.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,24 @@ namespace Paway.Win
         public MainWindow()
         {
             InitializeComponent();
+            var list = new List<TestInfo>();
+            list.Add(new TestInfo("Hello"));
+            list.Add(new TestInfo("你好", 70));
+            datagrid1.ItemsSource = list;
+        }
+    }
+    public class TestInfo
+    {
+        [NoShow]
+        public int Id { get; set; }
+        [Text("名称")]
+        public string Name { get; set; }
+        public double Value { get; set; }
+
+        public TestInfo(string name, double value = 0)
+        {
+            this.Name = name;
+            this.Value = value;
         }
     }
 }

@@ -8,29 +8,29 @@ using System.Windows.Media;
 
 namespace Paway.WPF
 {
-    public partial class MKProgressBar : ProgressBar
+    public partial class ProgressBarRound : ProgressBar
     {
         public static readonly DependencyProperty RadiusProperty =
-            DependencyProperty.RegisterAttached("Radius", typeof(CornerRadius), typeof(MKProgressBar), new PropertyMetadata(new CornerRadius(3)));
+            DependencyProperty.RegisterAttached("Radius", typeof(CornerRadius), typeof(ProgressBarRound), new PropertyMetadata(new CornerRadius(3)));
         public static readonly DependencyProperty ForegroundStartColorProperty =
-            DependencyProperty.RegisterAttached("ForegroundStartColor", typeof(Color), typeof(MKProgressBar),
+            DependencyProperty.RegisterAttached("ForegroundStartColor", typeof(Color), typeof(ProgressBarRound),
             new PropertyMetadata(Color.FromArgb(255, 57, 143, 180)));
         public static readonly DependencyProperty ForegroundEndColorProperty =
-            DependencyProperty.RegisterAttached("ForegroundEndColor", typeof(Color), typeof(MKProgressBar),
+            DependencyProperty.RegisterAttached("ForegroundEndColor", typeof(Color), typeof(ProgressBarRound),
             new PropertyMetadata(Color.FromArgb(255, 106, 210, 216)));
         public static readonly DependencyProperty ProgressValueProperty =
-            DependencyProperty.RegisterAttached("ProgressValue", typeof(string), typeof(MKProgressBar));
+            DependencyProperty.RegisterAttached("ProgressValue", typeof(string), typeof(ProgressBarRound));
 
         #region 启用监听，获取进度
         public static readonly DependencyProperty IsMonitoringProperty =
-            DependencyProperty.RegisterAttached("IsMonitoring", typeof(bool), typeof(MKProgressBar), new UIPropertyMetadata(false, OnIsMonitoringChanged));
+            DependencyProperty.RegisterAttached("IsMonitoring", typeof(bool), typeof(ProgressBarRound), new UIPropertyMetadata(false, OnIsMonitoringChanged));
         private static void OnIsMonitoringChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             if (obj is ProgressBar bar)
             {
                 bar.LayoutUpdated += delegate
                 {
-                    bar.SetValue(ProgressValueProperty, bar.Value + "/" + bar.Maximum);
+                    bar.SetValue(ProgressValueProperty, $"{bar.Value * 100 / bar.Maximum:F0}%");
                 };
                 if ((bool)e.NewValue)
                 {
@@ -46,7 +46,7 @@ namespace Paway.WPF
         {
             if (sender is ProgressBar bar)
             {
-                bar.SetValue(ProgressValueProperty, bar.Value + "/" + bar.Maximum);
+                bar.SetValue(ProgressValueProperty, $"{bar.Value * 100 / bar.Maximum:F0}%");
             }
         }
         public bool IsMonitoring
@@ -76,6 +76,6 @@ namespace Paway.WPF
             set { SetValue(ForegroundEndColorProperty, value); }
         }
 
-        public MKProgressBar() { }
+        public ProgressBarRound() { }
     }
 }

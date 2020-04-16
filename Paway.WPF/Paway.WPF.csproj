@@ -71,7 +71,7 @@
     <Compile Include="UserControls\ButtonRound.cs" />
     <Compile Include="UserControls\ComboBoxMonitor.cs" />
     <Compile Include="UserControls\DataGridAuto.cs" />
-    <Compile Include="UserControls\MKProgressBar.cs" />
+    <Compile Include="UserControls\ProgressBarRound.cs" />
     <Compile Include="UserControls\PasswordBoxMonitor.cs" />
     <Compile Include="UserControls\ScrollViewerMonitor.cs" />
     <Compile Include="UserControls\ScrollViewerRound.cs" />
@@ -79,7 +79,7 @@
       <DependentUpon>SelectedBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ComboBoxRound.cs" />
-    <Compile Include="UserControls\TextBoxWater.cs" />
+    <Compile Include="UserControls\TextBoxRound.cs" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\PasswordBox.xaml">

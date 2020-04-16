@@ -39,7 +39,7 @@
                         </Grid.ColumnDefinitions>
                         <Border Name="border" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="1" CornerRadius="{TemplateBinding Radius}"
                                  BorderBrush="{TemplateBinding BorderBrush}" />
-                        <ContentPresenter HorizontalAlignment="Left" Margin="3,3,0,3" x:Name="ContentSite" 
+                        <ContentPresenter HorizontalAlignment="Left" Margin="7,3,0,3" x:Name="ContentSite" 
                                           VerticalAlignment="Center" 
                                           Content="{TemplateBinding SelectionBoxItem}" 
                                           ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" 
@@ -59,20 +59,20 @@
                                    Background="Transparent" 
                                    IsReadOnly="{TemplateBinding IsReadOnly}"/>
                         <!--Popup 可显示 ComboBox 中的项列表。IsOpen 已数据绑定到通过 ComboBoxToggleButton 来切换的 IsDropDownOpen-->
-                        <Popup IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" x:Name="Popup" 
+                        <Popup IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" x:Name="Popup"
                                Focusable="False" 
                                AllowsTransparency="True" 
                                PopupAnimation="Slide">
-                            <Grid MaxHeight="150" MinWidth="{TemplateBinding ActualWidth}" x:Name="DropDown" 
+                            <Grid MaxHeight="150" MinWidth="{TemplateBinding ActualWidth}" x:Name="DropDown"
                                   SnapsToDevicePixels="True">
-                                <Border x:Name="DropDownBorder"  BorderBrush="#CCC" BorderThickness="1 0 1 1"/>
+                                <Border x:Name="DropDownBorder"  BorderBrush="#CCC" BorderThickness="1"/>
                                 <ScrollViewer Margin="1" 
                                               SnapsToDevicePixels="True" 
                                               HorizontalScrollBarVisibility="Auto" 
                                               VerticalScrollBarVisibility="Auto" 
                                               CanContentScroll="True">
                                     <!--StackPanel 用于显示子级，方法是将 IsItemsHost 设置为 True-->
-                                    <StackPanel IsItemsHost="True" 
+                                    <StackPanel IsItemsHost="True"
                                                 KeyboardNavigation.DirectionalNavigation="Contained" 
                                                 Background="White"/>
                                 </ScrollViewer>

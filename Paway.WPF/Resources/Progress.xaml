@@ -2,46 +2,14 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Paway.WPF;assembly=Paway.WPF">
 
-    <Style TargetType="{x:Type ProgressBar}">
+    <Style TargetType="{x:Type local:ProgressBarRound}">
+        <Setter Property="local:ProgressBarRound.IsMonitoring" Value="True"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Background" Value="White"/>
         <Setter Property="Template">
             <Setter.Value>
                 <!--控件模板-->
-                <ControlTemplate TargetType="{x:Type ProgressBar}" >
-                    <Grid>
-                        <Border Name="PART_Track"
-                                    CornerRadius="3"
-                                    BorderBrush="LightGray"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    Background="{TemplateBinding Background}" >
-                        </Border>
-                        <Border x:Name="PART_Indicator"
-                                    CornerRadius="3"
-                                    HorizontalAlignment="Left">
-                            <Border.Background>
-                                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
-                                    <GradientStop Color="#FF398FB4"
-                                                      Offset="0" />
-                                    <GradientStop Color="#FF6AD2D8"
-                                                      Offset="1" />
-                                </LinearGradientBrush>
-                            </Border.Background>
-                        </Border>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style TargetType="{x:Type local:MKProgressBar}">
-        <Setter Property="local:MKProgressBar.IsMonitoring" Value="True"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Background" Value="White"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <!--控件模板-->
-                <ControlTemplate TargetType="{x:Type local:MKProgressBar}" >
+                <ControlTemplate TargetType="{x:Type local:ProgressBarRound}" >
                     <Grid>
                         <Border Name="PART_Track"
                                     CornerRadius="{TemplateBinding Radius}"
