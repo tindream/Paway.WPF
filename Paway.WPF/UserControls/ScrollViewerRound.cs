@@ -18,18 +18,21 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached("ScrollBarWidth", typeof(double), typeof(ScrollViewerRound), new PropertyMetadata(8d));
 
         [Category("扩展")]
+        [Description("自定义边框圆角")]
         public CornerRadius ScrollBarRadius
         {
             get { return (CornerRadius)GetValue(ScrollBarRadiusProperty); }
             set { SetValue(ScrollBarRadiusProperty, value); }
         }
         [Category("扩展")]
+        [Description("滚动条颜色")]
         public Brush ScrollBarColor
         {
             get { return (Brush)GetValue(ScrollBarColorProperty); }
             set { SetValue(ScrollBarColorProperty, value); }
         }
         [Category("扩展")]
+        [Description("滚动条高/宽度")]
         public double ScrollBarWidth
         {
             get { return (double)GetValue(ScrollBarWidthProperty); }

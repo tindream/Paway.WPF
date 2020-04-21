@@ -20,24 +20,28 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached("FocusedBrush", typeof(Brush), typeof(TextBoxRound), new PropertyMetadata(new SolidColorBrush(Color.FromRgb(35, 175, 255))));
 
         [Category("扩展")]
+        [Description("水印内容")]
         public string Water
         {
             get { return (string)GetValue(WaterProperty); }
             set { SetValue(WaterProperty, value); }
         }
         [Category("扩展")]
+        [Description("水印内容字体大小")]
         public double WaterSize
         {
             get { return (double)GetValue(WaterSizeProperty); }
             set { SetValue(WaterSizeProperty, value); }
         }
         [Category("扩展")]
+        [Description("自定义边框圆角")]
         public CornerRadius Radius
         {
             get { return (CornerRadius)GetValue(RadiusProperty); }
             set { SetValue(RadiusProperty, value); }
         }
         [Category("扩展")]
+        [Description("文本框激活时的边框颜色")]
         public Brush FocusedBrush
         {
             get { return (Brush)GetValue(FocusedBrushProperty); }

@@ -4,6 +4,16 @@
              xmlns:local="clr-namespace:Paway.Win"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Button.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\ComboBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\DataGrid.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\PasswordBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Progress.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\ScrollBar.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\TextBox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

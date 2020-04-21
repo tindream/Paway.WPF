@@ -7,19 +7,6 @@
         xmlns:utils="clr-namespace:Paway.WPF;assembly=Paway.WPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Button.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\ComboBox.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\DataGrid.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\PasswordBox.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Progress.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\ScrollBar.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\TextBox.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
 
     <Grid VerticalAlignment="Top" HorizontalAlignment="Left">
         <Grid.RowDefinitions>
@@ -49,12 +36,12 @@
         
         <utils:TextBoxRound Grid.Row="3" Margin="5" HorizontalAlignment="Stretch"  ></utils:TextBoxRound>
         <PasswordBox Grid.Row="4" Margin="5" HorizontalAlignment="Stretch"  ></PasswordBox>
-        <utils:ButtonRound Grid.Row="5" Margin="5"  Content="确认"></utils:ButtonRound>
+        <utils:ButtonRound Grid.Row="5" Margin="5"  Content="确认" ></utils:ButtonRound>
 
         <utils:CheckBoxRound Grid.Row="6" Margin="5"  ></utils:CheckBoxRound>
         <utils:SelectedBox Grid.Row="7" Margin="5"  ></utils:SelectedBox>
         
-        <utils:DataGridAuto Name="datagrid1" Grid.Column="1" Grid.RowSpan="7" Margin="5"  ></utils:DataGridAuto>
+        <utils:DataGridAuto Name="datagrid1" Grid.Column="1" Grid.RowSpan="7" Margin="5"  Height="250" ></utils:DataGridAuto>
         
     </Grid>
 </Window>

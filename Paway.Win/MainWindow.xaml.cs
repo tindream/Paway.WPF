@@ -26,6 +26,7 @@ namespace Paway.Win
             var list = new List<TestInfo>();
             list.Add(new TestInfo("Hello"));
             list.Add(new TestInfo("你好", 70));
+            for (int i = 0; i < 20; i++) list.Add(new TestInfo("A" + i, i));
             datagrid1.ItemsSource = list;
         }
     }

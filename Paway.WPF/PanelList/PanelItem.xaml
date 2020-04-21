@@ -10,10 +10,10 @@
                 TouchDown="Blue_MouseMove" TouchUp="Trans_MouseLeave"
                 MouseDown="Blue_MouseDown" MouseMove="Blue_MouseMove" MouseLeave="Trans_MouseLeave">
             <DockPanel Margin="10,7">
-                <TextBlock Name="lbDesc" Text="Desc" FontFamily="Microsoft YaHei" FontSize="18" 
-                       Opacity="0.8" VerticalAlignment="Center" HorizontalAlignment="Right" DockPanel.Dock="Right"/>
-                <TextBlock Name="lbName" Text="Name" FontFamily="Microsoft YaHei" FontSize="18" Margin="1,0"
-                       Opacity="0.9" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                <TextBlock Name="lbDesc" Text="Desc" FontFamily="Microsoft YaHei" FontSize="18" Foreground="#555"
+                       VerticalAlignment="Center" HorizontalAlignment="Right" DockPanel.Dock="Right"/>
+                <TextBlock Name="lbName" Text="Name" FontFamily="Microsoft YaHei" FontSize="18" Foreground="#333"
+                       VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
             </DockPanel>
         </Border>
     </Grid>

@@ -15,7 +15,7 @@
                 MouseMove="BlueBorder_MouseMove" MouseLeave="TransBorder_MouseLeave">
             <DockPanel>
                 <Image Name="cbxImage" Source="../Images/selectedBox.png" Width="24"/>
-                <TextBlock Name="cbxTitle" Margin="5,0,0,0" Opacity="0.8" Text="标题" 
+                <TextBlock Name="cbxTitle" Margin="5,0,0,0" Text="标题" Foreground="#333"
                    FontFamily="Microsoft YaHei" FontSize="18"
                    LineStackingStrategy="BlockLineHeight" 
                    TextTrimming="WordEllipsis" />

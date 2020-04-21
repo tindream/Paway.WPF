@@ -5,7 +5,7 @@
     <Style TargetType="{x:Type local:ButtonRound}">
         <Setter Property="FontFamily" Value="Microsoft YaHei"/>
         <Setter Property="FontSize" Value="20"/>
-        <Setter Property="BorderBrush" Value="#D8D8D8"/>
+        <Setter Property="BorderBrush" Value="#D3D3D3"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="Black"/>

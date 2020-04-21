@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Paway.WPF;assembly=Paway.WPF">
 
-    <Style x:Key="CellBase"  TargetType="{x:Type DataGridCell}">
+    <Style TargetType="{x:Type DataGridCell}">
         <Setter Property="Background" Value="#FFFFFF" />
         <Setter Property="FontFamily" Value="Microsoft YaHei" />
         <Setter Property="BorderThickness" Value="0" />
@@ -14,56 +14,36 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style x:Key="CellState"  TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource CellBase}">
-        <Setter Property="Height" Value="78"/>
-        <Setter Property="FontSize" Value="24" />
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding State}" Value="{x:Null}">
-                <Setter Property="Foreground" Value="#000000"/>
-            </DataTrigger>
-            <DataTrigger Binding="{Binding State}" Value="1">
-                <Setter Property="Foreground" Value="#FF7256"/>
-            </DataTrigger>
-            <DataTrigger Binding="{Binding State}" Value="2">
-                <Setter Property="Foreground" Value="#FF9047"/>
-            </DataTrigger>
-        </Style.Triggers>
-    </Style>
-    <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource CellState}">
-    </Style>
 
     <Style TargetType="{x:Type DataGridRow}">
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#B5DEFF"/>
+                <Setter Property="Background" Value="#23AFFF"/>
             </Trigger>
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="ColumnHeaderBase" TargetType="{x:Type DataGridColumnHeader}">
+    <Style TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="BorderThickness" Value="0,0,1,1"></Setter>
-        <Setter Property="BorderBrush" Value="#E8E8E8"></Setter>
-        <Setter Property="Background" Value="#F5F6F8"/>
+        <Setter Property="BorderBrush" Value="#E0E0E0"></Setter>
+        <Setter Property="Background" Value="#EEE"/>
         <Setter Property="Foreground" Value="Black" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Foreground" Value="White"/>
-                <Setter Property="Background" Value="#7823AFFF"/>
+                <Setter Property="Background" Value="#91D7FF"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Foreground" Value="White"/>
-                <Setter Property="Background" Value="#AA23AFFF"/>
+                <Setter Property="Background" Value="#65C7FF"/>
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style TargetType="{x:Type DataGridColumnHeader}">
-        <Setter Property="FontSize" Value="24"/>
-    </Style>
 
-    <Style x:Key="dataGrid" TargetType="{x:Type local:DataGridAuto}">
+    <Style TargetType="{x:Type local:DataGridAuto}">
         <!--其它-->
         <Setter Property="IsReadOnly" Value="True"/>
-        <Setter Property="BorderBrush" Value="#E8E8E8"/>
+        <Setter Property="BorderBrush" Value="#D3D3D3"/>
         <!--标题-->
         <Setter Property="RowHeaderWidth" Value="0"/>
         <!--外观-->
@@ -72,12 +52,12 @@
         <Setter Property="GridLinesVisibility" Value="Horizontal"/>
         <Setter Property="HorizontalGridLinesBrush">
             <Setter.Value>
-                <SolidColorBrush Color="#E8E8E8"/>
+                <SolidColorBrush Color="#E3E3E3"/>
             </Setter.Value>
         </Setter>
         <Setter Property="VerticalGridLinesBrush">
             <Setter.Value>
-                <SolidColorBrush Color="#E8E8E8"/>
+                <SolidColorBrush Color="#E3E3E3"/>
             </Setter.Value>
         </Setter>
         <!--列-->
@@ -86,6 +66,7 @@
         <Setter Property="CanUserResizeColumns" Value="False"/>
         <!--<Setter Property="CanUserSortColumns" Value="False"/>-->
         <!--行-->
+        <Setter Property="AlternatingRowBackground" Value="#A0A0A0"/>
         <Setter Property="AlternationCount" Value="2"/>
         <Setter Property="SelectionMode" Value="Single"/>
         <Setter Property="CanUserAddRows" Value="False"/>
@@ -102,10 +83,5 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
     </Style>
-
-    <!--默认DataGrid-->
-    <Style TargetType="DataGrid" BasedOn="{StaticResource dataGrid}"/>
-    <!--默认local:DataGridAuto-->
-    <Style TargetType="local:DataGridAuto" BasedOn="{StaticResource dataGrid}"/>
 
 </ResourceDictionary>

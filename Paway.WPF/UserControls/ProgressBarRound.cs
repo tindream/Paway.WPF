@@ -58,18 +58,21 @@ namespace Paway.WPF
         #endregion
 
         [Category("扩展")]
+        [Description("自定义边框圆角")]
         public CornerRadius Radius
         {
             get { return (CornerRadius)GetValue(RadiusProperty); }
             set { SetValue(RadiusProperty, value); }
         }
         [Category("扩展")]
+        [Description("进度条起始颜色")]
         public Color ForegroundStartColor
         {
             get { return (Color)GetValue(ForegroundStartColorProperty); }
             set { SetValue(ForegroundStartColorProperty, value); }
         }
         [Category("扩展")]
+        [Description("进度条终点颜色")]
         public Color ForegroundEndColor
         {
             get { return (Color)GetValue(ForegroundEndColorProperty); }

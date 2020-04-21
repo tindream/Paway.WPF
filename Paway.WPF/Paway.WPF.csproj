@@ -65,6 +65,9 @@
     <Compile Include="PanelList\PanelItem.xaml.cs">
       <DependentUpon>PanelItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Test\StateCButton.xaml.cs">
+      <DependentUpon>StateCButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\CheckBoxRound.xaml.cs">
       <DependentUpon>CheckBoxRound.xaml</DependentUpon>
     </Compile>
@@ -109,6 +112,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
+    <Page Include="Test\StateCButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UserControls\SelectedBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -20,18 +20,21 @@ namespace Paway.WPF
             new PropertyMetadata(new SolidColorBrush(Color.FromArgb(230, 35, 175, 255))));
 
         [Category("扩展")]
+        [Description("自定义边框圆角")]
         public CornerRadius Radius
         {
             get { return (CornerRadius)GetValue(RadiusProperty); }
             set { SetValue(RadiusProperty, value); }
         }
         [Category("扩展")]
+        [Description("鼠标划过时的背景颜色")]
         public Brush FocusedBrush
         {
             get { return (Brush)GetValue(FocusedBrushProperty); }
             set { SetValue(FocusedBrushProperty, value); }
         }
         [Category("扩展")]
+        [Description("鼠标点击时的背景颜色")]
         public Brush FocusedBrushDown
         {
             get { return (Brush)GetValue(FocusedBrushDownProperty); }

@@ -18,17 +18,13 @@ namespace Paway.WPF
         public DataGridAuto()
         {
             //AutoGenerateColumns = true;
+            this.Background = new SolidColorBrush(Color.FromArgb(255, 250, 250, 250));
             this.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
             this.CanUserSortColumns = true;
             this.CanUserResizeColumns = true;
             this.FontSize = 15;
-            this.RowHeight = 42;
+            this.RowHeight = 36;
             this.ColumnHeaderHeight = 35;
-            this.Loaded += DataGridAuto_Loaded;
-        }
-        private void DataGridAuto_Loaded(object sender, RoutedEventArgs e)
-        {
-            ColumnHeaderStyle = (Style)FindResource("ColumnHeaderBase");
         }
 
         #endregion
@@ -65,7 +61,6 @@ namespace Paway.WPF
                 column.Header = property.TextName();
                 column.ElementStyle = (Style)FindResource("TextLeftSytle");
                 column.FontSize = this.FontSize;
-                column.CellStyle = (Style)FindResource("CellBase");
                 column.Visibility = property.IShow() ? Visibility.Visible : Visibility.Collapsed;
                 this.Columns.Add(column);
             }
