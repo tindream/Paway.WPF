@@ -3,13 +3,10 @@
                     xmlns:local="clr-namespace:Paway.WPF;assembly=Paway.WPF">
 
     <Style TargetType="{x:Type local:TextBoxRound}">
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="BorderBrush" Value="#D3D3D3"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Cursor" Value="IBeam"/>
-        <Setter Property="Padding" Value="5,2,0,2"/>
+        <Setter Property="Padding" Value="3,2"/>
         <Setter Property="Margin" Value="0,2"/>
         <Setter Property="FontFamily" Value="Microsoft YaHei"/>
         <Setter Property="FontSize" Value="18"/>
@@ -31,11 +28,10 @@
                                             Visibility="Collapsed"
                                             Orientation="Horizontal">
                                 <Label Opacity="0.4"
-                                           Padding="7,0,0,0"
+                                           Padding="5,0,0,0"
                                            FontSize="{TemplateBinding WaterSize}"
                                            Foreground="#000000"
                                            FontFamily="Microsoft YaHei"
-                                           HorizontalAlignment="Left"
                                            Content="{TemplateBinding Water}"
                                            VerticalContentAlignment="Center"/>
                             </StackPanel>
@@ -47,6 +43,9 @@
                         </Trigger>
                         <Trigger Property="Text" Value="">
                             <Setter Property="Visibility"  TargetName="stackPanel" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsReadOnly" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="#F9F9F9"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="false">
                             <Setter Property="BorderBrush" TargetName="border" 

@@ -32,7 +32,7 @@
                         </Grid.ColumnDefinitions>
                         <Border Name="border" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="1" CornerRadius="{TemplateBinding Radius}"
                                  BorderBrush="{TemplateBinding BorderBrush}" />
-                        <ContentPresenter HorizontalAlignment="Left" Margin="7,3,0,3" x:Name="ContentSite" 
+                        <ContentPresenter Margin="5,3,0,3" x:Name="ContentSite" 
                                           VerticalAlignment="Center" 
                                           Content="{TemplateBinding SelectionBoxItem}" 
                                           ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" 
@@ -47,7 +47,6 @@
                         <!--必须将 TextBox 命名为 PART_EditableTextBox，否则 ComboBox 将无法识别它-->
                         <TextBox   Visibility="Hidden" 
                                    x:Name="PART_EditableTextBox"  
-                                   VerticalAlignment="Center" 
                                    Focusable="True" 
                                    Background="Transparent" 
                                    IsReadOnly="{TemplateBinding IsReadOnly}"/>
@@ -92,7 +91,7 @@
                             <ControlTemplate  TargetType="{x:Type ComboBoxItem}">
                                 <Grid Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
                                     <Border x:Name="_borderbg" Background="Transparent"/>
-                                    <TextBlock Margin="3 0" VerticalAlignment="Center" x:Name="_txt" Foreground="#333" 
+                                    <TextBlock Margin="5 0" VerticalAlignment="Center" x:Name="_txt" Foreground="#333" 
                                                Text="{Binding Content,RelativeSource={RelativeSource TemplatedParent}}"/>
                                     <Border x:Name="_border" Background="White" Opacity="0"/>
                                 </Grid>
