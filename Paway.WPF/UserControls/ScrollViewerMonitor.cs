@@ -27,6 +27,13 @@ namespace Paway.WPF
                         thumb.SetValue(ScrollBarColorProperty, scrollViewerRound.ScrollBarColor);
                         return;
                     }
+                    else if (scrollBar.TemplatedParent is ScrollViewer scrollViewer)
+                    {
+                        if (scrollViewer.TemplatedParent is DataGridAuto dataGrid)
+                        {
+                            thumb.SetValue(VerticalScrollBarMarginProperty, new Thickness(0, -dataGrid.ColumnHeaderHeight, 0, 0));
+                        }
+                    }
                 }
                 thumb.SetValue(ScrollBarRadiusProperty, new ScrollViewerRound().ScrollBarRadius);
                 thumb.SetValue(ScrollBarColorProperty, new ScrollViewerRound().ScrollBarColor);
@@ -40,9 +47,20 @@ namespace Paway.WPF
 
         #endregion
 
+        /// <summary>
+        /// 滚动条圆角
+        /// </summary>
         public static readonly DependencyProperty ScrollBarRadiusProperty =
             DependencyProperty.RegisterAttached("ScrollBarRadius", typeof(CornerRadius), typeof(ScrollViewerMonitor));
+        /// <summary>
+        /// 滚动条颜色
+        /// </summary>
         public static readonly DependencyProperty ScrollBarColorProperty =
             DependencyProperty.RegisterAttached("ScrollBarColor", typeof(Brush), typeof(ScrollViewerMonitor));
+        /// <summary>
+        /// 垂直滚动条外边距
+        /// </summary>
+        public static readonly DependencyProperty VerticalScrollBarMarginProperty =
+            DependencyProperty.RegisterAttached("VerticalScrollBarMargin", typeof(Thickness), typeof(ScrollViewerMonitor));
     }
 }

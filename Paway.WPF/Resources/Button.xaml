@@ -29,12 +29,12 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Foreground" Value="White"></Setter>
                             <Setter Property="Background" TargetName="border" 
-                                    Value="{Binding FocusedBrush, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
+                                    Value="{Binding MouseBackground, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Foreground" Value="White"></Setter>
                             <Setter Property="Background" TargetName="border" 
-                                    Value="{Binding FocusedBrushDown, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
+                                    Value="{Binding PressedBackground, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

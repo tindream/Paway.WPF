@@ -12,11 +12,11 @@ namespace Paway.WPF
     {
         public static readonly DependencyProperty RadiusProperty =
             DependencyProperty.RegisterAttached("Radius", typeof(CornerRadius), typeof(ButtonRound), new PropertyMetadata(new CornerRadius(7)));
-        public static readonly DependencyProperty FocusedBrushProperty =
-            DependencyProperty.RegisterAttached("FocusedBrush", typeof(Brush), typeof(ButtonRound),
+        public static readonly DependencyProperty MouseBackgroundProperty =
+            DependencyProperty.RegisterAttached("MouseBackground", typeof(Brush), typeof(ButtonRound),
             new PropertyMetadata(new SolidColorBrush(Color.FromArgb(170, 35, 175, 255))));
-        public static readonly DependencyProperty FocusedBrushDownProperty =
-            DependencyProperty.RegisterAttached("FocusedBrushDown", typeof(Brush), typeof(ButtonRound),
+        public static readonly DependencyProperty PressedBackgroundProperty =
+            DependencyProperty.RegisterAttached("PressedBackground", typeof(Brush), typeof(ButtonRound),
             new PropertyMetadata(new SolidColorBrush(Color.FromArgb(230, 35, 175, 255))));
 
         [Category("扩展")]
@@ -28,17 +28,17 @@ namespace Paway.WPF
         }
         [Category("扩展")]
         [Description("鼠标划过时的背景颜色")]
-        public Brush FocusedBrush
+        public Brush MouseBackground
         {
-            get { return (Brush)GetValue(FocusedBrushProperty); }
-            set { SetValue(FocusedBrushProperty, value); }
+            get { return (Brush)GetValue(MouseBackgroundProperty); }
+            set { SetValue(MouseBackgroundProperty, value); }
         }
         [Category("扩展")]
         [Description("鼠标点击时的背景颜色")]
-        public Brush FocusedBrushDown
+        public Brush PressedBackground
         {
-            get { return (Brush)GetValue(FocusedBrushDownProperty); }
-            set { SetValue(FocusedBrushDownProperty, value); }
+            get { return (Brush)GetValue(PressedBackgroundProperty); }
+            set { SetValue(PressedBackgroundProperty, value); }
         }
 
         public ButtonRound() { }

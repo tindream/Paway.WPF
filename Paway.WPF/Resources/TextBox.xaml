@@ -17,7 +17,7 @@
                     <Border Name="border" 
                                 SnapsToDevicePixels="true"
                                 Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding FocusedBrush}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
                                 CornerRadius="{TemplateBinding Radius}"
                                 BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid>
@@ -47,13 +47,13 @@
                         <Trigger Property="IsReadOnly" Value="True">
                             <Setter Property="Background" TargetName="border" Value="#F9F9F9"/>
                         </Trigger>
-                        <Trigger Property="IsMouseOver" Value="false">
+                        <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="BorderBrush" TargetName="border" 
-                                    Value="{Binding BorderBrush, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                    Value="{Binding BorderFocusedBrush, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="True">
                             <Setter Property="BorderBrush" TargetName="border" 
-                                    Value="{Binding FocusedBrush, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                    Value="{Binding BorderFocusedBrush, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

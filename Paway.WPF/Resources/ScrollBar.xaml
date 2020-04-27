@@ -12,7 +12,8 @@
                     <Grid>
                         <!--滚动条颜色-->
                         <Border Background="{TemplateBinding local:ScrollViewerMonitor.ScrollBarColor}"
-                                CornerRadius="{TemplateBinding local:ScrollViewerMonitor.ScrollBarRadius}"/>
+                                CornerRadius="{TemplateBinding local:ScrollViewerMonitor.ScrollBarRadius}" 
+                                Margin="{TemplateBinding local:ScrollViewerMonitor.VerticalScrollBarMargin}"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

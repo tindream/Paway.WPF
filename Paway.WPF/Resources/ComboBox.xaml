@@ -42,7 +42,7 @@
                         <ToggleButton Grid.Column="0"  Grid.ColumnSpan="2"  x:Name="ToggleButton" 
                                       Template="{StaticResource ComboBoxToggleButton}"
                                       Focusable="false" 
-                                      IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                      IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" 
                                       ClickMode="Press"/>
                         <!--必须将 TextBox 命名为 PART_EditableTextBox，否则 ComboBox 将无法识别它-->
                         <TextBox   Visibility="Hidden" 
