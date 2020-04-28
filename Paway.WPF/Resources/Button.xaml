@@ -3,12 +3,14 @@
                     xmlns:local="clr-namespace:Paway.WPF;assembly=Paway.WPF">
 
     <Style TargetType="{x:Type local:ButtonRound}">
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FontFamily" Value="Microsoft YaHei"/>
         <Setter Property="FontSize" Value="20"/>
-        <Setter Property="BorderBrush" Value="#D3D3D3"/>
+        <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Padding" Value="12,4"/>
         <!--修改模板属性-->
         <Setter Property="Template">
             <Setter.Value>
@@ -17,24 +19,43 @@
                     <Border x:Name="border" 
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            Background="{TemplateBinding Background}"
-                            Padding="12,4"
+                            Padding="{TemplateBinding Padding}"
                             Margin="1"
                             CornerRadius="{TemplateBinding Radius}">
-                        <ContentPresenter Content="{TemplateBinding ContentControl.Content}" 
-                                          HorizontalAlignment="Center" 
-                                          VerticalAlignment="Center" ></ContentPresenter>
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="{TemplateBinding Background}" Offset="0" />
+                                <GradientStop Color="#EEE" Offset="1" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <TextBlock x:Name="txt" Text="{TemplateBinding Content}"
+                                   Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Foreground" Value="White"></Setter>
-                            <Setter Property="Background" TargetName="border" 
-                                    Value="{Binding MouseBackground, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
+                            <Setter Property="Foreground" TargetName="txt" Value="White"></Setter>
+                            <Setter Property="Background" TargetName="border">
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Color="#5523AFFF" Offset="0" />
+                                        <GradientStop Color="{Binding MouseBackground, RelativeSource={RelativeSource TemplatedParent}}" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Foreground" Value="White"></Setter>
-                            <Setter Property="Background" TargetName="border" 
-                                    Value="{Binding PressedBackground, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
+                            <Setter Property="Foreground" TargetName="txt" Value="White"></Setter>
+                            <Setter Property="Background" TargetName="border">
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Color="#7D23AFFF" Offset="0" />
+                                        <GradientStop Color="{Binding PressedBackground, RelativeSource={RelativeSource TemplatedParent}}" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" TargetName="border" Value="LightGray"></Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

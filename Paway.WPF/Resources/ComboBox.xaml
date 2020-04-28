@@ -21,7 +21,7 @@
     </ControlTemplate>
 
     <Style TargetType="{x:Type local:ComboBoxRound}">
-        <Setter Property="BorderBrush" Value="#D3D3D3"/>
+        <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ComboBoxRound}">

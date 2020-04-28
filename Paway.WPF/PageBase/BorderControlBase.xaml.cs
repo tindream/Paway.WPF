@@ -59,13 +59,13 @@ namespace Paway.WPF
         protected virtual void Blue_MouseMove(object sender, InputEventArgs e)
         {
             var border = sender as Border;
-            border.Background = new SolidColorBrush(Color.FromArgb(170, 35, 175, 255));
+            border.Background = new SolidColorBrush(Color.FromArgb(210, 35, 175, 255));
             BlueHandle(border.Name);
         }
         protected virtual void Blue_MouseDown(object sender, InputEventArgs e)
         {
             var border = sender as Border;
-            border.Background = new SolidColorBrush(Color.FromArgb(230, 35, 175, 255));
+            border.Background = new SolidColorBrush(Color.FromArgb(250, 35, 175, 255));
             BlueHandle(border.Name);
         }
         protected virtual void BlueBorder_MouseMove(object sender, InputEventArgs e)

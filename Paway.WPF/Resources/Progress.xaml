@@ -31,7 +31,7 @@
                             </Border.Background>
                         </Border>
                         <Grid>
-                            <Label Opacity="0.4"
+                            <Label Opacity="0.7" Name="txt"
                                            Padding="12,0,0,0"
                                            Foreground="#000000"
                                            Margin="0,0,5,0"
@@ -41,6 +41,12 @@
                                            VerticalContentAlignment="Center"/>
                         </Grid>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Value" Value="100">
+                            <Setter TargetName="txt" Property="Foreground" Value="White" />
+                            <Setter TargetName="txt" Property="Opacity" Value="1.0" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

@@ -13,11 +13,11 @@ namespace Paway.WPF
         public static readonly DependencyProperty RadiusProperty =
             DependencyProperty.RegisterAttached("Radius", typeof(CornerRadius), typeof(ButtonRound), new PropertyMetadata(new CornerRadius(7)));
         public static readonly DependencyProperty MouseBackgroundProperty =
-            DependencyProperty.RegisterAttached("MouseBackground", typeof(Brush), typeof(ButtonRound),
-            new PropertyMetadata(new SolidColorBrush(Color.FromArgb(170, 35, 175, 255))));
+            DependencyProperty.RegisterAttached("MouseBackground", typeof(Color), typeof(ButtonRound),
+            new PropertyMetadata(Color.FromArgb(210, 35, 175, 255)));
         public static readonly DependencyProperty PressedBackgroundProperty =
-            DependencyProperty.RegisterAttached("PressedBackground", typeof(Brush), typeof(ButtonRound),
-            new PropertyMetadata(new SolidColorBrush(Color.FromArgb(230, 35, 175, 255))));
+            DependencyProperty.RegisterAttached("PressedBackground", typeof(Color), typeof(ButtonRound),
+            new PropertyMetadata(Color.FromArgb(250, 35, 175, 255)));
 
         [Category("扩展")]
         [Description("自定义边框圆角")]
@@ -28,16 +28,16 @@ namespace Paway.WPF
         }
         [Category("扩展")]
         [Description("鼠标划过时的背景颜色")]
-        public Brush MouseBackground
+        public Color MouseBackground
         {
-            get { return (Brush)GetValue(MouseBackgroundProperty); }
+            get { return (Color)GetValue(MouseBackgroundProperty); }
             set { SetValue(MouseBackgroundProperty, value); }
         }
         [Category("扩展")]
         [Description("鼠标点击时的背景颜色")]
-        public Brush PressedBackground
+        public Color PressedBackground
         {
-            get { return (Brush)GetValue(PressedBackgroundProperty); }
+            get { return (Color)GetValue(PressedBackgroundProperty); }
             set { SetValue(PressedBackgroundProperty, value); }
         }
 

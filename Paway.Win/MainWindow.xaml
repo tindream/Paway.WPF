@@ -26,22 +26,33 @@
             <ColumnDefinition Width="300"></ColumnDefinition>
             <ColumnDefinition Width="350"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <utils:ProgressBarRound Grid.Row="1" Margin="5" Height="32" Value="50" />
+        <utils:ProgressBarRound Grid.Row="1" Margin="5" Height="32" Value="95" />
 
         <utils:ComboBoxRound Grid.Row="2" Margin="5" >
             <ComboBoxItem Content="A" IsSelected="True"/>
             <ComboBoxItem Content="B"/>
             <ComboBoxItem Content="C"/>
         </utils:ComboBoxRound>
-        
+
         <utils:TextBoxRound Grid.Row="3" Margin="5" ></utils:TextBoxRound>
         <PasswordBox Grid.Row="4" Margin="5" ></PasswordBox>
         <utils:ButtonRound Grid.Row="5" Margin="5"  Content="确认" ></utils:ButtonRound>
 
         <utils:CheckBoxRound Grid.Row="6" Margin="5"  ></utils:CheckBoxRound>
         <utils:SelectedBox Grid.Row="7" Margin="5"  ></utils:SelectedBox>
-        
-        <utils:DataGridAuto Name="datagrid1" Grid.Column="1" Grid.RowSpan="7" Margin="5"  Height="250" ></utils:DataGridAuto>
-        
+
+        <utils:DataGridAuto Name="datagrid1" Grid.Column="1" Grid.RowSpan="8" Margin="5"  Height="295">
+            <DataGrid.Columns>
+                <DataGridTextColumn  MinWidth="130" Binding="{Binding Money}" ElementStyle="{StaticResource TextRightSytle}"/>
+                <DataGridTemplateColumn Header="进度" x:Name="Value">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <utils:ProgressBarRound Value="{Binding Value}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </utils:DataGridAuto>
+
     </Grid>
 </Window>

@@ -3,39 +3,74 @@
                     xmlns:local="clr-namespace:Paway.WPF;assembly=Paway.WPF">
 
     <Style TargetType="{x:Type DataGridCell}">
-        <Setter Property="Background" Value="#FFFFFF" />
+        <!--<Setter Property="Background" Value="#FFFFFF" />-->
         <Setter Property="FontFamily" Value="Microsoft YaHei" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Foreground" Value="#000000" />
-        <Setter Property="Opacity" Value="0.9" />
+        <!--<Setter Property="BorderThickness" Value="0" />-->
+        <!--<Setter Property="Opacity" Value="1" />-->
         <Style.Triggers >
-            <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="#B5DEFF"/>
-            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="True"/>
+                </MultiTrigger.Conditions>
+                <!--默认系统蓝色
+                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />-->
+                <Setter Property="Background" Value="#AA23AFFF" />
+                <Setter Property="BorderBrush" Value="#AA23AFFF" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="True"/>
+                    <Condition Property="IsMouseOver" Value="True"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="#7723AFFF" />
+            </MultiTrigger>
         </Style.Triggers>
     </Style>
 
     <Style TargetType="{x:Type DataGridRow}">
+        <Setter Property="Height" Value="36" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#23AFFF"/>
+                <Setter Property="Background" Value="#5523AFFF"/>
             </Trigger>
         </Style.Triggers>
     </Style>
 
     <Style TargetType="{x:Type DataGridColumnHeader}">
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="BorderThickness" Value="0,0,1,1"></Setter>
-        <Setter Property="BorderBrush" Value="#E0E0E0"></Setter>
-        <Setter Property="Background" Value="#EEE"/>
+        <Setter Property="BorderBrush" Value="LightGray"></Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Offset="0" Color="#FEFEFE" />
+                    <GradientStop Offset="1" Color="#DDDEDE" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Foreground" Value="Black" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Foreground" Value="White"/>
-                <Setter Property="Background" Value="#91D7FF"/>
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Offset="0" Color="#5523AFFF" />
+                            <GradientStop Offset="1" Color="#AA23AFFF" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Foreground" Value="White"/>
-                <Setter Property="Background" Value="#65C7FF"/>
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Offset="0" Color="#7D23AFFF" />
+                            <GradientStop Offset="1" Color="#D223AFFF" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -43,12 +78,14 @@
     <Style TargetType="{x:Type local:DataGridAuto}">
         <!--其它-->
         <Setter Property="IsReadOnly" Value="True"/>
-        <Setter Property="BorderBrush" Value="#D3D3D3"/>
+        <Setter Property="BorderBrush" Value="LightGray"/>
+        <Setter Property="FontSize" Value="15"/>
         <!--标题-->
         <Setter Property="RowHeaderWidth" Value="0"/>
         <!--外观-->
+        <Setter Property="Background" Value="#FAFAFA"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <!--网络线-->
+        <!--网格线-->
         <Setter Property="GridLinesVisibility" Value="Horizontal"/>
         <Setter Property="HorizontalGridLinesBrush">
             <Setter.Value>
@@ -63,22 +100,26 @@
         <!--列-->
         <Setter Property="AutoGenerateColumns" Value="False"/>
         <Setter Property="CanUserReorderColumns" Value="False"/>
-        <Setter Property="CanUserResizeColumns" Value="False"/>
-        <!--<Setter Property="CanUserSortColumns" Value="False"/>-->
+        <Setter Property="CanUserResizeColumns" Value="True"/>
+        <Setter Property="CanUserSortColumns" Value="True"/>
         <!--行-->
-        <Setter Property="AlternatingRowBackground" Value="#A0A0A0"/>
+        <!--隔行换色-->
+        <Setter Property="AlternatingRowBackground" Value="#F3F3F3"/>
         <Setter Property="AlternationCount" Value="2"/>
+        <!--单行选择-->
         <Setter Property="SelectionMode" Value="Single"/>
         <Setter Property="CanUserAddRows" Value="False"/>
         <Setter Property="CanUserResizeRows" Value="False"/>
     </Style>
 
     <Style x:Key="TextLeftSytle" TargetType="{x:Type TextBlock}" >
+        <Setter Property="Margin" Value="2,0" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
     </Style>
     <Style x:Key="TextRightSytle" TargetType="{x:Type TextBlock}">
+        <Setter Property="Margin" Value="2,0" />
         <Setter Property="HorizontalAlignment" Value="Right" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="TextTrimming" Value="WordEllipsis"/>

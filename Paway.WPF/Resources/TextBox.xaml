@@ -3,7 +3,8 @@
                     xmlns:local="clr-namespace:Paway.WPF;assembly=Paway.WPF">
 
     <Style TargetType="{x:Type local:TextBoxRound}">
-        <Setter Property="BorderBrush" Value="#D3D3D3"/>
+        <Setter Property="local:TextBoxMonitor.IsMonitoring" Value="True"/>
+        <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Cursor" Value="IBeam"/>
         <Setter Property="Padding" Value="3,2"/>
@@ -29,7 +30,7 @@
                                             Orientation="Horizontal">
                                 <Label Opacity="0.4"
                                            Padding="5,0,0,0"
-                                           FontSize="{TemplateBinding WaterSize}"
+                                           FontSize="{TemplateBinding local:TextBoxMonitor.WaterSize}"
                                            Foreground="#000000"
                                            FontFamily="Microsoft YaHei"
                                            Content="{TemplateBinding Water}"

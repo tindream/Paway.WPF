@@ -36,11 +36,14 @@ namespace Paway.Win
         public int Id { get; set; }
         [Text("名称")]
         public string Name { get; set; }
+        public double Money { get; set; }
+        [Text("进度")]
         public double Value { get; set; }
 
         public TestInfo(string name, double value = 0)
         {
             this.Name = name;
+            this.Money = value;
             this.Value = value;
         }
     }

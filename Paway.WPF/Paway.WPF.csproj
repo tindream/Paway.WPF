@@ -81,6 +81,7 @@
       <DependentUpon>SelectedBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ComboBoxRound.cs" />
+    <Compile Include="UserControls\TextBoxMonitor.cs" />
     <Compile Include="UserControls\TextBoxRound.cs" />
   </ItemGroup>
   <ItemGroup>

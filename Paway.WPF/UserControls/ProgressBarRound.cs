@@ -14,10 +14,10 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached("Radius", typeof(CornerRadius), typeof(ProgressBarRound), new PropertyMetadata(new CornerRadius(3)));
         public static readonly DependencyProperty ForegroundStartColorProperty =
             DependencyProperty.RegisterAttached("ForegroundStartColor", typeof(Color), typeof(ProgressBarRound),
-            new PropertyMetadata(Color.FromArgb(255, 57, 143, 180)));
+            new PropertyMetadata(Color.FromArgb(85, 35, 175, 255)));
         public static readonly DependencyProperty ForegroundEndColorProperty =
             DependencyProperty.RegisterAttached("ForegroundEndColor", typeof(Color), typeof(ProgressBarRound),
-            new PropertyMetadata(Color.FromArgb(255, 106, 210, 216)));
+            new PropertyMetadata(Color.FromArgb(250, 35, 175, 255)));
         public static readonly DependencyProperty ProgressValueProperty =
             DependencyProperty.RegisterAttached("ProgressValue", typeof(string), typeof(ProgressBarRound));
 

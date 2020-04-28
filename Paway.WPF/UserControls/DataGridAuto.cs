@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using Paway.Helper;
@@ -18,13 +20,13 @@ namespace Paway.WPF
         public DataGridAuto()
         {
             //AutoGenerateColumns = true;
-            this.Background = new SolidColorBrush(Color.FromArgb(255, 250, 250, 250));
             this.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
-            this.CanUserSortColumns = true;
-            this.CanUserResizeColumns = true;
-            this.FontSize = 15;
-            this.RowHeight = 36;
-            this.ColumnHeaderHeight = 35;
+            this.ColumnHeaderHeight = 42;
+            this.Initialized += DataGridAuto_Initialized;
+        }
+        private void DataGridAuto_Initialized(object sender, EventArgs e)
+        {
+            columnsReady.AddRange(this.Columns);
         }
 
         #endregion
@@ -34,6 +36,10 @@ namespace Paway.WPF
         /// 当前绑定的数据类型
         /// </summary>
         private Type type;
+        /// <summary>
+        /// 外部自定义列
+        /// </summary>
+        private readonly List<DataGridColumn> columnsReady = new List<DataGridColumn>();
         /// <summary>
         /// 获取或设置用于生成 System.Windows.Controls.ItemsControl 的内容的集合。
         /// <para>重载数据绑定</para>
@@ -52,18 +58,30 @@ namespace Paway.WPF
         }
         private void LoadColumns()
         {
-            this.Columns.Clear();
+            var columns = new List<DataGridColumn>();
             var properties = this.type.PropertiesCache();
             foreach (var property in properties)
             {
-                var column = new DataGridTextColumn();
-                column.Binding = new Binding(property.Name);
+                var column = columnsReady.Find(c => (c.ClipboardContentBinding is Binding binding && binding.Path.Path == property.Name) || c.Header.ToStrs() == property.TextName());
+                if (column != null)
+                {
+                    columns.Add(column);
+                }
+                else
+                {
+                    column = new DataGridTextColumn();
+                    (column as DataGridTextColumn).Binding = new Binding(property.Name);
+                    columns.Add(column);
+                }
                 column.Header = property.TextName();
-                column.ElementStyle = (Style)FindResource("TextLeftSytle");
-                column.FontSize = this.FontSize;
+                if (column is DataGridTextColumn text && text.ElementStyle.Setters.Count == 1 && (text.ElementStyle.Setters[0] as Setter).Property.Name == "Margin")
+                {
+                    text.ElementStyle = (Style)FindResource("TextLeftSytle");
+                }
                 column.Visibility = property.IShow() ? Visibility.Visible : Visibility.Collapsed;
-                this.Columns.Add(column);
             }
+            this.Columns.Clear();
+            foreach (var column in columns) this.Columns.Add(column);
         }
 
         #endregion
