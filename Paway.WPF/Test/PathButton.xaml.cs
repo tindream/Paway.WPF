@@ -19,14 +19,14 @@ namespace Paway.WPF
     /// <summary>
     /// MKStateCButton.xaml 的交互逻辑
     /// </summary>
-    public partial class StateCButton : UserControl
+    public partial class PathButton : UserControl
     {
         public static readonly DependencyProperty FocusedBrushProperty =
-            DependencyProperty.RegisterAttached("FocusedBrush", typeof(Brush), typeof(StateCButton),
-            new PropertyMetadata(new SolidColorBrush(Color.FromArgb(255, 95, 189, 242))));
+            DependencyProperty.RegisterAttached("FocusedBrush", typeof(Brush), typeof(PathButton),
+            new PropertyMetadata(new SolidColorBrush(Color.FromArgb(190, 35, 175, 255))));
         public static readonly DependencyProperty FocusedBrushDownProperty =
-            DependencyProperty.RegisterAttached("FocusedBrushDown", typeof(Brush), typeof(StateCButton),
-            new PropertyMetadata(new SolidColorBrush(Color.FromArgb(255, 52, 178, 250))));
+            DependencyProperty.RegisterAttached("FocusedBrushDown", typeof(Brush), typeof(PathButton),
+            new PropertyMetadata(new SolidColorBrush(Color.FromArgb(250, 35, 175, 255))));
 
         [Category("扩展")]
         [Description("鼠标划过时背景颜色")]
@@ -42,16 +42,18 @@ namespace Paway.WPF
             get { return (Brush)GetValue(FocusedBrushDownProperty); }
             set { SetValue(FocusedBrushDownProperty, value); }
         }
+        public string Text
+        {
+            get { return lbText.Text; }
+            set { lbText.Text = value; }
+        }
 
 
-        public StateCButton(int index)
+        public PathButton()
         {
             InitializeComponent();
-            lbText.Text = index.ToString();
-            this.Width = 50;
-            this.Height = 100;
             this.Margin = new Thickness(400, 125, 0, 0);
-            this.RenderTransform = new RotateTransform((index - 1) * 10, 25, 300);
+            this.RenderTransform = new RotateTransform(0, 25, 300);
         }
 
         private void Path_MouseDown(object sender, MouseButtonEventArgs e)
@@ -60,14 +62,12 @@ namespace Paway.WPF
             path.Fill = FocusedBrushDown;
             lbText.Foreground = new SolidColorBrush(Colors.White);
         }
-
         private void Path_MouseMove(object sender, MouseEventArgs e)
         {
             path.Stroke = FocusedBrush;
             path.Fill = FocusedBrush;
             lbText.Foreground = new SolidColorBrush(Colors.White);
         }
-
         private void Path_MouseLeave(object sender, MouseEventArgs e)
         {
             path.Stroke = new SolidColorBrush(Color.FromArgb(255, 200, 200, 200));

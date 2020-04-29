@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Paway.Win"
         xmlns:utils="clr-namespace:Paway.WPF;assembly=Paway.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="450" Width="850" WindowStartupLocation="CenterScreen">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -25,6 +25,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"></ColumnDefinition>
             <ColumnDefinition Width="350"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <utils:ProgressBarRound Grid.Row="1" Margin="5" Height="32" Value="95" />
 
@@ -53,6 +54,12 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </utils:DataGridAuto>
+
+        <Path Grid.Row="1" Grid.Column="2" Fill="#66C2E6" Stroke="Gray" Data="M15,15 A8,8 0 1 1 15,16Z"></Path>
+        <Path Grid.Row="1" Grid.Column="2" Fill="#23AFFF" Stroke="Gray" Data="M60,15 A8,8 0 1 1 60,16Z"></Path>
+        <Path Grid.Row="1" Grid.Column="2" Fill="#23AFFF" Stroke="Gray" Data="M45,8 37,16 53,16Z"></Path>
+        <Path Grid.Row="1" Grid.Column="2" Fill="Red" Stroke="Gray" Data="M45,26 37,18 53,18Z"></Path>
+        <utils:PathButton Grid.Row="2" Grid.Column="2" Grid.RowSpan="3" Margin="74,10" VerticalAlignment="Top" ></utils:PathButton>
 
     </Grid>
 </Window>
