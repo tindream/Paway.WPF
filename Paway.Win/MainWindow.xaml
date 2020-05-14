@@ -44,7 +44,7 @@
 
         <utils:CheckBoxRound Grid.Row="6" Margin="5"  ></utils:CheckBoxRound>
         <utils:SelectedBox Grid.Row="7" Margin="5"  ></utils:SelectedBox>
-        <utils:StackList Grid.Row="8" Margin="5"  Height="250"></utils:StackList>
+        <utils:StackList Grid.Row="9" Margin="5"  Height="250"></utils:StackList>
 
         <utils:DataGridAuto Name="datagrid1" Grid.Column="1" Grid.RowSpan="8" Margin="5"  Height="295">
             <DataGrid.Columns>

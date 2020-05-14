@@ -19,7 +19,7 @@ namespace Paway.WPF
     /// <summary>
     /// BookClass.xaml 的交互逻辑
     /// </summary>
-    public partial class PanelItem : BorderControlBase
+    public partial class PanelItem : BorderControl
     {
         public event Action<PanelItem> SelectedEvent;
 
@@ -35,12 +35,12 @@ namespace Paway.WPF
                     if (value)
                     {
                         border.Background = new SolidColorBrush(Color.FromArgb(200, 35, 175, 255));
-                        lbName.Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
+                        lbName.Foreground = new SolidColorBrush(Colors.White);
                     }
                     else
                     {
-                        border.Background = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255));
-                        lbName.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
+                        border.Background = new SolidColorBrush(Colors.Transparent);
+                        lbName.Foreground = new SolidColorBrush(Colors.Black);
                     }
                     if (value) SelectedEvent?.Invoke(this);
                 }
@@ -65,17 +65,6 @@ namespace Paway.WPF
             this.Text = text;
             this.Desc = desc;
             this.Tag = tag;
-        }
-        protected override void BlueHandle(string borderName)
-        {
-            lbName.Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
-            base.BlueHandle(borderName);
-        }
-        protected override void Trans_MouseLeave(object sender, InputEventArgs e)
-        {
-            if (Selected) return;
-            base.Trans_MouseLeave(sender, e);
-            lbName.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
         }
     }
 }

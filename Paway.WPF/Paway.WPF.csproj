@@ -62,11 +62,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Method\Method.cs" />
-    <Compile Include="Controls\PageBase\TimerPageBase.xaml.cs" />
     <Compile Include="Controls\Custom\PanelListBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controls\PageBase\BorderControlBase.xaml.cs" />
-    <Compile Include="Controls\PageBase\BorderPageBase.xaml.cs" />
+    <Compile Include="Controls\Custom\BorderControl.cs" />
     <Compile Include="Controls\Custom\WrapList.xaml.cs">
       <DependentUpon>WrapList.xaml</DependentUpon>
     </Compile>
@@ -79,7 +77,7 @@
     <Compile Include="Controls\Test\PathButton.xaml.cs">
       <DependentUpon>PathButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Extend\CheckBoxRound.xaml.cs">
+    <Compile Include="Controls\Custom\CheckBoxRound.xaml.cs">
       <DependentUpon>CheckBoxRound.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Extend\ButtonRound.cs" />
@@ -88,7 +86,7 @@
     <Compile Include="Controls\Extend\PasswordBoxMonitor.cs" />
     <Compile Include="Controls\Extend\ScrollViewerMonitor.cs" />
     <Compile Include="Controls\Extend\ScrollViewerRound.cs" />
-    <Compile Include="Controls\Extend\SelectedBox.xaml.cs">
+    <Compile Include="Controls\Custom\SelectedBox.xaml.cs">
       <DependentUpon>SelectedBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Extend\ComboBoxRound.cs" />
@@ -104,6 +102,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Resource Include="Resources\Border.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
     <Resource Include="Resources\PasswordBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -136,7 +138,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Extend\SelectedBox.xaml">
+    <Page Include="Controls\Custom\SelectedBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -152,7 +154,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Page Include="Controls\Extend\CheckBoxRound.xaml">
+    <Page Include="Controls\Custom\CheckBoxRound.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

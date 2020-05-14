@@ -1,10 +1,10 @@
-﻿<local:BorderControl x:Class="Paway.WPF.PanelItem"
+﻿<local:BorderControl x:Class="Paway.WPF.CheckBoxRound"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Paway.WPF"
-             mc:Ignorable="d">
+             mc:Ignorable="d" Height="Auto" Width="Auto">
     <local:BorderControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -12,15 +12,16 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </local:BorderControl.Resources>
-    <Border Style="{StaticResource borderBack}" 
-                BorderBrush="#CCC" CornerRadius="3" Name="border" BorderThickness="1"
+    <Border Style="{StaticResource borderBrush}" 
+                VerticalAlignment="Center"
+                CornerRadius="7" BorderThickness="1" 
+                Padding="5"
                 MouseDown="Border_MouseDown" MouseUp="Border_MouseUp">
-        <DockPanel Margin="10,7">
-            <TextBlock Name="lbDesc" Text="Desc" FontFamily="Microsoft YaHei" FontSize="18" Foreground="#555"
-                       VerticalAlignment="Center" HorizontalAlignment="Right" DockPanel.Dock="Right"/>
-            <TextBlock Name="lbName" Text="Name" Style="{StaticResource textBlock}" 
-                       FontFamily="Microsoft YaHei" FontSize="18" Foreground="#333"
-                       VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+        <DockPanel>
+            <Image Name="cbxImage" Source="/Images/checkBox.png" Height="24" DockPanel.Dock="Right"/>
+            <TextBlock Name="cbxTitle" Padding="0,0,5,0" Text="标题" Foreground="#333"
+                   FontFamily="Microsoft YaHei" FontSize="18" 
+                   TextTrimming="WordEllipsis" />
         </DockPanel>
     </Border>
 </local:BorderControl>

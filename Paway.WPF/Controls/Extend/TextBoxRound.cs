@@ -15,7 +15,7 @@ namespace Paway.WPF
         public static readonly DependencyProperty RadiusProperty =
             DependencyProperty.RegisterAttached("Radius", typeof(CornerRadius), typeof(TextBoxRound), new PropertyMetadata(new CornerRadius(3)));
         public static readonly DependencyProperty BorderFocusedBrushProperty =
-            DependencyProperty.RegisterAttached("BorderFocusedBrush", typeof(Brush), typeof(TextBoxRound), new PropertyMetadata(new SolidColorBrush(Color.FromRgb(35, 175, 255))));
+            DependencyProperty.RegisterAttached("BorderFocusedBrush", typeof(Brush), typeof(TextBoxRound), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(255, 35, 175, 255))));
 
         [Category("扩展")]
         [Description("水印内容")]

@@ -9,7 +9,7 @@ using System.Windows.Media;
 
 namespace Paway.WPF
 {
-    public partial class PanelListBase : BorderControlBase
+    public partial class PanelListBase : BorderControl
     {
         private Panel panel;
         public PanelItem Current { get; private set; }

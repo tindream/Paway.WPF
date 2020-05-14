@@ -15,9 +15,9 @@ using System.Windows.Shapes;
 namespace Paway.WPF
 {
     /// <summary>
-    /// SelectedBox.xaml 的交互逻辑
+    /// CheckBoxRound.xaml 的交互逻辑
     /// </summary>
-    public partial class SelectedBox : BorderControlBase
+    public partial class CheckBoxRound : BorderControl
     {
         public event Action<string, bool> ValueChangeEvent;
         private bool _value;
@@ -31,11 +31,11 @@ namespace Paway.WPF
                     _value = value;
                     if (value)
                     {
-                        cbxImage.Source = new BitmapImage(new Uri(@"pack://application:,,,/Paway.WPF;component/Images/selectedBox_checked.png"));
+                        cbxImage.Source = new BitmapImage(new Uri(@"pack://application:,,,/Paway.WPF;component/Images/checkBox_checked.png"));
                     }
                     else
                     {
-                        cbxImage.Source = new BitmapImage(new Uri(@"pack://application:,,,/Paway.WPF;component/Images/selectedBox.png"));
+                        cbxImage.Source = new BitmapImage(new Uri(@"pack://application:,,,/Paway.WPF;component/Images/checkBox.png"));
                     }
                     ValueChangeEvent?.Invoke(this.Name, value);
                 }
@@ -46,21 +46,14 @@ namespace Paway.WPF
             get { return this.cbxTitle.Text; }
             set { this.cbxTitle.Text = value; }
         }
-        public SelectedBox()
+        public CheckBoxRound()
         {
             InitializeComponent();
+            cbxImage.Source = new BitmapImage(new Uri(@"pack://application:,,,/Paway.WPF;component/Images/checkBox.png"));
         }
         protected override void ClickHandle(object sender)
         {
-            if (sender is Border border)
-            {
-                switch (border.Name)
-                {
-                    case "cbxBorder":
-                        Value = !Value;
-                        break;
-                }
-            }
+            Value = !Value;
             base.ClickHandle(sender);
         }
     }
