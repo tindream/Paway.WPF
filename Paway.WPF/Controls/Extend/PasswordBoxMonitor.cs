@@ -17,7 +17,7 @@ namespace Paway.WPF
         {
             if (obj is PasswordBox pad)
             {
-                pad.LayoutUpdated += delegate
+                pad.Loaded += delegate
                 {
                     pad.SetValue(WaterSizeProperty, pad.FontSize * 0.85);
                 };

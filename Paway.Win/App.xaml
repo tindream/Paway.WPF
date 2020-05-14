@@ -10,9 +10,10 @@
                 <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\ComboBox.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\DataGrid.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\PasswordBox.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Progress.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\ProgressBar.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\ScrollBar.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\TextBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\ListView.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

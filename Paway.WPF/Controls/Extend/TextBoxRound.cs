@@ -12,10 +12,13 @@ namespace Paway.WPF
     {
         public static readonly DependencyProperty WaterProperty =
             DependencyProperty.RegisterAttached("Water", typeof(string), typeof(TextBoxRound), new PropertyMetadata("请输入.."));
+        public static readonly DependencyProperty WaterSizeProperty =
+            DependencyProperty.RegisterAttached("WaterSize", typeof(double), typeof(TextBoxRound), new PropertyMetadata(15d));
         public static readonly DependencyProperty RadiusProperty =
             DependencyProperty.RegisterAttached("Radius", typeof(CornerRadius), typeof(TextBoxRound), new PropertyMetadata(new CornerRadius(3)));
         public static readonly DependencyProperty BorderFocusedBrushProperty =
-            DependencyProperty.RegisterAttached("BorderFocusedBrush", typeof(Brush), typeof(TextBoxRound), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(255, 35, 175, 255))));
+            DependencyProperty.RegisterAttached("BorderFocusedBrush", typeof(Brush), typeof(TextBoxRound),
+                new PropertyMetadata(new SolidColorBrush(Color.FromArgb(255, 35, 175, 255))));
 
         [Category("扩展")]
         [Description("水印内容")]
@@ -23,6 +26,13 @@ namespace Paway.WPF
         {
             get { return (string)GetValue(WaterProperty); }
             set { SetValue(WaterProperty, value); }
+        }
+        [Category("扩展")]
+        [Description("水印字体大小")]
+        public double WaterSize
+        {
+            get { return (double)GetValue(WaterSizeProperty); }
+            set { SetValue(WaterSizeProperty, value); }
         }
         [Category("扩展")]
         [Description("自定义边框圆角")]

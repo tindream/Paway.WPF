@@ -15,11 +15,11 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached("IsMonitoring", typeof(bool), typeof(TextBoxMonitor), new UIPropertyMetadata(false, OnIsMonitoringChanged));
         private static void OnIsMonitoringChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            if (obj is TextBox txt)
+            if (obj is TextBoxRound txt)
             {
-                txt.LayoutUpdated += delegate
+                txt.Loaded += delegate
                 {
-                    txt.SetValue(WaterSizeProperty, txt.FontSize * 0.85);
+                    if (txt.WaterSize == 15) txt.SetValue(TextBoxRound.WaterSizeProperty, txt.FontSize * 0.85);
                 };
             }
         }
@@ -30,8 +30,5 @@ namespace Paway.WPF
         }
 
         #endregion
-
-        public static readonly DependencyProperty WaterSizeProperty =
-            DependencyProperty.RegisterAttached("WaterSize", typeof(double), typeof(TextBoxMonitor), new PropertyMetadata(15d));
     }
 }

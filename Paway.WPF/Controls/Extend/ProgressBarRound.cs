@@ -28,7 +28,7 @@ namespace Paway.WPF
         {
             if (obj is ProgressBar bar)
             {
-                bar.LayoutUpdated += delegate
+                bar.Loaded += delegate
                 {
                     bar.SetValue(ProgressValueProperty, $"{bar.Value * 100 / bar.Maximum:F0}%");
                 };

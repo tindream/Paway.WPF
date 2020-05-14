@@ -30,7 +30,7 @@
                                             Orientation="Horizontal">
                                 <Label Opacity="0.4"
                                            Padding="5,0,0,0"
-                                           FontSize="{TemplateBinding local:TextBoxMonitor.WaterSize}"
+                                           FontSize="{TemplateBinding WaterSize}"
                                            Foreground="#000000"
                                            FontFamily="Microsoft YaHei"
                                            Content="{TemplateBinding Water}"

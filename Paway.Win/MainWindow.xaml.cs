@@ -30,6 +30,8 @@ namespace Paway.Win
             list.Add(new TestInfo("你好", 70));
             for (int i = 0; i < 20; i++) list.Add(new TestInfo("A" + i, i));
             datagrid1.ItemsSource = list;
+            //listView1.Items.Clear();
+            //listView1.ItemsSource = list;
         }
 
         private void ButtonRound_Click(object sender, RoutedEventArgs e)
