@@ -1,7 +1,9 @@
 ﻿using Paway.Helper;
+using Paway.WPF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,6 +30,12 @@ namespace Paway.Win
             list.Add(new TestInfo("你好", 70));
             for (int i = 0; i < 20; i++) list.Add(new TestInfo("A" + i, i));
             datagrid1.ItemsSource = list;
+        }
+
+        private void ButtonRound_Click(object sender, RoutedEventArgs e)
+        {
+            var m = "Hello";
+            Method.Toast(m + m + m + m + m + m + m + m + m + m + m + m + m + m + m + m + m + m + m);
         }
     }
     public class TestInfo

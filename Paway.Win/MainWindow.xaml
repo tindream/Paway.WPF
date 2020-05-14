@@ -6,10 +6,13 @@
         xmlns:local="clr-namespace:Paway.Win"
         xmlns:utils="clr-namespace:Paway.WPF;assembly=Paway.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="850" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="650" Width="850" WindowStartupLocation="CenterScreen">
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
@@ -37,10 +40,11 @@
 
         <utils:TextBoxRound Grid.Row="3" Margin="5" ></utils:TextBoxRound>
         <PasswordBox Grid.Row="4" Margin="5" ></PasswordBox>
-        <utils:ButtonRound Grid.Row="5" Margin="5"  Content="确认" ></utils:ButtonRound>
+        <utils:ButtonRound Grid.Row="5" Margin="5"  Content="确认" Click="ButtonRound_Click"></utils:ButtonRound>
 
         <utils:CheckBoxRound Grid.Row="6" Margin="5"  ></utils:CheckBoxRound>
         <utils:SelectedBox Grid.Row="7" Margin="5"  ></utils:SelectedBox>
+        <utils:StackList Grid.Row="8" Margin="5"  Height="250"></utils:StackList>
 
         <utils:DataGridAuto Name="datagrid1" Grid.Column="1" Grid.RowSpan="8" Margin="5"  Height="295">
             <DataGrid.Columns>

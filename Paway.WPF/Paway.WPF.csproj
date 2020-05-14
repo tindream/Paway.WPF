@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,11 +31,17 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Paway.Forms, Version=2.1.2.0, Culture=neutral, PublicKeyToken=5f9d1a9ddcc41d83, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Root\Paway.Forms.dll</HintPath>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="Paway.Helper, Version=2.3.3.0, Culture=neutral, PublicKeyToken=5f9d1a9ddcc41d83, processorArchitecture=MSIL">
+      <HintPath>..\packages\Paway.Helper.2.3.3.2\lib\net40\Paway.Helper.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -41,6 +49,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -51,40 +62,48 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Method\Method.cs" />
-    <Compile Include="PageBase\TimerPageBase.xaml.cs" />
-    <Compile Include="PanelList\PanelListBase.cs" />
+    <Compile Include="Controls\PageBase\TimerPageBase.xaml.cs" />
+    <Compile Include="Controls\Custom\PanelListBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PageBase\BorderControlBase.xaml.cs" />
-    <Compile Include="PageBase\BorderPageBase.xaml.cs" />
-    <Compile Include="PanelList\WrapList.xaml.cs">
+    <Compile Include="Controls\PageBase\BorderControlBase.xaml.cs" />
+    <Compile Include="Controls\PageBase\BorderPageBase.xaml.cs" />
+    <Compile Include="Controls\Custom\WrapList.xaml.cs">
       <DependentUpon>WrapList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PanelList\StackList.xaml.cs">
+    <Compile Include="Controls\Custom\StackList.xaml.cs">
       <DependentUpon>StackList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PanelList\PanelItem.xaml.cs">
+    <Compile Include="Controls\Custom\PanelItem.xaml.cs">
       <DependentUpon>PanelItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Test\PathButton.xaml.cs">
+    <Compile Include="Controls\Test\PathButton.xaml.cs">
       <DependentUpon>PathButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\CheckBoxRound.xaml.cs">
+    <Compile Include="Controls\Extend\CheckBoxRound.xaml.cs">
       <DependentUpon>CheckBoxRound.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ButtonRound.cs" />
-    <Compile Include="UserControls\DataGridAuto.cs" />
-    <Compile Include="UserControls\ProgressBarRound.cs" />
-    <Compile Include="UserControls\PasswordBoxMonitor.cs" />
-    <Compile Include="UserControls\ScrollViewerMonitor.cs" />
-    <Compile Include="UserControls\ScrollViewerRound.cs" />
-    <Compile Include="UserControls\SelectedBox.xaml.cs">
+    <Compile Include="Controls\Extend\ButtonRound.cs" />
+    <Compile Include="Controls\Extend\DataGridAuto.cs" />
+    <Compile Include="Controls\Extend\ProgressBarRound.cs" />
+    <Compile Include="Controls\Extend\PasswordBoxMonitor.cs" />
+    <Compile Include="Controls\Extend\ScrollViewerMonitor.cs" />
+    <Compile Include="Controls\Extend\ScrollViewerRound.cs" />
+    <Compile Include="Controls\Extend\SelectedBox.xaml.cs">
       <DependentUpon>SelectedBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ComboBoxRound.cs" />
-    <Compile Include="UserControls\TextBoxMonitor.cs" />
-    <Compile Include="UserControls\TextBoxRound.cs" />
+    <Compile Include="Controls\Extend\ComboBoxRound.cs" />
+    <Compile Include="Controls\Extend\TextBoxMonitor.cs" />
+    <Compile Include="Controls\Extend\TextBoxRound.cs" />
+    <Compile Include="Controls\Windows\MessageToastModel.cs" />
+    <Compile Include="Controls\Windows\MessageToast.xaml.cs">
+      <DependentUpon>MessageToast.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\Windows\MessageToast.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Resource Include="Resources\PasswordBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -93,15 +112,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Page Include="PanelList\WrapList.xaml">
+    <Page Include="Controls\Custom\WrapList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PanelList\StackList.xaml">
+    <Page Include="Controls\Custom\StackList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PanelList\PanelItem.xaml">
+    <Page Include="Controls\Custom\PanelItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -113,11 +132,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Page Include="Test\PathButton.xaml">
+    <Page Include="Controls\Test\PathButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\SelectedBox.xaml">
+    <Page Include="Controls\Extend\SelectedBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -133,7 +152,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Page Include="UserControls\CheckBoxRound.xaml">
+    <Page Include="Controls\Extend\CheckBoxRound.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -150,6 +169,8 @@
   <ItemGroup>
     <Resource Include="Images\checkBox_checked.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

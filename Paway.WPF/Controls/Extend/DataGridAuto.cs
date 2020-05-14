@@ -62,7 +62,7 @@ namespace Paway.WPF
             var properties = this.type.PropertiesCache();
             foreach (var property in properties)
             {
-                var column = columnsReady.Find(c => (c.ClipboardContentBinding is Binding binding && binding.Path.Path == property.Name) || c.Header.ToStrs() == property.TextName());
+                var column = columnsReady.Find(c => (c.ClipboardContentBinding is Binding binding && binding.Path.Path == property.Name) || c.Header.ToStrs() == property.Text());
                 if (column != null)
                 {
                     columns.Add(column);
@@ -73,7 +73,7 @@ namespace Paway.WPF
                     (column as DataGridTextColumn).Binding = new Binding(property.Name);
                     columns.Add(column);
                 }
-                column.Header = property.TextName();
+                column.Header = property.Text();
                 if (column is DataGridTextColumn text && text.ElementStyle.Setters.Count == 1 && (text.ElementStyle.Setters[0] as Setter).Property.Name == "Margin")
                 {
                     text.ElementStyle = (Style)FindResource("TextLeftSytle");

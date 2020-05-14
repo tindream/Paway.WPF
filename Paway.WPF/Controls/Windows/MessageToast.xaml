@@ -1,0 +1,68 @@
+﻿<Window x:Class="Paway.WPF.MessageToast"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" 
+        xmlns:local="clr-namespace:Paway.WPF"
+        mc:Ignorable="d"
+        AllowsTransparency="True" Background="Transparent" WindowStyle="None"
+        Title="MessageBox" Height="405" Width="850" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" >
+    <Window.Resources>
+        <Storyboard x:Key="ShowSb" Completed="Storyboard_Completed" >
+            <DoubleAnimationUsingKeyFrames  Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="border1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="{Binding YOffSetStart}" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:3" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:3.5" Value="{Binding YOffSetEnd}"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames  Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="tb">
+                <EasingDoubleKeyFrame KeyTime="0" Value="{Binding YOffSetStart}" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:3" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:3.5" Value="{Binding YOffSetEnd}"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="MouseLeave" Completed="Storyboard_Completed">
+            <DoubleAnimationUsingKeyFrames   Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="border1">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.Y)" Storyboard.TargetName="border1">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="{Binding YOffSetEnd}"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Border x:Name="border1" Margin="1"  BorderBrush="#E623AFFF" BorderThickness="1" CornerRadius="8" Background="#FAFAFA"
+            HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+        <Border.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform/>
+                <SkewTransform/>
+                <RotateTransform/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </Border.RenderTransform>
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="MouseEnter">
+                <ei:ControlStoryboardAction Storyboard="{StaticResource ShowSb}" ControlStoryboardOption="Stop"/>
+            </i:EventTrigger>
+            <i:EventTrigger EventName="MouseLeave">
+                <ei:ControlStoryboardAction Storyboard="{StaticResource MouseLeave}"/>
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+        <TextBlock x:Name="tb" Margin="25 7" FontFamily="Microsoft YaHei" FontSize="16"
+                   Text="{Binding Message,FallbackValue=失败信息}"
+                   TextWrapping="Wrap" TextAlignment="Center" Foreground="#333"
+                   MinWidth="200" MaxWidth="600" ToolTip="双击复制"
+                   RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform></TextBlock>
+    </Border>
+</Window>
