@@ -32,22 +32,23 @@
         </Grid.ColumnDefinitions>
         <utils:ProgressBarRound Grid.Row="1" Margin="5" Height="32" Value="95" />
 
-        <utils:ComboBoxRound Grid.Row="2" Margin="5" >
+        <utils:ComboBoxRound Grid.Row="2" Margin="5" Name="cbx">
             <ComboBoxItem Content="A" IsSelected="True"/>
             <ComboBoxItem Content="B"/>
             <ComboBoxItem Content="C"/>
         </utils:ComboBoxRound>
 
-        <utils:TextBoxRound Grid.Row="3" Margin="5" FontSize="18" ></utils:TextBoxRound>
+        <utils:TextBoxRound Grid.Row="3" Margin="5" Name="tb"></utils:TextBoxRound>
         <PasswordBox Grid.Row="4" Margin="5" ></PasswordBox>
-        <utils:ButtonRound Grid.Row="5" Margin="5"  Content="确认" Click="ButtonRound_Click"></utils:ButtonRound>
+        <utils:ButtonRound Grid.Row="5" Margin="5"  Content="确认" Click="ButtonRound_Click" ></utils:ButtonRound>
 
         <utils:CheckBoxRound Grid.Row="6" Margin="5"  ></utils:CheckBoxRound>
         <utils:SelectedBox Grid.Row="7" Margin="5"  ></utils:SelectedBox>
-        <utils:StackList Grid.Row="8" Margin="5"  Height="250"></utils:StackList>
-        <ListView Name="listView1" Grid.Row="8" Grid.Column="1" Margin="5"  Height="250">
+        <utils:ListViewRound Name="listView1" Grid.Row="8" Grid.Column="1" Height="250" Margin="5" >
             <ComboBoxItem Content="Hello123"/>
-            <ComboBoxItem Content="A1"/>
+            <ListBoxItem Content="C1"/>
+            <ListBoxItem Content="C2"/>
+            <ListBoxItem Content="A1"/>
             <ComboBoxItem Content="A2"/>
             <ComboBoxItem Content="A3"/>
             <ComboBoxItem Content="A4"/>
@@ -55,7 +56,8 @@
             <ComboBoxItem Content="B2"/>
             <ComboBoxItem Content="B3"/>
             <ComboBoxItem Content="B4"/>
-        </ListView>
+        </utils:ListViewRound>
+
 
         <utils:DataGridAuto Name="datagrid1" Grid.Column="1" Grid.RowSpan="8" Margin="5"  Height="295">
             <DataGrid.Columns>

@@ -3,9 +3,9 @@
                     xmlns:local="clr-namespace:Paway.WPF;assembly=Paway.WPF">
 
     <Style TargetType="{x:Type local:ButtonRound}">
+        <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FontFamily" Value="Microsoft YaHei"/>
-        <Setter Property="FontSize" Value="18"/>
         <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Background" Value="Transparent"/>

@@ -2,63 +2,80 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Paway.WPF;assembly=Paway.WPF">
 
-    <Style TargetType="{x:Type ListView}">
+    <Style TargetType="{x:Type local:ListViewRound}">
+        <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FontFamily" Value="Microsoft YaHei"/>
-        <Setter Property="FontSize" Value="18"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="LightGray"/>
+        <Setter Property="Padding" Value="0"/>
         <!--修改模板属性-->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate >
-                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                        <WrapPanel  x:Name="WrapPanel" Orientation="Horizontal"  ScrollViewer.CanContentScroll="True" IsItemsHost="True" ></WrapPanel>
-                    </ScrollViewer>
+                    <Border BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}">
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                            <WrapPanel  x:Name="WrapPanel" Orientation="Horizontal"  ScrollViewer.CanContentScroll="True" IsItemsHost="True" />
+                        </ScrollViewer>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
         <Setter Property="ItemTemplate">
             <Setter.Value>
-                <DataTemplate>
-                    <Border x:Name="card1"  Width="120" Height="60" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                        <TextBlock Text="{Binding Path=ItemName}" TextWrapping="Wrap" FontSize="15" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        </TextBlock>
-                        <Border.InputBindings>
-                            <MouseBinding Command="{Binding DataContext.RowClickCommand, ElementName=wd}" MouseAction="LeftDoubleClick" />
-                        </Border.InputBindings>
-                    </Border>
+                <DataTemplate >
+                    <DockPanel>
+                        <Image Source="/Images/selectedBox.png" 
+                                   Width="{Binding ItemImageWidth, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" 
+                                   Height="{Binding ItemImageHeight, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
+                        <DockPanel>
+                            <TextBlock Text="{Binding Desc}" 
+                                   TextTrimming="WordEllipsis" Foreground="Black" 
+                                   FontSize="{Binding FontSize-2, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" 
+                                   HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" 
+                                   VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" DockPanel.Dock="Right" >
+                            </TextBlock>
+                            <TextBlock Text="{Binding Content}" 
+                                   TextTrimming="WordEllipsis" Foreground="Black" 
+                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" 
+                                   HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" 
+                                   VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" >
+                            </TextBlock>
+                        </DockPanel>
+                    </DockPanel>
                 </DataTemplate>
             </Setter.Value>
         </Setter>
         <Setter Property="ItemContainerStyle">
             <Setter.Value>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="IsSelected" Value="{Binding ItemSelected, Mode=TwoWay}" />
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
                     <Setter Property="Template">
                         <Setter.Value>
-                            <ControlTemplate TargetType="ListViewItem">
-
-                                <Border x:Name="Border" Width="120"  Height="60" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center"  BorderBrush="Transparent" BorderThickness="1" CornerRadius="5" >
-                                    <Border.Background>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <GradientStop Color="#FFDBE9EE" Offset="0.647"/>
-                                            <GradientStop Color="#FFD2E0E2" Offset="0.125"/>
-                                        </LinearGradientBrush>
-                                    </Border.Background>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <Border x:Name="border" BorderBrush="LightGray" Background="#F3F3F3"
+                                        Margin="{Binding ItemMargin, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" 
+                                        BorderThickness="{Binding ItemBorder, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" 
+                                        CornerRadius="{Binding ItemRadius, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"
+                                        Width="{Binding ItemWidth, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" 
+                                        Height="{Binding ItemHeight, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" 
+                                        HorizontalAlignment="Left" VerticalAlignment="Center">
                                     <ContentPresenter/>
                                 </Border>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True" >
-                                        <Setter TargetName="Border" Property="Background"  Value="#FF79D7F1"/>
-                                        <Setter TargetName="Border" Property="BorderThickness" Value="1"/>
-                                        <Setter TargetName="Border" Property="BorderBrush" Value="#63dafc"/>
+                                        <Setter TargetName="border" Property="BorderBrush" Value="#9F23AFFF"/>
+                                        <Setter TargetName="border" Property="Background"  Value="#7723AFFF"/>
+                                        <Setter TargetName="border" Property="BorderThickness" Value="{Binding ItemBorder, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
 
                                     </Trigger>
                                     <Trigger Property="IsSelected" Value="true">
-                                        <Setter TargetName="Border" Property="Background"  Value="#FF8FC2F0"/>
-                                        <Setter TargetName="Border" Property="BorderThickness" Value="1"/>
-                                        <Setter TargetName="Border" Property="BorderBrush" Value="#0bbcef"/>
+                                        <Setter TargetName="border" Property="BorderBrush" Value="#E623AFFF"/>
+                                        <Setter TargetName="border" Property="Background"  Value="#AA23AFFF"/>
+                                        <Setter TargetName="border" Property="BorderThickness" Value="{Binding ItemBorder, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
                                     </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>

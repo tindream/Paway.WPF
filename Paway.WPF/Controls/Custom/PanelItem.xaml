@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Paway.WPF"
-             mc:Ignorable="d">
+             mc:Ignorable="d" Width="138">
     <local:BorderControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -15,12 +15,15 @@
     <Border Style="{StaticResource borderBack}" 
                 BorderBrush="#CCC" CornerRadius="3" Name="border" BorderThickness="1"
                 MouseDown="Border_MouseDown" MouseUp="Border_MouseUp">
-        <DockPanel Margin="10,7">
-            <TextBlock Name="lbDesc" Text="Desc" FontFamily="Microsoft YaHei" FontSize="18" Foreground="#555"
-                       VerticalAlignment="Center" HorizontalAlignment="Right" DockPanel.Dock="Right"/>
-            <TextBlock Name="lbName" Text="Name" Style="{StaticResource textBlock}" 
+        <DockPanel>
+            <Image Name="cbxImage" Source="/Images/checkBox.png" Height="24" DockPanel.Dock="Top"/>
+            <DockPanel Margin="10,7">
+                <TextBlock Name="lbName" Text="Name" Style="{StaticResource textBlock}" 
                        FontFamily="Microsoft YaHei" FontSize="18" Foreground="#333"
                        VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                <TextBlock Name="lbDesc" Text="Desc" FontFamily="Microsoft YaHei" FontSize="18" Foreground="#555"
+                       VerticalAlignment="Center" HorizontalAlignment="Right" DockPanel.Dock="Right"/>
+            </DockPanel>
         </DockPanel>
     </Border>
 </local:BorderControl>

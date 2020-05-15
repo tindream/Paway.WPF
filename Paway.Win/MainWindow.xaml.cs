@@ -27,17 +27,17 @@ namespace Paway.Win
             InitializeComponent();
             var list = new List<TestInfo>();
             list.Add(new TestInfo("Hello"));
-            list.Add(new TestInfo("你好", 70));
-            for (int i = 0; i < 20; i++) list.Add(new TestInfo("A" + i, i));
+            list.Add(new TestInfo("你好123", 70));
+            for (int i = 0; i < 20; i++) list.Add(new TestInfo("A" + i, i) { Desc="D"+i});
             datagrid1.ItemsSource = list;
-            //listView1.Items.Clear();
-            //listView1.ItemsSource = list;
+            listView1.Items.Clear();
+            listView1.ItemsSource = list;
         }
 
         private void ButtonRound_Click(object sender, RoutedEventArgs e)
         {
-            var m = "Hello";
-            Method.Toast(m + m + m + m + m + m + m + m + m + m + m + m + m + m + m + m + m + m + m);
+            var xml = Method.GetTemplateXaml(tb);
+            Method.Toast(xml);
         }
     }
     public class TestInfo
@@ -45,14 +45,17 @@ namespace Paway.Win
         [NoShow]
         public int Id { get; set; }
         [Text("名称")]
-        public string Name { get; set; }
+        public string Content { get; set; }
         public double Money { get; set; }
         [Text("进度")]
         public double Value { get; set; }
+        public bool IsSelected { get; set; }
+        public Image Image { get; set; }
+        public string Desc { get; set; }
 
         public TestInfo(string name, double value = 0)
         {
-            this.Name = name;
+            this.Content = name;
             this.Money = value;
             this.Value = value;
         }

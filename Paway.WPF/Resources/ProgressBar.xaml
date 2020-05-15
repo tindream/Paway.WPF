@@ -3,6 +3,7 @@
                     xmlns:local="clr-namespace:Paway.WPF;assembly=Paway.WPF">
 
     <Style TargetType="{x:Type local:ProgressBarRound}">
+        <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <Setter Property="local:ProgressBarRound.IsMonitoring" Value="True"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Background" Value="White"/>

@@ -76,10 +76,10 @@
     </Style>
 
     <Style TargetType="{x:Type local:DataGridAuto}">
+        <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <!--其它-->
         <Setter Property="IsReadOnly" Value="True"/>
         <Setter Property="BorderBrush" Value="LightGray"/>
-        <Setter Property="FontSize" Value="15"/>
         <!--标题-->
         <Setter Property="RowHeaderWidth" Value="0"/>
         <!--外观-->

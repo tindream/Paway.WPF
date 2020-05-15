@@ -10,10 +10,10 @@ namespace Paway.WPF
 {
     public partial class ButtonRound : Button
     {
-        #region 属性
+        #region 属性定义
         #region 前景
         public static readonly DependencyProperty RadiusProperty =
-            DependencyProperty.RegisterAttached("Radius", typeof(CornerRadius), typeof(ButtonRound), new PropertyMetadata(new CornerRadius(7)));
+                DependencyProperty.RegisterAttached("Radius", typeof(CornerRadius), typeof(ButtonRound), new PropertyMetadata(new CornerRadius(7)));
         public static readonly DependencyProperty EffectRadiusProperty =
             DependencyProperty.RegisterAttached("EffectRadius", typeof(double), typeof(ButtonRound), new PropertyMetadata(0d));
         public static readonly DependencyProperty MouseForegroundProperty =
@@ -27,16 +27,16 @@ namespace Paway.WPF
         #region 背景颜色
         public static readonly DependencyProperty NormalBackgroundStartProperty =
             DependencyProperty.RegisterAttached("NormalBackgroundStart", typeof(Color), typeof(ButtonRound),
-            new PropertyMetadata(Color.FromArgb(254, 254, 254, 254), OnNormalBackgroundStart));
+            new PropertyMetadata(Color.FromArgb(254, 254, 254, 254)));
         public static readonly DependencyProperty NormalBackgroundEndProperty =
             DependencyProperty.RegisterAttached("NormalBackgroundEnd", typeof(Color), typeof(ButtonRound),
-            new PropertyMetadata(Color.FromArgb(254, 220, 220, 220), OnNormalBackgroundEnd));
+            new PropertyMetadata(Color.FromArgb(254, 220, 220, 220)));
         public static readonly DependencyProperty MouseBackgroundStartProperty =
             DependencyProperty.RegisterAttached("MouseBackgroundStart", typeof(Color), typeof(ButtonRound),
-            new PropertyMetadata(Color.FromArgb(15, 35, 175, 255), OnMouseBackgroundStart));
+            new PropertyMetadata(Color.FromArgb(15, 35, 175, 255)));
         public static readonly DependencyProperty MouseBackgroundEndProperty =
             DependencyProperty.RegisterAttached("MouseBackgroundEnd", typeof(Color), typeof(ButtonRound),
-            new PropertyMetadata(Color.FromArgb(210, 35, 175, 255), OnMouseBackgroundEnd));
+            new PropertyMetadata(Color.FromArgb(211, 35, 175, 255)));
         public static readonly DependencyProperty PressedBackgroundStartProperty =
             DependencyProperty.RegisterAttached("PressedBackgroundStart", typeof(Color), typeof(ButtonRound),
             new PropertyMetadata(Color.FromArgb(65, 35, 175, 255)));
@@ -46,22 +46,22 @@ namespace Paway.WPF
 
         #endregion
         #region 背景图片
+        public static readonly DependencyProperty ViewportProperty =
+            DependencyProperty.RegisterAttached("Viewport", typeof(Rect), typeof(ButtonRound),
+            new PropertyMetadata(new Rect(0, 0, 1, 1)));
         public static readonly DependencyProperty BackgroundImageProperty =
-            DependencyProperty.RegisterAttached("BackgroundImage", typeof(ImageSource), typeof(ButtonRound), new UIPropertyMetadata(null, OnBackgroundImage));
+            DependencyProperty.RegisterAttached("BackgroundImage", typeof(ImageSource), typeof(ButtonRound));
         public static readonly DependencyProperty BackgroundFocusedImageProperty =
             DependencyProperty.RegisterAttached("BackgroundFocusedImage", typeof(ImageSource), typeof(ButtonRound));
         public static readonly DependencyProperty StretchProperty =
             DependencyProperty.RegisterAttached("Stretch", typeof(Stretch), typeof(ButtonRound),
             new PropertyMetadata(Stretch.Fill));
-        public static readonly DependencyProperty ViewportProperty =
-            DependencyProperty.RegisterAttached("Viewport", typeof(Rect), typeof(ButtonRound),
-            new PropertyMetadata(new Rect(0, 0, 1, 1)));
 
         #endregion
 
         #endregion
 
-        #region 扩展定义
+        #region 属性
         #region 前景
         [Category("扩展")]
         [Description("自定义边框圆角")]
@@ -140,6 +140,13 @@ namespace Paway.WPF
         #endregion
         #region 背景图片
         [Category("扩展")]
+        [Description("背景图片位置")]
+        public Rect Viewport
+        {
+            get { return (Rect)GetValue(ViewportProperty); }
+            set { SetValue(ViewportProperty, value); }
+        }
+        [Category("扩展")]
         [Description("默认的背景图片")]
         public ImageSource BackgroundImage
         {
@@ -160,107 +167,57 @@ namespace Paway.WPF
             get { return (Stretch)GetValue(BackgroundFocusedImageProperty); }
             set { SetValue(BackgroundFocusedImageProperty, value); }
         }
-        [Category("扩展")]
-        [Description("背景图片的位置")]
-        public Rect Viewport
-        {
-            get { return (Rect)GetValue(ViewportProperty); }
-            set { SetValue(ViewportProperty, value); }
-        }
 
         #endregion
 
         #endregion
 
-        #region 自动设置
-        private static void OnBackgroundImage(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        public ButtonRound()
         {
-            if (obj is ButtonRound btn)
+            this.Loaded += ButtonRound_Loaded;
+        }
+        private void ButtonRound_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (this.BackgroundImage != null)
             {
-                btn.Loaded += delegate
+                if (this.BackgroundFocusedImage == null)
                 {
-                    if (btn.BackgroundImage != null)
-                    {
-                        if (btn.BackgroundFocusedImage == null)
-                        {
-                            btn.BackgroundFocusedImage = btn.BackgroundImage;
-                        }
-                        if (btn.NormalBackgroundStart == Color.FromArgb(254, 254, 254, 254))
-                        {
-                            btn.NormalBackgroundStart = Colors.Transparent;
-                            btn.NormalBackgroundEnd = Colors.Transparent;
-                            btn.MouseBackgroundStart = Colors.Transparent;
-                            btn.MouseBackgroundEnd = Colors.Transparent;
-                            btn.PressedBackgroundStart = Colors.Transparent;
-                            btn.PressedBackgroundEnd = Colors.Transparent;
-                        }
-                    }
-                };
+                    this.BackgroundFocusedImage = this.BackgroundImage;
+                }
+                if (this.NormalBackgroundStart == Color.FromArgb(254, 254, 254, 254))
+                {
+                    this.NormalBackgroundStart = Colors.Transparent;
+                    this.NormalBackgroundEnd = Colors.Transparent;
+                    this.MouseBackgroundStart = Colors.Transparent;
+                    this.MouseBackgroundEnd = Colors.Transparent;
+                    this.PressedBackgroundStart = Colors.Transparent;
+                    this.PressedBackgroundEnd = Colors.Transparent;
+                }
+            }
+            if (this.NormalBackgroundStart != Color.FromArgb(254, 254, 254, 254) && this.NormalBackgroundStart != Colors.Transparent)
+            {
+                this.PressedBackgroundStart = Color.FromArgb(255, this.NormalBackgroundStart.R, this.NormalBackgroundStart.G, this.NormalBackgroundStart.B);
+                if (this.MouseBackgroundStart == Color.FromArgb(15, 35, 175, 255))
+                {
+                    this.MouseBackgroundStart = Color.FromArgb((byte)(this.NormalBackgroundStart.A + (255 - this.NormalBackgroundStart.A) / 2), this.NormalBackgroundStart.R, this.NormalBackgroundStart.G, this.NormalBackgroundStart.B);
+                }
+                else if (this.MouseBackgroundStart != Colors.Transparent)
+                {
+                    this.PressedBackgroundStart = Color.FromArgb(255, this.MouseBackgroundStart.R, this.MouseBackgroundStart.G, this.MouseBackgroundStart.B);
+                }
+            }
+            if (this.NormalBackgroundEnd != Color.FromArgb(254, 220, 220, 220) && this.NormalBackgroundEnd != Colors.Transparent)
+            {
+                this.PressedBackgroundEnd = Color.FromArgb(255, this.NormalBackgroundEnd.R, this.NormalBackgroundEnd.G, this.NormalBackgroundEnd.B);
+                if (this.MouseBackgroundEnd == Color.FromArgb(211, 35, 175, 255))
+                {
+                    this.MouseBackgroundEnd = Color.FromArgb((byte)(this.NormalBackgroundEnd.A + (255 - this.NormalBackgroundEnd.A) / 2), this.NormalBackgroundEnd.R, this.NormalBackgroundEnd.G, this.NormalBackgroundEnd.B);
+                }
+                else if (this.MouseBackgroundEnd != Colors.Transparent)
+                {
+                    this.PressedBackgroundEnd = Color.FromArgb(255, this.MouseBackgroundEnd.R, this.MouseBackgroundEnd.G, this.MouseBackgroundEnd.B);
+                }
             }
         }
-        private static void OnNormalBackgroundStart(DependencyObject obj, DependencyPropertyChangedEventArgs e)
-        {
-            if (obj is ButtonRound btn)
-            {
-                btn.Loaded += delegate
-                {
-                    if (btn.NormalBackgroundStart != Color.FromArgb(254, 254, 254, 254) && btn.NormalBackgroundStart != Colors.Transparent)
-                    {
-                        if (btn.MouseBackgroundStart == Color.FromArgb(210, 56, 192, 200))
-                        {
-                            btn.MouseBackgroundStart = Color.FromArgb((byte)(btn.NormalBackgroundStart.A + (255 - btn.NormalBackgroundStart.A) / 2), btn.NormalBackgroundStart.R, btn.NormalBackgroundStart.G, btn.NormalBackgroundStart.B);
-                        }
-                        btn.PressedBackgroundStart = Color.FromArgb(255, btn.NormalBackgroundStart.R, btn.NormalBackgroundStart.G, btn.NormalBackgroundStart.B);
-                    }
-                };
-            }
-        }
-        private static void OnNormalBackgroundEnd(DependencyObject obj, DependencyPropertyChangedEventArgs e)
-        {
-            if (obj is ButtonRound btn)
-            {
-                btn.Loaded += delegate
-                {
-                    if (btn.NormalBackgroundEnd != Color.FromArgb(254, 220, 220, 220) && btn.NormalBackgroundEnd != Colors.Transparent)
-                    {
-                        if (btn.MouseBackgroundEnd == Color.FromArgb(210, 35, 175, 255))
-                        {
-                            btn.MouseBackgroundEnd = Color.FromArgb((byte)(btn.NormalBackgroundEnd.A + (255 - btn.NormalBackgroundEnd.A) / 2), btn.NormalBackgroundEnd.R, btn.NormalBackgroundEnd.G, btn.NormalBackgroundEnd.B);
-                        }
-                        btn.PressedBackgroundEnd = Color.FromArgb(255, btn.NormalBackgroundEnd.R, btn.NormalBackgroundEnd.G, btn.NormalBackgroundEnd.B);
-                    }
-                };
-            }
-        }
-        private static void OnMouseBackgroundStart(DependencyObject obj, DependencyPropertyChangedEventArgs e)
-        {
-            if (obj is ButtonRound btn)
-            {
-                btn.Loaded += delegate
-                {
-                    if (btn.MouseBackgroundStart != Color.FromArgb(210, 56, 192, 200) && btn.MouseBackgroundStart != Colors.Transparent)
-                    {
-                        btn.PressedBackgroundStart = Color.FromArgb(255, btn.MouseBackgroundStart.R, btn.MouseBackgroundStart.G, btn.MouseBackgroundStart.B);
-                    }
-                };
-            }
-        }
-        private static void OnMouseBackgroundEnd(DependencyObject obj, DependencyPropertyChangedEventArgs e)
-        {
-            if (obj is ButtonRound btn)
-            {
-                btn.Loaded += delegate
-                {
-                    if (btn.MouseBackgroundEnd != Color.FromArgb(210, 35, 175, 255) && btn.MouseBackgroundEnd != Colors.Transparent)
-                    {
-                        btn.PressedBackgroundEnd = Color.FromArgb(255, btn.MouseBackgroundEnd.R, btn.MouseBackgroundEnd.G, btn.MouseBackgroundEnd.B);
-                    }
-                };
-            }
-        }
-
-        #endregion
-
-        public ButtonRound() { }
     }
 }

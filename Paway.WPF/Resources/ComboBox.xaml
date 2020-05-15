@@ -21,6 +21,7 @@
     </ControlTemplate>
 
     <Style TargetType="{x:Type local:ComboBoxRound}">
+        <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="Template">
             <Setter.Value>
