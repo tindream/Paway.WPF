@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Paway.Win
+namespace Paway.Test
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑

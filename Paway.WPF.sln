@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29512.175
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paway.WPF", "Paway.WPF\Paway.WPF.csproj", "{839BD7C8-68CF-4D25-8326-F241DC785967}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paway.Win", "Paway.Win\Paway.Win.csproj", "{7B81D476-B91B-42ED-8CF3-D45EE312EE92}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paway.Test", "Paway.Test\Paway.Test.csproj", "{7B81D476-B91B-42ED-8CF3-D45EE312EE92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -30,3 +30,6 @@ _ReSharper*/
 .vs/
 #Nuget packages folder
 packages/
+AssemblyVersion.cs
+*/*.nupkg
+*/nuget.exe

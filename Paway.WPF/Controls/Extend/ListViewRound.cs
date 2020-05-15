@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace Paway.WPF
 {
-    public partial class ListViewRound : ComboBox
+    public partial class ListViewRound : ListView
     {
         public static readonly DependencyProperty ItemWidthProperty =
             DependencyProperty.RegisterAttached("ItemWidth", typeof(double), typeof(ListViewRound), new PropertyMetadata(150d));
