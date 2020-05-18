@@ -8,6 +8,9 @@ using System.Windows.Controls;
 
 namespace Paway.WPF
 {
+    /// <summary>
+    /// 主题样式
+    /// </summary>
     public class ThemeMonitor : DependencyObject
     {
         #region 主题样式监听
@@ -45,11 +48,20 @@ namespace Paway.WPF
         /// 字体大小
         /// </summary>
         public static readonly DependencyProperty FontSizeProperty =
-            DependencyProperty.RegisterAttached("FontSize", typeof(double), typeof(ThemeMonitor), new PropertyMetadata(15d));
+            DependencyProperty.RegisterAttached("FontSize", typeof(double), typeof(ThemeMonitor), new PropertyMetadata(Config.FontSize));
         /// <summary>
         /// 按钮字体大小
         /// </summary>
         public static readonly DependencyProperty ButtonFontSizeProperty =
-            DependencyProperty.RegisterAttached("ButtonFontSize", typeof(double), typeof(ThemeMonitor), new PropertyMetadata(18d));
+            DependencyProperty.RegisterAttached("ButtonFontSize", typeof(double), typeof(ThemeMonitor), new PropertyMetadata(Config.FontSize + 3));
+
+        /// <summary>
+        /// 字体大小
+        /// </summary>
+        public double FontSize
+        {
+            get { return (double)GetValue(FontSizeProperty); }
+            set { SetValue(FontSizeProperty, value); }
+        }
     }
 }

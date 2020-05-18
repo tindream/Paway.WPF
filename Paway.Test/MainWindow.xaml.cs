@@ -2,11 +2,11 @@
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -28,7 +28,11 @@ namespace Paway.Test
             var list = new List<TestInfo>();
             list.Add(new TestInfo("Hello"));
             list.Add(new TestInfo("你好123", 70));
-            for (int i = 0; i < 20; i++) list.Add(new TestInfo("A" + i, i) { Desc="D"+i});
+            for (int i = 0; i < 20; i++) list.Add(new TestInfo("A" + i, i)
+            {
+                Desc = "D" + i,
+                Image = new BitmapImage(new Uri(@"pack://application:,,,/Paway.Test;component/Images/close.png"))
+            });
             datagrid1.ItemsSource = list;
             listView1.Items.Clear();
             listView1.ItemsSource = list;
@@ -50,7 +54,7 @@ namespace Paway.Test
         [Text("进度")]
         public double Value { get; set; }
         public bool IsSelected { get; set; }
-        public Image Image { get; set; }
+        public ImageSource Image { get; set; }
         public string Desc { get; set; }
 
         public TestInfo(string name, double value = 0)
@@ -58,6 +62,7 @@ namespace Paway.Test
             this.Content = name;
             this.Money = value;
             this.Value = value;
+            //this.Image = BitmapHelper.GetBitmapFormFile("close.png");
         }
     }
 }

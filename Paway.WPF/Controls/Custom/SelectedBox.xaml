@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Paway.WPF"
-             mc:Ignorable="d" Height="Auto" Width="Auto">
+             mc:Ignorable="d" Height="Auto" Width="Auto" FontSize="15">
     <local:BorderControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -20,9 +20,9 @@
         <DockPanel>
             <Image Name="cbxImage" Source="/Images/selectedBox.png" Width="24"/>
             <TextBlock Name="cbxTitle" Padding="5,0,0,0" Text="标题" Foreground="#333"
-                   FontFamily="Microsoft YaHei" FontSize="18"
+                   FontFamily="Microsoft YaHei" 
                    LineStackingStrategy="BlockLineHeight" 
-                   TextTrimming="WordEllipsis" />
+                   TextTrimming="WordEllipsis" VerticalAlignment="Center" />
         </DockPanel>
     </Border>
 </local:BorderControl>

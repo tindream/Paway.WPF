@@ -49,6 +49,7 @@ namespace Paway.WPF
         public SelectedBox()
         {
             InitializeComponent();
+            this.FontSize = new ThemeMonitor().FontSize;
             cbxImage.Source = new BitmapImage(new Uri(@"pack://application:,,,/Paway.WPF;component/Images/selectedBox.png"));
         }
         protected override void ClickHandle(object sender)

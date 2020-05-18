@@ -23,11 +23,7 @@ namespace Paway.WPF
         public double YOffSetStart
         {
             get { return yOffSetStart; }
-            set
-            {
-                yOffSetStart = value;
-                OnPropertyChanged();
-            }
+            set { yOffSetStart = value; OnPropertyChanged(); }
         }
         private double yOffSetEnd = 200;
         /// <summary>
@@ -36,11 +32,7 @@ namespace Paway.WPF
         public double YOffSetEnd
         {
             get { return yOffSetEnd; }
-            set
-            {
-                yOffSetEnd = value;
-                OnPropertyChanged();
-            }
+            set { yOffSetEnd = value; OnPropertyChanged(); }
         }
 
         private string message;

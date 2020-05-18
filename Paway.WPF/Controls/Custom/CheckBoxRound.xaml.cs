@@ -49,6 +49,7 @@ namespace Paway.WPF
         public CheckBoxRound()
         {
             InitializeComponent();
+            this.FontSize = new ThemeMonitor().FontSize;
             cbxImage.Source = new BitmapImage(new Uri(@"pack://application:,,,/Paway.WPF;component/Images/checkBox.png"));
         }
         protected override void ClickHandle(object sender)

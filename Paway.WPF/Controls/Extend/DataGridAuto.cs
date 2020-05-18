@@ -14,13 +14,19 @@ using Paway.Helper;
 
 namespace Paway.WPF
 {
+    /// <summary>
+    /// DataGrid自定义扩展
+    /// </summary>
     public partial class DataGridAuto : DataGrid
     {
         #region 基本样式
+        /// <summary>
+        /// 构造
+        /// </summary>
         public DataGridAuto()
         {
             //AutoGenerateColumns = true;
-            this.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
+            //this.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
             this.ColumnHeaderHeight = 42;
             this.Initialized += DataGridAuto_Initialized;
         }
@@ -73,6 +79,7 @@ namespace Paway.WPF
                     (column as DataGridTextColumn).Binding = new Binding(property.Name);
                     columns.Add(column);
                 }
+                column.MinWidth = 64;
                 column.Header = property.Text();
                 if (column is DataGridTextColumn text && text.ElementStyle.Setters.Count == 1 && (text.ElementStyle.Setters[0] as Setter).Property.Name == "Margin")
                 {
@@ -87,6 +94,9 @@ namespace Paway.WPF
         #endregion
 
         #region 扩展公共方法
+        /// <summary>
+        /// 获取指定名称列
+        /// </summary>
         public DataGridColumn GetColumn(string name)
         {
             foreach (var item in Columns)

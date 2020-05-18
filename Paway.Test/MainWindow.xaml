@@ -30,7 +30,7 @@
             <ColumnDefinition Width="350"></ColumnDefinition>
             <ColumnDefinition Width="200"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <utils:ProgressBarRound Grid.Row="1" Margin="5" Height="32" Value="95" />
+        <utils:ProgressBarRound Grid.Row="1" Margin="5" Value="95" />
 
         <utils:ComboBoxRound Grid.Row="2" Margin="5" Name="cbx">
             <ComboBoxItem Content="A" IsSelected="True"/>
@@ -38,13 +38,15 @@
             <ComboBoxItem Content="C"/>
         </utils:ComboBoxRound>
 
-        <utils:TextBoxRound Grid.Row="3" Margin="5" Name="tb"></utils:TextBoxRound>
+        <utils:TextBoxRound Grid.Row="3" Margin="5" Name="tb" ></utils:TextBoxRound>
         <PasswordBox Grid.Row="4" Margin="5" ></PasswordBox>
         <utils:ButtonRound Grid.Row="5" Margin="5"  Content="确认" Click="ButtonRound_Click" ></utils:ButtonRound>
 
-        <utils:CheckBoxRound Grid.Row="6" Margin="5"  ></utils:CheckBoxRound>
-        <utils:SelectedBox Grid.Row="7" Margin="5"  ></utils:SelectedBox>
-        <utils:ListViewRound Name="listView1" Grid.Row="8" Grid.Column="1" Height="250" Margin="5" >
+        <utils:CheckBoxRound Grid.Row="6" Margin="5"></utils:CheckBoxRound>
+        <utils:SelectedBox Grid.Row="7" Margin="5"></utils:SelectedBox>
+        <Image Grid.Row="8" Name="image"/>
+
+        <utils:ListViewRound Name="listView1" Grid.Row="8" Grid.Column="1" Height="250" Margin="5" ItemImageWidth="50">
             <ComboBoxItem Content="Hello123"/>
             <ListBoxItem Content="C1"/>
             <ListBoxItem Content="C2"/>
@@ -59,7 +61,7 @@
         </utils:ListViewRound>
 
 
-        <utils:DataGridAuto Name="datagrid1" Grid.Column="1" Grid.RowSpan="8" Margin="5"  Height="295">
+        <utils:DataGridAuto Name="datagrid1" Grid.Column="1" Grid.RowSpan="8" Margin="5" Height="285">
             <DataGrid.Columns>
                 <DataGridTextColumn  MinWidth="130" Binding="{Binding Money}" ElementStyle="{StaticResource TextRightSytle}"/>
                 <DataGridTemplateColumn Header="进度" x:Name="Value">
