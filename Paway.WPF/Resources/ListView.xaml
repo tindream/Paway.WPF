@@ -55,7 +55,7 @@
         <Setter Property="ItemContainerStyle">
             <Setter.Value>
                 <Style TargetType="ListBoxItem">
-                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                    <Setter Property="IsSelected" Value="{Binding IsSelected}" />
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
@@ -70,7 +70,7 @@
                                         Height="{Binding ItemHeight, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}">
                                     <DockPanel>
                                         <Image Name="image" 
-                                               Source="{Binding Image}" 
+                                               Source="{Binding Path=Image.Normal}" 
                                                Width="{Binding ItemImageWidth, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"  
                                                Height="{Binding ItemImageHeight, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"
                                                DockPanel.Dock="{Binding ItemImageDock, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"
@@ -98,14 +98,7 @@
                                 </Border>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True" >
-                                        <Setter TargetName="image" Property="Source" >
-                                            <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource NullJudgeConverter}">
-                                                    <Binding Path="ImageMouse" />
-                                                    <Binding Path="Image" />
-                                                </MultiBinding>
-                                            </Setter.Value>
-                                        </Setter>
+                                        <Setter TargetName="image" Property="Source" Value="{Binding Path=Image.Mouse}"/>
                                         <Setter TargetName="border" Property="BorderBrush" 
                                                 Value="{Binding Path=ItemBorderBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
                                         <Setter TargetName="border" Property="Background"  
@@ -133,9 +126,9 @@
                                         <Setter TargetName="image" Property="Source" >
                                             <Setter.Value>
                                                 <MultiBinding Converter="{StaticResource NullJudgeConverter}">
-                                                    <Binding Path="ImagePressed" />
-                                                    <Binding Path="ImageMouse" />
-                                                    <Binding Path="Image" />
+                                                    <Binding Path="Image.Pressed" />
+                                                    <Binding Path="Image.Mouse" />
+                                                    <Binding Path="Image.Normal" />
                                                 </MultiBinding>
                                             </Setter.Value>
                                         </Setter>

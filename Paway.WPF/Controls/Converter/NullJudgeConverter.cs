@@ -23,7 +23,7 @@ namespace Paway.WPF
         public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
         {
             var index = 0;
-            while (value.Length > index && value[index] == DependencyProperty.UnsetValue)
+            while (value.Length > index && (value[index] == null || value[index] == DependencyProperty.UnsetValue))
             {
                 index++;
             }

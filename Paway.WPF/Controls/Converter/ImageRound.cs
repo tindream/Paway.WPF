@@ -36,10 +36,20 @@ namespace Paway.WPF
         public ImageRound() { }
         /// <summary>
         /// </summary>
-        public ImageRound(ImageSource image) : this(image, image, image) { }
+        public ImageRound(string uri) : this(uri, uri, uri) { }
         /// <summary>
         /// </summary>
-        public ImageRound(ImageSource normal, ImageSource mouse, ImageSource pressed)
+        public ImageRound(string normal, string mouse = null, string pressed = null)
+        {
+            if (normal != null) Normal = new BitmapImage(new Uri(normal));
+            if (mouse != null) Mouse = new BitmapImage(new Uri(mouse));
+            else Mouse = Normal;
+            if (pressed != null) Pressed = new BitmapImage(new Uri(pressed));
+            else Pressed = Mouse;
+        }
+        /// <summary>
+        /// </summary>
+        public ImageRound(ImageSource normal, ImageSource mouse = null, ImageSource pressed = null)
         {
             if (normal != null) Normal = normal;
             if (mouse != null) Mouse = mouse;
@@ -85,13 +95,7 @@ namespace Paway.WPF
             if (value is string str)
             {
                 var strs = str.Split('|');
-                ImageSource normal = null;
-                ImageSource mouse = null;
-                ImageSource pressed = null;
-                if (strs.Length > 0) normal = new BitmapImage(new Uri(strs[0]));
-                if (strs.Length > 1) mouse = new BitmapImage(new Uri(strs[1]));
-                if (strs.Length > 2) pressed = new BitmapImage(new Uri(strs[2]));
-                return new ImageRound(normal, mouse, pressed);
+                return new ImageRound(strs.Length > 0 ? strs[0] : null, strs.Length > 1 ? strs[1] : null, strs.Length > 2 ? strs[2] : null);
             }
             return base.ConvertFrom(context, culture, value);
         }

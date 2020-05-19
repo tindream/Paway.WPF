@@ -30,12 +30,12 @@ namespace Paway.Test
             list.Add(new TestInfo("Hello"));
             list.Add(new TestInfo("你好123", 70)
             {
-                ImageMouse = new BitmapImage(new Uri(@"pack://application:,,,/Paway.Test;component/Images/close_while.png"))
+                Image = new ImageRound(null, @"pack://application:,,,/Paway.Test;component/Images/close_while.png")
             });
             for (int i = 0; i < 20; i++) list.Add(new TestInfo("A" + i, i)
             {
                 Desc = "D" + i,
-                Image = new BitmapImage(new Uri(@"pack://application:,,,/Paway.Test;component/Images/close.png"))
+                Image = new ImageRound(@"pack://application:,,,/Paway.Test;component/Images/close.png")
             });
             datagrid1.ItemsSource = list;
             listView1.Items.Clear();
@@ -55,7 +55,7 @@ namespace Paway.Test
             Method.Toast(xml);
         }
     }
-    public class TestInfo
+    public class TestInfo : IListViewInfo
     {
         [NoShow]
         public int Id { get; set; }
@@ -65,8 +65,7 @@ namespace Paway.Test
         [Text("进度")]
         public double Value { get; set; }
         public bool IsSelected { get; set; }
-        public ImageSource Image { get; set; }
-        public ImageSource ImageMouse { get; set; }
+        public ImageRound Image { get; set; }
         public string Desc { get; set; }
 
         public TestInfo(string name, double value = 0)
@@ -74,7 +73,6 @@ namespace Paway.Test
             this.Content = name;
             this.Money = value;
             this.Value = value;
-            //this.Image = BitmapHelper.GetBitmapFormFile("close.png");
         }
     }
 }
