@@ -10,9 +10,15 @@ using System.Windows.Media;
 
 namespace Paway.WPF
 {
+    /// <summary>
+    /// ScrollViewer扩展监听
+    /// </summary>
     public class ScrollViewerMonitor : DependencyObject
     {
         #region 启用监听，获取ScrollViewer属性并设置到Thumb
+        /// <summary>
+        /// 启用监听，获取ScrollViewer属性并设置到Thumb
+        /// </summary>
         public static readonly DependencyProperty IsMonitoringProperty =
             DependencyProperty.RegisterAttached("IsMonitoring", typeof(bool), typeof(ScrollViewerMonitor), new UIPropertyMetadata(false, OnIsMonitoringChanged));
         private static void OnIsMonitoringChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
@@ -39,6 +45,9 @@ namespace Paway.WPF
                 thumb.SetValue(ScrollBarColorProperty, new ScrollViewerRound().ScrollBarColor);
             }
         }
+        /// <summary>
+        /// 启用监听
+        /// </summary>
         public bool IsMonitoring
         {
             get { return (bool)GetValue(IsMonitoringProperty); }

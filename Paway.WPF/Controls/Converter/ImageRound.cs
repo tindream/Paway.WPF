@@ -8,61 +8,56 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Paway.WPF
 {
     /// <summary>
-    /// 自定义默认、鼠标划过时、鼠标点击时的大小
+    /// 自定义默认、鼠标划过时、鼠标点击时的图片
     /// </summary>
-    [TypeConverter(typeof(DoubleRoundConverter))]
-    public class DoubleRound : IEquatable<DoubleRound>
+    [TypeConverter(typeof(ImageRoundConverter))]
+    public class ImageRound : IEquatable<ImageRound>
     {
         /// <summary>
-        /// 默认的大小
+        /// 默认的图片
         /// </summary>
-        public double Normal { get; set; }
+        public ImageSource Normal { get; set; }
         /// <summary>
-        /// 鼠标划过时的大小
+        /// 鼠标划过时的图片
         /// </summary>
-        public double Mouse { get; set; }
+        public ImageSource Mouse { get; set; }
         /// <summary>
-        /// 鼠标点击时的大小
+        /// 鼠标点击时的图片
         /// </summary>
-        public double Pressed { get; set; }
+        public ImageSource Pressed { get; set; }
 
         /// <summary>
         /// </summary>
-        public DoubleRound()
-        {
-            if (Normal == 0) Normal = new ThemeMonitor().FontSize;
-            if (Mouse == 0) Mouse = new ThemeMonitor().FontSize;
-            if (Pressed == 0) Pressed = new ThemeMonitor().FontSize;
-        }
+        public ImageRound() { }
         /// <summary>
         /// </summary>
-        public DoubleRound(double value) : this(value, value, value) { }
+        public ImageRound(ImageSource image) : this(image, image, image) { }
         /// <summary>
         /// </summary>
-        public DoubleRound(double? normal, double? mouse, double? pressed)
+        public ImageRound(ImageSource normal, ImageSource mouse, ImageSource pressed)
         {
-            if (normal != null) Normal = normal.Value;
-            if (mouse != null) Mouse = mouse.Value;
+            if (normal != null) Normal = normal;
+            if (mouse != null) Mouse = mouse;
             else Mouse = Normal;
-            if (pressed != null) Pressed = pressed.Value;
+            if (pressed != null) Pressed = pressed;
             else Pressed = Mouse;
-            if (Normal == 0) Normal = new ThemeMonitor().FontSize;
         }
         /// <summary>
         /// </summary>
-        public bool Equals(DoubleRound other)
+        public bool Equals(ImageRound other)
         {
             return Normal.Equals(other.Normal) && Mouse.Equals(other.Mouse) && Pressed.Equals(other.Pressed);
         }
     }
     /// <summary>
-    /// 字符串转DoubleRound
+    /// 字符串转ImageRound
     /// </summary>
-    public class DoubleRoundConverter : TypeConverter
+    public class ImageRoundConverter : TypeConverter
     {
         /// <summary>
         /// </summary>
@@ -79,7 +74,7 @@ namespace Paway.WPF
             return base.CanConvertTo(context, destinationType);
         }
         /// <summary>
-        /// 自定义字符串转换，以分号(;)隔开
+        /// 自定义字符串转换，以位运算符(|)隔开
         /// </summary>
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
@@ -87,30 +82,18 @@ namespace Paway.WPF
             {
                 throw base.GetConvertFromException(value);
             }
-            if (value is double)
-            {
-                return new DoubleRound((double)value);
-            }
             if (value is string str)
             {
-                var strs = str.Split(';');
-                double? normal = null;
-                double? mouse = null;
-                double? pressed = null;
-                if (strs.Length > 0) Parse(strs[0], out normal);
-                if (strs.Length > 1) Parse(strs[1], out mouse);
-                if (strs.Length > 2) Parse(strs[2], out pressed);
-                return new DoubleRound(normal, mouse, pressed);
+                var strs = str.Split('|');
+                ImageSource normal = null;
+                ImageSource mouse = null;
+                ImageSource pressed = null;
+                if (strs.Length > 0) normal = new BitmapImage(new Uri(strs[0]));
+                if (strs.Length > 1) mouse = new BitmapImage(new Uri(strs[1]));
+                if (strs.Length > 2) pressed = new BitmapImage(new Uri(strs[2]));
+                return new ImageRound(normal, mouse, pressed);
             }
             return base.ConvertFrom(context, culture, value);
-        }
-        private void Parse(string str, out double? value)
-        {
-            if (double.TryParse(str, out double result))
-            {
-                value = result;
-            }
-            else value = null;
         }
         /// <summary>
         /// </summary>

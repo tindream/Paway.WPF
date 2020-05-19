@@ -18,10 +18,12 @@ using System.Windows.Shapes;
 namespace Paway.WPF
 {
     /// <summary>
-    /// MessageBox.xaml 的交互逻辑
+    /// Window系统消息框-Toast显示
     /// </summary>
     public partial class MessageToast : Window
     {
+        /// <summary>
+        /// </summary>
         public MessageToast()
         {
             InitializeComponent();
@@ -33,6 +35,9 @@ namespace Paway.WPF
                 (this.Resources["ShowSb"] as Storyboard).Begin();
             };
         }
+        /// <summary>
+        /// 显示
+        /// </summary>
         public void Show(string msg, bool iError = false)
         {
             if (iError)
@@ -42,6 +47,9 @@ namespace Paway.WPF
             (this.DataContext as MessageToastModel).Message = msg;
             this.Show();
         }
+        /// <summary>
+        /// 自动大小、位置
+        /// </summary>
         protected override void OnRender(DrawingContext drawingContext)
         {
             this.Width = border1.ActualWidth + 2;

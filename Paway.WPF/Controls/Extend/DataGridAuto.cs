@@ -15,7 +15,7 @@ using Paway.Helper;
 namespace Paway.WPF
 {
     /// <summary>
-    /// DataGrid自定义扩展
+    /// DataGrid扩展
     /// </summary>
     public partial class DataGridAuto : DataGrid
     {

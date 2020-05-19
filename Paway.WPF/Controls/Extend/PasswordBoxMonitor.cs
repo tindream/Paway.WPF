@@ -8,9 +8,15 @@ using System.Windows.Controls;
 
 namespace Paway.WPF
 {
+    /// <summary>
+    /// PasswordBox扩展监听
+    /// </summary>
     public class PasswordBoxMonitor : DependencyObject
     {
         #region 启用监听，设置水印大小，获取密码长度
+        /// <summary>
+        /// 启用监听，设置水印大小，获取密码长度
+        /// </summary>
         public static readonly DependencyProperty IsMonitoringProperty =
             DependencyProperty.RegisterAttached("IsMonitoring", typeof(bool), typeof(PasswordBoxMonitor), new UIPropertyMetadata(false, OnIsMonitoringChanged));
         private static void OnIsMonitoringChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
@@ -38,6 +44,9 @@ namespace Paway.WPF
                 pad.SetValue(PasswordLengthProperty, pad.Password.Length);
             }
         }
+        /// <summary>
+        /// 启用监听
+        /// </summary>
         public bool IsMonitoring
         {
             get { return (bool)GetValue(IsMonitoringProperty); }

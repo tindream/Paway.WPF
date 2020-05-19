@@ -12,71 +12,71 @@ using System.Windows.Media;
 namespace Paway.WPF
 {
     /// <summary>
-    /// 自定义默认、鼠标划过时、鼠标点击时的Brush颜色
+    /// 自定义默认、鼠标划过时、鼠标点击时的Color颜色
     /// </summary>
-    [TypeConverter(typeof(BrushRoundConverter))]
-    public class BrushRound : IEquatable<BrushRound>
+    [TypeConverter(typeof(ColorRoundConverter))]
+    public class ColorRound : IEquatable<ColorRound>
     {
         /// <summary>
         /// 默认的颜色
         /// </summary>
-        public Brush Normal { get; set; } = new SolidColorBrush(Colors.LightGray);
+        public Color Normal { get; set; } = Colors.LightGray;
         /// <summary>
         /// 鼠标划过时的颜色
         /// </summary>
-        public Brush Mouse { get; set; } = new SolidColorBrush(Color.FromArgb(210, 35, 175, 255));
+        public Color Mouse { get; set; } = Color.FromArgb(210, 35, 175, 255);
         /// <summary>
         /// 鼠标点击时的颜色
         /// </summary>
-        public Brush Pressed { get; set; } = new SolidColorBrush(Color.FromArgb(250, 35, 175, 255));
+        public Color Pressed { get; set; } = Color.FromArgb(250, 35, 175, 255);
 
         /// <summary>
         /// </summary>
-        public BrushRound() { }
+        public ColorRound() { }
         /// <summary>
         /// </summary>
-        public BrushRound(Color? normal, Color? mouse = null, Color? pressed = null, int add = 50)
+        public ColorRound(Color? normal, Color? mouse = null, Color? pressed = null, int add = 50)
         {
-            if (normal != null) Normal = new SolidColorBrush(normal.Value);
-            if (mouse != null) Mouse = new SolidColorBrush(mouse.Value);
+            if (normal != null) Normal = normal.Value;
+            if (mouse != null) Mouse = mouse.Value;
             else if (normal != null) Reset(normal.Value, add);
-            if (pressed != null) Pressed = new SolidColorBrush(pressed.Value);
+            if (pressed != null) Pressed = pressed.Value;
             else if (mouse != null) Focused(mouse.Value, add);
         }
         /// <summary>
         /// 设置所有颜色，指定Alpha差异
         /// </summary>
-        public BrushRound Reset(Color color, int add = 50)
+        public ColorRound Reset(Color color, int add = 50)
         {
-            Normal = new SolidColorBrush(color);
-            Mouse = new SolidColorBrush(Color.FromArgb((byte)(color.A - add), color.R, color.G, color.B));
+            Normal = color;
+            Mouse = Color.FromArgb((byte)(color.A - add), color.R, color.G, color.B);
             var a = color.A + add;
             if (a > 255) a = 255;
-            Pressed = new SolidColorBrush(Color.FromArgb((byte)a, color.R, color.G, color.B));
+            Pressed = Color.FromArgb((byte)a, color.R, color.G, color.B);
             return this;
         }
         /// <summary>
         /// 设置鼠标划过、点击时的颜色
         /// </summary>
-        public BrushRound Focused(Color color, int add = 50)
+        public ColorRound Focused(Color color, int add = 50)
         {
-            Mouse = new SolidColorBrush(color);
+            Mouse = color;
             var a = color.A + add;
             if (a > 255) a = 255;
-            Pressed = new SolidColorBrush(Color.FromArgb((byte)a, color.R, color.G, color.B));
+            Pressed = Color.FromArgb((byte)a, color.R, color.G, color.B);
             return this;
         }
         /// <summary>
         /// </summary>
-        public bool Equals(BrushRound other)
+        public bool Equals(ColorRound other)
         {
             return Normal.Equals(other.Normal) && Mouse.Equals(other.Mouse) && Pressed.Equals(other.Pressed);
         }
     }
     /// <summary>
-    /// 字符串转BrushRound
+    /// 字符串转ColorRound
     /// </summary>
-    public class BrushRoundConverter : TypeConverter
+    public class ColorRoundConverter : TypeConverter
     {
         /// <summary>
         /// </summary>
@@ -112,7 +112,7 @@ namespace Paway.WPF
                 if (strs.Length > 1 && !string.IsNullOrEmpty(strs[1])) mouse = (Color)ColorConverter.ConvertFromString(strs[1]);
                 if (strs.Length > 2 && !string.IsNullOrEmpty(strs[2])) pressed = (Color)ColorConverter.ConvertFromString(strs[2]);
                 if (strs.Length > 3 && !string.IsNullOrEmpty(strs[3])) add = Convert.ToInt32(strs[3], culture);
-                return new BrushRound(normal, mouse, pressed, add);
+                return new ColorRound(normal, mouse, pressed, add);
             }
             return base.ConvertFrom(context, culture, value);
         }

@@ -16,6 +16,9 @@ using Paway.Helper;
 
 namespace Paway.WPF
 {
+    /// <summary>
+    /// 一些帮助方法
+    /// </summary>
     public class Method
     {
         #region 获取控件模板的XAML代码
@@ -27,11 +30,12 @@ namespace Paway.WPF
             string xaml;
             if (ctrl.Template != null)
             {
-                var settings = new XmlWriterSettings();
-                settings.Indent = true;
-                settings.IndentChars = new string(' ', 4);
-                settings.NewLineOnAttributes = true;
-
+                var settings = new XmlWriterSettings
+                {
+                    Indent = true,
+                    IndentChars = new string(' ', 4),
+                    NewLineOnAttributes = true
+                };
                 var strbuild = new StringBuilder();
                 var xmlwrite = XmlWriter.Create(strbuild, settings);
                 try

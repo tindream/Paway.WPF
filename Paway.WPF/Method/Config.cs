@@ -16,8 +16,14 @@ using Paway.Helper;
 
 namespace Paway.WPF
 {
+    /// <summary>
+    /// 配置
+    /// </summary>
     public class Config
     {
+        /// <summary>
+        /// 全局字体大小
+        /// </summary>
         public static double FontSize = 15d;
     }
 }

@@ -30,8 +30,14 @@ namespace Paway.WPF
         /// </summary>
         public Thickness Pressed { get; set; } = new Thickness(1);
 
+        /// <summary>
+        /// </summary>
         public ThicknessRound() { }
+        /// <summary>
+        /// </summary>
         public ThicknessRound(double value) : this(value, value, value) { }
+        /// <summary>
+        /// </summary>
         public ThicknessRound(double? normal, double? mouse, double? pressed)
         {
             if (normal != null) Normal = new Thickness(normal.Value);
@@ -40,6 +46,8 @@ namespace Paway.WPF
             if (pressed != null) Pressed = new Thickness(pressed.Value);
             else Pressed = Mouse;
         }
+        /// <summary>
+        /// </summary>
         public ThicknessRound(Thickness? normal, Thickness? mouse, Thickness? pressed)
         {
             if (normal != null) Normal = normal.Value;
@@ -48,6 +56,8 @@ namespace Paway.WPF
             if (pressed != null) Pressed = pressed.Value;
             else Pressed = Mouse;
         }
+        /// <summary>
+        /// </summary>
         public bool Equals(ThicknessRound other)
         {
             return Normal.Equals(other.Normal) && Mouse.Equals(other.Mouse) && Pressed.Equals(other.Pressed);
@@ -58,16 +68,23 @@ namespace Paway.WPF
     /// </summary>
     public class ThicknessRoundConverter : TypeConverter
     {
+        /// <summary>
+        /// </summary>
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
             if (sourceType == typeof(string)) return true;
             return base.CanConvertFrom(context, sourceType);
         }
+        /// <summary>
+        /// </summary>
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
             if (destinationType == typeof(string)) return true;
             return base.CanConvertTo(context, destinationType);
         }
+        /// <summary>
+        /// 自定义字符串转换，以分号(;)隔开
+        /// </summary>
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
             if (value == null)
@@ -106,6 +123,8 @@ namespace Paway.WPF
             }
             else value = null;
         }
+        /// <summary>
+        /// </summary>
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
             if (destinationType == typeof(string))

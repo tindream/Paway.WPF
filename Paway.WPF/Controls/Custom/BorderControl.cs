@@ -25,12 +25,19 @@ namespace Paway.WPF
         private Point lastClickPoint;
 
         #region 点击验证
+        /// <summary>
+        /// Border点击触发
+        /// </summary>
         protected virtual void ClickHandle(object sender) { }
+        /// <summary>
+        /// </summary>
         protected void Border_MouseDown(object sender, InputEventArgs e)
         {
             Point pointToWindow = Mouse.GetPosition(this);
             this.lastClickPoint = PointToScreen(pointToWindow);
         }
+        /// <summary>
+        /// </summary>
         protected void Border_MouseUp(object sender, InputEventArgs e)
         {
             if (this.lastClickPoint == new Point()) return;

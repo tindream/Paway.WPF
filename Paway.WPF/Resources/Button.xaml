@@ -9,7 +9,6 @@
         <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="Black"/>
         <Setter Property="Padding" Value="12,5"/>
         <Setter Property="Margin" Value="5"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -21,13 +20,13 @@
                 <ControlTemplate TargetType="{x:Type local:ButtonRound}" >
                     <Grid>
                         <Border x:Name="border1"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{TemplateBinding Radius}">
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding Radius}">
                             <Border.Background>
                                 <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                                    <GradientStop Color="{Binding NormalBackgroundStart, RelativeSource={RelativeSource TemplatedParent}}" Offset="0" />
-                                    <GradientStop Color="{Binding NormalBackgroundEnd, RelativeSource={RelativeSource TemplatedParent}}" Offset="1" />
+                                    <GradientStop Color="{Binding Path=BackgroundStart.Normal, RelativeSource={RelativeSource TemplatedParent}}" Offset="0" />
+                                    <GradientStop Color="{Binding Path=BackgroundEnd.Normal, RelativeSource={RelativeSource TemplatedParent}}" Offset="1" />
                                 </LinearGradientBrush>
                             </Border.Background>
                             <Border.Effect>
@@ -37,48 +36,48 @@
                         <Border x:Name="border2" 
                                 Padding="{TemplateBinding Padding}">
                             <Border.Background>
-                                <ImageBrush ImageSource="{Binding BackgroundImage, RelativeSource={RelativeSource TemplatedParent}}"
-                                        Stretch="{Binding Stretch, RelativeSource={RelativeSource TemplatedParent}}"
-                                        Viewport="{Binding Viewport, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                <ImageBrush ImageSource="{Binding Path=BackgroundImage.Normal, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Stretch="{Binding Stretch, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Viewport="{Binding Viewport, RelativeSource={RelativeSource TemplatedParent}}"/>
                             </Border.Background>
                             <TextBlock x:Name="txt" Text="{TemplateBinding Content}"
-                                   Foreground="{TemplateBinding Foreground}" 
-                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                       Foreground="{Binding Path=ForegroundRound.Normal, RelativeSource={RelativeSource TemplatedParent}}" 
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Foreground" TargetName="txt" Value="{Binding MouseForeground, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
+                            <Setter Property="Foreground" TargetName="txt" Value="{Binding Path=ForegroundRound.Mouse, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
                             <Setter Property="Background" TargetName="border1">
                                 <Setter.Value>
                                     <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                                        <GradientStop Color="{Binding MouseBackgroundStart, RelativeSource={RelativeSource TemplatedParent}}" Offset="0" />
-                                        <GradientStop Color="{Binding MouseBackgroundEnd, RelativeSource={RelativeSource TemplatedParent}}" Offset="1" />
+                                        <GradientStop Color="{Binding Path=BackgroundStart.Mouse, RelativeSource={RelativeSource TemplatedParent}}" Offset="0" />
+                                        <GradientStop Color="{Binding Path=BackgroundEnd.Mouse, RelativeSource={RelativeSource TemplatedParent}}" Offset="1" />
                                     </LinearGradientBrush>
                                 </Setter.Value>
                             </Setter>
                             <Setter Property="Background" TargetName="border2">
                                 <Setter.Value>
-                                    <ImageBrush ImageSource="{Binding BackgroundFocusedImage, RelativeSource={RelativeSource TemplatedParent}}" 
+                                    <ImageBrush ImageSource="{Binding Path=BackgroundImage.Mouse, RelativeSource={RelativeSource TemplatedParent}}" 
                                                 Stretch="{Binding Stretch, RelativeSource={RelativeSource TemplatedParent}}"
                                                 Viewport="{Binding Viewport, RelativeSource={RelativeSource TemplatedParent}}"/>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Foreground" TargetName="txt" Value="{Binding PressedForeground, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
+                            <Setter Property="Foreground" TargetName="txt" Value="{Binding Path=ForegroundRound.Pressed, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
                             <Setter Property="Background" TargetName="border1">
                                 <Setter.Value>
                                     <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                                        <GradientStop Color="{Binding PressedBackgroundStart, RelativeSource={RelativeSource TemplatedParent}}" Offset="0" />
-                                        <GradientStop Color="{Binding PressedBackgroundEnd, RelativeSource={RelativeSource TemplatedParent}}" Offset="1" />
+                                        <GradientStop Color="{Binding Path=BackgroundStart.Pressed, RelativeSource={RelativeSource TemplatedParent}}" Offset="0" />
+                                        <GradientStop Color="{Binding Path=BackgroundEnd.Pressed, RelativeSource={RelativeSource TemplatedParent}}" Offset="1" />
                                     </LinearGradientBrush>
                                 </Setter.Value>
                             </Setter>
                             <Setter Property="Background" TargetName="border2">
                                 <Setter.Value>
-                                    <ImageBrush ImageSource="{Binding BackgroundFocusedImage, RelativeSource={RelativeSource TemplatedParent}}" 
+                                    <ImageBrush ImageSource="{Binding Path=BackgroundImage.Pressed, RelativeSource={RelativeSource TemplatedParent}}" 
                                                 Stretch="{Binding Stretch, RelativeSource={RelativeSource TemplatedParent}}"
                                                 Viewport="{Binding Viewport, RelativeSource={RelativeSource TemplatedParent}}"/>
                                 </Setter.Value>

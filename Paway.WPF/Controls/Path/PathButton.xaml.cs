@@ -17,17 +17,28 @@ using System.Windows.Shapes;
 namespace Paway.WPF
 {
     /// <summary>
-    /// MKStateCButton.xaml 的交互逻辑
+    /// Path绘制按钮
     /// </summary>
     public partial class PathButton : UserControl
     {
+        #region 依赖属性
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty FocusedBrushProperty =
             DependencyProperty.RegisterAttached("FocusedBrush", typeof(Brush), typeof(PathButton),
             new PropertyMetadata(new SolidColorBrush(Color.FromArgb(190, 35, 175, 255))));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty FocusedBrushDownProperty =
             DependencyProperty.RegisterAttached("FocusedBrushDown", typeof(Brush), typeof(PathButton),
             new PropertyMetadata(new SolidColorBrush(Color.FromArgb(250, 35, 175, 255))));
 
+        #endregion
+
+        #region 扩展
+        /// <summary>
+        /// 鼠标划过时背景颜色
+        /// </summary>
         [Category("扩展")]
         [Description("鼠标划过时背景颜色")]
         public Brush FocusedBrush
@@ -35,6 +46,9 @@ namespace Paway.WPF
             get { return (Brush)GetValue(FocusedBrushProperty); }
             set { SetValue(FocusedBrushProperty, value); }
         }
+        /// <summary>
+        /// 鼠标点击时背景颜色
+        /// </summary>
         [Category("扩展")]
         [Description("鼠标点击时背景颜色")]
         public Brush FocusedBrushDown
@@ -42,20 +56,27 @@ namespace Paway.WPF
             get { return (Brush)GetValue(FocusedBrushDownProperty); }
             set { SetValue(FocusedBrushDownProperty, value); }
         }
+        /// <summary>
+        /// 显示文本
+        /// </summary>
+        [Category("扩展")]
+        [Description("显示文本")]
         public string Text
         {
             get { return lbText.Text; }
             set { lbText.Text = value; }
         }
 
+        #endregion
 
+        /// <summary>
+        /// </summary>
         public PathButton()
         {
             InitializeComponent();
             this.Margin = new Thickness(400, 125, 0, 0);
             this.RenderTransform = new RotateTransform(0, 25, 300);
         }
-
         private void Path_MouseDown(object sender, MouseButtonEventArgs e)
         {
             path.Stroke = FocusedBrushDown;

@@ -16,25 +16,25 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:TextBoxRound}">
                     <Border Name="border" 
-                                SnapsToDevicePixels="true"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                CornerRadius="{TemplateBinding Radius}"
-                                BorderThickness="{TemplateBinding BorderThickness}">
+                            SnapsToDevicePixels="true"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            CornerRadius="{TemplateBinding Radius}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid>
                             <ScrollViewer x:Name="PART_ContentHost"
                                           VerticalAlignment="Center"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                             <StackPanel Name="stackPanel"
-                                            Visibility="Collapsed"
-                                            Orientation="Horizontal">
+                                        Visibility="Collapsed"
+                                        Orientation="Horizontal">
                                 <Label Opacity="0.4"
-                                           Padding="5,0,0,0"
-                                           FontSize="{TemplateBinding WaterSize}"
-                                           Foreground="#000000"
-                                           FontFamily="Microsoft YaHei"
-                                           Content="{TemplateBinding Water}"
-                                           VerticalContentAlignment="Center"/>
+                                       Padding="5,0,0,0"
+                                       FontSize="{TemplateBinding WaterSize}"
+                                       Foreground="#000000"
+                                       FontFamily="Microsoft YaHei"
+                                       Content="{TemplateBinding Water}"
+                                       VerticalContentAlignment="Center"/>
                             </StackPanel>
                         </Grid>
                     </Border>

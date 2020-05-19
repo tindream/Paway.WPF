@@ -13,13 +13,13 @@
                 <ControlTemplate TargetType="{x:Type local:ProgressBarRound}" >
                     <Grid>
                         <Border Name="PART_Track"
-                                    CornerRadius="{TemplateBinding Radius}"
-                                    BorderBrush="LightGray"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    Background="{TemplateBinding Background}" />
+                                BorderBrush="LightGray"
+                                CornerRadius="{TemplateBinding Radius}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}" />
                         <Border x:Name="PART_Indicator"
-                                    CornerRadius="{TemplateBinding Radius}"
-                                    HorizontalAlignment="Left">
+                                CornerRadius="{TemplateBinding Radius}"
+                                HorizontalAlignment="Left">
                             <Border.Background>
                                 <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
                                     <GradientStop 
@@ -33,12 +33,12 @@
                         </Border>
                         <Grid>
                             <Label Opacity="0.7" Name="txt"
-                                           Padding="12,4,5,4"
-                                           Foreground="#000000"
-                                           Content="{TemplateBinding ProgressValue}"
-                                           FontFamily="Microsoft YaHei"
-                                           HorizontalAlignment="Right"
-                                           VerticalContentAlignment="Center"/>
+                                   Padding="12,4,5,4"
+                                   Foreground="#000000"
+                                   Content="{TemplateBinding ProgressValue}"
+                                   FontFamily="Microsoft YaHei"
+                                   HorizontalAlignment="Right"
+                                   VerticalContentAlignment="Center"/>
                         </Grid>
                     </Grid>
                     <ControlTemplate.Triggers>

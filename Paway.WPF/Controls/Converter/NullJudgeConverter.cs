@@ -17,6 +17,9 @@ namespace Paway.WPF
     /// </summary>
     public class NullJudgeConverter : IMultiValueConverter
     {
+        /// <summary>
+        /// 多字段空值判断转换
+        /// </summary>
         public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
         {
             var index = 0;
@@ -27,7 +30,8 @@ namespace Paway.WPF
             if (value.Length > index) return value[index];
             else return null;
         }
-
+        /// <summary>
+        /// </summary>
         public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
         {
             throw new Exception("未写转化器反向转换。[Mode=TwoWay]");

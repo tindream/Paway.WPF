@@ -22,7 +22,6 @@
 
     <Style TargetType="{x:Type local:ComboBoxRound}">
         <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
-        <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ComboBoxRound}">
@@ -31,20 +30,21 @@
                             <ColumnDefinition Width="0.7*"/>
                             <ColumnDefinition Width="0.3*" MaxWidth="30"/>
                         </Grid.ColumnDefinitions>
-                        <Border Name="border" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="1" CornerRadius="{TemplateBinding Radius}"
-                                 BorderBrush="{TemplateBinding BorderBrush}" />
-                        <ContentPresenter Margin="5,3,0,3" x:Name="ContentSite" 
+                        <Border Name="border" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="1" 
+                                CornerRadius="{TemplateBinding Radius}"
+                                BorderBrush="{Binding Path=BackgroundRound.Normal, RelativeSource={RelativeSource TemplatedParent}}" />
+                        <ContentPresenter x:Name="ContentSite" Margin="5,3,0,3" 
                                           VerticalAlignment="Center" 
+                                          IsHitTestVisible="False"
                                           Content="{TemplateBinding SelectionBoxItem}" 
                                           ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" 
-                                          ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" 
-                                          IsHitTestVisible="False"/>
+                                          ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" />
                         <!--ToggleButton 已数据绑定到 ComboBox 本身以切换 IsDropDownOpen-->
-                        <ToggleButton Grid.Column="0"  Grid.ColumnSpan="2"  x:Name="ToggleButton" 
-                                      Template="{StaticResource ComboBoxToggleButton}"
+                        <ToggleButton x:Name="ToggleButton" Grid.Column="0"  Grid.ColumnSpan="2"  
                                       Focusable="false" 
-                                      IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" 
-                                      ClickMode="Press"/>
+                                      ClickMode="Press"
+                                      Template="{StaticResource ComboBoxToggleButton}"
+                                      IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" />
                         <!--必须将 TextBox 命名为 PART_EditableTextBox，否则 ComboBox 将无法识别它-->
                         <TextBox   Visibility="Hidden" 
                                    x:Name="PART_EditableTextBox"  
@@ -77,7 +77,7 @@
                             <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="border" Property="BorderBrush" Value="{Binding SelectedBackground, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="{Binding Path=BackgroundRound.Pressed, RelativeSource={RelativeSource TemplatedParent}}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -99,9 +99,9 @@
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsSelected" Value="true">
                                         <Setter TargetName="_borderbg" Property="Background" 
-                                                Value="{Binding SelectedBackground,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxRound}}}" />
+                                                Value="{Binding Path=BackgroundRound.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxRound}}}" />
                                         <Setter TargetName="_txt" Property="Foreground" 
-                                                Value="{Binding SelectedForeground,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxRound}}}"/>
+                                                Value="{Binding Path=ForegroundRound.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxRound}}}"/>
                                     </Trigger>
                                     <MultiTrigger>
                                         <MultiTrigger.Conditions>
@@ -109,9 +109,9 @@
                                             <Condition Property="IsMouseOver" Value="true"/>
                                         </MultiTrigger.Conditions>
                                         <Setter TargetName="_borderbg" Property="Background" 
-                                                Value="{Binding MouseOverBackground,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxRound}}}" />
+                                                Value="{Binding Path=BackgroundRound.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxRound}}}" />
                                         <Setter TargetName="_txt" Property="Foreground" 
-                                                Value="{Binding MouseOverForeground,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxRound}}}"/>
+                                                Value="{Binding Path=ForegroundRound.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxRound}}}"/>
                                     </MultiTrigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>

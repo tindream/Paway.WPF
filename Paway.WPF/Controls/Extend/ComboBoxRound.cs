@@ -8,23 +8,33 @@ using System.Windows.Media;
 
 namespace Paway.WPF
 {
+    /// <summary>
+    /// ComboBox扩展
+    /// </summary>
     public partial class ComboBoxRound : ComboBox
     {
+        #region 依赖属性
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty RadiusProperty =
             DependencyProperty.RegisterAttached("Radius", typeof(CornerRadius), typeof(ComboBoxRound), new PropertyMetadata(new CornerRadius(3)));
-        public static readonly DependencyProperty SelectedBackgroundProperty =
-            DependencyProperty.RegisterAttached("SelectedBackground", typeof(Brush), typeof(ComboBoxRound),
-            new PropertyMetadata(new SolidColorBrush(Color.FromArgb(200, 35, 175, 255))));
-        public static readonly DependencyProperty SelectedForegroundProperty =
-            DependencyProperty.RegisterAttached("SelectedForeground", typeof(Brush), typeof(ComboBoxRound),
-            new PropertyMetadata(new SolidColorBrush(Colors.White)));
-        public static readonly DependencyProperty MouseOverBackgroundProperty =
-           DependencyProperty.RegisterAttached("MouseOverBackground", typeof(Brush), typeof(ComboBoxRound),
-           new PropertyMetadata(new SolidColorBrush(Color.FromArgb(149, 35, 175, 255))));
-        public static readonly DependencyProperty MouseOverForegroundProperty =
-           DependencyProperty.RegisterAttached("MouseOverForeground", typeof(Brush), typeof(ComboBoxRound),
-           new PropertyMetadata(new SolidColorBrush(Colors.White)));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ForegroundRoundProperty =
+            DependencyProperty.RegisterAttached("ForegroundRound", typeof(BrushRound), typeof(ComboBoxRound),
+            new PropertyMetadata(new BrushRound(Colors.Black, Colors.White)));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty BackgroundRoundProperty =
+            DependencyProperty.RegisterAttached("BackgroundRound", typeof(BrushRound), typeof(ComboBoxRound),
+            new PropertyMetadata(new BrushRound(Colors.LightGray, Color.FromArgb(149, 35, 175, 255))));
 
+        #endregion
+
+        #region 扩展
+        /// <summary>
+        /// 自定义边框圆角
+        /// </summary>
         [Category("扩展")]
         [Description("自定义边框圆角")]
         public CornerRadius Radius
@@ -32,35 +42,31 @@ namespace Paway.WPF
             get { return (CornerRadius)GetValue(RadiusProperty); }
             set { SetValue(RadiusProperty, value); }
         }
+        /// <summary>
+        /// 项的字体颜色
+        /// </summary>
         [Category("扩展")]
-        [Description("选定项的背景颜色")]
-        public Brush SelectedBackground
+        [Description("项的字体颜色")]
+        public BrushRound ForegroundRound
         {
-            get { return (Brush)GetValue(SelectedBackgroundProperty); }
-            set { SetValue(SelectedBackgroundProperty, value); }
+            get { return (BrushRound)GetValue(ForegroundRoundProperty); }
+            set { SetValue(ForegroundRoundProperty, value); }
         }
+        /// <summary>
+        /// 项的边框背景颜色
+        /// </summary>
         [Category("扩展")]
-        [Description("选定项的字体颜色")]
-        public Brush SelectedForeground
+        [Description("项的边框背景颜色")]
+        public BrushRound BackgroundRound
         {
-            get { return (Brush)GetValue(SelectedForegroundProperty); }
-            set { SetValue(SelectedForegroundProperty, value); }
-        }
-        [Category("扩展")]
-        [Description("鼠标划过时的背景颜色")]
-        public Brush MouseOverBackground
-        {
-            get { return (Brush)GetValue(MouseOverBackgroundProperty); }
-            set { SetValue(MouseOverBackgroundProperty, value); }
-        }
-        [Category("扩展")]
-        [Description("鼠标划过时的字体颜色")]
-        public Brush MouseOverForeground
-        {
-            get { return (Brush)GetValue(MouseOverForegroundProperty); }
-            set { SetValue(MouseOverForegroundProperty, value); }
+            get { return (BrushRound)GetValue(BackgroundRoundProperty); }
+            set { SetValue(BackgroundRoundProperty, value); }
         }
 
+        #endregion
+
+        /// <summary>
+        /// </summary>
         public ComboBoxRound() { }
     }
 }

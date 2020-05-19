@@ -14,8 +14,14 @@ namespace Paway.WPF
     public class ThemeMonitor : DependencyObject
     {
         #region 主题样式监听
+        /// <summary>
+        /// 主题样式监听
+        /// </summary>
         public static readonly DependencyProperty IsMonitoringProperty =
             DependencyProperty.RegisterAttached("IsMonitoring", typeof(bool), typeof(ThemeMonitor), new UIPropertyMetadata(false, OnIsMonitoringChanged));
+        /// <summary>
+        /// 启用监听
+        /// </summary>
         public bool IsMonitoring
         {
             get { return (bool)GetValue(IsMonitoringProperty); }

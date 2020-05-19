@@ -8,9 +8,15 @@ using System.Windows.Controls;
 
 namespace Paway.WPF
 {
+    /// <summary>
+    /// TextBox扩展监听
+    /// </summary>
     public class TextBoxMonitor : DependencyObject
     {
         #region 启用监听，设置水印大小
+        /// <summary>
+        /// 启用监听，设置水印大小
+        /// </summary>
         public static readonly DependencyProperty IsMonitoringProperty =
             DependencyProperty.RegisterAttached("IsMonitoring", typeof(bool), typeof(TextBoxMonitor), new UIPropertyMetadata(false, OnIsMonitoringChanged));
         private static void OnIsMonitoringChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
@@ -23,6 +29,9 @@ namespace Paway.WPF
                 };
             }
         }
+        /// <summary>
+        /// 启用监听
+        /// </summary>
         public bool IsMonitoring
         {
             get { return (bool)GetValue(IsMonitoringProperty); }

@@ -7,9 +7,16 @@ using System.Threading.Tasks;
 
 namespace Paway.WPF
 {
+    /// <summary>
+    /// Window系统消息框-Toast显示-Model
+    /// </summary>
     public class MessageToastModel : INotifyPropertyChanged
     {
+        /// <summary>
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// </summary>
         public void OnPropertyChanged()
         {
             var name = Method.GetLastModelName();
@@ -36,6 +43,9 @@ namespace Paway.WPF
         }
 
         private string message;
+        /// <summary>
+        /// 显示消息
+        /// </summary>
         public string Message
         {
             get { return message; }
