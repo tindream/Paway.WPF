@@ -3,6 +3,9 @@
                     xmlns:local="clr-namespace:Paway.WPF;assembly=Paway.WPF">
 
     <Style TargetType="{x:Type local:ListViewRound}">
+        <Style.Resources>
+            <local:NullJudgeConverter x:Key="NullJudgeConverter" />
+        </Style.Resources>
         <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FontFamily" Value="Microsoft YaHei"/>
@@ -24,7 +27,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="ItemTemplate">
+        <!--<Setter Property="ItemTemplate">
             <Setter.Value>
                 <DataTemplate >
                     <DockPanel>
@@ -48,7 +51,7 @@
                     </DockPanel>
                 </DataTemplate>
             </Setter.Value>
-        </Setter>
+        </Setter>-->
         <Setter Property="ItemContainerStyle">
             <Setter.Value>
                 <Style TargetType="ListBoxItem">
@@ -56,26 +59,108 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
-                                <Border x:Name="border" BorderBrush="LightGray" Background="#F3F3F3"
+                                <Border x:Name="border" 
+                                        BorderBrush="{Binding Path=ItemBorderBrush.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" 
+                                        Background="{Binding Path=ItemBackground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"
+                                        BorderThickness="{Binding Path=ItemBorder.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" 
+                                        CornerRadius="{Binding Path=ItemRadius.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"
+                                        Padding="{Binding Path=ItemPadding.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"
                                         Margin="{Binding ItemMargin, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" 
-                                        BorderThickness="{Binding ItemBorder, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" 
-                                        CornerRadius="{Binding ItemRadius, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"
                                         Width="{Binding ItemWidth, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" 
-                                        Height="{Binding ItemHeight, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" 
-                                        HorizontalAlignment="Left" VerticalAlignment="Center">
-                                    <ContentPresenter/>
+                                        Height="{Binding ItemHeight, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}">
+                                    <DockPanel>
+                                        <Image Name="image" 
+                                               Source="{Binding Image}" 
+                                               Width="{Binding ItemImageWidth, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"  
+                                               Height="{Binding ItemImageHeight, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"
+                                               DockPanel.Dock="{Binding ItemImageDock, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"
+                                               Margin="{Binding ItemImageMargin, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
+                                        <DockPanel>
+                                            <TextBlock Name="desc" Text="{Binding Desc}"
+                                                       TextTrimming="WordEllipsis" 
+                                                       Foreground="{Binding Path=ItemDescForeground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" 
+                                                       Background="{Binding Path=ItemDescBackground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" 
+                                                       FontSize="{Binding Path=ItemDescFontSize.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" 
+                                                       HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" 
+                                                       VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"
+                                                       Padding="{Binding ItemDescPadding, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"
+                                                       DockPanel.Dock="{Binding ItemDescDock, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" />
+                                            <TextBlock Name="text" Text="{Binding Content}" 
+                                                       TextTrimming="WordEllipsis" 
+                                                       Foreground="{Binding Path=ItemTextForeground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" 
+                                                       Background="{Binding Path=ItemTextBackground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" 
+                                                       FontSize="{Binding Path=ItemTextFontSize.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" 
+                                                       HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" 
+                                                       VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}" 
+                                                       Padding="{Binding ItemTextPadding, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
+                                        </DockPanel>
+                                    </DockPanel>
                                 </Border>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True" >
-                                        <Setter TargetName="border" Property="BorderBrush" Value="#9F23AFFF"/>
-                                        <Setter TargetName="border" Property="Background"  Value="#7723AFFF"/>
-                                        <Setter TargetName="border" Property="BorderThickness" Value="{Binding ItemBorder, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
-
+                                        <Setter TargetName="image" Property="Source" >
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource NullJudgeConverter}">
+                                                    <Binding Path="ImageMouse" />
+                                                    <Binding Path="Image" />
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter TargetName="border" Property="BorderBrush" 
+                                                Value="{Binding Path=ItemBorderBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
+                                        <Setter TargetName="border" Property="Background"  
+                                                Value="{Binding Path=ItemBackground.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
+                                        <Setter TargetName="border" Property="BorderThickness" 
+                                                Value="{Binding Path=ItemBorder.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
+                                        <Setter TargetName="border" Property="CornerRadius" 
+                                                Value="{Binding Path=ItemRadius.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
+                                        <Setter TargetName="border" Property="Padding" 
+                                                Value="{Binding Path=ItemPadding.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
+                                        <Setter TargetName="text" Property="Foreground"  
+                                                Value="{Binding Path=ItemTextForeground.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
+                                        <Setter TargetName="text" Property="Background"  
+                                                Value="{Binding Path=ItemTextBackground.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
+                                        <Setter TargetName="text" Property="FontSize"  
+                                                Value="{Binding Path=ItemTextFontSize.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
+                                        <Setter TargetName="desc" Property="Foreground"  
+                                                Value="{Binding Path=ItemDescForeground.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
+                                        <Setter TargetName="desc" Property="Background"  
+                                                Value="{Binding Path=ItemDescBackground.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
+                                        <Setter TargetName="desc" Property="FontSize"  
+                                                Value="{Binding Path=ItemDescFontSize.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
                                     </Trigger>
                                     <Trigger Property="IsSelected" Value="true">
-                                        <Setter TargetName="border" Property="BorderBrush" Value="#E623AFFF"/>
-                                        <Setter TargetName="border" Property="Background"  Value="#AA23AFFF"/>
-                                        <Setter TargetName="border" Property="BorderThickness" Value="{Binding ItemBorder, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
+                                        <Setter TargetName="image" Property="Source" >
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource NullJudgeConverter}">
+                                                    <Binding Path="ImagePressed" />
+                                                    <Binding Path="ImageMouse" />
+                                                    <Binding Path="Image" />
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter TargetName="border" Property="BorderBrush" 
+                                                Value="{Binding Path=ItemBorderBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
+                                        <Setter TargetName="border" Property="Background"  
+                                                Value="{Binding Path=ItemBackground.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
+                                        <Setter TargetName="border" Property="BorderThickness" 
+                                                Value="{Binding Path=ItemBorder.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
+                                        <Setter TargetName="border" Property="CornerRadius" 
+                                                Value="{Binding Path=ItemRadius.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
+                                        <Setter TargetName="border" Property="Padding" 
+                                                Value="{Binding Path=ItemPadding.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
+                                        <Setter TargetName="text" Property="Foreground" 
+                                                Value="{Binding Path=ItemTextForeground.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
+                                        <Setter TargetName="text" Property="Background" 
+                                                Value="{Binding Path=ItemTextBackground.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
+                                        <Setter TargetName="text" Property="FontSize"  
+                                                Value="{Binding Path=ItemTextFontSize.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
+                                        <Setter TargetName="desc" Property="Foreground" 
+                                                Value="{Binding Path=ItemDescForeground.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
+                                        <Setter TargetName="desc" Property="Background" 
+                                                Value="{Binding Path=ItemDescBackground.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
+                                        <Setter TargetName="desc" Property="FontSize"  
+                                                Value="{Binding Path=ItemDescFontSize.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewRound}}}"/>
                                     </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>

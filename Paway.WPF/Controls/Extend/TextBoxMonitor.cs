@@ -19,7 +19,7 @@ namespace Paway.WPF
             {
                 txt.Loaded += delegate
                 {
-                    if (txt.WaterSize == 15) txt.SetValue(TextBoxRound.WaterSizeProperty, txt.FontSize * 0.85);
+                    if (txt.WaterSize == 0) txt.SetValue(TextBoxRound.WaterSizeProperty, txt.FontSize * 0.85);
                 };
             }
         }

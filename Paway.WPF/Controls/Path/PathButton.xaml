@@ -12,6 +12,6 @@
                 <DropShadowEffect Color="#FFE5E5E6" ShadowDepth="0"/>
             </Path.Effect>
         </Path>
-        <TextBlock Text="1" Name="lbText" Canvas.Left="5" Canvas.Top="15" Width="40" FontSize="17" TextAlignment="Center" />
+        <TextBlock Text="1" Name="lbText" Canvas.Left="5" Canvas.Top="14" Width="40" FontSize="17" TextAlignment="Center" />
     </Canvas>
 </UserControl>

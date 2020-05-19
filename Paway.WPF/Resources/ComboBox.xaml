@@ -56,7 +56,7 @@
                                Focusable="False" 
                                AllowsTransparency="True" 
                                PopupAnimation="Slide">
-                            <Grid MaxHeight="150" MinWidth="{TemplateBinding ActualWidth}" x:Name="DropDown"
+                            <Grid MaxHeight="149" MinWidth="{TemplateBinding ActualWidth}" x:Name="DropDown"
                                   SnapsToDevicePixels="True">
                                 <Border x:Name="DropDownBorder"  BorderBrush="#CCC" BorderThickness="1"/>
                                 <ScrollViewer Margin="1" 

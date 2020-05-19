@@ -22,12 +22,16 @@ namespace Paway.Test
     /// </summary>
     public partial class MainWindow : Window
     {
+        public List<TestInfo> list;
         public MainWindow()
         {
             InitializeComponent();
             var list = new List<TestInfo>();
             list.Add(new TestInfo("Hello"));
-            list.Add(new TestInfo("你好123", 70));
+            list.Add(new TestInfo("你好123", 70)
+            {
+                ImageMouse = new BitmapImage(new Uri(@"pack://application:,,,/Paway.Test;component/Images/close_while.png"))
+            });
             for (int i = 0; i < 20; i++) list.Add(new TestInfo("A" + i, i)
             {
                 Desc = "D" + i,
@@ -55,6 +59,7 @@ namespace Paway.Test
         public double Value { get; set; }
         public bool IsSelected { get; set; }
         public ImageSource Image { get; set; }
+        public ImageSource ImageMouse { get; set; }
         public string Desc { get; set; }
 
         public TestInfo(string name, double value = 0)

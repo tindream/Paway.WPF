@@ -13,7 +13,7 @@ namespace Paway.WPF
         public static readonly DependencyProperty WaterProperty =
             DependencyProperty.RegisterAttached("Water", typeof(string), typeof(TextBoxRound), new PropertyMetadata("请输入.."));
         public static readonly DependencyProperty WaterSizeProperty =
-            DependencyProperty.RegisterAttached("WaterSize", typeof(double), typeof(TextBoxRound), new PropertyMetadata(15d));
+            DependencyProperty.RegisterAttached("WaterSize", typeof(double), typeof(TextBoxRound), new PropertyMetadata());
         public static readonly DependencyProperty RadiusProperty =
             DependencyProperty.RegisterAttached("Radius", typeof(CornerRadius), typeof(TextBoxRound), new PropertyMetadata(new CornerRadius(3)));
         public static readonly DependencyProperty BorderFocusedBrushProperty =

@@ -20,7 +20,7 @@ namespace Paway.WPF
             new PropertyMetadata(new SolidColorBrush(Colors.White)));
         public static readonly DependencyProperty MouseOverBackgroundProperty =
            DependencyProperty.RegisterAttached("MouseOverBackground", typeof(Brush), typeof(ComboBoxRound),
-           new PropertyMetadata(new SolidColorBrush(Color.FromArgb(150, 35, 175, 255))));
+           new PropertyMetadata(new SolidColorBrush(Color.FromArgb(149, 35, 175, 255))));
         public static readonly DependencyProperty MouseOverForegroundProperty =
            DependencyProperty.RegisterAttached("MouseOverForeground", typeof(Brush), typeof(ComboBoxRound),
            new PropertyMetadata(new SolidColorBrush(Colors.White)));

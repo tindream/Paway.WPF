@@ -55,6 +55,6 @@ namespace Paway.WPF
         /// 水印字体大小
         /// </summary>
         public static readonly DependencyProperty WaterSizeProperty =
-            DependencyProperty.RegisterAttached("WaterSize", typeof(double), typeof(PasswordBoxMonitor), new PropertyMetadata(15d));
+            DependencyProperty.RegisterAttached("WaterSize", typeof(double), typeof(PasswordBoxMonitor), new PropertyMetadata());
     }
 }

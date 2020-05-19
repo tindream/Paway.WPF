@@ -33,7 +33,7 @@ namespace Paway.WPF
             new PropertyMetadata(Color.FromArgb(254, 220, 220, 220)));
         public static readonly DependencyProperty MouseBackgroundStartProperty =
             DependencyProperty.RegisterAttached("MouseBackgroundStart", typeof(Color), typeof(ButtonRound),
-            new PropertyMetadata(Color.FromArgb(15, 35, 175, 255)));
+            new PropertyMetadata(Color.FromArgb(16, 35, 175, 255)));
         public static readonly DependencyProperty MouseBackgroundEndProperty =
             DependencyProperty.RegisterAttached("MouseBackgroundEnd", typeof(Color), typeof(ButtonRound),
             new PropertyMetadata(Color.FromArgb(211, 35, 175, 255)));
@@ -197,7 +197,7 @@ namespace Paway.WPF
             if (this.NormalBackgroundStart != Color.FromArgb(254, 254, 254, 254) && this.NormalBackgroundStart != Colors.Transparent)
             {
                 this.PressedBackgroundStart = Color.FromArgb(255, this.NormalBackgroundStart.R, this.NormalBackgroundStart.G, this.NormalBackgroundStart.B);
-                if (this.MouseBackgroundStart == Color.FromArgb(15, 35, 175, 255))
+                if (this.MouseBackgroundStart == Color.FromArgb(16, 35, 175, 255))
                 {
                     this.MouseBackgroundStart = Color.FromArgb((byte)(this.NormalBackgroundStart.A + (255 - this.NormalBackgroundStart.A) / 2), this.NormalBackgroundStart.R, this.NormalBackgroundStart.G, this.NormalBackgroundStart.B);
                 }

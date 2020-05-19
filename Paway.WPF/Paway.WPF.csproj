@@ -63,6 +63,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Converter\NullJudgeConverter.cs" />
+    <Compile Include="Controls\Converter\RadiusRound.cs" />
+    <Compile Include="Controls\Converter\DoubleRound.cs" />
+    <Compile Include="Controls\Converter\ThicknessRound.cs" />
+    <Compile Include="Controls\Converter\BrushRound.cs" />
     <Compile Include="Controls\Extend\ListViewRound.cs" />
     <Compile Include="Controls\ThemeMonitor.cs" />
     <Compile Include="Method\Config.cs" />

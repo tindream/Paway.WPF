@@ -44,10 +44,16 @@
 
         <utils:CheckBoxRound Grid.Row="6" Margin="5"></utils:CheckBoxRound>
         <utils:SelectedBox Grid.Row="7" Margin="5"></utils:SelectedBox>
-        <Image Grid.Row="8" Name="image"/>
+        <TextBlock Name="image" Grid.Row="8" Text="12345" VerticalAlignment="Bottom"/>
 
-        <utils:ListViewRound Name="listView1" Grid.Row="8" Grid.Column="1" Height="250" Margin="5" ItemImageWidth="50">
-            <ComboBoxItem Content="Hello123"/>
+        <utils:ListViewRound Name="listView1" Grid.Row="8" Grid.Column="1" Height="250" Margin="5" 
+                             ItemWidth="150" ItemHeight="72" ItemRadius="5;5;0" ItemMargin="1" ItemPadding="0;0,4,0,0"
+                             ItemBorder="1;1,1,1,5" ItemBackground="#EEE;#7723AFFF"
+                             ItemImageWidth="24" ItemImageHeight="24" ItemImageMargin="5,0,0,0"  ItemImageDock="Left"
+                             HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                             ItemTextPadding="5" ItemTextForeground="Black;White" ItemTextFontSize=";20"
+                             ItemDescDock="Right" ItemDescPadding="5" ItemDescForeground="Black;Red">
+            <ComboBoxItem Content="Hello123" HorizontalAlignment="Right"/>
             <ListBoxItem Content="C1"/>
             <ListBoxItem Content="C2"/>
             <ListBoxItem Content="A1"/>
