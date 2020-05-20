@@ -11,7 +11,7 @@
                   UseLayoutRounding="True"
                   VerticalAlignment="Center"
                   HorizontalAlignment="Center"
-                  Fill="White" />
+                  Fill="#4C5787" />
     </DataTemplate>
     <DataTemplate x:Key="MaximizeWhite">
         <Path Data="M1,1  L1 ,11 L11,11 L11,1 z M0,0 L12,0 L12,12 L0,12 z"
@@ -20,7 +20,7 @@
               UseLayoutRounding="True"
               VerticalAlignment="Center"
               HorizontalAlignment="Center"
-              Fill="White" />
+              Fill="#4C5787" />
     </DataTemplate>
     <DataTemplate x:Key="RestoreWhite">
         <Path Data="M1,3 L1,11 L9,11 L9,3 z M3,1 L3,2 L10,2 L10,9 L11,9 L11,1 z M2 ,0 L12,0 L12,10 L10,10 L10,12 L0,12 L0,2 L2 ,2 z"
@@ -29,7 +29,7 @@
               UseLayoutRounding="True"
               VerticalAlignment="Center"
               HorizontalAlignment="Center"
-              Fill="White" />
+              Fill="#4C5787" />
     </DataTemplate>
     <DataTemplate x:Key="CloseWhite">
         <Path Data="M1,0 L6,5 L11,0 L12,1 L7,6 L12,11 L11,12 L6,7 L1,12 L0,11 L5,6 L0,1 z"
@@ -38,12 +38,14 @@
               UseLayoutRounding="True"
               VerticalAlignment="Center"
               HorizontalAlignment="Center"
-              Fill="White" />
+              Fill="#4C5787" />
     </DataTemplate>
 
     <Style x:Key="WindowTitleBarButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Focusable" Value="False" />
-        <Setter Property="Background" Value="#32FFFFFF" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="Foreground" Value="#222" />
+        <Setter Property="FontSize" Value="15" />
         <Setter Property="Width" Value="36" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -68,10 +70,10 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Opacity" TargetName="btnBackground" Value="1" />
+                            <Setter Property="Opacity" TargetName="btnBackground" Value="0.7" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Opacity" TargetName="btnBackground" Value="0.6"/>
+                            <Setter Property="Opacity" TargetName="btnBackground" Value="1"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Opacity" TargetName="btnContent" Value=".5" />
@@ -136,9 +138,9 @@
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <Grid x:Name="WindowTitlePanel"
-                                  Height="{Binding Path=(SystemParameters.WindowNonClientFrameThickness).Top}"
-                                  Background="{TemplateBinding BorderBrush}"
-                                  Margin="0,-1,0,0">
+                                  Height="36"
+                                  Background="#CCD5F0"
+                                  Margin="0,0,0,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
@@ -153,10 +155,10 @@
                                            WindowChrome.IsHitTestVisibleInChrome="True"/>
                                     <ContentControl IsTabStop="False"
                                                     Margin="5,0,0,0"
-                                                    Foreground="White"
+                                                    Foreground="#222"
                                                     HorizontalAlignment="Center"
                                                     VerticalAlignment="Center"
-                                                    FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}"
+                                                    FontSize="15"
                                                     Content="{TemplateBinding Title}" />
                                     <ContentPresenter Focusable="False"
                                                       Margin="5,0,0,0"
