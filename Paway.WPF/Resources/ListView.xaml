@@ -1,11 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:Paway.WPF;assembly=Paway.WPF">
+                    xmlns:local="clr-namespace:Paway.WPF">
 
+    <local:NullJudgeConverter x:Key="NullJudgeConverter" />
+    
     <Style TargetType="{x:Type local:ListViewRound}">
-        <Style.Resources>
-            <local:NullJudgeConverter x:Key="NullJudgeConverter" />
-        </Style.Resources>
         <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FontFamily" Value="Microsoft YaHei"/>

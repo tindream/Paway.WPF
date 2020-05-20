@@ -65,5 +65,14 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty WaterSizeProperty =
             DependencyProperty.RegisterAttached("WaterSize", typeof(double), typeof(PasswordBoxMonitor), new PropertyMetadata());
+
+        /// <summary>
+        /// 自动获取当前密码框文本长度
+        /// </summary>
+        public int PasswordLength
+        {
+            get { return (int)GetValue(PasswordLengthProperty); }
+            set { SetValue(PasswordLengthProperty, value); }
+        }
     }
 }

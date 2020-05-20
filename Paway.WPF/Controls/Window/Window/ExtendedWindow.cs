@@ -1,0 +1,122 @@
+﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Interop;
+using System.Windows.Media;
+using System.Windows.Shell;
+
+namespace Paway.WPF
+{
+    /// <summary>
+    /// Window扩展
+    /// </summary>
+    public class ExtendedWindow : Window
+    {
+        #region 依赖属性
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty FunctionBarProperty =
+            DependencyProperty.Register(nameof(FunctionBar), typeof(WindowFunctionBar), typeof(ExtendedWindow), new PropertyMetadata(default(WindowFunctionBar), OnFunctionBarChanged));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty FunctionBarRightProperty =
+            DependencyProperty.Register(nameof(FunctionBarRight), typeof(WindowFunctionBar), typeof(ExtendedWindow), new PropertyMetadata(default(WindowFunctionBar), OnFunctionBarChanged));
+        /// <summary>
+        /// </summary>
+        private static readonly DependencyProperty IsNonClientActiveProperty =
+            DependencyProperty.Register(nameof(IsNonClientActive), typeof(bool), typeof(ExtendedWindow), new FrameworkPropertyMetadata(false));
+
+        #endregion
+
+        #region 扩展
+        /// <summary>
+        /// 左侧标题栏
+        /// </summary>
+        public WindowFunctionBar FunctionBar
+        {
+            get => (WindowFunctionBar)GetValue(FunctionBarProperty);
+            set => SetValue(FunctionBarProperty, value);
+        }
+        /// <summary>
+        /// 右侧标题栏
+        /// </summary>
+        public WindowFunctionBar FunctionBarRight
+        {
+            get => (WindowFunctionBar)GetValue(FunctionBarRightProperty);
+            set => SetValue(FunctionBarRightProperty, value);
+        }
+        /// <summary>
+        /// 窗体失去焦点时
+        /// </summary>
+        public bool IsNonClientActive
+        {
+            get => (bool)GetValue(IsNonClientActiveProperty);
+            set => SetValue(IsNonClientActiveProperty, value);
+        }
+
+        #endregion
+
+        /// <summary>
+        /// </summary>
+        public ExtendedWindow()
+        {
+            DefaultStyleKey = typeof(ExtendedWindow);
+        }
+
+        /// <summary>
+        /// </summary>
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            base.OnSourceInitialized(e);
+            if (SizeToContent == SizeToContent.WidthAndHeight && WindowChrome.GetWindowChrome(this) != null)
+            {
+                InvalidateMeasure();
+            }
+            IntPtr handle = new WindowInteropHelper(this).Handle;
+            HwndSource.FromHwnd(handle).AddHook(new HwndSourceHook(WndProc));
+        }
+        private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        {
+            if (msg == WindowNotifications.WM_NCACTIVATE) IsNonClientActive = wParam == (IntPtr)1;
+            return IntPtr.Zero;
+        }
+        /// <summary>
+        /// </summary>
+        protected override void OnActivated(EventArgs e)
+        {
+            base.OnActivated(e);
+            IsNonClientActive = true;
+        }
+        /// <summary>
+        /// </summary>
+        protected override void OnDeactivated(EventArgs e)
+        {
+            base.OnDeactivated(e);
+            IsNonClientActive = false;
+        }
+
+        #region FunctionBar更改
+        private static void OnFunctionBarChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            var oldValue = (WindowFunctionBar)args.OldValue;
+            var newValue = (WindowFunctionBar)args.NewValue;
+            if (oldValue == newValue)
+            {
+                return;
+            }
+
+            var target = obj as ExtendedWindow;
+            target?.OnFunctionBarChanged(oldValue, newValue);
+        }
+        /// <summary>
+        /// FunctionBar 属性更改时调用此方法。
+        /// </summary>
+        /// <param name="oldValue">FunctionBar 属性的旧值。</param>
+        /// <param name="newValue">FunctionBar 属性的新值。</param>
+        protected virtual void OnFunctionBarChanged(WindowFunctionBar oldValue, WindowFunctionBar newValue) { }
+
+        #endregion
+    }
+}
