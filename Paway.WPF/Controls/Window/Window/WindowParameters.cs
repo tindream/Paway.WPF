@@ -9,12 +9,11 @@ using System.Windows;
 
 namespace Paway.WPF
 {
+    /// <summary>
+    /// </summary>
     public static class WindowParameters
     {
         private static Thickness? _paddedBorderThickness;
-
-        private static double? _ribbonContextualTabGroupHeight;
-
         /// <summary>
         /// returns the border thickness padding around captioned windows,in pixels. Windows XP/2000:  This value is not supported.
         /// </summary>
@@ -31,25 +30,9 @@ namespace Paway.WPF
                     Size frameSizeInDips = DpiHelper.DeviceSizeToLogical(frameSize, dpi / 96.0, dpi / 96.0);
                     _paddedBorderThickness = new Thickness(frameSizeInDips.Width, frameSizeInDips.Height, frameSizeInDips.Width, frameSizeInDips.Height);
                 }
-
                 return _paddedBorderThickness.Value;
             }
         }
-
-        public static double RibbonContextualTabGroupHeight
-        {
-
-            get
-            {
-                if (_ribbonContextualTabGroupHeight == null)
-                {
-                    _ribbonContextualTabGroupHeight = SystemParameters.WindowNonClientFrameThickness.Top + (1d * GetDpi() / 96.0);
-                }
-
-                return _ribbonContextualTabGroupHeight.Value;
-            }
-        }
-
 
         /// <summary>
         /// Get Dpi
@@ -58,7 +41,6 @@ namespace Paway.WPF
         public static double GetDpi()
         {
             var dpiXProperty = typeof(SystemParameters).GetProperty("DpiX", BindingFlags.NonPublic | BindingFlags.Static);
-
             var dpiX = (int)dpiXProperty.GetValue(null, null);
             return dpiX;
         }
