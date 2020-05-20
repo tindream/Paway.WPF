@@ -18,7 +18,7 @@ namespace Paway.WPF
         /// 主题样式监听
         /// </summary>
         public static readonly DependencyProperty IsMonitoringProperty =
-            DependencyProperty.RegisterAttached("IsMonitoring", typeof(bool), typeof(ThemeMonitor), new UIPropertyMetadata(false, OnIsMonitoringChanged));
+            DependencyProperty.RegisterAttached(nameof(IsMonitoring), typeof(bool), typeof(ThemeMonitor), new UIPropertyMetadata(false, OnIsMonitoringChanged));
         /// <summary>
         /// 启用监听
         /// </summary>
@@ -54,7 +54,7 @@ namespace Paway.WPF
         /// 字体大小
         /// </summary>
         public static readonly DependencyProperty FontSizeProperty =
-            DependencyProperty.RegisterAttached("FontSize", typeof(double), typeof(ThemeMonitor), new PropertyMetadata(Config.FontSize));
+            DependencyProperty.RegisterAttached(nameof(FontSize), typeof(double), typeof(ThemeMonitor), new PropertyMetadata(Config.FontSize));
         /// <summary>
         /// 按钮字体大小
         /// </summary>

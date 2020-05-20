@@ -18,90 +18,90 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemWidthProperty =
-            DependencyProperty.RegisterAttached("ItemWidth", typeof(double), typeof(ListViewRound), new PropertyMetadata(90d));
+            DependencyProperty.RegisterAttached(nameof(ItemWidth), typeof(double), typeof(ListViewRound), new PropertyMetadata(90d));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemHeightProperty =
-            DependencyProperty.RegisterAttached("ItemHeight", typeof(double), typeof(ListViewRound), new PropertyMetadata(42d));
+            DependencyProperty.RegisterAttached(nameof(ItemHeight), typeof(double), typeof(ListViewRound), new PropertyMetadata(42d));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemRadiusProperty =
-            DependencyProperty.RegisterAttached("ItemRadius", typeof(RadiusRound), typeof(ListViewRound), new PropertyMetadata(new RadiusRound(5)));
+            DependencyProperty.RegisterAttached(nameof(ItemRadius), typeof(RadiusRound), typeof(ListViewRound), new PropertyMetadata(new RadiusRound(5)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemMarginProperty =
-            DependencyProperty.RegisterAttached("ItemMargin", typeof(Thickness), typeof(ListViewRound), new PropertyMetadata(new Thickness(1)));
+            DependencyProperty.RegisterAttached(nameof(ItemMargin), typeof(Thickness), typeof(ListViewRound), new PropertyMetadata(new Thickness(1)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemPaddingProperty =
-            DependencyProperty.RegisterAttached("ItemPadding", typeof(ThicknessRound), typeof(ListViewRound), new PropertyMetadata(new ThicknessRound(0)));
+            DependencyProperty.RegisterAttached(nameof(ItemPadding), typeof(ThicknessRound), typeof(ListViewRound), new PropertyMetadata(new ThicknessRound(0)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBorderProperty =
-            DependencyProperty.RegisterAttached("ItemBorder", typeof(ThicknessRound), typeof(ListViewRound), new PropertyMetadata(new ThicknessRound(1)));
+            DependencyProperty.RegisterAttached(nameof(ItemBorder), typeof(ThicknessRound), typeof(ListViewRound), new PropertyMetadata(new ThicknessRound(1)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBorderBrushProperty =
-            DependencyProperty.RegisterAttached("ItemBorderBrush", typeof(BrushRound), typeof(ListViewRound), new PropertyMetadata(new BrushRound().Focused(Color.FromArgb(170, 35, 175, 255))));
+            DependencyProperty.RegisterAttached(nameof(ItemBorderBrush), typeof(BrushRound), typeof(ListViewRound), new PropertyMetadata(new BrushRound().Focused(Color.FromArgb(170, 35, 175, 255))));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBackgroundProperty =
-            DependencyProperty.RegisterAttached("ItemBackground", typeof(BrushRound), typeof(ListViewRound), new PropertyMetadata(new BrushRound(Color.FromArgb(255, 243, 243, 243), Color.FromArgb(120, 35, 175, 255))));
+            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushRound), typeof(ListViewRound), new PropertyMetadata(new BrushRound(Color.FromArgb(255, 243, 243, 243), Color.FromArgb(120, 35, 175, 255))));
 
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemImageWidthProperty =
-            DependencyProperty.RegisterAttached("ItemImageWidth", typeof(double), typeof(ListViewRound), new PropertyMetadata(24d));
+            DependencyProperty.RegisterAttached(nameof(ItemImageWidth), typeof(double), typeof(ListViewRound), new PropertyMetadata(24d));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemImageHeightProperty =
-            DependencyProperty.RegisterAttached("ItemImageHeight", typeof(double), typeof(ListViewRound), new PropertyMetadata(24d));
+            DependencyProperty.RegisterAttached(nameof(ItemImageHeight), typeof(double), typeof(ListViewRound), new PropertyMetadata(24d));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemImageDockProperty =
-            DependencyProperty.RegisterAttached("ItemImageDock", typeof(Dock), typeof(ListViewRound), new PropertyMetadata(Dock.Left));
+            DependencyProperty.RegisterAttached(nameof(ItemImageDock), typeof(Dock), typeof(ListViewRound), new PropertyMetadata(Dock.Left));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemImageMarginProperty =
-            DependencyProperty.RegisterAttached("ItemImageMargin", typeof(Thickness), typeof(ListViewRound), new PropertyMetadata(new Thickness(0)));
+            DependencyProperty.RegisterAttached(nameof(ItemImageMargin), typeof(Thickness), typeof(ListViewRound), new PropertyMetadata(new Thickness(0)));
 
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemTextPaddingProperty =
-            DependencyProperty.RegisterAttached("ItemTextPadding", typeof(Thickness), typeof(ListViewRound), new PropertyMetadata(new Thickness(0)));
+            DependencyProperty.RegisterAttached(nameof(ItemTextPadding), typeof(Thickness), typeof(ListViewRound), new PropertyMetadata(new Thickness(0)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemTextForegroundProperty =
-            DependencyProperty.RegisterAttached("ItemTextForeground", typeof(BrushRound), typeof(ListViewRound), new PropertyMetadata(new BrushRound(Colors.Black, Colors.White)));
+            DependencyProperty.RegisterAttached(nameof(ItemTextForeground), typeof(BrushRound), typeof(ListViewRound), new PropertyMetadata(new BrushRound(Colors.Black, Colors.White)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemTextBackgroundProperty =
-            DependencyProperty.RegisterAttached("ItemTextBackground", typeof(BrushRound), typeof(ListViewRound), new PropertyMetadata(new BrushRound(Colors.Transparent, null, null, 0)));
+            DependencyProperty.RegisterAttached(nameof(ItemTextBackground), typeof(BrushRound), typeof(ListViewRound), new PropertyMetadata(new BrushRound(Colors.Transparent, null, null, 0)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemTextFontSizeProperty =
-            DependencyProperty.RegisterAttached("ItemTextFontSize", typeof(DoubleRound), typeof(ListViewRound), new PropertyMetadata(new DoubleRound()));
+            DependencyProperty.RegisterAttached(nameof(ItemTextFontSize), typeof(DoubleRound), typeof(ListViewRound), new PropertyMetadata(new DoubleRound()));
 
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemDescDockProperty =
-            DependencyProperty.RegisterAttached("ItemDescDock", typeof(Dock), typeof(ListViewRound), new PropertyMetadata(Dock.Right));
+            DependencyProperty.RegisterAttached(nameof(ItemDescDock), typeof(Dock), typeof(ListViewRound), new PropertyMetadata(Dock.Right));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemDescPaddingProperty =
-            DependencyProperty.RegisterAttached("ItemDescPadding", typeof(Thickness), typeof(ListViewRound), new PropertyMetadata(new Thickness(0)));
+            DependencyProperty.RegisterAttached(nameof(ItemDescPadding), typeof(Thickness), typeof(ListViewRound), new PropertyMetadata(new Thickness(0)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemDescForegroundProperty =
-            DependencyProperty.RegisterAttached("ItemDescForeground", typeof(BrushRound), typeof(ListViewRound), new PropertyMetadata(new BrushRound(Colors.Black, Colors.White)));
+            DependencyProperty.RegisterAttached(nameof(ItemDescForeground), typeof(BrushRound), typeof(ListViewRound), new PropertyMetadata(new BrushRound(Colors.Black, Colors.White)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemDescBackgroundProperty =
-            DependencyProperty.RegisterAttached("ItemDescBackground", typeof(BrushRound), typeof(ListViewRound), new PropertyMetadata(new BrushRound(Colors.Transparent, null, null, 0)));
+            DependencyProperty.RegisterAttached(nameof(ItemDescBackground), typeof(BrushRound), typeof(ListViewRound), new PropertyMetadata(new BrushRound(Colors.Transparent, null, null, 0)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemDescFontSizeProperty =
-        DependencyProperty.RegisterAttached("ItemDescFontSize", typeof(DoubleRound), typeof(ListViewRound), new PropertyMetadata(new DoubleRound(13)));
+        DependencyProperty.RegisterAttached(nameof(ItemDescFontSize), typeof(DoubleRound), typeof(ListViewRound), new PropertyMetadata(new DoubleRound(13)));
 
         #endregion
 

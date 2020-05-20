@@ -17,19 +17,19 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty WaterProperty =
-            DependencyProperty.RegisterAttached("Water", typeof(string), typeof(TextBoxRound), new PropertyMetadata("请输入.."));
+            DependencyProperty.RegisterAttached(nameof(Water), typeof(string), typeof(TextBoxRound), new PropertyMetadata("请输入.."));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty WaterSizeProperty =
-            DependencyProperty.RegisterAttached("WaterSize", typeof(double), typeof(TextBoxRound), new PropertyMetadata());
+            DependencyProperty.RegisterAttached(nameof(WaterSize), typeof(double), typeof(TextBoxRound), new PropertyMetadata());
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty RadiusProperty =
-            DependencyProperty.RegisterAttached("Radius", typeof(CornerRadius), typeof(TextBoxRound), new PropertyMetadata(new CornerRadius(3)));
+            DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(TextBoxRound), new PropertyMetadata(new CornerRadius(3)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty BorderFocusedBrushProperty =
-            DependencyProperty.RegisterAttached("BorderFocusedBrush", typeof(Brush), typeof(TextBoxRound),
+            DependencyProperty.RegisterAttached(nameof(BorderFocusedBrush), typeof(Brush), typeof(TextBoxRound),
                 new PropertyMetadata(new SolidColorBrush(Color.FromArgb(255, 35, 175, 255))));
 
         #endregion

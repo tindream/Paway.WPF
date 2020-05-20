@@ -25,12 +25,12 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty FocusedBrushProperty =
-            DependencyProperty.RegisterAttached("FocusedBrush", typeof(Brush), typeof(PathButton),
+            DependencyProperty.RegisterAttached(nameof(FocusedBrush), typeof(Brush), typeof(PathButton),
             new PropertyMetadata(new SolidColorBrush(Color.FromArgb(190, 35, 175, 255))));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty FocusedBrushDownProperty =
-            DependencyProperty.RegisterAttached("FocusedBrushDown", typeof(Brush), typeof(PathButton),
+            DependencyProperty.RegisterAttached(nameof(FocusedBrushDown), typeof(Brush), typeof(PathButton),
             new PropertyMetadata(new SolidColorBrush(Color.FromArgb(250, 35, 175, 255))));
 
         #endregion

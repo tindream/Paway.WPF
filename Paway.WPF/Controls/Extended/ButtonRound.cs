@@ -17,42 +17,42 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty RadiusProperty =
-                DependencyProperty.RegisterAttached("Radius", typeof(CornerRadius), typeof(ButtonRound), new PropertyMetadata(new CornerRadius(7)));
+                DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(ButtonRound), new PropertyMetadata(new CornerRadius(7)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty EffectRadiusProperty =
-            DependencyProperty.RegisterAttached("EffectRadius", typeof(double), typeof(ButtonRound), new PropertyMetadata(0d));
+            DependencyProperty.RegisterAttached(nameof(EffectRadius), typeof(double), typeof(ButtonRound), new PropertyMetadata(0d));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ForegroundRoundProperty =
-            DependencyProperty.RegisterAttached("ForegroundRound", typeof(BrushRound), typeof(ButtonRound),
+            DependencyProperty.RegisterAttached(nameof(ForegroundRound), typeof(BrushRound), typeof(ButtonRound),
             new PropertyMetadata(new BrushRound(Color.FromArgb(255, 33, 33, 33), Color.FromArgb(255, 33, 33, 33), Colors.White)));
 
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty BackgroundStartProperty =
-            DependencyProperty.RegisterAttached("BackgroundStart", typeof(ColorRound), typeof(ButtonRound),
+            DependencyProperty.RegisterAttached(nameof(BackgroundStart), typeof(ColorRound), typeof(ButtonRound),
             new PropertyMetadata(new ColorRound(Color.FromArgb(254, 254, 254, 254), Color.FromArgb(16, 35, 175, 255))));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty BackgroundEndProperty =
-            DependencyProperty.RegisterAttached("BackgroundEnd", typeof(ColorRound), typeof(ButtonRound),
+            DependencyProperty.RegisterAttached(nameof(BackgroundEnd), typeof(ColorRound), typeof(ButtonRound),
             new PropertyMetadata(new ColorRound(Color.FromArgb(254, 220, 220, 220), Color.FromArgb(211, 35, 175, 255))));
 
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ViewportProperty =
-            DependencyProperty.RegisterAttached("Viewport", typeof(Rect), typeof(ButtonRound),
+            DependencyProperty.RegisterAttached(nameof(Viewport), typeof(Rect), typeof(ButtonRound),
             new PropertyMetadata(new Rect(0, 0, 1, 1)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty StretchProperty =
-            DependencyProperty.RegisterAttached("Stretch", typeof(Stretch), typeof(ButtonRound),
+            DependencyProperty.RegisterAttached(nameof(Stretch), typeof(Stretch), typeof(ButtonRound),
             new PropertyMetadata(Stretch.Fill));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty BackgroundImageProperty =
-            DependencyProperty.RegisterAttached("BackgroundImage", typeof(ImageRound), typeof(ButtonRound));
+            DependencyProperty.RegisterAttached(nameof(BackgroundImage), typeof(ImageRound), typeof(ButtonRound));
 
         #endregion
 

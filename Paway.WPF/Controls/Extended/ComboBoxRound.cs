@@ -17,16 +17,16 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty RadiusProperty =
-            DependencyProperty.RegisterAttached("Radius", typeof(CornerRadius), typeof(ComboBoxRound), new PropertyMetadata(new CornerRadius(3)));
+            DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(ComboBoxRound), new PropertyMetadata(new CornerRadius(3)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ForegroundRoundProperty =
-            DependencyProperty.RegisterAttached("ForegroundRound", typeof(BrushRound), typeof(ComboBoxRound),
+            DependencyProperty.RegisterAttached(nameof(ForegroundRound), typeof(BrushRound), typeof(ComboBoxRound),
             new PropertyMetadata(new BrushRound(Colors.Black, Colors.White)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty BackgroundRoundProperty =
-            DependencyProperty.RegisterAttached("BackgroundRound", typeof(BrushRound), typeof(ComboBoxRound),
+            DependencyProperty.RegisterAttached(nameof(BackgroundRound), typeof(BrushRound), typeof(ComboBoxRound),
             new PropertyMetadata(new BrushRound(Colors.LightGray, Color.FromArgb(149, 35, 175, 255))));
 
         #endregion

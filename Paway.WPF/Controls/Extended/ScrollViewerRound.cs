@@ -17,15 +17,15 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ScrollBarRadiusProperty =
-            DependencyProperty.RegisterAttached("ScrollBarRadius", typeof(CornerRadius), typeof(ScrollViewerRound), new PropertyMetadata(new CornerRadius(4)));
+            DependencyProperty.RegisterAttached(nameof(ScrollBarRadius), typeof(CornerRadius), typeof(ScrollViewerRound), new PropertyMetadata(new CornerRadius(4)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ScrollBarColorProperty =
-            DependencyProperty.RegisterAttached("ScrollBarColor", typeof(Brush), typeof(ScrollViewerRound), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(200, 125, 125, 125))));
+            DependencyProperty.RegisterAttached(nameof(ScrollBarColor), typeof(Brush), typeof(ScrollViewerRound), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(200, 125, 125, 125))));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ScrollBarWidthProperty =
-            DependencyProperty.RegisterAttached("ScrollBarWidth", typeof(double), typeof(ScrollViewerRound), new PropertyMetadata(8d));
+            DependencyProperty.RegisterAttached(nameof(ScrollBarWidth), typeof(double), typeof(ScrollViewerRound), new PropertyMetadata(8d));
 
         #endregion
 

@@ -17,16 +17,16 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty RadiusProperty =
-            DependencyProperty.RegisterAttached("Radius", typeof(CornerRadius), typeof(ProgressBarRound), new PropertyMetadata(new CornerRadius(3)));
+            DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(ProgressBarRound), new PropertyMetadata(new CornerRadius(3)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ForegroundStartColorProperty =
-            DependencyProperty.RegisterAttached("ForegroundStartColor", typeof(Color), typeof(ProgressBarRound),
+            DependencyProperty.RegisterAttached(nameof(ForegroundStartColor), typeof(Color), typeof(ProgressBarRound),
             new PropertyMetadata(Color.FromArgb(85, 35, 175, 255)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ForegroundEndColorProperty =
-            DependencyProperty.RegisterAttached("ForegroundEndColor", typeof(Color), typeof(ProgressBarRound),
+            DependencyProperty.RegisterAttached(nameof(ForegroundEndColor), typeof(Color), typeof(ProgressBarRound),
             new PropertyMetadata(Color.FromArgb(250, 35, 175, 255)));
         /// <summary>
         /// </summary>
@@ -40,7 +40,7 @@ namespace Paway.WPF
         /// 启用监听，获取进度
         /// </summary>
         public static readonly DependencyProperty IsMonitoringProperty =
-            DependencyProperty.RegisterAttached("IsMonitoring", typeof(bool), typeof(ProgressBarRound), new UIPropertyMetadata(false, OnIsMonitoringChanged));
+            DependencyProperty.RegisterAttached(nameof(IsMonitoring), typeof(bool), typeof(ProgressBarRound), new UIPropertyMetadata(false, OnIsMonitoringChanged));
         private static void OnIsMonitoringChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             if (obj is ProgressBar bar)

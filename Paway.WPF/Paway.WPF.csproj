@@ -70,7 +70,7 @@
     <Compile Include="Controls\Converter\DoubleRound.cs" />
     <Compile Include="Controls\Converter\ThicknessRound.cs" />
     <Compile Include="Controls\Converter\BrushRound.cs" />
-    <Compile Include="Controls\Extend\ListViewRound.cs" />
+    <Compile Include="Controls\Extended\ListViewRound.cs" />
     <Compile Include="Controls\Theme\ThemeMonitor.cs" />
     <Compile Include="Method\Config.cs" />
     <Compile Include="Method\Method.cs" />
@@ -86,25 +86,29 @@
     <Compile Include="Controls\Custom\CheckBoxRound.xaml.cs">
       <DependentUpon>CheckBoxRound.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Extend\ButtonRound.cs" />
-    <Compile Include="Controls\Extend\DataGridAuto.cs" />
-    <Compile Include="Controls\Extend\ProgressBarRound.cs" />
-    <Compile Include="Controls\Extend\PasswordBoxMonitor.cs" />
-    <Compile Include="Controls\Extend\ScrollViewerMonitor.cs" />
-    <Compile Include="Controls\Extend\ScrollViewerRound.cs" />
+    <Compile Include="Controls\Extended\ButtonRound.cs" />
+    <Compile Include="Controls\Extended\DataGridAuto.cs" />
+    <Compile Include="Controls\Extended\ProgressBarRound.cs" />
+    <Compile Include="Controls\Extended\PasswordBoxMonitor.cs" />
+    <Compile Include="Controls\Extended\ScrollViewerMonitor.cs" />
+    <Compile Include="Controls\Extended\ScrollViewerRound.cs" />
     <Compile Include="Controls\Custom\SelectedBox.xaml.cs">
       <DependentUpon>SelectedBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Extend\ComboBoxRound.cs" />
-    <Compile Include="Controls\Extend\TextBoxMonitor.cs" />
-    <Compile Include="Controls\Extend\TextBoxRound.cs" />
-    <Compile Include="Controls\Windows\MessageToastModel.cs" />
-    <Compile Include="Controls\Windows\MessageToast.xaml.cs">
+    <Compile Include="Controls\Extended\ComboBoxRound.cs" />
+    <Compile Include="Controls\Extended\TextBoxMonitor.cs" />
+    <Compile Include="Controls\Extended\TextBoxRound.cs" />
+    <Compile Include="Controls\Toast\MessageToastModel.cs" />
+    <Compile Include="Controls\Toast\MessageToast.xaml.cs">
       <DependentUpon>MessageToast.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Controls\Windows\MessageToast.xaml">
+    <Page Include="Controls\Toast\MessageToast.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
