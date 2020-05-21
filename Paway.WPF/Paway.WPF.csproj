@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Controls\Window\FunctionBar\FunctionBar.cs" />
     <Compile Include="Controls\Window\FunctionBar\WindowFunctionBar.cs" />
+    <Compile Include="Controls\Window\FunctionBar\FunctionBarMonitor.cs" />
     <Compile Include="Method\DpiHelper.cs" />
     <Compile Include="Controls\Converter\EmptyObjectToVisibilityConverter.cs" />
     <Compile Include="Method\NativeMethods.cs" />

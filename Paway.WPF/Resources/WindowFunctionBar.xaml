@@ -7,7 +7,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="WindowFunctionBarTitleBarButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource WindowTitleBarButtonStyle}">
-        <Setter Property="MinWidth" Value="36" />
+        <Setter Property="MinWidth" Value="42" />
         <Setter Property="Width" Value="Auto" />
         <Setter Property="Padding"  Value="6,0" />
     </Style>
@@ -24,8 +24,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Rectangle x:Name="ButtonBackground"
-                           Fill="White"
-                           Opacity="0"
+                           Fill="Transparent"
                            Grid.ColumnSpan="2" />
                 <ContentPresenter x:Name="Icon"
                                   Content="{TemplateBinding Icon}"
@@ -64,16 +63,13 @@
                 <Setter Property="Visibility" TargetName="GlyphPanel" Value="Visible" />
                 <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
             </Trigger>
-            <Trigger Property="IsHighlighted" Value="True">
-                <Setter Property="Opacity" TargetName="ButtonBackground" Value="0.2" />
-                <!--<Setter Property="Background" TargetName="templateRoot" Value="#3D26A0DA" />
-                <Setter Property="BorderBrush" TargetName="templateRoot" Value="#FF26A0DA" />-->
-            </Trigger>
             <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Opacity" TargetName="ButtonBackground" Value="0.2" />
+                <Setter Property="Fill" TargetName="ButtonBackground" Value="#ECF4FF" />
+                <Setter Property="Stroke" TargetName="ButtonBackground" Value="#B0C1E2" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Opacity" TargetName="ButtonBackground" Value="0.12"/>
+                <Setter Property="Fill" TargetName="ButtonBackground" Value="White" />
+                <Setter Property="Stroke" TargetName="ButtonBackground" Value="#94A6CA" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="#FF707070" />
@@ -84,9 +80,7 @@
                     <Condition Property="IsHighlighted" Value="True" />
                     <Condition Property="IsEnabled" Value="False" />
                 </MultiTrigger.Conditions>
-                <Setter Property="Opacity" TargetName="ButtonBackground" Value="0.2" />
-                <!--<Setter Property="Background" TargetName="templateRoot" Value="#0A000000" />
-                <Setter Property="BorderBrush" TargetName="templateRoot" Value="#21000000" />-->
+                <Setter Property="Fill" TargetName="ButtonBackground" Value="#ECF4FF" />
             </MultiTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -98,9 +92,15 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Rectangle x:Name="ButtonBackground"
-                           Fill="White"
-                           Opacity="0"
+                           Fill="Transparent"
                            Grid.ColumnSpan="2" />
+                <TextBlock x:Name="Line"
+                           Height="2"
+                           Margin="1,0,1,-1"
+                           Background="#E9EEFF"
+                           Grid.ColumnSpan="2"
+                           Visibility="Collapsed" 
+                           VerticalAlignment="Bottom"/>
                 <ContentPresenter x:Name="Icon"
                                   Content="{TemplateBinding Icon}"
                                   ContentSource="Icon"
@@ -136,33 +136,42 @@
                        PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
                        Placement="Bottom">
                     <Border x:Name="SubMenuBorder"
-                            BorderBrush="#FF999999"
+                            BorderBrush="#94A6CA"
                             BorderThickness="1"
-                            Background="#FFF0F0F0"
+                            Background="#E9EEFF"
                             Padding="2">
-                        <ScrollViewer x:Name="SubMenuScrollViewer"
+                        <StackPanel>
+                            <TextBlock x:Name="Line2"
+                                       Height="1"
+                                       Width="{TemplateBinding local:FunctionBarMonitor.BarWidth}"
+                                       Margin="-2,-3,1,0"
+                                       Background="#E9EEFF"
+                                       VerticalAlignment="Top" 
+                                       HorizontalAlignment="Left"/>
+                            <ScrollViewer x:Name="SubMenuScrollViewer"
                                       Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
-                            <Grid RenderOptions.ClearTypeHint="Enabled">
-                                <Canvas HorizontalAlignment="Left"
+                                <Grid RenderOptions.ClearTypeHint="Enabled">
+                                    <Canvas HorizontalAlignment="Left"
                                         Height="0"
                                         VerticalAlignment="Top"
                                         Width="0">
-                                    <Rectangle x:Name="OpaqueRect"
+                                        <Rectangle x:Name="OpaqueRect"
                                                Fill="{Binding Background, ElementName=SubMenuBorder}"
                                                Height="{Binding ActualHeight, ElementName=SubMenuBorder}"
                                                Width="{Binding ActualWidth, ElementName=SubMenuBorder}" />
-                                </Canvas>
-                                <Rectangle Fill="#FFD7D7D7"
+                                    </Canvas>
+                                    <!--<Rectangle Fill="#C0CAE9"
                                            HorizontalAlignment="Left"
                                            Margin="29,2,0,2"
-                                           Width="1" />
-                                <ItemsPresenter x:Name="ItemsPresenter"
+                                           Width="1" />-->
+                                    <ItemsPresenter x:Name="ItemsPresenter"
                                                 KeyboardNavigation.DirectionalNavigation="Cycle"
                                                 Grid.IsSharedSizeScope="True"
                                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                                 KeyboardNavigation.TabNavigation="Cycle" />
-                            </Grid>
-                        </ScrollViewer>
+                                </Grid>
+                            </ScrollViewer>
+                        </StackPanel>
                     </Border>
                 </Popup>
             </Grid>
@@ -179,7 +188,14 @@
                 <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter Property="Opacity" TargetName="ButtonBackground" Value="0.2" />
+                <!--<Setter Property="Opacity" TargetName="ButtonBackground" Value="0.2" />-->
+                <Setter Property="Fill" TargetName="ButtonBackground" Value="#ECF4FF" />
+                <Setter Property="Stroke" TargetName="ButtonBackground" Value="#B0C1E2" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Fill" TargetName="ButtonBackground" Value="#E9EEFF" />
+                <Setter Property="Stroke" TargetName="ButtonBackground" Value="#94A6CA" />
+                <Setter Property="Visibility" TargetName="Line" Value="Visible" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="#FF707070" />
@@ -191,13 +207,22 @@
                 <Setter Property="Canvas.Left" TargetName="OpaqueRect"
                         Value="{Binding HorizontalOffset, ElementName=SubMenuScrollViewer}" />
             </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsHighlighted" Value="True" />
+                    <Condition Property="IsSubmenuOpen" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Fill" TargetName="ButtonBackground" Value="#E9EEFF" />
+                <Setter Property="Stroke" TargetName="ButtonBackground" Value="#94A6CA" />
+                <Setter Property="Visibility" TargetName="Line" Value="Visible" />
+            </MultiTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <ControlTemplate x:Key="SubmenuItemTemplate" TargetType="{x:Type MenuItem}">
         <Border x:Name="templateRoot"
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}"
-                Background="{TemplateBinding Background}"
+                Background="#E9EEFF"
                 SnapsToDevicePixels="True">
             <Grid Margin="-1">
                 <Grid.ColumnDefinitions>
@@ -212,8 +237,7 @@
                                   Content="{TemplateBinding Icon}"
                                   ContentSource="Icon"
                                   HorizontalAlignment="Center"
-                                  Height="24"
-                                  Margin="3"
+                                  Height="16"
                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                   VerticalAlignment="Center"
                                   Width="16" />
@@ -222,18 +246,18 @@
                         BorderBrush="#FF26A0DA"
                         BorderThickness="0"
                         Background="#0026A0DA"
+                        Padding="0,7"
                         ClipToBounds="False"
                         HorizontalAlignment="Center"
-                        Height="32"
                         Margin="-1,0,0,0"
                         VerticalAlignment="Center"
-                        Width="22">
+                        Width="22" >
                     <Path x:Name="Glyph"
                           Data="F1M10,1.2L4.7,9.1 4.5,9.1 0,5.2 1.3,3.5 4.3,6.1 8.3,0 10,1.2z"
                           Fill="#FF212121"
                           FlowDirection="LeftToRight"
-                          Height="16"
-                          Width="10" />
+                          Height="11"
+                          Width="10"  />
                 </Border>
                 <ContentPresenter x:Name="menuHeaderContainer"
                                   ContentTemplate="{TemplateBinding HeaderTemplate}"
@@ -265,7 +289,7 @@
                 <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter Property="Background" TargetName="templateRoot" Value="#3D26A0DA" />
+                <Setter Property="Background" TargetName="templateRoot" Value="#B1C5FF" />
                 <Setter Property="BorderBrush" TargetName="templateRoot" Value="#FF26A0DA" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
@@ -301,7 +325,7 @@
                                   Content="{TemplateBinding Icon}"
                                   ContentSource="Icon"
                                   HorizontalAlignment="Center"
-                                  Height="24"
+                                  Height="16"
                                   Margin="3"
                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                   VerticalAlignment="Center"
@@ -311,7 +335,7 @@
                         BorderBrush="#FF26A0DA"
                         BorderThickness="0"
                         Background="#0026A0DA"
-                        Height="32"
+                        Padding="0,7"
                         Margin="-1,0,0,0"
                         VerticalAlignment="Center"
                         Width="22">
@@ -319,7 +343,7 @@
                           Data="F1M10,1.2L4.7,9.1 4.5,9.1 0,5.2 1.3,3.5 4.3,6.1 8.3,0 10,1.2z"
                           Fill="#FF212121"
                           FlowDirection="LeftToRight"
-                          Height="16"
+                          Height="11"
                           Width="10" />
                 </Border>
                 <ContentPresenter ContentTemplate="{TemplateBinding HeaderTemplate}"
@@ -353,11 +377,11 @@
                        IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
                        PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
                        Placement="Right"
-                       VerticalOffset="-3">
+                       VerticalOffset="1">
                     <Border x:Name="SubMenuBorder"
-                            BorderBrush="#FF999999"
+                            BorderBrush="#94A6CA"
                             BorderThickness="1"
-                            Background="#FFF0F0F0"
+                            Background="#E9EEFF"
                             Padding="2">
                         <ScrollViewer x:Name="SubMenuScrollViewer"
                                       Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
@@ -371,10 +395,10 @@
                                                Height="{Binding ActualHeight, ElementName=SubMenuBorder}"
                                                Width="{Binding ActualWidth, ElementName=SubMenuBorder}" />
                                 </Canvas>
-                                <Rectangle Fill="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"
+                                <!--<Rectangle Fill="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"
                                            HorizontalAlignment="Left"
                                            Margin="29,2,0,2"
-                                           Width="1" />
+                                           Width="1" />-->
                                 <ItemsPresenter x:Name="ItemsPresenter"
                                                 KeyboardNavigation.DirectionalNavigation="Cycle"
                                                 Grid.IsSharedSizeScope="True"
@@ -398,7 +422,7 @@
                 <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter Property="Background" TargetName="templateRoot" Value="#3D26A0DA" />
+                <Setter Property="Background" TargetName="templateRoot" Value="#B1C5FF" />
                 <Setter Property="BorderBrush" TargetName="templateRoot" Value="#FF26A0DA" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
@@ -416,6 +440,7 @@
     </ControlTemplate>
 
     <Style x:Key="WindowTitleBarMenuItemStyle" TargetType="{x:Type MenuItem}">
+        <Setter Property="local:FunctionBarMonitor.IsMonitoring" Value="True"/>
         <Setter Property="Control.HorizontalContentAlignment"
                 Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
         <Setter Property="Control.VerticalContentAlignment"
@@ -425,6 +450,7 @@
         <Setter Property="Control.BorderThickness" Value="0" />
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+        <Setter Property="Margin"  Value="0,3" />
         <Setter Property="Control.Template" Value="{StaticResource SubmenuItemTemplate}" />
         <Style.Triggers>
             <Trigger Property="MenuItem.Role" Value="TopLevelHeader">

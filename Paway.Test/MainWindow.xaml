@@ -10,16 +10,16 @@
     <utils:ExtendedWindow.FunctionBar>
         <utils:WindowFunctionBar>
             <Menu>
-                <MenuItem Header="发送反馈2" />
+                <MenuItem Header="发送反馈2" Icon="Q2" IsCheckable="True"/>
                 <MenuItem Header="发送反馈3" >
                     <MenuItem Header="报告问题"
-                              IsCheckable="True"  Icon="Q12B"/>
+                              IsCheckable="True"  Icon="Q3"/>
                     <MenuItem Header="提供反馈"
                               IsCheckable="True" />
                     <Separator />
                     <MenuItem Header="设置..." />
                 </MenuItem>
-                <MenuItem Header="发送反馈" Icon="Q12A">
+                <MenuItem Header="发送反馈" Icon="Q1">
                     <MenuItem Header="报告问题"
                               IsCheckable="True"  Icon="Q12B"/>
                     <MenuItem Header="提供反馈"
@@ -133,9 +133,7 @@
                            Width="12"
                            Height="12"
                            UseLayoutRounding="True"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Center"
-                           Fill="Red" Margin="94,13,94,14" />
+                           Fill="Red" Margin="94,13,94,14" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
 
     </Grid>
 </utils:ExtendedWindow>
