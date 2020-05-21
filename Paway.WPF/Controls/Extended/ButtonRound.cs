@@ -148,20 +148,6 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public ButtonRound()
-        {
-            this.Loaded += ButtonRound_Loaded;
-        }
-        private void ButtonRound_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (this.BackgroundImage != null)
-            {
-                if (this.BackgroundStart.Normal == Color.FromArgb(254, 254, 254, 254))
-                {
-                    this.BackgroundStart.Reset(Colors.Transparent, 0);
-                    this.BackgroundEnd.Reset(Colors.Transparent, 0);
-                }
-            }
-        }
+        public ButtonRound() { }
     }
 }

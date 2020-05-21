@@ -29,8 +29,8 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty BorderFocusedBrushProperty =
-            DependencyProperty.RegisterAttached(nameof(BorderFocusedBrush), typeof(Brush), typeof(TextBoxRound),
-                new PropertyMetadata(new SolidColorBrush(Color.FromArgb(255, 35, 175, 255))));
+            DependencyProperty.RegisterAttached(nameof(BorderFocusedBrush), typeof(BrushRound), typeof(TextBoxRound),
+                new PropertyMetadata(new BrushRound(null, Color.FromArgb(170, 35, 175, 255), null, 85)));
 
         #endregion
 
@@ -66,13 +66,13 @@ namespace Paway.WPF
             set { SetValue(RadiusProperty, value); }
         }
         /// <summary>
-        /// 文本框激活时的边框颜色
+        /// 文本框的边框颜色
         /// </summary>
         [Category("扩展")]
-        [Description("文本框激活时的边框颜色")]
-        public Brush BorderFocusedBrush
+        [Description("文本框的边框颜色")]
+        public BrushRound BorderFocusedBrush
         {
-            get { return (Brush)GetValue(BorderFocusedBrushProperty); }
+            get { return (BrushRound)GetValue(BorderFocusedBrushProperty); }
             set { SetValue(BorderFocusedBrushProperty, value); }
         }
 

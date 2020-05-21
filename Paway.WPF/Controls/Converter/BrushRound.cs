@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Markup;
 using System.Windows.Media;
 
 namespace Paway.WPF
@@ -29,28 +30,39 @@ namespace Paway.WPF
         /// 鼠标点击时的颜色
         /// </summary>
         public Brush Pressed { get; set; } = new SolidColorBrush(Color.FromArgb(250, 35, 175, 255));
+        /// <summary>
+        /// 颜色Alpha值变量
+        /// </summary>
+        public int Alpha { get; set; } = 50;
 
         /// <summary>
         /// </summary>
         public BrushRound() { }
         /// <summary>
         /// </summary>
-        public BrushRound(Color? normal, Color? mouse = null, Color? pressed = null, int add = 50)
+        public BrushRound(Color? normal, Color? mouse = null, Color? pressed = null, int? alpha = 50, BrushRound value = null)
         {
+            if (alpha != null) Alpha = alpha.Value;
+            else if (value != null) Alpha = value.Alpha;
             if (normal != null) Normal = new SolidColorBrush(normal.Value);
+            else if (value != null) Normal = value.Normal;
             if (mouse != null) Mouse = new SolidColorBrush(mouse.Value);
-            else if (normal != null) Reset(normal.Value, add);
+            else if (normal != null) Reset(normal.Value, Alpha);
+            else if (value != null) Mouse = value.Mouse;
             if (pressed != null) Pressed = new SolidColorBrush(pressed.Value);
-            else if (mouse != null) Focused(mouse.Value, add);
+            else if (mouse != null) Focused(mouse.Value, Alpha);
+            else if (value != null) Pressed = value.Pressed;
         }
         /// <summary>
         /// 设置所有颜色，指定Alpha差异
         /// </summary>
-        public BrushRound Reset(Color color, int add = 50)
+        public BrushRound Reset(Color color, int alpha = 50)
         {
             Normal = new SolidColorBrush(color);
-            Mouse = new SolidColorBrush(Color.FromArgb((byte)(color.A - add), color.R, color.G, color.B));
-            var a = color.A + add;
+            var a = color.A - alpha;
+            if (a < 0) a = 0;
+            Mouse = new SolidColorBrush(Color.FromArgb((byte)a, color.R, color.G, color.B));
+            a = color.A + alpha;
             if (a > 255) a = 255;
             Pressed = new SolidColorBrush(Color.FromArgb((byte)a, color.R, color.G, color.B));
             return this;
@@ -58,10 +70,10 @@ namespace Paway.WPF
         /// <summary>
         /// 设置鼠标划过、点击时的颜色
         /// </summary>
-        public BrushRound Focused(Color color, int add = 50)
+        public BrushRound Focused(Color color, int alpha = 50)
         {
             Mouse = new SolidColorBrush(color);
-            var a = color.A + add;
+            var a = color.A + alpha;
             if (a > 255) a = 255;
             Pressed = new SolidColorBrush(Color.FromArgb((byte)a, color.R, color.G, color.B));
             return this;
@@ -107,12 +119,22 @@ namespace Paway.WPF
                 Color? normal = null;
                 Color? mouse = null;
                 Color? pressed = null;
-                int add = 50;
+                int? alpha = null;
                 if (strs.Length > 0 && !string.IsNullOrEmpty(strs[0])) normal = (Color)ColorConverter.ConvertFromString(strs[0]);
                 if (strs.Length > 1 && !string.IsNullOrEmpty(strs[1])) mouse = (Color)ColorConverter.ConvertFromString(strs[1]);
                 if (strs.Length > 2 && !string.IsNullOrEmpty(strs[2])) pressed = (Color)ColorConverter.ConvertFromString(strs[2]);
-                if (strs.Length > 3 && !string.IsNullOrEmpty(strs[3])) add = Convert.ToInt32(strs[3], culture);
-                return new BrushRound(normal, mouse, pressed, add);
+                if (strs.Length > 3 && !string.IsNullOrEmpty(strs[3])) alpha = Convert.ToInt32(strs[3], culture);
+
+                BrushRound old = null;
+                if (context != null)
+                {
+                    var service = (IProvideValueTarget)context.GetService(typeof(IProvideValueTarget));
+                    var objType = service.TargetObject.GetType();
+                    var obj = (DependencyObject)Activator.CreateInstance(objType);
+                    var property = (DependencyProperty)service.TargetProperty;
+                    old = (BrushRound)obj.GetValue(property);
+                }
+                return new BrushRound(normal, mouse, pressed, alpha, old);
             }
             return base.ConvertFrom(context, culture, value);
         }

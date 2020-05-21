@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Markup;
 using System.Windows.Media;
 
 namespace Paway.WPF
@@ -43,14 +44,16 @@ namespace Paway.WPF
         public DoubleRound(double value) : this(value, value, value) { }
         /// <summary>
         /// </summary>
-        public DoubleRound(double? normal, double? mouse, double? pressed)
+        public DoubleRound(double? normal, double? mouse = null, double? pressed = null, DoubleRound value = null)
         {
             if (normal != null) Normal = normal.Value;
+            else if (value != null) Normal = value.Normal;
             if (mouse != null) Mouse = mouse.Value;
-            else Mouse = Normal;
+            else if (normal != null) Mouse = normal.Value;
+            else if (value != null) Mouse = value.Mouse;
             if (pressed != null) Pressed = pressed.Value;
-            else Pressed = Mouse;
-            if (Normal == 0) Normal = new ThemeMonitor().FontSize;
+            else if (mouse != null) Pressed = mouse.Value;
+            else if (value != null) Pressed = value.Pressed;
         }
         /// <summary>
         /// </summary>
@@ -100,7 +103,17 @@ namespace Paway.WPF
                 if (strs.Length > 0) Parse(strs[0], out normal);
                 if (strs.Length > 1) Parse(strs[1], out mouse);
                 if (strs.Length > 2) Parse(strs[2], out pressed);
-                return new DoubleRound(normal, mouse, pressed);
+
+                DoubleRound old = null;
+                if (context != null)
+                {
+                    var service = (IProvideValueTarget)context.GetService(typeof(IProvideValueTarget));
+                    var objType = service.TargetObject.GetType();
+                    var obj = (DependencyObject)Activator.CreateInstance(objType);
+                    var property = (DependencyProperty)service.TargetProperty;
+                    old = (DoubleRound)obj.GetValue(property);
+                }
+                return new DoubleRound(normal, mouse, pressed, old);
             }
             return base.ConvertFrom(context, culture, value);
         }

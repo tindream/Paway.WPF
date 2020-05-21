@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Paway.WPF">
 
-    <local:EmptyObjectToVisibilityConverter x:Key="EmptyObjectToVisibilityConverter" />
+    <local:EmptyObjectConverter x:Key="EmptyObjectConverter" />
 
     <DataTemplate x:Key="MinimizeWhite">
         <Path Data="M0,6 L12,6 L12,7 L0,7 z"
@@ -149,7 +149,7 @@
                                     <Image Source="{TemplateBinding Icon}"
                                            VerticalAlignment="Center"
                                            Margin="5,0,0,0"
-                                           Visibility="{Binding Icon,RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource EmptyObjectToVisibilityConverter}}"
+                                           Visibility="{Binding Icon,RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource EmptyObjectConverter}}"
                                            Height="{x:Static SystemParameters.SmallIconHeight}"
                                            Width="{x:Static SystemParameters.SmallIconWidth}"
                                            WindowChrome.IsHitTestVisibleInChrome="True"/>

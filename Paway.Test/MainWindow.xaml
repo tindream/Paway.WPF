@@ -80,19 +80,18 @@
         <utils:TextBoxRound Grid.Row="3" Margin="5" Name="tb" Grid.ColumnSpan="2" ></utils:TextBoxRound>
         <PasswordBox Grid.Row="4" Margin="5" Grid.ColumnSpan="2" ></PasswordBox>
         <utils:ButtonRound Grid.Row="5" Margin="5"  Content="确认" Click="ButtonRound_Click" 
-                           BackgroundStart=";#770C7900" BackgroundEnd="#FEDCDCDC;#77FF0000"
-                                BackgroundImage="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"
-                                Stretch="None" Viewport="0,0,0.5,1" Grid.ColumnSpan="2">
+                           BackgroundStart=";#770C7900" BackgroundEnd=";#77FF0000"
+                           BackgroundImage="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"
+                           Stretch="None" Viewport="0,0,0.5,1" Grid.ColumnSpan="2">
 
         </utils:ButtonRound>
 
         <utils:CheckBoxRound Grid.Row="6" Margin="5" Grid.ColumnSpan="2"></utils:CheckBoxRound>
         <utils:SelectedBox Grid.Row="7" Margin="5" Grid.ColumnSpan="2"></utils:SelectedBox>
-        <TextBlock Name="image" Grid.Row="8" Text="12345" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
 
-        <utils:ListViewRound Name="listView1" Grid.Row="8" Grid.Column="2" Height="250" Margin="5,6,5,5" 
-                             ItemWidth="150" ItemHeight="72" ItemRadius="5;5;0" ItemMargin="1" ItemPadding="0;0,4,0,0"
-                             ItemBorder="1;1,1,1,5" ItemBackground="#EEE;#7723AFFF"
+        <utils:ListViewRound Name="listView1" Grid.Row="9" Grid.Column="2" Height="250" Margin="5,6,5,5" 
+                             ItemWidth="150" ItemHeight="72" ItemRadius=";5;0" ItemMargin="1" ItemPadding="0;0,4,0,0"
+                             ItemBorder=";1,1,1,5" ItemBackground=";#7723AFFF"
                              ItemImageWidth="24" ItemImageHeight="24" ItemImageMargin="5,0,0,0"  ItemImageDock="Left"
                              HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
                              ItemTextPadding="5" ItemTextFontSize=";20"

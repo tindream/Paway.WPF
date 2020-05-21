@@ -50,11 +50,11 @@
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="BorderBrush" TargetName="border" 
-                                    Value="{Binding BorderFocusedBrush, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                    Value="{Binding Path=BorderFocusedBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="True">
                             <Setter Property="BorderBrush" TargetName="border" 
-                                    Value="{Binding BorderFocusedBrush, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                    Value="{Binding Path=BorderFocusedBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

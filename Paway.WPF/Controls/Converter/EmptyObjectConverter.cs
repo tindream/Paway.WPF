@@ -11,17 +11,17 @@ namespace Paway.WPF
 {
     /// <summary>
     /// </summary>
-    public class EmptyObjectToVisibilityConverter : DependencyObject, IValueConverter
+    public class EmptyObjectConverter : DependencyObject, IValueConverter
     {
         #region 依赖属性
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty EmptyValueProperty =
-            DependencyProperty.Register(nameof(EmptyValue), typeof(Visibility), typeof(EmptyObjectToVisibilityConverter), new PropertyMetadata(Visibility.Collapsed));
+            DependencyProperty.Register(nameof(EmptyValue), typeof(Visibility), typeof(EmptyObjectConverter), new PropertyMetadata(Visibility.Collapsed));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty NotEmptyValueProperty =
-            DependencyProperty.Register(nameof(NotEmptyValue), typeof(Visibility), typeof(EmptyObjectToVisibilityConverter), new PropertyMetadata(Visibility.Visible));
+            DependencyProperty.Register(nameof(NotEmptyValue), typeof(Visibility), typeof(EmptyObjectConverter), new PropertyMetadata(Visibility.Visible));
 
         #endregion
 

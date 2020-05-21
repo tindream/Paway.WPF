@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Markup;
 using System.Windows.Media;
 
 namespace Paway.WPF
@@ -38,23 +39,26 @@ namespace Paway.WPF
         public ThicknessRound(double value) : this(value, value, value) { }
         /// <summary>
         /// </summary>
-        public ThicknessRound(double? normal, double? mouse, double? pressed)
+        public ThicknessRound(double? normal, double? mouse, double? pressed = null)
         {
             if (normal != null) Normal = new Thickness(normal.Value);
             if (mouse != null) Mouse = new Thickness(mouse.Value);
-            else Mouse = Normal;
+            else if (normal != null) Mouse = new Thickness(normal.Value);
             if (pressed != null) Pressed = new Thickness(pressed.Value);
-            else Pressed = Mouse;
+            else if (mouse != null) Pressed = new Thickness(mouse.Value);
         }
         /// <summary>
         /// </summary>
-        public ThicknessRound(Thickness? normal, Thickness? mouse, Thickness? pressed)
+        public ThicknessRound(Thickness? normal, Thickness? mouse = null, Thickness? pressed = null, ThicknessRound value = null)
         {
             if (normal != null) Normal = normal.Value;
+            else if (value != null) Normal = value.Normal;
             if (mouse != null) Mouse = mouse.Value;
-            else Mouse = Normal;
+            else if (normal != null) Mouse = normal.Value;
+            else if (value != null) Mouse = value.Mouse;
             if (pressed != null) Pressed = pressed.Value;
-            else Pressed = Mouse;
+            else if (mouse != null) Pressed = mouse.Value;
+            else if (value != null) Pressed = value.Pressed;
         }
         /// <summary>
         /// </summary>
@@ -104,7 +108,17 @@ namespace Paway.WPF
                 if (strs.Length > 0) Parse(strs[0], out normal);
                 if (strs.Length > 1) Parse(strs[1], out mouse);
                 if (strs.Length > 2) Parse(strs[2], out pressed);
-                return new ThicknessRound(normal, mouse, pressed);
+
+                ThicknessRound old = null;
+                if (context != null)
+                {
+                    var service = (IProvideValueTarget)context.GetService(typeof(IProvideValueTarget));
+                    var objType = service.TargetObject.GetType();
+                    var obj = (DependencyObject)Activator.CreateInstance(objType);
+                    var property = (DependencyProperty)service.TargetProperty;
+                    old = (ThicknessRound)obj.GetValue(property);
+                }
+                return new ThicknessRound(normal, mouse, pressed, old);
             }
             return base.ConvertFrom(context, culture, value);
         }
