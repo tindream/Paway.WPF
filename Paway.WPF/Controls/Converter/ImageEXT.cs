@@ -42,8 +42,10 @@ namespace Paway.WPF
         public ImageEXT(string normal, string mouse = null, string pressed = null)
         {
             if (normal != null) Normal = new BitmapImage(new Uri(normal));
+
             if (mouse != null) Mouse = new BitmapImage(new Uri(mouse));
             else Mouse = Normal;
+
             if (pressed != null) Pressed = new BitmapImage(new Uri(pressed));
             else Pressed = Mouse;
         }

@@ -43,15 +43,18 @@ namespace Paway.WPF
         public BrushEXT(Color? normal, Color? mouse = null, Color? pressed = null, int? alpha = 50, BrushEXT value = null)
         {
             if (alpha != null) Alpha = alpha.Value;
+
             else if (value != null) Alpha = value.Alpha;
             if (normal != null) Normal = new SolidColorBrush(normal.Value);
+
             else if (value != null) Normal = value.Normal;
             if (mouse != null) Mouse = new SolidColorBrush(mouse.Value);
             else if (normal != null) Reset(normal.Value, Alpha);
             else if (value != null) Mouse = value.Mouse;
+
             if (pressed != null) Pressed = new SolidColorBrush(pressed.Value);
             else if (mouse != null) Focused(mouse.Value, Alpha);
-            else if (value != null) Pressed = value.Pressed;
+            else if (normal == null && value != null) Pressed = value.Pressed;
         }
         /// <summary>
         /// 设置所有颜色，指定Alpha差异

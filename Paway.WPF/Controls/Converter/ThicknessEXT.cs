@@ -42,10 +42,13 @@ namespace Paway.WPF
         public ThicknessEXT(double? normal, double? mouse, double? pressed = null)
         {
             if (normal != null) Normal = new Thickness(normal.Value);
+
             if (mouse != null) Mouse = new Thickness(mouse.Value);
-            else if (normal != null) Mouse = new Thickness(normal.Value);
+            else if (normal != null) Mouse = Normal;
+
             if (pressed != null) Pressed = new Thickness(pressed.Value);
-            else if (mouse != null) Pressed = new Thickness(mouse.Value);
+            else if (mouse != null) Pressed = Mouse;
+            else if (normal != null) Pressed = Normal;
         }
         /// <summary>
         /// </summary>
@@ -53,11 +56,14 @@ namespace Paway.WPF
         {
             if (normal != null) Normal = normal.Value;
             else if (value != null) Normal = value.Normal;
+
             if (mouse != null) Mouse = mouse.Value;
-            else if (normal != null) Mouse = normal.Value;
+            else if (normal != null) Mouse = Normal;
             else if (value != null) Mouse = value.Mouse;
+
             if (pressed != null) Pressed = pressed.Value;
-            else if (mouse != null) Pressed = mouse.Value;
+            else if (mouse != null) Pressed = Mouse;
+            else if (normal != null) Pressed = Normal;
             else if (value != null) Pressed = value.Pressed;
         }
         /// <summary>

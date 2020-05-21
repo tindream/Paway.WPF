@@ -48,11 +48,14 @@ namespace Paway.WPF
         {
             if (normal != null) Normal = normal.Value;
             else if (value != null) Normal = value.Normal;
+
             if (mouse != null) Mouse = mouse.Value;
-            else if (normal != null) Mouse = normal.Value;
+            else if (normal != null) Mouse = Normal;
             else if (value != null) Mouse = value.Mouse;
+
             if (pressed != null) Pressed = pressed.Value;
-            else if (mouse != null) Pressed = mouse.Value;
+            else if (mouse != null) Pressed = Mouse;
+            else if (normal != null) Pressed = Normal;
             else if (value != null) Pressed = value.Pressed;
         }
         /// <summary>

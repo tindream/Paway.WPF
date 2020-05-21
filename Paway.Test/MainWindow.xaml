@@ -91,12 +91,13 @@
         <utils:CheckBoxEXT Content="AAA" Grid.Row="7" Margin="5"></utils:CheckBoxEXT>
 
         <utils:ListViewEXT Name="listView1" Grid.Row="9" Grid.Column="1" Height="250" Margin="5,6,5,5" 
-                             ItemWidth="150" ItemHeight="72" ItemRadius=";5;0" ItemMargin="1" ItemPadding="0;0,4,0,0"
-                             ItemBorder=";1,1,1,5" ItemBackground=";#7723AFFF"
-                             ItemImageWidth="24" ItemImageHeight="24" ItemImageMargin="5,0,0,0"  ItemImageDock="Left"
-                             HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
-                             ItemTextPadding="5" ItemTextFontSize=";20"
-                             ItemDescDock="Right" ItemDescPadding="5" >
+                           ItemWidth="150" ItemHeight="164" ItemRadius="0" ItemMargin="1" ItemPadding="0;0,4,0,0"
+                           ItemBorder=";1,1,1,5" ItemBackground=";#7723AFFF"
+                           ItemImageMargin="5,5,0,0;5,1,0,4"  
+                           HorizontalContentAlignment="Left" VerticalContentAlignment="Center" ItemTextForeground="#222"
+                           ItemTextPadding="5" 
+                           ItemImageHeight="48" ItemImageWidth="48" ItemImageDock="Top" 
+                           ItemDescDock="Right" ItemDescPadding="5" >
             <ComboBoxItem Content="Hello123" HorizontalAlignment="Right"/>
             <ListBoxItem Content="C1"/>
             <ListBoxItem Content="C2"/>

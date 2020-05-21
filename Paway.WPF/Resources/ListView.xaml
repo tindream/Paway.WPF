@@ -18,9 +18,10 @@
             <Setter.Value>
                 <ControlTemplate >
                     <Border BorderThickness="{TemplateBinding BorderThickness}"
-                            BorderBrush="{TemplateBinding BorderBrush}">
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}">
                         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                            <WrapPanel  x:Name="WrapPanel" Orientation="Horizontal"  ScrollViewer.CanContentScroll="True" IsItemsHost="True" />
+                            <WrapPanel  x:Name="WrapPanel" Orientation="{Binding Orientation, RelativeSource={RelativeSource TemplatedParent}}"  ScrollViewer.CanContentScroll="True" IsItemsHost="True" />
                         </ScrollViewer>
                     </Border>
                 </ControlTemplate>
@@ -73,7 +74,8 @@
                                                Width="{Binding ItemImageWidth, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"  
                                                Height="{Binding ItemImageHeight, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
                                                DockPanel.Dock="{Binding ItemImageDock, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
-                                               Margin="{Binding ItemImageMargin, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
+                                               Margin="{Binding Path=ItemImageMargin.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
+                                               Stretch="Fill"/>
                                         <DockPanel>
                                             <TextBlock Name="desc" Text="{Binding Desc}"
                                                        TextTrimming="WordEllipsis" 
@@ -120,6 +122,8 @@
                                                 Value="{Binding Path=ItemDescBackground.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="desc" Property="FontSize"  
                                                 Value="{Binding Path=ItemDescFontSize.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
+                                        <Setter TargetName="image" Property="Margin"  
+                                                Value="{Binding Path=ItemImageMargin.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                     </Trigger>
                                     <Trigger Property="IsSelected" Value="true">
                                         <Setter TargetName="image" Property="Source" >
@@ -153,6 +157,8 @@
                                                 Value="{Binding Path=ItemDescBackground.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="desc" Property="FontSize"  
                                                 Value="{Binding Path=ItemDescFontSize.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
+                                        <Setter TargetName="image" Property="Margin"  
+                                                Value="{Binding Path=ItemImageMargin.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                     </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>

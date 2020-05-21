@@ -17,6 +17,10 @@ namespace Paway.WPF
         #region 依赖属性
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty OrientationProperty =
+            DependencyProperty.RegisterAttached(nameof(Orientation), typeof(Orientation), typeof(ListViewEXT), new PropertyMetadata(Orientation.Horizontal));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty ItemWidthProperty =
             DependencyProperty.RegisterAttached(nameof(ItemWidth), typeof(double), typeof(ListViewEXT), new PropertyMetadata(90d));
         /// <summary>
@@ -63,7 +67,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemImageMarginProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemImageMargin), typeof(Thickness), typeof(ListViewEXT), new PropertyMetadata(new Thickness(0)));
+            DependencyProperty.RegisterAttached(nameof(ItemImageMargin), typeof(ThicknessEXT), typeof(ListViewEXT), new PropertyMetadata(new ThicknessEXT(0)));
 
         /// <summary>
         /// </summary>
@@ -106,6 +110,16 @@ namespace Paway.WPF
         #endregion
 
         #region 扩展.项
+        /// <summary>
+        /// 项显示方向
+        /// </summary>
+        [Category("扩展.项")]
+        [Description("项显示方向")]
+        public Orientation Orientation
+        {
+            get { return (Orientation)GetValue(OrientationProperty); }
+            set { SetValue(OrientationProperty, value); }
+        }
         /// <summary>
         /// 自定义项宽度
         /// </summary>
@@ -224,9 +238,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展.项图片")]
         [Description("自定义项图片外边距")]
-        public Thickness ItemImageMargin
+        public ThicknessEXT ItemImageMargin
         {
-            get { return (Thickness)GetValue(ItemImageMarginProperty); }
+            get { return (ThicknessEXT)GetValue(ItemImageMarginProperty); }
             set { SetValue(ItemImageMarginProperty, value); }
         }
 
