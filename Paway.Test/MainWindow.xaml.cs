@@ -51,7 +51,7 @@ namespace Paway.Test
 
         private void ButtonEXT_Click(object sender, RoutedEventArgs e)
         {
-            var xml = Method.GetTemplateXaml(tb);
+            var xml = Method.GetTemplateXaml(datagrid1);
             Method.Toast(xml);
         }
     }

@@ -9,7 +9,7 @@
     <Style x:Key="WindowFunctionBarTitleBarButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource WindowTitleBarButtonStyle}">
         <Setter Property="MinWidth" Value="42" />
         <Setter Property="Width" Value="Auto" />
-        <Setter Property="Padding"  Value="6,0" />
+        <Setter Property="Padding"  Value="9,0" />
     </Style>
 
     <ControlTemplate x:Key="TopLevelItemTemplate" TargetType="{x:Type MenuItem}">
@@ -455,11 +455,11 @@
         <Style.Triggers>
             <Trigger Property="MenuItem.Role" Value="TopLevelHeader">
                 <Setter Property="Control.Template" Value="{StaticResource TopLevelHeaderTemplate}" />
-                <Setter Property="Control.Padding" Value="6,0" />
+                <Setter Property="Control.Padding" Value="9,0" />
             </Trigger>
             <Trigger Property="MenuItem.Role" Value="TopLevelItem">
                 <Setter Property="Control.Template" Value="{StaticResource TopLevelItemTemplate}" />
-                <Setter Property="Control.Padding" Value="6,0" />
+                <Setter Property="Control.Padding" Value="9,0" />
             </Trigger>
             <Trigger Property="MenuItem.Role" Value="SubmenuHeader">
                 <Setter Property="Control.Template" Value="{StaticResource SubmenuHeaderTemplate}" />

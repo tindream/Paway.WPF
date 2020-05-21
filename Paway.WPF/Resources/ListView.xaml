@@ -19,10 +19,11 @@
                 <ControlTemplate >
                     <Border BorderThickness="{TemplateBinding BorderThickness}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            Background="{TemplateBinding Background}">
-                        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                            Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}">
+                        <local:ScrollViewerEXT HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                             <WrapPanel  x:Name="WrapPanel" Orientation="{Binding Orientation, RelativeSource={RelativeSource TemplatedParent}}"  ScrollViewer.CanContentScroll="True" IsItemsHost="True" />
-                        </ScrollViewer>
+                        </local:ScrollViewerEXT>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

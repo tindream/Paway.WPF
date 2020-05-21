@@ -66,7 +66,7 @@
     </Style>
 
     <ControlTemplate x:Key="VerticalScrollBar" TargetType="{x:Type ScrollBar}">
-        <Grid >
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
@@ -133,7 +133,7 @@
     </Style>
     <Style TargetType="{x:Type local:ScrollViewerEXT}">
         <Setter Property="BorderBrush" Value="LightGray"/>
-        <Setter Property="PanningMode" Value="VerticalOnly"/>
+        <!--<Setter Property="PanningMode" Value="Both"/>-->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ScrollViewerEXT}">
@@ -163,8 +163,7 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <EventTrigger RoutedEvent="MouseEnter"
-                                      SourceName="PART_ScrollBar">
+                        <EventTrigger RoutedEvent="MouseEnter" SourceName="PART_ScrollBar">
                             <BeginStoryboard>
                                 <Storyboard>
                                     <DoubleAnimation
@@ -175,8 +174,7 @@
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseLeave"
-                                      SourceName="PART_ScrollBar">
+                        <EventTrigger RoutedEvent="MouseLeave" SourceName="PART_ScrollBar">
                             <BeginStoryboard>
                                 <Storyboard>
                                     <DoubleAnimation
@@ -187,34 +185,9 @@
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseEnter"
-                                      SourceName="PART_VerticalScrollBar">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation
-                                        Storyboard.TargetName="PART_VerticalScrollBar"
-                                        Storyboard.TargetProperty="Opacity"
-                                        To="0.8"
-                                        Duration="0:0:0"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseLeave"
-                                      SourceName="PART_VerticalScrollBar">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation
-                                        Storyboard.TargetName="PART_VerticalScrollBar"
-                                        Storyboard.TargetProperty="Opacity"
-                                        To="0.6"
-                                        Duration="0:0:0"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
 
 
-                        <EventTrigger RoutedEvent="MouseEnter"
-                                      SourceName="PART_ScrollBar">
+                        <EventTrigger RoutedEvent="MouseEnter" SourceName="PART_ScrollBar">
                             <BeginStoryboard>
                                 <Storyboard>
                                     <DoubleAnimation
@@ -225,8 +198,7 @@
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseLeave"
-                                      SourceName="PART_ScrollBar">
+                        <EventTrigger RoutedEvent="MouseLeave" SourceName="PART_ScrollBar">
                             <BeginStoryboard>
                                 <Storyboard>
                                     <DoubleAnimation
@@ -234,30 +206,6 @@
                                         Storyboard.TargetProperty="Opacity"
                                         To="0.0"
                                         Duration="0:0:0.3"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseEnter"
-                                      SourceName="PART_HorizontalScrollBar">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation
-                                        Storyboard.TargetName="PART_HorizontalScrollBar"
-                                        Storyboard.TargetProperty="Opacity"
-                                        To="0.8"
-                                        Duration="0:0:0"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseLeave"
-                                      SourceName="PART_HorizontalScrollBar">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation
-                                        Storyboard.TargetName="PART_HorizontalScrollBar"
-                                        Storyboard.TargetProperty="Opacity"
-                                        To="0.6"
-                                        Duration="0:0:0"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
