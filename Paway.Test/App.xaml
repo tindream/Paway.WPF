@@ -6,7 +6,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Paway.WPF;component\Themes\Generic.xaml" />
+                <ResourceDictionary Source="/Paway.WPF;component\Themes\Paway.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

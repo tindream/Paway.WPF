@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:Paway.WPF">
+                    xmlns:local="clr-namespace:Paway.WPF;assembly=Paway.WPF">
     <!-- ScrollViewer 滚动条 -->
     <Style x:Key="ScrollVerticalThumb" TargetType="{x:Type Thumb}">
         <Setter Property="local:ScrollViewerMonitor.IsMonitoring" Value="True"/>
