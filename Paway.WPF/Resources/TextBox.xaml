@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Paway.WPF;assembly=Paway.WPF">
 
-    <Style TargetType="{x:Type local:TextBoxRound}">
+    <Style TargetType="{x:Type local:TextBoxEXT}">
         <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <Setter Property="local:TextBoxMonitor.IsMonitoring" Value="True"/>
         <Setter Property="BorderBrush" Value="LightGray"/>
@@ -14,7 +14,7 @@
         <!--修改模板属性-->
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:TextBoxRound}">
+                <ControlTemplate TargetType="{x:Type local:TextBoxEXT}">
                     <Border Name="border" 
                             SnapsToDevicePixels="true"
                             Background="{TemplateBinding Background}"

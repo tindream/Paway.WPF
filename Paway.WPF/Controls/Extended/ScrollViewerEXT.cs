@@ -11,21 +11,21 @@ namespace Paway.WPF
     /// <summary>
     /// ScrollViewer扩展
     /// </summary>
-    public partial class ScrollViewerRound : ScrollViewer
+    public partial class ScrollViewerEXT : ScrollViewer
     {
         #region 依赖属性
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ScrollBarRadiusProperty =
-            DependencyProperty.RegisterAttached(nameof(ScrollBarRadius), typeof(CornerRadius), typeof(ScrollViewerRound), new PropertyMetadata(new CornerRadius(4)));
+            DependencyProperty.RegisterAttached(nameof(ScrollBarRadius), typeof(CornerRadius), typeof(ScrollViewerEXT), new PropertyMetadata(new CornerRadius(4)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ScrollBarColorProperty =
-            DependencyProperty.RegisterAttached(nameof(ScrollBarColor), typeof(Brush), typeof(ScrollViewerRound), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(200, 125, 125, 125))));
+            DependencyProperty.RegisterAttached(nameof(ScrollBarColor), typeof(Brush), typeof(ScrollViewerEXT), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(200, 125, 125, 125))));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ScrollBarWidthProperty =
-            DependencyProperty.RegisterAttached(nameof(ScrollBarWidth), typeof(double), typeof(ScrollViewerRound), new PropertyMetadata(8d));
+            DependencyProperty.RegisterAttached(nameof(ScrollBarWidth), typeof(double), typeof(ScrollViewerEXT), new PropertyMetadata(8d));
 
         #endregion
 
@@ -65,6 +65,6 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public ScrollViewerRound() { }
+        public ScrollViewerEXT() { }
     }
 }

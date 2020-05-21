@@ -20,7 +20,7 @@ namespace Paway.Test
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : ExtendedWindow
+    public partial class MainWindow : WindowEXT
     {
         public List<TestInfo> list;
         public MainWindow()
@@ -30,12 +30,12 @@ namespace Paway.Test
             list.Add(new TestInfo("Hello"));
             list.Add(new TestInfo("你好123", 70)
             {
-                Image = new ImageRound(null, @"pack://application:,,,/Paway.Test;component/Images/close_while.png")
+                Image = new ImageEXT(null, @"pack://application:,,,/Paway.Test;component/Images/close_while.png")
             });
             for (int i = 0; i < 20; i++) list.Add(new TestInfo("A" + i, i)
             {
                 Desc = "D" + i,
-                Image = new ImageRound(@"pack://application:,,,/Paway.Test;component/Images/close.png")
+                Image = new ImageEXT(@"pack://application:,,,/Paway.Test;component/Images/close.png")
             });
             datagrid1.ItemsSource = list;
             listView1.Items.Clear();
@@ -49,7 +49,7 @@ namespace Paway.Test
             listView1.SelectedIndex = -1;
         }
 
-        private void ButtonRound_Click(object sender, RoutedEventArgs e)
+        private void ButtonEXT_Click(object sender, RoutedEventArgs e)
         {
             var xml = Method.GetTemplateXaml(tb);
             Method.Toast(xml);
@@ -65,7 +65,7 @@ namespace Paway.Test
         [Text("进度")]
         public double Value { get; set; }
         public bool IsSelected { get; set; }
-        public ImageRound Image { get; set; }
+        public ImageEXT Image { get; set; }
         public string Desc { get; set; }
 
         public TestInfo(string name, double value = 0)

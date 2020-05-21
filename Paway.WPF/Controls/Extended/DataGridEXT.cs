@@ -17,20 +17,20 @@ namespace Paway.WPF
     /// <summary>
     /// DataGrid扩展
     /// </summary>
-    public partial class DataGridAuto : DataGrid
+    public partial class DataGridEXT : DataGrid
     {
         #region 基本样式
         /// <summary>
         /// 构造
         /// </summary>
-        public DataGridAuto()
+        public DataGridEXT()
         {
             //AutoGenerateColumns = true;
             //this.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
             this.ColumnHeaderHeight = 42;
-            this.Initialized += DataGridAuto_Initialized;
+            this.Initialized += DataGridEXT_Initialized;
         }
-        private void DataGridAuto_Initialized(object sender, EventArgs e)
+        private void DataGridEXT_Initialized(object sender, EventArgs e)
         {
             columnsReady.AddRange(this.Columns);
         }

@@ -11,28 +11,28 @@ namespace Paway.WPF
     /// <summary>
     /// ComboBox扩展
     /// </summary>
-    public partial class ComboBoxRound : ComboBox
+    public partial class ComboBoxEXT : ComboBox
     {
         #region 依赖属性
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty RadiusProperty =
-            DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(ComboBoxRound), new PropertyMetadata(new CornerRadius(3)));
+            DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(ComboBoxEXT), new PropertyMetadata(new CornerRadius(3)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ForegroundRoundProperty =
-            DependencyProperty.RegisterAttached(nameof(ForegroundRound), typeof(BrushRound), typeof(ComboBoxRound),
-            new PropertyMetadata(new BrushRound(Colors.Black, Colors.White)));
+            DependencyProperty.RegisterAttached(nameof(ForegroundRound), typeof(BrushEXT), typeof(ComboBoxEXT),
+            new PropertyMetadata(new BrushEXT(Colors.Black, Colors.White)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty BackgroundRoundProperty =
-            DependencyProperty.RegisterAttached(nameof(BackgroundRound), typeof(BrushRound), typeof(ComboBoxRound),
-            new PropertyMetadata(new BrushRound(Colors.LightGray, Color.FromArgb(149, 35, 175, 255))));
+            DependencyProperty.RegisterAttached(nameof(BackgroundRound), typeof(BrushEXT), typeof(ComboBoxEXT),
+            new PropertyMetadata(new BrushEXT(Colors.LightGray, Color.FromArgb(149, 35, 175, 255))));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty BorderFocusedBrushProperty =
-            DependencyProperty.RegisterAttached(nameof(BorderFocusedBrush), typeof(BrushRound), typeof(ComboBoxRound),
-                new PropertyMetadata(new BrushRound(null, Color.FromArgb(170, 35, 175, 255), null, 85)));
+            DependencyProperty.RegisterAttached(nameof(BorderFocusedBrush), typeof(BrushEXT), typeof(ComboBoxEXT),
+                new PropertyMetadata(new BrushEXT(null, Color.FromArgb(170, 35, 175, 255), null, 85)));
 
         #endregion
 
@@ -52,9 +52,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展")]
         [Description("项的字体颜色")]
-        public BrushRound ForegroundRound
+        public BrushEXT ForegroundRound
         {
-            get { return (BrushRound)GetValue(ForegroundRoundProperty); }
+            get { return (BrushEXT)GetValue(ForegroundRoundProperty); }
             set { SetValue(ForegroundRoundProperty, value); }
         }
         /// <summary>
@@ -62,9 +62,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展")]
         [Description("项的边框背景颜色")]
-        public BrushRound BackgroundRound
+        public BrushEXT BackgroundRound
         {
-            get { return (BrushRound)GetValue(BackgroundRoundProperty); }
+            get { return (BrushEXT)GetValue(BackgroundRoundProperty); }
             set { SetValue(BackgroundRoundProperty, value); }
         }
         /// <summary>
@@ -72,9 +72,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展")]
         [Description("外边框颜色")]
-        public BrushRound BorderFocusedBrush
+        public BrushEXT BorderFocusedBrush
         {
-            get { return (BrushRound)GetValue(BorderFocusedBrushProperty); }
+            get { return (BrushEXT)GetValue(BorderFocusedBrushProperty); }
             set { SetValue(BorderFocusedBrushProperty, value); }
         }
 
@@ -82,6 +82,6 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public ComboBoxRound() { }
+        public ComboBoxEXT() { }
     }
 }

@@ -27,22 +27,22 @@ namespace Paway.WPF
             {
                 if (thumb.TemplatedParent is ScrollBar scrollBar)
                 {
-                    if (scrollBar.TemplatedParent is ScrollViewerRound scrollViewerRound)
+                    if (scrollBar.TemplatedParent is ScrollViewerEXT ScrollViewerEXT)
                     {
-                        thumb.SetValue(ScrollBarRadiusProperty, scrollViewerRound.ScrollBarRadius);
-                        thumb.SetValue(ScrollBarColorProperty, scrollViewerRound.ScrollBarColor);
+                        thumb.SetValue(ScrollBarRadiusProperty, ScrollViewerEXT.ScrollBarRadius);
+                        thumb.SetValue(ScrollBarColorProperty, ScrollViewerEXT.ScrollBarColor);
                         return;
                     }
                     else if (scrollBar.TemplatedParent is ScrollViewer scrollViewer)
                     {
-                        if (scrollViewer.TemplatedParent is DataGridAuto dataGrid)
+                        if (scrollViewer.TemplatedParent is DataGridEXT dataGrid)
                         {
                             thumb.SetValue(VerticalScrollBarMarginProperty, new Thickness(0, -dataGrid.ColumnHeaderHeight, 0, 0));
                         }
                     }
                 }
-                thumb.SetValue(ScrollBarRadiusProperty, new ScrollViewerRound().ScrollBarRadius);
-                thumb.SetValue(ScrollBarColorProperty, new ScrollViewerRound().ScrollBarColor);
+                thumb.SetValue(ScrollBarRadiusProperty, new ScrollViewerEXT().ScrollBarRadius);
+                thumb.SetValue(ScrollBarColorProperty, new ScrollViewerEXT().ScrollBarColor);
             }
         }
         /// <summary>

@@ -15,8 +15,8 @@ namespace Paway.WPF
     /// <summary>
     /// 自定义默认、鼠标划过时、鼠标点击时的图片
     /// </summary>
-    [TypeConverter(typeof(ImageRoundConverter))]
-    public class ImageRound : IEquatable<ImageRound>
+    [TypeConverter(typeof(ImageEXTConverter))]
+    public class ImageEXT : IEquatable<ImageEXT>
     {
         /// <summary>
         /// 默认的图片
@@ -33,13 +33,13 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public ImageRound() { }
+        public ImageEXT() { }
         /// <summary>
         /// </summary>
-        public ImageRound(string uri) : this(uri, uri, uri) { }
+        public ImageEXT(string uri) : this(uri, uri, uri) { }
         /// <summary>
         /// </summary>
-        public ImageRound(string normal, string mouse = null, string pressed = null)
+        public ImageEXT(string normal, string mouse = null, string pressed = null)
         {
             if (normal != null) Normal = new BitmapImage(new Uri(normal));
             if (mouse != null) Mouse = new BitmapImage(new Uri(mouse));
@@ -49,7 +49,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// </summary>
-        public ImageRound(ImageSource normal, ImageSource mouse = null, ImageSource pressed = null)
+        public ImageEXT(ImageSource normal, ImageSource mouse = null, ImageSource pressed = null)
         {
             if (normal != null) Normal = normal;
             if (mouse != null) Mouse = mouse;
@@ -59,15 +59,15 @@ namespace Paway.WPF
         }
         /// <summary>
         /// </summary>
-        public bool Equals(ImageRound other)
+        public bool Equals(ImageEXT other)
         {
             return Normal.Equals(other.Normal) && Mouse.Equals(other.Mouse) && Pressed.Equals(other.Pressed);
         }
     }
     /// <summary>
-    /// 字符串转ImageRound
+    /// 字符串转ImageEXT
     /// </summary>
-    public class ImageRoundConverter : TypeConverter
+    public class ImageEXTConverter : TypeConverter
     {
         /// <summary>
         /// </summary>
@@ -95,7 +95,7 @@ namespace Paway.WPF
             if (value is string str)
             {
                 var strs = str.Split('|');
-                return new ImageRound(strs.Length > 0 ? strs[0] : null, strs.Length > 1 ? strs[1] : null, strs.Length > 2 ? strs[2] : null);
+                return new ImageEXT(strs.Length > 0 ? strs[0] : null, strs.Length > 1 ? strs[1] : null, strs.Length > 2 ? strs[2] : null);
             }
             return base.ConvertFrom(context, culture, value);
         }

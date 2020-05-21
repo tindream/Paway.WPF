@@ -9,50 +9,50 @@ using System.Windows.Media;
 namespace Paway.WPF
 {
     /// <summary>
-    /// ButtonRound扩展
+    /// ButtonEXT扩展
     /// </summary>
-    public partial class ButtonRound : Button
+    public partial class ButtonEXT : Button
     {
         #region 依赖属性
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty RadiusProperty =
-                DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(ButtonRound), new PropertyMetadata(new CornerRadius(7)));
+                DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(ButtonEXT), new PropertyMetadata(new CornerRadius(7)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty EffectRadiusProperty =
-            DependencyProperty.RegisterAttached(nameof(EffectRadius), typeof(double), typeof(ButtonRound), new PropertyMetadata(0d));
+            DependencyProperty.RegisterAttached(nameof(EffectRadius), typeof(double), typeof(ButtonEXT), new PropertyMetadata(0d));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ForegroundRoundProperty =
-            DependencyProperty.RegisterAttached(nameof(ForegroundRound), typeof(BrushRound), typeof(ButtonRound),
-            new PropertyMetadata(new BrushRound(Color.FromArgb(255, 33, 33, 33), Color.FromArgb(255, 33, 33, 33), Colors.White)));
+            DependencyProperty.RegisterAttached(nameof(ForegroundRound), typeof(BrushEXT), typeof(ButtonEXT),
+            new PropertyMetadata(new BrushEXT(Color.FromArgb(255, 33, 33, 33), Color.FromArgb(255, 33, 33, 33), Colors.White)));
 
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty BackgroundStartProperty =
-            DependencyProperty.RegisterAttached(nameof(BackgroundStart), typeof(ColorRound), typeof(ButtonRound),
-            new PropertyMetadata(new ColorRound(Color.FromArgb(254, 254, 254, 254), Color.FromArgb(16, 35, 175, 255))));
+            DependencyProperty.RegisterAttached(nameof(BackgroundStart), typeof(ColorEXT), typeof(ButtonEXT),
+            new PropertyMetadata(new ColorEXT(Color.FromArgb(254, 254, 254, 254), Color.FromArgb(16, 35, 175, 255))));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty BackgroundEndProperty =
-            DependencyProperty.RegisterAttached(nameof(BackgroundEnd), typeof(ColorRound), typeof(ButtonRound),
-            new PropertyMetadata(new ColorRound(Color.FromArgb(254, 220, 220, 220), Color.FromArgb(211, 35, 175, 255))));
+            DependencyProperty.RegisterAttached(nameof(BackgroundEnd), typeof(ColorEXT), typeof(ButtonEXT),
+            new PropertyMetadata(new ColorEXT(Color.FromArgb(254, 220, 220, 220), Color.FromArgb(211, 35, 175, 255))));
 
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ViewportProperty =
-            DependencyProperty.RegisterAttached(nameof(Viewport), typeof(Rect), typeof(ButtonRound),
+            DependencyProperty.RegisterAttached(nameof(Viewport), typeof(Rect), typeof(ButtonEXT),
             new PropertyMetadata(new Rect(0, 0, 1, 1)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty StretchProperty =
-            DependencyProperty.RegisterAttached(nameof(Stretch), typeof(Stretch), typeof(ButtonRound),
+            DependencyProperty.RegisterAttached(nameof(Stretch), typeof(Stretch), typeof(ButtonEXT),
             new PropertyMetadata(Stretch.Fill));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty BackgroundImageProperty =
-            DependencyProperty.RegisterAttached(nameof(BackgroundImage), typeof(ImageRound), typeof(ButtonRound));
+            DependencyProperty.RegisterAttached(nameof(BackgroundImage), typeof(ImageEXT), typeof(ButtonEXT));
 
         #endregion
 
@@ -82,9 +82,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展.前景")]
         [Description("自定义文本颜色")]
-        public BrushRound ForegroundRound
+        public BrushEXT ForegroundRound
         {
-            get { return (BrushRound)GetValue(ForegroundRoundProperty); }
+            get { return (BrushEXT)GetValue(ForegroundRoundProperty); }
             set { SetValue(ForegroundRoundProperty, value); }
         }
 
@@ -95,9 +95,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展.背景颜色")]
         [Description("自定义背景颜色(起始颜色)")]
-        public ColorRound BackgroundStart
+        public ColorEXT BackgroundStart
         {
-            get { return (ColorRound)GetValue(BackgroundStartProperty); }
+            get { return (ColorEXT)GetValue(BackgroundStartProperty); }
             set { SetValue(BackgroundStartProperty, value); }
         }
         /// <summary>
@@ -105,9 +105,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展.背景颜色")]
         [Description("自定义背景颜色(终点颜色)")]
-        public ColorRound BackgroundEnd
+        public ColorEXT BackgroundEnd
         {
-            get { return (ColorRound)GetValue(BackgroundEndProperty); }
+            get { return (ColorEXT)GetValue(BackgroundEndProperty); }
             set { SetValue(BackgroundEndProperty, value); }
         }
 
@@ -138,9 +138,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展.背景图片")]
         [Description("背景图片")]
-        public ImageRound BackgroundImage
+        public ImageEXT BackgroundImage
         {
-            get { return (ImageRound)GetValue(BackgroundImageProperty); }
+            get { return (ImageEXT)GetValue(BackgroundImageProperty); }
             set { SetValue(BackgroundImageProperty, value); }
         }
 
@@ -148,6 +148,6 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public ButtonRound() { }
+        public ButtonEXT() { }
     }
 }

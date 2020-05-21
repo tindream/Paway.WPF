@@ -11,26 +11,26 @@ namespace Paway.WPF
     /// <summary>
     /// TextBox扩展
     /// </summary>
-    public partial class TextBoxRound : TextBox
+    public partial class TextBoxEXT : TextBox
     {
         #region 依赖属性
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty WaterProperty =
-            DependencyProperty.RegisterAttached(nameof(Water), typeof(string), typeof(TextBoxRound), new PropertyMetadata("请输入.."));
+            DependencyProperty.RegisterAttached(nameof(Water), typeof(string), typeof(TextBoxEXT), new PropertyMetadata("请输入.."));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty WaterSizeProperty =
-            DependencyProperty.RegisterAttached(nameof(WaterSize), typeof(double), typeof(TextBoxRound), new PropertyMetadata());
+            DependencyProperty.RegisterAttached(nameof(WaterSize), typeof(double), typeof(TextBoxEXT), new PropertyMetadata());
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty RadiusProperty =
-            DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(TextBoxRound), new PropertyMetadata(new CornerRadius(3)));
+            DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(TextBoxEXT), new PropertyMetadata(new CornerRadius(3)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty BorderFocusedBrushProperty =
-            DependencyProperty.RegisterAttached(nameof(BorderFocusedBrush), typeof(BrushRound), typeof(TextBoxRound),
-                new PropertyMetadata(new BrushRound(null, Color.FromArgb(170, 35, 175, 255), null, 85)));
+            DependencyProperty.RegisterAttached(nameof(BorderFocusedBrush), typeof(BrushEXT), typeof(TextBoxEXT),
+                new PropertyMetadata(new BrushEXT(null, Color.FromArgb(170, 35, 175, 255), null, 85)));
 
         #endregion
 
@@ -70,9 +70,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展")]
         [Description("文本框的边框颜色")]
-        public BrushRound BorderFocusedBrush
+        public BrushEXT BorderFocusedBrush
         {
-            get { return (BrushRound)GetValue(BorderFocusedBrushProperty); }
+            get { return (BrushEXT)GetValue(BorderFocusedBrushProperty); }
             set { SetValue(BorderFocusedBrushProperty, value); }
         }
 
@@ -80,6 +80,6 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public TextBoxRound() { }
+        public TextBoxEXT() { }
     }
 }

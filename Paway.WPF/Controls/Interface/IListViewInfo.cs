@@ -25,7 +25,7 @@ namespace Paway.WPF
         /// <summary>
         /// 图片
         /// </summary>
-        ImageRound Image { get; set; }
+        ImageEXT Image { get; set; }
         /// <summary>
         /// 选择项
         /// </summary>

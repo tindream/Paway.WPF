@@ -131,12 +131,12 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style TargetType="{x:Type local:ScrollViewerRound}">
+    <Style TargetType="{x:Type local:ScrollViewerEXT}">
         <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="PanningMode" Value="VerticalOnly"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:ScrollViewerRound}">
+                <ControlTemplate TargetType="{x:Type local:ScrollViewerEXT}">
                     <Border BorderBrush="{TemplateBinding BorderBrush}" Name="PART_ScrollBar" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
                         <Grid Background="{TemplateBinding Background}">
                             <ScrollContentPresenter  Cursor="{TemplateBinding Cursor}" Margin="{TemplateBinding Padding}" ContentTemplate="{TemplateBinding ContentTemplate}"/>

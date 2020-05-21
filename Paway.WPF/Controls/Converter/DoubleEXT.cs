@@ -13,43 +13,38 @@ using System.Windows.Media;
 namespace Paway.WPF
 {
     /// <summary>
-    /// 自定义默认、鼠标划过时、鼠标点击时的Thickness宽度
+    /// 自定义默认、鼠标划过时、鼠标点击时的大小
     /// </summary>
-    [TypeConverter(typeof(ThicknessRoundConverter))]
-    public class ThicknessRound : IEquatable<ThicknessRound>
+    [TypeConverter(typeof(DoubleEXTConverter))]
+    public class DoubleEXT : IEquatable<DoubleEXT>
     {
         /// <summary>
-        /// 默认的宽度
+        /// 默认的大小
         /// </summary>
-        public Thickness Normal { get; set; } = new Thickness(1);
+        public double Normal { get; set; }
         /// <summary>
-        /// 鼠标划过时的宽度
+        /// 鼠标划过时的大小
         /// </summary>
-        public Thickness Mouse { get; set; } = new Thickness(1);
+        public double Mouse { get; set; }
         /// <summary>
-        /// 鼠标点击时的宽度
+        /// 鼠标点击时的大小
         /// </summary>
-        public Thickness Pressed { get; set; } = new Thickness(1);
+        public double Pressed { get; set; }
 
         /// <summary>
         /// </summary>
-        public ThicknessRound() { }
-        /// <summary>
-        /// </summary>
-        public ThicknessRound(double value) : this(value, value, value) { }
-        /// <summary>
-        /// </summary>
-        public ThicknessRound(double? normal, double? mouse, double? pressed = null)
+        public DoubleEXT()
         {
-            if (normal != null) Normal = new Thickness(normal.Value);
-            if (mouse != null) Mouse = new Thickness(mouse.Value);
-            else if (normal != null) Mouse = new Thickness(normal.Value);
-            if (pressed != null) Pressed = new Thickness(pressed.Value);
-            else if (mouse != null) Pressed = new Thickness(mouse.Value);
+            if (Normal == 0) Normal = new ThemeMonitor().FontSize;
+            if (Mouse == 0) Mouse = new ThemeMonitor().FontSize;
+            if (Pressed == 0) Pressed = new ThemeMonitor().FontSize;
         }
         /// <summary>
         /// </summary>
-        public ThicknessRound(Thickness? normal, Thickness? mouse = null, Thickness? pressed = null, ThicknessRound value = null)
+        public DoubleEXT(double value) : this(value, value, value) { }
+        /// <summary>
+        /// </summary>
+        public DoubleEXT(double? normal, double? mouse = null, double? pressed = null, DoubleEXT value = null)
         {
             if (normal != null) Normal = normal.Value;
             else if (value != null) Normal = value.Normal;
@@ -62,15 +57,15 @@ namespace Paway.WPF
         }
         /// <summary>
         /// </summary>
-        public bool Equals(ThicknessRound other)
+        public bool Equals(DoubleEXT other)
         {
             return Normal.Equals(other.Normal) && Mouse.Equals(other.Mouse) && Pressed.Equals(other.Pressed);
         }
     }
     /// <summary>
-    /// 字符串转ThicknessRound
+    /// 字符串转DoubleEXT
     /// </summary>
-    public class ThicknessRoundConverter : TypeConverter
+    public class DoubleEXTConverter : TypeConverter
     {
         /// <summary>
         /// </summary>
@@ -97,43 +92,36 @@ namespace Paway.WPF
             }
             if (value is double)
             {
-                return new ThicknessRound((double)value);
+                return new DoubleEXT((double)value);
             }
             if (value is string str)
             {
                 var strs = str.Split(';');
-                Thickness? normal = null;
-                Thickness? mouse = null;
-                Thickness? pressed = null;
+                double? normal = null;
+                double? mouse = null;
+                double? pressed = null;
                 if (strs.Length > 0) Parse(strs[0], out normal);
                 if (strs.Length > 1) Parse(strs[1], out mouse);
                 if (strs.Length > 2) Parse(strs[2], out pressed);
 
-                ThicknessRound old = null;
+                DoubleEXT old = null;
                 if (context != null)
                 {
                     var service = (IProvideValueTarget)context.GetService(typeof(IProvideValueTarget));
                     var objType = service.TargetObject.GetType();
                     var obj = (DependencyObject)Activator.CreateInstance(objType);
                     var property = (DependencyProperty)service.TargetProperty;
-                    old = (ThicknessRound)obj.GetValue(property);
+                    old = (DoubleEXT)obj.GetValue(property);
                 }
-                return new ThicknessRound(normal, mouse, pressed, old);
+                return new DoubleEXT(normal, mouse, pressed, old);
             }
             return base.ConvertFrom(context, culture, value);
         }
-        private void Parse(string str, out Thickness? value)
+        private void Parse(string str, out double? value)
         {
-            if (string.IsNullOrEmpty(str)) value = null;
-            if (str.Contains(","))
+            if (double.TryParse(str, out double result))
             {
-                var strs = str.Split(',');
-                if (strs.Length != 4) throw new WarningException("参数错误");
-                value = new Thickness(Convert.ToDouble(strs[0]), Convert.ToDouble(strs[1]), Convert.ToDouble(strs[2]), Convert.ToDouble(strs[3]));
-            }
-            else if (double.TryParse(str, out double result))
-            {
-                value = new Thickness(result);
+                value = result;
             }
             else value = null;
         }

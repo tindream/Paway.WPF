@@ -20,14 +20,14 @@ namespace Paway.WPF
     /// <summary>
     /// Window系统消息框-Toast显示
     /// </summary>
-    public partial class MessageToast : Window
+    public partial class WindowToast : Window
     {
         /// <summary>
         /// </summary>
-        public MessageToast()
+        public WindowToast()
         {
             InitializeComponent();
-            this.DataContext = new MessageToastModel();
+            this.DataContext = new WindowToastModel();
             this.MouseDoubleClick += MessageBoxExtend_MouseDoubleClick;
             this.ShowInTaskbar = false;
             this.Loaded += delegate
@@ -44,7 +44,7 @@ namespace Paway.WPF
             {
                 tb.Foreground = new SolidColorBrush(Color.FromArgb(255, 240, 0, 0));
             }
-            (this.DataContext as MessageToastModel).Message = msg;
+            (this.DataContext as WindowToastModel).Message = msg;
             this.Show();
         }
         /// <summary>
@@ -60,7 +60,7 @@ namespace Paway.WPF
         }
         private void MessageBoxExtend_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Clipboard.SetText((this.DataContext as MessageToastModel).Message);
+            Clipboard.SetText((this.DataContext as WindowToastModel).Message);
         }
         private void Storyboard_Completed(object sender, EventArgs e)
         {

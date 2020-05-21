@@ -15,8 +15,8 @@ namespace Paway.WPF
     /// <summary>
     /// 自定义默认、鼠标划过时、鼠标点击时的CornerRadius圆角
     /// </summary>
-    [TypeConverter(typeof(RadiusRoundConverter))]
-    public class RadiusRound : IEquatable<RadiusRound>
+    [TypeConverter(typeof(RadiusEXTConverter))]
+    public class RadiusEXT : IEquatable<RadiusEXT>
     {
         /// <summary>
         /// 默认的圆角
@@ -33,13 +33,13 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public RadiusRound() { }
+        public RadiusEXT() { }
         /// <summary>
         /// </summary>
-        public RadiusRound(double value) : this(value, value, value) { }
+        public RadiusEXT(double value) : this(value, value, value) { }
         /// <summary>
         /// </summary>
-        public RadiusRound(double? normal, double? mouse, double? pressed = null)
+        public RadiusEXT(double? normal, double? mouse, double? pressed = null)
         {
             if (normal != null) Normal = new CornerRadius(normal.Value);
             if (mouse != null) Mouse = new CornerRadius(mouse.Value);
@@ -49,7 +49,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// </summary>
-        public RadiusRound(CornerRadius? normal, CornerRadius? mouse = null, CornerRadius? pressed = null, RadiusRound value = null)
+        public RadiusEXT(CornerRadius? normal, CornerRadius? mouse = null, CornerRadius? pressed = null, RadiusEXT value = null)
         {
             if (normal != null) Normal = normal.Value;
             else if (value != null) Normal = value.Normal;
@@ -62,15 +62,15 @@ namespace Paway.WPF
         }
         /// <summary>
         /// </summary>
-        public bool Equals(RadiusRound other)
+        public bool Equals(RadiusEXT other)
         {
             return Normal.Equals(other.Normal) && Mouse.Equals(other.Mouse) && Pressed.Equals(other.Pressed);
         }
     }
     /// <summary>
-    /// 字符串转RadiusRound
+    /// 字符串转RadiusEXT
     /// </summary>
-    public class RadiusRoundConverter : TypeConverter
+    public class RadiusEXTConverter : TypeConverter
     {
         /// <summary>
         /// </summary>
@@ -97,7 +97,7 @@ namespace Paway.WPF
             }
             if (value is double)
             {
-                return new RadiusRound((double)value);
+                return new RadiusEXT((double)value);
             }
             if (value is string str)
             {
@@ -109,16 +109,16 @@ namespace Paway.WPF
                 if (strs.Length > 1) Parse(strs[1], out mouse);
                 if (strs.Length > 2) Parse(strs[2], out pressed);
 
-                RadiusRound old = null;
+                RadiusEXT old = null;
                 if (context != null)
                 {
                     var service = (IProvideValueTarget)context.GetService(typeof(IProvideValueTarget));
                     var objType = service.TargetObject.GetType();
                     var obj = (DependencyObject)Activator.CreateInstance(objType);
                     var property = (DependencyProperty)service.TargetProperty;
-                    old = (RadiusRound)obj.GetValue(property);
+                    old = (RadiusEXT)obj.GetValue(property);
                 }
-                return new RadiusRound(normal, mouse, pressed, old);
+                return new RadiusEXT(normal, mouse, pressed, old);
             }
             return base.ConvertFrom(context, culture, value);
         }

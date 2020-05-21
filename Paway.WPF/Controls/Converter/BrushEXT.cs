@@ -15,8 +15,8 @@ namespace Paway.WPF
     /// <summary>
     /// 自定义默认、鼠标划过时、鼠标点击时的Brush颜色
     /// </summary>
-    [TypeConverter(typeof(BrushRoundConverter))]
-    public class BrushRound : IEquatable<BrushRound>
+    [TypeConverter(typeof(BrushEXTConverter))]
+    public class BrushEXT : IEquatable<BrushEXT>
     {
         /// <summary>
         /// 默认的颜色
@@ -37,10 +37,10 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public BrushRound() { }
+        public BrushEXT() { }
         /// <summary>
         /// </summary>
-        public BrushRound(Color? normal, Color? mouse = null, Color? pressed = null, int? alpha = 50, BrushRound value = null)
+        public BrushEXT(Color? normal, Color? mouse = null, Color? pressed = null, int? alpha = 50, BrushEXT value = null)
         {
             if (alpha != null) Alpha = alpha.Value;
             else if (value != null) Alpha = value.Alpha;
@@ -56,7 +56,7 @@ namespace Paway.WPF
         /// <summary>
         /// 设置所有颜色，指定Alpha差异
         /// </summary>
-        public BrushRound Reset(Color color, int alpha = 50)
+        public BrushEXT Reset(Color color, int alpha = 50)
         {
             Normal = new SolidColorBrush(color);
             var a = color.A - alpha;
@@ -70,7 +70,7 @@ namespace Paway.WPF
         /// <summary>
         /// 设置鼠标划过、点击时的颜色
         /// </summary>
-        public BrushRound Focused(Color color, int alpha = 50)
+        public BrushEXT Focused(Color color, int alpha = 50)
         {
             Mouse = new SolidColorBrush(color);
             var a = color.A + alpha;
@@ -80,15 +80,15 @@ namespace Paway.WPF
         }
         /// <summary>
         /// </summary>
-        public bool Equals(BrushRound other)
+        public bool Equals(BrushEXT other)
         {
             return Normal.Equals(other.Normal) && Mouse.Equals(other.Mouse) && Pressed.Equals(other.Pressed);
         }
     }
     /// <summary>
-    /// 字符串转BrushRound
+    /// 字符串转BrushEXT
     /// </summary>
-    public class BrushRoundConverter : TypeConverter
+    public class BrushEXTConverter : TypeConverter
     {
         /// <summary>
         /// </summary>
@@ -125,16 +125,16 @@ namespace Paway.WPF
                 if (strs.Length > 2 && !string.IsNullOrEmpty(strs[2])) pressed = (Color)ColorConverter.ConvertFromString(strs[2]);
                 if (strs.Length > 3 && !string.IsNullOrEmpty(strs[3])) alpha = Convert.ToInt32(strs[3], culture);
 
-                BrushRound old = null;
+                BrushEXT old = null;
                 if (context != null)
                 {
                     var service = (IProvideValueTarget)context.GetService(typeof(IProvideValueTarget));
                     var objType = service.TargetObject.GetType();
                     var obj = (DependencyObject)Activator.CreateInstance(objType);
                     var property = (DependencyProperty)service.TargetProperty;
-                    old = (BrushRound)obj.GetValue(property);
+                    old = (BrushEXT)obj.GetValue(property);
                 }
-                return new BrushRound(normal, mouse, pressed, alpha, old);
+                return new BrushEXT(normal, mouse, pressed, alpha, old);
             }
             return base.ConvertFrom(context, culture, value);
         }

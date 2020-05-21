@@ -63,24 +63,26 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Extended\ToggleEXT.cs" />
+    <Compile Include="Controls\Extended\CheckBoxEXT.cs" />
     <Compile Include="Controls\Window\FunctionBar\FunctionBar.cs" />
     <Compile Include="Controls\Window\FunctionBar\WindowFunctionBar.cs" />
     <Compile Include="Controls\Window\FunctionBar\FunctionBarMonitor.cs" />
     <Compile Include="Method\DpiHelper.cs" />
     <Compile Include="Controls\Converter\EmptyObjectConverter.cs" />
     <Compile Include="Method\NativeMethods.cs" />
-    <Compile Include="Controls\Window\Window\ExtendedWindow.cs" />
-    <Compile Include="Controls\Window\Window\WindowParameters.cs" />
-    <Compile Include="Controls\Window\Window\WindowMonitor.cs" />
-    <Compile Include="Controls\Window\Window\WindowCommandHelper.cs" />
-    <Compile Include="Controls\Converter\ColorRound.cs" />
-    <Compile Include="Controls\Converter\ImageRound.cs" />
+    <Compile Include="Controls\Window\WindowEXT.cs" />
+    <Compile Include="Controls\Window\WindowParameters.cs" />
+    <Compile Include="Controls\Window\WindowMonitor.cs" />
+    <Compile Include="Controls\Window\WindowCommandHelper.cs" />
+    <Compile Include="Controls\Converter\ColorEXT.cs" />
+    <Compile Include="Controls\Converter\ImageEXT.cs" />
     <Compile Include="Controls\Converter\NullJudgeConverter.cs" />
-    <Compile Include="Controls\Converter\RadiusRound.cs" />
-    <Compile Include="Controls\Converter\DoubleRound.cs" />
-    <Compile Include="Controls\Converter\ThicknessRound.cs" />
-    <Compile Include="Controls\Converter\BrushRound.cs" />
-    <Compile Include="Controls\Extended\ListViewRound.cs" />
+    <Compile Include="Controls\Converter\RadiusEXT.cs" />
+    <Compile Include="Controls\Converter\DoubleEXT.cs" />
+    <Compile Include="Controls\Converter\ThicknessEXT.cs" />
+    <Compile Include="Controls\Converter\BrushEXT.cs" />
+    <Compile Include="Controls\Extended\ListViewEXT.cs" />
     <Compile Include="Controls\Theme\ThemeMonitor.cs" />
     <Compile Include="Method\Config.cs" />
     <Compile Include="Method\Method.cs" />
@@ -90,31 +92,28 @@
     <Compile Include="..\AssemblyVersion.cs">
       <Link>Properties\AssemblyVersion.cs</Link>
     </Compile>
-    <Compile Include="Controls\Custom\BorderControl.cs" />
     <Compile Include="Controls\Path\PathButton.xaml.cs">
       <DependentUpon>PathButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Custom\CheckBoxRound.xaml.cs">
-      <DependentUpon>CheckBoxRound.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Extended\ButtonRound.cs" />
-    <Compile Include="Controls\Extended\DataGridAuto.cs" />
-    <Compile Include="Controls\Extended\ProgressBarRound.cs" />
+    <Compile Include="Controls\Extended\ButtonEXT.cs" />
+    <Compile Include="Controls\Extended\DataGridEXT.cs" />
+    <Compile Include="Controls\Extended\ProgressBarEXT.cs" />
     <Compile Include="Controls\Extended\PasswordBoxMonitor.cs" />
     <Compile Include="Controls\Extended\ScrollViewerMonitor.cs" />
-    <Compile Include="Controls\Extended\ScrollViewerRound.cs" />
-    <Compile Include="Controls\Custom\SelectedBox.xaml.cs">
-      <DependentUpon>SelectedBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Extended\ComboBoxRound.cs" />
+    <Compile Include="Controls\Extended\ScrollViewerEXT.cs" />
+    <Compile Include="Controls\Extended\ComboBoxEXT.cs" />
     <Compile Include="Controls\Extended\TextBoxMonitor.cs" />
-    <Compile Include="Controls\Extended\TextBoxRound.cs" />
-    <Compile Include="Controls\Toast\MessageToastModel.cs" />
-    <Compile Include="Controls\Toast\MessageToast.xaml.cs">
-      <DependentUpon>MessageToast.xaml</DependentUpon>
+    <Compile Include="Controls\Extended\TextBoxEXT.cs" />
+    <Compile Include="Controls\Toast\WindowToastModel.cs" />
+    <Compile Include="Controls\Toast\WindowToast.xaml.cs">
+      <DependentUpon>WindowToast.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\CheckBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
     <Page Include="Resources\WindowFunctionBar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -123,7 +122,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Toast\MessageToast.xaml">
+    <Page Include="Controls\Toast\WindowToast.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -163,10 +162,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Custom\SelectedBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Resource Include="Resources\Button.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -179,10 +174,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Page Include="Controls\Custom\CheckBoxRound.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\selectedBox.png" />

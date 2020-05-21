@@ -11,5 +11,6 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ScrollBar.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\TextBox.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ListView.xaml" />
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\CheckBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

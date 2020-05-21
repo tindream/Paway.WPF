@@ -20,11 +20,11 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style TargetType="{x:Type local:ComboBoxRound}">
+    <Style TargetType="{x:Type local:ComboBoxEXT}">
         <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:ComboBoxRound}">
+                <ControlTemplate TargetType="{x:Type local:ComboBoxEXT}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.7*"/>
@@ -80,14 +80,22 @@
                             <Setter TargetName="border" Property="BorderBrush" 
                                     Value="{Binding Path=BorderFocusedBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}" />
                         </Trigger>
-                        <Trigger Property="IsKeyboardFocused" Value="True">
+                        <!--<Trigger Property="IsKeyboardFocused" Value="True">
                             <Setter TargetName="border" Property="BorderBrush" 
                                     Value="{Binding Path=BorderFocusedBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" />
-                        </Trigger>
+                        </Trigger>-->
                         <Trigger Property="IsDropDownOpen" Value="True">
                             <Setter TargetName="border" Property="BorderBrush" 
                                     Value="{Binding Path=BorderFocusedBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" />
                         </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsDropDownOpen" Value="False" />
+                                <Condition Property="IsMouseOver" Value="true" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="border" Property="BorderBrush" 
+                                    Value="{Binding Path=BorderFocusedBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -108,9 +116,9 @@
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsSelected" Value="true">
                                         <Setter TargetName="_borderbg" Property="Background" 
-                                                Value="{Binding Path=BackgroundRound.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxRound}}}" />
+                                                Value="{Binding Path=BackgroundRound.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}" />
                                         <Setter TargetName="_txt" Property="Foreground" 
-                                                Value="{Binding Path=ForegroundRound.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxRound}}}"/>
+                                                Value="{Binding Path=ForegroundRound.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}"/>
                                     </Trigger>
                                     <MultiTrigger>
                                         <MultiTrigger.Conditions>
@@ -118,9 +126,9 @@
                                             <Condition Property="IsMouseOver" Value="true"/>
                                         </MultiTrigger.Conditions>
                                         <Setter TargetName="_borderbg" Property="Background" 
-                                                Value="{Binding Path=BackgroundRound.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxRound}}}" />
+                                                Value="{Binding Path=BackgroundRound.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}" />
                                         <Setter TargetName="_txt" Property="Foreground" 
-                                                Value="{Binding Path=ForegroundRound.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxRound}}}"/>
+                                                Value="{Binding Path=ForegroundRound.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}"/>
                                     </MultiTrigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>

@@ -1,5 +1,4 @@
-﻿using Paway.Helper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -14,82 +13,64 @@ using System.Windows.Media;
 namespace Paway.WPF
 {
     /// <summary>
-    /// 自定义默认、鼠标划过时、鼠标点击时的Color颜色
+    /// 自定义默认、鼠标划过时、鼠标点击时的Thickness宽度
     /// </summary>
-    [TypeConverter(typeof(ColorRoundConverter))]
-    public class ColorRound : IEquatable<ColorRound>
+    [TypeConverter(typeof(ThicknessEXTConverter))]
+    public class ThicknessEXT : IEquatable<ThicknessEXT>
     {
         /// <summary>
-        /// 默认的颜色
+        /// 默认的宽度
         /// </summary>
-        public Color Normal { get; set; } = Colors.LightGray;
+        public Thickness Normal { get; set; } = new Thickness(1);
         /// <summary>
-        /// 鼠标划过时的颜色
+        /// 鼠标划过时的宽度
         /// </summary>
-        public Color Mouse { get; set; } = Color.FromArgb(210, 35, 175, 255);
+        public Thickness Mouse { get; set; } = new Thickness(1);
         /// <summary>
-        /// 鼠标点击时的颜色
+        /// 鼠标点击时的宽度
         /// </summary>
-        public Color Pressed { get; set; } = Color.FromArgb(250, 35, 175, 255);
-        /// <summary>
-        /// 颜色Alpha值变量
-        /// </summary>
-        public int Alpha { get; set; } = 50;
+        public Thickness Pressed { get; set; } = new Thickness(1);
 
         /// <summary>
         /// </summary>
-        public ColorRound() { }
+        public ThicknessEXT() { }
         /// <summary>
         /// </summary>
-        public ColorRound(Color? normal, Color? mouse = null, Color? pressed = null, int? alpha = 50, ColorRound value = null)
+        public ThicknessEXT(double value) : this(value, value, value) { }
+        /// <summary>
+        /// </summary>
+        public ThicknessEXT(double? normal, double? mouse, double? pressed = null)
         {
-            if (alpha != null) Alpha = alpha.Value;
-            else if (value != null) Alpha = value.Alpha;
+            if (normal != null) Normal = new Thickness(normal.Value);
+            if (mouse != null) Mouse = new Thickness(mouse.Value);
+            else if (normal != null) Mouse = new Thickness(normal.Value);
+            if (pressed != null) Pressed = new Thickness(pressed.Value);
+            else if (mouse != null) Pressed = new Thickness(mouse.Value);
+        }
+        /// <summary>
+        /// </summary>
+        public ThicknessEXT(Thickness? normal, Thickness? mouse = null, Thickness? pressed = null, ThicknessEXT value = null)
+        {
             if (normal != null) Normal = normal.Value;
             else if (value != null) Normal = value.Normal;
             if (mouse != null) Mouse = mouse.Value;
-            else if (normal != null) Reset(normal.Value, Alpha);
+            else if (normal != null) Mouse = normal.Value;
             else if (value != null) Mouse = value.Mouse;
             if (pressed != null) Pressed = pressed.Value;
-            else if (mouse != null) Focused(mouse.Value, Alpha);
+            else if (mouse != null) Pressed = mouse.Value;
             else if (value != null) Pressed = value.Pressed;
         }
         /// <summary>
-        /// 设置所有颜色，指定Alpha差异
         /// </summary>
-        public ColorRound Reset(Color color, int alpha = 50)
-        {
-            Normal = color;
-            var a = color.A - alpha;
-            if (a < 0) a = 0;
-            Mouse = Color.FromArgb((byte)a, color.R, color.G, color.B);
-            a = color.A + alpha;
-            if (a > 255) a = 255;
-            Pressed = Color.FromArgb((byte)a, color.R, color.G, color.B);
-            return this;
-        }
-        /// <summary>
-        /// 设置鼠标划过、点击时的颜色
-        /// </summary>
-        public ColorRound Focused(Color color, int alpha = 50)
-        {
-            Mouse = color;
-            var a = color.A + alpha;
-            if (a > 255) a = 255;
-            Pressed = Color.FromArgb((byte)a, color.R, color.G, color.B);
-            return this;
-        }
-        /// <summary>
-        /// </summary>
-        public bool Equals(ColorRound other)
+        public bool Equals(ThicknessEXT other)
         {
             return Normal.Equals(other.Normal) && Mouse.Equals(other.Mouse) && Pressed.Equals(other.Pressed);
         }
     }
     /// <summary>
-    /// 字符串转ColorRound
+    /// 字符串转ThicknessEXT
     /// </summary>
-    public class ColorRoundConverter : TypeConverter
+    public class ThicknessEXTConverter : TypeConverter
     {
         /// <summary>
         /// </summary>
@@ -114,30 +95,47 @@ namespace Paway.WPF
             {
                 throw base.GetConvertFromException(value);
             }
+            if (value is double)
+            {
+                return new ThicknessEXT((double)value);
+            }
             if (value is string str)
             {
                 var strs = str.Split(';');
-                Color? normal = null;
-                Color? mouse = null;
-                Color? pressed = null;
-                int? alpha = null;
-                if (strs.Length > 0 && !string.IsNullOrEmpty(strs[0])) normal = (Color)ColorConverter.ConvertFromString(strs[0]);
-                if (strs.Length > 1 && !string.IsNullOrEmpty(strs[1])) mouse = (Color)ColorConverter.ConvertFromString(strs[1]);
-                if (strs.Length > 2 && !string.IsNullOrEmpty(strs[2])) pressed = (Color)ColorConverter.ConvertFromString(strs[2]);
-                if (strs.Length > 3 && !string.IsNullOrEmpty(strs[3])) alpha = Convert.ToInt32(strs[3], culture);
+                Thickness? normal = null;
+                Thickness? mouse = null;
+                Thickness? pressed = null;
+                if (strs.Length > 0) Parse(strs[0], out normal);
+                if (strs.Length > 1) Parse(strs[1], out mouse);
+                if (strs.Length > 2) Parse(strs[2], out pressed);
 
-                ColorRound old = null;
+                ThicknessEXT old = null;
                 if (context != null)
                 {
                     var service = (IProvideValueTarget)context.GetService(typeof(IProvideValueTarget));
                     var objType = service.TargetObject.GetType();
                     var obj = (DependencyObject)Activator.CreateInstance(objType);
                     var property = (DependencyProperty)service.TargetProperty;
-                    old = (ColorRound)obj.GetValue(property);
+                    old = (ThicknessEXT)obj.GetValue(property);
                 }
-                return new ColorRound(normal, mouse, pressed, alpha, old);
+                return new ThicknessEXT(normal, mouse, pressed, old);
             }
             return base.ConvertFrom(context, culture, value);
+        }
+        private void Parse(string str, out Thickness? value)
+        {
+            if (string.IsNullOrEmpty(str)) value = null;
+            if (str.Contains(","))
+            {
+                var strs = str.Split(',');
+                if (strs.Length != 4) throw new WarningException("参数错误");
+                value = new Thickness(Convert.ToDouble(strs[0]), Convert.ToDouble(strs[1]), Convert.ToDouble(strs[2]), Convert.ToDouble(strs[3]));
+            }
+            else if (double.TryParse(str, out double result))
+            {
+                value = new Thickness(result);
+            }
+            else value = null;
         }
         /// <summary>
         /// </summary>

@@ -2,15 +2,15 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Paway.WPF;assembly=Paway.WPF">
 
-    <Style TargetType="{x:Type local:ProgressBarRound}">
+    <Style TargetType="{x:Type local:ProgressBarEXT}">
         <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
-        <Setter Property="local:ProgressBarRound.IsMonitoring" Value="True"/>
+        <Setter Property="local:ProgressBarEXT.IsMonitoring" Value="True"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Background" Value="White"/>
         <Setter Property="Template">
             <Setter.Value>
                 <!--控件模板-->
-                <ControlTemplate TargetType="{x:Type local:ProgressBarRound}" >
+                <ControlTemplate TargetType="{x:Type local:ProgressBarEXT}" >
                     <Grid>
                         <Border Name="PART_Track"
                                 BorderBrush="LightGray"

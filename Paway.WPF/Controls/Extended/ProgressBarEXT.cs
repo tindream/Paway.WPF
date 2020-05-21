@@ -11,27 +11,27 @@ namespace Paway.WPF
     /// <summary>
     /// ProgressBar扩展
     /// </summary>
-    public partial class ProgressBarRound : ProgressBar
+    public partial class ProgressBarEXT : ProgressBar
     {
         #region 依赖属性
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty RadiusProperty =
-            DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(ProgressBarRound), new PropertyMetadata(new CornerRadius(3)));
+            DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(ProgressBarEXT), new PropertyMetadata(new CornerRadius(3)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ForegroundStartColorProperty =
-            DependencyProperty.RegisterAttached(nameof(ForegroundStartColor), typeof(Color), typeof(ProgressBarRound),
+            DependencyProperty.RegisterAttached(nameof(ForegroundStartColor), typeof(Color), typeof(ProgressBarEXT),
             new PropertyMetadata(Color.FromArgb(85, 35, 175, 255)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ForegroundEndColorProperty =
-            DependencyProperty.RegisterAttached(nameof(ForegroundEndColor), typeof(Color), typeof(ProgressBarRound),
+            DependencyProperty.RegisterAttached(nameof(ForegroundEndColor), typeof(Color), typeof(ProgressBarEXT),
             new PropertyMetadata(Color.FromArgb(250, 35, 175, 255)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ProgressValueProperty =
-            DependencyProperty.RegisterAttached("ProgressValue", typeof(string), typeof(ProgressBarRound));
+            DependencyProperty.RegisterAttached("ProgressValue", typeof(string), typeof(ProgressBarEXT));
 
         #endregion
 
@@ -40,7 +40,7 @@ namespace Paway.WPF
         /// 启用监听，获取进度
         /// </summary>
         public static readonly DependencyProperty IsMonitoringProperty =
-            DependencyProperty.RegisterAttached(nameof(IsMonitoring), typeof(bool), typeof(ProgressBarRound), new UIPropertyMetadata(false, OnIsMonitoringChanged));
+            DependencyProperty.RegisterAttached(nameof(IsMonitoring), typeof(bool), typeof(ProgressBarEXT), new UIPropertyMetadata(false, OnIsMonitoringChanged));
         private static void OnIsMonitoringChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             if (obj is ProgressBar bar)
@@ -113,6 +113,6 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public ProgressBarRound() { }
+        public ProgressBarEXT() { }
     }
 }

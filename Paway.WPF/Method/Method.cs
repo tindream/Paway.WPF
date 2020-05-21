@@ -96,7 +96,7 @@ namespace Paway.WPF
         /// </summary>
         public static void Toast(string msg, bool iError = false)
         {
-            new MessageToast().Show(msg, iError);
+            new WindowToast().Show(msg, iError);
         }
 
         #endregion

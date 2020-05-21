@@ -1,0 +1,82 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Paway.WPF;assembly=Paway.WPF">
+
+    <Style TargetType="{x:Type local:CheckBoxEXT}">
+        <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:CheckBoxEXT">
+                    <Border x:Name="border"
+                            VerticalAlignment="Center"
+                            CornerRadius="{TemplateBinding Radius}"
+                            BorderThickness="1" 
+                            Padding="5">
+                        <DockPanel>
+                            <Image Name="image" Source="pack://application:,,,/Paway.WPF;component/Images/selectedBox.png" Width="24"/>
+                            <TextBlock Name="cbxTitle" Padding="5,0,0,0" Foreground="#333"
+                                       Text="{TemplateBinding Content}" 
+                                       FontFamily="Microsoft YaHei" 
+                                       LineStackingStrategy="BlockLineHeight" 
+                                       TextTrimming="WordEllipsis" VerticalAlignment="Center" />
+                        </DockPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" TargetName="border" 
+                                    Value="{Binding Path=BorderFocusedBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="BorderBrush" TargetName="border" 
+                                    Value="{Binding Path=BorderFocusedBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Source" TargetName="image" 
+                                    Value="pack://application:,,,/Paway.WPF;component/Images/selectedBox_checked.png"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type local:ToggleEXT}">
+        <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:ToggleEXT">
+                    <Border x:Name="border"
+                            VerticalAlignment="Center"
+                            CornerRadius="{TemplateBinding Radius}"
+                            BorderThickness="1" 
+                            Padding="5"
+                            Focusable="True">
+                        <DockPanel>
+                            <Image Name="image" Source="pack://application:,,,/Paway.WPF;component/Images/checkBox.png" Height="24" DockPanel.Dock="Right"/>
+                            <TextBlock Name="cbxTitle" Padding="0,0,5,0" Foreground="#333"
+                                       Text="{TemplateBinding Content}" 
+                                       FontFamily="Microsoft YaHei"
+                                       TextTrimming="WordEllipsis" VerticalAlignment="Center" />
+                        </DockPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" TargetName="border" 
+                                    Value="{Binding Path=BorderFocusedBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="BorderBrush" TargetName="border" 
+                                    Value="{Binding Path=BorderFocusedBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Source" TargetName="image" 
+                                    Value="pack://application:,,,/Paway.WPF;component/Images/checkBox_checked.png"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

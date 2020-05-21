@@ -12,21 +12,21 @@ namespace Paway.WPF
     /// <summary>
     /// Window扩展
     /// </summary>
-    public class ExtendedWindow : Window
+    public class WindowEXT : Window
     {
         #region 依赖属性
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty FunctionBarProperty =
-            DependencyProperty.Register(nameof(FunctionBar), typeof(WindowFunctionBar), typeof(ExtendedWindow), new PropertyMetadata(default(WindowFunctionBar), OnFunctionBarChanged));
+            DependencyProperty.Register(nameof(FunctionBar), typeof(WindowFunctionBar), typeof(WindowEXT), new PropertyMetadata(default(WindowFunctionBar), OnFunctionBarChanged));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty FunctionBarRightProperty =
-            DependencyProperty.Register(nameof(FunctionBarRight), typeof(WindowFunctionBar), typeof(ExtendedWindow), new PropertyMetadata(default(WindowFunctionBar), OnFunctionBarChanged));
+            DependencyProperty.Register(nameof(FunctionBarRight), typeof(WindowFunctionBar), typeof(WindowEXT), new PropertyMetadata(default(WindowFunctionBar), OnFunctionBarChanged));
         /// <summary>
         /// </summary>
         private static readonly DependencyProperty IsNonClientActiveProperty =
-            DependencyProperty.Register(nameof(IsNonClientActive), typeof(bool), typeof(ExtendedWindow), new FrameworkPropertyMetadata(false));
+            DependencyProperty.Register(nameof(IsNonClientActive), typeof(bool), typeof(WindowEXT), new FrameworkPropertyMetadata(false));
 
         #endregion
 
@@ -60,9 +60,9 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public ExtendedWindow()
+        public WindowEXT()
         {
-            DefaultStyleKey = typeof(ExtendedWindow);
+            DefaultStyleKey = typeof(WindowEXT);
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace Paway.WPF
                 return;
             }
 
-            var target = obj as ExtendedWindow;
+            var target = obj as WindowEXT;
             target?.OnFunctionBarChanged(oldValue, newValue);
         }
         /// <summary>

@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Paway.WPF;assembly=Paway.WPF">
 
-    <Style TargetType="{x:Type local:ButtonRound}">
+    <Style TargetType="{x:Type local:ButtonEXT}">
         <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FontFamily" Value="Microsoft YaHei"/>
@@ -17,7 +17,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <!--控件模板-->
-                <ControlTemplate TargetType="{x:Type local:ButtonRound}" >
+                <ControlTemplate TargetType="{x:Type local:ButtonEXT}" >
                     <Grid>
                         <Border x:Name="border1"
                                 BorderBrush="{TemplateBinding BorderBrush}"

@@ -75,7 +75,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="{x:Type local:DataGridAuto}">
+    <Style TargetType="{x:Type local:DataGridEXT}">
         <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <!--其它-->
         <Setter Property="IsReadOnly" Value="True"/>

@@ -12,96 +12,96 @@ namespace Paway.WPF
     /// <summary>
     /// ListView扩展
     /// </summary>
-    public partial class ListViewRound : ListView
+    public partial class ListViewEXT : ListView
     {
         #region 依赖属性
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemWidthProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemWidth), typeof(double), typeof(ListViewRound), new PropertyMetadata(90d));
+            DependencyProperty.RegisterAttached(nameof(ItemWidth), typeof(double), typeof(ListViewEXT), new PropertyMetadata(90d));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemHeightProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemHeight), typeof(double), typeof(ListViewRound), new PropertyMetadata(42d));
+            DependencyProperty.RegisterAttached(nameof(ItemHeight), typeof(double), typeof(ListViewEXT), new PropertyMetadata(42d));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemRadiusProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemRadius), typeof(RadiusRound), typeof(ListViewRound), new PropertyMetadata(new RadiusRound(5)));
+            DependencyProperty.RegisterAttached(nameof(ItemRadius), typeof(RadiusEXT), typeof(ListViewEXT), new PropertyMetadata(new RadiusEXT(5)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemMarginProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemMargin), typeof(Thickness), typeof(ListViewRound), new PropertyMetadata(new Thickness(1)));
+            DependencyProperty.RegisterAttached(nameof(ItemMargin), typeof(Thickness), typeof(ListViewEXT), new PropertyMetadata(new Thickness(1)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemPaddingProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemPadding), typeof(ThicknessRound), typeof(ListViewRound), new PropertyMetadata(new ThicknessRound(0)));
+            DependencyProperty.RegisterAttached(nameof(ItemPadding), typeof(ThicknessEXT), typeof(ListViewEXT), new PropertyMetadata(new ThicknessEXT(0)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBorderProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBorder), typeof(ThicknessRound), typeof(ListViewRound), new PropertyMetadata(new ThicknessRound(1)));
+            DependencyProperty.RegisterAttached(nameof(ItemBorder), typeof(ThicknessEXT), typeof(ListViewEXT), new PropertyMetadata(new ThicknessEXT(1)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBorderBrushProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBorderBrush), typeof(BrushRound), typeof(ListViewRound), new PropertyMetadata(new BrushRound().Focused(Color.FromArgb(170, 35, 175, 255))));
+            DependencyProperty.RegisterAttached(nameof(ItemBorderBrush), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT().Focused(Color.FromArgb(170, 35, 175, 255))));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBackgroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushRound), typeof(ListViewRound), new PropertyMetadata(new BrushRound(Color.FromArgb(255, 243, 243, 243), Color.FromArgb(120, 35, 175, 255))));
+            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(Color.FromArgb(255, 243, 243, 243), Color.FromArgb(120, 35, 175, 255))));
 
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemImageWidthProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemImageWidth), typeof(double), typeof(ListViewRound), new PropertyMetadata(24d));
+            DependencyProperty.RegisterAttached(nameof(ItemImageWidth), typeof(double), typeof(ListViewEXT), new PropertyMetadata(24d));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemImageHeightProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemImageHeight), typeof(double), typeof(ListViewRound), new PropertyMetadata(24d));
+            DependencyProperty.RegisterAttached(nameof(ItemImageHeight), typeof(double), typeof(ListViewEXT), new PropertyMetadata(24d));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemImageDockProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemImageDock), typeof(Dock), typeof(ListViewRound), new PropertyMetadata(Dock.Left));
+            DependencyProperty.RegisterAttached(nameof(ItemImageDock), typeof(Dock), typeof(ListViewEXT), new PropertyMetadata(Dock.Left));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemImageMarginProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemImageMargin), typeof(Thickness), typeof(ListViewRound), new PropertyMetadata(new Thickness(0)));
+            DependencyProperty.RegisterAttached(nameof(ItemImageMargin), typeof(Thickness), typeof(ListViewEXT), new PropertyMetadata(new Thickness(0)));
 
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemTextPaddingProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemTextPadding), typeof(Thickness), typeof(ListViewRound), new PropertyMetadata(new Thickness(0)));
+            DependencyProperty.RegisterAttached(nameof(ItemTextPadding), typeof(Thickness), typeof(ListViewEXT), new PropertyMetadata(new Thickness(0)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemTextForegroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemTextForeground), typeof(BrushRound), typeof(ListViewRound), new PropertyMetadata(new BrushRound(Colors.Black, Colors.White)));
+            DependencyProperty.RegisterAttached(nameof(ItemTextForeground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(Colors.Black, Colors.White)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemTextBackgroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemTextBackground), typeof(BrushRound), typeof(ListViewRound), new PropertyMetadata(new BrushRound(Colors.Transparent, null, null, 0)));
+            DependencyProperty.RegisterAttached(nameof(ItemTextBackground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(Colors.Transparent, null, null, 0)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemTextFontSizeProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemTextFontSize), typeof(DoubleRound), typeof(ListViewRound), new PropertyMetadata(new DoubleRound()));
+            DependencyProperty.RegisterAttached(nameof(ItemTextFontSize), typeof(DoubleEXT), typeof(ListViewEXT), new PropertyMetadata(new DoubleEXT()));
 
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemDescDockProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemDescDock), typeof(Dock), typeof(ListViewRound), new PropertyMetadata(Dock.Right));
+            DependencyProperty.RegisterAttached(nameof(ItemDescDock), typeof(Dock), typeof(ListViewEXT), new PropertyMetadata(Dock.Right));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemDescPaddingProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemDescPadding), typeof(Thickness), typeof(ListViewRound), new PropertyMetadata(new Thickness(0)));
+            DependencyProperty.RegisterAttached(nameof(ItemDescPadding), typeof(Thickness), typeof(ListViewEXT), new PropertyMetadata(new Thickness(0)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemDescForegroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemDescForeground), typeof(BrushRound), typeof(ListViewRound), new PropertyMetadata(new BrushRound(Colors.Black, Colors.White)));
+            DependencyProperty.RegisterAttached(nameof(ItemDescForeground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(Colors.Black, Colors.White)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemDescBackgroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemDescBackground), typeof(BrushRound), typeof(ListViewRound), new PropertyMetadata(new BrushRound(Colors.Transparent, null, null, 0)));
+            DependencyProperty.RegisterAttached(nameof(ItemDescBackground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(Colors.Transparent, null, null, 0)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemDescFontSizeProperty =
-        DependencyProperty.RegisterAttached(nameof(ItemDescFontSize), typeof(DoubleRound), typeof(ListViewRound), new PropertyMetadata(new DoubleRound(13)));
+        DependencyProperty.RegisterAttached(nameof(ItemDescFontSize), typeof(DoubleEXT), typeof(ListViewEXT), new PropertyMetadata(new DoubleEXT(13)));
 
         #endregion
 
@@ -131,9 +131,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展.项")]
         [Description("自定义项圆角")]
-        public RadiusRound ItemRadius
+        public RadiusEXT ItemRadius
         {
-            get { return (RadiusRound)GetValue(ItemRadiusProperty); }
+            get { return (RadiusEXT)GetValue(ItemRadiusProperty); }
             set { SetValue(ItemRadiusProperty, value); }
         }
         /// <summary>
@@ -151,9 +151,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展.项")]
         [Description("自定义项内边距")]
-        public ThicknessRound ItemPadding
+        public ThicknessEXT ItemPadding
         {
-            get { return (ThicknessRound)GetValue(ItemPaddingProperty); }
+            get { return (ThicknessEXT)GetValue(ItemPaddingProperty); }
             set { SetValue(ItemPaddingProperty, value); }
         }
         /// <summary>
@@ -161,9 +161,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展.项")]
         [Description("自定义项外边框")]
-        public ThicknessRound ItemBorder
+        public ThicknessEXT ItemBorder
         {
-            get { return (ThicknessRound)GetValue(ItemBorderProperty); }
+            get { return (ThicknessEXT)GetValue(ItemBorderProperty); }
             set { SetValue(ItemBorderProperty, value); }
         }
         /// <summary>
@@ -171,9 +171,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展.项")]
         [Description("自定义项外边框颜色")]
-        public BrushRound ItemBorderBrush
+        public BrushEXT ItemBorderBrush
         {
-            get { return (BrushRound)GetValue(ItemBorderBrushProperty); }
+            get { return (BrushEXT)GetValue(ItemBorderBrushProperty); }
             set { SetValue(ItemBorderBrushProperty, value); }
         }
         /// <summary>
@@ -181,9 +181,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展.项")]
         [Description("自定义项背景颜色")]
-        public BrushRound ItemBackground
+        public BrushEXT ItemBackground
         {
-            get { return (BrushRound)GetValue(ItemBackgroundProperty); }
+            get { return (BrushEXT)GetValue(ItemBackgroundProperty); }
             set { SetValue(ItemBackgroundProperty, value); }
         }
 
@@ -247,9 +247,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展.项文本")]
         [Description("自定义项文本字体颜色")]
-        public BrushRound ItemTextForeground
+        public BrushEXT ItemTextForeground
         {
-            get { return (BrushRound)GetValue(ItemTextForegroundProperty); }
+            get { return (BrushEXT)GetValue(ItemTextForegroundProperty); }
             set { SetValue(ItemTextForegroundProperty, value); }
         }
         /// <summary>
@@ -257,9 +257,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展.项文本")]
         [Description("自定义项文本背景颜色")]
-        public BrushRound ItemTextBackground
+        public BrushEXT ItemTextBackground
         {
-            get { return (BrushRound)GetValue(ItemTextBackgroundProperty); }
+            get { return (BrushEXT)GetValue(ItemTextBackgroundProperty); }
             set { SetValue(ItemTextBackgroundProperty, value); }
         }
         /// <summary>
@@ -267,9 +267,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展.项文本")]
         [Description("自定义项文本字体大小")]
-        public DoubleRound ItemTextFontSize
+        public DoubleEXT ItemTextFontSize
         {
-            get { return (DoubleRound)GetValue(ItemTextFontSizeProperty); }
+            get { return (DoubleEXT)GetValue(ItemTextFontSizeProperty); }
             set { SetValue(ItemTextFontSizeProperty, value); }
         }
 
@@ -300,9 +300,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展.项描述")]
         [Description("自定义项描述字体颜色")]
-        public BrushRound ItemDescForeground
+        public BrushEXT ItemDescForeground
         {
-            get { return (BrushRound)GetValue(ItemDescForegroundProperty); }
+            get { return (BrushEXT)GetValue(ItemDescForegroundProperty); }
             set { SetValue(ItemDescForegroundProperty, value); }
         }
         /// <summary>
@@ -310,9 +310,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展.项描述")]
         [Description("自定义项描述字体颜色")]
-        public BrushRound ItemDescBackground
+        public BrushEXT ItemDescBackground
         {
-            get { return (BrushRound)GetValue(ItemDescBackgroundProperty); }
+            get { return (BrushEXT)GetValue(ItemDescBackgroundProperty); }
             set { SetValue(ItemDescBackgroundProperty, value); }
         }
         /// <summary>
@@ -320,9 +320,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展.项描述")]
         [Description("自定义项描述字体大小")]
-        public DoubleRound ItemDescFontSize
+        public DoubleEXT ItemDescFontSize
         {
-            get { return (DoubleRound)GetValue(ItemDescFontSizeProperty); }
+            get { return (DoubleEXT)GetValue(ItemDescFontSizeProperty); }
             set { SetValue(ItemDescFontSizeProperty, value); }
         }
 
@@ -330,6 +330,6 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public ListViewRound() { }
+        public ListViewEXT() { }
     }
 }

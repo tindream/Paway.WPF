@@ -21,11 +21,11 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(IsMonitoring), typeof(bool), typeof(TextBoxMonitor), new UIPropertyMetadata(false, OnIsMonitoringChanged));
         private static void OnIsMonitoringChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            if (obj is TextBoxRound txt)
+            if (obj is TextBoxEXT txt)
             {
                 txt.Loaded += delegate
                 {
-                    if (txt.WaterSize == 0) txt.SetValue(TextBoxRound.WaterSizeProperty, txt.FontSize * 0.85);
+                    if (txt.WaterSize == 0) txt.SetValue(TextBoxEXT.WaterSizeProperty, txt.FontSize * 0.85);
                 };
             }
         }
