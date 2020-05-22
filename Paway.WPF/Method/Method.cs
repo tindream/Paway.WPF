@@ -90,6 +90,47 @@ namespace Paway.WPF
 
         #endregion
 
+        #region Window弹出
+        /// <summary>
+        /// 显示子窗体
+        /// </summary>
+        public static bool? Show(DependencyObject parent, Window window)
+        {
+            Parent(parent, out Window owner);
+            window.ShowInTaskbar = false;
+            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            window.Closed += delegate
+            {
+                //容器Grid
+                Grid grid = owner.Content as Grid;
+                //父级窗体原来的内容
+                var originalOld = VisualTreeHelper.GetChild(grid, 0) as UIElement;
+                //将父级窗体原来的内容在容器Grid中移除
+                grid.Children.Remove(originalOld);
+                //赋给父级窗体
+                owner.Content = originalOld;
+            };
+            //父级窗体原来的内容
+            var original = owner.Content as UIElement;
+            //将父级窗体原来的内容在容器Grid中移除
+            owner.Content = null;
+            //容器Grid
+            var container = new Grid();
+            //放入原来的内容
+            container.Children.Add(original);
+            //蒙板
+            var layer = new Grid() { Background = new SolidColorBrush(Color.FromArgb(128, 0, 0, 0)) };
+            //在上面放一层蒙板
+            container.Children.Add(layer);
+            //将装有原来内容和蒙板的容器赋给父级窗体
+            owner.Content = container;
+            //弹出消息框 
+            window.Owner = owner;
+            return window.ShowDialog();
+        }
+
+        #endregion
+
         #region Window系统消息框-Toast显示
         /// <summary>
         /// Window系统消息框-Toast显示
@@ -134,19 +175,22 @@ namespace Paway.WPF
         {
             if (Parent(parent, out Window window))
             {
-                switch (level)
+                window.Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    case LeveType.Debug:
-                    default:
-                        MessageBox.Show(window, msg, window.Title, MessageBoxButton.OK, MessageBoxImage.Information);
-                        break;
-                    case LeveType.Warn:
-                        MessageBox.Show(window, msg, window.Title, MessageBoxButton.OK, MessageBoxImage.Warning);
-                        break;
-                    case LeveType.Error:
-                        MessageBox.Show(window, msg, window.Title, MessageBoxButton.OK, MessageBoxImage.Error);
-                        break;
-                }
+                    switch (level)
+                    {
+                        case LeveType.Debug:
+                        default:
+                            MessageBox.Show(window, msg, window.Title, MessageBoxButton.OK, MessageBoxImage.Information);
+                            break;
+                        case LeveType.Warn:
+                            MessageBox.Show(window, msg, window.Title, MessageBoxButton.OK, MessageBoxImage.Warning);
+                            break;
+                        case LeveType.Error:
+                            MessageBox.Show(window, msg, window.Title, MessageBoxButton.OK, MessageBoxImage.Error);
+                            break;
+                    }
+                }));
             }
         }
         /// <summary>

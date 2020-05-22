@@ -11,7 +11,7 @@ namespace Paway.WPF
     /// <summary>
     /// PasswordBox扩展监听
     /// </summary>
-    public class PasswordBoxMonitor : DependencyObject
+    internal class PasswordBoxMonitor : DependencyObject
     {
         #region 启用监听，设置水印大小，获取密码长度
         /// <summary>

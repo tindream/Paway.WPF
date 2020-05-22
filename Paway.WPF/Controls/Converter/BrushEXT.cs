@@ -91,7 +91,7 @@ namespace Paway.WPF
     /// <summary>
     /// 字符串转BrushEXT
     /// </summary>
-    public class BrushEXTConverter : TypeConverter
+    internal class BrushEXTConverter : TypeConverter
     {
         /// <summary>
         /// </summary>

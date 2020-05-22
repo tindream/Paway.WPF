@@ -68,7 +68,7 @@ namespace Paway.WPF
     /// <summary>
     /// 字符串转DoubleEXT
     /// </summary>
-    public class DoubleEXTConverter : TypeConverter
+    internal class DoubleEXTConverter : TypeConverter
     {
         /// <summary>
         /// </summary>

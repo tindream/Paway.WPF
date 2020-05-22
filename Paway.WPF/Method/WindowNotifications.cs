@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace Paway.WPF
 {
-    /// <summary>
-    /// Window Notifications
-    /// </summary>
-    public class WindowNotifications
+    internal class WindowNotifications
     {
         /// <summary>
         /// Sent to a window when its nonclient area needs to be changed to indicate an active or inactive state.

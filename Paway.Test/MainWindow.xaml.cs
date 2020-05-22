@@ -38,14 +38,14 @@ namespace Paway.Test
                 Image = new ImageEXT(@"pack://application:,,,/Paway.Test;component/Images/close.png")
             });
             datagrid1.ItemsSource = list;
-            listView1.Items.Clear();
-            listView1.ItemsSource = list;
+            //listView1.Items.Clear();
+            //listView1.ItemsSource = list;
             listView1.SelectionChanged += ListView1_SelectionChanged;
         }
 
         private void ListView1_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if (e.AddedItems.Count > 0) Method.Show(this, (e.AddedItems[0] as TestInfo).Content);
+            if (e.AddedItems.Count > 0 && e.AddedItems[0] is IListViewInfo info) Method.Show(this, info.Content);
             listView1.SelectedIndex = -1;
         }
 

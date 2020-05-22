@@ -11,7 +11,7 @@ namespace Paway.WPF
     /// <summary>
     /// TextBox扩展监听
     /// </summary>
-    public class TextBoxMonitor : DependencyObject
+    internal class TextBoxMonitor : DependencyObject
     {
         #region 启用监听，设置水印大小
         /// <summary>

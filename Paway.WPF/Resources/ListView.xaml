@@ -3,7 +3,7 @@
                     xmlns:local="clr-namespace:Paway.WPF;assembly=Paway.WPF">
 
     <local:NullJudgeConverter x:Key="NullJudgeConverter" />
-    
+
     <Style TargetType="{x:Type local:ListViewEXT}">
         <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <Setter Property="Cursor" Value="Hand"/>

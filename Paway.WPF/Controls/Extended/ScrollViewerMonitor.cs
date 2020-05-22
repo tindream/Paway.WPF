@@ -13,7 +13,7 @@ namespace Paway.WPF
     /// <summary>
     /// ScrollViewer扩展监听
     /// </summary>
-    public class ScrollViewerMonitor : DependencyObject
+    internal class ScrollViewerMonitor : DependencyObject
     {
         #region 启用监听，获取ScrollViewer属性并设置到Thumb
         /// <summary>

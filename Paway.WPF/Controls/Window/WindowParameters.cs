@@ -11,7 +11,7 @@ namespace Paway.WPF
 {
     /// <summary>
     /// </summary>
-    public static class WindowParameters
+    internal static class WindowParameters
     {
         private static Thickness? _paddedBorderThickness;
         /// <summary>

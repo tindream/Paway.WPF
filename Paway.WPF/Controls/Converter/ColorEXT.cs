@@ -92,7 +92,7 @@ namespace Paway.WPF
     /// <summary>
     /// 字符串转ColorEXT
     /// </summary>
-    public class ColorEXTConverter : TypeConverter
+    internal class ColorEXTConverter : TypeConverter
     {
         /// <summary>
         /// </summary>

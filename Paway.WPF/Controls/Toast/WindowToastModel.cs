@@ -10,7 +10,7 @@ namespace Paway.WPF
     /// <summary>
     /// Window系统消息框-Toast显示-Model
     /// </summary>
-    public class WindowToastModel : INotifyPropertyChanged
+    internal class WindowToastModel : INotifyPropertyChanged
     {
         /// <summary>
         /// </summary>

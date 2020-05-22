@@ -76,7 +76,7 @@ namespace Paway.WPF
     /// <summary>
     /// 字符串转ThicknessEXT
     /// </summary>
-    public class ThicknessEXTConverter : TypeConverter
+    internal class ThicknessEXTConverter : TypeConverter
     {
         /// <summary>
         /// </summary>

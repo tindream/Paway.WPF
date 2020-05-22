@@ -9,9 +9,9 @@ using System.Windows.Controls;
 namespace Paway.WPF
 {
     /// <summary>
-    /// TextBox扩展监听
+    /// FunctionBar扩展监听
     /// </summary>
-    public class FunctionBarMonitor : DependencyObject
+    internal class FunctionBarMonitor : DependencyObject
     {
         #region 启用监听，设置按钮宽度
         /// <summary>

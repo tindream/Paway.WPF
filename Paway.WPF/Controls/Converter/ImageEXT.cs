@@ -69,7 +69,7 @@ namespace Paway.WPF
     /// <summary>
     /// 字符串转ImageEXT
     /// </summary>
-    public class ImageEXTConverter : TypeConverter
+    internal class ImageEXTConverter : TypeConverter
     {
         /// <summary>
         /// </summary>

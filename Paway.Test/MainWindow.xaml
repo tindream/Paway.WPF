@@ -98,17 +98,11 @@
                            ItemTextPadding="5" 
                            ItemImageHeight="24" ItemImageWidth="24" ItemImageDock="Top" 
                            ItemDescDock="Right" ItemDescPadding="5" >
-            <ComboBoxItem Content="Hello123" HorizontalAlignment="Right"/>
-            <ListBoxItem Content="C1"/>
+            <utils:ListBoxItemEXT Content="C1" Desc="11" IsSelected="True" 
+                                  Image="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"/>
             <ListBoxItem Content="C2"/>
-            <ListBoxItem Content="A1"/>
-            <ComboBoxItem Content="A2"/>
-            <ComboBoxItem Content="A3"/>
-            <ComboBoxItem Content="A4"/>
-            <ComboBoxItem Content="B1"/>
-            <ComboBoxItem Content="B2"/>
-            <ComboBoxItem Content="B3"/>
-            <ComboBoxItem Content="B4"/>
+            <ComboBoxItem Content="A"/>
+            <ComboBoxItem Content="B"/>
         </utils:ListViewEXT>
 
 

@@ -76,7 +76,7 @@ namespace Paway.WPF
     /// <summary>
     /// 字符串转RadiusEXT
     /// </summary>
-    public class RadiusEXTConverter : TypeConverter
+    internal class RadiusEXTConverter : TypeConverter
     {
         /// <summary>
         /// </summary>

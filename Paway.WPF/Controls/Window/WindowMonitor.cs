@@ -11,7 +11,7 @@ namespace Paway.WPF
     /// <summary>
     /// for custom window
     /// </summary>
-    public partial class WindowMonitor
+    internal partial class WindowMonitor
     {
         #region 依赖属性
         /// <summary>

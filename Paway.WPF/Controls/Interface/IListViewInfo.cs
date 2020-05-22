@@ -15,7 +15,7 @@ namespace Paway.WPF
     public interface IListViewInfo
     {
         /// <summary>
-        /// 内容
+        /// 文本
         /// </summary>
         string Content { get; set; }
         /// <summary>

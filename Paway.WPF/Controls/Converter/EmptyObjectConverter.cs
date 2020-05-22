@@ -11,7 +11,7 @@ namespace Paway.WPF
 {
     /// <summary>
     /// </summary>
-    public class EmptyObjectConverter : DependencyObject, IValueConverter
+    internal class EmptyObjectConverter : DependencyObject, IValueConverter
     {
         #region 依赖属性
         /// <summary>

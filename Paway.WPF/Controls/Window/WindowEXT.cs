@@ -18,11 +18,11 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty FunctionBarProperty =
-            DependencyProperty.Register(nameof(FunctionBar), typeof(WindowFunctionBar), typeof(WindowEXT), new PropertyMetadata(default(WindowFunctionBar), OnFunctionBarChanged));
+            DependencyProperty.Register(nameof(FunctionBar), typeof(WindowFunctionBar), typeof(WindowEXT), new PropertyMetadata(default(WindowFunctionBar)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty FunctionBarRightProperty =
-            DependencyProperty.Register(nameof(FunctionBarRight), typeof(WindowFunctionBar), typeof(WindowEXT), new PropertyMetadata(default(WindowFunctionBar), OnFunctionBarChanged));
+            DependencyProperty.Register(nameof(FunctionBarRight), typeof(WindowFunctionBar), typeof(WindowEXT), new PropertyMetadata(default(WindowFunctionBar)));
         /// <summary>
         /// </summary>
         private static readonly DependencyProperty IsNonClientActiveProperty =
@@ -96,27 +96,5 @@ namespace Paway.WPF
             base.OnDeactivated(e);
             IsNonClientActive = false;
         }
-
-        #region FunctionBar更改
-        private static void OnFunctionBarChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
-        {
-            var oldValue = (WindowFunctionBar)args.OldValue;
-            var newValue = (WindowFunctionBar)args.NewValue;
-            if (oldValue == newValue)
-            {
-                return;
-            }
-
-            var target = obj as WindowEXT;
-            target?.OnFunctionBarChanged(oldValue, newValue);
-        }
-        /// <summary>
-        /// FunctionBar 属性更改时调用此方法。
-        /// </summary>
-        /// <param name="oldValue">FunctionBar 属性的旧值。</param>
-        /// <param name="newValue">FunctionBar 属性的新值。</param>
-        protected virtual void OnFunctionBarChanged(WindowFunctionBar oldValue, WindowFunctionBar newValue) { }
-
-        #endregion
     }
 }
