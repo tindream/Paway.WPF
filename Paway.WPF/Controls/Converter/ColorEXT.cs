@@ -129,15 +129,7 @@ namespace Paway.WPF
                 if (strs.Length > 2 && !string.IsNullOrEmpty(strs[2])) pressed = (Color)ColorConverter.ConvertFromString(strs[2]);
                 if (strs.Length > 3 && !string.IsNullOrEmpty(strs[3])) alpha = Convert.ToInt32(strs[3], culture);
 
-                ColorEXT old = null;
-                if (context != null)
-                {
-                    var service = (IProvideValueTarget)context.GetService(typeof(IProvideValueTarget));
-                    var objType = service.TargetObject.GetType();
-                    var obj = (DependencyObject)Activator.CreateInstance(objType);
-                    var property = (DependencyProperty)service.TargetProperty;
-                    old = (ColorEXT)obj.GetValue(property);
-                }
+                var old = Method.GetValue<ColorEXT>(context);
                 return new ColorEXT(normal, mouse, pressed, alpha, old);
             }
             return base.ConvertFrom(context, culture, value);

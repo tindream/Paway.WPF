@@ -52,8 +52,8 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnRender(DrawingContext drawingContext)
         {
-            this.Width = border1.ActualWidth + 2;
-            this.Height = border1.ActualHeight + 2;
+            this.Width = border1.ActualWidth + 3;
+            this.Height = border1.ActualHeight + 3;
             this.Left = (SystemParameters.WorkArea.Width - this.Width) / 2;
             this.Top = (SystemParameters.WorkArea.Height - this.Height) * 2 / 3;
             base.OnRender(drawingContext);

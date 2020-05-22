@@ -12,7 +12,7 @@ namespace Paway.WPF
     /// <summary>
     /// ListBoxItem扩展
     /// </summary>
-    public partial class ListBoxItemEXT : Button, IListViewInfo, INotifyPropertyChanged
+    public partial class ListBoxItemEXT : ListBoxItem, IListViewInfo, INotifyPropertyChanged
     {
         /// <summary>
         /// </summary>
@@ -51,14 +51,13 @@ namespace Paway.WPF
             get { return image; }
             set { image = value; OnPropertyChanged(); }
         }
-        private bool isSelected;
         /// <summary>
         /// 选中状态
         /// </summary>
-        public bool IsSelected
+        public new bool IsSelected
         {
-            get { return isSelected; }
-            set { isSelected = value; OnPropertyChanged(); }
+            get { return base.IsSelected; }
+            set { base.IsSelected = value; OnPropertyChanged(); }
         }
 
         /// <summary>

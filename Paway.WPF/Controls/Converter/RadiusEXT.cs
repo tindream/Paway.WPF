@@ -115,15 +115,7 @@ namespace Paway.WPF
                 if (strs.Length > 1) Parse(strs[1], out mouse);
                 if (strs.Length > 2) Parse(strs[2], out pressed);
 
-                RadiusEXT old = null;
-                if (context != null)
-                {
-                    var service = (IProvideValueTarget)context.GetService(typeof(IProvideValueTarget));
-                    var objType = service.TargetObject.GetType();
-                    var obj = (DependencyObject)Activator.CreateInstance(objType);
-                    var property = (DependencyProperty)service.TargetProperty;
-                    old = (RadiusEXT)obj.GetValue(property);
-                }
+                var old = Method.GetValue<RadiusEXT>(context);
                 return new RadiusEXT(normal, mouse, pressed, old);
             }
             return base.ConvertFrom(context, culture, value);

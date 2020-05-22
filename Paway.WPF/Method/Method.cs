@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Security;
@@ -21,6 +22,22 @@ namespace Paway.WPF
     /// </summary>
     public class Method
     {
+        /// <summary>
+        /// 获取ITypeDescriptorContext中的属性值
+        /// </summary>
+        internal static T GetValue<T>(ITypeDescriptorContext context)
+        {
+            if (context != null)
+            {
+                var service = (IProvideValueTarget)context.GetService(typeof(IProvideValueTarget));
+                var objType = service.TargetObject.GetType();
+                var obj = (DependencyObject)Activator.CreateInstance(objType);
+                var property = (DependencyProperty)service.TargetProperty;
+                return (T)obj.GetValue(property);
+            }
+            return default;
+        }
+
         #region 获取控件模板的XAML代码
         /// <summary>
         /// 获取控件模板的XAML代码
