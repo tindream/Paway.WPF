@@ -230,6 +230,10 @@ namespace Paway.WPF
             if (Parent(obj, out Window window)) return window;
             return null;
         }
+
+        #endregion
+
+        #region 返回指定控件的上下层控件
         /// <summary>
         /// 返回控件的顶层指定类型控件
         /// </summary>
@@ -247,35 +251,48 @@ namespace Paway.WPF
             parent = null;
             return false;
         }
-        internal static bool Child<T>(DependencyObject obj, out T child) where T : FrameworkElement
+        /// <summary>
+        /// 查找指定类型子(同级)控件
+        /// </summary>
+        /// <typeparam name="T">查找控件类型</typeparam>
+        /// <param name="obj">控件</param>
+        /// <param name="child">返回指定类型控件</param>
+        /// <param name="name">指定控件名称</param>
+        /// <param name="parent">指定搜索同级控件</param>
+        /// <returns></returns>
+        public static bool Child<T>(DependencyObject obj, out T child, string name = null, bool parent = true) where T : FrameworkElement
         {
+            child = null;
+            if (parent) obj = VisualTreeHelper.GetParent(obj);
             var count = VisualTreeHelper.GetChildrenCount(obj);
             for (int i = 0; i < count; i++)
             {
                 var value = VisualTreeHelper.GetChild(obj, i);
-                if (value is T)
+                if (value is T temp)
                 {
-                    child = (T)value;
-                    return true;
-                }
-                else
-                {
-                    if (Child<T>(value, out child))
+                    if (name == null || temp.Name == name)
                     {
+                        child = temp;
                         return true;
                     }
+                }
+                if (Child<T>(value, out child, name, false))
+                {
+                    return true;
                 }
             }
             while (obj is ContentControl control)
             {
                 obj = control.Content as DependencyObject;
-                if (obj is T)
+                if (obj is T temp)
                 {
-                    child = (T)obj;
-                    return true;
+                    if (name == null || temp.Name == name)
+                    {
+                        child = temp;
+                        return true;
+                    }
                 }
             }
-            child = null;
             return false;
         }
 
