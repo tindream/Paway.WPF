@@ -289,12 +289,16 @@ namespace Paway.WPF
         /// <param name="obj">控件</param>
         /// <param name="child">返回指定类型控件</param>
         /// <param name="name">指定控件名称</param>
-        /// <param name="parent">指定搜索同级控件</param>
+        /// <param name="iParent">指定搜索同级控件</param>
         /// <returns></returns>
-        public static bool Child<T>(DependencyObject obj, out T child, string name = null, bool parent = true) where T : FrameworkElement
+        public static bool Child<T>(DependencyObject obj, out T child, string name = null, bool iParent = true) where T : FrameworkElement
         {
             child = null;
-            if (parent) obj = VisualTreeHelper.GetParent(obj);
+            if (iParent)
+            {
+                var parent = VisualTreeHelper.GetParent(obj);
+                if (parent != null) obj = parent;
+            }
             var count = VisualTreeHelper.GetChildrenCount(obj);
             for (int i = 0; i < count; i++)
             {

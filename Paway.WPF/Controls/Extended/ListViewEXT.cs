@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Paway.WPF
@@ -202,6 +203,12 @@ namespace Paway.WPF
             get { return (BrushEXT)GetValue(ItemBackgroundProperty); }
             set { SetValue(ItemBackgroundProperty, value); }
         }
+        /// <summary>
+        /// 指定何时应引发事件
+        /// </summary>
+        [Category("扩展.项")]
+        [Description("指定何时应引发事件")]
+        public ClickMode ClickMode { get; set; }
 
         #endregion
         #region 扩展.项图片
@@ -349,5 +356,107 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public ListViewEXT() { }
+
+        #region 指定按钮按下并释放时，应引发事件。
+        /// <summary>
+        /// 第一次按下时的item序号(Shift)
+        /// </summary>
+        private int firstIndex = -1;
+        /// <summary>
+        /// 上一次按下时的item
+        /// </summary>
+        private IListViewInfo lastItem;
+        /// <summary>
+        /// 按下时的item
+        /// </summary>
+        private IListViewInfo downItem;
+        /// <summary>
+        /// 鼠标按下时取消触发
+        /// </summary>
+        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
+        {
+            downItem = null;
+            if (ClickMode == ClickMode.Release && e.ChangedButton == MouseButton.Left)
+            {
+                if (e.OriginalSource is FrameworkElement element && element.DataContext is IListViewInfo info)
+                {
+                    downItem = info;
+                    e.Handled = true;
+                }
+            }
+            base.OnPreviewMouseDown(e);
+        }
+        /// <summary>
+        /// 鼠标抬起时判断触发
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnPreviewMouseUp(MouseButtonEventArgs e)
+        {
+            if (ClickMode == ClickMode.Release && e.ChangedButton == MouseButton.Left && downItem != null)
+            {
+                if (e.OriginalSource is FrameworkElement element && element.DataContext is IListViewInfo item)
+                {
+                    if (item == downItem)
+                    {
+                        if (SelectionMode == SelectionMode.Extended)
+                        {
+                            if (System.Windows.Forms.Control.ModifierKeys == System.Windows.Forms.Keys.Shift)
+                            {
+                                if (firstIndex == -1)
+                                {
+                                    firstIndex = Items.IndexOf(item);
+                                    item.IsSelected = true;
+                                }
+                                else
+                                {
+                                    var index = Items.IndexOf(item);
+                                    var min = Math.Min(firstIndex, index);
+                                    var max = Math.Max(firstIndex, index);
+                                    for (int i = 0; i < Items.Count; i++)
+                                    {
+                                        if (Items[i] is IListViewInfo temp)
+                                        {
+                                            temp.IsSelected = i >= min && i <= max;
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                firstIndex = Items.IndexOf(item);
+                                if (System.Windows.Forms.Control.ModifierKeys == System.Windows.Forms.Keys.Control)
+                                {
+                                    item.IsSelected = !item.IsSelected;
+                                }
+                                else
+                                {
+                                    for (int i = 0; i < Items.Count; i++)
+                                    {
+                                        if (Items[i] is IListViewInfo temp)
+                                        {
+                                            temp.IsSelected = false;
+                                        }
+                                    }
+                                    item.IsSelected = true;
+                                }
+                            }
+                        }
+                        else if (SelectionMode == SelectionMode.Multiple)
+                        {
+                            item.IsSelected = !item.IsSelected;
+                        }
+                        else
+                        {
+                            if (lastItem != null) lastItem.IsSelected = false;
+                            item.IsSelected = true;
+                            lastItem = item;
+                        }
+                    }
+                }
+            }
+            base.OnPreviewMouseUp(e);
+        }
+
+        #endregion
     }
 }
