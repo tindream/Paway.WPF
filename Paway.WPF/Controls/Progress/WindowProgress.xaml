@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Paway.WPF"
         mc:Ignorable="d"
-        AllowsTransparency="True" Background="Transparent" WindowStyle="None"
-        Title="MessageBox" Height="50" Width="50" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" >
-    <local:Progress Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></local:Progress>
+        AllowsTransparency="True" Background="#E6FFFFFF" WindowStyle="None" FontSize="15"
+        Title="MessageBox" Height="100" MaxWidth="350" Width="350" MinWidth="150" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" >
+    <StackPanel>
+        <local:Progress Margin="10" Width="40" Height="40" VerticalAlignment="Stretch" HorizontalAlignment="Center"></local:Progress>
+        <TextBlock Name="desc" Grid.Row="1" Padding="10" Text="Loading..." HorizontalAlignment="Center" TextTrimming="WordEllipsis"/>
+    </StackPanel>
 </Window>

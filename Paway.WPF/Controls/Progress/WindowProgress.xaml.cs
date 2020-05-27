@@ -24,9 +24,18 @@ namespace Paway.WPF
     {
         /// <summary>
         /// </summary>
-        public WindowProgress()
+        public WindowProgress(string msg = Config.Loading)
         {
             InitializeComponent();
+            desc.Text = msg;
+        }
+        /// <summary>
+        /// 自动大小
+        /// </summary>
+        protected override void OnRender(DrawingContext drawingContext)
+        {
+            if (this.Width > desc.ActualWidth) this.Width = desc.ActualWidth;
+            base.OnRender(drawingContext);
         }
     }
 }

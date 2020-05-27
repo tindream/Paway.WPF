@@ -21,10 +21,11 @@ namespace Paway.WPF
     /// </summary>
     public class Config
     {
+        #region 常量
         /// <summary>
-        /// 全局字体大小
+        /// Loading
         /// </summary>
-        public static double FontSize = 15d;
+        public const string Loading = "Loading...";
 
         #region GroupActive
         /// <summary>
@@ -41,5 +42,15 @@ namespace Paway.WPF
         public const string GroupActive = "ActiveStates";
 
         #endregion GroupActive
+
+        #endregion
+
+        #region 主题
+        /// <summary>
+        /// 全局字体大小
+        /// </summary>
+        public static double FontSize = 15d;
+
+        #endregion
     }
 }

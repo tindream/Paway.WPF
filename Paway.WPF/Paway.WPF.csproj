@@ -65,7 +65,6 @@
   <ItemGroup>
     <Compile Include="Controls\Extended\ListBoxItemEXT.cs" />
     <Compile Include="Controls\Extended\RadioButtonEXT.cs" />
-    <Compile Include="Controls\Extended\ToggleEXT.cs" />
     <Compile Include="Controls\Extended\CheckBoxEXT.cs" />
     <Compile Include="Controls\Progress\Progress.cs" />
     <Compile Include="Controls\Progress\ProgressTemplate.cs" />
@@ -190,18 +189,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\selectedBox.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\selectedBox_checked.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\checkBox.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\checkBox_checked.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

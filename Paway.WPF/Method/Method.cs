@@ -113,19 +113,23 @@ namespace Paway.WPF
         /// <summary>
         /// 显示Window进度条
         /// </summary>
-        public static void Progress(DependencyObject parent, bool dialog = false)
+        public static void Progress(DependencyObject parent = null, bool dialog = false)
         {
+            if (progress == null) progress = new WindowProgress();
             if (Parent(parent, out Window owner))
             {
                 owner.Closed += delegate
                 {
                     Hide();
                 };
-                if (progress == null) progress = new WindowProgress();
                 progress.Owner = owner;
-                if (dialog) progress.ShowDialog();
-                else progress.Show();
             }
+            else
+            {
+                progress.Topmost = true;
+            }
+            if (dialog) progress.ShowDialog();
+            else progress.Show();
         }
         /// <summary>
         /// 隐藏Window进度条

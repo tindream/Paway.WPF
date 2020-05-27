@@ -45,11 +45,11 @@ namespace Paway.Test
         private bool b;
         private void ButtonEXT_Click(object sender, RoutedEventArgs e)
         {
-            var xml = Method.GetTemplateXaml(rb);
+            var xml = Method.GetTemplateXaml(btn);
             Method.Toast(xml);
-            b = !b;
-            if (b) Method.Progress(this);
-            else Method.Hide();
+            //b = !b;
+            //if (b) Method.Progress();
+            //else Method.Hide();
         }
     }
     public class TestInfo : IListViewInfo

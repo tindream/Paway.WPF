@@ -34,7 +34,8 @@
                             </Border.Effect>
                         </Border>
                         <Border x:Name="border2" 
-                                Padding="{TemplateBinding Padding}">
+                                Padding="{TemplateBinding Padding}"
+                                CornerRadius="{TemplateBinding Radius}">
                             <Border.Background>
                                 <ImageBrush ImageSource="{Binding Path=BackgroundImage.Normal, RelativeSource={RelativeSource TemplatedParent}}"
                                             Stretch="{Binding Stretch, RelativeSource={RelativeSource TemplatedParent}}"
@@ -84,8 +85,7 @@
                             </Setter>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" TargetName="border1" Value="#00000000"></Setter>
-                            <Setter Property="Background" TargetName="border2" Value="LightGray"></Setter>
+                            <Setter Property="Background" TargetName="border1" Value="#E6E6E6"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

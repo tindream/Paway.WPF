@@ -5,6 +5,10 @@
     <Style TargetType="{x:Type local:RadioButtonEXT}">
         <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="BorderBrush" Value="Gray"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Padding" Value="0,0,3,0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:RadioButtonEXT">
@@ -15,15 +19,16 @@
                         </Grid.ColumnDefinitions>
                         <Border
                             BorderThickness="{TemplateBinding Border.BorderThickness}"
-                            CornerRadius="200"
+                            CornerRadius="100"
                             BorderBrush="{TemplateBinding Border.BorderBrush}"
                             Background="{TemplateBinding Panel.Background}"
                             Name="radioButtonBorder"
-                            Margin="1,1,2,1"
+                            Margin="7,6"
                             HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}">
-                            <Grid Name="markGrid" Margin="2,2,2,2">
-                                <Ellipse Fill="#FF212121" Name="optionMark" MinWidth="6" MinHeight="6" Opacity="0" />
+                            <Grid Name="markGrid" Margin="3">
+                                <Ellipse Name="optionMark" MinWidth="9" MinHeight="9" Opacity="0"
+                                         Fill="{Binding Path=BorderFocusedBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" />
                             </Grid>
                         </Border>
                         <ContentPresenter
@@ -40,116 +45,26 @@
                             Grid.Column="1" />
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="ContentControl.HasContent">
-                            <Setter Property="FrameworkElement.FocusVisualStyle">
-                                <Setter.Value>
-                                    <Style TargetType="IFrameworkInputElement">
-                                        <Style.Resources>
-                                            <ResourceDictionary />
-                                        </Style.Resources>
-                                        <Setter Property="Control.Template">
-                                            <Setter.Value>
-                                                <ControlTemplate>
-                                                    <Rectangle
-                                                        Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" 
-                                                        StrokeThickness="1"
-                                                        StrokeDashArray="1 2"
-                                                        Margin="14,0,0,0"
-                                                        SnapsToDevicePixels="True" />
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </Setter.Value>
-                            </Setter>
-                            <Setter Property="Control.Padding">
-                                <Setter.Value>
-                                    <Thickness>4,-1,0,0</Thickness>
-                                </Setter.Value>
-                            </Setter>
-                            <Trigger.Value>
-                                <system:Boolean>True</system:Boolean>
-                            </Trigger.Value>
+                        <Trigger Property="UIElement.IsMouseOver" Value="True">
+                            <Setter Property="Panel.Background" TargetName="radioButtonBorder" Value="#FFF3F9FF"/>
+                            <Setter Property="Border.BorderBrush" TargetName="radioButtonBorder"
+                                    Value="{Binding Path=BorderFocusedBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </Trigger>
-                        <Trigger Property="UIElement.IsMouseOver">
-                            <Setter Property="Panel.Background" TargetName="radioButtonBorder">
-                                <Setter.Value>
-                                    <SolidColorBrush>#FFF3F9FF</SolidColorBrush>
-                                </Setter.Value>
-                            </Setter>
-                            <Setter Property="Border.BorderBrush" TargetName="radioButtonBorder">
-                                <Setter.Value>
-                                    <SolidColorBrush>#FF5593FF</SolidColorBrush>
-                                </Setter.Value>
-                            </Setter>
-                            <Setter Property="Shape.Fill" TargetName="optionMark">
-                                <Setter.Value>
-                                    <SolidColorBrush>#FF212121</SolidColorBrush>
-                                </Setter.Value>
-                            </Setter>
-                            <Trigger.Value>
-                                <system:Boolean>True</system:Boolean>
-                            </Trigger.Value>
+                        <Trigger Property="UIElement.IsEnabled" Value="False">
+                            <Setter Property="Panel.Background" TargetName="radioButtonBorder" Value="#FFE6E6E6"/>
+                            <Setter Property="Border.BorderBrush" TargetName="radioButtonBorder" Value="#FFBCBCBC"/>
+                            <Setter Property="Shape.Fill" TargetName="optionMark" Value="#FF707070"/>
                         </Trigger>
-                        <Trigger Property="UIElement.IsEnabled">
-                            <Setter Property="Panel.Background" TargetName="radioButtonBorder">
-                                <Setter.Value>
-                                    <SolidColorBrush>#FFE6E6E6</SolidColorBrush>
-                                </Setter.Value>
-                            </Setter>
-                            <Setter Property="Border.BorderBrush" TargetName="radioButtonBorder">
-                                <Setter.Value>
-                                    <SolidColorBrush>#FFBCBCBC</SolidColorBrush>
-                                </Setter.Value>
-                            </Setter>
-                            <Setter Property="Shape.Fill" TargetName="optionMark">
-                                <Setter.Value>
-                                    <SolidColorBrush>#FF707070</SolidColorBrush>
-                                </Setter.Value>
-                            </Setter>
-                            <Trigger.Value>
-                                <system:Boolean>False</system:Boolean>
-                            </Trigger.Value>
+                        <Trigger Property="ButtonBase.IsPressed" Value="True">
+                            <Setter Property="Panel.Background" TargetName="radioButtonBorder" Value="#FFD9ECFF"/>
+                            <Setter Property="Border.BorderBrush" TargetName="radioButtonBorder"
+                                    Value="{Binding Path=BorderFocusedBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </Trigger>
-                        <Trigger Property="ButtonBase.IsPressed">
-                            <Setter Property="Panel.Background" TargetName="radioButtonBorder">
-                                <Setter.Value>
-                                    <SolidColorBrush>#FFD9ECFF</SolidColorBrush>
-                                </Setter.Value>
-                            </Setter>
-                            <Setter Property="Border.BorderBrush" TargetName="radioButtonBorder">
-                                <Setter.Value>
-                                    <SolidColorBrush>#FF3C77DD</SolidColorBrush>
-                                </Setter.Value>
-                            </Setter>
-                            <Setter Property="Shape.Fill" TargetName="optionMark">
-                                <Setter.Value>
-                                    <SolidColorBrush>#FF212121</SolidColorBrush>
-                                </Setter.Value>
-                            </Setter>
-                            <Trigger.Value>
-                                <system:Boolean>True</system:Boolean>
-                            </Trigger.Value>
+                        <Trigger Property="ToggleButton.IsChecked" Value="True">
+                            <Setter Property="UIElement.Opacity" TargetName="optionMark" Value="1"/>
                         </Trigger>
-                        <Trigger Property="ToggleButton.IsChecked">
-                            <Setter Property="UIElement.Opacity" TargetName="optionMark">
-                                <Setter.Value>
-                                    <system:Double>1</system:Double>
-                                </Setter.Value>
-                            </Setter>
-                            <Trigger.Value>
-                                <system:Boolean>True</system:Boolean>
-                            </Trigger.Value>
-                        </Trigger>
-                        <Trigger Property="ToggleButton.IsChecked">
-                            <Setter Property="UIElement.Opacity" TargetName="optionMark">
-                                <Setter.Value>
-                                    <system:Double>0.56</system:Double>
-                                </Setter.Value>
-                            </Setter>
-                            <Trigger.Value>
-                                <x:Null />
-                            </Trigger.Value>
+                        <Trigger Property="ToggleButton.IsChecked" Value="{x:Null}">
+                            <Setter Property="UIElement.Opacity" TargetName="optionMark" Value="0.56"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

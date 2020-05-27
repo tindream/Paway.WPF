@@ -5,73 +5,78 @@
     <Style TargetType="{x:Type local:CheckBoxEXT}">
         <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="BorderBrush" Value="Gray"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Padding" Value="0,0,3,0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:CheckBoxEXT">
-                    <Border x:Name="border"
-                            VerticalAlignment="Center"
+                    <Grid Background="#00FFFFFF" Name="templateRoot" SnapsToDevicePixels="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Border
+                            BorderThickness="{TemplateBinding Border.BorderThickness}"
+                            BorderBrush="{TemplateBinding Border.BorderBrush}"
+                            Background="{TemplateBinding Panel.Background}"
                             CornerRadius="{TemplateBinding Radius}"
-                            BorderThickness="1" 
-                            Padding="5">
-                        <DockPanel>
-                            <Image Name="image" Source="pack://application:,,,/Paway.WPF;component/Images/selectedBox.png" Width="24"/>
-                            <TextBlock Name="cbxTitle" Padding="5,0,0,0" Foreground="#333"
-                                       Text="{TemplateBinding Content}" 
-                                       FontFamily="Microsoft YaHei" 
-                                       LineStackingStrategy="BlockLineHeight" 
-                                       TextTrimming="WordEllipsis" VerticalAlignment="Center" />
-                        </DockPanel>
-                    </Border>
+                            Name="checkBoxBorder"
+                            Margin="6"
+                            HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}">
+                            <Grid Name="markGrid" >
+                                <Path
+                                    Data="F1M9.97498,1.22334L4.6983,9.09834 4.52164,9.09834 0,5.19331 1.27664,3.52165 4.255,6.08833 8.33331,1.52588E-05 9.97498,1.22334z"
+                                    Stretch="Fill"
+                                    Fill="{Binding Path=BorderFocusedBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}"
+                                    Name="optionMark"
+                                    Width="13" Height="12"
+                                    Margin="2"
+                                    Opacity="0" />
+                                <Rectangle
+                                    Fill="{Binding Path=BorderFocusedBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}"
+                                    Margin="3"
+                                    Name="indeterminateMark"
+                                    Opacity="0" />
+                            </Grid>
+                        </Border>
+                        <ContentPresenter
+                            RecognizesAccessKey="True"
+                            Content="{TemplateBinding ContentControl.Content}"
+                            ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
+                            ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"
+                            Name="contentPresenter"
+                            Margin="{TemplateBinding Control.Padding}"
+                            HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}"
+                            SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"
+                            Focusable="False"
+                            Grid.Column="1" />
+                    </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="BorderBrush" TargetName="border" 
-                                    Value="{Binding Path=BorderFocusedBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        <Trigger Property="UIElement.IsMouseOver" Value="True">
+                            <Setter Property="Panel.Background" TargetName="checkBoxBorder" Value="#FFF3F9FF"/>
+                            <Setter Property="Border.BorderBrush" TargetName="checkBoxBorder" Value="#FF5593FF"/>
                         </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="BorderBrush" TargetName="border" 
+                        <Trigger Property="UIElement.IsEnabled" Value="False">
+                            <Setter Property="Panel.Background" TargetName="checkBoxBorder" Value="#FFE6E6E6"/>
+                            <Setter Property="Border.BorderBrush" TargetName="checkBoxBorder" Value="#FFBCBCBC"/>
+                            <Setter Property="Shape.Fill" TargetName="optionMark" Value="#FF707070"/>
+                        </Trigger>
+                        <Trigger Property="ButtonBase.IsPressed" Value="True">
+                            <Setter Property="Panel.Background" TargetName="checkBoxBorder" Value="#FFD9ECFF"/>
+                            <Setter Property="Border.BorderBrush" TargetName="checkBoxBorder" 
                                     Value="{Binding Path=BorderFocusedBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </Trigger>
-                        <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Source" TargetName="image" 
-                                    Value="pack://application:,,,/Paway.WPF;component/Images/selectedBox_checked.png"/>
+                        <Trigger Property="ToggleButton.IsChecked" Value="True">
+                            <Setter Property="UIElement.Opacity" TargetName="optionMark" Value="1"/>
+                            <Setter Property="UIElement.Opacity" TargetName="indeterminateMark" Value="0"/>
                         </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    <Style TargetType="{x:Type local:ToggleEXT}">
-        <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
-        <Setter Property="IsTabStop" Value="False" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="local:ToggleEXT">
-                    <Border x:Name="border"
-                            VerticalAlignment="Center"
-                            CornerRadius="{TemplateBinding Radius}"
-                            BorderThickness="1" 
-                            Padding="5"
-                            Focusable="True">
-                        <DockPanel>
-                            <Image Name="image" Source="pack://application:,,,/Paway.WPF;component/Images/checkBox.png" Height="24" DockPanel.Dock="Right"/>
-                            <TextBlock Name="cbxTitle" Padding="0,0,5,0" Foreground="#333"
-                                       Text="{TemplateBinding Content}" 
-                                       FontFamily="Microsoft YaHei"
-                                       TextTrimming="WordEllipsis" VerticalAlignment="Center" />
-                        </DockPanel>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="BorderBrush" TargetName="border" 
-                                    Value="{Binding Path=BorderFocusedBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="BorderBrush" TargetName="border" 
-                                    Value="{Binding Path=BorderFocusedBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
-                        </Trigger>
-                        <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Source" TargetName="image" 
-                                    Value="pack://application:,,,/Paway.WPF;component/Images/checkBox_checked.png"/>
+                        <Trigger Property="ToggleButton.IsChecked" Value="{x:Null}">
+                            <Setter Property="UIElement.Opacity" TargetName="optionMark" Value="0"/>
+                            <Setter Property="UIElement.Opacity" TargetName="indeterminateMark" Value="1"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

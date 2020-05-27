@@ -17,12 +17,12 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty RadiusProperty =
-            DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(CheckBoxEXT), new PropertyMetadata(new CornerRadius(7)));
+            DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(CheckBoxEXT), new PropertyMetadata(new CornerRadius(3)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty BorderFocusedBrushProperty =
             DependencyProperty.RegisterAttached(nameof(BorderFocusedBrush), typeof(BrushEXT), typeof(CheckBoxEXT),
-                new PropertyMetadata(new BrushEXT(null, Color.FromArgb(170, 35, 175, 255), null, 85)));
+                new PropertyMetadata(new BrushEXT(null, Color.FromArgb(200, 35, 175, 255), null, 55)));
 
         #endregion
 
