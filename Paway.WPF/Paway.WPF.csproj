@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\Extended\ListBoxItemEXT.cs" />
+    <Compile Include="Controls\Extended\RadioButtonEXT.cs" />
     <Compile Include="Controls\Extended\ToggleEXT.cs" />
     <Compile Include="Controls\Extended\CheckBoxEXT.cs" />
     <Compile Include="Controls\Progress\Progress.cs" />
@@ -125,6 +126,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Resource Include="Resources\RadioButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
     <Page Include="Resources\Progress.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

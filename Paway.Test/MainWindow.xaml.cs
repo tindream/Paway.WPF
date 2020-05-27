@@ -42,11 +42,14 @@ namespace Paway.Test
             //listView1.ItemsSource = list;
         }
 
+        private bool b;
         private void ButtonEXT_Click(object sender, RoutedEventArgs e)
         {
-            var xml = Method.GetTemplateXaml(datagrid1);
+            var xml = Method.GetTemplateXaml(rb);
             Method.Toast(xml);
-            Method.Progress(this);
+            b = !b;
+            if (b) Method.Progress(this);
+            else Method.Hide();
         }
     }
     public class TestInfo : IListViewInfo
