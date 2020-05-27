@@ -125,6 +125,7 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展.项")]
         [Description("自定义项宽度")]
+        [TypeConverter(typeof(LengthConverter))]
         public double ItemWidth
         {
             get { return (double)GetValue(ItemWidthProperty); }
@@ -135,6 +136,7 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展.项")]
         [Description("自定义项高度")]
+        [TypeConverter(typeof(LengthConverter))]
         public double ItemHeight
         {
             get { return (double)GetValue(ItemHeightProperty); }
@@ -208,6 +210,7 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展.项图片")]
         [Description("自定义项图片宽度")]
+        [TypeConverter(typeof(LengthConverter))]
         public double ItemImageWidth
         {
             get { return (double)GetValue(ItemImageWidthProperty); }
@@ -218,6 +221,7 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展.项图片")]
         [Description("自定义项图片高度")]
+        [TypeConverter(typeof(LengthConverter))]
         public double ItemImageHeight
         {
             get { return (double)GetValue(ItemImageHeightProperty); }

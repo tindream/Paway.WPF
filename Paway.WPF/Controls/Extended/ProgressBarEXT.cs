@@ -13,28 +13,6 @@ namespace Paway.WPF
     /// </summary>
     public partial class ProgressBarEXT : ProgressBar
     {
-        #region 依赖属性
-        /// <summary>
-        /// </summary>
-        public static readonly DependencyProperty RadiusProperty =
-            DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(ProgressBarEXT), new PropertyMetadata(new CornerRadius(3)));
-        /// <summary>
-        /// </summary>
-        public static readonly DependencyProperty ForegroundStartColorProperty =
-            DependencyProperty.RegisterAttached(nameof(ForegroundStartColor), typeof(Color), typeof(ProgressBarEXT),
-            new PropertyMetadata(Color.FromArgb(85, 35, 175, 255)));
-        /// <summary>
-        /// </summary>
-        public static readonly DependencyProperty ForegroundEndColorProperty =
-            DependencyProperty.RegisterAttached(nameof(ForegroundEndColor), typeof(Color), typeof(ProgressBarEXT),
-            new PropertyMetadata(Color.FromArgb(250, 35, 175, 255)));
-        /// <summary>
-        /// </summary>
-        public static readonly DependencyProperty ProgressValueProperty =
-            DependencyProperty.RegisterAttached("ProgressValue", typeof(string), typeof(ProgressBarEXT));
-
-        #endregion
-
         #region 启用监听，获取进度
         /// <summary>
         /// 启用监听，获取进度
@@ -43,11 +21,12 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(IsMonitoring), typeof(bool), typeof(ProgressBarEXT), new UIPropertyMetadata(false, OnIsMonitoringChanged));
         private static void OnIsMonitoringChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            if (obj is ProgressBar bar)
+            if (obj is ProgressBarEXT bar)
             {
-                bar.Loaded += delegate
+                bar.LayoutUpdated += delegate
                 {
-                    bar.SetValue(ProgressValueProperty, $"{bar.Value * 100 / bar.Maximum:F0}%");
+                    var value = $"{bar.Value * 100 / bar.Maximum:F0}%";
+                    if (bar.ProgressValue != value) bar.SetValue(ProgressValueProperty, value);
                 };
                 if ((bool)e.NewValue)
                 {
@@ -76,6 +55,29 @@ namespace Paway.WPF
         }
 
         #endregion
+
+        #region 依赖属性
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty RadiusProperty =
+            DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(ProgressBarEXT), new PropertyMetadata(new CornerRadius(3)));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ForegroundStartColorProperty =
+            DependencyProperty.RegisterAttached(nameof(ForegroundStartColor), typeof(Color), typeof(ProgressBarEXT),
+            new PropertyMetadata(Color.FromArgb(85, 35, 175, 255)));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ForegroundEndColorProperty =
+            DependencyProperty.RegisterAttached(nameof(ForegroundEndColor), typeof(Color), typeof(ProgressBarEXT),
+            new PropertyMetadata(Color.FromArgb(250, 35, 175, 255)));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ProgressValueProperty =
+            DependencyProperty.RegisterAttached(nameof(ProgressValue), typeof(string), typeof(ProgressBarEXT));
+
+        #endregion
+
 
         #region 扩展
         /// <summary>
@@ -107,6 +109,16 @@ namespace Paway.WPF
         {
             get { return (Color)GetValue(ForegroundEndColorProperty); }
             set { SetValue(ForegroundEndColorProperty, value); }
+        }
+        /// <summary>
+        /// 进度条显示文本
+        /// </summary>
+        [Category("扩展")]
+        [Description("进度条显示文本")]
+        public string ProgressValue
+        {
+            get { return (string)GetValue(ProgressValueProperty); }
+            set { SetValue(ProgressValueProperty, value); }
         }
 
         #endregion

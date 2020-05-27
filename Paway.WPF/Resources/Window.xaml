@@ -123,6 +123,7 @@
     </Style>
 
     <Style TargetType="{x:Type local:WindowEXT}">
+        <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
         <Setter Property="Background" Value="#FFF1F1F1" />
         <Setter Property="BorderBrush" Value="#FF464775" />

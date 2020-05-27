@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,9 +24,10 @@ namespace Paway.WPF
         {
             if (obj is PasswordBox pad)
             {
-                pad.Loaded += delegate
+                pad.LayoutUpdated += delegate
                 {
-                    pad.SetValue(WaterSizeProperty, pad.FontSize * 0.85);
+                    if ((double)pad.GetValue(WaterSizeProperty) != pad.FontSize * 0.85)
+                        pad.SetValue(WaterSizeProperty, pad.FontSize * 0.85);
                 };
                 if ((bool)e.NewValue)
                 {
@@ -55,17 +57,21 @@ namespace Paway.WPF
 
         #endregion
 
+        #region 依赖属性
         /// <summary>
         /// 自动获取当前密码框文本长度
         /// </summary>
         public static readonly DependencyProperty PasswordLengthProperty =
-            DependencyProperty.RegisterAttached("PasswordLength", typeof(int), typeof(PasswordBoxMonitor));
+            DependencyProperty.RegisterAttached(nameof(PasswordLength), typeof(int), typeof(PasswordBoxMonitor));
         /// <summary>
         /// 水印字体大小
         /// </summary>
         public static readonly DependencyProperty WaterSizeProperty =
-            DependencyProperty.RegisterAttached("WaterSize", typeof(double), typeof(PasswordBoxMonitor), new PropertyMetadata());
+            DependencyProperty.RegisterAttached(nameof(WaterSize), typeof(double), typeof(PasswordBoxMonitor), new PropertyMetadata());
 
+        #endregion
+
+        #region 扩展
         /// <summary>
         /// 自动获取当前密码框文本长度
         /// </summary>
@@ -74,5 +80,15 @@ namespace Paway.WPF
             get { return (int)GetValue(PasswordLengthProperty); }
             set { SetValue(PasswordLengthProperty, value); }
         }
+        /// <summary>
+        /// 水印字体大小
+        /// </summary>
+        public double WaterSize
+        {
+            get { return (double)GetValue(WaterSizeProperty); }
+            set { SetValue(WaterSizeProperty, value); }
+        }
+
+        #endregion
     }
 }

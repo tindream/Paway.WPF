@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Odbc;
 using System.Diagnostics;
 using System.Linq;
 using System.Security;
@@ -103,6 +104,36 @@ namespace Paway.WPF
         {
             ((DispatcherFrame)state).Continue = false;
             return null;
+        }
+
+        #endregion
+
+        #region Window进度条
+        private static WindowProgress progress;
+        /// <summary>
+        /// 显示Window进度条
+        /// </summary>
+        public static void Progress(DependencyObject parent, bool dialog = false)
+        {
+            if (Parent(parent, out Window owner))
+            {
+                owner.Closed += delegate
+                {
+                    Hide();
+                };
+                if (progress == null) progress = new WindowProgress();
+                progress.Owner = owner;
+                if (dialog) progress.ShowDialog();
+                else progress.Show();
+            }
+        }
+        /// <summary>
+        /// 隐藏Window进度条
+        /// </summary>
+        public static void Hide()
+        {
+            if (progress != null) progress.Close();
+            progress = null;
         }
 
         #endregion

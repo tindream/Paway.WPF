@@ -25,5 +25,21 @@ namespace Paway.WPF
         /// 全局字体大小
         /// </summary>
         public static double FontSize = 15d;
+
+        #region GroupActive
+        /// <summary>
+        /// Active state
+        /// </summary>
+        public const string StateActive = "Active";
+        /// <summary>
+        /// Inactive state
+        /// </summary>
+        public const string StateInactive = "Inactive";
+        /// <summary>
+        /// Active state group
+        /// </summary>
+        public const string GroupActive = "ActiveStates";
+
+        #endregion GroupActive
     }
 }

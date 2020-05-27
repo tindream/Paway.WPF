@@ -42,7 +42,7 @@
             <ComboBoxItem Content="C"/>
         </utils:ComboBoxEXT>
 
-        <utils:TextBoxEXT Grid.Row="3" Margin="5" Name="tb" ></utils:TextBoxEXT>
+        <utils:TextBoxEXT Grid.Row="3" Margin="5" Name="tb"></utils:TextBoxEXT>
         <PasswordBox Grid.Row="4" Margin="5" ></PasswordBox>
         <utils:ButtonEXT Name="btn" Grid.Row="5" Margin="5"  Content="确认" Click="ButtonEXT_Click" 
                          BackgroundStart=";#770C7900" BackgroundEnd=";#77FF0000"
@@ -54,6 +54,8 @@
 
         <utils:ToggleEXT Content="BBB" Grid.Row="6" Margin="5"></utils:ToggleEXT>
         <utils:CheckBoxEXT Content="AAA" Grid.Row="7" Margin="5"></utils:CheckBoxEXT>
+        <TextBlock Grid.Row="8" Text="Hello,World"/>
+        <utils:Progress  Grid.Row="9" Margin="5" Width="60" Height="90"/>
 
         <utils:ListViewEXT Name="listView1" Grid.Row="9" Grid.Column="1" Height="250" Margin="5,6,5,5" 
                            ItemWidth="100" ItemHeight="100" ItemRadius="0" ItemMargin="1" ItemPadding="0;0,4,0,0"

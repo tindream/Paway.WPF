@@ -46,6 +46,7 @@ namespace Paway.Test
         {
             var xml = Method.GetTemplateXaml(datagrid1);
             Method.Toast(xml);
+            Method.Progress(this);
         }
     }
     public class TestInfo : IListViewInfo

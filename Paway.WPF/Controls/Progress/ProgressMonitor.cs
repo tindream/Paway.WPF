@@ -9,24 +9,30 @@ using System.Windows.Controls;
 namespace Paway.WPF
 {
     /// <summary>
-    /// TextBox扩展监听
+    /// Progress扩展监听
     /// </summary>
-    internal class TextBoxMonitor : DependencyObject
+    internal class ProgressMonitor : DependencyObject
     {
         #region 启用监听，设置水印大小
         /// <summary>
         /// 启用监听，设置水印大小
         /// </summary>
         public static readonly DependencyProperty IsMonitoringProperty =
-            DependencyProperty.RegisterAttached(nameof(IsMonitoring), typeof(bool), typeof(TextBoxMonitor), new UIPropertyMetadata(false, OnIsMonitoringChanged));
+            DependencyProperty.RegisterAttached(nameof(IsMonitoring), typeof(bool), typeof(ProgressMonitor), new UIPropertyMetadata(false, OnIsMonitoringChanged));
         private static void OnIsMonitoringChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            if (obj is TextBoxEXT txt)
+            if (obj is Progress progress)
             {
-                txt.LayoutUpdated += delegate
+                progress.LayoutUpdated += delegate
                 {
-                    if (txt.WaterSize != txt.FontSize * 0.85)
-                        txt.SetValue(TextBoxEXT.WaterSizeProperty, txt.FontSize * 0.85);
+                    var width = 20d;
+                    var height = 20d;
+                    //if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(progress) == false)
+                    {
+                        width = double.IsNaN(progress.Width) == false ? progress.Width : progress.ActualWidth;
+                        height = double.IsNaN(progress.Height) == false ? progress.Height : progress.ActualHeight;
+                    }
+                    progress.TemplateSettings = new ProgressTemplate(Math.Min(width, height));
                 };
             }
         }

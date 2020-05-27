@@ -50,6 +50,7 @@ namespace Paway.WPF
 
         #endregion
 
+        #region 依赖属性
         /// <summary>
         /// 字体大小
         /// </summary>
@@ -59,8 +60,11 @@ namespace Paway.WPF
         /// 按钮字体大小
         /// </summary>
         public static readonly DependencyProperty ButtonFontSizeProperty =
-            DependencyProperty.RegisterAttached("ButtonFontSize", typeof(double), typeof(ThemeMonitor), new PropertyMetadata(Config.FontSize + 3));
+            DependencyProperty.RegisterAttached(nameof(ButtonFontSize), typeof(double), typeof(ThemeMonitor), new PropertyMetadata(Config.FontSize + 3));
 
+        #endregion
+
+        #region 扩展
         /// <summary>
         /// 字体大小
         /// </summary>
@@ -69,5 +73,15 @@ namespace Paway.WPF
             get { return (double)GetValue(FontSizeProperty); }
             set { SetValue(FontSizeProperty, value); }
         }
+        /// <summary>
+        /// 按钮字体大小
+        /// </summary>
+        public double ButtonFontSize
+        {
+            get { return (double)GetValue(ButtonFontSizeProperty); }
+            set { SetValue(ButtonFontSizeProperty, value); }
+        }
+
+        #endregion
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paway.WPF;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -12,5 +13,13 @@ namespace Paway.Test
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+        }
+        protected override void OnExit(ExitEventArgs e)
+        {
+            base.OnExit(e);
+        }
     }
 }

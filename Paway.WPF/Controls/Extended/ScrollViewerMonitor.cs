@@ -56,6 +56,7 @@ namespace Paway.WPF
 
         #endregion
 
+        #region 依赖属性
         /// <summary>
         /// 滚动条圆角
         /// </summary>
@@ -71,5 +72,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty VerticalScrollBarMarginProperty =
             DependencyProperty.RegisterAttached("VerticalScrollBarMargin", typeof(Thickness), typeof(ScrollViewerMonitor));
+
+        #endregion
     }
 }
