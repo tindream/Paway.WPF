@@ -20,7 +20,7 @@ namespace Paway.WPF
     /// <summary>
     /// Window进度条
     /// </summary>
-    public partial class WindowProgress : Window
+    public partial class WindowProgress : WindowEXT
     {
         /// <summary>
         /// </summary>

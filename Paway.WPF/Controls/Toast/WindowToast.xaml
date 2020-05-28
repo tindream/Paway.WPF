@@ -1,4 +1,4 @@
-﻿<Window x:Class="Paway.WPF.WindowToast"
+﻿<local:WindowEXT x:Class="Paway.WPF.WindowToast"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -52,7 +52,7 @@
             </i:EventTrigger>
         </i:Interaction.Triggers>
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-            <TextBlock x:Name="tb" Margin="25 7" FontFamily="Microsoft YaHei" FontSize="16"
+            <TextBlock x:Name="tb" Margin="25 7" FontFamily="Microsoft YaHei" 
                    Text="{Binding Message,FallbackValue=失败信息}"
                    TextWrapping="Wrap" TextAlignment="Center" Foreground="#333"
                    MinWidth="200" MaxWidth="600" ToolTip="双击复制"
@@ -67,4 +67,4 @@
                 </TextBlock.RenderTransform></TextBlock>
         </ScrollViewer>
     </Border>
-</Window>
+</local:WindowEXT>

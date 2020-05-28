@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paway.Helper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -16,7 +17,7 @@ namespace Paway.WPF
     /// 自定义默认、鼠标划过时、鼠标点击时的Brush颜色
     /// </summary>
     [TypeConverter(typeof(BrushEXTConverter))]
-    public class BrushEXT : IEquatable<BrushEXT>
+    public class BrushEXT : IEquatable<BrushEXT>, IElementStatu<Brush>
     {
         /// <summary>
         /// 默认的颜色
@@ -118,20 +119,19 @@ namespace Paway.WPF
             }
             if (value is string str)
             {
-                var strs = str.Split(';');
-                Color? normal = null;
-                Color? mouse = null;
-                Color? pressed = null;
-                int? alpha = null;
-                if (strs.Length > 0 && !string.IsNullOrEmpty(strs[0])) normal = (Color)ColorConverter.ConvertFromString(strs[0]);
-                if (strs.Length > 1 && !string.IsNullOrEmpty(strs[1])) mouse = (Color)ColorConverter.ConvertFromString(strs[1]);
-                if (strs.Length > 2 && !string.IsNullOrEmpty(strs[2])) pressed = (Color)ColorConverter.ConvertFromString(strs[2]);
-                if (strs.Length > 3 && !string.IsNullOrEmpty(strs[3])) alpha = Convert.ToInt32(strs[3], culture);
-
-                var old = Method.GetValue<BrushEXT>(context);
-                return new BrushEXT(normal, mouse, pressed, alpha, old);
+                var result = Method.ElementStatu<BrushEXT, Color>(context, culture, str, Parse, ParseValue);
+                return new BrushEXT(result.Item2, result.Item3, result.Item4, result.Item5, result.Item1);
             }
             return base.ConvertFrom(context, culture, value);
+        }
+        private Color? ParseValue(BrushEXT old, string name)
+        {
+            if (old == null) return null;
+            return (old.GetValue(name) as SolidColorBrush).Color;
+        }
+        private Color Parse(string str)
+        {
+            return (Color)ColorConverter.ConvertFromString(str);
         }
         /// <summary>
         /// </summary>

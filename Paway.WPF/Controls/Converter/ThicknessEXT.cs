@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paway.Helper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -107,33 +108,26 @@ namespace Paway.WPF
             }
             if (value is string str)
             {
-                var strs = str.Split(';');
-                Thickness? normal = null;
-                Thickness? mouse = null;
-                Thickness? pressed = null;
-                if (strs.Length > 0) Parse(strs[0], out normal);
-                if (strs.Length > 1) Parse(strs[1], out mouse);
-                if (strs.Length > 2) Parse(strs[2], out pressed);
-
-                var old = Method.GetValue<ThicknessEXT>(context);
-                return new ThicknessEXT(normal, mouse, pressed, old);
+                var result = Method.ElementStatu<ThicknessEXT, Thickness>(context, culture, str, Parse, ParseValue);
+                return new ThicknessEXT(result.Item2, result.Item3, result.Item4, result.Item1);
             }
             return base.ConvertFrom(context, culture, value);
         }
-        private void Parse(string str, out Thickness? value)
+        private Thickness? ParseValue(ThicknessEXT old, string name)
         {
-            if (string.IsNullOrEmpty(str)) value = null;
+            if (old == null) return null;
+            return (Thickness)old.GetValue(name);
+        }
+        private Thickness Parse(string str)
+        {
             if (str.Contains(","))
             {
                 var strs = str.Split(',');
                 if (strs.Length != 4) throw new WarningException("参数错误");
-                value = new Thickness(Convert.ToDouble(strs[0]), Convert.ToDouble(strs[1]), Convert.ToDouble(strs[2]), Convert.ToDouble(strs[3]));
+                return new Thickness(Convert.ToDouble(strs[0]), Convert.ToDouble(strs[1]), Convert.ToDouble(strs[2]), Convert.ToDouble(strs[3]));
             }
-            else if (double.TryParse(str, out double result))
-            {
-                value = new Thickness(result);
-            }
-            else value = null;
+            double.TryParse(str, out double result);
+            return new Thickness(result);
         }
         /// <summary>
         /// </summary>

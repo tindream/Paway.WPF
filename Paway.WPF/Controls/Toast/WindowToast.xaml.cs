@@ -20,8 +20,10 @@ namespace Paway.WPF
     /// <summary>
     /// Window系统消息框-Toast显示
     /// </summary>
-    public partial class WindowToast : Window
+    public partial class WindowToast : WindowEXT
     {
+        private bool iFirst = true;
+
         /// <summary>
         /// </summary>
         public WindowToast()
@@ -52,8 +54,12 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnRender(DrawingContext drawingContext)
         {
-            this.Width = border1.ActualWidth + 3;
-            this.Height = border1.ActualHeight + 3;
+            if (iFirst)
+            {
+                iFirst = false;
+                this.Width = border1.ActualWidth + 3;
+                this.Height = border1.ActualHeight + 3;
+            }
             this.Left = (SystemParameters.WorkArea.Width - this.Width) / 2;
             this.Top = (SystemParameters.WorkArea.Height - this.Height) * 2 / 3;
             base.OnRender(drawingContext);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Odbc;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Security;
 using System.Security.Cryptography;
@@ -23,6 +24,7 @@ namespace Paway.WPF
     /// </summary>
     public class Method
     {
+        #region TypeConverter
         /// <summary>
         /// 获取ITypeDescriptorContext中的属性值
         /// </summary>
@@ -38,6 +40,45 @@ namespace Paway.WPF
             }
             return default;
         }
+        /// <summary>
+        /// 控件状态转换
+        /// </summary>
+        internal static Tuple<T, I?, I?, I?, int?> ElementStatu<T, I>(ITypeDescriptorContext context, CultureInfo culture, string str,
+            Func<string, I> func, Func<T, string, I?> funcValue)
+            //where T : IElementStatu<I> 
+            where I : struct
+        {
+            var old = Method.GetValue<T>(context);
+
+            var strs = str.Split(';');
+            I? normal = null;
+            I? mouse = null;
+            I? pressed = null;
+            int? alpha = null;
+            if (strs.Length > 0)
+            {
+                if (!string.IsNullOrEmpty(strs[0])) normal = func(strs[0]);
+                else normal = funcValue(old, "Normal");
+            }
+            if (strs.Length > 1)
+            {
+                if (!string.IsNullOrEmpty(strs[1])) mouse = func(strs[1]);
+                else mouse = funcValue(old, "Mouse");
+            }
+            if (strs.Length > 2)
+            {
+                if (!string.IsNullOrEmpty(strs[2])) pressed = func(strs[2]);
+                else pressed = funcValue(old, "Pressed");
+            }
+            if (strs.Length > 3)
+            {
+                if (!string.IsNullOrEmpty(strs[3])) alpha = Convert.ToInt32(strs[3], culture);
+                else if (old != null) alpha = (int)old.GetValue("Alpha");
+            }
+            return new Tuple<T, I?, I?, I?, int?>(old, normal, mouse, pressed, alpha);
+        }
+
+        #endregion
 
         #region 获取控件模板的XAML代码
         /// <summary>
