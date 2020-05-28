@@ -317,9 +317,9 @@ namespace Paway.WPF
         {
             while (obj != null)
             {
-                if (obj is T)
+                if (obj is T t)
                 {
-                    parent = (T)obj;
+                    parent = t;
                     return true;
                 }
                 obj = VisualTreeHelper.GetParent(obj);

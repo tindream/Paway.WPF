@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -56,11 +57,11 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemImageWidthProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemImageWidth), typeof(double), typeof(ListViewEXT), new PropertyMetadata(24d));
+            DependencyProperty.RegisterAttached(nameof(ItemImageWidth), typeof(double), typeof(ListViewEXT), new PropertyMetadata(32d));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemImageHeightProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemImageHeight), typeof(double), typeof(ListViewEXT), new PropertyMetadata(24d));
+            DependencyProperty.RegisterAttached(nameof(ItemImageHeight), typeof(double), typeof(ListViewEXT), new PropertyMetadata(32d));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemImageDockProperty =
@@ -365,25 +366,25 @@ namespace Paway.WPF
         /// <summary>
         /// 上一次按下时的item
         /// </summary>
-        private IListViewInfo lastItem;
+        private ListBoxItem lastItem;
         /// <summary>
         /// 按下时的item
         /// </summary>
-        private IListViewInfo downItem;
+        private ListBoxItem downItem;
         /// <summary>
         /// 鼠标按下时取消触发
         /// </summary>
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
             downItem = null;
-            if (ClickMode == ClickMode.Release && e.ChangedButton == MouseButton.Left)
+            if (e.ChangedButton == MouseButton.Left)
             {
-                if (e.OriginalSource is FrameworkElement element && element.DataContext is IListViewInfo info)
+                if (ClickMode == ClickMode.Release)
                 {
-                    downItem = info;
-                    e.Handled = true;
+                    e.Handled = Method.Parent<ListBoxItem>(e.OriginalSource as DependencyObject, out downItem);
                 }
             }
+            else e.Handled = true;
             base.OnPreviewMouseDown(e);
         }
         /// <summary>
@@ -394,7 +395,7 @@ namespace Paway.WPF
         {
             if (ClickMode == ClickMode.Release && e.ChangedButton == MouseButton.Left && downItem != null)
             {
-                if (e.OriginalSource is FrameworkElement element && element.DataContext is IListViewInfo item)
+                if (Method.Parent<ListBoxItem>(e.OriginalSource as DependencyObject, out ListBoxItem item))
                 {
                     if (item == downItem)
                     {
@@ -404,39 +405,27 @@ namespace Paway.WPF
                             {
                                 if (firstIndex == -1)
                                 {
-                                    firstIndex = Items.IndexOf(item);
+                                    firstIndex = Index(item);
                                     item.IsSelected = true;
                                 }
                                 else
                                 {
-                                    var index = Items.IndexOf(item);
+                                    var index = Index(item);
                                     var min = Math.Min(firstIndex, index);
                                     var max = Math.Max(firstIndex, index);
-                                    for (int i = 0; i < Items.Count; i++)
-                                    {
-                                        if (Items[i] is IListViewInfo temp)
-                                        {
-                                            temp.IsSelected = i >= min && i <= max;
-                                        }
-                                    }
+                                    Selected(i => i >= min && i <= max);
                                 }
                             }
                             else
                             {
-                                firstIndex = Items.IndexOf(item);
+                                firstIndex = Index(item);
                                 if (System.Windows.Forms.Control.ModifierKeys == System.Windows.Forms.Keys.Control)
                                 {
                                     item.IsSelected = !item.IsSelected;
                                 }
                                 else
                                 {
-                                    for (int i = 0; i < Items.Count; i++)
-                                    {
-                                        if (Items[i] is IListViewInfo temp)
-                                        {
-                                            temp.IsSelected = false;
-                                        }
-                                    }
+                                    Selected(i => false);
                                     item.IsSelected = true;
                                 }
                             }
@@ -455,6 +444,38 @@ namespace Paway.WPF
                 }
             }
             base.OnPreviewMouseUp(e);
+        }
+        private void Selected(Func<int, bool> action)
+        {
+            for (int i = 0; i < this.Items.Count; i++)
+            {
+                if (Items[i] is ListBoxItem listBoxItem)
+                {
+                    listBoxItem.IsSelected = action(i);
+                }
+                else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is ListViewItem listViewItem)
+                {
+                    listViewItem.IsSelected = action(i);
+                }
+            }
+        }
+        private int Index(ListBoxItem item)
+        {
+            for (int i = 0; i < Items.Count; i++)
+            {
+                if (Items[i] is ListBoxItem listBoxItem)
+                {
+                    if (item.Equals(listBoxItem) || item.Content.Equals(listBoxItem))
+                    {
+                        return i;
+                    }
+                }
+                else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is ListViewItem listViewItem)
+                {
+                    if (item.Equals(listViewItem)) return i;
+                }
+            }
+            return -1;
         }
 
         #endregion

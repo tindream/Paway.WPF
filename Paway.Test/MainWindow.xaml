@@ -66,8 +66,8 @@
                            ItemImageMargin="5,5,0,0;5,1,0,4"  
                            HorizontalContentAlignment="Left" VerticalContentAlignment="Center" ItemTextForeground="#222"
                            ItemTextPadding="5" 
-                           ItemImageHeight="24" ItemImageWidth="24" ItemImageDock="Top" 
-                           ItemDescDock="Right" ItemDescPadding="5" >
+                           ItemImageHeight="32" ItemImageWidth="32" ItemImageDock="Top" 
+                           ItemDescDock="Right" ItemDescPadding="5" SelectionMode="Extended">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding SelectionCommand}"
@@ -77,6 +77,7 @@
             <utils:ListBoxItemEXT Content="Hello" Desc="World"
                                   Image="pack://application:,,,/Paway.Test;component/Images/close.png"/>
             <utils:ListBoxItemEXT Content="A"/>
+            <Button Content="Hi"/>
             <utils:ListBoxItemEXT Content="B"/>
             <utils:ListBoxItemEXT Content="C"/>
         </utils:ListViewEXT>

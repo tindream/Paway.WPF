@@ -41,8 +41,8 @@ namespace Paway.Test.ViewModel
             {
                 return selectionCommand ?? (selectionCommand = new RelayCommand<ListViewEXT>(listView1 =>
                 {
-                    if (listView1.SelectedItem is IListViewInfo info) Method.Show(listView1, info.Content);
-                    listView1.SelectedIndex = -1;
+                    //if (listView1.SelectedItem is IListViewInfo info) Method.Show(listView1, info.Content);
+                    //listView1.SelectedIndex = -1;
                 }));
             }
         }

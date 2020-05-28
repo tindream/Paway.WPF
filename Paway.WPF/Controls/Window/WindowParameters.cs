@@ -37,7 +37,7 @@ namespace Paway.WPF
         /// <summary>
         /// Get Dpi
         /// </summary>
-        /// <returns>Return 96,144/returns>
+        /// <returns>Return 96,144</returns>
         public static double GetDpi()
         {
             var dpiXProperty = typeof(SystemParameters).GetProperty("DpiX", BindingFlags.NonPublic | BindingFlags.Static);
