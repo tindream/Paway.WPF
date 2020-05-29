@@ -52,6 +52,9 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public CheckBoxEXT() { }
+        public CheckBoxEXT()
+        {
+            DefaultStyleKey = typeof(CheckBoxEXT);
+        }
     }
 }

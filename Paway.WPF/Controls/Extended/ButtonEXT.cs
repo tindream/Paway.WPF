@@ -148,6 +148,9 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public ButtonEXT() { }
+        public ButtonEXT()
+        {
+            DefaultStyleKey = typeof(ButtonEXT);
+        }
     }
 }

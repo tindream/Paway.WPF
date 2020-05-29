@@ -82,6 +82,9 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public ComboBoxEXT() { }
+        public ComboBoxEXT()
+        {
+            DefaultStyleKey = typeof(ComboBoxEXT);
+        }
     }
 }

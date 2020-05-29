@@ -356,7 +356,10 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public ListViewEXT() { }
+        public ListViewEXT()
+        {
+            DefaultStyleKey = typeof(ListViewEXT);
+        }
 
         #region 指定按钮按下并释放时，应引发事件。
         /// <summary>

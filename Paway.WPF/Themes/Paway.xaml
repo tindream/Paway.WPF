@@ -3,15 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Paway.WPF">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\Button.xaml"/>
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBox.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\DataGrid.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\PasswordBox.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\ProgressBar.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ScrollBar.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\TextBox.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\ListView.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\CheckBox.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\RadioButton.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

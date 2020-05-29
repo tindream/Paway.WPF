@@ -125,6 +125,9 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public ProgressBarEXT() { }
+        public ProgressBarEXT()
+        {
+            DefaultStyleKey = typeof(ProgressBarEXT);
+        }
     }
 }

@@ -80,6 +80,9 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public TextBoxEXT() { }
+        public TextBoxEXT()
+        {
+            DefaultStyleKey = typeof(TextBoxEXT);
+        }
     }
 }

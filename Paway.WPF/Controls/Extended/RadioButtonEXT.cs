@@ -38,6 +38,9 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public RadioButtonEXT() { }
+        public RadioButtonEXT()
+        {
+            DefaultStyleKey = typeof(RadioButtonEXT);
+        }
     }
 }
