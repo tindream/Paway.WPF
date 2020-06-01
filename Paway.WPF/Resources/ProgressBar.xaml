@@ -19,7 +19,7 @@
                                 Background="{TemplateBinding Background}" />
                         <Border x:Name="PART_Indicator"
                                 CornerRadius="{TemplateBinding Radius}"
-                                HorizontalAlignment="Left">
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
                             <Border.Background>
                                 <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
                                     <GradientStop 
