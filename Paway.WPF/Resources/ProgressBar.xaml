@@ -22,24 +22,22 @@
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
                             <Border.Background>
                                 <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
-                                    <GradientStop 
+                                    <GradientStop
                                         Offset="0"
                                         Color="{Binding ForegroundStartColor, RelativeSource={RelativeSource TemplatedParent}}" />
-                                    <GradientStop 
+                                    <GradientStop
                                         Offset="1"
                                         Color="{Binding ForegroundEndColor, RelativeSource={RelativeSource TemplatedParent}}" />
                                 </LinearGradientBrush>
                             </Border.Background>
                         </Border>
-                        <Grid>
-                            <Label Opacity="0.7" Name="txt"
-                                   Padding="12,4,5,4"
-                                   Foreground="#000000"
-                                   Content="{TemplateBinding ProgressValue}"
-                                   FontFamily="Microsoft YaHei"
-                                   HorizontalAlignment="Right"
-                                   VerticalContentAlignment="Center"/>
-                        </Grid>
+                        <Label Opacity="0.7" Name="txt"
+							   Padding="12,4,5,4"
+							   Foreground="#000000"
+							   Content="{TemplateBinding ProgressValue}"
+							   FontFamily="Microsoft YaHei"
+							   HorizontalAlignment="Right"
+							   VerticalContentAlignment="Center"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Value" Value="100">

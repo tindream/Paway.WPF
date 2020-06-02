@@ -191,7 +191,7 @@ namespace Paway.WPF
         {
             Parent(parent, out Window owner);
             window.ShowInTaskbar = false;
-            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             window.Closed += delegate
             {
                 //容器Grid
