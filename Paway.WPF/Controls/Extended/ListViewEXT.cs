@@ -409,7 +409,7 @@ namespace Paway.WPF
                                 if (firstIndex == -1)
                                 {
                                     firstIndex = Index(item);
-                                    item.IsSelected = true;
+                                    SetSelected(item, true);
                                 }
                                 else
                                 {
@@ -424,23 +424,22 @@ namespace Paway.WPF
                                 firstIndex = Index(item);
                                 if (System.Windows.Forms.Control.ModifierKeys == System.Windows.Forms.Keys.Control)
                                 {
-                                    item.IsSelected = !item.IsSelected;
+                                    SetSelected(item, !item.IsSelected);
                                 }
                                 else
                                 {
-                                    Selected(i => false);
-                                    item.IsSelected = true;
+                                    Selected(i => i == Index(item));
                                 }
                             }
                         }
                         else if (SelectionMode == SelectionMode.Multiple)
                         {
-                            item.IsSelected = !item.IsSelected;
+                            SetSelected(item, !item.IsSelected);
                         }
                         else
                         {
-                            if (lastItem != null) lastItem.IsSelected = false;
-                            item.IsSelected = true;
+                            if (lastItem != null && lastItem != item) SetSelected(lastItem, false);
+                            SetSelected(item, true);
                             lastItem = item;
                         }
                     }
@@ -454,13 +453,17 @@ namespace Paway.WPF
             {
                 if (Items[i] is ListBoxItem listBoxItem)
                 {
-                    listBoxItem.IsSelected = action(i);
+                    SetSelected(listBoxItem, action(i));
                 }
                 else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is ListViewItem listViewItem)
                 {
-                    listViewItem.IsSelected = action(i);
+                    SetSelected(listViewItem, action(i));
                 }
             }
+        }
+        private void SetSelected(ListBoxItem item, bool value)
+        {
+            if (item.IsSelected != value) item.IsSelected = value;
         }
         private int Index(ListBoxItem item)
         {
