@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>Paway.WPF</id>
-		<version>1.0.11</version>
+		<version>1.0.12</version>
 		<title>Paway.WPF</title>
 		<authors>Tinn</authors>
 		<owners>Tinna</owners>
@@ -22,5 +22,6 @@
 	</metadata>
 	<files>
 		<file src="bin\release\Paway.WPF.dll" target="lib\net45" />
+		<file src="bin\release\Paway.WPF.xml" target="lib\net45" />
 	</files>
 </package>
