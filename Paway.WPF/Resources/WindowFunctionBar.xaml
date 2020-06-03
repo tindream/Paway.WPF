@@ -4,6 +4,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Window.xaml" />
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="WindowFunctionBarTitleBarButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource WindowTitleBarButtonStyle}">
@@ -36,12 +37,10 @@
                                   VerticalAlignment="Center"
                                   Width="16" />
                 <Path x:Name="GlyphPanel"
-                      Data="F1M10,1.2L4.7,9.1 4.5,9.1 0,5.2 1.3,3.5 4.3,6.1 8.3,0 10,1.2z"
+                      Style="{StaticResource PathRight}"  Width="10" Height="9"
                       Fill="#FF212121"
-                      FlowDirection="LeftToRight"
                       Margin="3"
-                      Visibility="Collapsed"
-                      VerticalAlignment="Center" />
+                      Visibility="Collapsed"/>
                 <ContentPresenter ContentTemplate="{TemplateBinding HeaderTemplate}"
                                   VerticalAlignment="Center"
                                   Content="{TemplateBinding Header}"
@@ -111,12 +110,10 @@
                                   VerticalAlignment="Center"
                                   Width="16" />
                 <Path x:Name="GlyphPanel"
-                      Data="F1M10,1.2L4.7,9.1 4.5,9.1 0,5.2 1.3,3.5 4.3,6.1 8.3,0 10,1.2z"
+                      Style="{StaticResource PathRight}"  Width="10" Height="9"
                       Fill="{TemplateBinding Foreground}"
-                      FlowDirection="LeftToRight"
                       Margin="3"
-                      Visibility="Collapsed"
-                      VerticalAlignment="Center" />
+                      Visibility="Collapsed"/>
                 <ContentPresenter  x:Name="ContentPresenter"
                                    VerticalAlignment="Center"
                                    ContentTemplate="{TemplateBinding HeaderTemplate}"
@@ -253,11 +250,9 @@
                         VerticalAlignment="Center"
                         Width="22" >
                     <Path x:Name="Glyph"
-                          Data="F1M10,1.2L4.7,9.1 4.5,9.1 0,5.2 1.3,3.5 4.3,6.1 8.3,0 10,1.2z"
-                          Fill="#FF212121"
-                          FlowDirection="LeftToRight"
-                          Height="11"
-                          Width="10"  />
+                          Style="{StaticResource PathRight}"  Width="10" Height="9"
+                          Margin="0"
+                          Fill="#FF212121" />
                 </Border>
                 <ContentPresenter x:Name="menuHeaderContainer"
                                   ContentTemplate="{TemplateBinding HeaderTemplate}"
@@ -340,11 +335,9 @@
                         VerticalAlignment="Center"
                         Width="22">
                     <Path x:Name="Glyph"
-                          Data="F1M10,1.2L4.7,9.1 4.5,9.1 0,5.2 1.3,3.5 4.3,6.1 8.3,0 10,1.2z"
-                          Fill="#FF212121"
-                          FlowDirection="LeftToRight"
-                          Height="11"
-                          Width="10" />
+                          Style="{StaticResource PathRight}"  Width="10" Height="9"
+                          Margin="0"
+                          Fill="#FF212121"/>
                 </Border>
                 <ContentPresenter ContentTemplate="{TemplateBinding HeaderTemplate}"
                                   Content="{TemplateBinding Header}"
@@ -364,12 +357,11 @@
                            Text="{TemplateBinding InputGestureText}"
                            VerticalAlignment="Center" />
                 <Path x:Name="RightArrow"
+                      Style="{StaticResource PathTriangleRight}" StrokeThickness="0" Stretch="Fill"  Width="4" Height="7"
                       Grid.Column="5"
-                      Data="M0,0L4,3.5 0,7z"
                       Fill="#FF212121"
                       HorizontalAlignment="Left"
-                      Margin="10,0,0,0"
-                      VerticalAlignment="Center" />
+                      Margin="10,0,0,0" />
                 <Popup x:Name="PART_Popup"
                        AllowsTransparency="True"
                        Focusable="False"

@@ -1,4 +1,5 @@
 ﻿
+using Paway.Helper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,7 +25,7 @@ namespace Paway.WPF
     {
         /// <summary>
         /// </summary>
-        public WindowProgress(string msg = Config.Loading)
+        public WindowProgress(string msg = TConfig.Loading)
         {
             InitializeComponent();
             desc.Text = msg;

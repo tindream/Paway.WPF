@@ -22,11 +22,6 @@ namespace Paway.WPF
     public class Config
     {
         #region 常量
-        /// <summary>
-        /// Loading
-        /// </summary>
-        public const string Loading = "Loading...";
-
         #region GroupActive
         /// <summary>
         /// Active state

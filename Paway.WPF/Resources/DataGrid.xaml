@@ -112,23 +112,4 @@
         <Setter Property="CanUserResizeRows" Value="False"/>
     </Style>
 
-    <Style x:Key="TextLeftSytle" TargetType="{x:Type TextBlock}" >
-        <Setter Property="Margin" Value="2,0" />
-        <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="TextTrimming" Value="WordEllipsis"/>
-    </Style>
-    <Style x:Key="TextCenterSytle" TargetType="{x:Type TextBlock}">
-        <Setter Property="Margin" Value="2,0" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="TextTrimming" Value="WordEllipsis"/>
-    </Style>
-    <Style x:Key="TextRightSytle" TargetType="{x:Type TextBlock}">
-        <Setter Property="Margin" Value="2,0" />
-        <Setter Property="HorizontalAlignment" Value="Right" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="TextTrimming" Value="WordEllipsis"/>
-    </Style>
-
 </ResourceDictionary>

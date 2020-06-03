@@ -24,6 +24,7 @@ namespace Paway.WPF
     /// </summary>
     public class Method
     {
+        #region internal
         #region TypeConverter
         /// <summary>
         /// 获取ITypeDescriptorContext中的属性值
@@ -77,6 +78,8 @@ namespace Paway.WPF
             }
             return new Tuple<T, I?, I?, I?, int?>(old, normal, mouse, pressed, alpha);
         }
+
+        #endregion
 
         #endregion
 

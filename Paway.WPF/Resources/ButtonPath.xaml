@@ -2,6 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Paway.WPF">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
     <Style TargetType="{x:Type local:ButtonPath}">
         <Setter Property="FontFamily" Value="Source Han Sans CN Normal"></Setter>
         <Setter Property="Cursor" Value="Hand"/>
@@ -39,10 +43,8 @@
                                 <DropShadowEffect Color="#FFE5E5E6" ShadowDepth="0"/>
                             </Path.Effect>
                         </Path>
-                        <Path Name="close" Data="M1,0 L6,5 L11,0 L12,1 L7,6 L12,11 L11,12 L6,7 L1,12 L0,11 L5,6 L0,1 z"
-                              Width="12"
-                              Height="12"
-                              Fill="Red" Stretch="Fill" Visibility="Collapsed"
+                        <Path Name="close" Style="{StaticResource PathClose}"
+                              Visibility="Collapsed"
                               Canvas.Left="14.75" Canvas.Top="45" RenderTransformOrigin="0.792,-0.062" />
                         <TextBlock Name="lbText" Canvas.Left="3" Canvas.Top="14" Width="34"
 								   Text="{TemplateBinding Content}"

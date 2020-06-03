@@ -2,12 +2,17 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Paway.WPF">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
     <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
         <Grid Height="30">
             <Border Grid.Column="1" Background="White" Opacity="0"   Cursor="Hand"/>
-            <Path x:Name="Arrow" Grid.Column="1"   Data="M 0 0  6 6 12 0 Z"  Margin="0,0,5,0"
-                  VerticalAlignment="Center" HorizontalAlignment="Right" 
-                  Stretch="None" Fill="#B1B1B1" />
+            <Path x:Name="Arrow" Grid.Column="1"  Margin="0,0,5,0"
+                  Style="{StaticResource PathTriangleDown}" Width="12" Height="6"
+                  HorizontalAlignment="Right" StrokeThickness="0"
+                  Stretch="Fill" Fill="#B1B1B1" />
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsChecked" Value="true">

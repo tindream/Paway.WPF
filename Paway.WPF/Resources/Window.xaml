@@ -2,6 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Paway.WPF">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
     <local:EmptyObjectConverter x:Key="EmptyObjectConverter" />
 
     <DataTemplate x:Key="MinimizeBlack">
@@ -32,22 +36,10 @@
               Fill="#4C5787" />
     </DataTemplate>
     <DataTemplate x:Key="CloseBlack">
-        <Path Data="M1,0 L6,5 L11,0 L12,1 L7,6 L12,11 L11,12 L6,7 L1,12 L0,11 L5,6 L0,1 z"
-              Width="12"
-              Height="12"
-              UseLayoutRounding="True"
-              VerticalAlignment="Center"
-              HorizontalAlignment="Center"
-              Fill="#4C5787" />
+        <Path Style="{StaticResource PathClose}" Fill="#4C5787" />
     </DataTemplate>
     <DataTemplate x:Key="CloseWhite">
-        <Path Data="M1,0 L6,5 L11,0 L12,1 L7,6 L12,11 L11,12 L6,7 L1,12 L0,11 L5,6 L0,1 z"
-              Width="12"
-              Height="12"
-              UseLayoutRounding="True"
-              VerticalAlignment="Center"
-              HorizontalAlignment="Center"
-              Fill="White" />
+        <Path Style="{StaticResource PathClose}" Fill="White" />
     </DataTemplate>
 
     <Style x:Key="WindowTitleBarButtonStyle" TargetType="{x:Type Button}">
