@@ -59,9 +59,17 @@ namespace Paway.WPF
                 iFirst = false;
                 this.Width = border1.ActualWidth + 3;
                 this.Height = border1.ActualHeight + 3;
+                if (this.Owner == null)
+                {
+                    this.Left = (SystemParameters.WorkArea.Width - this.Width) / 2;
+                    this.Top = (SystemParameters.WorkArea.Height - this.Height) * 2 / 3;
+                }
+                else
+                {
+                    this.Left = this.Owner.Left + (this.Owner.Width - this.Width) / 2;
+                    this.Top = this.Owner.Top + (this.Owner.Height - this.Height) * 2 / 3;
+                }
             }
-            this.Left = (SystemParameters.WorkArea.Width - this.Width) / 2;
-            this.Top = (SystemParameters.WorkArea.Height - this.Height) * 2 / 3;
             base.OnRender(drawingContext);
         }
         private void MessageBoxExtend_MouseDoubleClick(object sender, MouseButtonEventArgs e)

@@ -23,6 +23,7 @@ namespace Paway.WPF
     /// </summary>
     public partial class WindowProgress : WindowEXT
     {
+        private bool iFirst = true;
         /// <summary>
         /// </summary>
         public WindowProgress(string msg = TConfig.Loading)
@@ -35,7 +36,23 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnRender(DrawingContext drawingContext)
         {
-            if (this.Width > desc.ActualWidth) this.Width = desc.ActualWidth;
+            if (iFirst)
+            {
+                iFirst = false;
+                var left = desc.ActualWidth;
+                if (left < this.MinWidth) left = this.MinWidth;
+                left = this.Width - left;
+                if (this.Width > desc.ActualWidth) this.Width = desc.ActualWidth;
+                if (this.Owner == null)
+                {
+                    this.Left = (SystemParameters.WorkArea.Width - this.Width) / 2;
+                    this.Top = (SystemParameters.WorkArea.Height - this.Height) / 2;
+                }
+                else
+                {
+                    this.Left += left / 2;
+                }
+            }
             base.OnRender(drawingContext);
         }
     }

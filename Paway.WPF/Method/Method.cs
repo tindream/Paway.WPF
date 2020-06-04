@@ -236,7 +236,19 @@ namespace Paway.WPF
         /// </summary>
         public static void Toast(string msg, bool iError = false)
         {
-            new WindowToast().Show(msg, iError);
+            Toast(null, msg, iError);
+        }
+        /// <summary>
+        /// Window系统消息框-Toast显示
+        /// </summary>
+        public static void Toast(DependencyObject parent, string msg, bool iError = false)
+        {
+            var toast = new WindowToast();
+            if (Parent(parent, out Window owner))
+            {
+                toast.Owner = owner;
+            }
+            toast.Show(msg, iError);
         }
 
         #endregion
