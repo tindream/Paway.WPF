@@ -32,6 +32,19 @@ namespace Paway.WPF
         /// </summary>
         public Brush Pressed { get; set; } = new SolidColorBrush(Color.FromArgb(250, 35, 175, 255));
         /// <summary>
+        /// 鼠标划过时的选中颜色
+        /// </summary>
+        public Brush PressedMouse
+        {
+            get
+            {
+                var pressed = Pressed as SolidColorBrush;
+                var alpha = pressed.Color.A - 20;
+                if (alpha < 0) alpha = 0;
+                return new SolidColorBrush(Color.FromArgb((byte)alpha, pressed.Color.R, pressed.Color.G, pressed.Color.B));
+            }
+        }
+        /// <summary>
         /// 颜色Alpha值变量
         /// </summary>
         public int Alpha { get; set; } = 50;

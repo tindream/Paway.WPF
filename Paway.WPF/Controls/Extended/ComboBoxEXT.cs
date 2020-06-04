@@ -22,17 +22,17 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ForegroundRoundProperty =
             DependencyProperty.RegisterAttached(nameof(ForegroundRound), typeof(BrushEXT), typeof(ComboBoxEXT),
-            new PropertyMetadata(new BrushEXT(Colors.Black, Colors.White)));
+            new PropertyMetadata(new BrushEXT(Colors.Black, Colors.Black, Colors.White)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty BackgroundRoundProperty =
             DependencyProperty.RegisterAttached(nameof(BackgroundRound), typeof(BrushEXT), typeof(ComboBoxEXT),
-            new PropertyMetadata(new BrushEXT(Colors.LightGray, Color.FromArgb(149, 35, 175, 255))));
+            new PropertyMetadata(new BrushEXT(null, Color.FromArgb(85, 35, 175, 255), alpha: 85)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty BorderFocusedBrushProperty =
             DependencyProperty.RegisterAttached(nameof(BorderFocusedBrush), typeof(BrushEXT), typeof(ComboBoxEXT),
-                new PropertyMetadata(new BrushEXT(null, Color.FromArgb(170, 35, 175, 255), null, 85)));
+                new PropertyMetadata(new BrushEXT(Colors.LightGray, Color.FromArgb(170, 35, 175, 255), null, 85)));
 
         #endregion
 

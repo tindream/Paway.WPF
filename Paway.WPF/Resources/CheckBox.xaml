@@ -10,7 +10,6 @@
         <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="BorderBrush" Value="Gray"/>
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="Padding" Value="0,0,3,0"/>
         <Setter Property="Template">
@@ -23,7 +22,7 @@
                         </Grid.ColumnDefinitions>
                         <Border
                             BorderThickness="{TemplateBinding Border.BorderThickness}"
-                            BorderBrush="{TemplateBinding Border.BorderBrush}"
+                            BorderBrush="{Binding Path=BorderFocusedBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"
                             Background="{TemplateBinding Panel.Background}"
                             CornerRadius="{TemplateBinding Radius}"
                             Name="checkBoxBorder"

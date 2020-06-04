@@ -86,7 +86,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemTextFontSizeProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemTextFontSize), typeof(DoubleEXT), typeof(ListViewEXT), new PropertyMetadata(new DoubleEXT()));
+            DependencyProperty.RegisterAttached(nameof(ItemTextFontSize), typeof(DoubleEXT), typeof(ListViewEXT), new PropertyMetadata(new DoubleEXT(Config.FontSize)));
 
         /// <summary>
         /// </summary>
@@ -107,7 +107,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemDescFontSizeProperty =
-        DependencyProperty.RegisterAttached(nameof(ItemDescFontSize), typeof(DoubleEXT), typeof(ListViewEXT), new PropertyMetadata(new DoubleEXT(13)));
+        DependencyProperty.RegisterAttached(nameof(ItemDescFontSize), typeof(DoubleEXT), typeof(ListViewEXT), new PropertyMetadata(new DoubleEXT(Config.FontSize - 2)));
 
         #endregion
 
@@ -384,7 +384,7 @@ namespace Paway.WPF
             {
                 if (ClickMode == ClickMode.Release)
                 {
-                    e.Handled = Method.Parent<ListBoxItem>(e.OriginalSource as DependencyObject, out downItem);
+                    e.Handled = Method.Parent(e.OriginalSource as DependencyObject, out downItem);
                 }
             }
             else e.Handled = true;
@@ -398,7 +398,7 @@ namespace Paway.WPF
         {
             if (ClickMode == ClickMode.Release && e.ChangedButton == MouseButton.Left && downItem != null)
             {
-                if (Method.Parent<ListBoxItem>(e.OriginalSource as DependencyObject, out ListBoxItem item))
+                if (Method.Parent(e.OriginalSource as DependencyObject, out ListBoxItem item))
                 {
                     if (item == downItem)
                     {

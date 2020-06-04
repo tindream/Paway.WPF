@@ -9,7 +9,7 @@
     <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
         <Grid Height="30">
             <Border Grid.Column="1" Background="White" Opacity="0"   Cursor="Hand"/>
-            <Path x:Name="Arrow" Grid.Column="1"  Margin="0,0,5,0"
+            <Path x:Name="Arrow" Grid.Column="1"  Margin="9,0"
                   Style="{StaticResource PathTriangleDown}" Width="12" Height="6"
                   HorizontalAlignment="Right" StrokeThickness="0"
                   Stretch="Fill" Fill="#B1B1B1" />
@@ -37,7 +37,14 @@
                         </Grid.ColumnDefinitions>
                         <Border Name="border" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="1" 
                                 CornerRadius="{TemplateBinding Radius}"
-                                BorderBrush="{Binding Path=BackgroundRound.Normal, RelativeSource={RelativeSource TemplatedParent}}" />
+                                BorderBrush="{Binding Path=BorderFocusedBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}" >
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                    <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                                    <GradientStop Color="#FFE5E5E5" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
                         <ContentPresenter x:Name="ContentSite" Margin="5,3,0,3" 
                                           VerticalAlignment="Center" 
                                           IsHitTestVisible="False"
@@ -51,11 +58,12 @@
                                       Template="{StaticResource ComboBoxToggleButton}"
                                       IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" />
                         <!--必须将 TextBox 命名为 PART_EditableTextBox，否则 ComboBox 将无法识别它-->
-                        <TextBox   Visibility="Hidden" 
-                                   x:Name="PART_EditableTextBox"  
-                                   Focusable="True" 
-                                   Background="Transparent" 
-                                   IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                        <local:TextBoxEXT x:Name="PART_EditableTextBox"
+                                          BorderFocusedBrush="Transparent"
+                                          Visibility="Hidden" 
+                                          Focusable="True" 
+                                          Background="Transparent" 
+                                          IsReadOnly="{TemplateBinding IsReadOnly}"/>
                         <!--Popup 可显示 ComboBox 中的项列表。IsOpen 已数据绑定到通过 ComboBoxToggleButton 来切换的 IsDropDownOpen-->
                         <Popup IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" x:Name="Popup"
                                Focusable="False" 
@@ -80,6 +88,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEditable" Value="true">
                             <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="border" Property="Background" Value="White" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="border" Property="BorderBrush" 
@@ -111,12 +120,13 @@
         <Setter Property="ItemContainerStyle">
             <Setter.Value>
                 <Style TargetType="ComboBoxItem">
-                    <Setter Property="Height" Value="30"/>
+                    <Setter Property="Padding" Value="3,15"/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate  TargetType="{x:Type ComboBoxItem}">
                                 <Grid Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
-                                    <Border x:Name="_borderbg" Background="Transparent"/>
+                                    <Border x:Name="_borderbg" Background="Transparent"
+                                            Padding="{TemplateBinding Padding}"/>
                                     <TextBlock Margin="5 0" VerticalAlignment="Center" x:Name="_txt" Foreground="#333" 
                                                Text="{Binding Content,RelativeSource={RelativeSource TemplatedParent}}"/>
                                     <Border x:Name="_border" Background="White" Opacity="0"/>
@@ -128,15 +138,21 @@
                                         <Setter TargetName="_txt" Property="Foreground" 
                                                 Value="{Binding Path=ForegroundRound.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}"/>
                                     </Trigger>
-                                    <MultiTrigger>
-                                        <MultiTrigger.Conditions>
-                                            <Condition Property="IsSelected" Value="false"/>
-                                            <Condition Property="IsMouseOver" Value="true"/>
-                                        </MultiTrigger.Conditions>
+                                    <Trigger Property="IsMouseOver" Value="true">
                                         <Setter TargetName="_borderbg" Property="Background" 
                                                 Value="{Binding Path=BackgroundRound.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}" />
                                         <Setter TargetName="_txt" Property="Foreground" 
                                                 Value="{Binding Path=ForegroundRound.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}"/>
+                                    </Trigger>
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="IsSelected" Value="true"/>
+                                            <Condition Property="IsMouseOver" Value="true"/>
+                                        </MultiTrigger.Conditions>
+                                        <Setter TargetName="_borderbg" Property="Background" 
+                                                Value="{Binding Path=BackgroundRound.PressedMouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}" />
+                                        <Setter TargetName="_txt" Property="Foreground" 
+                                                Value="{Binding Path=ForegroundRound.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}"/>
                                     </MultiTrigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>

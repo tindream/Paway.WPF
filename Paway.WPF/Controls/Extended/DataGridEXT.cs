@@ -27,7 +27,7 @@ namespace Paway.WPF
         {
             //AutoGenerateColumns = true;
             //this.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
-            this.ColumnHeaderHeight = 42;
+            //this.ColumnHeaderHeight = 42;
             this.Initialized += DataGridEXT_Initialized;
         }
         private void DataGridEXT_Initialized(object sender, EventArgs e)

@@ -18,7 +18,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty BorderFocusedBrushProperty =
             DependencyProperty.RegisterAttached(nameof(BorderFocusedBrush), typeof(BrushEXT), typeof(RadioButtonEXT),
-                new PropertyMetadata(new BrushEXT(null, Color.FromArgb(200, 35, 175, 255), null, 55)));
+                new PropertyMetadata(new BrushEXT(Colors.Gray, Color.FromArgb(200, 35, 175, 255), null, 55)));
 
         #endregion
 

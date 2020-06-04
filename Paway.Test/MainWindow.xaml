@@ -21,6 +21,9 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
+            
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
@@ -31,8 +34,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"></ColumnDefinition>
-            <ColumnDefinition Width="350"></ColumnDefinition>
-            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <utils:ProgressBarEXT Grid.Row="1" Margin="5" Value="95" />
 
@@ -42,32 +44,51 @@
             <ComboBoxItem Content="C"/>
         </utils:ComboBoxEXT>
 
-        <utils:TextBoxEXT Grid.Row="3" Margin="5" Name="tb" ></utils:TextBoxEXT>
+        <utils:TextBoxEXT Grid.Row="3" Name="tb" Margin="5" ></utils:TextBoxEXT>
         <PasswordBox Grid.Row="4" Margin="5" ></PasswordBox>
-        <utils:ButtonEXT Name="btn" Grid.Row="5" Margin="5"  Content="确认" Click="ButtonEXT_Click" 
+        <utils:ButtonEXT Name="btn" Grid.Row="5" Margin="5"  
+                         Content="确认" Click="ButtonEXT_Click" 
                          BackgroundStart=";#770C7900" BackgroundEnd=";#77FF0000"
                          BackgroundImage="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"
                          Stretch="None" Viewport="0,0,0.5,1"
                          Command="{Binding Teach}"
                          CommandParameter="{Binding ElementName=btn}"/>
-        <WrapPanel Grid.Row="6">
+        <WrapPanel Grid.Row="6" Margin="5">
             <utils:CheckBoxEXT x:Name="cbx" Content="Hello" IsChecked="True" Padding="0,0,3,0"/>
-            <utils:CheckBoxEXT Content="World" IsChecked="{x:Null}" IsEnabled="False"/>
+            <utils:CheckBoxEXT Content="World" IsChecked="{x:Null}"/>
+            <utils:CheckBoxEXT Content="Watch" IsChecked="{x:Null}" IsEnabled="False"/>
         </WrapPanel>
-        <WrapPanel Grid.Row="7">
+        <WrapPanel Grid.Row="7" Margin="5">
             <utils:RadioButtonEXT Name="rb" Content="Hello" IsChecked="True" />
-            <utils:RadioButtonEXT Name="rb2" Content="World" IsChecked="True" />
+            <utils:RadioButtonEXT Content="World" IsChecked="True" />
+            <utils:RadioButtonEXT Content="Watch" IsChecked="{x:Null}" IsEnabled="False"/>
         </WrapPanel>
-        <utils:Progress  Grid.Row="10" Margin="5" Width="40" Height="40" />
+        <WrapPanel Grid.Row="8" Margin="5">
+            <Path Style="{StaticResource PathRound}" Margin="5"/>
+            <Path Style="{StaticResource PathRound}" Fill="Red" Margin="5"/>
+            <Path Style="{StaticResource PathTriangle}" Margin="5"/>
+            <Path Style="{StaticResource PathTriangleDown}" Fill="Red" Margin="5"/>
+            <Path Style="{StaticResource PathQuestion}" Margin="5"/>
+            <Path Style="{StaticResource PathRight}" Margin="5"/>
+            <Path Style="{StaticResource PathClose}" Margin="5"/>
+        </WrapPanel>
+        <WrapPanel Grid.Row="9" Margin="5">
+            <utils:ButtonPath 
+                          Width="50" Height="100" Value="50" Background="#F1F1F1"/>
+            <utils:Progress 
+                         Width="40" Height="40" />
+        </WrapPanel>
 
-        <utils:ListViewEXT Name="listView1" Grid.Row="10" Grid.Column="1" Height="250" Margin="5,6,5,5" 
+        
+        <utils:ListViewEXT Name="listView1" Grid.Column="1" Grid.Row="9" Grid.RowSpan="9" 
+                           Height="250" Margin="5,6,5,5" 
                            ItemWidth="100" ItemHeight="100" ItemRadius="0" ItemMargin="1" ItemPadding="0;0,4,0,0"
                            ItemBorder=";1,1,1,5" ItemBackground=";#7723AFFF"
                            ItemImageMargin="5,5,0,0;5,1,0,4"  
                            HorizontalContentAlignment="Left" VerticalContentAlignment="Center" ItemTextForeground="#222"
                            ItemTextPadding="5" 
                            ItemImageHeight="32" ItemImageWidth="32" ItemImageDock="Top" 
-                           ItemDescDock="Right" ItemDescPadding="5" SelectionMode="Extended">
+                           ItemDescDock="Right" ItemDescPadding="5" SelectionMode="Extended" VerticalAlignment="Top">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding SelectionCommand}"
@@ -83,7 +104,8 @@
         </utils:ListViewEXT>
 
 
-        <utils:DataGridEXT Name="datagrid1" Grid.Column="1" Grid.RowSpan="7" Margin="5,7,5,8" Height="285" Grid.Row="1">
+        <utils:DataGridEXT Name="datagrid1" Grid.Column="1" Grid.RowSpan="9" 
+                           Margin="5,7,5,8" Height="250" Grid.Row="1" VerticalAlignment="Top">
             <DataGrid.Columns>
                 <DataGridTextColumn  MinWidth="130" Binding="{Binding Money}" ElementStyle="{StaticResource TextRight}"/>
                 <DataGridTemplateColumn Header="进度" x:Name="Value">
@@ -96,14 +118,7 @@
             </DataGrid.Columns>
         </utils:DataGridEXT>
 
-        <Path Grid.Row="1" Grid.Column="2" Style="{StaticResource PathRound}" Fill="#66C2E6" />
-        <Path Grid.Row="2" Grid.Column="2" Style="{StaticResource PathTriangle}"/>
-        <Path Grid.Row="3" Grid.Column="2" Style="{StaticResource PathTriangleDown}" Fill="Red" />
-        <Path Grid.Row="4" Grid.Column="2" Style="{StaticResource PathQuestion}" />
-        <Path Grid.Row="5" Grid.Column="2" Style="{StaticResource PathRight}"/>
-        <Path Grid.Row="6" Grid.Column="2" Style="{StaticResource PathClose}"/>
 
-        <utils:ButtonPath Grid.Row="10" Grid.Column="2" Width="50" Height="100" Value="50" Background="#F1F1F1"/>
 
     </Grid>
     <utils:WindowEXT.FunctionBar>

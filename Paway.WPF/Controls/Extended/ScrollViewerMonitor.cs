@@ -37,7 +37,13 @@ namespace Paway.WPF
                     {
                         if (scrollViewer.TemplatedParent is DataGridEXT dataGrid)
                         {
-                            thumb.SetValue(VerticalScrollBarMarginProperty, new Thickness(0, -dataGrid.ColumnHeaderHeight, 0, 0));
+                            dataGrid.Loaded += delegate
+                            {
+                                if (Method.Child(dataGrid, out DataGridColumnHeadersPresenter headersPresenter))
+                                {
+                                    thumb.SetValue(VerticalScrollBarMarginProperty, new Thickness(0, -headersPresenter.ActualHeight, 0, 0));
+                                }
+                            };
                         }
                     }
                 }

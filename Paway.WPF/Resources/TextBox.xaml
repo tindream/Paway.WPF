@@ -5,9 +5,9 @@
     <Style TargetType="{x:Type local:TextBoxEXT}">
         <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <Setter Property="local:TextBoxMonitor.IsMonitoring" Value="True"/>
-        <Setter Property="BorderBrush" Value="LightGray"/>
-        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Cursor" Value="IBeam"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="White"/>
         <Setter Property="Padding" Value="3,4"/>
         <Setter Property="Margin" Value="0,2"/>
         <Setter Property="FontFamily" Value="Microsoft YaHei"/>
@@ -18,7 +18,7 @@
                     <Border Name="border" 
                             SnapsToDevicePixels="true"
                             Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderBrush="{Binding Path=BorderFocusedBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"
                             CornerRadius="{TemplateBinding Radius}"
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid>

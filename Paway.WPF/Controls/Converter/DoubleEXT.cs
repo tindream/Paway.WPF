@@ -34,12 +34,7 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public DoubleEXT()
-        {
-            if (Normal == 0) Normal = new ThemeMonitor().FontSize;
-            if (Mouse == 0) Mouse = new ThemeMonitor().FontSize;
-            if (Pressed == 0) Pressed = new ThemeMonitor().FontSize;
-        }
+        public DoubleEXT() { }
         /// <summary>
         /// </summary>
         public DoubleEXT(double value) : this(value, value, value) { }

@@ -34,10 +34,13 @@ namespace Paway.WPF
             if (context != null)
             {
                 var service = (IProvideValueTarget)context.GetService(typeof(IProvideValueTarget));
-                var objType = service.TargetObject.GetType();
-                var obj = (DependencyObject)Activator.CreateInstance(objType);
-                var property = (DependencyProperty)service.TargetProperty;
-                return (T)obj.GetValue(property);
+                if (service.TargetObject != null)
+                {
+                    var objType = service.TargetObject.GetType();
+                    var obj = (DependencyObject)Activator.CreateInstance(objType);
+                    var property = (DependencyProperty)service.TargetProperty;
+                    return (T)obj.GetValue(property);
+                }
             }
             return default;
         }
@@ -359,7 +362,7 @@ namespace Paway.WPF
                         return true;
                     }
                 }
-                if (Child<T>(value, out child, name, false))
+                if (Child(value, out child, name, false))
                 {
                     return true;
                 }
