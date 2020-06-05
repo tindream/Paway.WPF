@@ -14,5 +14,6 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ListView.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\CheckBox.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\RadioButton.xaml" />
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\Slider.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

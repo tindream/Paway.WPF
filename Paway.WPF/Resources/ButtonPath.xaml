@@ -55,10 +55,6 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Stroke" TargetName="path" Value="{Binding BorderFocusedColor, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
                         </Trigger>
-                        <Trigger Property="IWarn" Value="True">
-                            <Setter TargetName="progress" Property="ForegroundStartColor" Value="#F8CD8A" />
-                            <Setter TargetName="progress" Property="ForegroundEndColor" Value="#F18B18" />
-                        </Trigger>
                         <Trigger Property="IEmpty" Value="True">
                             <Setter Property="Stroke" TargetName="path" Value="Gray"></Setter>
                             <Setter Property="Fill" TargetName="path" Value="LightGray"></Setter>

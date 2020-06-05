@@ -63,14 +63,9 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(ProgressBarEXT), new PropertyMetadata(new CornerRadius(3)));
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty ForegroundStartColorProperty =
-            DependencyProperty.RegisterAttached(nameof(ForegroundStartColor), typeof(Color), typeof(ProgressBarEXT),
-            new PropertyMetadata(Color.FromArgb(85, 35, 175, 255)));
-        /// <summary>
-        /// </summary>
-        public static readonly DependencyProperty ForegroundEndColorProperty =
-            DependencyProperty.RegisterAttached(nameof(ForegroundEndColor), typeof(Color), typeof(ProgressBarEXT),
-            new PropertyMetadata(Color.FromArgb(250, 35, 175, 255)));
+        public static readonly DependencyProperty ForegroundColorLinearProperty =
+            DependencyProperty.RegisterAttached(nameof(ForegroundColorLinear), typeof(ColorLinear), typeof(ProgressBarEXT),
+                new PropertyMetadata(new ColorLinear(Color.FromArgb(85, 35, 175, 255))));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ProgressValueProperty =
@@ -91,24 +86,14 @@ namespace Paway.WPF
             set { SetValue(RadiusProperty, value); }
         }
         /// <summary>
-        /// 进度条起始颜色
+        /// 进度条线性颜色
         /// </summary>
         [Category("扩展")]
-        [Description("进度条起始颜色")]
-        public Color ForegroundStartColor
+        [Description("进度条线性颜色")]
+        public ColorLinear ForegroundColorLinear
         {
-            get { return (Color)GetValue(ForegroundStartColorProperty); }
-            set { SetValue(ForegroundStartColorProperty, value); }
-        }
-        /// <summary>
-        /// 进度条终点颜色
-        /// </summary>
-        [Category("扩展")]
-        [Description("进度条终点颜色")]
-        public Color ForegroundEndColor
-        {
-            get { return (Color)GetValue(ForegroundEndColorProperty); }
-            set { SetValue(ForegroundEndColorProperty, value); }
+            get { return (ColorLinear)GetValue(ForegroundColorLinearProperty); }
+            set { SetValue(ForegroundColorLinearProperty, value); }
         }
         /// <summary>
         /// 进度条显示文本

@@ -24,10 +24,10 @@
                                 <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
                                     <GradientStop
                                         Offset="0"
-                                        Color="{Binding ForegroundStartColor, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        Color="{Binding ForegroundColorLinear.Start, RelativeSource={RelativeSource TemplatedParent}}" />
                                     <GradientStop
                                         Offset="1"
-                                        Color="{Binding ForegroundEndColor, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        Color="{Binding ForegroundColorLinear.End, RelativeSource={RelativeSource TemplatedParent}}" />
                                 </LinearGradientBrush>
                             </Border.Background>
                         </Border>

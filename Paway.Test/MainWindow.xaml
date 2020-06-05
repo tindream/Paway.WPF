@@ -21,7 +21,7 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
-            
+
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
@@ -63,7 +63,11 @@
             <utils:RadioButtonEXT Content="World" IsChecked="True" />
             <utils:RadioButtonEXT Content="Watch" IsChecked="{x:Null}" IsEnabled="False"/>
         </WrapPanel>
-        <WrapPanel Grid.Row="8" Margin="5">
+        <utils:SliderEXT Name="slider" Grid.Row="9" Grid.ColumnSpan="2"  Margin="5" Maximum="100" Value="50" BorderBrush="Red"
+                VerticalAlignment="Center" Foreground="Blue" OpacityMask="Gold"/>
+
+        
+        <WrapPanel Grid.Row="10" Margin="5">
             <Path Style="{StaticResource PathRound}" Margin="5"/>
             <Path Style="{StaticResource PathRound}" Fill="Red" Margin="5"/>
             <Path Style="{StaticResource PathTriangle}" Margin="5"/>
@@ -72,15 +76,17 @@
             <Path Style="{StaticResource PathRight}" Margin="5"/>
             <Path Style="{StaticResource PathClose}" Margin="5"/>
         </WrapPanel>
-        <WrapPanel Grid.Row="9" Margin="5">
+
+
+        <WrapPanel Grid.Row="15" Margin="5">
             <utils:ButtonPath 
                           Width="50" Height="100" Value="50" Background="#F1F1F1"/>
             <utils:Progress 
                          Width="40" Height="40" />
         </WrapPanel>
 
-        
-        <utils:ListViewEXT Name="listView1" Grid.Column="1" Grid.Row="9" Grid.RowSpan="9" 
+
+        <utils:ListViewEXT Name="listView1" Grid.Column="1" Grid.Row="10" Grid.RowSpan="9" 
                            Height="250" Margin="5,6,5,5" 
                            ItemWidth="100" ItemHeight="100" ItemRadius="0" ItemMargin="1" ItemPadding="0;0,4,0,0"
                            ItemBorder=";1,1,1,5" ItemBackground=";#7723AFFF"

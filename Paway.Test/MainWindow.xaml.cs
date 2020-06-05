@@ -45,7 +45,7 @@ namespace Paway.Test
         private bool b;
         private void ButtonEXT_Click(object sender, RoutedEventArgs e)
         {
-            var xml = Method.GetTemplateXaml(btn);
+            var xml = Method.GetTemplateXaml(slider);
             Method.Toast(this, xml);
             b = !b;
             if (b) Method.Progress(this);

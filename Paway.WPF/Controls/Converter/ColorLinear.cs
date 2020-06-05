@@ -14,85 +14,63 @@ using System.Windows.Media;
 namespace Paway.WPF
 {
     /// <summary>
-    /// 自定义默认、鼠标划过时、鼠标点击时的Color颜色
+    /// 自定义线性渐变的Color颜色
     /// </summary>
-    [TypeConverter(typeof(ColorEXTConverter))]
-    public class ColorEXT : IEquatable<ColorEXT>, IElementStatu<Color>
+    [TypeConverter(typeof(ColorLinearConverter))]
+    public class ColorLinear : IEquatable<ColorLinear>
     {
         /// <summary>
-        /// 默认的颜色
+        /// 起始颜色
         /// </summary>
-        public Color Normal { get; set; } = Colors.LightGray;
+        public Color Start { get; set; } = Color.FromArgb(85, 35, 175, 255);
         /// <summary>
-        /// 鼠标划过时的颜色
+        /// 终点颜色
         /// </summary>
-        public Color Mouse { get; set; } = Color.FromArgb(210, 35, 175, 255);
-        /// <summary>
-        /// 鼠标点击时的颜色
-        /// </summary>
-        public Color Pressed { get; set; } = Color.FromArgb(250, 35, 175, 255);
+        public Color End { get; set; } = Color.FromArgb(250, 35, 175, 255);
         /// <summary>
         /// 颜色Alpha值变量
         /// </summary>
-        public int Alpha { get; set; } = 50;
+        public int Alpha { get; set; } = 165;
 
         /// <summary>
         /// </summary>
-        public ColorEXT() { }
+        public ColorLinear() { }
         /// <summary>
         /// </summary>
-        public ColorEXT(Color? normal, Color? mouse = null, Color? pressed = null, int? alpha = null, ColorEXT value = null)
+        public ColorLinear(Color? start, Color? end = null, int? alpha = null, ColorLinear value = null)
         {
             if (alpha != null) Alpha = alpha.Value;
             else if (value != null) Alpha = value.Alpha;
 
-            if (normal != null) Normal = normal.Value;
-            else if (value != null) Normal = value.Normal;
+            if (start != null) Start = start.Value;
+            else if (value != null) Start = value.Start;
 
-            if (mouse != null) Mouse = mouse.Value;
-            else if (normal != null) Reset(normal.Value, Alpha);
-            else if (value != null) Mouse = value.Mouse;
-
-            if (pressed != null) Pressed = pressed.Value;
-            else if (mouse != null) Focused(mouse.Value, Alpha);
-            else if (normal == null && value != null) Pressed = value.Pressed;
+            if (end != null) End = end.Value;
+            else if (start != null) Reset(start.Value, Alpha);
+            else if (value != null) End = value.End;
         }
         /// <summary>
         /// 设置所有颜色，指定Alpha差异
         /// </summary>
-        public ColorEXT Reset(Color color, int alpha = 50)
+        public ColorLinear Reset(Color color, int alpha = 50)
         {
-            Normal = color;
-            var a = color.A - alpha;
-            if (a < 0) a = 0;
-            Mouse = Color.FromArgb((byte)a, color.R, color.G, color.B);
-            a = color.A + alpha;
-            if (a > 255) a = 255;
-            Pressed = Color.FromArgb((byte)a, color.R, color.G, color.B);
-            return this;
-        }
-        /// <summary>
-        /// 设置鼠标划过、点击时的颜色
-        /// </summary>
-        public ColorEXT Focused(Color color, int alpha = 50)
-        {
-            Mouse = color;
+            Start = color;
             var a = color.A + alpha;
             if (a > 255) a = 255;
-            Pressed = Color.FromArgb((byte)a, color.R, color.G, color.B);
+            End = Color.FromArgb((byte)a, color.R, color.G, color.B);
             return this;
         }
         /// <summary>
         /// </summary>
-        public bool Equals(ColorEXT other)
+        public bool Equals(ColorLinear other)
         {
-            return Normal.Equals(other.Normal) && Mouse.Equals(other.Mouse) && Pressed.Equals(other.Pressed) && Alpha.Equals(other.Alpha);
+            return Start.Equals(other.Start) && End.Equals(other.End) && Alpha.Equals(other.Alpha);
         }
     }
     /// <summary>
-    /// 字符串转ColorEXT
+    /// 字符串转ColorLinear
     /// </summary>
-    internal class ColorEXTConverter : TypeConverter
+    internal class ColorLinearConverter : TypeConverter
     {
         /// <summary>
         /// </summary>
@@ -119,15 +97,30 @@ namespace Paway.WPF
             }
             if (value is string str)
             {
-                var result = Method.ElementStatu<ColorEXT, Color>(context, culture, str, Parse, ParseValue);
-                return new ColorEXT(result.Item2, result.Item3, result.Item4, result.Item5, result.Item1);
+                var old = Method.GetValue<ColorLinear>(context);
+
+                var strs = str.Split(';');
+                Color? start = null;
+                Color? end = null;
+                int? alpha = null;
+                if (strs.Length > 0)
+                {
+                    if (!string.IsNullOrEmpty(strs[0])) start = Parse(strs[0]);
+                    else if (old != null) start = old.Start;
+                }
+                if (strs.Length > 1)
+                {
+                    if (!string.IsNullOrEmpty(strs[1])) end = Parse(strs[1]);
+                    else if (old != null) end = old.End;
+                }
+                if (strs.Length > 2)
+                {
+                    if (!string.IsNullOrEmpty(strs[2])) alpha = Convert.ToInt32(strs[3], culture);
+                    else if (old != null) alpha = old.Alpha;
+                }
+                return new ColorLinear(start, end, alpha, old);
             }
             return base.ConvertFrom(context, culture, value);
-        }
-        private Color? ParseValue(ColorEXT old, string name)
-        {
-            if (old == null) return null;
-            return (Color)old.GetValue(name);
         }
         private Color Parse(string str)
         {
