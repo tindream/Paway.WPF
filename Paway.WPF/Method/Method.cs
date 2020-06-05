@@ -5,6 +5,7 @@ using System.Data.Odbc;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Security;
 using System.Security.Cryptography;
 using System.Text;
@@ -83,6 +84,32 @@ namespace Paway.WPF
         }
 
         #endregion
+
+        #endregion
+
+        #region 获取指定对象下的指定名称属性值
+        /// <summary>
+        /// 获取指定对象下的指定名称属性值
+        /// </summary>
+        public static bool PrivateField<T>(object parent, string name, out T value)
+        {
+            return PrivateField(parent, parent.GetType(), name, out value);
+        }
+        /// <summary>
+        /// 获取指定对象下的指定名称属性值
+        /// </summary>
+        public static bool PrivateField<T>(object parent, Type type, string name, out T value)
+        {
+            value = default;
+            var field = type.GetField(name, TConfig.Flags);
+            if (field == null && type.BaseType != null) return PrivateField(parent, type.BaseType, name, out value);
+            if (field != null && field.GetValue(parent) is T t)
+            {
+                value = t;
+                return true;
+            }
+            return false;
+        }
 
         #endregion
 

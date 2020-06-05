@@ -63,10 +63,10 @@
             <utils:RadioButtonEXT Content="World" IsChecked="True" />
             <utils:RadioButtonEXT Content="Watch" IsChecked="{x:Null}" IsEnabled="False"/>
         </WrapPanel>
-        <utils:SliderEXT Name="slider" Grid.Row="9" Grid.ColumnSpan="2"  Margin="5" Maximum="100" Value="50" BorderBrush="Red"
-                VerticalAlignment="Center" Foreground="Blue" OpacityMask="Gold"/>
+        <utils:SliderEXT x:Name="slider" Grid.Row="9" Grid.ColumnSpan="2"  Margin="5,5,5,7" Maximum="100" Value="80"
+                VerticalAlignment="Center" Foreground="Blue" OpacityMask="Gold" Orientation="Horizontal" TickPlacement="None" TrackWidth="11"/>
 
-        
+
         <WrapPanel Grid.Row="10" Margin="5">
             <Path Style="{StaticResource PathRound}" Margin="5"/>
             <Path Style="{StaticResource PathRound}" Fill="Red" Margin="5"/>

@@ -1,9 +1,13 @@
-﻿using System;
+﻿using Paway.Helper;
+using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Paway.WPF
@@ -22,6 +26,10 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty RadiusLeftProperty =
             DependencyProperty.RegisterAttached("RadiusLeft", typeof(CornerRadius), typeof(SliderEXT), new PropertyMetadata(new CornerRadius(2, 0, 0, 2)));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty RadiusBottomProperty =
+            DependencyProperty.RegisterAttached("RadiusBottom", typeof(CornerRadius), typeof(SliderEXT), new PropertyMetadata(new CornerRadius(0, 0, 2, 2)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty TrackHeightProperty =
@@ -43,6 +51,8 @@ namespace Paway.WPF
                 {
                     if (((CornerRadius)slider.GetValue(RadiusLeftProperty)).TopLeft != slider.Radius.TopLeft)
                         slider.SetValue(RadiusLeftProperty, new CornerRadius(slider.Radius.TopLeft, 0, 0, slider.Radius.BottomLeft));
+                    if (((CornerRadius)slider.GetValue(RadiusBottomProperty)).BottomLeft != slider.Radius.BottomLeft)
+                        slider.SetValue(RadiusBottomProperty, new CornerRadius(0, 0, slider.Radius.BottomLeft, slider.Radius.BottomRight));
                 };
             }
         }
@@ -98,6 +108,34 @@ namespace Paway.WPF
         public SliderEXT()
         {
             DefaultStyleKey = typeof(SliderEXT);
+            this.ValueChanged += SliderEXT_ValueChanged;
         }
+
+        #region ToolTip
+        /// <summary>
+        /// 点击移动到指定位置
+        /// </summary>
+        protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            base.OnPreviewMouseLeftButtonDown(e);
+            if (this.IsMoveToPointEnabled)
+            {
+                this.ToolTip = this.Value.ToString("0.#");
+            }
+        }
+        /// <summary>
+        /// 拖动到指定位置
+        /// </summary>
+        protected override void OnThumbDragDelta(DragDeltaEventArgs e)
+        {
+            base.OnThumbDragDelta(e);
+            this.ToolTip = this.Value.ToString("0.#");
+        }
+        private void SliderEXT_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            this.ToolTip = this.Value.ToString("0.#");
+        }
+
+        #endregion
     }
 }

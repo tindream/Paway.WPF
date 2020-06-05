@@ -52,7 +52,7 @@ namespace Paway.WPF
         /// <summary>
         /// 设置所有颜色，指定Alpha差异
         /// </summary>
-        public ColorLinear Reset(Color color, int alpha = 50)
+        public ColorLinear Reset(Color color, int alpha = 165)
         {
             Start = color;
             var a = color.A + alpha;
