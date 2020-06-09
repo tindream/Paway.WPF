@@ -33,7 +33,7 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Window.Resources>
-    <Border x:Name="border1" Margin="1"  BorderBrush="#E623AFFF" BorderThickness="1" CornerRadius="8" Background="#FAFAFA"
+    <Border x:Name="border1" Margin="1"  CornerRadius="8" Background="#5D6B99"
             HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
         <Border.RenderTransform>
             <TransformGroup>
@@ -54,7 +54,7 @@
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
             <TextBlock x:Name="tb" Margin="25 7" FontFamily="Microsoft YaHei" 
                    Text="{Binding Message,FallbackValue=失败信息}"
-                   TextWrapping="Wrap" TextAlignment="Center" Foreground="#333"
+                   TextWrapping="Wrap" TextAlignment="Center" Foreground="White"
                    MinWidth="200" MaxWidth="600" ToolTip="双击复制"
                    RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>

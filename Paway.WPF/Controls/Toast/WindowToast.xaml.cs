@@ -62,12 +62,12 @@ namespace Paway.WPF
                 if (this.Owner == null)
                 {
                     this.Left = (SystemParameters.WorkArea.Width - this.Width) / 2;
-                    this.Top = (SystemParameters.WorkArea.Height - this.Height) * 2 / 3;
+                    this.Top = (SystemParameters.WorkArea.Height - this.Height) * 4 / 5;
                 }
                 else
                 {
                     this.Left = this.Owner.Left + (this.Owner.Width - this.Width) / 2;
-                    this.Top = this.Owner.Top + (this.Owner.Height - this.Height) * 2 / 3;
+                    this.Top = this.Owner.Top + (this.Owner.Height - this.Height) * 4 / 5;
                 }
             }
             base.OnRender(drawingContext);

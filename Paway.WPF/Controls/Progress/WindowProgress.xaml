@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:Paway.WPF"
         mc:Ignorable="d"
         AllowsTransparency="True" Background="#E6FFFFFF" WindowStyle="None" FontSize="15"
-        Title="MessageBox" Height="100" MaxWidth="350" Width="350" MinWidth="150" ShowInTaskbar="False" WindowStartupLocation="CenterOwner" >
+        Title="MessageBox" Height="102" MaxWidth="350" Width="350" MinWidth="150" ShowInTaskbar="False" WindowStartupLocation="CenterOwner" >
 
-    <Border BorderBrush="#E623AFFF" BorderThickness="1">
+    <Border BorderBrush="LightGray" BorderThickness="1">
         <StackPanel>
             <local:Progress Margin="10" Width="40" Height="40" VerticalAlignment="Stretch" HorizontalAlignment="Center"></local:Progress>
             <TextBlock Name="desc" Grid.Row="1" Padding="10" Text="Loading..." HorizontalAlignment="Center" TextTrimming="WordEllipsis"/>

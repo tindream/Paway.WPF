@@ -101,7 +101,7 @@ namespace Paway.WPF
         public static bool PrivateField<T>(object parent, Type type, string name, out T value)
         {
             value = default;
-            var field = type.GetField(name, TConfig.Flags);
+            var field = type.GetField(name, TConfig.Flags | BindingFlags.Instance);
             if (field == null && type.BaseType != null) return PrivateField(parent, type.BaseType, name, out value);
             if (field != null && field.GetValue(parent) is T t)
             {
