@@ -185,7 +185,6 @@
                 <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <!--<Setter Property="Opacity" TargetName="ButtonBackground" Value="0.2" />-->
                 <Setter Property="Fill" TargetName="ButtonBackground" Value="#ECF4FF" />
                 <Setter Property="Stroke" TargetName="ButtonBackground" Value="#B0C1E2" />
             </Trigger>
@@ -243,10 +242,9 @@
                         BorderBrush="#FF26A0DA"
                         BorderThickness="0"
                         Background="#0026A0DA"
-                        Padding="0,7"
+                        Padding="0,7,0,11" 
                         ClipToBounds="False"
                         HorizontalAlignment="Center"
-                        Margin="-1,0,0,0"
                         VerticalAlignment="Center"
                         Width="22" >
                     <Path x:Name="Glyph"
@@ -330,8 +328,7 @@
                         BorderBrush="#FF26A0DA"
                         BorderThickness="0"
                         Background="#0026A0DA"
-                        Padding="0,7"
-                        Margin="-1,0,0,0"
+                        Padding="0,7,0,11" 
                         VerticalAlignment="Center"
                         Width="22">
                     <Path x:Name="Glyph"
@@ -442,14 +439,15 @@
         <Setter Property="Control.BorderThickness" Value="0" />
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
-        <Setter Property="Margin"  Value="0,3" />
         <Setter Property="Control.Template" Value="{StaticResource SubmenuItemTemplate}" />
         <Style.Triggers>
             <Trigger Property="MenuItem.Role" Value="TopLevelHeader">
+                <Setter Property="Margin"  Value="0,3" />
                 <Setter Property="Control.Template" Value="{StaticResource TopLevelHeaderTemplate}" />
                 <Setter Property="Control.Padding" Value="9,0" />
             </Trigger>
             <Trigger Property="MenuItem.Role" Value="TopLevelItem">
+                <Setter Property="Margin"  Value="0,3" />
                 <Setter Property="Control.Template" Value="{StaticResource TopLevelItemTemplate}" />
                 <Setter Property="Control.Padding" Value="9,0" />
             </Trigger>
