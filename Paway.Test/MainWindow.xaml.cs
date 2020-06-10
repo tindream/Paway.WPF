@@ -50,6 +50,8 @@ namespace Paway.Test
             b = !b;
             if (b) Method.Progress(this);
             else Method.Hide();
+            transition.Transition = (TransitionType)new Random().Next(0, 5);
+            //transition.Transition = TransitionType.Up;
         }
     }
     public class TestInfo : IListViewInfo

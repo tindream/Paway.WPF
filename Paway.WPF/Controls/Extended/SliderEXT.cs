@@ -1,6 +1,7 @@
 ﻿using Paway.Helper;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -112,16 +113,60 @@ namespace Paway.WPF
         }
 
         #region ToolTip
+        private ToolTip toolTip;
         /// <summary>
         /// 点击移动到指定位置
         /// </summary>
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             base.OnPreviewMouseLeftButtonDown(e);
-            if (this.IsMoveToPointEnabled)
+            this.ToolTip = TMethod.Round(this.Value, 0);
+
+            if (this.AutoToolTipPlacement == System.Windows.Controls.Primitives.AutoToolTipPlacement.None) return;
+            if (toolTip == null)
             {
-                this.ToolTip = this.Value.ToString("0.#");
+                if (Method.Child(this, out Thumb thumb))
+                {
+                    toolTip = new ToolTip();
+                    toolTip.Placement = PlacementMode.Custom;
+                    toolTip.PlacementTarget = thumb;
+                    toolTip.CustomPopupPlacementCallback = AutoToolTipCustomPlacementCallbackTemp;
+                    thumb.ToolTip = toolTip;
+                }
             }
+            toolTip.Content = TMethod.Round(this.Value, 0);
+            if (!toolTip.IsOpen)
+            {
+                toolTip.IsOpen = true;
+            }
+            Method.ExecuteMethod(toolTip.Parent, "Reposition");
+        }
+        private CustomPopupPlacement[] AutoToolTipCustomPlacementCallbackTemp(Size popupSize, Size targetSize, Point offset)
+        {
+            if (Method.ExecuteMethod(this, "AutoToolTipCustomPlacementCallback", out object result, popupSize, targetSize, offset))
+            {
+                var a = result as CustomPopupPlacement[];
+                Debug.WriteLine(a[0].Point);
+                return result as CustomPopupPlacement[];
+            }
+            return null;
+        }
+        /// <summary>
+        /// 鼠标离开
+        /// </summary>
+        protected override void OnMouseLeave(MouseEventArgs e)
+        {
+            base.OnMouseLeave(e);
+            if (this.toolTip != null) this.toolTip.IsOpen = false;
+        }
+
+        /// <summary>
+        /// 拖动开始
+        /// </summary>
+        protected override void OnThumbDragStarted(DragStartedEventArgs e)
+        {
+            base.OnThumbDragStarted(e);
+            if (this.toolTip != null) this.toolTip.IsOpen = false;
         }
         /// <summary>
         /// 拖动到指定位置
@@ -129,11 +174,12 @@ namespace Paway.WPF
         protected override void OnThumbDragDelta(DragDeltaEventArgs e)
         {
             base.OnThumbDragDelta(e);
-            this.ToolTip = this.Value.ToString("0.#");
+            this.ToolTip = TMethod.Round(this.Value, 0);
         }
+
         private void SliderEXT_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            this.ToolTip = this.Value.ToString("0.#");
+            this.ToolTip = TMethod.Round(this.Value, 0);
         }
 
         #endregion

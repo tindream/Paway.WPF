@@ -87,25 +87,68 @@ namespace Paway.WPF
 
         #endregion
 
-        #region 获取指定对象下的指定名称属性值
+        #region 获取对象指定名称字段、执行对象方法
         /// <summary>
-        /// 获取指定对象下的指定名称属性值
+        /// 获取对象指定名称字段
         /// </summary>
-        public static bool PrivateField<T>(object parent, string name, out T value)
+        public static bool GetField<T>(object parent, string name, out T value)
         {
-            return PrivateField(parent, parent.GetType(), name, out value);
+            return GetField(parent, parent.GetType(), name, out value);
         }
         /// <summary>
-        /// 获取指定对象下的指定名称属性值
+        /// 获取对象指定名称字段
         /// </summary>
-        public static bool PrivateField<T>(object parent, Type type, string name, out T value)
+        private static bool GetField<T>(object parent, Type type, string name, out T value)
         {
             value = default;
             var field = type.GetField(name, TConfig.Flags | BindingFlags.Instance);
-            if (field == null && type.BaseType != null) return PrivateField(parent, type.BaseType, name, out value);
+            if (field == null && type.BaseType != null) return GetField(parent, type.BaseType, name, out value);
             if (field != null && field.GetValue(parent) is T t)
             {
                 value = t;
+                return true;
+            }
+            return false;
+        }
+        /// <summary>
+        /// 执行对象方法
+        /// </summary>
+        public static bool ExecuteMethod(object obj, string name, params object[] args)
+        {
+            return ExecuteMethod(obj, obj.GetType(), name, args);
+        }
+        /// <summary>
+        /// 执行对象方法
+        /// </summary>
+        private static bool ExecuteMethod(object obj, Type type, string name, params object[] args)
+        {
+            var method = obj.GetType().GetMethod(name, TConfig.Flags | BindingFlags.Instance);
+            if (method == null && type.BaseType != null) return ExecuteMethod(obj, type.BaseType, name, args);
+            if (method != null)
+            {
+                method.Invoke(obj, args);
+                return true;
+            }
+            return false;
+        }
+        /// <summary>
+        /// 执行对象方法
+        /// </summary>
+        public static bool ExecuteMethod(object obj, string name, out object result, params object[] args)
+        {
+            return ExecuteMethod(obj, obj.GetType(), name, out result, args);
+        }
+        /// <summary>
+        /// 执行对象方法
+        /// </summary>
+        private static bool ExecuteMethod(object obj, Type type, string name, out object result, params object[] args)
+        {
+            result = null;
+            var method = obj.GetType().BaseType.GetMethod(name, TConfig.Flags | BindingFlags.Instance);
+            if (method == null && type.BaseType != null) return ExecuteMethod(obj, type.BaseType, name, out result, args);
+            if (method != null)
+            {
+                result = method.Invoke(obj, args);
                 return true;
             }
             return false;

@@ -89,9 +89,9 @@ namespace Paway.WPF
             {
                 throw base.GetConvertFromException(value);
             }
-            if (value is double)
+            if (value is double @double)
             {
-                return new DoubleEXT((double)value);
+                return new DoubleEXT(@double);
             }
             if (value is string str)
             {

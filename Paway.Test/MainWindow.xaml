@@ -69,7 +69,9 @@
 
         <WrapPanel Grid.Row="10" Margin="5">
             <Path Style="{StaticResource PathRound}" Margin="5"/>
-            <Path Style="{StaticResource PathRound}" Fill="Red" Margin="5"/>
+            <utils:TransitionControl Name="transition" >
+                <Path Style="{StaticResource PathRound}" Fill="Red" Margin="5"/>
+            </utils:TransitionControl>
             <Path Style="{StaticResource PathTriangle}" Margin="5"/>
             <Path Style="{StaticResource PathTriangleDown}" Fill="Red" Margin="5"/>
             <Path Style="{StaticResource PathQuestion}" Margin="5"/>
