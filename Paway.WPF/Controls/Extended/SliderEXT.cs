@@ -135,18 +135,19 @@ namespace Paway.WPF
                 }
             }
             toolTip.Content = TMethod.Round(this.Value, 0);
-            if (!toolTip.IsOpen)
+            if (toolTip.IsOpen)
             {
-                toolTip.IsOpen = true;
+                toolTip.IsOpen = false;
+                //会自动更新位置，再次=True位置不更新
+                return;
             }
+            toolTip.IsOpen = true;
             Method.ExecuteMethod(toolTip.Parent, "Reposition");
         }
         private CustomPopupPlacement[] AutoToolTipCustomPlacementCallbackTemp(Size popupSize, Size targetSize, Point offset)
         {
             if (Method.ExecuteMethod(this, "AutoToolTipCustomPlacementCallback", out object result, popupSize, targetSize, offset))
             {
-                var a = result as CustomPopupPlacement[];
-                Debug.WriteLine(a[0].Point);
                 return result as CustomPopupPlacement[];
             }
             return null;
