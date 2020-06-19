@@ -51,12 +51,39 @@ namespace Paway.Test
             multiList.Add(new ComboBoxMultiInfo("王八"));
             multiList.Add(new ComboBoxMultiInfo("陈九"));
             MultiCmb.ItemsSource = multiList;
+
+            var treeList = new ObservableCollection<ITreeView>()
+            {
+                new TreeViewInfo()
+                {
+                    IsGrouping = true,
+                    GroupName = "单位名称(3/7)",
+                    Children = new ObservableCollection<ITreeView>()
+                    {
+                        new TreeViewInfo(){
+                            IsGrouping=true,
+                            GroupName="未分组联系人(2/4)",
+                            Children=new ObservableCollection<ITreeView>()
+                            {
+                                new TreeViewInfo(){
+                                    IsGrouping=false,
+                                    SurName="刘",
+                                    Name="刘棒",
+                                    Subtitle="我要走向天空！",
+                                    Desc="3人"
+                                }
+                            }
+                        }
+                    },
+                }
+            };
+            TreeViewOrg.ItemsSource = treeList;
         }
 
         private bool b;
         private void ButtonEXT_Click(object sender, RoutedEventArgs e)
         {
-            var xml = Method.GetTemplateXaml(slider);
+            var xml = Method.GetTemplateXaml(TreeViewOrg);
             //Method.Toast(this, xml);
             b = !b;
             if (b) Method.Progress(this);
@@ -64,6 +91,17 @@ namespace Paway.Test
             transition.Transition = (TransitionType)new Random().Next(0, 5);
             //transition.Transition = TransitionType.Up;
         }
+    }
+    public class TreeViewInfo : ITreeView
+    {
+        public bool? IsChecked { get; set; } = false;
+        public bool IsGrouping { get; set; }
+        public ObservableCollection<ITreeView> Children { get; set; }
+        public string GroupName { get; set; }
+        public string SurName { get; set; }
+        public string Name { get; set; }
+        public string Subtitle { get; set; }
+        public string Desc { get; set; }
     }
 
     public class ComboBoxMultiInfo : IComboBoxMulti
@@ -79,7 +117,7 @@ namespace Paway.Test
             this.Text = text;
         }
     }
-    public class TestInfo : IListViewInfo
+    public class TestInfo : IListView
     {
         [NoShow]
         public int Id { get; set; }

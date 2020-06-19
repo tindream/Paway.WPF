@@ -18,11 +18,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ChekedItemsProperty =
-            DependencyProperty.Register(nameof(ChekedItems), typeof(ObservableCollection<IComboBoxMulti>), typeof(ComboBoxMulti), new PropertyMetadata(new ObservableCollection<IComboBoxMulti>(), OnPropertyChanged));
-        private static void OnPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            d.SetValue(e.Property, e.NewValue);
-        }
+            DependencyProperty.Register(nameof(ChekedItems), typeof(ObservableCollection<IComboBoxMulti>), typeof(ComboBoxMulti), new PropertyMetadata(new ObservableCollection<IComboBoxMulti>()));
 
         #endregion
 

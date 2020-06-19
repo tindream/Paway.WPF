@@ -1,0 +1,232 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Paway.WPF">
+
+    <Style x:Key="DefaultTreeViewItem" TargetType="{x:Type TreeViewItem}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TreeViewItem}">
+                    <ControlTemplate.Resources>
+                        <local:IndentConverter  x:Key="indentConverter"/>
+                    </ControlTemplate.Resources>
+                    <Grid Background="Transparent">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Border Name="itemBackground" 
+                                            Background="{TemplateBinding Background}"  
+                                            BorderBrush="{TemplateBinding BorderBrush}"  
+                                            BorderThickness="{TemplateBinding BorderThickness}"  
+                                            Padding="{TemplateBinding Padding}">
+                            <Grid Background="Transparent">
+                                <Grid x:Name="ItemRoot" Margin="{Binding Converter={StaticResource indentConverter},RelativeSource={RelativeSource TemplatedParent}}" Background="Transparent">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="16" />
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <ToggleButton x:Name="Expander" HorizontalAlignment="Left" ClickMode="Press" IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}">
+                                        <ToggleButton.Style>
+                                            <Style TargetType="{x:Type ToggleButton}">
+                                                <Setter Property="Focusable" Value="False"/>
+                                                <Setter Property="Width" Value="16"/>
+                                                <Setter Property="Height" Value="16"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                                            <Border Background="Transparent" Height="16" Padding="5" Width="16">
+                                                                <Path x:Name="ExpandPath" Data="M0,0 L0,6 L6,0 z" Fill="#66645e" Stroke="#66645e">
+                                                                    <Path.RenderTransform>
+                                                                        <RotateTransform Angle="135" CenterY="3" CenterX="3"/>
+                                                                    </Path.RenderTransform>
+                                                                </Path>
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsChecked" Value="True">
+                                                                    <Setter Property="RenderTransform" TargetName="ExpandPath">
+                                                                        <Setter.Value>
+                                                                            <RotateTransform Angle="180" CenterY="3" CenterX="3"/>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                    <Setter Property="Fill" TargetName="ExpandPath" Value="#66645e"/>
+                                                                    <Setter Property="Stroke" TargetName="ExpandPath" Value="#66645e"/>
+                                                                </Trigger>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter Property="Stroke" TargetName="ExpandPath" Value="#66645e"/>
+                                                                    <Setter Property="Fill" TargetName="ExpandPath" Value="#66645e"/>
+                                                                </Trigger>
+                                                                <MultiTrigger>
+                                                                    <MultiTrigger.Conditions>
+                                                                        <Condition Property="IsMouseOver" Value="True"/>
+                                                                        <Condition Property="IsChecked" Value="True"/>
+                                                                    </MultiTrigger.Conditions>
+                                                                    <Setter Property="Stroke" TargetName="ExpandPath" Value="#66645e"/>
+                                                                    <Setter Property="Fill" TargetName="ExpandPath" Value="#66645e"/>
+                                                                </MultiTrigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ToggleButton.Style>
+                                    </ToggleButton>
+                                    <ContentPresenter x:Name="PART_Header" Grid.Column="1" 
+                                                                  ContentSource="Header"  
+                                                                  HorizontalAlignment="Stretch" />
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <ItemsPresenter x:Name="ItemsHost" Grid.Row="1"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding IsGrouping}" Value="false">
+                            <Setter Property="Visibility" TargetName="Expander" Value="Hidden"/>
+                        </DataTrigger>
+                        <Trigger Property="HasItems" Value="False">
+                            <Setter Property="Visibility" TargetName="Expander" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="IsExpanded" Value="False">
+                            <Setter Property="Visibility" TargetName="ItemsHost" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="itemBackground" Property="Background" 
+                                                Value="{Binding Path=BackgroundRound.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsFocused" Value="False"/>
+                                <Condition Property="IsMouseOver" SourceName="itemBackground" Value="true"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="itemBackground" Property="Background" 
+                                                Value="{Binding Path=BackgroundRound.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" SourceName="itemBackground" Value="true"/>
+                                <Condition Property="IsSelected" Value="true"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="itemBackground" Property="Background" 
+                                                Value="{Binding Path=BackgroundRound.PressedMouse,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}" />
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <HierarchicalDataTemplate x:Key="UserNode" ItemsSource="{Binding Children,Mode=TwoWay}">
+        <Grid Background="Transparent">
+            <Grid.Resources>
+                <local:BoolToVisible x:Key="boolToVisible"/>
+                <local:VisibleToReverse x:Key="visibleToReverse"/>
+            </Grid.Resources>
+            <Grid Margin="0,5" 
+                  Visibility="{Binding Visibility,ElementName=groupinginfo,Converter={StaticResource visibleToReverse}}">
+                <DockPanel>
+                    <Border Background="#62ACF9" Width="40" Height="40" CornerRadius="4" HorizontalAlignment="Left" Margin="0">
+                        <TextBlock Text="{Binding SurName}" FontSize="23" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                    <DockPanel Margin="10 0 0 0">
+                        <TextBlock Text="{Binding Desc}" FontSize="13" Foreground="#808080" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="0,0,3,0"/>
+                        <DockPanel>
+                            <TextBlock Text="{Binding Subtitle}" FontSize="13" Foreground="#808080" DockPanel.Dock="Bottom"/>
+                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                        </DockPanel>
+                    </DockPanel>
+                </DockPanel>
+            </Grid>
+            <StackPanel x:Name="groupinginfo" 
+                        Orientation="Horizontal" Background="Transparent" 
+                        HorizontalAlignment="Left" 
+                        Visibility="{Binding IsGrouping,Converter={StaticResource boolToVisible}}">
+                <TextBlock Text="{Binding GroupName}" Padding="3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </Grid>
+    </HierarchicalDataTemplate>
+    <HierarchicalDataTemplate x:Key="DefaultNode" ItemsSource="{Binding Children,Mode=TwoWay}">
+        <Grid Background="Transparent">
+            <Grid.Resources>
+                <local:BoolToVisible x:Key="boolToVisible"/>
+                <local:VisibleToReverse x:Key="visibleToReverse"/>
+            </Grid.Resources>
+            <Grid Margin="0,5" 
+                  Visibility="{Binding Visibility,ElementName=groupinginfo,Converter={StaticResource visibleToReverse}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox IsChecked="{Binding Path=IsChecked}" 
+                          Margin="1,0"
+                          Visibility="{Binding Path=CheckBox, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}" 
+                          VerticalContentAlignment="Center"/>
+                <TextBlock Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid x:Name="groupinginfo" 
+                  Margin="3"  
+                  Background="Transparent" 
+                  HorizontalAlignment="Left" 
+                  Visibility="{Binding IsGrouping,Converter={StaticResource boolToVisible}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox IsChecked="{Binding Path=IsChecked}" 
+                          Margin="1,0"
+                          Visibility="{Binding Path=CheckBox, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}" 
+                          VerticalContentAlignment="Center"/>
+                <TextBlock Grid.Column="1" Text="{Binding GroupName}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            </Grid>
+        </Grid>
+    </HierarchicalDataTemplate>
+
+    <Style TargetType="{x:Type local:TreeViewEXT}">
+        <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+        <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Visible" />
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="ItemContainerStyle" Value="{StaticResource DefaultTreeViewItem}"></Setter>
+        <Setter Property="ItemTemplate" Value="{StaticResource DefaultNode}"/>
+        <!--修改模板属性-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:TreeViewEXT" >
+                    <Border Name="border"
+                            BorderThickness="{TemplateBinding Border.BorderThickness}"
+                            BorderBrush="{Binding Path=BorderFocusedBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"
+                            SnapsToDevicePixels="True">
+                        <local:ScrollViewerEXT x:Name="_tv_scrollviewer_"
+                                      HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                      VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                      Background="{TemplateBinding Panel.Background}"
+                                      Padding="{TemplateBinding Control.Padding}"
+                                      SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"
+                                      Focusable="False">
+                            <ItemsPresenter />
+                        </local:ScrollViewerEXT>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="UIElement.IsEnabled" Value="False">
+                            <Setter Property="Panel.Background" TargetName="border" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" TargetName="border" 
+                                    Value="{Binding Path=BorderFocusedBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="BorderBrush" TargetName="border" 
+                                    Value="{Binding Path=BorderFocusedBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

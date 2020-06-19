@@ -8,7 +8,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
         DataContext="{Binding Main ,Source={StaticResource Locator}}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="850" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="850" Width="850" WindowStartupLocation="CenterScreen">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -81,7 +81,7 @@
         </WrapPanel>
 
         <TabControl Grid.Row="11"  Margin="5" TabStripPlacement="Top"
-                    Height="100"   Background="#FF632DC1" Foreground="White">
+                    Height="100"   Background="#8257CD" Foreground="White">
             <TabItem Cursor="Hand" Header="音乐电台" >
                 <Grid Background="#33ffffff">
                     <TextBlock Text="音乐电台" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -93,6 +93,8 @@
                 </Grid>
             </TabItem>
         </TabControl>
+        <utils:TreeViewEXT x:Name="TreeViewOrg" Grid.Row="12" Margin="5"  Height="180" CheckBox="Visible"/>
+
 
         <WrapPanel Grid.Row="15" Margin="5">
             <utils:ButtonPath 

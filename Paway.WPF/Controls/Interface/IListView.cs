@@ -12,7 +12,7 @@ namespace Paway.WPF
     /// <summary>
     /// ListView数接口据定义
     /// </summary>
-    public interface IListViewInfo
+    public interface IListView
     {
         /// <summary>
         /// 文本

@@ -19,7 +19,7 @@ namespace Paway.WPF
         /// </summary>
         int Id { get; set; }
         /// <summary>
-        /// 显示名称
+        /// 显示文本
         /// </summary>
         string Text { get; set; }
         /// <summary>

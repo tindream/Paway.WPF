@@ -73,7 +73,7 @@
                                   Background="White"
                                   SnapsToDevicePixels="True">
                                 <Border x:Name="DropDownBorder"  BorderBrush="#CCC" BorderThickness="1"/>
-                                <ScrollViewer Margin="1" 
+                                <local:ScrollViewerEXT Margin="1" 
                                               SnapsToDevicePixels="True" 
                                               HorizontalScrollBarVisibility="Auto" 
                                               VerticalScrollBarVisibility="Auto" 
@@ -81,7 +81,7 @@
                                     <!--StackPanel 用于显示子级，方法是将 IsItemsHost 设置为 True-->
                                     <StackPanel IsItemsHost="True"
                                                 KeyboardNavigation.DirectionalNavigation="Contained" />
-                                </ScrollViewer>
+                                </local:ScrollViewerEXT>
                             </Grid>
                         </Popup>
                     </Grid>

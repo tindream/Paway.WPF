@@ -12,7 +12,7 @@ namespace Paway.WPF
     /// <summary>
     /// ListBoxItem扩展
     /// </summary>
-    public partial class ListBoxItemEXT : ListBoxItem, IListViewInfo, INotifyPropertyChanged
+    public partial class ListBoxItemEXT : ListBoxItem, IListView, INotifyPropertyChanged
     {
         /// <summary>
         /// </summary>
