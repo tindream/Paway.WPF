@@ -10,6 +10,7 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Button.xaml"/>
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ButtonPath.xaml"/>
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBox.xaml" />
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBoxMulti.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ProgressBar.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ListView.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\CheckBox.xaml" />

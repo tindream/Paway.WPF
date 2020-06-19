@@ -43,22 +43,23 @@
             <ComboBoxItem Content="B"/>
             <ComboBoxItem Content="C"/>
         </utils:ComboBoxEXT>
+        <utils:ComboBoxMulti x:Name="MultiCmb" Grid.Row="3" Margin="5" />
 
-        <utils:TextBoxEXT Grid.Row="3" Name="tb" Margin="5" ></utils:TextBoxEXT>
-        <PasswordBox Grid.Row="4" Margin="5" ></PasswordBox>
-        <utils:ButtonEXT Name="btn" Grid.Row="5" Margin="5"  
+        <utils:TextBoxEXT Grid.Row="4" Name="tb" Margin="5" ></utils:TextBoxEXT>
+        <PasswordBox Grid.Row="5" Margin="5" ></PasswordBox>
+        <utils:ButtonEXT Name="btn" Grid.Row="6" Margin="5"  
                          Content="确认" Click="ButtonEXT_Click" 
                          BackgroundStart=";#770C7900" BackgroundEnd=";#77FF0000"
                          BackgroundImage="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"
                          Stretch="None" Viewport="0,0,0.5,1"
                          Command="{Binding Teach}"
                          CommandParameter="{Binding ElementName=btn}"/>
-        <WrapPanel Grid.Row="6" Margin="5">
+        <WrapPanel Grid.Row="7" Margin="5">
             <utils:CheckBoxEXT x:Name="cbx" Content="Hello" IsChecked="True" Padding="0,0,3,0"/>
             <utils:CheckBoxEXT Content="World" IsChecked="{x:Null}"/>
             <utils:CheckBoxEXT Content="Watch" IsChecked="{x:Null}" IsEnabled="False"/>
         </WrapPanel>
-        <WrapPanel Grid.Row="7" Margin="5">
+        <WrapPanel Grid.Row="8" Margin="5">
             <utils:RadioButtonEXT Name="rb" Content="Hello" IsChecked="True" />
             <utils:RadioButtonEXT Content="World" IsChecked="True" />
             <utils:RadioButtonEXT Content="Watch" IsChecked="{x:Null}" IsEnabled="False"/>
@@ -79,6 +80,19 @@
             <Path Style="{StaticResource PathClose}" Margin="5"/>
         </WrapPanel>
 
+        <TabControl Grid.Row="11"  Margin="5" TabStripPlacement="Top"
+                    Height="100"   Background="#FF632DC1" Foreground="White">
+            <TabItem Cursor="Hand" Header="音乐电台" >
+                <Grid Background="#33ffffff">
+                    <TextBlock Text="音乐电台" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Grid>
+            </TabItem>
+            <TabItem Cursor="Hand" Header="Mv电台">
+                <Grid Background="#33ffffff">
+                    <TextBlock Text="Mv电台" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
 
         <WrapPanel Grid.Row="15" Margin="5">
             <utils:ButtonPath 

@@ -7,6 +7,7 @@
         <Setter Property="local:ProgressBarEXT.IsMonitoring" Value="True"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="White"/>
         <Setter Property="Template">
             <Setter.Value>
                 <!--控件模板-->
@@ -30,14 +31,15 @@
                                         Color="{Binding ForegroundColorLinear.End, RelativeSource={RelativeSource TemplatedParent}}" />
                                 </LinearGradientBrush>
                             </Border.Background>
+                            <Label Name="txt"
+                                   Opacity="0.9" 
+                                   Padding="12,4,5,4"
+                                   Foreground="{TemplateBinding Foreground}"
+                                   Content="{TemplateBinding ProgressValue}"
+                                   FontFamily="Microsoft YaHei"
+                                   HorizontalAlignment="Right"
+                                   VerticalContentAlignment="Center"/>
                         </Border>
-                        <Label Opacity="0.7" Name="txt"
-							   Padding="12,4,5,4"
-							   Foreground="#000000"
-							   Content="{TemplateBinding ProgressValue}"
-							   FontFamily="Microsoft YaHei"
-							   HorizontalAlignment="Right"
-							   VerticalContentAlignment="Center"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Value" Value="100">

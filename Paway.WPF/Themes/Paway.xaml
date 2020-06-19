@@ -7,5 +7,7 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\DataGrid.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\PasswordBox.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ScrollBar.xaml" />
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\TabControl.xaml" />
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\ListBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

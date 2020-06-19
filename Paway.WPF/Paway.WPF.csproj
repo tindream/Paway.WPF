@@ -65,11 +65,13 @@
   <ItemGroup>
     <Compile Include="Controls\Converter\ColorLinear.cs" />
     <Compile Include="Controls\Extended\ButtonPath.cs" />
+    <Compile Include="Controls\Extended\ComboBoxMulti.cs" />
     <Compile Include="Controls\Extended\SliderEXT.cs" />
     <Compile Include="Controls\Interface\IElementStatu.cs" />
     <Compile Include="Controls\Extended\ListBoxItemEXT.cs" />
     <Compile Include="Controls\Extended\RadioButtonEXT.cs" />
     <Compile Include="Controls\Extended\CheckBoxEXT.cs" />
+    <Compile Include="Controls\Interface\IComboBoxMulti.cs" />
     <Compile Include="Controls\Progress\Progress.cs" />
     <Compile Include="Controls\Progress\ProgressTemplate.cs" />
     <Compile Include="Controls\Progress\ProgressMonitor.cs" />
@@ -121,6 +123,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Resources\ComboBoxMulti.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ListBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\TabControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\TransitionControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -35,7 +35,7 @@
                             <ColumnDefinition Width="0.7*"/>
                             <ColumnDefinition Width="0.3*" MaxWidth="30"/>
                         </Grid.ColumnDefinitions>
-                        <Border Name="border" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="1" 
+                        <Border Name="border" Grid.ColumnSpan="2" BorderThickness="1" 
                                 CornerRadius="{TemplateBinding Radius}"
                                 BorderBrush="{Binding Path=BorderFocusedBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}" >
                             <Border.Background>
@@ -52,7 +52,7 @@
                                           ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" 
                                           ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" />
                         <!--ToggleButton 已数据绑定到 ComboBox 本身以切换 IsDropDownOpen-->
-                        <ToggleButton x:Name="ToggleButton" Grid.Column="0"  Grid.ColumnSpan="2"  
+                        <ToggleButton x:Name="ToggleButton" Grid.ColumnSpan="2"  
                                       Focusable="false" 
                                       ClickMode="Press"
                                       Template="{StaticResource ComboBoxToggleButton}"

@@ -1,0 +1,184 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Paway.WPF">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBox.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="{x:Type local:ComboBoxMulti}">
+        <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Padding" Value="1" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ComboBoxMulti}">
+                    <Grid>
+                        <Border x:Name="border" 
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"  
+                                BorderThickness="1" 
+                                CornerRadius="{TemplateBinding Radius}"
+                                Padding="{TemplateBinding Padding}"
+                                BorderBrush="{Binding Path=BorderFocusedBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}" >
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                    <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                                    <GradientStop Color="#FFE5E5E5" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <Grid x:Name="PART_Root">
+                                <Grid x:Name="PART_InnerGrid" Margin="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="0.3*" MaxWidth="30" />
+                                    </Grid.ColumnDefinitions>
+                                    <ListBox x:Name="PART_ListBoxChk"  
+                                             SelectionMode="Multiple" 
+                                             BorderThickness="0" 
+                                             ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                        <ListBox.Background>
+                                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                                <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                                                <GradientStop Color="#FFE5E5E5" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </ListBox.Background>
+                                        <ListBox.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <VirtualizingStackPanel Orientation="Horizontal" VirtualizingStackPanel.IsVirtualizing="True" />
+                                            </ItemsPanelTemplate>
+                                        </ListBox.ItemsPanel>
+                                        <ListBox.ItemContainerStyle>
+                                            <Style TargetType="ListBoxItem">
+                                                <Setter Property="IsSelected" Value="True"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="ListBoxItem">
+                                                            <WrapPanel VerticalAlignment="Center">
+                                                                <Path Style="{StaticResource PathRight}"/>
+                                                                <TextBlock x:Name="txt222" Text="{Binding Text}" Padding="3"/>
+                                                            </WrapPanel>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="true">
+                                                                    <Setter TargetName="txt222" Property="Foreground" 
+                                                                            Value="{Binding Path=BorderFocusedBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}" />
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ListBox.ItemContainerStyle>
+                                    </ListBox>
+                                    <!--下拉按钮-->
+                                    <ToggleButton x:Name="PART_DropDownToggle" 
+                                                  IsTabStop="False"  
+                                                  IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                  Grid.Column="1" 
+                                                  Template="{StaticResource ComboBoxToggleButton}" />
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <!--弹出多选列表-->
+                        <Popup x:Name="PART_Popup" 
+                               AllowsTransparency="True"  
+                               Focusable="False" 
+                               StaysOpen="False"
+                               IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                               PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" 
+                               Placement="Bottom">
+                            <Grid 
+                                Width="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}"  
+                                MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}" >
+                                <ListBox x:Name="PART_ListBox" 
+                                         SelectionMode="Multiple" 
+                                         BorderThickness="1"
+                                         ItemsSource="{Binding ItemsSource,RelativeSource={RelativeSource TemplatedParent}}"
+                                         MaxHeight="{TemplateBinding MaxDropDownHeight}" 
+                                         BorderBrush="#CCC"  >
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Setter Property="Padding" Value="3,15"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type ListBoxItem}" >
+                                                        <Grid>
+                                                            <Border x:Name="_borderbg" 
+                                                                    Padding="{TemplateBinding Padding}"/>
+                                                            <ContentPresenter x:Name="_txt"  />
+                                                            <Border Background="White"  Opacity="0"/>
+                                                        </Grid>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsSelected" Value="True">
+                                                                <Setter TargetName="_borderbg" Property="Background" 
+                                                                        Value="{Binding Path=BackgroundRound.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}" />
+                                                                <Setter Property="Foreground" 
+                                                                        Value="{Binding Path=ForegroundRound.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}" />
+                                                            </Trigger>
+                                                            <Trigger Property="IsMouseOver" Value="true">
+                                                                <Setter TargetName="_borderbg" Property="Background" 
+                                                                        Value="{Binding Path=BackgroundRound.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}" />
+                                                                <Setter Property="Foreground" 
+                                                                        Value="{Binding Path=ForegroundRound.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}"/>
+                                                            </Trigger>
+                                                            <MultiTrigger>
+                                                                <MultiTrigger.Conditions>
+                                                                    <Condition Property="IsSelected" Value="true"/>
+                                                                    <Condition Property="IsMouseOver" Value="true"/>
+                                                                </MultiTrigger.Conditions>
+                                                                <Setter TargetName="_borderbg" Property="Background" 
+                                                                        Value="{Binding Path=BackgroundRound.PressedMouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}" />
+                                                                <Setter Property="Foreground" 
+                                                                        Value="{Binding Path=ForegroundRound.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}"/>
+                                                            </MultiTrigger>
+                                                            <Trigger Property="IsEnabled" Value="False">
+                                                                <Setter TargetName="_borderbg" Property="Opacity" Value="0.3" />
+                                                                <Setter Property="Foreground" Value="Gray" />
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <CheckBox VerticalContentAlignment="Center"
+                                                      Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                                      IsChecked="{Binding  RelativeSource={RelativeSource AncestorType=ListBoxItem},Path=IsSelected,Mode=TwoWay}"  
+                                                      Content="{Binding Path=Text}" />
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </Grid>
+                        </Popup>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEditable" Value="true">
+                            <Setter TargetName="border" Property="Background" Value="White" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="border" Property="BorderBrush" 
+                                    Value="{Binding Path=BorderFocusedBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" TargetName="border" Value="#FFE6E6E6"/>
+                        </Trigger>
+                        <Trigger Property="IsDropDownOpen" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" 
+                                    Value="{Binding Path=BorderFocusedBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsDropDownOpen" Value="False" />
+                                <Condition Property="IsMouseOver" Value="true" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="border" Property="BorderBrush" 
+                                    Value="{Binding Path=BorderFocusedBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

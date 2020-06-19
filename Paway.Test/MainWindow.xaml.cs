@@ -2,6 +2,7 @@
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -40,6 +41,16 @@ namespace Paway.Test
             datagrid1.ItemsSource = list;
             listView1.Items.Clear();
             listView1.ItemsSource = list;
+
+            var multiList = new ObservableCollection<ComboBoxMultiInfo>();
+            multiList.Add(new ComboBoxMultiInfo("张三"));
+            multiList.Add(new ComboBoxMultiInfo("李四"));
+            multiList.Add(new ComboBoxMultiInfo("王五"));
+            multiList.Add(new ComboBoxMultiInfo("马六"));
+            multiList.Add(new ComboBoxMultiInfo("赵七"));
+            multiList.Add(new ComboBoxMultiInfo("王八"));
+            multiList.Add(new ComboBoxMultiInfo("陈九"));
+            MultiCmb.ItemsSource = multiList;
         }
 
         private bool b;
@@ -52,6 +63,20 @@ namespace Paway.Test
             else Method.Hide();
             transition.Transition = (TransitionType)new Random().Next(0, 5);
             //transition.Transition = TransitionType.Up;
+        }
+    }
+
+    public class ComboBoxMultiInfo : IComboBoxMulti
+    {
+        public int Id { get; set; }
+
+        public string Text { get; set; }
+
+        public bool IsChecked { get; set; }
+        public ComboBoxMultiInfo(string text)
+        {
+            this.Id = this.GetHashCode();
+            this.Text = text;
         }
     }
     public class TestInfo : IListViewInfo
