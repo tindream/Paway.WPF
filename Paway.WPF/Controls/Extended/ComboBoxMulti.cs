@@ -77,22 +77,9 @@ namespace Paway.WPF
                     }
                 }
             }
-            if (base.GetTemplateChild("tbOpen") is TextBlock textBoxSite)
-            {
-                textBoxSite.PreviewMouseDown += TextBoxSite_MouseDown;
-            }
-            if (base.GetTemplateChild("PART_DropDownToggle") is ToggleButton toggleButton)
-            {
-                toggleButton.PreviewMouseDown += TextBoxSite_MouseDown;
-            }
         }
 
-        private void TextBoxSite_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            this.IsDropDownOpen = !this.IsDropDownOpen;
-            Console.WriteLine("V=>" + IsDropDownOpen);
-        }
-
+        #region 关联选择
         private void ListBoxH_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             foreach (var item in e.RemovedItems)
@@ -136,5 +123,7 @@ namespace Paway.WPF
                 }
             }
         }
+
+        #endregion
     }
 }

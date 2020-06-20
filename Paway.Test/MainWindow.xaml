@@ -106,9 +106,8 @@
 
         <utils:ListViewEXT Name="listView1" Grid.Column="1" Grid.Row="10" Grid.RowSpan="9" 
                            Height="250" Margin="5,6,5,5" 
-                           ItemWidth="100" ItemHeight="100" ItemRadius="0" ItemMargin="1" ItemPadding="0;0,4,0,0"
+                           ItemWidth="100" ItemHeight="100" ItemRadius="0" ItemMargin="1" 
                            ItemBorder=";1,1,1,5" ItemBackground=";#7723AFFF"
-                           ItemImageMargin="5,5,0,0;5,1,0,4"  
                            HorizontalContentAlignment="Left" VerticalContentAlignment="Center" ItemTextForeground="#222"
                            ItemTextPadding="5" 
                            ItemImageHeight="32" ItemImageWidth="32" ItemImageDock="Top" 

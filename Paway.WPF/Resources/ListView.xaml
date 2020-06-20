@@ -61,7 +61,8 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
-                                <Border x:Name="border" 
+                                <Grid>
+                                    <Border x:Name="border" 
                                         BorderBrush="{Binding Path=ItemBorderBrush.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                         Background="{Binding Path=ItemBackground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
                                         BorderThickness="{Binding Path=ItemBorder.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
@@ -69,7 +70,7 @@
                                         Padding="{Binding Path=ItemPadding.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
                                         Margin="{Binding ItemMargin, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                         Width="{Binding ItemWidth, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
-                                        Height="{Binding ItemHeight, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
+                                        Height="{Binding ItemHeight, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                     <DockPanel>
                                         <Image Name="image" 
                                                Source="{Binding Path=Image.Normal}" 
@@ -98,7 +99,7 @@
                                                        Padding="{Binding ItemTextPadding, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         </DockPanel>
                                     </DockPanel>
-                                </Border>
+                                </Grid>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True" >
                                         <Setter TargetName="image" Property="Source" Value="{Binding Path=Image.Mouse}"/>

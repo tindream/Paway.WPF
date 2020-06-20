@@ -6,9 +6,13 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <LinearGradientBrush x:Key="backLine" EndPoint="0,1" StartPoint="0,0">
+        <GradientStop Color="#FFF0F0F0" Offset="0"/>
+        <GradientStop Color="#FFE5E5E5" Offset="1"/>
+    </LinearGradientBrush>
     <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
-        <Grid Height="30">
-            <Border Grid.Column="1" Background="White" Opacity="0"   Cursor="Hand"/>
+        <Grid>
+            <Border Background="White" Opacity="0"   Cursor="Hand"/>
             <Path x:Name="Arrow" Grid.Column="1"  Margin="9,0"
                   Style="{StaticResource PathTriangleDown}" Width="12" Height="6"
                   HorizontalAlignment="Right" StrokeThickness="0"
@@ -37,14 +41,8 @@
                         </Grid.ColumnDefinitions>
                         <Border Name="border" Grid.ColumnSpan="2" BorderThickness="1" 
                                 CornerRadius="{TemplateBinding Radius}"
-                                BorderBrush="{Binding Path=BorderFocusedBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}" >
-                            <Border.Background>
-                                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                                    <GradientStop Color="#FFF0F0F0" Offset="0"/>
-                                    <GradientStop Color="#FFE5E5E5" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Border.Background>
-                        </Border>
+                                Background="{StaticResource backLine}"
+                                BorderBrush="{Binding Path=BorderFocusedBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}" />
                         <ContentPresenter x:Name="ContentSite" Margin="5,3,0,3" 
                                           VerticalAlignment="Center" 
                                           IsHitTestVisible="False"
@@ -65,9 +63,11 @@
                                           Background="Transparent" 
                                           IsReadOnly="{TemplateBinding IsReadOnly}"/>
                         <!--Popup 可显示 ComboBox 中的项列表。IsOpen 已数据绑定到通过 ComboBoxToggleButton 来切换的 IsDropDownOpen-->
-                        <Popup IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" x:Name="Popup"
-                               Focusable="False" 
+                        <Popup x:Name="Popup"
                                AllowsTransparency="True" 
+                               Focusable="False" 
+                               IsOpen="{TemplateBinding IsDropDownOpen}" 
+                               Placement="Bottom" 
                                PopupAnimation="Slide">
                             <Grid MaxHeight="149" MinWidth="{TemplateBinding ActualWidth}" x:Name="DropDown" 
                                   Background="White"
@@ -125,8 +125,7 @@
                         <Setter.Value>
                             <ControlTemplate  TargetType="{x:Type ComboBoxItem}">
                                 <Grid Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
-                                    <Border x:Name="_borderbg" Background="Transparent"
-                                            Padding="{TemplateBinding Padding}"/>
+                                    <Border x:Name="_borderbg" Background="Transparent" Padding="{TemplateBinding Padding}"/>
                                     <TextBlock Margin="5 0" VerticalAlignment="Center" x:Name="_txt" Foreground="#333" 
                                                Text="{Binding Content,RelativeSource={RelativeSource TemplatedParent}}"/>
                                     <Border x:Name="_border" Background="White" Opacity="0"/>

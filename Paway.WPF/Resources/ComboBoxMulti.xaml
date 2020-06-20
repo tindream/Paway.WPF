@@ -6,14 +6,14 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <LinearGradientBrush x:Key="backLine" EndPoint="0,1" StartPoint="0,0">
-        <GradientStop Color="#FFF0F0F0" Offset="0"/>
-        <GradientStop Color="#FFE5E5E5" Offset="1"/>
-    </LinearGradientBrush>
+    <ControlTemplate x:Key="ComboBoxToggleNone" TargetType="{x:Type ToggleButton}">
+        <Grid>
+            <Border Grid.Column="1" Background="White" Opacity="0"   Cursor="Hand"/>
+        </Grid>
+    </ControlTemplate>
     <Style TargetType="{x:Type local:ComboBoxMulti}">
         <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="Padding" Value="1" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ComboBoxMulti}">
@@ -24,56 +24,63 @@
                                 CornerRadius="{TemplateBinding Radius}"
                                 Padding="{TemplateBinding Padding}"
                                 Background="{StaticResource backLine}"
-                                BorderBrush="{Binding Path=BorderFocusedBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}" >
-                            <Grid x:Name="PART_Root">
-                                <DockPanel x:Name="PART_InnerGrid" Margin="0">
-                                    <!--下拉按钮-->
-                                    <ToggleButton Name="PART_DropDownToggle" 
+                                BorderBrush="{Binding Path=BorderFocusedBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}" />
+                        <Grid x:Name="PART_Root">
+                            <DockPanel x:Name="PART_InnerGrid" Margin="0">
+                                <!--下拉按钮-->
+                                <ToggleButton Name="PART_DropDownToggle" 
                                                   Width="30" DockPanel.Dock="Right"
                                                   IsTabStop="False"  
+                                                  IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                                   Template="{StaticResource ComboBoxToggleButton}" />
-                                    <ListBox x:Name="PART_ListBoxChk"  
-                                             SelectionMode="Multiple" 
-                                             BorderThickness="0" 
-                                             Background="{StaticResource backLine}"
-                                             ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                                        <ListBox.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <VirtualizingStackPanel Orientation="Horizontal" VirtualizingStackPanel.IsVirtualizing="True" />
-                                            </ItemsPanelTemplate>
-                                        </ListBox.ItemsPanel>
-                                        <ListBox.ItemContainerStyle>
-                                            <Style TargetType="ListBoxItem">
-                                                <Setter Property="IsSelected" Value="True"/>
-                                                <Setter Property="Template">
-                                                    <Setter.Value>
-                                                        <ControlTemplate TargetType="ListBoxItem">
-                                                            <WrapPanel VerticalAlignment="Center">
-                                                                <Path x:Name="path" Style="{StaticResource PathRight}" Fill="#AA23AFFF"/>
-                                                                <TextBlock x:Name="txt" Text="{Binding Text}" Padding="3"/>
-                                                            </WrapPanel>
-                                                            <ControlTemplate.Triggers>
-                                                                <Trigger Property="IsMouseOver" Value="true">
-                                                                    <Setter TargetName="path" Property="Fill" Value="#AAFF0000" />
-                                                                    <Setter TargetName="txt" Property="Foreground" 
+                                <ListBox x:Name="PART_ListBoxChk"  
+                                         SelectionMode="Multiple" 
+                                         BorderThickness="0" 
+                                         Margin="2"
+                                         Background="{StaticResource backLine}"
+                                         ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <VirtualizingStackPanel Orientation="Horizontal" VirtualizingStackPanel.IsVirtualizing="True" />
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Setter Property="IsSelected" Value="True"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="ListBoxItem">
+                                                        <WrapPanel VerticalAlignment="Center">
+                                                            <Path x:Name="path" Style="{StaticResource PathRight}" Fill="#AA23AFFF"/>
+                                                            <TextBlock x:Name="txt" Text="{Binding Text}" Padding="3"/>
+                                                        </WrapPanel>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="true">
+                                                                <Setter TargetName="path" Property="Fill" Value="#AAFF0000" />
+                                                                <Setter TargetName="txt" Property="Foreground" 
                                                                             Value="{Binding Path=BorderFocusedBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxMulti}}}" />
-                                                                </Trigger>
-                                                            </ControlTemplate.Triggers>
-                                                        </ControlTemplate>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </Style>
-                                        </ListBox.ItemContainerStyle>
-                                    </ListBox>
-                                    <TextBlock Name="tbOpen" Cursor="Hand" Background="{StaticResource backLine}"/>
-                                </DockPanel>
-                            </Grid>
-                        </Border>
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                </ListBox>
+                                <!--<TextBlock Name="tbOpen" Cursor="Hand" Background="{StaticResource backLine}"/>-->
+                                <local:TextBoxEXT Width="0" />
+                                <ToggleButton Name="PART_DropDownToggle2" 
+                                                  DockPanel.Dock="Right"
+                                                  IsTabStop="False"  
+                                                  IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                  Template="{StaticResource ComboBoxToggleNone}" />
+                            </DockPanel>
+                        </Grid>
                         <!--弹出多选列表-->
                         <Popup x:Name="PART_Popup" 
                                AllowsTransparency="True"  
                                Focusable="False" 
-                               StaysOpen="False"
+                               StaysOpen="True"
                                IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
                                PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" 
                                Placement="Bottom">
@@ -93,8 +100,7 @@
                                                 <Setter.Value>
                                                     <ControlTemplate TargetType="{x:Type ListBoxItem}" >
                                                         <Grid>
-                                                            <Border x:Name="_borderbg" 
-                                                                    Padding="{TemplateBinding Padding}"/>
+                                                            <Border x:Name="_borderbg" Padding="{TemplateBinding Padding}"/>
                                                             <ContentPresenter x:Name="_txt"  />
                                                             <Border Background="White"  Opacity="0"/>
                                                         </Grid>
