@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:Paway.WPF"
         mc:Ignorable="d"
         AllowsTransparency="True" Background="Transparent" WindowStyle="None"
-        Title="MessageBox" Height="350" Width="850" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" >
+        Title="MessageBox" Height="350" Width="850" ShowInTaskbar="False" WindowStartupLocation="CenterOwner" >
     <Window.Resources>
         <Storyboard x:Key="ShowSb" Completed="Storyboard_Completed" >
             <DoubleAnimationUsingKeyFrames  Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="border1">
@@ -51,7 +51,7 @@
                 <ei:ControlStoryboardAction Storyboard="{StaticResource MouseLeave}"/>
             </i:EventTrigger>
         </i:Interaction.Triggers>
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <local:ScrollViewerEXT HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
             <TextBlock x:Name="tb" Margin="25 7" FontFamily="Microsoft YaHei" 
                    Text="{Binding Message,FallbackValue=失败信息}"
                    TextWrapping="Wrap" TextAlignment="Center" Foreground="White"
@@ -65,6 +65,6 @@
                         <TranslateTransform/>
                     </TransformGroup>
                 </TextBlock.RenderTransform></TextBlock>
-        </ScrollViewer>
+        </local:ScrollViewerEXT>
     </Border>
 </local:WindowEXT>

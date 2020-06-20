@@ -6,6 +6,10 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <LinearGradientBrush x:Key="backLine" EndPoint="0,1" StartPoint="0,0">
+        <GradientStop Color="#FFF0F0F0" Offset="0"/>
+        <GradientStop Color="#FFE5E5E5" Offset="1"/>
+    </LinearGradientBrush>
     <Style TargetType="{x:Type local:ComboBoxMulti}">
         <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -19,29 +23,20 @@
                                 BorderThickness="1" 
                                 CornerRadius="{TemplateBinding Radius}"
                                 Padding="{TemplateBinding Padding}"
+                                Background="{StaticResource backLine}"
                                 BorderBrush="{Binding Path=BorderFocusedBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}" >
-                            <Border.Background>
-                                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                                    <GradientStop Color="#FFF0F0F0" Offset="0"/>
-                                    <GradientStop Color="#FFE5E5E5" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Border.Background>
                             <Grid x:Name="PART_Root">
-                                <Grid x:Name="PART_InnerGrid" Margin="0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="0.3*" MaxWidth="30" />
-                                    </Grid.ColumnDefinitions>
+                                <DockPanel x:Name="PART_InnerGrid" Margin="0">
+                                    <!--下拉按钮-->
+                                    <ToggleButton Name="PART_DropDownToggle" 
+                                                  Width="30" DockPanel.Dock="Right"
+                                                  IsTabStop="False"  
+                                                  Template="{StaticResource ComboBoxToggleButton}" />
                                     <ListBox x:Name="PART_ListBoxChk"  
                                              SelectionMode="Multiple" 
                                              BorderThickness="0" 
+                                             Background="{StaticResource backLine}"
                                              ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                                        <ListBox.Background>
-                                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                                                <GradientStop Color="#FFF0F0F0" Offset="0"/>
-                                                <GradientStop Color="#FFE5E5E5" Offset="1"/>
-                                            </LinearGradientBrush>
-                                        </ListBox.Background>
                                         <ListBox.ItemsPanel>
                                             <ItemsPanelTemplate>
                                                 <VirtualizingStackPanel Orientation="Horizontal" VirtualizingStackPanel.IsVirtualizing="True" />
@@ -54,13 +49,14 @@
                                                     <Setter.Value>
                                                         <ControlTemplate TargetType="ListBoxItem">
                                                             <WrapPanel VerticalAlignment="Center">
-                                                                <Path Style="{StaticResource PathRight}"/>
-                                                                <TextBlock x:Name="txt222" Text="{Binding Text}" Padding="3"/>
+                                                                <Path x:Name="path" Style="{StaticResource PathRight}" Fill="#AA23AFFF"/>
+                                                                <TextBlock x:Name="txt" Text="{Binding Text}" Padding="3"/>
                                                             </WrapPanel>
                                                             <ControlTemplate.Triggers>
                                                                 <Trigger Property="IsMouseOver" Value="true">
-                                                                    <Setter TargetName="txt222" Property="Foreground" 
-                                                                            Value="{Binding Path=BorderFocusedBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}" />
+                                                                    <Setter TargetName="path" Property="Fill" Value="#AAFF0000" />
+                                                                    <Setter TargetName="txt" Property="Foreground" 
+                                                                            Value="{Binding Path=BorderFocusedBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxMulti}}}" />
                                                                 </Trigger>
                                                             </ControlTemplate.Triggers>
                                                         </ControlTemplate>
@@ -69,13 +65,8 @@
                                             </Style>
                                         </ListBox.ItemContainerStyle>
                                     </ListBox>
-                                    <!--下拉按钮-->
-                                    <ToggleButton x:Name="PART_DropDownToggle" 
-                                                  IsTabStop="False"  
-                                                  IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                                  Grid.Column="1" 
-                                                  Template="{StaticResource ComboBoxToggleButton}" />
-                                </Grid>
+                                    <TextBlock Name="tbOpen" Cursor="Hand" Background="{StaticResource backLine}"/>
+                                </DockPanel>
                             </Grid>
                         </Border>
                         <!--弹出多选列表-->
@@ -110,15 +101,15 @@
                                                         <ControlTemplate.Triggers>
                                                             <Trigger Property="IsSelected" Value="True">
                                                                 <Setter TargetName="_borderbg" Property="Background" 
-                                                                        Value="{Binding Path=BackgroundRound.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}" />
+                                                                        Value="{Binding Path=BackgroundRound.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxMulti}}}" />
                                                                 <Setter Property="Foreground" 
-                                                                        Value="{Binding Path=ForegroundRound.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}" />
+                                                                        Value="{Binding Path=ForegroundRound.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxMulti}}}" />
                                                             </Trigger>
                                                             <Trigger Property="IsMouseOver" Value="true">
                                                                 <Setter TargetName="_borderbg" Property="Background" 
-                                                                        Value="{Binding Path=BackgroundRound.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}" />
+                                                                        Value="{Binding Path=BackgroundRound.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxMulti}}}" />
                                                                 <Setter Property="Foreground" 
-                                                                        Value="{Binding Path=ForegroundRound.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}"/>
+                                                                        Value="{Binding Path=ForegroundRound.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxMulti}}}"/>
                                                             </Trigger>
                                                             <MultiTrigger>
                                                                 <MultiTrigger.Conditions>
@@ -126,9 +117,9 @@
                                                                     <Condition Property="IsMouseOver" Value="true"/>
                                                                 </MultiTrigger.Conditions>
                                                                 <Setter TargetName="_borderbg" Property="Background" 
-                                                                        Value="{Binding Path=BackgroundRound.PressedMouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}" />
+                                                                        Value="{Binding Path=BackgroundRound.PressedMouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxMulti}}}" />
                                                                 <Setter Property="Foreground" 
-                                                                        Value="{Binding Path=ForegroundRound.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}"/>
+                                                                        Value="{Binding Path=ForegroundRound.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxMulti}}}"/>
                                                             </MultiTrigger>
                                                             <Trigger Property="IsEnabled" Value="False">
                                                                 <Setter TargetName="_borderbg" Property="Opacity" Value="0.3" />
@@ -167,6 +158,9 @@
                             <Setter TargetName="border" Property="BorderBrush" 
                                     Value="{Binding Path=BorderFocusedBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" />
                         </Trigger>
+                        <!--<Trigger Property="IsFocused" Value="True">
+                            <Setter Property="IsDropDownOpen" Value="True" />
+                        </Trigger>-->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsDropDownOpen" Value="False" />

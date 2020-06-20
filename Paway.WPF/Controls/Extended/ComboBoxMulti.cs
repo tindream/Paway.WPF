@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 
 namespace Paway.WPF
 {
@@ -75,7 +77,22 @@ namespace Paway.WPF
                     }
                 }
             }
+            if (base.GetTemplateChild("tbOpen") is TextBlock textBoxSite)
+            {
+                textBoxSite.PreviewMouseDown += TextBoxSite_MouseDown;
+            }
+            if (base.GetTemplateChild("PART_DropDownToggle") is ToggleButton toggleButton)
+            {
+                toggleButton.PreviewMouseDown += TextBoxSite_MouseDown;
+            }
         }
+
+        private void TextBoxSite_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.IsDropDownOpen = !this.IsDropDownOpen;
+            Console.WriteLine("V=>" + IsDropDownOpen);
+        }
+
         private void ListBoxH_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             foreach (var item in e.RemovedItems)

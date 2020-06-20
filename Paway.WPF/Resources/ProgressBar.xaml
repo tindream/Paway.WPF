@@ -33,7 +33,7 @@
                             </Border.Background>
                             <Label Name="txt"
                                    Opacity="0.9" 
-                                   Padding="12,4,5,4"
+                                   Padding="5,4"
                                    Foreground="{TemplateBinding Foreground}"
                                    Content="{TemplateBinding ProgressValue}"
                                    FontFamily="Microsoft YaHei"

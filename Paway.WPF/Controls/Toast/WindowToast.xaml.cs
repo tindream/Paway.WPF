@@ -57,6 +57,9 @@ namespace Paway.WPF
             if (iFirst)
             {
                 iFirst = false;
+
+                var left = this.Width - border1.ActualWidth - 3;
+                var top = this.Height - border1.ActualHeight - 3;
                 this.Width = border1.ActualWidth + 3;
                 this.Height = border1.ActualHeight + 3;
                 if (this.Owner == null)
@@ -66,8 +69,8 @@ namespace Paway.WPF
                 }
                 else
                 {
-                    this.Left = this.Owner.Left + (this.Owner.Width - this.Width) / 2;
-                    this.Top = this.Owner.Top + (this.Owner.Height - this.Height) * 4 / 5;
+                    this.Left += left / 2;
+                    this.Top += top / 2 + (this.Owner.ActualHeight - this.Height) * 2 / 5;
                 }
             }
             base.OnRender(drawingContext);

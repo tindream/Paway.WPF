@@ -22,7 +22,7 @@
                             CornerRadius="{TemplateBinding Radius}"
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid>
-                            <ScrollViewer x:Name="PART_ContentHost"
+                            <local:ScrollViewerEXT x:Name="PART_ContentHost"
                                           VerticalAlignment="Center"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                             <StackPanel Name="stackPanel"
