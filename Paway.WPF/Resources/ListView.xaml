@@ -67,20 +67,23 @@
                                         Background="{Binding Path=ItemBackground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
                                         BorderThickness="{Binding Path=ItemBorder.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                         CornerRadius="{Binding Path=ItemRadius.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
-                                        Padding="{Binding Path=ItemPadding.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
                                         Margin="{Binding ItemMargin, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                         Width="{Binding ItemWidth, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                         Height="{Binding ItemHeight, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
-                                    <DockPanel>
-                                        <Image Name="image" 
+                                    <Border x:Name="border2" 
+                                            Padding="{Binding Path=ItemPadding.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
+                                            Width="{Binding ItemWidth, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
+                                            Height="{Binding ItemHeight, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
+                                        <DockPanel>
+                                            <Image Name="image" 
                                                Source="{Binding Path=Image.Normal}" 
                                                Width="{Binding ItemImageWidth, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"  
                                                Height="{Binding ItemImageHeight, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
                                                DockPanel.Dock="{Binding ItemImageDock, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
                                                Margin="{Binding Path=ItemImageMargin.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                Stretch="Fill"/>
-                                        <DockPanel>
-                                            <TextBlock Name="desc" Text="{Binding Desc}"
+                                            <DockPanel>
+                                                <TextBlock Name="desc" Text="{Binding Desc}"
                                                        TextTrimming="WordEllipsis" 
                                                        Foreground="{Binding Path=ItemDescForeground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        Background="{Binding Path=ItemDescBackground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
@@ -89,7 +92,7 @@
                                                        VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
                                                        Padding="{Binding ItemDescPadding, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
                                                        DockPanel.Dock="{Binding ItemDescDock, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" />
-                                            <TextBlock Name="text" Text="{Binding Content}" 
+                                                <TextBlock Name="text" Text="{Binding Content}" 
                                                        TextTrimming="WordEllipsis" 
                                                        Foreground="{Binding Path=ItemTextForeground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        Background="{Binding Path=ItemTextBackground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
@@ -97,8 +100,9 @@
                                                        HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        Padding="{Binding ItemTextPadding, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
+                                            </DockPanel>
                                         </DockPanel>
-                                    </DockPanel>
+                                    </Border>
                                 </Grid>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True" >
@@ -111,7 +115,7 @@
                                                 Value="{Binding Path=ItemBorder.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="border" Property="CornerRadius" 
                                                 Value="{Binding Path=ItemRadius.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
-                                        <Setter TargetName="border" Property="Padding" 
+                                        <Setter TargetName="border2" Property="Padding" 
                                                 Value="{Binding Path=ItemPadding.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="text" Property="Foreground"  
                                                 Value="{Binding Path=ItemTextForeground.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
@@ -146,7 +150,7 @@
                                                 Value="{Binding Path=ItemBorder.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="border" Property="CornerRadius" 
                                                 Value="{Binding Path=ItemRadius.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
-                                        <Setter TargetName="border" Property="Padding" 
+                                        <Setter TargetName="border2" Property="Padding" 
                                                 Value="{Binding Path=ItemPadding.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="text" Property="Foreground" 
                                                 Value="{Binding Path=ItemTextForeground.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
