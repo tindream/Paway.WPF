@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paway.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,9 +16,13 @@ namespace Paway.WPF
     public interface IListView
     {
         /// <summary>
+        /// 标识符
+        /// </summary>
+        int Id { get; set; }
+        /// <summary>
         /// 文本
         /// </summary>
-        string Content { get; set; }
+        string Text { get; set; }
         /// <summary>
         /// 描述
         /// </summary>
@@ -30,5 +35,71 @@ namespace Paway.WPF
         /// 选择项
         /// </summary>
         bool IsSelected { get; set; }
+    }
+    /// <summary>
+    /// IListView数据模型
+    /// </summary>
+    public class ListViewModel : ModelBase, IListView
+    {
+        private int id;
+        /// <summary>
+        /// 标识符
+        /// </summary>
+        [NoShow]
+        public virtual int Id
+        {
+            get { return id; }
+            set { id = value; OnPropertyChanged(); }
+        }
+        private string text;
+        /// <summary>
+        /// 文本
+        /// </summary>
+        public virtual string Text
+        {
+            get { return text; }
+            set { text = value; OnPropertyChanged(); }
+        }
+        private string desc;
+        /// <summary>
+        /// 描述
+        /// </summary>
+        public virtual string Desc
+        {
+            get { return desc; }
+            set { desc = value; OnPropertyChanged(); }
+        }
+        private ImageEXT image;
+        /// <summary>
+        /// 图片
+        /// </summary>
+        public virtual ImageEXT Image
+        {
+            get { return image; }
+            set { image = value; OnPropertyChanged(); }
+        }
+        private bool isSelected;
+        /// <summary>
+        /// 选择项
+        /// </summary>
+        public virtual bool IsSelected
+        {
+            get { return isSelected; }
+            set { isSelected = value; OnPropertyChanged(); }
+        }
+
+        /// <summary>
+        /// </summary>
+        public ListViewModel()
+        {
+            this.Id = this.GetHashCode();
+        }
+        /// <summary>
+        /// </summary>
+        public ListViewModel(string text, string desc = null) : this()
+        {
+            this.Text = text;
+            this.Desc = desc;
+        }
     }
 }

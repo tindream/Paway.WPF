@@ -16,14 +16,6 @@ namespace Paway.WPF
     /// </summary>
     public class ComboBoxMulti : ComboBoxEXT
     {
-        #region 依赖属性
-        /// <summary>
-        /// </summary>
-        public static readonly DependencyProperty ChekedItemsProperty =
-            DependencyProperty.Register(nameof(ChekedItems), typeof(ObservableCollection<IComboBoxMulti>), typeof(ComboBoxMulti), new PropertyMetadata(new ObservableCollection<IComboBoxMulti>()));
-
-        #endregion
-
         /// <summary>
         /// </summary>
         public ComboBoxMulti()
@@ -31,20 +23,16 @@ namespace Paway.WPF
             DefaultStyleKey = typeof(ComboBoxMulti);
         }
 
-        #region 扩展
+        #region 属性
         /// <summary>
         /// 选中项列表
         /// </summary>
-        [Category("扩展")]
-        [Description("选中项列表")]
-        public ObservableCollection<IComboBoxMulti> ChekedItems
-        {
-            get { return (ObservableCollection<IComboBoxMulti>)GetValue(ChekedItemsProperty); }
-            set { SetValue(ChekedItemsProperty, value); }
-        }
+        [Browsable(false)]
+        public ObservableCollection<IComboBoxMulti> ChekedItems { get; } = new ObservableCollection<IComboBoxMulti>();
 
         #endregion
 
+        #region 关联选择
         /// <summary>
         /// ListBox竖向列表
         /// </summary>
@@ -53,7 +41,6 @@ namespace Paway.WPF
         /// ListBox横向列表
         /// </summary>
         private ListBox _ListBoxH;
-
         /// <summary>
         /// </summary>
         public override void OnApplyTemplate()
@@ -78,8 +65,6 @@ namespace Paway.WPF
                 }
             }
         }
-
-        #region 关联选择
         private void ListBoxH_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             foreach (var item in e.RemovedItems)

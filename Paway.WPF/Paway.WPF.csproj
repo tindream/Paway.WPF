@@ -36,6 +36,9 @@
     <DocumentationFile>..\bin\Release\Paway.WPF.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ChnCharInfo">
+      <HintPath>..\Root\ChnCharInfo.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
@@ -71,6 +74,7 @@
     <Compile Include="Controls\Extended\ComboBoxMulti.cs" />
     <Compile Include="Controls\Extended\SliderEXT.cs" />
     <Compile Include="Controls\Extended\TreeViewEXT.cs" />
+    <Compile Include="Controls\Interface\ModelBase.cs" />
     <Compile Include="Controls\Interface\IElementStatu.cs" />
     <Compile Include="Controls\Extended\ListBoxItemEXT.cs" />
     <Compile Include="Controls\Extended\RadioButtonEXT.cs" />

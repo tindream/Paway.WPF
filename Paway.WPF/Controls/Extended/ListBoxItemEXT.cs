@@ -15,6 +15,10 @@ namespace Paway.WPF
     public partial class ListBoxItemEXT : ListBoxItem, IListView, INotifyPropertyChanged
     {
         /// <summary>
+        /// 标识符
+        /// </summary>
+        public int Id { get; set; }
+        /// <summary>
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
         /// <summary>
@@ -28,7 +32,7 @@ namespace Paway.WPF
         /// <summary>
         /// 内容
         /// </summary>
-        public new string Content
+        public new string Text
         {
             get { return base.Content.ToStrs(); }
             set { base.Content = value; OnPropertyChanged(); }

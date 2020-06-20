@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace Paway.WPF
@@ -13,6 +16,29 @@ namespace Paway.WPF
     /// </summary>
     public partial class TreeViewEXT : TreeView
     {
+        #region 属性
+        /// <summary>
+        /// 选中项列表
+        /// </summary>
+        [Browsable(false)]
+        public List<ITreeView> ChekedItems
+        {
+            get
+            {
+                var list = new List<ITreeView>();
+                if (this.ItemsSource is List<ITreeView> modelList)
+                {
+                    foreach (var item in modelList)
+                    {
+                        if (item.IsChecked == true) list.Add(item);
+                    }
+                }
+                return list;
+            }
+        }
+
+        #endregion
+
         #region 依赖属性
         /// <summary>
         /// </summary>
@@ -70,7 +96,7 @@ namespace Paway.WPF
         /// </summary>
         public TreeViewEXT()
         {
-            //DefaultStyleKey = typeof(TreeViewEXT);
+            DefaultStyleKey = typeof(TreeViewEXT);
         }
     }
 }

@@ -18,6 +18,14 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ValueProperty =
                 DependencyProperty.RegisterAttached(nameof(Value), typeof(double), typeof(ButtonPath), new PropertyMetadata(0d, OnValueChanged));
+        private static void OnValueChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            if (obj is ButtonPath btn)
+            {
+                btn.IWarn = btn.Value < 25;
+            }
+        }
+
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty BorderColorProperty =
@@ -38,14 +46,6 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(IEmpty), typeof(bool), typeof(ButtonPath));
 
         #endregion
-
-        private static void OnValueChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
-        {
-            if (obj is ButtonPath btn)
-            {
-                btn.IWarn = btn.Value < 25;
-            }
-        }
 
         #region 扩展
         /// <summary>
