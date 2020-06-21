@@ -30,9 +30,9 @@ namespace Paway.WPF
         }
 
         /// <summary>
-        /// 内容
+        /// 文本
         /// </summary>
-        public new string Text
+        public string Text
         {
             get { return base.Content.ToStrs(); }
             set { base.Content = value; OnPropertyChanged(); }

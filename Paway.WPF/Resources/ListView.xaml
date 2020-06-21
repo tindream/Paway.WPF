@@ -11,7 +11,7 @@
         <Setter Property="FontFamily" Value="Microsoft YaHei"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="Padding" Value="0"/>
         <!--修改模板属性-->

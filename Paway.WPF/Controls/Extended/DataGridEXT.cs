@@ -34,6 +34,18 @@ namespace Paway.WPF
         {
             columnsReady.AddRange(this.Columns);
         }
+        /// <summary>
+        /// 加载列
+        /// </summary>
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            if (base.ItemsSource != null)
+            {
+                this.type = base.ItemsSource.GetType().GenericType();
+                LoadColumns();
+            }
+        }
 
         #endregion
 

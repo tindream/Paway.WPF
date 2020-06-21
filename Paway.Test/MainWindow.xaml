@@ -128,6 +128,7 @@
 
 
         <utils:DataGridEXT Name="datagrid1" Grid.Column="1" Grid.RowSpan="9" 
+                           ItemsSource="{Binding GridList}"
                            Margin="5,7,5,8" Height="250" Grid.Row="1" VerticalAlignment="Top">
             <DataGrid.Columns>
                 <DataGridTextColumn  MinWidth="130" Binding="{Binding Money}" ElementStyle="{StaticResource TextRight}"/>

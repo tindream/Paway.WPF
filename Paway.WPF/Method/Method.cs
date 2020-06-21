@@ -228,6 +228,26 @@ namespace Paway.WPF
         #region Window进度条
         private static WindowProgress progress;
         /// <summary>
+        /// 模式显示Window进度条，执行完成后关闭
+        /// </summary>
+        public static void Progress(DependencyObject parent, Action action)
+        {
+            parent.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                new Action(() =>
+                {
+                    action.Invoke();
+                }).BeginInvoke(new AsyncCallback(ar =>
+                {
+                    parent.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        Method.Hide();
+                    }));
+                }), null);
+                Progress(parent, true);
+            }));
+        }
+        /// <summary>
         /// 显示Window进度条
         /// </summary>
         public static void Progress(DependencyObject parent = null, bool dialog = false)
