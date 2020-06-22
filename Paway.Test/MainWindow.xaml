@@ -118,12 +118,12 @@
                                            CommandParameter="{Binding ElementName=listView1}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-            <utils:ListBoxItemEXT Content="Hello" Desc="World"
+            <utils:ListBoxItemEXT Text="Hello" Desc="World"
                                   Image="pack://application:,,,/Paway.Test;component/Images/close.png"/>
-            <utils:ListBoxItemEXT Content="A"/>
+            <utils:ListBoxItemEXT Text="A"/>
             <Button Content="Hi"/>
-            <utils:ListBoxItemEXT Content="B"/>
-            <utils:ListBoxItemEXT Content="C"/>
+            <utils:ListBoxItemEXT Text="B"/>
+            <utils:ListBoxItemEXT Text="C"/>
         </utils:ListViewEXT>
 
 

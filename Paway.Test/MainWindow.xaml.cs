@@ -38,8 +38,8 @@ namespace Paway.Test
                 Image = new ImageEXT(@"pack://application:,,,/Paway.Test;component/Images/close.png")
             });
             datagrid1.ItemsSource = list;
-            listView1.Items.Clear();
-            listView1.ItemsSource = list;
+            //listView1.Items.Clear();
+            //listView1.ItemsSource = list;
 
             var multiList = new ObservableCollection<ComboBoxMultiModel>();
             multiList.Add(new ComboBoxMultiModel("张三"));

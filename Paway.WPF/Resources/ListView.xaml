@@ -194,6 +194,8 @@
                                                 Value="{Binding Path=ItemBorderBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="border" Property="Background"
                                                 Value="{Binding Path=ItemBackground.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
+                                        <Setter TargetName="border" Property="BorderThickness" 
+                                                Value="{Binding Path=ItemBorder.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                     </DataTrigger>
                                     <MultiTrigger>
                                         <MultiTrigger.Conditions>
@@ -204,6 +206,8 @@
                                                 Value="{Binding Path=ItemBorderBrush.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="border" Property="Background"
                                                 Value="{Binding Path=ItemBackground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
+                                        <Setter TargetName="border" Property="BorderThickness" 
+                                                Value="{Binding Path=ItemBorder.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                     </MultiTrigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>

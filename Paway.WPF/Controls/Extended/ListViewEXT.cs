@@ -387,16 +387,41 @@ namespace Paway.WPF
                     if (Method.Parent(e.OriginalSource as DependencyObject, out downItem))
                     {
                         e.Handled = true;
-                        if (downItem.Content is ListViewModel model)
-                        {
-                            model.IsPressed = true;
-                        }
+                        IsPressed(true);
                     }
                 }
             }
             else e.Handled = true;
             base.OnPreviewMouseDown(e);
         }
+        private void IsPressed(bool value)
+        {
+            if (downItem.Content is ListViewModel model)
+            {
+                model.IsPressed = value;
+            }
+            else if (downItem.Content is ListBoxItemEXT itemEXT)
+            {
+                itemEXT.IsPressed = value;
+            }
+        }
+        /// <summary>
+        /// 判断按下状态
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnPreviewMouseMove(MouseEventArgs e)
+        {
+            base.OnPreviewMouseMove(e);
+            if (ClickMode == ClickMode.Release && downItem != null)
+            {
+                if (e.LeftButton == MouseButtonState.Released)
+                {
+                    IsPressed(false);
+                    downItem = null;
+                }
+            }
+        }
+
         /// <summary>
         /// 鼠标抬起时判断触发
         /// </summary>
@@ -405,10 +430,7 @@ namespace Paway.WPF
         {
             if (ClickMode == ClickMode.Release && e.ChangedButton == MouseButton.Left && downItem != null)
             {
-                if (downItem.Content is ListViewModel model)
-                {
-                    model.IsPressed = false;
-                }
+                IsPressed(false);
                 if (Method.Parent(e.OriginalSource as DependencyObject, out ListBoxItem item))
                 {
                     if (item == downItem)
