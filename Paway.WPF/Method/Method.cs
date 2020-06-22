@@ -230,7 +230,7 @@ namespace Paway.WPF
         /// <summary>
         /// 模式显示Window进度条，执行完成后关闭
         /// </summary>
-        public static void Progress(DependencyObject parent, Action action)
+        public static void Progress(DependencyObject parent, Action action, Action completed = null)
         {
             parent.Dispatcher.BeginInvoke(new Action(() =>
             {
@@ -242,6 +242,7 @@ namespace Paway.WPF
                     parent.Dispatcher.BeginInvoke(new Action(() =>
                     {
                         Method.Hide();
+                        completed?.Invoke();
                     }));
                 }), null);
                 Progress(parent, true);
@@ -322,13 +323,16 @@ namespace Paway.WPF
                 var interval = NativeMethods.GetDoubleClickTime();
                 window.KeyDown += delegate (object sender, System.Windows.Input.KeyEventArgs e)
                 {
-                    if (iExit && DateTime.Now.Subtract(exitTime).TotalMilliseconds < interval)
+                    if (e.Key == System.Windows.Input.Key.Escape)
                     {
-                        window.Close();
-                        return;
+                        if (iExit && DateTime.Now.Subtract(exitTime).TotalMilliseconds < interval)
+                        {
+                            window.Close();
+                            return;
+                        }
+                        iExit = true;
+                        exitTime = DateTime.Now;
                     }
-                    iExit = true;
-                    exitTime = DateTime.Now;
                 };
             }
             return window.ShowDialog();

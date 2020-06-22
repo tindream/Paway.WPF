@@ -9,7 +9,7 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Background" Value="White"/>
         <Setter Property="Padding" Value="3,4"/>
-        <Setter Property="Margin" Value="0,2"/>
+        <Setter Property="Margin" Value="2"/>
         <Setter Property="FontFamily" Value="Microsoft YaHei"/>
         <!--修改模板属性-->
         <Setter Property="Template">
@@ -58,6 +58,9 @@
                         <Trigger Property="IsKeyboardFocused" Value="True">
                             <Setter Property="BorderBrush" TargetName="border" 
                                     Value="{Binding Path=BorderFocusedBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter Property="BorderBrush" TargetName="border" Value="Transparent"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
