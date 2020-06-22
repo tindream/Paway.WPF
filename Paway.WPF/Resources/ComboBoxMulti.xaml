@@ -8,7 +8,7 @@
 
     <ControlTemplate x:Key="ComboBoxToggleNone" TargetType="{x:Type ToggleButton}">
         <Grid>
-            <Border Grid.Column="1" Background="White" Opacity="0"   Cursor="Hand"/>
+            <Border Grid.Column="1" Background="White" Opacity="0" Cursor="Hand"/>
         </Grid>
     </ControlTemplate>
     <Style TargetType="{x:Type local:ComboBoxMulti}">
@@ -19,7 +19,7 @@
                 <ControlTemplate TargetType="{x:Type local:ComboBoxMulti}">
                     <Grid>
                         <Border x:Name="border" 
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"  
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                                 BorderThickness="1" 
                                 CornerRadius="{TemplateBinding Radius}"
                                 Padding="{TemplateBinding Padding}"
@@ -30,10 +30,10 @@
                                 <!--下拉按钮-->
                                 <ToggleButton Name="PART_DropDownToggle" 
                                                   Width="30" DockPanel.Dock="Right"
-                                                  IsTabStop="False"  
+                                                  IsTabStop="False" 
                                                   IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                                   Template="{StaticResource ComboBoxToggleButton}" />
-                                <ListBox x:Name="PART_ListBoxChk"  
+                                <ListBox x:Name="PART_ListBoxChk" 
                                          SelectionMode="Multiple" 
                                          BorderThickness="0" 
                                          Margin="2"
@@ -71,28 +71,28 @@
                                 <local:TextBoxEXT Width="0" />
                                 <ToggleButton Name="PART_DropDownToggle2" 
                                                   DockPanel.Dock="Right"
-                                                  IsTabStop="False"  
+                                                  IsTabStop="False" 
                                                   IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                                   Template="{StaticResource ComboBoxToggleNone}" />
                             </DockPanel>
                         </Grid>
                         <!--弹出多选列表-->
                         <Popup x:Name="PART_Popup" 
-                               AllowsTransparency="True"  
+                               AllowsTransparency="True" 
                                Focusable="False" 
                                StaysOpen="True"
                                IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
                                PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" 
                                Placement="Bottom">
                             <Grid 
-                                Width="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}"  
+                                Width="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
                                 MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}" >
                                 <ListBox x:Name="PART_ListBox" 
                                          SelectionMode="Multiple" 
                                          BorderThickness="1"
                                          ItemsSource="{Binding ItemsSource,RelativeSource={RelativeSource TemplatedParent}}"
                                          MaxHeight="{TemplateBinding MaxDropDownHeight}" 
-                                         BorderBrush="#CCC"  >
+                                         BorderBrush="#CCC" >
                                     <ListBox.ItemContainerStyle>
                                         <Style TargetType="ListBoxItem">
                                             <Setter Property="Padding" Value="3,15"/>
@@ -101,8 +101,8 @@
                                                     <ControlTemplate TargetType="{x:Type ListBoxItem}" >
                                                         <Grid>
                                                             <Border x:Name="_borderbg" Padding="{TemplateBinding Padding}"/>
-                                                            <ContentPresenter x:Name="_txt"  />
-                                                            <Border Background="White"  Opacity="0"/>
+                                                            <ContentPresenter x:Name="_txt" />
+                                                            <Border Background="White" Opacity="0"/>
                                                         </Grid>
                                                         <ControlTemplate.Triggers>
                                                             <Trigger Property="IsSelected" Value="True">
@@ -141,7 +141,7 @@
                                         <DataTemplate>
                                             <CheckBox VerticalContentAlignment="Center"
                                                       Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-                                                      IsChecked="{Binding  RelativeSource={RelativeSource AncestorType=ListBoxItem},Path=IsSelected,Mode=TwoWay}"  
+                                                      IsChecked="{Binding  RelativeSource={RelativeSource AncestorType=ListBoxItem},Path=IsSelected,Mode=TwoWay}" 
                                                       Content="{Binding Path=Text}" />
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>

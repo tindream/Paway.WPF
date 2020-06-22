@@ -40,10 +40,10 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Text" Value="{x:Null}">
-                            <Setter Property="Visibility"  TargetName="stackPanel" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="stackPanel" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="Text" Value="">
-                            <Setter Property="Visibility"  TargetName="stackPanel" Value="Visible"/>
+                            <Setter Property="Visibility" TargetName="stackPanel" Value="Visible"/>
                         </Trigger>
                         <Trigger Property="IsReadOnly" Value="True">
                             <Setter Property="Background" TargetName="border" Value="#F7F7F7"/>

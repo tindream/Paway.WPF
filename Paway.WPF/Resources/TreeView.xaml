@@ -18,10 +18,10 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Border Name="itemBackground" 
-                                            Background="{TemplateBinding Background}"  
-                                            BorderBrush="{TemplateBinding BorderBrush}"  
-                                            BorderThickness="{TemplateBinding BorderThickness}"  
-                                            Padding="{TemplateBinding Padding}">
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}">
                             <Grid Background="Transparent">
                                 <Grid x:Name="ItemRoot" Margin="{Binding Converter={StaticResource indentConverter},RelativeSource={RelativeSource TemplatedParent}}" Background="Transparent">
                                     <Grid.ColumnDefinitions>
@@ -74,8 +74,8 @@
                                         </ToggleButton.Style>
                                     </ToggleButton>
                                     <ContentPresenter x:Name="PART_Header" Grid.Column="1" 
-                                                                  ContentSource="Header"  
-                                                                  HorizontalAlignment="Stretch" />
+                                                      ContentSource="Header"
+                                                      HorizontalAlignment="Stretch"/>
                                 </Grid>
                             </Grid>
                         </Border>
@@ -93,7 +93,7 @@
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="itemBackground" Property="Background" 
-                                                Value="{Binding Path=BackgroundRound.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}" />
+                                    Value="{Binding Path=BackgroundRound.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -101,7 +101,7 @@
                                 <Condition Property="IsMouseOver" SourceName="itemBackground" Value="true"/>
                             </MultiTrigger.Conditions>
                             <Setter TargetName="itemBackground" Property="Background" 
-                                                Value="{Binding Path=BackgroundRound.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}" />
+                                    Value="{Binding Path=BackgroundRound.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -109,7 +109,7 @@
                                 <Condition Property="IsSelected" Value="true"/>
                             </MultiTrigger.Conditions>
                             <Setter TargetName="itemBackground" Property="Background" 
-                                                Value="{Binding Path=BackgroundRound.PressedMouse,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}" />
+                                    Value="{Binding Path=BackgroundRound.PressedMouse,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
@@ -167,7 +167,7 @@
                 <TextBlock Grid.Column="1" Text="{Binding Text}" VerticalAlignment="Center"/>
             </Grid>
             <Grid x:Name="groupinginfo" 
-                  Margin="3"  
+                  Margin="3" 
                   Background="Transparent" 
                   HorizontalAlignment="Left" 
                   Visibility="{Binding IsGrouping,Converter={StaticResource boolToVisible}}">

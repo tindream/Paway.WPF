@@ -19,11 +19,11 @@
                 <!--控件模板-->
                 <ControlTemplate TargetType="{x:Type local:ButtonPath}" >
                     <Canvas Background="{TemplateBinding Background}"
-							Margin="5">
+                            Margin="5">
                         <local:ProgressBarEXT x:Name="progress" Value="{TemplateBinding local:ButtonPath.Value}"
-                                             BorderThickness="0"
-											 Height="35" Width="86" Canvas.Left="-23" Canvas.Top="28"
-											 RenderTransformOrigin="0.5,0.5" HorizontalContentAlignment="Right" >
+                                              BorderThickness="0"
+                                              Height="35" Width="86" Canvas.Left="-23" Canvas.Top="28"
+                                              RenderTransformOrigin="0.5,0.5" HorizontalContentAlignment="Right">
                             <local:ProgressBarEXT.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -38,7 +38,7 @@
                         <Path Fill="{TemplateBinding Background}" Data="M38,8 L34,85 Q30,89 25,89 L38,89z"/>
                         <Path Fill="{TemplateBinding Background}" Data="M13,89 Q8,88 6,85 L2,8 0,89z"/>
                         <Path Name="path" Stroke="{TemplateBinding BorderColor}" Fill="Transparent" Margin="1"
-							  Data="M1,8 Q3,3 8,1 L30,1 Q35,3 37,8 L33,84 Q30,88 25,88 L13,88 Q8,88 5,84z">
+                              Data="M1,8 Q3,3 8,1 L30,1 Q35,3 37,8 L33,84 Q30,88 25,88 L13,88 Q8,88 5,84z">
                             <Path.Effect>
                                 <DropShadowEffect Color="#FFE5E5E6" ShadowDepth="0"/>
                             </Path.Effect>
@@ -47,9 +47,9 @@
                               Visibility="Collapsed"
                               Canvas.Left="14.75" Canvas.Top="45" RenderTransformOrigin="0.792,-0.062" />
                         <TextBlock Name="lbText" Canvas.Left="3" Canvas.Top="14" Width="34"
-								   Text="{TemplateBinding Content}"
-								   FontSize="{TemplateBinding FontSize}"
-								   TextAlignment="Center" />
+                                   Text="{TemplateBinding Content}"
+                                   FontSize="{TemplateBinding FontSize}"
+                                   TextAlignment="Center"/>
                     </Canvas>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">

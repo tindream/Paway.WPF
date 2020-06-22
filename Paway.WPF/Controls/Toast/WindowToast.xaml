@@ -33,7 +33,7 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Window.Resources>
-    <Border x:Name="border1" Margin="1"  CornerRadius="8" Background="#5D6B99"
+    <Border x:Name="border1" Margin="1" CornerRadius="8" Background="#5D6B99"
             HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
         <Border.RenderTransform>
             <TransformGroup>

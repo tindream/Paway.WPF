@@ -12,8 +12,8 @@
     </LinearGradientBrush>
     <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
         <Grid>
-            <Border Background="White" Opacity="0"   Cursor="Hand"/>
-            <Path x:Name="Arrow" Grid.Column="1"  Margin="9,0"
+            <Border Background="White" Opacity="0" Cursor="Hand"/>
+            <Path x:Name="Arrow" Grid.Column="1" Margin="9,0"
                   Style="{StaticResource PathTriangleDown}" Width="12" Height="6"
                   HorizontalAlignment="Right" StrokeThickness="0"
                   Stretch="Fill" Fill="#B1B1B1" />
@@ -50,7 +50,7 @@
                                           ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" 
                                           ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" />
                         <!--ToggleButton 已数据绑定到 ComboBox 本身以切换 IsDropDownOpen-->
-                        <ToggleButton x:Name="ToggleButton" Grid.ColumnSpan="2"  
+                        <ToggleButton x:Name="ToggleButton" Grid.ColumnSpan="2" 
                                       Focusable="false" 
                                       ClickMode="Press"
                                       Template="{StaticResource ComboBoxToggleButton}"
@@ -72,7 +72,7 @@
                             <Grid MaxHeight="149" MinWidth="{TemplateBinding ActualWidth}" x:Name="DropDown" 
                                   Background="White"
                                   SnapsToDevicePixels="True">
-                                <Border x:Name="DropDownBorder"  BorderBrush="#CCC" BorderThickness="1"/>
+                                <Border x:Name="DropDownBorder" BorderBrush="#CCC" BorderThickness="1"/>
                                 <local:ScrollViewerEXT Margin="1" 
                                               SnapsToDevicePixels="True" 
                                               HorizontalScrollBarVisibility="Auto" 

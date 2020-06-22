@@ -20,6 +20,10 @@ namespace Paway.WPF
         /// </summary>
         int Id { get; set; }
         /// <summary>
+        /// 按下状态
+        /// </summary>
+        bool IsPressed { get; set; }
+        /// <summary>
         /// 文本
         /// </summary>
         string Text { get; set; }
@@ -50,6 +54,15 @@ namespace Paway.WPF
         {
             get { return id; }
             set { id = value; OnPropertyChanged(); }
+        }
+        private bool isPressed;
+        /// <summary>
+        /// 按下状态
+        /// </summary>
+        public virtual bool IsPressed
+        {
+            get { return isPressed; }
+            set { isPressed = value; OnPropertyChanged(); }
         }
         private string text;
         /// <summary>

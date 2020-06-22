@@ -384,7 +384,14 @@ namespace Paway.WPF
             {
                 if (ClickMode == ClickMode.Release)
                 {
-                    e.Handled = Method.Parent(e.OriginalSource as DependencyObject, out downItem);
+                    if (Method.Parent(e.OriginalSource as DependencyObject, out downItem))
+                    {
+                        e.Handled = true;
+                        if (downItem.Content is ListViewModel model)
+                        {
+                            model.IsPressed = true;
+                        }
+                    }
                 }
             }
             else e.Handled = true;
@@ -398,6 +405,10 @@ namespace Paway.WPF
         {
             if (ClickMode == ClickMode.Release && e.ChangedButton == MouseButton.Left && downItem != null)
             {
+                if (downItem.Content is ListViewModel model)
+                {
+                    model.IsPressed = false;
+                }
                 if (Method.Parent(e.OriginalSource as DependencyObject, out ListBoxItem item))
                 {
                     if (item == downItem)
@@ -455,7 +466,7 @@ namespace Paway.WPF
                 {
                     SetSelected(listBoxItem, action(i));
                 }
-                else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is ListViewItem listViewItem)
+                else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is ListBoxItem listViewItem)
                 {
                     SetSelected(listViewItem, action(i));
                 }
@@ -476,7 +487,7 @@ namespace Paway.WPF
                         return i;
                     }
                 }
-                else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is ListViewItem listViewItem)
+                else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is ListBoxItem listViewItem)
                 {
                     if (item.Equals(listViewItem)) return i;
                 }

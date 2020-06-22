@@ -10,7 +10,7 @@
     <Style x:Key="WindowFunctionBarTitleBarButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource WindowTitleBarButtonStyle}">
         <Setter Property="MinWidth" Value="42" />
         <Setter Property="Width" Value="Auto" />
-        <Setter Property="Padding"  Value="9,0" />
+        <Setter Property="Padding" Value="9,0" />
     </Style>
 
     <ControlTemplate x:Key="TopLevelItemTemplate" TargetType="{x:Type MenuItem}">
@@ -37,7 +37,7 @@
                                   VerticalAlignment="Center"
                                   Width="16" />
                 <Path x:Name="GlyphPanel"
-                      Style="{StaticResource PathRight}"  Width="10" Height="9"
+                      Style="{StaticResource PathRight}" Width="10" Height="9"
                       Fill="#FF212121"
                       Margin="3"
                       Visibility="Collapsed"/>
@@ -110,7 +110,7 @@
                                   VerticalAlignment="Center"
                                   Width="16" />
                 <Path x:Name="GlyphPanel"
-                      Style="{StaticResource PathRight}"  Width="10" Height="9"
+                      Style="{StaticResource PathRight}" Width="10" Height="9"
                       Fill="{TemplateBinding Foreground}"
                       Margin="3"
                       Visibility="Collapsed"/>
@@ -175,7 +175,7 @@
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsSuspendingPopupAnimation" Value="True">
-                <Setter Property="PopupAnimation" TargetName="PART_Popup"  Value="None" />
+                <Setter Property="PopupAnimation" TargetName="PART_Popup" Value="None" />
             </Trigger>
             <Trigger Property="Icon" Value="{x:Null}">
                 <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
@@ -248,7 +248,7 @@
                         VerticalAlignment="Center"
                         Width="22" >
                     <Path x:Name="Glyph"
-                          Style="{StaticResource PathRight}"  Width="10" Height="9"
+                          Style="{StaticResource PathRight}" Width="10" Height="9"
                           Margin="0"
                           Fill="#FF212121" />
                 </Border>
@@ -275,7 +275,7 @@
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="Icon" Value="{x:Null}">
-                <Setter Property="Visibility" TargetName="Icon"  Value="Collapsed" />
+                <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsChecked" Value="True">
                 <Setter Property="Visibility" TargetName="GlyphPanel" Value="Visible" />
@@ -332,7 +332,7 @@
                         VerticalAlignment="Center"
                         Width="22">
                     <Path x:Name="Glyph"
-                          Style="{StaticResource PathRight}"  Width="10" Height="9"
+                          Style="{StaticResource PathRight}" Width="10" Height="9"
                           Margin="0"
                           Fill="#FF212121"/>
                 </Border>
@@ -354,7 +354,7 @@
                            Text="{TemplateBinding InputGestureText}"
                            VerticalAlignment="Center" />
                 <Path x:Name="RightArrow"
-                      Style="{StaticResource PathTriangleRight}" StrokeThickness="0" Stretch="Fill"  Width="4" Height="7"
+                      Style="{StaticResource PathTriangleRight}" StrokeThickness="0" Stretch="Fill" Width="4" Height="7"
                       Grid.Column="5"
                       Fill="#FF212121"
                       HorizontalAlignment="Left"
@@ -442,12 +442,12 @@
         <Setter Property="Control.Template" Value="{StaticResource SubmenuItemTemplate}" />
         <Style.Triggers>
             <Trigger Property="MenuItem.Role" Value="TopLevelHeader">
-                <Setter Property="Margin"  Value="0,3" />
+                <Setter Property="Margin" Value="0,3" />
                 <Setter Property="Control.Template" Value="{StaticResource TopLevelHeaderTemplate}" />
                 <Setter Property="Control.Padding" Value="9,0" />
             </Trigger>
             <Trigger Property="MenuItem.Role" Value="TopLevelItem">
-                <Setter Property="Margin"  Value="0,3" />
+                <Setter Property="Margin" Value="0,3" />
                 <Setter Property="Control.Template" Value="{StaticResource TopLevelItemTemplate}" />
                 <Setter Property="Control.Padding" Value="9,0" />
             </Trigger>
@@ -521,7 +521,7 @@
                         <ResourceDictionary>
                             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource WindowFunctionBarTitleBarButtonStyle}" />
                             <Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource WindowTitleBarMenuItemStyle}" />
-                            <Style TargetType="{x:Type Menu}" BasedOn="{StaticResource WindowTitleBarMenuStyle}"  />
+                            <Style TargetType="{x:Type Menu}" BasedOn="{StaticResource WindowTitleBarMenuStyle}" />
                             <Style TargetType="{x:Type Separator}" BasedOn="{StaticResource WindowTitleBarSeparatorStyle}" />
                         </ResourceDictionary>
                     </ControlTemplate.Resources>

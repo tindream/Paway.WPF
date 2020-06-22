@@ -66,7 +66,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="IncreaseRepeatButton"  TargetType="RepeatButton">
+    <Style x:Key="IncreaseRepeatButton" TargetType="RepeatButton">
         <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True"/>
         <Setter Property="Panel.Background" Value="#00FFFFFF"/>
         <Setter Property="UIElement.Focusable" Value="False"/>

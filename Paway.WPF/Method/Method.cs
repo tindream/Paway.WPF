@@ -283,9 +283,9 @@ namespace Paway.WPF
         /// <summary>
         /// 显示子窗体
         /// </summary>
-        public static bool? Show(DependencyObject parent, Window window)
+        public static bool? Show(DependencyObject parent, Window window, bool iEscExit = true)
         {
-            Parent(parent, out Window owner);
+            if (!Parent(parent, out Window owner)) return null;
             window.ShowInTaskbar = false;
             window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             window.Closed += delegate
@@ -315,6 +315,22 @@ namespace Paway.WPF
             owner.Content = container;
             //弹出消息框 
             window.Owner = owner;
+            if (iEscExit)
+            {
+                var iExit = false;
+                var exitTime = DateTime.MinValue;
+                var interval = NativeMethods.GetDoubleClickTime();
+                window.KeyDown += delegate (object sender, System.Windows.Input.KeyEventArgs e)
+                {
+                    if (iExit && DateTime.Now.Subtract(exitTime).TotalMilliseconds < interval)
+                    {
+                        window.Close();
+                        return;
+                    }
+                    iExit = true;
+                    exitTime = DateTime.Now;
+                };
+            }
             return window.ShowDialog();
         }
 

@@ -28,6 +28,16 @@ namespace Paway.WPF
             var name = Method.GetLastModelName();
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
+        private bool isPressed;
+        /// <summary>
+        /// 按下状态
+        /// </summary>
+        [Browsable(false)]
+        public bool IsPressed
+        {
+            get { return isPressed; }
+            set { isPressed = value; OnPropertyChanged(); }
+        }
 
         /// <summary>
         /// 文本
