@@ -135,7 +135,7 @@
                                                                        Storyboard.TargetProperty="(UIElement.Opacity)">
                                             <SplineDoubleKeyFrame KeyTime="00:00:00"
                                                                   Value="0" />
-                                            <SplineDoubleKeyFrame KeyTime="00:00:00.300"
+                                            <SplineDoubleKeyFrame KeyTime="00:00:00.500"
                                                                   Value="1" />
                                         </DoubleAnimationUsingKeyFrames>
 
@@ -143,8 +143,8 @@
                                                                        Storyboard.TargetName="CurrentContentPresentationSite"
                                                                        Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
                                             <SplineDoubleKeyFrame KeyTime="00:00:00"
-                                                                  Value="-40" />
-                                            <SplineDoubleKeyFrame KeyTime="00:00:00.300"
+                                                                  Value="-400" />
+                                            <SplineDoubleKeyFrame KeyTime="00:00:00.500"
                                                                   Value="0" />
                                         </DoubleAnimationUsingKeyFrames>
 
@@ -153,7 +153,7 @@
                                                                        Storyboard.TargetProperty="(UIElement.Opacity)">
                                             <SplineDoubleKeyFrame KeyTime="00:00:00"
                                                                   Value="1" />
-                                            <SplineDoubleKeyFrame KeyTime="00:00:00.300"
+                                            <SplineDoubleKeyFrame KeyTime="00:00:00.500"
                                                                   Value="0" />
                                         </DoubleAnimationUsingKeyFrames>
 
@@ -162,8 +162,8 @@
                                                                        Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
                                             <SplineDoubleKeyFrame KeyTime="00:00:00"
                                                                   Value="0" />
-                                            <SplineDoubleKeyFrame KeyTime="00:00:00.300"
-                                                                  Value="40" />
+                                            <SplineDoubleKeyFrame KeyTime="00:00:00.500"
+                                                                  Value="400" />
                                         </DoubleAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -174,7 +174,7 @@
                                                                        Storyboard.TargetProperty="(UIElement.Opacity)">
                                             <SplineDoubleKeyFrame KeyTime="00:00:00"
                                                                   Value="0" />
-                                            <SplineDoubleKeyFrame KeyTime="00:00:00.300"
+                                            <SplineDoubleKeyFrame KeyTime="00:00:00.500"
                                                                   Value="1" />
                                         </DoubleAnimationUsingKeyFrames>
 
@@ -182,8 +182,8 @@
                                                                        Storyboard.TargetName="CurrentContentPresentationSite"
                                                                        Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
                                             <SplineDoubleKeyFrame KeyTime="00:00:00"
-                                                                  Value="30" />
-                                            <SplineDoubleKeyFrame KeyTime="00:00:00.300"
+                                                                  Value="400" />
+                                            <SplineDoubleKeyFrame KeyTime="00:00:00.500"
                                                                   Value="0" />
                                         </DoubleAnimationUsingKeyFrames>
 
@@ -192,7 +192,7 @@
                                                                        Storyboard.TargetProperty="(UIElement.Opacity)">
                                             <SplineDoubleKeyFrame KeyTime="00:00:00"
                                                                   Value="1" />
-                                            <SplineDoubleKeyFrame KeyTime="00:00:00.300"
+                                            <SplineDoubleKeyFrame KeyTime="00:00:00.500"
                                                                   Value="0" />
                                         </DoubleAnimationUsingKeyFrames>
 
@@ -201,8 +201,8 @@
                                                                        Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
                                             <SplineDoubleKeyFrame KeyTime="00:00:00"
                                                                   Value="0" />
-                                            <SplineDoubleKeyFrame KeyTime="00:00:00.300"
-                                                                  Value="-30" />
+                                            <SplineDoubleKeyFrame KeyTime="00:00:00.500"
+                                                                  Value="-400" />
                                         </DoubleAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>

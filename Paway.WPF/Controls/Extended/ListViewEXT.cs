@@ -384,7 +384,7 @@ namespace Paway.WPF
             {
                 if (ClickMode == ClickMode.Release)
                 {
-                    if (Method.Parent(e.OriginalSource as DependencyObject, out downItem))
+                    if (Method.Parent(e.OriginalSource, out downItem))
                     {
                         e.Handled = true;
                         IsPressed(true);
@@ -431,7 +431,7 @@ namespace Paway.WPF
             if (ClickMode == ClickMode.Release && e.ChangedButton == MouseButton.Left && downItem != null)
             {
                 IsPressed(false);
-                if (Method.Parent(e.OriginalSource as DependencyObject, out ListBoxItem item))
+                if (Method.Parent(e.OriginalSource, out ListBoxItem item))
                 {
                     if (item == downItem)
                     {

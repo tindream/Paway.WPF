@@ -441,18 +441,19 @@ namespace Paway.WPF
         /// <summary>
         /// 返回控件的顶层指定类型控件
         /// </summary>
-        public static bool Parent<T>(DependencyObject obj, out T parent) where T : FrameworkElement
+        public static bool Parent<T>(object obj, out T parent) where T : FrameworkElement
         {
-            while (obj != null)
+            parent = null;
+            if (!(obj is DependencyObject dependency)) return false;
+            while (dependency != null)
             {
-                if (obj is T t)
+                if (dependency is T t)
                 {
                     parent = t;
                     return true;
                 }
-                obj = VisualTreeHelper.GetParent(obj);
+                dependency = VisualTreeHelper.GetParent(dependency);
             }
-            parent = null;
             return false;
         }
         /// <summary>
@@ -464,18 +465,19 @@ namespace Paway.WPF
         /// <param name="name">指定控件名称</param>
         /// <param name="iParent">指定搜索同级控件</param>
         /// <returns></returns>
-        public static bool Child<T>(DependencyObject obj, out T child, string name = null, bool iParent = true) where T : FrameworkElement
+        public static bool Child<T>(object obj, out T child, string name = null, bool iParent = true) where T : FrameworkElement
         {
             child = null;
+            if (!(obj is DependencyObject dependency)) return false;
             if (iParent)
             {
-                var parent = VisualTreeHelper.GetParent(obj);
-                if (parent != null) obj = parent;
+                var parent = VisualTreeHelper.GetParent(dependency);
+                if (parent != null) dependency = parent;
             }
-            var count = VisualTreeHelper.GetChildrenCount(obj);
+            var count = VisualTreeHelper.GetChildrenCount(dependency);
             for (int i = 0; i < count; i++)
             {
-                var value = VisualTreeHelper.GetChild(obj, i);
+                var value = VisualTreeHelper.GetChild(dependency, i);
                 if (value is T temp)
                 {
                     if (name == null || temp.Name == name)
@@ -489,10 +491,10 @@ namespace Paway.WPF
                     return true;
                 }
             }
-            while (obj is ContentControl control)
+            while (dependency is ContentControl control)
             {
-                obj = control.Content as DependencyObject;
-                if (obj is T temp)
+                dependency = control.Content as DependencyObject;
+                if (dependency is T temp)
                 {
                     if (name == null || temp.Name == name)
                     {
