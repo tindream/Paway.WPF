@@ -64,6 +64,8 @@ namespace Paway.Test
         }
 
         private bool b;
+        private Path pathNew;
+        private object pathCurrent;
         private void ButtonEXT_Click(object sender, RoutedEventArgs e)
         {
             var xml = Method.GetTemplateXaml(datagrid1);
@@ -71,8 +73,16 @@ namespace Paway.Test
             b = !b;
             if (b) Method.Progress(this);
             else Method.Hide();
-            transition.Transition = (TransitionType)new Random().Next(0, 5);
-            //transition.Transition = TransitionType.Up;
+            if (this.pathCurrent == null)
+            {
+                this.pathCurrent = transition.Content;
+                this.pathNew = new Path();
+                this.pathNew.Style = this.FindResource("PathRound") as Style;
+            }
+            transition.TransitionType = (TransitionType)new Random().Next(0, 5);
+            //transition.TransitionType = TransitionType.Left;
+            if (b) transition.Content = this.pathNew;
+            else transition.Content = this.pathCurrent;
         }
     }
 }

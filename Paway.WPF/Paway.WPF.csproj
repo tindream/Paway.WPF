@@ -88,7 +88,6 @@
       <DependentUpon>WindowProgress.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\TransitionControl\TransitionControl.cs" />
-    <Compile Include="Controls\TransitionControl\TransitionControl.VisualStates.cs" />
     <Compile Include="Controls\TransitionControl\TransitionType.cs" />
     <Compile Include="Controls\Window\FunctionBar\FunctionBar.cs" />
     <Compile Include="Controls\Window\FunctionBar\WindowFunctionBar.cs" />
