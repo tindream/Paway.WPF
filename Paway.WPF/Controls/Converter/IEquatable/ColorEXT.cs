@@ -67,7 +67,8 @@ namespace Paway.WPF
             if (a < 0) a = 0;
             Mouse = Color.FromArgb((byte)a, color.R, color.G, color.B);
             a = color.A + alpha;
-            if (a > 255) a = 255;
+            if (color == Colors.Transparent) a = 0;
+            else if (a > 255) a = 255;
             Pressed = Color.FromArgb((byte)a, color.R, color.G, color.B);
             return this;
         }
@@ -78,7 +79,8 @@ namespace Paway.WPF
         {
             Mouse = color;
             var a = color.A + alpha;
-            if (a > 255) a = 255;
+            if (color == Colors.Transparent) a = 0;
+            else if (a > 255) a = 255;
             Pressed = Color.FromArgb((byte)a, color.R, color.G, color.B);
             return this;
         }

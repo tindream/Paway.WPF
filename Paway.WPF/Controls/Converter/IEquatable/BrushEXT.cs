@@ -80,7 +80,8 @@ namespace Paway.WPF
             if (a < 0) a = 0;
             Mouse = new SolidColorBrush(Color.FromArgb((byte)a, color.R, color.G, color.B));
             a = color.A + alpha;
-            if (a > 255) a = 255;
+            if (color == Colors.Transparent) a = 0;
+            else if (a > 255) a = 255;
             Pressed = new SolidColorBrush(Color.FromArgb((byte)a, color.R, color.G, color.B));
             return this;
         }
@@ -91,7 +92,8 @@ namespace Paway.WPF
         {
             Mouse = new SolidColorBrush(color);
             var a = color.A + alpha;
-            if (a > 255) a = 255;
+            if (color == Colors.Transparent) a = 0;
+            else if (a > 255) a = 255;
             Pressed = new SolidColorBrush(Color.FromArgb((byte)a, color.R, color.G, color.B));
             return this;
         }
