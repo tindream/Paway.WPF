@@ -81,7 +81,7 @@
                                                Height="{Binding ItemImageHeight, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
                                                DockPanel.Dock="{Binding ItemImageDock, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
                                                Margin="{Binding Path=ItemImageMargin.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
-                                               Stretch="Fill"/>
+                                               Stretch="{Binding Path=ItemImageStretch, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/> 
                                             <DockPanel>
                                                 <TextBlock Name="desc" Text="{Binding Desc}"
                                                        TextTrimming="WordEllipsis" 

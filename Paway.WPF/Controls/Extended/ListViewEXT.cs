@@ -70,6 +70,11 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemImageMarginProperty =
             DependencyProperty.RegisterAttached(nameof(ItemImageMargin), typeof(ThicknessEXT), typeof(ListViewEXT), new PropertyMetadata(new ThicknessEXT(0)));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty StretchProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemImageStretch), typeof(Stretch), typeof(ListViewEXT),
+            new PropertyMetadata(Stretch.Fill));
 
         /// <summary>
         /// </summary>
@@ -254,6 +259,16 @@ namespace Paway.WPF
         {
             get { return (ThicknessEXT)GetValue(ItemImageMarginProperty); }
             set { SetValue(ItemImageMarginProperty, value); }
+        }
+        /// <summary>
+        /// 背景图片的内容如何拉伸才适合其磁贴
+        /// </summary>
+        [Category("扩展.项图片")]
+        [Description("自定义项图片的内容如何拉伸才适合其磁贴")]
+        public Stretch ItemImageStretch
+        {
+            get { return (Stretch)GetValue(StretchProperty); }
+            set { SetValue(StretchProperty, value); }
         }
 
         #endregion
