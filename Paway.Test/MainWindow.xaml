@@ -94,7 +94,7 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </utils:DataGridEXT>
-            
+
             <utils:ListViewEXT Name="listView1" Grid.Column="1" Grid.Row="10" Grid.RowSpan="9" 
                            Height="250" 
                            ItemWidth="100" ItemHeight="100" ItemRadius="0" ItemMargin="1" 
@@ -116,6 +116,9 @@
                 <utils:ListBoxItemEXT Text="B"/>
                 <utils:ListBoxItemEXT Text="C"/>
             </utils:ListViewEXT>
+
+            <DatePicker Name="dp" Width="153" VerticalContentAlignment="Center" Margin="5" HorizontalAlignment="Left"/>
+            <Calendar Margin="5" HorizontalAlignment="Left" />
         </StackPanel>
     </WrapPanel>
     <utils:WindowEXT.FunctionBar>

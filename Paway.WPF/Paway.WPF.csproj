@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\Converter\IEquatable\ColorLinear.cs" />
+    <Compile Include="Controls\Converter\IValueConverter\DateConvertToColor.cs" />
     <Compile Include="Controls\Converter\IValueConverter\IndentConverter.cs" />
     <Compile Include="Controls\Converter\IValueConverter\VisibleToReverse.cs" />
     <Compile Include="Controls\Converter\IValueConverter\BoolToVisible.cs" />
@@ -131,11 +132,19 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Resources\DatePicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\ComboBoxMulti.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\ListBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Calendar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
