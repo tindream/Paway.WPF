@@ -123,10 +123,10 @@
         <Grid Background="Transparent">
             <Grid.Resources>
                 <local:BoolToVisible x:Key="boolToVisible"/>
-                <local:VisibleToReverse x:Key="visibleToReverse"/>
+                <local:VisibleReverse x:Key="visibleReverse"/>
             </Grid.Resources>
             <Grid Margin="0,5" 
-                  Visibility="{Binding Visibility,ElementName=groupinginfo,Converter={StaticResource visibleToReverse}}">
+                  Visibility="{Binding Visibility,ElementName=groupinginfo,Converter={StaticResource visibleReverse}}">
                 <DockPanel>
                     <Border Background="#62ACF9" Width="40" Height="40" CornerRadius="4" HorizontalAlignment="Left" Margin="0">
                         <TextBlock Text="{Binding ShortName}" FontSize="23" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -152,10 +152,10 @@
         <Grid Background="Transparent">
             <Grid.Resources>
                 <local:BoolToVisible x:Key="boolToVisible"/>
-                <local:VisibleToReverse x:Key="visibleToReverse"/>
+                <local:VisibleReverse x:Key="visibleReverse"/>
             </Grid.Resources>
             <Grid Margin="0,5" 
-                  Visibility="{Binding Visibility,ElementName=groupinginfo,Converter={StaticResource visibleToReverse}}">
+                  Visibility="{Binding Visibility,ElementName=groupinginfo,Converter={StaticResource visibleReverse}}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>

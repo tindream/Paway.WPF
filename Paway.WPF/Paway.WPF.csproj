@@ -67,9 +67,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\Converter\IEquatable\ColorLinear.cs" />
+    <Compile Include="Controls\Converter\IValueConverter\BoolReverse.cs" />
     <Compile Include="Controls\Converter\IValueConverter\DateConvertToColor.cs" />
     <Compile Include="Controls\Converter\IValueConverter\IndentConverter.cs" />
-    <Compile Include="Controls\Converter\IValueConverter\VisibleToReverse.cs" />
+    <Compile Include="Controls\Converter\IValueConverter\VisibleReverse.cs" />
     <Compile Include="Controls\Converter\IValueConverter\BoolToVisible.cs" />
     <Compile Include="Controls\Extended\ButtonPath.cs" />
     <Compile Include="Controls\Extended\ComboBoxMulti.cs" />

@@ -167,6 +167,7 @@
                                                FontSize="15"
                                                Margin="1"
                                                xml:space="preserve"/>
+                            <Border Name="tbBordor" BorderBrush="Transparent" BorderThickness="1" Margin="1"/>
                             <Grid Name="PART_DisabledVisual"
                                   Opacity="0"
                                   IsHitTestVisible="False"
@@ -206,6 +207,12 @@
                                 </Setter.Value>
                             </Setter>
                         </DataTrigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="IsEnabled" TargetName="PART_TextBox" Value="False"/>
+                            <Setter Property="Background" TargetName="PART_TextBox" Value="#FFE6E6E6"/>
+                            <Setter Property="BorderBrush" TargetName="tbBordor" Value="#FFE6E6E6"/>
+                            <Setter Property="Background" Value="#FFE6E6E6"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

@@ -10,17 +10,18 @@ using System.Windows.Data;
 namespace Paway.WPF
 {
     /// <summary>
-    /// bool转Visibility
+    /// Visibility反转
     /// </summary>
-    internal class BoolToVisible : IValueConverter
+    internal class VisibleReverse : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((bool)value)
-                return Visibility.Visible;
-            else
+            if ((Visibility)value == Visibility.Visible)
                 return Visibility.Collapsed;
+            else
+                return Visibility.Visible;
         }
+
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
