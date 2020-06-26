@@ -11,6 +11,8 @@
         <Setter Property="Padding" Value="3,4"/>
         <Setter Property="Margin" Value="2"/>
         <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
         <!--修改模板属性-->
         <Setter Property="Template">
             <Setter.Value>
@@ -24,6 +26,7 @@
                         <Grid>
                             <local:ScrollViewerEXT x:Name="PART_ContentHost"
                                           VerticalAlignment="Center"
+                                          VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                             <StackPanel Name="stackPanel"
                                         Visibility="Collapsed"

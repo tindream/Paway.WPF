@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Paway.WPF
@@ -83,6 +84,20 @@ namespace Paway.WPF
         public TextBoxEXT()
         {
             DefaultStyleKey = typeof(TextBoxEXT);
+        }
+        /// <summary>
+        /// 响应滚动条
+        /// </summary>
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            var scrollViewer = GetTemplateChild("PART_ContentHost") as ScrollViewerEXT;
+            scrollViewer.PreviewMouseWheel += ScrollViewer_PreviewMouseWheel;
+        }
+        private void ScrollViewer_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        {
+            var scrollViewer = sender as ScrollViewerEXT;
+            scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - (e.Delta >> 2));
         }
     }
 }

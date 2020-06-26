@@ -394,20 +394,24 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
+            base.OnPreviewMouseDown(e);
             downItem = null;
             if (e.ChangedButton == MouseButton.Left)
             {
-                if (ClickMode == ClickMode.Release)
+                if (ClickMode == ClickMode.Release && Method.Parent(e.OriginalSource, out downItem))
                 {
-                    if (Method.Parent(e.OriginalSource, out downItem))
+                    e.Handled = true;
+                    IsPressed(true);
+                }
+                else if (e.ButtonState == MouseButtonState.Pressed)
+                {
+                    if (Method.Parent(this, out Window window))
                     {
-                        e.Handled = true;
-                        IsPressed(true);
+                        window.DragMove();
                     }
                 }
             }
             else e.Handled = true;
-            base.OnPreviewMouseDown(e);
         }
         private void IsPressed(bool value)
         {
@@ -443,57 +447,54 @@ namespace Paway.WPF
         /// <param name="e"></param>
         protected override void OnPreviewMouseUp(MouseButtonEventArgs e)
         {
+            base.OnPreviewMouseUp(e);
             if (ClickMode == ClickMode.Release && e.ChangedButton == MouseButton.Left && downItem != null)
             {
                 IsPressed(false);
-                if (Method.Parent(e.OriginalSource, out ListBoxItem item))
+                if (Method.Parent(e.OriginalSource, out ListBoxItem item) && item == downItem)
                 {
-                    if (item == downItem)
+                    if (SelectionMode == SelectionMode.Extended)
                     {
-                        if (SelectionMode == SelectionMode.Extended)
+                        if (System.Windows.Forms.Control.ModifierKeys == System.Windows.Forms.Keys.Shift)
                         {
-                            if (System.Windows.Forms.Control.ModifierKeys == System.Windows.Forms.Keys.Shift)
+                            if (firstIndex == -1)
                             {
-                                if (firstIndex == -1)
-                                {
-                                    firstIndex = Index(item);
-                                    SetSelected(item, true);
-                                }
-                                else
-                                {
-                                    var index = Index(item);
-                                    var min = Math.Min(firstIndex, index);
-                                    var max = Math.Max(firstIndex, index);
-                                    Selected(i => i >= min && i <= max);
-                                }
+                                firstIndex = Index(item);
+                                SetSelected(item, true);
                             }
                             else
                             {
-                                firstIndex = Index(item);
-                                if (System.Windows.Forms.Control.ModifierKeys == System.Windows.Forms.Keys.Control)
-                                {
-                                    SetSelected(item, !item.IsSelected);
-                                }
-                                else
-                                {
-                                    Selected(i => i == Index(item));
-                                }
+                                var index = Index(item);
+                                var min = Math.Min(firstIndex, index);
+                                var max = Math.Max(firstIndex, index);
+                                Selected(i => i >= min && i <= max);
                             }
-                        }
-                        else if (SelectionMode == SelectionMode.Multiple)
-                        {
-                            SetSelected(item, !item.IsSelected);
                         }
                         else
                         {
-                            if (lastItem != null && lastItem != item) SetSelected(lastItem, false);
-                            SetSelected(item, true);
-                            lastItem = item;
+                            firstIndex = Index(item);
+                            if (System.Windows.Forms.Control.ModifierKeys == System.Windows.Forms.Keys.Control)
+                            {
+                                SetSelected(item, !item.IsSelected);
+                            }
+                            else
+                            {
+                                Selected(i => i == Index(item));
+                            }
                         }
+                    }
+                    else if (SelectionMode == SelectionMode.Multiple)
+                    {
+                        SetSelected(item, !item.IsSelected);
+                    }
+                    else
+                    {
+                        if (lastItem != null && lastItem != item) SetSelected(lastItem, false);
+                        SetSelected(item, true);
+                        lastItem = item;
                     }
                 }
             }
-            base.OnPreviewMouseUp(e);
         }
         private void Selected(Func<int, bool> action)
         {
