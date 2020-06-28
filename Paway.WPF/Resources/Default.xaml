@@ -5,7 +5,8 @@
     <local:BoolReverse x:Key="boolReverse"/>
     <local:BoolToVisible x:Key="boolToVisible"/>
     <local:VisibleReverse x:Key="visibleReverse"/>
-    
+    <local:DateConverter x:Key="dateConverter"/>
+
     <Style x:Key="PathRound" TargetType="{x:Type Path}" >
         <Setter Property="Margin" Value="1" />
         <Setter Property="Stroke" Value="Gray" />
