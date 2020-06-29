@@ -236,7 +236,17 @@ namespace Paway.WPF
             {
                 new Action(() =>
                 {
-                    action.Invoke();
+                    try
+                    {
+                        action.Invoke();
+                    }
+                    catch (Exception ex)
+                    {
+                        parent.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            Method.Error(parent, ex.Message());
+                        }));
+                    }
                 }).BeginInvoke(new AsyncCallback(ar =>
                 {
                     parent.Dispatcher.BeginInvoke(new Action(() =>
