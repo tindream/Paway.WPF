@@ -44,7 +44,7 @@ namespace Paway.WPF
         {
             if (iError)
             {
-                tb.Foreground = new SolidColorBrush(Color.FromArgb(255, 240, 0, 0));
+                border1.Background = new SolidColorBrush(Color.FromArgb(255, 221, 51, 51));
             }
             (this.DataContext as WindowToastModel).Message = msg;
             this.Show();

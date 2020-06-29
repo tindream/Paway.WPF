@@ -59,6 +59,7 @@ namespace Paway.WPF
         /// <summary>
         /// 按下状态
         /// </summary>
+        [NoShow]
         public virtual bool IsPressed
         {
             get { return isPressed; }

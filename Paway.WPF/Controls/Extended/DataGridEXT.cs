@@ -80,15 +80,14 @@ namespace Paway.WPF
             var properties = this.type.PropertiesCache();
             foreach (var property in properties)
             {
-                var column = columnsReady.Find(c => (c.ClipboardContentBinding is Binding binding && binding.Path.Path == property.Name) || c.Header.ToStrs() == property.Text());
+                var column = columnsReady.Find(c => (c.ClipboardContentBinding is Binding binding && binding.Path.Path == property.Name) || c.Header.ToStrs() == property.Name || c.Header.ToStrs() == property.Text());
                 if (column != null)
                 {
                     columns.Add(column);
                 }
                 else
                 {
-                    column = new DataGridTextColumn();
-                    (column as DataGridTextColumn).Binding = new Binding(property.Name);
+                    column = new DataGridTextColumn { Binding = new Binding(property.Name) };
                     columns.Add(column);
                 }
                 column.MinWidth = 64;

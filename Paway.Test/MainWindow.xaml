@@ -85,10 +85,10 @@
                            Height="250" Grid.Row="1" VerticalAlignment="Top">
                 <DataGrid.Columns>
                     <DataGridTextColumn  MinWidth="130" Binding="{Binding Money}" ElementStyle="{StaticResource TextRight}"/>
-                    <DataGridTemplateColumn Header="进度" x:Name="Value">
+                    <DataGridTemplateColumn Header="Desc">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <utils:ProgressBarEXT Value="{Binding Value}" />
+                                <TextBlock Text="{Binding Desc}" Foreground="Red"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
