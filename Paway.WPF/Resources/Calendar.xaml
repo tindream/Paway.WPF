@@ -3,6 +3,7 @@
                     xmlns:local="clr-namespace:Paway.WPF">
 
     <local:DateConvertToColor x:Key="DateConvertToColor"/>
+    <local:BoolToVisible x:Key="BoolToVisible"/>
 
     <!--选择年月按钮-->
     <Style x:Key="CalendarButtonStyle" TargetType="{x:Type CalendarButton}">
@@ -247,7 +248,7 @@
                         <!--星期样式-->
                         <DataTemplate x:Key="{ComponentResourceKey ResourceId=DayTitleTemplate, TypeInTargetAssembly={x:Type CalendarItem}}">
                             <TextBlock x:Name="TxtDayTitle" Foreground="#FF333333" FontWeight="Bold" FontSize="11" FontFamily="Verdana" 
-                                       HorizontalAlignment="Center" Margin="0,6" Text="{Binding}" VerticalAlignment="Center"/>
+                                       HorizontalAlignment="Center" Margin="0,6" VerticalAlignment="Center"/>
                         </DataTemplate>
                     </ControlTemplate.Resources>
                     <Grid x:Name="PART_Root">
@@ -353,6 +354,7 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="*"/>
+                                        <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
                                     <Button x:Name="PART_PreviousButton" Grid.Column="0" Focusable="False" HorizontalAlignment="Left" Height="20" Grid.Row="0" Width="28">
                                         <Button.Template>
@@ -481,6 +483,17 @@
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
                                     </Grid>
+                                    <Grid Grid.Row="2" Grid.ColumnSpan="3" 
+                                          Visibility="{Binding HasButton, RelativeSource={RelativeSource AncestorType={x:Type local:CalendarEXT}}, Converter={StaticResource BoolToVisible}}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <local:ButtonEXT x:Name="PART_GoClear" Margin="0,-4,0,0" Content="清空" Radius="0" BorderThickness="0,1,0,0"
+                                                         BackgroundStart="Transparent;#77CA6B38" BackgroundEnd="Transparent;#77CA6B38" />
+                                        <local:ButtonEXT x:Name="PART_GoToday" Margin="0,-4,0,0" Grid.Column="1" Content="今天" Radius="0" BorderThickness="1,1,0,0"
+                                                         BackgroundStart="Transparent;#7723AFFF" BackgroundEnd="Transparent;#7723AFFF" />
+                                    </Grid>
                                 </Grid>
                             </Border>
                         </Border>
@@ -537,5 +550,6 @@
     </Style>
 
     <Style TargetType="Calendar" BasedOn="{StaticResource CalendarStyle}"/>
+    <Style TargetType="local:CalendarEXT" BasedOn="{StaticResource CalendarStyle}"/>
 
 </ResourceDictionary>

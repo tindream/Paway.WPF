@@ -10,7 +10,7 @@
         <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="0,0,3,0"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -26,16 +26,16 @@
                             Background="{TemplateBinding Panel.Background}"
                             CornerRadius="{TemplateBinding Radius}"
                             Name="checkBoxBorder"
-                            Margin="6"
+                            Margin="7,6"
                             HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}">
                             <Grid Name="markGrid" >
                                 <Path Style="{StaticResource PathRight}" Name="optionMark"
                                       Fill="{Binding Path=BorderFocusedBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}"
-                                      Margin="2"
+                                      Width="12" Height="11"
                                       Opacity="0" />
                                 <Rectangle Fill="{Binding Path=BorderFocusedBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}"
-                                           Margin="3"
+                                           Margin="3" Width="8" Height="8"
                                            Name="indeterminateMark"
                                            Opacity="0" />
                             </Grid>

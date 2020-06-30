@@ -25,6 +25,13 @@ namespace Paway.Test.ViewModel
         private readonly List<ListViewModel> list;
         public List<ListViewModel> GridList { get { return list; } }
 
+        private int _value = 11;
+        public int Value
+        {
+            get { return _value; }
+            set { _value = value; RaisePropertyChanged(); }
+        }
+
         #endregion
 
         #region 命令

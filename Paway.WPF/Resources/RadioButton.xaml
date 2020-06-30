@@ -6,7 +6,7 @@
         <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="0,0,3,0"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -26,7 +26,7 @@
                             HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}">
                             <Grid Name="markGrid" Margin="3">
-                                <Ellipse Name="optionMark" MinWidth="9" MinHeight="9" Opacity="0"
+                                <Ellipse Name="optionMark" Width="8" Height="8" Opacity="0"
                                          Fill="{Binding Path=BorderFocusedBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" />
                             </Grid>
                         </Border>

@@ -6,7 +6,7 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Calendar.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type DatePicker}">
+    <Style TargetType="{x:Type local:DatePickerEXT}">
         <Setter Property="CalendarStyle" Value="{StaticResource CalendarStyle}"/>
         <Setter Property="Background" Value="White"/>
         <Setter Property="BorderBrush">
@@ -194,7 +194,6 @@
                                        Placement="Bottom"
                                        StaysOpen="False"
                                        HorizontalOffset="-3"
-                                       VerticalOffset="-1"
                                        AllowsTransparency="True"/>
                             </Grid>
                         </Grid>

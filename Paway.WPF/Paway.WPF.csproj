@@ -74,8 +74,10 @@
     <Compile Include="Controls\Converter\IValueConverter\VisibleReverse.cs" />
     <Compile Include="Controls\Converter\IValueConverter\BoolToVisible.cs" />
     <Compile Include="Controls\Extended\ButtonPath.cs" />
+    <Compile Include="Controls\Extended\DatePickerEXT.cs" />
     <Compile Include="Controls\Extended\ComboBoxMulti.cs" />
     <Compile Include="Controls\Extended\SliderEXT.cs" />
+    <Compile Include="Controls\Extended\CalendarEXT.cs" />
     <Compile Include="Controls\Extended\TreeViewEXT.cs" />
     <Compile Include="Controls\Interface\ModelBase.cs" />
     <Compile Include="Controls\Interface\IElementStatu.cs" />

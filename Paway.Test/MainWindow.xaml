@@ -8,10 +8,11 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
         DataContext="{Binding Main ,Source={StaticResource Locator}}"
         mc:Ignorable="d"
+        FontSize="15"
         Title="MainWindow" Height="850" Width="850" WindowStartupLocation="CenterScreen">
 
     <WrapPanel>
-        <StackPanel Width="300">
+        <StackPanel Width="320">
             <utils:ProgressBarEXT Grid.Row="1" Value="95" />
 
             <utils:ComboBoxEXT Grid.Row="2" Name="cbxBox" >
@@ -21,7 +22,7 @@
             </utils:ComboBoxEXT>
             <utils:ComboBoxMulti x:Name="MultiCmb" Grid.Row="3" />
 
-            <utils:TextBoxEXT Grid.Row="4" Name="tb" ></utils:TextBoxEXT>
+            <utils:TextBoxEXT Grid.Row="4" Name="tb" Text="{Binding Value}"></utils:TextBoxEXT>
             <PasswordBox Grid.Row="5" ></PasswordBox>
             <utils:ButtonEXT Name="btn" Grid.Row="6"  
                          Content="确认" Click="ButtonEXT_Click" 
@@ -34,11 +35,13 @@
                 <utils:CheckBoxEXT x:Name="cbx" Content="Hello" IsChecked="True" Padding="0,0,3,0"/>
                 <utils:CheckBoxEXT Content="World" IsChecked="{x:Null}"/>
                 <utils:CheckBoxEXT Content="Watch" IsChecked="{x:Null}" IsEnabled="False"/>
+                <CheckBox Content="Watch" IsChecked="True" />
             </WrapPanel>
             <WrapPanel Grid.Row="8" >
                 <utils:RadioButtonEXT Name="rb" Content="Hello" IsChecked="True" />
                 <utils:RadioButtonEXT Content="World" IsChecked="True" />
                 <utils:RadioButtonEXT Content="Watch" IsChecked="{x:Null}" IsEnabled="False"/>
+                <RadioButton Content="Watch" />
             </WrapPanel>
             <utils:SliderEXT x:Name="slider" Grid.Row="9" Grid.ColumnSpan="2"  Maximum="100" Value="80"
                 VerticalAlignment="Center" Foreground="Blue" OpacityMask="Gold" Orientation="Horizontal" TickPlacement="None" TrackWidth="11"/>
@@ -117,8 +120,8 @@
                 <utils:ListBoxItemEXT Text="C"/>
             </utils:ListViewEXT>
 
-            <DatePicker Name="dp" Width="153" VerticalContentAlignment="Center" Margin="5" HorizontalAlignment="Left"/>
-            <Calendar Margin="5" HorizontalAlignment="Left" />
+            <utils:DatePickerEXT Name="dp" Width="153" VerticalContentAlignment="Center" Margin="5" HorizontalAlignment="Left"/>
+            <utils:CalendarEXT Margin="5" HorizontalAlignment="Left" />
         </StackPanel>
     </WrapPanel>
     <utils:WindowEXT.FunctionBar>
