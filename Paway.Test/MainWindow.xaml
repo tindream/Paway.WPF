@@ -112,7 +112,7 @@
                 <utils:ListBoxItemEXT Text="Hello" Desc="World"
                                   Image="pack://application:,,,/Paway.Test;component/Images/close.png"/>
                 <utils:ListBoxItemEXT Text="A"/>
-                <Button Content="Hi"/>
+                <Button Content="Hi" Visibility="Collapsed"/>
                 <utils:ListBoxItemEXT Text="B"/>
                 <utils:ListBoxItemEXT Text="C"/>
             </utils:ListViewEXT>

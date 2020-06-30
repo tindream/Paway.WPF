@@ -65,14 +65,6 @@ namespace Paway.WPF
             get { return image; }
             set { image = value; OnPropertyChanged(); }
         }
-        /// <summary>
-        /// 选中状态
-        /// </summary>
-        public new bool IsSelected
-        {
-            get { return base.IsSelected; }
-            set { base.IsSelected = value; OnPropertyChanged(); }
-        }
 
         /// <summary>
         /// </summary>

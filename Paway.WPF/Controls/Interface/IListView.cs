@@ -36,6 +36,10 @@ namespace Paway.WPF
         /// </summary>
         ImageEXT Image { get; set; }
         /// <summary>
+        /// 显示
+        /// </summary>
+        Visibility Visibility { get; set; }
+        /// <summary>
         /// 选择项
         /// </summary>
         bool IsSelected { get; set; }
@@ -91,6 +95,15 @@ namespace Paway.WPF
         {
             get { return image; }
             set { image = value; OnPropertyChanged(); }
+        }
+        private Visibility visibility = Visibility.Visible;
+        /// <summary>
+        /// 显示
+        /// </summary>
+        public virtual Visibility Visibility
+        {
+            get { return visibility; }
+            set { visibility = value; OnPropertyChanged(); }
         }
         private bool isSelected;
         /// <summary>

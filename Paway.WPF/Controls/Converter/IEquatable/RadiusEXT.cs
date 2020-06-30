@@ -22,15 +22,15 @@ namespace Paway.WPF
         /// <summary>
         /// 默认的圆角
         /// </summary>
-        public CornerRadius Normal { get; set; } = new CornerRadius(5);
+        public CornerRadius Normal { get; set; } = new CornerRadius(3);
         /// <summary>
         /// 鼠标划过时的圆角
         /// </summary>
-        public CornerRadius Mouse { get; set; } = new CornerRadius(5);
+        public CornerRadius Mouse { get; set; } = new CornerRadius(3);
         /// <summary>
         /// 鼠标点击时的圆角
         /// </summary>
-        public CornerRadius Pressed { get; set; } = new CornerRadius(5);
+        public CornerRadius Pressed { get; set; } = new CornerRadius(3);
 
         /// <summary>
         /// </summary>

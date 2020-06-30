@@ -58,7 +58,7 @@ namespace Paway.WPF
         /// <summary>
         /// TransitionProperty property changed handler.
         /// </summary>
-        /// <param name="d">TransitionControl that changed its Transition.</param>
+        /// <param name="obj">TransitionControl that changed its Transition.</param>
         /// <param name="e">Event arguments.</param>
         private static void OnTransitionPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
