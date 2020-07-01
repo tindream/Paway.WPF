@@ -251,8 +251,15 @@ namespace Paway.WPF
                 {
                     parent.Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        Method.Hide();
-                        completed?.Invoke();
+                        try
+                        {
+                            Method.Hide();
+                            completed?.Invoke();
+                        }
+                        catch (Exception ex)
+                        {
+                            Method.Error(parent, ex.Message());
+                        }
                     }));
                 }), null);
                 Progress(parent, true);

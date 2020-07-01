@@ -6,6 +6,7 @@
     <local:BoolToVisible x:Key="boolToVisible"/>
     <local:VisibleReverse x:Key="visibleReverse"/>
     <local:DateConverter x:Key="dateConverter"/>
+    <local:NullToVisible x:Key="nullToVisible"/>
 
     <Style TargetType="{x:Type CheckBox}">
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -13,7 +14,7 @@
     <Style TargetType="{x:Type RadioButton}">
         <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
-    
+
     <Style x:Key="PathRound" TargetType="{x:Type Path}" >
         <Setter Property="Margin" Value="1" />
         <Setter Property="Stroke" Value="Gray" />

@@ -10,19 +10,16 @@ using System.Windows.Data;
 namespace Paway.WPF
 {
     /// <summary>
-    /// DateTime格式化(默认G)
+    /// null转Visibility
     /// </summary>
-    internal class DateConverter : IValueConverter
+    internal class NullToVisible : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is DateTime time)
-            {
-                if (time == DateTime.MinValue) return null;
-                var param = parameter == null ? "G" : parameter.ToString();
-                return time.ToString(param);
-            }
-            throw new NotImplementedException();
+            if (value == null || value == DBNull.Value)
+                return Visibility.Collapsed;
+            else
+                return Visibility.Visible;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

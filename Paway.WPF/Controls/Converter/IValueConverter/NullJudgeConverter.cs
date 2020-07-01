@@ -13,7 +13,7 @@ using System.Windows.Media;
 namespace Paway.WPF
 {
     /// <summary>
-    /// 多字段空值判断转换
+    /// 多字段空值判断转换(取排在最前面的非空字段值)
     /// </summary>
     public class NullJudgeConverter : IMultiValueConverter
     {

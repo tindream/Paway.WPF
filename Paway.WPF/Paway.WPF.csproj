@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Controls\Converter\IEquatable\ColorLinear.cs" />
     <Compile Include="Controls\Converter\IValueConverter\BoolReverse.cs" />
+    <Compile Include="Controls\Converter\IValueConverter\NullToVisible.cs" />
     <Compile Include="Controls\Converter\IValueConverter\DateConverter.cs" />
     <Compile Include="Controls\Converter\IValueConverter\DateConvertToColor.cs" />
     <Compile Include="Controls\Converter\IValueConverter\IndentConverter.cs" />
