@@ -2,6 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Paway.WPF">
 
+    <local:SmallConverter x:Key="smallConverter"/>
+
     <Style TargetType="{x:Type local:ButtonEXT}">
         <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <Setter Property="Cursor" Value="Hand"/>
@@ -42,6 +44,7 @@
                                             Viewport="{Binding Viewport, RelativeSource={RelativeSource TemplatedParent}}"/>
                             </Border.Background>
                             <TextBlock x:Name="txt" Text="{TemplateBinding Content}"
+                                       FontSize="{TemplateBinding FontSize, Converter={StaticResource smallConverter}, ConverterParameter=-2}"
                                        Foreground="{Binding Path=ForegroundRound.Normal, RelativeSource={RelativeSource TemplatedParent}}" 
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />

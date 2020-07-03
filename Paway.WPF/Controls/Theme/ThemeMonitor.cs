@@ -31,14 +31,7 @@ namespace Paway.WPF
         {
             if ((bool)e.NewValue)
             {
-                if (obj is Button btn)
-                {
-                    btn.Loaded += delegate
-                    {
-                        if (btn.FontSize == new Control().FontSize) btn.SetValue(Control.FontSizeProperty, btn.GetValue(ButtonFontSizeProperty));
-                    };
-                }
-                else if (obj is Control ctrl)
+                if (obj is Control ctrl)
                 {
                     ctrl.Loaded += delegate
                     {
@@ -56,11 +49,6 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty FontSizeProperty =
             DependencyProperty.RegisterAttached(nameof(FontSize), typeof(double), typeof(ThemeMonitor), new PropertyMetadata(Config.FontSize));
-        /// <summary>
-        /// 按钮字体大小
-        /// </summary>
-        public static readonly DependencyProperty ButtonFontSizeProperty =
-            DependencyProperty.RegisterAttached(nameof(ButtonFontSize), typeof(double), typeof(ThemeMonitor), new PropertyMetadata(Config.FontSize + 3));
 
         #endregion
 
@@ -72,14 +60,6 @@ namespace Paway.WPF
         {
             get { return (double)GetValue(FontSizeProperty); }
             set { SetValue(FontSizeProperty, value); }
-        }
-        /// <summary>
-        /// 按钮字体大小
-        /// </summary>
-        public double ButtonFontSize
-        {
-            get { return (double)GetValue(ButtonFontSizeProperty); }
-            set { SetValue(ButtonFontSizeProperty, value); }
         }
 
         #endregion

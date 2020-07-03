@@ -45,6 +45,7 @@
             </WrapPanel>
             <utils:SliderEXT x:Name="slider" Grid.Row="9" Grid.ColumnSpan="2"  Maximum="100" Value="80"
                 VerticalAlignment="Center" Foreground="Blue" OpacityMask="Gold" Orientation="Horizontal" TickPlacement="None" TrackWidth="11"/>
+            <utils:DatePickerEXT Name="dp" Width="153" VerticalContentAlignment="Center" Margin="5" HorizontalAlignment="Left"/>
 
 
             <WrapPanel Grid.Row="10" >
@@ -57,13 +58,19 @@
                 <Path Style="{StaticResource PathQuestion}" />
                 <Path Style="{StaticResource PathRight}" />
                 <Path Style="{StaticResource PathClose}" />
+                <utils:ButtonPath Width="50" Height="100" Value="50" Background="#F1F1F1"/>
+                <utils:Progress Width="40" Height="40" />
             </WrapPanel>
 
             <TabControl Grid.Row="11"  TabStripPlacement="Top"
                     Height="100"   Background="#8257CD" Foreground="White">
                 <TabItem Cursor="Hand" Header="音乐电台" >
                     <Grid Background="#33ffffff">
-                        <TextBlock Text="音乐电台" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7*"/>
+                            <ColumnDefinition Width="33*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="音乐电台" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Margin="74,25,130,24"/>
                     </Grid>
                 </TabItem>
                 <TabItem Cursor="Hand" Header="Mv电台">
@@ -75,12 +82,6 @@
             <utils:TreeViewEXT x:Name="TreeViewOrg" Grid.Row="12"  Height="180" CheckBox="Visible"/>
 
 
-            <WrapPanel Grid.Row="15" >
-                <utils:ButtonPath 
-                          Width="50" Height="100" Value="50" Background="#F1F1F1"/>
-                <utils:Progress 
-                         Width="40" Height="40" />
-            </WrapPanel>
         </StackPanel>
         <StackPanel>
             <utils:DataGridEXT Name="datagrid1" Grid.Column="1" Grid.RowSpan="9" 
@@ -99,29 +100,48 @@
             </utils:DataGridEXT>
 
             <utils:ListViewEXT Name="listView1" Grid.Column="1" Grid.Row="10" Grid.RowSpan="9" 
-                           Height="250" 
-                           ItemWidth="100" ItemHeight="100" ItemRadius="0" ItemMargin="1" 
-                           ItemBorder=";1,1,1,5" ItemBackground=";#7723AFFF"
-                           HorizontalContentAlignment="Left" VerticalContentAlignment="Center" ItemTextForeground="#222"
-                           ItemTextPadding="5" 
-                           ItemImageHeight="32" ItemImageWidth="32" ItemImageDock="Top" 
-                           ItemDescDock="Right" ItemDescPadding="5" SelectionMode="Extended" VerticalAlignment="Top">
+                           ItemHeight="68" ItemWidth="100" Width="480" Height="68"
+                           ItemBorder=";0,0,0,4"
+                           ItemBorderBrush="Transparent;#AA23AFFF;#DC23AFFF"
+                           ItemBackground="Transparent;#ECF4FF;#E9EEFF" 
+                           ItemTextForeground="#222;#222"
+                           Background="#CCD5F0"
+                           ItemImageHeight="32" ItemImageDock="Top" ItemPadding="5"
+                           SelectionMode="Extended" VerticalAlignment="Top">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding SelectionCommand}"
                                            CommandParameter="{Binding ElementName=listView1}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-                <utils:ListBoxItemEXT Text="Hello" Desc="World"
+                <utils:ListBoxItemEXT Text="Hello" IsSelected="True"
                                   Image="pack://application:,,,/Paway.Test;component/Images/close.png"/>
-                <utils:ListBoxItemEXT Text="A"/>
+                <utils:ListBoxItemEXT Text="World"/>
                 <Button Content="Hi" Visibility="Collapsed"/>
-                <utils:ListBoxItemEXT Text="B"/>
+                <utils:ListBoxItemEXT Text="A"/>
+                <utils:ListBoxItemEXT Text="C"/>
+                <utils:ListBoxItemEXT Text="C"/>
+                <utils:ListBoxItemEXT Text="C"/>
+            </utils:ListViewEXT>
+            <utils:ListViewEXT Name="listView2" Grid.Column="1" 
+                           Width="480" Height="84"
+                           ItemBorder="0,0.5,0,0.5" ItemPadding="10,5,10,5" ItemWidth="120" 
+                           ItemImageWidth="0" 
+                           SelectionMode="Multiple"
+                           ItemDescForeground="Green" ItemDescFontSize="14"
+                           HorizontalContentAlignment="Left" VerticalAlignment="Top" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectionCommand}"
+                                           CommandParameter="{Binding ElementName=listView2}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <utils:ListBoxItemEXT Text="Hello" IsSelected="True" Desc="●"/>
+                <utils:ListBoxItemEXT Text="World" Desc="●"/>
+                <utils:ListBoxItemEXT Text="A"/>
                 <utils:ListBoxItemEXT Text="C"/>
             </utils:ListViewEXT>
 
-            <utils:DatePickerEXT Name="dp" Width="153" VerticalContentAlignment="Center" Margin="5" HorizontalAlignment="Left"/>
-            <utils:CalendarEXT Margin="5" HorizontalAlignment="Left" />
         </StackPanel>
     </WrapPanel>
     <utils:WindowEXT.FunctionBar>

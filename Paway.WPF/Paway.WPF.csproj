@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\Converter\IEquatable\ColorLinear.cs" />
+    <Compile Include="Controls\Converter\IValueConverter\SmallConverter.cs" />
     <Compile Include="Controls\Converter\IValueConverter\BoolReverse.cs" />
     <Compile Include="Controls\Converter\IValueConverter\NullToVisible.cs" />
     <Compile Include="Controls\Converter\IValueConverter\DateConverter.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Controls\Extended\ComboBoxMulti.cs" />
     <Compile Include="Controls\Extended\SliderEXT.cs" />
     <Compile Include="Controls\Extended\CalendarEXT.cs" />
+    <Compile Include="Controls\Extended\ListBoxEXT.cs" />
     <Compile Include="Controls\Extended\TreeViewEXT.cs" />
     <Compile Include="Controls\Interface\ModelBase.cs" />
     <Compile Include="Controls\Interface\IElementStatu.cs" />

@@ -14,6 +14,7 @@
     <Style TargetType="{x:Type local:ComboBoxMulti}">
         <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Margin" Value="2"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -21,7 +22,7 @@
                     <Grid>
                         <Border x:Name="border" 
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                BorderThickness="1" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
                                 CornerRadius="{TemplateBinding Radius}"
                                 Padding="{TemplateBinding Padding}"
                                 Background="{StaticResource backLine}"
@@ -34,11 +35,12 @@
                                                   IsTabStop="False" 
                                                   IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                                   Template="{StaticResource ComboBoxToggleButton}" />
-                                <ListBox x:Name="PART_ListBoxChk" 
+                                <local:ListBoxEXT x:Name="PART_ListBoxChk" 
                                          SelectionMode="Multiple" 
                                          BorderThickness="0" 
-                                         Margin="2"
+                                         Margin="1"
                                          Background="{StaticResource backLine}"
+                                         Radius="{TemplateBinding Radius}" 
                                          ScrollViewer.VerticalScrollBarVisibility="Disabled">
                                     <ListBox.ItemsPanel>
                                         <ItemsPanelTemplate>
@@ -67,9 +69,9 @@
                                             </Setter>
                                         </Style>
                                     </ListBox.ItemContainerStyle>
-                                </ListBox>
+                                </local:ListBoxEXT>
                                 <!--<TextBlock Name="tbOpen" Cursor="Hand" Background="{StaticResource backLine}"/>-->
-                                <local:TextBoxEXT Width="0" Margin="1"/>
+                                <local:TextBoxEXT Width="0" Margin="0"/>
                                 <ToggleButton Name="PART_DropDownToggle2" 
                                                   DockPanel.Dock="Right"
                                                   IsTabStop="False" 

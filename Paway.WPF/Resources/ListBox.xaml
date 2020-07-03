@@ -2,18 +2,19 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Paway.WPF">
 
-    <Style TargetType="{x:Type ListBox}">
+    <Style TargetType="{x:Type local:ListBoxEXT}">
         <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <Setter Property="Padding" Value="0"/>
         <!--修改模板属性-->
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate>
+                <ControlTemplate TargetType="{x:Type local:ListBoxEXT}" >
                     <Border Name="Bd"
                             BorderThickness="{TemplateBinding Border.BorderThickness}"
                             Padding="{TemplateBinding Padding}"
                             BorderBrush="{TemplateBinding Border.BorderBrush}"
                             Background="{TemplateBinding Panel.Background}"
+                            CornerRadius="{TemplateBinding Radius}"
                             SnapsToDevicePixels="True">
                         <local:ScrollViewerEXT Padding="{TemplateBinding Control.Padding}" >
                             <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />

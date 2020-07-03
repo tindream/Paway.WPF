@@ -2,10 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Paway.WPF">
 
+    <local:SmallConverter x:Key="smallConverter"/>
+
     <Style TargetType="{x:Type local:ProgressBarEXT}">
         <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <Setter Property="local:ProgressBarEXT.IsMonitoring" Value="True"/>
         <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Margin" Value="2"/>
         <Setter Property="Background" Value="White"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Template">
@@ -32,8 +35,9 @@
                                 </LinearGradientBrush>
                             </Border.Background>
                             <Label Name="txt"
+                                   FontSize="{TemplateBinding FontSize,Converter={StaticResource smallConverter}}"
                                    Opacity="0.9" 
-                                   Padding="5,4"
+                                   Padding="5,5"
                                    Foreground="{TemplateBinding Foreground}"
                                    Content="{TemplateBinding ProgressValue}"
                                    FontFamily="Microsoft YaHei"

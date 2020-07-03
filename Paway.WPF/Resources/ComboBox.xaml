@@ -31,6 +31,7 @@
 
     <Style TargetType="{x:Type local:ComboBoxEXT}">
         <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
+        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Margin" Value="2"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -40,8 +41,10 @@
                             <ColumnDefinition Width="0.7*"/>
                             <ColumnDefinition Width="0.3*" MaxWidth="30"/>
                         </Grid.ColumnDefinitions>
-                        <Border Name="border" Grid.ColumnSpan="2" BorderThickness="1" 
+                        <Border Name="border" Grid.ColumnSpan="2" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
                                 CornerRadius="{TemplateBinding Radius}"
+                                Padding="{TemplateBinding Padding}"
                                 Background="{StaticResource backLine}"
                                 BorderBrush="{Binding Path=BorderFocusedBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}" />
                         <ContentPresenter x:Name="ContentSite" Margin="5,3,0,3" 
@@ -58,7 +61,7 @@
                                       IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" />
                         <!--必须将 TextBox 命名为 PART_EditableTextBox，否则 ComboBox 将无法识别它-->
                         <local:TextBoxEXT x:Name="PART_EditableTextBox"
-                                          Margin="1"
+                                          Margin="0"
                                           BorderFocusedBrush="Transparent"
                                           Visibility="Hidden" 
                                           Focusable="True" 
