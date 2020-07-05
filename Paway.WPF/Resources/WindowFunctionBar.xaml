@@ -212,6 +212,13 @@
                 <Setter Property="Stroke" TargetName="ButtonBackground" Value="#94A6CA" />
                 <Setter Property="Visibility" TargetName="Line" Value="Visible" />
             </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsPressed" Value="True" />
+                    <Condition Property="IsSubmenuOpen" Value="False" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Visibility" TargetName="Line" Value="Collapsed" />
+            </MultiTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <ControlTemplate x:Key="SubmenuItemTemplate" TargetType="{x:Type MenuItem}">

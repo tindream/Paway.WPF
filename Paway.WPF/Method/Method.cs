@@ -134,21 +134,21 @@ namespace Paway.WPF
         /// <summary>
         /// 执行对象方法
         /// </summary>
-        public static bool ExecuteMethod(object obj, string name, out object result, params object[] args)
+        public static bool ExecuteMethod<T>(object obj, string name, out T result, params object[] args)
         {
             return ExecuteMethod(obj, obj.GetType(), name, out result, args);
         }
         /// <summary>
         /// 执行对象方法
         /// </summary>
-        private static bool ExecuteMethod(object obj, Type type, string name, out object result, params object[] args)
+        private static bool ExecuteMethod<T>(object obj, Type type, string name, out T result, params object[] args)
         {
-            result = null;
-            var method = obj.GetType().BaseType.GetMethod(name, TConfig.Flags | BindingFlags.Instance);
+            result = default;
+            var method = obj.GetType().GetMethod(name, TConfig.Flags | BindingFlags.Instance);
             if (method == null && type.BaseType != null) return ExecuteMethod(obj, type.BaseType, name, out result, args);
             if (method != null)
             {
-                result = method.Invoke(obj, args);
+                result = (T)method.Invoke(obj, args);
                 return true;
             }
             return false;
