@@ -24,13 +24,22 @@
 
             <utils:TextBoxEXT Grid.Row="4" Name="tb" Text="{Binding Value}"></utils:TextBoxEXT>
             <PasswordBox Grid.Row="5" ></PasswordBox>
-            <utils:ButtonEXT Name="btn" Grid.Row="6"  
-                         Content="确认" Click="ButtonEXT_Click" 
-                         BackgroundStart=";#770C7900" BackgroundEnd=";#77FF0000"
-                         BackgroundImage="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"
-                         Stretch="None" Viewport="0,0,0.5,1"
-                         Command="{Binding Teach}"
-                         CommandParameter="{Binding ElementName=btn}"/>
+            <Grid>
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <utils:ButtonEXT Name="chart" Content="取消"
+                             BackgroundStart="Transparent;#77CA6B38" BackgroundEnd="Transparent;#77CA6B38" 
+                             BackgroundImage="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"
+                             Stretch="None" Viewport="0,0,0.5,1"
+                             Command="{Binding Teach}" CommandParameter="{Binding ElementName=btn}"/>
+                <utils:ButtonEXT Name="btn" Grid.Column="1" Grid.Row="6" 
+                             Content="确认" Click="ButtonEXT_Click" 
+                             Border="1;0"
+                             BackgroundStart="Transparent;#7723AFFF" BackgroundEnd="Transparent;#7723AFFF" 
+                             CommandParameter="{Binding ElementName=btn}"/>
+            </Grid>
             <WrapPanel Grid.Row="7" >
                 <utils:CheckBoxEXT x:Name="cbx" Content="Hello" IsChecked="True" Padding="0,0,3,0"/>
                 <utils:CheckBoxEXT Content="World" IsChecked="{x:Null}"/>
@@ -43,8 +52,7 @@
                 <utils:RadioButtonEXT Content="Watch" IsChecked="{x:Null}" IsEnabled="False"/>
                 <RadioButton Content="Watch" />
             </WrapPanel>
-            <utils:SliderEXT x:Name="slider" Grid.Row="9" Grid.ColumnSpan="2"  Maximum="100" Value="80"
-                VerticalAlignment="Center" Foreground="Blue" OpacityMask="Gold" Orientation="Horizontal" TickPlacement="None" TrackWidth="11"/>
+            <utils:SliderEXT x:Name="slider" Grid.Row="9" Grid.ColumnSpan="2"  Maximum="100" Value="80"/>
             <utils:DatePickerEXT Name="dp" Width="153" VerticalContentAlignment="Center" Margin="5" HorizontalAlignment="Left"/>
 
 

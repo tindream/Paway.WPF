@@ -38,7 +38,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty TrackWidthProperty =
-            DependencyProperty.RegisterAttached(nameof(TrackWidth), typeof(double), typeof(SliderEXT), new PropertyMetadata(14d));
+            DependencyProperty.RegisterAttached(nameof(TrackWidth), typeof(double), typeof(SliderEXT), new PropertyMetadata(11d));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty TrackColorLinearProperty =

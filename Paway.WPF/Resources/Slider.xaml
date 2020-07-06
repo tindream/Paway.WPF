@@ -403,6 +403,7 @@
         <Setter Property="IsMoveToPointEnabled" Value="True"/>
         <Setter Property="AutoToolTipPlacement" Value="TopLeft"/>
         <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
         <!--修改模板属性-->
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Horizontal">

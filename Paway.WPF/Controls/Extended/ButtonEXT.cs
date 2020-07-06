@@ -20,6 +20,10 @@ namespace Paway.WPF
                 DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(ButtonEXT), new PropertyMetadata(new CornerRadius(4)));
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty BorderProperty =
+            DependencyProperty.RegisterAttached(nameof(Border), typeof(ThicknessEXT), typeof(ButtonEXT), new PropertyMetadata(new ThicknessEXT(1)));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty EffectRadiusProperty =
             DependencyProperty.RegisterAttached(nameof(EffectRadius), typeof(double), typeof(ButtonEXT), new PropertyMetadata(0d));
         /// <summary>
@@ -65,6 +69,16 @@ namespace Paway.WPF
         public CornerRadius Radius
         {
             get { return (CornerRadius)GetValue(RadiusProperty); }
+            set { SetValue(RadiusProperty, value); }
+        }
+        /// <summary>
+        /// 自定义边框线
+        /// </summary>
+        [Category("扩展.前景")]
+        [Description("自定义边框线")]
+        public ThicknessEXT Border
+        {
+            get { return (ThicknessEXT)GetValue(BorderProperty); }
             set { SetValue(RadiusProperty, value); }
         }
         /// <summary>

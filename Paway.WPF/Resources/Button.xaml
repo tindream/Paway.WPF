@@ -23,7 +23,7 @@
                     <Grid>
                         <Border x:Name="border1"
                                 BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderThickness="{Binding Path=Border.Normal, RelativeSource={RelativeSource TemplatedParent}}"
                                 CornerRadius="{TemplateBinding Radius}">
                             <Border.Background>
                                 <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
@@ -52,7 +52,8 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Foreground" TargetName="txt" Value="{Binding Path=ForegroundRound.Mouse, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
+                            <Setter Property="Foreground" TargetName="txt" Value="{Binding Path=ForegroundRound.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter Property="BorderThickness" TargetName="border1" Value="{Binding Path=Border.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter Property="Background" TargetName="border1">
                                 <Setter.Value>
                                     <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
@@ -70,7 +71,8 @@
                             </Setter>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Foreground" TargetName="txt" Value="{Binding Path=ForegroundRound.Pressed, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
+                            <Setter Property="Foreground" TargetName="txt" Value="{Binding Path=ForegroundRound.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter Property="BorderThickness" TargetName="border1" Value="{Binding Path=Border.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter Property="Background" TargetName="border1">
                                 <Setter.Value>
                                     <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
