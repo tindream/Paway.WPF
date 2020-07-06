@@ -15,10 +15,7 @@
         <StackPanel Width="320">
             <utils:ProgressBarEXT Grid.Row="1" Value="95" />
 
-            <utils:ComboBoxEXT Grid.Row="2" Name="cbxBox" >
-                <ComboBoxItem Content="A" IsSelected="True"/>
-                <ComboBoxItem Content="B"/>
-                <ComboBoxItem Content="C"/>
+            <utils:ComboBoxEXT Grid.Row="2" Name="cbxBox" ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text">
             </utils:ComboBoxEXT>
             <utils:ComboBoxMulti x:Name="MultiCmb" Grid.Row="3" />
 

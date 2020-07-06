@@ -38,7 +38,7 @@
                                 <local:ListBoxEXT x:Name="PART_ListBoxChk" 
                                          SelectionMode="Multiple" 
                                          BorderThickness="0" 
-                                         Margin="1"
+                                         Margin="4,1"
                                          Background="{StaticResource backLine}"
                                          Radius="{TemplateBinding Radius}" 
                                          ScrollViewer.VerticalScrollBarVisibility="Disabled">
