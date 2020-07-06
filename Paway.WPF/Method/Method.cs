@@ -242,6 +242,7 @@ namespace Paway.WPF
                     }
                     catch (Exception ex)
                     {
+                        ex.Log();
                         parent.Dispatcher.BeginInvoke(new Action(() =>
                         {
                             Method.Error(parent, ex.Message());
@@ -258,6 +259,7 @@ namespace Paway.WPF
                         }
                         catch (Exception ex)
                         {
+                            ex.Log();
                             Method.Error(parent, ex.Message());
                         }
                     }));
