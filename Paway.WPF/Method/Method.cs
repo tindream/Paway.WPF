@@ -250,25 +250,57 @@ namespace Paway.WPF
                     }
                 }).BeginInvoke(new AsyncCallback(ar =>
                 {
-                    parent.Dispatcher.BeginInvoke(new Action(() =>
-                    {
-                        try
-                        {
-                            Method.Hide();
-                            completed?.Invoke();
-                        }
-                        catch (Exception ex)
-                        {
-                            ex.Log();
-                            Method.Error(parent, ex.Message());
-                        }
-                    }));
+                    ProgressCompleted(parent, completed);
                 }), null);
                 Progress(parent, true);
             }));
         }
         /// <summary>
-        /// 显示Window进度条
+        /// 同步步模式显示Window进度条，执行完成后关闭
+        /// </summary>
+        public static void ProgressSync(DependencyObject parent, Action action, Action completed = null)
+        {
+            parent.Dispatcher.Invoke(() =>
+            {
+                new Action(() =>
+                {
+                    try
+                    {
+                        action.Invoke();
+                    }
+                    catch (Exception ex)
+                    {
+                        ex.Log();
+                        parent.Dispatcher.Invoke(() =>
+                        {
+                            Method.Error(parent, ex.Message());
+                        });
+                    }
+                }).BeginInvoke(new AsyncCallback(ar =>
+                {
+                    ProgressCompleted(parent, completed);
+                }), null);
+                Progress(parent, true);
+            });
+        }
+        private static void ProgressCompleted(DependencyObject parent, Action completed = null)
+        {
+            parent.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                try
+                {
+                    Method.Hide();
+                    completed?.Invoke();
+                }
+                catch (Exception ex)
+                {
+                    ex.Log();
+                    Method.Error(parent, ex.Message());
+                }
+            }));
+        }
+        /// <summary>
+        /// 同步显示Window进度条
         /// </summary>
         public static void Progress(DependencyObject parent = null, bool dialog = false)
         {
