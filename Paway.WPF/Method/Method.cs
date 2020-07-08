@@ -404,12 +404,15 @@ namespace Paway.WPF
         /// </summary>
         public static void Toast(DependencyObject parent, string msg, bool iError = false)
         {
-            var toast = new WindowToast();
-            if (Parent(parent, out Window owner))
+            parent.Dispatcher.Invoke(() =>
             {
-                toast.Owner = owner;
-            }
-            toast.Show(msg, iError);
+                var toast = new WindowToast();
+                if (Parent(parent, out Window owner))
+                {
+                    toast.Owner = owner;
+                }
+                toast.Show(msg, iError);
+            });
         }
 
         #endregion

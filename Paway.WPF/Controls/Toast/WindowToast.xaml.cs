@@ -34,7 +34,7 @@ namespace Paway.WPF
             this.ShowInTaskbar = false;
             this.Loaded += delegate
             {
-                (this.Resources["ShowSb"] as Storyboard).Begin();
+                (this.Resources["showSb"] as Storyboard).Begin();
             };
         }
         /// <summary>
