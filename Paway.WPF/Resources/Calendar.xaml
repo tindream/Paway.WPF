@@ -2,9 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Paway.WPF">
 
-    <local:DateConvertToColor x:Key="DateConvertToColor"/>
-    <local:BoolToVisible x:Key="BoolToVisible"/>
-
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
+    <local:DateConvertToColor x:Key="dateConvertToColor"/>
+    
     <!--选择年月按钮-->
     <Style x:Key="CalendarButtonStyle" TargetType="{x:Type CalendarButton}">
         <Setter Property="Background" Value="#23AFFF"/>
@@ -226,7 +229,7 @@
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                             <TextElement.Foreground>
-                                <Binding RelativeSource="{RelativeSource TemplatedParent}" Converter="{StaticResource DateConvertToColor}">
+                                <Binding RelativeSource="{RelativeSource TemplatedParent}" Converter="{StaticResource dateConvertToColor}">
                                 </Binding>
                             </TextElement.Foreground>
                         </ContentPresenter>
@@ -484,7 +487,7 @@
                                         </Grid.RowDefinitions>
                                     </Grid>
                                     <Grid Grid.Row="2" Grid.ColumnSpan="3" 
-                                          Visibility="{Binding HasButton, RelativeSource={RelativeSource AncestorType={x:Type local:CalendarEXT}}, Converter={StaticResource BoolToVisible}}">
+                                          Visibility="{Binding HasButton, RelativeSource={RelativeSource AncestorType={x:Type local:CalendarEXT}}, Converter={StaticResource boolToVisible}}">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                             <ColumnDefinition Width="*"></ColumnDefinition>

@@ -43,6 +43,11 @@ namespace Paway.WPF
         /// 选择项
         /// </summary>
         bool IsSelected { get; set; }
+
+        /// <summary>
+        /// 自定义项背景颜色
+        /// </summary>
+        BrushEXT ItemBackground { get; set; }
     }
     /// <summary>
     /// IListView数据模型
@@ -113,6 +118,16 @@ namespace Paway.WPF
         {
             get { return isSelected; }
             set { isSelected = value; OnPropertyChanged(); }
+        }
+
+        private BrushEXT itemBackground;
+        /// <summary>
+        /// 自定义项背景颜色
+        /// </summary>
+        public virtual BrushEXT ItemBackground
+        {
+            get { return itemBackground; }
+            set { itemBackground = value; OnPropertyChanged(); }
         }
 
         /// <summary>

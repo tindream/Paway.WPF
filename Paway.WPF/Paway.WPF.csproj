@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\Converter\IEquatable\ColorLinear.cs" />
+    <Compile Include="Controls\Converter\IValueConverter\EmptyConverter.cs" />
     <Compile Include="Controls\Converter\IValueConverter\SmallConverter.cs" />
     <Compile Include="Controls\Converter\IValueConverter\BoolReverse.cs" />
     <Compile Include="Controls\Converter\IValueConverter\NullToVisible.cs" />

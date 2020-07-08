@@ -31,7 +31,8 @@ namespace Paway.Test
             list.Add(new ListViewModel("Hello"));
             list.Add(new ListViewModel("你好123")
             {
-                Image = new ImageEXT(null, @"pack://application:,,,/Paway.Test;component/Images/close_while.png")
+                Image = new ImageEXT(null, @"pack://application:,,,/Paway.Test;component/Images/close_while.png"),
+                ItemBackground = new BrushEXT(Colors.Red)
             });
             for (int i = 0; i < 20; i++) list.Add(new ListViewModel("A" + i, "D" + i)
             {

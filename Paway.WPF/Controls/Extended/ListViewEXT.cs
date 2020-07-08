@@ -23,6 +23,10 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(Orientation), typeof(Orientation), typeof(ListViewEXT), new PropertyMetadata(Orientation.Horizontal));
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty INormalProperty =
+            DependencyProperty.RegisterAttached(nameof(INormal), typeof(bool), typeof(ListViewEXT));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty ItemWidthProperty =
             DependencyProperty.RegisterAttached(nameof(ItemWidth), typeof(double), typeof(ListViewEXT), new PropertyMetadata(90d));
         /// <summary>
@@ -126,6 +130,16 @@ namespace Paway.WPF
         {
             get { return (Orientation)GetValue(OrientationProperty); }
             set { SetValue(OrientationProperty, value); }
+        }
+        /// <summary>
+        /// 普通项，不响应鼠标事件
+        /// </summary>
+        [Category("扩展.项")]
+        [Description("普通项，不响应鼠标事件")]
+        public bool INormal
+        {
+            get { return (bool)GetValue(INormalProperty); }
+            set { SetValue(INormalProperty, value); }
         }
         /// <summary>
         /// 自定义项宽度
@@ -395,6 +409,11 @@ namespace Paway.WPF
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
             base.OnPreviewMouseDown(e);
+            if (INormal)
+            {
+                e.Handled = true;
+                return;
+            }
             downItem = null;
             if (e.ChangedButton == MouseButton.Left)
             {

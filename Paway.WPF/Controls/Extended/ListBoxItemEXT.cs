@@ -15,6 +15,22 @@ namespace Paway.WPF
     public partial class ListBoxItemEXT : ListBoxItem, IListView, INotifyPropertyChanged
     {
         /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ItemBackgroundProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ListBoxItemEXT), new PropertyMetadata(new BrushEXT().Reset(Colors.Transparent, 0)));
+
+        /// <summary>
+        /// 自定义项背景颜色
+        /// </summary>
+        [Category("扩展")]
+        [Description("自定义项背景颜色")]
+        public BrushEXT ItemBackground
+        {
+            get { return (BrushEXT)GetValue(ItemBackgroundProperty); }
+            set { SetValue(ItemBackgroundProperty, value); }
+        }
+
+        /// <summary>
         /// 标识符
         /// </summary>
         public int Id { get; set; }

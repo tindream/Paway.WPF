@@ -90,7 +90,7 @@
         </StackPanel>
         <StackPanel>
             <utils:DataGridEXT Name="datagrid1" Grid.Column="1" Grid.RowSpan="9" 
-                           ItemsSource="{Binding GridList}"
+                           ItemsSource="{Binding GridList}" Width="480"
                            Height="250" Grid.Row="1" VerticalAlignment="Top">
                 <DataGrid.Columns>
                     <DataGridTextColumn  MinWidth="130" Binding="{Binding Money}" ElementStyle="{StaticResource TextRight}"/>
@@ -125,12 +125,10 @@
                 <Button Content="Hi" Visibility="Collapsed"/>
                 <utils:ListBoxItemEXT Text="A"/>
                 <utils:ListBoxItemEXT Text="C"/>
-                <utils:ListBoxItemEXT Text="C"/>
-                <utils:ListBoxItemEXT Text="C"/>
             </utils:ListViewEXT>
-            <utils:ListViewEXT Name="listView2" Grid.Column="1" 
+            <utils:ListViewEXT Name="listView2" Grid.Column="1" INormal="True"
                            Width="480" Height="84"
-                           ItemBorder="0,0.5,0,0.5" ItemPadding="10,5,10,5" ItemWidth="120" 
+                           ItemBorder="0" ItemPadding="10,5,10,5" ItemWidth="120" 
                            ItemImageWidth="0" 
                            SelectionMode="Multiple"
                            ItemDescForeground="Green" ItemDescFontSize="14"
@@ -141,8 +139,8 @@
                                            CommandParameter="{Binding ElementName=listView2}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-                <utils:ListBoxItemEXT Text="Hello" IsSelected="True" Desc="●"/>
-                <utils:ListBoxItemEXT Text="World" Desc="●"/>
+                <utils:ListBoxItemEXT Text="Hello" IsSelected="True" Desc="●" />
+                <utils:ListBoxItemEXT Text="World" Desc="●" ItemBackground="Red"/>
                 <utils:ListBoxItemEXT Text="A"/>
                 <utils:ListBoxItemEXT Text="C"/>
             </utils:ListViewEXT>

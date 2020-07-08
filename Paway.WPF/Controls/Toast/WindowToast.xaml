@@ -10,7 +10,7 @@
         AllowsTransparency="True" Background="Transparent" WindowStyle="None"
         Title="MessageBox" Height="350" Width="850" ShowInTaskbar="False" WindowStartupLocation="CenterOwner" >
     <Window.Resources>
-        <Storyboard x:Key="ShowSb" Completed="Storyboard_Completed" >
+        <Storyboard x:Key="showSb" Completed="Storyboard_Completed" >
             <DoubleAnimationUsingKeyFrames  Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="border1">
                 <EasingDoubleKeyFrame KeyTime="0" Value="{Binding YOffSetStart}" />
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
@@ -24,7 +24,7 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:3.5" Value="{Binding YOffSetEnd}"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Key="MouseLeave" Completed="Storyboard_Completed">
+        <Storyboard x:Key="mouseLeave" Completed="Storyboard_Completed">
             <DoubleAnimationUsingKeyFrames   Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="border1">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
@@ -45,10 +45,10 @@
         </Border.RenderTransform>
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="MouseEnter">
-                <ei:ControlStoryboardAction Storyboard="{StaticResource ShowSb}" ControlStoryboardOption="Stop"/>
+                <ei:ControlStoryboardAction Storyboard="{StaticResource showSb}" ControlStoryboardOption="Stop"/>
             </i:EventTrigger>
             <i:EventTrigger EventName="MouseLeave">
-                <ei:ControlStoryboardAction Storyboard="{StaticResource MouseLeave}"/>
+                <ei:ControlStoryboardAction Storyboard="{StaticResource mouseLeave}"/>
             </i:EventTrigger>
         </i:Interaction.Triggers>
         <local:ScrollViewerEXT HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">

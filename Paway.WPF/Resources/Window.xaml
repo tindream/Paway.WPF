@@ -6,7 +6,7 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
-    <local:EmptyObjectConverter x:Key="EmptyObjectConverter" />
+    <local:EmptyObjectConverter x:Key="emptyObjectConverter" />
 
     <DataTemplate x:Key="MinimizeBlack">
         <Path Data="M0,6 L12,6 L12,7 L0,7 z"
@@ -159,7 +159,7 @@
                                     <Image Source="{TemplateBinding Icon}"
                                            VerticalAlignment="Center"
                                            Margin="5,0,0,0"
-                                           Visibility="{Binding Icon,RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource EmptyObjectConverter}}"
+                                           Visibility="{Binding Icon,RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource emptyObjectConverter}}"
                                            Height="{x:Static SystemParameters.SmallIconHeight}"
                                            Width="{x:Static SystemParameters.SmallIconWidth}"
                                            WindowChrome.IsHitTestVisibleInChrome="True"/>
