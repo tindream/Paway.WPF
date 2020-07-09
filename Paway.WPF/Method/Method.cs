@@ -124,7 +124,7 @@ namespace Paway.WPF
             if (animTime == 0)
             {
                 var animValue = value == 0 ? x ? content.ActualWidth : content.ActualHeight : value;
-                animTime = (int)(Math.Pow(animValue, 1.0 / 3) * 100);
+                animTime = (int)(Math.Pow(animValue, 1.0 / 4) * 100);
                 if (animTime < 300) animTime = 300;
                 else if (animTime > 1000) animTime = 1000;
             }
