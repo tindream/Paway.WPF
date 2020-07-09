@@ -15,7 +15,7 @@
 		<dependencies>
 			<group targetFramework="net45">
 				<dependency id="log4net" version="2.0.8" />
-				<dependency id="Paway.Helper" version="2.3.11" />
+				<dependency id="Paway.Helper" version="2.3.12" />
 				<dependency id="System.Windows.Interactivity.WPF" version="2.0.20525" />
 			</group>
 		</dependencies>
