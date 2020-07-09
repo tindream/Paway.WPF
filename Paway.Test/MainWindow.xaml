@@ -63,7 +63,6 @@
                 <Path Style="{StaticResource PathQuestion}" />
                 <Path Style="{StaticResource PathRight}" />
                 <Path Style="{StaticResource PathClose}" />
-                <utils:ButtonPath Width="50" Height="100" Value="50" Background="#F1F1F1"/>
                 <utils:Progress Width="40" Height="40" />
             </WrapPanel>
 

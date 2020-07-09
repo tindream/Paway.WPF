@@ -18,7 +18,7 @@ using System.Windows.Shapes;
 namespace Paway.WPF
 {
     /// <summary>
-    /// Window系统消息框-Toast显示
+    /// 自定义消息框-Toast
     /// </summary>
     public partial class WindowToast : WindowEXT
     {
@@ -40,13 +40,15 @@ namespace Paway.WPF
         /// <summary>
         /// 显示
         /// </summary>
-        public void Show(string msg, bool iError = false)
+        public void Show(string msg, int time = 0, bool iError = false)
         {
             if (iError)
             {
                 border1.Background = new SolidColorBrush(Color.FromArgb(255, 221, 51, 51));
             }
-            (this.DataContext as WindowToastModel).Message = msg;
+            var model = this.DataContext as WindowToastModel;
+            model.Message = msg;
+            if (time != 0) model.Time = KeyTime.FromTimeSpan(new TimeSpan(0, 0, time));
             this.Show();
         }
         /// <summary>

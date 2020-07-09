@@ -14,6 +14,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using System.Xml;
 using Paway.Helper;
@@ -25,65 +26,110 @@ namespace Paway.WPF
     /// </summary>
     public class Method
     {
-        #region internal
-        #region TypeConverter
+        #region 位移动画
         /// <summary>
-        /// 获取ITypeDescriptorContext中的属性值
+        /// 位移动画-从X轴左边进入(离开)
         /// </summary>
-        internal static T GetValue<T>(ITypeDescriptorContext context)
+        /// <param name="content">控件</param>
+        /// <param name="display">显示(进入)/隐藏(离开)</param>
+        /// <param name="completed">完成触发事件</param>
+        /// <param name="value">变化量</param>
+        /// <param name="time">变化时间</param>
+        public static void AnimMoveLeft(ContentPresenter content, bool display = true, Action completed = null, double value = 0, double time = 0)
         {
-            if (context != null)
-            {
-                var service = (IProvideValueTarget)context.GetService(typeof(IProvideValueTarget));
-                if (service.TargetObject != null)
-                {
-                    var objType = service.TargetObject.GetType();
-                    var obj = (DependencyObject)Activator.CreateInstance(objType);
-                    var property = (DependencyProperty)service.TargetProperty;
-                    return (T)obj.GetValue(property);
-                }
-            }
-            return default;
+            AnimMove(content, display, 1, completed, value, time, true);
         }
         /// <summary>
-        /// 控件状态转换
+        /// 位移动画-从Y轴上边进入(离开)
         /// </summary>
-        internal static Tuple<T, I?, I?, I?, int?> ElementStatu<T, I>(ITypeDescriptorContext context, CultureInfo culture, string str,
-            Func<string, I> func, Func<T, string, I?> funcValue)
-            //where T : IElementStatu<I> 
-            where I : struct
+        /// <param name="content">控件</param>
+        /// <param name="display">显示(进入)/隐藏(离开)</param>
+        /// <param name="completed">完成触发事件</param>
+        /// <param name="value">变化量</param>
+        /// <param name="time">变化时间</param>
+        public static void AnimMoveUp(ContentPresenter content, bool display = true, Action completed = null, double value = 0, double time = 0)
         {
-            var old = Method.GetValue<T>(context);
-
-            var strs = str.Split(';');
-            I? normal = null;
-            I? mouse = null;
-            I? pressed = null;
-            int? alpha = null;
-            if (strs.Length > 0)
-            {
-                if (!string.IsNullOrEmpty(strs[0])) normal = func(strs[0]);
-                else normal = funcValue(old, "Normal");
-            }
-            if (strs.Length > 1)
-            {
-                if (!string.IsNullOrEmpty(strs[1])) mouse = func(strs[1]);
-                else mouse = funcValue(old, "Mouse");
-            }
-            if (strs.Length > 2)
-            {
-                if (!string.IsNullOrEmpty(strs[2])) pressed = func(strs[2]);
-                else pressed = funcValue(old, "Pressed");
-            }
-            if (strs.Length > 3)
-            {
-                if (!string.IsNullOrEmpty(strs[3])) alpha = Convert.ToInt32(strs[3], culture);
-                else if (old != null) alpha = (int)old.GetValue("Alpha");
-            }
-            return new Tuple<T, I?, I?, I?, int?>(old, normal, mouse, pressed, alpha);
+            AnimMove(content, display, -1, completed, value, time, false);
+        }
+        /// <summary>
+        /// 位移动画-从X轴右边进入(离开)
+        /// </summary>
+        /// <param name="content">控件</param>
+        /// <param name="display">显示(进入)/隐藏(离开)</param>
+        /// <param name="completed">完成触发事件</param>
+        /// <param name="value">变化量</param>
+        /// <param name="time">变化时间</param>
+        public static void AnimMoveRight(ContentPresenter content, bool display = true, Action completed = null, double value = 0, double time = 0)
+        {
+            AnimMove(content, display, -1, completed, value, time, true);
+        }
+        /// <summary>
+        /// 位移动画-从Y轴下边进入(离开)
+        /// </summary>
+        /// <param name="content">控件</param>
+        /// <param name="display">显示(进入)/隐藏(离开)</param>
+        /// <param name="completed">完成触发事件</param>
+        /// <param name="value">变化量</param>
+        /// <param name="time">变化时间</param>
+        public static void AnimMoveDown(ContentPresenter content, bool display = true, Action completed = null, double value = 0, double time = 0)
+        {
+            AnimMove(content, display, 1, completed, value, time, false);
+        }
+        /// <summary>
+        /// 位移动画
+        /// </summary>
+        /// <param name="content">控件</param>
+        /// <param name="display">显示(进入)/隐藏(离开)</param>
+        /// <param name="direction">反向标记</param>
+        /// <param name="completed">完成触发事件</param>
+        /// <param name="value">变化量</param>
+        /// <param name="time">变化时间</param>
+        /// <param name="x">变化量为0时取值依据</param>
+        private static void AnimMove(ContentPresenter content, bool display = true, int direction = 1, Action completed = null, double value = 0, double time = 0, bool x = true)
+        {
+            //实例化旋转对象（顺时针旋转）
+            TranslateTransform tt = new TranslateTransform();
+            //让content控件平移
+            content.RenderTransform = tt;
+            var animValue = value == 0 ? x ? content.ActualWidth : content.ActualHeight : value;
+            var animTime = AnimTime(content, value, time, x);
+            //创建动画处理对象
+            var animBy = new DoubleAnimation(display ? animValue * direction : 0, display ? 0 : animValue * direction, new Duration(TimeSpan.FromMilliseconds(animTime)));
+            //反向运动
+            //animBy.AutoReverse = true;
+            //无限循环
+            //animBy.RepeatBehavior = RepeatBehavior.Forever;
+            tt.BeginAnimation(x ? TranslateTransform.XProperty : TranslateTransform.YProperty, animBy);
         }
 
-        #endregion
+        /// <summary>
+        /// 透明度动画
+        /// </summary>
+        /// <param name="content">控件</param>
+        /// <param name="display">显示/隐藏</param>
+        /// <param name="completed">完成触发事件</param>
+        /// <param name="value">变化量</param>
+        /// <param name="time">变化时间</param>
+        /// <param name="x">变化量为0时取值依据</param>
+        public static void AnimOpacity(ContentPresenter content, bool display = true, Action completed = null, double value = 0, double time = 0, bool x = true)
+        {
+            var animTime = AnimTime(content, value, time, x);
+            var opacity = new DoubleAnimation(display ? 0 : 1, display ? 1 : 0, new Duration(TimeSpan.FromMilliseconds(animTime)));
+            opacity.Completed += delegate { completed?.Invoke(); };
+            content.BeginAnimation(UIElement.OpacityProperty, opacity);
+        }
+        private static double AnimTime(ContentPresenter content, double value = 0, double time = 0, bool x = true)
+        {
+            var animTime = time;
+            if (animTime == 0)
+            {
+                var animValue = value == 0 ? x ? content.ActualWidth : content.ActualHeight : value;
+                animTime = (int)(Math.Pow(animValue, 1.0 / 3) * 100);
+                if (animTime < 300) animTime = 300;
+                else if (animTime > 1000) animTime = 1000;
+            }
+            return animTime;
+        }
 
         #endregion
 
@@ -207,6 +253,7 @@ namespace Paway.WPF
 
         #endregion
 
+        #region Window
         #region 让系统可以处理队列中的所有Windows消息
         /// <summary>
         /// 让系统可以处理队列中的所有Windows消息
@@ -225,12 +272,12 @@ namespace Paway.WPF
 
         #endregion
 
-        #region Window进度条
+        #region Window忙碌提示
         private static WindowProgress progress;
         /// <summary>
-        /// 模式显示Window进度条，执行完成后关闭
+        /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
-        public static void Progress(DependencyObject parent, Action action, Action completed = null)
+        public static void Progress(DependencyObject parent, Action action, Action completed = null, bool iErrorBox = true)
         {
             parent.Dispatcher.BeginInvoke(new Action(() =>
             {
@@ -243,6 +290,7 @@ namespace Paway.WPF
                     catch (Exception ex)
                     {
                         ex.Log();
+                        if (!iErrorBox) return;
                         parent.Dispatcher.BeginInvoke(new Action(() =>
                         {
                             Method.Error(parent, ex.Message());
@@ -250,15 +298,15 @@ namespace Paway.WPF
                     }
                 }).BeginInvoke(new AsyncCallback(ar =>
                 {
-                    ProgressCompleted(parent, completed);
+                    ProgressCompleted(parent, completed, iErrorBox);
                 }), null);
                 Progress(parent, true);
             }));
         }
         /// <summary>
-        /// 同步步模式显示Window进度条，执行完成后关闭
+        /// 同步模式显示Window忙提示框，执行完成后关闭
         /// </summary>
-        public static void ProgressSync(DependencyObject parent, Action action, Action completed = null)
+        public static void ProgressSync(DependencyObject parent, Action action, Action completed = null, bool iErrorBox = true)
         {
             parent.Dispatcher.Invoke(() =>
             {
@@ -271,6 +319,7 @@ namespace Paway.WPF
                     catch (Exception ex)
                     {
                         ex.Log();
+                        if (!iErrorBox) return;
                         parent.Dispatcher.Invoke(() =>
                         {
                             Method.Error(parent, ex.Message());
@@ -278,12 +327,12 @@ namespace Paway.WPF
                     }
                 }).BeginInvoke(new AsyncCallback(ar =>
                 {
-                    ProgressCompleted(parent, completed);
+                    ProgressCompleted(parent, completed, iErrorBox);
                 }), null);
                 Progress(parent, true);
             });
         }
-        private static void ProgressCompleted(DependencyObject parent, Action completed = null)
+        private static void ProgressCompleted(DependencyObject parent, Action completed = null, bool iErrorBox = true)
         {
             parent.Dispatcher.BeginInvoke(new Action(() =>
             {
@@ -295,6 +344,7 @@ namespace Paway.WPF
                 catch (Exception ex)
                 {
                     ex.Log();
+                    if (!iErrorBox) return;
                     Method.Error(parent, ex.Message());
                 }
             }));
@@ -331,9 +381,9 @@ namespace Paway.WPF
 
         #endregion
 
-        #region Window弹出
+        #region Window弹框
         /// <summary>
-        /// 显示子窗体
+        /// Window弹框
         /// </summary>
         public static bool? Show(DependencyObject parent, Window window, bool iEscExit = true)
         {
@@ -360,7 +410,7 @@ namespace Paway.WPF
             //放入原来的内容
             container.Children.Add(original);
             //蒙板
-            var layer = new Grid() { Background = new SolidColorBrush(Color.FromArgb(128, 0, 0, 0)) };
+            var layer = new Grid() { Background = new SolidColorBrush(Color.FromArgb(100, 0, 0, 0)) };
             //在上面放一层蒙板
             container.Children.Add(layer);
             //将装有原来内容和蒙板的容器赋给父级窗体
@@ -391,18 +441,18 @@ namespace Paway.WPF
 
         #endregion
 
-        #region Window系统消息框-Toast显示
+        #region 自定义消息框-Toast
         /// <summary>
-        /// Window系统消息框-Toast显示
+        /// 自定义消息框-Toast
         /// </summary>
-        public static void Toast(string msg, bool iError = false)
+        public static void Toast(string msg, int time = 0, bool iError = false)
         {
-            Toast(null, msg, iError);
+            Toast(null, msg, time, iError);
         }
         /// <summary>
-        /// Window系统消息框-Toast显示
+        /// 自定义消息框-Toast
         /// </summary>
-        public static void Toast(DependencyObject parent, string msg, bool iError = false)
+        public static void Toast(DependencyObject parent, string msg, int time = 0, bool iError = false)
         {
             parent.Dispatcher.Invoke(() =>
             {
@@ -411,7 +461,7 @@ namespace Paway.WPF
                 {
                     toast.Owner = owner;
                 }
-                toast.Show(msg, iError);
+                toast.Show(msg, time, iError);
             });
         }
 
@@ -493,9 +543,40 @@ namespace Paway.WPF
 
         #region 返回指定控件的上下层控件
         /// <summary>
+        /// 返回控件树中指定类型控件
+        /// </summary>
+        public static bool Find<T>(object obj, out T parent, string name = null) where T : FrameworkElement
+        {
+            parent = null;
+            if (!(obj is DependencyObject dependency)) return false;
+            if (Child(obj, out parent, name))
+            {
+                return true;
+            }
+            while (dependency != null)
+            {
+                if (dependency is T t)
+                {
+                    if (name == null || t.Name == name)
+                    {
+                        parent = t;
+                        return true;
+                    }
+                }
+                var temp = VisualTreeHelper.GetParent(dependency);
+                if (temp == null) break;
+                dependency = temp;
+            }
+            if (Child(dependency, out parent, name))
+            {
+                return true;
+            }
+            return false;
+        }
+        /// <summary>
         /// 返回控件的顶层指定类型控件
         /// </summary>
-        public static bool Parent<T>(object obj, out T parent) where T : FrameworkElement
+        public static bool Parent<T>(object obj, out T parent, string name = null) where T : FrameworkElement
         {
             parent = null;
             if (!(obj is DependencyObject dependency)) return false;
@@ -503,8 +584,11 @@ namespace Paway.WPF
             {
                 if (dependency is T t)
                 {
-                    parent = t;
-                    return true;
+                    if (name == null || t.Name == name)
+                    {
+                        parent = t;
+                        return true;
+                    }
                 }
                 dependency = VisualTreeHelper.GetParent(dependency);
             }
@@ -559,6 +643,70 @@ namespace Paway.WPF
             }
             return false;
         }
+
+        #endregion
+
+        #endregion
+
+        #region internal
+        #region TypeConverter
+        /// <summary>
+        /// 获取ITypeDescriptorContext中的属性值
+        /// </summary>
+        internal static T GetValue<T>(ITypeDescriptorContext context)
+        {
+            if (context != null)
+            {
+                var service = (IProvideValueTarget)context.GetService(typeof(IProvideValueTarget));
+                if (service.TargetObject != null)
+                {
+                    var objType = service.TargetObject.GetType();
+                    var obj = (DependencyObject)Activator.CreateInstance(objType);
+                    var property = (DependencyProperty)service.TargetProperty;
+                    return (T)obj.GetValue(property);
+                }
+            }
+            return default;
+        }
+        /// <summary>
+        /// 控件状态转换
+        /// </summary>
+        internal static Tuple<T, I?, I?, I?, int?> ElementStatu<T, I>(ITypeDescriptorContext context, CultureInfo culture, string str,
+            Func<string, I> func, Func<T, string, I?> funcValue)
+            //where T : IElementStatu<I> 
+            where I : struct
+        {
+            var old = Method.GetValue<T>(context);
+
+            var strs = str.Split(';');
+            I? normal = null;
+            I? mouse = null;
+            I? pressed = null;
+            int? alpha = null;
+            if (strs.Length > 0)
+            {
+                if (!string.IsNullOrEmpty(strs[0])) normal = func(strs[0]);
+                else normal = funcValue(old, "Normal");
+            }
+            if (strs.Length > 1)
+            {
+                if (!string.IsNullOrEmpty(strs[1])) mouse = func(strs[1]);
+                else mouse = funcValue(old, "Mouse");
+            }
+            if (strs.Length > 2)
+            {
+                if (!string.IsNullOrEmpty(strs[2])) pressed = func(strs[2]);
+                else pressed = funcValue(old, "Pressed");
+            }
+            if (strs.Length > 3)
+            {
+                if (!string.IsNullOrEmpty(strs[3])) alpha = Convert.ToInt32(strs[3], culture);
+                else if (old != null) alpha = (int)old.GetValue("Alpha");
+            }
+            return new Tuple<T, I?, I?, I?, int?>(old, normal, mouse, pressed, alpha);
+        }
+
+        #endregion
 
         #endregion
     }

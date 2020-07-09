@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Animation;
 
 namespace Paway.WPF
 {
@@ -40,6 +41,30 @@ namespace Paway.WPF
         {
             get { return yOffSetEnd; }
             set { yOffSetEnd = value; OnPropertyChanged(); }
+        }
+
+        private KeyTime time = KeyTime.FromTimeSpan(new TimeSpan(0, 0, 3));
+        /// <summary>
+        /// 关闭时间
+        /// </summary>
+        public KeyTime Time
+        {
+            get { return time; }
+            set
+            {
+                time = value;
+                TimeEnd = time.TimeSpan.Add(new TimeSpan(0, 0, 0, 0, 500));
+                OnPropertyChanged();
+            }
+        }
+        private KeyTime timeEnd = KeyTime.FromTimeSpan(new TimeSpan(0, 0, 0, 3, 500));
+        /// <summary>
+        /// 关闭时间
+        /// </summary>
+        public KeyTime TimeEnd
+        {
+            get { return timeEnd; }
+            set { timeEnd = value; OnPropertyChanged(); }
         }
 
         private string message;

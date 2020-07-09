@@ -19,7 +19,7 @@ using System.Windows.Shapes;
 namespace Paway.WPF
 {
     /// <summary>
-    /// Window进度条
+    /// Window忙提示框
     /// </summary>
     public partial class WindowProgress : WindowEXT
     {

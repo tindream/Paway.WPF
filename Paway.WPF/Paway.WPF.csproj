@@ -45,8 +45,8 @@
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
-    <Reference Include="Paway.Helper, Version=2.3.11.0, Culture=neutral, PublicKeyToken=5f9d1a9ddcc41d83, processorArchitecture=MSIL">
-      <HintPath>..\packages\Paway.Helper.2.3.11\lib\net40\Paway.Helper.dll</HintPath>
+    <Reference Include="Paway.Helper, Version=2.3.12.0, Culture=neutral, PublicKeyToken=5f9d1a9ddcc41d83, processorArchitecture=MSIL">
+      <HintPath>..\packages\Paway.Helper.2.3.12\lib\net40\Paway.Helper.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -76,7 +76,6 @@
     <Compile Include="Controls\Converter\IValueConverter\IndentConverter.cs" />
     <Compile Include="Controls\Converter\IValueConverter\VisibleReverse.cs" />
     <Compile Include="Controls\Converter\IValueConverter\BoolToVisible.cs" />
-    <Compile Include="Controls\Extended\ButtonPath.cs" />
     <Compile Include="Controls\Extended\DatePickerEXT.cs" />
     <Compile Include="Controls\Extended\ComboBoxMulti.cs" />
     <Compile Include="Controls\Extended\SliderEXT.cs" />
@@ -165,10 +164,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\TransitionControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Resources\ButtonPath.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

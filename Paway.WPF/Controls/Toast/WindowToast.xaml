@@ -14,14 +14,14 @@
             <DoubleAnimationUsingKeyFrames  Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="border1">
                 <EasingDoubleKeyFrame KeyTime="0" Value="{Binding YOffSetStart}" />
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:3" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:3.5" Value="{Binding YOffSetEnd}"/>
+                <EasingDoubleKeyFrame KeyTime="{Binding Time}" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="{Binding TimeEnd}" Value="{Binding YOffSetEnd}"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames  Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="tb">
                 <EasingDoubleKeyFrame KeyTime="0" Value="{Binding YOffSetStart}" />
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:3" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:3.5" Value="{Binding YOffSetEnd}"/>
+                <EasingDoubleKeyFrame KeyTime="{Binding Time}" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="{Binding TimeEnd}" Value="{Binding YOffSetEnd}"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="mouseLeave" Completed="Storyboard_Completed">

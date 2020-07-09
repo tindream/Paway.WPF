@@ -55,7 +55,7 @@ namespace Paway.Test.ViewModel
             {
                 return teach ?? (teach = new RelayCommand<Button>((btn) =>
                 {
-                    Method.Toast(btn, "Hello");
+                    Method.Toast(btn, "Hello", 5);
                 }));
             }
         }

@@ -182,12 +182,10 @@ namespace Paway.WPF
         /// <summary>
         /// Handles the Completed event of the transition storyboard.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void OnTransitionCompleted(object sender, EventArgs e)
+        private void OnTransitionCompleted()
         {
             AbortTransition();
-            TransitionCompleted?.Invoke(sender, new RoutedEventArgs());
+            TransitionCompleted?.Invoke(this, new RoutedEventArgs());
         }
         /// <summary>
         /// Gets or sets the storyboard that is used to transition old and new content.
@@ -197,26 +195,26 @@ namespace Paway.WPF
             switch (TransitionType)
             {
                 case TransitionType.Default:
-                    Move(PreviousContentPresentationSite, display: false);
-                    Move(CurrentContentPresentationSite);
                     break;
                 case TransitionType.Left:
-                    Move(PreviousContentPresentationSite, display: false);
-                    Move(CurrentContentPresentationSite);
+                    Method.AnimMoveRight(PreviousContentPresentationSite, false);
+                    Method.AnimMoveLeft(CurrentContentPresentationSite);
                     break;
                 case TransitionType.Right:
-                    Move(PreviousContentPresentationSite, direction: -1, display: false);
-                    Move(CurrentContentPresentationSite, direction: -1);
+                    Method.AnimMoveLeft(PreviousContentPresentationSite, false);
+                    Method.AnimMoveRight(CurrentContentPresentationSite);
                     break;
                 case TransitionType.Up:
-                    Move(PreviousContentPresentationSite, false, -1, false);
-                    Move(CurrentContentPresentationSite, false, -1);
+                    Method.AnimMoveDown(PreviousContentPresentationSite, false);
+                    Method.AnimMoveUp(CurrentContentPresentationSite);
                     break;
                 case TransitionType.Down:
-                    Move(PreviousContentPresentationSite, false, display: false);
-                    Move(CurrentContentPresentationSite, false);
+                    Method.AnimMoveUp(PreviousContentPresentationSite, false);
+                    Method.AnimMoveDown(CurrentContentPresentationSite);
                     break;
             }
+            Method.AnimOpacity(PreviousContentPresentationSite, false);
+            Method.AnimOpacity(CurrentContentPresentationSite, true, OnTransitionCompleted);
         }
         private void Move(ContentPresenter content, bool x = true, int direction = 1, bool display = true)
         {
@@ -242,9 +240,6 @@ namespace Paway.WPF
             {
                 tt.BeginAnimation(x ? TranslateTransform.XProperty : TranslateTransform.YProperty, bx);
             }
-            var opacity = new DoubleAnimation(display ? 0 : 1, display ? 1 : 0, new Duration(TimeSpan.FromMilliseconds(time)));
-            opacity.Completed += OnTransitionCompleted;
-            content.BeginAnimation(UIElement.OpacityProperty, opacity);
         }
 
         #endregion

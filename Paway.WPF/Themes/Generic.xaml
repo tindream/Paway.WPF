@@ -8,7 +8,6 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Progress.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\TextBox.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Button.xaml"/>
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\ButtonPath.xaml"/>
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBox.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBoxMulti.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ProgressBar.xaml" />
