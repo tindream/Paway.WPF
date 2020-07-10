@@ -23,7 +23,8 @@ namespace Paway.WPF
     public partial class WindowToast : WindowEXT
     {
         private bool iFirst = true;
-
+        private Rect rect;
+        private static List<Rect> positionList = new List<Rect>();
         /// <summary>
         /// </summary>
         public WindowToast()
@@ -60,10 +61,10 @@ namespace Paway.WPF
             {
                 iFirst = false;
 
-                var left = this.Width - border1.ActualWidth - 3;
-                var top = this.Height - border1.ActualHeight - 3;
-                this.Width = border1.ActualWidth + 3;
-                this.Height = border1.ActualHeight + 3;
+                var left = this.Width - border1.ActualWidth;
+                var top = this.Height - border1.ActualHeight;
+                this.Width = border1.ActualWidth;
+                this.Height = border1.ActualHeight;
                 if (this.Owner == null)
                 {
                     this.Left = (SystemParameters.WorkArea.Width - this.Width) / 2;
@@ -74,6 +75,17 @@ namespace Paway.WPF
                     this.Left += left / 2;
                     this.Top += top / 2 + (this.Owner.ActualHeight - this.Height) * 2 / 5;
                 }
+                this.rect = new Rect(0, this.Top, 10, this.Height);
+                for (int i = 0; i < positionList.Count; i++)
+                {
+                    var item = positionList[i];
+                    if (Rect.Intersect(item, rect).Width > 0)
+                    {
+                        if (rect.Top > item.Top - this.Height) rect = new Rect(0, item.Top - this.Height, 10, this.Height);
+                    }
+                }
+                if (this.Top != rect.Top) this.Top = rect.Top;
+                positionList.Add(this.rect);
             }
             base.OnRender(drawingContext);
         }
@@ -83,6 +95,8 @@ namespace Paway.WPF
         }
         private void Storyboard_Completed(object sender, EventArgs e)
         {
+            var item = positionList.Find(c => c.Top == this.rect.Top && c.Height == this.rect.Height);
+            if (item != null) positionList.Remove(item);
             this.Close();
         }
     }
