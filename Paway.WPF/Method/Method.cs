@@ -338,7 +338,7 @@ namespace Paway.WPF
             {
                 try
                 {
-                    Method.Hide();
+                    Method.Hide(parent);
                     completed?.Invoke();
                 }
                 catch (Exception ex)
@@ -359,7 +359,7 @@ namespace Paway.WPF
             {
                 owner.Closed += delegate
                 {
-                    Hide();
+                    Hide(owner);
                 };
                 progress.Owner = owner;
             }
@@ -373,10 +373,14 @@ namespace Paway.WPF
         /// <summary>
         /// 隐藏Window进度条
         /// </summary>
-        public static void Hide()
+        public static void Hide(object parent = null)
         {
             if (progress != null) progress.Close();
             progress = null;
+            if (Parent(parent, out Window owner))
+            {
+                owner.Focus();
+            }
         }
 
         #endregion

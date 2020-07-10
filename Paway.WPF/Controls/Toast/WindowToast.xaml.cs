@@ -64,7 +64,7 @@ namespace Paway.WPF
                 var left = this.Width - border1.ActualWidth;
                 var top = this.Height - border1.ActualHeight;
                 this.Width = border1.ActualWidth;
-                this.Height = border1.ActualHeight;
+                this.Height = border1.ActualHeight + 1;
                 if (this.Owner == null)
                 {
                     this.Left = (SystemParameters.WorkArea.Width - this.Width) / 2;
@@ -98,6 +98,7 @@ namespace Paway.WPF
             var item = positionList.Find(c => c.Top == this.rect.Top && c.Height == this.rect.Height);
             if (item != null) positionList.Remove(item);
             this.Close();
+            if (this.Owner != null) this.Owner.Focus();
         }
     }
 }
