@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -23,11 +24,11 @@ namespace Paway.Test
     /// </summary>
     public partial class MainWindow : WindowEXT
     {
-        public List<ListViewModel> list;
+        private List<ListViewModel> list;
         public MainWindow()
         {
             InitializeComponent();
-            var list = new List<ListViewModel>();
+            list = new List<ListViewModel>();
             list.Add(new ListViewModel("Hello"));
             list.Add(new ListViewModel("你好123")
             {

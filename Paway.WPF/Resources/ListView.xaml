@@ -39,13 +39,13 @@
                                    Height="{Binding ItemImageHeight, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                         <DockPanel>
                             <TextBlock Text="{Binding Desc}" 
-                                   TextTrimming="WordEllipsis" Foreground="Black" 
+                                   TextTrimming="WordEllipsis" Foreground="#222" 
                                    FontSize="{Binding FontSize-2, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                    HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                    VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" DockPanel.Dock="Right" >
                             </TextBlock>
                             <TextBlock Text="{Binding Content}" 
-                                   TextTrimming="WordEllipsis" Foreground="Black" 
+                                   TextTrimming="WordEllipsis" Foreground="#222" 
                                    FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                    HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                    VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" >
@@ -212,6 +212,8 @@
                                     <DataTrigger Binding="{Binding IsPressed}" Value="true">
                                         <Setter TargetName="border" Property="BorderBrush" 
                                                 Value="{Binding Path=ItemBorderBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
+                                        <Setter TargetName="text" Property="Foreground" 
+                                                Value="{Binding Path=ItemTextForeground.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="border" Property="Background">
                                             <Setter.Value>
                                                 <MultiBinding Converter="{StaticResource emptyConverter}">

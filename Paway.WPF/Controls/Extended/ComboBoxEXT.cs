@@ -22,7 +22,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ForegroundRoundProperty =
             DependencyProperty.RegisterAttached(nameof(ForegroundRound), typeof(BrushEXT), typeof(ComboBoxEXT),
-            new PropertyMetadata(new BrushEXT(Colors.Black, Colors.Black, Colors.White)));
+            new PropertyMetadata(new BrushEXT(Color.FromArgb(255, 34, 34, 34), Color.FromArgb(255, 34, 34, 34), Colors.White)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty BackgroundRoundProperty =
