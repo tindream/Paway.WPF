@@ -692,6 +692,7 @@ namespace Paway.WPF
         internal static Tuple<T, I?, I?, I?, int?> ElementStatu<T, I>(ITypeDescriptorContext context, CultureInfo culture, string str,
             Func<string, I> func, Func<T, string, I?> funcValue)
             //where T : IElementStatu<I> 
+            where T : class
             where I : struct
         {
             var old = Method.GetValue<T>(context);

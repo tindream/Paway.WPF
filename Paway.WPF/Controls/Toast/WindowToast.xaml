@@ -41,7 +41,7 @@
             <ei:ControlStoryboardAction Storyboard="{StaticResource mouseLeave}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Border x:Name="border1" Margin="0,1,0,0" CornerRadius="8" Background="#F25D6B99"
+    <Border x:Name="border1" Margin="0,1,0,0" CornerRadius="5" Background="#F25D6B99"
             HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
         <Border.RenderTransform>
             <TransformGroup>
@@ -53,7 +53,7 @@
         </Border.RenderTransform>
         <local:ScrollViewerEXT HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
             <TextBlock x:Name="tb" Margin="8,0" Padding="17,7" FontFamily="Microsoft YaHei"
-                   Text="{Binding Message,FallbackValue=失败信息}"
+                   Text="{Binding Message,FallbackValue=提示信息}"
                    TextWrapping="Wrap" TextAlignment="Center" Foreground="White"
                    MinWidth="200" MaxWidth="600" ToolTip="双击复制"
                    RenderTransformOrigin="0.5,0.5">
