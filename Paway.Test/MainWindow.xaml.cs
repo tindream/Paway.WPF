@@ -39,7 +39,10 @@ namespace Paway.Test
             {
                 Image = new ImageEXT(@"pack://application:,,,/Paway.Test;component/Images/close.png")
             });
-            datagrid1.ItemsSource = list;
+            var pagedCollectionView = new PagedCollectionView(list) { PageSize = 10 };
+            datagrid1.ItemsSource = pagedCollectionView;
+            dataPager.Source = pagedCollectionView;
+            dataPager.IsTotalItemCountFixed = true;
             listView2.Items.Clear();
             listView2.ItemsSource = list;
 

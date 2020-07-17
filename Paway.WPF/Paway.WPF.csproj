@@ -76,6 +76,16 @@
     <Compile Include="Controls\Converter\IValueConverter\IndentConverter.cs" />
     <Compile Include="Controls\Converter\IValueConverter\VisibleReverse.cs" />
     <Compile Include="Controls\Converter\IValueConverter\BoolToVisible.cs" />
+    <Compile Include="Controls\DataPager\CollectionViewGroupInternal.cs" />
+    <Compile Include="Controls\DataPager\CollectionViewGroupRoot.cs" />
+    <Compile Include="Controls\DataPager\DataPager.cs" />
+    <Compile Include="Controls\DataPager\Extensions.cs" />
+    <Compile Include="Controls\DataPager\IPagedCollectionView.cs" />
+    <Compile Include="Controls\DataPager\PageChangingEventArgs.cs" />
+    <Compile Include="Controls\DataPager\PagedCollectionView.cs" />
+    <Compile Include="Controls\DataPager\PagerDisplayMode.cs" />
+    <Compile Include="Controls\DataPager\TypeHelper.cs" />
+    <Compile Include="Controls\DataPager\WeakEventListener.cs" />
     <Compile Include="Controls\Extended\DatePickerEXT.cs" />
     <Compile Include="Controls\Extended\ComboBoxMulti.cs" />
     <Compile Include="Controls\Extended\SliderEXT.cs" />
@@ -139,6 +149,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Resources\DataPager.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\DatePicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -247,5 +261,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

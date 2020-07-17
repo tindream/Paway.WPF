@@ -11,7 +11,7 @@
         FontSize="15"
         Title="MainWindow" Height="850" Width="850" WindowStartupLocation="CenterScreen">
 
-    <WrapPanel>
+    <WrapPanel Margin="3">
         <StackPanel Width="320">
             <utils:ProgressBarEXT Grid.Row="1" Value="95" />
 
@@ -102,6 +102,7 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </utils:DataGridEXT>
+            <utils:DataPager Name="dataPager" Margin="0,0,0,3"/>
 
             <utils:ListViewEXT Name="listView1" Grid.Column="1" Grid.Row="10" Grid.RowSpan="9" 
                            ItemHeight="68" ItemWidth="100" Width="480" Height="68"

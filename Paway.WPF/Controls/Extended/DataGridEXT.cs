@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.SymbolStore;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -19,7 +20,6 @@ namespace Paway.WPF
     /// </summary>
     public partial class DataGridEXT : DataGrid
     {
-        #region 基本样式
         /// <summary>
         /// 构造
         /// </summary>
@@ -28,28 +28,67 @@ namespace Paway.WPF
             //AutoGenerateColumns = true;
             //this.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
             //this.ColumnHeaderHeight = 42;
-            this.Initialized += DataGridEXT_Initialized;
         }
-        private void DataGridEXT_Initialized(object sender, EventArgs e)
+
+        #region 自定义排序
+        /// <summary>
+        /// 自定义排序-字符串
+        /// </summary>
+        protected override void OnSorting(DataGridSortingEventArgs eventArgs)
         {
-            columnsReady.AddRange(this.Columns);
+            var column = eventArgs.Column;
+            //use a ListCollectionView to do the sort.
+            var source = CollectionViewSource.GetDefaultView(this.ItemsSource);
+            var property = this.type.Property(column.SortMemberPath);
+            if (source is ListCollectionView list && property.PropertyType.Name == nameof(String))
+            {
+                //i do some custom checking based on column to get the right comparer
+                //i have different comparers for different columns. I also handle the sort direction
+                //in my comparer
+
+                // prevent the built-in sort from sorting
+                //eventArgs.Handled = true;
+
+                var direction = (column.SortDirection != ListSortDirection.Ascending) ? ListSortDirection.Ascending : ListSortDirection.Descending;
+                //set the sort order on the column
+                column.SortDirection = direction;
+
+                //this is my custom sorter it just derives from IComparer and has a few properties
+                //you could just apply the comparer but i needed to do a few extra bits and pieces
+                var comparer = new StringComparer(column.SortMemberPath, column.SortDirection == ListSortDirection.Ascending);
+
+                //apply the sort
+                list.CustomSort = comparer;
+            }
+            else
+            {
+                base.OnSorting(eventArgs);
+            }
         }
         /// <summary>
-        /// 加载列
+        /// 字符串比较
         /// </summary>
-        public override void OnApplyTemplate()
+        internal class StringComparer : IComparer
         {
-            base.OnApplyTemplate();
-            if (base.ItemsSource != null)
+            private readonly string Name;
+            private readonly int Comparer = 1;
+            public StringComparer(string name, bool asc)
             {
-                this.type = base.ItemsSource.GetType().GenericType();
-                LoadColumns();
+                this.Name = name;
+                this.Comparer = asc ? 1 : -1;
+            }
+            /// <summary>
+            /// 重写字符串比较方法
+            /// </summary>
+            public int Compare(object x, object y)
+            {
+                return Comparer * (x.GetValue(Name) as string).Compare(y.GetValue(Name) as string);
             }
         }
 
         #endregion
 
-        #region 绑定数据
+        #region 绑定数据，自动列
         /// <summary>
         /// 当前绑定的数据类型
         /// </summary>
@@ -69,13 +108,40 @@ namespace Paway.WPF
             get { return base.ItemsSource; }
             set
             {
-                this.type = value.GetType().GenericType();
-                LoadColumns();
                 base.ItemsSource = value;
+                LoadColumns();
+            }
+        }
+        /// <summary>
+        /// 初始化时缓存自定义列样式
+        /// </summary>
+        protected override void OnInitialized(EventArgs e)
+        {
+            columnsReady.AddRange(this.Columns);
+            base.OnInitialized(e);
+        }
+        /// <summary>
+        /// 加载列
+        /// </summary>
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            if (base.ItemsSource != null)
+            {
+                this.type = base.ItemsSource.GetType().GenericType();
+                LoadColumns();
             }
         }
         private void LoadColumns()
         {
+            if (base.ItemsSource is PagedCollectionView paged)
+            {
+                this.type = paged.SourceCollection.GetType().GenericType();
+            }
+            else
+            {
+                this.type = base.ItemsSource.GetType().GenericType();
+            }
             var columns = new List<DataGridColumn>();
             var properties = this.type.PropertiesCache();
             foreach (var property in properties)
