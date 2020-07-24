@@ -20,9 +20,9 @@
             <utils:ComboBoxMulti x:Name="MultiCmb" Grid.Row="3" />
 
             <utils:TextBoxEXT Grid.Row="4" Name="tb">
-                <Binding Path="Value" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="Value">
                     <Binding.ValidationRules>
-                        <utils:ValidationRuleEXT Pattern="^[0-9]*[1-9][0-9]*$" ErrorMessage="输入异常: {0}"/>
+                        <utils:RegexValidationRule RegexType="UInt" MinLength="2" MaxLength="4"/>
                     </Binding.ValidationRules>
                 </Binding>
             </utils:TextBoxEXT>

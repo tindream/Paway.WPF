@@ -96,6 +96,7 @@ namespace Paway.WPF
         /// <summary>
         /// 图片
         /// </summary>
+        [NoShow]
         public virtual ImageEXT Image
         {
             get { return image; }
@@ -124,6 +125,7 @@ namespace Paway.WPF
         /// <summary>
         /// 自定义项背景颜色
         /// </summary>
+        [NoShow]
         public virtual BrushEXT ItemBackground
         {
             get { return itemBackground; }
