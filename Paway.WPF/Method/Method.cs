@@ -449,28 +449,14 @@ namespace Paway.WPF
         /// <summary>
         /// 自定义消息框-Toast
         /// </summary>
-        public static void Toast(string msg, bool iError = false)
-        {
-            Toast(null, msg, 0, iError);
-        }
-        /// <summary>
-        /// 自定义消息框-Toast
-        /// </summary>
-        public static void Toast(string msg, int time, bool iError = false)
-        {
-            Toast(null, msg, time, iError);
-        }
-        /// <summary>
-        /// 自定义消息框-Toast
-        /// </summary>
-        public static void Toast(DependencyObject parent, string msg, bool iError = false)
+        public static void Toast(DependencyObject parent, object msg, bool iError = false)
         {
             Toast(parent, msg, 0, iError);
         }
         /// <summary>
         /// 自定义消息框-Toast
         /// </summary>
-        public static void Toast(DependencyObject parent, string msg, int time, bool iError = false)
+        public static void Toast(DependencyObject parent, object msg, int time, bool iError = false)
         {
             parent.Dispatcher.Invoke(() =>
             {

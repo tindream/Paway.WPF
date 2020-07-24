@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -73,6 +74,8 @@ namespace Paway.Test
         private object pathCurrent;
         private void ButtonEXT_Click(object sender, RoutedEventArgs e)
         {
+            var r = Validation.GetHasError(tb);
+            Method.Toast(this, r);
             var xml = Method.GetTemplateXaml(dp);
             //Method.Toast(this, xml);
             b = !b;

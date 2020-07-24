@@ -2,6 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Paway.WPF">
 
+    <local:ValidationRuleEXT x:Key="validationRuleEXT"/>
+
     <Style TargetType="{x:Type local:TextBoxEXT}">
         <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <Setter Property="local:TextBoxMonitor.IsMonitoring" Value="True"/>
@@ -66,6 +68,25 @@
                             <Setter Property="BorderBrush" TargetName="border" Value="Transparent"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Validation.ErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <DockPanel LastChildFill="true">
+                        <Border Background="Red" DockPanel.Dock="Right"
+                                CornerRadius="10" Margin="3" Width="20" Height="20"
+                                ToolTip="{Binding ElementName=customAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                            <TextBlock Text="!" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                            <Border.Effect>
+                                <DropShadowEffect Color="#FF9300" BlurRadius="6" ShadowDepth="0" Opacity="0.6" />
+                            </Border.Effect>
+                        </Border>
+                        <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center">
+                            <Border BorderBrush="Red" CornerRadius="3" BorderThickness="1"/>
+                        </AdornedElementPlaceholder>
+                    </DockPanel>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

@@ -1,4 +1,5 @@
 ﻿
+using Paway.Helper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -41,14 +42,14 @@ namespace Paway.WPF
         /// <summary>
         /// 显示
         /// </summary>
-        public void Show(string msg, int time = 0, bool iError = false)
+        public void Show(object msg, int time = 0, bool iError = false)
         {
             if (iError)
             {
                 border1.Background = new SolidColorBrush(Color.FromArgb(255, 221, 51, 51));
             }
             var model = this.DataContext as WindowToastModel;
-            model.Message = msg;
+            model.Message = msg.ToStrs();
             if (time != 0) model.Time = KeyTime.FromTimeSpan(new TimeSpan(0, 0, time));
             this.Show();
         }

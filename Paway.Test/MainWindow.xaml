@@ -19,7 +19,13 @@
             </utils:ComboBoxEXT>
             <utils:ComboBoxMulti x:Name="MultiCmb" Grid.Row="3" />
 
-            <utils:TextBoxEXT Grid.Row="4" Name="tb" Text="{Binding Value}"></utils:TextBoxEXT>
+            <utils:TextBoxEXT Grid.Row="4" Name="tb">
+                <Binding Path="Value" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <utils:ValidationRuleEXT Pattern="^[0-9]*[1-9][0-9]*$" ErrorMessage="输入异常: {0}"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </utils:TextBoxEXT>
             <PasswordBox Grid.Row="5" ></PasswordBox>
             <Grid>
                 <Grid.ColumnDefinitions >

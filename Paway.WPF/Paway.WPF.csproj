@@ -66,6 +66,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Converter\ValidationRuleEXT.cs" />
     <Compile Include="Controls\Converter\IEquatable\ColorLinear.cs" />
     <Compile Include="Controls\Converter\IValueConverter\EmptyConverter.cs" />
     <Compile Include="Controls\Converter\IValueConverter\SmallConverter.cs" />
