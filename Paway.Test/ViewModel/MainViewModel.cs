@@ -25,6 +25,13 @@ namespace Paway.Test.ViewModel
         private readonly List<ListViewModel> list;
         public List<ListViewModel> GridList { get { return list; } }
 
+        private DateTime datePickerTime = DateTime.Now;
+        public DateTime DatePickerTime
+        {
+            get { return datePickerTime; }
+            set { datePickerTime = value; RaisePropertyChanged(); }
+        }
+
         private int _value = 11;
         public int Value
         {
@@ -42,6 +49,10 @@ namespace Paway.Test.ViewModel
             {
                 return selectionCommand ?? (selectionCommand = new RelayCommand<ListViewEXT>(listView1 =>
                 {
+                    if (listView1.SelectedItem is IListView info)
+                    {
+                        Method.Toast(listView1, Value);
+                    }
                     //if (listView1.SelectedItem is IListViewInfo info) Method.Show(listView1, info.Content);
                     //listView1.SelectedIndex = -1;
                 }));

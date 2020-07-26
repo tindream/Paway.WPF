@@ -30,31 +30,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <!--<Setter Property="ItemTemplate">
-            <Setter.Value>
-                <DataTemplate >
-                    <DockPanel>
-                        <Image Source="/Images/selectedBox.png" 
-                                   Width="{Binding ItemImageWidth, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
-                                   Height="{Binding ItemImageHeight, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
-                        <DockPanel>
-                            <TextBlock Text="{Binding Desc}" 
-                                   TextTrimming="WordEllipsis" Foreground="#222" 
-                                   FontSize="{Binding FontSize-2, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
-                                   HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
-                                   VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" DockPanel.Dock="Right" >
-                            </TextBlock>
-                            <TextBlock Text="{Binding Content}" 
-                                   TextTrimming="WordEllipsis" Foreground="#222" 
-                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
-                                   HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
-                                   VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" >
-                            </TextBlock>
-                        </DockPanel>
-                    </DockPanel>
-                </DataTemplate>
-            </Setter.Value>
-        </Setter>-->
         <Setter Property="ItemContainerStyle">
             <Setter.Value>
                 <Style TargetType="ListBoxItem">

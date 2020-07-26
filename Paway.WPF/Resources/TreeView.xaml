@@ -119,7 +119,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <HierarchicalDataTemplate x:Key="UserNode" ItemsSource="{Binding Children,Mode=TwoWay}">
+    <HierarchicalDataTemplate x:Key="UserNode" ItemsSource="{Binding Children}">
         <Grid Background="Transparent">
             <Grid.Resources>
                 <local:BoolToVisible x:Key="boolToVisible"/>
@@ -148,7 +148,7 @@
             </StackPanel>
         </Grid>
     </HierarchicalDataTemplate>
-    <HierarchicalDataTemplate x:Key="DefaultNode" ItemsSource="{Binding Children,Mode=TwoWay}">
+    <HierarchicalDataTemplate x:Key="DefaultNode" ItemsSource="{Binding Children}">
         <Grid Background="Transparent">
             <Grid.Resources>
                 <local:BoolToVisible x:Key="boolToVisible"/>

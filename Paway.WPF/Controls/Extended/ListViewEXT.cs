@@ -498,6 +498,7 @@ namespace Paway.WPF
                             }
                             else
                             {
+                                Selected(i => false);
                                 Selected(i => i == Index(item));
                             }
                         }
@@ -531,7 +532,11 @@ namespace Paway.WPF
         }
         private void SetSelected(ListBoxItem item, bool value)
         {
-            if (item.IsSelected != value) item.IsSelected = value;
+            if (item.IsSelected != value)
+            {
+                if (value) this.Focus();
+                item.IsSelected = value;
+            }
         }
         private int Index(ListBoxItem item)
         {

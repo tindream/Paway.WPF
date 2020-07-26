@@ -11,7 +11,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:RadioButtonEXT">
-                    <Grid Background="#00FFFFFF" Name="templateRoot" SnapsToDevicePixels="True">
+                    <Grid Background="#00FFFFFF" Name="templateRoot" SnapsToDevicePixels="True" Focusable="True">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />

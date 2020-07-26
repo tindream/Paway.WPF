@@ -33,7 +33,7 @@
                                 <ToggleButton Name="PART_DropDownToggle" 
                                                   Width="30" DockPanel.Dock="Right"
                                                   IsTabStop="False" 
-                                                  IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                  IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
                                                   Template="{StaticResource ComboBoxToggleButton}" />
                                 <local:ListBoxEXT x:Name="PART_ListBoxChk" 
                                          SelectionMode="Multiple" 
@@ -71,11 +71,11 @@
                                     </ListBox.ItemContainerStyle>
                                 </local:ListBoxEXT>
                                 <!--<TextBlock Name="tbOpen" Cursor="Hand" Background="{StaticResource backLine}"/>-->
-                                <local:TextBoxEXT Width="0" Margin="0"/>
+                                <local:TextBoxEXT Width="0" Margin="0" Focusable="False"/>
                                 <ToggleButton Name="PART_DropDownToggle2" 
                                                   DockPanel.Dock="Right"
                                                   IsTabStop="False" 
-                                                  IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                  IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
                                                   Template="{StaticResource ComboBoxToggleNone}" />
                             </DockPanel>
                         </Grid>
@@ -144,7 +144,7 @@
                                         <DataTemplate>
                                             <CheckBox VerticalContentAlignment="Center"
                                                       Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-                                                      IsChecked="{Binding  RelativeSource={RelativeSource AncestorType=ListBoxItem},Path=IsSelected,Mode=TwoWay}" 
+                                                      IsChecked="{Binding  RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=IsSelected}" 
                                                       Content="{Binding Path=Text}" />
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
