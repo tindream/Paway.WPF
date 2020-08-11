@@ -66,6 +66,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Converter\IValueConverter\IsNotNullConverter.cs" />
     <Compile Include="Controls\Converter\ValidationRule\RegexType.cs" />
     <Compile Include="Controls\Converter\ValidationRule\RegexValidationRule.cs" />
     <Compile Include="Controls\Converter\IEquatable\ColorLinear.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Controls\DataPager\WeakEventListener.cs" />
     <Compile Include="Controls\Extended\DatePickerEXT.cs" />
     <Compile Include="Controls\Extended\ComboBoxMulti.cs" />
+    <Compile Include="Controls\Extended\PasswordBoxEXT.cs" />
     <Compile Include="Controls\Extended\SliderEXT.cs" />
     <Compile Include="Controls\Extended\CalendarEXT.cs" />
     <Compile Include="Controls\Extended\ListBoxEXT.cs" />

@@ -2,6 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Paway.WPF">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
     <Style TargetType="{x:Type local:TextBoxEXT}">
         <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <Setter Property="local:TextBoxMonitor.IsMonitoring" Value="True"/>
@@ -24,11 +28,20 @@
                             CornerRadius="{TemplateBinding Radius}"
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image x:Name="icon" Visibility="Collapsed"
+                                   Source="{TemplateBinding Icon}"
+                                   Stretch="{TemplateBinding IconStretch}"/>
                             <local:ScrollViewerEXT x:Name="PART_ContentHost"
-                                          VerticalAlignment="Center"
-                                          VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                                   Grid.Column="1"
+                                                   VerticalAlignment="Center"
+                                                   VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}"
+                                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                             <StackPanel Name="stackPanel"
+                                        Grid.Column="1"
                                         Visibility="Collapsed"
                                         Orientation="Horizontal">
                                 <Label Opacity="0.4"
@@ -42,6 +55,10 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Icon, Converter={StaticResource isNotNull}, RelativeSource={RelativeSource Self}}" Value="True">
+                            <Setter TargetName="icon" Property="Visibility" Value="Visible" />
+                            <Setter Property="Padding" Value="0,4" />
+                        </DataTrigger>
                         <Trigger Property="Text" Value="{x:Null}">
                             <Setter Property="Visibility" TargetName="stackPanel" Value="Collapsed"/>
                         </Trigger>

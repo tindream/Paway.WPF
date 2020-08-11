@@ -32,6 +32,15 @@ namespace Paway.WPF
         public static readonly DependencyProperty BorderFocusedBrushProperty =
             DependencyProperty.RegisterAttached(nameof(BorderFocusedBrush), typeof(BrushEXT), typeof(TextBoxEXT),
                 new PropertyMetadata(new BrushEXT(Colors.LightGray, Color.FromArgb(170, 35, 175, 255), null, 85)));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty IconProperty =
+            DependencyProperty.RegisterAttached(nameof(Icon), typeof(ImageSource), typeof(TextBoxEXT));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty IconStretchProperty =
+            DependencyProperty.RegisterAttached(nameof(IconStretch), typeof(Stretch), typeof(TextBoxEXT),
+            new PropertyMetadata(Stretch.None));
 
         #endregion
 
@@ -75,6 +84,26 @@ namespace Paway.WPF
         {
             get { return (BrushEXT)GetValue(BorderFocusedBrushProperty); }
             set { SetValue(BorderFocusedBrushProperty, value); }
+        }
+        /// <summary>
+        /// 图片
+        /// </summary>
+        [Category("扩展")]
+        [Description("图片")]
+        public ImageSource Icon
+        {
+            get { return (ImageSource)GetValue(IconProperty); }
+            set { SetValue(IconProperty, value); }
+        }
+        /// <summary>
+        /// 图片的内容如何拉伸才适合其磁贴
+        /// </summary>
+        [Category("扩展")]
+        [Description("图片的内容如何拉伸才适合其磁贴")]
+        public Stretch IconStretch
+        {
+            get { return (Stretch)GetValue(IconStretchProperty); }
+            set { SetValue(IconStretchProperty, value); }
         }
 
         #endregion

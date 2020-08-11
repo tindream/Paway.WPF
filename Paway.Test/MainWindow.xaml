@@ -19,14 +19,14 @@
             </utils:ComboBoxEXT>
             <utils:ComboBoxMulti x:Name="MultiCmb" Grid.Row="3" />
 
-            <utils:TextBoxEXT Grid.Row="4" Name="tb">
+            <utils:TextBoxEXT Grid.Row="4" Name="tb" Icon="pack://application:,,,/Paway.Test;component/Images/close.png">
                 <Binding Path="Value">
                     <Binding.ValidationRules>
                         <utils:RegexValidationRule RegexType="UInt" MinLength="2" MaxLength="4"/>
                     </Binding.ValidationRules>
                 </Binding>
             </utils:TextBoxEXT>
-            <PasswordBox Grid.Row="5" ></PasswordBox>
+            <PasswordBox Grid.Row="5" utils:PasswordBoxEXT.Icon="pack://application:,,,/Paway.Test;component/Images/close.png"></PasswordBox>
             <Grid>
                 <Grid.ColumnDefinitions >
                     <ColumnDefinition Width="*"/>
