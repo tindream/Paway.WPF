@@ -15,9 +15,10 @@
         <StackPanel Width="320">
             <utils:ProgressBarEXT Grid.Row="1" Value="95" />
 
-            <utils:ComboBoxEXT Grid.Row="2" Name="cbxBox" ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text">
-            </utils:ComboBoxEXT>
-            <utils:ComboBoxMulti x:Name="MultiCmb" Grid.Row="3" />
+            <utils:ComboBoxEXT Grid.Row="2" Name="cbxBox" ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text"
+                               SelectedValue="{Binding Id}"/>
+            <utils:ComboBoxMulti x:Name="MultiCmb" Grid.Row="3" ItemsSource="{Binding MultiList}"/>
+            <utils:ComboBoxDate SelectedValue="{Binding DatePickerTime}"/>
 
             <utils:TextBoxEXT Grid.Row="4" Name="tb" Icon="pack://application:,,,/Paway.Test;component/Images/close.png">
                 <Binding Path="Value">
@@ -58,7 +59,6 @@
             <utils:SliderEXT x:Name="slider" Grid.Row="9" Grid.ColumnSpan="2"  Maximum="100" Value="80"/>
             <utils:DatePickerEXT Name="dp" Text="{Binding DatePickerTime, Mode=TwoWay}"/>
 
-
             <WrapPanel Grid.Row="10" >
                 <Path Style="{StaticResource PathRound}" />
                 <utils:TransitionControl Name="transition" >
@@ -82,8 +82,9 @@
         </StackPanel>
         <StackPanel>
             <utils:DataGridEXT Name="datagrid1" Grid.Column="1" Grid.RowSpan="9" 
-                           ItemsSource="{Binding GridList}" Width="480"
-                           Height="250" Grid.Row="1" VerticalAlignment="Top">
+                               ItemsSource="{Binding GridList}" Width="480"
+                               SelectedItem="{Binding SelectedItem}"
+                               Height="250" Grid.Row="1" VerticalAlignment="Top">
                 <DataGrid.Columns>
                     <DataGridTextColumn  MinWidth="130" Binding="{Binding Money}" ElementStyle="{StaticResource TextRight}"/>
                     <DataGridTemplateColumn Header="Desc">

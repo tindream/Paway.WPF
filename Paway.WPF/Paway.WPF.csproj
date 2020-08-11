@@ -89,6 +89,7 @@
     <Compile Include="Controls\DataPager\PagerDisplayMode.cs" />
     <Compile Include="Controls\DataPager\TypeHelper.cs" />
     <Compile Include="Controls\DataPager\WeakEventListener.cs" />
+    <Compile Include="Controls\Extended\ComboBoxDate.cs" />
     <Compile Include="Controls\Extended\DatePickerEXT.cs" />
     <Compile Include="Controls\Extended\ComboBoxMulti.cs" />
     <Compile Include="Controls\Extended\PasswordBoxEXT.cs" />
@@ -153,6 +154,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Resources\ComboBoxDate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\DataPager.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

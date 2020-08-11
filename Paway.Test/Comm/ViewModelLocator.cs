@@ -24,6 +24,7 @@ namespace Paway.Test.ViewModel
     /// </summary>
     public class ViewModelLocator
     {
+        public static ViewModelLocator Default { get; } = new ViewModelLocator();
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>

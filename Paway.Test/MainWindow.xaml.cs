@@ -1,4 +1,5 @@
 ﻿using Paway.Helper;
+using Paway.Test.ViewModel;
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
@@ -25,37 +26,17 @@ namespace Paway.Test
     /// </summary>
     public partial class MainWindow : WindowEXT
     {
-        private List<ListViewModel> list;
         public MainWindow()
         {
             InitializeComponent();
-            list = new List<ListViewModel>();
-            list.Add(new ListViewModel("Hello"));
-            list.Add(new ListViewModel("你好123")
-            {
-                Image = new ImageEXT(null, @"pack://application:,,,/Paway.Test;component/Images/close_while.png"),
-                ItemBackground = new BrushEXT(Colors.Red)
-            });
-            for (int i = 0; i < 20; i++) list.Add(new ListViewModel("A" + i, "D" + i)
-            {
-                Image = new ImageEXT(@"pack://application:,,,/Paway.Test;component/Images/close.png")
-            });
+
+            var list = ViewModelLocator.Default.Main.GridList;
             var pagedCollectionView = new PagedCollectionView(list) { PageSize = 10 };
             datagrid1.ItemsSource = pagedCollectionView;
             dataPager.Source = pagedCollectionView;
             dataPager.IsTotalItemCountFixed = true;
             listView2.Items.Clear();
             listView2.ItemsSource = list;
-
-            var multiList = new ObservableCollection<ComboBoxMultiModel>();
-            multiList.Add(new ComboBoxMultiModel("张三"));
-            multiList.Add(new ComboBoxMultiModel("李四"));
-            multiList.Add(new ComboBoxMultiModel("王五"));
-            multiList.Add(new ComboBoxMultiModel("马六"));
-            multiList.Add(new ComboBoxMultiModel("赵七"));
-            multiList.Add(new ComboBoxMultiModel("王八"));
-            multiList.Add(new ComboBoxMultiModel("陈九"));
-            MultiCmb.ItemsSource = multiList;
 
             var treeList = new ObservableCollection<ITreeView>();
             var treeInfo = new TreeViewModel("单位名称(3/7)", true);

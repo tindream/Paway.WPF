@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Command;
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -25,6 +26,36 @@ namespace Paway.Test.ViewModel
         #region 属性
         private readonly List<ListViewModel> list;
         public List<ListViewModel> GridList { get { return list; } }
+        private ListViewModel selectedItem;
+        public ListViewModel SelectedItem
+        {
+            get { return selectedItem; }
+            set
+            {
+                if (selectedItem != value)
+                {
+                    selectedItem = value;
+                    if (value != null) Id = value.Id;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+        private int id;
+        public int Id
+        {
+            get { return id; }
+            set
+            {
+                if (id != value)
+                {
+                    id = value;
+                    SelectedItem = GridList.Find(c => c.Id == value);
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public ObservableCollection<IComboBoxMulti> MultiList { get; } = new ObservableCollection<IComboBoxMulti>();
 
         private DateTime datePickerTime = DateTime.Now;
         public DateTime DatePickerTime
@@ -90,14 +121,13 @@ namespace Paway.Test.ViewModel
                 Image = new ImageEXT(@"pack://application:,,,/Paway.Test;component/Images/close.png")
             });
 
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
+            MultiList.Add(new ComboBoxMultiModel("张三"));
+            MultiList.Add(new ComboBoxMultiModel("李四"));
+            MultiList.Add(new ComboBoxMultiModel("王五"));
+            MultiList.Add(new ComboBoxMultiModel("马六"));
+            MultiList.Add(new ComboBoxMultiModel("赵七"));
+            MultiList.Add(new ComboBoxMultiModel("王八"));
+            MultiList.Add(new ComboBoxMultiModel("陈九"));
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Paway.WPF
                 var param = parameter == null ? "G" : parameter.ToString();
                 return time.ToString(param);
             }
-            throw new NotImplementedException();
+            return null;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

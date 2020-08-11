@@ -136,7 +136,7 @@ namespace Paway.WPF
         /// </summary>
         public ListViewModel()
         {
-            this.Id = this.GetHashCode();
+            if (this.Id == 0) this.Id = this.GetHashCode();
         }
         /// <summary>
         /// </summary>
