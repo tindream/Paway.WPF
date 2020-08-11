@@ -15,6 +15,42 @@ namespace Paway.WPF
     /// </summary>
     public partial class DatePickerEXT : DatePicker
     {
+        #region 依赖属性
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty RadiusProperty =
+            DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(DatePickerEXT), new PropertyMetadata(new CornerRadius(3)));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty IsReadOnlyProperty =
+            DependencyProperty.RegisterAttached(nameof(IsReadOnly), typeof(bool), typeof(DatePickerEXT), new PropertyMetadata(true));
+
+        #endregion
+
+        #region 扩展
+        /// <summary>
+        /// 自定义边框圆角
+        /// </summary>
+        [Category("扩展")]
+        [Description("自定义边框圆角")]
+        public CornerRadius Radius
+        {
+            get { return (CornerRadius)GetValue(RadiusProperty); }
+            set { SetValue(RadiusProperty, value); }
+        }
+        /// <summary>
+        /// 只读属性
+        /// </summary>
+        [Category("扩展")]
+        [Description("只读属性")]
+        public bool IsReadOnly
+        {
+            get { return (bool)GetValue(IsReadOnlyProperty); }
+            set { SetValue(IsReadOnlyProperty, value); }
+        }
+
+        #endregion
+
         /// <summary>
         /// </summary>
         public DatePickerEXT() { }

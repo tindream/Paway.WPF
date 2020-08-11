@@ -23,6 +23,7 @@
         <Setter Property="FirstDayOfWeek" Value="Sunday"/>
         <Setter Property="CalendarStyle" Value="{StaticResource CalendarStyle}"/>
         <Setter Property="Background" Value="White"/>
+        <Setter Property="Margin" Value="2"/>
         <Setter Property="BorderBrush">
             <Setter.Value>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -35,9 +36,9 @@
         </Setter>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="DatePicker" >
+                <ControlTemplate TargetType="local:DatePickerEXT" >
                     <Border BorderThickness="{TemplateBinding Border.BorderThickness}"
-                            CornerRadius="1"
+                            CornerRadius="{TemplateBinding Radius}"
                             Padding="{TemplateBinding Control.Padding}"
                             BorderBrush="{TemplateBinding Border.BorderBrush}"
                             Background="{TemplateBinding Panel.Background}">
@@ -150,7 +151,7 @@
                                                Grid.Row="0"
                                                FontSize="15"
                                                Margin="1"
-                                               xml:space="preserve"/>
+                                               IsReadOnly="{TemplateBinding IsReadOnly}"/>
                             <Border Name="tbBordor" BorderBrush="Transparent" BorderThickness="1" Margin="1"/>
                             <Grid Name="PART_DisabledVisual"
                                   Opacity="0"

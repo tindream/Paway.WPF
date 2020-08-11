@@ -12,7 +12,7 @@ using System.Windows.Input;
 namespace Paway.WPF
 {
     /// <summary>
-    /// ComboBox多选
+    /// ComboBox扩展多选
     /// </summary>
     public class ComboBoxMulti : ComboBoxEXT
     {
