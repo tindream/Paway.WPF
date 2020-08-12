@@ -8,7 +8,6 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
         DataContext="{Binding Main ,Source={StaticResource Locator}}"
         mc:Ignorable="d"
-        FontSize="15"
         Title="MainWindow" Height="850" Width="850" WindowStartupLocation="CenterScreen">
 
     <WrapPanel Margin="3">
@@ -56,7 +55,14 @@
                 <utils:RadioButtonEXT Content="Watch" IsChecked="{x:Null}" IsEnabled="False"/>
                 <RadioButton Content="Watch" />
             </WrapPanel>
-            <utils:SliderEXT x:Name="slider" Grid.Row="9" Grid.ColumnSpan="2"  Maximum="100" Value="80"/>
+            <utils:SliderEXT x:Name="slider" Grid.Row="9" Grid.ColumnSpan="2"  Maximum="100" Value="15" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="ValueChanged">
+                        <i:InvokeCommandAction Command="{Binding ValueChanged}"
+                                           CommandParameter="{Binding ElementName=slider}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </utils:SliderEXT>
             <utils:DatePickerEXT Name="dp" Text="{Binding DatePickerTime, Mode=TwoWay}"/>
 
             <WrapPanel Grid.Row="10" >
@@ -76,13 +82,13 @@
                 <TabItem Cursor="Hand" Header="音乐电台" />
                 <TabItem Cursor="Hand" Header="Mv电台"/>
             </TabControl>
-            <utils:TreeViewEXT x:Name="TreeViewOrg" Grid.Row="12"  Height="180" CheckBox="Visible"/>
+            <utils:TreeViewEXT x:Name="TreeViewOrg" Grid.Row="12"  Height="180" CheckBox="Visible" ItemTemplate="{StaticResource UserNode}" ItemsSource="{Binding TreeList}"/>
 
 
         </StackPanel>
         <StackPanel>
             <utils:DataGridEXT Name="datagrid1" Grid.Column="1" Grid.RowSpan="9" 
-                               ItemsSource="{Binding GridList}" Width="480"
+                               ItemsSource="{Binding CollectionView}" Width="480"
                                SelectedItem="{Binding SelectedItem}"
                                Height="250" Grid.Row="1" VerticalAlignment="Top">
                 <DataGrid.Columns>
@@ -105,7 +111,7 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </utils:DataGridEXT>
-            <utils:DataPager Name="dataPager" Margin="0,0,0,3"/>
+            <utils:DataPager Name="dataPager" Margin="0,0,0,3" Source="{Binding CollectionView}" IsTotalItemCountFixed="True"/>
 
             <utils:ListViewEXT Name="listView1" Grid.Column="1" Grid.Row="10" Grid.RowSpan="9" 
                            ItemHeight="68" ItemWidth="100" Width="480" Height="68"
@@ -130,22 +136,19 @@
                 <utils:ListBoxItemEXT Text="C"/>
             </utils:ListViewEXT>
             <utils:ListViewEXT Name="listView2" Grid.Column="1" INormal="True"
-                           Width="480" Height="84"
-                           ItemBorder="0" ItemPadding="10,5,10,5" ItemWidth="120" 
-                           ItemImageWidth="0" 
-                           SelectionMode="Multiple"
-                           ItemDescForeground="Green" ItemDescFontSize="14"
-                           HorizontalContentAlignment="Left" VerticalAlignment="Top" >
+                               Width="480" Height="84"
+                               ItemsSource="{Binding GridList}"
+                               ItemBorder="0" ItemPadding="10,5,10,5" ItemWidth="120" 
+                               ItemImageWidth="0" 
+                               SelectionMode="Multiple"
+                               ItemDescForeground="Green"
+                               HorizontalContentAlignment="Left" VerticalAlignment="Top" >
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding SelectionCommand}"
                                            CommandParameter="{Binding ElementName=listView2}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-                <utils:ListBoxItemEXT Text="Hello" IsSelected="True" Desc="●" />
-                <utils:ListBoxItemEXT Text="World" Desc="●" ItemBackground="Red"/>
-                <utils:ListBoxItemEXT Text="A"/>
-                <utils:ListBoxItemEXT Text="C"/>
             </utils:ListViewEXT>
 
         </StackPanel>
@@ -153,25 +156,25 @@
     <utils:WindowEXT.FunctionBar>
         <utils:WindowFunctionBar>
             <Menu>
-                <MenuItem Header="发送反馈2" Icon="Q2" IsCheckable="True"/>
+                <MenuItem Header="发送反馈2" Icon="Q" IsCheckable="True"/>
                 <MenuItem Header="发送反馈3" >
                     <MenuItem Header="报告问题"
-                              IsCheckable="True"  Icon="Q3"/>
+                              IsCheckable="True"  Icon="Q"/>
                     <MenuItem Header="提供反馈"
                               IsCheckable="True" />
                     <Separator />
                     <MenuItem Header="设置..." />
                 </MenuItem>
-                <MenuItem Header="发送反馈" Icon="Q1">
+                <MenuItem Header="发送反馈" Icon="A">
                     <MenuItem Header="报告问题"
-                              IsCheckable="True"  Icon="A1"/>
+                              IsCheckable="True"  Icon="A"/>
                     <MenuItem Header="提供反馈"
                               IsCheckable="True" />
                     <Separator />
                     <MenuItem Header="设置..." />
-                    <MenuItem Header="发送反馈C" Icon="A2">
+                    <MenuItem Header="发送反馈C" Icon="A">
                         <MenuItem Header="报告问题"
-                              IsCheckable="True"  Icon="B1"/>
+                              IsCheckable="True"  Icon="B"/>
                         <MenuItem Header="提供反馈"
                               IsCheckable="True" />
                         <Separator />

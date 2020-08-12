@@ -42,9 +42,13 @@ namespace Paway.WPF
 
         #region 主题
         /// <summary>
-        /// 全局字体大小
+        /// 主题字体大小
         /// </summary>
         public static double FontSize = 15d;
+        /// <summary>
+        /// 主题颜色
+        /// </summary>
+        public static Color Color = Color.FromArgb(255, 35, 175, 255);
 
         #endregion
     }

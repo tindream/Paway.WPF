@@ -794,17 +794,16 @@ namespace System.Windows.Data
             {
                 return NewItemPlaceholderPosition.None;
             }
-
             set
             {
                 if (value != NewItemPlaceholderPosition.None)
                 {
-                    throw new ArgumentException(
-                        string.Format(CultureInfo.InvariantCulture,
-                            InvalidEnumArgument,
-                            "value",
-                            value.ToString(),
-                            typeof(NewItemPlaceholderPosition).Name));
+                    //throw new ArgumentException(
+                    //    string.Format(CultureInfo.InvariantCulture,
+                    //        InvalidEnumArgument,
+                    //        "value",
+                    //        value.ToString(),
+                    //        typeof(NewItemPlaceholderPosition).Name));
                 }
             }
         }

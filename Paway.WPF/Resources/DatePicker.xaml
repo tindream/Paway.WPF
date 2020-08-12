@@ -149,7 +149,6 @@
                                                Focusable="{TemplateBinding UIElement.Focusable}"
                                                Grid.Column="0"
                                                Grid.Row="0"
-                                               FontSize="15"
                                                Margin="1"
                                                IsReadOnly="{TemplateBinding IsReadOnly}"/>
                             <Border Name="tbBordor" BorderBrush="Transparent" BorderThickness="1" Margin="1"/>

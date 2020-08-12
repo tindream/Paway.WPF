@@ -43,11 +43,11 @@
     </DataTemplate>
 
     <Style x:Key="WindowTitleBarButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
         <Setter Property="Focusable" Value="False" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Background" Value="White" />
         <Setter Property="Foreground" Value="#222" />
-        <Setter Property="FontSize" Value="15" />
         <Setter Property="Width" Value="45" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -168,7 +168,6 @@
                                                     Foreground="#222"
                                                     HorizontalAlignment="Center"
                                                     VerticalAlignment="Center"
-                                                    FontSize="15"
                                                     Content="{TemplateBinding Title}" />
                                     <ContentPresenter Focusable="False"
                                                       Margin="5,0,0,0"

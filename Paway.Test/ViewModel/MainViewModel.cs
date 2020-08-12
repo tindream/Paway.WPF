@@ -1,10 +1,13 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Paway.Helper;
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace Paway.Test.ViewModel
@@ -26,6 +29,9 @@ namespace Paway.Test.ViewModel
         #region 属性
         private readonly List<ListViewModel> list;
         public List<ListViewModel> GridList { get { return list; } }
+        public PagedCollectionView CollectionView { get; private set; }
+        public ObservableCollection<ITreeView> TreeList { get; private set; } = new ObservableCollection<ITreeView>();
+
         private ListViewModel selectedItem;
         public ListViewModel SelectedItem
         {
@@ -74,6 +80,27 @@ namespace Paway.Test.ViewModel
         #endregion
 
         #region 命令
+        private ICommand valueChanged;
+        public ICommand ValueChanged
+        {
+            get
+            {
+                return valueChanged ?? (valueChanged = new RelayCommand<SliderEXT>(slider =>
+                {
+                    Config.FontSize = slider.Value;
+
+                    var list = new List<ResourceDictionary>();
+                    foreach (var item in Application.Current.Resources.MergedDictionaries) list.Add(item);
+                    Application.Current.Resources.MergedDictionaries.Clear();
+
+                    ResourceDictionary resource = (ResourceDictionary)Application.LoadComponent(new Uri("/Paway.WPF;component/Themes/Paway.xaml", UriKind.Relative));
+                    Application.Current.Resources.MergedDictionaries.Add(resource);
+
+                    //foreach (var item in list) Application.Current.Resources.MergedDictionaries.Add(item);
+                }));
+            }
+        }
+
         private ICommand selectionCommand;
         public ICommand SelectionCommand
         {
@@ -96,7 +123,7 @@ namespace Paway.Test.ViewModel
         {
             get
             {
-                return teach ?? (teach = new RelayCommand<Button>((btn) =>
+                return teach ?? (teach = new RelayCommand<Button>(btn =>
                 {
                     Method.Toast(btn, "Hello", 5);
                 }));
@@ -121,6 +148,8 @@ namespace Paway.Test.ViewModel
                 Image = new ImageEXT(@"pack://application:,,,/Paway.Test;component/Images/close.png")
             });
 
+            this.CollectionView = new PagedCollectionView(list) { PageSize = 10 };
+
             MultiList.Add(new ComboBoxMultiModel("张三"));
             MultiList.Add(new ComboBoxMultiModel("李四"));
             MultiList.Add(new ComboBoxMultiModel("王五"));
@@ -128,6 +157,15 @@ namespace Paway.Test.ViewModel
             MultiList.Add(new ComboBoxMultiModel("赵七"));
             MultiList.Add(new ComboBoxMultiModel("王八"));
             MultiList.Add(new ComboBoxMultiModel("陈九"));
+
+            var treeInfo = new TreeViewModel("单位名称(3/7)", true);
+            this.TreeList.Add(treeInfo);
+            var treeInfo2 = new TreeViewModel("未分组联系人(2/4)", true);
+            treeInfo.Add(treeInfo2);
+            treeInfo2.Add("刘棒", "我要走向天空！", "3人");
+            treeInfo2.Add("刘棒1", "我要走向天空！", "3人");
+            treeInfo2.Add("刘棒2", "我要走向天空！", "3人");
+            treeInfo2.Add("刘棒3", "我要走向天空！", "3人");
         }
     }
 }

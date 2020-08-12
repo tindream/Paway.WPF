@@ -250,7 +250,9 @@
                     <ControlTemplate.Resources>
                         <!--星期样式-->
                         <DataTemplate x:Key="{ComponentResourceKey ResourceId=DayTitleTemplate, TypeInTargetAssembly={x:Type CalendarItem}}">
-                            <TextBlock x:Name="TxtDayTitle" Foreground="#FF333333" FontWeight="Bold" FontSize="11" FontFamily="Verdana" 
+                            <TextBlock x:Name="TxtDayTitle" Foreground="#FF333333" FontWeight="Bold" 
+                                       FontSize="11" 
+                                       FontFamily="Verdana" 
                                        HorizontalAlignment="Center" Margin="0,6" Text="{Binding}" VerticalAlignment="Center"/>
                         </DataTemplate>
                     </ControlTemplate.Resources>
@@ -390,7 +392,7 @@
                                             </ControlTemplate>
                                         </Button.Template>
                                     </Button>
-                                    <Button x:Name="PART_HeaderButton" Grid.Column="1" FontWeight="Bold" Focusable="False" FontSize="12" 
+                                    <Button x:Name="PART_HeaderButton" Grid.Column="1" FontWeight="Bold" Focusable="False"
                                             HorizontalAlignment="Center" Grid.Row="0" VerticalAlignment="Center">
                                         <Button.Template>
                                             <ControlTemplate TargetType="{x:Type Button}">

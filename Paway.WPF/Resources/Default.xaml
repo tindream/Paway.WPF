@@ -8,6 +8,7 @@
     <local:VisibleReverse x:Key="visibleReverse"/>
     <local:DateConverter x:Key="dateConverter"/>
     <local:NullToVisible x:Key="nullToVisible"/>
+    <local:SmallConverter x:Key="smallConverter"/>
 
     <Style TargetType="{x:Type CheckBox}">
         <Setter Property="VerticalContentAlignment" Value="Center" />

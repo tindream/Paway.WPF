@@ -29,25 +29,6 @@ namespace Paway.Test
         public MainWindow()
         {
             InitializeComponent();
-
-            var list = ViewModelLocator.Default.Main.GridList;
-            var pagedCollectionView = new PagedCollectionView(list) { PageSize = 10 };
-            datagrid1.ItemsSource = pagedCollectionView;
-            dataPager.Source = pagedCollectionView;
-            dataPager.IsTotalItemCountFixed = true;
-            listView2.Items.Clear();
-            listView2.ItemsSource = list;
-
-            var treeList = new ObservableCollection<ITreeView>();
-            var treeInfo = new TreeViewModel("单位名称(3/7)", true);
-            treeList.Add(treeInfo);
-            var treeInfo2 = new TreeViewModel("未分组联系人(2/4)", true);
-            treeInfo.Add(treeInfo2);
-            treeInfo2.Add("刘棒", "我要走向天空！", "3人");
-            treeInfo2.Add("刘棒1", "我要走向天空！", "3人");
-            treeInfo2.Add("刘棒2", "我要走向天空！", "3人");
-            treeInfo2.Add("刘棒3", "我要走向天空！", "3人");
-            TreeViewOrg.ItemsSource = treeList;
         }
 
         private bool b;

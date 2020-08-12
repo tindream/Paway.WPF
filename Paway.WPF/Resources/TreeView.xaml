@@ -2,6 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Paway.WPF">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
     <Style x:Key="DefaultTreeViewItem" TargetType="{x:Type TreeViewItem}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -132,9 +136,13 @@
                         <TextBlock Text="{Binding ShortName}" FontSize="23" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Border>
                     <DockPanel Margin="10 0 0 0">
-                        <TextBlock Text="{Binding Desc}" FontSize="13" Foreground="#808080" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="0,0,3,0"/>
+                        <TextBlock Text="{Binding Desc}" 
+                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}, Converter={StaticResource smallConverter}}" 
+                                   Foreground="#808080" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="0,0,3,0"/>
                         <DockPanel>
-                            <TextBlock Text="{Binding Subtitle}" FontSize="13" Foreground="#808080" DockPanel.Dock="Bottom"/>
+                            <TextBlock Text="{Binding Subtitle}" 
+                                       FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}, Converter={StaticResource smallConverter}}" 
+                                       Foreground="#808080" DockPanel.Dock="Bottom"/>
                             <TextBlock Text="{Binding Text}" VerticalAlignment="Center"/>
                         </DockPanel>
                     </DockPanel>

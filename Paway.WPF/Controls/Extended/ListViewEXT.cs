@@ -116,7 +116,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemDescFontSizeProperty =
-        DependencyProperty.RegisterAttached(nameof(ItemDescFontSize), typeof(DoubleEXT), typeof(ListViewEXT), new PropertyMetadata(new DoubleEXT(Config.FontSize - 2)));
+        DependencyProperty.RegisterAttached(nameof(ItemDescFontSize), typeof(DoubleEXT), typeof(ListViewEXT), new PropertyMetadata(new DoubleEXT(Config.FontSize * 0.85)));
 
         #endregion
 

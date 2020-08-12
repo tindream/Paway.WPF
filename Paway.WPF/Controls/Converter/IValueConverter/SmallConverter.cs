@@ -19,8 +19,8 @@ namespace Paway.WPF
         {
             if (value is double size)
             {
-                var param = parameter == null ? 2 : parameter.ToDouble();
-                return size - param;
+                var param = parameter == null ? 0.85 : parameter.ToDouble();
+                return size * param;
             }
             throw new NotImplementedException();
         }
