@@ -70,8 +70,8 @@
     <Compile Include="Controls\Converter\ValidationRule\RegexType.cs" />
     <Compile Include="Controls\Converter\ValidationRule\RegexValidationRule.cs" />
     <Compile Include="Controls\Converter\IEquatable\ColorLinear.cs" />
-    <Compile Include="Controls\Converter\IValueConverter\EmptyConverter.cs" />
-    <Compile Include="Controls\Converter\IValueConverter\SmallConverter.cs" />
+    <Compile Include="Controls\Converter\IValueConverter\EmptyColorConverter.cs" />
+    <Compile Include="Controls\Converter\IValueConverter\ChangeConverter.cs" />
     <Compile Include="Controls\Converter\IValueConverter\BoolReverse.cs" />
     <Compile Include="Controls\Converter\IValueConverter\NullToVisible.cs" />
     <Compile Include="Controls\Converter\IValueConverter\DateConverter.cs" />
@@ -116,7 +116,6 @@
     <Compile Include="Controls\Window\FunctionBar\WindowFunctionBar.cs" />
     <Compile Include="Controls\Window\FunctionBar\FunctionBarMonitor.cs" />
     <Compile Include="Method\DpiHelper.cs" />
-    <Compile Include="Controls\Converter\IValueConverter\EmptyObjectConverter.cs" />
     <Compile Include="Method\NativeMethods.cs" />
     <Compile Include="Controls\Window\WindowEXT.cs" />
     <Compile Include="Controls\Window\WindowParameters.cs" />

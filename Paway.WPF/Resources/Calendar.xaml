@@ -5,12 +5,19 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    
+
     <local:DateConvertToColor x:Key="dateConvertToColor"/>
-    
+
     <!--选择年月按钮-->
     <Style x:Key="CalendarButtonStyle" TargetType="{x:Type CalendarButton}">
-        <Setter Property="Background" Value="{Binding ItemBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:CalendarEXT}}}"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <MultiBinding Converter="{StaticResource nullJudgeConverter}">
+                    <Binding Path="ItemBrush.Mouse" RelativeSource="{RelativeSource AncestorType=local:CalendarEXT}"/>
+                    <Binding Path="ItemBrush.Mouse" RelativeSource="{RelativeSource AncestorType=local:DatePickerEXT}"/>
+                </MultiBinding>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Width" Value="40"/>
         <Setter Property="Height" Value="40"/>
         <Setter Property="FontSize" Value="12"/>

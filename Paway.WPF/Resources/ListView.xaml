@@ -2,8 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Paway.WPF">
 
-    <local:NullJudgeConverter x:Key="nullJudgeConverter" />
-    <local:EmptyConverter x:Key="emptyConverter" />
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
+    <local:EmptyColorConverter x:Key="emptyColorConverter" />
 
     <Style TargetType="{x:Type local:ListViewEXT}">
         <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
@@ -100,7 +103,7 @@
                                                 Value="{Binding Path=ItemBorderBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="border" Property="Background">
                                             <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource emptyConverter}">
+                                                <MultiBinding Converter="{StaticResource emptyColorConverter}">
                                                     <Binding Path="ItemBackground.Mouse" />
                                                     <Binding Path="ItemBackground.Mouse" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
@@ -141,7 +144,7 @@
                                                 Value="{Binding Path=ItemBorderBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="border" Property="Background">
                                             <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource emptyConverter}">
+                                                <MultiBinding Converter="{StaticResource emptyColorConverter}">
                                                     <Binding Path="ItemBackground.Pressed" />
                                                     <Binding Path="ItemBackground.Pressed" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
@@ -177,7 +180,7 @@
                                                 Value="{Binding Path=ItemBorderBrush.PressedMouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="border" Property="Background">
                                             <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource emptyConverter}">
+                                                <MultiBinding Converter="{StaticResource emptyColorConverter}">
                                                     <Binding Path="ItemBackground.PressedMouse" />
                                                     <Binding Path="ItemBackground.PressedMouse" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
@@ -191,7 +194,7 @@
                                                 Value="{Binding Path=ItemTextForeground.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="border" Property="Background">
                                             <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource emptyConverter}">
+                                                <MultiBinding Converter="{StaticResource emptyColorConverter}">
                                                     <Binding Path="ItemBackground.Pressed" />
                                                     <Binding Path="ItemBackground.Pressed" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
@@ -209,7 +212,7 @@
                                                 Value="{Binding Path=ItemBorderBrush.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="border" Property="Background">
                                             <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource emptyConverter}">
+                                                <MultiBinding Converter="{StaticResource emptyColorConverter}">
                                                     <Binding Path="ItemBackground.Normal" />
                                                     <Binding Path="ItemBackground.Normal" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>

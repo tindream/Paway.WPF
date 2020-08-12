@@ -11,9 +11,9 @@ using System.Windows.Data;
 namespace Paway.WPF
 {
     /// <summary>
-    /// 值减少变大转换
+    /// 值大小转换
     /// </summary>
-    internal class SmallConverter : IValueConverter
+    internal class ChangeConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

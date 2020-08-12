@@ -15,7 +15,7 @@ namespace Paway.WPF
     /// <summary>
     /// 多颜色值判断选择(跳过空、透明)
     /// </summary>
-    public class EmptyConverter : IMultiValueConverter
+    public class EmptyColorConverter : IMultiValueConverter
     {
         /// <summary>
         /// 多颜色值判断选择(跳过空、透明)

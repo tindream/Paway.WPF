@@ -2,13 +2,14 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Paway.WPF">
 
-    <local:IsNotNullConverter x:Key="isNotNull" />
     <local:BoolReverse x:Key="boolReverse"/>
     <local:BoolToVisible x:Key="boolToVisible"/>
-    <local:VisibleReverse x:Key="visibleReverse"/>
+    <local:ChangeConverter x:Key="changeConverter"/>
     <local:DateConverter x:Key="dateConverter"/>
+    <local:IsNotNullConverter x:Key="isNotNull" />
     <local:NullToVisible x:Key="nullToVisible"/>
-    <local:SmallConverter x:Key="smallConverter"/>
+    <local:NullJudgeConverter x:Key="nullJudgeConverter" />
+    <local:VisibleReverse x:Key="visibleReverse"/>
 
     <Style TargetType="{x:Type CheckBox}">
         <Setter Property="VerticalContentAlignment" Value="Center" />

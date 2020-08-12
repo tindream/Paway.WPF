@@ -46,7 +46,7 @@
                                             Viewport="{Binding Viewport, RelativeSource={RelativeSource TemplatedParent}}"/>
                             </Border.Background>
                             <TextBlock x:Name="txt" Text="{TemplateBinding Content}"
-                                       FontSize="{TemplateBinding FontSize, Converter={StaticResource smallConverter}, ConverterParameter=1.2}"
+                                       FontSize="{TemplateBinding FontSize, Converter={StaticResource changeConverter}, ConverterParameter=1.2}"
                                        Foreground="{Binding Path=ForegroundRound.Normal, RelativeSource={RelativeSource TemplatedParent}}" 
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />

@@ -31,6 +31,7 @@
                 <Grid.ColumnDefinitions >
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <utils:ButtonEXT Name="chart" Content="取消"
                              BackgroundStart="Transparent;#77CA6B38" BackgroundEnd="Transparent;#77CA6B38" 
@@ -40,7 +41,11 @@
                 <utils:ButtonEXT Name="btn" Grid.Column="1" Grid.Row="6" 
                              Content="确认" Click="ButtonEXT_Click" 
                              Border="1;0"
-                             BackgroundStart="Transparent;#7723AFFF" BackgroundEnd="Transparent;#7723AFFF" 
+                             BackgroundStart="#AA23AFFF" BackgroundEnd="#AA23AFFF" 
+                             CommandParameter="{Binding ElementName=btn}"/>
+                <utils:ButtonEXT Grid.Column="2" Grid.Row="6" 
+                             Content="原生"
+                             Border="1;0"
                              CommandParameter="{Binding ElementName=btn}"/>
             </Grid>
             <WrapPanel Grid.Row="7" >
