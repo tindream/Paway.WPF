@@ -22,11 +22,11 @@ namespace Paway.WPF
         /// <summary>
         /// 起始颜色
         /// </summary>
-        public Color Start { get; set; } = Color.FromArgb(85, 35, 175, 255);
+        public Color Start { get; set; } = Color.FromArgb(85, Config.Color.R, Config.Color.G, Config.Color.B);
         /// <summary>
         /// 终点颜色
         /// </summary>
-        public Color End { get; set; } = Color.FromArgb(250, 35, 175, 255);
+        public Color End { get; set; } = Color.FromArgb(250, Config.Color.R, Config.Color.G, Config.Color.B);
         /// <summary>
         /// 颜色Alpha值变量
         /// </summary>

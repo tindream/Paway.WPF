@@ -26,11 +26,11 @@ namespace Paway.WPF
         /// <summary>
         /// 鼠标划过时的颜色
         /// </summary>
-        public Color Mouse { get; set; } = Color.FromArgb(210, 35, 175, 255);
+        public Color Mouse { get; set; } = Color.FromArgb(210, Config.Color.R, Config.Color.G, Config.Color.B);
         /// <summary>
         /// 鼠标点击时的颜色
         /// </summary>
-        public Color Pressed { get; set; } = Color.FromArgb(250, 35, 175, 255);
+        public Color Pressed { get; set; } = Color.FromArgb(250, Config.Color.R, Config.Color.G, Config.Color.B);
         /// <summary>
         /// 颜色Alpha值变量
         /// </summary>

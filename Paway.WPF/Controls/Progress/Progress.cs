@@ -13,10 +13,26 @@ namespace Paway.WPF
     /// <summary>
     /// Window圆点进度条
     /// </summary>
-    [TemplateVisualState(GroupName = Config.GroupActive, Name = Config.StateActive)]
-    [TemplateVisualState(GroupName = Config.GroupActive, Name = Config.StateInactive)]
+    [TemplateVisualState(GroupName = Progress.GroupActive, Name = Progress.StateActive)]
+    [TemplateVisualState(GroupName = Progress.GroupActive, Name = Progress.StateInactive)]
     public partial class Progress : Control
     {
+        #region GroupActive
+        /// <summary>
+        /// Active state
+        /// </summary>
+        private const string StateActive = "Active";
+        /// <summary>
+        /// Inactive state
+        /// </summary>
+        private const string StateInactive = "Inactive";
+        /// <summary>
+        /// Active state group
+        /// </summary>
+        private const string GroupActive = "ActiveStates";
+
+        #endregion GroupActive
+
         private bool hasAppliedTemplate = false;
 
         #region 依赖属性
@@ -78,7 +94,7 @@ namespace Paway.WPF
         {
             if (hasAppliedTemplate)
             {
-                string state = isActive ? Config.StateActive : Config.StateInactive;
+                string state = isActive ? Progress.StateActive : Progress.StateInactive;
                 VisualStateManager.GoToState(this, state, true);
             }
         }

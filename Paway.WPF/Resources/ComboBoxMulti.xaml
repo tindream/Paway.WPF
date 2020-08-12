@@ -54,7 +54,8 @@
                                                 <Setter.Value>
                                                     <ControlTemplate TargetType="ListBoxItem">
                                                         <WrapPanel VerticalAlignment="Center">
-                                                            <Path x:Name="path" Style="{StaticResource PathRight}" Fill="#AA23AFFF"/>
+                                                            <Path x:Name="path" Style="{StaticResource PathRight}" 
+                                                                  Fill="{Binding Path=BorderFocusedBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxMulti}}}"/>
                                                             <TextBlock x:Name="txt" Text="{Binding Text}" Padding="3"/>
                                                         </WrapPanel>
                                                         <ControlTemplate.Triggers>

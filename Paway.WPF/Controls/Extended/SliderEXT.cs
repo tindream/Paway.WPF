@@ -43,7 +43,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty TrackColorLinearProperty =
             DependencyProperty.RegisterAttached(nameof(TrackColorLinear), typeof(ColorLinear), typeof(SliderEXT),
-                new PropertyMetadata(new ColorLinear(Color.FromArgb(85, 35, 175, 255))));
+                new PropertyMetadata(new ColorLinear(Color.FromArgb(85, Config.Color.R, Config.Color.G, Config.Color.B))));
         private static void OnRadiusChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             if (obj is SliderEXT slider)

@@ -24,6 +24,11 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty IsReadOnlyProperty =
             DependencyProperty.RegisterAttached(nameof(IsReadOnly), typeof(bool), typeof(DatePickerEXT), new PropertyMetadata(true));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ItemBrushProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(Brush), typeof(DatePickerEXT),
+                new PropertyMetadata(new SolidColorBrush(Color.FromArgb(255, Config.Color.R, Config.Color.G, Config.Color.B))));
 
         #endregion
 
@@ -47,6 +52,16 @@ namespace Paway.WPF
         {
             get { return (bool)GetValue(IsReadOnlyProperty); }
             set { SetValue(IsReadOnlyProperty, value); }
+        }
+        /// <summary>
+        /// 自定义项背景色
+        /// </summary>
+        [Category("扩展")]
+        [Description("自定义项背景色")]
+        public Brush ItemBrush
+        {
+            get { return (Brush)GetValue(ItemBrushProperty); }
+            set { SetValue(ItemBrushProperty, value); }
         }
 
         #endregion

@@ -52,11 +52,11 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBorderBrushProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBorderBrush), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT().Focused(Color.FromArgb(170, 35, 175, 255))));
+            DependencyProperty.RegisterAttached(nameof(ItemBorderBrush), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT().Focused(Color.FromArgb(170, Config.Color.R, Config.Color.G, Config.Color.B))));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBackgroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(Color.FromArgb(255, 243, 243, 243), Color.FromArgb(120, 35, 175, 255))));
+            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(Color.FromArgb(255, 243, 243, 243), Color.FromArgb(120, Config.Color.R, Config.Color.G, Config.Color.B))));
 
         /// <summary>
         /// </summary>

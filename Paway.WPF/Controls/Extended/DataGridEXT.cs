@@ -20,6 +20,56 @@ namespace Paway.WPF
     /// </summary>
     public partial class DataGridEXT : DataGrid
     {
+        #region 扩展
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ItemBrushProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(DataGridEXT),
+                new PropertyMetadata(new BrushEXT(Color.FromArgb(120, Config.Color.R, Config.Color.G, Config.Color.B))));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty HeaderStartProperty =
+            DependencyProperty.RegisterAttached(nameof(HeaderStart), typeof(ColorEXT), typeof(DataGridEXT),
+                new PropertyMetadata(new ColorEXT(Color.FromArgb(255, 254, 254, 254), Color.FromArgb(85, Config.Color.R, Config.Color.G, Config.Color.B))));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty HeaderEndProperty =
+            DependencyProperty.RegisterAttached(nameof(HeaderEnd), typeof(ColorEXT), typeof(DataGridEXT),
+                new PropertyMetadata(new ColorEXT(Color.FromArgb(255, 220, 220, 220), Color.FromArgb(170, Config.Color.R, Config.Color.G, Config.Color.B))));
+
+        /// <summary>
+        /// 自定义项背景色
+        /// </summary>
+        [Category("扩展")]
+        [Description("自定义项背景色")]
+        public BrushEXT ItemBrush
+        {
+            get { return (BrushEXT)GetValue(ItemBrushProperty); }
+            set { SetValue(ItemBrushProperty, value); }
+        }
+        /// <summary>
+        /// 标题列背景开始颜色
+        /// </summary>
+        [Category("扩展")]
+        [Description("标题列背景开始颜色")]
+        public ColorEXT HeaderStart
+        {
+            get { return (ColorEXT)GetValue(HeaderStartProperty); }
+            set { SetValue(HeaderStartProperty, value); }
+        }
+        /// <summary>
+        /// 标题列背景结束颜色
+        /// </summary>
+        [Category("扩展")]
+        [Description("标题列背景结束颜色")]
+        public ColorEXT HeaderEnd
+        {
+            get { return (ColorEXT)GetValue(HeaderEndProperty); }
+            set { SetValue(HeaderEndProperty, value); }
+        }
+
+        #endregion
+
         /// <summary>
         /// 构造
         /// </summary>

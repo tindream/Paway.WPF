@@ -24,12 +24,12 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty BorderMouseBrushProperty =
             DependencyProperty.RegisterAttached(nameof(BorderMouseBrush), typeof(Brush), typeof(PasswordBoxEXT),
-                new PropertyMetadata(new SolidColorBrush(Color.FromArgb(170, 35, 175, 255))));
+                new PropertyMetadata(new SolidColorBrush(Color.FromArgb(170, Config.Color.R, Config.Color.G, Config.Color.B))));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty BorderPressedBrushProperty =
             DependencyProperty.RegisterAttached(nameof(BorderPressedBrush), typeof(Brush), typeof(PasswordBoxEXT),
-                new PropertyMetadata(new SolidColorBrush(Color.FromArgb(255, 35, 175, 255))));
+                new PropertyMetadata(new SolidColorBrush(Color.FromArgb(255, Config.Color.R, Config.Color.G, Config.Color.B))));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty IconProperty =

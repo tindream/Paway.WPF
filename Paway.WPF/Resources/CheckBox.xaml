@@ -56,7 +56,8 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="UIElement.IsMouseOver" Value="True">
                             <Setter Property="Panel.Background" TargetName="checkBoxBorder" Value="#FFF3F9FF"/>
-                            <Setter Property="Border.BorderBrush" TargetName="checkBoxBorder" Value="#FF5593FF"/>
+                            <Setter Property="Border.BorderBrush" TargetName="checkBoxBorder" 
+                                    Value="{Binding Path=BorderFocusedBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </Trigger>
                         <Trigger Property="UIElement.IsEnabled" Value="False">
                             <Setter Property="Panel.Background" TargetName="checkBoxBorder" Value="#FFE6E6E6"/>

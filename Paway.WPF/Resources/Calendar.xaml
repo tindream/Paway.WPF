@@ -10,7 +10,7 @@
     
     <!--选择年月按钮-->
     <Style x:Key="CalendarButtonStyle" TargetType="{x:Type CalendarButton}">
-        <Setter Property="Background" Value="#23AFFF"/>
+        <Setter Property="Background" Value="{Binding ItemBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:CalendarEXT}}}"/>
         <Setter Property="Width" Value="40"/>
         <Setter Property="Height" Value="40"/>
         <Setter Property="FontSize" Value="12"/>
@@ -100,7 +100,8 @@
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         <Border x:Name="CalendarButtonFocusVisual" IsHitTestVisible="False" CornerRadius="20" 
-                                BorderBrush="#23AFFF" BorderThickness="0" Visibility="Collapsed"/>
+                                BorderThickness="0" Visibility="Collapsed"
+                                BorderBrush="{Binding ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:CalendarEXT}}}"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">
@@ -218,10 +219,13 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Border x:Name="TodayBackground" Background="#0078d6" Opacity="0" CornerRadius="22"/>
-                        <Border x:Name="SelectedBackground" Background="#23AFFF" Opacity="0" CornerRadius="22"/>
+                        <Border x:Name="TodayBackground" Opacity="0" CornerRadius="22"
+                                Background="{Binding ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:CalendarEXT}}}"/>
+                        <Border x:Name="SelectedBackground" Opacity="0" CornerRadius="22"
+                                Background="{Binding ItemBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:CalendarEXT}}}" />
                         <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"/>
-                        <Border x:Name="HighlightBackground" Background="#23AFFF" Opacity="0" CornerRadius="22"/>
+                        <Border x:Name="HighlightBackground" Opacity="0" CornerRadius="22"
+                                Background="{Binding ItemBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:CalendarEXT}}}" />
                         <ContentPresenter x:Name="NormalText" ContentTemplate="{TemplateBinding ContentTemplate}" 
                                           Margin="5,1" 
                                           Content="{TemplateBinding Content}" 
@@ -497,7 +501,8 @@
                                         <local:ButtonEXT x:Name="PART_GoClear" Margin="-2,-4,0,-2" Content="清空" Radius="0" Border="0,1,0,0"
                                                          BackgroundStart="Transparent;#77CA6B38" BackgroundEnd="Transparent;#77CA6B38" />
                                         <local:ButtonEXT x:Name="PART_GoToday" Margin="0,-4,-2,-2" Grid.Column="1" Content="今天" Radius="0" Border="1,1,0,0"
-                                                         BackgroundStart="Transparent;#7723AFFF" BackgroundEnd="Transparent;#7723AFFF" />
+                                                         BackgroundStart="{Binding TodayColor, RelativeSource={RelativeSource AncestorType={x:Type local:CalendarEXT}}}" 
+                                                         BackgroundEnd="{Binding TodayColor, RelativeSource={RelativeSource AncestorType={x:Type local:CalendarEXT}}}" />
                                     </Grid>
                                 </Grid>
                             </Border>

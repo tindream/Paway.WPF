@@ -36,12 +36,12 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty BackgroundStartProperty =
             DependencyProperty.RegisterAttached(nameof(BackgroundStart), typeof(ColorEXT), typeof(ButtonEXT),
-            new PropertyMetadata(new ColorEXT(Color.FromArgb(254, 254, 254, 254), Color.FromArgb(16, 35, 175, 255))));
+            new PropertyMetadata(new ColorEXT(Color.FromArgb(255, 254, 254, 254), Color.FromArgb(16, Config.Color.R, Config.Color.G, Config.Color.B))));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty BackgroundEndProperty =
             DependencyProperty.RegisterAttached(nameof(BackgroundEnd), typeof(ColorEXT), typeof(ButtonEXT),
-            new PropertyMetadata(new ColorEXT(Color.FromArgb(254, 220, 220, 220), Color.FromArgb(211, 35, 175, 255))));
+            new PropertyMetadata(new ColorEXT(Color.FromArgb(255, 220, 220, 220), Color.FromArgb(211, Config.Color.R, Config.Color.G, Config.Color.B))));
 
         /// <summary>
         /// </summary>

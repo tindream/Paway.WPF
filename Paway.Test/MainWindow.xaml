@@ -78,7 +78,7 @@
                 <utils:Progress Width="40" Height="40" />
             </WrapPanel>
 
-            <TabControl Grid.Row="11"  TabStripPlacement="Top" Background="#8257CD" Foreground="White">
+            <TabControl Grid.Row="11"  TabStripPlacement="Top" Background="LightGray">
                 <TabItem Cursor="Hand" Header="音乐电台" />
                 <TabItem Cursor="Hand" Header="Mv电台"/>
             </TabControl>
@@ -96,7 +96,7 @@
                     <DataGridTemplateColumn Header="Desc">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Desc}" Foreground="Red"/>
+                                <TextBlock Text="{Binding Desc}" Foreground="Red" Style="{StaticResource TextLeft}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

@@ -26,11 +26,11 @@ namespace Paway.WPF
         /// <summary>
         /// 鼠标划过时的颜色
         /// </summary>
-        public Brush Mouse { get; set; } = new SolidColorBrush(Color.FromArgb(210, 35, 175, 255));
+        public Brush Mouse { get; set; } = new SolidColorBrush(Color.FromArgb(210, Config.Color.R, Config.Color.G, Config.Color.B));
         /// <summary>
         /// 鼠标点击时的颜色
         /// </summary>
-        public Brush Pressed { get; set; } = new SolidColorBrush(Color.FromArgb(250, 35, 175, 255));
+        public Brush Pressed { get; set; } = new SolidColorBrush(Color.FromArgb(250, Config.Color.R, Config.Color.G, Config.Color.B));
         /// <summary>
         /// 鼠标划过时的选中颜色
         /// </summary>

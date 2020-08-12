@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Windows;
+using System.Windows.Media;
 
 namespace Paway.Test
 {
@@ -15,6 +16,7 @@ namespace Paway.Test
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            Config.Color = Colors.Red;
             base.OnStartup(e);
         }
         protected override void OnExit(ExitEventArgs e)

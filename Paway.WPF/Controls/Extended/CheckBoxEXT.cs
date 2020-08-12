@@ -22,7 +22,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty BorderFocusedBrushProperty =
             DependencyProperty.RegisterAttached(nameof(BorderFocusedBrush), typeof(BrushEXT), typeof(CheckBoxEXT),
-                new PropertyMetadata(new BrushEXT(Colors.Gray, Color.FromArgb(200, 35, 175, 255), null, 55)));
+                new PropertyMetadata(new BrushEXT(Colors.Gray, Color.FromArgb(170, Config.Color.R, Config.Color.G, Config.Color.B), null, 85)));
 
         #endregion
 

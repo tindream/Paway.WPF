@@ -31,7 +31,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty BorderFocusedBrushProperty =
             DependencyProperty.RegisterAttached(nameof(BorderFocusedBrush), typeof(BrushEXT), typeof(TextBoxEXT),
-                new PropertyMetadata(new BrushEXT(Colors.LightGray, Color.FromArgb(170, 35, 175, 255), null, 85)));
+                new PropertyMetadata(new BrushEXT(Colors.LightGray, Color.FromArgb(170, Config.Color.R, Config.Color.G, Config.Color.B), null, 85)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty IconProperty =

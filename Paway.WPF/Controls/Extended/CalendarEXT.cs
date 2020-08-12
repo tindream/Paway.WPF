@@ -20,6 +20,16 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty HasButtonProperty =
             DependencyProperty.RegisterAttached(nameof(HasButton), typeof(bool), typeof(CalendarEXT));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ItemBrushProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(CalendarEXT),
+                new PropertyMetadata(new BrushEXT(Colors.Gray, Color.FromArgb(205, Config.Color.R, Config.Color.G, Config.Color.B))));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty TodayColorProperty =
+            DependencyProperty.RegisterAttached(nameof(TodayColor), typeof(ColorEXT), typeof(CalendarEXT),
+            new PropertyMetadata(new ColorEXT(Colors.Transparent, Color.FromArgb(119, Config.Color.R, Config.Color.G, Config.Color.B))));
 
         /// <summary>
         /// 启用扩展按钮
@@ -30,6 +40,26 @@ namespace Paway.WPF
         {
             get { return (bool)GetValue(HasButtonProperty); }
             set { SetValue(HasButtonProperty, value); }
+        }
+        /// <summary>
+        /// 自定义项背景色
+        /// </summary>
+        [Category("扩展")]
+        [Description("自定义项背景色")]
+        public BrushEXT ItemBrush
+        {
+            get { return (BrushEXT)GetValue(ItemBrushProperty); }
+            set { SetValue(ItemBrushProperty, value); }
+        }
+        /// <summary>
+        /// '今天'按钮颜色
+        /// </summary>
+        [Category("扩展")]
+        [Description("'今天'按钮颜色")]
+        public ColorEXT TodayColor
+        {
+            get { return (ColorEXT)GetValue(TodayColorProperty); }
+            set { SetValue(TodayColorProperty, value); }
         }
 
         #endregion

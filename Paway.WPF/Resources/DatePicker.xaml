@@ -191,7 +191,8 @@
                             </Setter>
                         </DataTrigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Foreground" TargetName="PART_Button" Value="#23AFFF"/>
+                            <Setter Property="Foreground" TargetName="PART_Button" 
+                                    Value="{Binding ItemBrush, RelativeSource={RelativeSource AncestorType={x:Type local:DatePickerEXT}}}"/>
                         </Trigger>
                         <Trigger Property="IsDropDownOpen" Value="true">
                             <Setter Property="Foreground" TargetName="PART_Button" Value="White"/>

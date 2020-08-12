@@ -51,6 +51,26 @@ namespace Paway.WPF
     [StyleTypedProperty(Property = DATAPAGER_styleNumericButton, StyleTargetType = typeof(ToggleButton))]
     public class DataPager : Control
     {
+        #region 扩展
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ItemBrushProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(DataPager),
+                new PropertyMetadata(new BrushEXT(System.Windows.Media.Colors.Gray, System.Windows.Media.Color.FromArgb(170, Config.Color.R, Config.Color.G, Config.Color.B), null, 85)));
+
+        /// <summary>
+        /// 自定义项背景色
+        /// </summary>
+        [Category("扩展")]
+        [Description("自定义项背景色")]
+        public BrushEXT ItemBrush
+        {
+            get { return (BrushEXT)GetValue(ItemBrushProperty); }
+            set { SetValue(ItemBrushProperty, value); }
+        }
+
+        #endregion
+
         ////------------------------------------------------------
         ////
         ////  Static Fields and Constants

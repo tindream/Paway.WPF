@@ -21,25 +21,6 @@ namespace Paway.WPF
     /// </summary>
     public class Config
     {
-        #region 常量
-        #region GroupActive
-        /// <summary>
-        /// Active state
-        /// </summary>
-        public const string StateActive = "Active";
-        /// <summary>
-        /// Inactive state
-        /// </summary>
-        public const string StateInactive = "Inactive";
-        /// <summary>
-        /// Active state group
-        /// </summary>
-        public const string GroupActive = "ActiveStates";
-
-        #endregion GroupActive
-
-        #endregion
-
         #region 主题
         /// <summary>
         /// 主题字体大小

@@ -66,7 +66,7 @@
         <Setter Property="ItemContainerStyle">
             <Setter.Value>
                 <Style TargetType="TabItem">
-                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Foreground" Value="#222"/>
                     <Setter Property="Padding" Value="6"/>
                     <Setter Property="Background" Value="Transparent"/>
                     <Setter Property="BorderBrush" Value="#FFACACAC"/>
@@ -77,7 +77,7 @@
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type TabItem}">
                                 <Grid x:Name="templateRoot" SnapsToDevicePixels="True" Background="Transparent">
-                                    <Border x:Name="_underline" BorderBrush="#37aefe" BorderThickness="0" Margin="{TemplateBinding Margin}"/>
+                                    <Border x:Name="_underline" BorderBrush="#23AFFF" BorderThickness="0" Margin="{TemplateBinding Margin}"/>
                                     <TextBlock x:Name="txt" 
                                                Padding="{TemplateBinding Padding}"
                                                Visibility="Visible" 
@@ -92,28 +92,28 @@
                                             <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>
                                             <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Top"/>
                                         </MultiDataTrigger.Conditions>
-                                        <Setter Property="Foreground" TargetName="txt" Value="#37aefe"/>
+                                        <Setter Property="Foreground" TargetName="txt" Value="#23AFFF"/>
                                     </MultiDataTrigger>
                                     <MultiDataTrigger>
                                         <MultiDataTrigger.Conditions>
                                             <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>
                                             <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Left"/>
                                         </MultiDataTrigger.Conditions>
-                                        <Setter Property="Foreground" TargetName="txt" Value="#37aefe"/>
+                                        <Setter Property="Foreground" TargetName="txt" Value="#23AFFF"/>
                                     </MultiDataTrigger>
                                     <MultiDataTrigger>
                                         <MultiDataTrigger.Conditions>
                                             <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>
                                             <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Bottom"/>
                                         </MultiDataTrigger.Conditions>
-                                        <Setter Property="Foreground" TargetName="txt" Value="#37aefe"/>
+                                        <Setter Property="Foreground" TargetName="txt" Value="#23AFFF"/>
                                     </MultiDataTrigger>
                                     <MultiDataTrigger>
                                         <MultiDataTrigger.Conditions>
                                             <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>
                                             <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Right"/>
                                         </MultiDataTrigger.Conditions>
-                                        <Setter Property="Foreground" TargetName="txt" Value="#37aefe"/>
+                                        <Setter Property="Foreground" TargetName="txt" Value="#23AFFF"/>
                                     </MultiDataTrigger>
 
                                     <MultiDataTrigger>
@@ -122,7 +122,7 @@
                                             <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Top"/>
                                         </MultiDataTrigger.Conditions>
                                         <Setter Property="Panel.ZIndex" Value="1"/>
-                                        <Setter Property="Foreground" TargetName="txt" Value="#37aefe"/>
+                                        <Setter Property="Foreground" TargetName="txt" Value="#23AFFF"/>
                                         <Setter Property="BorderThickness" TargetName="_underline" Value="0 0 0 2"/>
                                     </MultiDataTrigger>
                                     <MultiDataTrigger>
@@ -131,7 +131,7 @@
                                             <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Left"/>
                                         </MultiDataTrigger.Conditions>
                                         <Setter Property="Panel.ZIndex" Value="1"/>
-                                        <Setter Property="Foreground" TargetName="txt" Value="#37aefe"/>
+                                        <Setter Property="Foreground" TargetName="txt" Value="#23AFFF"/>
                                         <Setter Property="BorderThickness" TargetName="_underline" Value="0 0 2 0"/>
                                     </MultiDataTrigger>
                                     <MultiDataTrigger>
@@ -140,7 +140,7 @@
                                             <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Bottom"/>
                                         </MultiDataTrigger.Conditions>
                                         <Setter Property="Panel.ZIndex" Value="1"/>
-                                        <Setter Property="Foreground" TargetName="txt" Value="#37aefe"/>
+                                        <Setter Property="Foreground" TargetName="txt" Value="#23AFFF"/>
                                         <Setter Property="BorderThickness" TargetName="_underline" Value="0 2 0 0"/>
                                     </MultiDataTrigger>
                                     <MultiDataTrigger>
@@ -149,7 +149,7 @@
                                             <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Right"/>
                                         </MultiDataTrigger.Conditions>
                                         <Setter Property="Panel.ZIndex" Value="1"/>
-                                        <Setter Property="Foreground" TargetName="txt" Value="#37aefe"/>
+                                        <Setter Property="Foreground" TargetName="txt" Value="#23AFFF"/>
                                         <Setter Property="BorderThickness" TargetName="_underline" Value="2 0 0 0"/>
                                     </MultiDataTrigger>
                                 </ControlTemplate.Triggers>
