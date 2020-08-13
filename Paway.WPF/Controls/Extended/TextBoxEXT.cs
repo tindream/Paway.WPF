@@ -29,8 +29,8 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(TextBoxEXT), new PropertyMetadata(new CornerRadius(3)));
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty BorderFocusedBrushProperty =
-            DependencyProperty.RegisterAttached(nameof(BorderFocusedBrush), typeof(BrushEXT), typeof(TextBoxEXT),
+        public static readonly DependencyProperty ItemBrushProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(TextBoxEXT),
                 new PropertyMetadata(new BrushEXT(Colors.LightGray, Color.FromArgb(170, Config.Color.R, Config.Color.G, Config.Color.B), null, 85)));
         /// <summary>
         /// </summary>
@@ -80,10 +80,10 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展")]
         [Description("文本框的边框颜色")]
-        public BrushEXT BorderFocusedBrush
+        public BrushEXT ItemBrush
         {
-            get { return (BrushEXT)GetValue(BorderFocusedBrushProperty); }
-            set { SetValue(BorderFocusedBrushProperty, value); }
+            get { return (BrushEXT)GetValue(ItemBrushProperty); }
+            set { SetValue(ItemBrushProperty, value); }
         }
         /// <summary>
         /// 图片

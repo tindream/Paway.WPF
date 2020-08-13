@@ -46,6 +46,11 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty TemplateSettingsProperty =
             DependencyProperty.Register(nameof(TemplateSettings), typeof(ProgressTemplate), typeof(Progress), new PropertyMetadata(null));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ItemBrushProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(Progress),
+                new PropertyMetadata(new BrushEXT(null, Color.FromArgb(205, Config.Color.R, Config.Color.G, Config.Color.B))));
 
         #endregion
 
@@ -68,6 +73,16 @@ namespace Paway.WPF
             get { return (ProgressTemplate)GetValue(TemplateSettingsProperty); }
             set { SetValue(TemplateSettingsProperty, value); }
         }
+        /// <summary>
+        /// 项颜色
+        /// </summary>
+        [Category("扩展")]
+        [Description("项颜色")]
+        public BrushEXT ItemBrush
+        {
+            get { return (BrushEXT)GetValue(ItemBrushProperty); }
+            set { SetValue(ItemBrushProperty, value); }
+        }
 
         #endregion
 
@@ -82,7 +97,6 @@ namespace Paway.WPF
         /// </summary>
         public override void OnApplyTemplate()
         {
-            this.Foreground = new SolidColorBrush(Config.Color);
             base.OnApplyTemplate();
             hasAppliedTemplate = true;
             UpdateState(IsActive);

@@ -19,7 +19,7 @@
                         <Border
                             BorderThickness="{TemplateBinding Border.BorderThickness}"
                             CornerRadius="100"
-                            BorderBrush="{Binding Path=BorderFocusedBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"
+                            BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"
                             Background="{TemplateBinding Panel.Background}"
                             Name="radioButtonBorder"
                             Margin="7,6"
@@ -27,7 +27,7 @@
                             VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}">
                             <Grid Name="markGrid" Margin="3">
                                 <Ellipse Name="optionMark" Width="8" Height="8" Opacity="0"
-                                         Fill="{Binding Path=BorderFocusedBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" />
+                                         Fill="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" />
                             </Grid>
                         </Border>
                         <ContentPresenter
@@ -47,7 +47,7 @@
                         <Trigger Property="UIElement.IsMouseOver" Value="True">
                             <Setter Property="Panel.Background" TargetName="radioButtonBorder" Value="#FFF3F9FF"/>
                             <Setter Property="Border.BorderBrush" TargetName="radioButtonBorder"
-                                    Value="{Binding Path=BorderFocusedBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                    Value="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </Trigger>
                         <Trigger Property="UIElement.IsEnabled" Value="False">
                             <Setter Property="Panel.Background" TargetName="radioButtonBorder" Value="#FFE6E6E6"/>
@@ -57,7 +57,7 @@
                         <Trigger Property="ButtonBase.IsPressed" Value="True">
                             <Setter Property="Panel.Background" TargetName="radioButtonBorder" Value="#FFD9ECFF"/>
                             <Setter Property="Border.BorderBrush" TargetName="radioButtonBorder"
-                                    Value="{Binding Path=BorderFocusedBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                    Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </Trigger>
                         <Trigger Property="ToggleButton.IsChecked" Value="True">
                             <Setter Property="UIElement.Opacity" TargetName="optionMark" Value="1"/>

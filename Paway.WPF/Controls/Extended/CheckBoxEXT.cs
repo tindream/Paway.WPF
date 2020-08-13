@@ -20,8 +20,8 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(CheckBoxEXT), new PropertyMetadata(new CornerRadius(2)));
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty BorderFocusedBrushProperty =
-            DependencyProperty.RegisterAttached(nameof(BorderFocusedBrush), typeof(BrushEXT), typeof(CheckBoxEXT),
+        public static readonly DependencyProperty ItemBrushProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(CheckBoxEXT),
                 new PropertyMetadata(new BrushEXT(Colors.Gray, Color.FromArgb(170, Config.Color.R, Config.Color.G, Config.Color.B), null, 85)));
 
         #endregion
@@ -42,10 +42,10 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展")]
         [Description("边框颜色")]
-        public BrushEXT BorderFocusedBrush
+        public BrushEXT ItemBrush
         {
-            get { return (BrushEXT)GetValue(BorderFocusedBrushProperty); }
-            set { SetValue(BorderFocusedBrushProperty, value); }
+            get { return (BrushEXT)GetValue(ItemBrushProperty); }
+            set { SetValue(ItemBrushProperty, value); }
         }
 
         #endregion

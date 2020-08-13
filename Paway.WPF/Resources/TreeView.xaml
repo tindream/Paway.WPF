@@ -97,7 +97,7 @@
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="itemBackground" Property="Background" 
-                                    Value="{Binding Path=BackgroundRound.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
+                                    Value="{Binding Path=ItemBackground.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -105,7 +105,7 @@
                                 <Condition Property="IsMouseOver" SourceName="itemBackground" Value="true"/>
                             </MultiTrigger.Conditions>
                             <Setter TargetName="itemBackground" Property="Background" 
-                                    Value="{Binding Path=BackgroundRound.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
+                                    Value="{Binding Path=ItemBackground.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -113,7 +113,7 @@
                                 <Condition Property="IsSelected" Value="true"/>
                             </MultiTrigger.Conditions>
                             <Setter TargetName="itemBackground" Property="Background" 
-                                    Value="{Binding Path=BackgroundRound.PressedMouse,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
+                                    Value="{Binding Path=ItemBackground.PressedMouse,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
@@ -207,7 +207,7 @@
                 <ControlTemplate TargetType="local:TreeViewEXT" >
                     <Border Name="border"
                             BorderThickness="{TemplateBinding Border.BorderThickness}"
-                            BorderBrush="{Binding Path=BorderFocusedBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"
+                            BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"
                             SnapsToDevicePixels="True">
                         <local:ScrollViewerEXT x:Name="_tv_scrollviewer_"
                                       HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
@@ -225,11 +225,11 @@
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="BorderBrush" TargetName="border" 
-                                    Value="{Binding Path=BorderFocusedBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                    Value="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="True">
                             <Setter Property="BorderBrush" TargetName="border" 
-                                    Value="{Binding Path=BorderFocusedBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                    Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

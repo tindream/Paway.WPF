@@ -100,7 +100,7 @@ namespace Paway.Test.ViewModel
             {
                 return colorChanged ?? (colorChanged = new RelayCommand<SliderEXT>(slider =>
                 {
-                    var color = Method.ColorSelector(slider.Value / 7);
+                    var color = Method.ColorSelector(slider.Value / 70);
                     Config.Color = color;
                     Method.DoStyles();
                 }));

@@ -20,18 +20,18 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(ComboBoxEXT), new PropertyMetadata(new CornerRadius(3)));
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty ForegroundRoundProperty =
-            DependencyProperty.RegisterAttached(nameof(ForegroundRound), typeof(BrushEXT), typeof(ComboBoxEXT),
+        public static readonly DependencyProperty ItemForegroundProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemForeground), typeof(BrushEXT), typeof(ComboBoxEXT),
             new PropertyMetadata(new BrushEXT(Color.FromArgb(255, 34, 34, 34), Color.FromArgb(255, 34, 34, 34), Colors.White)));
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty BackgroundRoundProperty =
-            DependencyProperty.RegisterAttached(nameof(BackgroundRound), typeof(BrushEXT), typeof(ComboBoxEXT),
+        public static readonly DependencyProperty ItemBackgroundProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ComboBoxEXT),
             new PropertyMetadata(new BrushEXT(null, Color.FromArgb(85, Config.Color.R, Config.Color.G, Config.Color.B), alpha: 85)));
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty BorderFocusedBrushProperty =
-            DependencyProperty.RegisterAttached(nameof(BorderFocusedBrush), typeof(BrushEXT), typeof(ComboBoxEXT),
+        public static readonly DependencyProperty ItemBrushProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ComboBoxEXT),
                 new PropertyMetadata(new BrushEXT(Colors.LightGray, Color.FromArgb(170, Config.Color.R, Config.Color.G, Config.Color.B), null, 85)));
 
         #endregion
@@ -48,34 +48,34 @@ namespace Paway.WPF
             set { SetValue(RadiusProperty, value); }
         }
         /// <summary>
-        /// 项的字体颜色
+        /// 项字体颜色
         /// </summary>
         [Category("扩展")]
-        [Description("项的字体颜色")]
-        public BrushEXT ForegroundRound
+        [Description("项字体颜色")]
+        public BrushEXT ItemForeground
         {
-            get { return (BrushEXT)GetValue(ForegroundRoundProperty); }
-            set { SetValue(ForegroundRoundProperty, value); }
+            get { return (BrushEXT)GetValue(ItemForegroundProperty); }
+            set { SetValue(ItemForegroundProperty, value); }
         }
         /// <summary>
-        /// 项的边框背景颜色
+        /// 项背景颜色
         /// </summary>
         [Category("扩展")]
-        [Description("项的边框背景颜色")]
-        public BrushEXT BackgroundRound
+        [Description("项背景颜色")]
+        public BrushEXT ItemBackground
         {
-            get { return (BrushEXT)GetValue(BackgroundRoundProperty); }
-            set { SetValue(BackgroundRoundProperty, value); }
+            get { return (BrushEXT)GetValue(ItemBackgroundProperty); }
+            set { SetValue(ItemBackgroundProperty, value); }
         }
         /// <summary>
         /// 外边框颜色
         /// </summary>
         [Category("扩展")]
         [Description("外边框颜色")]
-        public BrushEXT BorderFocusedBrush
+        public BrushEXT ItemBrush
         {
-            get { return (BrushEXT)GetValue(BorderFocusedBrushProperty); }
-            set { SetValue(BorderFocusedBrushProperty, value); }
+            get { return (BrushEXT)GetValue(ItemBrushProperty); }
+            set { SetValue(ItemBrushProperty, value); }
         }
 
         #endregion

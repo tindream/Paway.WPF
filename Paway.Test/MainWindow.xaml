@@ -26,11 +26,10 @@
             </utils:SliderEXT>
             <utils:SliderEXT x:Name="sldTheme" TrackColorLinear="Transparent;Transparent"
                              TrackBackground="Transparent"
-                             TrackDot="2"
-                             Maximum="7"
-                             Value="2.5"
+                             Maximum="70"
+                             Value="0"
                              IsSnapToTickEnabled="True"
-                             TickFrequency="0.01"
+                             TickFrequency="1"
                              Background="{StaticResource ColorSelector}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="ValueChanged">

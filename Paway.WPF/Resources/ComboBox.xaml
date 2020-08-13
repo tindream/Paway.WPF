@@ -46,7 +46,7 @@
                                 CornerRadius="{TemplateBinding Radius}"
                                 Padding="{TemplateBinding Padding}"
                                 Background="{StaticResource backLine}"
-                                BorderBrush="{Binding Path=BorderFocusedBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}" />
+                                BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}" />
                         <ContentPresenter x:Name="ContentSite" Margin="5,3,0,3" 
                                           VerticalAlignment="Center" 
                                           IsHitTestVisible="False"
@@ -62,7 +62,7 @@
                         <!--必须将 TextBox 命名为 PART_EditableTextBox，否则 ComboBox 将无法识别它-->
                         <local:TextBoxEXT x:Name="PART_EditableTextBox"
                                           Margin="0"
-                                          BorderFocusedBrush="Transparent"
+                                          ItemBrush="Transparent"
                                           Visibility="Hidden" 
                                           Focusable="True" 
                                           Background="Transparent" 
@@ -98,18 +98,18 @@
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="border" Property="BorderBrush" 
-                                    Value="{Binding Path=BorderFocusedBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}" />
+                                    Value="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" TargetName="border" Value="#FFE6E6E6"/>
                         </Trigger>
                         <!--<Trigger Property="IsKeyboardFocused" Value="True">
                             <Setter TargetName="border" Property="BorderBrush" 
-                                    Value="{Binding Path=BorderFocusedBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" />
+                                    Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" />
                         </Trigger>-->
                         <Trigger Property="IsDropDownOpen" Value="True">
                             <Setter TargetName="border" Property="BorderBrush" 
-                                    Value="{Binding Path=BorderFocusedBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" />
+                                    Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -117,7 +117,7 @@
                                 <Condition Property="IsMouseOver" Value="true" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="border" Property="BorderBrush" 
-                                    Value="{Binding Path=BorderFocusedBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}" />
+                                    Value="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -137,15 +137,15 @@
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsSelected" Value="true">
                                         <Setter TargetName="_borderbg" Property="Background" 
-                                                Value="{Binding Path=BackgroundRound.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}" />
+                                                Value="{Binding Path=ItemBackground.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}" />
                                         <Setter TargetName="_txt" Property="TextBox.Foreground" 
-                                                Value="{Binding Path=ForegroundRound.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}"/>
+                                                Value="{Binding Path=ItemForeground.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}"/>
                                     </Trigger>
                                     <Trigger Property="IsMouseOver" Value="true">
                                         <Setter TargetName="_borderbg" Property="Background" 
-                                                Value="{Binding Path=BackgroundRound.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}" />
+                                                Value="{Binding Path=ItemBackground.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}" />
                                         <Setter TargetName="_txt" Property="TextBox.Foreground" 
-                                                Value="{Binding Path=ForegroundRound.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}"/>
+                                                Value="{Binding Path=ItemForeground.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}"/>
                                     </Trigger>
                                     <MultiTrigger>
                                         <MultiTrigger.Conditions>
@@ -153,9 +153,9 @@
                                             <Condition Property="IsMouseOver" Value="true"/>
                                         </MultiTrigger.Conditions>
                                         <Setter TargetName="_borderbg" Property="Background" 
-                                                Value="{Binding Path=BackgroundRound.PressedMouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}" />
+                                                Value="{Binding Path=ItemBackground.PressedMouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}" />
                                         <Setter TargetName="_txt" Property="TextBox.Foreground" 
-                                                Value="{Binding Path=ForegroundRound.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}"/>
+                                                Value="{Binding Path=ItemForeground.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}"/>
                                     </MultiTrigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>

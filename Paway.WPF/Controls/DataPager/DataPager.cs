@@ -56,7 +56,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(DataPager),
-                new PropertyMetadata(new BrushEXT(System.Windows.Media.Colors.Gray, System.Windows.Media.Color.FromArgb(170, Config.Color.R, Config.Color.G, Config.Color.B), null, 85)));
+                new PropertyMetadata(new BrushEXT(null, System.Windows.Media.Color.FromArgb(170, Config.Color.R, Config.Color.G, Config.Color.B), null, 85)));
 
         /// <summary>
         /// 自定义项背景色

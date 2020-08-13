@@ -22,14 +22,9 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(PasswordBoxEXT), new PropertyMetadata(new CornerRadius(3)));
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty BorderMouseBrushProperty =
-            DependencyProperty.RegisterAttached(nameof(BorderMouseBrush), typeof(Brush), typeof(PasswordBoxEXT),
-                new PropertyMetadata(new SolidColorBrush(Color.FromArgb(170, Config.Color.R, Config.Color.G, Config.Color.B))));
-        /// <summary>
-        /// </summary>
-        public static readonly DependencyProperty BorderPressedBrushProperty =
-            DependencyProperty.RegisterAttached(nameof(BorderPressedBrush), typeof(Brush), typeof(PasswordBoxEXT),
-                new PropertyMetadata(new SolidColorBrush(Color.FromArgb(255, Config.Color.R, Config.Color.G, Config.Color.B))));
+        public static readonly DependencyProperty ItemBrushProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(PasswordBoxEXT),
+                new PropertyMetadata(new BrushEXT(Colors.LightGray, Color.FromArgb(170, Config.Color.R, Config.Color.G, Config.Color.B), null, 85)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty IconProperty =
@@ -65,44 +60,24 @@ namespace Paway.WPF
         }
 
         /// <summary>
-        /// 文本框的鼠标移过时的边框颜色
+        /// 文本框的边框颜色
         /// </summary>
         [Category("扩展")]
-        [Description("文本框的鼠标移过时的边框颜色")]
-        public Brush BorderMouseBrush { get; set; }
+        [Description("文本框的边框颜色")]
+        public BrushEXT ItemBrush { get; set; }
         /// <summary>
-        /// get文本框的鼠标移过时的边框颜色
+        /// get文本框的边框颜色
         /// </summary>
-        public static Brush GetBorderMouseBrush(DependencyObject obj)
+        public static BrushEXT GetBorderPressedBrush(DependencyObject obj)
         {
-            return (Brush)obj.GetValue(BorderMouseBrushProperty);
+            return (BrushEXT)obj.GetValue(ItemBrushProperty);
         }
         /// <summary>
-        /// set文本框的鼠标移过时的边框颜色
+        /// set文本框的边框颜色
         /// </summary>
-        public static void SetBorderMouseBrush(DependencyObject obj, Brush value)
+        public static void SetBorderPressedBrush(DependencyObject obj, BrushEXT value)
         {
-            obj.SetValue(BorderMouseBrushProperty, value);
-        }
-        /// <summary>
-        /// 文本框的鼠标按下时的边框颜色
-        /// </summary>
-        [Category("扩展")]
-        [Description("文本框的鼠标按下时的边框颜色")]
-        public Brush BorderPressedBrush { get; set; }
-        /// <summary>
-        /// get文本框的鼠标按下时的边框颜色
-        /// </summary>
-        public static Brush GetBorderPressedBrush(DependencyObject obj)
-        {
-            return (Brush)obj.GetValue(BorderPressedBrushProperty);
-        }
-        /// <summary>
-        /// set文本框的鼠标按下时的边框颜色
-        /// </summary>
-        public static void SetBorderPressedBrush(DependencyObject obj, Brush value)
-        {
-            obj.SetValue(BorderPressedBrushProperty, value);
+            obj.SetValue(ItemBrushProperty, value);
         }
 
         /// <summary>

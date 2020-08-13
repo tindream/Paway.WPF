@@ -694,7 +694,7 @@ namespace Paway.WPF
             if (context != null)
             {
                 var service = (IProvideValueTarget)context.GetService(typeof(IProvideValueTarget));
-                if (service.TargetObject != null)
+                if (service != null && service.TargetObject != null)
                 {
                     var objType = service.TargetObject.GetType();
                     var obj = (DependencyObject)Activator.CreateInstance(objType);

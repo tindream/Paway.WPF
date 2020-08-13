@@ -24,7 +24,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(CalendarEXT),
-                new PropertyMetadata(new BrushEXT(Colors.Gray, Color.FromArgb(205, Config.Color.R, Config.Color.G, Config.Color.B))));
+                new PropertyMetadata(new BrushEXT(null, Color.FromArgb(205, Config.Color.R, Config.Color.G, Config.Color.B))));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty TodayColorProperty =

@@ -47,13 +47,13 @@ namespace Paway.WPF
                 new PropertyMetadata(Visibility.Collapsed));
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty BorderFocusedBrushProperty =
-            DependencyProperty.RegisterAttached(nameof(BorderFocusedBrush), typeof(BrushEXT), typeof(TreeViewEXT),
+        public static readonly DependencyProperty ItemBrushProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(TreeViewEXT),
                 new PropertyMetadata(new BrushEXT(Colors.LightGray, Color.FromArgb(170, Config.Color.R, Config.Color.G, Config.Color.B), null, 85)));
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty BackgroundRoundProperty =
-            DependencyProperty.RegisterAttached(nameof(BackgroundRound), typeof(BrushEXT), typeof(TreeViewEXT),
+        public static readonly DependencyProperty ItemBackgroundProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(TreeViewEXT),
             new PropertyMetadata(new BrushEXT(null, Color.FromArgb(85, Config.Color.R, Config.Color.G, Config.Color.B), alpha: 85)));
 
         #endregion
@@ -70,24 +70,24 @@ namespace Paway.WPF
             set { SetValue(CheckBoxProperty, value); }
         }
         /// <summary>
-        /// 边框颜色
+        /// 项边框颜色
         /// </summary>
         [Category("扩展")]
-        [Description("边框颜色")]
-        public BrushEXT BorderFocusedBrush
+        [Description("项边框颜色")]
+        public BrushEXT ItemBrush
         {
-            get { return (BrushEXT)GetValue(BorderFocusedBrushProperty); }
-            set { SetValue(BorderFocusedBrushProperty, value); }
+            get { return (BrushEXT)GetValue(ItemBrushProperty); }
+            set { SetValue(ItemBrushProperty, value); }
         }
         /// <summary>
-        /// 项的边框背景颜色
+        /// 项背景颜色
         /// </summary>
         [Category("扩展")]
-        [Description("项的边框背景颜色")]
-        public BrushEXT BackgroundRound
+        [Description("项背景颜色")]
+        public BrushEXT ItemBackground
         {
-            get { return (BrushEXT)GetValue(BackgroundRoundProperty); }
-            set { SetValue(BackgroundRoundProperty, value); }
+            get { return (BrushEXT)GetValue(ItemBackgroundProperty); }
+            set { SetValue(ItemBackgroundProperty, value); }
         }
 
         #endregion

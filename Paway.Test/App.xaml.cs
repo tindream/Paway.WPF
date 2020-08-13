@@ -16,7 +16,6 @@ namespace Paway.Test
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            Config.Color = Colors.Red;
             base.OnStartup(e);
         }
         protected override void OnExit(ExitEventArgs e)
