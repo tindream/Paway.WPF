@@ -34,10 +34,24 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public ColorLinear() { }
+        public ColorLinear()
+        {
+            Config.ColorChanged += Config_ColorChanged;
+        }
+        private void Config_ColorChanged(Color obj)
+        {
+            if (this.Start is Color start && start.R == obj.R && start.G == obj.G && start.B == obj.B)
+            {
+                this.Start = Color.FromArgb(start.A, Config.Color.R, Config.Color.G, Config.Color.B);
+            }
+            if (this.End is Color end && end.R == obj.R && end.G == obj.G && end.B == obj.B)
+            {
+                this.End = Color.FromArgb(end.A, Config.Color.R, Config.Color.G, Config.Color.B);
+            }
+        }
         /// <summary>
         /// </summary>
-        public ColorLinear(Color? start, Color? end = null, int? alpha = null, ColorLinear value = null)
+        public ColorLinear(Color? start, Color? end = null, int? alpha = null, ColorLinear value = null) : this()
         {
             if (alpha != null) Alpha = alpha.Value;
             else if (value != null) Alpha = value.Alpha;

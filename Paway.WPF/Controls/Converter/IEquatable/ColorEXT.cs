@@ -38,10 +38,28 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public ColorEXT() { }
+        public ColorEXT()
+        {
+            Config.ColorChanged += Config_ColorChanged;
+        }
+        private void Config_ColorChanged(Color obj)
+        {
+            if (this.Normal is Color normal && normal.R == obj.R && normal.G == obj.G && normal.B == obj.B)
+            {
+                this.Normal = Color.FromArgb(normal.A, Config.Color.R, Config.Color.G, Config.Color.B);
+            }
+            if (this.Mouse is Color mouse && mouse.R == obj.R && mouse.G == obj.G && mouse.B == obj.B)
+            {
+                this.Mouse = Color.FromArgb(mouse.A, Config.Color.R, Config.Color.G, Config.Color.B);
+            }
+            if (this.Pressed is Color pressed && pressed.R == obj.R && pressed.G == obj.G && pressed.B == obj.B)
+            {
+                this.Pressed = Color.FromArgb(pressed.A, Config.Color.R, Config.Color.G, Config.Color.B);
+            }
+        }
         /// <summary>
         /// </summary>
-        public ColorEXT(Color? normal, Color? mouse = null, Color? pressed = null, int? alpha = null, ColorEXT value = null)
+        public ColorEXT(Color? normal, Color? mouse = null, Color? pressed = null, int? alpha = null, ColorEXT value = null) : this()
         {
             if (alpha != null) Alpha = alpha.Value;
             else if (value != null) Alpha = value.Alpha;

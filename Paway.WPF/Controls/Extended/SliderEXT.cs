@@ -41,9 +41,19 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(TrackWidth), typeof(double), typeof(SliderEXT), new PropertyMetadata(18d));
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty TrackDotProperty =
+            DependencyProperty.RegisterAttached(nameof(TrackDot), typeof(int), typeof(SliderEXT));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty TrackColorLinearProperty =
             DependencyProperty.RegisterAttached(nameof(TrackColorLinear), typeof(ColorLinear), typeof(SliderEXT),
                 new PropertyMetadata(new ColorLinear(Color.FromArgb(85, Config.Color.R, Config.Color.G, Config.Color.B))));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty TrackBackgroundProperty =
+            DependencyProperty.RegisterAttached(nameof(TrackBackground), typeof(Brush), typeof(SliderEXT),
+                new PropertyMetadata(new SolidColorBrush(Colors.LightGray)));
+
         private static void OnRadiusChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             if (obj is SliderEXT slider)
@@ -92,6 +102,16 @@ namespace Paway.WPF
             set { SetValue(TrackWidthProperty, value); }
         }
         /// <summary>
+        /// 显示小数位数
+        /// </summary>
+        [Category("扩展")]
+        [Description("显示小数位数")]
+        public int TrackDot
+        {
+            get { return (int)GetValue(TrackDotProperty); }
+            set { SetValue(TrackDotProperty, value); }
+        }
+        /// <summary>
         /// 轨道线性颜色
         /// </summary>
         [Category("扩展")]
@@ -100,6 +120,16 @@ namespace Paway.WPF
         {
             get { return (ColorLinear)GetValue(TrackColorLinearProperty); }
             set { SetValue(TrackColorLinearProperty, value); }
+        }
+        /// <summary>
+        /// 轨道背景颜色
+        /// </summary>
+        [Category("扩展")]
+        [Description("轨道背景颜色")]
+        public Brush TrackBackground
+        {
+            get { return (Brush)GetValue(TrackBackgroundProperty); }
+            set { SetValue(TrackBackgroundProperty, value); }
         }
 
         #endregion
@@ -119,8 +149,7 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            base.OnPreviewMouseLeftButtonDown(e);
-            this.ToolTip = TMethod.Round(this.Value, 0);
+            this.ToolTip = TMethod.Round(this.Value, TrackDot);
 
             if (this.AutoToolTipPlacement == System.Windows.Controls.Primitives.AutoToolTipPlacement.None) return;
             if (toolTip == null)
@@ -134,7 +163,7 @@ namespace Paway.WPF
                     thumb.ToolTip = toolTip;
                 }
             }
-            toolTip.Content = TMethod.Round(this.Value, 0);
+            toolTip.Content = TMethod.Round(this.Value, TrackDot);
             if (toolTip.IsOpen)
             {
                 toolTip.IsOpen = false;
@@ -143,6 +172,8 @@ namespace Paway.WPF
             }
             toolTip.IsOpen = true;
             Method.ExecuteMethod(toolTip.Parent, "Reposition");
+
+            base.OnPreviewMouseLeftButtonDown(e);
         }
         private CustomPopupPlacement[] AutoToolTipCustomPlacementCallbackTemp(Size popupSize, Size targetSize, Point offset)
         {
@@ -175,12 +206,12 @@ namespace Paway.WPF
         protected override void OnThumbDragDelta(DragDeltaEventArgs e)
         {
             base.OnThumbDragDelta(e);
-            this.ToolTip = TMethod.Round(this.Value, 0);
+            this.ToolTip = TMethod.Round(this.Value, TrackDot);
         }
 
         private void SliderEXT_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            this.ToolTip = TMethod.Round(this.Value, 0);
+            this.ToolTip = TMethod.Round(this.Value, TrackDot);
         }
 
         #endregion

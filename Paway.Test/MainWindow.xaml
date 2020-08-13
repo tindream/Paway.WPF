@@ -10,23 +10,50 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="850" Width="850" WindowStartupLocation="CenterScreen">
 
-    <WrapPanel Margin="3">
-        <StackPanel Width="320">
-            <utils:ProgressBarEXT Grid.Row="1" Value="95" />
+    <Grid Margin="3">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <utils:SliderEXT x:Name="slider" Maximum="100" Value="15" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="ValueChanged">
+                        <i:InvokeCommandAction Command="{Binding SizeChanged}"
+                                           CommandParameter="{Binding ElementName=slider}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </utils:SliderEXT>
+            <utils:SliderEXT x:Name="sldTheme" TrackColorLinear="Transparent;Transparent"
+                             TrackBackground="Transparent"
+                             TrackDot="2"
+                             Maximum="7"
+                             Value="2.5"
+                             IsSnapToTickEnabled="True"
+                             TickFrequency="0.01"
+                             Background="{StaticResource ColorSelector}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="ValueChanged">
+                        <i:InvokeCommandAction Command="{Binding ColorChanged}"
+                                           CommandParameter="{Binding ElementName=sldTheme}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </utils:SliderEXT>
+            <utils:ProgressBarEXT Value="95" />
 
-            <utils:ComboBoxEXT Grid.Row="2" Name="cbxBox" ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text"
+            <utils:ComboBoxEXT Name="cbxBox" ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text"
                                SelectedValue="{Binding Id}"/>
-            <utils:ComboBoxMulti x:Name="MultiCmb" Grid.Row="3" ItemsSource="{Binding MultiList}"/>
+            <utils:ComboBoxMulti x:Name="MultiCmb" ItemsSource="{Binding MultiList}"/>
             <utils:ComboBoxDate SelectedValue="{Binding DatePickerTime}"/>
 
-            <utils:TextBoxEXT Grid.Row="4" Name="tb" Icon="pack://application:,,,/Paway.Test;component/Images/close.png">
+            <utils:TextBoxEXT Name="tb" Icon="pack://application:,,,/Paway.Test;component/Images/close.png">
                 <Binding Path="Value">
                     <Binding.ValidationRules>
                         <utils:RegexValidationRule RegexType="UInt" MinLength="2" MaxLength="4"/>
                     </Binding.ValidationRules>
                 </Binding>
             </utils:TextBoxEXT>
-            <PasswordBox Grid.Row="5" utils:PasswordBoxEXT.Icon="pack://application:,,,/Paway.Test;component/Images/close.png"></PasswordBox>
+            <PasswordBox utils:PasswordBoxEXT.Icon="pack://application:,,,/Paway.Test;component/Images/close.png"></PasswordBox>
             <Grid>
                 <Grid.ColumnDefinitions >
                     <ColumnDefinition Width="*"/>
@@ -38,39 +65,29 @@
                              BackgroundImage="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"
                              Stretch="None" Viewport="0,0,0.4,1"
                              Command="{Binding Teach}" CommandParameter="{Binding ElementName=btn}"/>
-                <utils:ButtonEXT Name="btn" Grid.Column="1" Grid.Row="6" 
+                <utils:ButtonEXT Name="btn" Grid.Column="1"
                              Content="确认" Click="ButtonEXT_Click" 
                              Border="1;0"
                              BackgroundStart="#AA23AFFF" BackgroundEnd="#AA23AFFF" 
                              CommandParameter="{Binding ElementName=btn}"/>
-                <utils:ButtonEXT Grid.Column="2" Grid.Row="6" 
+                <utils:ButtonEXT Grid.Column="2"
                              Content="原生"
                              Border="1;0"
                              CommandParameter="{Binding ElementName=btn}"/>
             </Grid>
-            <WrapPanel Grid.Row="7" >
+            <WrapPanel>
                 <utils:CheckBoxEXT x:Name="cbx" Content="Hello" IsChecked="True" Padding="0,0,3,0"/>
                 <utils:CheckBoxEXT Content="World" IsChecked="{x:Null}"/>
                 <utils:CheckBoxEXT Content="Watch" IsChecked="{x:Null}" IsEnabled="False"/>
-                <CheckBox Content="Watch" IsChecked="True" />
             </WrapPanel>
-            <WrapPanel Grid.Row="8" >
+            <WrapPanel>
                 <utils:RadioButtonEXT Name="rb" Content="Hello" IsChecked="True" />
                 <utils:RadioButtonEXT Content="World" IsChecked="True" />
                 <utils:RadioButtonEXT Content="Watch" IsChecked="{x:Null}" IsEnabled="False"/>
-                <RadioButton Content="Watch" />
             </WrapPanel>
-            <utils:SliderEXT x:Name="slider" Grid.Row="9" Grid.ColumnSpan="2"  Maximum="100" Value="15" >
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="ValueChanged">
-                        <i:InvokeCommandAction Command="{Binding ValueChanged}"
-                                           CommandParameter="{Binding ElementName=slider}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </utils:SliderEXT>
             <utils:DatePickerEXT Name="dp" Text="{Binding DatePickerTime, Mode=TwoWay}"/>
 
-            <WrapPanel Grid.Row="10" >
+            <WrapPanel>
                 <Path Style="{StaticResource PathRound}" />
                 <utils:TransitionControl Name="transition" >
                     <Path Style="{StaticResource PathRound}" Fill="Red" />
@@ -83,19 +100,19 @@
                 <utils:Progress Width="40" Height="40" />
             </WrapPanel>
 
-            <TabControl Grid.Row="11"  TabStripPlacement="Top" Background="LightGray">
+            <utils:TabControlEXT TabStripPlacement="Top" Background="LightGray">
                 <TabItem Cursor="Hand" Header="音乐电台" />
                 <TabItem Cursor="Hand" Header="Mv电台"/>
-            </TabControl>
-            <utils:TreeViewEXT x:Name="TreeViewOrg" Grid.Row="12"  Height="180" CheckBox="Visible" ItemTemplate="{StaticResource UserNode}" ItemsSource="{Binding TreeList}"/>
+            </utils:TabControlEXT>
+            <utils:TreeViewEXT x:Name="TreeViewOrg" Height="180" CheckBox="Visible" ItemTemplate="{StaticResource UserNode}" ItemsSource="{Binding TreeList}"/>
 
 
         </StackPanel>
-        <StackPanel>
-            <utils:DataGridEXT Name="datagrid1" Grid.Column="1" Grid.RowSpan="9" 
-                               ItemsSource="{Binding CollectionView}" Width="480"
+        <StackPanel Grid.Column="1" Margin="10,0,0,0">
+            <utils:DataGridEXT Name="datagrid1"
+                               ItemsSource="{Binding CollectionView}"
                                SelectedItem="{Binding SelectedItem}"
-                               Height="250" Grid.Row="1" VerticalAlignment="Top">
+                               Height="250" VerticalAlignment="Top">
                 <DataGrid.Columns>
                     <DataGridTextColumn  MinWidth="130" Binding="{Binding Money}" ElementStyle="{StaticResource TextRight}"/>
                     <DataGridTemplateColumn Header="Desc">
@@ -118,8 +135,8 @@
             </utils:DataGridEXT>
             <utils:DataPager Name="dataPager" Margin="0,0,0,3" Source="{Binding CollectionView}" IsTotalItemCountFixed="True"/>
 
-            <utils:ListViewEXT Name="listView1" Grid.Column="1" Grid.Row="10" Grid.RowSpan="9" 
-                           ItemHeight="68" ItemWidth="100" Width="480" Height="68"
+            <utils:ListViewEXT Name="listView1"
+                           ItemHeight="68" ItemWidth="100" Height="68"
                            ItemBorder=";0,0,0,4"
                            ItemBorderBrush="Transparent;#AA23AFFF;#DC23AFFF"
                            ItemBackground="Transparent;#ECF4FF;#E9EEFF" 
@@ -140,8 +157,8 @@
                 <utils:ListBoxItemEXT Text="A"/>
                 <utils:ListBoxItemEXT Text="C"/>
             </utils:ListViewEXT>
-            <utils:ListViewEXT Name="listView2" Grid.Column="1" INormal="True"
-                               Width="480" Height="84"
+            <utils:ListViewEXT Name="listView2" INormal="True"
+                               Height="84"
                                ItemsSource="{Binding GridList}"
                                ItemBorder="0" ItemPadding="10,5,10,5" ItemWidth="120" 
                                ItemImageWidth="0" 
@@ -157,7 +174,7 @@
             </utils:ListViewEXT>
 
         </StackPanel>
-    </WrapPanel>
+    </Grid>
     <utils:WindowEXT.FunctionBar>
         <utils:WindowFunctionBar>
             <Menu>

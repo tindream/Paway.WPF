@@ -260,7 +260,7 @@
                          Visibility="Collapsed"
                          Grid.Row="2" />
                 <Border Name="TrackBackground"
-                        Background="LightGray"
+                        Background="{TemplateBinding TrackBackground}"
                         CornerRadius="{TemplateBinding Radius}"
                         Height="{TemplateBinding TrackHeight}"
                         VerticalAlignment="Center"
@@ -343,7 +343,7 @@
                          Visibility="Collapsed"
                          Grid.Column="2" />
                 <Border Name="TrackBackground"
-                        Background="LightGray"
+                        Background="{TemplateBinding TrackBackground}"
                         CornerRadius="{TemplateBinding Radius}"
                         Width="{TemplateBinding TrackHeight}"
                         HorizontalAlignment="Center"

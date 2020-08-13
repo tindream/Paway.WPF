@@ -95,7 +95,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemTextFontSizeProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemTextFontSize), typeof(DoubleEXT), typeof(ListViewEXT), new PropertyMetadata(new DoubleEXT(Config.FontSize)));
+            DependencyProperty.RegisterAttached(nameof(ItemTextFontSize), typeof(DoubleEXT), typeof(ListViewEXT));
 
         /// <summary>
         /// </summary>
@@ -116,7 +116,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemDescFontSizeProperty =
-        DependencyProperty.RegisterAttached(nameof(ItemDescFontSize), typeof(DoubleEXT), typeof(ListViewEXT), new PropertyMetadata(new DoubleEXT(Config.FontSize * 0.85)));
+        DependencyProperty.RegisterAttached(nameof(ItemDescFontSize), typeof(DoubleEXT), typeof(ListViewEXT));
 
         #endregion
 
@@ -388,6 +388,30 @@ namespace Paway.WPF
         public ListViewEXT()
         {
             DefaultStyleKey = typeof(ListViewEXT);
+            Config_FontSizeChanged(Config.FontSize);
+            Config.FontSizeChanged += Config_FontSizeChanged;
+        }
+        /// <summary>
+        /// 防止重置样式时多次选择错误
+        /// </summary>
+        public override void OnApplyTemplate()
+        {
+            this.SelectedIndex = -1;
+            base.OnApplyTemplate();
+        }
+        /// <summary>
+        /// 更新字体大小
+        /// </summary>
+        private void Config_FontSizeChanged(double old)
+        {
+            if (this.ItemTextFontSize == null || this.ItemTextFontSize.Equals(new DoubleEXT(old)))
+            {
+                this.ItemTextFontSize = new DoubleEXT(Config.FontSize);
+            }
+            if (this.ItemDescFontSize == null || this.ItemDescFontSize.Equals(new DoubleEXT(old * 0.85)))
+            {
+                this.ItemDescFontSize = new DoubleEXT(Config.FontSize * 0.85);
+            }
         }
 
         #region 指定按钮按下并释放时，应引发事件。

@@ -115,4 +115,16 @@
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
     </Style>
 
+    <LinearGradientBrush x:Key="ColorSelector">
+        <GradientStop Color="#ff0000" />
+        <GradientStop Color="#ff00ff" Offset="0.571" />
+        <GradientStop Color="#0000ff" Offset="0.45" />
+        <GradientStop Color="#00ffff" Offset="0.3426" />
+        <GradientStop Color="#00ff00" Offset="0.2285" />
+        <GradientStop Color="#ffff00" Offset="0.114" />
+        <GradientStop Color="#ff0000" Offset="0.7994" />
+        <GradientStop Color="White" Offset="0.7995" />
+        <GradientStop Color="Black" Offset="1" />
+    </LinearGradientBrush>
+
 </ResourceDictionary>

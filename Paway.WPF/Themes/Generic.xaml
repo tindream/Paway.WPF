@@ -5,21 +5,5 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Window.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\WindowFunctionBar.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\Progress.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\TextBox.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\Button.xaml"/>
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBox.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBoxMulti.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\ProgressBar.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\ListView.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\CheckBox.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\RadioButton.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\Slider.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\TransitionControl.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\ListBox.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\TreeView.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\Calendar.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\DataPager.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBoxDate.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

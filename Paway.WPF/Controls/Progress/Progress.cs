@@ -2,11 +2,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Paway.WPF
 {
@@ -51,6 +53,7 @@ namespace Paway.WPF
         /// <summary>
         /// Using a DependencyProperty as the backing store for IsActive.  This enables animation, styling, binding, etc...
         /// </summary>
+        [Browsable(false)]
         public bool IsActive
         {
             get { return (bool)GetValue(IsActiveProperty); }
@@ -59,6 +62,7 @@ namespace Paway.WPF
         /// <summary>
         /// Using a DependencyProperty as the backing store for TemplateSettings.  This enables animation, styling, binding, etc...
         /// </summary>
+        [Browsable(false)]
         public ProgressTemplate TemplateSettings
         {
             get { return (ProgressTemplate)GetValue(TemplateSettingsProperty); }
@@ -78,6 +82,7 @@ namespace Paway.WPF
         /// </summary>
         public override void OnApplyTemplate()
         {
+            this.Foreground = new SolidColorBrush(Config.Color);
             base.OnApplyTemplate();
             hasAppliedTemplate = true;
             UpdateState(IsActive);

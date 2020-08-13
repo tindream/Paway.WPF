@@ -51,10 +51,28 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public BrushEXT() { }
+        public BrushEXT()
+        {
+            Config.ColorChanged += Config_ColorChanged;
+        }
+        private void Config_ColorChanged(Color obj)
+        {
+            if (this.Normal is SolidColorBrush normal && normal.Color.R == obj.R && normal.Color.G == obj.G && normal.Color.B == obj.B)
+            {
+                this.Normal = new SolidColorBrush(Color.FromArgb(normal.Color.A, Config.Color.R, Config.Color.G, Config.Color.B));
+            }
+            if (this.Mouse is SolidColorBrush mouse && mouse.Color.R == obj.R && mouse.Color.G == obj.G && mouse.Color.B == obj.B)
+            {
+                this.Mouse = new SolidColorBrush(Color.FromArgb(mouse.Color.A, Config.Color.R, Config.Color.G, Config.Color.B));
+            }
+            if (this.Pressed is SolidColorBrush pressed && pressed.Color.R == obj.R && pressed.Color.G == obj.G && pressed.Color.B == obj.B)
+            {
+                this.Pressed = new SolidColorBrush(Color.FromArgb(pressed.Color.A, Config.Color.R, Config.Color.G, Config.Color.B));
+            }
+        }
         /// <summary>
         /// </summary>
-        public BrushEXT(Color? normal, Color? mouse = null, Color? pressed = null, int? alpha = null, BrushEXT value = null)
+        public BrushEXT(Color? normal, Color? mouse = null, Color? pressed = null, int? alpha = null, BrushEXT value = null) : this()
         {
             if (alpha != null) Alpha = alpha.Value;
             else if (value != null) Alpha = value.Alpha;

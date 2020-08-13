@@ -13,6 +13,8 @@ namespace Paway.WPF
     /// </summary>
     public class ThemeMonitor : DependencyObject
     {
+        private static readonly List<Control> ControlList = new List<Control>();
+
         #region 主题样式监听
         /// <summary>
         /// 主题样式监听
@@ -35,7 +37,11 @@ namespace Paway.WPF
                 {
                     ctrl.Loaded += delegate
                     {
-                        if (ctrl.FontSize == new Control().FontSize) ctrl.SetValue(Control.FontSizeProperty, ctrl.GetValue(FontSizeProperty));
+                        if (ctrl.FontSize == new Control().FontSize)
+                        {
+                            if (!ControlList.Contains(ctrl)) ControlList.Add(ctrl);
+                            ctrl.SetValue(Control.FontSizeProperty, Config.FontSize);
+                        }
                     };
                 }
             }
@@ -43,25 +49,22 @@ namespace Paway.WPF
 
         #endregion
 
-        #region 依赖属性
         /// <summary>
-        /// 字体大小
+        /// 监听主题字体更新
         /// </summary>
-        public static readonly DependencyProperty FontSizeProperty =
-            DependencyProperty.RegisterAttached(nameof(FontSize), typeof(double), typeof(ThemeMonitor), new PropertyMetadata(Config.FontSize));
-
-        #endregion
-
-        #region 扩展
-        /// <summary>
-        /// 字体大小
-        /// </summary>
-        public double FontSize
+        static ThemeMonitor()
         {
-            get { return (double)GetValue(FontSizeProperty); }
-            set { SetValue(FontSizeProperty, value); }
+            Config.FontSizeChanged += Config_FontSizeChanged;
         }
-
-        #endregion
+        /// <summary>
+        /// 更新字体大小
+        /// </summary>
+        private static void Config_FontSizeChanged(double old)
+        {
+            for (int i = 0; i < ControlList.Count; i++)
+            {
+                ControlList[i].SetValue(Control.FontSizeProperty, Config.FontSize);
+            }
+        }
     }
 }

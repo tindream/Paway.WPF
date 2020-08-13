@@ -5,10 +5,12 @@ using Paway.WPF;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Paway.Test.ViewModel
 {
@@ -80,23 +82,27 @@ namespace Paway.Test.ViewModel
         #endregion
 
         #region 命令
-        private ICommand valueChanged;
-        public ICommand ValueChanged
+        private ICommand sizeChanged;
+        public ICommand SizeChanged
         {
             get
             {
-                return valueChanged ?? (valueChanged = new RelayCommand<SliderEXT>(slider =>
+                return sizeChanged ?? (sizeChanged = new RelayCommand<SliderEXT>(slider =>
                 {
                     Config.FontSize = slider.Value;
-
-                    var list = new List<ResourceDictionary>();
-                    foreach (var item in Application.Current.Resources.MergedDictionaries) list.Add(item);
-                    Application.Current.Resources.MergedDictionaries.Clear();
-
-                    ResourceDictionary resource = (ResourceDictionary)Application.LoadComponent(new Uri("/Paway.WPF;component/Themes/Paway.xaml", UriKind.Relative));
-                    Application.Current.Resources.MergedDictionaries.Add(resource);
-
-                    //foreach (var item in list) Application.Current.Resources.MergedDictionaries.Add(item);
+                }));
+            }
+        }
+        private ICommand colorChanged;
+        public ICommand ColorChanged
+        {
+            get
+            {
+                return colorChanged ?? (colorChanged = new RelayCommand<SliderEXT>(slider =>
+                {
+                    var color = Method.ColorSelector(slider.Value / 7);
+                    Config.Color = color;
+                    Method.DoStyles();
                 }));
             }
         }
