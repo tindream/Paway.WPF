@@ -36,7 +36,7 @@
                 <utils:ButtonEXT Name="chart" Content="取消"
                              BackgroundStart="Transparent;#77CA6B38" BackgroundEnd="Transparent;#77CA6B38" 
                              BackgroundImage="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"
-                             Stretch="None" Viewport="0,0,0.5,1"
+                             Stretch="None" Viewport="0,0,0.4,1"
                              Command="{Binding Teach}" CommandParameter="{Binding ElementName=btn}"/>
                 <utils:ButtonEXT Name="btn" Grid.Column="1" Grid.Row="6" 
                              Content="确认" Click="ButtonEXT_Click" 

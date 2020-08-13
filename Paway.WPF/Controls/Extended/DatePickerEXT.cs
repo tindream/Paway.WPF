@@ -26,9 +26,13 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(IsReadOnly), typeof(bool), typeof(DatePickerEXT), new PropertyMetadata(true));
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty HasButtonProperty =
+            DependencyProperty.RegisterAttached(nameof(HasButton), typeof(bool), typeof(DatePickerEXT), new PropertyMetadata(true));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(Brush), typeof(DatePickerEXT),
-                new PropertyMetadata(new SolidColorBrush(Color.FromArgb(255, Config.Color.R, Config.Color.G, Config.Color.B))));
+            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(DatePickerEXT),
+                new PropertyMetadata(new BrushEXT(Colors.Gray, Color.FromArgb(205, Config.Color.R, Config.Color.G, Config.Color.B))));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty TodayColorProperty =
@@ -59,13 +63,23 @@ namespace Paway.WPF
             set { SetValue(IsReadOnlyProperty, value); }
         }
         /// <summary>
+        /// 启用扩展按钮
+        /// </summary>
+        [Category("扩展")]
+        [Description("启用扩展按钮")]
+        public bool HasButton
+        {
+            get { return (bool)GetValue(HasButtonProperty); }
+            set { SetValue(HasButtonProperty, value); }
+        }
+        /// <summary>
         /// 自定义项背景色
         /// </summary>
         [Category("扩展")]
         [Description("自定义项背景色")]
-        public Brush ItemBrush
+        public BrushEXT ItemBrush
         {
-            get { return (Brush)GetValue(ItemBrushProperty); }
+            get { return (BrushEXT)GetValue(ItemBrushProperty); }
             set { SetValue(ItemBrushProperty, value); }
         }
         /// <summary>
