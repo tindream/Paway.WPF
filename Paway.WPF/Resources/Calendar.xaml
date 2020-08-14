@@ -561,11 +561,11 @@
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Visibility" TargetName="PART_DisabledVisual" Value="Visible"/>
                         </Trigger>
-                        <DataTrigger Binding="{Binding DisplayMode, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type Calendar}}}" Value="Year">
+                        <DataTrigger Binding="{Binding DisplayMode, RelativeSource={RelativeSource AncestorType={x:Type Calendar}}}" Value="Year">
                             <Setter Property="Visibility" TargetName="PART_MonthView" Value="Hidden"/>
                             <Setter Property="Visibility" TargetName="PART_YearView" Value="Visible"/>
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding DisplayMode, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type Calendar}}}" Value="Decade">
+                        <DataTrigger Binding="{Binding DisplayMode, RelativeSource={RelativeSource AncestorType={x:Type Calendar}}}" Value="Decade">
                             <Setter Property="Visibility" TargetName="PART_MonthView" Value="Hidden"/>
                             <Setter Property="Visibility" TargetName="PART_YearView" Value="Visible"/>
                         </DataTrigger>

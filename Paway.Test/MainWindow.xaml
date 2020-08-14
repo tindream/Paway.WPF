@@ -136,8 +136,7 @@
 
             <utils:ListViewEXT Name="listView1"
                            ItemHeight="68" ItemWidth="100" Height="68"
-                           ItemBorder=";0,0,0,4"
-                           ItemBorderBrush="Transparent;#AA23AFFF;#DC23AFFF"
+                           ItemBorder="0;0,0,0,4"
                            ItemBackground="Transparent;#ECF4FF;#E9EEFF" 
                            ItemTextForeground="#222;#222"
                            Background="#CCD5F0"
