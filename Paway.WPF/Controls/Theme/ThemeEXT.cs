@@ -18,8 +18,8 @@ namespace Paway.WPF
         #region 依赖属性
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty RadiusProperty =
-            DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(ThemeEXT), new PropertyMetadata(new CornerRadius(3)));
+        public static readonly DependencyProperty FontSizeProperty =
+            DependencyProperty.RegisterAttached(nameof(FontSize), typeof(double), typeof(ThemeEXT), new PropertyMetadata(Config.FontSize));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
@@ -29,31 +29,27 @@ namespace Paway.WPF
         #endregion
 
         #region 扩展
-        #region 自定义边框圆角
         /// <summary>
-        /// 自定义边框圆角
+        /// 字体大小
         /// </summary>
         [Category("扩展")]
-        [Description("自定义边框圆角")]
-        public CornerRadius Radius { get; set; }
+        [Description("字体大小")]
+        public double FontSize { get; set; }
         /// <summary>
-        /// get自定义边框圆角
+        /// get字体大小
         /// </summary>
-        public static CornerRadius GetRadius(DependencyObject obj)
+        public static double GetFontSize(DependencyObject obj)
         {
-            return (CornerRadius)obj.GetValue(RadiusProperty);
+            return (double)obj.GetValue(FontSizeProperty);
         }
         /// <summary>
-        /// set自定义边框圆角
+        /// set字体大小
         /// </summary>
-        public static void SetRadius(DependencyObject obj, CornerRadius value)
+        public static void SetFontSize(DependencyObject obj, double value)
         {
-            obj.SetValue(RadiusProperty, value);
+            obj.SetValue(FontSizeProperty, value);
         }
 
-        #endregion
-
-        #region 文本框的边框颜色
         /// <summary>
         /// 文本框的边框颜色
         /// </summary>
@@ -74,8 +70,6 @@ namespace Paway.WPF
         {
             obj.SetValue(ItemBrushProperty, value);
         }
-
-        #endregion
 
         #endregion
     }

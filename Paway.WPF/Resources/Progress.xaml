@@ -11,6 +11,7 @@
         <Setter Property="MinHeight" Value="20" />
         <Setter Property="MinWidth" Value="20" />
         <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Foreground" Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:Progress}">
@@ -161,7 +162,7 @@
                                 Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.EllipseDiameter}"
                                 Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.EllipseDiameter}"
                                 Margin="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.EllipseOffset}"
-                                Fill="{Binding ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:Progress}}}" />
+                                Fill="{TemplateBinding Foreground}" />
                             </Canvas>
                             <Canvas RenderTransformOrigin=".5,.5">
                                 <Canvas.RenderTransform>
@@ -172,7 +173,7 @@
                                 Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.EllipseDiameter}"
                                 Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.EllipseDiameter}"
                                 Margin="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.EllipseOffset}"
-                                Fill="{Binding ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:Progress}}}" />
+                                Fill="{TemplateBinding Foreground}" />
                             </Canvas>
                             <Canvas RenderTransformOrigin=".5,.5">
                                 <Canvas.RenderTransform>
@@ -183,7 +184,7 @@
                                 Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.EllipseDiameter}"
                                 Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.EllipseDiameter}"
                                 Margin="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.EllipseOffset}"
-                                Fill="{Binding ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:Progress}}}" />
+                                Fill="{TemplateBinding Foreground}" />
                             </Canvas>
                             <Canvas RenderTransformOrigin=".5,.5">
                                 <Canvas.RenderTransform>
@@ -194,7 +195,7 @@
                                 Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.EllipseDiameter}"
                                 Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.EllipseDiameter}"
                                 Margin="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.EllipseOffset}"
-                                Fill="{Binding ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:Progress}}}" />
+                                Fill="{TemplateBinding Foreground}" />
                             </Canvas>
                             <Canvas RenderTransformOrigin=".5,.5">
                                 <Canvas.RenderTransform>
@@ -205,7 +206,7 @@
                                 Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.EllipseDiameter}"
                                 Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.EllipseDiameter}"
                                 Margin="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.EllipseOffset}"
-                                Fill="{Binding ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:Progress}}}" />
+                                Fill="{TemplateBinding Foreground}" />
                             </Canvas>
                             <Canvas RenderTransformOrigin=".5,.5" Visibility="Collapsed" x:Name="SixthCircle">
                                 <Canvas.RenderTransform>
@@ -216,7 +217,7 @@
                                 Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.EllipseDiameter}"
                                 Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.EllipseDiameter}"
                                 Margin="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.EllipseOffset}"
-                                Fill="{Binding ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:Progress}}}" />
+                                Fill="{TemplateBinding Foreground}" />
                             </Canvas>
                         </Grid>
                     </Border>

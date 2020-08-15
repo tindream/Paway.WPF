@@ -17,8 +17,27 @@ namespace Paway.WPF
     /// 自定义默认、鼠标划过时、鼠标点击时的Color颜色
     /// </summary>
     [TypeConverter(typeof(ColorEXTConverter))]
-    public class ColorEXT : IEquatable<ColorEXT>, IElementStatu<Color>
+    public class ColorEXT : IEquatable<ColorEXT>, IElementStatu<Color>, INotifyPropertyChanged
     {
+        #region INotifyPropertyChanged
+        /// <summary>
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// </summary>
+        public void OnPropertyChanged()
+        {
+            OnPropertyChanged(Method.GetLastModelName());
+        }
+        /// <summary>
+        /// </summary>
+        public void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
+        #endregion
+
         /// <summary>
         /// 默认的颜色
         /// </summary>
@@ -47,14 +66,17 @@ namespace Paway.WPF
             if (this.Normal is Color normal && normal.R == obj.R && normal.G == obj.G && normal.B == obj.B)
             {
                 this.Normal = Method.ThemeColor(normal.A);
+                OnPropertyChanged(nameof(Normal));
             }
             if (this.Mouse is Color mouse && mouse.R == obj.R && mouse.G == obj.G && mouse.B == obj.B)
             {
                 this.Mouse = Method.ThemeColor(mouse.A);
+                OnPropertyChanged(nameof(Mouse));
             }
             if (this.Pressed is Color pressed && pressed.R == obj.R && pressed.G == obj.G && pressed.B == obj.B)
             {
                 this.Pressed = Method.ThemeColor(pressed.A);
+                OnPropertyChanged(nameof(Pressed));
             }
         }
         /// <summary>

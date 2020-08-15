@@ -126,5 +126,10 @@
         <GradientStop Color="White" Offset="0.7995" />
         <GradientStop Color="Black" Offset="1" />
     </LinearGradientBrush>
+    <Style x:Key="borderColor" TargetType="{x:Type Border}">
+        <Setter Property="Height" Value="3" />
+        <Setter Property="CornerRadius" Value="2" />
+        <Setter Property="Background" Value="{StaticResource ColorSelector}" />
+    </Style>
 
 </ResourceDictionary>

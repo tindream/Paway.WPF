@@ -19,6 +19,10 @@ namespace Paway.WPF
         #region 依赖属性
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty BackgroundEXTProperty =
+            DependencyProperty.RegisterAttached(nameof(BackgroundEXT), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(20)));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty OrientationProperty =
             DependencyProperty.RegisterAttached(nameof(Orientation), typeof(Orientation), typeof(ListViewEXT), new PropertyMetadata(Orientation.Horizontal));
         /// <summary>
@@ -48,7 +52,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBorderProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBorder), typeof(ThicknessEXT), typeof(ListViewEXT), new PropertyMetadata(new ThicknessEXT(1)));
+            DependencyProperty.RegisterAttached(nameof(ItemBorder), typeof(ThicknessEXT), typeof(ListViewEXT), new PropertyMetadata(new ThicknessEXT(0)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBorderBrushProperty =
@@ -56,7 +60,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBackgroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(Color.FromArgb(255, 243, 243, 243), 120, 170)));
+            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(Colors.Transparent, 120, 150)));
 
         /// <summary>
         /// </summary>
@@ -121,6 +125,16 @@ namespace Paway.WPF
         #endregion
 
         #region 扩展.项
+        /// <summary>
+        /// 自定义背景颜色
+        /// </summary>
+        [Category("扩展.项")]
+        [Description("自定义背景颜色")]
+        public BrushEXT BackgroundEXT
+        {
+            get { return (BrushEXT)GetValue(BackgroundEXTProperty); }
+            set { SetValue(BackgroundEXTProperty, value); }
+        }
         /// <summary>
         /// 项显示方向
         /// </summary>
@@ -390,14 +404,6 @@ namespace Paway.WPF
             DefaultStyleKey = typeof(ListViewEXT);
             Config_FontSizeChanged(Config.FontSize);
             Config.FontSizeChanged += Config_FontSizeChanged;
-        }
-        /// <summary>
-        /// 防止重置样式时多次选择错误
-        /// </summary>
-        public override void OnApplyTemplate()
-        {
-            this.SelectedIndex = -1;
-            base.OnApplyTemplate();
         }
         /// <summary>
         /// 更新字体大小

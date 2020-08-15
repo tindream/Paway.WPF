@@ -16,7 +16,7 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <StackPanel>
-            <utils:SliderEXT x:Name="slider" Maximum="100" Value="15" >
+            <utils:SliderEXT x:Name="slider" Minimum="12" Maximum="18" Value="15" AutoToolTipPrecision="2"  TickFrequency="0.01">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="ValueChanged">
                         <i:InvokeCommandAction Command="{Binding SizeChanged}"
@@ -24,20 +24,18 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </utils:SliderEXT>
-            <utils:SliderEXT x:Name="sldTheme" TrackColorLinear="Transparent;Transparent"
-                             TrackBackground="Transparent"
-                             Maximum="70"
-                             Value="0"
-                             IsSnapToTickEnabled="True"
-                             TickFrequency="1"
-                             Background="{StaticResource ColorSelector}">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="ValueChanged">
-                        <i:InvokeCommandAction Command="{Binding ColorChanged}"
+            <Grid>
+                <Border Style="{StaticResource borderColor}"/>
+                <utils:SliderEXT x:Name="sldTheme" Maximum="7" Value="2.5" AutoToolTipPrecision="2" TickFrequency="0.01" Margin="0"
+                                 TrackColorLinear="Transparent;Transparent" TrackBackground="Transparent" IsSnapToTickEnabled="True">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="ValueChanged">
+                            <i:InvokeCommandAction Command="{Binding ColorChanged}"
                                            CommandParameter="{Binding ElementName=sldTheme}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </utils:SliderEXT>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </utils:SliderEXT>
+            </Grid>
             <utils:ProgressBarEXT Value="95" />
 
             <utils:ComboBoxEXT Name="cbxBox" ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text"
@@ -138,9 +136,6 @@
             <utils:ListViewEXT Name="listView1"
                            ItemHeight="68" ItemWidth="100" Height="68"
                            ItemBorder="0;0,0,0,4"
-                           ItemBackground="Transparent;#ECF4FF;#E9EEFF" 
-                           ItemTextForeground="#222;#222"
-                           Background="#CCD5F0"
                            ItemImageHeight="32" ItemImageDock="Top" ItemPadding="5"
                            SelectionMode="Extended" VerticalAlignment="Top">
                 <i:Interaction.Triggers>
@@ -156,10 +151,10 @@
                 <utils:ListBoxItemEXT Text="A"/>
                 <utils:ListBoxItemEXT Text="C"/>
             </utils:ListViewEXT>
-            <utils:ListViewEXT Name="listView2" INormal="True"
+            <utils:ListViewEXT Name="listView2"
                                Height="84"
                                ItemsSource="{Binding GridList}"
-                               ItemBorder="0" ItemPadding="10,5,10,5" ItemWidth="120" 
+                               ItemPadding="10,5,10,5" ItemWidth="120" 
                                SelectionMode="Multiple"
                                ItemDescForeground="Green"
                                HorizontalContentAlignment="Left" VerticalAlignment="Top" >

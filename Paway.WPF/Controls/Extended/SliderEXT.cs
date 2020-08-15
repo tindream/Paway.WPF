@@ -41,10 +41,6 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(TrackWidth), typeof(double), typeof(SliderEXT), new PropertyMetadata(18d));
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty TrackDotProperty =
-            DependencyProperty.RegisterAttached(nameof(TrackDot), typeof(int), typeof(SliderEXT));
-        /// <summary>
-        /// </summary>
         public static readonly DependencyProperty TrackColorLinearProperty =
             DependencyProperty.RegisterAttached(nameof(TrackColorLinear), typeof(ColorLinear), typeof(SliderEXT),
                 new PropertyMetadata(new ColorLinear(85, 255)));
@@ -102,16 +98,6 @@ namespace Paway.WPF
             set { SetValue(TrackWidthProperty, value); }
         }
         /// <summary>
-        /// 显示小数位数
-        /// </summary>
-        [Category("扩展")]
-        [Description("显示小数位数")]
-        public int TrackDot
-        {
-            get { return (int)GetValue(TrackDotProperty); }
-            set { SetValue(TrackDotProperty, value); }
-        }
-        /// <summary>
         /// 轨道线性颜色
         /// </summary>
         [Category("扩展")]
@@ -149,7 +135,7 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            this.ToolTip = TMethod.Round(this.Value, TrackDot);
+            this.ToolTip = TMethod.Round(this.Value, this.AutoToolTipPrecision);
 
             if (this.AutoToolTipPlacement == System.Windows.Controls.Primitives.AutoToolTipPlacement.None) return;
             if (toolTip == null)
@@ -163,7 +149,7 @@ namespace Paway.WPF
                     thumb.ToolTip = toolTip;
                 }
             }
-            toolTip.Content = TMethod.Round(this.Value, TrackDot);
+            toolTip.Content = TMethod.Round(this.Value, this.AutoToolTipPrecision);
             if (toolTip.IsOpen)
             {
                 toolTip.IsOpen = false;
@@ -206,12 +192,12 @@ namespace Paway.WPF
         protected override void OnThumbDragDelta(DragDeltaEventArgs e)
         {
             base.OnThumbDragDelta(e);
-            this.ToolTip = TMethod.Round(this.Value, TrackDot);
+            this.ToolTip = TMethod.Round(this.Value, this.AutoToolTipPrecision);
         }
 
         private void SliderEXT_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            this.ToolTip = TMethod.Round(this.Value, TrackDot);
+            this.ToolTip = TMethod.Round(this.Value, this.AutoToolTipPrecision);
         }
 
         #endregion

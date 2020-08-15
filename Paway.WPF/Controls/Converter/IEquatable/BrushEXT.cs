@@ -79,18 +79,18 @@ namespace Paway.WPF
             if (this.Normal is SolidColorBrush normal && normal.Color.R == obj.R && normal.Color.G == obj.G && normal.Color.B == obj.B)
             {
                 this.Normal = new SolidColorBrush(Method.ThemeColor(normal.Color.A));
+                OnPropertyChanged(nameof(Normal));
             }
             if (this.Mouse is SolidColorBrush mouse && mouse.Color.R == obj.R && mouse.Color.G == obj.G && mouse.Color.B == obj.B)
             {
                 this.Mouse = new SolidColorBrush(Method.ThemeColor(mouse.Color.A));
+                OnPropertyChanged(nameof(Mouse));
             }
             if (this.Pressed is SolidColorBrush pressed && pressed.Color.R == obj.R && pressed.Color.G == obj.G && pressed.Color.B == obj.B)
             {
                 this.Pressed = new SolidColorBrush(Method.ThemeColor(pressed.Color.A));
+                OnPropertyChanged(nameof(Pressed));
             }
-            OnPropertyChanged(nameof(Normal));
-            OnPropertyChanged(nameof(Mouse));
-            OnPropertyChanged(nameof(Pressed));
         }
         /// <summary>
         /// 主题色：设置所有颜色，自动Alpha变量
