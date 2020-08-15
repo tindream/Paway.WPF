@@ -52,11 +52,11 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBorderBrushProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBorderBrush), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT().Focused(Color.FromArgb(170, Config.Color.R, Config.Color.G, Config.Color.B))));
+            DependencyProperty.RegisterAttached(nameof(ItemBorderBrush), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(170, 255)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBackgroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(Color.FromArgb(255, 243, 243, 243), Color.FromArgb(120, Config.Color.R, Config.Color.G, Config.Color.B))));
+            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(Color.FromArgb(255, 243, 243, 243), 120, 170)));
 
         /// <summary>
         /// </summary>
@@ -78,7 +78,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty StretchProperty =
             DependencyProperty.RegisterAttached(nameof(ItemImageStretch), typeof(Stretch), typeof(ListViewEXT),
-            new PropertyMetadata(Stretch.Fill));
+            new PropertyMetadata(Stretch.None));
 
         /// <summary>
         /// </summary>
@@ -91,7 +91,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemTextBackgroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemTextBackground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(Colors.Transparent, null, null, 0)));
+            DependencyProperty.RegisterAttached(nameof(ItemTextBackground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(Colors.Transparent)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemTextFontSizeProperty =
@@ -112,7 +112,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemDescBackgroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemDescBackground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(Colors.Transparent, null, null, 0)));
+            DependencyProperty.RegisterAttached(nameof(ItemDescBackground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(Colors.Transparent)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemDescFontSizeProperty =

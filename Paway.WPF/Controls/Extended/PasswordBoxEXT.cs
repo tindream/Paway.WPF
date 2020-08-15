@@ -24,7 +24,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(PasswordBoxEXT),
-                new PropertyMetadata(new BrushEXT(Colors.LightGray, Color.FromArgb(170, Config.Color.R, Config.Color.G, Config.Color.B), null, 85)));
+                new PropertyMetadata(new BrushEXT(170, 255)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty IconProperty =

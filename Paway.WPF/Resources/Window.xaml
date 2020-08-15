@@ -157,7 +157,7 @@
                                     <Image Source="{TemplateBinding Icon}"
                                            VerticalAlignment="Center"
                                            Margin="5,0,0,0"
-                                           Visibility="{Binding Icon,RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource nullToVisible}}"
+                                           Visibility="{Binding Icon,RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource nullToCollapsed}}"
                                            Height="{x:Static SystemParameters.SmallIconHeight}"
                                            Width="{x:Static SystemParameters.SmallIconWidth}"
                                            WindowChrome.IsHitTestVisibleInChrome="True"/>

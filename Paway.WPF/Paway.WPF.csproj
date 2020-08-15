@@ -73,7 +73,7 @@
     <Compile Include="Controls\Converter\IValueConverter\EmptyColorConverter.cs" />
     <Compile Include="Controls\Converter\IValueConverter\ChangeConverter.cs" />
     <Compile Include="Controls\Converter\IValueConverter\BoolReverse.cs" />
-    <Compile Include="Controls\Converter\IValueConverter\NullToVisible.cs" />
+    <Compile Include="Controls\Converter\IValueConverter\NullToCollapsed.cs" />
     <Compile Include="Controls\Converter\IValueConverter\DateConverter.cs" />
     <Compile Include="Controls\Converter\IValueConverter\DateConvertToColor.cs" />
     <Compile Include="Controls\Converter\IValueConverter\IndentConverter.cs" />
@@ -111,6 +111,7 @@
     <Compile Include="Controls\Progress\WindowProgress.xaml.cs">
       <DependentUpon>WindowProgress.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Theme\ThemeEXT.cs" />
     <Compile Include="Controls\TransitionControl\TransitionControl.cs" />
     <Compile Include="Controls\TransitionControl\TransitionType.cs" />
     <Compile Include="Controls\Window\FunctionBar\FunctionBar.cs" />

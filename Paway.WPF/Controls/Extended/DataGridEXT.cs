@@ -25,17 +25,17 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(DataGridEXT),
-                new PropertyMetadata(new BrushEXT(Color.FromArgb(120, Config.Color.R, Config.Color.G, Config.Color.B))));
+                new PropertyMetadata(new BrushEXT(120)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty HeaderStartProperty =
             DependencyProperty.RegisterAttached(nameof(HeaderStart), typeof(ColorEXT), typeof(DataGridEXT),
-                new PropertyMetadata(new ColorEXT(Color.FromArgb(255, 254, 254, 254), Color.FromArgb(85, Config.Color.R, Config.Color.G, Config.Color.B))));
+                new PropertyMetadata(new ColorEXT(Color.FromArgb(255, 254, 254, 254), 85, 135)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty HeaderEndProperty =
             DependencyProperty.RegisterAttached(nameof(HeaderEnd), typeof(ColorEXT), typeof(DataGridEXT),
-                new PropertyMetadata(new ColorEXT(Color.FromArgb(255, 220, 220, 220), Color.FromArgb(170, Config.Color.R, Config.Color.G, Config.Color.B))));
+                new PropertyMetadata(new ColorEXT(Color.FromArgb(255, 220, 220, 220), 170, 225)));
 
         /// <summary>
         /// 自定义项背景色

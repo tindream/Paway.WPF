@@ -22,15 +22,15 @@ namespace Paway.WPF
         /// <summary>
         /// 起始颜色
         /// </summary>
-        public Color Start { get; set; } = Color.FromArgb(85, Config.Color.R, Config.Color.G, Config.Color.B);
+        public Color Start { get; set; } = Method.ThemeColor(85);
         /// <summary>
         /// 终点颜色
         /// </summary>
-        public Color End { get; set; } = Color.FromArgb(250, Config.Color.R, Config.Color.G, Config.Color.B);
+        public Color End { get; set; } = Method.ThemeColor(250);
         /// <summary>
         /// 颜色Alpha值变量
         /// </summary>
-        public int Alpha { get; set; } = 165;
+        public int Alpha { get; set; } = 100;
 
         /// <summary>
         /// </summary>
@@ -42,13 +42,17 @@ namespace Paway.WPF
         {
             if (this.Start is Color start && start.R == obj.R && start.G == obj.G && start.B == obj.B)
             {
-                this.Start = Color.FromArgb(start.A, Config.Color.R, Config.Color.G, Config.Color.B);
+                this.Start = Method.ThemeColor(start.A);
             }
             if (this.End is Color end && end.R == obj.R && end.G == obj.G && end.B == obj.B)
             {
-                this.End = Color.FromArgb(end.A, Config.Color.R, Config.Color.G, Config.Color.B);
+                this.End = Method.ThemeColor(end.A);
             }
         }
+        /// <summary>
+        /// 主题色：普通、鼠标移过、alpha变量
+        /// </summary>
+        public ColorLinear(byte start, byte end) : this(Method.ThemeColor(start), Method.ThemeColor(end)) { }
         /// <summary>
         /// </summary>
         public ColorLinear(Color? start, Color? end = null, int? alpha = null, ColorLinear value = null) : this()
@@ -64,9 +68,9 @@ namespace Paway.WPF
             else if (value != null) End = value.End;
         }
         /// <summary>
-        /// 设置所有颜色，指定Alpha差异
+        /// 设置所有颜色，指定Alpha变量
         /// </summary>
-        public ColorLinear Reset(Color color, int alpha = 165)
+        private ColorLinear Reset(Color color, int alpha = 165)
         {
             Start = color;
             var a = color.A + alpha;
@@ -138,6 +142,10 @@ namespace Paway.WPF
         }
         private Color Parse(string str)
         {
+            if (byte.TryParse(str, out byte alpha))
+            {
+                return Method.ThemeColor(alpha);
+            }
             return (Color)ColorConverter.ConvertFromString(str);
         }
         /// <summary>

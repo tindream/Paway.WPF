@@ -10,17 +10,17 @@ using System.Windows.Data;
 namespace Paway.WPF
 {
     /// <summary>
-    /// 空值检查(转换为bool)
+    /// 非空检查(转换为bool)
     /// </summary>
     internal class IsNotNullConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value != null;
+            return value != null && value != DependencyProperty.UnsetValue;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return DependencyProperty.UnsetValue;
+            throw new NotImplementedException();
         }
     }
 }

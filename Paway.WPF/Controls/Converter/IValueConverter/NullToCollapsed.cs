@@ -10,9 +10,9 @@ using System.Windows.Data;
 namespace Paway.WPF
 {
     /// <summary>
-    /// null转Visibility
+    /// null转Collapsed
     /// </summary>
-    internal class NullToVisible : IValueConverter
+    internal class NullToCollapsed : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

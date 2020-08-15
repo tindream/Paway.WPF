@@ -17,7 +17,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBackgroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ListBoxItemEXT), new PropertyMetadata(new BrushEXT().Reset(Colors.Transparent, 0)));
+            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ListBoxItemEXT), new PropertyMetadata(new BrushEXT(Colors.Transparent)));
 
         /// <summary>
         /// 自定义项背景颜色

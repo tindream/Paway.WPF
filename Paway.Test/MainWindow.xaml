@@ -62,12 +62,12 @@
                 <utils:ButtonEXT Name="chart" Content="取消"
                              BackgroundStart="Transparent;#77CA6B38" BackgroundEnd="Transparent;#77CA6B38" 
                              BackgroundImage="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"
-                             Stretch="None" Viewport="0,0,0.4,1"
+                             Stretch="None" Viewport="0,0,0.35,1"
                              Command="{Binding Teach}" CommandParameter="{Binding ElementName=btn}"/>
                 <utils:ButtonEXT Name="btn" Grid.Column="1"
                              Content="确认" Click="ButtonEXT_Click" 
                              Border="1;0"
-                             BackgroundStart="#AA23AFFF" BackgroundEnd="#AA23AFFF" 
+                             BackgroundStart="170" BackgroundEnd="170" 
                              CommandParameter="{Binding ElementName=btn}"/>
                 <utils:ButtonEXT Grid.Column="2"
                              Content="原生"
@@ -92,9 +92,10 @@
                     <Path Style="{StaticResource PathRound}" Fill="Red" />
                 </utils:TransitionControl>
                 <Path Style="{StaticResource PathTriangle}" />
-                <Path Style="{StaticResource PathTriangleDown}" Fill="Red" />
-                <Path Style="{StaticResource PathQuestion}" />
+                <Path Style="{StaticResource PathTriangleDown}"/>
+                <Path Style="{StaticResource PathTriangleRight}"/>
                 <Path Style="{StaticResource PathRight}" />
+                <Path Style="{StaticResource PathQuestion}" />
                 <Path Style="{StaticResource PathClose}" />
                 <utils:Progress Width="40" Height="40" />
             </WrapPanel>
@@ -159,7 +160,6 @@
                                Height="84"
                                ItemsSource="{Binding GridList}"
                                ItemBorder="0" ItemPadding="10,5,10,5" ItemWidth="120" 
-                               ItemImageWidth="0" 
                                SelectionMode="Multiple"
                                ItemDescForeground="Green"
                                HorizontalContentAlignment="Left" VerticalAlignment="Top" >

@@ -26,11 +26,11 @@ namespace Paway.WPF
         /// <summary>
         /// 鼠标划过时的颜色
         /// </summary>
-        public Color Mouse { get; set; } = Color.FromArgb(210, Config.Color.R, Config.Color.G, Config.Color.B);
+        public Color Mouse { get; set; } = Method.ThemeColor(210);
         /// <summary>
         /// 鼠标点击时的颜色
         /// </summary>
-        public Color Pressed { get; set; } = Color.FromArgb(250, Config.Color.R, Config.Color.G, Config.Color.B);
+        public Color Pressed { get; set; } = Method.ThemeColor(250);
         /// <summary>
         /// 颜色Alpha值变量
         /// </summary>
@@ -46,17 +46,21 @@ namespace Paway.WPF
         {
             if (this.Normal is Color normal && normal.R == obj.R && normal.G == obj.G && normal.B == obj.B)
             {
-                this.Normal = Color.FromArgb(normal.A, Config.Color.R, Config.Color.G, Config.Color.B);
+                this.Normal = Method.ThemeColor(normal.A);
             }
             if (this.Mouse is Color mouse && mouse.R == obj.R && mouse.G == obj.G && mouse.B == obj.B)
             {
-                this.Mouse = Color.FromArgb(mouse.A, Config.Color.R, Config.Color.G, Config.Color.B);
+                this.Mouse = Method.ThemeColor(mouse.A);
             }
             if (this.Pressed is Color pressed && pressed.R == obj.R && pressed.G == obj.G && pressed.B == obj.B)
             {
-                this.Pressed = Color.FromArgb(pressed.A, Config.Color.R, Config.Color.G, Config.Color.B);
+                this.Pressed = Method.ThemeColor(pressed.A);
             }
         }
+        /// <summary>
+        /// 主题色：普通、鼠标移过、alpha变量
+        /// </summary>
+        public ColorEXT(Color? normal, byte mouse, byte pressed) : this(normal, Method.ThemeColor(mouse), Method.ThemeColor(pressed)) { }
         /// <summary>
         /// </summary>
         public ColorEXT(Color? normal, Color? mouse = null, Color? pressed = null, int? alpha = null, ColorEXT value = null) : this()
@@ -76,9 +80,9 @@ namespace Paway.WPF
             else if (normal == null && value != null) Pressed = value.Pressed;
         }
         /// <summary>
-        /// 设置所有颜色，指定Alpha差异
+        /// 设置所有颜色，指定Alpha变量
         /// </summary>
-        public ColorEXT Reset(Color color, int alpha = 50)
+        private ColorEXT Reset(Color color, int alpha)
         {
             Normal = color;
             var a = color.A - alpha;
@@ -93,7 +97,7 @@ namespace Paway.WPF
         /// <summary>
         /// 设置鼠标划过、点击时的颜色
         /// </summary>
-        public ColorEXT Focused(Color color, int alpha = 50)
+        private ColorEXT Focused(Color color, int alpha)
         {
             Mouse = color;
             var a = color.A + alpha;
@@ -151,6 +155,10 @@ namespace Paway.WPF
         }
         private Color Parse(string str)
         {
+            if (byte.TryParse(str, out byte alpha))
+            {
+                return Method.ThemeColor(alpha);
+            }
             return (Color)ColorConverter.ConvertFromString(str);
         }
         /// <summary>

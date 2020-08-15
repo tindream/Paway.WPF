@@ -20,7 +20,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(TabControlEXT),
-                new PropertyMetadata(new BrushEXT(null, Color.FromArgb(205, Config.Color.R, Config.Color.G, Config.Color.B))));
+                new PropertyMetadata(new BrushEXT(205, 255)));
 
         #endregion
 

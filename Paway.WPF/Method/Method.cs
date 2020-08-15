@@ -301,6 +301,15 @@ namespace Paway.WPF
             var b = (byte)((right.Color.B - left.Color.B) * offset + left.Color.B);
             return Color.FromArgb(a, r, g, b);
         }
+        /// <summary>
+        /// 主题颜色
+        /// </summary>
+        internal static Color ThemeColor(byte alpha)
+        {
+            if (alpha < 0) alpha = 0;
+            else if (alpha > 255) alpha = 255;
+            return Color.FromArgb(alpha, Config.Color.R, Config.Color.G, Config.Color.B);
+        }
 
         #endregion
 

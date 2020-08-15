@@ -5,7 +5,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    
+
     <local:EmptyColorConverter x:Key="emptyColorConverter" />
 
     <Style TargetType="{x:Type local:ListViewEXT}">
@@ -55,7 +55,8 @@
                                             Width="{Binding ItemWidth, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                             Height="{Binding ItemHeight, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
                                         <DockPanel>
-                                            <Image Name="image" 
+                                            <Image Name="image"
+                                               Visibility="{Binding Source, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource nullToCollapsed}}"
                                                Source="{Binding Path=Image.Normal}" 
                                                Width="{Binding ItemImageWidth, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                Height="{Binding ItemImageHeight, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"

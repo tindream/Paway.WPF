@@ -36,12 +36,12 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty BackgroundStartProperty =
             DependencyProperty.RegisterAttached(nameof(BackgroundStart), typeof(ColorEXT), typeof(ButtonEXT),
-            new PropertyMetadata(new ColorEXT(Color.FromArgb(255, 254, 254, 254), Color.FromArgb(16, Config.Color.R, Config.Color.G, Config.Color.B))));
+            new PropertyMetadata(new ColorEXT(Color.FromArgb(255, 254, 254, 254), 15, 65)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty BackgroundEndProperty =
             DependencyProperty.RegisterAttached(nameof(BackgroundEnd), typeof(ColorEXT), typeof(ButtonEXT),
-            new PropertyMetadata(new ColorEXT(Color.FromArgb(255, 220, 220, 220), Color.FromArgb(211, Config.Color.R, Config.Color.G, Config.Color.B))));
+            new PropertyMetadata(new ColorEXT(Color.FromArgb(255, 220, 220, 220), 210, 255)));
 
         /// <summary>
         /// </summary>
@@ -52,7 +52,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty StretchProperty =
             DependencyProperty.RegisterAttached(nameof(Stretch), typeof(Stretch), typeof(ButtonEXT),
-            new PropertyMetadata(Stretch.Fill));
+            new PropertyMetadata(Stretch.None));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty BackgroundImageProperty =

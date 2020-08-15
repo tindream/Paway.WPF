@@ -17,8 +17,27 @@ namespace Paway.WPF
     /// 自定义默认、鼠标划过时、鼠标点击时的Brush颜色
     /// </summary>
     [TypeConverter(typeof(BrushEXTConverter))]
-    public class BrushEXT : IEquatable<BrushEXT>, IElementStatu<Brush>
+    public class BrushEXT : IEquatable<BrushEXT>, IElementStatu<Brush>, INotifyPropertyChanged
     {
+        #region INotifyPropertyChanged
+        /// <summary>
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// </summary>
+        public void OnPropertyChanged()
+        {
+            OnPropertyChanged(Method.GetLastModelName());
+        }
+        /// <summary>
+        /// </summary>
+        public void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
+        #endregion
+
         /// <summary>
         /// 默认的颜色
         /// </summary>
@@ -26,11 +45,11 @@ namespace Paway.WPF
         /// <summary>
         /// 鼠标划过时的颜色
         /// </summary>
-        public Brush Mouse { get; set; } = new SolidColorBrush(Color.FromArgb(210, Config.Color.R, Config.Color.G, Config.Color.B));
+        public Brush Mouse { get; set; } = new SolidColorBrush(Method.ThemeColor(210));
         /// <summary>
         /// 鼠标点击时的颜色
         /// </summary>
-        public Brush Pressed { get; set; } = new SolidColorBrush(Color.FromArgb(250, Config.Color.R, Config.Color.G, Config.Color.B));
+        public Brush Pressed { get; set; } = new SolidColorBrush(Method.ThemeColor(210));
         /// <summary>
         /// 鼠标划过时的选中颜色
         /// </summary>
@@ -59,17 +78,32 @@ namespace Paway.WPF
         {
             if (this.Normal is SolidColorBrush normal && normal.Color.R == obj.R && normal.Color.G == obj.G && normal.Color.B == obj.B)
             {
-                this.Normal = new SolidColorBrush(Color.FromArgb(normal.Color.A, Config.Color.R, Config.Color.G, Config.Color.B));
+                this.Normal = new SolidColorBrush(Method.ThemeColor(normal.Color.A));
             }
             if (this.Mouse is SolidColorBrush mouse && mouse.Color.R == obj.R && mouse.Color.G == obj.G && mouse.Color.B == obj.B)
             {
-                this.Mouse = new SolidColorBrush(Color.FromArgb(mouse.Color.A, Config.Color.R, Config.Color.G, Config.Color.B));
+                this.Mouse = new SolidColorBrush(Method.ThemeColor(mouse.Color.A));
             }
             if (this.Pressed is SolidColorBrush pressed && pressed.Color.R == obj.R && pressed.Color.G == obj.G && pressed.Color.B == obj.B)
             {
-                this.Pressed = new SolidColorBrush(Color.FromArgb(pressed.Color.A, Config.Color.R, Config.Color.G, Config.Color.B));
+                this.Pressed = new SolidColorBrush(Method.ThemeColor(pressed.Color.A));
             }
+            OnPropertyChanged(nameof(Normal));
+            OnPropertyChanged(nameof(Mouse));
+            OnPropertyChanged(nameof(Pressed));
         }
+        /// <summary>
+        /// 主题色：设置所有颜色，自动Alpha变量
+        /// </summary>
+        public BrushEXT(byte normal) : this(Method.ThemeColor(normal)) { }
+        /// <summary>
+        /// 主题色：鼠标移过、按下
+        /// </summary>
+        public BrushEXT(byte mouse, byte pressed) : this(null, mouse, pressed) { }
+        /// <summary>
+        /// 主题色：普通、鼠标移过、按下
+        /// </summary>
+        public BrushEXT(Color? normal, byte mouse, byte pressed) : this(normal, Method.ThemeColor(mouse), Method.ThemeColor(pressed)) { }
         /// <summary>
         /// </summary>
         public BrushEXT(Color? normal, Color? mouse = null, Color? pressed = null, int? alpha = null, BrushEXT value = null) : this()
@@ -89,9 +123,9 @@ namespace Paway.WPF
             else if (normal == null && value != null) Pressed = value.Pressed;
         }
         /// <summary>
-        /// 设置所有颜色，指定Alpha差异
+        /// 设置所有颜色，指定Alpha变量
         /// </summary>
-        public BrushEXT Reset(Color color, int alpha = 50)
+        private BrushEXT Reset(Color color, int alpha)
         {
             Normal = new SolidColorBrush(color);
             var a = color.A - alpha;
@@ -106,7 +140,7 @@ namespace Paway.WPF
         /// <summary>
         /// 设置鼠标划过、点击时的颜色
         /// </summary>
-        public BrushEXT Focused(Color color, int alpha = 50)
+        private BrushEXT Focused(Color color, int alpha)
         {
             Mouse = new SolidColorBrush(color);
             var a = color.A + alpha;
@@ -164,6 +198,10 @@ namespace Paway.WPF
         }
         private Color Parse(string str)
         {
+            if (byte.TryParse(str, out byte alpha))
+            {
+                return Method.ThemeColor(alpha);
+            }
             return (Color)ColorConverter.ConvertFromString(str);
         }
         /// <summary>
