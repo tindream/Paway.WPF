@@ -66,6 +66,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Converter\IEquatable\FontSizeEXT.cs" />
     <Compile Include="Controls\Converter\IValueConverter\IsNotNullConverter.cs" />
     <Compile Include="Controls\Converter\ValidationRule\RegexType.cs" />
     <Compile Include="Controls\Converter\ValidationRule\RegexValidationRule.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="Controls\Window\FunctionBar\FunctionBar.cs" />
     <Compile Include="Controls\Window\FunctionBar\WindowFunctionBar.cs" />
     <Compile Include="Controls\Window\FunctionBar\FunctionBarMonitor.cs" />
+    <Compile Include="Method\ConverHelper.cs" />
     <Compile Include="Method\DpiHelper.cs" />
     <Compile Include="Method\NativeMethods.cs" />
     <Compile Include="Controls\Window\WindowEXT.cs" />
@@ -131,7 +133,6 @@
     <Compile Include="Controls\Converter\IEquatable\ThicknessEXT.cs" />
     <Compile Include="Controls\Converter\IEquatable\BrushEXT.cs" />
     <Compile Include="Controls\Extended\ListViewEXT.cs" />
-    <Compile Include="Controls\Theme\ThemeMonitor.cs" />
     <Compile Include="Method\Config.cs" />
     <Compile Include="Method\Method.cs" />
     <Compile Include="Controls\Interface\IListView.cs" />
@@ -147,7 +148,6 @@
     <Compile Include="Controls\Extended\ScrollViewerMonitor.cs" />
     <Compile Include="Controls\Extended\ScrollViewerEXT.cs" />
     <Compile Include="Controls\Extended\ComboBoxEXT.cs" />
-    <Compile Include="Controls\Extended\TextBoxMonitor.cs" />
     <Compile Include="Controls\Extended\TextBoxEXT.cs" />
     <Compile Include="Controls\Toast\WindowToastModel.cs" />
     <Compile Include="Controls\Toast\WindowToast.xaml.cs">

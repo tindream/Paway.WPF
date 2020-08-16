@@ -5,7 +5,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    
+
     <DataTemplate x:Key="MinimizeBlack">
         <Path Data="M0,6 L12,6 L12,7 L0,7 z"
                   Width="12"
@@ -13,7 +13,7 @@
                   UseLayoutRounding="True"
                   VerticalAlignment="Center"
                   HorizontalAlignment="Center"
-                  Fill="#4C5787" />
+                  Style="{StaticResource themeFillHigh}" />
     </DataTemplate>
     <DataTemplate x:Key="MaximizeBlack">
         <Path Data="M1,1  L1 ,11 L11,11 L11,1 z M0,0 L12,0 L12,12 L0,12 z"
@@ -22,7 +22,7 @@
               UseLayoutRounding="True"
               VerticalAlignment="Center"
               HorizontalAlignment="Center"
-              Fill="#4C5787" />
+              Style="{StaticResource themeFillHigh}"/>
     </DataTemplate>
     <DataTemplate x:Key="RestoreBlack">
         <Path Data="M1,3 L1,11 L9,11 L9,3 z M3,1 L3,2 L10,2 L10,9 L11,9 L11,1 z M2 ,0 L12,0 L12,10 L10,10 L10,12 L0,12 L0,2 L2 ,2 z"
@@ -31,17 +31,18 @@
               UseLayoutRounding="True"
               VerticalAlignment="Center"
               HorizontalAlignment="Center"
-              Fill="#4C5787" />
+              Style="{StaticResource themeFillHigh}"/>
     </DataTemplate>
     <DataTemplate x:Key="CloseBlack">
-        <Path Style="{StaticResource PathClose}" Fill="#4C5787" />
+        <Path Style="{StaticResource PathClose}" 
+              Fill="{Binding Path=(local:ThemeEXT.HighBrush).Pressed, RelativeSource={RelativeSource Self}}" />
     </DataTemplate>
     <DataTemplate x:Key="CloseWhite">
         <Path Style="{StaticResource PathClose}" Fill="White" />
     </DataTemplate>
 
     <Style x:Key="WindowTitleBarButtonStyle" TargetType="{x:Type Button}">
-        <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
+        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="Focusable" Value="False" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Background" Value="White" />
@@ -113,10 +114,11 @@
     </Style>
 
     <Style TargetType="{x:Type local:WindowEXT}">
-        <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
+        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
         <Setter Property="Background" Value="#FFF1F1F1" />
-        <Setter Property="BorderBrush" Value="#FF464775" />
+        <Setter Property="BorderBrush" 
+                Value="{Binding Path=(local:ThemeEXT.HighBrush).Pressed, RelativeSource={RelativeSource Self}}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="ResizeMode" Value="CanResize" />
@@ -147,7 +149,7 @@
                             </Grid.RowDefinitions>
                             <Grid x:Name="WindowTitlePanel"
                                   Height="36"
-                                  Background="#CCD5F0"
+                                  Background="{Binding Path=(local:ThemeEXT.HighBrush).Normal, RelativeSource={RelativeSource Self}}"
                                   Margin="0,0,0,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />

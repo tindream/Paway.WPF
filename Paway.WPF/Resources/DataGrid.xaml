@@ -77,7 +77,7 @@
     </Style>
 
     <Style TargetType="{x:Type local:DataGridEXT}">
-        <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
+        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
         <!--样式-->
         <Setter Property="ColumnHeaderStyle" Value="{StaticResource ColumnHeaderStyle}"/>
         <Setter Property="RowStyle" Value="{StaticResource RowStyle}"/>

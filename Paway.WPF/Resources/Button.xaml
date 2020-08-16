@@ -7,7 +7,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type local:ButtonEXT}">
-        <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
+        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FontFamily" Value="Microsoft YaHei"/>
         <Setter Property="BorderBrush" Value="LightGray"/>

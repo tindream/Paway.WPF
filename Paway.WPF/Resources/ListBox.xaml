@@ -3,7 +3,7 @@
                     xmlns:local="clr-namespace:Paway.WPF">
 
     <Style TargetType="{x:Type local:ListBoxEXT}">
-        <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
+        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="Padding" Value="0"/>
         <!--修改模板属性-->
         <Setter Property="Template">

@@ -8,166 +8,191 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
         DataContext="{Binding Main ,Source={StaticResource Locator}}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="850" Width="850" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="800" Width="850" WindowStartupLocation="CenterScreen">
 
-    <Grid Margin="3">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="2*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel>
-            <utils:SliderEXT x:Name="slider" Minimum="12" Maximum="18" Value="15" AutoToolTipPrecision="2"  TickFrequency="0.01">
+    <DockPanel>
+        <StatusBar DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Foreground="White" Height="30" Style="{StaticResource themeBackHigh}">
+            <TextBlock Text="{Binding Desc}" Padding="10,6" FontSize="14" Margin="-3"></TextBlock>
+        </StatusBar>
+        <StackPanel DockPanel.Dock="Top">
+            <utils:SliderEXT x:Name="sliderSize" Minimum="12" Maximum="18" Value="15" AutoToolTipPrecision="2"  TickFrequency="0.01">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="ValueChanged">
                         <i:InvokeCommandAction Command="{Binding SizeChanged}"
-                                           CommandParameter="{Binding ElementName=slider}"/>
+                                           CommandParameter="{Binding ElementName=sliderSize}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </utils:SliderEXT>
             <Grid>
                 <Border Style="{StaticResource borderColor}"/>
-                <utils:SliderEXT x:Name="sldTheme" Maximum="7" Value="2.5" AutoToolTipPrecision="2" TickFrequency="0.01" Margin="0"
-                                 TrackColorLinear="Transparent;Transparent" TrackBackground="Transparent" IsSnapToTickEnabled="True">
+                <utils:SliderEXT x:Name="sliderTheme" Maximum="7" Value="2.62" AutoToolTipPrecision="2" TickFrequency="0.01" Margin="0"
+                                 TrackColorLinear="Transparent;Transparent" TrackBackground="Transparent" IsSnapToTickEnabled="True" SmallChange="0.01">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="ValueChanged">
                             <i:InvokeCommandAction Command="{Binding ColorChanged}"
-                                           CommandParameter="{Binding ElementName=sldTheme}"/>
+                                           CommandParameter="{Binding ElementName=sliderTheme}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </utils:SliderEXT>
             </Grid>
-            <utils:ProgressBarEXT Value="95" />
+            <utils:SliderEXT x:Name="sliderLight" Minimum="-240" Maximum="240" Value="{Binding LightValue}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="ValueChanged">
+                        <i:InvokeCommandAction Command="{Binding LightChanged}"
+                                           CommandParameter="{Binding ElementName=sliderLight}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </utils:SliderEXT>
+            <utils:SliderEXT x:Name="sliderAlpha" Minimum="0" Maximum="255" Value="{Binding AlphaValue}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="ValueChanged">
+                        <i:InvokeCommandAction Command="{Binding LightChanged}"
+                                           CommandParameter="{Binding ElementName=sliderAlpha}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </utils:SliderEXT>
+            <Border Height="48" Background="{Binding TestColor}"/>
+        </StackPanel>
+        <Grid Margin="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <utils:ProgressBarEXT Value="95" />
 
-            <utils:ComboBoxEXT Name="cbxBox" ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text"
+                <utils:ComboBoxEXT Name="cbxBox" ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text"
                                SelectedValue="{Binding Id}"/>
-            <utils:ComboBoxMulti x:Name="MultiCmb" ItemsSource="{Binding MultiList}"/>
-            <utils:ComboBoxDate SelectedValue="{Binding DatePickerTime}"/>
+                <utils:ComboBoxMulti x:Name="MultiCmb" ItemsSource="{Binding MultiList}"/>
+                <utils:ComboBoxDate SelectedValue="{Binding DatePickerTime}"/>
 
-            <utils:TextBoxEXT Name="tb" Icon="pack://application:,,,/Paway.Test;component/Images/close.png">
-                <Binding Path="Value">
-                    <Binding.ValidationRules>
-                        <utils:RegexValidationRule RegexType="UInt" MinLength="2" MaxLength="4"/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </utils:TextBoxEXT>
-            <PasswordBox utils:PasswordBoxEXT.Icon="pack://application:,,,/Paway.Test;component/Images/close.png"></PasswordBox>
-            <Grid>
-                <Grid.ColumnDefinitions >
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <utils:ButtonEXT Name="chart" Content="取消"
+                <utils:TextBoxEXT Name="tb" Icon="pack://application:,,,/Paway.Test;component/Images/close.png">
+                    <Binding Path="Value">
+                        <Binding.ValidationRules>
+                            <utils:RegexValidationRule RegexType="UInt" MinLength="2" MaxLength="4"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </utils:TextBoxEXT>
+                <PasswordBox utils:PasswordBoxEXT.Icon="pack://application:,,,/Paway.Test;component/Images/close.png"></PasswordBox>
+                <Grid>
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <utils:ButtonEXT Name="chart" Content="取消"
                              BackgroundStart="Transparent;#77CA6B38" BackgroundEnd="Transparent;#77CA6B38" 
                              BackgroundImage="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"
                              Stretch="None" Viewport="0,0,0.35,1"
                              Command="{Binding Teach}" CommandParameter="{Binding ElementName=btn}"/>
-                <utils:ButtonEXT Name="btn" Grid.Column="1"
+                    <utils:ButtonEXT Name="btn" Grid.Column="1"
                              Content="确认" Click="ButtonEXT_Click" 
                              Border="1;0"
                              BackgroundStart="170" BackgroundEnd="170" 
                              CommandParameter="{Binding ElementName=btn}"/>
-                <utils:ButtonEXT Grid.Column="2"
+                    <utils:ButtonEXT Grid.Column="2"
                              Content="原生"
                              Border="1;0"
                              CommandParameter="{Binding ElementName=btn}"/>
-            </Grid>
-            <WrapPanel>
-                <utils:CheckBoxEXT x:Name="cbx" Content="Hello" IsChecked="True" Padding="0,0,3,0"/>
-                <utils:CheckBoxEXT Content="World" IsChecked="{x:Null}"/>
-                <utils:CheckBoxEXT Content="Watch" IsChecked="{x:Null}" IsEnabled="False"/>
-            </WrapPanel>
-            <WrapPanel>
-                <utils:RadioButtonEXT Name="rb" Content="Hello" IsChecked="True" />
-                <utils:RadioButtonEXT Content="World" IsChecked="True" />
-                <utils:RadioButtonEXT Content="Watch" IsChecked="{x:Null}" IsEnabled="False"/>
-            </WrapPanel>
-            <utils:DatePickerEXT Name="dp" Text="{Binding DatePickerTime, Mode=TwoWay}"/>
+                </Grid>
+                <WrapPanel>
+                    <utils:CheckBoxEXT x:Name="cbx" Content="Hello" IsChecked="True" Padding="0,0,3,0"/>
+                    <utils:CheckBoxEXT Content="World" IsChecked="{x:Null}"/>
+                    <utils:CheckBoxEXT Content="Watch" IsChecked="{x:Null}" IsEnabled="False"/>
+                </WrapPanel>
+                <WrapPanel>
+                    <utils:RadioButtonEXT Name="rb" Content="Hello" IsChecked="True" />
+                    <utils:RadioButtonEXT Content="World" IsChecked="True" />
+                    <utils:RadioButtonEXT Content="Watch" IsChecked="{x:Null}" IsEnabled="False"/>
+                </WrapPanel>
+                <utils:DatePickerEXT Name="dp" Text="{Binding DatePickerTime, Mode=TwoWay}"/>
 
-            <WrapPanel>
-                <Path Style="{StaticResource PathRound}" />
-                <utils:TransitionControl Name="transition" >
-                    <Path Style="{StaticResource PathRound}" Fill="Red" />
-                </utils:TransitionControl>
-                <Path Style="{StaticResource PathTriangle}" />
-                <Path Style="{StaticResource PathTriangleDown}"/>
-                <Path Style="{StaticResource PathTriangleRight}"/>
-                <Path Style="{StaticResource PathRight}" />
-                <Path Style="{StaticResource PathQuestion}" />
-                <Path Style="{StaticResource PathClose}" />
-                <utils:Progress Width="40" Height="40" />
-            </WrapPanel>
+                <WrapPanel>
+                    <Path Style="{StaticResource PathRound}" />
+                    <utils:TransitionControl Name="transition" >
+                        <Path Style="{StaticResource PathRound}" Fill="Red" />
+                    </utils:TransitionControl>
+                    <Path Style="{StaticResource PathTriangle}" />
+                    <Path Style="{StaticResource PathTriangleDown}"/>
+                    <Path Style="{StaticResource PathTriangleRight}"/>
+                    <Path Style="{StaticResource PathRight}" />
+                    <Path Style="{StaticResource PathQuestion}" />
+                    <Path Style="{StaticResource PathClose}" />
+                    <utils:Progress Width="40" Height="40" />
+                </WrapPanel>
 
-            <utils:TabControlEXT TabStripPlacement="Top" Background="LightGray">
-                <TabItem Cursor="Hand" Header="音乐电台" />
-                <TabItem Cursor="Hand" Header="Mv电台"/>
-            </utils:TabControlEXT>
-            <utils:TreeViewEXT x:Name="TreeViewOrg" Height="180" CheckBox="Visible" ItemTemplate="{StaticResource UserNode}" ItemsSource="{Binding TreeList}"/>
+                <utils:TabControlEXT TabStripPlacement="Top" Background="LightGray">
+                    <TabItem Cursor="Hand" Header="音乐电台" />
+                    <TabItem Cursor="Hand" Header="Mv电台"/>
+                </utils:TabControlEXT>
+                <utils:TreeViewEXT x:Name="TreeViewOrg" Height="180" CheckBox="Visible" ItemTemplate="{StaticResource UserNode}" ItemsSource="{Binding TreeList}"/>
 
 
-        </StackPanel>
-        <StackPanel Grid.Column="1" Margin="10,0,0,0">
-            <utils:DataGridEXT Name="datagrid1"
+            </StackPanel>
+            <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                <utils:DataGridEXT Name="datagrid1"
                                ItemsSource="{Binding CollectionView}"
                                SelectedItem="{Binding SelectedItem}"
                                Height="250" VerticalAlignment="Top">
-                <DataGrid.Columns>
-                    <DataGridTextColumn  MinWidth="130" Binding="{Binding Money}" ElementStyle="{StaticResource TextRight}"/>
-                    <DataGridTemplateColumn Header="Desc">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Desc}" Foreground="Red" Style="{StaticResource TextLeft}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="IsSelected">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <DockPanel>
-                                    <utils:CheckBoxEXT IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}"/>
-                                </DockPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </utils:DataGridEXT>
-            <utils:DataPager Name="dataPager" Margin="0,0,0,3" Source="{Binding CollectionView}" IsTotalItemCountFixed="True"/>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn  MinWidth="130" Binding="{Binding Money}" ElementStyle="{StaticResource TextRight}"/>
+                        <DataGridTemplateColumn Header="Desc">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Desc}" Foreground="Red" Style="{StaticResource TextLeft}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="IsSelected">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <DockPanel>
+                                        <utils:CheckBoxEXT IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DockPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </utils:DataGridEXT>
+                <utils:DataPager Name="dataPager" Margin="0,0,0,3" Source="{Binding CollectionView}" IsTotalItemCountFixed="True"/>
 
-            <utils:ListViewEXT Name="listView1"
+                <utils:ListViewEXT Name="listView1"
                            ItemHeight="68" ItemWidth="100" Height="68"
                            ItemBorder="0;0,0,0,4"
                            ItemImageHeight="32" ItemImageDock="Top" ItemPadding="5"
                            SelectionMode="Extended" VerticalAlignment="Top">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding SelectionCommand}"
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectionCommand}"
                                            CommandParameter="{Binding ElementName=listView1}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-                <utils:ListBoxItemEXT Text="Hello" IsSelected="True"
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <utils:ListBoxItemEXT Text="Hello" IsSelected="True"
                                   Image="pack://application:,,,/Paway.Test;component/Images/close.png"/>
-                <utils:ListBoxItemEXT Text="World"/>
-                <Button Content="Hi" Visibility="Collapsed"/>
-                <utils:ListBoxItemEXT Text="A"/>
-                <utils:ListBoxItemEXT Text="C"/>
-            </utils:ListViewEXT>
-            <utils:ListViewEXT Name="listView2"
+                    <utils:ListBoxItemEXT Text="World"/>
+                    <Button Content="Hi" Visibility="Collapsed"/>
+                    <utils:ListBoxItemEXT Text="A"/>
+                    <utils:ListBoxItemEXT Text="C"/>
+                </utils:ListViewEXT>
+                <utils:ListViewEXT Name="listView2"
                                Height="84"
+                               Background="#CCD5F0"
                                ItemsSource="{Binding GridList}"
                                ItemPadding="10,5,10,5" ItemWidth="120" 
                                SelectionMode="Multiple"
                                ItemDescForeground="Green"
                                HorizontalContentAlignment="Left" VerticalAlignment="Top" >
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding SelectionCommand}"
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectionCommand}"
                                            CommandParameter="{Binding ElementName=listView2}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </utils:ListViewEXT>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </utils:ListViewEXT>
 
-        </StackPanel>
-    </Grid>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
     <utils:WindowEXT.FunctionBar>
         <utils:WindowFunctionBar>
             <Menu>

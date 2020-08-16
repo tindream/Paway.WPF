@@ -27,29 +27,26 @@ namespace Paway.WPF
         /// </summary>
         public void OnPropertyChanged()
         {
-            OnPropertyChanged(Method.GetLastModelName());
-        }
-        /// <summary>
-        /// </summary>
-        public void OnPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Method.GetLastModelName()));
         }
 
         #endregion
 
+        private Color normal = Colors.LightGray;
         /// <summary>
         /// 默认的颜色
         /// </summary>
-        public Color Normal { get; set; } = Colors.LightGray;
+        public Color Normal { get { return normal; } set { normal = value; OnPropertyChanged(); } }
+        private Color mouse = Method.ThemeColor(210);
         /// <summary>
         /// 鼠标划过时的颜色
         /// </summary>
-        public Color Mouse { get; set; } = Method.ThemeColor(210);
+        public Color Mouse { get { return mouse; } set { mouse = value; OnPropertyChanged(); } }
+        private Color pressed = Method.ThemeColor(250);
         /// <summary>
         /// 鼠标点击时的颜色
         /// </summary>
-        public Color Pressed { get; set; } = Method.ThemeColor(250);
+        public Color Pressed { get { return pressed; } set { pressed = value; OnPropertyChanged(); } }
         /// <summary>
         /// 颜色Alpha值变量
         /// </summary>
@@ -63,20 +60,17 @@ namespace Paway.WPF
         }
         private void Config_ColorChanged(Color obj)
         {
-            if (this.Normal is Color normal && normal.R == obj.R && normal.G == obj.G && normal.B == obj.B)
+            if (this.Normal is Color normal && normal != Colors.LightGray && normal.R == obj.R && normal.G == obj.G && normal.B == obj.B)
             {
                 this.Normal = Method.ThemeColor(normal.A);
-                OnPropertyChanged(nameof(Normal));
             }
             if (this.Mouse is Color mouse && mouse.R == obj.R && mouse.G == obj.G && mouse.B == obj.B)
             {
                 this.Mouse = Method.ThemeColor(mouse.A);
-                OnPropertyChanged(nameof(Mouse));
             }
             if (this.Pressed is Color pressed && pressed.R == obj.R && pressed.G == obj.G && pressed.B == obj.B)
             {
                 this.Pressed = Method.ThemeColor(pressed.A);
-                OnPropertyChanged(nameof(Pressed));
             }
         }
         /// <summary>

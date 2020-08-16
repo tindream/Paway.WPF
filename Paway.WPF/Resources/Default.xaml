@@ -115,6 +115,15 @@
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
     </Style>
 
+    <Style x:Key="themeBackHigh" TargetType="Control">
+        <Setter Property="Background" Value="{Binding Path=(local:ThemeEXT.HighBrush).Pressed, RelativeSource={RelativeSource Self}}" />
+    </Style>
+    <Style x:Key="themeForeHigh" TargetType="Control">
+        <Setter Property="Foreground" Value="{Binding Path=(local:ThemeEXT.HighBrush).Pressed, RelativeSource={RelativeSource Self}}" />
+    </Style>
+    <Style x:Key="themeFillHigh" TargetType="Shape">
+        <Setter Property="Fill" Value="{Binding Path=(local:ThemeEXT.HighBrush).Pressed, RelativeSource={RelativeSource Self}}" />
+    </Style>
     <LinearGradientBrush x:Key="ColorSelector">
         <GradientStop Color="#ff0000" />
         <GradientStop Color="#ff00ff" Offset="0.571" />
@@ -127,6 +136,7 @@
         <GradientStop Color="Black" Offset="1" />
     </LinearGradientBrush>
     <Style x:Key="borderColor" TargetType="{x:Type Border}">
+        <Setter Property="Margin" Value="2" />
         <Setter Property="Height" Value="3" />
         <Setter Property="CornerRadius" Value="2" />
         <Setter Property="Background" Value="{StaticResource ColorSelector}" />

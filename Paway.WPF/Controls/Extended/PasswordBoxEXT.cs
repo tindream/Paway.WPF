@@ -68,14 +68,14 @@ namespace Paway.WPF
         /// <summary>
         /// get文本框的边框颜色
         /// </summary>
-        public static BrushEXT GetBorderPressedBrush(DependencyObject obj)
+        public static BrushEXT GetItemBrush(DependencyObject obj)
         {
             return (BrushEXT)obj.GetValue(ItemBrushProperty);
         }
         /// <summary>
         /// set文本框的边框颜色
         /// </summary>
-        public static void SetBorderPressedBrush(DependencyObject obj, BrushEXT value)
+        public static void SetItemBrush(DependencyObject obj, BrushEXT value)
         {
             obj.SetValue(ItemBrushProperty, value);
         }

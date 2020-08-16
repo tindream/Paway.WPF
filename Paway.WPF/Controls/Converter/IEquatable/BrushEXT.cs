@@ -27,29 +27,26 @@ namespace Paway.WPF
         /// </summary>
         public void OnPropertyChanged()
         {
-            OnPropertyChanged(Method.GetLastModelName());
-        }
-        /// <summary>
-        /// </summary>
-        public void OnPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Method.GetLastModelName()));
         }
 
         #endregion
 
+        private Brush normal = new SolidColorBrush(Colors.LightGray);
         /// <summary>
         /// 默认的颜色
         /// </summary>
-        public Brush Normal { get; set; } = new SolidColorBrush(Colors.LightGray);
+        public Brush Normal { get { return normal; } set { normal = value; OnPropertyChanged(); } }
+        private Brush mouse = new SolidColorBrush(Method.ThemeColor(210));
         /// <summary>
         /// 鼠标划过时的颜色
         /// </summary>
-        public Brush Mouse { get; set; } = new SolidColorBrush(Method.ThemeColor(210));
+        public Brush Mouse { get { return mouse; } set { mouse = value; OnPropertyChanged(); } }
+        private Brush pressed = new SolidColorBrush(Method.ThemeColor(210));
         /// <summary>
         /// 鼠标点击时的颜色
         /// </summary>
-        public Brush Pressed { get; set; } = new SolidColorBrush(Method.ThemeColor(210));
+        public Brush Pressed { get { return pressed; } set { pressed = value; OnPropertyChanged(); } }
         /// <summary>
         /// 鼠标划过时的选中颜色
         /// </summary>
@@ -67,6 +64,7 @@ namespace Paway.WPF
         /// 颜色Alpha值变量
         /// </summary>
         public int Alpha { get; set; } = 50;
+        internal bool IHigh { get; set; }
 
         /// <summary>
         /// </summary>
@@ -76,20 +74,38 @@ namespace Paway.WPF
         }
         private void Config_ColorChanged(Color obj)
         {
-            if (this.Normal is SolidColorBrush normal && normal.Color.R == obj.R && normal.Color.G == obj.G && normal.Color.B == obj.B)
+            if (this.Normal is SolidColorBrush normal && normal.Color != Colors.LightGray && normal.Color != Colors.Gray && normal.Color.R == obj.R && normal.Color.G == obj.G && normal.Color.B == obj.B)
             {
                 this.Normal = new SolidColorBrush(Method.ThemeColor(normal.Color.A));
-                OnPropertyChanged(nameof(Normal));
             }
             if (this.Mouse is SolidColorBrush mouse && mouse.Color.R == obj.R && mouse.Color.G == obj.G && mouse.Color.B == obj.B)
             {
                 this.Mouse = new SolidColorBrush(Method.ThemeColor(mouse.Color.A));
-                OnPropertyChanged(nameof(Mouse));
             }
             if (this.Pressed is SolidColorBrush pressed && pressed.Color.R == obj.R && pressed.Color.G == obj.G && pressed.Color.B == obj.B)
             {
                 this.Pressed = new SolidColorBrush(Method.ThemeColor(pressed.Color.A));
-                OnPropertyChanged(nameof(Pressed));
+            }
+            High();
+        }
+        /// <summary>
+        /// 主题深色
+        /// </summary>
+        public BrushEXT(bool high) : this()
+        {
+            this.IHigh = high;
+            High();
+        }
+        /// <summary>
+        /// 主题深色
+        /// </summary>
+        private void High()
+        {
+            if (IHigh)
+            {
+                this.Normal = new SolidColorBrush(Config.Color.AddLight(103));
+                this.Mouse = new SolidColorBrush(Config.Color.AddLight(110, 0.98));
+                this.Pressed = new SolidColorBrush(Config.Color.AddLight(-60));
             }
         }
         /// <summary>
@@ -100,6 +116,10 @@ namespace Paway.WPF
         /// 主题色：鼠标移过、按下
         /// </summary>
         public BrushEXT(byte mouse, byte pressed) : this(null, mouse, pressed) { }
+        /// <summary>
+        /// 主题色：设置所有颜色，普通、鼠标移过、按下
+        /// </summary>
+        public BrushEXT(byte normal, byte mouse, byte pressed, bool iHigh = false) : this(Method.ThemeColor(normal), mouse, pressed) { }
         /// <summary>
         /// 主题色：普通、鼠标移过、按下
         /// </summary>

@@ -3,7 +3,7 @@
                     xmlns:local="clr-namespace:Paway.WPF">
 
     <Style TargetType="{x:Type local:RadioButtonEXT}">
-        <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
+        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="BorderThickness" Value="1"/>

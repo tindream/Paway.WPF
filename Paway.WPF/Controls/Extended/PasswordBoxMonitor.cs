@@ -24,11 +24,6 @@ namespace Paway.WPF
         {
             if (obj is PasswordBox pad)
             {
-                pad.LayoutUpdated += delegate
-                {
-                    if ((double)pad.GetValue(WaterSizeProperty) != pad.FontSize * 0.85)
-                        pad.SetValue(WaterSizeProperty, pad.FontSize * 0.85);
-                };
                 if ((bool)e.NewValue)
                 {
                     pad.PasswordChanged += PasswordChanged;
@@ -63,11 +58,6 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty PasswordLengthProperty =
             DependencyProperty.RegisterAttached(nameof(PasswordLength), typeof(int), typeof(PasswordBoxMonitor));
-        /// <summary>
-        /// 水印字体大小
-        /// </summary>
-        public static readonly DependencyProperty WaterSizeProperty =
-            DependencyProperty.RegisterAttached(nameof(WaterSize), typeof(double), typeof(PasswordBoxMonitor), new PropertyMetadata());
 
         #endregion
 
@@ -79,14 +69,6 @@ namespace Paway.WPF
         {
             get { return (int)GetValue(PasswordLengthProperty); }
             set { SetValue(PasswordLengthProperty, value); }
-        }
-        /// <summary>
-        /// 水印字体大小
-        /// </summary>
-        public double WaterSize
-        {
-            get { return (double)GetValue(WaterSizeProperty); }
-            set { SetValue(WaterSizeProperty, value); }
         }
 
         #endregion

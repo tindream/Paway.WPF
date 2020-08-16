@@ -12,7 +12,7 @@
         </Grid>
     </ControlTemplate>
     <Style TargetType="{x:Type local:ComboBoxDate}">
-        <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
+        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Margin" Value="2"/>

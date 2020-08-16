@@ -7,7 +7,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type local:ProgressBarEXT}">
-        <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
+        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="local:ProgressBarEXT.IsMonitoring" Value="True"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Margin" Value="2"/>

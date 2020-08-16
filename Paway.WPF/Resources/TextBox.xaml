@@ -7,8 +7,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type local:TextBoxEXT}">
-        <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
-        <Setter Property="local:TextBoxMonitor.IsMonitoring" Value="True"/>
+        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="Cursor" Value="IBeam"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Background" Value="White"/>
@@ -46,7 +45,7 @@
                                         Orientation="Horizontal">
                                 <Label Opacity="0.4"
                                        Padding="5,0,0,0"
-                                       FontSize="{TemplateBinding WaterSize}"
+                                       FontSize="{TemplateBinding FontSize, Converter={StaticResource changeConverter}}"
                                        Foreground="#000000"
                                        FontFamily="Microsoft YaHei"
                                        Content="{TemplateBinding Water}"

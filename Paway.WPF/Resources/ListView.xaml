@@ -9,7 +9,7 @@
     <local:EmptyColorConverter x:Key="emptyColorConverter" />
 
     <Style TargetType="{x:Type local:ListViewEXT}">
-        <Setter Property="local:ThemeMonitor.IsMonitoring" Value="True"/>
+        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="SelectionMode" Value="Single"/>
         <Setter Property="FontFamily" Value="Microsoft YaHei"/>

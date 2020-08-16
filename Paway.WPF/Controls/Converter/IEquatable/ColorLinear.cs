@@ -27,25 +27,21 @@ namespace Paway.WPF
         /// </summary>
         public void OnPropertyChanged()
         {
-            OnPropertyChanged(Method.GetLastModelName());
-        }
-        /// <summary>
-        /// </summary>
-        public void OnPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Method.GetLastModelName()));
         }
 
         #endregion
 
+        private Color start = Method.ThemeColor(85);
         /// <summary>
         /// 起始颜色
         /// </summary>
-        public Color Start { get; set; } = Method.ThemeColor(85);
+        public Color Start { get { return start; } set { start = value; OnPropertyChanged(); } }
+        private Color end = Method.ThemeColor(250);
         /// <summary>
         /// 终点颜色
         /// </summary>
-        public Color End { get; set; } = Method.ThemeColor(250);
+        public Color End { get { return end; } set { end = value; OnPropertyChanged(); } }
         /// <summary>
         /// 颜色Alpha值变量
         /// </summary>
@@ -62,12 +58,10 @@ namespace Paway.WPF
             if (this.Start is Color start && start.R == obj.R && start.G == obj.G && start.B == obj.B)
             {
                 this.Start = Method.ThemeColor(start.A);
-                OnPropertyChanged(nameof(Start));
             }
             if (this.End is Color end && end.R == obj.R && end.G == obj.G && end.B == obj.B)
             {
                 this.End = Method.ThemeColor(end.A);
-                OnPropertyChanged(nameof(End));
             }
         }
         /// <summary>
