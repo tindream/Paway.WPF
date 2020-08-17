@@ -19,10 +19,6 @@ namespace Paway.WPF
         #region 依赖属性
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty BackgroundEXTProperty =
-            DependencyProperty.RegisterAttached(nameof(BackgroundEXT), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(20)));
-        /// <summary>
-        /// </summary>
         public static readonly DependencyProperty OrientationProperty =
             DependencyProperty.RegisterAttached(nameof(Orientation), typeof(Orientation), typeof(ListViewEXT), new PropertyMetadata(Orientation.Horizontal));
         /// <summary>
@@ -125,16 +121,6 @@ namespace Paway.WPF
         #endregion
 
         #region 扩展.项
-        /// <summary>
-        /// 自定义背景颜色
-        /// </summary>
-        [Category("扩展.项")]
-        [Description("自定义背景颜色")]
-        public BrushEXT BackgroundEXT
-        {
-            get { return (BrushEXT)GetValue(BackgroundEXTProperty); }
-            set { SetValue(BackgroundEXTProperty, value); }
-        }
         /// <summary>
         /// 项显示方向
         /// </summary>

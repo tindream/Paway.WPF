@@ -60,7 +60,7 @@ namespace Paway.WPF
         }
         private void Config_ColorChanged(Color obj)
         {
-            if (this.Normal is Color normal && normal != Colors.LightGray && normal.R == obj.R && normal.G == obj.G && normal.B == obj.B)
+            if (obj != Colors.LightGray && this.Normal is Color normal && normal.R == obj.R && normal.G == obj.G && normal.B == obj.B)
             {
                 this.Normal = Method.ThemeColor(normal.A);
             }

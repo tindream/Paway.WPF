@@ -35,23 +35,6 @@
                     </i:Interaction.Triggers>
                 </utils:SliderEXT>
             </Grid>
-            <utils:SliderEXT x:Name="sliderLight" Minimum="-240" Maximum="240" Value="{Binding LightValue}">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="ValueChanged">
-                        <i:InvokeCommandAction Command="{Binding LightChanged}"
-                                           CommandParameter="{Binding ElementName=sliderLight}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </utils:SliderEXT>
-            <utils:SliderEXT x:Name="sliderAlpha" Minimum="0" Maximum="255" Value="{Binding AlphaValue}">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="ValueChanged">
-                        <i:InvokeCommandAction Command="{Binding LightChanged}"
-                                           CommandParameter="{Binding ElementName=sliderAlpha}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </utils:SliderEXT>
-            <Border Height="48" Background="{Binding TestColor}"/>
         </StackPanel>
         <Grid Margin="3">
             <Grid.ColumnDefinitions>
@@ -176,7 +159,6 @@
                 </utils:ListViewEXT>
                 <utils:ListViewEXT Name="listView2"
                                Height="84"
-                               Background="#CCD5F0"
                                ItemsSource="{Binding GridList}"
                                ItemPadding="10,5,10,5" ItemWidth="120" 
                                SelectionMode="Multiple"

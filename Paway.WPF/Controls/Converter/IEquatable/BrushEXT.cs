@@ -74,7 +74,7 @@ namespace Paway.WPF
         }
         private void Config_ColorChanged(Color obj)
         {
-            if (this.Normal is SolidColorBrush normal && normal.Color != Colors.LightGray && normal.Color != Colors.Gray && normal.Color.R == obj.R && normal.Color.G == obj.G && normal.Color.B == obj.B)
+            if (obj != Colors.LightGray && obj != Colors.Gray && this.Normal is SolidColorBrush normal && normal.Color.R == obj.R && normal.Color.G == obj.G && normal.Color.B == obj.B)
             {
                 this.Normal = new SolidColorBrush(Method.ThemeColor(normal.Color.A));
             }
@@ -103,8 +103,8 @@ namespace Paway.WPF
         {
             if (IHigh)
             {
-                this.Normal = new SolidColorBrush(Config.Color.AddLight(103));
-                this.Mouse = new SolidColorBrush(Config.Color.AddLight(110, 0.98));
+                this.Normal = new SolidColorBrush(Config.Color.AddLight(0.985));
+                this.Mouse = new SolidColorBrush(Config.Color.AddLight(0.95));
                 this.Pressed = new SolidColorBrush(Config.Color.AddLight(-60));
             }
         }

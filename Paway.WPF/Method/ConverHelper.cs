@@ -15,15 +15,21 @@ namespace Paway.WPF
     {
         #region Color
         /// <summary>
-        /// 颜色转换
+        /// 颜色转换(Add)
         /// </summary>
-        public static Color AddLight(this Color color, int value, double max = 0.95)
+        public static Color AddLight(this Color color, int value)
         {
             var result = RGBToHSL(color.R / 255.0, color.G / 255.0, color.B / 255.0);
             var l = result[2] + value * 1.0 / 240;
-            if (l > max) l = max;
-            else if (l < 1 - max) l = 1 - max;
             return HSLToRGB(result[0], result[1], l);
+        }
+        /// <summary>
+        /// 颜色转换(Mult)
+        /// </summary>
+        public static Color AddLight(this Color color, double value)
+        {
+            var result = RGBToHSL(color.R / 255.0, color.G / 255.0, color.B / 255.0);
+            return HSLToRGB(result[0], result[1], value);
         }
         /// <summary>
         /// RGB空间到HSL空间的转换

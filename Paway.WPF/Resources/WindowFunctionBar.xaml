@@ -63,11 +63,11 @@
             </Trigger>
             <Trigger Property="IsMouseOver" Value="true">
                 <Setter Property="Fill" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.HighBrush).Mouse, RelativeSource={RelativeSource Self}}" />
-                <Setter Property="Stroke" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Normal, RelativeSource={RelativeSource Self}}" />
+                <Setter Property="Stroke" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Fill" TargetName="ButtonBackground" Value="White" />
-                <Setter Property="Stroke" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.HighBrush).Pressed, RelativeSource={RelativeSource Self}}" />
+                <Setter Property="Stroke" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Normal, RelativeSource={RelativeSource Self}}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="#FF707070" />
@@ -95,7 +95,7 @@
                 <TextBlock x:Name="Line"
                            Height="2"
                            Margin="1,0,1,-1"
-                           Background="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}"
+                           Background="{Binding Path=(local:ThemeEXT.HighBrush).Mouse, RelativeSource={RelativeSource Self}}"
                            Grid.ColumnSpan="2"
                            Visibility="Collapsed" 
                            VerticalAlignment="Bottom"/>
@@ -131,16 +131,16 @@
                        PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
                        Placement="Bottom">
                     <Border x:Name="SubMenuBorder"
-                            BorderBrush="{Binding Path=(local:ThemeEXT.HighBrush).Pressed, RelativeSource={RelativeSource Self}}"
+                            BorderBrush="{Binding Path=(local:ThemeEXT.ItemBrush).Normal, RelativeSource={RelativeSource Self}}"
                             BorderThickness="1"
-                            Background="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}"
+                            Background="{Binding Path=(local:ThemeEXT.HighBrush).Mouse, RelativeSource={RelativeSource Self}}"
                             Padding="2">
                         <StackPanel>
                             <TextBlock x:Name="Line2"
                                        Height="1"
                                        Width="{TemplateBinding local:FunctionBarMonitor.BarWidth}"
                                        Margin="-2,-3,1,0"
-                                       Background="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}"
+                                       Background="{Binding Path=(local:ThemeEXT.HighBrush).Mouse, RelativeSource={RelativeSource Self}}"
                                        VerticalAlignment="Top" 
                                        HorizontalAlignment="Left"/>
                             <ScrollViewer x:Name="SubMenuScrollViewer"
@@ -180,11 +180,11 @@
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
                 <Setter Property="Fill" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.HighBrush).Mouse, RelativeSource={RelativeSource Self}}" />
-                <Setter Property="Stroke" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Normal, RelativeSource={RelativeSource Self}}" />
+                <Setter Property="Stroke" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Fill" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}" />
-                <Setter Property="Stroke" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.HighBrush).Pressed, RelativeSource={RelativeSource Self}}" />
+                <Setter Property="Fill" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.HighBrush).Mouse, RelativeSource={RelativeSource Self}}" />
+                <Setter Property="Stroke" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Normal, RelativeSource={RelativeSource Self}}" />
                 <Setter Property="Visibility" TargetName="Line" Value="Visible" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
@@ -202,8 +202,8 @@
                     <Condition Property="IsHighlighted" Value="True" />
                     <Condition Property="IsSubmenuOpen" Value="True" />
                 </MultiTrigger.Conditions>
-                <Setter Property="Fill" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}" />
-                <Setter Property="Stroke" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.HighBrush).Pressed, RelativeSource={RelativeSource Self}}" />
+                <Setter Property="Fill" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.HighBrush).Mouse, RelativeSource={RelativeSource Self}}" />
+                <Setter Property="Stroke" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Normal, RelativeSource={RelativeSource Self}}" />
                 <Setter Property="Visibility" TargetName="Line" Value="Visible" />
             </MultiTrigger>
             <MultiTrigger>
@@ -219,7 +219,7 @@
         <Border x:Name="templateRoot"
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}"
-                Background="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}"
+                Background="{Binding Path=(local:ThemeEXT.HighBrush).Mouse, RelativeSource={RelativeSource Self}}"
                 SnapsToDevicePixels="True">
             <Grid Margin="-1">
                 <Grid.ColumnDefinitions>
@@ -281,8 +281,7 @@
                 <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter Property="Background" TargetName="templateRoot" Value="#B1C5FF" />
-                <Setter Property="BorderBrush" TargetName="templateRoot" Value="#FF26A0DA" />
+                <Setter Property="Background" TargetName="templateRoot" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="#FF707070" />
@@ -323,7 +322,6 @@
                                   VerticalAlignment="Center"/>
                 <Border x:Name="GlyphPanel"
                         Visibility="Hidden"
-                        BorderBrush="Red"
                         BorderThickness="0"
                         Background="#0026A0DA"
                         Padding="0,9,0,9" 
@@ -367,7 +365,7 @@
                     <Border x:Name="SubMenuBorder"
                             BorderBrush="{Binding Path=(local:ThemeEXT.HighBrush).Pressed, RelativeSource={RelativeSource Self}}"
                             BorderThickness="1"
-                            Background="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}"
+                            Background="{Binding Path=(local:ThemeEXT.HighBrush).Mouse, RelativeSource={RelativeSource Self}}"
                             Padding="2">
                         <ScrollViewer x:Name="SubMenuScrollViewer"
                                       Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
@@ -408,8 +406,7 @@
                 <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter Property="Background" TargetName="templateRoot" Value="#B1C5FF" />
-                <Setter Property="BorderBrush" TargetName="templateRoot" Value="#FF26A0DA" />
+                <Setter Property="Background" TargetName="templateRoot" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}" /> 
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="#FF707070" />

@@ -24,7 +24,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ThemeEXT),
-                new PropertyMetadata(new BrushEXT(120, 70, 255)));
+                new PropertyMetadata(new BrushEXT(170, 120, 255)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty HighBrushProperty =

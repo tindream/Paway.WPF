@@ -62,37 +62,6 @@ namespace Paway.Test.ViewModel
                 }
             }
         }
-        private Brush testColor;
-        public Brush TestColor
-        {
-            get { return testColor; }
-            set
-            {
-                testColor = value;
-                RaisePropertyChanged();
-            }
-        }
-        private double lightValue = -60;
-        public double LightValue
-        {
-            get { return lightValue; }
-            set
-            {
-                lightValue = value;
-                RaisePropertyChanged();
-            }
-        }
-        private double alphaValue = 255;
-        public double AlphaValue
-        {
-            get { return alphaValue; }
-            set
-            {
-                alphaValue = value;
-                RaisePropertyChanged();
-            }
-        }
-
 
         public ObservableCollection<IComboBoxMulti> MultiList { get; } = new ObservableCollection<IComboBoxMulti>();
 
@@ -124,7 +93,6 @@ namespace Paway.Test.ViewModel
                 }));
             }
         }
-
         private ICommand colorChanged;
         public ICommand ColorChanged
         {
@@ -135,25 +103,8 @@ namespace Paway.Test.ViewModel
                     var color = Method.ColorSelector(slider.Value / 7);
                     Config.Color = color;
                     //Method.DoStyles();
-                    UpdateTestColor();
                 }));
             }
-        }
-        private ICommand lightChanged;
-        public ICommand LightChanged
-        {
-            get
-            {
-                return lightChanged ?? (lightChanged = new RelayCommand<SliderEXT>(slider =>
-                {
-                    UpdateTestColor();
-                }));
-            }
-        }
-        private void UpdateTestColor()
-        {
-            var color = Config.Color.AddLight((int)LightValue);
-            TestColor = new SolidColorBrush(Color.FromArgb((byte)AlphaValue, color.R, color.G, color.B));
         }
 
         private ICommand selectionCommand;
@@ -192,7 +143,6 @@ namespace Paway.Test.ViewModel
         /// </summary>
         public MainViewModel()
         {
-            UpdateTestColor();
             list = new List<ListViewModel>();
             list.Add(new ListViewModel("Hello"));
             list.Add(new ListViewModel("你好123")
