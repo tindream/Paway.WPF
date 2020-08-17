@@ -58,10 +58,7 @@ namespace Paway.WPF
             if (null != target)
             {
                 // Call registered action
-                if (null != OnEventAction)
-                {
-                    OnEventAction(target, source, eventArgs);
-                }
+                OnEventAction?.Invoke(target, source, eventArgs);
             }
             else
             {

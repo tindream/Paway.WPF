@@ -97,7 +97,7 @@ namespace Paway.WPF
                 // if we can't find the property or it is not of the correct type,
                 // treat it as a null value
 #pragma warning disable IDE0018 // 内联变量声明
-                object[] index = null;
+                object[] index;
 #pragma warning restore IDE0018 // 内联变量声明
                 propertyInfo = type.GetPropertyOrIndexer(propertyNames[i], out index);
                 if (propertyInfo == null)
@@ -143,11 +143,8 @@ namespace Paway.WPF
             }
 
             object item = null;
-#pragma warning disable IDE0018 // 内联变量声明
-            Exception exception = null;
-#pragma warning restore IDE0018 // 内联变量声明
-            PropertyInfo propertyInfo = parentType.GetNestedProperty(propertyPath, out exception, ref item);
-            return propertyInfo == null ? null : propertyInfo.PropertyType;
+            PropertyInfo propertyInfo = parentType.GetNestedProperty(propertyPath, out _, ref item);
+            return propertyInfo?.PropertyType;
         }
 
         /// <summary>

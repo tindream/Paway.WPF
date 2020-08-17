@@ -119,7 +119,7 @@ namespace Paway.WPF
         /// <summary>
         /// 主题色：设置所有颜色，普通、鼠标移过、按下
         /// </summary>
-        public BrushEXT(byte normal, byte mouse, byte pressed, bool iHigh = false) : this(Method.ThemeColor(normal), mouse, pressed) { }
+        public BrushEXT(byte normal, byte mouse, byte pressed) : this(Method.ThemeColor(normal), mouse, pressed) { }
         /// <summary>
         /// 主题色：普通、鼠标移过、按下
         /// </summary>

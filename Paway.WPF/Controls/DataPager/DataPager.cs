@@ -989,8 +989,7 @@ namespace Paway.WPF
                 // update button styles
                 foreach (UIElement uiElement in pager._numericButtonPanel.Children)
                 {
-                    ToggleButton button = uiElement as ToggleButton;
-                    if (button != null)
+                    if (uiElement is ToggleButton button)
                     {
                         button.Style = pager.NumericButtonStyle;
                     }
@@ -1133,8 +1132,7 @@ namespace Paway.WPF
         /// <param name="e">The DependencyPropertyChangedEventArgs for this event.</param>
         private static void OnReadOnlyPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            DataPager pager = d as DataPager;
-            if (pager != null && !pager.AreHandlersSuspended())
+            if (d is DataPager pager && !pager.AreHandlersSuspended())
             {
                 pager.SetValueNoCallback(e.Property, e.OldValue);
                 throw new InvalidOperationException(
@@ -1154,18 +1152,15 @@ namespace Paway.WPF
         {
             DataPager pager = d as DataPager;
 
-            INotifyPropertyChanged oldNotifyPropertyChanged = e.OldValue as INotifyPropertyChanged;
-            if (oldNotifyPropertyChanged != null && pager._weakEventListenerPropertyChanged != null)
+            if (e.OldValue is INotifyPropertyChanged oldNotifyPropertyChanged && pager._weakEventListenerPropertyChanged != null)
             {
                 pager._weakEventListenerPropertyChanged.Detach();
                 pager._weakEventListenerPropertyChanged = null;
             }
 
-            IPagedCollectionView newPagedCollectionView = e.NewValue as IPagedCollectionView;
-            if (newPagedCollectionView != null)
+            if (e.NewValue is IPagedCollectionView newPagedCollectionView)
             {
-                INotifyPropertyChanged newNotifyPropertyChanged = e.NewValue as INotifyPropertyChanged;
-                if (newNotifyPropertyChanged != null)
+                if (e.NewValue is INotifyPropertyChanged newNotifyPropertyChanged)
                 {
                     pager._weakEventListenerPropertyChanged = new WeakEventListener<DataPager, object, PropertyChangedEventArgs>(pager)
                     {
@@ -1213,8 +1208,7 @@ namespace Paway.WPF
             }
             else
             {
-                IEnumerable enumerable = e.NewValue as IEnumerable;
-                if (enumerable != null)
+                if (e.NewValue is IEnumerable enumerable)
                 {
                     IEnumerable<object> genericEnumerable = enumerable.Cast<object>();
                     pager.ItemCount = genericEnumerable.Count();
@@ -1516,11 +1510,7 @@ namespace Paway.WPF
 
             this._needPageChangingNotification = true;
 
-            EventHandler<EventArgs> handler = this.PageIndexChanged;
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
+            this.PageIndexChanged?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -1531,11 +1521,7 @@ namespace Paway.WPF
         {
             if (this._needPageChangingNotification)
             {
-                EventHandler<CancelEventArgs> handler = this.PageIndexChanging;
-                if (handler != null)
-                {
-                    handler(this, e);
-                }
+                this.PageIndexChanging?.Invoke(this, e);
 
                 // A PageIndexChanging notification is still required when
                 // the change was cancelled.
@@ -1717,8 +1703,7 @@ namespace Paway.WPF
                 // remove excess
                 while (this._numericButtonPanel.Children.Count > buttonCount)
                 {
-                    ToggleButton button = this._numericButtonPanel.Children[0] as ToggleButton;
-                    if (button != null)
+                    if (this._numericButtonPanel.Children[0] is ToggleButton button)
                     {
                         button.Checked -= new RoutedEventHandler(this.ToggleButton_Checked);
                         button.Unchecked -= new RoutedEventHandler(this.ToggleButton_Unchecked);
@@ -1752,8 +1737,7 @@ namespace Paway.WPF
                 int index = startIndex;
                 foreach (UIElement ui in this._numericButtonPanel.Children)
                 {
-                    ToggleButton button = ui as ToggleButton;
-                    if (button != null)
+                    if (ui is ToggleButton button)
                     {
                         if (this.PagedSource == null)
                         {
@@ -1837,8 +1821,7 @@ namespace Paway.WPF
                     // Focus the toggle button representing the current page instead.
                     foreach (UIElement ui in this._numericButtonPanel.Children)
                     {
-                        ToggleButton button = ui as ToggleButton;
-                        if (button != null && (bool)button.IsChecked)
+                        if (ui is ToggleButton button && (bool)button.IsChecked)
                         {
                             button.Focus();
                             break;
@@ -1997,16 +1980,14 @@ namespace Paway.WPF
             {
                 foreach (UIElement uiElement in this._numericButtonPanel.Children)
                 {
-                    ToggleButton button = uiElement as ToggleButton;
-                    if (button != null)
+                    if (uiElement is ToggleButton button)
                     {
                         bool useDataPagerForeground = true;
                         if (button.Style != null)
                         {
                             foreach (SetterBase sb in button.Style.Setters)
                             {
-                                Setter s = sb as Setter;
-                                if (s != null && s.Property != null &&
+                                if (sb is Setter s && s.Property != null &&
                                     s.Property.Equals(ForegroundProperty) &&
                                     s.Value != null)
                                 {

@@ -25,7 +25,7 @@ namespace Paway.WPF
     {
         private bool iFirst = true;
         private Rect rect;
-        private static List<Rect> positionList = new List<Rect>();
+        private static readonly List<Rect> positionList = new List<Rect>();
         /// <summary>
         /// </summary>
         public WindowToast()

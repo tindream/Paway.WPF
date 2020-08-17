@@ -216,31 +216,6 @@ namespace Paway.WPF
             Method.AnimOpacity(PreviousContentPresentationSite, false);
             Method.AnimOpacity(CurrentContentPresentationSite, true, OnTransitionCompleted);
         }
-        private void Move(ContentPresenter content, bool x = true, int direction = 1, bool display = true)
-        {
-            //实例化旋转对象（顺时针旋转）
-            TranslateTransform tt = new TranslateTransform();
-            //让content控件平移
-            content.RenderTransform = tt;
-            var value = Value == 0 ? x ? content.ActualWidth : content.ActualHeight : Value;
-            var time = Time;
-            if (time == 0)
-            {
-                time = (int)(Math.Pow(Value, 1.0 / 3) * 100);
-                if (time < 300) time = 300;
-                else if (time > 1000) time = 1000;
-            }
-            //创建动画处理对象
-            var bx = new DoubleAnimation(display ? value * direction : 0, display ? 0 : -value * direction, new Duration(TimeSpan.FromMilliseconds(time)));
-            //反向运动
-            //bx.AutoReverse = true;
-            //无限循环
-            //bx.RepeatBehavior = RepeatBehavior.Forever;
-            if (TransitionType != TransitionType.Default)
-            {
-                tt.BeginAnimation(x ? TranslateTransform.XProperty : TranslateTransform.YProperty, bx);
-            }
-        }
 
         #endregion
     }

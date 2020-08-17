@@ -102,9 +102,9 @@ namespace Paway.WPF
             {
                 throw base.GetConvertFromException(value);
             }
-            if (value is double)
+            if (value is double @double)
             {
-                return new RadiusEXT((double)value);
+                return new RadiusEXT(@double);
             }
             if (value is string str)
             {

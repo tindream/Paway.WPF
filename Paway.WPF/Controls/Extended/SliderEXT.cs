@@ -142,10 +142,12 @@ namespace Paway.WPF
             {
                 if (Method.Child(this, out Thumb thumb))
                 {
-                    toolTip = new ToolTip();
-                    toolTip.Placement = PlacementMode.Custom;
-                    toolTip.PlacementTarget = thumb;
-                    toolTip.CustomPopupPlacementCallback = AutoToolTipCustomPlacementCallbackTemp;
+                    toolTip = new ToolTip
+                    {
+                        Placement = PlacementMode.Custom,
+                        PlacementTarget = thumb,
+                        CustomPopupPlacementCallback = AutoToolTipCustomPlacementCallbackTemp
+                    };
                     thumb.ToolTip = toolTip;
                 }
             }

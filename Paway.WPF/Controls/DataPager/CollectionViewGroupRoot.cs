@@ -198,8 +198,7 @@ namespace System.Windows.Data
         protected override int FindIndex(object item, object seed, IComparer comparer, int low, int high)
         {
             // root group needs to adjust the bounds of the search to exclude the new item (if any)
-            IEditableCollectionView iecv = this._view as IEditableCollectionView;
-            if (iecv != null && iecv.IsAddingNew)
+            if (this._view is IEditableCollectionView iecv && iecv.IsAddingNew)
             {
                 --high;
             }
@@ -250,10 +249,7 @@ namespace System.Windows.Data
         {
             Debug.Assert(args != null, "Arguments passed in should not be null");
 
-            if (this.CollectionChanged != null)
-            {
-                this.CollectionChanged(this, args);
-            }
+            this.CollectionChanged?.Invoke(this, args);
         }
 
         /// <summary>
@@ -261,10 +257,7 @@ namespace System.Windows.Data
         /// </summary>
         protected override void OnGroupByChanged()
         {
-            if (this.GroupDescriptionChanged != null)
-            {
-                this.GroupDescriptionChanged(this, EventArgs.Empty);
-            }
+            this.GroupDescriptionChanged?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -381,7 +374,6 @@ namespace System.Windows.Data
         private void AddToSubgroups(object item, CollectionViewGroupInternal group, int level, bool loading)
         {
             object name = this.GetGroupName(item, group.GroupBy, level);
-            ICollection nameList;
 
             if (name == UseAsItemDirectly)
             {
@@ -397,7 +389,7 @@ namespace System.Windows.Data
                     this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, index));
                 }
             }
-            else if ((nameList = name as ICollection) == null)
+            else if (!(name is ICollection nameList))
             {
                 // the item belongs to one subgroup
                 this.AddToSubgroup(item, group, level, name, loading);
@@ -471,8 +463,7 @@ namespace System.Windows.Data
             group.GroupBy = groupDescription;
 
             // create subgroups for each of the explicit names
-            ObservableCollection<object> explicitNames =
-                (groupDescription != null) ? groupDescription.GroupNames : null;
+            ObservableCollection<object> explicitNames = groupDescription?.GroupNames;
             if (explicitNames != null)
             {
                 for (int k = 0, n = explicitNames.Count; k < n; ++k)
@@ -554,14 +545,13 @@ namespace System.Windows.Data
         {
             bool itemIsMissing = false;
             object name = this.GetGroupName(item, group.GroupBy, level);
-            ICollection nameList;
 
             if (name == UseAsItemDirectly)
             {
                 // the item belongs to the group itself (not to any subgroups)
                 itemIsMissing = this.RemoveFromGroupDirectly(group, item);
             }
-            else if ((nameList = name as ICollection) == null)
+            else if (!(name is ICollection nameList))
             {
                 // the item belongs to one subgroup
                 if (this.RemoveFromSubgroup(item, group, level, name))
@@ -604,8 +594,7 @@ namespace System.Windows.Data
                 // (loop runs backwards in case an entire group is deleted)
                 for (int k = group.Items.Count - 1; k >= 0; --k)
                 {
-                    CollectionViewGroupInternal subgroup = group.Items[k] as CollectionViewGroupInternal;
-                    if (subgroup != null)
+                    if (group.Items[k] is CollectionViewGroupInternal subgroup)
                     {
                         this.RemoveItemFromSubgroupsByExhaustiveSearch(subgroup, item);
                     }

@@ -46,8 +46,10 @@ namespace Paway.Test
             if (this.pathCurrent == null)
             {
                 this.pathCurrent = transition.Content;
-                this.pathNew = new Path();
-                this.pathNew.Style = this.FindResource("PathRound") as Style;
+                this.pathNew = new Path
+                {
+                    Style = this.FindResource("PathRound") as Style
+                };
             }
             transition.TransitionType = (TransitionType)new Random().Next(0, 5);
             //transition.TransitionType = TransitionType.Left;

@@ -102,9 +102,9 @@ namespace Paway.WPF
             {
                 throw base.GetConvertFromException(value);
             }
-            if (value is double)
+            if (value is double @double)
             {
-                return new ThicknessEXT((double)value);
+                return new ThicknessEXT(@double);
             }
             if (value is string str)
             {

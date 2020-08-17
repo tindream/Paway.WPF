@@ -45,7 +45,7 @@ namespace Paway.Test.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
         }
-        
+
         public MainViewModel Main { get { return GetModelInstance<MainViewModel>(); } }
         public T GetModelInstance<T>() { return ServiceLocator.Current.GetInstance<T>(); }
 

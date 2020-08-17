@@ -67,8 +67,7 @@ namespace Paway.WPF
                     DependencyObject parent = VisualTreeHelper.GetParent(child);
                     if (parent == null)
                     {
-                        FrameworkElement childElement = child as FrameworkElement;
-                        if (childElement != null)
+                        if (child is FrameworkElement childElement)
                         {
                             parent = childElement.Parent;
                         }
@@ -90,7 +89,7 @@ namespace Paway.WPF
         /// <returns>True if the currently focused element is within the visual tree of the parent</returns>
         internal static bool ContainsFocusedElement(this DependencyObject element)
         {
-            return (element == null) ? false : element.ContainsChild(FocusManager.GetFocusedElement(element) as DependencyObject);
+            return element != null && element.ContainsChild(FocusManager.GetFocusedElement(element) as DependencyObject);
         }
 
         /// <summary>

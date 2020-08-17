@@ -143,8 +143,7 @@ namespace System.Windows.Data
                     // look for first item, child by child
                     for (int k = 0, n = Items.Count; k < n; ++k)
                     {
-                        CollectionViewGroupInternal subgroup = this.Items[k] as CollectionViewGroupInternal;
-                        if (subgroup == null)
+                        if (!(this.Items[k] is CollectionViewGroupInternal subgroup))
                         {
                             // child is an item - return it
                             return this.Items[k];
@@ -234,8 +233,7 @@ namespace System.Windows.Data
 
             if (comparer != null)
             {
-                ListComparer listComparer = comparer as ListComparer;
-                if (listComparer != null)
+                if (comparer is ListComparer listComparer)
                 {
                     // reset the IListComparer before each search. This cannot be done
                     // any less frequently (e.g. in Root.AddToSubgroups), due to the
@@ -243,8 +241,7 @@ namespace System.Windows.Data
                     listComparer.Reset();
                 }
 
-                CollectionViewGroupComparer groupComparer = comparer as CollectionViewGroupComparer;
-                if (groupComparer != null)
+                if (comparer is CollectionViewGroupComparer groupComparer)
                 {
                     // reset the CollectionViewGroupComparer before each search. This cannot be done
                     // any less frequently (e.g. in Root.AddToSubgroups), due to the
@@ -254,8 +251,7 @@ namespace System.Windows.Data
 
                 for (index = low; index < high; ++index)
                 {
-                    CollectionViewGroupInternal subgroup = this.ProtectedItems[index] as CollectionViewGroupInternal;
-                    object seed1 = (subgroup != null) ? subgroup.SeedItem : this.ProtectedItems[index];
+                    object seed1 = (this.ProtectedItems[index] is CollectionViewGroupInternal subgroup) ? subgroup.SeedItem : this.ProtectedItems[index];
                     if (seed1 == DependencyProperty.UnsetValue)
                     {
                         continue;
@@ -317,8 +313,7 @@ namespace System.Windows.Data
         {
             for (int k = 0, n = this.Items.Count; k < n; ++k)
             {
-                CollectionViewGroupInternal subgroup = this.Items[k] as CollectionViewGroupInternal;
-                if (subgroup != null)
+                if (this.Items[k] is CollectionViewGroupInternal subgroup)
                 {
                     // current item is a group - either drill in, or skip over
                     if (index < subgroup.ItemCount)
@@ -376,8 +371,7 @@ namespace System.Windows.Data
                     }
 
                     // accumulate leaf count
-                    CollectionViewGroupInternal subgroup = group.Items[k] as CollectionViewGroupInternal;
-                    result += (subgroup == null) ? 1 : subgroup.ItemCount;
+                    result += (!(group.Items[k] is CollectionViewGroupInternal subgroup)) ? 1 : subgroup.ItemCount;
                 }
             }
 
@@ -395,8 +389,7 @@ namespace System.Windows.Data
             int leaves = 0;         // number of leaves we've passed over so far
             for (int k = 0, n = Items.Count; k < n; ++k)
             {
-                CollectionViewGroupInternal subgroup = Items[k] as CollectionViewGroupInternal;
-                if (subgroup != null)
+                if (Items[k] is CollectionViewGroupInternal subgroup)
                 {
                     int subgroupIndex = subgroup.LeafIndexOf(item);
                     if (subgroupIndex < 0)
@@ -774,8 +767,7 @@ namespace System.Windows.Data
                         return false;
                     }
 
-                    CollectionViewGroupInternal subgroup = this._group.Items[this._index] as CollectionViewGroupInternal;
-                    if (subgroup == null)
+                    if (!(this._group.Items[this._index] is CollectionViewGroupInternal subgroup))
                     {
                         // current item is a leaf - it's the new Current
                         this._current = this._group.Items[this._index];

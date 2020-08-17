@@ -32,48 +32,44 @@ namespace Paway.WPF
         /// </summary>
         /// <param name="content">控件</param>
         /// <param name="display">显示(进入)/隐藏(离开)</param>
-        /// <param name="completed">完成触发事件</param>
         /// <param name="value">变化量</param>
         /// <param name="time">变化时间</param>
-        public static void AnimMoveLeft(ContentPresenter content, bool display = true, Action completed = null, double value = 0, double time = 0)
+        public static void AnimMoveLeft(ContentPresenter content, bool display = true,  double value = 0, double time = 0)
         {
-            AnimMove(content, display, 1, completed, value, time, true);
+            AnimMove(content, display, 1,  value, time, true);
         }
         /// <summary>
         /// 位移动画-从Y轴上边进入(离开)
         /// </summary>
         /// <param name="content">控件</param>
         /// <param name="display">显示(进入)/隐藏(离开)</param>
-        /// <param name="completed">完成触发事件</param>
         /// <param name="value">变化量</param>
         /// <param name="time">变化时间</param>
-        public static void AnimMoveUp(ContentPresenter content, bool display = true, Action completed = null, double value = 0, double time = 0)
+        public static void AnimMoveUp(ContentPresenter content, bool display = true,  double value = 0, double time = 0)
         {
-            AnimMove(content, display, -1, completed, value, time, false);
+            AnimMove(content, display, -1,  value, time, false);
         }
         /// <summary>
         /// 位移动画-从X轴右边进入(离开)
         /// </summary>
         /// <param name="content">控件</param>
         /// <param name="display">显示(进入)/隐藏(离开)</param>
-        /// <param name="completed">完成触发事件</param>
         /// <param name="value">变化量</param>
         /// <param name="time">变化时间</param>
-        public static void AnimMoveRight(ContentPresenter content, bool display = true, Action completed = null, double value = 0, double time = 0)
+        public static void AnimMoveRight(ContentPresenter content, bool display = true,  double value = 0, double time = 0)
         {
-            AnimMove(content, display, -1, completed, value, time, true);
+            AnimMove(content, display, -1,  value, time, true);
         }
         /// <summary>
         /// 位移动画-从Y轴下边进入(离开)
         /// </summary>
         /// <param name="content">控件</param>
         /// <param name="display">显示(进入)/隐藏(离开)</param>
-        /// <param name="completed">完成触发事件</param>
         /// <param name="value">变化量</param>
         /// <param name="time">变化时间</param>
-        public static void AnimMoveDown(ContentPresenter content, bool display = true, Action completed = null, double value = 0, double time = 0)
+        public static void AnimMoveDown(ContentPresenter content, bool display = true,  double value = 0, double time = 0)
         {
-            AnimMove(content, display, 1, completed, value, time, false);
+            AnimMove(content, display, 1,  value, time, false);
         }
         /// <summary>
         /// 位移动画
@@ -81,11 +77,10 @@ namespace Paway.WPF
         /// <param name="content">控件</param>
         /// <param name="display">显示(进入)/隐藏(离开)</param>
         /// <param name="direction">反向标记</param>
-        /// <param name="completed">完成触发事件</param>
         /// <param name="value">变化量</param>
         /// <param name="time">变化时间</param>
         /// <param name="x">变化量为0时取值依据</param>
-        private static void AnimMove(ContentPresenter content, bool display = true, int direction = 1, Action completed = null, double value = 0, double time = 0, bool x = true)
+        private static void AnimMove(ContentPresenter content, bool display = true, int direction = 1, double value = 0, double time = 0, bool x = true)
         {
             //实例化旋转对象（顺时针旋转）
             TranslateTransform tt = new TranslateTransform();
