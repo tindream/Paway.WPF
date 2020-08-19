@@ -50,7 +50,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(Progress),
-                new PropertyMetadata(new BrushEXT(205, 255)));
+                new PropertyMetadata(new BrushEXT(205, 250)));
 
         #endregion
 

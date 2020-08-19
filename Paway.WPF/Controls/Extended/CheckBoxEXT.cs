@@ -22,7 +22,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(CheckBoxEXT),
-                new PropertyMetadata(new BrushEXT(Colors.Gray, 170, 255)));
+                new PropertyMetadata(new BrushEXT(Colors.Gray, 170, 250)));
 
         #endregion
 

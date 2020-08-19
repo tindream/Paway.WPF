@@ -212,6 +212,8 @@
                                         </MultiTrigger.Conditions>
                                         <Setter TargetName="border" Property="BorderBrush" 
                                                 Value="{Binding Path=ItemBorderBrush.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
+                                        <Setter TargetName="text" Property="Foreground" 
+                                                Value="{Binding Path=ItemTextForeground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="border" Property="Background">
                                             <Setter.Value>
                                                 <MultiBinding Converter="{StaticResource emptyColorConverter}">

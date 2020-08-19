@@ -32,7 +32,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ComboBoxEXT),
-                new PropertyMetadata(new BrushEXT(170, 255)));
+                new PropertyMetadata(new BrushEXT(170, 250)));
 
         #endregion
 

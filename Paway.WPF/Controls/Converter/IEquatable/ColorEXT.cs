@@ -91,13 +91,8 @@ namespace Paway.WPF
         private ColorEXT Reset(Color color, int alpha)
         {
             Normal = color;
-            var a = color.A - alpha;
-            if (a < 0) a = 0;
-            Mouse = Color.FromArgb((byte)a, color.R, color.G, color.B);
-            a = color.A + alpha;
-            if (color == Colors.Transparent) a = 0;
-            else if (a > 255) a = 255;
-            Pressed = Color.FromArgb((byte)a, color.R, color.G, color.B);
+            Mouse = Method.AlphaColor(color.A - alpha, color);
+            Pressed = Method.AlphaColor(color.A + alpha, color);
             return this;
         }
         /// <summary>
@@ -106,10 +101,7 @@ namespace Paway.WPF
         private ColorEXT Focused(Color color, int alpha)
         {
             Mouse = color;
-            var a = color.A + alpha;
-            if (color == Colors.Transparent) a = 0;
-            else if (a > 255) a = 255;
-            Pressed = Color.FromArgb((byte)a, color.R, color.G, color.B);
+            Pressed = Method.AlphaColor(color.A + alpha, color);
             return this;
         }
         /// <summary>

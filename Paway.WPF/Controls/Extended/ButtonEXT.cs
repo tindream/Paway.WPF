@@ -41,7 +41,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty BackgroundEndProperty =
             DependencyProperty.RegisterAttached(nameof(BackgroundEnd), typeof(ColorEXT), typeof(ButtonEXT),
-            new PropertyMetadata(new ColorEXT(Color.FromArgb(255, 220, 220, 220), 210, 255)));
+            new PropertyMetadata(new ColorEXT(Color.FromArgb(255, 220, 220, 220), 210, 250)));
 
         /// <summary>
         /// </summary>

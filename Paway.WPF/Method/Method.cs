@@ -299,18 +299,19 @@ namespace Paway.WPF
         /// <summary>
         /// 主题颜色
         /// </summary>
-        internal static Color ThemeColor(byte alpha)
+        internal static Color ThemeColor(int alpha)
         {
-            return ThemeColor(alpha, Config.Color);
+            return AlphaColor(alpha, Config.Color);
         }
         /// <summary>
-        /// 主题颜色
+        /// 指定Alpha颜色
         /// </summary>
-        internal static Color ThemeColor(byte alpha, Color color)
+        internal static Color AlphaColor(int alpha, Color color)
         {
+            if (color == Colors.Transparent) alpha = 0;
             if (alpha < 0) alpha = 0;
             else if (alpha > 255) alpha = 255;
-            return Color.FromArgb(alpha, color.R, color.G, color.B);
+            return Color.FromArgb((byte)alpha, color.R, color.G, color.B);
         }
 
         #endregion

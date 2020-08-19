@@ -42,9 +42,7 @@ namespace Paway.WPF
             get
             {
                 var pressed = Pressed as SolidColorBrush;
-                var alpha = pressed.Color.A - 20;
-                if (alpha < 0) alpha = 0;
-                return new SolidColorBrush(Color.FromArgb((byte)alpha, pressed.Color.R, pressed.Color.G, pressed.Color.B));
+                return new SolidColorBrush(Method.AlphaColor(pressed.Color.A - 20, pressed.Color));
             }
         }
         /// <summary>
@@ -63,18 +61,24 @@ namespace Paway.WPF
         {
             if (this.Normal is SolidColorBrush normal && normal.Color.R == obj.R && normal.Color.G == obj.G && normal.Color.B == obj.B)
             {
-                if (normal.Color != Colors.Gray && normal.Color != Colors.LightGray && normal.Color != Color.FromArgb(255, 33, 33, 33) && normal.Color != Color.FromArgb(255, 66, 66, 66))
+                if (normal.Color != Colors.Transparent && normal.Color != Colors.Gray && normal.Color != Colors.LightGray && normal.Color != Color.FromArgb(255, 33, 33, 33) && normal.Color != Color.FromArgb(255, 66, 66, 66))
                 {
-                    this.Normal = new SolidColorBrush(Method.ThemeColor(normal.Color.A, iBackground ? Config.Background : Config.Color));
+                    this.Normal = new SolidColorBrush(Method.AlphaColor(normal.Color.A, iBackground ? Config.Background : Config.Color));
                 }
             }
             if (this.Mouse is SolidColorBrush mouse && mouse.Color.R == obj.R && mouse.Color.G == obj.G && mouse.Color.B == obj.B)
             {
-                this.Mouse = new SolidColorBrush(Method.ThemeColor(mouse.Color.A, iBackground ? Config.Background : Config.Color));
+                if (mouse.Color != Colors.Transparent && mouse.Color != Colors.White && mouse.Color != Color.FromArgb(255, 33, 33, 33))
+                {
+                    this.Mouse = new SolidColorBrush(Method.AlphaColor(mouse.Color.A, iBackground ? Config.Background : Config.Color));
+                }
             }
             if (this.Pressed is SolidColorBrush pressed && pressed.Color.R == obj.R && pressed.Color.G == obj.G && pressed.Color.B == obj.B)
             {
-                this.Pressed = new SolidColorBrush(Method.ThemeColor(pressed.Color.A, iBackground ? Config.Background : Config.Color));
+                if (pressed.Color != Colors.Transparent && pressed.Color != Colors.White)
+                {
+                    this.Pressed = new SolidColorBrush(Method.AlphaColor(pressed.Color.A, iBackground ? Config.Background : Config.Color));
+                }
             }
             High();
         }
@@ -85,10 +89,10 @@ namespace Paway.WPF
         {
             if (IHigh)
             {
-                var alpha = this.Normal is SolidColorBrush normal ? normal.Color.A : (byte)255;
-                this.Normal = new SolidColorBrush(Method.ThemeColor(alpha, Config.Color.AddLight(0.96)));
-                alpha = this.Mouse is SolidColorBrush mouse ? mouse.Color.A : (byte)255;
-                this.Mouse = new SolidColorBrush(Method.ThemeColor(alpha, Config.Color.AddLight(0.96)));
+                var alpha = this.Normal is SolidColorBrush normal ? normal.Color.A : (byte)250;
+                this.Normal = new SolidColorBrush(Method.AlphaColor(alpha, Config.Color.AddLight(0.96)));
+                alpha = this.Mouse is SolidColorBrush mouse ? mouse.Color.A : (byte)250;
+                this.Mouse = new SolidColorBrush(Method.AlphaColor(alpha, Config.Color.AddLight(0.96)));
                 this.Pressed = new SolidColorBrush(Config.Color.AddLight(-60));
             }
         }
@@ -136,13 +140,8 @@ namespace Paway.WPF
         private BrushEXT Reset(Color color, int alpha)
         {
             Normal = new SolidColorBrush(color);
-            var a = color.A - alpha;
-            if (a < 0) a = 0;
-            Mouse = new SolidColorBrush(Color.FromArgb((byte)a, color.R, color.G, color.B));
-            a = color.A + alpha;
-            if (color == Colors.Transparent) a = 0;
-            else if (a > 255) a = 255;
-            Pressed = new SolidColorBrush(Color.FromArgb((byte)a, color.R, color.G, color.B));
+            Mouse = new SolidColorBrush(Method.AlphaColor(color.A - alpha, color));
+            Pressed = new SolidColorBrush(Method.AlphaColor(color.A + alpha, color));
             return this;
         }
         /// <summary>
@@ -151,10 +150,7 @@ namespace Paway.WPF
         private BrushEXT Focused(Color color, int alpha)
         {
             Mouse = new SolidColorBrush(color);
-            var a = color.A + alpha;
-            if (color == Colors.Transparent) a = 0;
-            else if (a > 255) a = 255;
-            Pressed = new SolidColorBrush(Color.FromArgb((byte)a, color.R, color.G, color.B));
+            Pressed = new SolidColorBrush(Method.AlphaColor(color.A + alpha, color));
             return this;
         }
         /// <summary>

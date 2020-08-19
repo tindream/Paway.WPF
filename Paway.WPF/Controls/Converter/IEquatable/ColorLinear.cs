@@ -75,9 +75,7 @@ namespace Paway.WPF
         private ColorLinear Reset(Color color, int alpha = 165)
         {
             Start = color;
-            var a = color.A + alpha;
-            if (a > 255) a = 255;
-            End = Color.FromArgb((byte)a, color.R, color.G, color.B);
+            End = Method.AlphaColor(color.A + alpha, color);
             return this;
         }
         /// <summary>
