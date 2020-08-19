@@ -61,9 +61,12 @@ namespace Paway.WPF
         }
         private void Config_ColorChanged(Color obj, bool iBackground)
         {
-            if (obj != Colors.LightGray && obj != Colors.Gray && this.Normal is SolidColorBrush normal && normal.Color.R == obj.R && normal.Color.G == obj.G && normal.Color.B == obj.B)
+            if (this.Normal is SolidColorBrush normal && normal.Color.R == obj.R && normal.Color.G == obj.G && normal.Color.B == obj.B)
             {
-                this.Normal = new SolidColorBrush(Method.ThemeColor(normal.Color.A, iBackground ? Config.Background : Config.Color));
+                if (normal.Color != Colors.Gray && normal.Color != Colors.LightGray && normal.Color != Color.FromArgb(255, 33, 33, 33) && normal.Color != Color.FromArgb(255, 66, 66, 66))
+                {
+                    this.Normal = new SolidColorBrush(Method.ThemeColor(normal.Color.A, iBackground ? Config.Background : Config.Color));
+                }
             }
             if (this.Mouse is SolidColorBrush mouse && mouse.Color.R == obj.R && mouse.Color.G == obj.G && mouse.Color.B == obj.B)
             {
@@ -78,20 +81,14 @@ namespace Paway.WPF
         /// <summary>
         /// 主题深色
         /// </summary>
-        public BrushEXT(bool high) : this()
-        {
-            this.IHigh = high;
-            High();
-        }
-        /// <summary>
-        /// 主题深色
-        /// </summary>
         private void High()
         {
             if (IHigh)
             {
-                this.Normal = new SolidColorBrush(Config.Color.AddLight(0.985));
-                this.Mouse = new SolidColorBrush(Config.Color.AddLight(0.95));
+                var alpha = this.Normal is SolidColorBrush normal ? normal.Color.A : (byte)255;
+                this.Normal = new SolidColorBrush(Method.ThemeColor(alpha, Config.Color.AddLight(0.96)));
+                alpha = this.Mouse is SolidColorBrush mouse ? mouse.Color.A : (byte)255;
+                this.Mouse = new SolidColorBrush(Method.ThemeColor(alpha, Config.Color.AddLight(0.96)));
                 this.Pressed = new SolidColorBrush(Config.Color.AddLight(-60));
             }
         }
@@ -106,7 +103,11 @@ namespace Paway.WPF
         /// <summary>
         /// 主题色：设置所有颜色，普通、鼠标移过、按下
         /// </summary>
-        public BrushEXT(byte normal, byte mouse, byte pressed) : this(Method.ThemeColor(normal), mouse, pressed) { }
+        public BrushEXT(byte normal, byte mouse, byte pressed, bool iHigh = false) : this(Method.ThemeColor(normal), mouse, pressed)
+        {
+            this.IHigh = iHigh;
+            High();
+        }
         /// <summary>
         /// 主题色：普通、鼠标移过、按下
         /// </summary>

@@ -47,9 +47,12 @@ namespace Paway.WPF
         }
         private void Config_ColorChanged(Color obj, bool iBackground)
         {
-            if (obj != Colors.LightGray && this.Normal is Color normal && normal.R == obj.R && normal.G == obj.G && normal.B == obj.B)
+            if (this.Normal is Color normal && normal.R == obj.R && normal.G == obj.G && normal.B == obj.B)
             {
-                this.Normal = Method.ThemeColor(normal.A);
+                if (normal != Colors.LightGray && normal != Color.FromArgb(255, 254, 254, 254) && normal != Color.FromArgb(255, 220, 220, 220))
+                {
+                    this.Normal = Method.ThemeColor(normal.A);
+                }
             }
             if (this.Mouse is Color mouse && mouse.R == obj.R && mouse.G == obj.G && mouse.B == obj.B)
             {

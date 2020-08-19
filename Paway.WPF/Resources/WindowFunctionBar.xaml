@@ -66,7 +66,7 @@
                 <Setter Property="Stroke" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Fill" TargetName="ButtonBackground" Value="White" />
+                <Setter Property="Fill" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Normal, RelativeSource={RelativeSource Self}}" />
                 <Setter Property="Stroke" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Normal, RelativeSource={RelativeSource Self}}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
@@ -283,6 +283,9 @@
             <Trigger Property="IsHighlighted" Value="True">
                 <Setter Property="Background" TargetName="templateRoot" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}" />
             </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" TargetName="templateRoot" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Normal, RelativeSource={RelativeSource Self}}" />
+            </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="#FF707070" />
                 <Setter Property="Fill" TargetName="Glyph" Value="#FF707070" />
@@ -406,7 +409,10 @@
                 <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter Property="Background" TargetName="templateRoot" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}" /> 
+                <Setter Property="Background" TargetName="templateRoot" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" TargetName="templateRoot" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Normal, RelativeSource={RelativeSource Self}}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="#FF707070" />

@@ -29,7 +29,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty HighBrushProperty =
             DependencyProperty.RegisterAttached(nameof(HighBrush), typeof(BrushEXT), typeof(ThemeEXT),
-                new PropertyMetadata(new BrushEXT(true)));
+                new PropertyMetadata(new BrushEXT(120, 255, 255, true)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty BackgroundProperty =
