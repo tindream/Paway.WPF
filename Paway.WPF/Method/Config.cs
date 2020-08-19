@@ -44,10 +44,11 @@ namespace Paway.WPF
                 }
             }
         }
+
         /// <summary>
         /// 主题颜色变化事件
         /// </summary>
-        public static event Action<Color, bool> ColorChanged;
+        public static event Action<Color> ColorChanged;
         private static Color color = Color.FromArgb(255, 35, 175, 255);
         /// <summary>
         /// 主题颜色
@@ -61,10 +62,15 @@ namespace Paway.WPF
                 {
                     var old = color;
                     color = value;
-                    ColorChanged?.Invoke(old, false);
+                    ColorChanged?.Invoke(old);
                 }
             }
         }
+
+        /// <summary>
+        /// 主题窗体背景色事件
+        /// </summary>
+        public static event Action<Color> BackgroundChanged;
         private static Color background = Color.FromArgb(255, 204, 213, 240);
         /// <summary>
         /// 窗体背景色
@@ -78,7 +84,7 @@ namespace Paway.WPF
                 {
                     var old = background;
                     background = value;
-                    ColorChanged?.Invoke(old, true);
+                    BackgroundChanged?.Invoke(old);
                 }
             }
         }

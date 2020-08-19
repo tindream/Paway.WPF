@@ -15,6 +15,7 @@ namespace Paway.WPF
 {
     /// <summary>
     /// 自定义默认、鼠标划过时、鼠标点击时的Brush颜色
+    /// <para>需要反射实体对象，获取默认值，故注意无限循环，不可引用自身</para>
     /// </summary>
     [TypeConverter(typeof(BrushEXTConverter))]
     public class BrushEXT : ModelBase, IEquatable<BrushEXT>, IElementStatu<Brush>
@@ -57,27 +58,27 @@ namespace Paway.WPF
         {
             Config.ColorChanged += Config_ColorChanged;
         }
-        private void Config_ColorChanged(Color obj, bool iBackground)
+        private void Config_ColorChanged(Color obj)
         {
             if (this.Normal is SolidColorBrush normal && normal.Color.R == obj.R && normal.Color.G == obj.G && normal.Color.B == obj.B)
             {
                 if (normal.Color != Colors.Transparent && normal.Color != Colors.Gray && normal.Color != Colors.LightGray && normal.Color != Color.FromArgb(255, 33, 33, 33) && normal.Color != Color.FromArgb(255, 66, 66, 66))
                 {
-                    this.Normal = new SolidColorBrush(Method.AlphaColor(normal.Color.A, iBackground ? Config.Background : Config.Color));
+                    this.Normal = new SolidColorBrush(Method.ThemeColor(normal.Color.A));
                 }
             }
             if (this.Mouse is SolidColorBrush mouse && mouse.Color.R == obj.R && mouse.Color.G == obj.G && mouse.Color.B == obj.B)
             {
                 if (mouse.Color != Colors.Transparent && mouse.Color != Colors.White && mouse.Color != Color.FromArgb(255, 33, 33, 33))
                 {
-                    this.Mouse = new SolidColorBrush(Method.AlphaColor(mouse.Color.A, iBackground ? Config.Background : Config.Color));
+                    this.Mouse = new SolidColorBrush(Method.ThemeColor(mouse.Color.A));
                 }
             }
             if (this.Pressed is SolidColorBrush pressed && pressed.Color.R == obj.R && pressed.Color.G == obj.G && pressed.Color.B == obj.B)
             {
                 if (pressed.Color != Colors.Transparent && pressed.Color != Colors.White)
                 {
-                    this.Pressed = new SolidColorBrush(Method.AlphaColor(pressed.Color.A, iBackground ? Config.Background : Config.Color));
+                    this.Pressed = new SolidColorBrush(Method.ThemeColor(pressed.Color.A));
                 }
             }
             High();

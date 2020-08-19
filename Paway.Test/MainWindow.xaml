@@ -15,7 +15,7 @@
             <TextBlock Text="{Binding Desc}" Padding="10,6" FontSize="14" Margin="-3"></TextBlock>
         </StatusBar>
         <StackPanel DockPanel.Dock="Top">
-            <utils:SliderEXT x:Name="sliderSize" Minimum="12" Maximum="18" Value="15" AutoToolTipPrecision="2"  TickFrequency="0.01">
+            <utils:SliderEXT x:Name="sliderSize" Minimum="12" Maximum="21" Value="15" AutoToolTipPrecision="2"  TickFrequency="0.01">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="ValueChanged">
                         <i:InvokeCommandAction Command="{Binding SizeChanged}"
@@ -108,7 +108,7 @@
                     <TabItem Cursor="Hand" Header="音乐电台" />
                     <TabItem Cursor="Hand" Header="Mv电台"/>
                 </utils:TabControlEXT>
-                <utils:TreeViewEXT x:Name="TreeViewOrg" Height="180" CheckBox="Visible" ItemTemplate="{StaticResource UserNode}" ItemsSource="{Binding TreeList}"/>
+                <utils:TreeViewEXT x:Name="TreeViewOrg" Height="180" CheckBox="Visible" ItemTemplate="{StaticResource DefaultNode}" ItemsSource="{Binding TreeList}"/>
 
 
             </StackPanel>

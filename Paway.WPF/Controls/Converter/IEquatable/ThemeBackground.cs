@@ -15,47 +15,47 @@ using System.Windows.Media;
 namespace Paway.WPF
 {
     /// <summary>
-    /// 自定义默认、鼠标划过时、鼠标点击时的大小
+    /// 主题背景颜色
     /// </summary>
-    [TypeConverter(typeof(FontSizeEXTConverter))]
-    public class FontSizeEXT : ModelBase, IEquatable<FontSizeEXT>
+    [TypeConverter(typeof(ThemeBackgroundConverter))]
+    public class ThemeBackground : ModelBase, IEquatable<ThemeBackground>
     {
-        private double _value;
+        private Brush _value;
         /// <summary>
         /// 默认值
         /// </summary>
-        public double Value { get { return _value; } set { _value = value; OnPropertyChanged(); } }
+        public Brush Value { get { return _value; } set { _value = value; OnPropertyChanged(); } }
 
         /// <summary>
         /// </summary>
-        public FontSizeEXT()
+        public ThemeBackground()
         {
-            Config.FontSizeChanged += Config_FontSizeChanged;
+            Config.BackgroundChanged += Config_BackgroundChanged;
         }
-        private void Config_FontSizeChanged(double obj)
+        private void Config_BackgroundChanged(Color obj)
         {
-            if (this.Value == obj)
+            if (this.Value is SolidColorBrush value && value.Color.R == obj.R && value.Color.G == obj.G && value.Color.B == obj.B)
             {
-                this.Value = Config.FontSize;
+                this.Value = new SolidColorBrush(Config.Background);
             }
         }
         /// <summary>
         /// </summary>
-        public FontSizeEXT(double value) : this()
+        public ThemeBackground(Color value) : this()
         {
-            this.Value = value;
+            this.Value = new SolidColorBrush(value);
         }
         /// <summary>
         /// </summary>
-        public bool Equals(FontSizeEXT other)
+        public bool Equals(ThemeBackground other)
         {
             return Value.Equals(other.Value);
         }
     }
     /// <summary>
-    /// 字符串转FontSizeEXT
+    /// 字符串转ThemeBackground
     /// </summary>
-    internal class FontSizeEXTConverter : TypeConverter
+    internal class ThemeBackgroundConverter : TypeConverter
     {
         /// <summary>
         /// </summary>
@@ -80,13 +80,13 @@ namespace Paway.WPF
             {
                 throw base.GetConvertFromException(value);
             }
-            if (value is double @double)
-            {
-                return new FontSizeEXT(@double);
-            }
             if (value is string str)
             {
-                return new FontSizeEXT(str.ToDouble());
+                if (byte.TryParse(str, out byte alpha))
+                {
+                    return new ThemeBackground(Method.ThemeColor(alpha));
+                }
+                return new ThemeBackground((Color)ColorConverter.ConvertFromString(str));
             }
             return base.ConvertFrom(context, culture, value);
         }

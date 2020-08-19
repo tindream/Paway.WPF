@@ -66,6 +66,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Converter\IEquatable\ThemeBackground.cs" />
     <Compile Include="Controls\Converter\IEquatable\FontSizeEXT.cs" />
     <Compile Include="Controls\Converter\IValueConverter\IsNotNullConverter.cs" />
     <Compile Include="Controls\Converter\Enum\RegexType.cs" />

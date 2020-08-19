@@ -6,6 +6,7 @@
     <local:BoolToVisible x:Key="boolToVisible"/>
     <local:ChangeConverter x:Key="changeConverter"/>
     <local:DateConverter x:Key="dateConverter"/>
+    <local:EmptyColorConverter x:Key="emptyColorConverter" />
     <local:IsNotNullConverter x:Key="isNotNull"/>
     <local:NullToCollapsed x:Key="nullToCollapsed"/>
     <local:NullJudgeConverter x:Key="nullJudgeConverter"/>
@@ -116,7 +117,7 @@
     </Style>
 
     <Style x:Key="themeBackground" TargetType="Control">
-        <Setter Property="Background" Value="{Binding Path=(local:ThemeEXT.Background).Normal, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="Background" Value="{Binding Path=(local:ThemeEXT.Background).Value, RelativeSource={RelativeSource Self}}" />
     </Style>
     <Style x:Key="themeBlockHigh" TargetType="TextBlock">
         <Setter Property="Background" Value="{Binding Path=(local:ThemeEXT.HighBrush).Pressed, RelativeSource={RelativeSource Self}}" />

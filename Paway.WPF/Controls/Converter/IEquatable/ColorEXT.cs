@@ -45,7 +45,7 @@ namespace Paway.WPF
         {
             Config.ColorChanged += Config_ColorChanged;
         }
-        private void Config_ColorChanged(Color obj, bool iBackground)
+        private void Config_ColorChanged(Color obj)
         {
             if (this.Normal is Color normal && normal.R == obj.R && normal.G == obj.G && normal.B == obj.B)
             {

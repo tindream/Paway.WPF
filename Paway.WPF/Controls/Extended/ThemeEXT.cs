@@ -33,8 +33,8 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty BackgroundProperty =
-            DependencyProperty.RegisterAttached(nameof(Background), typeof(BrushEXT), typeof(ThemeEXT),
-                new PropertyMetadata(new BrushEXT(Config.Background)));
+            DependencyProperty.RegisterAttached(nameof(Background), typeof(ThemeBackground), typeof(ThemeEXT),
+                new PropertyMetadata(new ThemeBackground(Config.Background)));
 
         #endregion
 
@@ -61,64 +61,37 @@ namespace Paway.WPF
         }
 
         /// <summary>
-        /// 项颜色
+        /// 项颜色(禁止个性设置，通过主题色更新)
         /// </summary>
         [Category("扩展")]
         [Description("项颜色")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public BrushEXT ItemBrush { get; set; }
-        /// <summary>
-        /// get项颜色
-        /// </summary>
-        public static BrushEXT GetItemBrush(DependencyObject obj)
-        {
-            return (BrushEXT)obj.GetValue(ItemBrushProperty);
-        }
-        /// <summary>
-        /// set项颜色
-        /// </summary>
-        public static void SetItemBrush(DependencyObject obj, BrushEXT value)
-        {
-            obj.SetValue(ItemBrushProperty, value);
-        }
 
         /// <summary>
-        /// 主题深色
+        /// 主题深色(禁止个性设置，通过主题色更新)
         /// </summary>
         [Category("扩展")]
         [Description("主题深色")]
         public BrushEXT HighBrush { get; set; }
-        /// <summary>
-        /// get主题深色
-        /// </summary>
-        public static BrushEXT GetHighBrush(DependencyObject obj)
-        {
-            return (BrushEXT)obj.GetValue(HighBrushProperty);
-        }
-        /// <summary>
-        /// set主题深色
-        /// </summary>
-        public static void SetHighBrush(DependencyObject obj, BrushEXT value)
-        {
-            obj.SetValue(HighBrushProperty, value);
-        }
 
         /// <summary>
-        /// 窗体背景色(自定义)
+        /// 窗体背景颜色
         /// </summary>
         [Category("扩展")]
-        [Description("主题深色")]
-        public BrushEXT Background { get; set; }
+        [Description("窗体背景颜色")]
+        public ThemeBackground Background { get; set; }
         /// <summary>
-        /// get窗体背景色(自定义)
+        /// get窗体背景颜色
         /// </summary>
-        public static BrushEXT GetBackground(DependencyObject obj)
+        public static ThemeBackground GetBackground(DependencyObject obj)
         {
-            return (BrushEXT)obj.GetValue(BackgroundProperty);
+            return (ThemeBackground)obj.GetValue(BackgroundProperty);
         }
         /// <summary>
-        /// set窗体背景色(自定义)
+        /// set窗体背景颜色
         /// </summary>
-        public static void SetBackground(DependencyObject obj, BrushEXT value)
+        public static void SetBackground(DependencyObject obj, ThemeBackground value)
         {
             obj.SetValue(BackgroundProperty, value);
         }
