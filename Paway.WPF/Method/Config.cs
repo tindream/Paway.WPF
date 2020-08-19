@@ -47,7 +47,7 @@ namespace Paway.WPF
         /// <summary>
         /// 主题颜色变化事件
         /// </summary>
-        public static event Action<Color> ColorChanged;
+        public static event Action<Color, bool> ColorChanged;
         private static Color color = Color.FromArgb(255, 35, 175, 255);
         /// <summary>
         /// 主题颜色
@@ -61,7 +61,24 @@ namespace Paway.WPF
                 {
                     var old = color;
                     color = value;
-                    ColorChanged?.Invoke(old);
+                    ColorChanged?.Invoke(old, false);
+                }
+            }
+        }
+        private static Color background = Color.FromArgb(255, 204, 213, 240);
+        /// <summary>
+        /// 窗体背景色
+        /// </summary>
+        public static Color Background
+        {
+            get { return background; }
+            set
+            {
+                if (background != value)
+                {
+                    var old = background;
+                    background = value;
+                    ColorChanged?.Invoke(old, true);
                 }
             }
         }

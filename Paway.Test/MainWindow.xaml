@@ -143,6 +143,7 @@
                            ItemHeight="68" ItemWidth="100" Height="68"
                            ItemBorder="0;0,0,0,4"
                            ItemImageHeight="32" ItemImageDock="Top" ItemPadding="5"
+                           Style="{StaticResource themeBackground}"
                            SelectionMode="Extended" VerticalAlignment="Top">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">

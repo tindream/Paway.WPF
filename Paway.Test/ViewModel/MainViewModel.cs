@@ -102,6 +102,7 @@ namespace Paway.Test.ViewModel
                 {
                     var color = Method.ColorSelector(slider.Value / 7);
                     Config.Color = color;
+                    //Config.Background = Method.ColorSelector((slider.Value + 0.4) / 7).AddLight(0.93);
                     //Method.DoStyles();
                 }));
             }

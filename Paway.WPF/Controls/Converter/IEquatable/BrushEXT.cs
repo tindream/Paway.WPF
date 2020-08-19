@@ -59,19 +59,19 @@ namespace Paway.WPF
         {
             Config.ColorChanged += Config_ColorChanged;
         }
-        private void Config_ColorChanged(Color obj)
+        private void Config_ColorChanged(Color obj, bool iBackground)
         {
             if (obj != Colors.LightGray && obj != Colors.Gray && this.Normal is SolidColorBrush normal && normal.Color.R == obj.R && normal.Color.G == obj.G && normal.Color.B == obj.B)
             {
-                this.Normal = new SolidColorBrush(Method.ThemeColor(normal.Color.A));
+                this.Normal = new SolidColorBrush(Method.ThemeColor(normal.Color.A, iBackground ? Config.Background : Config.Color));
             }
             if (this.Mouse is SolidColorBrush mouse && mouse.Color.R == obj.R && mouse.Color.G == obj.G && mouse.Color.B == obj.B)
             {
-                this.Mouse = new SolidColorBrush(Method.ThemeColor(mouse.Color.A));
+                this.Mouse = new SolidColorBrush(Method.ThemeColor(mouse.Color.A, iBackground ? Config.Background : Config.Color));
             }
             if (this.Pressed is SolidColorBrush pressed && pressed.Color.R == obj.R && pressed.Color.G == obj.G && pressed.Color.B == obj.B)
             {
-                this.Pressed = new SolidColorBrush(Method.ThemeColor(pressed.Color.A));
+                this.Pressed = new SolidColorBrush(Method.ThemeColor(pressed.Color.A, iBackground ? Config.Background : Config.Color));
             }
             High();
         }

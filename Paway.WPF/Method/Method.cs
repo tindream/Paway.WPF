@@ -34,9 +34,9 @@ namespace Paway.WPF
         /// <param name="display">显示(进入)/隐藏(离开)</param>
         /// <param name="value">变化量</param>
         /// <param name="time">变化时间</param>
-        public static void AnimMoveLeft(ContentPresenter content, bool display = true,  double value = 0, double time = 0)
+        public static void AnimMoveLeft(ContentPresenter content, bool display = true, double value = 0, double time = 0)
         {
-            AnimMove(content, display, 1,  value, time, true);
+            AnimMove(content, display, 1, value, time, true);
         }
         /// <summary>
         /// 位移动画-从Y轴上边进入(离开)
@@ -45,9 +45,9 @@ namespace Paway.WPF
         /// <param name="display">显示(进入)/隐藏(离开)</param>
         /// <param name="value">变化量</param>
         /// <param name="time">变化时间</param>
-        public static void AnimMoveUp(ContentPresenter content, bool display = true,  double value = 0, double time = 0)
+        public static void AnimMoveUp(ContentPresenter content, bool display = true, double value = 0, double time = 0)
         {
-            AnimMove(content, display, -1,  value, time, false);
+            AnimMove(content, display, -1, value, time, false);
         }
         /// <summary>
         /// 位移动画-从X轴右边进入(离开)
@@ -56,9 +56,9 @@ namespace Paway.WPF
         /// <param name="display">显示(进入)/隐藏(离开)</param>
         /// <param name="value">变化量</param>
         /// <param name="time">变化时间</param>
-        public static void AnimMoveRight(ContentPresenter content, bool display = true,  double value = 0, double time = 0)
+        public static void AnimMoveRight(ContentPresenter content, bool display = true, double value = 0, double time = 0)
         {
-            AnimMove(content, display, -1,  value, time, true);
+            AnimMove(content, display, -1, value, time, true);
         }
         /// <summary>
         /// 位移动画-从Y轴下边进入(离开)
@@ -67,9 +67,9 @@ namespace Paway.WPF
         /// <param name="display">显示(进入)/隐藏(离开)</param>
         /// <param name="value">变化量</param>
         /// <param name="time">变化时间</param>
-        public static void AnimMoveDown(ContentPresenter content, bool display = true,  double value = 0, double time = 0)
+        public static void AnimMoveDown(ContentPresenter content, bool display = true, double value = 0, double time = 0)
         {
-            AnimMove(content, display, 1,  value, time, false);
+            AnimMove(content, display, 1, value, time, false);
         }
         /// <summary>
         /// 位移动画
@@ -301,9 +301,16 @@ namespace Paway.WPF
         /// </summary>
         internal static Color ThemeColor(byte alpha)
         {
+            return ThemeColor(alpha, Config.Color);
+        }
+        /// <summary>
+        /// 主题颜色
+        /// </summary>
+        internal static Color ThemeColor(byte alpha, Color color)
+        {
             if (alpha < 0) alpha = 0;
             else if (alpha > 255) alpha = 255;
-            return Color.FromArgb(alpha, Config.Color.R, Config.Color.G, Config.Color.B);
+            return Color.FromArgb(alpha, color.R, color.G, color.B);
         }
 
         #endregion

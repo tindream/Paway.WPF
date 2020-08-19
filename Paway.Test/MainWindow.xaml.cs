@@ -28,7 +28,6 @@ namespace Paway.Test
         public MainWindow()
         {
             InitializeComponent();
-            this.ItemBrush = new BrushEXT(Color.FromArgb(255, 204, 213, 240));
         }
 
         private bool b;

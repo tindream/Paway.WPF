@@ -27,10 +27,6 @@ namespace Paway.WPF
         /// </summary>
         private static readonly DependencyProperty IsNonClientActiveProperty =
             DependencyProperty.Register(nameof(IsNonClientActive), typeof(bool), typeof(WindowEXT), new FrameworkPropertyMetadata(false));
-        /// <summary>
-        /// </summary>
-        public static readonly DependencyProperty ItemBrushProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(WindowEXT));
 
         #endregion
 
@@ -61,15 +57,6 @@ namespace Paway.WPF
         {
             get => (bool)GetValue(IsNonClientActiveProperty);
             set => SetValue(IsNonClientActiveProperty, value);
-        }
-        /// <summary>
-        /// 背景颜色
-        /// </summary>
-        [Browsable(false)]
-        public BrushEXT ItemBrush
-        {
-            get { return (BrushEXT)GetValue(ItemBrushProperty); }
-            set { SetValue(ItemBrushProperty, value); }
         }
 
         #endregion

@@ -30,6 +30,11 @@ namespace Paway.WPF
         public static readonly DependencyProperty HighBrushProperty =
             DependencyProperty.RegisterAttached(nameof(HighBrush), typeof(BrushEXT), typeof(ThemeEXT),
                 new PropertyMetadata(new BrushEXT(true)));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty BackgroundProperty =
+            DependencyProperty.RegisterAttached(nameof(Background), typeof(BrushEXT), typeof(ThemeEXT),
+                new PropertyMetadata(new BrushEXT(Config.Background)));
 
         #endregion
 
@@ -95,6 +100,27 @@ namespace Paway.WPF
         public static void SetHighBrush(DependencyObject obj, BrushEXT value)
         {
             obj.SetValue(HighBrushProperty, value);
+        }
+
+        /// <summary>
+        /// 窗体背景色(自定义)
+        /// </summary>
+        [Category("扩展")]
+        [Description("主题深色")]
+        public BrushEXT Background { get; set; }
+        /// <summary>
+        /// get窗体背景色(自定义)
+        /// </summary>
+        public static BrushEXT GetBackground(DependencyObject obj)
+        {
+            return (BrushEXT)obj.GetValue(BackgroundProperty);
+        }
+        /// <summary>
+        /// set窗体背景色(自定义)
+        /// </summary>
+        public static void SetBackground(DependencyObject obj, BrushEXT value)
+        {
+            obj.SetValue(BackgroundProperty, value);
         }
 
         #endregion
