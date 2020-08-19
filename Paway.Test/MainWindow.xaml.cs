@@ -4,7 +4,6 @@ using Paway.WPF;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -29,6 +28,7 @@ namespace Paway.Test
         public MainWindow()
         {
             InitializeComponent();
+            this.ItemBrush = new BrushEXT(Color.FromArgb(255, 204, 213, 240));
         }
 
         private bool b;

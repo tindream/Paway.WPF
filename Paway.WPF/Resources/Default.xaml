@@ -115,11 +115,11 @@
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
     </Style>
 
-    <Style x:Key="themeBackHigh" TargetType="Control">
+    <Style x:Key="themeBlockHigh" TargetType="TextBlock">
         <Setter Property="Background" Value="{Binding Path=(local:ThemeEXT.HighBrush).Pressed, RelativeSource={RelativeSource Self}}" />
     </Style>
-    <Style x:Key="themeForeHigh" TargetType="Control">
-        <Setter Property="Foreground" Value="{Binding Path=(local:ThemeEXT.HighBrush).Pressed, RelativeSource={RelativeSource Self}}" />
+    <Style x:Key="themeBackHigh" TargetType="Control">
+        <Setter Property="Background" Value="{Binding Path=(local:ThemeEXT.HighBrush).Pressed, RelativeSource={RelativeSource Self}}" />
     </Style>
     <Style x:Key="themeFillHigh" TargetType="Shape">
         <Setter Property="Fill" Value="{Binding Path=(local:ThemeEXT.HighBrush).Pressed, RelativeSource={RelativeSource Self}}" />

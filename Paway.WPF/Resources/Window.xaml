@@ -149,8 +149,13 @@
                             </Grid.RowDefinitions>
                             <Grid x:Name="WindowTitlePanel"
                                   Height="36"
-                                  Background="{Binding Path=(local:ThemeEXT.HighBrush).Normal, RelativeSource={RelativeSource Self}}"
                                   Margin="0,0,0,0">
+                                <Grid.Background>
+                                    <MultiBinding Converter="{StaticResource nullJudgeConverter}">
+                                        <Binding Path="ItemBrush.Normal" RelativeSource="{RelativeSource AncestorType={x:Type local:WindowEXT}}" />
+                                        <Binding Path="(local:ThemeEXT.HighBrush).Normal" RelativeSource="{RelativeSource Self}" />
+                                    </MultiBinding>
+                                </Grid.Background>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />

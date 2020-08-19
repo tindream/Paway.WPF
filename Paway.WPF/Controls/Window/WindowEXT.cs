@@ -27,6 +27,10 @@ namespace Paway.WPF
         /// </summary>
         private static readonly DependencyProperty IsNonClientActiveProperty =
             DependencyProperty.Register(nameof(IsNonClientActive), typeof(bool), typeof(WindowEXT), new FrameworkPropertyMetadata(false));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ItemBrushProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(WindowEXT));
 
         #endregion
 
@@ -34,6 +38,7 @@ namespace Paway.WPF
         /// <summary>
         /// 左侧标题栏
         /// </summary>
+        [Browsable(false)]
         public WindowFunctionBar FunctionBar
         {
             get => (WindowFunctionBar)GetValue(FunctionBarProperty);
@@ -42,6 +47,7 @@ namespace Paway.WPF
         /// <summary>
         /// 右侧标题栏
         /// </summary>
+        [Browsable(false)]
         public WindowFunctionBar FunctionBarRight
         {
             get => (WindowFunctionBar)GetValue(FunctionBarRightProperty);
@@ -50,10 +56,20 @@ namespace Paway.WPF
         /// <summary>
         /// 窗体失去焦点时
         /// </summary>
+        [Browsable(false)]
         public bool IsNonClientActive
         {
             get => (bool)GetValue(IsNonClientActiveProperty);
             set => SetValue(IsNonClientActiveProperty, value);
+        }
+        /// <summary>
+        /// 背景颜色
+        /// </summary>
+        [Browsable(false)]
+        public BrushEXT ItemBrush
+        {
+            get { return (BrushEXT)GetValue(ItemBrushProperty); }
+            set { SetValue(ItemBrushProperty, value); }
         }
 
         #endregion
