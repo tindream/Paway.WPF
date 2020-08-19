@@ -17,21 +17,8 @@ namespace Paway.WPF
     /// 自定义默认、鼠标划过时、鼠标点击时的Brush颜色
     /// </summary>
     [TypeConverter(typeof(BrushEXTConverter))]
-    public class BrushEXT : IEquatable<BrushEXT>, IElementStatu<Brush>, INotifyPropertyChanged
+    public class BrushEXT : ModelBase, IEquatable<BrushEXT>, IElementStatu<Brush>
     {
-        #region INotifyPropertyChanged
-        /// <summary>
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-        /// <summary>
-        /// </summary>
-        public void OnPropertyChanged()
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Method.GetLastModelName()));
-        }
-
-        #endregion
-
         private Brush normal = new SolidColorBrush(Colors.LightGray);
         /// <summary>
         /// 默认的颜色

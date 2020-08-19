@@ -18,27 +18,8 @@ namespace Paway.WPF
     /// 自定义默认、鼠标划过时、鼠标点击时的大小
     /// </summary>
     [TypeConverter(typeof(FontSizeConverter))]
-    public class FontSizeEXT : IEquatable<FontSizeEXT>, INotifyPropertyChanged
+    public class FontSizeEXT : ModelBase, IEquatable<FontSizeEXT>
     {
-        #region INotifyPropertyChanged
-        /// <summary>
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-        /// <summary>
-        /// </summary>
-        public void OnPropertyChanged()
-        {
-            OnPropertyChanged(Method.GetLastModelName());
-        }
-        /// <summary>
-        /// </summary>
-        public void OnPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-
-        #endregion
-
         /// <summary>
         /// 默认值
         /// </summary>

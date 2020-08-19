@@ -17,21 +17,8 @@ namespace Paway.WPF
     /// 自定义线性渐变的Color颜色
     /// </summary>
     [TypeConverter(typeof(ColorLinearConverter))]
-    public class ColorLinear : IEquatable<ColorLinear>, INotifyPropertyChanged
+    public class ColorLinear : ModelBase, IEquatable<ColorLinear>
     {
-        #region INotifyPropertyChanged
-        /// <summary>
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-        /// <summary>
-        /// </summary>
-        public void OnPropertyChanged()
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Method.GetLastModelName()));
-        }
-
-        #endregion
-
         private Color start = Method.ThemeColor(85);
         /// <summary>
         /// 起始颜色

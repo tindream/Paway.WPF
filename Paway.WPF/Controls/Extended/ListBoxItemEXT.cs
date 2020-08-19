@@ -14,6 +14,20 @@ namespace Paway.WPF
     /// </summary>
     public partial class ListBoxItemEXT : ListBoxItem, IListView, INotifyPropertyChanged
     {
+        #region INotifyPropertyChanged
+        /// <summary>
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// </summary>
+        public void OnPropertyChanged()
+        {
+            var name = Method.GetLastModelName();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
+        #endregion
+
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBackgroundProperty =
@@ -34,16 +48,6 @@ namespace Paway.WPF
         /// 标识符
         /// </summary>
         public int Id { get; set; }
-        /// <summary>
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-        /// <summary>
-        /// </summary>
-        public void OnPropertyChanged()
-        {
-            var name = Method.GetLastModelName();
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
         private bool isPressed;
         /// <summary>
         /// 按下状态

@@ -11,19 +11,8 @@ namespace Paway.WPF
     /// <summary>
     /// Window系统消息框-Toast显示-Model
     /// </summary>
-    internal class WindowToastModel : INotifyPropertyChanged
+    internal class WindowToastModel : ModelBase
     {
-        /// <summary>
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-        /// <summary>
-        /// </summary>
-        public void OnPropertyChanged()
-        {
-            var name = Method.GetLastModelName();
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-
         private double yOffSetStart = -200;
         /// <summary>
         /// 开始帧速及方向

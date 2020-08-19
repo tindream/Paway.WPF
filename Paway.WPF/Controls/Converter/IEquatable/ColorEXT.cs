@@ -17,21 +17,8 @@ namespace Paway.WPF
     /// 自定义默认、鼠标划过时、鼠标点击时的Color颜色
     /// </summary>
     [TypeConverter(typeof(ColorEXTConverter))]
-    public class ColorEXT : IEquatable<ColorEXT>, IElementStatu<Color>, INotifyPropertyChanged
+    public class ColorEXT : ModelBase, IEquatable<ColorEXT>, IElementStatu<Color>
     {
-        #region INotifyPropertyChanged
-        /// <summary>
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-        /// <summary>
-        /// </summary>
-        public void OnPropertyChanged()
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Method.GetLastModelName()));
-        }
-
-        #endregion
-
         private Color normal = Colors.LightGray;
         /// <summary>
         /// 默认的颜色
