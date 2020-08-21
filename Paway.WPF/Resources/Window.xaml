@@ -124,7 +124,7 @@
         <Setter Property="ResizeMode" Value="CanResize" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
         <Setter Property="WindowStyle" Value="SingleBorderWindow" />
-        <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+        <!--<Setter Property="FontFamily" Value="Microsoft YaHei"/>-->
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="WindowChrome.WindowChrome">
@@ -148,7 +148,7 @@
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <Grid x:Name="WindowTitlePanel"
-                                  Height="36"
+                                  Height="33"
                                   Margin="0,0,0,0">
                                 <Grid.Background>
                                     <!--允许用户修改-->

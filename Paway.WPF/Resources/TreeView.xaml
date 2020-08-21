@@ -133,17 +133,17 @@
                   Visibility="{Binding Visibility,ElementName=groupinginfo,Converter={StaticResource visibleReverse}}">
                 <DockPanel>
                     <Border Background="#62ACF9" Width="40" Height="40" CornerRadius="4" HorizontalAlignment="Left" Margin="0">
-                        <TextBlock Text="{Binding ShortName}" FontSize="23" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding ShortName}" FontSize="23" Foreground="White" HorizontalAlignment="Center"/>
                     </Border>
                     <DockPanel Margin="10 0 0 0">
                         <TextBlock Text="{Binding Desc}" 
                                    FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}, Converter={StaticResource changeConverter}}" 
-                                   Foreground="#808080" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="0,0,3,0"/>
+                                   Foreground="#808080" DockPanel.Dock="Right" Margin="0,0,3,0"/>
                         <DockPanel>
                             <TextBlock Text="{Binding Subtitle}" 
                                        FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}, Converter={StaticResource changeConverter}}" 
                                        Foreground="#808080" DockPanel.Dock="Bottom"/>
-                            <TextBlock Text="{Binding Text}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Text}"/>
                         </DockPanel>
                     </DockPanel>
                 </DockPanel>
@@ -152,7 +152,7 @@
                         Orientation="Horizontal" Background="Transparent" 
                         HorizontalAlignment="Left" 
                         Visibility="{Binding IsGrouping,Converter={StaticResource boolToVisible}}">
-                <TextBlock Text="{Binding GroupName}" Padding="3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock Text="{Binding GroupName}" Padding="3" HorizontalAlignment="Left"/>
             </StackPanel>
         </Grid>
     </HierarchicalDataTemplate>
@@ -170,9 +170,8 @@
                 </Grid.ColumnDefinitions>
                 <CheckBox x:Name="cbx" IsChecked="{Binding Path=IsChecked}" 
                           Margin="1,0"
-                          Visibility="{Binding Path=CheckBox, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}" 
-                          VerticalContentAlignment="Center"/>
-                <TextBlock Grid.Column="1" Text="{Binding Text}" VerticalAlignment="Center"/>
+                          Visibility="{Binding Path=CheckBox, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
+                <TextBlock Grid.Column="1" Text="{Binding Text}"/>
             </Grid>
             <Grid x:Name="groupinginfo" 
                   Margin="3" 
@@ -185,9 +184,8 @@
                 </Grid.ColumnDefinitions>
                 <CheckBox IsChecked="{Binding Path=IsChecked}" 
                           Margin="1,0"
-                          Visibility="{Binding Path=CheckBox, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}" 
-                          VerticalContentAlignment="Center"/>
-                <TextBlock Grid.Column="1" Text="{Binding GroupName}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                          Visibility="{Binding Path=CheckBox, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
+                <TextBlock Grid.Column="1" Text="{Binding GroupName}" HorizontalAlignment="Left"/>
             </Grid>
         </Grid>
     </HierarchicalDataTemplate>

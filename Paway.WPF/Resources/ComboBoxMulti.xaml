@@ -143,8 +143,7 @@
                                     </ListBox.ItemContainerStyle>
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
-                                            <CheckBox VerticalContentAlignment="Center"
-                                                      Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                            <CheckBox Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
                                                       IsChecked="{Binding  RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=IsSelected}" 
                                                       Content="{Binding Path=Text}" />
                                         </DataTemplate>

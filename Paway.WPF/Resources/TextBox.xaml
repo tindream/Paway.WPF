@@ -13,7 +13,6 @@
         <Setter Property="Background" Value="White"/>
         <Setter Property="Padding" Value="3,4"/>
         <Setter Property="Margin" Value="2"/>
-        <Setter Property="FontFamily" Value="Microsoft YaHei"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
         <!--修改模板属性-->
@@ -47,9 +46,7 @@
                                        Padding="5,0,0,0"
                                        FontSize="{TemplateBinding FontSize, Converter={StaticResource changeConverter}}"
                                        Foreground="#000000"
-                                       FontFamily="Microsoft YaHei"
-                                       Content="{TemplateBinding Water}"
-                                       VerticalContentAlignment="Center"/>
+                                       Content="{TemplateBinding Water}"/>
                             </StackPanel>
                         </Grid>
                     </Border>
@@ -92,7 +89,7 @@
                         <Border Background="Red" DockPanel.Dock="Right"
                                 CornerRadius="10" Margin="3" Width="20" Height="20"
                                 ToolTip="{Binding ElementName=customAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
-                            <TextBlock Text="!" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                            <TextBlock Text="!" HorizontalAlignment="Center" FontWeight="Bold" Foreground="White"/>
                             <Border.Effect>
                                 <DropShadowEffect Color="#FF9300" BlurRadius="6" ShadowDepth="0" Opacity="0.6" />
                             </Border.Effect>

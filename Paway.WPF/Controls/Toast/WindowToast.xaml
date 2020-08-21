@@ -52,7 +52,7 @@
             </TransformGroup>
         </Border.RenderTransform>
         <local:ScrollViewerEXT HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-            <TextBlock x:Name="tb" Margin="8,0" Padding="17,7" FontFamily="Microsoft YaHei"
+            <TextBlock x:Name="tb" Margin="8,0" Padding="17,7"
                    Text="{Binding Message,FallbackValue=提示信息}"
                    TextWrapping="Wrap" TextAlignment="Center" Foreground="White"
                    MinWidth="200" MaxWidth="600" ToolTip="双击复制"

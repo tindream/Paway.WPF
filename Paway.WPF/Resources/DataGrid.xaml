@@ -4,7 +4,6 @@
 
     <Style x:Key="CellStyle" TargetType="{x:Type DataGridCell}">
         <!--<Setter Property="Background" Value="#FFFFFF" />-->
-        <Setter Property="FontFamily" Value="Microsoft YaHei" />
         <Setter Property="BorderThickness" Value="3,6" />
         <!--<Setter Property="Opacity" Value="1" />-->
         <Style.Triggers >

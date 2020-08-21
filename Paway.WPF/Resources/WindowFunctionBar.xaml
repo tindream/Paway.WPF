@@ -268,8 +268,7 @@
                            Grid.Column="4"
                            Margin="{TemplateBinding Padding}"
                            Opacity="0.7"
-                           Text="{TemplateBinding InputGestureText}"
-                           VerticalAlignment="Center" />
+                           Text="{TemplateBinding InputGestureText}"/>
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
@@ -349,8 +348,7 @@
                 <TextBlock Grid.Column="4"
                            Margin="{TemplateBinding Padding}"
                            Opacity="0.7"
-                           Text="{TemplateBinding InputGestureText}"
-                           VerticalAlignment="Center" />
+                           Text="{TemplateBinding InputGestureText}"/>
                 <Path x:Name="RightArrow"
                       Style="{StaticResource PathTriangleRight}" StrokeThickness="0" Stretch="Fill" Width="4" Height="7"
                       Grid.Column="5"
@@ -460,8 +458,6 @@
 
     <Style x:Key="WindowTitleBarMenuStyle" TargetType="{x:Type Menu}">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="FontFamily"
-                Value="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" />
         <Setter Property="FontSize"
                 Value="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}" />
         <Setter Property="FontStyle"

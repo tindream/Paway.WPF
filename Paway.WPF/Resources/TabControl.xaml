@@ -82,7 +82,7 @@
                                     <TextBlock x:Name="txt" 
                                                Padding="{TemplateBinding Padding}"
                                                Visibility="Visible" 
-                                               VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                               HorizontalAlignment="Center" 
                                                Text="{TemplateBinding Header}" ToolTip="{TemplateBinding Header}" 
                                                Foreground="{TemplateBinding Foreground}" 
                                                TextTrimming="CharacterEllipsis" />

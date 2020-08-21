@@ -626,7 +626,6 @@
                                             Orientation="Horizontal">
                                     <TextBlock x:Name="CurrentPagePrefixTextBlock"
                                                Width="Auto"
-                                               VerticalAlignment="Center"
                                                Margin="4,0,0,0"
                                                Foreground="{TemplateBinding Foreground}" />
                                     <TextBox x:Name="CurrentPageTextBox"
@@ -640,7 +639,6 @@
                                              BorderBrush="{TemplateBinding BorderBrush}" />
                                     <TextBlock x:Name="CurrentPageSuffixTextBlock"
                                                Width="Auto"
-                                               VerticalAlignment="Center"
                                                Margin="0,0,4,0"
                                                Foreground="{TemplateBinding Foreground}" />
                                 </StackPanel>

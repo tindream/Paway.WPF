@@ -41,10 +41,7 @@
                                    Opacity="0.9" 
                                    Padding="5,5"
                                    Foreground="{TemplateBinding Foreground}"
-                                   Content="{TemplateBinding ProgressValue}"
-                                   FontFamily="Microsoft YaHei"
-                                   HorizontalAlignment="Right"
-                                   VerticalContentAlignment="Center"/>
+                                   Content="{TemplateBinding ProgressValue}"/>
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>

@@ -102,7 +102,7 @@
                         <Border Background="Red" DockPanel.Dock="Right"
                                 CornerRadius="10" Margin="3" Width="20" Height="20"
                                 ToolTip="{Binding ElementName=customAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
-                            <TextBlock Text="!" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                            <TextBlock Text="!" HorizontalAlignment="Center" FontWeight="Bold" Foreground="White"/>
                             <Border.Effect>
                                 <DropShadowEffect Color="#FF9300" BlurRadius="6" ShadowDepth="0" Opacity="0.6" />
                             </Border.Effect>

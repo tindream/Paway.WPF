@@ -10,7 +10,6 @@
         <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="SelectionMode" Value="Single"/>
-        <Setter Property="FontFamily" Value="Microsoft YaHei"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="BorderThickness" Value="0"/>
