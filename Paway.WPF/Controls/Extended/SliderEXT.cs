@@ -135,6 +135,7 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
+            base.OnPreviewMouseLeftButtonDown(e);
             this.ToolTip = TMethod.Round(this.Value, this.AutoToolTipPrecision);
 
             if (this.AutoToolTipPlacement == System.Windows.Controls.Primitives.AutoToolTipPlacement.None) return;
@@ -159,13 +160,11 @@ namespace Paway.WPF
                 return;
             }
             toolTip.IsOpen = true;
-            Method.ExecuteMethod(toolTip.Parent, "Reposition");
-
-            base.OnPreviewMouseLeftButtonDown(e);
+            TMethod.ExecuteMethod(toolTip.Parent, "Reposition");
         }
         private CustomPopupPlacement[] AutoToolTipCustomPlacementCallbackTemp(Size popupSize, Size targetSize, Point offset)
         {
-            if (Method.ExecuteMethod(this, "AutoToolTipCustomPlacementCallback", out object result, popupSize, targetSize, offset))
+            if (TMethod.ExecuteMethod(this, "AutoToolTipCustomPlacementCallback", out object result, popupSize, targetSize, offset))
             {
                 return result as CustomPopupPlacement[];
             }
