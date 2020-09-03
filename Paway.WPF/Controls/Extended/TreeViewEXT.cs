@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Media;
 
@@ -97,6 +98,93 @@ namespace Paway.WPF
         public TreeViewEXT()
         {
             DefaultStyleKey = typeof(TreeViewEXT);
+        }
+        /// <summary>
+        /// 收缩全部节点
+        /// </summary>
+        public void CollapseAll()
+        {
+            CollapseAll(this);
+        }
+        private void CollapseAll(ItemsControl view)
+        {
+            foreach (var item in view.Items)
+            {
+                if (view.ItemContainerGenerator.ContainerFromItem(item) is TreeViewItem treeItem)
+                {
+                    treeItem.IsExpanded = false;
+                    if (treeItem.HasItems)
+                    {
+                        CollapseAll(treeItem);
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// 展开全部节点
+        /// </summary>
+        public void ExpandAll()
+        {
+            foreach (var item in this.Items)
+            {
+                if (this.ItemContainerGenerator.ContainerFromItem(item) is TreeViewItem treeItem)
+                {
+                    treeItem.ExpandSubtree();
+                }
+            }
+        }
+        /// <summary>
+        /// 展开指定节点
+        /// </summary>
+        public bool Expand(ITreeView model)
+        {
+            return Selected(model.Id, false);
+        }
+        /// <summary>
+        /// 选中指定节点
+        /// </summary>
+        public bool Selected(int id, bool iSelected = true)
+        {
+            return Expand(this, id, iSelected);
+        }
+        private bool Expand(ItemsControl view, int id, bool iSelected)
+        {
+            foreach (var item in view.Items)
+            {
+                if (item is ITreeView temp)
+                {
+                    if (Expand(view, temp, id, iSelected)) return true;
+                }
+            }
+            return false;
+        }
+        private bool Expand(ItemsControl view, ITreeView item, int id, bool iSelected)
+        {
+            if (view.ItemContainerGenerator.ContainerFromItem(item) is TreeViewItem treeItem)
+            {
+                if (item.Id == id)
+                {
+                    treeItem.IsExpanded = true;
+                    if (iSelected) treeItem.IsSelected = true;
+                    return true;
+                }
+                else if (item.Children.Count > 0)
+                {
+                    var oldExpanded = treeItem.IsExpanded;
+                    if (iSelected)
+                    {
+                        treeItem.IsExpanded = true;
+                        if (treeItem.ItemContainerGenerator.Status != GeneratorStatus.ContainersGenerated)
+                        {
+                            treeItem.UpdateLayout();
+                        }
+                        //treeItem.ExpandSubtree();
+                    }
+                    if (Expand(treeItem, id, iSelected)) return true;
+                    else treeItem.IsExpanded = oldExpanded;
+                }
+            }
+            return false;
         }
     }
 }

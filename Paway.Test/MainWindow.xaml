@@ -44,10 +44,10 @@
             <StackPanel>
                 <utils:ProgressBarEXT Value="95" />
 
-                <utils:ComboBoxEXT Name="cbxBox" ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text"
-                               SelectedValue="{Binding Id}"/>
+                <utils:ComboBoxEXT Name="cbxBox" ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
                 <utils:ComboBoxMulti x:Name="MultiCmb" ItemsSource="{Binding MultiList}"/>
                 <utils:ComboBoxDate SelectedValue="{Binding DatePickerTime}"/>
+                <utils:ComboBoxTree ItemsSource="{Binding TreeList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding TreeId}"/>
 
                 <utils:TextBoxEXT Name="tb" Icon="pack://application:,,,/Paway.Test;component/Images/close.png">
                     <Binding Path="Value">
@@ -108,7 +108,14 @@
                     <TabItem Cursor="Hand" Header="音乐电台" />
                     <TabItem Cursor="Hand" Header="Mv电台"/>
                 </utils:TabControlEXT>
-                <utils:TreeViewEXT x:Name="TreeViewOrg" Height="180" CheckBox="Visible" ItemTemplate="{StaticResource DefaultNode}" ItemsSource="{Binding TreeList}"/>
+                <utils:TreeViewEXT x:Name="TreeViewOrg" Height="180" CheckBox="Visible" ItemTemplate="{StaticResource DefaultNode}" ItemsSource="{Binding TreeList}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectedItemChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectedItemChanged}"
+                                           CommandParameter="{Binding ElementName=TreeViewOrg}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </utils:TreeViewEXT>
 
 
             </StackPanel>

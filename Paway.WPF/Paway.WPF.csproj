@@ -73,7 +73,7 @@
     <Compile Include="Controls\Converter\ValidationRule\RegexValidationRule.cs" />
     <Compile Include="Controls\Converter\IEquatable\ColorLinear.cs" />
     <Compile Include="Controls\Converter\IValueConverter\EmptyColorConverter.cs" />
-    <Compile Include="Controls\Converter\IValueConverter\ChangeConverter.cs" />
+    <Compile Include="Controls\Converter\IValueConverter\ValueConverter.cs" />
     <Compile Include="Controls\Converter\IValueConverter\BoolReverse.cs" />
     <Compile Include="Controls\Converter\IValueConverter\NullToCollapsed.cs" />
     <Compile Include="Controls\Converter\IValueConverter\DateConverter.cs" />
@@ -91,6 +91,7 @@
     <Compile Include="Controls\Converter\Enum\PagerDisplayMode.cs" />
     <Compile Include="Controls\DataPager\TypeHelper.cs" />
     <Compile Include="Controls\DataPager\WeakEventListener.cs" />
+    <Compile Include="Controls\Extended\ComboBoxTree.cs" />
     <Compile Include="Controls\Extended\ComboBoxDate.cs" />
     <Compile Include="Controls\Extended\DatePickerEXT.cs" />
     <Compile Include="Controls\Extended\ComboBoxMulti.cs" />
@@ -156,6 +157,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Resources\ComboBoxTree.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\ComboBoxDate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

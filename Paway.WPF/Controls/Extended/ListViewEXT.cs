@@ -450,13 +450,9 @@ namespace Paway.WPF
         }
         private void IsPressed(bool value)
         {
-            if (downItem.Content is ListViewModel model)
+            if (downItem.Content is IListView model)
             {
                 model.IsPressed = value;
-            }
-            else if (downItem.Content is ListBoxItemEXT itemEXT)
-            {
-                itemEXT.IsPressed = value;
             }
         }
         /// <summary>

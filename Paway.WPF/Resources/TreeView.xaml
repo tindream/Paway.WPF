@@ -137,11 +137,11 @@
                     </Border>
                     <DockPanel Margin="10 0 0 0">
                         <TextBlock Text="{Binding Desc}" 
-                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}, Converter={StaticResource changeConverter}}" 
+                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}, Converter={StaticResource valueMultiConverter}}" 
                                    Foreground="#808080" DockPanel.Dock="Right" Margin="0,0,3,0"/>
                         <DockPanel>
                             <TextBlock Text="{Binding Subtitle}" 
-                                       FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}, Converter={StaticResource changeConverter}}" 
+                                       FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}, Converter={StaticResource valueMultiConverter}}" 
                                        Foreground="#808080" DockPanel.Dock="Bottom"/>
                             <TextBlock Text="{Binding Text}"/>
                         </DockPanel>

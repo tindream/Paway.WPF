@@ -106,8 +106,10 @@ namespace Paway.WPF
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            var scrollViewer = GetTemplateChild("PART_ContentHost") as ScrollViewerEXT;
-            scrollViewer.PreviewMouseWheel += ScrollViewer_PreviewMouseWheel;
+            if (GetTemplateChild("PART_ContentHost") is ScrollViewerEXT scrollViewer)
+            {
+                scrollViewer.PreviewMouseWheel += ScrollViewer_PreviewMouseWheel;
+            }
         }
         private void ScrollViewer_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {

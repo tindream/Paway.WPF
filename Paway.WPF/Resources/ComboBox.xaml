@@ -28,11 +28,17 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
+    <ControlTemplate x:Key="ComboBoxToggleNone" TargetType="{x:Type ToggleButton}">
+        <Grid>
+            <Border Grid.Column="1" Background="White" Opacity="0" Cursor="Hand"/>
+        </Grid>
+    </ControlTemplate>
 
     <Style TargetType="{x:Type local:ComboBoxEXT}">
         <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Margin" Value="2"/>
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ComboBoxEXT}">

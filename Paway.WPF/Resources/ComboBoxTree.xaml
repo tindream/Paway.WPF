@@ -7,7 +7,7 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type local:ComboBoxDate}">
+    <Style TargetType="{x:Type local:ComboBoxTree}">
         <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="BorderThickness" Value="1"/>
@@ -15,7 +15,7 @@
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:ComboBoxDate}">
+                <ControlTemplate TargetType="{x:Type local:ComboBoxTree}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.7*"/>
@@ -30,7 +30,7 @@
                         <ContentPresenter x:Name="ContentSite" Margin="5,3,0,3" 
                                           VerticalAlignment="Center" 
                                           IsHitTestVisible="False"
-                                          Content="{TemplateBinding SelectedValue, Converter={StaticResource dateConverter}, ConverterParameter=d}" 
+                                          Content="{TemplateBinding Text}" 
                                           ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" 
                                           ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" />
                         <!--ToggleButton 已数据绑定到 ComboBox 本身以切换 IsDropDownOpen-->
@@ -55,9 +55,12 @@
                                IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
                                PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" 
                                Placement="Bottom">
-                            <Border x:Name="DropDownBorder" BorderBrush="#CCC" BorderThickness="1">
-                                <local:CalendarEXT x:Name="PART_Calendar"
-                                                   HasButton="True" HorizontalAlignment="Left" Margin="0,-2,0,-3"/>
+                            <Border x:Name="DropDownBorder" BorderBrush="#CCC" BorderThickness="1" Padding="0">
+                                <local:TreeViewEXT x:Name="PART_TreeView" Background="White" 
+                                                   Height="180" BorderThickness="0"
+                                                   Width="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource valueAddConverter}}" 
+                                                   MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}"
+                                                   ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource TemplatedParent}}"/>
                             </Border>
                         </Popup>
                     </Grid>

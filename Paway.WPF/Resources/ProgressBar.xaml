@@ -37,7 +37,7 @@
                                 </LinearGradientBrush>
                             </Border.Background>
                             <Label Name="txt"
-                                   FontSize="{TemplateBinding FontSize,Converter={StaticResource changeConverter}}"
+                                   FontSize="{TemplateBinding FontSize,Converter={StaticResource valueMultiConverter}}"
                                    Opacity="0.9" 
                                    Padding="5,5"
                                    Foreground="{TemplateBinding Foreground}"

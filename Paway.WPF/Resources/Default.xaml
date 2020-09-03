@@ -3,8 +3,9 @@
                     xmlns:local="clr-namespace:Paway.WPF">
 
     <local:BoolReverse x:Key="boolReverse"/>
-    <local:BoolToVisible x:Key="boolToVisible"/>
-    <local:ChangeConverter x:Key="changeConverter"/>
+    <local:BoolToVisible x:Key="boolToVisible"/> 
+    <local:ValueMultiConverter x:Key="valueMultiConverter"/>
+    <local:ValueAddConverter x:Key="valueAddConverter"/>
     <local:DateConverter x:Key="dateConverter"/>
     <local:EmptyColorConverter x:Key="emptyColorConverter" />
     <local:IsNotNullConverter x:Key="isNotNull"/>
@@ -25,6 +26,22 @@
     <Style TargetType="{x:Type RadioButton}">
         <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
+
+    <ControlTemplate x:Key="ErrorTemplate">
+        <DockPanel LastChildFill="true">
+            <Border Background="Red" DockPanel.Dock="Right"
+                    CornerRadius="10" Margin="3" Width="20" Height="20"
+                    ToolTip="{Binding ElementName=customAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                <TextBlock Text="!" HorizontalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                <Border.Effect>
+                    <DropShadowEffect Color="#FF9300" BlurRadius="6" ShadowDepth="0" Opacity="0.6" />
+                </Border.Effect>
+            </Border>
+            <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center">
+                <Border BorderBrush="Red" CornerRadius="3" BorderThickness="1"/>
+            </AdornedElementPlaceholder>
+        </DockPanel>
+    </ControlTemplate>
 
     <Style x:Key="PathRound" TargetType="{x:Type Path}" >
         <Setter Property="Margin" Value="1" />

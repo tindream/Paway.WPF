@@ -45,7 +45,7 @@
         <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="Focusable" Value="False" />
         <Setter Property="IsTabStop" Value="False" />
-        <Setter Property="Background" Value="White" />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="#222" />
         <Setter Property="Width" Value="45" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -68,12 +68,24 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Fill" TargetName="btnBackground" 
-                                    Value="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}" />
+                            <Setter Property="Fill" TargetName="btnBackground">
+                                <Setter.Value>
+                                    <MultiBinding Converter="{StaticResource emptyColorConverter}">
+                                        <Binding Path="Background" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                        <Binding Path="(local:ThemeEXT.ItemBrush).Mouse" RelativeSource="{RelativeSource Self}" />
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Fill" TargetName="btnBackground" 
-                                    Value="{Binding Path=(local:ThemeEXT.ItemBrush).Normal, RelativeSource={RelativeSource Self}}" />
+                            <Setter Property="Fill" TargetName="btnBackground">
+                                <Setter.Value>
+                                    <MultiBinding Converter="{StaticResource emptyColorConverter}">
+                                        <Binding Path="Background" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                        <Binding Path="(local:ThemeEXT.ItemBrush).Normal" RelativeSource="{RelativeSource Self}" />
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Opacity" TargetName="btnContent" Value=".5" />
@@ -106,9 +118,11 @@
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
                 <Setter Property="ContentTemplate" Value="{StaticResource CloseWhite}" />
+                <Setter Property="Background" Value="#AAFF0000" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="ContentTemplate" Value="{StaticResource CloseWhite}" />
+                <Setter Property="Background" Value="#EEFF0000" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -194,7 +208,7 @@
                                         <Button x:Name="RestoreButton" Visibility="Collapsed" Style="{StaticResource RestoreButtonStyle}" />
                                         <Button x:Name="MaximizeButton" Style="{StaticResource MaximizeButtonStyle}" />
                                     </Grid>
-                                    <Button x:Name="CloseButton" Background="Red" Style="{StaticResource CloseButtonStyle}" />
+                                    <Button x:Name="CloseButton" Style="{StaticResource CloseButtonStyle}" />
                                 </StackPanel>
                             </Grid>
                             <AdornerDecorator Grid.Row="1" KeyboardNavigation.IsTabStop="False">

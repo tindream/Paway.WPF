@@ -15,6 +15,7 @@
         <Setter Property="Margin" Value="2"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
         <!--修改模板属性-->
         <Setter Property="Template">
             <Setter.Value>
@@ -44,7 +45,7 @@
                                         Orientation="Horizontal">
                                 <Label Opacity="0.4"
                                        Padding="5,0,0,0"
-                                       FontSize="{TemplateBinding FontSize, Converter={StaticResource changeConverter}}"
+                                       FontSize="{TemplateBinding FontSize, Converter={StaticResource valueMultiConverter}}"
                                        Foreground="#000000"
                                        Content="{TemplateBinding Water}"/>
                             </StackPanel>
@@ -79,25 +80,6 @@
                             <Setter Property="BorderBrush" TargetName="border" Value="Transparent"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Validation.ErrorTemplate">
-            <Setter.Value>
-                <ControlTemplate>
-                    <DockPanel LastChildFill="true">
-                        <Border Background="Red" DockPanel.Dock="Right"
-                                CornerRadius="10" Margin="3" Width="20" Height="20"
-                                ToolTip="{Binding ElementName=customAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
-                            <TextBlock Text="!" HorizontalAlignment="Center" FontWeight="Bold" Foreground="White"/>
-                            <Border.Effect>
-                                <DropShadowEffect Color="#FF9300" BlurRadius="6" ShadowDepth="0" Opacity="0.6" />
-                            </Border.Effect>
-                        </Border>
-                        <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center">
-                            <Border BorderBrush="Red" CornerRadius="3" BorderThickness="1"/>
-                        </AdornedElementPlaceholder>
-                    </DockPanel>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

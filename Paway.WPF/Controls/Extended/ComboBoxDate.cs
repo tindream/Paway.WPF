@@ -29,16 +29,17 @@ namespace Paway.WPF
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            var calendar = Template.FindName("PART_Calendar", this) as Calendar;
-            if (this.SelectedValue is DateTime date) calendar.SelectedDate = date;
-            calendar.SelectedDatesChanged += Calendar_SelectedDatesChanged;
+            if (Template.FindName("PART_Calendar", this) is Calendar calendar)
+            {
+                if (this.SelectedValue is DateTime date) calendar.SelectedDate = date;
+                calendar.SelectedDatesChanged += Calendar_SelectedDatesChanged;
+            }
         }
         private void Calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
             if (sender is Calendar calendar)
             {
-                if (calendar.SelectedDate != null) this.SelectedValue = calendar.SelectedDate.Value.ToString("d");
-                else this.SelectedValue = null;
+                this.SelectedValue = calendar.SelectedDate;
             }
             this.IsDropDownOpen = false;
         }

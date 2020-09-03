@@ -66,8 +66,12 @@ namespace Paway.WPF
         public WindowEXT()
         {
             DefaultStyleKey = typeof(WindowEXT);
+            this.ContentRendered += WindowEXT_ContentRendered;
         }
-
+        private void WindowEXT_ContentRendered(object sender, EventArgs e)
+        {
+            this.Activate();
+        }
         /// <summary>
         /// </summary>
         protected override void OnSourceInitialized(EventArgs e)

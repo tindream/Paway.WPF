@@ -62,6 +62,19 @@ namespace Paway.Test.ViewModel
                 }
             }
         }
+        private int treeId;
+        public int TreeId
+        {
+            get { return treeId; }
+            set
+            {
+                if (treeId != value)
+                {
+                    treeId = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
 
         public ObservableCollection<IComboBoxMulti> MultiList { get; } = new ObservableCollection<IComboBoxMulti>();
 
@@ -82,6 +95,20 @@ namespace Paway.Test.ViewModel
         #endregion
 
         #region 命令
+        private ICommand selectedItemChanged;
+        public ICommand SelectedItemChanged
+        {
+            get
+            {
+                return selectedItemChanged ?? (selectedItemChanged = new RelayCommand<TreeViewEXT>(treeView =>
+                {
+                    if (treeView.SelectedItem is ITreeView item)
+                    {
+                        this.TreeId = item.Id;
+                    }
+                }));
+            }
+        }
         private ICommand sizeChanged;
         public ICommand SizeChanged
         {
@@ -173,6 +200,11 @@ namespace Paway.Test.ViewModel
             treeInfo2.Add("刘棒1", "我要走向天空！", "3人");
             treeInfo2.Add("刘棒2", "我要走向天空！", "3人");
             treeInfo2.Add("刘棒3", "我要走向天空！", "3人");
+            treeInfo2.Add("刘棒4", "我要走向天空！", "3人");
+            treeInfo2.Add("刘棒5", "我要走向天空！", "3人");
+            treeInfo2.Add("刘棒6", "我要走向天空！", "3人");
+            treeInfo2.Add("刘棒7", "我要走向天空！", "3人");
+            this.TreeId = treeInfo2.Children[0].Id;
         }
     }
 }
