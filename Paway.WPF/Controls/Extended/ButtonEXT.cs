@@ -21,27 +21,22 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty BorderProperty =
-            DependencyProperty.RegisterAttached(nameof(Border), typeof(ThicknessEXT), typeof(ButtonEXT), new PropertyMetadata(new ThicknessEXT(1)));
+            DependencyProperty.RegisterAttached(nameof(Border), typeof(ThicknessEXT), typeof(ButtonEXT), new PropertyMetadata(new ThicknessEXT(0)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty EffectRadiusProperty =
             DependencyProperty.RegisterAttached(nameof(EffectRadius), typeof(double), typeof(ButtonEXT), new PropertyMetadata(0d));
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty ForegroundRoundProperty =
-            DependencyProperty.RegisterAttached(nameof(ForegroundRound), typeof(BrushEXT), typeof(ButtonEXT),
+        public static readonly DependencyProperty ItemForegroundProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemForeground), typeof(BrushEXT), typeof(ButtonEXT),
             new PropertyMetadata(new BrushEXT(Color.FromArgb(255, 33, 33, 33), Color.FromArgb(255, 33, 33, 33), Colors.White)));
 
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty BackgroundStartProperty =
-            DependencyProperty.RegisterAttached(nameof(BackgroundStart), typeof(ColorEXT), typeof(ButtonEXT),
-            new PropertyMetadata(new ColorEXT(Color.FromArgb(255, 254, 254, 254), 15, 65)));
-        /// <summary>
-        /// </summary>
-        public static readonly DependencyProperty BackgroundEndProperty =
-            DependencyProperty.RegisterAttached(nameof(BackgroundEnd), typeof(ColorEXT), typeof(ButtonEXT),
-            new PropertyMetadata(new ColorEXT(Color.FromArgb(255, 220, 220, 220), 210, 250)));
+        public static readonly DependencyProperty ItemBackgroundProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ButtonEXT),
+            new PropertyMetadata(new BrushEXT(170)));
 
         /// <summary>
         /// </summary>
@@ -96,33 +91,23 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展.前景")]
         [Description("自定义文本颜色")]
-        public BrushEXT ForegroundRound
+        public BrushEXT ItemForeground
         {
-            get { return (BrushEXT)GetValue(ForegroundRoundProperty); }
-            set { SetValue(ForegroundRoundProperty, value); }
+            get { return (BrushEXT)GetValue(ItemForegroundProperty); }
+            set { SetValue(ItemForegroundProperty, value); }
         }
 
         #endregion
         #region 扩展.背景颜色
         /// <summary>
-        /// 自定义背景颜色(起始颜色)
+        /// 自定义背景颜色
         /// </summary>
         [Category("扩展.背景颜色")]
-        [Description("自定义背景颜色(起始颜色)")]
-        public ColorEXT BackgroundStart
+        [Description("自定义背景颜色")]
+        public BrushEXT ItemBackground
         {
-            get { return (ColorEXT)GetValue(BackgroundStartProperty); }
-            set { SetValue(BackgroundStartProperty, value); }
-        }
-        /// <summary>
-        /// 自定义背景颜色(终点颜色)
-        /// </summary>
-        [Category("扩展.背景颜色")]
-        [Description("自定义背景颜色(终点颜色)")]
-        public ColorEXT BackgroundEnd
-        {
-            get { return (ColorEXT)GetValue(BackgroundEndProperty); }
-            set { SetValue(BackgroundEndProperty, value); }
+            get { return (BrushEXT)GetValue(ItemBackgroundProperty); }
+            set { SetValue(ItemBackgroundProperty, value); }
         }
 
         #endregion

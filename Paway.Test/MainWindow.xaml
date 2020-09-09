@@ -61,21 +61,15 @@
                     <Grid.ColumnDefinitions >
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <utils:ButtonEXT Name="chart" Content="取消"
-                             BackgroundStart="Transparent;#77CA6B38" BackgroundEnd="Transparent;#77CA6B38" 
+                             ItemBackground="Transparent;#77CA6B38"
                              BackgroundImage="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"
                              Stretch="None" Viewport="0,0,0.35,1"
+                             Border="1;0"
                              Command="{Binding Teach}" CommandParameter="{Binding ElementName=btn}"/>
                     <utils:ButtonEXT Name="btn" Grid.Column="1"
                              Content="确认" Click="ButtonEXT_Click" 
-                             Border="1;0"
-                             BackgroundStart="170" BackgroundEnd="170" 
-                             CommandParameter="{Binding ElementName=btn}"/>
-                    <utils:ButtonEXT Grid.Column="2"
-                             Content="原生"
-                             Border="1;0"
                              CommandParameter="{Binding ElementName=btn}"/>
                 </Grid>
                 <WrapPanel>

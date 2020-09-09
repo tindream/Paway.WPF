@@ -534,20 +534,14 @@
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
                                         <local:ButtonEXT x:Name="PART_GoClear" Margin="-2,-4,0,-2" Content="清空" Radius="0" Border="0,1,0,0"
-                                                         BackgroundStart="Transparent;#77CA6B38" BackgroundEnd="Transparent;#77CA6B38" />
-                                        <local:ButtonEXT x:Name="PART_GoToday" Margin="0,-4,-2,-2" Grid.Column="1" Content="今天" Radius="0" Border="1,1,0,0">
-                                            <local:ButtonEXT.BackgroundStart>
+                                                         ItemBackground="Transparent;#77CA6B38"/>
+                                        <local:ButtonEXT x:Name="PART_GoToday" Margin="0,-4,-2,-2" Grid.Column="1" Content="今天" Radius="0" Border="0,1,0,0">
+                                            <local:ButtonEXT.ItemBackground>
                                                 <MultiBinding Converter="{StaticResource nullJudgeConverter}">
                                                     <Binding Path="TodayColor" RelativeSource="{RelativeSource AncestorType=local:CalendarEXT}"/>
                                                     <Binding Path="TodayColor" RelativeSource="{RelativeSource AncestorType=local:DatePickerEXT}"/>
                                                 </MultiBinding>
-                                            </local:ButtonEXT.BackgroundStart>
-                                            <local:ButtonEXT.BackgroundEnd>
-                                                <MultiBinding Converter="{StaticResource nullJudgeConverter}">
-                                                    <Binding Path="TodayColor" RelativeSource="{RelativeSource AncestorType=local:CalendarEXT}"/>
-                                                    <Binding Path="TodayColor" RelativeSource="{RelativeSource AncestorType=local:DatePickerEXT}"/>
-                                                </MultiBinding>
-                                            </local:ButtonEXT.BackgroundEnd>
+                                            </local:ButtonEXT.ItemBackground>
                                         </local:ButtonEXT>
                                     </Grid>
                                 </Grid>
