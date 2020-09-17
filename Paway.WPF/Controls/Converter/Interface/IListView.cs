@@ -13,12 +13,8 @@ namespace Paway.WPF
     /// <summary>
     /// ListView数接口据定义
     /// </summary>
-    public interface IListView
+    public interface IListView : IId
     {
-        /// <summary>
-        /// 标识符
-        /// </summary>
-        int Id { get; set; }
         /// <summary>
         /// 按下状态
         /// </summary>

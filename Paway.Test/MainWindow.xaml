@@ -44,10 +44,11 @@
             <StackPanel>
                 <utils:ProgressBarEXT Value="95" />
 
-                <utils:ComboBoxEXT Name="cbxBox" ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
-                <utils:ComboBoxMulti x:Name="MultiCmb" ItemsSource="{Binding MultiList}"/>
+                <utils:ComboBoxEXT  ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
+                <utils:ComboBoxMulti ItemsSource="{Binding MultiList}"/>
                 <utils:ComboBoxDate SelectedValue="{Binding DatePickerTime}"/>
                 <utils:ComboBoxTree ItemsSource="{Binding TreeList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding TreeId}"/>
+                <utils:ComboBoxView ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
 
                 <utils:TextBoxEXT Name="tb" Icon="pack://application:,,,/Paway.Test;component/Images/close.png">
                     <Binding Path="Value">
@@ -115,7 +116,7 @@
             </StackPanel>
             <StackPanel Grid.Column="1" Margin="10,0,0,0">
                 <utils:DataGridEXT Name="datagrid1"
-                               ItemsSource="{Binding CollectionView}"
+                               ItemsSource="{Binding PagedList}"
                                SelectedItem="{Binding SelectedItem}"
                                Height="250" VerticalAlignment="Top">
                     <DataGrid.Columns>
@@ -138,7 +139,7 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </utils:DataGridEXT>
-                <utils:DataPager Name="dataPager" Margin="0,0,0,3" Source="{Binding CollectionView}" IsTotalItemCountFixed="True"/>
+                <utils:DataPager Name="dataPager" Margin="0,0,0,3" Source="{Binding PagedList}" IsTotalItemCountFixed="True"/>
 
                 <utils:ListViewEXT Name="listView1"
                            ItemHeight="68" ItemWidth="100" Height="68"

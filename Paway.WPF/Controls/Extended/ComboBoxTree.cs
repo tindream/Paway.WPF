@@ -55,9 +55,10 @@ namespace Paway.WPF
             {
                 if (tree.ItemsSource != null)
                 {
+                    var id = tree.SelectedValue.ToInt();
                     foreach (ITreeView item in tree.ItemsSource)
                     {
-                        if (tree.InitText(item, tree.SelectedValue.ToInt())) break;
+                        if (tree.InitText(item, id)) break;
                     }
                 }
             }
@@ -85,7 +86,7 @@ namespace Paway.WPF
         }
         private bool InitText(ITreeView item, int id)
         {
-            if (item.Id == id)
+            if (!item.IsGrouping && item.Id == id)
             {
                 this.SelectedItem = item;
                 this.Text = item.GetValue(this.DisplayMemberPath).ToStrs();
@@ -109,18 +110,16 @@ namespace Paway.WPF
         private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             var treeView = sender as TreeViewEXT;
-            if (e.NewValue is ITreeView model)
+            if (e.NewValue is ITreeView item)
             {
-                if (!model.IsGrouping)
+                if (!item.IsGrouping)
                 {
-                    this.SelectedItem = model;
-                    this.Text = model.GetValue(this.DisplayMemberPath).ToStrs();
-                    this.SelectedValue = model.GetValue(this.SelectedValuePath);
+                    this.SelectedValue = item.GetValue(this.SelectedValuePath);
                     if (isInit) this.Dispatcher.BeginInvoke(new Action(() => { this.IsDropDownOpen = false; }));
                 }
                 else
                 {
-                    treeView.Expand(model);
+                    treeView.Expand(item);
                 }
             }
         }

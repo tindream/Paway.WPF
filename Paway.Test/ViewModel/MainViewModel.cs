@@ -31,7 +31,7 @@ namespace Paway.Test.ViewModel
         #region 属性
         private readonly List<ListViewModel> list;
         public List<ListViewModel> GridList { get { return list; } }
-        public PagedCollectionView CollectionView { get; private set; }
+        public PagedCollectionView PagedList { get; private set; }
         public ObservableCollection<ITreeView> TreeList { get; private set; } = new ObservableCollection<ITreeView>();
 
         private ListViewModel selectedItem;
@@ -182,7 +182,7 @@ namespace Paway.Test.ViewModel
                 Image = new ImageEXT(@"pack://application:,,,/Paway.Test;component/Images/close.png")
             });
 
-            this.CollectionView = new PagedCollectionView(list) { PageSize = 10 };
+            this.PagedList = new PagedCollectionView(list) { PageSize = 10 };
 
             MultiList.Add(new ComboBoxMultiModel("张三"));
             MultiList.Add(new ComboBoxMultiModel("李四"));

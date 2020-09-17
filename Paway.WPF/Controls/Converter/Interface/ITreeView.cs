@@ -11,12 +11,8 @@ namespace Paway.WPF
     /// <summary>
     /// TreeView数接口据定义
     /// </summary>
-    public interface ITreeView
+    public interface ITreeView : IId
     {
-        /// <summary>
-        /// 标识符
-        /// </summary>
-        int Id { get; set; }
         /// <summary>
         /// 组标记
         /// </summary>

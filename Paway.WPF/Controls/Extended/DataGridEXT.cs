@@ -70,6 +70,14 @@ namespace Paway.WPF
 
         #endregion
 
+        #region 事件
+        /// <summary>
+        /// 列绑定显示事件
+        /// </summary>
+        public event Action<DataGridEXT> ColumnVisibleEvent;
+
+        #endregion
+
         /// <summary>
         /// 构造
         /// </summary>
@@ -215,6 +223,7 @@ namespace Paway.WPF
                 column.Visibility = property.IShow() ? Visibility.Visible : Visibility.Collapsed;
             }
             this.Columns.Clear();
+            ColumnVisibleEvent?.Invoke(this);
             foreach (var column in columns) this.Columns.Add(column);
         }
 
