@@ -13,12 +13,8 @@ namespace Paway.WPF
     /// <summary>
     /// ComboBoxMulti数接口据定义
     /// </summary>
-    public interface IComboBoxMulti
+    public interface IComboBoxMulti : IId
     {
-        /// <summary>
-        /// 标识符
-        /// </summary>
-        int Id { get; set; }
         /// <summary>
         /// 文本
         /// </summary>

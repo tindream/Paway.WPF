@@ -159,10 +159,10 @@
                               Background="{TemplateBinding Background}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <Grid x:Name="WindowTitlePanel"
-                                  Height="33"
+                                  Height="{Binding HeaderHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
                                   Margin="0,0,0,0">
                                 <Grid.Background>
                                     <!--允许用户修改-->
@@ -203,12 +203,12 @@
                                             Margin="0,0,-1,0">
                                     <ContentPresenter Focusable="False"
                                                       Content="{Binding FunctionBarRight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
-                                    <Button x:Name="MinimizeButton" Style="{StaticResource MinimizeButtonStyle}" />
-                                    <Grid Margin="1,0">
+                                    <Button x:Name="MinimizeButton" Style="{StaticResource MinimizeButtonStyle}" MaxHeight="45"/>
+                                    <Grid Margin="1,0" MaxHeight="45">
                                         <Button x:Name="RestoreButton" Visibility="Collapsed" Style="{StaticResource RestoreButtonStyle}" />
                                         <Button x:Name="MaximizeButton" Style="{StaticResource MaximizeButtonStyle}" />
                                     </Grid>
-                                    <Button x:Name="CloseButton" Style="{StaticResource CloseButtonStyle}" />
+                                    <Button x:Name="CloseButton" Style="{StaticResource CloseButtonStyle}" MaxHeight="45"/>
                                 </StackPanel>
                             </Grid>
                             <AdornerDecorator Grid.Row="1" KeyboardNavigation.IsTabStop="False">

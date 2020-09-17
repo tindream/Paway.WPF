@@ -8,6 +8,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
         DataContext="{Binding Main ,Source={StaticResource Locator}}"
         mc:Ignorable="d"
+        HeaderHeight="72"
         Title="MainWindow" Height="800" Width="850" WindowStartupLocation="CenterScreen">
 
     <DockPanel>
@@ -44,11 +45,11 @@
             <StackPanel>
                 <utils:ProgressBarEXT Value="95" />
 
-                <utils:ComboBoxEXT  ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
+                <utils:ComboBoxEXT  ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}" IsEditable="True"/>
                 <utils:ComboBoxMulti ItemsSource="{Binding MultiList}"/>
                 <utils:ComboBoxDate SelectedValue="{Binding DatePickerTime}"/>
-                <utils:ComboBoxTree ItemsSource="{Binding TreeList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding TreeId}"/>
-                <utils:ComboBoxView ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
+                <utils:ComboBoxTree ItemsSource="{Binding TreeList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding TreeId}" IsEditable="True"/>
+                <utils:ComboBoxView ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}" IsEditable="True"/>
 
                 <utils:TextBoxEXT Name="tb" Icon="pack://application:,,,/Paway.Test;component/Images/close.png">
                     <Binding Path="Value">
@@ -141,25 +142,6 @@
                 </utils:DataGridEXT>
                 <utils:DataPager Name="dataPager" Margin="0,0,0,3" Source="{Binding PagedList}" IsTotalItemCountFixed="True"/>
 
-                <utils:ListViewEXT Name="listView1"
-                           ItemHeight="68" ItemWidth="100" Height="68"
-                           ItemBorder="0;0,0,0,4"
-                           ItemImageHeight="32" ItemImageDock="Top" ItemPadding="5"
-                           Style="{StaticResource themeBackground}"
-                           SelectionMode="Extended" VerticalAlignment="Top">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction Command="{Binding SelectionCommand}"
-                                           CommandParameter="{Binding ElementName=listView1}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                    <utils:ListBoxItemEXT Text="Hello" IsSelected="True"
-                                  Image="pack://application:,,,/Paway.Test;component/Images/close.png"/>
-                    <utils:ListBoxItemEXT Text="World"/>
-                    <Button Content="Hi" Visibility="Collapsed"/>
-                    <utils:ListBoxItemEXT Text="A"/>
-                    <utils:ListBoxItemEXT Text="C"/>
-                </utils:ListViewEXT>
                 <utils:ListViewEXT Name="listView2"
                                Height="84"
                                ItemsSource="{Binding GridList}"
@@ -181,16 +163,7 @@
     <utils:WindowEXT.FunctionBar>
         <utils:WindowFunctionBar>
             <Menu>
-                <MenuItem Header="发送反馈2" Icon="Q" IsCheckable="True"/>
-                <MenuItem Header="发送反馈3" >
-                    <MenuItem Header="报告问题"
-                              IsCheckable="True"  Icon="Q"/>
-                    <MenuItem Header="提供反馈"
-                              IsCheckable="True" />
-                    <Separator />
-                    <MenuItem Header="设置..." />
-                </MenuItem>
-                <MenuItem Header="发送反馈" Icon="A">
+                <MenuItem Header="发送反馈">
                     <MenuItem Header="报告问题"
                               IsCheckable="True"  Icon="A"/>
                     <MenuItem Header="提供反馈"
@@ -207,8 +180,25 @@
                     </MenuItem>
                 </MenuItem>
             </Menu>
-            <Separator />
-            <Button Content="Dino.C" ToolTip="当前档案"/>
+            <utils:ListViewEXT Name="listView1" Margin="5,5,0,0"
+                           ItemHeight="67" ItemWidth="100"
+                           ItemBorder="0;0,0,0,4"
+                           ItemImageHeight="32" ItemImageDock="Top" ItemPadding="5"
+                           Style="{StaticResource themeBackground}"
+                           SelectionMode="Extended" VerticalAlignment="Top">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectionCommand}"
+                                           CommandParameter="{Binding ElementName=listView1}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <utils:ListBoxItemEXT Text="Hello" IsSelected="True"
+                                  Image="pack://application:,,,/Paway.Test;component/Images/close.png"/>
+                <utils:ListBoxItemEXT Text="World"/>
+                <Button Content="Hi" Visibility="Collapsed"/>
+                <utils:ListBoxItemEXT Text="A"/>
+                <utils:ListBoxItemEXT Text="C"/>
+            </utils:ListViewEXT>
         </utils:WindowFunctionBar>
     </utils:WindowEXT.FunctionBar>
     <utils:WindowEXT.FunctionBarRight>

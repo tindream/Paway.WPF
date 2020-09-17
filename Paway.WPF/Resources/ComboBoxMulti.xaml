@@ -151,7 +151,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEditable" Value="true">
-                            <Setter TargetName="border" Property="Background" Value="White" />
+                            <!--<Setter TargetName="border" Property="Background" Value="White" />-->
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="border" Property="BorderBrush" 

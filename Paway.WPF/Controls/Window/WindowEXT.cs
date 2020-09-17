@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Runtime.Remoting.Messaging;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
@@ -27,6 +28,10 @@ namespace Paway.WPF
         /// </summary>
         private static readonly DependencyProperty IsNonClientActiveProperty =
             DependencyProperty.Register(nameof(IsNonClientActive), typeof(bool), typeof(WindowEXT), new FrameworkPropertyMetadata(false));
+        /// <summary>
+        /// </summary>
+        private static readonly DependencyProperty HeaderHeightProperty =
+            DependencyProperty.Register(nameof(HeaderHeight), typeof(int), typeof(WindowEXT), new FrameworkPropertyMetadata(33));
 
         #endregion
 
@@ -57,6 +62,16 @@ namespace Paway.WPF
         {
             get => (bool)GetValue(IsNonClientActiveProperty);
             set => SetValue(IsNonClientActiveProperty, value);
+        }
+        /// <summary>
+        /// 标题栏高度
+        /// </summary>
+        [Category("扩展")]
+        [Description("标题栏高度")]
+        public int HeaderHeight
+        {
+            get { return (int)GetValue(HeaderHeightProperty); }
+            set { SetValue(HeaderHeightProperty, value); }
         }
 
         #endregion
