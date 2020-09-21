@@ -94,7 +94,7 @@ namespace Paway.WPF
                 this.Normal = new SolidColorBrush(Method.AlphaColor(alpha, Config.Color.AddLight(0.96)));
                 alpha = this.Mouse is SolidColorBrush mouse ? mouse.Color.A : (byte)250;
                 this.Mouse = new SolidColorBrush(Method.AlphaColor(alpha, Config.Color.AddLight(0.96)));
-                this.Pressed = new SolidColorBrush(Config.Color.AddLight(-60));
+                this.Pressed = new SolidColorBrush(Config.Color.AddLight(-90));
             }
         }
         /// <summary>

@@ -26,6 +26,82 @@ namespace Paway.WPF
     /// </summary>
     public class Method : TMethod
     {
+        #region 统一Invoke处理
+        /// <summary>
+        /// 同步调用
+        /// </summary>
+        public static void Invoke(DependencyObject obj, Action action, bool iThrow = false)
+        {
+            obj.Dispatcher.Invoke(() =>
+            {
+                try
+                {
+                    action.Invoke();
+                }
+                catch (Exception ex)
+                {
+                    if (iThrow) throw;
+                    else Method.Error(obj, ex.Message());
+                }
+            });
+        }
+        /// <summary>
+        /// 带参数同步调用
+        /// </summary>
+        public static void Invoke<T>(DependencyObject obj, Action<T> action, T t, bool iThrow = false)
+        {
+            obj.Dispatcher.Invoke(() =>
+            {
+                try
+                {
+                    action.Invoke(t);
+                }
+                catch (Exception ex)
+                {
+                    if (iThrow) throw;
+                    else Method.Error(obj, ex.Message());
+                }
+            });
+        }
+        /// <summary>
+        /// 异步调用
+        /// </summary>
+        public static void BeginInvoke(DependencyObject obj, Action action, bool iThrow = false)
+        {
+            obj.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                try
+                {
+                    action.Invoke();
+                }
+                catch (Exception ex)
+                {
+                    if (iThrow) throw;
+                    else Method.Error(obj, ex.Message());
+                }
+            }));
+        }
+        /// <summary>
+        /// 带参数异步调用
+        /// </summary>
+        public static void BeginInvoke<T>(DependencyObject obj, Action<T> action, T t, bool iThrow = false)
+        {
+            obj.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                try
+                {
+                    action.Invoke(t);
+                }
+                catch (Exception ex)
+                {
+                    if (iThrow) throw;
+                    else Method.Error(obj, ex.Message());
+                }
+            }));
+        }
+
+        #endregion
+
         #region 位移动画
         /// <summary>
         /// 位移动画-从X轴左边进入(离开)

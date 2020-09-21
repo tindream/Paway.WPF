@@ -135,6 +135,18 @@ namespace Paway.Test.ViewModel
             }
         }
 
+        private ICommand cbxFilterCmd;
+        public ICommand CbxFilterCmd
+        {
+            get
+            {
+                return cbxFilterCmd ?? (cbxFilterCmd = new RelayCommand<ComboBoxViewFilterEventArgs>(e =>
+                {
+                    e.List = this.list.FindAll(c => c.Text.Contains(e.Filter));
+                }));
+            }
+        }
+
         private ICommand selectionCommand;
         public ICommand SelectionCommand
         {

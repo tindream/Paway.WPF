@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -75,9 +76,14 @@ namespace Paway.WPF
         /// 列绑定显示事件
         /// </summary>
         public event Action<DataGridEXT> ColumnVisibleEvent;
+        /// <summary>
+        /// 行双击事件
+        /// </summary>
+        public event Action<DataGridEXT, object> RowDoubleEvent;
 
         #endregion
 
+        #region 构造
         /// <summary>
         /// 构造
         /// </summary>
@@ -86,7 +92,17 @@ namespace Paway.WPF
             //AutoGenerateColumns = true;
             //this.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
             //this.ColumnHeaderHeight = 42;
+            this.MouseDoubleClick += DataGridEXT_MouseDoubleClick;
         }
+        private void DataGridEXT_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (CurrentRow(e) is DataGridRow row)
+            {
+                RowDoubleEvent?.Invoke(this, row.Item);
+            }
+        }
+
+        #endregion
 
         #region 自定义排序
         /// <summary>
@@ -243,6 +259,51 @@ namespace Paway.WPF
                 }
             }
             return new DataGridTextColumn();
+        }
+        /// <summary>
+        /// 选中行列
+        /// </summary>
+        public bool Selected(int id)
+        {
+            for (int i = 0; i < this.Items.Count; i++)
+            {
+                if (this.Items[i] is IId item && item.Id == id)
+                {
+                    this.ScrollIntoView(item);
+                    if (this.ItemContainerGenerator.ContainerFromIndex(i) is DataGridRow row)
+                    {
+                        row.IsSelected = true;
+                        if (Method.Child(row, out DataGridCellsPresenter presenter, iParent: false))
+                        {
+                            for (int j = 0; j < this.Columns.Count; j++)
+                            {
+                                if (this.Columns[j].Visibility == Visibility.Visible)
+                                {
+                                    if (presenter.ItemContainerGenerator.ContainerFromIndex(j) is DataGridCell cell)
+                                    {
+                                        cell.Focus();
+                                    }
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+        /// <summary>
+        /// 鼠标操作行
+        /// </summary>
+        public DataGridRow CurrentRow(MouseEventArgs e)
+        {
+            var point = e.GetPosition(this);
+            var obj = this.InputHitTest(point);
+            if (Method.Parent(obj, out DataGridRow row))
+            {
+                return row;
+            }
+            return null;
         }
 
         #endregion

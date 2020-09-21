@@ -19,6 +19,7 @@
     </Style>
     <Style TargetType="{x:Type TextBlock}">
         <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="Microsoft YaHei"/>
     </Style>
     <Style TargetType="{x:Type CheckBox}">
         <Setter Property="VerticalContentAlignment" Value="Center" />

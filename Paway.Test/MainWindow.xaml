@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Paway.Test"
         xmlns:utils="clr-namespace:Paway.WPF;assembly=Paway.WPF"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+        xmlns:ip="http://www.galasoft.ch/mvvmlight"
         DataContext="{Binding Main ,Source={StaticResource Locator}}"
         mc:Ignorable="d"
         HeaderHeight="72"
@@ -49,7 +50,13 @@
                 <utils:ComboBoxMulti ItemsSource="{Binding MultiList}"/>
                 <utils:ComboBoxDate SelectedValue="{Binding DatePickerTime}"/>
                 <utils:ComboBoxTree ItemsSource="{Binding TreeList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding TreeId}" IsEditable="True"/>
-                <utils:ComboBoxView ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}" IsEditable="True"/>
+                <utils:ComboBoxView ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}" IsEditable="True">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="FilterEvent">
+                            <ip:EventToCommand Command="{Binding CbxFilterCmd}" PassEventArgsToCommand="True"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </utils:ComboBoxView>
 
                 <utils:TextBoxEXT Name="tb" Icon="pack://application:,,,/Paway.Test;component/Images/close.png">
                     <Binding Path="Value">
@@ -162,8 +169,17 @@
     </DockPanel>
     <utils:WindowEXT.FunctionBar>
         <utils:WindowFunctionBar>
-            <Menu>
-                <MenuItem Header="发送反馈">
+            <!--<Menu>
+                <MenuItem Header="发送反馈2" Icon="Q" IsCheckable="True"/>
+                <MenuItem Header="发送反馈3" >
+                    <MenuItem Header="报告问题"
+                              IsCheckable="True"  Icon="Q"/>
+                    <MenuItem Header="提供反馈"
+                              IsCheckable="True" />
+                    <Separator />
+                    <MenuItem Header="设置..." />
+                </MenuItem>
+                <MenuItem Header="发送反馈" Icon="A">
                     <MenuItem Header="报告问题"
                               IsCheckable="True"  Icon="A"/>
                     <MenuItem Header="提供反馈"
@@ -180,6 +196,8 @@
                     </MenuItem>
                 </MenuItem>
             </Menu>
+            <Separator />
+            <Button Content="Dino.C" ToolTip="当前档案"/>-->
             <utils:ListViewEXT Name="listView1" Margin="5,5,0,0"
                            ItemHeight="67" ItemWidth="100"
                            ItemBorder="0;0,0,0,4"
@@ -203,7 +221,7 @@
     </utils:WindowEXT.FunctionBar>
     <utils:WindowEXT.FunctionBarRight>
         <utils:WindowFunctionBar>
-            <Button Content="Sign in" />
+            <!--<Button Content="Sign in" />-->
         </utils:WindowFunctionBar>
     </utils:WindowEXT.FunctionBarRight>
 </utils:WindowEXT>
