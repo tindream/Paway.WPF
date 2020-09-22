@@ -94,7 +94,14 @@ namespace Paway.WPF
                     multi.IsChecked = true;
                     if (ChekedItems.IndexOf(multi) < 0)
                     {
-                        ChekedItems.Add(multi);
+                        var value = _ListBoxV.Items.IndexOf(multi);
+                        var index = 0;
+                        for (var i = 0; i < ChekedItems.Count; i++)
+                        {
+                            var j = _ListBoxV.Items.IndexOf(ChekedItems[i]);
+                            if (j < value) index = i + 1;
+                        }
+                        ChekedItems.Insert(index, multi);
                     }
                 }
             }

@@ -7,7 +7,7 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type local:ComboBoxView}">
+    <Style TargetType="{x:Type local:ComboBoxQuery}">
         <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="BorderThickness" Value="1"/>
@@ -15,7 +15,7 @@
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:ComboBoxView}">
+                <ControlTemplate TargetType="{x:Type local:ComboBoxQuery}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.7*"/>
@@ -25,14 +25,14 @@
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 CornerRadius="{TemplateBinding Radius}"
                                 Padding="{TemplateBinding Padding}"
-                                Background="{StaticResource backLine}"
+                                Background="White"
                                 BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}" />
-                        <ContentPresenter x:Name="ContentSite" Margin="5,3,0,3" 
+                        <!--<ContentPresenter x:Name="ContentSite" Margin="5,3,0,3" 
                                           VerticalAlignment="Center"
                                           IsHitTestVisible="False"
-                                          Content="{TemplateBinding SelectionBoxItem}" 
+                                          Content="{TemplateBinding Text}" 
                                           ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" 
-                                          ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" />
+                                          ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" />-->
                         <!--ToggleButton 已数据绑定到 ComboBox 本身以切换 IsDropDownOpen-->
                         <ToggleButton x:Name="ToggleButton" Grid.ColumnSpan="2" 
                                       Focusable="false" 
@@ -41,9 +41,10 @@
                                       IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" />
                         <!--必须将 TextBox 命名为 PART_EditableTextBox，否则 ComboBox 将无法识别它-->
                         <local:TextBoxEXT x:Name="PART_EditableTextBox"
+                                          Text="{TemplateBinding Text}"
                                           Margin="0"
                                           ItemBrush="Transparent"
-                                          Visibility="Hidden" 
+                                          Visibility="Visible" 
                                           Focusable="True" 
                                           Background="Transparent" 
                                           Radius="{TemplateBinding Radius}"
@@ -58,17 +59,17 @@
                             <Border x:Name="DropDownBorder" BorderBrush="#CCC" BorderThickness="1" Padding="0">
                                 <local:DataGridEXT x:Name="PART_DataGrid" Background="White" 
                                                    Height="180" BorderThickness="0"
-                                                   Width="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource valueAddConverter}}" 
+                                                   MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource valueAddConverter}}" 
                                                    MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}"
                                                    ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource TemplatedParent}}"/>
                             </Border>
                         </Popup>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsEditable" Value="true">
+                        <!--<Trigger Property="IsEditable" Value="true">
                             <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible" />
                             <Setter TargetName="border" Property="Background" Value="White" />
-                        </Trigger>
+                        </Trigger>-->
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="border" Property="BorderBrush" 
                                     Value="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}" />

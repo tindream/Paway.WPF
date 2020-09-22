@@ -114,8 +114,11 @@ namespace Paway.WPF
             {
                 if (!item.IsGrouping)
                 {
-                    this.SelectedValue = item.GetValue(this.SelectedValuePath);
-                    if (isInit) this.Dispatcher.BeginInvoke(new Action(() => { this.IsDropDownOpen = false; }));
+                    if (isInit)
+                    {
+                        this.SelectedValue = item.GetValue(this.SelectedValuePath);
+                        this.Dispatcher.BeginInvoke(new Action(() => { this.IsDropDownOpen = false; }));
+                    }
                 }
                 else
                 {

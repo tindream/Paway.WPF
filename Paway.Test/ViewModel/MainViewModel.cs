@@ -142,7 +142,7 @@ namespace Paway.Test.ViewModel
             {
                 return cbxFilterCmd ?? (cbxFilterCmd = new RelayCommand<ComboBoxViewFilterEventArgs>(e =>
                 {
-                    e.List = this.list.FindAll(c => c.Text.Contains(e.Filter));
+                    e.List = this.list.FindAll(c => c.Text.IndexOf(e.Filter) != -1);
                 }));
             }
         }
@@ -171,7 +171,9 @@ namespace Paway.Test.ViewModel
             {
                 return teach ?? (teach = new RelayCommand<Button>(btn =>
                 {
-                    Method.Toast(btn, "Hello", 5);
+                    MultiList[0].IsChecked = !MultiList[0].IsChecked;
+                    var desc = string.Join(",", MultiList.ToList().FindAll(c => c.IsChecked).Select(c => c.Text));
+                    Method.Toast(btn, desc, 5);
                 }));
             }
         }
@@ -196,11 +198,11 @@ namespace Paway.Test.ViewModel
 
             this.PagedList = new PagedCollectionView(list) { PageSize = 10 };
 
-            MultiList.Add(new ComboBoxMultiModel("张三"));
+            MultiList.Add(new ComboBoxMultiModel("张三") { IsChecked = true });
             MultiList.Add(new ComboBoxMultiModel("李四"));
             MultiList.Add(new ComboBoxMultiModel("王五"));
             MultiList.Add(new ComboBoxMultiModel("马六"));
-            MultiList.Add(new ComboBoxMultiModel("赵七"));
+            MultiList.Add(new ComboBoxMultiModel("赵七") { IsChecked = true });
             MultiList.Add(new ComboBoxMultiModel("王八"));
             MultiList.Add(new ComboBoxMultiModel("陈九"));
 

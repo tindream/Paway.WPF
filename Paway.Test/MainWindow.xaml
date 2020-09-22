@@ -46,17 +46,18 @@
             <StackPanel>
                 <utils:ProgressBarEXT Value="95" />
 
-                <utils:ComboBoxEXT  ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}" IsEditable="True"/>
+                <utils:ComboBoxEXT  ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
                 <utils:ComboBoxMulti ItemsSource="{Binding MultiList}"/>
                 <utils:ComboBoxDate SelectedValue="{Binding DatePickerTime}"/>
-                <utils:ComboBoxTree ItemsSource="{Binding TreeList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding TreeId}" IsEditable="True"/>
-                <utils:ComboBoxView ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}" IsEditable="True">
+                <utils:ComboBoxTree ItemsSource="{Binding TreeList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding TreeId}"/>
+                <utils:ComboBoxView ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
+                <utils:ComboBoxQuery ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="FilterEvent">
                             <ip:EventToCommand Command="{Binding CbxFilterCmd}" PassEventArgsToCommand="True"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                </utils:ComboBoxView>
+                </utils:ComboBoxQuery>
 
                 <utils:TextBoxEXT Name="tb" Icon="pack://application:,,,/Paway.Test;component/Images/close.png">
                     <Binding Path="Value">

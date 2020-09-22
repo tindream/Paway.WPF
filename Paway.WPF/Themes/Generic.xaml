@@ -13,6 +13,7 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBoxDate.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBoxTree.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBoxView.xaml" />
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBoxQuery.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ProgressBar.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ListView.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\CheckBox.xaml" />

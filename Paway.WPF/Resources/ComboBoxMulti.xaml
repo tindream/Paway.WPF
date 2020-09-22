@@ -32,13 +32,12 @@
                                                   IsTabStop="False" 
                                                   IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
                                                   Template="{StaticResource ComboBoxToggleButton}" />
-                                <local:ListBoxEXT x:Name="PART_ListBoxChk" 
-                                         SelectionMode="Multiple" 
-                                         BorderThickness="0" 
-                                         Margin="4,1"
-                                         Background="{StaticResource backLine}"
-                                         Radius="{TemplateBinding Radius}" 
-                                         ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                <local:ListBoxEXT x:Name="PART_ListBoxChk"
+                                                  SelectionMode="Multiple" 
+                                                  BorderThickness="0" 
+                                                  Margin="4,1" 
+                                                  Radius="{TemplateBinding Radius}" 
+                                                  ScrollViewer.HorizontalScrollBarVisibility="Auto">
                                     <ListBox.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <VirtualizingStackPanel Orientation="Horizontal" VirtualizingStackPanel.IsVirtualizing="True" />
@@ -72,7 +71,7 @@
                                 <local:TextBoxEXT Width="0" Margin="0" Focusable="False"/>
                                 <ToggleButton Name="PART_DropDownToggle2" 
                                                   DockPanel.Dock="Right"
-                                                  IsTabStop="False" 
+                                                  IsTabStop="False"
                                                   IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
                                                   Template="{StaticResource ComboBoxToggleNone}" />
                             </DockPanel>

@@ -45,8 +45,8 @@
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
-    <Reference Include="Paway.Helper, Version=2.3.18.0, Culture=neutral, PublicKeyToken=5f9d1a9ddcc41d83, processorArchitecture=MSIL">
-      <HintPath>..\packages\Paway.Helper.2.3.18.7\lib\net40\Paway.Helper.dll</HintPath>
+    <Reference Include="Paway.Helper, Version=2.3.19.0, Culture=neutral, PublicKeyToken=5f9d1a9ddcc41d83, processorArchitecture=MSIL">
+      <HintPath>..\packages\Paway.Helper.2.3.19\lib\net40\Paway.Helper.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -101,6 +101,7 @@
     <Compile Include="Controls\Extended\SliderEXT.cs" />
     <Compile Include="Controls\Extended\CalendarEXT.cs" />
     <Compile Include="Controls\Extended\ListBoxEXT.cs" />
+    <Compile Include="Controls\Extended\ComboBoxQuery.cs" />
     <Compile Include="Controls\Extended\TreeViewEXT.cs" />
     <Compile Include="Controls\Converter\Interface\ModelBase.cs" />
     <Compile Include="Controls\Converter\Interface\IElementStatu.cs" />
@@ -158,6 +159,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Resources\ComboBoxQuery.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\ComboBoxView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
