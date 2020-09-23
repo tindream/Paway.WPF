@@ -9,7 +9,7 @@
         xmlns:ip="http://www.galasoft.ch/mvvmlight"
         DataContext="{Binding Main ,Source={StaticResource Locator}}"
         mc:Ignorable="d"
-        HeaderHeight="72"
+        HeaderHeight="72" ButtonMaxHeight="35" ButtonAlignment="Top"
         Title="MainWindow" Height="800" Width="850" WindowStartupLocation="CenterScreen">
 
     <DockPanel>

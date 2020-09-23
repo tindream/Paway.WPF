@@ -31,7 +31,15 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         private static readonly DependencyProperty HeaderHeightProperty =
-            DependencyProperty.Register(nameof(HeaderHeight), typeof(int), typeof(WindowEXT), new FrameworkPropertyMetadata(33));
+            DependencyProperty.Register(nameof(HeaderHeight), typeof(int), typeof(WindowEXT), new FrameworkPropertyMetadata(30));
+        /// <summary>
+        /// </summary>
+        private static readonly DependencyProperty ButtonMaxHeightProperty =
+            DependencyProperty.Register(nameof(ButtonMaxHeight), typeof(double), typeof(WindowEXT), new FrameworkPropertyMetadata(45d));
+        /// <summary>
+        /// </summary>
+        private static readonly DependencyProperty ButtonAlignmentProperty =
+            DependencyProperty.Register(nameof(ButtonAlignment), typeof(VerticalAlignment), typeof(WindowEXT), new FrameworkPropertyMetadata(VerticalAlignment.Stretch));
 
         #endregion
 
@@ -72,6 +80,26 @@ namespace Paway.WPF
         {
             get { return (int)GetValue(HeaderHeightProperty); }
             set { SetValue(HeaderHeightProperty, value); }
+        }
+        /// <summary>
+        /// 按钮最大高度
+        /// </summary>
+        [Category("扩展")]
+        [Description("按钮最大高度")]
+        public double ButtonMaxHeight
+        {
+            get { return (double)GetValue(ButtonMaxHeightProperty); }
+            set { SetValue(ButtonMaxHeightProperty, value); }
+        }
+        /// <summary>
+        /// 按钮位置
+        /// </summary>
+        [Category("扩展")]
+        [Description("按钮位置")]
+        public VerticalAlignment ButtonAlignment
+        {
+            get { return (VerticalAlignment)GetValue(ButtonAlignmentProperty); }
+            set { SetValue(ButtonAlignmentProperty, value); }
         }
 
         #endregion
