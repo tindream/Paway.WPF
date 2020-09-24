@@ -3,15 +3,17 @@
                     xmlns:local="clr-namespace:Paway.WPF">
 
     <local:BoolReverse x:Key="boolReverse"/>
-    <local:BoolToVisible x:Key="boolToVisible"/> 
+    <local:BoolToVisible x:Key="boolToVisible"/>
+    <local:DateConverter x:Key="dateConverter"/>
     <local:ValueMultiConverter x:Key="valueMultiConverter"/>
     <local:ValueAddConverter x:Key="valueAddConverter"/>
-    <local:DateConverter x:Key="dateConverter"/>
-    <local:EmptyColorConverter x:Key="emptyColorConverter" />
+    <local:EnumConverter x:Key="enumConverter"/>
     <local:IsNotNullConverter x:Key="isNotNull"/>
     <local:NullToCollapsed x:Key="nullToCollapsed"/>
-    <local:NullJudgeConverter x:Key="nullJudgeConverter"/>
     <local:VisibleReverse x:Key="visibleReverse"/>
+
+    <local:EmptyColorConverter x:Key="emptyColorConverter" />
+    <local:NullJudgeConverter x:Key="nullJudgeConverter"/>
 
     <Style TargetType="{x:Type Label}">
         <Setter Property="HorizontalContentAlignment" Value="Right" />

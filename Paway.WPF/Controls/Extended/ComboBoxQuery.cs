@@ -101,13 +101,13 @@ namespace Paway.WPF
 
         #region 事件
         /// <summary>
-        /// DataGrid列绑定显示事件
+        /// DataGrid数据绑定刷新事件
         /// </summary>
-        public event Action<DataGridEXT> ColumnVisibleEvent;
+        public event Action<DataGridEXT> RefreshEvent;
         /// <summary>
         /// 搜索过滤事件
         /// </summary>
-        public event Action<object, ComboBoxViewFilterEventArgs> FilterEvent;
+        public event EventHandler<CustomFilterEventArgs> FilterEvent;
 
         #endregion
 
@@ -134,7 +134,7 @@ namespace Paway.WPF
             {
                 this.gridView = gridView;
                 if (!ColumnHeader) gridView.ColumnHeaderHeight = 0;
-                gridView.ColumnVisibleEvent += GridView_ColumnVisibleEvent;
+                gridView.RefreshEvent += GridView_RefreshEvent;
                 gridView.RowDoubleEvent += GridView_RowDoubleEvent;
             }
             if (Template.FindName("PART_EditableTextBox", this) is TextBoxEXT textBox)
@@ -152,9 +152,9 @@ namespace Paway.WPF
         {
             IsDropDownOpen = !IsDropDownOpen;
         }
-        private void GridView_RowDoubleEvent(DataGridEXT arg1, object arg2)
+        private void GridView_RowDoubleEvent(object arg1, RowDoubleEventArgs arg2)
         {
-            if (arg2 is IId item)
+            if (arg2.Item is IId item)
             {
                 if (this.SelectedValue.Equals(item.Id))
                     this.Text = null;
@@ -168,9 +168,9 @@ namespace Paway.WPF
             var result = gridView.Selected(this.SelectedValue.ToInt());
             if (result) textBox.Focus();
         }
-        private void GridView_ColumnVisibleEvent(DataGridEXT obj)
+        private void GridView_RefreshEvent(DataGridEXT obj)
         {
-            ColumnVisibleEvent?.Invoke(obj);
+            RefreshEvent?.Invoke(obj);
         }
 
         #endregion
@@ -193,7 +193,7 @@ namespace Paway.WPF
                 }
                 else
                 {
-                    var args = new ComboBoxViewFilterEventArgs() { Filter = text };
+                    var args = new CustomFilterEventArgs(text, e.RoutedEvent, this);
                     FilterEvent.Invoke(this, args);
                     if (args.List != null)
                     {
@@ -260,7 +260,7 @@ namespace Paway.WPF
                         var index = gridView.SelectedIndex;
                         if (index < 0) index = 0;
                         if (index >= this.Items.Count) index = this.Items.Count - 1;
-                        GridView_RowDoubleEvent(gridView, this.Items[index]);
+                        GridView_RowDoubleEvent(gridView, new RowDoubleEventArgs(this.Items[index], e.RoutedEvent, gridView));
                     }
                     break;
             }
@@ -281,19 +281,5 @@ namespace Paway.WPF
         }
 
         #endregion
-    }
-    /// <summary>
-    /// 搜索过滤路由事件参数
-    /// </summary>
-    public class ComboBoxViewFilterEventArgs : RoutedEventArgs
-    {
-        /// <summary>
-        /// 过滤输入
-        /// </summary>
-        public string Filter { get; set; }
-        /// <summary>
-        /// 结果列表
-        /// </summary>
-        public IList List { get; set; }
     }
 }

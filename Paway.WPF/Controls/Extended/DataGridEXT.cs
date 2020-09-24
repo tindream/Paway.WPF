@@ -73,13 +73,13 @@ namespace Paway.WPF
 
         #region 事件
         /// <summary>
-        /// 列绑定显示事件
+        /// 数据绑定刷新事件
         /// </summary>
-        public event Action<DataGridEXT> ColumnVisibleEvent;
+        public event Action<DataGridEXT> RefreshEvent;
         /// <summary>
         /// 行双击事件
         /// </summary>
-        public event Action<DataGridEXT, object> RowDoubleEvent;
+        public event EventHandler<RowDoubleEventArgs> RowDoubleEvent;
 
         #endregion
 
@@ -98,7 +98,7 @@ namespace Paway.WPF
         {
             if (CurrentRow(e) is DataGridRow row)
             {
-                RowDoubleEvent?.Invoke(this, row.Item);
+                RowDoubleEvent?.Invoke(this, new RowDoubleEventArgs(row.Item, e.RoutedEvent, this));
             }
         }
 
@@ -239,7 +239,7 @@ namespace Paway.WPF
                 column.Visibility = property.IShow() ? Visibility.Visible : Visibility.Collapsed;
             }
             this.Columns.Clear();
-            ColumnVisibleEvent?.Invoke(this);
+            RefreshEvent?.Invoke(this);
             foreach (var column in columns) this.Columns.Add(column);
         }
 

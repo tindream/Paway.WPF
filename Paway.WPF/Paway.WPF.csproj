@@ -46,7 +46,7 @@
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
     <Reference Include="Paway.Helper, Version=2.3.19.0, Culture=neutral, PublicKeyToken=5f9d1a9ddcc41d83, processorArchitecture=MSIL">
-      <HintPath>..\packages\Paway.Helper.2.3.19\lib\net40\Paway.Helper.dll</HintPath>
+      <HintPath>..\packages\Paway.Helper.2.3.19.6\lib\net40\Paway.Helper.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -70,6 +70,7 @@
     <Compile Include="Controls\Converter\IEquatable\FontSizeEXT.cs" />
     <Compile Include="Controls\Converter\IValueConverter\IsNotNullConverter.cs" />
     <Compile Include="Controls\Converter\Enum\RegexType.cs" />
+    <Compile Include="Controls\Converter\IValueConverter\EnumConverter.cs" />
     <Compile Include="Controls\Converter\ValidationRule\RegexValidationRule.cs" />
     <Compile Include="Controls\Converter\IEquatable\ColorLinear.cs" />
     <Compile Include="Controls\Converter\IValueConverter\EmptyColorConverter.cs" />
@@ -117,6 +118,8 @@
       <DependentUpon>WindowProgress.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Extended\ThemeEXT.cs" />
+    <Compile Include="Controls\RoutedEventArgs\DataGridEXTEventArgs.cs" />
+    <Compile Include="Controls\RoutedEventArgs\CustomFilterEventArgs.cs" />
     <Compile Include="Controls\TransitionControl\TransitionControl.cs" />
     <Compile Include="Controls\Converter\Enum\TransitionType.cs" />
     <Compile Include="Controls\Window\FunctionBar\FunctionBar.cs" />

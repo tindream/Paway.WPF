@@ -95,6 +95,23 @@ namespace Paway.Test.ViewModel
         #endregion
 
         #region 命令
+        private ICommand rowDoubleCommand;
+        public ICommand RowDoubleCommand
+        {
+            get
+            {
+                return rowDoubleCommand ?? (rowDoubleCommand = new RelayCommand<RowDoubleEventArgs>(e =>
+                {
+                    if (e.Source is DataGridEXT datagrid1)
+                    {
+                        if (e.Item is ListViewModel info)
+                        {
+                        }
+                    }
+                }));
+            }
+        }
+
         private ICommand selectedItemChanged;
         public ICommand SelectedItemChanged
         {
@@ -140,7 +157,7 @@ namespace Paway.Test.ViewModel
         {
             get
             {
-                return cbxFilterCmd ?? (cbxFilterCmd = new RelayCommand<ComboBoxViewFilterEventArgs>(e =>
+                return cbxFilterCmd ?? (cbxFilterCmd = new RelayCommand<CustomFilterEventArgs>(e =>
                 {
                     e.List = this.list.FindAll(c => c.Text.IndexOf(e.Filter) != -1);
                 }));

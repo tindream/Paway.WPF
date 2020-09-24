@@ -41,9 +41,9 @@ namespace Paway.WPF
 
         #region 事件
         /// <summary>
-        /// DataGrid列绑定显示事件
+        /// DataGrid数据绑定刷新事件
         /// </summary>
-        public event Action<DataGridEXT> ColumnVisibleEvent;
+        public event Action<DataGridEXT> RefreshEvent;
 
         #endregion
 
@@ -70,7 +70,7 @@ namespace Paway.WPF
             {
                 this.gridView = gridView;
                 if (!ColumnHeader) gridView.ColumnHeaderHeight = 0;
-                gridView.ColumnVisibleEvent += GridView_ColumnVisibleEvent;
+                gridView.RefreshEvent += GridView_RefreshEvent;
                 gridView.CurrentCellChanged += GridView_CurrentCellChanged;
             }
         }
@@ -96,9 +96,9 @@ namespace Paway.WPF
                 selecting = false;
             }
         }
-        private void GridView_ColumnVisibleEvent(DataGridEXT obj)
+        private void GridView_RefreshEvent(DataGridEXT obj)
         {
-            ColumnVisibleEvent?.Invoke(obj);
+            RefreshEvent?.Invoke(obj);
         }
 
         #endregion
