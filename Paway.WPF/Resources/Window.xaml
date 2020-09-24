@@ -204,20 +204,20 @@
                                     <ContentPresenter Focusable="False"
                                                       Content="{Binding FunctionBarRight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
                                     <Button x:Name="MinimizeButton" Style="{StaticResource MinimizeButtonStyle}"
-                                          VerticalAlignment="{Binding ButtonAlignment, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                                            VerticalAlignment="{Binding ButtonAlignment, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
                                             MaxHeight="{Binding ButtonMaxHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
-                                            Height="{Binding ActualHeight, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                            Height="{Binding HeaderHeight, RelativeSource={RelativeSource TemplatedParent}}"/>
                                     <Grid Margin="1,0"
                                           VerticalAlignment="{Binding ButtonAlignment, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
                                           MaxHeight="{Binding ButtonMaxHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
-                                          Height="{Binding ActualHeight, RelativeSource={RelativeSource TemplatedParent}}">
+                                          Height="{Binding HeaderHeight, RelativeSource={RelativeSource TemplatedParent}}">
                                         <Button x:Name="RestoreButton" Visibility="Collapsed" Style="{StaticResource RestoreButtonStyle}"/>
                                         <Button x:Name="MaximizeButton" Style="{StaticResource MaximizeButtonStyle}"/>
                                     </Grid>
                                     <Button x:Name="CloseButton" Style="{StaticResource CloseButtonStyle}"
-                                          VerticalAlignment="{Binding ButtonAlignment, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                                            VerticalAlignment="{Binding ButtonAlignment, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
                                             MaxHeight="{Binding ButtonMaxHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
-                                            Height="{Binding ActualHeight, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                            Height="{Binding HeaderHeight, RelativeSource={RelativeSource TemplatedParent}}"/>
                                 </StackPanel>
                             </Grid>
                             <AdornerDecorator Grid.Row="1" KeyboardNavigation.IsTabStop="False">

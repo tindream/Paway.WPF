@@ -35,7 +35,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         private static readonly DependencyProperty ButtonMaxHeightProperty =
-            DependencyProperty.Register(nameof(ButtonMaxHeight), typeof(double), typeof(WindowEXT), new FrameworkPropertyMetadata(45d));
+            DependencyProperty.Register(nameof(ButtonMaxHeight), typeof(double), typeof(WindowEXT), new FrameworkPropertyMetadata(32d));
         /// <summary>
         /// </summary>
         private static readonly DependencyProperty ButtonAlignmentProperty =
