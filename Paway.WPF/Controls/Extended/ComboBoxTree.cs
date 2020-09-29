@@ -1,8 +1,10 @@
 ﻿using Paway.Helper;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -18,6 +20,7 @@ namespace Paway.WPF
     /// </summary>
     public class ComboBoxTree : ComboBoxEXT
     {
+        #region 扩展
         /// <summary>
         /// </summary>
         public static readonly new DependencyProperty SelectedValueProperty =
@@ -26,13 +29,11 @@ namespace Paway.WPF
         /// </summary>
         public static readonly new DependencyProperty SelectedItemProperty =
             DependencyProperty.RegisterAttached(nameof(ComboBoxTree.SelectedItem), typeof(object), typeof(ComboBoxTree));
-
         /// <summary>
         /// </summary>
-        public ComboBoxTree()
-        {
-            DefaultStyleKey = typeof(ComboBoxTree);
-        }
+        public static readonly DependencyProperty IQueryProperty =
+            DependencyProperty.RegisterAttached(nameof(IQuery), typeof(bool), typeof(ComboBoxTree), new PropertyMetadata(false));
+
         /// <summary>
         /// 重写
         /// </summary>
@@ -53,43 +54,26 @@ namespace Paway.WPF
         {
             if (d is ComboBoxTree tree)
             {
-                if (tree.ItemsSource != null)
+                var list = tree.List;
+                if (list == null) list = tree.ItemsSource as IList<TreeViewModel>;
+                if (list != null)
                 {
                     var id = tree.SelectedValue.ToInt();
-                    foreach (ITreeView item in tree.ItemsSource)
+                    foreach (ITreeView item in list)
                     {
                         if (tree.InitText(item, id)) break;
                     }
                 }
             }
         }
-
-        #region 关联选择
-        private bool isInit;
-        /// <summary>
-        /// </summary>
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-            if (Template.FindName("PART_TreeView", this) is TreeViewEXT treeView)
-            {
-                treeView.MouseDoubleClick += TreeView_MouseDoubleClick;
-                treeView.SelectedItemChanged += TreeView_SelectedItemChanged;
-                treeView.Loaded += TreeView_Loaded;
-            }
-        }
-        private void TreeView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            var treeView = sender as TreeViewEXT;
-            if (treeView.SelectedItem is ITreeView treeItem && !treeItem.IsGrouping)
-                this.IsDropDownOpen = false;
-        }
         private bool InitText(ITreeView item, int id)
         {
             if (!item.IsGrouping && item.Id == id)
             {
                 this.SelectedItem = item;
-                this.Text = item.GetValue(this.DisplayMemberPath).ToStrs();
+                this.last = item.GetValue(this.DisplayMemberPath).ToStrs();
+                this.Text = this.last;
+                if (this.List != null) this.ItemsSource = this.List;
                 return true;
             }
             else if (item.Children.Count > 0)
@@ -101,11 +85,87 @@ namespace Paway.WPF
             }
             return false;
         }
-        private void TreeView_Loaded(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// 下拉列表是否显示列
+        /// </summary>
+        [Category("扩展")]
+        [Description("启用搜索框")]
+        public bool IQuery
+        {
+            get { return (bool)GetValue(IQueryProperty); }
+            set { SetValue(IQueryProperty, value); }
+        }
+
+        #endregion
+
+        #region 事件
+        /// <summary>
+        /// 搜索过滤事件
+        /// </summary>
+        public event EventHandler<CustomFilterEventArgs> FilterEvent;
+
+        #endregion
+
+        /// <summary>
+        /// </summary>
+        public ComboBoxTree()
+        {
+            DefaultStyleKey = typeof(ComboBoxTree);
+        }
+
+        #region 关联选择
+        private bool isInit;
+        private TreeViewEXT treeView;
+        /// <summary>
+        /// </summary>
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            IsEditable = false;
+            this.List = this.ItemsSource as IList<TreeViewModel>;
+            LoadChilds(this.List);
+            if (Template.FindName("PART_Popup", this) is Popup popup)
+            {
+                popup.Opened += Popup_Opened;
+            }
+            if (Template.FindName("PART_TreeView", this) is TreeViewEXT treeView)
+            {
+                this.treeView = treeView;
+                treeView.MouseDoubleClick += TreeView_MouseDoubleClick;
+                treeView.SelectedItemChanged += TreeView_SelectedItemChanged;
+            }
+            if (Template.FindName("PART_EditableTextBox", this) is TextBoxEXT textBox)
+            {
+                this.textBox = textBox;
+                textBox.PreviewMouseLeftButtonDown += TextBox_PreviewMouseLeftButtonDown;
+            }
+            if (Method.Parent(this, out Window window))
+            {
+                window.LocationChanged += delegate { this.IsDropDownOpen = false; };
+            }
+            this.KeyUp += ComboBoxTree_KeyUp;
+        }
+        private void LoadChilds(IList<TreeViewModel> list)
+        {
+            foreach (var item in list)
+            {
+                if (item.IsGrouping) LoadChilds(item.Children);
+                else this.Childs.Add(item);
+            }
+        }
+        private void TextBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            IsDropDownOpen = !IsDropDownOpen;
+        }
+        private void TreeView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var treeView = sender as TreeViewEXT;
-            isInit = treeView.Selected(this.SelectedValue.ToInt());
-            if (isInit) treeView.Loaded -= TreeView_Loaded;
+            if (treeView.SelectedItem is ITreeView item && !item.IsGrouping)
+            {
+                this.SelectedValue = item.GetValue(this.SelectedValuePath);
+                this.IsDropDownOpen = false;
+                textBox.Focus();
+            }
         }
         private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
@@ -114,10 +174,10 @@ namespace Paway.WPF
             {
                 if (!item.IsGrouping)
                 {
-                    if (isInit)
+                    if (isInit && !this.IQuery)
                     {
                         this.SelectedValue = item.GetValue(this.SelectedValuePath);
-                        this.Dispatcher.BeginInvoke(new Action(() => { this.IsDropDownOpen = false; }));
+                        Method.BeginInvoke(this, () => { this.IsDropDownOpen = false; });
                     }
                 }
                 else
@@ -125,6 +185,160 @@ namespace Paway.WPF
                     treeView.Expand(item);
                 }
             }
+        }
+        private void Popup_Opened(object sender, EventArgs e)
+        {
+            isInit = treeView.Selected(this.SelectedValue.ToInt());
+            if (isInit) textBox.Focus();
+        }
+
+        #endregion
+
+        #region 搜索
+        private IList<TreeViewModel> List;
+        private readonly IList<TreeViewModel> Childs = new List<TreeViewModel>();
+        private TextBoxEXT textBox;
+        private string last;
+        private void ComboBoxTree_KeyUp(object sender, KeyEventArgs e)
+        {
+            var text = textBox.Text;
+            if (last == text) return;
+            last = text;
+            Trace.WriteLine(text);
+            if (text.IsEmpty())
+            {
+                this.ItemsSource = this.List;
+            }
+            else
+            {
+                if (FilterEvent != null)
+                {
+                    var args = new CustomFilterEventArgs(text, e.RoutedEvent, treeView);
+                    FilterEvent.Invoke(this, args);
+                    if (args.List != null)
+                    {
+                        this.ItemsSource = args.List;
+                    }
+                }
+                else
+                {
+                    var p = this.List.Predicate<TreeViewModel>(text, c => c.IsGrouping);
+                    var list = this.Childs.AsParallel().Where(p).ToList();
+                    var id = list.Count > 0 ? list[0].Id : 0;
+                    list = LoadQuery(list);
+                    this.ItemsSource = list;
+                    if (id > 0)
+                    {
+                        treeView.Selected(id);
+                        textBox.Focus();
+                    }
+                }
+            }
+            IsDropDownOpen = true;
+        }
+        private List<TreeViewModel> LoadQuery(List<TreeViewModel> list)
+        {
+            var result = false;
+            var resultList = new List<TreeViewModel>();
+            foreach (var item in list)
+            {
+                if (item.Parent != null)
+                {
+                    result = true;
+                    var parent = resultList.Find(c => c.Id == item.Parent.Id);
+                    if (parent == null)
+                    {
+                        parent = item.Parent.Clone();
+                        parent.Parent = item.Parent.Parent.Clone();
+                        resultList.Add(parent);
+                    }
+                    parent.Add(item);
+                }
+            }
+            if (result) return LoadQuery(resultList);
+            return list;
+        }
+        /// <summary>
+        /// 按键快捷响应
+        /// </summary>
+        protected override void OnPreviewKeyDown(KeyEventArgs e)
+        {
+            if (!IQuery)
+            {
+                e.Handled = true;
+                base.OnPreviewKeyDown(e);
+                return;
+            }
+            switch (e.Key)
+            {
+                case Key.Right:
+                    if (textBox.IsFocused && textBox.SelectionStart == textBox.Text.Length)
+                    {
+                        IsDropDownOpen = true;
+                    }
+                    break;
+                case Key.Up:
+                    if (IsDropDownOpen)
+                    {
+                        if (treeView.SelectedItem is IId item)
+                        {
+                            if (this.Items.Count > 0 && this.Items[0] is IId item2 && item.Id == item2.Id)
+                            {
+                                textBox.Focus();
+                                return;
+                            }
+                        }
+                        if (textBox.IsFocused && Selected())
+                        {
+                            e.Handled = true;
+                            return;
+                        }
+                    }
+                    break;
+                case Key.Down:
+                    if (textBox.IsFocused)
+                    {
+                        if (!IsDropDownOpen)
+                        {
+                            IsDropDownOpen = true;
+                            e.Handled = true;
+                            return;
+                        }
+                        if (Selected())
+                        {
+                            e.Handled = true;
+                            return;
+                        }
+                    }
+                    break;
+                case Key.Enter:
+                    if (this.Items.Count > 0)
+                    {
+                        if (treeView.SelectedItem is IId item)
+                        {
+                            TreeView_MouseDoubleClick(treeView, null);
+                        }
+                        else if (this.Items[0] is IId item2)
+                        {
+                            treeView.Selected(item2.Id);
+                        }
+                        TreeView_MouseDoubleClick(treeView, null);
+                    }
+                    break;
+            }
+            base.OnPreviewKeyDown(e);
+        }
+        private bool Selected()
+        {
+            if (treeView.SelectedItem is IId item)
+            {
+                return treeView.Selected(item.Id);
+            }
+            if (this.Items.Count > 0 && this.Items[0] is IId item2)
+            {
+                return treeView.Selected(item2.Id);
+            }
+            return false;
         }
 
         #endregion

@@ -59,7 +59,7 @@
                             <Border x:Name="DropDownBorder" BorderBrush="#CCC" BorderThickness="1" Padding="0">
                                 <local:DataGridEXT x:Name="PART_DataGrid" Background="White" 
                                                    Height="180" BorderThickness="0"
-                                                   MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource valueAddConverter}}" 
+                                                   Width="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource valueAddConverter}}" 
                                                    MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}"
                                                    ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource TemplatedParent}}"/>
                             </Border>

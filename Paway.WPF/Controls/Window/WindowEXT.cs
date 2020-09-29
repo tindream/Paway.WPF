@@ -129,7 +129,7 @@ namespace Paway.WPF
         }
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
-            if (msg == WindowNotifications.WM_NCACTIVATE) IsNonClientActive = wParam == (IntPtr)1;
+            if (msg == (int)WindowsMessage.WM_NCACTIVATE) IsNonClientActive = wParam == (IntPtr)1;
             return IntPtr.Zero;
         }
         /// <summary>

@@ -30,7 +30,7 @@ namespace Paway.WPF
         /// <summary>
         /// 同步调用
         /// </summary>
-        public static void Invoke(DependencyObject obj, Action action, bool iThrow = false)
+        public static void Invoke(DependencyObject obj, Action action, Action<Exception> error = null)
         {
             obj.Dispatcher.Invoke(() =>
             {
@@ -40,15 +40,15 @@ namespace Paway.WPF
                 }
                 catch (Exception ex)
                 {
-                    if (iThrow) throw;
-                    else Method.Error(obj, ex.Message());
+                    if (error == null) throw;
+                    else error.Invoke(ex);
                 }
             });
         }
         /// <summary>
         /// 带参数同步调用
         /// </summary>
-        public static void Invoke<T>(DependencyObject obj, Action<T> action, T t, bool iThrow = false)
+        public static void Invoke<T>(DependencyObject obj, Action<T> action, T t, Action<Exception> error = null)
         {
             obj.Dispatcher.Invoke(() =>
             {
@@ -58,15 +58,15 @@ namespace Paway.WPF
                 }
                 catch (Exception ex)
                 {
-                    if (iThrow) throw;
-                    else Method.Error(obj, ex.Message());
+                    if (error == null) throw;
+                    else error.Invoke(ex);
                 }
             });
         }
         /// <summary>
         /// 异步调用
         /// </summary>
-        public static void BeginInvoke(DependencyObject obj, Action action, bool iThrow = false)
+        public static void BeginInvoke(DependencyObject obj, Action action, Action<Exception> error = null)
         {
             obj.Dispatcher.BeginInvoke(new Action(() =>
             {
@@ -76,15 +76,15 @@ namespace Paway.WPF
                 }
                 catch (Exception ex)
                 {
-                    if (iThrow) throw;
-                    else Method.Error(obj, ex.Message());
+                    if (error == null) throw;
+                    else error.Invoke(ex);
                 }
             }));
         }
         /// <summary>
         /// 带参数异步调用
         /// </summary>
-        public static void BeginInvoke<T>(DependencyObject obj, Action<T> action, T t, bool iThrow = false)
+        public static void BeginInvoke<T>(DependencyObject obj, Action<T> action, T t, Action<Exception> error = null)
         {
             obj.Dispatcher.BeginInvoke(new Action(() =>
             {
@@ -94,8 +94,8 @@ namespace Paway.WPF
                 }
                 catch (Exception ex)
                 {
-                    if (iThrow) throw;
-                    else Method.Error(obj, ex.Message());
+                    if (error == null) throw;
+                    else error.Invoke(ex);
                 }
             }));
         }
@@ -328,11 +328,11 @@ namespace Paway.WPF
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
-        public static void Progress(DependencyObject parent, Action action, Action completed = null, bool iErrorBox = true)
+        public static void Progress(DependencyObject parent, Action action, Action completed = null, Action<Exception> error = null)
         {
-            parent.Dispatcher.BeginInvoke(new Action(() =>
+            BeginInvoke(parent, () =>
             {
-                new Action(() =>
+                Task.Run(() =>
                 {
                     try
                     {
@@ -340,65 +340,33 @@ namespace Paway.WPF
                     }
                     catch (Exception ex)
                     {
-                        ex.Log();
-                        if (!iErrorBox) return;
-                        parent.Dispatcher.BeginInvoke(new Action(() =>
+                        if (error != null) error.Invoke(ex);
+                        else
                         {
+                            ex.Log();
                             Method.Error(parent, ex.Message());
-                        }));
+                        }
                     }
-                }).BeginInvoke(new AsyncCallback(ar =>
-                {
-                    ProgressCompleted(parent, completed, iErrorBox);
-                }), null);
-                Progress(parent, true);
-            }));
-        }
-        /// <summary>
-        /// 同步模式显示Window忙提示框，执行完成后关闭
-        /// </summary>
-        public static void ProgressSync(DependencyObject parent, Action action, Action completed = null, bool iErrorBox = true)
-        {
-            parent.Dispatcher.Invoke(() =>
-            {
-                new Action(() =>
-                {
-                    try
-                    {
-                        action.Invoke();
-                    }
-                    catch (Exception ex)
-                    {
-                        ex.Log();
-                        if (!iErrorBox) return;
-                        parent.Dispatcher.Invoke(() =>
-                        {
-                            Method.Error(parent, ex.Message());
-                        });
-                    }
-                }).BeginInvoke(new AsyncCallback(ar =>
-                {
-                    ProgressCompleted(parent, completed, iErrorBox);
-                }), null);
+                    ProgressCompleted(parent, completed, error);
+                });
                 Progress(parent, true);
             });
         }
-        private static void ProgressCompleted(DependencyObject parent, Action completed = null, bool iErrorBox = true)
+        private static void ProgressCompleted(DependencyObject parent, Action action, Action<Exception> error)
         {
-            parent.Dispatcher.BeginInvoke(new Action(() =>
+            BeginInvoke(parent, () =>
             {
-                try
-                {
-                    Method.Hide(parent);
-                    completed?.Invoke();
-                }
-                catch (Exception ex)
+                Method.Hide(parent);
+                action?.Invoke();
+            }, ex =>
+            {
+                if (error != null) error.Invoke(ex);
+                else
                 {
                     ex.Log();
-                    if (!iErrorBox) return;
                     Method.Error(parent, ex.Message());
                 }
-            }));
+            });
         }
         /// <summary>
         /// 同步显示Window进度条
@@ -509,7 +477,7 @@ namespace Paway.WPF
         /// </summary>
         public static void Toast(DependencyObject parent, object msg, int time, bool iError = false)
         {
-            parent.Dispatcher.Invoke(() =>
+            Invoke(parent, () =>
             {
                 var toast = new WindowToast();
                 if (Parent(parent, out Window owner))
@@ -555,22 +523,22 @@ namespace Paway.WPF
         {
             if (Parent(parent, out Window window))
             {
-                window.Dispatcher.BeginInvoke(new Action(() =>
+                BeginInvoke(parent, obj =>
                 {
                     switch (level)
                     {
                         case LeveType.Debug:
                         default:
-                            MessageBox.Show(window, msg, window.Title, MessageBoxButton.OK, MessageBoxImage.Information);
+                            MessageBox.Show(window, obj, window.Title, MessageBoxButton.OK, MessageBoxImage.Information);
                             break;
                         case LeveType.Warn:
-                            MessageBox.Show(window, msg, window.Title, MessageBoxButton.OK, MessageBoxImage.Warning);
+                            MessageBox.Show(window, obj, window.Title, MessageBoxButton.OK, MessageBoxImage.Warning);
                             break;
                         case LeveType.Error:
-                            MessageBox.Show(window, msg, window.Title, MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show(window, obj, window.Title, MessageBoxButton.OK, MessageBoxImage.Error);
                             break;
                     }
-                }));
+                }, msg);
             }
         }
         /// <summary>

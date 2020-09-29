@@ -24,7 +24,7 @@ namespace Paway.WPF
             {
                 if (_paddedBorderThickness == null)
                 {
-                    var paddedBorder = NativeMethods.GetSystemMetrics(SM.CXPADDEDBORDER);
+                    var paddedBorder = NativeMethods.GetSystemMetrics(SystemMessage.CXPADDEDBORDER);
                     var dpi = GetDpi();
                     Size frameSize = new Size(paddedBorder, paddedBorder);
                     Size frameSizeInDips = DpiHelper.DeviceSizeToLogical(frameSize, dpi / 96.0, dpi / 96.0);

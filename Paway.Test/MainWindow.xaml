@@ -49,7 +49,7 @@
                 <utils:ComboBoxEXT  ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
                 <utils:ComboBoxMulti ItemsSource="{Binding MultiList}"/>
                 <utils:ComboBoxDate SelectedValue="{Binding DatePickerTime}"/>
-                <utils:ComboBoxTree ItemsSource="{Binding TreeList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding TreeId}"/>
+                <utils:ComboBoxTree ItemsSource="{Binding TreeList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding TreeId}" IQuery="True"/>
                 <utils:ComboBoxView ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
                 <utils:ComboBoxQuery ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}">
                     <i:Interaction.Triggers>

@@ -46,11 +46,11 @@ namespace Paway.WPF
         /// <summary>
         /// 父级
         /// </summary>
-        ITreeView Parent { get; set; }
+        TreeViewModel Parent { get; set; }
         /// <summary>
         /// 子级列表
         /// </summary>
-        ObservableCollection<ITreeView> Children { get; set; }
+        ObservableCollection<TreeViewModel> Children { get; set; }
     }
     /// <summary>
     /// ITreeView数据模型
@@ -71,6 +71,7 @@ namespace Paway.WPF
         /// <summary>
         /// 组标记
         /// </summary>
+        [NoShow]
         public virtual bool IsGrouping
         {
             get { return isGrouping; }
@@ -80,6 +81,7 @@ namespace Paway.WPF
         /// <summary>
         /// 组组名
         /// </summary>
+        [NoShow]
         public virtual string GroupName
         {
             get { return groupName; }
@@ -89,6 +91,7 @@ namespace Paway.WPF
         /// <summary>
         /// 头像
         /// </summary>
+        [NoShow]
         public virtual string ShortName
         {
             get { return shortName; }
@@ -126,6 +129,7 @@ namespace Paway.WPF
         /// <summary>
         /// 选中标记
         /// </summary>
+        [NoShow]
         public virtual bool? IsChecked
         {
             get { return isChecked; }
@@ -141,11 +145,11 @@ namespace Paway.WPF
         /// <summary>
         /// 父级
         /// </summary>
-        public ITreeView Parent { get; set; }
+        public TreeViewModel Parent { get; set; }
         /// <summary>
         /// 子级列表
         /// </summary>
-        public virtual ObservableCollection<ITreeView> Children { get; set; } = new ObservableCollection<ITreeView>();
+        public virtual ObservableCollection<TreeViewModel> Children { get; set; } = new ObservableCollection<TreeViewModel>();
 
         /// <summary>
         /// </summary>

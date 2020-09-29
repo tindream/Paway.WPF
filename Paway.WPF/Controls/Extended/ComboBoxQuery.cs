@@ -27,16 +27,12 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(ColumnHeader), typeof(bool), typeof(ComboBoxQuery), new PropertyMetadata(false));
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty IsOpenProperty =
-            DependencyProperty.RegisterAttached(nameof(IsOpen), typeof(bool), typeof(ComboBoxQuery), new PropertyMetadata(false));
-        /// <summary>
-        /// </summary>
         public static readonly new DependencyProperty SelectedValueProperty =
-            DependencyProperty.RegisterAttached(nameof(ComboBoxTree.SelectedValue), typeof(object), typeof(ComboBoxQuery), new PropertyMetadata(OnSelectedValueChanged));
+            DependencyProperty.RegisterAttached(nameof(ComboBoxQuery.SelectedValue), typeof(object), typeof(ComboBoxQuery), new PropertyMetadata(OnSelectedValueChanged));
         /// <summary>
         /// </summary>
         public static readonly new DependencyProperty SelectedItemProperty =
-            DependencyProperty.RegisterAttached(nameof(ComboBoxTree.SelectedItem), typeof(object), typeof(ComboBoxQuery));
+            DependencyProperty.RegisterAttached(nameof(ComboBoxQuery.SelectedItem), typeof(object), typeof(ComboBoxQuery));
 
         /// <summary>
         /// 下拉列表是否显示列
@@ -47,16 +43,6 @@ namespace Paway.WPF
         {
             get { return (bool)GetValue(ColumnHeaderProperty); }
             set { SetValue(ColumnHeaderProperty, value); }
-        }
-        /// <summary>
-        /// 下拉列表是否显示列
-        /// </summary>
-        [Category("扩展")]
-        [Description("下拉列表是否显示列标题")]
-        public bool IsOpen
-        {
-            get { return (bool)GetValue(IsOpenProperty); }
-            set { SetValue(IsOpenProperty, value); }
         }
         /// <summary>
         /// 重写
@@ -95,6 +81,7 @@ namespace Paway.WPF
             this.SelectedItem = item;
             this.last = item.GetValue(this.DisplayMemberPath).ToStrs();
             this.Text = this.last;
+            if (this.List != null) this.ItemsSource = this.List;
         }
 
         #endregion
@@ -125,6 +112,7 @@ namespace Paway.WPF
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+            IsEditable = false;
             this.List = this.ItemsSource;
             if (Template.FindName("PART_Popup", this) is Popup popup)
             {
@@ -185,30 +173,34 @@ namespace Paway.WPF
             if (last == text) return;
             last = text;
             Trace.WriteLine(text);
-            if (FilterEvent != null)
+            var index = textBox.SelectionStart;
+            if (text.IsEmpty())
             {
-                if (text.IsEmpty())
+                this.ItemsSource = this.List;
+            }
+            else
+            {
+                if (FilterEvent != null)
                 {
-                    this.ItemsSource = this.List;
-                }
-                else
-                {
-                    var args = new CustomFilterEventArgs(text, e.RoutedEvent, this);
+                    var args = new CustomFilterEventArgs(text, e.RoutedEvent, gridView);
                     FilterEvent.Invoke(this, args);
                     if (args.List != null)
                     {
-                        if (args.List.Count == 0)
-                        {
-                            this.ItemsSource = this.List;
-                        }
-                        else
-                        {
-                            this.ItemsSource = args.List;
-                        }
+                        this.ItemsSource = args.List;
                     }
                 }
-                IsDropDownOpen = true;
+                else if (this.List is IList<ListViewModel> list)
+                {
+                    var p = gridView.Columns.Predicate<ListViewModel>(text);
+                    this.ItemsSource = list.AsParallel().Where(p).ToList();
+                }
+                if (textBox.Text != text)
+                {//第一次搜索绑定出现输入框被清空
+                    textBox.Text = text;
+                    textBox.SelectionStart = index;
+                }
             }
+            IsDropDownOpen = true;
         }
         /// <summary>
         /// 按键快捷响应
@@ -268,14 +260,13 @@ namespace Paway.WPF
         }
         private bool Selected()
         {
-            if (this.Items.Count == 0) return false;
-            var index = gridView.SelectedIndex;
-            if (index < 0) index = 0;
-            if (index >= this.Items.Count) index = this.Items.Count - 1;
-            if (this.Items[index] is IId item)
+            if (gridView.SelectedItem is IId item)
             {
-                gridView.Selected(item.Id);
-                return true;
+                return gridView.Selected(item.Id);
+            }
+            if (this.Items.Count > 0 && this.Items[0] is IId item2)
+            {
+                return gridView.Selected(item2.Id);
             }
             return false;
         }

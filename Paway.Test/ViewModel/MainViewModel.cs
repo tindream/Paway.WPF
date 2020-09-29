@@ -32,7 +32,7 @@ namespace Paway.Test.ViewModel
         private readonly List<ListViewModel> list;
         public List<ListViewModel> GridList { get { return list; } }
         public PagedCollectionView PagedList { get; private set; }
-        public ObservableCollection<ITreeView> TreeList { get; private set; } = new ObservableCollection<ITreeView>();
+        public ObservableCollection<TreeViewModel> TreeList { get; private set; } = new ObservableCollection<TreeViewModel>();
 
         private ListViewModel selectedItem;
         public ListViewModel SelectedItem
@@ -159,7 +159,11 @@ namespace Paway.Test.ViewModel
             {
                 return cbxFilterCmd ?? (cbxFilterCmd = new RelayCommand<CustomFilterEventArgs>(e =>
                 {
-                    e.List = this.list.FindAll(c => c.Text.IndexOf(e.Filter) != -1);
+                    if (e.Source is DataGridEXT dataGrid)
+                    {
+                        var p = dataGrid.Columns.Predicate<ListViewModel>(e.Filter);
+                        e.List = this.list.AsParallel().Where(p).ToList();
+                    }
                 }));
             }
         }
@@ -235,6 +239,14 @@ namespace Paway.Test.ViewModel
             treeInfo2.Add("刘棒5", "我要走向天空！", "3人");
             treeInfo2.Add("刘棒6", "我要走向天空！", "3人");
             treeInfo2.Add("刘棒7", "我要走向天空！", "3人");
+
+            treeInfo2 = new TreeViewModel("未分组联系人", true);
+            treeInfo.Add(treeInfo2);
+            treeInfo2.Add("刘棒A", "我要走向天空！", "3人");
+            treeInfo2.Add("刘棒B", "我要走向天空！", "3人");
+            treeInfo2.Add("刘棒C", "我要走向天空！", "3人");
+            treeInfo2.Add("刘棒5", "我要走向天空！", "3人");
+
             this.TreeId = treeInfo2.Children[0].Id;
         }
     }

@@ -22,12 +22,12 @@ namespace Paway.WPF
         /// 选中项列表
         /// </summary>
         [Browsable(false)]
-        public List<ITreeView> ChekedItems
+        public IList<TreeViewModel> ChekedItems
         {
             get
             {
-                var list = new List<ITreeView>();
-                if (this.ItemsSource is List<ITreeView> modelList)
+                var list = new List<TreeViewModel>();
+                if (this.ItemsSource is IList<TreeViewModel> modelList)
                 {
                     foreach (var item in modelList)
                     {
@@ -165,7 +165,12 @@ namespace Paway.WPF
                 if (item.Id == id)
                 {
                     treeItem.IsExpanded = true;
-                    if (iSelected) treeItem.IsSelected = true;
+                    if (iSelected)
+                    {
+                        treeItem.IsSelected = true;
+                        treeItem.BringIntoView();//滚动条滚动到选中的子元素
+                        treeItem.Focus();
+                    }
                     return true;
                 }
                 else if (item.Children.Count > 0)

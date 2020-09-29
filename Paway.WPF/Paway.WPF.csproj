@@ -127,6 +127,7 @@
     <Compile Include="Controls\Window\FunctionBar\FunctionBarMonitor.cs" />
     <Compile Include="Method\ConverHelper.cs" />
     <Compile Include="Method\DpiHelper.cs" />
+    <Compile Include="Method\Enums.cs" />
     <Compile Include="Method\NativeMethods.cs" />
     <Compile Include="Controls\Window\WindowEXT.cs" />
     <Compile Include="Controls\Window\WindowParameters.cs" />
@@ -143,7 +144,6 @@
     <Compile Include="Method\Config.cs" />
     <Compile Include="Method\Method.cs" />
     <Compile Include="Controls\Converter\Interface\IListView.cs" />
-    <Compile Include="Method\WindowNotifications.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\AssemblyVersion.cs">
       <Link>Properties\AssemblyVersion.cs</Link>

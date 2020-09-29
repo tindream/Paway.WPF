@@ -1,9 +1,13 @@
 ﻿using Paway.Helper;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 
 namespace Paway.WPF
@@ -13,6 +17,28 @@ namespace Paway.WPF
     /// </summary>
     public static class ConverHelper
     {
+        #region Labbda表达式
+        /// <summary>
+        /// 自动生成泛型谓词条件
+        /// </summary>
+        public static Func<T, bool> Predicate<T>(this ObservableCollection<DataGridColumn> columns, string value, Func<T, bool> action = null)
+        {
+            var list = new List<string>();
+            foreach (var column in columns)
+            {
+                if (column.Visibility != Visibility.Visible) continue;
+                var name = column.Header.ToStrs();
+                if (column.ClipboardContentBinding is Binding binding)
+                {
+                    name = binding.Path.Path;
+                }
+                list.Add(name);
+            }
+            return list.Predicate<T>(value, action);
+        }
+
+        #endregion
+
         #region Color
         /// <summary>
         /// 颜色转换(Add)
