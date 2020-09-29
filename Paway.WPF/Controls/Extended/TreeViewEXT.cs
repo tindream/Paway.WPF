@@ -22,17 +22,14 @@ namespace Paway.WPF
         /// 选中项列表
         /// </summary>
         [Browsable(false)]
-        public IList<TreeViewModel> ChekedItems
+        public IList<ITreeView> ChekedItems
         {
             get
             {
-                var list = new List<TreeViewModel>();
-                if (this.ItemsSource is IList<TreeViewModel> modelList)
+                var list = new List<ITreeView>();
+                foreach (ITreeView item in this.ItemsSource)
                 {
-                    foreach (var item in modelList)
-                    {
-                        if (item.IsChecked == true) list.Add(item);
-                    }
+                    if (item.IsChecked == true) list.Add(item);
                 }
                 return list;
             }

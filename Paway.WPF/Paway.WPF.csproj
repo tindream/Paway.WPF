@@ -69,7 +69,7 @@
     <Compile Include="Controls\Converter\IEquatable\ThemeBackground.cs" />
     <Compile Include="Controls\Converter\IEquatable\FontSizeEXT.cs" />
     <Compile Include="Controls\Converter\IValueConverter\IsNotNullConverter.cs" />
-    <Compile Include="Controls\Converter\Enum\RegexType.cs" />
+    <Compile Include="Controls\Enum\RegexType.cs" />
     <Compile Include="Controls\Converter\IValueConverter\EnumConverter.cs" />
     <Compile Include="Controls\Converter\ValidationRule\RegexValidationRule.cs" />
     <Compile Include="Controls\Converter\IEquatable\ColorLinear.cs" />
@@ -89,7 +89,7 @@
     <Compile Include="Controls\DataPager\IPagedCollectionView.cs" />
     <Compile Include="Controls\DataPager\PageChangingEventArgs.cs" />
     <Compile Include="Controls\DataPager\PagedCollectionView.cs" />
-    <Compile Include="Controls\Converter\Enum\PagerDisplayMode.cs" />
+    <Compile Include="Controls\Enum\PagerDisplayMode.cs" />
     <Compile Include="Controls\DataPager\TypeHelper.cs" />
     <Compile Include="Controls\DataPager\WeakEventListener.cs" />
     <Compile Include="Controls\Extended\ComboBoxView.cs" />
@@ -104,13 +104,13 @@
     <Compile Include="Controls\Extended\ListBoxEXT.cs" />
     <Compile Include="Controls\Extended\ComboBoxQuery.cs" />
     <Compile Include="Controls\Extended\TreeViewEXT.cs" />
-    <Compile Include="Controls\Converter\Interface\ModelBase.cs" />
-    <Compile Include="Controls\Converter\Interface\IElementStatu.cs" />
+    <Compile Include="Controls\Interface\ModelBase.cs" />
+    <Compile Include="Controls\Interface\IElementStatu.cs" />
     <Compile Include="Controls\Extended\ListBoxItemEXT.cs" />
     <Compile Include="Controls\Extended\RadioButtonEXT.cs" />
     <Compile Include="Controls\Extended\CheckBoxEXT.cs" />
-    <Compile Include="Controls\Converter\Interface\IComboBoxMulti.cs" />
-    <Compile Include="Controls\Converter\Interface\ITreeView.cs" />
+    <Compile Include="Controls\Interface\IComboBoxMulti.cs" />
+    <Compile Include="Controls\Interface\ITreeView.cs" />
     <Compile Include="Controls\Progress\Progress.cs" />
     <Compile Include="Controls\Progress\ProgressTemplate.cs" />
     <Compile Include="Controls\Progress\ProgressMonitor.cs" />
@@ -121,7 +121,7 @@
     <Compile Include="Controls\RoutedEventArgs\DataGridEXTEventArgs.cs" />
     <Compile Include="Controls\RoutedEventArgs\CustomFilterEventArgs.cs" />
     <Compile Include="Controls\TransitionControl\TransitionControl.cs" />
-    <Compile Include="Controls\Converter\Enum\TransitionType.cs" />
+    <Compile Include="Controls\Enum\TransitionType.cs" />
     <Compile Include="Controls\Window\FunctionBar\FunctionBar.cs" />
     <Compile Include="Controls\Window\FunctionBar\WindowFunctionBar.cs" />
     <Compile Include="Controls\Window\FunctionBar\FunctionBarMonitor.cs" />
@@ -143,7 +143,7 @@
     <Compile Include="Controls\Extended\ListViewEXT.cs" />
     <Compile Include="Method\Config.cs" />
     <Compile Include="Method\Method.cs" />
-    <Compile Include="Controls\Converter\Interface\IListView.cs" />
+    <Compile Include="Controls\Interface\IListView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\AssemblyVersion.cs">
       <Link>Properties\AssemblyVersion.cs</Link>

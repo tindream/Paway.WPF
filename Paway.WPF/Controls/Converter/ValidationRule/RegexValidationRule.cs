@@ -54,11 +54,11 @@ namespace Paway.WPF
             }
             else if (this.MinLength != 0 && text.Length < this.MinLength)
             {
-                validResult = new ValidationResult(false, $"最小输入限制: {this.MinLength} 位");
+                validResult = new ValidationResult(false, $"最小输入限制: {this.MinLength}位");
             }
             else if (this.MaxLength != 0 && text.Length > this.MaxLength)
             {
-                validResult = new ValidationResult(false, $"最大输入限制: {this.MaxLength} 位");
+                validResult = new ValidationResult(false, $"最大输入限制: {this.MaxLength}位");
             }
             return validResult;
         }

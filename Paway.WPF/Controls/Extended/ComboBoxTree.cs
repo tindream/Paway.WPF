@@ -54,8 +54,8 @@ namespace Paway.WPF
         {
             if (d is ComboBoxTree tree)
             {
-                var list = tree.List;
-                if (list == null) list = tree.ItemsSource as IList<TreeViewModel>;
+                IEnumerable list = tree.List;
+                if (list == null) list = tree.ItemsSource;
                 if (list != null)
                 {
                     var id = tree.SelectedValue.ToInt();
@@ -122,8 +122,13 @@ namespace Paway.WPF
         {
             base.OnApplyTemplate();
             IsEditable = false;
-            this.List = this.ItemsSource as IList<TreeViewModel>;
-            LoadChilds(this.List);
+            var type = this.ItemsSource.GenericType();
+            if (typeof(ITreeView).IsAssignableFrom(type))
+            {
+                this.List = new List<ITreeView>();
+                foreach (ITreeView item in this.ItemsSource) this.List.Add(item);
+                LoadChilds(this.List);
+            }
             if (Template.FindName("PART_Popup", this) is Popup popup)
             {
                 popup.Opened += Popup_Opened;
@@ -145,7 +150,7 @@ namespace Paway.WPF
             }
             this.KeyUp += ComboBoxTree_KeyUp;
         }
-        private void LoadChilds(IList<TreeViewModel> list)
+        private void LoadChilds(IEnumerable<ITreeView> list)
         {
             foreach (var item in list)
             {
@@ -195,8 +200,8 @@ namespace Paway.WPF
         #endregion
 
         #region 搜索
-        private IList<TreeViewModel> List;
-        private readonly IList<TreeViewModel> Childs = new List<TreeViewModel>();
+        private IList<ITreeView> List;
+        private readonly IList<ITreeView> Childs = new List<ITreeView>();
         private TextBoxEXT textBox;
         private string last;
         private void ComboBoxTree_KeyUp(object sender, KeyEventArgs e)
@@ -220,9 +225,9 @@ namespace Paway.WPF
                         this.ItemsSource = args.List;
                     }
                 }
-                else
+                else if (this.List != null)
                 {
-                    var p = this.List.Predicate<TreeViewModel>(text, c => c.IsGrouping);
+                    var p = this.List.Predicate<ITreeView>(text, c => c.IsGrouping);
                     var list = this.Childs.AsParallel().Where(p).ToList();
                     var id = list.Count > 0 ? list[0].Id : 0;
                     list = LoadQuery(list);
@@ -236,10 +241,10 @@ namespace Paway.WPF
             }
             IsDropDownOpen = true;
         }
-        private List<TreeViewModel> LoadQuery(List<TreeViewModel> list)
+        private List<ITreeView> LoadQuery(List<ITreeView> list)
         {
             var result = false;
-            var resultList = new List<TreeViewModel>();
+            var resultList = new List<ITreeView>();
             foreach (var item in list)
             {
                 if (item.Parent != null)

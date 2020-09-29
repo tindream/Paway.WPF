@@ -64,7 +64,7 @@ namespace Paway.WPF
         {
             if (d is ComboBoxQuery view)
             {
-                var list = view.List;
+                IEnumerable list = view.List;
                 if (list == null) list = view.ItemsSource;
                 if (list != null)
                 {
@@ -113,7 +113,12 @@ namespace Paway.WPF
         {
             base.OnApplyTemplate();
             IsEditable = false;
-            this.List = this.ItemsSource;
+            var type = this.ItemsSource.GenericType();
+            if (typeof(IListView).IsAssignableFrom(type))
+            {
+                this.List = new List<IListView>();
+                foreach (IListView item in this.ItemsSource) this.List.Add(item);
+            }
             if (Template.FindName("PART_Popup", this) is Popup popup)
             {
                 popup.Opened += Popup_Opened;
@@ -164,7 +169,7 @@ namespace Paway.WPF
         #endregion
 
         #region 搜索
-        private IEnumerable List;
+        private List<IListView> List;
         private TextBoxEXT textBox;
         private string last;
         private void ComboBoxQuery_KeyUp(object sender, KeyEventArgs e)
@@ -189,10 +194,10 @@ namespace Paway.WPF
                         this.ItemsSource = args.List;
                     }
                 }
-                else if (this.List is IList<ListViewModel> list)
+                else if (this.List != null)
                 {
-                    var p = gridView.Columns.Predicate<ListViewModel>(text);
-                    this.ItemsSource = list.AsParallel().Where(p).ToList();
+                    var p = gridView.Columns.Predicate<IListView>(text);
+                    this.ItemsSource = this.List.AsParallel().Where(p).ToList();
                 }
                 if (textBox.Text != text)
                 {//第一次搜索绑定出现输入框被清空

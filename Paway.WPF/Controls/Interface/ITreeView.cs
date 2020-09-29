@@ -16,14 +16,17 @@ namespace Paway.WPF
         /// <summary>
         /// 组标记
         /// </summary>
+        [NoShow]
         bool IsGrouping { get; set; }
         /// <summary>
         /// 组组名
         /// </summary>
+        [NoShow]
         string GroupName { get; set; }
         /// <summary>
         /// 头像
         /// </summary>
+        [NoShow]
         string ShortName { get; set; }
         /// <summary>
         /// 文本
@@ -41,16 +44,22 @@ namespace Paway.WPF
         /// <summary>
         /// 选中标记
         /// </summary>
+        [NoShow]
         bool? IsChecked { get; set; }
 
         /// <summary>
         /// 父级
         /// </summary>
-        TreeViewModel Parent { get; set; }
+        ITreeView Parent { get; set; }
         /// <summary>
         /// 子级列表
         /// </summary>
-        ObservableCollection<TreeViewModel> Children { get; set; }
+        ObservableCollection<ITreeView> Children { get; set; }
+
+        /// <summary>
+        /// 添加子级
+        /// </summary>
+        void Add(ITreeView model);
     }
     /// <summary>
     /// ITreeView数据模型
@@ -145,11 +154,11 @@ namespace Paway.WPF
         /// <summary>
         /// 父级
         /// </summary>
-        public TreeViewModel Parent { get; set; }
+        public ITreeView Parent { get; set; }
         /// <summary>
         /// 子级列表
         /// </summary>
-        public virtual ObservableCollection<TreeViewModel> Children { get; set; } = new ObservableCollection<TreeViewModel>();
+        public virtual ObservableCollection<ITreeView> Children { get; set; } = new ObservableCollection<ITreeView>();
 
         /// <summary>
         /// </summary>
@@ -167,7 +176,7 @@ namespace Paway.WPF
         /// <summary>
         /// 添加子级
         /// </summary>
-        public void Add(TreeViewModel model)
+        public void Add(ITreeView model)
         {
             model.Parent = this;
             this.Children.Add(model);
