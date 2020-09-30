@@ -18,7 +18,6 @@ namespace Paway.WPF
         /// <summary>
         /// 按下状态
         /// </summary>
-        [NoShow]
         bool IsPressed { get; set; }
         /// <summary>
         /// 文本
@@ -35,12 +34,10 @@ namespace Paway.WPF
         /// <summary>
         /// 显示
         /// </summary>
-        [NoShow]
         Visibility Visibility { get; set; }
         /// <summary>
         /// 选择项
         /// </summary>
-        [NoShow]
         bool IsSelected { get; set; }
 
         /// <summary>
@@ -105,6 +102,7 @@ namespace Paway.WPF
         /// <summary>
         /// 显示
         /// </summary>
+        [NoShow]
         public virtual Visibility Visibility
         {
             get { return visibility; }
@@ -114,6 +112,7 @@ namespace Paway.WPF
         /// <summary>
         /// 选择项
         /// </summary>
+        [NoShow]
         public virtual bool IsSelected
         {
             get { return isSelected; }

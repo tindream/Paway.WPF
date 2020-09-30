@@ -52,6 +52,7 @@ namespace Paway.WPF
         /// <summary>
         /// 选中标记
         /// </summary>
+        [NoShow]
         public virtual bool IsChecked
         {
             get { return isChecked; }

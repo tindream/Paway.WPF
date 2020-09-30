@@ -116,13 +116,14 @@ namespace Paway.WPF
         #region 关联选择
         private bool isInit;
         private TreeViewEXT treeView;
+        private Type type;
         /// <summary>
         /// </summary>
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
             IsEditable = false;
-            var type = this.ItemsSource.GenericType();
+            this.type = this.ItemsSource.GenericType();
             if (typeof(ITreeView).IsAssignableFrom(type))
             {
                 this.List = new List<ITreeView>();
@@ -227,15 +228,18 @@ namespace Paway.WPF
                 }
                 else if (this.List != null)
                 {
-                    var p = this.List.Predicate<ITreeView>(text, c => c.IsGrouping);
+                    var p = this.type.Predicate<ITreeView>(text, c => c.IsGrouping);
                     var list = this.Childs.AsParallel().Where(p).ToList();
                     var id = list.Count > 0 ? list[0].Id : 0;
                     list = LoadQuery(list);
                     this.ItemsSource = list;
                     if (id > 0)
                     {
-                        treeView.Selected(id);
-                        textBox.Focus();
+                        Method.BeginInvoke(this, () =>
+                        {
+                            treeView.Selected(id);
+                            textBox.Focus();
+                        });
                     }
                 }
             }

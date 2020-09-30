@@ -16,17 +16,14 @@ namespace Paway.WPF
         /// <summary>
         /// 组标记
         /// </summary>
-        [NoShow]
         bool IsGrouping { get; set; }
         /// <summary>
         /// 组组名
         /// </summary>
-        [NoShow]
         string GroupName { get; set; }
         /// <summary>
         /// 头像
         /// </summary>
-        [NoShow]
         string ShortName { get; set; }
         /// <summary>
         /// 文本
@@ -44,7 +41,6 @@ namespace Paway.WPF
         /// <summary>
         /// 选中标记
         /// </summary>
-        [NoShow]
         bool? IsChecked { get; set; }
 
         /// <summary>
@@ -60,6 +56,22 @@ namespace Paway.WPF
         /// 添加子级
         /// </summary>
         void Add(ITreeView model);
+        /// <summary>
+        /// 添加子级
+        /// </summary>
+        void Add(string text, string subtitle = null, string desc = null);
+        /// <summary>
+        /// 更新节点选中
+        /// </summary>
+        void Checked(bool? value);
+        /// <summary>
+        /// 更新子级节点选中
+        /// </summary>
+        void CheckedChild(bool? value);
+        /// <summary>
+        /// 更新父级节点选中
+        /// </summary>
+        void CheckedParent();
     }
     /// <summary>
     /// ITreeView数据模型
@@ -146,7 +158,8 @@ namespace Paway.WPF
             {
                 if (isChecked != value)
                 {
-                    Checked(value);
+                    CheckedChild(value);
+                    CheckedParent();
                 }
             }
         }
@@ -200,47 +213,37 @@ namespace Paway.WPF
         }
 
         #region 关联选中项
-        private void Checked(bool? value)
-        {
-            UpdateChild(value);
-            UpdateParent();
-        }
         /// <summary>
-        /// 更新值
+        /// 更新节点选中
         /// </summary>
-        /// <param name="value"></param>
-        private void UpdateValue(bool? value)
+        public virtual void Checked(bool? value)
         {
             this.isChecked = value;
             OnPropertyChanged(nameof(IsChecked));
         }
         /// <summary>
-        /// 更新子级
+        /// 更新子级节点选中
         /// </summary>
-        /// <param name="value"></param>
-        private void UpdateChild(bool? value)
+        public virtual void CheckedChild(bool? value)
         {
-            UpdateValue(value);
+            Checked(value);
             foreach (var item in Children)
             {
-                if (item is TreeViewModel model) model.UpdateChild(value);
+                item.CheckedChild(value);
             }
         }
         /// <summary>
-        /// 更新父级
+        /// 更新父级节点选中
         /// </summary>
-        private void UpdateParent()
+        public virtual void CheckedParent()
         {
             if (this.Parent != null)
             {
                 bool? value = null;
                 if (!this.Parent.Children.Any(c => c.IsChecked != true)) value = true;
                 if (!this.Parent.Children.Any(c => c.IsChecked != false)) value = false;
-                if (this.Parent is TreeViewModel model)
-                {
-                    model.UpdateValue(value);
-                    model.UpdateParent();
-                }
+                this.Parent.Checked(value);
+                this.Parent.CheckedParent();
             }
         }
 
