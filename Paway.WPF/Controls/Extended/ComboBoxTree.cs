@@ -168,7 +168,10 @@ namespace Paway.WPF
             var treeView = sender as TreeViewEXT;
             if (treeView.SelectedItem is ITreeView item && !item.IsGrouping)
             {
-                this.SelectedValue = item.GetValue(this.SelectedValuePath);
+                var id = item.GetValue(this.SelectedValuePath);
+                if (this.SelectedValue.Equals(id))
+                    this.Text = null;
+                this.SelectedValue = id;
                 this.IsDropDownOpen = false;
                 textBox.Focus();
             }

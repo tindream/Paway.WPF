@@ -149,9 +149,10 @@ namespace Paway.WPF
         {
             if (arg2.Item is IId item)
             {
-                if (this.SelectedValue.Equals(item.Id))
+                var id = item.GetValue(this.SelectedValuePath);
+                if (this.SelectedValue.Equals(id))
                     this.Text = null;
-                this.SelectedValue = item.Id;
+                this.SelectedValue = id;
             }
             IsDropDownOpen = false;
             textBox.Focus();
