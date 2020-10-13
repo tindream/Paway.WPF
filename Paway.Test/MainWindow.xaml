@@ -218,10 +218,10 @@
                 </i:Interaction.Triggers>
                 <utils:ListBoxItemEXT Text="Hello" IsSelected="True"
                                   Image="pack://application:,,,/Paway.Test;component/Images/close.png"/>
-                <utils:ListBoxItemEXT Text="World"/>
+                <utils:ListBoxItemEXT Text="World" ItemBackground=";#77FF4633" ItemBorderBrush=";#AAFF4633" ItemTextForeground="#FF4633;;"/>
                 <Button Content="Hi" Visibility="Collapsed"/>
-                <utils:ListBoxItemEXT Text="A"/>
-                <utils:ListBoxItemEXT Text="C"/>
+                <utils:ListBoxItemEXT Text="A" ItemBackground=";#7702E8FA" ItemBorderBrush=";#AA02E8FA" ItemTextForeground="#02E8FA;;"/>
+                <utils:ListBoxItemEXT Text="C" ItemBackground=";#77024AFA" ItemBorderBrush=";#AA024AFA" ItemTextForeground="#024AFA;;"/>
             </utils:ListViewEXT>
         </utils:WindowFunctionBar>
     </utils:WindowEXT.FunctionBar>

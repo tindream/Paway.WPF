@@ -43,7 +43,7 @@ namespace Paway.WPF
             get
             {
                 var pressed = Pressed as SolidColorBrush;
-                return new SolidColorBrush(Method.AlphaColor(pressed.Color.A - 20, pressed.Color));
+                return new SolidColorBrush(Method.AlphaColor(pressed.Color.A - Alpha / 2, pressed.Color));
             }
         }
         /// <summary>

@@ -28,11 +28,30 @@ namespace Paway.WPF
 
         #endregion
 
+        #region 依赖扩展
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ItemTextForegroundProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemTextForeground), typeof(BrushEXT), typeof(ListBoxItemEXT), new PropertyMetadata(new BrushEXT(Color.FromArgb(255, 33, 33, 33), Colors.White)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBackgroundProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ListBoxItemEXT), new PropertyMetadata(new BrushEXT(Colors.Transparent)));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ItemBorderBrushProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemBorderBrush), typeof(BrushEXT), typeof(ListBoxItemEXT), new PropertyMetadata(new BrushEXT(170, 250)));
 
+        /// <summary>
+        /// 自定义项文本字体颜色
+        /// </summary>
+        [Category("扩展")]
+        [Description("自定义项文本字体颜色")]
+        public BrushEXT ItemTextForeground
+        {
+            get { return (BrushEXT)GetValue(ItemTextForegroundProperty); }
+            set { SetValue(ItemTextForegroundProperty, value); }
+        }
         /// <summary>
         /// 自定义项背景颜色
         /// </summary>
@@ -43,11 +62,17 @@ namespace Paway.WPF
             get { return (BrushEXT)GetValue(ItemBackgroundProperty); }
             set { SetValue(ItemBackgroundProperty, value); }
         }
-
         /// <summary>
-        /// 标识符
+        /// 自定义项外边框颜色
         /// </summary>
-        public int Id { get; set; }
+        [Category("扩展")]
+        [Description("自定义项外边框颜色")]
+        public BrushEXT ItemBorderBrush
+        {
+            get { return (BrushEXT)GetValue(ItemBorderBrushProperty); }
+            set { SetValue(ItemBorderBrushProperty, value); }
+        }
+
         private bool isPressed;
         /// <summary>
         /// 按下状态
@@ -59,6 +84,12 @@ namespace Paway.WPF
             set { isPressed = value; OnPropertyChanged(); }
         }
 
+        #endregion
+
+        /// <summary>
+        /// 标识符
+        /// </summary>
+        public int Id { get; set; }
         /// <summary>
         /// 文本
         /// </summary>

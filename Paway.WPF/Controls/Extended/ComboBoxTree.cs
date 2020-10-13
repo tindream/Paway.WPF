@@ -326,7 +326,7 @@ namespace Paway.WPF
                 case Key.Enter:
                     if (this.Items.Count > 0)
                     {
-                        if (treeView.SelectedItem is IId item)
+                        if (treeView.SelectedItem is IId)
                         {
                             TreeView_MouseDoubleClick(treeView, null);
                         }
