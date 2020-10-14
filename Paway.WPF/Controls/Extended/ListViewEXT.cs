@@ -56,7 +56,32 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBackgroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(Colors.Transparent, 120, 150)));
+            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(Colors.Transparent, 120, 150), OnItemBackgroundChanged));
+        private static void OnItemBackgroundChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is ListViewEXT listView)
+            {
+                Color? mouseColor = null, pressedColor = null;
+                if (listView.ItemBackground.Mouse is SolidColorBrush mouse && mouse.Color != Method.AlphaColor(120, Config.Color))
+                {
+                    if ((listView.ItemBorderBrush.Mouse as SolidColorBrush).Color == Method.AlphaColor(170, Config.Color))
+                    {
+                        mouseColor = Method.AlphaColor(mouse.Color.A + 50, mouse.Color);
+                    }
+                }
+                if (listView.ItemBackground.Pressed is SolidColorBrush pressed && pressed.Color != Method.AlphaColor(150, Config.Color))
+                {
+                    if ((listView.ItemBorderBrush.Pressed as SolidColorBrush).Color == Method.AlphaColor(250, Config.Color))
+                    {
+                        pressedColor = Method.AlphaColor(pressed.Color.A + 100, pressed.Color);
+                    }
+                }
+                if (mouseColor != null || pressedColor != null)
+                {
+                    listView.ItemBorderBrush = new BrushEXT(null, mouseColor, pressedColor);
+                }
+            }
+        }
 
         /// <summary>
         /// </summary>

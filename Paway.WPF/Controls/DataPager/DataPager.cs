@@ -1456,7 +1456,7 @@ namespace Paway.WPF
                     break;
 
                 case "PageIndex":
-                    int oldPageIndex = this.PageIndex;
+                    //int oldPageIndex = this.PageIndex;
 
                     this.PageIndex = this.PagedSource.PageIndex;
                     this.RaisePageIndexChanged();

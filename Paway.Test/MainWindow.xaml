@@ -73,7 +73,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <utils:ButtonEXT Name="chart" Content="取消"
-                             ItemBackground="Transparent;#77CA6B38"
+                             ItemBackground="Transparent;#78CA6B38"
                              BackgroundImage="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"
                              Stretch="None" Viewport="0,0,0.35,1"
                              Border="1;0"
@@ -218,10 +218,10 @@
                 </i:Interaction.Triggers>
                 <utils:ListBoxItemEXT Text="Hello" IsSelected="True"
                                   Image="pack://application:,,,/Paway.Test;component/Images/close.png"/>
-                <utils:ListBoxItemEXT Text="World" ItemBackground=";#77FF4633" ItemBorderBrush=";#AAFF4633" ItemTextForeground="#FF4633;;"/>
+                <utils:ListBoxItemEXT Text="World" ItemBackground=";#78FF4633" ItemTextForeground="#FF4633;;"/>
                 <Button Content="Hi" Visibility="Collapsed"/>
-                <utils:ListBoxItemEXT Text="A" ItemBackground=";#7702E8FA" ItemBorderBrush=";#AA02E8FA" ItemTextForeground="#02E8FA;;"/>
-                <utils:ListBoxItemEXT Text="C" ItemBackground=";#77024AFA" ItemBorderBrush=";#AA024AFA" ItemTextForeground="#024AFA;;"/>
+                <utils:ListBoxItemEXT Text="A" ItemBackground=";#7802E8FA" ItemTextForeground="#02E8FA;;"/>
+                <utils:ListBoxItemEXT Text="C" ItemBackground=";#78024AFA" ItemTextForeground="#024AFA;;"/>
             </utils:ListViewEXT>
         </utils:WindowFunctionBar>
     </utils:WindowEXT.FunctionBar>

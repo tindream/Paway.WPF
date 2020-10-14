@@ -123,7 +123,7 @@ namespace Paway.WPF
         {
             base.OnApplyTemplate();
             IsEditable = false;
-            this.type = this.ItemsSource.GenericType();
+            if (this.ItemsSource != null) this.type = this.ItemsSource.GenericType();
             if (typeof(ITreeView).IsAssignableFrom(type))
             {
                 this.List = new List<ITreeView>();

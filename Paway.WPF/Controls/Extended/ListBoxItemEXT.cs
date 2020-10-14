@@ -32,15 +32,40 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemTextForegroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemTextForeground), typeof(BrushEXT), typeof(ListBoxItemEXT), new PropertyMetadata(new BrushEXT(Color.FromArgb(255, 33, 33, 33), Colors.White)));
+            DependencyProperty.RegisterAttached(nameof(ItemTextForeground), typeof(BrushEXT), typeof(ListBoxItemEXT), new PropertyMetadata(new BrushEXT(Colors.Transparent)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBackgroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ListBoxItemEXT), new PropertyMetadata(new BrushEXT(Colors.Transparent)));
+            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ListBoxItemEXT), new PropertyMetadata(new BrushEXT(Colors.Transparent), OnItemBackgroundChanged));
+        private static void OnItemBackgroundChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is ListBoxItemEXT listBoxItem)
+            {
+                Color? mouseColor = null, pressedColor = null;
+                if (listBoxItem.ItemBackground.Mouse is SolidColorBrush mouse && mouse.Color != Colors.Transparent)
+                {
+                    if ((listBoxItem.ItemBorderBrush.Mouse as SolidColorBrush).Color == Colors.Transparent)
+                    {
+                        mouseColor = Method.AlphaColor(mouse.Color.A + 50, mouse.Color);
+                    }
+                }
+                if (listBoxItem.ItemBackground.Pressed is SolidColorBrush pressed && pressed.Color != Colors.Transparent)
+                {
+                    if ((listBoxItem.ItemBorderBrush.Pressed as SolidColorBrush).Color == Colors.Transparent)
+                    {
+                        pressedColor = Method.AlphaColor(pressed.Color.A + 100, pressed.Color);
+                    }
+                }
+                if (mouseColor != null || pressedColor != null)
+                {
+                    listBoxItem.ItemBorderBrush = new BrushEXT(null, mouseColor, pressedColor);
+                }
+            }
+        }
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBorderBrushProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBorderBrush), typeof(BrushEXT), typeof(ListBoxItemEXT), new PropertyMetadata(new BrushEXT(170, 250)));
+            DependencyProperty.RegisterAttached(nameof(ItemBorderBrush), typeof(BrushEXT), typeof(ListBoxItemEXT), new PropertyMetadata(new BrushEXT(Colors.Transparent)));
 
         /// <summary>
         /// 自定义项文本字体颜色

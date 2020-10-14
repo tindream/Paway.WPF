@@ -113,11 +113,14 @@ namespace Paway.WPF
         {
             base.OnApplyTemplate();
             IsEditable = false;
-            var type = this.ItemsSource.GenericType();
-            if (typeof(IListView).IsAssignableFrom(type))
+            if (this.ItemsSource != null)
             {
-                this.List = new List<IListView>();
-                foreach (IListView item in this.ItemsSource) this.List.Add(item);
+                var type = this.ItemsSource.GenericType();
+                if (typeof(IListView).IsAssignableFrom(type))
+                {
+                    this.List = new List<IListView>();
+                    foreach (IListView item in this.ItemsSource) this.List.Add(item);
+                }
             }
             if (Template.FindName("PART_Popup", this) is Popup popup)
             {
