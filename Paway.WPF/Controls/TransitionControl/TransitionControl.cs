@@ -62,7 +62,7 @@ namespace Paway.WPF
         /// <param name="e">Event arguments.</param>
         private static void OnTransitionPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            if (obj is TransitionControl source)
+            if (e.NewValue != e.OldValue && obj is TransitionControl source)
             {
                 source.AbortTransition();
                 source.StartTransition();

@@ -158,6 +158,7 @@ namespace Paway.WPF
         /// <param name="x">变化量为0时取值依据</param>
         private static void AnimMove(ContentPresenter content, bool display = true, int direction = 1, double value = 0, double time = 0, bool x = true)
         {
+            if (content == null) return;
             //实例化旋转对象（顺时针旋转）
             TranslateTransform tt = new TranslateTransform();
             //让content控件平移
@@ -184,6 +185,7 @@ namespace Paway.WPF
         /// <param name="x">变化量为0时取值依据</param>
         public static void AnimOpacity(ContentPresenter content, bool display = true, Action completed = null, double value = 0, double time = 0, bool x = true)
         {
+            if (content == null) return;
             var animTime = AnimTime(content, value, time, x);
             var opacity = new DoubleAnimation(display ? 0 : 1, display ? 1 : 0, new Duration(TimeSpan.FromMilliseconds(animTime)));
             opacity.Completed += delegate { completed?.Invoke(); };
