@@ -110,9 +110,9 @@ namespace Paway.WPF
         /// <param name="display">显示(进入)/隐藏(离开)</param>
         /// <param name="value">变化量</param>
         /// <param name="time">变化时间</param>
-        public static void AnimMoveLeft(ContentPresenter content, bool display = true, double value = 0, double time = 0)
+        public static double AnimMoveLeft(ContentPresenter content, double value = 0, double time = 0, bool display = true)
         {
-            AnimMove(content, display, 1, value, time, true);
+            return AnimMove(content, display, 1, value, time, true);
         }
         /// <summary>
         /// 位移动画-从Y轴上边进入(离开)
@@ -121,9 +121,9 @@ namespace Paway.WPF
         /// <param name="display">显示(进入)/隐藏(离开)</param>
         /// <param name="value">变化量</param>
         /// <param name="time">变化时间</param>
-        public static void AnimMoveUp(ContentPresenter content, bool display = true, double value = 0, double time = 0)
+        public static double AnimMoveUp(ContentPresenter content, double value = 0, double time = 0, bool display = true)
         {
-            AnimMove(content, display, -1, value, time, false);
+            return AnimMove(content, display, -1, value, time, false);
         }
         /// <summary>
         /// 位移动画-从X轴右边进入(离开)
@@ -132,9 +132,9 @@ namespace Paway.WPF
         /// <param name="display">显示(进入)/隐藏(离开)</param>
         /// <param name="value">变化量</param>
         /// <param name="time">变化时间</param>
-        public static void AnimMoveRight(ContentPresenter content, bool display = true, double value = 0, double time = 0)
+        public static double AnimMoveRight(ContentPresenter content, double value = 0, double time = 0, bool display = true)
         {
-            AnimMove(content, display, -1, value, time, true);
+            return AnimMove(content, display, -1, value, time, true);
         }
         /// <summary>
         /// 位移动画-从Y轴下边进入(离开)
@@ -143,9 +143,9 @@ namespace Paway.WPF
         /// <param name="display">显示(进入)/隐藏(离开)</param>
         /// <param name="value">变化量</param>
         /// <param name="time">变化时间</param>
-        public static void AnimMoveDown(ContentPresenter content, bool display = true, double value = 0, double time = 0)
+        public static double AnimMoveDown(ContentPresenter content, double value = 0, double time = 0, bool display = true)
         {
-            AnimMove(content, display, 1, value, time, false);
+            return AnimMove(content, display, 1, value, time, false);
         }
         /// <summary>
         /// 位移动画
@@ -156,9 +156,9 @@ namespace Paway.WPF
         /// <param name="value">变化量</param>
         /// <param name="time">变化时间</param>
         /// <param name="x">变化量为0时取值依据</param>
-        private static void AnimMove(ContentPresenter content, bool display = true, int direction = 1, double value = 0, double time = 0, bool x = true)
+        private static double AnimMove(ContentPresenter content, bool display = true, int direction = 1, double value = 0, double time = 0, bool x = true)
         {
-            if (content == null) return;
+            if (content == null) return 0;
             //实例化旋转对象（顺时针旋转）
             TranslateTransform tt = new TranslateTransform();
             //让content控件平移
@@ -172,6 +172,7 @@ namespace Paway.WPF
             //无限循环
             //animBy.RepeatBehavior = RepeatBehavior.Forever;
             tt.BeginAnimation(x ? TranslateTransform.XProperty : TranslateTransform.YProperty, animBy);
+            return animTime;
         }
 
         /// <summary>
@@ -183,13 +184,14 @@ namespace Paway.WPF
         /// <param name="value">变化量</param>
         /// <param name="time">变化时间</param>
         /// <param name="x">变化量为0时取值依据</param>
-        public static void AnimOpacity(ContentPresenter content, bool display = true, Action completed = null, double value = 0, double time = 0, bool x = true)
+        public static double AnimOpacity(ContentPresenter content, double value = 0, double time = 0, Action completed = null, bool display = false, bool x = true)
         {
-            if (content == null) return;
+            if (content == null) return 0;
             var animTime = AnimTime(content, value, time, x);
             var opacity = new DoubleAnimation(display ? 0 : 1, display ? 1 : 0, new Duration(TimeSpan.FromMilliseconds(animTime)));
             opacity.Completed += delegate { completed?.Invoke(); };
             content.BeginAnimation(UIElement.OpacityProperty, opacity);
+            return animTime;
         }
         private static double AnimTime(ContentPresenter content, double value = 0, double time = 0, bool x = true)
         {

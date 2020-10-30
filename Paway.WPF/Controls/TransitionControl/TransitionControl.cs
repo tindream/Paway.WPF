@@ -190,31 +190,31 @@ namespace Paway.WPF
         /// <summary>
         /// Gets or sets the storyboard that is used to transition old and new content.
         /// </summary>
-        private void StartTransition()
+        public double StartTransition()
         {
             switch (TransitionType)
             {
                 case TransitionType.Default:
                     break;
                 case TransitionType.Left:
-                    Method.AnimMoveRight(PreviousContentPresentationSite, false);
-                    Method.AnimMoveLeft(CurrentContentPresentationSite);
+                    Method.AnimMoveRight(PreviousContentPresentationSite, Value, Time, false);
+                    Method.AnimMoveLeft(CurrentContentPresentationSite, Value, Time);
                     break;
                 case TransitionType.Right:
-                    Method.AnimMoveLeft(PreviousContentPresentationSite, false);
-                    Method.AnimMoveRight(CurrentContentPresentationSite);
+                    Method.AnimMoveLeft(PreviousContentPresentationSite, Value, Time, false);
+                    Method.AnimMoveRight(CurrentContentPresentationSite, Value, Time);
                     break;
                 case TransitionType.Up:
-                    Method.AnimMoveDown(PreviousContentPresentationSite, false);
-                    Method.AnimMoveUp(CurrentContentPresentationSite);
+                    Method.AnimMoveDown(PreviousContentPresentationSite, Value, Time, false);
+                    Method.AnimMoveUp(CurrentContentPresentationSite, Value, Time);
                     break;
                 case TransitionType.Down:
-                    Method.AnimMoveUp(PreviousContentPresentationSite, false);
-                    Method.AnimMoveDown(CurrentContentPresentationSite);
+                    Method.AnimMoveUp(PreviousContentPresentationSite, Value, Time, false);
+                    Method.AnimMoveDown(CurrentContentPresentationSite, Value, Time);
                     break;
             }
-            Method.AnimOpacity(PreviousContentPresentationSite, false);
-            Method.AnimOpacity(CurrentContentPresentationSite, true, OnTransitionCompleted);
+            Method.AnimOpacity(PreviousContentPresentationSite, Value, Time);
+            return Method.AnimOpacity(CurrentContentPresentationSite, Value, Time, OnTransitionCompleted, true);
         }
 
         #endregion
