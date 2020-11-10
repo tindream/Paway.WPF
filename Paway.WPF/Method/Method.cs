@@ -341,6 +341,7 @@ namespace Paway.WPF
                     try
                     {
                         action.Invoke();
+                        ProgressCompleted(parent, completed, error);
                     }
                     catch (Exception ex)
                     {
@@ -348,10 +349,9 @@ namespace Paway.WPF
                         else
                         {
                             ex.Log();
-                            Method.Error(parent, ex.Message());
+                            Error(parent, ex.Message());
                         }
                     }
-                    ProgressCompleted(parent, completed, error);
                 });
                 Progress(parent, true);
             });
@@ -360,7 +360,7 @@ namespace Paway.WPF
         {
             BeginInvoke(parent, () =>
             {
-                Method.Hide(parent);
+                Hide(parent);
                 action?.Invoke();
             }, ex =>
             {
@@ -368,7 +368,7 @@ namespace Paway.WPF
                 else
                 {
                     ex.Log();
-                    Method.Error(parent, ex.Message());
+                    Error(parent, ex.Message());
                 }
             });
         }
@@ -704,7 +704,7 @@ namespace Paway.WPF
             where T : class
             where I : struct
         {
-            var old = Method.GetValue<T>(context);
+            var old = GetValue<T>(context);
 
             var strs = str.Split(';');
             I? normal = null;
