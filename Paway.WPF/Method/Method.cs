@@ -345,6 +345,7 @@ namespace Paway.WPF
                     }
                     catch (Exception ex)
                     {
+                        ProgressCompleted(parent, null, error);
                         if (error != null) error.Invoke(ex);
                         else
                         {
