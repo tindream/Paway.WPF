@@ -7,9 +7,10 @@
         xmlns:utils="clr-namespace:Paway.WPF;assembly=Paway.WPF"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
         xmlns:ip="http://www.galasoft.ch/mvvmlight"
+        xmlns:oxy="http://oxyplot.org/wpf"
         DataContext="{Binding Main ,Source={StaticResource Locator}}"
         mc:Ignorable="d"
-        HeaderHeight="72" ButtonMaxHeight="35" ButtonAlignment="Top"
+        HeaderHeight="72" ButtonAlignment="Top"
         Title="MainWindow" Height="800" Width="850" WindowStartupLocation="CenterScreen">
 
     <DockPanel>
@@ -170,6 +171,14 @@
                     </i:Interaction.Triggers>
                 </utils:ListViewEXT>
 
+                <oxy:PlotView Model="{Binding Path= PlotModel}" Height="200">
+                    <oxy:PlotView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="重置" Padding="5" FontSize="15" Command="{Binding Reset}"/>
+                        </ContextMenu>
+                    </oxy:PlotView.ContextMenu>
+                </oxy:PlotView>
+                
             </StackPanel>
         </Grid>
     </DockPanel>

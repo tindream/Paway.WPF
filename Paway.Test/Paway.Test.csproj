@@ -52,6 +52,16 @@
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net40-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="OxyPlot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Core.1.0.0\lib\net45\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=75e952ba404cdbb0, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Wpf.1.0.0\lib\net45\OxyPlot.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=75e952ba404cdbb0, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\OxyPlot.Wpf.1.0.0\lib\net45\OxyPlot.Wpf.Shared.dll</HintPath>
+    </Reference>
     <Reference Include="Paway.Helper, Version=2.3.20.0, Culture=neutral, PublicKeyToken=5f9d1a9ddcc41d83, processorArchitecture=MSIL">
       <HintPath>..\packages\Paway.Helper.2.3.20\lib\net40\Paway.Helper.dll</HintPath>
     </Reference>
@@ -79,9 +89,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Enum\MonitorType.cs" />
+    <Compile Include="Method\PlotHelper.cs" />
+    <Compile Include="Info\BaseInfo.cs" />
+    <Compile Include="Info\TempInfo.cs" />
+    <Compile Include="Interface\IModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="Comm\ViewModelLocator.cs" />
-    <Compile Include="Comm\ViewModelPlus.cs" />
+    <Compile Include="ViewPlus\ViewModelLocator.cs" />
+    <Compile Include="ViewPlus\ViewModelPlus.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

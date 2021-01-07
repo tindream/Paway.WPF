@@ -332,7 +332,7 @@ namespace Paway.WPF
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
-        public static void Progress(DependencyObject parent, Action action, Action completed = null, Action<Exception> error = null)
+        public static void Progress(DependencyObject parent, Action action, Action success = null, Action<Exception> error = null, Action completed = null)
         {
             BeginInvoke(parent, () =>
             {
@@ -341,36 +341,39 @@ namespace Paway.WPF
                     try
                     {
                         action.Invoke();
-                        ProgressCompleted(parent, completed, error);
+                        if (success != null)
+                        {
+                            BeginInvoke(parent, () =>
+                            {
+                                success.Invoke();
+                            });
+                        }
                     }
                     catch (Exception ex)
                     {
-                        ProgressCompleted(parent, null, error);
-                        if (error != null) error.Invoke(ex);
+                        if (error != null)
+                        {
+                            BeginInvoke(parent, () =>
+                            {
+                                error.Invoke(ex);
+                            });
+                        }
                         else
                         {
                             ex.Log();
                             Error(parent, ex.Message());
                         }
                     }
+                    finally
+                    {
+                        BeginInvoke(parent, () =>
+                        {
+                            Hide(parent);
+                            completed?.Invoke();
+                        });
+                    }
                 });
                 Progress(parent, true);
-            });
-        }
-        private static void ProgressCompleted(DependencyObject parent, Action action, Action<Exception> error)
-        {
-            BeginInvoke(parent, () =>
-            {
-                Hide(parent);
-                action?.Invoke();
-            }, ex =>
-            {
-                if (error != null) error.Invoke(ex);
-                else
-                {
-                    ex.Log();
-                    Error(parent, ex.Message());
-                }
             });
         }
         /// <summary>
