@@ -47,8 +47,8 @@ namespace Paway.Test.Properties {
         }
         
         /// <summary>
-        ///   重写当前线程的 CurrentUICulture 属性
-        ///   重写当前线程的 CurrentUICulture 属性。
+        ///   重写当前线程的 CurrentUICulture 属性，对
+        ///   使用此强类型资源类的所有资源查找执行重写。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Globalization.CultureInfo Culture {
@@ -57,6 +57,42 @@ namespace Paway.Test.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 
+        ///
+        ///
+        ///CREATE TABLE [Auths](
+        ///&quot;Id&quot;  integer Primary Key AutoIncrement not null,
+        ///&quot;UserId&quot; int,
+        ///&quot;MenuType&quot; int,
+        ///&quot;ButtonType&quot; int,
+        /// unique(Id asc)
+        ///);
+        ///GO
+        ///Create index main.Auths_id on Auths (Id ASC);
+        ///GO
+        ///
+        ///CREATE TABLE [AlarmRecords](
+        ///&quot;Id&quot;  integer Primary Key AutoIncrement not null,
+        ///&quot;Code&quot; int,
+        ///&quot;Statu&quot; int,
+        ///&quot;TriggerOn&quot; datetime,
+        ///&quot;EndOn&quot; datetime,
+        /// unique(Id asc)
+        ///);
+        ///GO
+        ///Create index main.AlarmRecords_id on AlarmRecords (Id ASC);
+        ///GO
+        ///
+        ///CREATE TABLE [AlarmCodes](
+        ///&quot;Id&quot;  integer Primary Key AutoInc [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string script {
+            get {
+                return ResourceManager.GetString("script", resourceCulture);
             }
         }
     }

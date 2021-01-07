@@ -1,4 +1,5 @@
-﻿using Paway.Helper;
+﻿using GalaSoft.MvvmLight.Messaging;
+using Paway.Helper;
 using Paway.Test.ViewModel;
 using Paway.WPF;
 using System;
@@ -28,6 +29,27 @@ namespace Paway.Test
         public MainWindow()
         {
             InitializeComponent();
+        }
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            Messenger.Default.Send(new StatuMessage(TConfig.Loading));
+            Method.Progress(this, () =>
+            {
+                try
+                {
+                    DataService.Default.Load();
+                }
+                catch (Exception ex)
+                {
+                    ex.Log();
+                    Messenger.Default.Send(new StatuMessage(ex.Message()));
+                    Method.Error(this, ex.Message());
+                }
+            }, () =>
+            {
+                Messenger.Default.Send(new StatuMessage("加载完成"));
+            });
         }
 
         private bool b;

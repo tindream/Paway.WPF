@@ -32,7 +32,7 @@ namespace Paway.Test.ViewModel
     public class MainViewModel : ViewModelPlus
     {
         #region 属性
-        private readonly List<ListViewModel> list;
+        private readonly List<ListViewModel> list = new List<ListViewModel>();
         public List<ListViewModel> GridList { get { return list; } }
         public PagedCollectionView PagedList { get; private set; }
         public ObservableCollection<TreeViewModel> TreeList { get; private set; } = new ObservableCollection<TreeViewModel>();
@@ -103,6 +103,13 @@ namespace Paway.Test.ViewModel
         {
             get { return _value; }
             set { _value = value; RaisePropertyChanged(); }
+        }
+
+        private string desc = "准备就绪";
+        public string Desc
+        {
+            get { return desc; }
+            set { desc = value; RaisePropertyChanged(); }
         }
 
         #endregion
@@ -214,12 +221,21 @@ namespace Paway.Test.ViewModel
 
         #endregion
 
+        #region 消息
+        private void Statu(string msg)
+        {
+            this.Desc = msg;
+        }
+
+        #endregion
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         public MainViewModel()
         {
-            list = new List<ListViewModel>();
+            this.MessengerInstance.Register<StatuMessage>(this, msg => Statu(msg.Message));
+
             list.Add(new ListViewModel("Hello"));
             list.Add(new ListViewModel("你好123")
             {
@@ -229,9 +245,14 @@ namespace Paway.Test.ViewModel
             {
                 Image = new ImageEXT(@"pack://application:,,,/Paway.Test;component/Images/close.png")
             });
-
             this.PagedList = new PagedCollectionView(list) { PageSize = 10 };
 
+            AddComboBoxMulti();
+            AddTree();
+            AddPlot();
+        }
+        private void AddComboBoxMulti()
+        {
             MultiList.Add(new ComboBoxMultiModel("张三") { IsChecked = true });
             MultiList.Add(new ComboBoxMultiModel("李四"));
             MultiList.Add(new ComboBoxMultiModel("王五"));
@@ -239,7 +260,9 @@ namespace Paway.Test.ViewModel
             MultiList.Add(new ComboBoxMultiModel("赵七") { IsChecked = true });
             MultiList.Add(new ComboBoxMultiModel("王八"));
             MultiList.Add(new ComboBoxMultiModel("陈九"));
-
+        }
+        private void AddTree()
+        {
             var treeInfo = new TreeViewModel("单位名称(3/7)", true);
             this.TreeList.Add(treeInfo);
             var treeInfo2 = new TreeViewModel("未分组联系人(2/4)", true);
@@ -261,9 +284,8 @@ namespace Paway.Test.ViewModel
             treeInfo2.Add("刘棒5", "我要走向天空！", "3人");
 
             this.TreeId = treeInfo2.Children[0].Id;
-            AddLine();
         }
-        private void AddLine()
+        private void AddPlot()
         {
             var plotList = new List<TempInfo>();
             var time = DateTime.Now;
