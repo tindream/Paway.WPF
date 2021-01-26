@@ -40,7 +40,7 @@ namespace Paway.WPF
                 }
                 catch (Exception ex)
                 {
-                    if (error == null) throw;
+                    if (error == null) ex.Log();
                     else error.Invoke(ex);
                 }
             });
@@ -58,7 +58,7 @@ namespace Paway.WPF
                 }
                 catch (Exception ex)
                 {
-                    if (error == null) throw;
+                    if (error == null) ex.Log();
                     else error.Invoke(ex);
                 }
             });
@@ -76,7 +76,7 @@ namespace Paway.WPF
                 }
                 catch (Exception ex)
                 {
-                    if (error == null) throw;
+                    if (error == null) ex.Log();
                     else error.Invoke(ex);
                 }
             }));
@@ -94,7 +94,7 @@ namespace Paway.WPF
                 }
                 catch (Exception ex)
                 {
-                    if (error == null) throw;
+                    if (error == null) ex.Log();
                     else error.Invoke(ex);
                 }
             }));
@@ -373,13 +373,15 @@ namespace Paway.WPF
                         });
                     }
                 });
-                Progress(parent, true);
+                Progress(parent);
             });
         }
         /// <summary>
         /// 同步显示Window进度条
         /// </summary>
-        public static void Progress(DependencyObject parent = null, bool dialog = false)
+        /// <param name="parent"></param>
+        /// <param name="dialog">模式显示标记，默认true</param>
+        public static void Progress(DependencyObject parent = null, bool dialog = true)
         {
             if (progress == null) progress = new WindowProgress();
             if (Parent(parent, out Window owner))

@@ -36,19 +36,16 @@ namespace Paway.Test
             Messenger.Default.Send(new StatuMessage(TConfig.Loading));
             Method.Progress(this, () =>
             {
-                try
-                {
-                    DataService.Default.Load();
-                }
-                catch (Exception ex)
-                {
-                    ex.Log();
-                    Messenger.Default.Send(new StatuMessage(ex.Message()));
-                    Method.Error(this, ex.Message());
-                }
+                DataService.Default.Load();
             }, () =>
             {
                 Messenger.Default.Send(new StatuMessage("加载完成"));
+            },
+            ex =>
+            {
+                ex.Log();
+                Messenger.Default.Send(new StatuMessage(ex.Message()));
+                Method.Error(this, ex.Message());
             });
         }
 
@@ -62,7 +59,7 @@ namespace Paway.Test
             var xml = Method.GetTemplateXaml(dp);
             //Method.Toast(this, xml);
             b = !b;
-            if (b) Method.Progress(this);
+            if (b) Method.Progress(this, false);
             else Method.Hide();
             if (this.pathCurrent == null)
             {
