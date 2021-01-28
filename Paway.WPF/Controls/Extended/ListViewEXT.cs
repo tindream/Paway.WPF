@@ -8,6 +8,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 
 namespace Paway.WPF
 {
@@ -17,6 +19,10 @@ namespace Paway.WPF
     public partial class ListViewEXT : ListView
     {
         #region 依赖属性
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty IAnimationProperty =
+            DependencyProperty.RegisterAttached(nameof(IAnimation), typeof(bool), typeof(ListViewEXT));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty OrientationProperty =
@@ -146,6 +152,16 @@ namespace Paway.WPF
         #endregion
 
         #region 扩展.项
+        /// <summary>
+        /// 动画
+        /// </summary>
+        [Category("扩展.项")]
+        [Description("动画")]
+        public bool IAnimation
+        {
+            get { return (bool)GetValue(IAnimationProperty); }
+            set { SetValue(IAnimationProperty, value); }
+        }
         /// <summary>
         /// 项显示方向
         /// </summary>
@@ -416,6 +432,7 @@ namespace Paway.WPF
             Config_FontSizeChanged(Config.FontSize);
             Config.FontSizeChanged += Config_FontSizeChanged;
         }
+
         /// <summary>
         /// 更新字体大小
         /// </summary>
@@ -437,13 +454,17 @@ namespace Paway.WPF
         /// </summary>
         private int firstIndex = -1;
         /// <summary>
+        /// 鼠标移过项
+        /// </summary>
+        private ListViewItem moveItem;
+        /// <summary>
         /// 上一次按下时的item
         /// </summary>
-        private ListBoxItem lastItem;
+        private ListViewItem lastItem;
         /// <summary>
         /// 按下时的item
         /// </summary>
-        private ListBoxItem downItem;
+        private ListViewItem downItem;
         /// <summary>
         /// 鼠标按下时取消触发
         /// </summary>
@@ -477,7 +498,10 @@ namespace Paway.WPF
         {
             if (downItem.Content is IListView model)
             {
-                model.IsPressed = value;
+                if (model.IsPressed != value)
+                {
+                    model.IsPressed = value;
+                }
             }
         }
         /// <summary>
@@ -495,6 +519,20 @@ namespace Paway.WPF
                     downItem = null;
                 }
             }
+            if (IAnimation && Mouse.DirectlyOver != null && Method.Parent<ListViewItem>(Mouse.DirectlyOver, out ListViewItem listViewItem) && this.moveItem != listViewItem)
+            {
+                if (this.moveItem != null) Animation(moveItem, false);
+                this.moveItem = listViewItem;
+                Animation(listViewItem, true);
+            }
+        }
+        /// <summary>
+        /// 鼠标离开控件
+        /// </summary>
+        protected override void OnMouseLeave(MouseEventArgs e)
+        {
+            base.OnMouseLeave(e);
+            if (IAnimation && this.moveItem != null) Animation(moveItem, false);
         }
 
         /// <summary>
@@ -507,7 +545,7 @@ namespace Paway.WPF
             if (ClickMode == ClickMode.Release && e.ChangedButton == MouseButton.Left && downItem != null)
             {
                 IsPressed(false);
-                if (Method.Parent(e.OriginalSource, out ListBoxItem item) && item == downItem)
+                if (Method.Parent(e.OriginalSource, out ListViewItem item) && item == downItem)
                 {
                     if (SelectionMode == SelectionMode.Extended)
                     {
@@ -557,36 +595,49 @@ namespace Paway.WPF
         {
             for (int i = 0; i < this.Items.Count; i++)
             {
-                if (Items[i] is ListBoxItem listBoxItem)
+                if (Items[i] is ListViewItem item)
                 {
-                    SetSelected(listBoxItem, action(i));
+                    SetSelected(item, action(i));
                 }
-                else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is ListBoxItem listViewItem)
+                else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is ListViewItem listViewItem)
                 {
                     SetSelected(listViewItem, action(i));
                 }
             }
         }
-        private void SetSelected(ListBoxItem item, bool value)
+        private void SetSelected(ListViewItem item, bool value)
         {
             if (item.IsSelected != value)
             {
                 if (value) this.Focus();
                 item.IsSelected = value;
+                Animation(item, value);
             }
         }
-        private int Index(ListBoxItem item)
+        private void Animation(ListViewItem item, bool value)
+        {
+            Method.Child(item, out Line line1, "line1", false);
+            Method.Child(item, out Line line2, "line2", false);
+            if (value)
+            {
+                var animation1 = new DoubleAnimation(0, this.ItemWidth / 2, new Duration(TimeSpan.FromMilliseconds(100)));
+                var animation2 = new DoubleAnimation(this.ItemWidth / 2, 0, new Duration(TimeSpan.FromMilliseconds(100)));
+                if (line1 != null) line1.BeginAnimation(Line.X1Property, animation2);
+                if (line2 != null) line2.BeginAnimation(Line.X2Property, animation1);
+            }
+            else
+            {
+                var animation1 = new DoubleAnimation(0, this.ItemWidth / 2, new Duration(TimeSpan.FromMilliseconds(100)));
+                var animation2 = new DoubleAnimation(this.ItemWidth / 2, 0, new Duration(TimeSpan.FromMilliseconds(100)));
+                if (line1 != null) line1.BeginAnimation(Line.X1Property, animation1);
+                if (line2 != null) line2.BeginAnimation(Line.X2Property, animation2);
+            }
+        }
+        private int Index(ListViewItem item)
         {
             for (int i = 0; i < Items.Count; i++)
             {
-                if (Items[i] is ListBoxItem listBoxItem)
-                {
-                    if (item.Equals(listBoxItem) || item.Content.Equals(listBoxItem))
-                    {
-                        return i;
-                    }
-                }
-                else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is ListBoxItem listViewItem)
+                if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is ListViewItem listViewItem)
                 {
                     if (item.Equals(listViewItem)) return i;
                 }

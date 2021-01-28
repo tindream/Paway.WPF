@@ -181,7 +181,6 @@ namespace Paway.WPF
             var text = textBox.Text;
             if (last == text) return;
             last = text;
-            Trace.WriteLine(text);
             var index = textBox.SelectionStart;
             if (text.IsEmpty())
             {

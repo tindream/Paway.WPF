@@ -15,6 +15,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -52,7 +53,7 @@ namespace Paway.Test
         private bool b;
         private Path pathNew;
         private object pathCurrent;
-        private void ButtonEXT_Click(object sender, RoutedEventArgs e)
+        private void Commit_Click(object sender, RoutedEventArgs e)
         {
             var r = Validation.GetHasError(tb);
             Method.Toast(this, r);
@@ -73,6 +74,18 @@ namespace Paway.Test
             //transition.TransitionType = TransitionType.Left;
             if (b) transition.Content = this.pathNew;
             else transition.Content = this.pathCurrent;
+
+            var opacity1 = new DoubleAnimation(0, 100, new Duration(TimeSpan.FromMilliseconds(100)));
+            var opacity2 = new DoubleAnimation(100, 0, new Duration(TimeSpan.FromMilliseconds(100)));
+            line1.BeginAnimation(Line.X1Property, opacity2);
+            line2.BeginAnimation(Line.X2Property, opacity1);
+        }
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            var opacity1 = new DoubleAnimation(0, line1.X2, new Duration(TimeSpan.FromMilliseconds(100)));
+            var opacity2 = new DoubleAnimation(line2.X2, 0, new Duration(TimeSpan.FromMilliseconds(100)));
+            line1.BeginAnimation(Line.X1Property, opacity1);
+            line2.BeginAnimation(Line.X2Property, opacity2);
         }
     }
 }

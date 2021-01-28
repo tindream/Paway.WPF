@@ -78,9 +78,9 @@
                              BackgroundImage="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"
                              Stretch="None" Viewport="0,0,0.35,1"
                              Border="1;0"
-                             Command="{Binding Teach}" CommandParameter="{Binding ElementName=btn}"/>
+                             Command="{Binding Teach}" CommandParameter="{Binding ElementName=btn}" Click="Cancel_Click" />
                     <utils:ButtonEXT Name="btn" Grid.Column="1"
-                             Content="确认" Click="ButtonEXT_Click" 
+                             Content="确认" Click="Commit_Click" 
                              CommandParameter="{Binding ElementName=btn}"/>
                 </Grid>
                 <WrapPanel>
@@ -93,6 +93,15 @@
                     <utils:RadioButtonEXT Content="World" IsChecked="True" />
                     <utils:RadioButtonEXT Content="Watch" IsChecked="{x:Null}" IsEnabled="False"/>
                 </WrapPanel>
+                <Grid>
+                    <Border BorderThickness="4" >
+                        <TextBlock Text="Hello"></TextBlock>
+                    </Border>
+                    <DockPanel VerticalAlignment="Bottom">
+                        <Line x:Name="line1" X1="80" X2="100" Stroke="Red" StrokeThickness="3"/>
+                        <Line x:Name="line2" X1="0" X2="20" Stroke="Red" StrokeThickness="3"/>
+                    </DockPanel>
+                </Grid>
                 <utils:DatePickerEXT Name="dp" Text="{Binding DatePickerTime, Mode=TwoWay}"/>
 
                 <WrapPanel>
@@ -178,7 +187,7 @@
                         </ContextMenu>
                     </oxy:PlotView.ContextMenu>
                 </oxy:PlotView>
-                
+
             </StackPanel>
         </Grid>
     </DockPanel>
@@ -213,7 +222,7 @@
             </Menu>
             <Separator />
             <Button Content="Dino.C" ToolTip="当前档案"/>-->
-            <utils:ListViewEXT Name="listView1" Margin="5,5,0,0"
+            <utils:ListViewEXT Name="listView1" Margin="5,5,0,0" IAnimation="True"
                            ItemHeight="67" ItemWidth="100"
                            ItemBorder="0;0,0,0,4"
                            ItemImageHeight="32" ItemImageDock="Top" ItemPadding="5"

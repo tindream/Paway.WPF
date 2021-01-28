@@ -213,7 +213,6 @@ namespace Paway.WPF
             var text = textBox.Text;
             if (last == text) return;
             last = text;
-            Trace.WriteLine(text);
             if (text.IsEmpty())
             {
                 this.ItemsSource = this.List;
