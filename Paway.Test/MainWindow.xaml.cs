@@ -75,16 +75,16 @@ namespace Paway.Test
             if (b) transition.Content = this.pathNew;
             else transition.Content = this.pathCurrent;
 
-            var opacity1 = new DoubleAnimation(0, 100, new Duration(TimeSpan.FromMilliseconds(100)));
-            var opacity2 = new DoubleAnimation(100, 0, new Duration(TimeSpan.FromMilliseconds(100)));
-            line1.BeginAnimation(Line.X1Property, opacity2);
-            line2.BeginAnimation(Line.X2Property, opacity1);
+            var opacity1 = new DoubleAnimation(line1.X1, 0, new Duration(TimeSpan.FromMilliseconds(200)));
+            line1.BeginAnimation(Line.X1Property, opacity1);
+            var opacity2 = new DoubleAnimation(line2.X2, 100, new Duration(TimeSpan.FromMilliseconds(200)));
+            line2.BeginAnimation(Line.X2Property, opacity2);
         }
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            var opacity1 = new DoubleAnimation(0, line1.X2, new Duration(TimeSpan.FromMilliseconds(100)));
-            var opacity2 = new DoubleAnimation(line2.X2, 0, new Duration(TimeSpan.FromMilliseconds(100)));
+            var opacity1 = new DoubleAnimation(line1.X1, 100, new Duration(TimeSpan.FromMilliseconds(200)));
             line1.BeginAnimation(Line.X1Property, opacity1);
+            var opacity2 = new DoubleAnimation(line2.X2, 0, new Duration(TimeSpan.FromMilliseconds(200)));
             line2.BeginAnimation(Line.X2Property, opacity2);
         }
     }

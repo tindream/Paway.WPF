@@ -618,18 +618,19 @@ namespace Paway.WPF
         {
             Method.Child(item, out Line line1, "line1", false);
             Method.Child(item, out Line line2, "line2", false);
+            var animTime = Method.AnimTime(this.ItemWidth / 2, 100) / 2;
             if (value)
             {
-                var animation1 = new DoubleAnimation(0, this.ItemWidth / 2, new Duration(TimeSpan.FromMilliseconds(100)));
-                var animation2 = new DoubleAnimation(this.ItemWidth / 2, 0, new Duration(TimeSpan.FromMilliseconds(100)));
-                if (line1 != null) line1.BeginAnimation(Line.X1Property, animation2);
-                if (line2 != null) line2.BeginAnimation(Line.X2Property, animation1);
+                var animation1 = new DoubleAnimation(line1.X1, 0, new Duration(TimeSpan.FromMilliseconds(animTime)));
+                if (line1 != null) line1.BeginAnimation(Line.X1Property, animation1);
+                var animation2 = new DoubleAnimation(line2.X2, this.ItemWidth / 2, new Duration(TimeSpan.FromMilliseconds(animTime)));
+                if (line2 != null) line2.BeginAnimation(Line.X2Property, animation2);
             }
             else
             {
-                var animation1 = new DoubleAnimation(0, this.ItemWidth / 2, new Duration(TimeSpan.FromMilliseconds(100)));
-                var animation2 = new DoubleAnimation(this.ItemWidth / 2, 0, new Duration(TimeSpan.FromMilliseconds(100)));
+                var animation1 = new DoubleAnimation(line1.X1, this.ItemWidth / 2, new Duration(TimeSpan.FromMilliseconds(animTime)));
                 if (line1 != null) line1.BeginAnimation(Line.X1Property, animation1);
+                var animation2 = new DoubleAnimation(line2.X2, 0, new Duration(TimeSpan.FromMilliseconds(animTime)));
                 if (line2 != null) line2.BeginAnimation(Line.X2Property, animation2);
             }
         }

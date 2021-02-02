@@ -196,13 +196,17 @@ namespace Paway.WPF
         private static double AnimTime(ContentPresenter content, double value = 0, double time = 0, bool x = true)
         {
             var animTime = time;
-            if (animTime == 0)
-            {
-                var animValue = value == 0 ? x ? content.ActualWidth : content.ActualHeight : value;
-                animTime = (int)(Math.Pow(animValue, 1.0 / 4) * 100);
-                if (animTime < 300) animTime = 300;
-                else if (animTime > 1000) animTime = 1000;
-            }
+            if (animTime == 0) animTime = AnimTime(value == 0 ? x ? content.ActualWidth : content.ActualHeight : value);
+            return animTime;
+        }
+        /// <summary>
+        /// 计算动画时间
+        /// </summary>
+        public static double AnimTime(double value, int minTime = 300)
+        {
+            var animTime = (int)(Math.Pow(value, 1.0 / 4) * 100);
+            if (animTime < minTime) animTime = minTime;
+            else if (animTime > 1000) animTime = 1000;
             return animTime;
         }
 
