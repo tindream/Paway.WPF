@@ -31,14 +31,14 @@ namespace Paway.WPF
     {
         #region Adorner调用
         /// <summary>
-        /// 点击触发圆环水波纹装饰器
+        /// 点击触发水波纹装饰器
         /// </summary>
-        public static void EllipseAdorner(MouseEventArgs e)
+        public static void EllipseAdorner(MouseEventArgs e, double width = 0)
         {
             if (!(e.OriginalSource is FrameworkElement element)) return;
-            if (element is Ellipse ellipse && ellipse.Name == "adorner" && element.Parent is Canvas canvas)
-            {
-                if (Method.Parent(canvas, out EllipseAdorner adorner) && adorner.AdornedElement is FrameworkElement framework)
+            if (element is Adorner adorner)
+            {//暂未使用
+                if (adorner.AdornedElement is FrameworkElement framework)
                 {
                     element = framework;
                 }
@@ -58,7 +58,7 @@ namespace Paway.WPF
             if (myAdornerLayer != null)
             {
                 var point = e.GetPosition(element);
-                myAdornerLayer.Add(new EllipseAdorner(element, point));
+                myAdornerLayer.Add(new EllipseAdorner(element, point, width));
             }
         }
 

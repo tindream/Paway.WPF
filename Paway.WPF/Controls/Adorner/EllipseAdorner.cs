@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 namespace Paway.WPF
 {
     /// <summary>
-    /// 圆环水波纹装饰器
+    /// 水波纹装饰器
     /// </summary>
     public class EllipseAdorner : Adorner
     {
@@ -31,10 +31,10 @@ namespace Paway.WPF
         public static readonly DependencyProperty LineColorProperty =
             DependencyProperty.Register(nameof(LineColor), typeof(Color), typeof(EllipseAdorner), new UIPropertyMetadata(Colors.Transparent));
         /// <summary>
-        /// 圆环水波纹背景颜色
+        /// 水波纹背景颜色
         /// </summary>
         [Category("扩展")]
-        [Description("圆环水波纹背景颜色")]
+        [Description("水波纹背景颜色")]
         public Color Background
         {
             get { return (Color)GetValue(BackgroundProperty); }
@@ -53,33 +53,35 @@ namespace Paway.WPF
 
         #endregion
 
-        private readonly double width;
         private readonly Canvas canvas;
         /// <summary>
         /// 构造要将绑定到的装饰器的元素
         /// </summary>
-        public EllipseAdorner(FrameworkElement adornedElement, Point point) : base(adornedElement)
+        public EllipseAdorner(FrameworkElement adornedElement, Point point, double width = 0) : base(adornedElement)
         {
-            var x = Math.Max(adornedElement.ActualWidth - point.X, point.X);
-            var y = Math.Max(adornedElement.ActualHeight - point.Y, point.Y);
-            this.width = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2)) * 2;
+            //路由事件
+            IsHitTestVisible = false;
             canvas = new Canvas() { ClipToBounds = true };
             //添加到可视化树中
             var visCollec = new VisualCollection(this);
             visCollec.Add(canvas);
 
-            var ellipse = new Ellipse() { Name = "adorner", Width = 10, Height = 10, Fill = new SolidColorBrush(Background) };
+            var x = Math.Max(adornedElement.ActualWidth - point.X, point.X);
+            var y = Math.Max(adornedElement.ActualHeight - point.Y, point.Y);
+            var maxWidth = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2)) * 2;
+            if (width == 0 || width > maxWidth) width = maxWidth;
+            var ellipse = new Ellipse() { Width = 10, Height = 10, Fill = new SolidColorBrush(Background) };
             canvas.Children.Add(ellipse);
             ellipse.Loaded += (sender, e) =>
             {
-                var time = Method.AnimTime(this.width) * 1.5;
-                var animation = new DoubleAnimation(10, this.width, new Duration(TimeSpan.FromMilliseconds(time)));
-                var animation2 = new DoubleAnimation(10, this.width, new Duration(TimeSpan.FromMilliseconds(time)));
+                Method.Invoke(ellipse, () => { });
+                var time = Method.AnimTime(width, 200) * 1.5;
+                var animation = new DoubleAnimation(10, width, new Duration(TimeSpan.FromMilliseconds(time)));
+                var animation2 = new DoubleAnimation(10, width, new Duration(TimeSpan.FromMilliseconds(time)));
                 animation.CurrentTimeInvalidated += (sender2, e2) =>
                 {
-                    var width = Math.Max(ellipse.Width, ellipse.Height);
-                    Canvas.SetLeft(ellipse, point.X - width / 2);
-                    Canvas.SetTop(ellipse, point.Y - width / 2);
+                    Canvas.SetLeft(ellipse, point.X - ellipse.Width / 2);
+                    Canvas.SetTop(ellipse, point.Y - ellipse.Height / 2);
                 };
                 animation.Completed += (sender2, e2) =>
                 {
@@ -99,8 +101,8 @@ namespace Paway.WPF
                     var solid = ellipse.Fill = (SolidColorBrush)ellipse.Fill.Clone();
                     solid.BeginAnimation(SolidColorBrush.ColorProperty, colorAnm2);
                 };
-                ellipse.BeginAnimation(FrameworkElement.WidthProperty, animation2);
-                ellipse.BeginAnimation(FrameworkElement.HeightProperty, animation);
+                ellipse.BeginAnimation(Ellipse.WidthProperty, animation2);
+                ellipse.BeginAnimation(Ellipse.HeightProperty, animation);
 
 
                 var colorAnm = new ColorAnimation(Background, Color.FromArgb(20, Background.R, Background.G, Background.B), new Duration(TimeSpan.FromMilliseconds(300)));
