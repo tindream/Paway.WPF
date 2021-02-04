@@ -48,6 +48,29 @@ namespace Paway.Test
                 Messenger.Default.Send(new StatuMessage(ex.Message()));
                 Method.Error(this, ex.Message());
             });
+            Animation(e1);
+            Animation(e2, 750);
+            Animation(e3, 1500);
+            Animation(e4, 2250);
+        }
+        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
+        {
+            Method.EllipseAdorner(e);
+            base.OnPreviewMouseDown(e);
+        }
+        private void Animation(Ellipse ellipse, double beginTime = 0, double time = 3000)
+        {
+            var widthAnimation = new DoubleAnimation(10, 100, new Duration(TimeSpan.FromMilliseconds(time)));
+            widthAnimation.BeginTime = TimeSpan.FromMilliseconds(beginTime);
+            widthAnimation.RepeatBehavior = RepeatBehavior.Forever;
+            ellipse.BeginAnimation(FrameworkElement.WidthProperty, widthAnimation);
+            ellipse.BeginAnimation(FrameworkElement.HeightProperty, widthAnimation);
+
+            var colorAnimation = new ColorAnimation(Color.FromArgb(160, 255, 0, 0), Color.FromArgb(10, 255, 0, 0), new Duration(TimeSpan.FromMilliseconds(time)));
+            colorAnimation.BeginTime = TimeSpan.FromMilliseconds(beginTime);
+            colorAnimation.RepeatBehavior = RepeatBehavior.Forever;
+            var solid = ellipse.Fill = (SolidColorBrush)ellipse.Fill.Clone();
+            solid.BeginAnimation(SolidColorBrush.ColorProperty, colorAnimation);
         }
 
         private bool b;

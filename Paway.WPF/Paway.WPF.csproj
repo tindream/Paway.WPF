@@ -112,6 +112,7 @@
     <Compile Include="Controls\Extended\CheckBoxEXT.cs" />
     <Compile Include="Controls\Interface\IComboBoxMulti.cs" />
     <Compile Include="Controls\Interface\ITreeView.cs" />
+    <Compile Include="Controls\Adorner\EllipseAdorner.cs" />
     <Compile Include="Controls\Progress\Progress.cs" />
     <Compile Include="Controls\Progress\ProgressTemplate.cs" />
     <Compile Include="Controls\Progress\ProgressMonitor.cs" />

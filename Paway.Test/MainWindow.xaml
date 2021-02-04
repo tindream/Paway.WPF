@@ -189,6 +189,13 @@
                 </oxy:PlotView>
 
             </StackPanel>
+            <Grid Grid.Column="1" Height="100" VerticalAlignment="Top" Margin="0,-108,0,0">
+                <Ellipse x:Name="e1" Height="10" Width="10" Fill="Red" />
+                <Ellipse x:Name="e2" Height="10" Width="10" Fill="Red" />
+                <Ellipse x:Name="e3" Height="10" Width="10" Fill="Red" />
+                <Ellipse x:Name="e4" Height="10" Width="10" Fill="Red" />
+                <Ellipse Height="10" Width="10" Fill="Red" />
+            </Grid>
         </Grid>
     </DockPanel>
     <utils:WindowEXT.FunctionBar>

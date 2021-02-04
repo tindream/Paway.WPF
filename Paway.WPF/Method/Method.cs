@@ -12,9 +12,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Xml;
 using Paway.Helper;
@@ -26,6 +29,41 @@ namespace Paway.WPF
     /// </summary>
     public class Method : TMethod
     {
+        #region Adorner调用
+        /// <summary>
+        /// 点击触发圆环水波纹装饰器
+        /// </summary>
+        public static void EllipseAdorner(MouseEventArgs e)
+        {
+            if (!(e.OriginalSource is FrameworkElement element)) return;
+            if (element is Ellipse ellipse && ellipse.Name == "adorner" && element.Parent is Canvas canvas)
+            {
+                if (Method.Parent(canvas, out EllipseAdorner adorner) && adorner.AdornedElement is FrameworkElement framework)
+                {
+                    element = framework;
+                }
+            }
+            if (element is TextBlock textBlock)
+            {
+                if (textBlock.Parent is FrameworkElement framework)
+                {
+                    element = framework;
+                }
+                else if (Method.Parent(textBlock, out ContentPresenter content) && content.Parent is FrameworkElement framework2)
+                {
+                    element = framework2;
+                }
+            }
+            var myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
+            if (myAdornerLayer != null)
+            {
+                var point = e.GetPosition(element);
+                myAdornerLayer.Add(new EllipseAdorner(element, point));
+            }
+        }
+
+        #endregion
+
         #region 统一Invoke处理
         /// <summary>
         /// 同步调用
@@ -590,6 +628,7 @@ namespace Paway.WPF
             {
                 return true;
             }
+            var hasParent = false;
             while (dependency != null)
             {
                 if (dependency is T t)
@@ -603,8 +642,9 @@ namespace Paway.WPF
                 var temp = VisualTreeHelper.GetParent(dependency);
                 if (temp == null) break;
                 dependency = temp;
+                hasParent = true;
             }
-            if (Child(dependency, out parent, name))
+            if (hasParent && Child(dependency, out parent, name))
             {
                 return true;
             }
@@ -617,6 +657,7 @@ namespace Paway.WPF
         {
             parent = null;
             if (!(obj is DependencyObject dependency)) return false;
+            dependency = VisualTreeHelper.GetParent(dependency);
             while (dependency != null)
             {
                 if (dependency is T t)
