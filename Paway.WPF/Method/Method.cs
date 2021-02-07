@@ -33,9 +33,9 @@ namespace Paway.WPF
         /// <summary>
         /// 点击触发水波纹装饰器
         /// </summary>
-        public static void EllipseAdorner(MouseEventArgs e, double width = 0, double maxWidth = 500)
+        public static AdornerLayer EllipseAdorner(MouseEventArgs e, double width = 0, double maxWidth = 500)
         {
-            if (!(e.OriginalSource is FrameworkElement element)) return;
+            if (!(e.OriginalSource is FrameworkElement element)) return null;
             if (element is Adorner adorner)
             {//暂未使用
                 if (adorner.AdornedElement is FrameworkElement framework)
@@ -54,12 +54,21 @@ namespace Paway.WPF
                     element = framework2;
                 }
             }
+            var myAdornerLayer = EllipseAdorner(element, e, width, maxWidth);
+            return myAdornerLayer;
+        }
+        /// <summary>
+        /// 点击触发水波纹装饰器
+        /// </summary>
+        public static AdornerLayer EllipseAdorner(FrameworkElement element, MouseEventArgs e, double width, double maxWidth = 500)
+        {
             var myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
             if (myAdornerLayer != null)
             {
                 var point = e.GetPosition(element);
                 myAdornerLayer.Add(new EllipseAdorner(element, point, width, maxWidth));
             }
+            return myAdornerLayer;
         }
 
         #endregion

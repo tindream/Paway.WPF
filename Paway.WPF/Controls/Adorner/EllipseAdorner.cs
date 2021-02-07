@@ -75,38 +75,30 @@ namespace Paway.WPF
             canvas.Children.Add(ellipse);
             ellipse.Loaded += (sender, e) =>
             {
-                Method.Invoke(ellipse, () => { });
-                var time = Method.AnimTime(width) * 1.5;
+                var time = Method.AnimTime(width) * 1.3;
                 var animation = new DoubleAnimation(10, width, new Duration(TimeSpan.FromMilliseconds(time)));
                 var animation2 = new DoubleAnimation(10, width, new Duration(TimeSpan.FromMilliseconds(time)));
                 animation.CurrentTimeInvalidated += (sender2, e2) =>
                 {
-                    Canvas.SetLeft(ellipse, point.X - ellipse.Width / 2);
-                    Canvas.SetTop(ellipse, point.Y - ellipse.Height / 2);
+                    Canvas.SetLeft(ellipse, point.X - ellipse.ActualWidth / 2);
+                    Canvas.SetTop(ellipse, point.Y - ellipse.ActualHeight / 2);
                 };
                 animation.Completed += (sender2, e2) =>
                 {
-                    var colorAnm2 = new ColorAnimation((ellipse.Fill as SolidColorBrush).Color, Colors.Transparent, new Duration(TimeSpan.FromMilliseconds(30)));
-                    colorAnm2.Completed += (sender3, e3) =>
+                    var myAdornerLayer = AdornerLayer.GetAdornerLayer(adornedElement);
+                    if (myAdornerLayer != null)
                     {
-                        var myAdornerLayer = AdornerLayer.GetAdornerLayer(adornedElement);
-                        if (myAdornerLayer != null)
+                        var list = myAdornerLayer.GetAdorners(adornedElement);
+                        if (list != null)
                         {
-                            var list = myAdornerLayer.GetAdorners(adornedElement);
-                            if (list != null && list.Count() > 0)
-                            {
-                                myAdornerLayer.Remove(list.First());
-                            }
+                            myAdornerLayer.Remove(this);
                         }
-                    };
-                    var solid = ellipse.Fill = (SolidColorBrush)ellipse.Fill.Clone();
-                    solid.BeginAnimation(SolidColorBrush.ColorProperty, colorAnm2);
+                    }
                 };
                 ellipse.BeginAnimation(Ellipse.WidthProperty, animation2);
                 ellipse.BeginAnimation(Ellipse.HeightProperty, animation);
 
-
-                var colorAnm = new ColorAnimation(Background, Color.FromArgb(20, Background.R, Background.G, Background.B), new Duration(TimeSpan.FromMilliseconds(300)));
+                var colorAnm = new ColorAnimation(Background, Color.FromArgb(10, Background.R, Background.G, Background.B), new Duration(TimeSpan.FromMilliseconds(300)));
                 ellipse.Fill.BeginAnimation(SolidColorBrush.ColorProperty, colorAnm);
             };
         }

@@ -13,7 +13,7 @@
         HeaderHeight="72" ButtonAlignment="Top"
         Title="MainWindow" Height="800" Width="850" WindowStartupLocation="CenterScreen">
 
-    <DockPanel>
+    <DockPanel Name="panel">
         <StatusBar DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Foreground="White" Height="30" Style="{StaticResource themeBackHigh}">
             <TextBlock Text="{Binding Desc}" Padding="10,6" FontSize="14" Margin="-3"></TextBlock>
         </StatusBar>
