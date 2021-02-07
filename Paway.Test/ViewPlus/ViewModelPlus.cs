@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Paway.Helper;
 using Paway.WPF;
 using System.Windows.Input;
 
@@ -12,7 +13,7 @@ namespace Paway.Test.ViewModel
     {
         public void RaisePropertyChanged()
         {
-            RaisePropertyChanged(Method.GetLastModelName());
+            RaisePropertyChanged(TMethod.GetLastModelName());
         }
     }
 }

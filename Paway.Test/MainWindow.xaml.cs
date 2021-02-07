@@ -55,7 +55,7 @@ namespace Paway.Test
         }
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
-            Method.EllipseAdorner(e, 30);
+            Method.EllipseAdorner(e);
             base.OnPreviewMouseDown(e);
         }
         private void Animation(Ellipse ellipse, double beginTime = 0, double time = 3000)

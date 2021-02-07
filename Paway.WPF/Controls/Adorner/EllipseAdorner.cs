@@ -57,7 +57,7 @@ namespace Paway.WPF
         /// <summary>
         /// 构造要将绑定到的装饰器的元素
         /// </summary>
-        public EllipseAdorner(FrameworkElement adornedElement, Point point, double width = 0) : base(adornedElement)
+        public EllipseAdorner(FrameworkElement adornedElement, Point point, double width = 0, double maxWidth = 500) : base(adornedElement)
         {
             //路由事件
             IsHitTestVisible = false;
@@ -68,14 +68,15 @@ namespace Paway.WPF
 
             var x = Math.Max(adornedElement.ActualWidth - point.X, point.X);
             var y = Math.Max(adornedElement.ActualHeight - point.Y, point.Y);
-            var maxWidth = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2)) * 2;
-            if (width == 0 || width > maxWidth) width = maxWidth;
+            var autoWidth = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2)) * 2;
+            if (width == 0 || width > autoWidth) width = autoWidth;
+            if (maxWidth > 0 && width > maxWidth) width = maxWidth;
             var ellipse = new Ellipse() { Width = 10, Height = 10, Fill = new SolidColorBrush(Background) };
             canvas.Children.Add(ellipse);
             ellipse.Loaded += (sender, e) =>
             {
                 Method.Invoke(ellipse, () => { });
-                var time = Method.AnimTime(width, 200) * 1.5;
+                var time = Method.AnimTime(width) * 1.5;
                 var animation = new DoubleAnimation(10, width, new Duration(TimeSpan.FromMilliseconds(time)));
                 var animation2 = new DoubleAnimation(10, width, new Duration(TimeSpan.FromMilliseconds(time)));
                 animation.CurrentTimeInvalidated += (sender2, e2) =>

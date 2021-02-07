@@ -618,7 +618,7 @@ namespace Paway.WPF
         {
             Method.Child(item, out Line line1, "line1", false);
             Method.Child(item, out Line line2, "line2", false);
-            var animTime = Method.AnimTime(this.ItemWidth / 2, 100) / 2;
+            var animTime = Method.AnimTime(this.ItemWidth / 2) * 0.5;
             if (value)
             {
                 var animation1 = new DoubleAnimation(line1.X1, 0, new Duration(TimeSpan.FromMilliseconds(animTime)));

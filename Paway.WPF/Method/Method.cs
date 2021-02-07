@@ -33,7 +33,7 @@ namespace Paway.WPF
         /// <summary>
         /// 点击触发水波纹装饰器
         /// </summary>
-        public static void EllipseAdorner(MouseEventArgs e, double width = 0)
+        public static void EllipseAdorner(MouseEventArgs e, double width = 0, double maxWidth = 500)
         {
             if (!(e.OriginalSource is FrameworkElement element)) return;
             if (element is Adorner adorner)
@@ -58,7 +58,7 @@ namespace Paway.WPF
             if (myAdornerLayer != null)
             {
                 var point = e.GetPosition(element);
-                myAdornerLayer.Add(new EllipseAdorner(element, point, width));
+                myAdornerLayer.Add(new EllipseAdorner(element, point, width, maxWidth));
             }
         }
 
@@ -240,11 +240,11 @@ namespace Paway.WPF
         /// <summary>
         /// 计算动画时间
         /// </summary>
-        public static double AnimTime(double value, int minTime = 300)
+        public static double AnimTime(double value, int minTime = 250)
         {
             var animTime = (int)(Math.Pow(value, 1.0 / 4) * 100);
             if (animTime < minTime) animTime = minTime;
-            else if (animTime > 1000) animTime = 1000;
+            if (animTime > 1000) animTime = 1000;
             return animTime;
         }
 
@@ -282,21 +282,6 @@ namespace Paway.WPF
                 xaml = "no template";
             }
             return xaml;
-        }
-        /// <summary>
-        /// 从堆栈中获取上一个调用方法名称
-        /// <para>属性Set方法去除set_前辍</para>
-        /// </summary>
-        public static string GetLastModelName(int index = 2)
-        {
-            //当前堆栈信息
-            var sfs = new StackTrace().GetFrames();
-            //方法名称
-            //sfs[i].GetFileLineNumber();//没有PDB文件的情况下将始终返回0
-            if (sfs.Length < index) return null;
-            var name = sfs[index].GetMethod().Name;
-            if (name.StartsWith("set_")) name = name.Remove(0, 4);
-            return name;
         }
 
         #endregion

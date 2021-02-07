@@ -24,7 +24,7 @@ namespace Paway.WPF
         /// </summary>
         public void OnPropertyChanged()
         {
-            OnPropertyChanged(Method.GetLastModelName());
+            OnPropertyChanged(TMethod.GetLastModelName());
         }
         /// <summary>
         /// 手动引发

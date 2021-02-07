@@ -22,7 +22,7 @@ namespace Paway.WPF
         /// </summary>
         public void OnPropertyChanged()
         {
-            var name = Method.GetLastModelName();
+            var name = TMethod.GetLastModelName();
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
