@@ -20,7 +20,7 @@ namespace Paway.WPF
         /// <summary>
         /// 构造要将绑定到的装饰器的元素
         /// </summary>
-        public CustomAdorner(FrameworkElement adornedElement, Func<FrameworkElement> elementFunc, Func<Tuple<DependencyProperty, AnimationTimeline>> animFunc) : base(adornedElement)
+        public CustomAdorner(FrameworkElement adornedElement, Func<FrameworkElement> elementFunc, Func<Storyboard> boardFunc) : base(adornedElement)
         {
             //路由事件
             IsHitTestVisible = false;
@@ -38,13 +38,13 @@ namespace Paway.WPF
             };
             element.Loaded += (sender, e) =>
             {
-                Tuple<DependencyProperty, AnimationTimeline> animation = animFunc();
-                animation.Item2.CurrentTimeInvalidated += (sender2, e2) =>
+                var board = boardFunc();
+                board.CurrentTimeInvalidated += (sender2, e2) =>
                 {
                     Canvas.SetLeft(element, canvas.ActualWidth / 2 - element.ActualWidth / 2);
                     Canvas.SetTop(element, canvas.ActualHeight / 2 - element.ActualHeight / 2);
                 };
-                animation.Item2.Completed += (sender2, e2) =>
+                board.Completed += (sender2, e2) =>
                 {
                     var myAdornerLayer = AdornerLayer.GetAdornerLayer(adornedElement);
                     if (myAdornerLayer != null)
@@ -56,7 +56,7 @@ namespace Paway.WPF
                         }
                     }
                 };
-                element.BeginAnimation(animation.Item1, animation.Item2);
+                board.Begin(element);
             };
         }
         /// <summary>
