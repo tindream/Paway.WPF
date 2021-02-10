@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Security;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -57,8 +58,8 @@ namespace Paway.WPF
             var myAdornerLayer = EllipseAdorner(element, e, null, width, maxWidth);
             if (myAdornerLayer == null)
             {
-                var window = Method.Window(element);
-                if (window != null && window.Content is Panel panel)
+                if (!Parent(element, out Window window)) return null;
+                if (window.Content is Panel panel)
                 {
                     Method.EllipseAdorner(panel, e, null, width, maxWidth);
                 }
@@ -82,7 +83,7 @@ namespace Paway.WPF
 
             if (color == null) color = Color.FromArgb(255, 35, 175, 255);
             var ellipse = new Ellipse() { Width = 10, Height = 10, Fill = new SolidColorBrush(color.Value) };
-            myAdornerLayer.Add(new NoRouteAdorner(element, () => point.X - ellipse.ActualWidth / 2, () => point.Y - ellipse.ActualHeight / 2, () => ellipse, () =>
+            myAdornerLayer.Add(new CustomAdorner(element, () => ellipse, null, () => point.X - ellipse.ActualWidth / 2, () => point.Y - ellipse.ActualHeight / 2, () =>
             {
                 var storyboard = new Storyboard();
                 var time = Method.AnimTime(width) * 1.3;
@@ -440,7 +441,7 @@ namespace Paway.WPF
                     {
                         BeginInvoke(parent, () =>
                         {
-                            Hide(parent);
+                            ProgressClose(parent);
                             completed?.Invoke();
                         });
                     }
@@ -451,30 +452,80 @@ namespace Paway.WPF
         /// <summary>
         /// 同步显示Window进度条
         /// </summary>
-        /// <param name="parent"></param>
-        /// <param name="dialog">模式显示标记，默认true</param>
-        public static void Progress(DependencyObject parent = null, bool dialog = true)
+        public static void Progress(DependencyObject parent, object msg = null)
         {
-            if (progress == null) progress = new WindowProgress();
-            if (Parent(parent, out Window owner))
+            if (!Parent(parent, out Window window)) return;
+            if (window.Content is Panel panel)
             {
-                owner.Closed += delegate
+                var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
+                if (myAdornerLayer == null) return;
+
+                var border = new Border
                 {
-                    Hide(owner);
+                    CornerRadius = new CornerRadius(3),
+                    BorderBrush = new SolidColorBrush(Colors.LightGray),
+                    BorderThickness = new Thickness(1),
+                    Background = new SolidColorBrush(Color.FromArgb(240, 255, 255, 255)),
+                    MinWidth = 200,
+                    MaxWidth = 350,
                 };
-                progress.Owner = owner;
+                var dp = new DockPanel();
+                border.Child = dp;
+                var textBlock = new TextBlock()
+                {
+                    Text = msg == null ? TConfig.Loading : msg.ToStrs(),
+                    Padding = new Thickness(10),
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    TextTrimming = TextTrimming.WordEllipsis,
+                };
+                dp.Children.Add(textBlock);
+                DockPanel.SetDock(textBlock, Dock.Bottom);
+                dp.Children.Add(new Progress
+                {
+                    Margin = new Thickness(20),
+                    Width = 80,
+                    Height = 80,
+                });
+                myAdornerLayer.Add(new CustomAdorner(panel, () => border, Color.FromArgb(10, 0, 0, 0)));
             }
-            else
-            {
-                progress.Topmost = true;
-            }
-            if (dialog) progress.ShowDialog();
-            else progress.Show();
         }
         /// <summary>
         /// 隐藏Window进度条
         /// </summary>
-        public static void Hide(object parent = null)
+        public static void ProgressClose(DependencyObject parent)
+        {
+            if (!Parent(parent, out Window window)) return;
+            if (window.Content is Panel panel)
+            {
+                var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
+                if (myAdornerLayer == null) return;
+                var list = myAdornerLayer.GetAdorners(panel);
+                if (list != null && list.Count() > 0)
+                {
+                    myAdornerLayer.Remove(list.First());
+                }
+            }
+        }
+        /// <summary>
+        /// 同步显示Window进度条(弹框模式)
+        /// </summary>
+        public static void ProgressWindow(DependencyObject parent, object msg = null)
+        {
+            if (progress == null) progress = new WindowProgress(msg);
+            if (Parent(parent, out Window owner))
+            {
+                owner.Closed += delegate
+                {
+                    ProgressWindowClose(owner);
+                };
+                progress.Owner = owner;
+                progress.ShowDialog();
+            }
+        }
+        /// <summary>
+        /// 隐藏Window进度条(弹框模式)
+        /// </summary>
+        public static void ProgressWindowClose(DependencyObject parent)
         {
             if (progress != null) progress.Close();
             progress = null;
@@ -571,8 +622,8 @@ namespace Paway.WPF
             //        toast.Show(msg, time, iError);
             //    }
             //});
-            var window = Method.Window(parent);
-            if (window != null && window.Content is Panel panel)
+            if (!Parent(parent, out Window window)) return;
+            if (window.Content is Panel panel)
             {
                 var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
                 if (myAdornerLayer == null) return;
@@ -596,12 +647,12 @@ namespace Paway.WPF
                 };
                 border.Child = block;
                 if (time == 0) time = 3000;
-                myAdornerLayer.Add(new NoRouteAdorner(panel, null, () =>
+                myAdornerLayer.Add(new CustomAdorner(panel, () => border, null, null, () =>
                 {
                     var top = window.ActualHeight - border.ActualHeight;
                     top = top * 17 / 20;
                     return top;
-                }, () => border, () =>
+                }, () =>
                 {
                     var storyboard = new Storyboard();
 
@@ -700,7 +751,6 @@ namespace Paway.WPF
         /// </summary>
         public static Window Window(DependencyObject obj)
         {
-            if (obj is Window) return (Window)obj;
             if (Parent(obj, out Window window)) return window;
             return null;
         }
@@ -746,6 +796,14 @@ namespace Paway.WPF
         /// </summary>
         public static bool Parent<T>(object obj, out T parent, string name = null) where T : FrameworkElement
         {
+            if (obj is T t1)
+            {
+                if (name == null || t1.Name == name)
+                {
+                    parent = t1;
+                    return true;
+                }
+            }
             parent = null;
             if (!(obj is DependencyObject dependency)) return false;
             dependency = VisualTreeHelper.GetParent(dependency);

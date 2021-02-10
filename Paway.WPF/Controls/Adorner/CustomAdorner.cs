@@ -12,19 +12,21 @@ using System.Windows.Media.Animation;
 namespace Paway.WPF
 {
     /// <summary>
-    /// 无路由动画装饰器
+    /// 自定义动画装饰器
     /// </summary>
-    public class NoRouteAdorner : Adorner
+    public class CustomAdorner : Adorner
     {
         private readonly Canvas canvas;
         /// <summary>
         /// 构造要将绑定到的装饰器的元素
         /// </summary>
-        public NoRouteAdorner(FrameworkElement adornedElement, Func<double> xFunc, Func<double> yFunc, Func<FrameworkElement> elementFunc, Func<Storyboard> boardFunc) : base(adornedElement)
+        public CustomAdorner(FrameworkElement adornedElement, Func<FrameworkElement> elementFunc, Color? color = null, Func<double> xFunc = null, Func<double> yFunc = null, Func<Storyboard> boardFunc = null) : base(adornedElement)
         {
-            //无路由事件
-            IsHitTestVisible = false;
+            //true:不路由事件
+            //false:路由事件
+            IsHitTestVisible = boardFunc == null;
             canvas = new Canvas() { ClipToBounds = true };
+            if (color != null) canvas.Background = new SolidColorBrush(color.Value);
             //添加到可视化树中
             var visCollec = new VisualCollection(this);
             visCollec.Add(canvas);
@@ -38,6 +40,7 @@ namespace Paway.WPF
             };
             element.Loaded += (sender, e) =>
             {
+                if (boardFunc == null) return;
                 var board = boardFunc();
                 board.CurrentTimeInvalidated += (sender2, e2) =>
                 {
@@ -49,11 +52,7 @@ namespace Paway.WPF
                     var myAdornerLayer = AdornerLayer.GetAdornerLayer(adornedElement);
                     if (myAdornerLayer != null)
                     {
-                        var list = myAdornerLayer.GetAdorners(adornedElement);
-                        if (list != null)
-                        {
-                            myAdornerLayer.Remove(this);
-                        }
+                        myAdornerLayer.Remove(this);
                     }
                 };
                 board.Begin(element);

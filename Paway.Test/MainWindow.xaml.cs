@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -113,8 +114,6 @@ namespace Paway.Test
             var xml = Method.GetTemplateXaml(dp);
             //Method.Toast(this, xml);
 
-            Method.Progress(this, false);
-
             transition.TransitionType = (TransitionType)new Random().Next(0, 5);
             if (transition.Content != pathNew) transition.Content = this.pathNew;
             else transition.Content = this.pathCurrent;
@@ -127,8 +126,6 @@ namespace Paway.Test
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             storyboard.Stop(this);
-
-            Method.Hide();
 
             var animX1 = new DoubleAnimation(line1.X1, 137, new Duration(TimeSpan.FromMilliseconds(200)));
             line1.BeginAnimation(Line.X1Property, animX1);

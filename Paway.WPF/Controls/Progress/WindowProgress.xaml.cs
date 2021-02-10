@@ -26,10 +26,10 @@ namespace Paway.WPF
         private bool iFirst = true;
         /// <summary>
         /// </summary>
-        public WindowProgress(string msg = TConfig.Loading)
+        public WindowProgress(object msg)
         {
             InitializeComponent();
-            desc.Text = msg;
+            desc.Text = msg == null ? TConfig.Loading : msg.ToStrs();
         }
         /// <summary>
         /// 自动大小
