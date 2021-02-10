@@ -33,7 +33,7 @@ namespace Paway.WPF
         /// <summary>
         /// 点击触发水波纹装饰器
         /// </summary>
-        public static AdornerLayer EllipseAdorner(MouseEventArgs e, double width = 0, double maxWidth = 500)
+        public static AdornerLayer EllipseAdorner(MouseEventArgs e, double width = 0, double maxWidth = 300)
         {
             if (!(e.OriginalSource is FrameworkElement element)) return null;
             if (element is Adorner adorner)
@@ -54,20 +54,56 @@ namespace Paway.WPF
                     element = framework2;
                 }
             }
-            var myAdornerLayer = EllipseAdorner(element, e, width, maxWidth);
+            var myAdornerLayer = EllipseAdorner(element, e, null, width, maxWidth);
+            if (myAdornerLayer == null)
+            {
+                var window = Method.Window(element);
+                if (window != null && window.Content is Panel panel)
+                {
+                    Method.EllipseAdorner(panel, e, null, width, maxWidth);
+                }
+            }
             return myAdornerLayer;
         }
         /// <summary>
         /// 点击触发水波纹装饰器
         /// </summary>
-        public static AdornerLayer EllipseAdorner(FrameworkElement element, MouseEventArgs e, double width, double maxWidth = 500)
+        public static AdornerLayer EllipseAdorner(FrameworkElement element, MouseEventArgs e, Color? color = null, double width = 0, double maxWidth = 300)
         {
             var myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
-            if (myAdornerLayer != null)
+            if (myAdornerLayer == null) return null;
+
+            var point = e.GetPosition(element);
+            var x = Math.Max(element.ActualWidth - point.X, point.X);
+            var y = Math.Max(element.ActualHeight - point.Y, point.Y);
+            var autoWidth = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2)) * 2;
+            if (width == 0 || width > autoWidth) width = autoWidth;
+            if (maxWidth > 0 && width > maxWidth) width = maxWidth;
+
+            if (color == null) color = Color.FromArgb(255, 35, 175, 255);
+            var ellipse = new Ellipse() { Width = 10, Height = 10, Fill = new SolidColorBrush(color.Value) };
+            myAdornerLayer.Add(new NoRouteAdorner(element, () => point.X - ellipse.ActualWidth / 2, () => point.Y - ellipse.ActualHeight / 2, () => ellipse, () =>
             {
-                var point = e.GetPosition(element);
-                myAdornerLayer.Add(new EllipseAdorner(element, point, width, maxWidth));
-            }
+                var storyboard = new Storyboard();
+                var time = Method.AnimTime(width) * 1.3;
+
+                var animWidth = new DoubleAnimation(10, width, new Duration(TimeSpan.FromMilliseconds(time)));
+                Storyboard.SetTargetProperty(animWidth, new PropertyPath(FrameworkElement.WidthProperty));
+                storyboard.Children.Add(animWidth);
+
+                var animHeight = new DoubleAnimation(10, width, new Duration(TimeSpan.FromMilliseconds(time)));
+                Storyboard.SetTargetProperty(animHeight, new PropertyPath(FrameworkElement.HeightProperty));
+                storyboard.Children.Add(animHeight);
+
+
+                var animColor = new ColorAnimation(color.Value, Color.FromArgb(10, color.Value.R, color.Value.G, color.Value.B), new Duration(TimeSpan.FromMilliseconds(300)));
+                ellipse.Fill.BeginAnimation(SolidColorBrush.ColorProperty, animColor);
+                var propertyChain = new DependencyProperty[] { Ellipse.FillProperty, SolidColorBrush.ColorProperty };
+                Storyboard.SetTargetProperty(animColor, new PropertyPath("(0).(1)", propertyChain));
+                storyboard.Children.Add(animColor);
+
+                return storyboard;
+            }));
             return myAdornerLayer;
         }
 
@@ -207,18 +243,18 @@ namespace Paway.WPF
         {
             if (content == null) return 0;
             //实例化旋转对象（顺时针旋转）
-            TranslateTransform tt = new TranslateTransform();
+            var tt = new TranslateTransform();
             //让content控件平移
             content.RenderTransform = tt;
             var animValue = value == 0 ? x ? content.ActualWidth : content.ActualHeight : value;
             var animTime = AnimTime(content, value, time, x);
             //创建动画处理对象
-            var animBy = new DoubleAnimation(display ? animValue * direction : 0, display ? 0 : animValue * direction, new Duration(TimeSpan.FromMilliseconds(animTime)));
+            var animXY = new DoubleAnimation(display ? animValue * direction : 0, display ? 0 : animValue * direction, new Duration(TimeSpan.FromMilliseconds(animTime)));
             //反向运动
             //animBy.AutoReverse = true;
             //无限循环
             //animBy.RepeatBehavior = RepeatBehavior.Forever;
-            tt.BeginAnimation(x ? TranslateTransform.XProperty : TranslateTransform.YProperty, animBy);
+            tt.BeginAnimation(x ? TranslateTransform.XProperty : TranslateTransform.YProperty, animXY);
             return animTime;
         }
 
@@ -235,9 +271,9 @@ namespace Paway.WPF
         {
             if (content == null) return 0;
             var animTime = AnimTime(content, value, time, x);
-            var opacity = new DoubleAnimation(display ? 0 : 1, display ? 1 : 0, new Duration(TimeSpan.FromMilliseconds(animTime)));
-            opacity.Completed += delegate { completed?.Invoke(); };
-            content.BeginAnimation(UIElement.OpacityProperty, opacity);
+            var animOpacity = new DoubleAnimation(display ? 0 : 1, display ? 1 : 0, new Duration(TimeSpan.FromMilliseconds(animTime)));
+            animOpacity.Completed += delegate { completed?.Invoke(); };
+            content.BeginAnimation(UIElement.OpacityProperty, animOpacity);
             return animTime;
         }
         private static double AnimTime(ContentPresenter content, double value = 0, double time = 0, bool x = true)
@@ -521,17 +557,77 @@ namespace Paway.WPF
         /// <summary>
         /// 自定义消息框-Toast
         /// </summary>
-        public static void Toast(DependencyObject parent, object msg, int time, bool iError = false)
+        public static void Toast(DependencyObject parent, object msg, double time, bool iError = false)
         {
-            Invoke(parent, () =>
+            //Invoke(parent, () =>
+            //{
+            //    var toast = new WindowToast();
+            //    if (Parent(parent, out Window owner))
+            //    {
+            //        var window = Method.Window(parent);
+            //        {
+            //            toast.Owner = owner;
+            //        }
+            //        toast.Show(msg, time, iError);
+            //    }
+            //});
+            var window = Method.Window(parent);
+            if (window != null && window.Content is Panel panel)
             {
-                var toast = new WindowToast();
-                if (Parent(parent, out Window owner))
+                var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
+                if (myAdornerLayer == null) return;
+
+                var color = iError ? Color.FromArgb(240, 221, 51, 51) : Color.FromArgb(240, 93, 107, 153);
+                var border = new Border
                 {
-                    toast.Owner = owner;
-                }
-                toast.Show(msg, time, iError);
-            });
+                    CornerRadius = new CornerRadius(5),
+                    Background = new SolidColorBrush(color),
+                };
+                var block = new TextBlock()
+                {
+                    Text = msg.ToStrs(),
+                    Margin = new Thickness(8, 0, 8, 0),
+                    Padding = new Thickness(17, 7, 17, 7),
+                    TextWrapping = TextWrapping.Wrap,
+                    TextAlignment = TextAlignment.Center,
+                    Foreground = new SolidColorBrush(Colors.White),
+                    MinWidth = 200,
+                    MaxWidth = 600
+                };
+                border.Child = block;
+                if (time == 0) time = 3000;
+                myAdornerLayer.Add(new NoRouteAdorner(panel, null, () =>
+                {
+                    var top = window.ActualHeight - border.ActualHeight;
+                    top = top * 17 / 20;
+                    return top;
+                }, () => border, () =>
+                {
+                    var storyboard = new Storyboard();
+
+                    var tt = new TranslateTransform();
+                    border.RenderTransform = tt;
+                    var animIn = new DoubleAnimation(-border.ActualHeight, 0, new Duration(TimeSpan.FromMilliseconds(125)));
+                    var propertyY = new DependencyProperty[] { UIElement.RenderTransformProperty, TranslateTransform.YProperty };
+                    Storyboard.SetTargetProperty(animIn, new PropertyPath("(0).(1)", propertyY));
+                    storyboard.Children.Add(animIn);
+
+                    var animTime = Method.AnimTime(border.ActualHeight);
+                    var animColor = new ColorAnimation(color, Color.FromArgb(0, color.R, color.G, color.B), new Duration(TimeSpan.FromMilliseconds(animTime * 3)));
+                    animColor.BeginTime = TimeSpan.FromMilliseconds(time + 125);
+                    var propertyChain = new DependencyProperty[] { Border.BackgroundProperty, SolidColorBrush.ColorProperty };
+                    Storyboard.SetTargetProperty(animColor, new PropertyPath("(0).(1)", propertyChain));
+                    storyboard.Children.Add(animColor);
+
+                    var animOut = new DoubleAnimation(0, border.ActualHeight + 0, new Duration(TimeSpan.FromMilliseconds(animTime)));
+                    animOut.BeginTime = TimeSpan.FromMilliseconds(time + 125);
+                    var propertyY2 = new DependencyProperty[] { UIElement.RenderTransformProperty, TranslateTransform.YProperty };
+                    Storyboard.SetTargetProperty(animOut, new PropertyPath("(0).(1)", propertyY2));
+                    storyboard.Children.Add(animOut);
+
+                    return storyboard;
+                }));
+            }
         }
 
         #endregion
@@ -604,6 +700,7 @@ namespace Paway.WPF
         /// </summary>
         public static Window Window(DependencyObject obj)
         {
+            if (obj is Window) return (Window)obj;
             if (Parent(obj, out Window window)) return window;
             return null;
         }

@@ -621,17 +621,17 @@ namespace Paway.WPF
             var animTime = Method.AnimTime(this.ItemWidth / 2) * 0.5;
             if (value)
             {
-                var animation1 = new DoubleAnimation(line1.X1, 0, new Duration(TimeSpan.FromMilliseconds(animTime)));
-                if (line1 != null) line1.BeginAnimation(Line.X1Property, animation1);
-                var animation2 = new DoubleAnimation(line2.X2, this.ItemWidth / 2, new Duration(TimeSpan.FromMilliseconds(animTime)));
-                if (line2 != null) line2.BeginAnimation(Line.X2Property, animation2);
+                var animX1 = new DoubleAnimation(line1.X1, 0, new Duration(TimeSpan.FromMilliseconds(animTime)));
+                if (line1 != null) line1.BeginAnimation(Line.X1Property, animX1);
+                var animX2 = new DoubleAnimation(line2.X2, this.ItemWidth / 2, new Duration(TimeSpan.FromMilliseconds(animTime)));
+                if (line2 != null) line2.BeginAnimation(Line.X2Property, animX2);
             }
             else
             {
-                var animation1 = new DoubleAnimation(line1.X1, this.ItemWidth / 2, new Duration(TimeSpan.FromMilliseconds(animTime)));
-                if (line1 != null) line1.BeginAnimation(Line.X1Property, animation1);
-                var animation2 = new DoubleAnimation(line2.X2, 0, new Duration(TimeSpan.FromMilliseconds(animTime)));
-                if (line2 != null) line2.BeginAnimation(Line.X2Property, animation2);
+                var animX1 = new DoubleAnimation(line1.X1, this.ItemWidth / 2, new Duration(TimeSpan.FromMilliseconds(animTime)));
+                if (line1 != null) line1.BeginAnimation(Line.X1Property, animX1);
+                var animX2 = new DoubleAnimation(line2.X2, 0, new Duration(TimeSpan.FromMilliseconds(animTime)));
+                if (line2 != null) line2.BeginAnimation(Line.X2Property, animX2);
             }
         }
         private int Index(ListViewItem item)

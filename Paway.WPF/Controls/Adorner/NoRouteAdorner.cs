@@ -12,17 +12,17 @@ using System.Windows.Media.Animation;
 namespace Paway.WPF
 {
     /// <summary>
-    /// 自定义动画装饰器
+    /// 无路由动画装饰器
     /// </summary>
-    public class CustomAdorner : Adorner
+    public class NoRouteAdorner : Adorner
     {
         private readonly Canvas canvas;
         /// <summary>
         /// 构造要将绑定到的装饰器的元素
         /// </summary>
-        public CustomAdorner(FrameworkElement adornedElement, Func<FrameworkElement> elementFunc, Func<Storyboard> boardFunc) : base(adornedElement)
+        public NoRouteAdorner(FrameworkElement adornedElement, Func<double> xFunc, Func<double> yFunc, Func<FrameworkElement> elementFunc, Func<Storyboard> boardFunc) : base(adornedElement)
         {
-            //路由事件
+            //无路由事件
             IsHitTestVisible = false;
             canvas = new Canvas() { ClipToBounds = true };
             //添加到可视化树中
@@ -33,16 +33,16 @@ namespace Paway.WPF
             canvas.Children.Add(element);
             this.Loaded += (sender, e) =>
             {
-                Canvas.SetLeft(element, canvas.ActualWidth / 2 - element.ActualWidth / 2);
-                Canvas.SetTop(element, canvas.ActualHeight / 2 - element.ActualHeight / 2);
+                Canvas.SetLeft(element, xFunc != null ? xFunc() : (canvas.ActualWidth - element.ActualWidth) / 2);
+                Canvas.SetTop(element, yFunc != null ? yFunc() : (canvas.ActualHeight - element.ActualHeight) / 2);
             };
             element.Loaded += (sender, e) =>
             {
                 var board = boardFunc();
                 board.CurrentTimeInvalidated += (sender2, e2) =>
                 {
-                    Canvas.SetLeft(element, canvas.ActualWidth / 2 - element.ActualWidth / 2);
-                    Canvas.SetTop(element, canvas.ActualHeight / 2 - element.ActualHeight / 2);
+                    Canvas.SetLeft(element, xFunc != null ? xFunc() : (canvas.ActualWidth - element.ActualWidth) / 2);
+                    Canvas.SetTop(element, yFunc != null ? yFunc() : (canvas.ActualHeight - element.ActualHeight) / 2);
                 };
                 board.Completed += (sender2, e2) =>
                 {

@@ -70,37 +70,36 @@ namespace Paway.Test
         }
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
-            var myAdornerLayer = Method.EllipseAdorner(e);
-            if (myAdornerLayer == null) Method.EllipseAdorner(panel, e, 100);
+            Method.EllipseAdorner(e);
             base.OnPreviewMouseDown(e);
         }
         private void Animation(Ellipse ellipse, double beginTime = 0, double time = 3000)
         {
-            var widthAnimation = new DoubleAnimation(10, 100, new Duration(TimeSpan.FromMilliseconds(time)));
-            widthAnimation.BeginTime = TimeSpan.FromMilliseconds(beginTime);
-            widthAnimation.RepeatBehavior = RepeatBehavior.Forever;
+            var animWidth = new DoubleAnimation(10, 100, new Duration(TimeSpan.FromMilliseconds(time)));
+            animWidth.BeginTime = TimeSpan.FromMilliseconds(beginTime);
+            animWidth.RepeatBehavior = RepeatBehavior.Forever;
             //ellipse.BeginAnimation(FrameworkElement.WidthProperty, widthAnimation);
-            Storyboard.SetTargetName(widthAnimation, ellipse.Name);
-            Storyboard.SetTargetProperty(widthAnimation, new PropertyPath(FrameworkElement.WidthProperty));
-            storyboard.Children.Add(widthAnimation);
+            Storyboard.SetTargetName(animWidth, ellipse.Name);
+            Storyboard.SetTargetProperty(animWidth, new PropertyPath(FrameworkElement.WidthProperty));
+            storyboard.Children.Add(animWidth);
 
-            var heightAnimation = new DoubleAnimation(10, 100, new Duration(TimeSpan.FromMilliseconds(time)));
-            heightAnimation.BeginTime = TimeSpan.FromMilliseconds(beginTime);
-            heightAnimation.RepeatBehavior = RepeatBehavior.Forever;
+            var animHeight = new DoubleAnimation(10, 100, new Duration(TimeSpan.FromMilliseconds(time)));
+            animHeight.BeginTime = TimeSpan.FromMilliseconds(beginTime);
+            animHeight.RepeatBehavior = RepeatBehavior.Forever;
             //ellipse.BeginAnimation(FrameworkElement.HeightProperty, widthAnimation);
-            Storyboard.SetTargetName(heightAnimation, ellipse.Name);
-            Storyboard.SetTargetProperty(heightAnimation, new PropertyPath(FrameworkElement.HeightProperty));
-            storyboard.Children.Add(heightAnimation);
+            Storyboard.SetTargetName(animHeight, ellipse.Name);
+            Storyboard.SetTargetProperty(animHeight, new PropertyPath(FrameworkElement.HeightProperty));
+            storyboard.Children.Add(animHeight);
 
-            var colorAnimation = new ColorAnimation(Color.FromArgb(160, 255, 0, 0), Color.FromArgb(10, 255, 0, 0), new Duration(TimeSpan.FromMilliseconds(time)));
-            colorAnimation.BeginTime = TimeSpan.FromMilliseconds(beginTime);
-            colorAnimation.RepeatBehavior = RepeatBehavior.Forever;
+            var animColor = new ColorAnimation(Color.FromArgb(160, 255, 0, 0), Color.FromArgb(10, 255, 0, 0), new Duration(TimeSpan.FromMilliseconds(time)));
+            animColor.BeginTime = TimeSpan.FromMilliseconds(beginTime);
+            animColor.RepeatBehavior = RepeatBehavior.Forever;
             //var solid = ellipse.Fill = (SolidColorBrush)ellipse.Fill.Clone();
             //solid.BeginAnimation(SolidColorBrush.ColorProperty, colorAnimation);
             var propertyChain = new DependencyProperty[] { Ellipse.FillProperty, SolidColorBrush.ColorProperty };
-            Storyboard.SetTargetName(colorAnimation, ellipse.Name);
-            Storyboard.SetTargetProperty(colorAnimation, new PropertyPath("(0).(1)", propertyChain));
-            storyboard.Children.Add(colorAnimation);
+            Storyboard.SetTargetName(animColor, ellipse.Name);
+            Storyboard.SetTargetProperty(animColor, new PropertyPath("(0).(1)", propertyChain));
+            storyboard.Children.Add(animColor);
         }
 
         private void Commit_Click(object sender, RoutedEventArgs e)
@@ -120,10 +119,10 @@ namespace Paway.Test
             if (transition.Content != pathNew) transition.Content = this.pathNew;
             else transition.Content = this.pathCurrent;
 
-            var opacity1 = new DoubleAnimation(line1.X1, 0, new Duration(TimeSpan.FromMilliseconds(200)));
-            line1.BeginAnimation(Line.X1Property, opacity1);
-            var opacity2 = new DoubleAnimation(line2.X2, 137, new Duration(TimeSpan.FromMilliseconds(200)));
-            line2.BeginAnimation(Line.X2Property, opacity2);
+            var animX1 = new DoubleAnimation(line1.X1, 0, new Duration(TimeSpan.FromMilliseconds(200)));
+            line1.BeginAnimation(Line.X1Property, animX1);
+            var animX2 = new DoubleAnimation(line2.X2, 137, new Duration(TimeSpan.FromMilliseconds(200)));
+            line2.BeginAnimation(Line.X2Property, animX2);
         }
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
@@ -131,10 +130,10 @@ namespace Paway.Test
 
             Method.Hide();
 
-            var opacity1 = new DoubleAnimation(line1.X1, 137, new Duration(TimeSpan.FromMilliseconds(200)));
-            line1.BeginAnimation(Line.X1Property, opacity1);
-            var opacity2 = new DoubleAnimation(line2.X2, 0, new Duration(TimeSpan.FromMilliseconds(200)));
-            line2.BeginAnimation(Line.X2Property, opacity2);
+            var animX1 = new DoubleAnimation(line1.X1, 137, new Duration(TimeSpan.FromMilliseconds(200)));
+            line1.BeginAnimation(Line.X1Property, animX1);
+            var animX2 = new DoubleAnimation(line2.X2, 0, new Duration(TimeSpan.FromMilliseconds(200)));
+            line2.BeginAnimation(Line.X2Property, animX2);
         }
     }
 }
