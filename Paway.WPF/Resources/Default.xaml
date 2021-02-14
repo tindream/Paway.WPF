@@ -4,7 +4,7 @@
 
     <local:BoolReverse x:Key="boolReverse"/>
     <local:BoolToVisible x:Key="boolToVisible"/>
-    <local:BoolConverter x:Key="boolConverter"/>
+    <local:BoolSelector x:Key="boolSelector"/>
     <local:DateConverter x:Key="dateConverter"/>
     <local:ValueMultiConverter x:Key="valueMultiConverter"/>
     <local:ValueAddConverter x:Key="valueAddConverter"/>

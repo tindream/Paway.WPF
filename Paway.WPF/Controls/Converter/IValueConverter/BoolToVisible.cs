@@ -16,17 +16,15 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is bool b && b)
-                return Visibility.Visible;
-            else
-                return Visibility.Collapsed;
+            var result = value is bool b && b;
+            if (parameter != null || (parameter is bool p && !p)) result = !result;
+            return result ? Visibility.Visible : Visibility.Collapsed;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is Visibility visibility && visibility == Visibility.Visible)
-                return true;
-            else
-                return false;
+            var result = value is Visibility visibility && visibility == Visibility.Visible;
+            if (parameter != null || (parameter is bool p && !p)) result = !result;
+            return result;
         }
     }
 }

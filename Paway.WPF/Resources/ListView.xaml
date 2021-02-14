@@ -147,7 +147,7 @@
                                         </Setter>
                                         <Setter TargetName="border" Property="BorderThickness">
                                             <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource boolConverter}">
+                                                <MultiBinding Converter="{StaticResource boolSelector}">
                                                     <Binding Path="IAnimation" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}"/>
                                                     <Binding Source="0,0,0,0" />
                                                     <Binding Path="ItemBorder.Mouse" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
