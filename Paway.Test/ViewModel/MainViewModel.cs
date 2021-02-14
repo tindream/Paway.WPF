@@ -3,7 +3,6 @@ using GalaSoft.MvvmLight.Command;
 using OxyPlot;
 using OxyPlot.Annotations;
 using OxyPlot.Axes;
-using Paway.Helper;
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
@@ -164,9 +163,9 @@ namespace Paway.Test.ViewModel
             {
                 return colorChanged ?? (colorChanged = new RelayCommand<SliderEXT>(slider =>
                 {
-                    var color = Method.ColorSelector(slider.Value / 7);
+                    var color = WPF.TMethod.ColorSelector(slider.Value / 7);
                     Config.Color = color;
-                    Config.Background = Method.ColorSelector((slider.Value + 0.4) / 7).AddLight(0.93);
+                    Config.Background = TMethod.ColorSelector((slider.Value + 0.4) / 7).AddLight(0.93);
                     //Method.DoStyles();
                 }));
             }
@@ -197,7 +196,7 @@ namespace Paway.Test.ViewModel
                 {
                     if (listView1.SelectedItem is IListView info)
                     {
-                        Method.Toast(listView1, Value);
+                        WPF.TMethod.Toast(listView1, Value);
                     }
                     //if (listView1.SelectedItem is IListViewInfo info) Method.Show(listView1, info.Content);
                     //listView1.SelectedIndex = -1;
@@ -214,7 +213,7 @@ namespace Paway.Test.ViewModel
                 {
                     MultiList[0].IsChecked = !MultiList[0].IsChecked;
                     var desc = string.Join(",", MultiList.ToList().FindAll(c => c.IsChecked).Select(c => c.Text));
-                    Method.Toast(btn, desc, 5);
+                    WPF.TMethod.Toast(btn, desc, 5);
                 }));
             }
         }
@@ -322,7 +321,7 @@ namespace Paway.Test.ViewModel
 
             PlotModel.ResetAllAxes();
             PlotModel.InvalidatePlot(true);
-            Method.BeginInvoke(App.Current.MainWindow, () =>
+            WPF.TMethod.BeginInvoke(App.Current.MainWindow, () =>
             {
                 PlotHelper.AutoMaxMin(PlotModel, 10, 10);
                 PlotModel.InvalidatePlot(true);

@@ -28,7 +28,7 @@ namespace Paway.WPF
     /// <summary>
     /// 一些帮助方法
     /// </summary>
-    public class Method : TMethod
+    public class TMethod : Paway.Helper.TMethod
     {
         #region Adorner调用
         /// <summary>
@@ -50,7 +50,7 @@ namespace Paway.WPF
                 {
                     element = framework;
                 }
-                else if (Method.Parent(textBlock, out ContentPresenter content) && content.Parent is FrameworkElement framework2)
+                else if (TMethod.Parent(textBlock, out ContentPresenter content) && content.Parent is FrameworkElement framework2)
                 {
                     element = framework2;
                 }
@@ -61,7 +61,7 @@ namespace Paway.WPF
                 if (!Parent(element, out Window window)) return null;
                 if (window.Content is Panel panel)
                 {
-                    Method.EllipseAdorner(panel, e, null, width, maxWidth);
+                    TMethod.EllipseAdorner(panel, e, null, width, maxWidth);
                 }
             }
             return myAdornerLayer;
@@ -86,7 +86,7 @@ namespace Paway.WPF
             myAdornerLayer.Add(new CustomAdorner(element, () => ellipse, null, () => point.X - ellipse.ActualWidth / 2, () => point.Y - ellipse.ActualHeight / 2, () =>
             {
                 var storyboard = new Storyboard();
-                var time = Method.AnimTime(width) * 1.3;
+                var time = TMethod.AnimTime(width) * 1.3;
 
                 var animWidth = new DoubleAnimation(10, width, new Duration(TimeSpan.FromMilliseconds(time)));
                 Storyboard.SetTargetProperty(animWidth, new PropertyPath(FrameworkElement.WidthProperty));
@@ -385,7 +385,7 @@ namespace Paway.WPF
         /// </summary>
         internal static Color ThemeColor(int alpha)
         {
-            return AlphaColor(alpha, Config.Color);
+            return AlphaColor(alpha, TConfig.Color);
         }
         /// <summary>
         /// 指定Alpha颜色
@@ -465,7 +465,7 @@ namespace Paway.WPF
                     CornerRadius = new CornerRadius(3),
                     BorderBrush = new SolidColorBrush(Colors.LightGray),
                     BorderThickness = new Thickness(1),
-                    Background = new SolidColorBrush(Color.FromArgb(240, 255, 255, 255)),
+                    Background = new SolidColorBrush(Color.FromArgb(200, 255, 255, 255)),
                     MinWidth = 200,
                     MaxWidth = 350,
                 };
@@ -601,34 +601,22 @@ namespace Paway.WPF
         /// <summary>
         /// 自定义消息框-Toast
         /// </summary>
-        public static void Toast(DependencyObject parent, object msg, bool iError = false)
+        public static void Toast(DependencyObject parent, object msg, bool iError = false, int pos = 17)
         {
-            Toast(parent, msg, 0, iError);
+            Toast(parent, msg, 0, iError, pos);
         }
         /// <summary>
         /// 自定义消息框-Toast
         /// </summary>
-        public static void Toast(DependencyObject parent, object msg, double time, bool iError = false)
+        public static void Toast(DependencyObject parent, object msg, double time, bool iError = false, int pos = 17)
         {
-            //Invoke(parent, () =>
-            //{
-            //    var toast = new WindowToast();
-            //    if (Parent(parent, out Window owner))
-            //    {
-            //        var window = Method.Window(parent);
-            //        {
-            //            toast.Owner = owner;
-            //        }
-            //        toast.Show(msg, time, iError);
-            //    }
-            //});
             if (!Parent(parent, out Window window)) return;
             if (window.Content is Panel panel)
             {
                 var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
                 if (myAdornerLayer == null) return;
 
-                var color = iError ? Color.FromArgb(240, 221, 51, 51) : Color.FromArgb(240, 93, 107, 153);
+                var color = iError ? Color.FromArgb(200, 221, 51, 51) : Color.FromArgb(200, 93, 107, 153);
                 var border = new Border
                 {
                     CornerRadius = new CornerRadius(5),
@@ -638,7 +626,7 @@ namespace Paway.WPF
                 {
                     Text = msg.ToStrs(),
                     Margin = new Thickness(8, 0, 8, 0),
-                    Padding = new Thickness(17, 7, 17, 7),
+                    Padding = new Thickness(20, 10, 20, 10),
                     TextWrapping = TextWrapping.Wrap,
                     TextAlignment = TextAlignment.Center,
                     Foreground = new SolidColorBrush(Colors.White),
@@ -650,7 +638,7 @@ namespace Paway.WPF
                 myAdornerLayer.Add(new CustomAdorner(panel, () => border, null, null, () =>
                 {
                     var top = window.ActualHeight - border.ActualHeight;
-                    top = top * 17 / 20;
+                    top = top * pos / 20;
                     return top;
                 }, () =>
                 {
@@ -663,15 +651,19 @@ namespace Paway.WPF
                     Storyboard.SetTargetProperty(animIn, new PropertyPath("(0).(1)", propertyY));
                     storyboard.Children.Add(animIn);
 
-                    var animTime = Method.AnimTime(border.ActualHeight);
-                    var animColor = new ColorAnimation(color, Color.FromArgb(0, color.R, color.G, color.B), new Duration(TimeSpan.FromMilliseconds(animTime * 3)));
-                    animColor.BeginTime = TimeSpan.FromMilliseconds(time + 125);
+                    var animTime = TMethod.AnimTime(border.ActualHeight);
+                    var animColor = new ColorAnimation(color, Color.FromArgb(0, color.R, color.G, color.B), new Duration(TimeSpan.FromMilliseconds(animTime)))
+                    {
+                        BeginTime = TimeSpan.FromMilliseconds(time + 125)
+                    };
                     var propertyChain = new DependencyProperty[] { Border.BackgroundProperty, SolidColorBrush.ColorProperty };
                     Storyboard.SetTargetProperty(animColor, new PropertyPath("(0).(1)", propertyChain));
                     storyboard.Children.Add(animColor);
 
-                    var animOut = new DoubleAnimation(0, border.ActualHeight + 0, new Duration(TimeSpan.FromMilliseconds(animTime)));
-                    animOut.BeginTime = TimeSpan.FromMilliseconds(time + 125);
+                    var animOut = new DoubleAnimation(0, border.ActualHeight + 0, new Duration(TimeSpan.FromMilliseconds(animTime)))
+                    {
+                        BeginTime = TimeSpan.FromMilliseconds(time + 125)
+                    };
                     var propertyY2 = new DependencyProperty[] { UIElement.RenderTransformProperty, TranslateTransform.YProperty };
                     Storyboard.SetTargetProperty(animOut, new PropertyPath("(0).(1)", propertyY2));
                     storyboard.Children.Add(animOut);
@@ -679,6 +671,18 @@ namespace Paway.WPF
                     return storyboard;
                 }));
             }
+            //Invoke(parent, () =>
+            //{
+            //    var toast = new WindowToast();
+            //    if (Parent(parent, out Window owner))
+            //    {
+            //        var window = Method.Window(parent);
+            //        {
+            //            toast.Owner = owner;
+            //        }
+            //        toast.Show(msg, time, iError);
+            //    }
+            //});
         }
 
         #endregion

@@ -17,9 +17,6 @@ namespace System.Windows.Data
     /// PagedCollectionView view over an IEnumerable.
     /// </summary>
     /// <QualityBand>Preview</QualityBand>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "WPF Compatability")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1010:CollectionsShouldImplementGenericInterface", Justification = "WPF Compatibility")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "WPF Compatibility for naming")]
     public sealed class PagedCollectionView : ICollectionView, IPagedCollectionView, IEditableCollectionView, INotifyPropertyChanged
     {
         private const string OperationNotAllowedDuringAddOrEdit = "'{0}' is not allowed during an AddNew or EditItem transaction.";
@@ -216,8 +213,6 @@ namespace System.Windows.Data
         /// <param name="source">The source for the collection</param>
         /// <param name="isDataSorted">Determines whether the source is already sorted</param>
         /// <param name="isDataInGroupOrder">Whether the source is already in the correct order for grouping</param>
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Justification = "We want deriving classes to be able to override the refresh operation")]
-        [SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily", Justification = "Cannot use underscore in name to differentiate")]
         public PagedCollectionView(IEnumerable source, bool isDataSorted, bool isDataInGroupOrder)
         {
             _sourceCollection = source ?? throw new ArgumentNullException("source");
@@ -1489,7 +1484,6 @@ namespace System.Windows.Data
         /// Complete the transaction started by <seealso cref="EditItem"/>.
         /// The pending changes (if any) to the item are committed.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Handles multiple input types and scenarios")]
         public void CommitEdit()
         {
             if (IsAddingNew)
@@ -1672,7 +1666,6 @@ namespace System.Windows.Data
         /// convention in that the view's sort, filter, and paging
         /// specifications (if any) are applied to the new item.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Handles multiple input types and scenarios")]
         public void CommitNew()
         {
             if (IsEditingItem)
@@ -3330,7 +3323,6 @@ namespace System.Windows.Data
         /// </summary>
         /// <param name="addedItem">Item added to the source collection</param>
         /// <param name="addIndex">Index item was added into</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Handles multiple input types and scenarios")]
         private void ProcessAddEvent(object addedItem, int addIndex)
         {
             // item to fire remove notification for if necessary
@@ -3731,7 +3723,6 @@ namespace System.Windows.Data
         /// Re-create the view, using any SortDescriptions.
         /// Also updates currency information.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Handles multiple input types and scenarios")]
         private void RefreshOverride()
         {
             object oldCurrentItem = CurrentItem;

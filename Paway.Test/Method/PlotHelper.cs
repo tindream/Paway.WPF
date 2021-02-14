@@ -2,6 +2,7 @@
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using Paway.Helper;
+using Paway.WPF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace Paway.Test
                     plotModel.Series.RemoveAt(i);
                 }
             }
-            var list = TMethod.List<MonitorType>(0);
+            var list = WPF.TMethod.List<MonitorType>(0);
             foreach (var item in list)
             {
                 if ((all & item) != 0 && (monitorType & item) != 0)

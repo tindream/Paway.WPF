@@ -28,8 +28,10 @@ namespace Paway.WPF
             canvas = new Canvas() { ClipToBounds = true };
             if (color != null) canvas.Background = new SolidColorBrush(color.Value);
             //添加到可视化树中
-            var visCollec = new VisualCollection(this);
-            visCollec.Add(canvas);
+            var visCollec = new VisualCollection(this)
+            {
+                canvas
+            };
 
             FrameworkElement element = elementFunc();
             canvas.Children.Add(element);

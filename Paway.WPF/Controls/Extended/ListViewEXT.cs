@@ -68,18 +68,18 @@ namespace Paway.WPF
             if (d is ListViewEXT listView)
             {
                 Color? mouseColor = null, pressedColor = null;
-                if (listView.ItemBackground.Mouse is SolidColorBrush mouse && mouse.Color != Method.AlphaColor(120, Config.Color))
+                if (listView.ItemBackground.Mouse is SolidColorBrush mouse && mouse.Color != TMethod.AlphaColor(120, TConfig.Color))
                 {
-                    if ((listView.ItemBorderBrush.Mouse as SolidColorBrush).Color == Method.AlphaColor(170, Config.Color))
+                    if ((listView.ItemBorderBrush.Mouse as SolidColorBrush).Color == TMethod.AlphaColor(170, TConfig.Color))
                     {
-                        mouseColor = Method.AlphaColor(mouse.Color.A + 50, mouse.Color);
+                        mouseColor = TMethod.AlphaColor(mouse.Color.A + 50, mouse.Color);
                     }
                 }
-                if (listView.ItemBackground.Pressed is SolidColorBrush pressed && pressed.Color != Method.AlphaColor(150, Config.Color))
+                if (listView.ItemBackground.Pressed is SolidColorBrush pressed && pressed.Color != TMethod.AlphaColor(150, TConfig.Color))
                 {
-                    if ((listView.ItemBorderBrush.Pressed as SolidColorBrush).Color == Method.AlphaColor(250, Config.Color))
+                    if ((listView.ItemBorderBrush.Pressed as SolidColorBrush).Color == TMethod.AlphaColor(250, TConfig.Color))
                     {
-                        pressedColor = Method.AlphaColor(pressed.Color.A + 100, pressed.Color);
+                        pressedColor = TMethod.AlphaColor(pressed.Color.A + 100, pressed.Color);
                     }
                 }
                 if (mouseColor != null || pressedColor != null)
@@ -429,8 +429,8 @@ namespace Paway.WPF
         public ListViewEXT()
         {
             DefaultStyleKey = typeof(ListViewEXT);
-            Config_FontSizeChanged(Config.FontSize);
-            Config.FontSizeChanged += Config_FontSizeChanged;
+            Config_FontSizeChanged(TConfig.FontSize);
+            TConfig.FontSizeChanged += Config_FontSizeChanged;
         }
 
         /// <summary>
@@ -440,11 +440,11 @@ namespace Paway.WPF
         {
             if (this.ItemTextFontSize == null || this.ItemTextFontSize.Equals(new DoubleEXT(old)))
             {
-                this.ItemTextFontSize = new DoubleEXT(Config.FontSize);
+                this.ItemTextFontSize = new DoubleEXT(TConfig.FontSize);
             }
             if (this.ItemDescFontSize == null || this.ItemDescFontSize.Equals(new DoubleEXT(old * 0.85)))
             {
-                this.ItemDescFontSize = new DoubleEXT(Config.FontSize * 0.85);
+                this.ItemDescFontSize = new DoubleEXT(TConfig.FontSize * 0.85);
             }
         }
 
@@ -479,14 +479,14 @@ namespace Paway.WPF
             downItem = null;
             if (e.ChangedButton == MouseButton.Left)
             {
-                if (ClickMode == ClickMode.Release && Method.Parent(e.OriginalSource, out downItem))
+                if (ClickMode == ClickMode.Release && TMethod.Parent(e.OriginalSource, out downItem))
                 {
                     e.Handled = true;
                     IsPressed(true);
                 }
                 else if (e.ButtonState == MouseButtonState.Pressed)
                 {
-                    if (Method.Parent(this, out Window window))
+                    if (TMethod.Parent(this, out Window window))
                     {
                         window.DragMove();
                     }
@@ -519,7 +519,7 @@ namespace Paway.WPF
                     downItem = null;
                 }
             }
-            if (IAnimation && Mouse.DirectlyOver != null && Method.Parent<ListViewItem>(Mouse.DirectlyOver, out ListViewItem listViewItem) && this.moveItem != listViewItem)
+            if (IAnimation && Mouse.DirectlyOver != null && TMethod.Parent<ListViewItem>(Mouse.DirectlyOver, out ListViewItem listViewItem) && this.moveItem != listViewItem)
             {
                 if (this.moveItem != null) Animation(moveItem, false);
                 this.moveItem = listViewItem;
@@ -545,7 +545,7 @@ namespace Paway.WPF
             if (ClickMode == ClickMode.Release && e.ChangedButton == MouseButton.Left && downItem != null)
             {
                 IsPressed(false);
-                if (Method.Parent(e.OriginalSource, out ListViewItem item) && item == downItem)
+                if (TMethod.Parent(e.OriginalSource, out ListViewItem item) && item == downItem)
                 {
                     if (SelectionMode == SelectionMode.Extended)
                     {
@@ -616,9 +616,9 @@ namespace Paway.WPF
         }
         private void Animation(ListViewItem item, bool value)
         {
-            Method.Child(item, out Line line1, "line1", false);
-            Method.Child(item, out Line line2, "line2", false);
-            var animTime = Method.AnimTime(this.ItemWidth / 2) * 0.5;
+            TMethod.Child(item, out Line line1, "line1", false);
+            TMethod.Child(item, out Line line2, "line2", false);
+            var animTime = TMethod.AnimTime(this.ItemWidth / 2) * 0.5;
             if (value)
             {
                 var animX1 = new DoubleAnimation(line1.X1, 0, new Duration(TimeSpan.FromMilliseconds(animTime)));

@@ -145,7 +145,7 @@ namespace Paway.WPF
                 this.textBox = textBox;
                 textBox.PreviewMouseLeftButtonDown += TextBox_PreviewMouseLeftButtonDown;
             }
-            if (Method.Parent(this, out Window window))
+            if (TMethod.Parent(this, out Window window))
             {
                 window.LocationChanged += delegate { this.IsDropDownOpen = false; };
             }
@@ -186,7 +186,7 @@ namespace Paway.WPF
                     if (isInit && !this.IQuery)
                     {
                         this.SelectedValue = item.GetValue(this.SelectedValuePath);
-                        Method.BeginInvoke(this, () => { this.IsDropDownOpen = false; });
+                        TMethod.BeginInvoke(this, () => { this.IsDropDownOpen = false; });
                     }
                 }
                 else
@@ -237,7 +237,7 @@ namespace Paway.WPF
                     this.ItemsSource = list;
                     if (id > 0)
                     {
-                        Method.BeginInvoke(this, () =>
+                        TMethod.BeginInvoke(this, () =>
                         {
                             treeView.Selected(id);
                             textBox.Focus();

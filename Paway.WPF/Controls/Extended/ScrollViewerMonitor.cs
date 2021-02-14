@@ -48,7 +48,7 @@ namespace Paway.WPF
         }
         private static void SetVerticalScrollBarMargin(Thumb thumb, DataGridEXT dataGrid)
         {
-            if (Method.Child(dataGrid, out DataGridColumnHeadersPresenter headersPresenter))
+            if (TMethod.Child(dataGrid, out DataGridColumnHeadersPresenter headersPresenter))
             {
                 thumb.SetValue(VerticalScrollBarMarginProperty, new Thickness(0, -headersPresenter.ActualHeight, 0, 0));
             }

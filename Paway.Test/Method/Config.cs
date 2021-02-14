@@ -1,5 +1,6 @@
 ﻿using log4net;
 using Paway.Helper;
+using Paway.WPF;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,7 +11,7 @@ using System.Windows;
 
 namespace Paway.Test
 {
-    public class Config : Paway.WPF.Config
+    public class Config : WPF.TConfig
     {
         #region 常量
         public const string Text = "测试系统";

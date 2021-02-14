@@ -273,7 +273,7 @@ namespace Paway.WPF
                     if (this.ItemContainerGenerator.ContainerFromIndex(i) is DataGridRow row)
                     {
                         row.IsSelected = true;
-                        if (Method.Child(row, out DataGridCellsPresenter presenter, iParent: false))
+                        if (TMethod.Child(row, out DataGridCellsPresenter presenter, iParent: false))
                         {
                             for (int j = 0; j < this.Columns.Count; j++)
                             {
@@ -299,7 +299,7 @@ namespace Paway.WPF
         {
             var point = e.GetPosition(this);
             var obj = this.InputHitTest(point);
-            if (Method.Parent(obj, out DataGridRow row))
+            if (TMethod.Parent(obj, out DataGridRow row))
             {
                 return row;
             }

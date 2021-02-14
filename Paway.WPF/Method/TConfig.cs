@@ -19,7 +19,7 @@ namespace Paway.WPF
     /// <summary>
     /// 配置
     /// </summary>
-    public class Config
+    public class TConfig : Paway.Helper.TConfig
     {
         #region 主题
         /// <summary>

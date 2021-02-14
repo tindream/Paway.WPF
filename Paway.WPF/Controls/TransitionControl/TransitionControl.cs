@@ -153,12 +153,12 @@ namespace Paway.WPF
             base.OnContentChanged(oldContent, newContent);
             StartTransition(oldContent, newContent);
         }
+
         /// <summary>
         /// Starts the transition.
         /// </summary>
         /// <param name="oldContent">The old content.</param>
         /// <param name="newContent">The new content.</param>
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "newContent", Justification = "Should be used in the future.")]
         private void StartTransition(object oldContent, object newContent)
         {
             // both presenters must be available, otherwise a transition is useless.
@@ -197,24 +197,24 @@ namespace Paway.WPF
                 case TransitionType.Default:
                     break;
                 case TransitionType.Left:
-                    Method.AnimMoveRight(PreviousContentPresentationSite, Value, Time, false);
-                    Method.AnimMoveLeft(CurrentContentPresentationSite, Value, Time);
+                    TMethod.AnimMoveRight(PreviousContentPresentationSite, Value, Time, false);
+                    TMethod.AnimMoveLeft(CurrentContentPresentationSite, Value, Time);
                     break;
                 case TransitionType.Right:
-                    Method.AnimMoveLeft(PreviousContentPresentationSite, Value, Time, false);
-                    Method.AnimMoveRight(CurrentContentPresentationSite, Value, Time);
+                    TMethod.AnimMoveLeft(PreviousContentPresentationSite, Value, Time, false);
+                    TMethod.AnimMoveRight(CurrentContentPresentationSite, Value, Time);
                     break;
                 case TransitionType.Up:
-                    Method.AnimMoveDown(PreviousContentPresentationSite, Value, Time, false);
-                    Method.AnimMoveUp(CurrentContentPresentationSite, Value, Time);
+                    TMethod.AnimMoveDown(PreviousContentPresentationSite, Value, Time, false);
+                    TMethod.AnimMoveUp(CurrentContentPresentationSite, Value, Time);
                     break;
                 case TransitionType.Down:
-                    Method.AnimMoveUp(PreviousContentPresentationSite, Value, Time, false);
-                    Method.AnimMoveDown(CurrentContentPresentationSite, Value, Time);
+                    TMethod.AnimMoveUp(PreviousContentPresentationSite, Value, Time, false);
+                    TMethod.AnimMoveDown(CurrentContentPresentationSite, Value, Time);
                     break;
             }
-            Method.AnimOpacity(PreviousContentPresentationSite, Value, Time);
-            return Method.AnimOpacity(CurrentContentPresentationSite, Value, Time, OnTransitionCompleted, true);
+            TMethod.AnimOpacity(PreviousContentPresentationSite, Value, Time);
+            return TMethod.AnimOpacity(CurrentContentPresentationSite, Value, Time, OnTransitionCompleted, true);
         }
 
         #endregion

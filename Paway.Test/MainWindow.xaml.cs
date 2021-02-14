@@ -46,8 +46,8 @@ namespace Paway.Test
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            Messenger.Default.Send(new StatuMessage(TConfig.Loading));
-            Method.Progress(this, () =>
+            Messenger.Default.Send(new StatuMessage(Config.Loading));
+            WPF.TMethod.Progress(this, () =>
             {
                 DataService.Default.Load();
             }, () =>
@@ -58,7 +58,7 @@ namespace Paway.Test
             {
                 ex.Log();
                 Messenger.Default.Send(new StatuMessage(ex.Message()));
-                Method.Error(this, ex.Message());
+                WPF.TMethod.Error(this, ex.Message());
             });
             if (this.pathCurrent == null)
             {
@@ -71,7 +71,7 @@ namespace Paway.Test
         }
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
-            Method.EllipseAdorner(e);
+            WPF.TMethod.EllipseAdorner(e);
             base.OnPreviewMouseDown(e);
         }
         private void Animation(Ellipse ellipse, double beginTime = 0, double time = 3000)
@@ -106,12 +106,12 @@ namespace Paway.Test
         private void Commit_Click(object sender, RoutedEventArgs e)
         {
             storyboard.Stop(this);
-            Method.DoEvents();
+            WPF.TMethod.DoEvents();
             storyboard.Begin(this, true);
 
             var r = Validation.GetHasError(tb);
-            Method.Toast(this, r);
-            var xml = Method.GetTemplateXaml(dp);
+            WPF.TMethod.Toast(this, r, pos: 9);
+            var xml = WPF.TMethod.GetTemplateXaml(dp);
             //Method.Toast(this, xml);
 
             transition.TransitionType = (TransitionType)new Random().Next(0, 5);

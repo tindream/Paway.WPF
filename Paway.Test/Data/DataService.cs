@@ -1,6 +1,7 @@
 ﻿using Paway.Helper;
 using Paway.Test.Properties;
 using Paway.Utils;
+using Paway.WPF;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -32,11 +33,11 @@ namespace Paway.Test
             base.InitConnect(file);
             if (base.InitCreate(Resources.script))
             {
-                var user = new UserInfo { UserType = UserType.Admin, Name = "admin", Pad = EncryptHelper.MD5("admin" + TConfig.Suffix) };
+                var user = new UserInfo { UserType = UserType.Admin, Name = "admin", Pad = EncryptHelper.MD5("admin" + Config.Suffix) };
                 this.Insert(user);
                 var auth = new AuthInfo(user.Id);
-                auth.SetValue(nameof(MenuType), TMethod.Sum<MenuType>());
-                auth.SetValue(nameof(ButtonType), TMethod.Sum<ButtonType>());
+                auth.SetValue(nameof(Test.MenuType), WPF.TMethod.Sum<MenuType>());
+                auth.SetValue(nameof(Test.ButtonType), WPF.TMethod.Sum<ButtonType>());
                 this.Insert(auth);
             }
         }
@@ -118,7 +119,7 @@ namespace Paway.Test
             List<AdminBaseInfo> temp = Find<AdminBaseInfo>(cmd);
             List<IInfo> list = new List<IInfo>();
             list.AddRange(temp);
-            return TMethod.Conversion<AdminInfo, IInfo>(list);
+            return WPF.TMethod.Conversion<AdminInfo, IInfo>(list);
         }
 
         #endregion

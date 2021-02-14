@@ -46,14 +46,14 @@ namespace Paway.WPF
                 {
                     if ((listBoxItem.ItemBorderBrush.Mouse as SolidColorBrush).Color == Colors.Transparent)
                     {
-                        mouseColor = Method.AlphaColor(mouse.Color.A + 50, mouse.Color);
+                        mouseColor = TMethod.AlphaColor(mouse.Color.A + 50, mouse.Color);
                     }
                 }
                 if (listBoxItem.ItemBackground.Pressed is SolidColorBrush pressed && pressed.Color != Colors.Transparent)
                 {
                     if ((listBoxItem.ItemBorderBrush.Pressed as SolidColorBrush).Color == Colors.Transparent)
                     {
-                        pressedColor = Method.AlphaColor(pressed.Color.A + 100, pressed.Color);
+                        pressedColor = TMethod.AlphaColor(pressed.Color.A + 100, pressed.Color);
                     }
                 }
                 if (mouseColor != null || pressedColor != null)

@@ -13,7 +13,7 @@ namespace Paway.Test
     [Flags]
     public enum MenuType
     {
-        [Description(TConfig.None)]
+        [Description(Config.None)]
         None,
         /// <summary>
         /// 用户

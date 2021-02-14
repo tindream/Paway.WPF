@@ -141,7 +141,7 @@ namespace Paway.WPF
             if (this.AutoToolTipPlacement == System.Windows.Controls.Primitives.AutoToolTipPlacement.None) return;
             if (toolTip == null)
             {
-                if (Method.Child(this, out Thumb thumb))
+                if (TMethod.Child(this, out Thumb thumb))
                 {
                     toolTip = new ToolTip
                     {

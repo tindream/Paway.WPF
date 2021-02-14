@@ -138,7 +138,7 @@ namespace Paway.WPF
                 this.textBox = textBox;
                 textBox.PreviewMouseLeftButtonDown += TextBox_PreviewMouseLeftButtonDown;
             }
-            if (Method.Parent(this, out Window window))
+            if (TMethod.Parent(this, out Window window))
             {
                 window.LocationChanged += delegate { this.IsDropDownOpen = false; };
             }

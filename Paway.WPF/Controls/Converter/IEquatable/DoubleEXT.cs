@@ -95,7 +95,7 @@ namespace Paway.WPF
             }
             if (value is string str)
             {
-                var result = Method.ElementStatu<DoubleEXT, double>(context, culture, str, Parse, ParseValue);
+                var result = TMethod.ElementStatu<DoubleEXT, double>(context, culture, str, Parse, ParseValue);
                 return new DoubleEXT(result.Item2, result.Item3, result.Item4, result.Item1);
             }
             return base.ConvertFrom(context, culture, value);

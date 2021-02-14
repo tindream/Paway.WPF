@@ -13,7 +13,7 @@ namespace Paway.Test
     [Flags]
     public enum ButtonType
     {
-        [Description(TConfig.None)]
+        [Description(Config.None)]
         None,
         /// <summary>
         /// 新增

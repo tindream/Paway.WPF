@@ -25,12 +25,12 @@ namespace Paway.WPF
         /// 默认的颜色
         /// </summary>
         public Brush Normal { get { return normal; } set { normal = value; OnPropertyChanged(); } }
-        private Brush mouse = new SolidColorBrush(Method.ThemeColor(210));
+        private Brush mouse = new SolidColorBrush(TMethod.ThemeColor(210));
         /// <summary>
         /// 鼠标划过时的颜色
         /// </summary>
         public Brush Mouse { get { return mouse; } set { mouse = value; OnPropertyChanged(); } }
-        private Brush pressed = new SolidColorBrush(Method.ThemeColor(210));
+        private Brush pressed = new SolidColorBrush(TMethod.ThemeColor(210));
         /// <summary>
         /// 鼠标点击时的颜色
         /// </summary>
@@ -43,7 +43,7 @@ namespace Paway.WPF
             get
             {
                 var pressed = Pressed as SolidColorBrush;
-                return new SolidColorBrush(Method.AlphaColor(pressed.Color.A - Alpha / 2, pressed.Color));
+                return new SolidColorBrush(TMethod.AlphaColor(pressed.Color.A - Alpha / 2, pressed.Color));
             }
         }
         /// <summary>
@@ -56,7 +56,7 @@ namespace Paway.WPF
         /// </summary>
         public BrushEXT()
         {
-            Config.ColorChanged += Config_ColorChanged;
+            TConfig.ColorChanged += Config_ColorChanged;
         }
         private void Config_ColorChanged(Color obj)
         {
@@ -64,21 +64,21 @@ namespace Paway.WPF
             {
                 if (normal.Color != Colors.Transparent && normal.Color != Colors.Gray && normal.Color != Colors.LightGray && normal.Color != Color.FromArgb(255, 33, 33, 33) && normal.Color != Color.FromArgb(255, 66, 66, 66))
                 {
-                    this.Normal = new SolidColorBrush(Method.ThemeColor(normal.Color.A));
+                    this.Normal = new SolidColorBrush(TMethod.ThemeColor(normal.Color.A));
                 }
             }
             if (this.Mouse is SolidColorBrush mouse && mouse.Color.R == obj.R && mouse.Color.G == obj.G && mouse.Color.B == obj.B)
             {
                 if (mouse.Color != Colors.Transparent && mouse.Color != Colors.White && mouse.Color != Color.FromArgb(255, 33, 33, 33))
                 {
-                    this.Mouse = new SolidColorBrush(Method.ThemeColor(mouse.Color.A));
+                    this.Mouse = new SolidColorBrush(TMethod.ThemeColor(mouse.Color.A));
                 }
             }
             if (this.Pressed is SolidColorBrush pressed && pressed.Color.R == obj.R && pressed.Color.G == obj.G && pressed.Color.B == obj.B)
             {
                 if (pressed.Color != Colors.Transparent && pressed.Color != Colors.White)
                 {
-                    this.Pressed = new SolidColorBrush(Method.ThemeColor(pressed.Color.A));
+                    this.Pressed = new SolidColorBrush(TMethod.ThemeColor(pressed.Color.A));
                 }
             }
             High();
@@ -91,16 +91,16 @@ namespace Paway.WPF
             if (IHigh)
             {
                 var alpha = this.Normal is SolidColorBrush normal ? normal.Color.A : (byte)250;
-                this.Normal = new SolidColorBrush(Method.AlphaColor(alpha, Config.Color.AddLight(0.96)));
+                this.Normal = new SolidColorBrush(TMethod.AlphaColor(alpha, TConfig.Color.AddLight(0.96)));
                 alpha = this.Mouse is SolidColorBrush mouse ? mouse.Color.A : (byte)250;
-                this.Mouse = new SolidColorBrush(Method.AlphaColor(alpha, Config.Color.AddLight(0.96)));
-                this.Pressed = new SolidColorBrush(Config.Color.AddLight(-90));
+                this.Mouse = new SolidColorBrush(TMethod.AlphaColor(alpha, TConfig.Color.AddLight(0.96)));
+                this.Pressed = new SolidColorBrush(TConfig.Color.AddLight(-90));
             }
         }
         /// <summary>
         /// 主题色：设置所有颜色，自动Alpha变量
         /// </summary>
-        public BrushEXT(byte normal) : this(Method.ThemeColor(normal)) { }
+        public BrushEXT(byte normal) : this(TMethod.ThemeColor(normal)) { }
         /// <summary>
         /// 主题色：鼠标移过、按下
         /// </summary>
@@ -108,7 +108,7 @@ namespace Paway.WPF
         /// <summary>
         /// 主题色：设置所有颜色，普通、鼠标移过、按下
         /// </summary>
-        public BrushEXT(byte normal, byte mouse, byte pressed, bool iHigh = false) : this(Method.ThemeColor(normal), mouse, pressed)
+        public BrushEXT(byte normal, byte mouse, byte pressed, bool iHigh = false) : this(TMethod.ThemeColor(normal), mouse, pressed)
         {
             this.IHigh = iHigh;
             High();
@@ -116,7 +116,7 @@ namespace Paway.WPF
         /// <summary>
         /// 主题色：普通、鼠标移过、按下
         /// </summary>
-        public BrushEXT(Color? normal, byte mouse, byte pressed) : this(normal, Method.ThemeColor(mouse), Method.ThemeColor(pressed)) { }
+        public BrushEXT(Color? normal, byte mouse, byte pressed) : this(normal, TMethod.ThemeColor(mouse), TMethod.ThemeColor(pressed)) { }
         /// <summary>
         /// </summary>
         public BrushEXT(Color? normal, Color? mouse = null, Color? pressed = null, int? alpha = null, BrushEXT value = null) : this()
@@ -141,8 +141,8 @@ namespace Paway.WPF
         private BrushEXT Reset(Color color, int alpha)
         {
             Normal = new SolidColorBrush(color);
-            Mouse = new SolidColorBrush(Method.AlphaColor(color.A - alpha, color));
-            Pressed = new SolidColorBrush(Method.AlphaColor(color.A + alpha, color));
+            Mouse = new SolidColorBrush(TMethod.AlphaColor(color.A - alpha, color));
+            Pressed = new SolidColorBrush(TMethod.AlphaColor(color.A + alpha, color));
             return this;
         }
         /// <summary>
@@ -151,7 +151,7 @@ namespace Paway.WPF
         private BrushEXT Focused(Color color, int alpha)
         {
             Mouse = new SolidColorBrush(color);
-            Pressed = new SolidColorBrush(Method.AlphaColor(color.A + alpha, color));
+            Pressed = new SolidColorBrush(TMethod.AlphaColor(color.A + alpha, color));
             return this;
         }
         /// <summary>
@@ -191,7 +191,7 @@ namespace Paway.WPF
             }
             if (value is string str)
             {
-                var result = Method.ElementStatu<BrushEXT, Color>(context, culture, str, Parse, ParseValue);
+                var result = TMethod.ElementStatu<BrushEXT, Color>(context, culture, str, Parse, ParseValue);
                 return new BrushEXT(result.Item2, result.Item3, result.Item4, result.Item5, result.Item1);
             }
             return base.ConvertFrom(context, culture, value);
@@ -205,7 +205,7 @@ namespace Paway.WPF
         {
             if (byte.TryParse(str, out byte alpha))
             {
-                return Method.ThemeColor(alpha);
+                return TMethod.ThemeColor(alpha);
             }
             return (Color)ColorConverter.ConvertFromString(str);
         }

@@ -143,8 +143,8 @@
     <Compile Include="Controls\Converter\IEquatable\ThicknessEXT.cs" />
     <Compile Include="Controls\Converter\IEquatable\BrushEXT.cs" />
     <Compile Include="Controls\Extended\ListViewEXT.cs" />
-    <Compile Include="Method\Config.cs" />
-    <Compile Include="Method\Method.cs" />
+    <Compile Include="Method\TConfig.cs" />
+    <Compile Include="Method\TMethod.cs" />
     <Compile Include="Controls\Interface\IListView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\AssemblyVersion.cs">

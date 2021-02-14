@@ -80,10 +80,10 @@ namespace Paway.Test.ViewModel
                 case "新加":
                     AddViewModel.Info = new T();
                     var add = AddWindow();
-                    if (add != null && Method.Show(listView1, add) == true)
+                    if (add != null && WPF.TMethod.Show(listView1, add) == true)
                     {
                         Added(AddViewModel.Info);
-                        if (Method.Child(listView1, out DataGridEXT datagrid))
+                        if (WPF.TMethod.Child(listView1, out DataGridEXT datagrid))
                         {
                             datagrid.SelectedIndex = List.Count - 1;
                         }
@@ -95,10 +95,10 @@ namespace Paway.Test.ViewModel
                 case "删除":
                     if (selectedItem is T infoDel)
                     {
-                        if (Method.Ask(listView1, "确认删除：" + infoDel.Desc()))
+                        if (WPF.TMethod.Ask(listView1, "确认删除：" + infoDel.Desc()))
                         {
                             var index = -1;
-                            if (Method.Child(listView1, out DataGridEXT datagrid))
+                            if (WPF.TMethod.Child(listView1, out DataGridEXT datagrid))
                             {
                                 index = datagrid.SelectedIndex;
                             }
@@ -127,10 +127,10 @@ namespace Paway.Test.ViewModel
         }
         protected virtual void Refresh(DependencyObject obj)
         {
-            Method.Progress(obj, () =>
+            WPF.TMethod.Progress(obj, () =>
             {
                 var list = Find();
-                Method.BeginInvoke(obj, () =>
+                WPF.TMethod.BeginInvoke(obj, () =>
                 {
                     List.Clear();
                     foreach (var item in list) List.Add(item);
@@ -143,7 +143,7 @@ namespace Paway.Test.ViewModel
             {
                 AddViewModel.Info = info;
                 var edit = AddWindow();
-                if (Method.Show(obj, edit) == true)
+                if (WPF.TMethod.Show(obj, edit) == true)
                 {
                     Updated(obj, info);
                 }
