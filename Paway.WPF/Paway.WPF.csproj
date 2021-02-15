@@ -46,7 +46,7 @@
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
     <Reference Include="Paway.Helper, Version=2.3.20.0, Culture=neutral, PublicKeyToken=5f9d1a9ddcc41d83, processorArchitecture=MSIL">
-      <HintPath>..\packages\Paway.Helper.2.3.20\lib\net40\Paway.Helper.dll</HintPath>
+      <HintPath>..\packages\Paway.Helper.2.3.21\lib\net40\Paway.Helper.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />

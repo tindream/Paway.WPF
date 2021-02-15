@@ -718,25 +718,23 @@ namespace Paway.WPF
         /// </summary>
         public static void Show(DependencyObject parent, string msg, LeveType level = LeveType.Debug)
         {
-            if (Parent(parent, out Window window))
+            if (!Parent(parent, out Window window)) return;
+            BeginInvoke(parent, obj =>
             {
-                BeginInvoke(parent, obj =>
+                switch (level)
                 {
-                    switch (level)
-                    {
-                        case LeveType.Debug:
-                        default:
-                            MessageBox.Show(window, obj, window.Title, MessageBoxButton.OK, MessageBoxImage.Information);
-                            break;
-                        case LeveType.Warn:
-                            MessageBox.Show(window, obj, window.Title, MessageBoxButton.OK, MessageBoxImage.Warning);
-                            break;
-                        case LeveType.Error:
-                            MessageBox.Show(window, obj, window.Title, MessageBoxButton.OK, MessageBoxImage.Error);
-                            break;
-                    }
-                }, msg);
-            }
+                    case LeveType.Debug:
+                    default:
+                        MessageBox.Show(window, obj, window.Title, MessageBoxButton.OK, MessageBoxImage.Information);
+                        break;
+                    case LeveType.Warn:
+                        MessageBox.Show(window, obj, window.Title, MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case LeveType.Error:
+                        MessageBox.Show(window, obj, window.Title, MessageBoxButton.OK, MessageBoxImage.Error);
+                        break;
+                }
+            }, msg);
         }
         /// <summary>
         /// Window系统消息框
