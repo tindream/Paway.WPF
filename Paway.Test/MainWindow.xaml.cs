@@ -43,10 +43,9 @@ namespace Paway.Test
             Animation(e3, 1500);
             Animation(e4, 2250);
         }
-        public override void OnApplyTemplate()
+        protected override void OnRender(DrawingContext drawingContext)
         {
-            base.OnApplyTemplate();
-            Messenger.Default.Send(new StatuMessage(Config.Loading));
+            base.OnRender(drawingContext);
             WPF.TMethod.Progress(this, () =>
             {
                 DataService.Default.Load();
@@ -60,6 +59,11 @@ namespace Paway.Test
                 Messenger.Default.Send(new StatuMessage(ex.Message()));
                 WPF.TMethod.Error(this, ex.Message());
             });
+        }
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            Messenger.Default.Send(new StatuMessage(Config.Loading));
             if (this.pathCurrent == null)
             {
                 this.pathCurrent = transition.Content;
@@ -110,7 +114,7 @@ namespace Paway.Test
             storyboard.Begin(this, true);
 
             var r = Validation.GetHasError(tb);
-            WPF.TMethod.Toast(this, r, pos: 9);
+            WPF.TMethod.Hit(this, r);
             var xml = WPF.TMethod.GetTemplateXaml(dp);
             //Method.Toast(this, xml);
 

@@ -21,7 +21,7 @@ namespace Paway.WPF
     /// <summary>
     /// 自定义消息框-Toast
     /// </summary>
-    public partial class WindowToast : WindowEXT
+    public partial class WindowToast : Window
     {
         private bool iFirst = true;
         private Rect rect;

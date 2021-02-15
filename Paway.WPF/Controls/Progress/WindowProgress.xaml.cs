@@ -21,7 +21,7 @@ namespace Paway.WPF
     /// <summary>
     /// Window忙提示框
     /// </summary>
-    public partial class WindowProgress : WindowEXT
+    public partial class WindowProgress : Window
     {
         private bool iFirst = true;
         /// <summary>

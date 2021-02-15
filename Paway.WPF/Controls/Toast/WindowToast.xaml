@@ -1,4 +1,4 @@
-﻿<local:WindowEXT x:Class="Paway.WPF.WindowToast"
+﻿<Window x:Class="Paway.WPF.WindowToast"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -67,4 +67,4 @@
                 </TextBlock.RenderTransform></TextBlock>
         </local:ScrollViewerEXT>
     </Border>
-</local:WindowEXT>
+</Window>

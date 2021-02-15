@@ -407,7 +407,7 @@ namespace Paway.WPF
         /// </summary>
         public static void Progress(DependencyObject parent, Action action, Action success = null, Action<Exception> error = null, Action completed = null)
         {
-            BeginInvoke(parent, () =>
+            Invoke(parent, () =>
             {
                 Task.Run(() =>
                 {
@@ -439,11 +439,8 @@ namespace Paway.WPF
                     }
                     finally
                     {
-                        BeginInvoke(parent, () =>
-                        {
-                            ProgressClose(parent);
-                            completed?.Invoke();
-                        });
+                        ProgressClose(parent);
+                        completed?.Invoke();
                     }
                 });
                 Progress(parent);
@@ -465,7 +462,7 @@ namespace Paway.WPF
                     CornerRadius = new CornerRadius(3),
                     BorderBrush = new SolidColorBrush(Colors.LightGray),
                     BorderThickness = new Thickness(1),
-                    Background = new SolidColorBrush(Color.FromArgb(200, 255, 255, 255)),
+                    Background = new SolidColorBrush(Color.FromArgb(240, 255, 255, 255)),
                     MinWidth = 200,
                     MaxWidth = 350,
                 };
@@ -474,6 +471,7 @@ namespace Paway.WPF
                 var textBlock = new TextBlock()
                 {
                     Text = msg == null ? TConfig.Loading : msg.ToStrs(),
+                    Foreground = new SolidColorBrush(Colors.Black),
                     Padding = new Thickness(10),
                     HorizontalAlignment = HorizontalAlignment.Center,
                     TextTrimming = TextTrimming.WordEllipsis,
@@ -486,7 +484,9 @@ namespace Paway.WPF
                     Width = 80,
                     Height = 80,
                 });
-                myAdornerLayer.Add(new CustomAdorner(panel, () => border, Color.FromArgb(10, 0, 0, 0)));
+                var progress = new CustomAdorner(panel, () => border, Color.FromArgb(10, 0, 0, 0));
+                progress.Name = "Progress";
+                myAdornerLayer.Add(progress);
             }
         }
         /// <summary>
@@ -494,17 +494,20 @@ namespace Paway.WPF
         /// </summary>
         public static void ProgressClose(DependencyObject parent)
         {
-            if (!Parent(parent, out Window window)) return;
-            if (window.Content is Panel panel)
+            Invoke(parent, () =>
             {
-                var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
-                if (myAdornerLayer == null) return;
-                var list = myAdornerLayer.GetAdorners(panel);
-                if (list != null && list.Count() > 0)
+                if (!Parent(parent, out Window window)) return;
+                if (window.Content is Panel panel)
                 {
-                    myAdornerLayer.Remove(list.First());
+                    var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
+                    if (myAdornerLayer == null) return;
+                    var list = myAdornerLayer.GetAdorners(panel);
+                    if (list != null)
+                    {
+                        myAdornerLayer.Remove(list.FirstOrDefault(c => c.Name == "Progress"));
+                    }
                 }
-            }
+            });
         }
         /// <summary>
         /// 同步显示Window进度条(弹框模式)
@@ -597,80 +600,83 @@ namespace Paway.WPF
 
         #endregion
 
-        #region 自定义消息框-Toast
+        #region 自定义消息框
         /// <summary>
-        /// 自定义消息框-Toast
+        /// 自定义吐泡消息框-Toast
         /// </summary>
-        public static void Toast(DependencyObject parent, object msg, bool iError = false, int pos = 17)
+        public static void Toast(DependencyObject parent, object msg, bool iError = false)
         {
-            Toast(parent, msg, 0, iError, pos);
+            Toast(parent, msg, 0, iError);
         }
         /// <summary>
-        /// 自定义消息框-Toast
+        /// 自定义吐泡消息框-Toast
         /// </summary>
-        public static void Toast(DependencyObject parent, object msg, double time, bool iError = false, int pos = 17)
+        public static void Toast(DependencyObject parent, object msg, double time, bool iError = false)
         {
-            if (!Parent(parent, out Window window)) return;
-            if (window.Content is Panel panel)
+            BeginInvoke(parent, () =>
             {
-                var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
-                if (myAdornerLayer == null) return;
+                if (!Parent(parent, out Window window)) return;
+                if (window.Content is Panel panel)
+                {
+                    var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
+                    if (myAdornerLayer == null) return;
 
-                var color = iError ? Color.FromArgb(200, 221, 51, 51) : Color.FromArgb(200, 93, 107, 153);
-                var border = new Border
-                {
-                    CornerRadius = new CornerRadius(5),
-                    Background = new SolidColorBrush(color),
-                };
-                var block = new TextBlock()
-                {
-                    Text = msg.ToStrs(),
-                    Margin = new Thickness(8, 0, 8, 0),
-                    Padding = new Thickness(20, 10, 20, 10),
-                    TextWrapping = TextWrapping.Wrap,
-                    TextAlignment = TextAlignment.Center,
-                    Foreground = new SolidColorBrush(Colors.White),
-                    MinWidth = 200,
-                    MaxWidth = 600
-                };
-                border.Child = block;
-                if (time == 0) time = 3000;
-                myAdornerLayer.Add(new CustomAdorner(panel, () => border, null, null, () =>
-                {
-                    var top = window.ActualHeight - border.ActualHeight;
-                    top = top * pos / 20;
-                    return top;
-                }, () =>
-                {
-                    var storyboard = new Storyboard();
-
-                    var tt = new TranslateTransform();
-                    border.RenderTransform = tt;
-                    var animIn = new DoubleAnimation(-border.ActualHeight, 0, new Duration(TimeSpan.FromMilliseconds(125)));
-                    var propertyY = new DependencyProperty[] { UIElement.RenderTransformProperty, TranslateTransform.YProperty };
-                    Storyboard.SetTargetProperty(animIn, new PropertyPath("(0).(1)", propertyY));
-                    storyboard.Children.Add(animIn);
-
-                    var animTime = TMethod.AnimTime(border.ActualHeight);
-                    var animColor = new ColorAnimation(color, Color.FromArgb(0, color.R, color.G, color.B), new Duration(TimeSpan.FromMilliseconds(animTime)))
+                    var color = iError ? Color.FromArgb(240, 221, 51, 51) : Color.FromArgb(240, 93, 107, 153);
+                    var border = new Border
                     {
-                        BeginTime = TimeSpan.FromMilliseconds(time + 125)
+                        CornerRadius = new CornerRadius(5),
+                        Background = new SolidColorBrush(color),
                     };
-                    var propertyChain = new DependencyProperty[] { Border.BackgroundProperty, SolidColorBrush.ColorProperty };
-                    Storyboard.SetTargetProperty(animColor, new PropertyPath("(0).(1)", propertyChain));
-                    storyboard.Children.Add(animColor);
-
-                    var animOut = new DoubleAnimation(0, border.ActualHeight + 0, new Duration(TimeSpan.FromMilliseconds(animTime)))
+                    var block = new TextBlock()
                     {
-                        BeginTime = TimeSpan.FromMilliseconds(time + 125)
+                        Text = msg.ToStrs(),
+                        Margin = new Thickness(8, 0, 8, 0),
+                        Padding = new Thickness(20, 10, 20, 10),
+                        TextWrapping = TextWrapping.Wrap,
+                        TextAlignment = TextAlignment.Center,
+                        Foreground = new SolidColorBrush(Colors.White),
+                        MinWidth = 200,
+                        MaxWidth = 600
                     };
-                    var propertyY2 = new DependencyProperty[] { UIElement.RenderTransformProperty, TranslateTransform.YProperty };
-                    Storyboard.SetTargetProperty(animOut, new PropertyPath("(0).(1)", propertyY2));
-                    storyboard.Children.Add(animOut);
+                    border.Child = block;
+                    if (time == 0) time = 3000;
+                    myAdornerLayer.Add(new CustomAdorner(panel, () => border, null, null, () =>
+                    {
+                        var top = window.ActualHeight - border.ActualHeight;
+                        top = top * 17 / 20;
+                        return top;
+                    }, () =>
+                    {
+                        var storyboard = new Storyboard();
 
-                    return storyboard;
-                }));
-            }
+                        var tt = new TranslateTransform();
+                        border.RenderTransform = tt;
+                        var animIn = new DoubleAnimation(-border.ActualHeight, 0, new Duration(TimeSpan.FromMilliseconds(125)));
+                        var propertyY = new DependencyProperty[] { UIElement.RenderTransformProperty, TranslateTransform.YProperty };
+                        Storyboard.SetTargetProperty(animIn, new PropertyPath("(0).(1)", propertyY));
+                        storyboard.Children.Add(animIn);
+
+                        var animTime = TMethod.AnimTime(border.ActualHeight);
+                        var animColor = new ColorAnimation(color, Color.FromArgb(0, color.R, color.G, color.B), new Duration(TimeSpan.FromMilliseconds(animTime)))
+                        {
+                            BeginTime = TimeSpan.FromMilliseconds(time + 125)
+                        };
+                        var propertyChain = new DependencyProperty[] { Border.BackgroundProperty, SolidColorBrush.ColorProperty };
+                        Storyboard.SetTargetProperty(animColor, new PropertyPath("(0).(1)", propertyChain));
+                        storyboard.Children.Add(animColor);
+
+                        var animOut = new DoubleAnimation(0, border.ActualHeight + 0, new Duration(TimeSpan.FromMilliseconds(animTime)))
+                        {
+                            BeginTime = TimeSpan.FromMilliseconds(time + 125)
+                        };
+                        var propertyY2 = new DependencyProperty[] { UIElement.RenderTransformProperty, TranslateTransform.YProperty };
+                        Storyboard.SetTargetProperty(animOut, new PropertyPath("(0).(1)", propertyY2));
+                        storyboard.Children.Add(animOut);
+
+                        return storyboard;
+                    }));
+                }
+            });
             //Invoke(parent, () =>
             //{
             //    var toast = new WindowToast();
@@ -683,6 +689,67 @@ namespace Paway.WPF
             //        toast.Show(msg, time, iError);
             //    }
             //});
+        }
+        /// <summary>
+        /// 自定义提示框-Hit
+        /// </summary>
+        public static void Hit(DependencyObject parent, object msg, bool iError = false)
+        {
+            Hit(parent, msg, 0, iError);
+        }
+        /// <summary>
+        /// 自定义提示框-Hit
+        /// </summary>
+        public static void Hit(DependencyObject parent, object msg, double time, bool iError = false)
+        {
+            BeginInvoke(parent, () =>
+            {
+                if (!Parent(parent, out Window window)) return;
+                if (window.Content is Panel panel)
+                {
+                    var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
+                    if (myAdornerLayer == null) return;
+
+                    var color = iError ? Color.FromArgb(240, 221, 51, 51) : Color.FromArgb(240, 93, 107, 153);
+                    var border = new Border
+                    {
+                        CornerRadius = new CornerRadius(5),
+                        Background = new SolidColorBrush(color),
+                    };
+                    var block = new TextBlock()
+                    {
+                        Text = msg.ToStrs(),
+                        Margin = new Thickness(8, 0, 8, 0),
+                        Padding = new Thickness(20, 10, 20, 10),
+                        TextWrapping = TextWrapping.Wrap,
+                        TextAlignment = TextAlignment.Center,
+                        Foreground = new SolidColorBrush(Colors.White),
+                        MinWidth = 200,
+                        MaxWidth = 600
+                    };
+                    border.Child = block;
+                    if (time == 0) time = 3000;
+                    myAdornerLayer.Add(new CustomAdorner(panel, () => border, null, null, null, () =>
+                    {
+                        var storyboard = new Storyboard();
+
+                        var animInColor = new ColorAnimation(Color.FromArgb(0, color.R, color.G, color.B), color, new Duration(TimeSpan.FromMilliseconds(125)));
+                        var propertyChain = new DependencyProperty[] { Border.BackgroundProperty, SolidColorBrush.ColorProperty };
+                        Storyboard.SetTargetProperty(animInColor, new PropertyPath("(0).(1)", propertyChain));
+                        storyboard.Children.Add(animInColor);
+
+                        var animTime = TMethod.AnimTime(border.ActualHeight);
+                        var animColor = new ColorAnimation(color, Color.FromArgb(0, color.R, color.G, color.B), new Duration(TimeSpan.FromMilliseconds(animTime)))
+                        {
+                            BeginTime = TimeSpan.FromMilliseconds(time + 125)
+                        };
+                        Storyboard.SetTargetProperty(animColor, new PropertyPath("(0).(1)", propertyChain));
+                        storyboard.Children.Add(animColor);
+
+                        return storyboard;
+                    }));
+                }
+            });
         }
 
         #endregion
