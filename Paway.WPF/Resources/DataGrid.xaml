@@ -35,9 +35,9 @@
 
     <Style x:Key="ColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="BorderThickness" Value="0,0,1,1"></Setter>
-        <Setter Property="BorderBrush" Value="LightGray"></Setter>
-        <Setter Property="Padding" Value="5,10"></Setter>
+        <Setter Property="BorderThickness" Value="0,0,1,1"/>
+        <Setter Property="BorderBrush" Value="LightGray"/>
+        <Setter Property="Padding" Value="5,10"/>
         <Setter Property="Background">
             <Setter.Value>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -73,7 +73,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="{x:Type local:DataGridEXT}">
+    <Style x:Key="DataGridEXTStyle" TargetType="{x:Type local:DataGridEXT}">
         <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
         <!--样式-->
         <Setter Property="ColumnHeaderStyle" Value="{StaticResource ColumnHeaderStyle}"/>
@@ -87,6 +87,8 @@
         <!--外观-->
         <Setter Property="Background" Value="#FAFAFA"/>
         <Setter Property="BorderThickness" Value="1"/>
+        <!--由ElementStyle样式转换-->
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <!--网格线-->
         <Setter Property="GridLinesVisibility" Value="Horizontal"/>
         <Setter Property="HorizontalGridLinesBrush">
@@ -104,8 +106,11 @@
         <Setter Property="CanUserReorderColumns" Value="False"/>
         <Setter Property="CanUserResizeColumns" Value="True"/>
         <Setter Property="CanUserSortColumns" Value="True"/>
+        <!--自动列宽-->
+        <!--<Setter Property="ColumnWidth" Value="*"/>-->
         <!--行-->
         <!--隔行换色-->
+        <!--<Setter Property="RowBackground" Value="Red"/>-->
         <Setter Property="AlternatingRowBackground" Value="#F3F3F3"/>
         <Setter Property="AlternationCount" Value="2"/>
         <!--单行选择-->
@@ -113,5 +118,7 @@
         <Setter Property="CanUserAddRows" Value="False"/>
         <Setter Property="CanUserResizeRows" Value="False"/>
     </Style>
+
+    <Style TargetType="local:DataGridEXT" BasedOn="{StaticResource DataGridEXTStyle}"/>
 
 </ResourceDictionary>

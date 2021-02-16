@@ -197,7 +197,7 @@
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Visible" />
         <Setter Property="Padding" Value="0"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="ItemContainerStyle" Value="{StaticResource DefaultTreeViewItem}"></Setter>
+        <Setter Property="ItemContainerStyle" Value="{StaticResource DefaultTreeViewItem}"/>
         <Setter Property="ItemTemplate" Value="{StaticResource DefaultNode}"/>
         <!--修改模板属性-->
         <Setter Property="Template">

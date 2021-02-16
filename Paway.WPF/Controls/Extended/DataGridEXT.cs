@@ -230,11 +230,11 @@ namespace Paway.WPF
                     column = new DataGridTextColumn { Binding = new Binding(property.Name) };
                     columns.Add(column);
                 }
-                column.MinWidth = 64;
+                //column.MinWidth = 64; 
                 column.Header = property.Text();
                 if (column is DataGridTextColumn text && text.ElementStyle.Setters.Count == 1 && (text.ElementStyle.Setters[0] as Setter).Property.Name == "Margin")
                 {
-                    text.ElementStyle = (Style)FindResource("TextLeft");
+                    text.ElementStyle = (Style)FindResource("Text" + this.HorizontalContentAlignment);
                 }
                 column.Visibility = property.IShow() ? Visibility.Visible : Visibility.Collapsed;
             }
