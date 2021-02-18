@@ -254,9 +254,9 @@ namespace Paway.WPF
 
         #region 装饰器-自定义消息
         /// <summary>
-        /// 装饰器-收到新消息
+        /// 装饰器-收到消息装入列表
         /// </summary>
-        public static void ReceivedNews(FrameworkElement parent, object msg, double time = 500, double xMove = 0, double yMove = 0)
+        public static void Slowly(FrameworkElement parent, object msg, double time = 500, double xMove = 0, double yMove = 0, double size = 36, Color? color = null)
         {
             BeginInvoke(parent, () =>
             {
@@ -266,8 +266,9 @@ namespace Paway.WPF
                 var block = new TextBlock()
                 {
                     Text = msg.ToStrs(),
-                    FontSize = 36
+                    FontSize = size
                 };
+                if (color != null) block.Foreground = new SolidColorBrush(color.Value);
                 myAdornerLayer.Add(new CustomAdorner(parent, () => block, null, null, null, () =>
                 {
                     var storyboard = new Storyboard();
