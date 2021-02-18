@@ -30,86 +30,6 @@ namespace Paway.WPF
     /// </summary>
     public class TMethod : Paway.Helper.TMethod
     {
-        #region Adorner调用
-        /// <summary>
-        /// 点击触发水波纹装饰器
-        /// </summary>
-        public static AdornerLayer EllipseAdorner(MouseEventArgs e, double width = 0, double maxWidth = 300)
-        {
-            if (!(e.OriginalSource is FrameworkElement element)) return null;
-            if (element is Adorner adorner)
-            {//暂未使用
-                if (adorner.AdornedElement is FrameworkElement framework)
-                {
-                    element = framework;
-                }
-            }
-            if (element is TextBlock textBlock)
-            {
-                if (textBlock.Parent is FrameworkElement framework)
-                {
-                    element = framework;
-                }
-                else if (TMethod.Parent(textBlock, out ContentPresenter content) && content.Parent is FrameworkElement framework2)
-                {
-                    element = framework2;
-                }
-            }
-            var myAdornerLayer = EllipseAdorner(element, e, null, width, maxWidth);
-            if (myAdornerLayer == null)
-            {
-                if (!Parent(element, out Window window)) return null;
-                if (window.Content is Panel panel)
-                {
-                    TMethod.EllipseAdorner(panel, e, null, width, maxWidth);
-                }
-            }
-            return myAdornerLayer;
-        }
-        /// <summary>
-        /// 点击触发水波纹装饰器
-        /// </summary>
-        public static AdornerLayer EllipseAdorner(FrameworkElement element, MouseEventArgs e, Color? color = null, double width = 0, double maxWidth = 300)
-        {
-            var myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
-            if (myAdornerLayer == null) return null;
-
-            var point = e.GetPosition(element);
-            var x = Math.Max(element.ActualWidth - point.X, point.X);
-            var y = Math.Max(element.ActualHeight - point.Y, point.Y);
-            var autoWidth = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2)) * 2;
-            if (width == 0 || width > autoWidth) width = autoWidth;
-            if (maxWidth > 0 && width > maxWidth) width = maxWidth;
-
-            if (color == null) color = Color.FromArgb(255, 35, 175, 255);
-            var ellipse = new Ellipse() { Width = 10, Height = 10, Fill = new SolidColorBrush(color.Value) };
-            myAdornerLayer.Add(new CustomAdorner(element, () => ellipse, null, () => point.X - ellipse.ActualWidth / 2, () => point.Y - ellipse.ActualHeight / 2, () =>
-            {
-                var storyboard = new Storyboard();
-                var time = TMethod.AnimTime(width) * 1.3;
-
-                var animWidth = new DoubleAnimation(10, width, new Duration(TimeSpan.FromMilliseconds(time)));
-                Storyboard.SetTargetProperty(animWidth, new PropertyPath(FrameworkElement.WidthProperty));
-                storyboard.Children.Add(animWidth);
-
-                var animHeight = new DoubleAnimation(10, width, new Duration(TimeSpan.FromMilliseconds(time)));
-                Storyboard.SetTargetProperty(animHeight, new PropertyPath(FrameworkElement.HeightProperty));
-                storyboard.Children.Add(animHeight);
-
-
-                var animColor = new ColorAnimation(color.Value, Color.FromArgb(10, color.Value.R, color.Value.G, color.Value.B), new Duration(TimeSpan.FromMilliseconds(300)));
-                ellipse.Fill.BeginAnimation(SolidColorBrush.ColorProperty, animColor);
-                var propertyChain = new DependencyProperty[] { Ellipse.FillProperty, SolidColorBrush.ColorProperty };
-                Storyboard.SetTargetProperty(animColor, new PropertyPath("(0).(1)", propertyChain));
-                storyboard.Children.Add(animColor);
-
-                return storyboard;
-            }));
-            return myAdornerLayer;
-        }
-
-        #endregion
-
         #region 统一Invoke处理
         /// <summary>
         /// 同步调用
@@ -332,6 +252,362 @@ namespace Paway.WPF
 
         #endregion
 
+        #region 装饰器-自定义消息
+        /// <summary>
+        /// 装饰器-收到新消息
+        /// </summary>
+        public static void ReceivedNews(FrameworkElement parent, object msg, double time = 500, double xMove = 0, double yMove = 0)
+        {
+            BeginInvoke(parent, () =>
+            {
+                var myAdornerLayer = AdornerLayer.GetAdornerLayer(parent);
+                if (myAdornerLayer == null) return;
+
+                var block = new TextBlock()
+                {
+                    Text = msg.ToStrs(),
+                    FontSize = 36
+                };
+                myAdornerLayer.Add(new CustomAdorner(parent, () => block, null, null, null, () =>
+                {
+                    var storyboard = new Storyboard();
+
+                    var animTime = AnimTime(block.FontSize - 12) * 3;
+                    var animation = new DoubleAnimation(block.FontSize, 12, new Duration(TimeSpan.FromMilliseconds(animTime)))
+                    {
+                        BeginTime = TimeSpan.FromMilliseconds(time),
+                        AccelerationRatio = 0.9,
+                        DecelerationRatio = 0.1
+                    };
+                    Storyboard.SetTargetProperty(animation, new PropertyPath(TextBlock.FontSizeProperty));
+                    storyboard.Children.Add(animation);
+
+                    var tt = new TranslateTransform();
+                    block.RenderTransform = tt;
+                    if (xMove != 0)
+                    {
+                        var wMove = (parent.ActualWidth / 2 - block.ActualWidth / 2) * xMove;
+                        var animX = new DoubleAnimation(0, wMove, new Duration(TimeSpan.FromMilliseconds(animTime)))
+                        {
+                            BeginTime = TimeSpan.FromMilliseconds(time),
+                            AccelerationRatio = 0.9,
+                            DecelerationRatio = 0.1
+                        };
+                        var propertyX = new DependencyProperty[] { TextBlock.RenderTransformProperty, TranslateTransform.XProperty };
+                        Storyboard.SetTargetProperty(animX, new PropertyPath("(0).(1)", propertyX));
+                        storyboard.Children.Add(animX);
+                    }
+                    if (yMove != 0)
+                    {
+                        var hMove = (parent.ActualHeight / 2 - block.ActualHeight / 2) * yMove;
+                        var animY = new DoubleAnimation(0, hMove, new Duration(TimeSpan.FromMilliseconds(animTime)))
+                        {
+                            AccelerationRatio = 0.1,
+                            DecelerationRatio = 0.9,
+                            BeginTime = TimeSpan.FromMilliseconds(time)
+                        };
+                        var propertyY = new DependencyProperty[] { TextBlock.RenderTransformProperty, TranslateTransform.YProperty };
+                        Storyboard.SetTargetProperty(animY, new PropertyPath("(0).(1)", propertyY));
+                        storyboard.Children.Add(animY);
+                    }
+
+                    return storyboard;
+                }));
+            });
+        }
+        /// <summary>
+        /// 装饰器-点击触发水波纹特效
+        /// </summary>
+        public static void WaterAdorner(MouseEventArgs e, double width = 0, double maxWidth = 300)
+        {
+            if (!(e.OriginalSource is FrameworkElement element)) return;
+            if (element is Adorner adorner)
+            {//暂未使用
+                if (adorner.AdornedElement is FrameworkElement framework)
+                {
+                    element = framework;
+                }
+            }
+            if (element is TextBlock textBlock)
+            {
+                if (textBlock.Parent is FrameworkElement framework)
+                {
+                    element = framework;
+                }
+                else if (Parent(textBlock, out ContentPresenter content) && content.Parent is FrameworkElement framework2)
+                {
+                    element = framework2;
+                }
+            }
+            var myAdornerLayer = WaterAdorner(element, e, null, width, maxWidth);
+            if (myAdornerLayer == null)
+            {
+                if (!Parent(element, out Window window)) return;
+                if (window.Content is Panel panel)
+                {
+                    WaterAdorner(panel, e, null, width, maxWidth);
+                }
+            }
+        }
+        /// <summary>
+        /// 装饰器-点击触发水波纹特效
+        /// </summary>
+        private static AdornerLayer WaterAdorner(FrameworkElement element, MouseEventArgs e, Color? color = null, double width = 0, double maxWidth = 300)
+        {
+            var myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
+            if (myAdornerLayer == null) return null;
+
+            var point = e.GetPosition(element);
+            var x = Math.Max(element.ActualWidth - point.X, point.X);
+            var y = Math.Max(element.ActualHeight - point.Y, point.Y);
+            var autoWidth = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2)) * 2;
+            if (width == 0 || width > autoWidth) width = autoWidth;
+            if (maxWidth > 0 && width > maxWidth) width = maxWidth;
+
+            if (color == null) color = Color.FromArgb(255, 35, 175, 255);
+            var ellipse = new Ellipse() { Width = 10, Height = 10, Fill = new SolidColorBrush(color.Value) };
+            myAdornerLayer.Add(new CustomAdorner(element, () => ellipse, null, () => point.X - ellipse.ActualWidth / 2, () => point.Y - ellipse.ActualHeight / 2, () =>
+            {
+                var storyboard = new Storyboard();
+                var time = AnimTime(width) * 1.3;
+
+                var animWidth = new DoubleAnimation(10, width, new Duration(TimeSpan.FromMilliseconds(time)));
+                Storyboard.SetTargetProperty(animWidth, new PropertyPath(FrameworkElement.WidthProperty));
+                storyboard.Children.Add(animWidth);
+
+                var animHeight = new DoubleAnimation(10, width, new Duration(TimeSpan.FromMilliseconds(time)));
+                Storyboard.SetTargetProperty(animHeight, new PropertyPath(FrameworkElement.HeightProperty));
+                storyboard.Children.Add(animHeight);
+
+
+                var animColor = new ColorAnimation(color.Value, Color.FromArgb(10, color.Value.R, color.Value.G, color.Value.B), new Duration(TimeSpan.FromMilliseconds(300)));
+                ellipse.Fill.BeginAnimation(SolidColorBrush.ColorProperty, animColor);
+                var propertyChain = new DependencyProperty[] { Ellipse.FillProperty, SolidColorBrush.ColorProperty };
+                Storyboard.SetTargetProperty(animColor, new PropertyPath("(0).(1)", propertyChain));
+                storyboard.Children.Add(animColor);
+
+                return storyboard;
+            }));
+            return myAdornerLayer;
+        }
+        /// <summary>
+        /// 装饰器-同步显示Window进度条
+        /// </summary>
+        public static void Progress(DependencyObject parent, object msg = null)
+        {
+            if (!Parent(parent, out Window window)) return;
+            if (window.Content is Panel panel)
+            {
+                var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
+                if (myAdornerLayer == null) return;
+
+                var border = new Border
+                {
+                    CornerRadius = new CornerRadius(3),
+                    BorderBrush = new SolidColorBrush(Colors.LightGray),
+                    BorderThickness = new Thickness(1),
+                    Background = new SolidColorBrush(Color.FromArgb(240, 255, 255, 255)),
+                    MinWidth = 200,
+                    MaxWidth = 350,
+                };
+                var dp = new DockPanel();
+                border.Child = dp;
+                var textBlock = new TextBlock()
+                {
+                    Text = msg == null ? TConfig.Loading : msg.ToStrs(),
+                    Foreground = new SolidColorBrush(Colors.Black),
+                    Padding = new Thickness(10),
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    TextTrimming = TextTrimming.WordEllipsis,
+                };
+                dp.Children.Add(textBlock);
+                DockPanel.SetDock(textBlock, Dock.Bottom);
+                dp.Children.Add(new Progress
+                {
+                    Margin = new Thickness(20),
+                    Width = 80,
+                    Height = 80,
+                });
+                var progress = new CustomAdorner(panel, () => border, Color.FromArgb(10, 0, 0, 0))
+                {
+                    Name = "Progress"
+                };
+                myAdornerLayer.Add(progress);
+            }
+        }
+        /// <summary>
+        /// 装饰器-关闭Window进度条
+        /// </summary>
+        public static void ProgressClose(DependencyObject parent)
+        {
+            Invoke(parent, () =>
+            {
+                if (!Parent(parent, out Window window)) return;
+                if (window.Content is Panel panel)
+                {
+                    var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
+                    if (myAdornerLayer == null) return;
+                    var list = myAdornerLayer.GetAdorners(panel);
+                    if (list != null)
+                    {
+                        myAdornerLayer.Remove(list.FirstOrDefault(c => c.Name == "Progress"));
+                    }
+                }
+            });
+        }
+        /// <summary>
+        /// 装饰器-自定义吐泡消息框-Toast
+        /// </summary>
+        public static void Toast(DependencyObject parent, object msg, bool iError = false)
+        {
+            Toast(parent, msg, 0, iError);
+        }
+        /// <summary>
+        /// 装饰器-自定义吐泡消息框-Toast
+        /// </summary>
+        public static void Toast(DependencyObject parent, object msg, double time, bool iError = false)
+        {
+            BeginInvoke(parent, () =>
+            {
+                if (!Parent(parent, out Window window)) return;
+                if (window.Content is Panel panel)
+                {
+                    var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
+                    if (myAdornerLayer == null) return;
+
+                    var color = iError ? Color.FromArgb(240, 221, 51, 51) : Color.FromArgb(240, 93, 107, 153);
+                    var border = new Border
+                    {
+                        CornerRadius = new CornerRadius(5),
+                        Background = new SolidColorBrush(color),
+                    };
+                    var block = new TextBlock()
+                    {
+                        Text = msg.ToStrs(),
+                        Margin = new Thickness(8, 0, 8, 0),
+                        Padding = new Thickness(20, 10, 20, 10),
+                        TextWrapping = TextWrapping.Wrap,
+                        TextAlignment = TextAlignment.Center,
+                        Foreground = new SolidColorBrush(Colors.White),
+                        MinWidth = 200,
+                        MaxWidth = 600
+                    };
+                    border.Child = block;
+                    if (time == 0) time = 3000;
+                    myAdornerLayer.Add(new CustomAdorner(panel, () => border, null, null, () =>
+                    {
+                        var top = window.ActualHeight - border.ActualHeight;
+                        top = top * 17 / 20;
+                        return top;
+                    }, () =>
+                    {
+                        var storyboard = new Storyboard();
+
+                        var tt = new TranslateTransform();
+                        border.RenderTransform = tt;
+                        var animIn = new DoubleAnimation(-border.ActualHeight, 0, new Duration(TimeSpan.FromMilliseconds(125)));
+                        var propertyY = new DependencyProperty[] { UIElement.RenderTransformProperty, TranslateTransform.YProperty };
+                        Storyboard.SetTargetProperty(animIn, new PropertyPath("(0).(1)", propertyY));
+                        storyboard.Children.Add(animIn);
+
+                        var animTime = AnimTime(border.ActualHeight);
+                        var animColor = new ColorAnimation(color, Color.FromArgb(0, color.R, color.G, color.B), new Duration(TimeSpan.FromMilliseconds(animTime)))
+                        {
+                            BeginTime = TimeSpan.FromMilliseconds(time + 125)
+                        };
+                        var propertyChain = new DependencyProperty[] { Border.BackgroundProperty, SolidColorBrush.ColorProperty };
+                        Storyboard.SetTargetProperty(animColor, new PropertyPath("(0).(1)", propertyChain));
+                        storyboard.Children.Add(animColor);
+
+                        var animOut = new DoubleAnimation(0, border.ActualHeight + 0, new Duration(TimeSpan.FromMilliseconds(animTime)))
+                        {
+                            BeginTime = TimeSpan.FromMilliseconds(time + 125)
+                        };
+                        var propertyY2 = new DependencyProperty[] { UIElement.RenderTransformProperty, TranslateTransform.YProperty };
+                        Storyboard.SetTargetProperty(animOut, new PropertyPath("(0).(1)", propertyY2));
+                        storyboard.Children.Add(animOut);
+
+                        return storyboard;
+                    }));
+                }
+            });
+            //Invoke(parent, () =>
+            //{
+            //    var toast = new WindowToast();
+            //    if (Parent(parent, out Window owner))
+            //    {
+            //        var window = Window(parent);
+            //        {
+            //            toast.Owner = owner;
+            //        }
+            //        toast.Show(msg, time, iError);
+            //    }
+            //});
+        }
+        /// <summary>
+        /// 装饰器-自定义提示框-Hit
+        /// </summary>
+        public static void Hit(DependencyObject parent, object msg, bool iError = false)
+        {
+            Hit(parent, msg, 0, iError);
+        }
+        /// <summary>
+        /// 装饰器-自定义提示框-Hit
+        /// </summary>
+        public static void Hit(DependencyObject parent, object msg, double time, bool iError = false)
+        {
+            BeginInvoke(parent, () =>
+            {
+                if (!Parent(parent, out Window window)) return;
+                if (window.Content is Panel panel)
+                {
+                    var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
+                    if (myAdornerLayer == null) return;
+
+                    var color = iError ? Color.FromArgb(240, 221, 51, 51) : Color.FromArgb(240, 93, 107, 153);
+                    var border = new Border
+                    {
+                        CornerRadius = new CornerRadius(5),
+                        Background = new SolidColorBrush(color),
+                    };
+                    var block = new TextBlock()
+                    {
+                        Text = msg.ToStrs(),
+                        Margin = new Thickness(8, 0, 8, 0),
+                        Padding = new Thickness(20, 10, 20, 10),
+                        TextWrapping = TextWrapping.Wrap,
+                        TextAlignment = TextAlignment.Center,
+                        Foreground = new SolidColorBrush(Colors.White),
+                        MinWidth = 200,
+                        MaxWidth = 600
+                    };
+                    border.Child = block;
+                    if (time == 0) time = 3000;
+                    myAdornerLayer.Add(new CustomAdorner(panel, () => border, null, null, null, () =>
+                    {
+                        var storyboard = new Storyboard();
+
+                        var animInColor = new ColorAnimation(Color.FromArgb(0, color.R, color.G, color.B), color, new Duration(TimeSpan.FromMilliseconds(125)));
+                        var propertyChain = new DependencyProperty[] { Border.BackgroundProperty, SolidColorBrush.ColorProperty };
+                        Storyboard.SetTargetProperty(animInColor, new PropertyPath("(0).(1)", propertyChain));
+                        storyboard.Children.Add(animInColor);
+
+                        var animTime = AnimTime(border.ActualHeight);
+                        var animColor = new ColorAnimation(color, Color.FromArgb(0, color.R, color.G, color.B), new Duration(TimeSpan.FromMilliseconds(animTime)))
+                        {
+                            BeginTime = TimeSpan.FromMilliseconds(time + 125)
+                        };
+                        Storyboard.SetTargetProperty(animColor, new PropertyPath("(0).(1)", propertyChain));
+                        storyboard.Children.Add(animColor);
+
+                        return storyboard;
+                    }));
+                }
+            });
+        }
+
+        #endregion
+
         #region Window
         #region 让系统可以处理队列中的所有Windows消息
         /// <summary>
@@ -447,69 +723,6 @@ namespace Paway.WPF
             });
         }
         /// <summary>
-        /// 同步显示Window进度条
-        /// </summary>
-        public static void Progress(DependencyObject parent, object msg = null)
-        {
-            if (!Parent(parent, out Window window)) return;
-            if (window.Content is Panel panel)
-            {
-                var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
-                if (myAdornerLayer == null) return;
-
-                var border = new Border
-                {
-                    CornerRadius = new CornerRadius(3),
-                    BorderBrush = new SolidColorBrush(Colors.LightGray),
-                    BorderThickness = new Thickness(1),
-                    Background = new SolidColorBrush(Color.FromArgb(240, 255, 255, 255)),
-                    MinWidth = 200,
-                    MaxWidth = 350,
-                };
-                var dp = new DockPanel();
-                border.Child = dp;
-                var textBlock = new TextBlock()
-                {
-                    Text = msg == null ? TConfig.Loading : msg.ToStrs(),
-                    Foreground = new SolidColorBrush(Colors.Black),
-                    Padding = new Thickness(10),
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    TextTrimming = TextTrimming.WordEllipsis,
-                };
-                dp.Children.Add(textBlock);
-                DockPanel.SetDock(textBlock, Dock.Bottom);
-                dp.Children.Add(new Progress
-                {
-                    Margin = new Thickness(20),
-                    Width = 80,
-                    Height = 80,
-                });
-                var progress = new CustomAdorner(panel, () => border, Color.FromArgb(10, 0, 0, 0));
-                progress.Name = "Progress";
-                myAdornerLayer.Add(progress);
-            }
-        }
-        /// <summary>
-        /// 隐藏Window进度条
-        /// </summary>
-        public static void ProgressClose(DependencyObject parent)
-        {
-            Invoke(parent, () =>
-            {
-                if (!Parent(parent, out Window window)) return;
-                if (window.Content is Panel panel)
-                {
-                    var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
-                    if (myAdornerLayer == null) return;
-                    var list = myAdornerLayer.GetAdorners(panel);
-                    if (list != null)
-                    {
-                        myAdornerLayer.Remove(list.FirstOrDefault(c => c.Name == "Progress"));
-                    }
-                }
-            });
-        }
-        /// <summary>
         /// 同步显示Window进度条(弹框模式)
         /// </summary>
         public static void ProgressWindow(DependencyObject parent, object msg = null)
@@ -596,160 +809,6 @@ namespace Paway.WPF
                 };
             }
             return window.ShowDialog();
-        }
-
-        #endregion
-
-        #region 自定义消息框
-        /// <summary>
-        /// 自定义吐泡消息框-Toast
-        /// </summary>
-        public static void Toast(DependencyObject parent, object msg, bool iError = false)
-        {
-            Toast(parent, msg, 0, iError);
-        }
-        /// <summary>
-        /// 自定义吐泡消息框-Toast
-        /// </summary>
-        public static void Toast(DependencyObject parent, object msg, double time, bool iError = false)
-        {
-            BeginInvoke(parent, () =>
-            {
-                if (!Parent(parent, out Window window)) return;
-                if (window.Content is Panel panel)
-                {
-                    var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
-                    if (myAdornerLayer == null) return;
-
-                    var color = iError ? Color.FromArgb(240, 221, 51, 51) : Color.FromArgb(240, 93, 107, 153);
-                    var border = new Border
-                    {
-                        CornerRadius = new CornerRadius(5),
-                        Background = new SolidColorBrush(color),
-                    };
-                    var block = new TextBlock()
-                    {
-                        Text = msg.ToStrs(),
-                        Margin = new Thickness(8, 0, 8, 0),
-                        Padding = new Thickness(20, 10, 20, 10),
-                        TextWrapping = TextWrapping.Wrap,
-                        TextAlignment = TextAlignment.Center,
-                        Foreground = new SolidColorBrush(Colors.White),
-                        MinWidth = 200,
-                        MaxWidth = 600
-                    };
-                    border.Child = block;
-                    if (time == 0) time = 3000;
-                    myAdornerLayer.Add(new CustomAdorner(panel, () => border, null, null, () =>
-                    {
-                        var top = window.ActualHeight - border.ActualHeight;
-                        top = top * 17 / 20;
-                        return top;
-                    }, () =>
-                    {
-                        var storyboard = new Storyboard();
-
-                        var tt = new TranslateTransform();
-                        border.RenderTransform = tt;
-                        var animIn = new DoubleAnimation(-border.ActualHeight, 0, new Duration(TimeSpan.FromMilliseconds(125)));
-                        var propertyY = new DependencyProperty[] { UIElement.RenderTransformProperty, TranslateTransform.YProperty };
-                        Storyboard.SetTargetProperty(animIn, new PropertyPath("(0).(1)", propertyY));
-                        storyboard.Children.Add(animIn);
-
-                        var animTime = TMethod.AnimTime(border.ActualHeight);
-                        var animColor = new ColorAnimation(color, Color.FromArgb(0, color.R, color.G, color.B), new Duration(TimeSpan.FromMilliseconds(animTime)))
-                        {
-                            BeginTime = TimeSpan.FromMilliseconds(time + 125)
-                        };
-                        var propertyChain = new DependencyProperty[] { Border.BackgroundProperty, SolidColorBrush.ColorProperty };
-                        Storyboard.SetTargetProperty(animColor, new PropertyPath("(0).(1)", propertyChain));
-                        storyboard.Children.Add(animColor);
-
-                        var animOut = new DoubleAnimation(0, border.ActualHeight + 0, new Duration(TimeSpan.FromMilliseconds(animTime)))
-                        {
-                            BeginTime = TimeSpan.FromMilliseconds(time + 125)
-                        };
-                        var propertyY2 = new DependencyProperty[] { UIElement.RenderTransformProperty, TranslateTransform.YProperty };
-                        Storyboard.SetTargetProperty(animOut, new PropertyPath("(0).(1)", propertyY2));
-                        storyboard.Children.Add(animOut);
-
-                        return storyboard;
-                    }));
-                }
-            });
-            //Invoke(parent, () =>
-            //{
-            //    var toast = new WindowToast();
-            //    if (Parent(parent, out Window owner))
-            //    {
-            //        var window = Method.Window(parent);
-            //        {
-            //            toast.Owner = owner;
-            //        }
-            //        toast.Show(msg, time, iError);
-            //    }
-            //});
-        }
-        /// <summary>
-        /// 自定义提示框-Hit
-        /// </summary>
-        public static void Hit(DependencyObject parent, object msg, bool iError = false)
-        {
-            Hit(parent, msg, 0, iError);
-        }
-        /// <summary>
-        /// 自定义提示框-Hit
-        /// </summary>
-        public static void Hit(DependencyObject parent, object msg, double time, bool iError = false)
-        {
-            BeginInvoke(parent, () =>
-            {
-                if (!Parent(parent, out Window window)) return;
-                if (window.Content is Panel panel)
-                {
-                    var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
-                    if (myAdornerLayer == null) return;
-
-                    var color = iError ? Color.FromArgb(240, 221, 51, 51) : Color.FromArgb(240, 93, 107, 153);
-                    var border = new Border
-                    {
-                        CornerRadius = new CornerRadius(5),
-                        Background = new SolidColorBrush(color),
-                    };
-                    var block = new TextBlock()
-                    {
-                        Text = msg.ToStrs(),
-                        Margin = new Thickness(8, 0, 8, 0),
-                        Padding = new Thickness(20, 10, 20, 10),
-                        TextWrapping = TextWrapping.Wrap,
-                        TextAlignment = TextAlignment.Center,
-                        Foreground = new SolidColorBrush(Colors.White),
-                        MinWidth = 200,
-                        MaxWidth = 600
-                    };
-                    border.Child = block;
-                    if (time == 0) time = 3000;
-                    myAdornerLayer.Add(new CustomAdorner(panel, () => border, null, null, null, () =>
-                    {
-                        var storyboard = new Storyboard();
-
-                        var animInColor = new ColorAnimation(Color.FromArgb(0, color.R, color.G, color.B), color, new Duration(TimeSpan.FromMilliseconds(125)));
-                        var propertyChain = new DependencyProperty[] { Border.BackgroundProperty, SolidColorBrush.ColorProperty };
-                        Storyboard.SetTargetProperty(animInColor, new PropertyPath("(0).(1)", propertyChain));
-                        storyboard.Children.Add(animInColor);
-
-                        var animTime = TMethod.AnimTime(border.ActualHeight);
-                        var animColor = new ColorAnimation(color, Color.FromArgb(0, color.R, color.G, color.B), new Duration(TimeSpan.FromMilliseconds(animTime)))
-                        {
-                            BeginTime = TimeSpan.FromMilliseconds(time + 125)
-                        };
-                        Storyboard.SetTargetProperty(animColor, new PropertyPath("(0).(1)", propertyChain));
-                        storyboard.Children.Add(animColor);
-
-                        return storyboard;
-                    }));
-                }
-            });
         }
 
         #endregion

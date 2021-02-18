@@ -93,15 +93,6 @@
                     <utils:RadioButtonEXT Content="World" IsChecked="True" />
                     <utils:RadioButtonEXT Content="Watch" IsChecked="{x:Null}" IsEnabled="False"/>
                 </WrapPanel>
-                <Grid>
-                    <Border BorderThickness="4" >
-                        <TextBlock Text="Hello"></TextBlock>
-                    </Border>
-                    <DockPanel VerticalAlignment="Bottom">
-                        <Line x:Name="line1" X1="117" X2="137" Stroke="Red" StrokeThickness="3"/>
-                        <Line x:Name="line2" X1="0" X2="20" Stroke="Red" StrokeThickness="3"/>
-                    </DockPanel>
-                </Grid>
                 <utils:DatePickerEXT Name="dp" Text="{Binding DatePickerTime, Mode=TwoWay}"/>
 
                 <WrapPanel>
