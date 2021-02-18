@@ -136,7 +136,7 @@
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="IsTabStop" Value="False" />
         <!--未知，此参数会导致文本放大缩小动画抖动-->
-        <!--<Setter Property="TextOptions.TextFormattingMode" Value="Display" />-->
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
         <Setter Property="WindowStyle" Value="SingleBorderWindow" />
         <!--<Setter Property="FontFamily" Value="Microsoft YaHei"/>-->
         <!--解决Chrome窗体下元素边缘模糊的问题，此参数会导致放大缩小动画抖动-->
@@ -153,48 +153,49 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:WindowEXT}">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                    <Grid>
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             x:Name="WindowBorder">
-                        <Grid x:Name="LayoutRoot"
+                            <Grid x:Name="LayoutRoot"
                               Background="{TemplateBinding Background}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Grid x:Name="WindowTitlePanel"
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid x:Name="WindowTitlePanel"
                                   Height="{Binding HeaderHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
                                   Margin="0,0,0,0">
-                                <Grid.Background>
-                                    <!--允许用户修改-->
-                                    <MultiBinding Converter="{StaticResource emptyColorConverter}">
-                                        <Binding Path="(local:ThemeEXT.Background).Value" RelativeSource="{RelativeSource AncestorType={x:Type local:WindowEXT}}" />
-                                        <Binding Path="(local:ThemeEXT.Background).Value" RelativeSource="{RelativeSource Self}" />
-                                    </MultiBinding>
-                                </Grid.Background>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Source="{TemplateBinding Icon}"
+                                    <Grid.Background>
+                                        <!--允许用户修改-->
+                                        <MultiBinding Converter="{StaticResource emptyColorConverter}">
+                                            <Binding Path="(local:ThemeEXT.Background).Value" RelativeSource="{RelativeSource AncestorType={x:Type local:WindowEXT}}" />
+                                            <Binding Path="(local:ThemeEXT.Background).Value" RelativeSource="{RelativeSource Self}" />
+                                        </MultiBinding>
+                                    </Grid.Background>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{TemplateBinding Icon}"
                                            VerticalAlignment="Center"
                                            Margin="5,0,0,0"
                                            Visibility="{Binding Icon,RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource nullToCollapsed}}"
                                            Height="{x:Static SystemParameters.SmallIconHeight}"
                                            Width="{x:Static SystemParameters.SmallIconWidth}"
                                            WindowChrome.IsHitTestVisibleInChrome="True"/>
-                                    <ContentControl IsTabStop="False"
+                                        <ContentControl IsTabStop="False"
                                                     Margin="5,0,0,0"
                                                     Foreground="#222"
                                                     HorizontalAlignment="Center"
                                                     VerticalAlignment="Center"
                                                     Content="{TemplateBinding Title}" />
-                                    <ContentPresenter Focusable="False"
+                                        <ContentPresenter Focusable="False"
                                                       Margin="5,0,0,0"
                                                       Content="{Binding FunctionBar, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
-                                </StackPanel>
-                                <StackPanel x:Name="btnsPanel"
+                                    </StackPanel>
+                                    <StackPanel x:Name="btnsPanel"
                                             Grid.Column="1"
                                             HorizontalAlignment="Right"
                                             VerticalAlignment="Stretch"
@@ -202,39 +203,52 @@
                                             Orientation="Horizontal"
                                             WindowChrome.IsHitTestVisibleInChrome="True"
                                             Margin="0,0,-1,0">
-                                    <ContentPresenter Focusable="False"
+                                        <ContentPresenter Focusable="False"
                                                       Content="{Binding FunctionBarRight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
-                                    <Button x:Name="MinimizeButton" Style="{StaticResource MinimizeButtonStyle}"
+                                        <Button x:Name="MinimizeButton" Style="{StaticResource MinimizeButtonStyle}"
                                             VerticalAlignment="{Binding ButtonAlignment, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
                                             MaxHeight="{Binding ButtonMaxHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
                                             Height="{Binding HeaderHeight, RelativeSource={RelativeSource TemplatedParent}}"/>
-                                    <Grid Margin="1,0"
+                                        <Grid Margin="1,0"
                                           VerticalAlignment="{Binding ButtonAlignment, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
                                           MaxHeight="{Binding ButtonMaxHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
                                           Height="{Binding HeaderHeight, RelativeSource={RelativeSource TemplatedParent}}">
-                                        <Button x:Name="RestoreButton" Visibility="Collapsed" Style="{StaticResource RestoreButtonStyle}"/>
-                                        <Button x:Name="MaximizeButton" Style="{StaticResource MaximizeButtonStyle}"/>
-                                    </Grid>
-                                    <Button x:Name="CloseButton" Style="{StaticResource CloseButtonStyle}"
+                                            <Button x:Name="RestoreButton" Visibility="Collapsed" Style="{StaticResource RestoreButtonStyle}"/>
+                                            <Button x:Name="MaximizeButton" Style="{StaticResource MaximizeButtonStyle}"/>
+                                        </Grid>
+                                        <Button x:Name="CloseButton" Style="{StaticResource CloseButtonStyle}"
                                             VerticalAlignment="{Binding ButtonAlignment, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
                                             MaxHeight="{Binding ButtonMaxHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
                                             Height="{Binding HeaderHeight, RelativeSource={RelativeSource TemplatedParent}}"/>
-                                </StackPanel>
-                            </Grid>
-                            <AdornerDecorator Grid.Row="1" KeyboardNavigation.IsTabStop="False">
-                                <ContentPresenter Content="{TemplateBinding Content}"
+                                    </StackPanel>
+                                </Grid>
+                                <AdornerDecorator Grid.Row="1" KeyboardNavigation.IsTabStop="False">
+                                    <ContentPresenter Content="{TemplateBinding Content}"
                                                   x:Name="MainContentPresenter"
                                                   KeyboardNavigation.TabNavigation="Cycle" />
-                            </AdornerDecorator>
-                            <ResizeGrip x:Name="ResizeGrip"
+                                </AdornerDecorator>
+                                <ResizeGrip x:Name="ResizeGrip"
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Bottom"
                                         Grid.Row="1"
                                         IsTabStop="False"
                                         Visibility="Hidden"
                                         WindowChrome.ResizeGripDirection="BottomRight" />
-                        </Grid>
-                    </Border>
+                            </Grid>
+                        </Border>
+                        <DockPanel Grid.Column="1" VerticalAlignment="Bottom" >
+                            <Line x:Name="line1" 
+                                  X1="{Binding ActualWidth, Converter={StaticResource valueMultiConverter}, ConverterParameter=0.5, RelativeSource={RelativeSource TemplatedParent}}" 
+                                  X2="{Binding ActualWidth, Converter={StaticResource valueMultiConverter}, ConverterParameter=0.5, RelativeSource={RelativeSource TemplatedParent}}" 
+                                  StrokeThickness="{Binding IAnimation, RelativeSource={RelativeSource TemplatedParent}}" 
+                                  Stroke="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}">
+                            </Line>
+                            <Line x:Name="line2" 
+                                  StrokeThickness="{Binding IAnimation, RelativeSource={RelativeSource TemplatedParent}}"
+                                  Stroke="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}">
+                            </Line>
+                        </DockPanel>
+                    </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsNonClientActive" Value="False">
                             <Setter Property="BorderBrush" Value="#FF6F7785" />

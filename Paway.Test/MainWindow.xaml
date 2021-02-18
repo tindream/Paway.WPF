@@ -60,7 +60,7 @@
                     </i:Interaction.Triggers>
                 </utils:ComboBoxQuery>
 
-                <utils:TextBoxEXT Name="tb" Icon="pack://application:,,,/Paway.Test;component/Images/close.png">
+                <utils:TextBoxEXT Name="tb" Icon="pack://application:,,,/Paway.Test;component/Images/close.png" IAnimation="3" BorderThickness="0,0,0,1">
                     <Binding Path="Value">
                         <Binding.ValidationRules>
                             <utils:RegexValidationRule RegexType="UInt" MinLength="2" MaxLength="4"/>

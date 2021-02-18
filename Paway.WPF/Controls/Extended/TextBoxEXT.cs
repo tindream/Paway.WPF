@@ -6,6 +6,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 
 namespace Paway.WPF
 {
@@ -15,6 +17,10 @@ namespace Paway.WPF
     public partial class TextBoxEXT : TextBox
     {
         #region 依赖属性
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty IAnimationProperty =
+            DependencyProperty.RegisterAttached(nameof(IAnimation), typeof(double), typeof(TextBoxEXT), new PropertyMetadata(0d));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty WaterProperty =
@@ -41,6 +47,16 @@ namespace Paway.WPF
         #endregion
 
         #region 扩展
+        /// <summary>
+        /// 动画
+        /// </summary>
+        [Category("扩展")]
+        [Description("动画")]
+        public double IAnimation
+        {
+            get { return (double)GetValue(IAnimationProperty); }
+            set { SetValue(IAnimationProperty, value); }
+        }
         /// <summary>
         /// 水印内容
         /// </summary>
@@ -116,5 +132,66 @@ namespace Paway.WPF
             var scrollViewer = sender as ScrollViewerEXT;
             scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - (e.Delta >> 2));
         }
+
+        #region 动画
+        /// <summary>
+        /// 鼠标进入时启动
+        /// </summary>
+        protected override void OnMouseEnter(MouseEventArgs e)
+        {
+            base.OnMouseEnter(e);
+            if (IAnimation > 0) Animation(true);
+        }
+        /// <summary>
+        /// 鼠标进入时关闭
+        /// </summary>
+        protected override void OnMouseLeave(MouseEventArgs e)
+        {
+            base.OnMouseLeave(e);
+            if (IAnimation > 0) Animation(false);
+        }
+        private void Animation(bool value)
+        {
+            TMethod.Child(this, out Line line1, "line1", false);
+            TMethod.Child(this, out Line line2, "line2", false);
+            var storyboard = new Storyboard();
+            if (value)
+            {
+                var animX1 = new DoubleAnimation(line1.X1, BorderThickness.Left, new Duration(TimeSpan.FromMilliseconds(100)));
+                var animX2 = new DoubleAnimation(line2.X2, this.ActualWidth / 2 - BorderThickness.Right, new Duration(TimeSpan.FromMilliseconds(100)));
+                if (line1 != null)
+                {
+                    Storyboard.SetTargetName(animX1, line1.Name);
+                    Storyboard.SetTargetProperty(animX1, new PropertyPath(Line.X1Property));
+                    storyboard.Children.Add(animX1);
+                }
+                if (line2 != null)
+                {
+                    Storyboard.SetTargetName(animX2, line2.Name);
+                    Storyboard.SetTargetProperty(animX2, new PropertyPath(Line.X2Property));
+                    storyboard.Children.Add(animX2);
+                }
+            }
+            else
+            {
+                var animX1 = new DoubleAnimation(line1.X1, this.ActualWidth / 2, new Duration(TimeSpan.FromMilliseconds(100)));
+                var animX2 = new DoubleAnimation(line2.X2, 0, new Duration(TimeSpan.FromMilliseconds(100)));
+                if (line1 != null)
+                {
+                    Storyboard.SetTargetName(animX1, line1.Name);
+                    Storyboard.SetTargetProperty(animX1, new PropertyPath(Line.X1Property));
+                    storyboard.Children.Add(animX1);
+                }
+                if (line2 != null)
+                {
+                    Storyboard.SetTargetName(animX2, line2.Name);
+                    Storyboard.SetTargetProperty(animX2, new PropertyPath(Line.X2Property));
+                    storyboard.Children.Add(animX2);
+                }
+            }
+            if (line1 != null) storyboard.Begin(line1);
+        }
+
+        #endregion
     }
 }
