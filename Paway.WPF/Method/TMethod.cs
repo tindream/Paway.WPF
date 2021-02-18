@@ -379,9 +379,8 @@ namespace Paway.WPF
                 Storyboard.SetTargetProperty(animHeight, new PropertyPath(FrameworkElement.HeightProperty));
                 storyboard.Children.Add(animHeight);
 
-
                 var animColor = new ColorAnimation(color.Value, Color.FromArgb(10, color.Value.R, color.Value.G, color.Value.B), new Duration(TimeSpan.FromMilliseconds(300)));
-                ellipse.Fill.BeginAnimation(SolidColorBrush.ColorProperty, animColor);
+                //ellipse.Fill.BeginAnimation(SolidColorBrush.ColorProperty, animColor);
                 var propertyChain = new DependencyProperty[] { Ellipse.FillProperty, SolidColorBrush.ColorProperty };
                 Storyboard.SetTargetProperty(animColor, new PropertyPath("(0).(1)", propertyChain));
                 storyboard.Children.Add(animColor);
