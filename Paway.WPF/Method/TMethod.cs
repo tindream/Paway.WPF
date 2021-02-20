@@ -390,6 +390,7 @@ namespace Paway.WPF
             }));
             return myAdornerLayer;
         }
+        private static TextBlock tbProgress;
         /// <summary>
         /// 装饰器-同步显示Window进度条
         /// </summary>
@@ -412,16 +413,17 @@ namespace Paway.WPF
                 };
                 var dp = new DockPanel();
                 border.Child = dp;
-                var textBlock = new TextBlock()
+                tbProgress = new TextBlock()
                 {
                     Text = msg == null ? TConfig.Loading : msg.ToStrs(),
+                    FontSize = 15,
                     Foreground = new SolidColorBrush(Colors.Black),
                     Padding = new Thickness(10),
                     HorizontalAlignment = HorizontalAlignment.Center,
                     TextTrimming = TextTrimming.WordEllipsis,
                 };
-                dp.Children.Add(textBlock);
-                DockPanel.SetDock(textBlock, Dock.Bottom);
+                dp.Children.Add(tbProgress);
+                DockPanel.SetDock(tbProgress, Dock.Bottom);
                 dp.Children.Add(new Progress
                 {
                     Margin = new Thickness(20),
@@ -434,6 +436,17 @@ namespace Paway.WPF
                 };
                 myAdornerLayer.Add(progress);
             }
+        }
+        /// <summary>
+        /// 装饰器-Window进度条提示信息
+        /// </summary>
+        public static void ProgressMsg(object msg = null)
+        {
+            if (tbProgress == null) return;
+            Invoke(tbProgress, () =>
+            {
+                tbProgress.Text = msg == null ? Paway.WPF.TConfig.Loading : msg.ToStrs();
+            });
         }
         /// <summary>
         /// 装饰器-关闭Window进度条
