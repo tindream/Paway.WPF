@@ -69,12 +69,8 @@ namespace Paway.WPF
             {
                 case RegexType.None: return true;
                 case RegexType.Custom: break;
-                case RegexType.Normal:
-                case RegexType.Password:
-                case RegexType.Ip:
-                case RegexType.UInt:
-                case RegexType.Number:
-                    pattern = (string)RegexType.Tag();
+                default:
+                    pattern = $"^{RegexType.Tag()}$";
                     break;
             }
             return Regex.IsMatch(text, pattern, RegexOptions.Singleline);

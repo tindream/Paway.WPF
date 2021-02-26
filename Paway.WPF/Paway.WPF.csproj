@@ -71,7 +71,6 @@
     <Compile Include="Controls\Converter\IEquatable\FontSizeEXT.cs" />
     <Compile Include="Controls\Converter\IValueConverter\BoolSelector.cs" />
     <Compile Include="Controls\Converter\IValueConverter\IsNotNullConverter.cs" />
-    <Compile Include="Controls\Enum\RegexType.cs" />
     <Compile Include="Controls\Converter\IValueConverter\EnumConverter.cs" />
     <Compile Include="Controls\Converter\ValidationRule\RegexValidationRule.cs" />
     <Compile Include="Controls\Converter\IEquatable\ColorLinear.cs" />
