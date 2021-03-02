@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paway.Helper;
+using System;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
@@ -609,7 +610,14 @@ namespace Paway.WPF
         {
             if (item.IsSelected != value)
             {
-                if (value) this.Focus();
+                if (value)
+                {
+                    this.Focus();
+                    if (item.Content is IListView info) TConfig.AddLog(this, info.Text);
+                    else if(item.Content is ContentControl content) TConfig.AddLog(this, content.Content.ToStrs());
+                    else if (item.Content is TextBlock textBlock) TConfig.AddLog(this, textBlock.Text.ToStrs());
+                    else TConfig.AddLog(this, item.Content.ToStrs());
+                }
                 item.IsSelected = value;
                 Animation(item, value);
             }

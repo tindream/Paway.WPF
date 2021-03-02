@@ -235,7 +235,7 @@
                 <utils:ListBoxItemEXT Text="Hello" IsSelected="True"
                                   Image="pack://application:,,,/Paway.Test;component/Images/close.png"/>
                 <utils:ListBoxItemEXT Text="World" ItemBackground=";#78FF4633" ItemTextForeground="#FF4633;;"/>
-                <Button Content="Hi" Visibility="Collapsed"/>
+                <Button Content="Hi"/>
                 <utils:ListBoxItemEXT Text="A" ItemBackground=";#7802E8FA" ItemTextForeground="#02E8FA;;"/>
                 <utils:ListBoxItemEXT Text="C" ItemBackground=";#78024AFA" ItemTextForeground="#024AFA;;"/>
             </utils:ListViewEXT>

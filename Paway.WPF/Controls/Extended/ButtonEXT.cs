@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paway.Helper;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -150,6 +151,14 @@ namespace Paway.WPF
         public ButtonEXT()
         {
             DefaultStyleKey = typeof(ButtonEXT);
+        }
+        /// <summary>
+        /// 事件日志记录
+        /// </summary>
+        protected override void OnClick()
+        {
+            TConfig.AddLog(this, this.Content.ToStrs());
+            base.OnClick();
         }
     }
 }
