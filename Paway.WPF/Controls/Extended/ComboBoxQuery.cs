@@ -28,7 +28,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly new DependencyProperty SelectedValueProperty =
-            DependencyProperty.RegisterAttached(nameof(ComboBoxQuery.SelectedValue), typeof(object), typeof(ComboBoxQuery), new PropertyMetadata(OnSelectedValueChanged));
+            DependencyProperty.RegisterAttached(nameof(ComboBoxQuery.SelectedValue), typeof(object), typeof(ComboBoxQuery), new FrameworkPropertyMetadata(OnSelectedValueChanged) { BindsTwoWayByDefault = true });
         /// <summary>
         /// </summary>
         public static readonly new DependencyProperty SelectedItemProperty =

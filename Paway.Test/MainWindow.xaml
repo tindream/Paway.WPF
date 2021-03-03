@@ -67,7 +67,9 @@
                         </Binding.ValidationRules>
                     </Binding>
                 </utils:TextBoxEXT>
-                <PasswordBox utils:PasswordBoxEXT.Icon="pack://application:,,,/Paway.Test;component/Images/close.png"></PasswordBox>
+                <PasswordBox utils:PasswordBoxEXT.Icon="pack://application:,,,/Paway.Test;component/Images/close.png"
+                             utils:PasswordBoxEXT.Password="{Binding Pad}"
+                             utils:PasswordBoxEXT.IAnimation="2" BorderThickness="0,0,0,1"/>
                 <Grid>
                     <Grid.ColumnDefinitions >
                         <ColumnDefinition Width="*"/>

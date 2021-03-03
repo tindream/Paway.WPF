@@ -52,7 +52,7 @@
                                 </StackPanel>
                             </Grid>
                         </Border>
-                        <DockPanel Grid.Column="1" VerticalAlignment="Bottom" >
+                        <DockPanel VerticalAlignment="Bottom" >
                             <Line x:Name="line1" 
                                   X1="{Binding ActualWidth, Converter={StaticResource valueMultiConverter}, ConverterParameter=0.5, RelativeSource={RelativeSource TemplatedParent}}" 
                                   X2="{Binding ActualWidth, Converter={StaticResource valueMultiConverter}, ConverterParameter=0.5, RelativeSource={RelativeSource TemplatedParent}}" 

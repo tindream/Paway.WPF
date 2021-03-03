@@ -38,8 +38,6 @@ namespace Paway.WPF
             set { SetValue(IsMonitoringProperty, value); }
         }
 
-        #endregion
-
         /// <summary>
         /// 按钮宽度
         /// </summary>
@@ -53,5 +51,7 @@ namespace Paway.WPF
             get { return (double)GetValue(BarWidthProperty); }
             set { SetValue(BarWidthProperty, value); }
         }
+
+        #endregion
     }
 }

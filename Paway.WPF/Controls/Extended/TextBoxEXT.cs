@@ -16,11 +16,25 @@ namespace Paway.WPF
     /// </summary>
     public partial class TextBoxEXT : TextBox
     {
-        #region 依赖属性
+        #region 动画
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty IAnimationProperty =
             DependencyProperty.RegisterAttached(nameof(IAnimation), typeof(double), typeof(TextBoxEXT), new PropertyMetadata(0d));
+        /// <summary>
+        /// 动画
+        /// </summary>
+        [Category("扩展")]
+        [Description("动画")]
+        public double IAnimation
+        {
+            get { return (double)GetValue(IAnimationProperty); }
+            set { SetValue(IAnimationProperty, value); }
+        }
+
+        #endregion
+
+        #region 依赖属性
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty WaterProperty =
@@ -47,16 +61,6 @@ namespace Paway.WPF
         #endregion
 
         #region 扩展
-        /// <summary>
-        /// 动画
-        /// </summary>
-        [Category("扩展")]
-        [Description("动画")]
-        public double IAnimation
-        {
-            get { return (double)GetValue(IAnimationProperty); }
-            set { SetValue(IAnimationProperty, value); }
-        }
         /// <summary>
         /// 水印内容
         /// </summary>
@@ -143,7 +147,7 @@ namespace Paway.WPF
             if (IAnimation > 0) Animation(true);
         }
         /// <summary>
-        /// 鼠标进入时关闭
+        /// 鼠标离开时关闭
         /// </summary>
         protected override void OnMouseLeave(MouseEventArgs e)
         {

@@ -60,6 +60,7 @@ namespace Paway.Test.ViewModel
                 {
                     id = value;
                     SelectedItem = GridList.Find(c => c.Id == value);
+                    //Pad = value.ToString();
                     RaisePropertyChanged();
                 }
             }
@@ -102,6 +103,12 @@ namespace Paway.Test.ViewModel
         {
             get { return _value; }
             set { _value = value; RaisePropertyChanged(); }
+        }
+        private string pad = "1";
+        public string Pad
+        {
+            get { return pad; }
+            set { pad = value; RaisePropertyChanged(); }
         }
 
         private string desc = "准备就绪";
