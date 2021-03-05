@@ -32,6 +32,7 @@ namespace Paway.WPF
             if (Template.FindName("PART_Calendar", this) is Calendar calendar)
             {
                 if (this.SelectedValue is DateTime date) calendar.SelectedDate = date;
+                calendar.SelectedDatesChanged -= Calendar_SelectedDatesChanged;
                 calendar.SelectedDatesChanged += Calendar_SelectedDatesChanged;
             }
         }

@@ -128,6 +128,7 @@ namespace Paway.WPF
             base.OnApplyTemplate();
             if (GetTemplateChild("PART_ContentHost") is ScrollViewerEXT scrollViewer)
             {
+                scrollViewer.PreviewMouseWheel -= ScrollViewer_PreviewMouseWheel;
                 scrollViewer.PreviewMouseWheel += ScrollViewer_PreviewMouseWheel;
             }
         }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Paway.WPF
@@ -66,5 +67,16 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public ScrollViewerEXT() { }
+        /// <summary>
+        /// 滚动
+        /// </summary>
+        protected override void OnPreviewMouseWheel(MouseWheelEventArgs e)
+        {
+            var eventArg = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta);
+            eventArg.RoutedEvent = UIElement.MouseWheelEvent;
+            eventArg.Source = this;
+            this.RaiseEvent(eventArg);
+            base.OnPreviewMouseWheel(e);
+        }
     }
 }

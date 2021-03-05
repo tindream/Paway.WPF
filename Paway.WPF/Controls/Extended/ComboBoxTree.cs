@@ -24,11 +24,11 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly new DependencyProperty SelectedValueProperty =
-            DependencyProperty.RegisterAttached(nameof(ComboBoxTree.SelectedValue), typeof(object), typeof(ComboBoxTree), new FrameworkPropertyMetadata(OnSelectedValueChanged) { BindsTwoWayByDefault = true });
+            DependencyProperty.RegisterAttached(nameof(SelectedValue), typeof(object), typeof(ComboBoxTree), new FrameworkPropertyMetadata(OnSelectedValueChanged) { BindsTwoWayByDefault = true });
         /// <summary>
         /// </summary>
         public static readonly new DependencyProperty SelectedItemProperty =
-            DependencyProperty.RegisterAttached(nameof(ComboBoxTree.SelectedItem), typeof(object), typeof(ComboBoxTree));
+            DependencyProperty.RegisterAttached(nameof(SelectedItem), typeof(object), typeof(ComboBoxTree));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty IQueryProperty =
@@ -132,24 +132,34 @@ namespace Paway.WPF
             }
             if (Template.FindName("PART_Popup", this) is Popup popup)
             {
+                popup.Opened -= Popup_Opened;
                 popup.Opened += Popup_Opened;
             }
             if (Template.FindName("PART_TreeView", this) is TreeViewEXT treeView)
             {
                 this.treeView = treeView;
+                treeView.MouseDoubleClick -= TreeView_MouseDoubleClick;
                 treeView.MouseDoubleClick += TreeView_MouseDoubleClick;
+                treeView.SelectedItemChanged -= TreeView_SelectedItemChanged;
                 treeView.SelectedItemChanged += TreeView_SelectedItemChanged;
             }
             if (Template.FindName("PART_EditableTextBox", this) is TextBoxEXT textBox)
             {
                 this.textBox = textBox;
+                textBox.PreviewMouseLeftButtonDown -= TextBox_PreviewMouseLeftButtonDown;
                 textBox.PreviewMouseLeftButtonDown += TextBox_PreviewMouseLeftButtonDown;
             }
             if (TMethod.Parent(this, out Window window))
             {
-                window.LocationChanged += delegate { this.IsDropDownOpen = false; };
+                window.LocationChanged -= Window_LocationChanged;
+                window.LocationChanged += Window_LocationChanged;
             }
+            this.KeyUp -= ComboBoxTree_KeyUp;
             this.KeyUp += ComboBoxTree_KeyUp;
+        }
+        private void Window_LocationChanged(object sender, EventArgs e)
+        {
+            this.IsDropDownOpen = false;
         }
         private void LoadChilds(IEnumerable<ITreeView> list)
         {

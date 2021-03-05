@@ -64,13 +64,16 @@ namespace Paway.WPF
             base.OnApplyTemplate();
             if (Template.FindName("PART_Popup", this) is Popup popup)
             {
+                popup.Opened -= Popup_Opened;
                 popup.Opened += Popup_Opened;
             }
             if (Template.FindName("PART_DataGrid", this) is DataGridEXT gridView)
             {
                 this.gridView = gridView;
                 if (!ColumnHeader) gridView.ColumnHeaderHeight = 0;
+                gridView.RefreshEvent -= GridView_RefreshEvent;
                 gridView.RefreshEvent += GridView_RefreshEvent;
+                gridView.CurrentCellChanged -= GridView_CurrentCellChanged;
                 gridView.CurrentCellChanged += GridView_CurrentCellChanged;
             }
         }

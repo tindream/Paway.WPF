@@ -49,7 +49,9 @@ namespace Paway.WPF
             _ListBoxV = Template.FindName("PART_ListBox", this) as ListBox;
             _ListBoxH = Template.FindName("PART_ListBoxChk", this) as ListBox;
             _ListBoxH.ItemsSource = ChekedItems;
+            _ListBoxV.SelectionChanged -= ListBoxV_SelectionChanged;
             _ListBoxV.SelectionChanged += ListBoxV_SelectionChanged;
+            _ListBoxH.SelectionChanged -= ListBoxH_SelectionChanged;
             _ListBoxH.SelectionChanged += ListBoxH_SelectionChanged;
             if (ItemsSource != null)
             {
