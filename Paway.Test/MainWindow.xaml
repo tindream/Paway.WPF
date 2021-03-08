@@ -82,7 +82,8 @@
                              Border="1;0"
                              Command="{Binding Teach}" CommandParameter="{Binding ElementName=btn}" Click="Cancel_Click" />
                     <utils:ButtonEXT Name="btn" Grid.Column="1"
-                             Content="确认" Click="Commit_Click" 
+                                     FontFamily="{StaticResource FontAwesome}"
+                             Content="{utils:FontImage FontImage=Adjust}" Click="Commit_Click" 
                              CommandParameter="{Binding ElementName=btn}"/>
                 </Grid>
                 <WrapPanel>

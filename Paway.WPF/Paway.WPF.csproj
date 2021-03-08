@@ -72,6 +72,7 @@
     <Compile Include="Controls\Converter\IValueConverter\BoolSelector.cs" />
     <Compile Include="Controls\Converter\IValueConverter\IsNotNullConverter.cs" />
     <Compile Include="Controls\Converter\IValueConverter\EnumConverter.cs" />
+    <Compile Include="Controls\Converter\MarkupExtension\FontImageExtension.cs" />
     <Compile Include="Controls\Converter\ValidationRule\RegexValidationRule.cs" />
     <Compile Include="Controls\Converter\IEquatable\ColorLinear.cs" />
     <Compile Include="Controls\Converter\IValueConverter\EmptyColorConverter.cs" />
@@ -291,6 +292,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Resource Include="Resource\fontawesome.ttf" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

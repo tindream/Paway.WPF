@@ -40,7 +40,7 @@
                                             Stretch="{Binding Stretch, RelativeSource={RelativeSource TemplatedParent}}"
                                             Viewport="{Binding Viewport, RelativeSource={RelativeSource TemplatedParent}}"/>
                             </Border.Background>
-                            <TextBlock x:Name="txt" Text="{TemplateBinding Content}"
+                            <TextBlock x:Name="txt" Text="{TemplateBinding Content}" Style="{x:Null}"
                                        FontSize="{TemplateBinding FontSize, Converter={StaticResource valueMultiConverter}, ConverterParameter=1.2}"
                                        Foreground="{Binding Path=ItemForeground.Normal, RelativeSource={RelativeSource TemplatedParent}}" 
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"

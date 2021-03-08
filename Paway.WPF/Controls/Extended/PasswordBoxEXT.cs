@@ -19,7 +19,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty PasswordProperty =
-            DependencyProperty.RegisterAttached(nameof(Password), typeof(string), typeof(PasswordBoxEXT), new FrameworkPropertyMetadata(string.Empty, OnPasswordPropertyChanged) { BindsTwoWayByDefault = true });
+            DependencyProperty.RegisterAttached(nameof(Password), typeof(string), typeof(PasswordBoxEXT), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnPasswordPropertyChanged));
         /// <summary>
         /// </summary>
         internal static readonly DependencyProperty IsUpdatingProperty =

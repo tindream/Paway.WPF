@@ -40,16 +40,11 @@
                                                    VerticalAlignment="Center"
                                                    VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}"
                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                <StackPanel Name="stackPanel"
-                                        Grid.Column="1"
-                                        Visibility="Collapsed"
-                                        Orientation="Horizontal">
-                                    <Label Opacity="0.4"
-                                       Padding="5,0,0,0"
-                                       FontSize="{TemplateBinding FontSize, Converter={StaticResource valueMultiConverter}}"
-                                       Foreground="#000000"
-                                       Content="{TemplateBinding Water}"/>
-                                </StackPanel>
+                                <TextBlock Name="tbWater" Grid.Column="1" Visibility="Collapsed"
+                                           Padding="5,0,0,0"
+                                           FontSize="{TemplateBinding FontSize, Converter={StaticResource valueMultiConverter}}"
+                                           Foreground="#777"
+                                           Text="{TemplateBinding Water}"/>
                             </Grid>
                         </Border>
                         <DockPanel VerticalAlignment="Bottom" >
@@ -71,10 +66,10 @@
                             <Setter Property="Padding" Value="0,4" />
                         </DataTrigger>
                         <Trigger Property="Text" Value="{x:Null}">
-                            <Setter Property="Visibility" TargetName="stackPanel" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="tbWater" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="Text" Value="">
-                            <Setter Property="Visibility" TargetName="stackPanel" Value="Visible"/>
+                            <Setter Property="Visibility" TargetName="tbWater" Value="Visible"/>
                         </Trigger>
                         <Trigger Property="IsReadOnly" Value="True">
                             <Setter Property="Background" TargetName="border" Value="#F7F7F7"/>

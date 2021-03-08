@@ -16,12 +16,16 @@
     <local:EmptyColorConverter x:Key="emptyColorConverter" />
     <local:NullJudgeConverter x:Key="nullJudgeConverter"/>
 
+    <!--文本图标-->
+    <FontFamily x:Key="FontAwesome">/Paway.WPF;component/Resource/#fontawesome</FontFamily>
+
     <Style TargetType="{x:Type Label}">
         <Setter Property="HorizontalContentAlignment" Value="Right" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
-    <Style TargetType="{x:Type TextBlock}">
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
         <Setter Property="VerticalAlignment" Value="Center" />
+        <!--影响全局TextBlock样式，如Button字体等-->
         <Setter Property="FontFamily" Value="Microsoft YaHei"/>
     </Style>
     <Style TargetType="{x:Type CheckBox}">

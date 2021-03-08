@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -80,6 +81,11 @@ namespace Paway.Test
 
         private void Commit_Click(object sender, RoutedEventArgs e)
         {
+            WPF.TMethod.Progress(this, () =>
+            {
+                Thread.Sleep(1000);
+            });
+
             storyboard.Stop(this);
             WPF.TMethod.DoEvents();
             storyboard.Begin(this, true);
@@ -130,7 +136,7 @@ namespace Paway.Test
         }
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
-            WPF.TMethod.WaterAdorner(e);
+            //WPF.TMethod.WaterAdorner(e);
             base.OnPreviewMouseDown(e);
         }
     }
