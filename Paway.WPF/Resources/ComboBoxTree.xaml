@@ -44,6 +44,7 @@
                                           Text="{TemplateBinding Text}"
                                           Margin="0"
                                           ItemBrush="Transparent"
+                                          BorderThickness="0,1"
                                           Visibility="Hidden" 
                                           Focusable="True" 
                                           Background="Transparent" 

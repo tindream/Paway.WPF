@@ -41,6 +41,7 @@
                                                    VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}"
                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                                 <TextBlock Name="tbWater" Grid.Column="1" Visibility="Collapsed"
+                                           VerticalAlignment="Center"
                                            Padding="5,0,0,0"
                                            FontSize="{TemplateBinding FontSize, Converter={StaticResource valueMultiConverter}}"
                                            Foreground="#777"
