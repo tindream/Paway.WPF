@@ -72,11 +72,23 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnPreviewMouseWheel(MouseWheelEventArgs e)
         {
-            var eventArg = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta);
-            eventArg.RoutedEvent = UIElement.MouseWheelEvent;
-            eventArg.Source = this;
+            var eventArg = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta)
+            {
+                RoutedEvent = UIElement.MouseWheelEvent,
+                Source = this
+            };
             this.RaiseEvent(eventArg);
             base.OnPreviewMouseWheel(e);
+        }
+        /// <summary>
+        /// 自动垂直滚动
+        /// </summary>
+        /// <param name="time">滚动耗时(s)</param>
+        /// <param name="beginTime">开始延时(默认2s)</param>
+        /// <param name="forever">无限重复(默认true)</param>
+        public void AutoScroll(double time, double beginTime = 2, bool forever = true)
+        {
+            ScrollViewerBehavior.AutoScroll(this, time, beginTime, forever);
         }
     }
 }
