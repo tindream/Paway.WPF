@@ -129,9 +129,9 @@
     <Compile Include="Controls\Window\FunctionBar\WindowFunctionBar.cs" />
     <Compile Include="Controls\Window\FunctionBar\FunctionBarMonitor.cs" />
     <Compile Include="Method\ConverHelper.cs" />
-    <Compile Include="Method\DpiHelper.cs" />
-    <Compile Include="Method\Enums.cs" />
-    <Compile Include="Method\NativeMethods.cs" />
+    <Compile Include="Method\Internal\DpiHelper.cs" />
+    <Compile Include="Method\Internal\Enums.cs" />
+    <Compile Include="Method\Internal\NativeMethods.cs" />
     <Compile Include="Controls\Window\WindowEXT.cs" />
     <Compile Include="Controls\Window\WindowParameters.cs" />
     <Compile Include="Controls\Window\WindowMonitor.cs" />
