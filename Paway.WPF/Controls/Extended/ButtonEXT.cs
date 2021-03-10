@@ -31,7 +31,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemForegroundProperty =
             DependencyProperty.RegisterAttached(nameof(ItemForeground), typeof(BrushEXT), typeof(ButtonEXT),
-            new PropertyMetadata(new BrushEXT(Color.FromArgb(255, 33, 33, 33), Color.FromArgb(255, 33, 33, 33), Colors.White)));
+            new PropertyMetadata(new BrushEXT(Colors.White, Colors.White, Colors.White)));
 
         /// <summary>
         /// </summary>

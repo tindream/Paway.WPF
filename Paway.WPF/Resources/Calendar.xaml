@@ -534,7 +534,8 @@
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
                                         <local:ButtonEXT x:Name="PART_GoClear" Margin="-2,-4,0,-2" Content="清空" Radius="0" Border="0,1,0,0"
-                                                         ItemBackground="Transparent;#78CA6B38"/>
+                                                         ItemBackground="Transparent;#78CA6B38"
+                                                         ItemForeground="#333;;"/>
                                         <local:ButtonEXT x:Name="PART_GoToday" Margin="0,-4,-2,-2" Grid.Column="1" Content="今天" Radius="0" Border="0,1,0,0">
                                             <local:ButtonEXT.ItemBackground>
                                                 <MultiBinding Converter="{StaticResource nullJudgeConverter}">

@@ -81,7 +81,7 @@ namespace Paway.Test
 
         private void Commit_Click(object sender, RoutedEventArgs e)
         {
-            progress.Value = WPF.TMethod.Random(100);
+            progress.AnimationValue = WPF.TMethod.Random(100);
 
             //WPF.TMethod.Progress(this, () =>
             //{

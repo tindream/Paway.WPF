@@ -76,7 +76,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <utils:ButtonEXT Name="chart" Content="取消"
-                             ItemBackground="Transparent;#78CA6B38"
+                             ItemBackground="Transparent;#78CA6B38" ItemForeground="#333;;"
                              BackgroundImage="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"
                              Stretch="None" Viewport="0,0,0.35,1"
                              Border="1;0"

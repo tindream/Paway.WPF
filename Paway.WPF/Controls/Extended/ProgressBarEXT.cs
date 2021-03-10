@@ -44,12 +44,6 @@ namespace Paway.WPF
             if (sender is ProgressBar bar)
             {
                 bar.SetValue(ProgressValueProperty, $"{bar.Value * 100 / bar.Maximum:F0}%");
-                var animTime = TMethod.AnimTime(e.NewValue - e.OldValue) / 2;
-                var animValue = new DoubleAnimation(e.OldValue, e.NewValue, new Duration(TimeSpan.FromMilliseconds(animTime)))
-                {
-                    EasingFunction = new CubicEase() { EasingMode = EasingMode.EaseOut },
-                };
-                bar.BeginAnimation(ProgressBar.ValueProperty, animValue);
             }
         }
         /// <summary>
@@ -59,6 +53,36 @@ namespace Paway.WPF
         {
             get { return (bool)GetValue(IsMonitoringProperty); }
             set { SetValue(IsMonitoringProperty, value); }
+        }
+
+        #endregion
+
+        #region 动画进度
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty AnimationValueProperty =
+            DependencyProperty.RegisterAttached(nameof(AnimationValue), typeof(double), typeof(ProgressBarEXT), new FrameworkPropertyMetadata(0d, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnAnimationValueChanged));
+        /// <summary>
+        /// 动画进度值
+        /// </summary>
+        [Category("扩展")]
+        [Description("动画进度值")]
+        public double AnimationValue
+        {
+            get { return (double)GetValue(AnimationValueProperty); }
+            set { SetValue(AnimationValueProperty, value); }
+        }
+        private static void OnAnimationValueChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            if (obj is ProgressBarEXT bar)
+            {
+                var animTime = TMethod.AnimTime((double)e.NewValue - (double)e.OldValue);
+                var animValue = new DoubleAnimation((double)e.OldValue, (double)e.NewValue, new Duration(TimeSpan.FromMilliseconds(animTime)))
+                {
+                    EasingFunction = new CubicEase() { EasingMode = EasingMode.EaseOut },
+                };
+                bar.BeginAnimation(ProgressBar.ValueProperty, animValue);
+            }
         }
 
         #endregion

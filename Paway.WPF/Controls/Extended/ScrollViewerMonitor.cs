@@ -36,9 +36,9 @@ namespace Paway.WPF
                     else if (scrollBar.TemplatedParent is ScrollViewer scrollViewer)
                     {
                         if (scrollViewer.TemplatedParent is DataGridEXT dataGrid)
-                        {
-                            SetVerticalScrollBarMargin(thumb, dataGrid);
-                            dataGrid.Loaded += delegate { SetVerticalScrollBarMargin(thumb, dataGrid); };
+                        {//已重写DataGrid滚动样式
+                            //SetVerticalScrollBarMargin(thumb, dataGrid);
+                            //dataGrid.Loaded += delegate { SetVerticalScrollBarMargin(thumb, dataGrid); };
                         }
                     }
                 }
