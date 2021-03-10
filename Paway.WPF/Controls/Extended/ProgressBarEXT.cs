@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace Paway.WPF
 {
@@ -43,6 +44,12 @@ namespace Paway.WPF
             if (sender is ProgressBar bar)
             {
                 bar.SetValue(ProgressValueProperty, $"{bar.Value * 100 / bar.Maximum:F0}%");
+                var animTime = TMethod.AnimTime(e.NewValue - e.OldValue) / 2;
+                var animValue = new DoubleAnimation(e.OldValue, e.NewValue, new Duration(TimeSpan.FromMilliseconds(animTime)))
+                {
+                    EasingFunction = new CubicEase() { EasingMode = EasingMode.EaseOut },
+                };
+                bar.BeginAnimation(ProgressBar.ValueProperty, animValue);
             }
         }
         /// <summary>

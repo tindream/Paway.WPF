@@ -1,6 +1,24 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Paway.WPF">
+
+    <Storyboard x:Key="sbEnter">
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PART_VerticalScrollBar">
+            <EasingDoubleKeyFrame KeyTime="0:0:.2" Value=".8"/>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PART_HorizontalScrollBar">
+            <EasingDoubleKeyFrame KeyTime="0:0:.2" Value=".8"/>
+        </DoubleAnimationUsingKeyFrames>
+    </Storyboard>
+    <Storyboard x:Key="sbLeave">
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PART_VerticalScrollBar">
+            <EasingDoubleKeyFrame KeyTime="0:0:.3" Value="0"/>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PART_HorizontalScrollBar">
+            <EasingDoubleKeyFrame KeyTime="0:0:.3" Value="0"/>
+        </DoubleAnimationUsingKeyFrames>
+    </Storyboard>
+
     <!-- ScrollViewer 滚动条 -->
     <Style x:Key="ScrollVerticalThumb" TargetType="{x:Type Thumb}">
         <Setter Property="local:ScrollViewerMonitor.IsMonitoring" Value="True"/>
@@ -164,51 +182,11 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <EventTrigger RoutedEvent="MouseEnter" SourceName="PART_ScrollBar">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation
-                                        Storyboard.TargetName="PART_VerticalScrollBar"
-                                        Storyboard.TargetProperty="Opacity"
-                                        To="0.6"
-                                        Duration="0:0:0.1"/>
-                                </Storyboard>
-                            </BeginStoryboard>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard Storyboard="{StaticResource sbEnter}"/>
                         </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseLeave" SourceName="PART_ScrollBar">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation
-                                        Storyboard.TargetName="PART_VerticalScrollBar"
-                                        Storyboard.TargetProperty="Opacity"
-                                        To="0.0"
-                                        Duration="0:0:0.3"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-
-
-                        <EventTrigger RoutedEvent="MouseEnter" SourceName="PART_ScrollBar">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation
-                                        Storyboard.TargetName="PART_HorizontalScrollBar"
-                                        Storyboard.TargetProperty="Opacity"
-                                        To="0.6"
-                                        Duration="0:0:0.1"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseLeave" SourceName="PART_ScrollBar">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation
-                                        Storyboard.TargetName="PART_HorizontalScrollBar"
-                                        Storyboard.TargetProperty="Opacity"
-                                        To="0.0"
-                                        Duration="0:0:0.3"/>
-                                </Storyboard>
-                            </BeginStoryboard>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard Storyboard="{StaticResource sbLeave}"/>
                         </EventTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

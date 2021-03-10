@@ -208,7 +208,7 @@ namespace Paway.WPF
         /// </summary>
         public static double AnimTime(double value, int minTime = 250)
         {
-            var animTime = (int)(Math.Pow(value, 1.0 / 4) * 100);
+            var animTime = (int)(Math.Pow(Math.Abs(value), 1.0 / 4) * 100);
             if (animTime < minTime) animTime = minTime;
             if (animTime > 1000) animTime = 1000;
             return animTime;
@@ -370,13 +370,13 @@ namespace Paway.WPF
             myAdornerLayer.Add(new CustomAdorner(element, () => ellipse, null, () => point.X - ellipse.ActualWidth / 2, () => point.Y - ellipse.ActualHeight / 2, () =>
             {
                 var storyboard = new Storyboard();
-                var time = AnimTime(width) * 1.3;
+                var animTime = AnimTime(width) * 1.3;
 
-                var animWidth = new DoubleAnimation(10, width, new Duration(TimeSpan.FromMilliseconds(time)));
+                var animWidth = new DoubleAnimation(10, width, new Duration(TimeSpan.FromMilliseconds(animTime)));
                 Storyboard.SetTargetProperty(animWidth, new PropertyPath(FrameworkElement.WidthProperty));
                 storyboard.Children.Add(animWidth);
 
-                var animHeight = new DoubleAnimation(10, width, new Duration(TimeSpan.FromMilliseconds(time)));
+                var animHeight = new DoubleAnimation(10, width, new Duration(TimeSpan.FromMilliseconds(animTime)));
                 Storyboard.SetTargetProperty(animHeight, new PropertyPath(FrameworkElement.HeightProperty));
                 storyboard.Children.Add(animHeight);
 

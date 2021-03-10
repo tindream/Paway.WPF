@@ -37,6 +37,10 @@ namespace Paway.WPF
         public static readonly DependencyProperty HeaderEndProperty =
             DependencyProperty.RegisterAttached(nameof(HeaderEnd), typeof(ColorEXT), typeof(DataGridEXT),
                 new PropertyMetadata(new ColorEXT(Color.FromArgb(255, 220, 220, 220), 170, 225)));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ScrollBarWidthProperty =
+            DependencyProperty.RegisterAttached(nameof(ScrollBarWidth), typeof(double), typeof(DataGridEXT), new PropertyMetadata(8d));
 
         /// <summary>
         /// 自定义项背景色
@@ -67,6 +71,16 @@ namespace Paway.WPF
         {
             get { return (ColorEXT)GetValue(HeaderEndProperty); }
             set { SetValue(HeaderEndProperty, value); }
+        }
+        /// <summary>
+        /// 滚动条高度(宽度)
+        /// </summary>
+        [Category("扩展")]
+        [Description("滚动条高度(宽度)")]
+        public double ScrollBarWidth
+        {
+            get { return (double)GetValue(ScrollBarWidthProperty); }
+            set { SetValue(ScrollBarWidthProperty, value); }
         }
 
         #endregion

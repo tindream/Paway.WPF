@@ -599,7 +599,9 @@
         </Setter>
     </Style>
 
+    <!--默认Calendar-->
     <Style TargetType="Calendar" BasedOn="{StaticResource CalendarStyle}"/>
+    <!--默认local:CalendarEXT-->
     <Style TargetType="local:CalendarEXT" BasedOn="{StaticResource CalendarStyle}"/>
 
 </ResourceDictionary>

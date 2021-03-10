@@ -68,7 +68,7 @@ namespace Paway.WPF
         /// </summary>
         public ScrollViewerEXT() { }
         /// <summary>
-        /// 滚动
+        /// 滚动响应
         /// </summary>
         protected override void OnPreviewMouseWheel(MouseWheelEventArgs e)
         {

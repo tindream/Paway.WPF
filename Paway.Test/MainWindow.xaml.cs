@@ -81,10 +81,12 @@ namespace Paway.Test
 
         private void Commit_Click(object sender, RoutedEventArgs e)
         {
-            WPF.TMethod.Progress(this, () =>
-            {
-                Thread.Sleep(1000);
-            });
+            progress.Value = WPF.TMethod.Random(100);
+
+            //WPF.TMethod.Progress(this, () =>
+            //{
+            //    Thread.Sleep(1000);
+            //});
 
             storyboard.Stop(this);
             WPF.TMethod.DoEvents();
