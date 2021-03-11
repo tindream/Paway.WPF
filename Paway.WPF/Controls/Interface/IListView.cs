@@ -83,6 +83,7 @@ namespace Paway.WPF
         /// <summary>
         /// 描述
         /// </summary>
+        [FillSize]
         public virtual string Desc
         {
             get { return desc; }

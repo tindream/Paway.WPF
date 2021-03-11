@@ -36,7 +36,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ColumnWidthProperty =
-            DependencyProperty.RegisterAttached(nameof(ColumnWidth), typeof(DataGridLength), typeof(ComboBoxQuery), new PropertyMetadata(new DataGridLength(1, DataGridLengthUnitType.Star)));
+            DependencyProperty.RegisterAttached(nameof(ColumnWidth), typeof(DataGridLength), typeof(ComboBoxQuery), new PropertyMetadata());
 
         /// <summary>
         /// 下拉列表是否显示列

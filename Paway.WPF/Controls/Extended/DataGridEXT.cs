@@ -242,6 +242,18 @@ namespace Paway.WPF
                 else
                 {
                     column = new DataGridTextColumn { Binding = new Binding(property.Name) };
+                    if (property.AutoSize(out System.Windows.Forms.DataGridViewAutoSizeColumnMode mode))
+                    {
+                        switch (mode)
+                        {
+                            case System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells:
+                                column.Width = DataGridLength.Auto;
+                                break;
+                            case System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill:
+                                column.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+                                break;
+                        }
+                    }
                     columns.Add(column);
                 }
                 //column.MinWidth = 64; 
