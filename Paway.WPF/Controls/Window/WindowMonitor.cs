@@ -11,7 +11,7 @@ namespace Paway.WPF
     /// <summary>
     /// for custom window
     /// </summary>
-    internal partial class WindowMonitor
+    public partial class WindowMonitor
     {
         #region 依赖属性
         /// <summary>
@@ -49,15 +49,17 @@ namespace Paway.WPF
             var newValue = (bool)args.NewValue;
             if (oldValue == newValue) return;
 
-            var target = obj as Window;
-            if (newValue) target.MouseLeftButtonDown += OnWindowMouseLeftButtonDown;
-            else target.MouseLeftButtonDown -= OnWindowMouseLeftButtonDown;
+            if (obj is Window target)
+            {
+                if (newValue) target.MouseLeftButtonDown += OnWindowMouseLeftButtonDown;
+                else target.MouseLeftButtonDown -= OnWindowMouseLeftButtonDown;
+            }
         }
         private static void OnWindowMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (e.ButtonState == MouseButtonState.Pressed)
+            if (e.ButtonState == MouseButtonState.Pressed && sender is Window target)
             {
-                (sender as Window).DragMove();
+                target.DragMove();
             }
         }
     }

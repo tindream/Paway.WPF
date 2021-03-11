@@ -47,7 +47,7 @@
             <StackPanel>
                 <utils:ProgressBarEXT Value="95" Name="progress"/>
 
-                <utils:ExpanderEXT Header="下拉框" BorderBrush="LightGray" BorderThickness="1">
+                <utils:ExpanderEXT Header="下拉框" ItemBrush="LightGray;200">
                     <StackPanel>
                         <utils:ComboBoxEXT  ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
                         <utils:ComboBoxMulti ItemsSource="{Binding MultiList}"/>

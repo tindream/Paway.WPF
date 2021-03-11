@@ -15,6 +15,11 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty RadiusProperty =
             DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(ExpanderEXT), new PropertyMetadata(new CornerRadius(3)));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ItemBrushProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ExpanderEXT),
+                new PropertyMetadata(new BrushEXT(Colors.Transparent)));
 
         #endregion
 
@@ -28,6 +33,16 @@ namespace Paway.WPF
         {
             get { return (CornerRadius)GetValue(RadiusProperty); }
             set { SetValue(RadiusProperty, value); }
+        }
+        /// <summary>
+        /// 边框颜色
+        /// </summary>
+        [Category("扩展")]
+        [Description("边框颜色")]
+        public BrushEXT ItemBrush
+        {
+            get { return (BrushEXT)GetValue(ItemBrushProperty); }
+            set { SetValue(ItemBrushProperty, value); }
         }
 
         #endregion
