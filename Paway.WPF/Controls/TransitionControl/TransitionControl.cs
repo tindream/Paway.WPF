@@ -54,7 +54,7 @@ namespace Paway.WPF
         /// Identifies the Transition dependency property.
         /// </summary>
         public static readonly DependencyProperty TransitionTypeProperty =
-            DependencyProperty.Register(nameof(TransitionType), typeof(TransitionType), typeof(TransitionControl), new PropertyMetadata(TransitionType.Default, OnTransitionPropertyChanged));
+            DependencyProperty.Register(nameof(TransitionType), typeof(TransitionType), typeof(TransitionControl), new PropertyMetadata(TransitionType.None, OnTransitionPropertyChanged));
         /// <summary>
         /// TransitionProperty property changed handler.
         /// </summary>
@@ -194,7 +194,7 @@ namespace Paway.WPF
         {
             switch (TransitionType)
             {
-                case TransitionType.Default:
+                case TransitionType.None:
                     break;
                 case TransitionType.Left:
                     TMethod.AnimMoveRight(PreviousContentPresentationSite, Value, Time, false);
@@ -204,11 +204,11 @@ namespace Paway.WPF
                     TMethod.AnimMoveLeft(PreviousContentPresentationSite, Value, Time, false);
                     TMethod.AnimMoveRight(CurrentContentPresentationSite, Value, Time);
                     break;
-                case TransitionType.Up:
+                case TransitionType.Top:
                     TMethod.AnimMoveDown(PreviousContentPresentationSite, Value, Time, false);
                     TMethod.AnimMoveUp(CurrentContentPresentationSite, Value, Time);
                     break;
-                case TransitionType.Down:
+                case TransitionType.Bottom:
                     TMethod.AnimMoveUp(PreviousContentPresentationSite, Value, Time, false);
                     TMethod.AnimMoveDown(CurrentContentPresentationSite, Value, Time);
                     break;

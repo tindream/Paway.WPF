@@ -67,9 +67,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\Adorner\CustomAdorner.cs" />
+    <Compile Include="Controls\Badge\Badge.xaml.cs">
+      <DependentUpon>Badge.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Converter\IEquatable\ThemeBackground.cs" />
     <Compile Include="Controls\Converter\IEquatable\FontSizeEXT.cs" />
     <Compile Include="Controls\Converter\IValueConverter\BoolSelector.cs" />
+    <Compile Include="Controls\Converter\IValueConverter\BrushColorConverter.cs" />
     <Compile Include="Controls\Converter\IValueConverter\IsNotNullConverter.cs" />
     <Compile Include="Controls\Converter\IValueConverter\EnumConverter.cs" />
     <Compile Include="Controls\Converter\MarkupExtension\FontImageExtension.cs" />
@@ -129,6 +133,7 @@
     <Compile Include="Controls\Window\FunctionBar\FunctionBar.cs" />
     <Compile Include="Controls\Window\FunctionBar\WindowFunctionBar.cs" />
     <Compile Include="Controls\Window\FunctionBar\FunctionBarMonitor.cs" />
+    <Compile Include="Method\AnimationHelper.cs" />
     <Compile Include="Method\ConverHelper.cs" />
     <Compile Include="Method\Internal\DpiHelper.cs" />
     <Compile Include="Method\Internal\Enums.cs" />
@@ -166,6 +171,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\Badge\Badge.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\Expander.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

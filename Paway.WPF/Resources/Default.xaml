@@ -12,7 +12,9 @@
     <local:IsNotNullConverter x:Key="isNotNull"/>
     <local:NullToCollapsed x:Key="nullToCollapsed"/>
     <local:VisibleReverse x:Key="visibleReverse"/>
-
+    <local:BrushToColorConverter x:Key="brushToColorConverter" />
+    <local:ColorToBrushConverter x:Key="colorToBrushConverter" />
+    
     <local:EmptyColorConverter x:Key="emptyColorConverter" />
     <local:NullJudgeConverter x:Key="nullJudgeConverter"/>
 

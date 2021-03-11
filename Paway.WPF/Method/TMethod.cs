@@ -605,6 +605,14 @@ namespace Paway.WPF
                         Storyboard.SetTargetProperty(animInColor, new PropertyPath("(0).(1)", propertyChain));
                         storyboard.Children.Add(animInColor);
 
+                        //放大
+                        var tt = new TranslateTransform();
+                        border.LayoutTransform = tt;
+                        var animIn = new DoubleAnimation(0.5, 1, new Duration(TimeSpan.FromMilliseconds(125)));
+                        var propertyX = new DependencyProperty[] { FrameworkElement.LayoutTransformProperty, ScaleTransform.ScaleXProperty };
+                        Storyboard.SetTargetProperty(animIn, new PropertyPath("(0).(1)", propertyX));
+                        storyboard.Children.Add(animIn);
+
                         var animTime = AnimTime(border.ActualHeight);
                         var animColor = new ColorAnimation(color, Color.FromArgb(0, color.R, color.G, color.B), new Duration(TimeSpan.FromMilliseconds(animTime)))
                         {

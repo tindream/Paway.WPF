@@ -15,27 +15,42 @@ namespace Paway.WPF
         /// <summary>
         /// Default
         /// </summary>
-        [Description("Default")]
-        Default,
+        [Description(TConfig.None)]
+        None,
         /// <summary>
-        /// Left
+        /// 渐入
+        /// <para>使控件立即进行透明度从0至1的渐变动画。若控件尚未加载完成，则将在其加载完成后再执行动画。</para>
         /// </summary>
-        [Description("Left")]
+        [Description("淡入")]
+        FadeIn,
+        /// <summary>
+        /// 渐出
+        /// </summary>
+        [Description("淡入")]
+        FadeOut,
+        /// <summary>
+        /// 从左侧滑入
+        /// <para>使控件立即进行从相对左侧偏移一个控件宽度的位置，移动至当前位置的渐变动画。若控件尚未加载完成，则将在其加载完成后再执行动画。</para>
+        /// </summary>
+        [Description("从左侧滑入")]
         Left,
         /// <summary>
-        /// Up
+        /// 从右侧滑入
+        /// <para>使控件立即进行从相对右侧偏移一个控件宽度的位置，移动至当前位置的渐变动画。若控件尚未加载完成，则将在其加载完成后再执行动画。</para>
         /// </summary>
-        [Description("Up")]
-        Up,
-        /// <summary>
-        /// Right
-        /// </summary>
-        [Description("Right")]
+        [Description("从右侧滑入")]
         Right,
         /// <summary>
-        /// Down
+        /// 从顶部滑入
+        /// <para>使控件立即进行从相对顶部偏移一个控件高度的位置，移动至当前位置的渐变动画。若控件尚未加载完成，则将在其加载完成后再执行动画。</para>
         /// </summary>
-        [Description("Down")]
-        Down,
+        [Description("从顶部滑入")]
+        Top,
+        /// <summary>
+        /// 从底部滑入
+        /// <para>使控件立即进行从相对底部偏移一个控件高度的位置，移动至当前位置的渐变动画。若控件尚未加载完成，则将在其加载完成后再执行动画。</para>
+        /// </summary>
+        [Description("从底部滑入")]
+        Bottom,
     }
 }
