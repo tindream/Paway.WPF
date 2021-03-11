@@ -47,18 +47,22 @@
             <StackPanel>
                 <utils:ProgressBarEXT Value="95" Name="progress"/>
 
-                <utils:ComboBoxEXT  ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
-                <utils:ComboBoxMulti ItemsSource="{Binding MultiList}"/>
-                <utils:ComboBoxDate SelectedValue="{Binding DatePickerTime}"/>
-                <utils:ComboBoxTree ItemsSource="{Binding TreeList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding TreeId}" IQuery="True"/>
-                <utils:ComboBoxView ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
-                <utils:ComboBoxQuery ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="FilterEvent">
-                            <ip:EventToCommand Command="{Binding CbxFilterCmd}" PassEventArgsToCommand="True"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </utils:ComboBoxQuery>
+                <utils:ExpanderEXT Header="下拉框" BorderBrush="LightGray" BorderThickness="1">
+                    <StackPanel>
+                        <utils:ComboBoxEXT  ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
+                        <utils:ComboBoxMulti ItemsSource="{Binding MultiList}"/>
+                        <utils:ComboBoxDate SelectedValue="{Binding DatePickerTime}"/>
+                        <utils:ComboBoxTree ItemsSource="{Binding TreeList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding TreeId}" IQuery="True"/>
+                        <utils:ComboBoxView ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
+                        <utils:ComboBoxQuery ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="FilterEvent">
+                                    <ip:EventToCommand Command="{Binding CbxFilterCmd}" PassEventArgsToCommand="True"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </utils:ComboBoxQuery>
+                    </StackPanel>
+                </utils:ExpanderEXT>
 
                 <utils:TextBoxEXT Name="tb" Icon="pack://application:,,,/Paway.Test;component/Images/close.png" IAnimation="2" BorderThickness="0,0,0,1">
                     <Binding Path="Value">
@@ -82,8 +86,7 @@
                              Border="1;0"
                              Command="{Binding Teach}" CommandParameter="{Binding ElementName=btn}" Click="Cancel_Click" />
                     <utils:ButtonEXT Name="btn" Grid.Column="1"
-                                     FontFamily="{StaticResource FontAwesome}"
-                             Content="{utils:FontImage FontImage=Adjust}" Click="Commit_Click" 
+                             Content="{utils:FontImage Value=Adjust}" Click="Commit_Click" 
                              CommandParameter="{Binding ElementName=btn}"/>
                 </Grid>
                 <WrapPanel>

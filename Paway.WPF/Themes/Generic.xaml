@@ -13,6 +13,7 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBoxTree.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBoxView.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\DataPager.xaml" />
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\Expander.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ListBox.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ListView.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Progress.xaml" />

@@ -21,6 +21,19 @@ namespace Paway.WPF
     /// </summary>
     public class TConfig : Paway.Helper.TConfig
     {
+        static TConfig()
+        {
+            FontAwesome = new FontFamily(new Uri(@"pack://application:,,,/Paway.WPF;component/Resource/"), "./#fontawesome");
+        }
+
+        #region 字体
+        /// <summary>
+        /// QuartZ字体
+        /// </summary>
+        public static FontFamily FontAwesome { get; private set; }
+
+        #endregion
+
         #region 主题
         /// <summary>
         /// 主题字体大小变化事件

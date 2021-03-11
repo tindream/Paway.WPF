@@ -94,6 +94,7 @@
     <Compile Include="Controls\Enum\PagerDisplayMode.cs" />
     <Compile Include="Controls\DataPager\TypeHelper.cs" />
     <Compile Include="Controls\DataPager\WeakEventListener.cs" />
+    <Compile Include="Controls\Extended\ExpanderEXT.cs" />
     <Compile Include="Controls\Extended\ComboBoxView.cs" />
     <Compile Include="Controls\Extended\ComboBoxTree.cs" />
     <Compile Include="Controls\Extended\ComboBoxDate.cs" />
@@ -165,6 +166,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Resources\Expander.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\ComboBoxQuery.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

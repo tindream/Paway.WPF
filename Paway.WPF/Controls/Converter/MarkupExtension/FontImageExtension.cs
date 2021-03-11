@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Markup;
 using System.Windows.Media;
@@ -20,9 +21,13 @@ namespace Paway.WPF
     public class FontImageExtension : MarkupExtension
     {
         /// <summary>
+        /// 父控件
+        /// </summary>
+        public Control Control { get; set; }
+        /// <summary>
         /// 文本图标
         /// </summary>
-        public FontImageType FontImage { get; set; }
+        public FontImageType Value { get; set; }
 
         /// <summary>
         /// </summary>
@@ -31,14 +36,19 @@ namespace Paway.WPF
         /// </summary>
         public FontImageExtension(FontImageType type)
         {
-            this.FontImage = type;
+            this.Value = type;
         }
         /// <summary>
         /// 转换器
         /// </summary>
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            var charactor = typeof(FontImageType).GetField(FontImage.ToString()).GetCustomAttribute<CharAttribute>().Value;
+            var service = (IProvideValueTarget)serviceProvider.GetService(typeof(IProvideValueTarget));
+            if (service != null && service.TargetObject is Control obj)
+            {
+                obj.FontFamily = TConfig.FontAwesome;
+            }
+            var charactor = typeof(FontImageType).GetField(Value.ToString()).GetCustomAttribute<CharAttribute>().Value;
             return charactor.ToString();
         }
     }
