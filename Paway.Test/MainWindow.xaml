@@ -85,9 +85,12 @@
                              Stretch="None" Viewport="0,0,0.35,1"
                              Border="1;0"
                              Command="{Binding Teach}" CommandParameter="{Binding ElementName=btn}" Click="Cancel_Click" />
-                    <utils:ButtonEXT Name="btn" Grid.Column="1"
+                    <Grid Grid.Column="1">
+                        <utils:ButtonEXT Name="btn"
                              Content="{utils:FontImage Value=Adjust}" Click="Commit_Click" 
                              CommandParameter="{Binding ElementName=btn}"/>
+                        <utils:Badge IsWaving="True" HorizontalAlignment="Right" Background="Red" Margin="0,-8,-7,24"/>
+                    </Grid>
                 </Grid>
                 <WrapPanel>
                     <utils:CheckBoxEXT x:Name="cbx" Content="Hello" IsChecked="True" Padding="0,0,3,0"/>
@@ -186,13 +189,6 @@
                 </oxy:PlotView>
 
             </StackPanel>
-            <Grid Grid.Column="1" Height="100" VerticalAlignment="Top" Margin="0,-108,0,0">
-                <Ellipse x:Name="e1" Height="10" Width="10" Fill="Red" />
-                <Ellipse x:Name="e2" Height="10" Width="10" Fill="Red" />
-                <Ellipse x:Name="e3" Height="10" Width="10" Fill="Red" />
-                <Ellipse x:Name="e4" Height="10" Width="10" Fill="Red" />
-                <Ellipse Height="10" Width="10" Fill="Red" />
-            </Grid>
         </Grid>
     </DockPanel>
     <utils:WindowEXT.FunctionBar>

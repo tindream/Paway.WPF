@@ -40,44 +40,6 @@ namespace Paway.Test
         public MainWindow()
         {
             InitializeComponent();
-            Animation(e1);
-            Animation(e2, 750);
-            Animation(e3, 1500);
-            Animation(e4, 2250);
-        }
-        private void Animation(Ellipse ellipse, double beginTime = 0, double time = 3000)
-        {
-            var animWidth = new DoubleAnimation(10, 100, new Duration(TimeSpan.FromMilliseconds(time)))
-            {
-                BeginTime = TimeSpan.FromMilliseconds(beginTime),
-                RepeatBehavior = RepeatBehavior.Forever
-            };
-            //ellipse.BeginAnimation(FrameworkElement.WidthProperty, widthAnimation);
-            Storyboard.SetTargetName(animWidth, ellipse.Name);
-            Storyboard.SetTargetProperty(animWidth, new PropertyPath(FrameworkElement.WidthProperty));
-            storyboard.Children.Add(animWidth);
-
-            var animHeight = new DoubleAnimation(10, 100, new Duration(TimeSpan.FromMilliseconds(time)))
-            {
-                BeginTime = TimeSpan.FromMilliseconds(beginTime),
-                RepeatBehavior = RepeatBehavior.Forever
-            };
-            //ellipse.BeginAnimation(FrameworkElement.HeightProperty, widthAnimation);
-            Storyboard.SetTargetName(animHeight, ellipse.Name);
-            Storyboard.SetTargetProperty(animHeight, new PropertyPath(FrameworkElement.HeightProperty));
-            storyboard.Children.Add(animHeight);
-
-            var animColor = new ColorAnimation(Color.FromArgb(160, 255, 0, 0), Color.FromArgb(10, 255, 0, 0), new Duration(TimeSpan.FromMilliseconds(time)))
-            {
-                BeginTime = TimeSpan.FromMilliseconds(beginTime),
-                RepeatBehavior = RepeatBehavior.Forever
-            };
-            //var solid = ellipse.Fill = (SolidColorBrush)ellipse.Fill.Clone();
-            //solid.BeginAnimation(SolidColorBrush.ColorProperty, colorAnimation);
-            var propertyChain = new DependencyProperty[] { Ellipse.FillProperty, SolidColorBrush.ColorProperty };
-            Storyboard.SetTargetName(animColor, ellipse.Name);
-            Storyboard.SetTargetProperty(animColor, new PropertyPath("(0).(1)", propertyChain));
-            storyboard.Children.Add(animColor);
         }
 
         private void Commit_Click(object sender, RoutedEventArgs e)

@@ -163,8 +163,7 @@ namespace Paway.WPF
         /// </summary>
         public static void AddCompletedHandler(DependencyObject d, RoutedEventHandler handler)
         {
-            UIElement uie = d as UIElement;
-            if (uie != null)
+            if (d is UIElement uie)
             {
                 uie.AddHandler(CompletedEvent, handler);
             }
@@ -174,8 +173,7 @@ namespace Paway.WPF
         /// </summary>
         public static void RemoveCompletedHandler(DependencyObject d, RoutedEventHandler handler)
         {
-            UIElement uie = d as UIElement;
-            if (uie != null)
+            if (d is UIElement uie)
             {
                 uie.RemoveHandler(CompletedEvent, handler);
             }

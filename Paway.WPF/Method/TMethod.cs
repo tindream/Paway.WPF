@@ -510,9 +510,11 @@ namespace Paway.WPF
                         storyboard.Children.Add(animInColor);
 
                         //放大
-                        var scale = new ScaleTransform();
-                        scale.CenterX = border.ActualWidth / 2;
-                        scale.CenterY = border.ActualHeight / 2;
+                        var scale = new ScaleTransform
+                        {
+                            CenterX = border.ActualWidth / 2,
+                            CenterY = border.ActualHeight / 2
+                        };
                         border.RenderTransform = scale;
                         var animInX = new DoubleAnimation(0.5, 1, new Duration(TimeSpan.FromMilliseconds(125)));
                         var animInY = new DoubleAnimation(0.5, 1, new Duration(TimeSpan.FromMilliseconds(125)));
