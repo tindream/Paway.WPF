@@ -27,12 +27,12 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBackgroundProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ComboBoxEXT),
-            new PropertyMetadata(new BrushEXT(85, 170)));
+            new PropertyMetadata(new BrushEXT(null, 85, 170)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ComboBoxEXT),
-                new PropertyMetadata(new BrushEXT(170, 250)));
+                new PropertyMetadata(new BrushEXT(null, 170, 250)));
 
         #endregion
 

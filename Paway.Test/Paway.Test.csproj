@@ -125,6 +125,7 @@
     <Compile Include="Info\TempInfo.cs" />
     <Compile Include="Interface\IModel.cs" />
     <Compile Include="ViewMessage\RefreshMessage.cs" />
+    <Compile Include="ViewMessage\UserMessage.cs" />
     <Compile Include="ViewMessage\StatuMessage.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewPlus\AddViewModelPlus.cs" />
@@ -183,6 +184,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\script.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Log.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -7,23 +7,25 @@ using System.Threading.Tasks;
 
 namespace Paway.Test
 {
-    public class UserMessage
-    {
-        public OperType Type { get; set; }
-        public UserInfo Info { get; set; }
-        public UserMessage(UserInfo info, OperType type)
-        {
-            this.Info = info;
-            this.Type = type;
-        }
-    }
     public class StatuMessage
     {
-        public string Message { get; set; }
+        public string Msg { get; set; }
+        public LeveType Level { get; set; }
 
+        public StatuMessage() { }
         public StatuMessage(string msg)
         {
-            this.Message = msg;
+            this.Msg = msg;
+            this.Level = LeveType.Debug;
         }
+        public StatuMessage(string msg, LeveType level) : this(msg)
+        {
+            this.Msg = msg;
+            this.Level = level;
+        }
+    }
+    public class ErrorStatuMessage : StatuMessage
+    {
+        public ErrorStatuMessage(string title, Exception ex) : base($"{title}: {ex.Message()}", LeveType.Error) { }
     }
 }

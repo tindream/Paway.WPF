@@ -240,7 +240,7 @@ namespace Paway.Test.ViewModel
         /// </summary>
         public MainViewModel()
         {
-            this.MessengerInstance.Register<StatuMessage>(this, msg => Statu(msg.Message));
+            this.MessengerInstance.Register<StatuMessage>(this, msg => Statu(msg.Msg));
 
             list.Add(new ListViewModel("Hello"));
             list.Add(new ListViewModel("你好123")

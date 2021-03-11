@@ -1,5 +1,6 @@
 ﻿using OxyPlot;
 using OxyPlot.Axes;
+using OxyPlot.Legends;
 using OxyPlot.Series;
 using Paway.Helper;
 using Paway.WPF;
@@ -16,59 +17,129 @@ namespace Paway.Test
     /// </summary>
     public class PlotHelper
     {
-        public static void UpdateLine(PlotModel plotModel, MonitorType monitorType, MonitorType all)
+        #region CategoryAxis
+        public static PlotModel LoadCategoryAxis(List<double> valueList, List<string> labelList, Func<string, string, object, string, object, string> action = null)
         {
-            if (plotModel == null) return;
-            for (int i = plotModel.Series.Count - 1; i >= 0; i--)
+            var model = new PlotModel
             {
-                var value = plotModel.Series[i].Title.Parse<MonitorType>();
-                if ((monitorType & value) == 0)
-                {
-                    plotModel.Series.RemoveAt(i);
-                }
-            }
-            var list = WPF.TMethod.List<MonitorType>(0);
-            foreach (var item in list)
+                PlotAreaBorderColor = OxyColor.FromArgb(255, 86, 162, 226),
+                PlotAreaBorderThickness = new OxyThickness(0)
+            };
+
+            var yAxis = new CategoryAxis
             {
-                if ((all & item) != 0 && (monitorType & item) != 0)
-                {
-                    if (plotModel.Series.FirstOrDefault(c => c.Title == item.Description()) == null)
-                    {
-                        PlotHelper.AddLine(plotModel, item);
-                    }
-                }
-            }
-            for (int i = 0; i < plotModel.Series.Count; i++)
+                Position = AxisPosition.Left,
+                TextColor = OxyColors.White,//文本颜色
+                MajorTickSize = 0,
+                MinorTickSize = 0,
+                IsZoomEnabled = false,//坐标轴缩放功能
+                IsPanEnabled = false,//图表缩放功能
+                Minimum = -0.5,
+            };
+            foreach (var item in labelList) yAxis.ActualLabels.Add(item);
+            model.Axes.Add(yAxis);
+
+            var xAxis = new LinearAxis
             {
-                var line = plotModel.Series[i] as LineSeries;
-                if (i == 0)
-                {
-                    line.TrackerFormatString = "Time: {2}\r\n{0}: {4:0.0}";
-                }
-                else
-                {
-                    line.TrackerFormatString = "\r\n{0}: {4:0.0}";
-                }
-            }
+                Position = AxisPosition.Bottom,
+                TextColor = OxyColors.Transparent,//文本颜色
+                MajorTickSize = 0,
+                MinorTickSize = 0,
+                FontSize = 0.1,
+                Minimum = 0,
+                //StringFormat = "#,0.#",
+                //Maximum = valueList.Max() * 1.15,
+                IsZoomEnabled = false,//坐标轴缩放功能
+                IsPanEnabled = false,//图表缩放功能
+            };
+            model.Axes.Add(xAxis);
+
+            var series = new BarSeries
+            {
+                FillColor = OxyColor.FromArgb(255, 40, 255, 252),
+                TextColor = OxyColors.White,//文本颜色
+                BarWidth = 24,
+                //LabelFormatString = "{0:#,0.#}",
+                TrackerFormatString = "{1}：{2:#,0.#}",
+                TrackerFormatStringAction = action
+            };
+            model.Series.Add(series);
+            UpdateLine(model, valueList, false);
+
+            return model;
+        }
+        public static void UpdateLine(PlotModel model, List<double> valueList, bool Invalidate = true)
+        {
+            var series = model.Series[0] as BarSeries;
+            series.Items.Clear();
+            foreach (var item in valueList) series.Items.Add(new BarItem(item));
+            if (Invalidate) model.InvalidatePlot(true);
         }
 
-        public static LineSeries AddLine(PlotModel plotModel, MonitorType type, bool first = true)
+        #endregion
+
+        #region LinearAxis
+        public static PlotModel LoadLinearAxis(int count, double maxValue, Func<object, string> xAction = null, bool yZoom = false, bool xZoom = true)
         {
-            var line = new LineSeries()
+            var model = new PlotModel
             {
-                Title = type.Description(),
-                //MarkerType = MarkerType.Circle,
-                //InterpolationAlgorithm = InterpolationAlgorithms.CatmullRomSpline,
-                //Smooth = true,
-                TrackerFormatString = "\r\n{0}: {4:0,0.00}"
+                PlotAreaBorderColor = OxyColor.FromArgb(255, 38, 132, 143),
+                PlotAreaBorderThickness = new OxyThickness(1, 0, 0, 1)
             };
-            if (type.Tag() is byte[] colors)
+            var legend = new Legend
             {
-                line.Color = OxyColor.FromRgb(colors[0], colors[1], colors[2]);
-            }
-            if (first) line.TrackerFormatString = "时间: {2}\r\n{0}: {4:0,0.00}";
-            plotModel.Series.Add(line);
-            return line;
+                LegendPosition = LegendPosition.TopCenter,
+                LegendOrientation = LegendOrientation.Horizontal,
+                LegendPlacement = LegendPlacement.Inside,
+                LegendTextColor = OxyColors.White,
+                SeriesInvisibleTextColor = OxyColors.Gold,
+                LegendPadding = -2
+            };
+            model.Legends.Add(legend);
+
+            //定义y轴
+            var leftAxis = new LinearAxis()
+            {
+                Position = AxisPosition.Left,
+                //TicklineColor = OxyColors.Transparent,//刻度线颜色
+                //AxislineColor = OxyColors.Red,//小刻度线颜色
+                TextColor = OxyColors.White,//文本颜色
+                MajorTickSize = 0,
+                MinorTickSize = 0,
+                //FontSize = 0.1,
+                Minimum = 0,
+                Maximum = maxValue * 1.15,
+                //Title = "Y轴",//显示标题内容
+                //TitlePosition = 0,//显示标题位置
+                //TitleColor = OxyColor.Parse("#d3d3d3"),//显示标题颜色
+                IsZoomEnabled = yZoom,//false:坐标轴缩放功能
+                IsPanEnabled = yZoom,//false:图表缩放功能
+                //MajorGridlineStyle = LineStyle.Solid,//主刻度设置格网
+                //MajorGridlineColor = OxyColors.Red,
+                //MinorGridlineStyle = LineStyle.Dot,//子刻度设置格网样式
+                //MinorGridlineColor = OxyColors.Blue,
+                IntervalLength = 30
+            };
+            model.Axes.Add(leftAxis);
+
+            //定义x轴
+            var bottomAxis = new LinearAxis()
+            {
+                Position = AxisPosition.Bottom,
+                TicklineColor = OxyColors.Transparent,
+                TextColor = OxyColors.White,
+                MajorTickSize = 0,
+                MinorTickSize = 0,
+                IntervalLength = 6,
+                StringFormatAction = xAction,
+                IsZoomEnabled = xZoom,
+                IsPanEnabled = xZoom,
+                Minimum = -2,
+                Maximum = count * 7,
+            };
+            model.Axes.Add(bottomAxis);
+
+            return model;
         }
         public static void AddXY(PlotModel plotModel, bool yZoom = false, bool xZoom = true)
         {
@@ -103,49 +174,41 @@ namespace Paway.Test
             };
             plotModel.Axes.Add(bottomAxis);
         }
-        public static void AddPoint(PlotModel plotModel, DateTime time, TempInfo temp)
+        public static LineSeries AddLine(PlotModel plotModel, MonitorType type, bool first = true)
         {
-            bool bToMove = false;
-            for (int i = 0; i < plotModel.Series.Count; i++)
+            var line = new LineSeries()
             {
-                var line = plotModel.Series[i] as LineSeries;
-                var type = line.Title.Parse<MonitorType>();
-                var value = (double)temp.GetValue(type.ToString());
-                line.Points.Add(new DataPoint(DateTimeAxis.ToDouble(time), value));
+                Title = type.Description(),
+                //MarkerType = MarkerType.Circle,
+                //InterpolationAlgorithm = InterpolationAlgorithms.CatmullRomSpline,
+                //Smooth = true,
+                TrackerFormatString = "\r\n{0}: {4:0,0.00}"
+            };
+            if (type.Tag() is byte[] colors)
+            {
+                line.Color = OxyColor.FromRgb(colors[0], colors[1], colors[2]);
             }
+            if (first) line.TrackerFormatString = "时间: {2}\r\n{0}: {4:0,0.00}";
+            plotModel.Series.Add(line);
+            return line;
+        }
+        public static void AddLine(PlotModel model, int index, string title, OxyColor color, List<double> valueList, Func<string, string, object, string, object, string> action = null, string stringFormat = "{2}: {4:#,0.#}")
+        {
+            var line = new LinearBarSeries()
+            {
+                Title = title,
+                FillColor = color,
+                //BarWidth = 25,
+                TextColor = OxyColors.White,
+                //LabelFormatString = "{1:#,0.#}",
 
-            var bottomAxis = plotModel.Axes.FirstOrDefault(c => c.Position == AxisPosition.Bottom);
-            if (!bToMove)
-            {
-                //当前时间减去起始时间达到30秒后开始左移时间轴
-                TimeSpan timeSpan = DateTime.Now - DateTimeAxis.ToDateTime(bottomAxis.Minimum);
-                if (timeSpan.TotalSeconds >= 40)
-                {
-                    bToMove = true;
-                }
-            }
-            if (bToMove)
-            {
-                //左移时间轴，跨度维持在60秒
-                var start = DateTime.Now.AddSeconds(-40);
-                bottomAxis.Minimum = DateTimeAxis.ToDouble(start);
-                bottomAxis.Maximum = DateTimeAxis.ToDouble(DateTime.Now.AddSeconds(20));
-
-                //删除历史节点，防止DataPoint过多影响效率，也防止出现内存泄漏        
-                for (int i = 0; i < plotModel.Series.Count; i++)
-                {
-                    var line = plotModel.Series[i] as LineSeries;
-                    while (line.Points.Count > 0)
-                    {
-                        if (line.Points[0].X < DateTimeAxis.ToDouble(start))
-                            line.Points.RemoveAt(0);
-                        else break;
-                    }
-                }
-            }
-            AutoMaxMin(plotModel);
-            //刷新视图
-            plotModel.InvalidatePlot(true);
+                //MarkerType = MarkerType.Circle,
+                //InterpolationAlgorithm = InterpolationAlgorithms.CatmullRomSpline,
+                TrackerFormatString = stringFormat,
+                TrackerFormatStringAction = action
+            };
+            for (var i = 0; i < valueList.Count; i++) line.Points.Add(new DataPoint(i * 7 + index, valueList[i]));
+            model.Series.Add(line);
         }
         public static void AutoMaxMin(PlotModel plotModel, double max = double.NaN, double min = double.NaN)
         {
@@ -168,5 +231,7 @@ namespace Paway.Test
             if (!min.Equals(double.NaN)) leftAxis.Minimum = min;
             if (!max.Equals(double.NaN)) leftAxis.Maximum = max;
         }
+
+        #endregion
     }
 }

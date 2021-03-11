@@ -102,10 +102,6 @@ namespace Paway.WPF
         /// </summary>
         public BrushEXT(byte normal) : this(TMethod.ThemeColor(normal)) { }
         /// <summary>
-        /// 主题色：鼠标移过、按下
-        /// </summary>
-        public BrushEXT(byte mouse, byte pressed) : this(null, mouse, pressed) { }
-        /// <summary>
         /// 主题色：设置所有颜色，普通、鼠标移过、按下
         /// </summary>
         public BrushEXT(byte normal, byte mouse, byte pressed, bool iHigh = false) : this(TMethod.ThemeColor(normal), mouse, pressed)

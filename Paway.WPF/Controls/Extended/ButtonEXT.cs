@@ -37,7 +37,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBackgroundProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ButtonEXT),
-            new PropertyMetadata(new BrushEXT(170)));
+            new PropertyMetadata(new BrushEXT(160)));
 
         /// <summary>
         /// </summary>

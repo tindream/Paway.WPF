@@ -33,6 +33,10 @@ namespace Paway.WPF
         /// </summary>
         public static readonly new DependencyProperty SelectedItemProperty =
             DependencyProperty.RegisterAttached(nameof(SelectedItem), typeof(object), typeof(ComboBoxQuery));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ColumnWidthProperty =
+            DependencyProperty.RegisterAttached(nameof(ColumnWidth), typeof(DataGridLength), typeof(ComboBoxQuery), new PropertyMetadata(new DataGridLength(1, DataGridLengthUnitType.Star)));
 
         /// <summary>
         /// 下拉列表是否显示列
@@ -43,6 +47,16 @@ namespace Paway.WPF
         {
             get { return (bool)GetValue(ColumnHeaderProperty); }
             set { SetValue(ColumnHeaderProperty, value); }
+        }
+        /// <summary>
+        /// 下拉列表列宽度
+        /// </summary>
+        [Category("扩展")]
+        [Description("下拉列表列宽度")]
+        public DataGridLength ColumnWidth
+        {
+            get { return (DataGridLength)GetValue(ColumnWidthProperty); }
+            set { SetValue(ColumnWidthProperty, value); }
         }
         /// <summary>
         /// 重写
