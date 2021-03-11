@@ -52,5 +52,25 @@ namespace Paway.WPF
         /// </summary>
         [Description("从底部滑入")]
         Bottom,
+        /// <summary>
+        /// 滑入左侧
+        /// </summary>
+        [Description("滑入左侧")]
+        ToLeft,
+        /// <summary>
+        /// 滑入右侧
+        /// </summary>
+        [Description("滑入右侧")]
+        ToRight,
+        /// <summary>
+        /// 滑入顶部
+        /// </summary>
+        [Description("滑入顶部")]
+        ToTop,
+        /// <summary>
+        /// 滑入底部
+        /// </summary>
+        [Description("滑入底部")]
+        ToBottom,
     }
 }

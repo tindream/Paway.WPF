@@ -79,7 +79,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <utils:ButtonEXT Name="chart" Content="取消"
+                    <utils:ButtonEXT Name="btnCancel" Content="取消"  utils:AnimationHelper.Value="Bottom"
                              ItemBackground="Transparent;#78CA6B38" ItemForeground="#333;;"
                              BackgroundImage="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"
                              Stretch="None" Viewport="0,0,0.35,1"

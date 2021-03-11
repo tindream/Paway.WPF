@@ -190,31 +190,38 @@ namespace Paway.WPF
         /// <summary>
         /// Gets or sets the storyboard that is used to transition old and new content.
         /// </summary>
-        public double StartTransition()
+        public void StartTransition()
         {
             switch (TransitionType)
             {
                 case TransitionType.None:
+                case TransitionType.FadeIn:
+                case TransitionType.FadeOut:
                     break;
                 case TransitionType.Left:
-                    TMethod.AnimMoveRight(PreviousContentPresentationSite, Value, Time, false);
-                    TMethod.AnimMoveLeft(CurrentContentPresentationSite, Value, Time);
+                    AnimationHelper.Start(PreviousContentPresentationSite, TransitionType.ToRight, Value, Time);
                     break;
                 case TransitionType.Right:
-                    TMethod.AnimMoveLeft(PreviousContentPresentationSite, Value, Time, false);
-                    TMethod.AnimMoveRight(CurrentContentPresentationSite, Value, Time);
+                    AnimationHelper.Start(PreviousContentPresentationSite, TransitionType.ToLeft, Value, Time);
                     break;
                 case TransitionType.Top:
-                    TMethod.AnimMoveDown(PreviousContentPresentationSite, Value, Time, false);
-                    TMethod.AnimMoveUp(CurrentContentPresentationSite, Value, Time);
+                    AnimationHelper.Start(PreviousContentPresentationSite, TransitionType.ToBottom, Value, Time);
                     break;
                 case TransitionType.Bottom:
-                    TMethod.AnimMoveUp(PreviousContentPresentationSite, Value, Time, false);
-                    TMethod.AnimMoveDown(CurrentContentPresentationSite, Value, Time);
+                    AnimationHelper.Start(PreviousContentPresentationSite, TransitionType.ToTop, Value, Time);
                     break;
             }
-            TMethod.AnimOpacity(PreviousContentPresentationSite, Value, Time);
-            return TMethod.AnimOpacity(CurrentContentPresentationSite, Value, Time, OnTransitionCompleted, true);
+            switch (TransitionType)
+            {
+                case TransitionType.Left:
+                case TransitionType.Right:
+                case TransitionType.Top:
+                case TransitionType.Bottom:
+                    AnimationHelper.Start(CurrentContentPresentationSite, TransitionType, Value, Time, OnTransitionCompleted);
+                    break;
+            }
+            AnimationHelper.Start(PreviousContentPresentationSite, TransitionType.FadeOut, Value, Time);
+            AnimationHelper.Start(CurrentContentPresentationSite, TransitionType.FadeIn, Value, Time, OnTransitionCompleted);
         }
 
         #endregion

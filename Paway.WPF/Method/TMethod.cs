@@ -108,102 +108,6 @@ namespace Paway.WPF
 
         #region 位移动画
         /// <summary>
-        /// 位移动画-从X轴左边进入(离开)
-        /// </summary>
-        /// <param name="content">控件</param>
-        /// <param name="display">显示(进入)/隐藏(离开)</param>
-        /// <param name="value">变化量</param>
-        /// <param name="time">变化时间</param>
-        public static double AnimMoveLeft(ContentPresenter content, double value = 0, double time = 0, bool display = true)
-        {
-            return AnimMove(content, display, 1, value, time, true);
-        }
-        /// <summary>
-        /// 位移动画-从Y轴上边进入(离开)
-        /// </summary>
-        /// <param name="content">控件</param>
-        /// <param name="display">显示(进入)/隐藏(离开)</param>
-        /// <param name="value">变化量</param>
-        /// <param name="time">变化时间</param>
-        public static double AnimMoveUp(ContentPresenter content, double value = 0, double time = 0, bool display = true)
-        {
-            return AnimMove(content, display, -1, value, time, false);
-        }
-        /// <summary>
-        /// 位移动画-从X轴右边进入(离开)
-        /// </summary>
-        /// <param name="content">控件</param>
-        /// <param name="display">显示(进入)/隐藏(离开)</param>
-        /// <param name="value">变化量</param>
-        /// <param name="time">变化时间</param>
-        public static double AnimMoveRight(ContentPresenter content, double value = 0, double time = 0, bool display = true)
-        {
-            return AnimMove(content, display, -1, value, time, true);
-        }
-        /// <summary>
-        /// 位移动画-从Y轴下边进入(离开)
-        /// </summary>
-        /// <param name="content">控件</param>
-        /// <param name="display">显示(进入)/隐藏(离开)</param>
-        /// <param name="value">变化量</param>
-        /// <param name="time">变化时间</param>
-        public static double AnimMoveDown(ContentPresenter content, double value = 0, double time = 0, bool display = true)
-        {
-            return AnimMove(content, display, 1, value, time, false);
-        }
-        /// <summary>
-        /// 位移动画
-        /// </summary>
-        /// <param name="content">控件</param>
-        /// <param name="display">显示(进入)/隐藏(离开)</param>
-        /// <param name="direction">反向标记</param>
-        /// <param name="value">变化量</param>
-        /// <param name="time">变化时间</param>
-        /// <param name="x">变化量为0时取值依据</param>
-        private static double AnimMove(ContentPresenter content, bool display = true, int direction = 1, double value = 0, double time = 0, bool x = true)
-        {
-            if (content == null) return 0;
-            //实例化旋转对象（顺时针旋转）
-            var tt = new TranslateTransform();
-            //让content控件平移
-            content.RenderTransform = tt;
-            var animValue = value == 0 ? x ? content.ActualWidth : content.ActualHeight : value;
-            var animTime = AnimTime(content, value, time, x);
-            //创建动画处理对象
-            var animXY = new DoubleAnimation(display ? animValue * direction : 0, display ? 0 : animValue * direction, new Duration(TimeSpan.FromMilliseconds(animTime)));
-            //反向运动
-            //animBy.AutoReverse = true;
-            //无限循环
-            //animBy.RepeatBehavior = RepeatBehavior.Forever;
-            tt.BeginAnimation(x ? TranslateTransform.XProperty : TranslateTransform.YProperty, animXY);
-            return animTime;
-        }
-
-        /// <summary>
-        /// 透明度动画
-        /// </summary>
-        /// <param name="content">控件</param>
-        /// <param name="display">显示/隐藏</param>
-        /// <param name="completed">完成触发事件</param>
-        /// <param name="value">变化量</param>
-        /// <param name="time">变化时间</param>
-        /// <param name="x">变化量为0时取值依据</param>
-        public static double AnimOpacity(ContentPresenter content, double value = 0, double time = 0, Action completed = null, bool display = false, bool x = true)
-        {
-            if (content == null) return 0;
-            var animTime = AnimTime(content, value, time, x);
-            var animOpacity = new DoubleAnimation(display ? 0 : 1, display ? 1 : 0, new Duration(TimeSpan.FromMilliseconds(animTime)));
-            animOpacity.Completed += delegate { completed?.Invoke(); };
-            content.BeginAnimation(UIElement.OpacityProperty, animOpacity);
-            return animTime;
-        }
-        private static double AnimTime(ContentPresenter content, double value = 0, double time = 0, bool x = true)
-        {
-            var animTime = time;
-            if (animTime == 0) animTime = AnimTime(value == 0 ? x ? content.ActualWidth : content.ActualHeight : value);
-            return animTime;
-        }
-        /// <summary>
         /// 计算动画时间
         /// </summary>
         public static double AnimTime(double value, int minTime = 250)
@@ -606,14 +510,20 @@ namespace Paway.WPF
                         storyboard.Children.Add(animInColor);
 
                         //放大
-                        var tt = new TranslateTransform();
-                        border.LayoutTransform = tt;
-                        var animIn = new DoubleAnimation(0.5, 1, new Duration(TimeSpan.FromMilliseconds(125)));
-                        var propertyX = new DependencyProperty[] { FrameworkElement.LayoutTransformProperty, ScaleTransform.ScaleXProperty };
-                        Storyboard.SetTargetProperty(animIn, new PropertyPath("(0).(1)", propertyX));
-                        storyboard.Children.Add(animIn);
+                        var scale = new ScaleTransform();
+                        scale.CenterX = border.ActualWidth / 2;
+                        scale.CenterY = border.ActualHeight / 2;
+                        border.RenderTransform = scale;
+                        var animInX = new DoubleAnimation(0.5, 1, new Duration(TimeSpan.FromMilliseconds(125)));
+                        var animInY = new DoubleAnimation(0.5, 1, new Duration(TimeSpan.FromMilliseconds(125)));
+                        var propertyX = new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, ScaleTransform.ScaleXProperty });
+                        var propertyY = new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, ScaleTransform.ScaleYProperty });
+                        Storyboard.SetTargetProperty(animInX, propertyX);
+                        Storyboard.SetTargetProperty(animInY, propertyY);
+                        storyboard.Children.Add(animInX);
+                        storyboard.Children.Add(animInY);
 
-                        var animTime = AnimTime(border.ActualHeight);
+                        var animTime = AnimTime(Math.Max(border.ActualWidth, border.ActualHeight));
                         var animColor = new ColorAnimation(color, Color.FromArgb(0, color.R, color.G, color.B), new Duration(TimeSpan.FromMilliseconds(animTime)))
                         {
                             BeginTime = TimeSpan.FromMilliseconds(time + 125)

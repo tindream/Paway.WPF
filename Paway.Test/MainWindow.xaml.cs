@@ -5,6 +5,7 @@ using Paway.WPF;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -81,6 +82,10 @@ namespace Paway.Test
 
         private void Commit_Click(object sender, RoutedEventArgs e)
         {
+            var type = (TransitionType)WPF.TMethod.Random(0, (int)TransitionType.Bottom + 1);
+            if (btnCancel.Opacity == 0) type = TransitionType.FadeIn;
+            AnimationHelper.Start(btnCancel, type);
+
             progress.AnimationValue = WPF.TMethod.Random(100);
 
             //WPF.TMethod.Progress(this, () =>
@@ -97,7 +102,8 @@ namespace Paway.Test
             //var xml = WPF.TMethod.GetTemplateXaml(dp);
             //Method.Toast(this, xml);
 
-            transition.TransitionType = (TransitionType)new Random().Next(0, 5);
+            type = (TransitionType)WPF.TMethod.Random((int)TransitionType.Left, (int)TransitionType.Bottom + 1);
+            transition.TransitionType = type;
             if (transition.Content != pathNew) transition.Content = this.pathNew;
             else transition.Content = this.pathCurrent;
         }

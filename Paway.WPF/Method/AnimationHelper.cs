@@ -37,35 +37,41 @@ namespace Paway.WPF
         {
             if (d is FrameworkElement element && e.NewValue is TransitionType type)
             {
-                element.Opacity = 0;
-
                 if (element.IsLoaded)
                 {
-                    StartAnimation(element, type);
+                    Start(element, type);
                 }
                 else
                 {
                     element.Loaded += delegate
                     {
-                        StartAnimation(element, type);
+                        Start(element, type);
                     };
                 }
             }
         }
-        private static void StartAnimation(FrameworkElement element, TransitionType type)
+        /// <summary>
+        /// 启动动画
+        /// </summary>
+        public static void Start(FrameworkElement element, TransitionType type, double value = 0, double time = 0, Action completed = null)
         {
+            if (element == null) return;
             switch (type)
             {
                 case TransitionType.FadeIn:
-                    element.BeginAnimation(FrameworkElement.OpacityProperty, GetDoubleAnimation(0, 1, element));
+                    element.BeginAnimation(FrameworkElement.OpacityProperty, GetDoubleAnimation(0, 1, element, value, time, completed));
                     break;
                 case TransitionType.FadeOut:
-                    element.BeginAnimation(FrameworkElement.OpacityProperty, GetDoubleAnimation(1, 0, element));
+                    element.BeginAnimation(FrameworkElement.OpacityProperty, GetDoubleAnimation(1, 0, element, value, time, completed));
                     break;
                 case TransitionType.Left:
                 case TransitionType.Right:
                 case TransitionType.Top:
                 case TransitionType.Bottom:
+                case TransitionType.ToLeft:
+                case TransitionType.ToRight:
+                case TransitionType.ToTop:
+                case TransitionType.ToBottom:
                     var transform = new TranslateTransform();
                     if (element.RenderTransform != null)
                     {
@@ -91,16 +97,28 @@ namespace Paway.WPF
                     switch (type)
                     {
                         case TransitionType.Left:
-                            transform.BeginAnimation(TranslateTransform.XProperty, GetDoubleAnimation(-element.ActualWidth, 0, element));
+                            transform.BeginAnimation(TranslateTransform.XProperty, GetDoubleAnimation(-element.ActualWidth, 0, element, value, time, completed));
                             break;
                         case TransitionType.Right:
-                            transform.BeginAnimation(TranslateTransform.XProperty, GetDoubleAnimation(element.ActualWidth, 0, element));
+                            transform.BeginAnimation(TranslateTransform.XProperty, GetDoubleAnimation(element.ActualWidth, 0, element, value, time, completed));
                             break;
                         case TransitionType.Top:
-                            transform.BeginAnimation(TranslateTransform.YProperty, GetDoubleAnimation(-element.ActualHeight, 0, element));
+                            transform.BeginAnimation(TranslateTransform.YProperty, GetDoubleAnimation(-element.ActualHeight, 0, element, value, time, completed));
                             break;
                         case TransitionType.Bottom:
-                            transform.BeginAnimation(TranslateTransform.YProperty, GetDoubleAnimation(element.ActualHeight, 0, element));
+                            transform.BeginAnimation(TranslateTransform.YProperty, GetDoubleAnimation(element.ActualHeight, 0, element, value, time, completed));
+                            break;
+                        case TransitionType.ToLeft:
+                            transform.BeginAnimation(TranslateTransform.XProperty, GetDoubleAnimation(0, -element.ActualWidth, element, value, time, completed));
+                            break;
+                        case TransitionType.ToRight:
+                            transform.BeginAnimation(TranslateTransform.XProperty, GetDoubleAnimation(0, element.ActualWidth, element, value, time, completed));
+                            break;
+                        case TransitionType.ToTop:
+                            transform.BeginAnimation(TranslateTransform.YProperty, GetDoubleAnimation(0, -element.ActualHeight, element, value, time, completed));
+                            break;
+                        case TransitionType.ToBottom:
+                            transform.BeginAnimation(TranslateTransform.YProperty, GetDoubleAnimation(0, element.ActualHeight, element, value, time, completed));
                             break;
                     }
                     break;
@@ -108,12 +126,15 @@ namespace Paway.WPF
         }
 
         #region Function
-        private static DoubleAnimation GetDoubleAnimation(double from, double to, FrameworkElement element, double animTime = 0)
+        private static DoubleAnimation GetDoubleAnimation(double from, double to, FrameworkElement element, double value = 0, double animTime = 0, Action completed = null)
         {
             if (animTime == 0)
             {
-                var value = Math.Abs(from - to);
-                if (value <= 1) value = Math.Max(element.ActualWidth, element.ActualHeight);
+                if (value == 0)
+                {
+                    value = Math.Abs(from - to);
+                    if (value <= 1) value = Math.Max(element.ActualWidth, element.ActualHeight);
+                }
                 animTime = TMethod.AnimTime(value);
             }
             var anima = new DoubleAnimation()
@@ -124,6 +145,7 @@ namespace Paway.WPF
             };
             anima.Completed += delegate
             {
+                completed?.Invoke();
                 element.RaiseEvent(new RoutedEventArgs(CompletedEvent));
             };
             return anima;
