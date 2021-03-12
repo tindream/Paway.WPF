@@ -132,6 +132,21 @@ namespace Paway.WPF
             get { return desc; }
             set { desc = value; OnPropertyChanged(); }
         }
+        private string hit;
+        /// <summary>
+        /// 提示
+        /// </summary>
+        public string Hit
+        {
+            get
+            {
+                if (!hit.IsEmpty()) return hit;
+                if (!Text.IsEmpty()) return Text;
+                if (!desc.IsEmpty()) return desc;
+                return null;
+            }
+            set { hit = value; OnPropertyChanged(); }
+        }
         private ImageEXT image;
         /// <summary>
         /// 图片

@@ -533,7 +533,11 @@ namespace Paway.WPF
         protected override void OnMouseLeave(MouseEventArgs e)
         {
             base.OnMouseLeave(e);
-            if (IAnimation && this.moveItem != null) Animation(moveItem, false);
+            if (IAnimation && this.moveItem != null)
+            {
+                Animation(moveItem, false);
+                this.moveItem = null;
+            }
         }
 
         /// <summary>
@@ -613,8 +617,8 @@ namespace Paway.WPF
                 if (value)
                 {
                     this.Focus();
-                    if (item.Content is IListView info) TConfig.AddLog(this, info.Text);
-                    else if(item.Content is ContentControl content) TConfig.AddLog(this, content.Content.ToStrs());
+                    if (item.Content is IListView info) TConfig.AddLog(this, info.Hit);
+                    else if (item.Content is ContentControl content) TConfig.AddLog(this, content.Content.ToStrs());
                     else if (item.Content is TextBlock textBlock) TConfig.AddLog(this, textBlock.Text.ToStrs());
                     else TConfig.AddLog(this, item.Content.ToStrs());
                 }
@@ -634,6 +638,7 @@ namespace Paway.WPF
                 var animX2 = new DoubleAnimation(line2.X2, this.ItemWidth / 2, new Duration(TimeSpan.FromMilliseconds(animTime)));
                 if (line1 != null)
                 {
+                    if (line1.X2 > this.ActualWidth) line1.X2 = this.ActualWidth;
                     Storyboard.SetTargetName(animX1, line1.Name);
                     Storyboard.SetTargetProperty(animX1, new PropertyPath(Line.X1Property));
                     storyboard.Children.Add(animX1);

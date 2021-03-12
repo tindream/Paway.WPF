@@ -28,7 +28,7 @@
     <Style TargetType="{x:Type TextBlock}">
         <Setter Property="VerticalAlignment" Value="Center" />
         <!--影响全局TextBlock样式，如Button字体等-->
-        <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+        <!--<Setter Property="FontFamily" Value="Microsoft YaHei"/>-->
     </Style>
     <Style TargetType="{x:Type CheckBox}">
         <Setter Property="VerticalContentAlignment" Value="Center" />

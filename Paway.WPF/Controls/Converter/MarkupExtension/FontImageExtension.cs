@@ -21,10 +21,6 @@ namespace Paway.WPF
     public class FontImageExtension : MarkupExtension
     {
         /// <summary>
-        /// 父控件
-        /// </summary>
-        public Control Control { get; set; }
-        /// <summary>
         /// 文本图标
         /// </summary>
         public FontImageType Value { get; set; }

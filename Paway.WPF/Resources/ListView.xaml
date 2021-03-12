@@ -73,9 +73,7 @@
                                                        Padding="{Binding ItemDescPadding, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
                                                        DockPanel.Dock="{Binding ItemDescDock, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
                                                     <TextBlock.ToolTip>
-                                                        <StackPanel Orientation="Horizontal">
-                                                            <TextBlock Text="{Binding Desc}"/>
-                                                        </StackPanel>
+                                                        <TextBlock Text="{Binding Desc}"/>
                                                     </TextBlock.ToolTip>
                                                 </TextBlock>
                                                 <TextBlock Name="text"
@@ -93,9 +91,14 @@
                                                         </MultiBinding>
                                                     </TextBlock.Text>
                                                     <TextBlock.ToolTip>
-                                                        <StackPanel Orientation="Horizontal">
-                                                            <TextBlock Text="{Binding Text}"/>
-                                                        </StackPanel>
+                                                        <TextBlock>
+                                                            <TextBlock.Text>
+                                                                <MultiBinding Converter="{StaticResource nullJudgeConverter}">
+                                                                    <Binding Path="Text" />
+                                                                    <Binding Path="Content" />
+                                                                </MultiBinding>
+                                                            </TextBlock.Text>
+                                                        </TextBlock>
                                                     </TextBlock.ToolTip>
                                                 </TextBlock>
                                             </DockPanel>
@@ -123,6 +126,16 @@
                                             </Line.Stroke>
                                         </Line>
                                     </DockPanel>
+                                    <Grid.ToolTip>
+                                        <TextBlock>
+                                            <TextBlock.Text>
+                                                <MultiBinding Converter="{StaticResource nullJudgeConverter}">
+                                                    <Binding Path="Hit" />
+                                                    <Binding Path="Content" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </Grid.ToolTip>
                                 </Grid>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True" >

@@ -16,6 +16,10 @@ namespace Paway.WPF
     public interface IListView : IId
     {
         /// <summary>
+        /// 数据
+        /// </summary>
+        object Tag { get; set; }
+        /// <summary>
         /// 按下状态
         /// </summary>
         bool IsPressed { get; set; }
@@ -27,6 +31,10 @@ namespace Paway.WPF
         /// 描述
         /// </summary>
         string Desc { get; set; }
+        /// <summary>
+        /// 提示
+        /// </summary>
+        string Hit { get; set; }
         /// <summary>
         /// 图片
         /// </summary>
@@ -50,6 +58,11 @@ namespace Paway.WPF
     /// </summary>
     public class ListViewModel : ModelBase, IListView
     {
+        /// <summary>
+        /// 数据
+        /// </summary>
+        public object Tag { get; set; }
+
         private int id;
         /// <summary>
         /// 标识符
@@ -88,6 +101,21 @@ namespace Paway.WPF
         {
             get { return desc; }
             set { desc = value; OnPropertyChanged(); }
+        }
+        private string hit;
+        /// <summary>
+        /// 提示
+        /// </summary>
+        public string Hit
+        {
+            get
+            {
+                if (!hit.IsEmpty()) return hit;
+                if (!Text.IsEmpty()) return Text;
+                if (!desc.IsEmpty()) return desc;
+                return null;
+            }
+            set { hit = value; OnPropertyChanged(); }
         }
         private ImageEXT image;
         /// <summary>
