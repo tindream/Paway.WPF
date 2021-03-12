@@ -104,6 +104,7 @@
     <Compile Include="Controls\Extended\ComboBoxDate.cs" />
     <Compile Include="Controls\Extended\DatePickerEXT.cs" />
     <Compile Include="Controls\Extended\ComboBoxMulti.cs" />
+    <Compile Include="Controls\Extended\RichTextBoxEXT.cs" />
     <Compile Include="Controls\Extended\ScrollViewerBehavior.cs" />
     <Compile Include="Controls\Extended\TabControlEXT.cs" />
     <Compile Include="Controls\Extended\PasswordBoxEXT.cs" />
@@ -212,6 +213,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Calendar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\RichTextBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

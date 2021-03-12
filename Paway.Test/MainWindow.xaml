@@ -74,6 +74,16 @@
                 <PasswordBox utils:PasswordBoxEXT.Icon="pack://application:,,,/Paway.Test;component/Images/close.png"
                              utils:PasswordBoxEXT.Password="{Binding Pad}"
                              utils:PasswordBoxEXT.IAnimation="2" BorderThickness="0,0,0,1"/>
+                <utils:RichTextBoxEXT x:Name="rt3" MaxHeight="100" >
+                    <FlowDocument>
+                        <Paragraph>
+                            <Run Text="追加内容" />
+                        </Paragraph>
+                        <Paragraph>
+                            <Run Text="自动高度" />
+                        </Paragraph>
+                    </FlowDocument>
+                </utils:RichTextBoxEXT>
                 <Grid>
                     <Grid.ColumnDefinitions >
                         <ColumnDefinition Width="*"/>
@@ -89,7 +99,7 @@
                         <utils:ButtonEXT Name="btn"
                              Content="{utils:FontImage Value=Adjust}" Click="Commit_Click" 
                              CommandParameter="{Binding ElementName=btn}"/>
-                        <utils:Badge IsWaving="True" HorizontalAlignment="Right" Background="Red" Margin="0,-8,-7,24"/>
+                        <utils:Badge IsWaving="True" HorizontalAlignment="Right" Background="Red" VerticalAlignment="Top" Height="20" Margin="-6"/>
                     </Grid>
                 </Grid>
                 <WrapPanel>
