@@ -112,16 +112,16 @@
                                               StrokeThickness="{Binding Path=ItemBorder.Mouse.Bottom, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
                                             <Line.Stroke>
                                                 <MultiBinding Converter="{StaticResource emptyColorConverter}">
-                                                    <Binding Path="ItemBorderBrush.Mouse" />
-                                                    <Binding Path="ItemBorderBrush.Mouse" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
+                                                    <Binding Path="ItemBorderBrush.Pressed" />
+                                                    <Binding Path="ItemBorderBrush.Pressed" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
                                             </Line.Stroke>
                                         </Line>
                                         <Line x:Name="line2" StrokeThickness="{Binding Path=ItemBorder.Mouse.Bottom, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
                                             <Line.Stroke>
                                                 <MultiBinding Converter="{StaticResource emptyColorConverter}">
-                                                    <Binding Path="ItemBorderBrush.Mouse" />
-                                                    <Binding Path="ItemBorderBrush.Mouse" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
+                                                    <Binding Path="ItemBorderBrush.Pressed" />
+                                                    <Binding Path="ItemBorderBrush.Pressed" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
                                             </Line.Stroke>
                                         </Line>

@@ -528,6 +528,31 @@ namespace Paway.WPF
             }
         }
         /// <summary>
+        /// 重置动画线条位置
+        /// </summary>
+        protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
+        {
+            base.OnRenderSizeChanged(sizeInfo);
+            if (!IAnimation) return;
+            for (int i = 0; i < this.Items.Count; i++)
+            {
+                if (Items[i] is ListViewItem item)
+                {
+                    if (TMethod.Child(item, out Line line1, "line1", false))
+                    {
+                        line1.X2 = this.ItemWidth / 2;
+                    }
+                }
+                else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is ListViewItem listViewItem)
+                {
+                    if (TMethod.Child(listViewItem, out Line line1, "line1", false))
+                    {
+                        line1.X2 = this.ItemWidth / 2;
+                    }
+                }
+            }
+        }
+        /// <summary>
         /// 鼠标离开控件
         /// </summary>
         protected override void OnMouseLeave(MouseEventArgs e)
