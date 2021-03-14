@@ -68,7 +68,7 @@ namespace Paway.WPF
         }
         private bool InitText(ITreeView item, int id)
         {
-            if (!item.IsGrouping && item.Id == id)
+            if (!item.IsGroup && item.Id == id)
             {
                 this.SelectedItem = item;
                 this.last = item.GetValue(this.DisplayMemberPath).ToStrs();
@@ -165,7 +165,7 @@ namespace Paway.WPF
         {
             foreach (var item in list)
             {
-                if (item.IsGrouping) LoadChilds(item.Children);
+                if (item.IsGroup) LoadChilds(item.Children);
                 else this.Childs.Add(item);
             }
         }
@@ -176,7 +176,7 @@ namespace Paway.WPF
         private void TreeView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var treeView = sender as TreeViewEXT;
-            if (treeView.SelectedItem is ITreeView item && !item.IsGrouping)
+            if (treeView.SelectedItem is ITreeView item && !item.IsGroup)
             {
                 var id = item.GetValue(this.SelectedValuePath);
                 if (this.SelectedValue.Equals(id))
@@ -191,7 +191,7 @@ namespace Paway.WPF
             var treeView = sender as TreeViewEXT;
             if (e.NewValue is ITreeView item)
             {
-                if (!item.IsGrouping)
+                if (!item.IsGroup)
                 {
                     if (isInit && !this.IQuery)
                     {
@@ -240,7 +240,7 @@ namespace Paway.WPF
                 }
                 else if (this.List != null)
                 {
-                    var p = this.type.Predicate<ITreeView>(text, c => c.IsGrouping);
+                    var p = this.type.Predicate<ITreeView>(text, c => c.IsGroup);
                     var list = this.Childs.AsParallel().Where(p).ToList();
                     var id = list.Count > 0 ? list[0].Id : 0;
                     list = LoadQuery(list);

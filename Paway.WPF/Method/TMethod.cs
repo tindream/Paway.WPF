@@ -347,7 +347,7 @@ namespace Paway.WPF
         public static void ProgressMsg(object msg = null)
         {
             if (tbProgress == null) return;
-            Invoke(tbProgress, () =>
+            BeginInvoke(tbProgress, () =>
             {
                 tbProgress.Text = msg == null ? Paway.WPF.TConfig.Loading : msg.ToStrs();
             });

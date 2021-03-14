@@ -16,11 +16,7 @@ namespace Paway.WPF
         /// <summary>
         /// 组标记
         /// </summary>
-        bool IsGrouping { get; set; }
-        /// <summary>
-        /// 组组名
-        /// </summary>
-        string GroupName { get; set; }
+        bool IsGroup { get; set; }
         /// <summary>
         /// 头像
         /// </summary>
@@ -93,20 +89,10 @@ namespace Paway.WPF
         /// 组标记
         /// </summary>
         [NoShow]
-        public virtual bool IsGrouping
+        public virtual bool IsGroup
         {
             get { return isGrouping; }
             set { isGrouping = value; OnPropertyChanged(); }
-        }
-        private string groupName;
-        /// <summary>
-        /// 组组名
-        /// </summary>
-        [NoShow]
-        public virtual string GroupName
-        {
-            get { return groupName; }
-            set { groupName = value; OnPropertyChanged(); }
         }
         private string shortName;
         /// <summary>
@@ -181,10 +167,10 @@ namespace Paway.WPF
         }
         /// <summary>
         /// </summary>
-        public TreeViewModel(string groupName, bool isGrouping = false) : this()
+        public TreeViewModel(string text, bool isGroup = false) : this()
         {
-            this.GroupName = groupName;
-            this.IsGrouping = isGrouping;
+            this.Text = text;
+            this.IsGroup = isGroup;
         }
         /// <summary>
         /// 添加子级
