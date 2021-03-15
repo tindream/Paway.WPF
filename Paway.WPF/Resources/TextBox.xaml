@@ -73,10 +73,10 @@
                             <Setter Property="Visibility" TargetName="tbWater" Value="Visible"/>
                         </Trigger>
                         <Trigger Property="IsReadOnly" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="#F7F7F7"/>
+                            <Setter Property="Background" TargetName="border" Value="#EBEBEB"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" TargetName="border" Value="#FFE6E6E6"/>
+                            <Setter Property="Background" TargetName="border" Value="LightGray"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="BorderBrush" TargetName="border" 

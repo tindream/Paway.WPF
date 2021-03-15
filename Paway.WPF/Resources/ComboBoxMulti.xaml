@@ -101,7 +101,7 @@
                                                     <ControlTemplate TargetType="{x:Type ListBoxItem}" >
                                                         <Grid>
                                                             <Border x:Name="_borderbg" Padding="{TemplateBinding Padding}"/>
-                                                            <ContentPresenter x:Name="_txt" />
+                                                            <ContentPresenter x:Name="_txt"/>
                                                             <Border Background="White" Opacity="0"/>
                                                         </Grid>
                                                         <ControlTemplate.Triggers>
@@ -157,7 +157,7 @@
                                     Value="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" TargetName="border" Value="#FFE6E6E6"/>
+                            <Setter Property="Background" TargetName="border" Value="LightGray"/>
                         </Trigger>
                         <Trigger Property="IsDropDownOpen" Value="True">
                             <Setter TargetName="border" Property="BorderBrush" 
