@@ -49,7 +49,7 @@
 
                 <utils:ExpanderEXT Header="下拉框" ItemBrush="LightGray;200">
                     <StackPanel>
-                        <utils:ComboBoxEXT  ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
+                        <utils:ComboBoxEXT ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
                         <utils:ComboBoxMulti ItemsSource="{Binding MultiList}"/>
                         <utils:ComboBoxDate SelectedValue="{Binding DatePickerTime}"/>
                         <utils:ComboBoxTree ItemsSource="{Binding TreeList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding TreeId}" IQuery="True"/>
@@ -189,14 +189,27 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </utils:ListViewEXT>
-
-                <oxy:PlotView Model="{Binding Path= PlotModel}" Height="200">
-                    <oxy:PlotView.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="重置" Padding="5" FontSize="15" Command="{Binding Reset}"/>
-                        </ContextMenu>
-                    </oxy:PlotView.ContextMenu>
-                </oxy:PlotView>
+                <DockPanel Height="300">
+                    <utils:ExpanderEXT ExpandDirection="Left" Header="Hello" ItemBrush="LightGray;200">
+                        <TextBlock Text="Hello"/>
+                    </utils:ExpanderEXT>
+                    <utils:ExpanderEXT ExpandDirection="Up" DockPanel.Dock="Top" Header="Hello" ItemBrush="LightGray;200">
+                        <TextBlock Text="Hello"/>
+                    </utils:ExpanderEXT>
+                    <utils:ExpanderEXT ExpandDirection="Right" DockPanel.Dock="Right" Header="Hello" ItemBrush="LightGray;200">
+                        <TextBlock Text="Hello"/>
+                    </utils:ExpanderEXT>
+                    <utils:ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="Hello" ItemBrush="LightGray;200">
+                        <TextBlock Text="Hello"/>
+                    </utils:ExpanderEXT>
+                    <oxy:PlotView Model="{Binding Path= PlotModel}" Height="200">
+                        <oxy:PlotView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="重置" Padding="5" FontSize="15" Command="{Binding Reset}"/>
+                            </ContextMenu>
+                        </oxy:PlotView.ContextMenu>
+                    </oxy:PlotView>
+                </DockPanel>
 
             </StackPanel>
         </Grid>

@@ -68,7 +68,18 @@ namespace Paway.WPF
             this.PART_Root = this.GetTemplateChild("PART_Root") as FrameworkElement;
             if (this.PART_Root != null)
             {
-                VisualStateManager.GoToElementState(this.PART_Root, this.IsExpanded ? "Storyboard_Expanded" : "Storyboard_Collapsed", true);
+                var suffix = "Y";
+                switch (ExpandDirection)
+                {
+                    case ExpandDirection.Down:
+                    case ExpandDirection.Up:
+                        break;
+                    case ExpandDirection.Left:
+                    case ExpandDirection.Right:
+                        suffix = "X";
+                        break;
+                }
+                VisualStateManager.GoToElementState(this.PART_Root, this.IsExpanded ? $"Storyboard_Expanded_{suffix}" : $"Storyboard_Collapsed_{suffix}", true);
             }
         }
         /// <summary>
@@ -79,7 +90,18 @@ namespace Paway.WPF
             base.OnCollapsed();
             if (this.PART_Root != null)
             {
-                VisualStateManager.GoToElementState(this.PART_Root, "Storyboard_Collapsed", true);
+                var suffix = "Y";
+                switch (ExpandDirection)
+                {
+                    case ExpandDirection.Down:
+                    case ExpandDirection.Up:
+                        break;
+                    case ExpandDirection.Left:
+                    case ExpandDirection.Right:
+                        suffix = "X";
+                        break;
+                }
+                VisualStateManager.GoToElementState(this.PART_Root, $"Storyboard_Collapsed_{suffix}", true);
             }
         }
         /// <summary>
@@ -90,7 +112,18 @@ namespace Paway.WPF
             base.OnExpanded();
             if (this.PART_Root != null)
             {
-                VisualStateManager.GoToElementState(this.PART_Root, "Storyboard_Expanded", true);
+                var suffix = "Y";
+                switch (ExpandDirection)
+                {
+                    case ExpandDirection.Down:
+                    case ExpandDirection.Up:
+                        break;
+                    case ExpandDirection.Left:
+                    case ExpandDirection.Right:
+                        suffix = "X";
+                        break;
+                }
+                VisualStateManager.GoToElementState(this.PART_Root, $"Storyboard_Expanded_{suffix}", true);
             }
         }
 
