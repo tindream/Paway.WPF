@@ -44,6 +44,8 @@ namespace Paway.Test
 
         private void Commit_Click(object sender, RoutedEventArgs e)
         {
+            rt.AddLine(DateTime.Now.ToString());
+
             var type = (TransitionType)WPF.TMethod.Random(0, (int)TransitionType.Bottom + 1);
             if (btnCancel.Opacity == 0) type = TransitionType.FadeIn;
             AnimationHelper.Start(btnCancel, type);

@@ -74,16 +74,6 @@
                 <PasswordBox utils:PasswordBoxEXT.Icon="pack://application:,,,/Paway.Test;component/Images/close.png"
                              utils:PasswordBoxEXT.Password="{Binding Pad}"
                              utils:PasswordBoxEXT.IAnimation="2" BorderThickness="0,0,0,1"/>
-                <utils:RichTextBoxEXT x:Name="rt3" MaxHeight="100" >
-                    <FlowDocument>
-                        <Paragraph>
-                            <Run Text="追加内容" />
-                        </Paragraph>
-                        <Paragraph>
-                            <Run Text="自动高度" />
-                        </Paragraph>
-                    </FlowDocument>
-                </utils:RichTextBoxEXT>
                 <Grid>
                     <Grid.ColumnDefinitions >
                         <ColumnDefinition Width="*"/>
@@ -102,6 +92,16 @@
                         <utils:Badge IsWaving="True" HorizontalAlignment="Right" Background="Red" VerticalAlignment="Top" Height="20" Margin="-6"/>
                     </Grid>
                 </Grid>
+                <utils:RichTextBoxEXT x:Name="rt" MaxHeight="100" >
+                    <FlowDocument>
+                        <Paragraph>
+                            <Run Text="追加内容" />
+                        </Paragraph>
+                        <Paragraph>
+                            <Run Text="自动高度" />
+                        </Paragraph>
+                    </FlowDocument>
+                </utils:RichTextBoxEXT>
                 <WrapPanel>
                     <utils:CheckBoxEXT x:Name="cbx" Content="Hello" IsChecked="True" Padding="0,0,3,0"/>
                     <utils:CheckBoxEXT Content="World" IsChecked="{x:Null}"/>

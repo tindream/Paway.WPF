@@ -14,6 +14,10 @@ namespace Paway.WPF
     public interface ITreeView : IId
     {
         /// <summary>
+        /// 数据
+        /// </summary>
+        object Tag { get; set; }
+        /// <summary>
         /// 组标记
         /// </summary>
         bool IsGroup { get; set; }
@@ -74,6 +78,12 @@ namespace Paway.WPF
     /// </summary>
     public class TreeViewModel : ModelBase, ITreeView
     {
+        /// <summary>
+        /// 数据
+        /// </summary>
+        [NoShow]
+        public object Tag { get; set; }
+
         private int id;
         /// <summary>
         /// 标识符

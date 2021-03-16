@@ -52,6 +52,10 @@ namespace Paway.WPF
         #endregion
 
         /// <summary>
+        /// 滚动条
+        /// </summary>
+        public ScrollViewer ScrollViewer { get; set; }
+        /// <summary>
         /// </summary>
         public RichTextBoxEXT()
         {
@@ -65,6 +69,14 @@ namespace Paway.WPF
             {
                 SetSize();
             };
+        }
+        /// <summary>
+        /// 获取滚动条
+        /// </summary>
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            this.ScrollViewer = this.GetTemplateChild("ScrollViewer") as ScrollViewer;
         }
         private void SetColor()
         {
@@ -153,7 +165,7 @@ namespace Paway.WPF
                 hl.MouseLeftButtonDown += delegate { action(); };
                 Document.Blocks.Add(new Paragraph(hl));
             }
-            ScrollToEnd();
+            this.ScrollViewer.ScrollToEnd();
         }
 
         /// <summary>
@@ -202,7 +214,7 @@ namespace Paway.WPF
                 hl.MouseLeftButtonDown += delegate { action(); };
                 (Document.Blocks.LastBlock as Paragraph).Inlines.Add(hl);
             }
-            ScrollToEnd();
+            this.ScrollViewer.ScrollToEnd();
         }
 
         #endregion

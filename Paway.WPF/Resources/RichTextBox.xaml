@@ -34,7 +34,7 @@
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 CornerRadius="{TemplateBinding Radius}"/>
 
-                        <ScrollViewer Margin="{TemplateBinding BorderThickness}" Focusable="False"
+                        <ScrollViewer Margin="{TemplateBinding BorderThickness}" Focusable="False" Name="ScrollViewer"
                                       VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}">
                             <ScrollViewer x:Name="PART_ContentHost" 
                                           Margin="{TemplateBinding Padding}" 

@@ -61,6 +61,7 @@ namespace Paway.WPF
         /// <summary>
         /// 数据
         /// </summary>
+        [NoShow]
         public object Tag { get; set; }
 
         private int id;

@@ -44,8 +44,7 @@ namespace Paway.WPF
             {
                 obj.FontFamily = TConfig.FontAwesome;
             }
-            var charactor = typeof(FontImageType).GetField(Value.ToString()).GetCustomAttribute<CharAttribute>().Value;
-            return charactor.ToString();
+            return Value.Description();
         }
     }
     /// <summary>
@@ -72,2967 +71,2967 @@ namespace Paway.WPF
     {
         /// <summary>
         /// </summary>
-        [Char('\uf042')]
+        [Description("\uf042")]
         Adjust,
 
         /// <summary>
         /// </summary>
-        [Char('\uf170')]
+        [Description("\uf170")]
         Adn,
 
         /// <summary>
         /// </summary>
-        [Char('\uf037')]
+        [Description("\uf037")]
         AlignCenter,
 
         /// <summary>
         /// </summary>
-        [Char('\uf039')]
+        [Description("\uf039")]
         AlignJustify,
 
         /// <summary>
         /// </summary>
-        [Char('\uf036')]
+        [Description("\uf036")]
         AlignLeft,
 
         /// <summary>
         /// </summary>
-        [Char('\uf038')]
+        [Description("\uf038")]
         AlignRight,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0f9')]
+        [Description("\uf0f9")]
         Ambulance,
 
         /// <summary>
         /// </summary>
-        [Char('\uf13d')]
+        [Description("\uf13d")]
         Anchor,
 
         /// <summary>
         /// </summary>
-        [Char('\uf17b')]
+        [Description("\uf17b")]
         Android,
 
         /// <summary>
         /// </summary>
-        [Char('\uf209')]
+        [Description("\uf209")]
         Angellist,
 
         /// <summary>
         /// </summary>
-        [Char('\uf103')]
+        [Description("\uf103")]
         AngleDoubleDown,
 
         /// <summary>
         /// </summary>
-        [Char('\uf100')]
+        [Description("\uf100")]
         AngleDoubleLeft,
 
         /// <summary>
         /// </summary>
-        [Char('\uf101')]
+        [Description("\uf101")]
         AngleDoubleRight,
 
         /// <summary>
         /// </summary>
-        [Char('\uf102')]
+        [Description("\uf102")]
         AngleDoubleUp,
 
         /// <summary>
         /// </summary>
-        [Char('\uf107')]
+        [Description("\uf107")]
         AngleDown,
 
         /// <summary>
         /// </summary>
-        [Char('\uf104')]
+        [Description("\uf104")]
         AngleLeft,
 
         /// <summary>
         /// </summary>
-        [Char('\uf105')]
+        [Description("\uf105")]
         AngleRight,
 
         /// <summary>
         /// </summary>
-        [Char('\uf106')]
+        [Description("\uf106")]
         AngleUp,
 
         /// <summary>
         /// </summary>
-        [Char('\uf179')]
+        [Description("\uf179")]
         Apple,
 
         /// <summary>
         /// </summary>
-        [Char('\uf187')]
+        [Description("\uf187")]
         Archive,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1fe')]
+        [Description("\uf1fe")]
         AreaChart,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0ab')]
+        [Description("\uf0ab")]
         ArrowCircleDown,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0a8')]
+        [Description("\uf0a8")]
         ArrowCircleLeft,
 
         /// <summary>
         /// </summary>
-        [Char('\uf01a')]
+        [Description("\uf01a")]
         ArrowCircleODown,
 
         /// <summary>
         /// </summary>
-        [Char('\uf190')]
+        [Description("\uf190")]
         ArrowCircleOLeft,
 
         /// <summary>
         /// </summary>
-        [Char('\uf18e')]
+        [Description("\uf18e")]
         ArrowCircleORight,
 
         /// <summary>
         /// </summary>
-        [Char('\uf01b')]
+        [Description("\uf01b")]
         ArrowCircleOUp,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0a9')]
+        [Description("\uf0a9")]
         ArrowCircleRight,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0aa')]
+        [Description("\uf0aa")]
         ArrowCircleUp,
 
         /// <summary>
         /// </summary>
-        [Char('\uf063')]
+        [Description("\uf063")]
         ArrowDown,
 
         /// <summary>
         /// </summary>
-        [Char('\uf060')]
+        [Description("\uf060")]
         ArrowLeft,
 
         /// <summary>
         /// </summary>
-        [Char('\uf061')]
+        [Description("\uf061")]
         ArrowRight,
 
         /// <summary>
         /// </summary>
-        [Char('\uf062')]
+        [Description("\uf062")]
         ArrowUp,
 
         /// <summary>
         /// </summary>
-        [Char('\uf047')]
+        [Description("\uf047")]
         Arrows,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0b2')]
+        [Description("\uf0b2")]
         ArrowsAlt,
 
         /// <summary>
         /// </summary>
-        [Char('\uf07e')]
+        [Description("\uf07e")]
         ArrowsH,
 
         /// <summary>
         /// </summary>
-        [Char('\uf07d')]
+        [Description("\uf07d")]
         ArrowsV,
 
         /// <summary>
         /// </summary>
-        [Char('\uf069')]
+        [Description("\uf069")]
         Asterisk,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1fa')]
+        [Description("\uf1fa")]
         At,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1b9')]
+        [Description("\uf1b9")]
         Automobile,
 
         /// <summary>
         /// </summary>
-        [Char('\uf04a')]
+        [Description("\uf04a")]
         Backward,
 
         /// <summary>
         /// </summary>
-        [Char('\uf05e')]
+        [Description("\uf05e")]
         Ban,
 
         /// <summary>
         /// </summary>
-        [Char('\uf19c')]
+        [Description("\uf19c")]
         Bank,
 
         /// <summary>
         /// </summary>
-        [Char('\uf080')]
+        [Description("\uf080")]
         BarChart,
 
         /// <summary>
         /// </summary>
-        [Char('\uf080')]
+        [Description("\uf080")]
         BarChartO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf02a')]
+        [Description("\uf02a")]
         Barcode,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0c9')]
+        [Description("\uf0c9")]
         Bars,
 
         /// <summary>
         /// </summary>
-        [Char('\uf236')]
+        [Description("\uf236")]
         Bed,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0fc')]
+        [Description("\uf0fc")]
         Beer,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1b4')]
+        [Description("\uf1b4")]
         Behance,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1b5')]
+        [Description("\uf1b5")]
         BehanceSquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0f3')]
+        [Description("\uf0f3")]
         Bell,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0a2')]
+        [Description("\uf0a2")]
         BellO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1f6')]
+        [Description("\uf1f6")]
         BellSlash,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1f7')]
+        [Description("\uf1f7")]
         BellSlashO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf206')]
+        [Description("\uf206")]
         Bicycle,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1e5')]
+        [Description("\uf1e5")]
         Binoculars,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1fd')]
+        [Description("\uf1fd")]
         BirthdayCake,
 
         /// <summary>
         /// </summary>
-        [Char('\uf171')]
+        [Description("\uf171")]
         Bitbucket,
 
         /// <summary>
         /// </summary>
-        [Char('\uf172')]
+        [Description("\uf172")]
         BitbucketSquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf15a')]
+        [Description("\uf15a")]
         Bitcoin,
 
         /// <summary>
         /// </summary>
-        [Char('\uf032')]
+        [Description("\uf032")]
         Bold,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0e7')]
+        [Description("\uf0e7")]
         Bolt,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1e2')]
+        [Description("\uf1e2")]
         Bomb,
 
         /// <summary>
         /// </summary>
-        [Char('\uf02d')]
+        [Description("\uf02d")]
         Book,
 
         /// <summary>
         /// </summary>
-        [Char('\uf02e')]
+        [Description("\uf02e")]
         Bookmark,
 
         /// <summary>
         /// </summary>
-        [Char('\uf097')]
+        [Description("\uf097")]
         BookmarkO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0b1')]
+        [Description("\uf0b1")]
         Briefcase,
 
         /// <summary>
         /// </summary>
-        [Char('\uf15a')]
+        [Description("\uf15a")]
         Btc,
 
         /// <summary>
         /// </summary>
-        [Char('\uf188')]
+        [Description("\uf188")]
         Bug,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1ad')]
+        [Description("\uf1ad")]
         Building,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0f7')]
+        [Description("\uf0f7")]
         BuildingO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0a1')]
+        [Description("\uf0a1")]
         Bullhorn,
 
         /// <summary>
         /// </summary>
-        [Char('\uf140')]
+        [Description("\uf140")]
         Bullseye,
 
         /// <summary>
         /// </summary>
-        [Char('\uf207')]
+        [Description("\uf207")]
         Bus,
 
         /// <summary>
         /// </summary>
-        [Char('\uf20d')]
+        [Description("\uf20d")]
         Buysellads,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1ba')]
+        [Description("\uf1ba")]
         Cab,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1ec')]
+        [Description("\uf1ec")]
         Calculator,
 
         /// <summary>
         /// </summary>
-        [Char('\uf073')]
+        [Description("\uf073")]
         Calendar,
 
         /// <summary>
         /// </summary>
-        [Char('\uf133')]
+        [Description("\uf133")]
         CalendarO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf030')]
+        [Description("\uf030")]
         Camera,
 
         /// <summary>
         /// </summary>
-        [Char('\uf083')]
+        [Description("\uf083")]
         CameraRetro,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1b9')]
+        [Description("\uf1b9")]
         Car,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0d7')]
+        [Description("\uf0d7")]
         CaretDown,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0d9')]
+        [Description("\uf0d9")]
         CaretLeft,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0da')]
+        [Description("\uf0da")]
         CaretRight,
 
         /// <summary>
         /// </summary>
-        [Char('\uf150')]
+        [Description("\uf150")]
         CaretSquareODown,
 
         /// <summary>
         /// </summary>
-        [Char('\uf191')]
+        [Description("\uf191")]
         CaretSquareOLeft,
 
         /// <summary>
         /// </summary>
-        [Char('\uf152')]
+        [Description("\uf152")]
         CaretSquareORight,
 
         /// <summary>
         /// </summary>
-        [Char('\uf151')]
+        [Description("\uf151")]
         CaretSquareOUp,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0d8')]
+        [Description("\uf0d8")]
         CaretUp,
 
         /// <summary>
         /// </summary>
-        [Char('\uf218')]
+        [Description("\uf218")]
         CartArrowDown,
 
         /// <summary>
         /// </summary>
-        [Char('\uf217')]
+        [Description("\uf217")]
         CartPlus,
 
         /// <summary>
         /// </summary>
-        [Char('\uf20a')]
+        [Description("\uf20a")]
         Cc,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1f3')]
+        [Description("\uf1f3")]
         CcAmex,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1f2')]
+        [Description("\uf1f2")]
         CcDiscover,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1f1')]
+        [Description("\uf1f1")]
         CcMastercard,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1f4')]
+        [Description("\uf1f4")]
         CcPaypal,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1f5')]
+        [Description("\uf1f5")]
         CcStripe,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1f0')]
+        [Description("\uf1f0")]
         CcVisa,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0a3')]
+        [Description("\uf0a3")]
         Certificate,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0c1')]
+        [Description("\uf0c1")]
         Chain,
 
         /// <summary>
         /// </summary>
-        [Char('\uf127')]
+        [Description("\uf127")]
         ChainBroken,
 
         /// <summary>
         /// </summary>
-        [Char('\uf00c')]
+        [Description("\uf00c")]
         Check,
 
         /// <summary>
         /// </summary>
-        [Char('\uf058')]
+        [Description("\uf058")]
         CheckCircle,
 
         /// <summary>
         /// </summary>
-        [Char('\uf05d')]
+        [Description("\uf05d")]
         CheckCircleO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf14a')]
+        [Description("\uf14a")]
         CheckSquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf046')]
+        [Description("\uf046")]
         CheckSquareO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf13a')]
+        [Description("\uf13a")]
         ChevronCircleDown,
 
         /// <summary>
         /// </summary>
-        [Char('\uf137')]
+        [Description("\uf137")]
         ChevronCircleLeft,
 
         /// <summary>
         /// </summary>
-        [Char('\uf138')]
+        [Description("\uf138")]
         ChevronCircleRight,
 
         /// <summary>
         /// </summary>
-        [Char('\uf139')]
+        [Description("\uf139")]
         ChevronCircleUp,
 
         /// <summary>
         /// </summary>
-        [Char('\uf078')]
+        [Description("\uf078")]
         ChevronDown,
 
         /// <summary>
         /// </summary>
-        [Char('\uf053')]
+        [Description("\uf053")]
         ChevronLeft,
 
         /// <summary>
         /// </summary>
-        [Char('\uf054')]
+        [Description("\uf054")]
         ChevronRight,
 
         /// <summary>
         /// </summary>
-        [Char('\uf077')]
+        [Description("\uf077")]
         ChevronUp,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1ae')]
+        [Description("\uf1ae")]
         Child,
 
         /// <summary>
         /// </summary>
-        [Char('\uf111')]
+        [Description("\uf111")]
         Circle,
 
         /// <summary>
         /// </summary>
-        [Char('\uf10c')]
+        [Description("\uf10c")]
         CircleO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1ce')]
+        [Description("\uf1ce")]
         CircleONotch,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1db')]
+        [Description("\uf1db")]
         CircleThin,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0ea')]
+        [Description("\uf0ea")]
         Clipboard,
 
         /// <summary>
         /// </summary>
-        [Char('\uf017')]
+        [Description("\uf017")]
         ClockO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf00d')]
+        [Description("\uf00d")]
         Close,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0c2')]
+        [Description("\uf0c2")]
         Cloud,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0ed')]
+        [Description("\uf0ed")]
         CloudDownload,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0ee')]
+        [Description("\uf0ee")]
         CloudUpload,
 
         /// <summary>
         /// </summary>
-        [Char('\uf157')]
+        [Description("\uf157")]
         Cny,
 
         /// <summary>
         /// </summary>
-        [Char('\uf121')]
+        [Description("\uf121")]
         Code,
 
         /// <summary>
         /// </summary>
-        [Char('\uf126')]
+        [Description("\uf126")]
         CodeFork,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1cb')]
+        [Description("\uf1cb")]
         Codepen,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0f4')]
+        [Description("\uf0f4")]
         Coffee,
 
         /// <summary>
         /// </summary>
-        [Char('\uf013')]
+        [Description("\uf013")]
         Cog,
 
         /// <summary>
         /// </summary>
-        [Char('\uf085')]
+        [Description("\uf085")]
         Cogs,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0db')]
+        [Description("\uf0db")]
         Columns,
 
         /// <summary>
         /// </summary>
-        [Char('\uf075')]
+        [Description("\uf075")]
         Comment,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0e5')]
+        [Description("\uf0e5")]
         CommentO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf086')]
+        [Description("\uf086")]
         Comments,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0e6')]
+        [Description("\uf0e6")]
         CommentsO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf14e')]
+        [Description("\uf14e")]
         Compass,
 
         /// <summary>
         /// </summary>
-        [Char('\uf066')]
+        [Description("\uf066")]
         Compress,
 
         /// <summary>
         /// </summary>
-        [Char('\uf20e')]
+        [Description("\uf20e")]
         Connectdevelop,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0c5')]
+        [Description("\uf0c5")]
         Copy,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1f9')]
+        [Description("\uf1f9")]
         Copyright,
 
         /// <summary>
         /// </summary>
-        [Char('\uf09d')]
+        [Description("\uf09d")]
         CreditCard,
 
         /// <summary>
         /// </summary>
-        [Char('\uf125')]
+        [Description("\uf125")]
         Crop,
 
         /// <summary>
         /// </summary>
-        [Char('\uf05b')]
+        [Description("\uf05b")]
         Crosshairs,
 
         /// <summary>
         /// </summary>
-        [Char('\uf13c')]
+        [Description("\uf13c")]
         Css3,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1b2')]
+        [Description("\uf1b2")]
         Cube,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1b3')]
+        [Description("\uf1b3")]
         Cubes,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0c4')]
+        [Description("\uf0c4")]
         Cut,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0f5')]
+        [Description("\uf0f5")]
         Cutlery,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0e4')]
+        [Description("\uf0e4")]
         Dashboard,
 
         /// <summary>
         /// </summary>
-        [Char('\uf210')]
+        [Description("\uf210")]
         Dashcube,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1c0')]
+        [Description("\uf1c0")]
         Database,
 
         /// <summary>
         /// </summary>
-        [Char('\uf03b')]
+        [Description("\uf03b")]
         Dedent,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1a5')]
+        [Description("\uf1a5")]
         Delicious,
 
         /// <summary>
         /// </summary>
-        [Char('\uf108')]
+        [Description("\uf108")]
         Desktop,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1bd')]
+        [Description("\uf1bd")]
         Deviantart,
 
         /// <summary>
         /// </summary>
-        [Char('\uf219')]
+        [Description("\uf219")]
         Diamond,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1a6')]
+        [Description("\uf1a6")]
         Digg,
 
         /// <summary>
         /// </summary>
-        [Char('\uf155')]
+        [Description("\uf155")]
         Dollar,
 
         /// <summary>
         /// </summary>
-        [Char('\uf192')]
+        [Description("\uf192")]
         DotCircleO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf019')]
+        [Description("\uf019")]
         Download,
 
         /// <summary>
         /// </summary>
-        [Char('\uf17d')]
+        [Description("\uf17d")]
         Dribbble,
 
         /// <summary>
         /// </summary>
-        [Char('\uf16b')]
+        [Description("\uf16b")]
         Dropbox,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1a9')]
+        [Description("\uf1a9")]
         Drupal,
 
         /// <summary>
         /// </summary>
-        [Char('\uf044')]
+        [Description("\uf044")]
         Edit,
 
         /// <summary>
         /// </summary>
-        [Char('\uf052')]
+        [Description("\uf052")]
         Eject,
 
         /// <summary>
         /// </summary>
-        [Char('\uf141')]
+        [Description("\uf141")]
         EllipsisH,
 
         /// <summary>
         /// </summary>
-        [Char('\uf142')]
+        [Description("\uf142")]
         EllipsisV,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1d1')]
+        [Description("\uf1d1")]
         Empire,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0e0')]
+        [Description("\uf0e0")]
         Envelope,
 
         /// <summary>
         /// </summary>
-        [Char('\uf003')]
+        [Description("\uf003")]
         EnvelopeO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf199')]
+        [Description("\uf199")]
         EnvelopeSquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf12d')]
+        [Description("\uf12d")]
         Eraser,
 
         /// <summary>
         /// </summary>
-        [Char('\uf153')]
+        [Description("\uf153")]
         Eur,
 
         /// <summary>
         /// </summary>
-        [Char('\uf153')]
+        [Description("\uf153")]
         Euro,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0ec')]
+        [Description("\uf0ec")]
         Exchange,
 
         /// <summary>
         /// </summary>
-        [Char('\uf12a')]
+        [Description("\uf12a")]
         Exclamation,
 
         /// <summary>
         /// </summary>
-        [Char('\uf06a')]
+        [Description("\uf06a")]
         ExclamationCircle,
 
         /// <summary>
         /// </summary>
-        [Char('\uf071')]
+        [Description("\uf071")]
         ExclamationTriangle,
 
         /// <summary>
         /// </summary>
-        [Char('\uf065')]
+        [Description("\uf065")]
         Expand,
 
         /// <summary>
         /// </summary>
-        [Char('\uf08e')]
+        [Description("\uf08e")]
         ExternalLink,
 
         /// <summary>
         /// </summary>
-        [Char('\uf14c')]
+        [Description("\uf14c")]
         ExternalLinkSquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf06e')]
+        [Description("\uf06e")]
         Eye,
 
         /// <summary>
         /// </summary>
-        [Char('\uf070')]
+        [Description("\uf070")]
         EyeSlash,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1fb')]
+        [Description("\uf1fb")]
         Eyedropper,
 
         /// <summary>
         /// </summary>
-        [Char('\uf09a')]
+        [Description("\uf09a")]
         Facebook,
 
         /// <summary>
         /// </summary>
-        [Char('\uf09a')]
+        [Description("\uf09a")]
         FacebookF,
 
         /// <summary>
         /// </summary>
-        [Char('\uf230')]
+        [Description("\uf230")]
         FacebookOfficial,
 
         /// <summary>
         /// </summary>
-        [Char('\uf082')]
+        [Description("\uf082")]
         FacebookSquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf049')]
+        [Description("\uf049")]
         FastBackward,
 
         /// <summary>
         /// </summary>
-        [Char('\uf050')]
+        [Description("\uf050")]
         FastForward,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1ac')]
+        [Description("\uf1ac")]
         Fax,
 
         /// <summary>
         /// </summary>
-        [Char('\uf182')]
+        [Description("\uf182")]
         Female,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0fb')]
+        [Description("\uf0fb")]
         FighterJet,
 
         /// <summary>
         /// </summary>
-        [Char('\uf15b')]
+        [Description("\uf15b")]
         File,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1c6')]
+        [Description("\uf1c6")]
         FileArchiveO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1c7')]
+        [Description("\uf1c7")]
         FileAudioO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1c9')]
+        [Description("\uf1c9")]
         FileCodeO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1c3')]
+        [Description("\uf1c3")]
         FileExcelO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1c5')]
+        [Description("\uf1c5")]
         FileImageO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1c8')]
+        [Description("\uf1c8")]
         FileMovieO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf016')]
+        [Description("\uf016")]
         FileO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1c1')]
+        [Description("\uf1c1")]
         FilePdfO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1c5')]
+        [Description("\uf1c5")]
         FilePhotoO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1c5')]
+        [Description("\uf1c5")]
         FilePictureO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1c4')]
+        [Description("\uf1c4")]
         FilePowerpointO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1c7')]
+        [Description("\uf1c7")]
         FileSoundO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf15c')]
+        [Description("\uf15c")]
         FileText,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0f6')]
+        [Description("\uf0f6")]
         FileTextO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1c8')]
+        [Description("\uf1c8")]
         FileVideoO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1c2')]
+        [Description("\uf1c2")]
         FileWordO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1c6')]
+        [Description("\uf1c6")]
         FileZipO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0c5')]
+        [Description("\uf0c5")]
         FilesO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf008')]
+        [Description("\uf008")]
         Film,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0b0')]
+        [Description("\uf0b0")]
         Filter,
 
         /// <summary>
         /// </summary>
-        [Char('\uf06d')]
+        [Description("\uf06d")]
         Fire,
 
         /// <summary>
         /// </summary>
-        [Char('\uf134')]
+        [Description("\uf134")]
         FireExtinguisher,
 
         /// <summary>
         /// </summary>
-        [Char('\uf024')]
+        [Description("\uf024")]
         Flag,
 
         /// <summary>
         /// </summary>
-        [Char('\uf11e')]
+        [Description("\uf11e")]
         FlagCheckered,
 
         /// <summary>
         /// </summary>
-        [Char('\uf11d')]
+        [Description("\uf11d")]
         FlagO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0e7')]
+        [Description("\uf0e7")]
         Flash,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0c3')]
+        [Description("\uf0c3")]
         Flask,
 
         /// <summary>
         /// </summary>
-        [Char('\uf16e')]
+        [Description("\uf16e")]
         Flickr,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0c7')]
+        [Description("\uf0c7")]
         FloppyO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf07b')]
+        [Description("\uf07b")]
         Folder,
 
         /// <summary>
         /// </summary>
-        [Char('\uf114')]
+        [Description("\uf114")]
         FolderO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf07c')]
+        [Description("\uf07c")]
         FolderOpen,
 
         /// <summary>
         /// </summary>
-        [Char('\uf115')]
+        [Description("\uf115")]
         FolderOpenO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf031')]
+        [Description("\uf031")]
         Font,
 
         /// <summary>
         /// </summary>
-        [Char('\uf211')]
+        [Description("\uf211")]
         Forumbee,
 
         /// <summary>
         /// </summary>
-        [Char('\uf04e')]
+        [Description("\uf04e")]
         Forward,
 
         /// <summary>
         /// </summary>
-        [Char('\uf180')]
+        [Description("\uf180")]
         Foursquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf119')]
+        [Description("\uf119")]
         FrownO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1e3')]
+        [Description("\uf1e3")]
         FutbolO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf11b')]
+        [Description("\uf11b")]
         Gamepad,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0e3')]
+        [Description("\uf0e3")]
         Gavel,
 
         /// <summary>
         /// </summary>
-        [Char('\uf154')]
+        [Description("\uf154")]
         Gbp,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1d1')]
+        [Description("\uf1d1")]
         Ge,
 
         /// <summary>
         /// </summary>
-        [Char('\uf013')]
+        [Description("\uf013")]
         Gear,
 
         /// <summary>
         /// </summary>
-        [Char('\uf085')]
+        [Description("\uf085")]
         Gears,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1db')]
+        [Description("\uf1db")]
         Genderless,
 
         /// <summary>
         /// </summary>
-        [Char('\uf06b')]
+        [Description("\uf06b")]
         Gift,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1d3')]
+        [Description("\uf1d3")]
         Git,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1d2')]
+        [Description("\uf1d2")]
         GitSquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf09b')]
+        [Description("\uf09b")]
         Github,
 
         /// <summary>
         /// </summary>
-        [Char('\uf113')]
+        [Description("\uf113")]
         GithubAlt,
 
         /// <summary>
         /// </summary>
-        [Char('\uf092')]
+        [Description("\uf092")]
         GithubSquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf184')]
+        [Description("\uf184")]
         Gittip,
 
         /// <summary>
         /// </summary>
-        [Char('\uf000')]
+        [Description("\uf000")]
         Glass,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0ac')]
+        [Description("\uf0ac")]
         Globe,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1a0')]
+        [Description("\uf1a0")]
         Google,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0d5')]
+        [Description("\uf0d5")]
         GooglePlus,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0d4')]
+        [Description("\uf0d4")]
         GooglePlusSquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1ee')]
+        [Description("\uf1ee")]
         GoogleWallet,
 
         /// <summary>
         /// </summary>
-        [Char('\uf19d')]
+        [Description("\uf19d")]
         GraduationCap,
 
         /// <summary>
         /// </summary>
-        [Char('\uf184')]
+        [Description("\uf184")]
         Gratipay,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0c0')]
+        [Description("\uf0c0")]
         Group,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0fd')]
+        [Description("\uf0fd")]
         HSquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1d4')]
+        [Description("\uf1d4")]
         HackerNews,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0a7')]
+        [Description("\uf0a7")]
         HandODown,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0a5')]
+        [Description("\uf0a5")]
         HandOLeft,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0a4')]
+        [Description("\uf0a4")]
         HandORight,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0a6')]
+        [Description("\uf0a6")]
         HandOUp,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0a0')]
+        [Description("\uf0a0")]
         HddO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1dc')]
+        [Description("\uf1dc")]
         Header,
 
         /// <summary>
         /// </summary>
-        [Char('\uf025')]
+        [Description("\uf025")]
         Headphones,
 
         /// <summary>
         /// </summary>
-        [Char('\uf004')]
+        [Description("\uf004")]
         Heart,
 
         /// <summary>
         /// </summary>
-        [Char('\uf08a')]
+        [Description("\uf08a")]
         HeartO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf21e')]
+        [Description("\uf21e")]
         Heartbeat,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1da')]
+        [Description("\uf1da")]
         History,
 
         /// <summary>
         /// </summary>
-        [Char('\uf015')]
+        [Description("\uf015")]
         Home,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0f8')]
+        [Description("\uf0f8")]
         HospitalO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf236')]
+        [Description("\uf236")]
         Hotel,
 
         /// <summary>
         /// </summary>
-        [Char('\uf13b')]
+        [Description("\uf13b")]
         Html5,
 
         /// <summary>
         /// </summary>
-        [Char('\uf20b')]
+        [Description("\uf20b")]
         Ils,
 
         /// <summary>
         /// </summary>
-        [Char('\uf03e')]
+        [Description("\uf03e")]
         Image,
 
         /// <summary>
         /// </summary>
-        [Char('\uf01c')]
+        [Description("\uf01c")]
         Inbox,
 
         /// <summary>
         /// </summary>
-        [Char('\uf03c')]
+        [Description("\uf03c")]
         Indent,
 
         /// <summary>
         /// </summary>
-        [Char('\uf129')]
+        [Description("\uf129")]
         Info,
 
         /// <summary>
         /// </summary>
-        [Char('\uf05a')]
+        [Description("\uf05a")]
         InfoCircle,
 
         /// <summary>
         /// </summary>
-        [Char('\uf156')]
+        [Description("\uf156")]
         Inr,
 
         /// <summary>
         /// </summary>
-        [Char('\uf16d')]
+        [Description("\uf16d")]
         Instagram,
 
         /// <summary>
         /// </summary>
-        [Char('\uf19c')]
+        [Description("\uf19c")]
         Institution,
 
         /// <summary>
         /// </summary>
-        [Char('\uf208')]
+        [Description("\uf208")]
         Ioxhost,
 
         /// <summary>
         /// </summary>
-        [Char('\uf033')]
+        [Description("\uf033")]
         Italic,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1aa')]
+        [Description("\uf1aa")]
         Joomla,
 
         /// <summary>
         /// </summary>
-        [Char('\uf157')]
+        [Description("\uf157")]
         Jpy,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1cc')]
+        [Description("\uf1cc")]
         Jsfiddle,
 
         /// <summary>
         /// </summary>
-        [Char('\uf084')]
+        [Description("\uf084")]
         Key,
 
         /// <summary>
         /// </summary>
-        [Char('\uf11c')]
+        [Description("\uf11c")]
         KeyboardO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf159')]
+        [Description("\uf159")]
         Krw,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1ab')]
+        [Description("\uf1ab")]
         Language,
 
         /// <summary>
         /// </summary>
-        [Char('\uf109')]
+        [Description("\uf109")]
         Laptop,
 
         /// <summary>
         /// </summary>
-        [Char('\uf202')]
+        [Description("\uf202")]
         Lastfm,
 
         /// <summary>
         /// </summary>
-        [Char('\uf203')]
+        [Description("\uf203")]
         LastfmSquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf06c')]
+        [Description("\uf06c")]
         Leaf,
 
         /// <summary>
         /// </summary>
-        [Char('\uf212')]
+        [Description("\uf212")]
         Leanpub,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0e3')]
+        [Description("\uf0e3")]
         Legal,
 
         /// <summary>
         /// </summary>
-        [Char('\uf094')]
+        [Description("\uf094")]
         LemonO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf149')]
+        [Description("\uf149")]
         LevelDown,
 
         /// <summary>
         /// </summary>
-        [Char('\uf148')]
+        [Description("\uf148")]
         LevelUp,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1cd')]
+        [Description("\uf1cd")]
         LifeBouy,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1cd')]
+        [Description("\uf1cd")]
         LifeBuoy,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1cd')]
+        [Description("\uf1cd")]
         LifeRing,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1cd')]
+        [Description("\uf1cd")]
         LifeSaver,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0eb')]
+        [Description("\uf0eb")]
         LightbulbO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf201')]
+        [Description("\uf201")]
         LineChart,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0c1')]
+        [Description("\uf0c1")]
         Link,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0e1')]
+        [Description("\uf0e1")]
         Linkedin,
 
         /// <summary>
         /// </summary>
-        [Char('\uf08c')]
+        [Description("\uf08c")]
         LinkedinSquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf17c')]
+        [Description("\uf17c")]
         Linux,
 
         /// <summary>
         /// </summary>
-        [Char('\uf03a')]
+        [Description("\uf03a")]
         List,
 
         /// <summary>
         /// </summary>
-        [Char('\uf022')]
+        [Description("\uf022")]
         ListAlt,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0cb')]
+        [Description("\uf0cb")]
         ListOl,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0ca')]
+        [Description("\uf0ca")]
         ListUl,
 
         /// <summary>
         /// </summary>
-        [Char('\uf124')]
+        [Description("\uf124")]
         LocationArrow,
 
         /// <summary>
         /// </summary>
-        [Char('\uf023')]
+        [Description("\uf023")]
         Lock,
 
         /// <summary>
         /// </summary>
-        [Char('\uf175')]
+        [Description("\uf175")]
         LongArrowDown,
 
         /// <summary>
         /// </summary>
-        [Char('\uf177')]
+        [Description("\uf177")]
         LongArrowLeft,
 
         /// <summary>
         /// </summary>
-        [Char('\uf178')]
+        [Description("\uf178")]
         LongArrowRight,
 
         /// <summary>
         /// </summary>
-        [Char('\uf176')]
+        [Description("\uf176")]
         LongArrowUp,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0d0')]
+        [Description("\uf0d0")]
         Magic,
 
         /// <summary>
         /// </summary>
-        [Char('\uf076')]
+        [Description("\uf076")]
         Magnet,
 
         /// <summary>
         /// </summary>
-        [Char('\uf064')]
+        [Description("\uf064")]
         MailForward,
 
         /// <summary>
         /// </summary>
-        [Char('\uf112')]
+        [Description("\uf112")]
         MailReply,
 
         /// <summary>
         /// </summary>
-        [Char('\uf122')]
+        [Description("\uf122")]
         MailReplyAll,
 
         /// <summary>
         /// </summary>
-        [Char('\uf183')]
+        [Description("\uf183")]
         Male,
 
         /// <summary>
         /// </summary>
-        [Char('\uf041')]
+        [Description("\uf041")]
         MapMarker,
 
         /// <summary>
         /// </summary>
-        [Char('\uf222')]
+        [Description("\uf222")]
         Mars,
 
         /// <summary>
         /// </summary>
-        [Char('\uf227')]
+        [Description("\uf227")]
         MarsDouble,
 
         /// <summary>
         /// </summary>
-        [Char('\uf229')]
+        [Description("\uf229")]
         MarsStroke,
 
         /// <summary>
         /// </summary>
-        [Char('\uf22b')]
+        [Description("\uf22b")]
         MarsStrokeH,
 
         /// <summary>
         /// </summary>
-        [Char('\uf22a')]
+        [Description("\uf22a")]
         MarsStrokeV,
 
         /// <summary>
         /// </summary>
-        [Char('\uf136')]
+        [Description("\uf136")]
         Maxcdn,
 
         /// <summary>
         /// </summary>
-        [Char('\uf20c')]
+        [Description("\uf20c")]
         Meanpath,
 
         /// <summary>
         /// </summary>
-        [Char('\uf23a')]
+        [Description("\uf23a")]
         Medium,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0fa')]
+        [Description("\uf0fa")]
         Medkit,
 
         /// <summary>
         /// </summary>
-        [Char('\uf11a')]
+        [Description("\uf11a")]
         MehO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf223')]
+        [Description("\uf223")]
         Mercury,
 
         /// <summary>
         /// </summary>
-        [Char('\uf130')]
+        [Description("\uf130")]
         Microphone,
 
         /// <summary>
         /// </summary>
-        [Char('\uf131')]
+        [Description("\uf131")]
         MicrophoneSlash,
 
         /// <summary>
         /// </summary>
-        [Char('\uf068')]
+        [Description("\uf068")]
         Minus,
 
         /// <summary>
         /// </summary>
-        [Char('\uf056')]
+        [Description("\uf056")]
         MinusCircle,
 
         /// <summary>
         /// </summary>
-        [Char('\uf146')]
+        [Description("\uf146")]
         MinusSquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf147')]
+        [Description("\uf147")]
         MinusSquareO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf10b')]
+        [Description("\uf10b")]
         Mobile,
 
         /// <summary>
         /// </summary>
-        [Char('\uf10b')]
+        [Description("\uf10b")]
         MobilePhone,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0d6')]
+        [Description("\uf0d6")]
         Money,
 
         /// <summary>
         /// </summary>
-        [Char('\uf186')]
+        [Description("\uf186")]
         MoonO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf19d')]
+        [Description("\uf19d")]
         MortarBoard,
 
         /// <summary>
         /// </summary>
-        [Char('\uf21c')]
+        [Description("\uf21c")]
         Motorcycle,
 
         /// <summary>
         /// </summary>
-        [Char('\uf001')]
+        [Description("\uf001")]
         Music,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0c9')]
+        [Description("\uf0c9")]
         Navicon,
 
         /// <summary>
         /// </summary>
-        [Char('\uf22c')]
+        [Description("\uf22c")]
         Neuter,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1ea')]
+        [Description("\uf1ea")]
         NewspaperO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf19b')]
+        [Description("\uf19b")]
         Openid,
 
         /// <summary>
         /// </summary>
-        [Char('\uf03b')]
+        [Description("\uf03b")]
         Outdent,
 
         /// <summary>
         /// </summary>
-        [Char('\uf18c')]
+        [Description("\uf18c")]
         Pagelines,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1fc')]
+        [Description("\uf1fc")]
         PaintBrush,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1d8')]
+        [Description("\uf1d8")]
         PaperPlane,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1d9')]
+        [Description("\uf1d9")]
         PaperPlaneO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0c6')]
+        [Description("\uf0c6")]
         Paperclip,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1dd')]
+        [Description("\uf1dd")]
         Paragraph,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0ea')]
+        [Description("\uf0ea")]
         Paste,
 
         /// <summary>
         /// </summary>
-        [Char('\uf04c')]
+        [Description("\uf04c")]
         Pause,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1b0')]
+        [Description("\uf1b0")]
         Paw,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1ed')]
+        [Description("\uf1ed")]
         Paypal,
 
         /// <summary>
         /// </summary>
-        [Char('\uf040')]
+        [Description("\uf040")]
         Pencil,
 
         /// <summary>
         /// </summary>
-        [Char('\uf14b')]
+        [Description("\uf14b")]
         PencilSquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf044')]
+        [Description("\uf044")]
         PencilSquareO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf095')]
+        [Description("\uf095")]
         Phone,
 
         /// <summary>
         /// </summary>
-        [Char('\uf098')]
+        [Description("\uf098")]
         PhoneSquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf03e')]
+        [Description("\uf03e")]
         Photo,
 
         /// <summary>
         /// </summary>
-        [Char('\uf03e')]
+        [Description("\uf03e")]
         PictureO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf200')]
+        [Description("\uf200")]
         PieChart,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1a7')]
+        [Description("\uf1a7")]
         PiedPiper,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1a8')]
+        [Description("\uf1a8")]
         PiedPiperAlt,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0d2')]
+        [Description("\uf0d2")]
         Pinterest,
 
         /// <summary>
         /// </summary>
-        [Char('\uf231')]
+        [Description("\uf231")]
         PinterestP,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0d3')]
+        [Description("\uf0d3")]
         PinterestSquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf072')]
+        [Description("\uf072")]
         Plane,
 
         /// <summary>
         /// </summary>
-        [Char('\uf04b')]
+        [Description("\uf04b")]
         Play,
 
         /// <summary>
         /// </summary>
-        [Char('\uf144')]
+        [Description("\uf144")]
         PlayCircle,
 
         /// <summary>
         /// </summary>
-        [Char('\uf01d')]
+        [Description("\uf01d")]
         PlayCircleO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1e6')]
+        [Description("\uf1e6")]
         Plug,
 
         /// <summary>
         /// </summary>
-        [Char('\uf067')]
+        [Description("\uf067")]
         Plus,
 
         /// <summary>
         /// </summary>
-        [Char('\uf055')]
+        [Description("\uf055")]
         PlusCircle,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0fe')]
+        [Description("\uf0fe")]
         PlusSquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf196')]
+        [Description("\uf196")]
         PlusSquareO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf011')]
+        [Description("\uf011")]
         PowerOff,
 
         /// <summary>
         /// </summary>
-        [Char('\uf02f')]
+        [Description("\uf02f")]
         Print,
 
         /// <summary>
         /// </summary>
-        [Char('\uf12e')]
+        [Description("\uf12e")]
         PuzzlePiece,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1d6')]
+        [Description("\uf1d6")]
         Qq,
 
         /// <summary>
         /// </summary>
-        [Char('\uf029')]
+        [Description("\uf029")]
         Qrcode,
 
         /// <summary>
         /// </summary>
-        [Char('\uf128')]
+        [Description("\uf128")]
         Question,
 
         /// <summary>
         /// </summary>
-        [Char('\uf059')]
+        [Description("\uf059")]
         QuestionCircle,
 
         /// <summary>
         /// </summary>
-        [Char('\uf10d')]
+        [Description("\uf10d")]
         QuoteLeft,
 
         /// <summary>
         /// </summary>
-        [Char('\uf10e')]
+        [Description("\uf10e")]
         QuoteRight,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1d0')]
+        [Description("\uf1d0")]
         Ra,
 
         /// <summary>
         /// </summary>
-        [Char('\uf074')]
+        [Description("\uf074")]
         Random,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1d0')]
+        [Description("\uf1d0")]
         Rebel,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1b8')]
+        [Description("\uf1b8")]
         Recycle,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1a1')]
+        [Description("\uf1a1")]
         Reddit,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1a2')]
+        [Description("\uf1a2")]
         RedditSquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf021')]
+        [Description("\uf021")]
         Refresh,
 
         /// <summary>
         /// </summary>
-        [Char('\uf00d')]
+        [Description("\uf00d")]
         Remove,
 
         /// <summary>
         /// </summary>
-        [Char('\uf18b')]
+        [Description("\uf18b")]
         Renren,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0c9')]
+        [Description("\uf0c9")]
         Reorder,
 
         /// <summary>
         /// </summary>
-        [Char('\uf01e')]
+        [Description("\uf01e")]
         Repeat,
 
         /// <summary>
         /// </summary>
-        [Char('\uf112')]
+        [Description("\uf112")]
         Reply,
 
         /// <summary>
         /// </summary>
-        [Char('\uf122')]
+        [Description("\uf122")]
         ReplyAll,
 
         /// <summary>
         /// </summary>
-        [Char('\uf079')]
+        [Description("\uf079")]
         Retweet,
 
         /// <summary>
         /// </summary>
-        [Char('\uf157')]
+        [Description("\uf157")]
         Rmb,
 
         /// <summary>
         /// </summary>
-        [Char('\uf018')]
+        [Description("\uf018")]
         Road,
 
         /// <summary>
         /// </summary>
-        [Char('\uf135')]
+        [Description("\uf135")]
         Rocket,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0e2')]
+        [Description("\uf0e2")]
         RotateLeft,
 
         /// <summary>
         /// </summary>
-        [Char('\uf01e')]
+        [Description("\uf01e")]
         RotateRight,
 
         /// <summary>
         /// </summary>
-        [Char('\uf158')]
+        [Description("\uf158")]
         Rouble,
 
         /// <summary>
         /// </summary>
-        [Char('\uf09e')]
+        [Description("\uf09e")]
         Rss,
 
         /// <summary>
         /// </summary>
-        [Char('\uf143')]
+        [Description("\uf143")]
         RssSquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf158')]
+        [Description("\uf158")]
         Rub,
 
         /// <summary>
         /// </summary>
-        [Char('\uf158')]
+        [Description("\uf158")]
         Ruble,
 
         /// <summary>
         /// </summary>
-        [Char('\uf156')]
+        [Description("\uf156")]
         Rupee,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0c7')]
+        [Description("\uf0c7")]
         Save,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0c4')]
+        [Description("\uf0c4")]
         Scissors,
 
         /// <summary>
         /// </summary>
-        [Char('\uf002')]
+        [Description("\uf002")]
         Search,
 
         /// <summary>
         /// </summary>
-        [Char('\uf010')]
+        [Description("\uf010")]
         SearchMinus,
 
         /// <summary>
         /// </summary>
-        [Char('\uf00e')]
+        [Description("\uf00e")]
         SearchPlus,
 
         /// <summary>
         /// </summary>
-        [Char('\uf213')]
+        [Description("\uf213")]
         Sellsy,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1d8')]
+        [Description("\uf1d8")]
         Send,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1d9')]
+        [Description("\uf1d9")]
         SendO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf233')]
+        [Description("\uf233")]
         Server,
 
         /// <summary>
         /// </summary>
-        [Char('\uf064')]
+        [Description("\uf064")]
         Share,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1e0')]
+        [Description("\uf1e0")]
         ShareAlt,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1e1')]
+        [Description("\uf1e1")]
         ShareAltSquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf14d')]
+        [Description("\uf14d")]
         ShareSquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf045')]
+        [Description("\uf045")]
         ShareSquareO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf20b')]
+        [Description("\uf20b")]
         Shekel,
 
         /// <summary>
         /// </summary>
-        [Char('\uf20b')]
+        [Description("\uf20b")]
         Sheqel,
 
         /// <summary>
         /// </summary>
-        [Char('\uf132')]
+        [Description("\uf132")]
         Shield,
 
         /// <summary>
         /// </summary>
-        [Char('\uf21a')]
+        [Description("\uf21a")]
         Ship,
 
         /// <summary>
         /// </summary>
-        [Char('\uf214')]
+        [Description("\uf214")]
         Shirtsinbulk,
 
         /// <summary>
         /// </summary>
-        [Char('\uf07a')]
+        [Description("\uf07a")]
         ShoppingCart,
 
         /// <summary>
         /// </summary>
-        [Char('\uf090')]
+        [Description("\uf090")]
         SignIn,
 
         /// <summary>
         /// </summary>
-        [Char('\uf08b')]
+        [Description("\uf08b")]
         SignOut,
 
         /// <summary>
         /// </summary>
-        [Char('\uf012')]
+        [Description("\uf012")]
         Signal,
 
         /// <summary>
         /// </summary>
-        [Char('\uf215')]
+        [Description("\uf215")]
         Simplybuilt,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0e8')]
+        [Description("\uf0e8")]
         Sitemap,
 
         /// <summary>
         /// </summary>
-        [Char('\uf216')]
+        [Description("\uf216")]
         Skyatlas,
 
         /// <summary>
         /// </summary>
-        [Char('\uf17e')]
+        [Description("\uf17e")]
         Skype,
 
         /// <summary>
         /// </summary>
-        [Char('\uf198')]
+        [Description("\uf198")]
         Slack,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1de')]
+        [Description("\uf1de")]
         Sliders,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1e7')]
+        [Description("\uf1e7")]
         Slideshare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf118')]
+        [Description("\uf118")]
         SmileO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1e3')]
+        [Description("\uf1e3")]
         SoccerBallO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0dc')]
+        [Description("\uf0dc")]
         Sort,
 
         /// <summary>
         /// </summary>
-        [Char('\uf15d')]
+        [Description("\uf15d")]
         SortAlphaAsc,
 
         /// <summary>
         /// </summary>
-        [Char('\uf15e')]
+        [Description("\uf15e")]
         SortAlphaDesc,
 
         /// <summary>
         /// </summary>
-        [Char('\uf160')]
+        [Description("\uf160")]
         SortAmountAsc,
 
         /// <summary>
         /// </summary>
-        [Char('\uf161')]
+        [Description("\uf161")]
         SortAmountDesc,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0de')]
+        [Description("\uf0de")]
         SortAsc,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0dd')]
+        [Description("\uf0dd")]
         SortDesc,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0dd')]
+        [Description("\uf0dd")]
         SortDown,
 
         /// <summary>
         /// </summary>
-        [Char('\uf162')]
+        [Description("\uf162")]
         SortNumericAsc,
 
         /// <summary>
         /// </summary>
-        [Char('\uf163')]
+        [Description("\uf163")]
         SortNumericDesc,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0de')]
+        [Description("\uf0de")]
         SortUp,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1be')]
+        [Description("\uf1be")]
         Soundcloud,
 
         /// <summary>
         /// </summary>
-        [Char('\uf197')]
+        [Description("\uf197")]
         SpaceShuttle,
 
         /// <summary>
         /// </summary>
-        [Char('\uf110')]
+        [Description("\uf110")]
         Spinner,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1b1')]
+        [Description("\uf1b1")]
         Spoon,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1bc')]
+        [Description("\uf1bc")]
         Spotify,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0c8')]
+        [Description("\uf0c8")]
         Square,
 
         /// <summary>
         /// </summary>
-        [Char('\uf096')]
+        [Description("\uf096")]
         SquareO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf18d')]
+        [Description("\uf18d")]
         StackExchange,
 
         /// <summary>
         /// </summary>
-        [Char('\uf16c')]
+        [Description("\uf16c")]
         StackOverflow,
 
         /// <summary>
         /// </summary>
-        [Char('\uf005')]
+        [Description("\uf005")]
         Star,
 
         /// <summary>
         /// </summary>
-        [Char('\uf089')]
+        [Description("\uf089")]
         StarHalf,
 
         /// <summary>
         /// </summary>
-        [Char('\uf123')]
+        [Description("\uf123")]
         StarHalfEmpty,
 
         /// <summary>
         /// </summary>
-        [Char('\uf123')]
+        [Description("\uf123")]
         StarHalfFull,
 
         /// <summary>
         /// </summary>
-        [Char('\uf123')]
+        [Description("\uf123")]
         StarHalfO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf006')]
+        [Description("\uf006")]
         StarO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1b6')]
+        [Description("\uf1b6")]
         Steam,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1b7')]
+        [Description("\uf1b7")]
         SteamSquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf048')]
+        [Description("\uf048")]
         StepBackward,
 
         /// <summary>
         /// </summary>
-        [Char('\uf051')]
+        [Description("\uf051")]
         StepForward,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0f1')]
+        [Description("\uf0f1")]
         Stethoscope,
 
         /// <summary>
         /// </summary>
-        [Char('\uf04d')]
+        [Description("\uf04d")]
         Stop,
 
         /// <summary>
         /// </summary>
-        [Char('\uf21d')]
+        [Description("\uf21d")]
         StreetView,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0cc')]
+        [Description("\uf0cc")]
         Strikethrough,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1a4')]
+        [Description("\uf1a4")]
         Stumbleupon,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1a3')]
+        [Description("\uf1a3")]
         StumbleuponCircle,
 
         /// <summary>
         /// </summary>
-        [Char('\uf12c')]
+        [Description("\uf12c")]
         Subscript,
 
         /// <summary>
         /// </summary>
-        [Char('\uf239')]
+        [Description("\uf239")]
         Subway,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0f2')]
+        [Description("\uf0f2")]
         Suitcase,
 
         /// <summary>
         /// </summary>
-        [Char('\uf185')]
+        [Description("\uf185")]
         SunO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf12b')]
+        [Description("\uf12b")]
         Superscript,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1cd')]
+        [Description("\uf1cd")]
         Support,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0ce')]
+        [Description("\uf0ce")]
         Table,
 
         /// <summary>
         /// </summary>
-        [Char('\uf10a')]
+        [Description("\uf10a")]
         Tablet,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0e4')]
+        [Description("\uf0e4")]
         Tachometer,
 
         /// <summary>
         /// </summary>
-        [Char('\uf02b')]
+        [Description("\uf02b")]
         Tag,
 
         /// <summary>
         /// </summary>
-        [Char('\uf02c')]
+        [Description("\uf02c")]
         Tags,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0ae')]
+        [Description("\uf0ae")]
         Tasks,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1ba')]
+        [Description("\uf1ba")]
         Taxi,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1d5')]
+        [Description("\uf1d5")]
         TencentWeibo,
 
         /// <summary>
         /// </summary>
-        [Char('\uf120')]
+        [Description("\uf120")]
         Terminal,
 
         /// <summary>
         /// </summary>
-        [Char('\uf034')]
+        [Description("\uf034")]
         TextHeight,
 
         /// <summary>
         /// </summary>
-        [Char('\uf035')]
+        [Description("\uf035")]
         TextWidth,
 
         /// <summary>
         /// </summary>
-        [Char('\uf00a')]
+        [Description("\uf00a")]
         Th,
 
         /// <summary>
         /// </summary>
-        [Char('\uf009')]
+        [Description("\uf009")]
         ThLarge,
 
         /// <summary>
         /// </summary>
-        [Char('\uf00b')]
+        [Description("\uf00b")]
         ThList,
 
         /// <summary>
         /// </summary>
-        [Char('\uf08d')]
+        [Description("\uf08d")]
         ThumbTack,
 
         /// <summary>
         /// </summary>
-        [Char('\uf165')]
+        [Description("\uf165")]
         ThumbsDown,
 
         /// <summary>
         /// </summary>
-        [Char('\uf088')]
+        [Description("\uf088")]
         ThumbsODown,
 
         /// <summary>
         /// </summary>
-        [Char('\uf087')]
+        [Description("\uf087")]
         ThumbsOUp,
 
         /// <summary>
         /// </summary>
-        [Char('\uf164')]
+        [Description("\uf164")]
         ThumbsUp,
 
         /// <summary>
         /// </summary>
-        [Char('\uf145')]
+        [Description("\uf145")]
         Ticket,
 
         /// <summary>
         /// </summary>
-        [Char('\uf00d')]
+        [Description("\uf00d")]
         Times,
 
         /// <summary>
         /// </summary>
-        [Char('\uf057')]
+        [Description("\uf057")]
         TimesCircle,
 
         /// <summary>
         /// </summary>
-        [Char('\uf05c')]
+        [Description("\uf05c")]
         TimesCircleO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf043')]
+        [Description("\uf043")]
         Tint,
 
         /// <summary>
         /// </summary>
-        [Char('\uf150')]
+        [Description("\uf150")]
         ToggleDown,
 
         /// <summary>
         /// </summary>
-        [Char('\uf191')]
+        [Description("\uf191")]
         ToggleLeft,
 
         /// <summary>
         /// </summary>
-        [Char('\uf204')]
+        [Description("\uf204")]
         ToggleOff,
 
         /// <summary>
         /// </summary>
-        [Char('\uf205')]
+        [Description("\uf205")]
         ToggleOn,
 
         /// <summary>
         /// </summary>
-        [Char('\uf152')]
+        [Description("\uf152")]
         ToggleRight,
 
         /// <summary>
         /// </summary>
-        [Char('\uf151')]
+        [Description("\uf151")]
         ToggleUp,
 
         /// <summary>
         /// </summary>
-        [Char('\uf238')]
+        [Description("\uf238")]
         Train,
 
         /// <summary>
         /// </summary>
-        [Char('\uf224')]
+        [Description("\uf224")]
         Transgender,
 
         /// <summary>
         /// </summary>
-        [Char('\uf225')]
+        [Description("\uf225")]
         TransgenderAlt,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1f8')]
+        [Description("\uf1f8")]
         Trash,
 
         /// <summary>
         /// </summary>
-        [Char('\uf014')]
+        [Description("\uf014")]
         TrashO,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1bb')]
+        [Description("\uf1bb")]
         Tree,
 
         /// <summary>
         /// </summary>
-        [Char('\uf181')]
+        [Description("\uf181")]
         Trello,
 
         /// <summary>
         /// </summary>
-        [Char('\uf091')]
+        [Description("\uf091")]
         Trophy,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0d1')]
+        [Description("\uf0d1")]
         Truck,
 
         /// <summary>
         /// </summary>
-        [Char('\uf195')]
+        [Description("\uf195")]
         Try,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1e4')]
+        [Description("\uf1e4")]
         Tty,
 
         /// <summary>
         /// </summary>
-        [Char('\uf173')]
+        [Description("\uf173")]
         Tumblr,
 
         /// <summary>
         /// </summary>
-        [Char('\uf174')]
+        [Description("\uf174")]
         TumblrSquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf195')]
+        [Description("\uf195")]
         TurkishLira,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1e8')]
+        [Description("\uf1e8")]
         Twitch,
 
         /// <summary>
         /// </summary>
-        [Char('\uf099')]
+        [Description("\uf099")]
         Twitter,
 
         /// <summary>
         /// </summary>
-        [Char('\uf081')]
+        [Description("\uf081")]
         TwitterSquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0e9')]
+        [Description("\uf0e9")]
         Umbrella,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0cd')]
+        [Description("\uf0cd")]
         Underline,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0e2')]
+        [Description("\uf0e2")]
         Undo,
 
         /// <summary>
         /// </summary>
-        [Char('\uf19c')]
+        [Description("\uf19c")]
         University,
 
         /// <summary>
         /// </summary>
-        [Char('\uf127')]
+        [Description("\uf127")]
         Unlink,
 
         /// <summary>
         /// </summary>
-        [Char('\uf09c')]
+        [Description("\uf09c")]
         Unlock,
 
         /// <summary>
         /// </summary>
-        [Char('\uf13e')]
+        [Description("\uf13e")]
         UnlockAlt,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0dc')]
+        [Description("\uf0dc")]
         Unsorted,
 
         /// <summary>
         /// </summary>
-        [Char('\uf093')]
+        [Description("\uf093")]
         Upload,
 
         /// <summary>
         /// </summary>
-        [Char('\uf155')]
+        [Description("\uf155")]
         Usd,
 
         /// <summary>
         /// </summary>
-        [Char('\uf007')]
+        [Description("\uf007")]
         User,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0f0')]
+        [Description("\uf0f0")]
         UserMd,
 
         /// <summary>
         /// </summary>
-        [Char('\uf234')]
+        [Description("\uf234")]
         UserPlus,
 
         /// <summary>
         /// </summary>
-        [Char('\uf21b')]
+        [Description("\uf21b")]
         UserSecret,
 
         /// <summary>
         /// </summary>
-        [Char('\uf235')]
+        [Description("\uf235")]
         UserTimes,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0c0')]
+        [Description("\uf0c0")]
         Users,
 
         /// <summary>
         /// </summary>
-        [Char('\uf221')]
+        [Description("\uf221")]
         Venus,
 
         /// <summary>
         /// </summary>
-        [Char('\uf226')]
+        [Description("\uf226")]
         VenusDouble,
 
         /// <summary>
         /// </summary>
-        [Char('\uf228')]
+        [Description("\uf228")]
         VenusMars,
 
         /// <summary>
         /// </summary>
-        [Char('\uf237')]
+        [Description("\uf237")]
         Viacoin,
 
         /// <summary>
         /// </summary>
-        [Char('\uf03d')]
+        [Description("\uf03d")]
         VideoCamera,
 
         /// <summary>
         /// </summary>
-        [Char('\uf194')]
+        [Description("\uf194")]
         VimeoSquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1ca')]
+        [Description("\uf1ca")]
         Vine,
 
         /// <summary>
         /// </summary>
-        [Char('\uf189')]
+        [Description("\uf189")]
         Vk,
 
         /// <summary>
         /// </summary>
-        [Char('\uf027')]
+        [Description("\uf027")]
         VolumeDown,
 
         /// <summary>
         /// </summary>
-        [Char('\uf026')]
+        [Description("\uf026")]
         VolumeOff,
 
         /// <summary>
         /// </summary>
-        [Char('\uf028')]
+        [Description("\uf028")]
         VolumeUp,
 
         /// <summary>
         /// </summary>
-        [Char('\uf071')]
+        [Description("\uf071")]
         Warning,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1d7')]
+        [Description("\uf1d7")]
         Wechat,
 
         /// <summary>
         /// </summary>
-        [Char('\uf18a')]
+        [Description("\uf18a")]
         Weibo,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1d7')]
+        [Description("\uf1d7")]
         Weixin,
 
         /// <summary>
         /// </summary>
-        [Char('\uf232')]
+        [Description("\uf232")]
         Whatsapp,
 
         /// <summary>
         /// </summary>
-        [Char('\uf193')]
+        [Description("\uf193")]
         Wheelchair,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1eb')]
+        [Description("\uf1eb")]
         Wifi,
 
         /// <summary>
         /// </summary>
-        [Char('\uf17a')]
+        [Description("\uf17a")]
         Windows,
 
         /// <summary>
         /// </summary>
-        [Char('\uf159')]
+        [Description("\uf159")]
         Won,
 
         /// <summary>
         /// </summary>
-        [Char('\uf19a')]
+        [Description("\uf19a")]
         Wordpress,
 
         /// <summary>
         /// </summary>
-        [Char('\uf0ad')]
+        [Description("\uf0ad")]
         Wrench,
 
         /// <summary>
         /// </summary>
-        [Char('\uf168')]
+        [Description("\uf168")]
         Xing,
 
         /// <summary>
         /// </summary>
-        [Char('\uf169')]
+        [Description("\uf169")]
         XingSquare,
 
         /// <summary>
         /// </summary>
-        [Char('\uf19e')]
+        [Description("\uf19e")]
         Yahoo,
 
         /// <summary>
         /// </summary>
-        [Char('\uf1e9')]
+        [Description("\uf1e9")]
         Yelp,
 
         /// <summary>
         /// </summary>
-        [Char('\uf157')]
+        [Description("\uf157")]
         Yen,
 
         /// <summary>
         /// </summary>
-        [Char('\uf167')]
+        [Description("\uf167")]
         Youtube,
 
         /// <summary>
         /// </summary>
-        [Char('\uf16a')]
+        [Description("\uf16a")]
         YoutubePlay,
 
         /// <summary>
         /// </summary>
-        [Char('\uf166')]
+        [Description("\uf166")]
         YoutubeSquare,
     }
 }
