@@ -11,7 +11,9 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border BorderThickness="{TemplateBinding BorderThickness}">
+                    <Border BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="#EBEBEB"
+                            CornerRadius="{Binding Radius, RelativeSource={RelativeSource AncestorType={x:Type local:ExpanderEXT}}}">
                         <Grid Background="{TemplateBinding Background}" SnapsToDevicePixels="False">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto" />
@@ -87,7 +89,9 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border BorderThickness="{TemplateBinding BorderThickness}">
+                    <Border BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="#EBEBEB"
+                            CornerRadius="{Binding Radius, RelativeSource={RelativeSource AncestorType={x:Type local:ExpanderEXT}}}">
                         <Grid Background="{TemplateBinding Background}" SnapsToDevicePixels="False">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto" />
