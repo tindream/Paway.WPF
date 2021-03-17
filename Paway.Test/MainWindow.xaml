@@ -103,12 +103,12 @@
                     </FlowDocument>
                 </utils:RichTextBoxEXT>
                 <WrapPanel>
-                    <utils:CheckBoxEXT x:Name="cbx" Content="Hello" IsChecked="True" Padding="0,0,3,0"/>
+                    <utils:CheckBoxEXT x:Name="cbx" Content="Hello" IsChecked="True"/>
                     <utils:CheckBoxEXT Content="World" IsChecked="{x:Null}"/>
-                    <utils:CheckBoxEXT Content="Watch" IsChecked="{x:Null}" IsEnabled="False"/>
+                    <utils:CheckBoxEXT Content="Watch" IsChecked="True" IsEnabled="False"/>
                 </WrapPanel>
                 <WrapPanel>
-                    <utils:RadioButtonEXT Name="rb" Content="Hello" IsChecked="True" />
+                    <utils:RadioButtonEXT Name="rb" Content="Hello" IsChecked="True"/>
                     <utils:RadioButtonEXT Content="World" IsChecked="True" />
                     <utils:RadioButtonEXT Content="Watch" IsChecked="{x:Null}" IsEnabled="False"/>
                 </WrapPanel>
@@ -132,7 +132,7 @@
                     <TabItem Cursor="Hand" Header="音乐电台" />
                     <TabItem Cursor="Hand" Header="Mv电台"/>
                 </utils:TabControlEXT>
-                <utils:TreeViewEXT x:Name="TreeViewOrg" Height="180" CheckBox="Visible" ItemTemplate="{StaticResource DefaultNode}" ItemsSource="{Binding TreeList}">
+                <utils:TreeViewEXT x:Name="TreeViewOrg" Height="180" ICheckBox="Visible" ItemTemplate="{StaticResource DefaultNode}" ItemsSource="{Binding TreeList}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectedItemChanged">
                             <i:InvokeCommandAction Command="{Binding SelectedItemChanged}"

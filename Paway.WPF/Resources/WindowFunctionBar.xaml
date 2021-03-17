@@ -38,7 +38,7 @@
                                   VerticalAlignment="Center"/>
                 <Path x:Name="GlyphPanel"
                       Style="{StaticResource PathRight}" Width="12"
-                      Fill="{TemplateBinding Foreground}"
+                      Stroke="{TemplateBinding Foreground}"
                       Margin="4,4,-5,4"
                       Visibility="Collapsed"/>
                 <ContentPresenter ContentTemplate="{TemplateBinding HeaderTemplate}"
@@ -110,7 +110,7 @@
                                   VerticalAlignment="Center"/>
                 <Path x:Name="GlyphPanel"
                       Style="{StaticResource PathRight}" Width="12"
-                      Fill="{TemplateBinding Foreground}"
+                      Stroke="{TemplateBinding Foreground}"
                       Margin="4,4,-5,4"
                       Visibility="Collapsed"/>
                 <ContentPresenter  x:Name="ContentPresenter"
@@ -250,7 +250,7 @@
                     <Path x:Name="Glyph"
                           Style="{StaticResource PathRight}" Width="12"
                           Margin="0"
-                          Fill="#FF212121" />
+                          Stroke="#FF212121" />
                 </Border>
                 <ContentPresenter x:Name="menuHeaderContainer"
                                   ContentTemplate="{TemplateBinding HeaderTemplate}"
@@ -332,7 +332,7 @@
                     <Path x:Name="Glyph"
                           Style="{StaticResource PathRight}" Width="12"
                           Margin="0"
-                          Fill="#FF212121"/>
+                          Stroke="#FF212121"/>
                 </Border>
                 <ContentPresenter ContentTemplate="{TemplateBinding HeaderTemplate}"
                                   Content="{TemplateBinding Header}"

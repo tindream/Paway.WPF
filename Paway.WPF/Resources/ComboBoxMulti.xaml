@@ -51,12 +51,12 @@
                                                     <ControlTemplate TargetType="ListBoxItem">
                                                         <WrapPanel VerticalAlignment="Center">
                                                             <Path x:Name="path" Style="{StaticResource PathRight}" 
-                                                                  Fill="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxMulti}}}"/>
+                                                                  Stroke="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxMulti}}}"/>
                                                             <TextBlock x:Name="txt" Text="{Binding Text}" Padding="3"/>
                                                         </WrapPanel>
                                                         <ControlTemplate.Triggers>
                                                             <Trigger Property="IsMouseOver" Value="true">
-                                                                <Setter TargetName="path" Property="Fill" Value="#AAFF0000" />
+                                                                <Setter TargetName="path" Property="Stroke" Value="#AAFF0000" />
                                                                 <Setter TargetName="txt" Property="Foreground" 
                                                                             Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxMulti}}}" />
                                                             </Trigger>
@@ -139,7 +139,7 @@
                                     </ListBox.ItemContainerStyle>
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
-                                            <CheckBox Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                            <local:CheckBoxEXT Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
                                                       IsChecked="{Binding  RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=IsSelected}" 
                                                       Content="{Binding Path=Text}" />
                                         </DataTemplate>

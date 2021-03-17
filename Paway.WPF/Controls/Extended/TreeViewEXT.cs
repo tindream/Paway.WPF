@@ -40,8 +40,8 @@ namespace Paway.WPF
         #region 依赖属性
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty CheckBoxProperty =
-            DependencyProperty.RegisterAttached(nameof(CheckBox), typeof(Visibility), typeof(TreeViewEXT),
+        public static readonly DependencyProperty ICheckBoxProperty =
+            DependencyProperty.RegisterAttached(nameof(ICheckBox), typeof(Visibility), typeof(TreeViewEXT),
                 new PropertyMetadata(Visibility.Collapsed));
         /// <summary>
         /// </summary>
@@ -62,10 +62,10 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展")]
         [Description("选择框")]
-        public Visibility CheckBox
+        public Visibility ICheckBox
         {
-            get { return (Visibility)GetValue(CheckBoxProperty); }
-            set { SetValue(CheckBoxProperty, value); }
+            get { return (Visibility)GetValue(ICheckBoxProperty); }
+            set { SetValue(ICheckBoxProperty, value); }
         }
         /// <summary>
         /// 项边框颜色

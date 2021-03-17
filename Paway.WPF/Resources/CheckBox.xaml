@@ -6,8 +6,6 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Geometry x:Key="CheckedGeometry">M 0,2 3,5 8,0</Geometry>
-
     <Style TargetType="{x:Type local:CheckBoxEXT}">
         <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="IsTabStop" Value="False" />
@@ -28,21 +26,14 @@
                             Background="{TemplateBinding Panel.Background}"
                             CornerRadius="{TemplateBinding Radius}"
                             Name="checkBoxBorder"
-                            Margin="7,6"
+                            Margin="3,6"
                             HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}">
                             <Grid Name="markGrid" >
-                                <Path FlowDirection="LeftToRight" 
-                                      UseLayoutRounding="True" x:Name="optionMark" StrokeDashOffset="8" StrokeDashArray="8,8" Width="12" Height="12" 
-                                      Data="{StaticResource CheckedGeometry}" StrokeThickness="2" Stretch="Uniform"
+                                <Path x:Name="optionMark" Style="{StaticResource PathRight}" StrokeDashOffset="8"
                                       Stroke="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
-                                <!--<Path Style="{StaticResource PathRight}" Name="optionMark"
-                                      FlowDirection="LeftToRight" UseLayoutRounding="True" StrokeDashOffset="8" StrokeDashArray="8,8" StrokeThickness="2"
-                                      Fill="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}"
-                                      Width="12" Height="11"
-                                      Opacity="0" />-->
                                 <Rectangle Fill="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}"
-                                           Margin="3" Width="8" Height="8"
+                                           Width="8" Height="8"
                                            Name="indeterminateMark"
                                            Opacity="0" />
                             </Grid>
@@ -63,12 +54,12 @@
                     <ControlTemplate.Resources>
                         <Storyboard x:Key="StoryboardCheckedTrue">
                             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.StrokeDashOffset)" Storyboard.TargetName="optionMark">
-                                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.125" Value="0"/>
                             </DoubleAnimationUsingKeyFrames>
                         </Storyboard>
                         <Storyboard x:Key="StoryboardCheckedFalse">
                             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.StrokeDashOffset)" Storyboard.TargetName="optionMark">
-                                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="8"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.125" Value="8"/>
                             </DoubleAnimationUsingKeyFrames>
                         </Storyboard>
                     </ControlTemplate.Resources>
@@ -81,7 +72,7 @@
                         <Trigger Property="UIElement.IsEnabled" Value="False">
                             <Setter Property="Panel.Background" TargetName="checkBoxBorder" Value="#FFE6E6E6"/>
                             <Setter Property="Border.BorderBrush" TargetName="checkBoxBorder" Value="#FFBCBCBC"/>
-                            <Setter Property="Shape.Fill" TargetName="optionMark" Value="#FF707070"/>
+                            <Setter Property="Shape.Stroke" TargetName="optionMark" Value="#FF707070"/>
                         </Trigger>
                         <Trigger Property="ButtonBase.IsPressed" Value="True">
                             <Setter Property="Panel.Background" TargetName="checkBoxBorder" Value="#FFD9ECFF"/>
@@ -95,11 +86,9 @@
                             <Trigger.ExitActions>
                                 <BeginStoryboard Storyboard="{StaticResource StoryboardCheckedFalse}"/>
                             </Trigger.ExitActions>
-                            <Setter Property="UIElement.Opacity" TargetName="optionMark" Value="1"/>
                             <Setter Property="UIElement.Opacity" TargetName="indeterminateMark" Value="0"/>
                         </Trigger>
                         <Trigger Property="ToggleButton.IsChecked" Value="{x:Null}">
-                            <Setter Property="UIElement.Opacity" TargetName="optionMark" Value="0"/>
                             <Setter Property="UIElement.Opacity" TargetName="indeterminateMark" Value="1"/>
                         </Trigger>
                     </ControlTemplate.Triggers>

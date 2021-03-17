@@ -168,9 +168,9 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <CheckBox x:Name="cbx" IsChecked="{Binding Path=IsChecked}" 
+                <local:CheckBoxEXT x:Name="cbx" IsChecked="{Binding Path=IsChecked}" 
                           Margin="1,0"
-                          Visibility="{Binding Path=CheckBox, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
+                          Visibility="{Binding Path=ICheckBox, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
                 <TextBlock Grid.Column="1" Text="{Binding Text}"/>
             </Grid>
             <Grid x:Name="groupinginfo" 
@@ -182,9 +182,9 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <CheckBox IsChecked="{Binding Path=IsChecked}" 
+                <local:CheckBoxEXT IsChecked="{Binding Path=IsChecked}" 
                           Margin="1,0"
-                          Visibility="{Binding Path=CheckBox, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
+                          Visibility="{Binding Path=ICheckBox, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
                 <TextBlock Grid.Column="1" Text="{Binding Text}" HorizontalAlignment="Left"/>
             </Grid>
         </Grid>

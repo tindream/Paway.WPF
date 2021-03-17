@@ -22,10 +22,10 @@
                             BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"
                             Background="{TemplateBinding Panel.Background}"
                             Name="radioButtonBorder"
-                            Margin="7,6"
+                            Margin="3,6"
                             HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}">
-                            <Grid Name="markGrid" Margin="3">
+                            <Grid Name="markGrid" Margin="2">
                                 <Ellipse Name="optionMark" Width="8" Height="8" Opacity="0"
                                          Fill="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" />
                             </Grid>
