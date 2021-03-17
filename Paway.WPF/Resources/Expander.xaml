@@ -245,7 +245,7 @@
                                             </DoubleAnimationUsingKeyFrames>-->
                                             </Storyboard>
                                         </VisualState>
-                                        <VisualState x:Name="Storyboard_Collapsed_X">
+                                        <VisualState x:Name="Storyboard_Collapsed_Left">
                                             <Storyboard>
                                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ExpandSite" Storyboard.TargetProperty="(FrameworkElement.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                                                     <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
@@ -260,13 +260,18 @@
                                                         </DiscreteObjectKeyFrame.Value>
                                                     </DiscreteObjectKeyFrame>
                                                 </ObjectAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="HeaderSiteAngle" Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)">
+                                                    <EasingDoubleKeyFrame KeyTime="0" Value="30" />
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
+                                                </DoubleAnimationUsingKeyFrames>
                                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="HeaderSiteAngle" Storyboard.TargetProperty="(FrameworkElement.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
                                                     <EasingDoubleKeyFrame KeyTime="0" Value="0" />
                                                     <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1" />
                                                 </DoubleAnimationUsingKeyFrames>
+                                                <!--<DoubleAnimation Duration="0:0:0.2" From="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="HeaderSiteAngle"/>-->
                                             </Storyboard>
                                         </VisualState>
-                                        <VisualState x:Name="Storyboard_Expanded_X">
+                                        <VisualState x:Name="Storyboard_Expanded_Left">
                                             <Storyboard>
                                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ExpandSite" Storyboard.TargetProperty="(FrameworkElement.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                                                     <EasingDoubleKeyFrame KeyTime="0" Value="0" />
@@ -275,6 +280,62 @@
                                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="HeaderSite" Storyboard.TargetProperty="(FrameworkElement.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                                                     <EasingDoubleKeyFrame KeyTime="0" Value="0" />
                                                     <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1" />
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="HeaderSiteAngle" Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)">
+                                                    <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="30" />
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="HeaderSiteAngle" Storyboard.TargetProperty="(FrameworkElement.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <!--<DoubleAnimation Duration="0:0:0.2" From="1" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="HeaderSiteAngle"/>-->
+                                                <ObjectAnimationUsingKeyFrames BeginTime="0:0:0.2" Duration="0" Storyboard.TargetProperty="Visibility" Storyboard.TargetName="HeaderSiteAngle">
+                                                    <DiscreteObjectKeyFrame KeyTime="0">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <Visibility>Collapsed</Visibility>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Storyboard_Collapsed_Right">
+                                            <Storyboard>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ExpandSite" Storyboard.TargetProperty="(FrameworkElement.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="HeaderSite" Storyboard.TargetProperty="(FrameworkElement.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames BeginTime="0:0:0.2" Duration="0" Storyboard.TargetProperty="Visibility" Storyboard.TargetName="HeaderSite">
+                                                    <DiscreteObjectKeyFrame KeyTime="0">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <Visibility>Collapsed</Visibility>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="HeaderSiteAngle" Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)">
+                                                    <EasingDoubleKeyFrame KeyTime="0" Value="-30" />
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="HeaderSiteAngle" Storyboard.TargetProperty="(FrameworkElement.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                                                    <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1" />
+                                                </DoubleAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Storyboard_Expanded_Right">
+                                            <Storyboard>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ExpandSite" Storyboard.TargetProperty="(FrameworkElement.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                                                    <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1" />
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="HeaderSite" Storyboard.TargetProperty="(FrameworkElement.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                                                    <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1" />
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="HeaderSiteAngle" Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)">
+                                                    <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-30" />
                                                 </DoubleAnimationUsingKeyFrames>
                                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="HeaderSiteAngle" Storyboard.TargetProperty="(FrameworkElement.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
                                                     <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
@@ -321,7 +382,13 @@
                                             <TranslateTransform />
                                         </TransformGroup>
                                     </ToggleButton.LayoutTransform>
+                                    <ToggleButton.RenderTransform>
+                                        <TransformGroup>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </ToggleButton.RenderTransform>
                                 </ToggleButton>
+                                <TextBlock/>
                             </DockPanel>
                         </Grid>
                     </Border>

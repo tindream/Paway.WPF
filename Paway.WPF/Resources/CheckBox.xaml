@@ -6,6 +6,8 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <Geometry x:Key="CheckedGeometry">M 0,2 3,5 8,0</Geometry>
+
     <Style TargetType="{x:Type local:CheckBoxEXT}">
         <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="IsTabStop" Value="False" />
@@ -30,10 +32,15 @@
                             HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}">
                             <Grid Name="markGrid" >
-                                <Path Style="{StaticResource PathRight}" Name="optionMark"
+                                <Path FlowDirection="LeftToRight" 
+                                      UseLayoutRounding="True" x:Name="optionMark" StrokeDashOffset="8" StrokeDashArray="8,8" Width="12" Height="12" 
+                                      Data="{StaticResource CheckedGeometry}" StrokeThickness="2" Stretch="Uniform"
+                                      Stroke="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                <!--<Path Style="{StaticResource PathRight}" Name="optionMark"
+                                      FlowDirection="LeftToRight" UseLayoutRounding="True" StrokeDashOffset="8" StrokeDashArray="8,8" StrokeThickness="2"
                                       Fill="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}"
                                       Width="12" Height="11"
-                                      Opacity="0" />
+                                      Opacity="0" />-->
                                 <Rectangle Fill="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}"
                                            Margin="3" Width="8" Height="8"
                                            Name="indeterminateMark"
@@ -53,6 +60,18 @@
                             Focusable="False"
                             Grid.Column="1" />
                     </Grid>
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="StoryboardCheckedTrue">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.StrokeDashOffset)" Storyboard.TargetName="optionMark">
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="StoryboardCheckedFalse">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.StrokeDashOffset)" Storyboard.TargetName="optionMark">
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="8"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </ControlTemplate.Resources>
                     <ControlTemplate.Triggers>
                         <Trigger Property="UIElement.IsMouseOver" Value="True">
                             <Setter Property="Panel.Background" TargetName="checkBoxBorder" Value="#FFF3F9FF"/>
@@ -70,6 +89,12 @@
                                     Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </Trigger>
                         <Trigger Property="ToggleButton.IsChecked" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource StoryboardCheckedTrue}"/>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource StoryboardCheckedFalse}"/>
+                            </Trigger.ExitActions>
                             <Setter Property="UIElement.Opacity" TargetName="optionMark" Value="1"/>
                             <Setter Property="UIElement.Opacity" TargetName="indeterminateMark" Value="0"/>
                         </Trigger>

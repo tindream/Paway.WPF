@@ -191,16 +191,44 @@
                 </utils:ListViewEXT>
                 <DockPanel Height="300">
                     <utils:ExpanderEXT ExpandDirection="Left" Header="Hello" ItemBrush="LightGray;200">
-                        <TextBlock Text="Hello"/>
+                        <StackPanel>
+                            <Button Background="#23AFFF" BorderThickness="0" Content="默认"/>
+                            <Button Background="#00BCD4" BorderThickness="0" Content="Info"/>
+                            <Button Background="#326CF3" BorderThickness="0" Content="Primary"/>
+
+                            <Button Background="#61B891" BorderThickness="0" Content="成功"/>
+                            <Button Background="#2DB84D" BorderThickness="0" Content="Success"/>
+
+                            <Button Background="#FF9900" BorderThickness="0" Content="警告"/>
+                            <Button Background="#E67E22" BorderThickness="0" Content="Warning"/>
+                            <Button Background="#F38B76" BorderThickness="0" Content="Stop"/>
+                            <Button Background="#E9AF20" BorderThickness="0" Content="Warn"/>
+
+                            <Button Background="#FF5500" BorderThickness="0" Content="错误"/>
+                            <Button Background="#F8491E" BorderThickness="0" Content="Accent"/>
+                            <Button Background="#DB3340" BorderThickness="0" Content="Danger"/>
+                        </StackPanel>
                     </utils:ExpanderEXT>
                     <utils:ExpanderEXT ExpandDirection="Up" DockPanel.Dock="Top" Header="Hello" ItemBrush="LightGray;200">
-                        <TextBlock Text="Hello"/>
+                        <StackPanel>
+                            <Button Background="#23AFFF" BorderThickness="0" Content="默认"/>
+                            <Button Background="#00BCD4" BorderThickness="0" Content="Info"/>
+                            <Button Background="#326CF3" BorderThickness="0" Content="Primary"/>
+                        </StackPanel>
                     </utils:ExpanderEXT>
                     <utils:ExpanderEXT ExpandDirection="Right" DockPanel.Dock="Right" Header="Hello" ItemBrush="LightGray;200">
-                        <TextBlock Text="Hello"/>
+                        <StackPanel>
+                            <Button Background="#61B891" BorderThickness="0" Content="成功"/>
+                            <Button Background="#2DB84D" BorderThickness="0" Content="Success"/>
+                        </StackPanel>
                     </utils:ExpanderEXT>
                     <utils:ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="Hello" ItemBrush="LightGray;200">
-                        <TextBlock Text="Hello"/>
+                        <StackPanel>
+                            <Button Background="#FF9900" BorderThickness="0" Content="警告"/>
+                            <Button Background="#E67E22" BorderThickness="0" Content="Warning"/>
+                            <Button Background="#F38B76" BorderThickness="0" Content="Stop"/>
+                            <Button Background="#E9AF20" BorderThickness="0" Content="Warn"/>
+                        </StackPanel>
                     </utils:ExpanderEXT>
                     <oxy:PlotView Model="{Binding Path= PlotModel}" Height="200">
                         <oxy:PlotView.ContextMenu>

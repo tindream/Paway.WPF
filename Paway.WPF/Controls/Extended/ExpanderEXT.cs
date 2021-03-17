@@ -76,7 +76,7 @@ namespace Paway.WPF
                         break;
                     case ExpandDirection.Left:
                     case ExpandDirection.Right:
-                        suffix = "X";
+                        suffix = ExpandDirection.ToString();
                         break;
                 }
                 VisualStateManager.GoToElementState(this.PART_Root, this.IsExpanded ? $"Storyboard_Expanded_{suffix}" : $"Storyboard_Collapsed_{suffix}", true);
@@ -98,7 +98,7 @@ namespace Paway.WPF
                         break;
                     case ExpandDirection.Left:
                     case ExpandDirection.Right:
-                        suffix = "X";
+                        suffix = ExpandDirection.ToString();
                         break;
                 }
                 VisualStateManager.GoToElementState(this.PART_Root, $"Storyboard_Collapsed_{suffix}", true);
@@ -120,7 +120,7 @@ namespace Paway.WPF
                         break;
                     case ExpandDirection.Left:
                     case ExpandDirection.Right:
-                        suffix = "X";
+                        suffix = ExpandDirection.ToString();
                         break;
                 }
                 VisualStateManager.GoToElementState(this.PART_Root, $"Storyboard_Expanded_{suffix}", true);
