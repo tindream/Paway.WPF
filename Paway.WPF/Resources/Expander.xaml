@@ -253,13 +253,6 @@
                                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="HeaderSite" Storyboard.TargetProperty="(FrameworkElement.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                                                     <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
                                                 </DoubleAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames BeginTime="0:0:0.2" Duration="0" Storyboard.TargetProperty="Visibility" Storyboard.TargetName="HeaderSite">
-                                                    <DiscreteObjectKeyFrame KeyTime="0">
-                                                        <DiscreteObjectKeyFrame.Value>
-                                                            <Visibility>Collapsed</Visibility>
-                                                        </DiscreteObjectKeyFrame.Value>
-                                                    </DiscreteObjectKeyFrame>
-                                                </ObjectAnimationUsingKeyFrames>
                                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="HeaderSiteAngle" Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)">
                                                     <EasingDoubleKeyFrame KeyTime="0" Value="30" />
                                                     <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
@@ -289,13 +282,6 @@
                                                     <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
                                                 </DoubleAnimationUsingKeyFrames>
                                                 <!--<DoubleAnimation Duration="0:0:0.2" From="1" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="HeaderSiteAngle"/>-->
-                                                <ObjectAnimationUsingKeyFrames BeginTime="0:0:0.2" Duration="0" Storyboard.TargetProperty="Visibility" Storyboard.TargetName="HeaderSiteAngle">
-                                                    <DiscreteObjectKeyFrame KeyTime="0">
-                                                        <DiscreteObjectKeyFrame.Value>
-                                                            <Visibility>Collapsed</Visibility>
-                                                        </DiscreteObjectKeyFrame.Value>
-                                                    </DiscreteObjectKeyFrame>
-                                                </ObjectAnimationUsingKeyFrames>
                                             </Storyboard>
                                         </VisualState>
                                         <VisualState x:Name="Storyboard_Collapsed_Right">
@@ -306,13 +292,6 @@
                                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="HeaderSite" Storyboard.TargetProperty="(FrameworkElement.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                                                     <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
                                                 </DoubleAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames BeginTime="0:0:0.2" Duration="0" Storyboard.TargetProperty="Visibility" Storyboard.TargetName="HeaderSite">
-                                                    <DiscreteObjectKeyFrame KeyTime="0">
-                                                        <DiscreteObjectKeyFrame.Value>
-                                                            <Visibility>Collapsed</Visibility>
-                                                        </DiscreteObjectKeyFrame.Value>
-                                                    </DiscreteObjectKeyFrame>
-                                                </ObjectAnimationUsingKeyFrames>
                                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="HeaderSiteAngle" Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)">
                                                     <EasingDoubleKeyFrame KeyTime="0" Value="-30" />
                                                     <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
@@ -340,22 +319,14 @@
                                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="HeaderSiteAngle" Storyboard.TargetProperty="(FrameworkElement.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
                                                     <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
                                                 </DoubleAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames BeginTime="0:0:0.2" Duration="0" Storyboard.TargetProperty="Visibility" Storyboard.TargetName="HeaderSiteAngle">
-                                                    <DiscreteObjectKeyFrame KeyTime="0">
-                                                        <DiscreteObjectKeyFrame.Value>
-                                                            <Visibility>Collapsed</Visibility>
-                                                        </DiscreteObjectKeyFrame.Value>
-                                                    </DiscreteObjectKeyFrame>
-                                                </ObjectAnimationUsingKeyFrames>
                                             </Storyboard>
                                         </VisualState>
                                     </VisualStateGroup>
                                 </VisualStateManager.VisualStateGroups>
                             </DockPanel>
-                            <DockPanel Width="30">
+                            <DockPanel Width="30" Name="dpAngle" Visibility="Collapsed">
                                 <ToggleButton
                                 x:Name="HeaderSiteAngle"
-                                Visibility="Collapsed"
                                 Background="#EBEBEB"
                                 MinWidth="0"
                                 MinHeight="0"
@@ -394,11 +365,11 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="ExpandDirection" Value="Right">
-                            <Setter TargetName="HeaderSiteAngle" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="dpAngle" Property="Visibility" Value="Visible" />
                             <Setter TargetName="HeaderSiteAngle" Property="DockPanel.Dock" Value="Left" />
                         </Trigger>
                         <Trigger Property="ExpandDirection" Value="Left">
-                            <Setter TargetName="HeaderSiteAngle" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="dpAngle" Property="Visibility" Value="Visible" />
                         </Trigger>
                         <Trigger Property="ExpandDirection" Value="Up">
                             <Setter TargetName="ExpandSite" Property="DockPanel.Dock" Value="Top" />

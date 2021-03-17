@@ -220,7 +220,7 @@ namespace Paway.Test.ViewModel
                 {
                     MultiList[0].IsChecked = !MultiList[0].IsChecked;
                     var desc = string.Join(",", MultiList.ToList().FindAll(c => c.IsChecked).Select(c => c.Text));
-                    WPF.TMethod.Toast(btn, desc, 5);
+                    WPF.TMethod.Toast(btn, desc, 5000);
                 }));
             }
         }

@@ -516,8 +516,8 @@ namespace Paway.WPF
                             CenterY = border.ActualHeight / 2
                         };
                         border.RenderTransform = scale;
-                        var animInX = new DoubleAnimation(0.5, 1, new Duration(TimeSpan.FromMilliseconds(125)));
-                        var animInY = new DoubleAnimation(0.5, 1, new Duration(TimeSpan.FromMilliseconds(125)));
+                        var animInX = new DoubleAnimation(0.4, 1, new Duration(TimeSpan.FromMilliseconds(100)));
+                        var animInY = new DoubleAnimation(0.8, 1, new Duration(TimeSpan.FromMilliseconds(100)));
                         var propertyX = new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, ScaleTransform.ScaleXProperty });
                         var propertyY = new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, ScaleTransform.ScaleYProperty });
                         Storyboard.SetTargetProperty(animInX, propertyX);
