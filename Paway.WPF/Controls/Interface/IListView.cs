@@ -107,6 +107,7 @@ namespace Paway.WPF
         /// <summary>
         /// 提示
         /// </summary>
+        [NoShow]
         public string Hit
         {
             get

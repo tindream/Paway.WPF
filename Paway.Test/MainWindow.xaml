@@ -154,7 +154,7 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <DataGrid.Columns>
-                        <DataGridTextColumn  MinWidth="130" Binding="{Binding Money}" ElementStyle="{StaticResource TextRight}"/>
+                        <DataGridTextColumn MinWidth="130" Binding="{Binding Money}" ElementStyle="{StaticResource TextRight}"/>
                         <DataGridTemplateColumn Header="Desc">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

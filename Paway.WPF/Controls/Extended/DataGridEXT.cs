@@ -266,7 +266,15 @@ namespace Paway.WPF
             }
             this.Columns.Clear();
             RefreshEvent?.Invoke(this);
-            foreach (var column in columns) this.Columns.Add(column);
+            var lastColumn = columns.FindLast(c => c.Visibility == Visibility.Visible);
+            if (lastColumn != null) lastColumn.HeaderStyle = (Style)FindResource("LastColumnHeaderStyle");
+            var noLastStyle = (Style)FindResource("NoLastColumnHeaderStyle");
+            var fill = columns.Any(c => c.Width.UnitType == DataGridLengthUnitType.Star);
+            foreach (var column in columns)
+            {
+                if (!fill || column != lastColumn) column.HeaderStyle = noLastStyle;
+                this.Columns.Add(column);
+            }
         }
 
         #endregion
