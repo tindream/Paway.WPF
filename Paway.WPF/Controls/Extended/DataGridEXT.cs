@@ -41,6 +41,10 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ScrollBarWidthProperty =
             DependencyProperty.RegisterAttached(nameof(ScrollBarWidth), typeof(double), typeof(DataGridEXT), new PropertyMetadata(8d));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ICustomColumnHeaderProperty =
+            DependencyProperty.RegisterAttached(nameof(ICustomColumnHeader), typeof(bool), typeof(DataGridEXT), new PropertyMetadata(false));
 
         /// <summary>
         /// 自定义项背景色
@@ -81,6 +85,17 @@ namespace Paway.WPF
         {
             get { return (double)GetValue(ScrollBarWidthProperty); }
             set { SetValue(ScrollBarWidthProperty, value); }
+        }
+        /// <summary>
+        /// 滚动条高度(宽度)
+        /// </summary>
+        [Category("扩展")]
+        [Description("自定义列头")]
+        [Browsable(false)]
+        public bool ICustomColumnHeader
+        {
+            get { return (bool)GetValue(ICustomColumnHeaderProperty); }
+            set { SetValue(ICustomColumnHeaderProperty, value); }
         }
 
         #endregion
@@ -266,13 +281,19 @@ namespace Paway.WPF
             }
             this.Columns.Clear();
             RefreshEvent?.Invoke(this);
-            var lastColumn = columns.FindLast(c => c.Visibility == Visibility.Visible);
-            if (lastColumn != null) lastColumn.HeaderStyle = (Style)FindResource("LastColumnHeaderStyle");
-            var noLastStyle = (Style)FindResource("NoLastColumnHeaderStyle");
-            var fill = columns.Any(c => c.Width.UnitType == DataGridLengthUnitType.Star);
+            if (ICustomColumnHeader)
+            {
+                var lastColumn = columns.FindLast(c => c.Visibility == Visibility.Visible);
+                if (lastColumn != null) lastColumn.HeaderStyle = (Style)FindResource("LastColumnHeaderStyle");
+                var noLastStyle = (Style)FindResource("NormalColumnHeaderStyle");
+                var fill = columns.Any(c => c.Width.UnitType == DataGridLengthUnitType.Star);
+                foreach (var column in columns)
+                {
+                    if (!fill || column != lastColumn) column.HeaderStyle = noLastStyle;
+                }
+            }
             foreach (var column in columns)
             {
-                if (!fill || column != lastColumn) column.HeaderStyle = noLastStyle;
                 this.Columns.Add(column);
             }
         }

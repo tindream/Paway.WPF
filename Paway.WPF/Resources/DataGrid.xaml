@@ -81,11 +81,12 @@
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
         <Setter Property="Margin" Value="0,0,-1,0"/>
     </Style>
-    <Style x:Key="NoLastColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource ColumnHeaderStyle}">
+    <Style x:Key="NormalColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource ColumnHeaderStyle}">
         <Setter Property="BorderThickness" Value="0,0,1,1"/>
     </Style>
 
     <Style TargetType="{x:Type local:DataGridEXT}" BasedOn="{StaticResource Config}">
+        <Setter Property="ICustomColumnHeader" Value="True"/>
         <!--样式-->
         <Setter Property="ColumnHeaderStyle" Value="{StaticResource ColumnHeaderStyle}"/>
         <Setter Property="RowStyle" Value="{StaticResource RowStyle}"/>
@@ -182,5 +183,10 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!--默认DataGridCell-->
+    <Style TargetType="DataGridCell" BasedOn="{StaticResource CellStyle}"/>
+    <!--默认DataGridRow-->
+    <Style TargetType="DataGridRow" BasedOn="{StaticResource RowStyle}"/>
 
 </ResourceDictionary>
