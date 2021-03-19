@@ -7,10 +7,8 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type local:ComboBoxMulti}">
-        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
+    <Style TargetType="{x:Type local:ComboBoxMulti}" BasedOn="{StaticResource Config}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Margin" Value="2"/>
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
         <Setter Property="Template">

@@ -41,8 +41,7 @@
         <Path Style="{StaticResource PathClose}" Fill="White" />
     </DataTemplate>
 
-    <Style x:Key="WindowTitleBarButtonStyle" TargetType="{x:Type Button}">
-        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
+    <Style x:Key="WindowTitleBarButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource Config}">
         <Setter Property="Focusable" Value="False" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Background" Value="Transparent" />
@@ -127,13 +126,11 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="{x:Type local:WindowEXT}">
-        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
+    <Style TargetType="{x:Type local:WindowEXT}" BasedOn="{StaticResource Config}">
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
         <Setter Property="Background" Value="#FFF1F1F1" />
         <Setter Property="BorderBrush" 
                 Value="{Binding Path=(local:ThemeEXT.HighBrush).Pressed, RelativeSource={RelativeSource Self}}" />
-        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="IsTabStop" Value="False" />
         <!--未知，此参数会导致文本放大缩小动画抖动-->
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />

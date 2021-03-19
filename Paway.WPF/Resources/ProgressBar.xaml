@@ -6,10 +6,8 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type local:ProgressBarEXT}">
-        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
+    <Style TargetType="{x:Type local:ProgressBarEXT}" BasedOn="{StaticResource Config}">
         <Setter Property="local:ProgressBarEXT.IsMonitoring" Value="True"/>
-        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Margin" Value="2"/>
         <Setter Property="Background" Value="White"/>
         <Setter Property="Foreground" Value="White"/>

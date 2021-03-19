@@ -3,6 +3,7 @@
                     xmlns:local="clr-namespace:Paway.WPF">
 
     <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ScrollBar.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
@@ -84,8 +85,7 @@
         <Setter Property="BorderThickness" Value="0,0,1,1"/>
     </Style>
 
-    <Style x:Key="DataGridEXTStyle" TargetType="{x:Type local:DataGridEXT}">
-        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
+    <Style TargetType="{x:Type local:DataGridEXT}" BasedOn="{StaticResource Config}">
         <!--样式-->
         <Setter Property="ColumnHeaderStyle" Value="{StaticResource ColumnHeaderStyle}"/>
         <Setter Property="RowStyle" Value="{StaticResource RowStyle}"/>
@@ -97,7 +97,6 @@
         <Setter Property="RowHeaderWidth" Value="0"/>
         <!--外观-->
         <Setter Property="Background" Value="#FAFAFA"/>
-        <Setter Property="BorderThickness" Value="1"/>
         <!--由ElementStyle样式转换-->
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <!--网格线-->
@@ -183,8 +182,5 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-    <!--默认local:DataGridEXT-->
-    <Style TargetType="local:DataGridEXT" BasedOn="{StaticResource DataGridEXTStyle}"/>
 
 </ResourceDictionary>

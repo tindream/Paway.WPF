@@ -6,11 +6,9 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type local:CheckBoxEXT}">
-        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
+    <Style TargetType="{x:Type local:CheckBoxEXT}" BasedOn="{StaticResource Config}">
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="0,0,3,0"/>
         <Setter Property="Template">
             <Setter.Value>

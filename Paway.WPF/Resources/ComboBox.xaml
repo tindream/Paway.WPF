@@ -34,9 +34,7 @@
         </Grid>
     </ControlTemplate>
 
-    <Style TargetType="{x:Type local:ComboBoxEXT}">
-        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
-        <Setter Property="BorderThickness" Value="1"/>
+    <Style TargetType="{x:Type local:ComboBoxEXT}" BasedOn="{StaticResource Config}">
         <Setter Property="Margin" Value="2"/>
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
         <Setter Property="Template">

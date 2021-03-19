@@ -6,12 +6,10 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type local:RichTextBoxEXT}">
-        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}, Converter={StaticResource valueMultiConverter}}"/>
+    <Style TargetType="{x:Type local:RichTextBoxEXT}" BasedOn="{StaticResource MiniConfig}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
 
-        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Background" Value="#ffffff"/>
         <Setter Property="Margin" Value="2"/>
         <Setter Property="VerticalScrollBarVisibility" Value="Visible"/>

@@ -190,13 +190,11 @@
         </Grid>
     </HierarchicalDataTemplate>
 
-    <Style TargetType="{x:Type local:TreeViewEXT}">
-        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
+    <Style TargetType="{x:Type local:TreeViewEXT}" BasedOn="{StaticResource Config}">
         <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
         <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Visible" />
         <Setter Property="Padding" Value="0"/>
-        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="ItemContainerStyle" Value="{StaticResource DefaultTreeViewItem}"/>
         <Setter Property="ItemTemplate" Value="{StaticResource DefaultNode}"/>
         <!--修改模板属性-->

@@ -6,10 +6,8 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type local:TextBoxEXT}">
-        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
+    <Style TargetType="{x:Type local:TextBoxEXT}" BasedOn="{StaticResource Config}">
         <Setter Property="Cursor" Value="IBeam"/>
-        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Background" Value="White"/>
         <Setter Property="Padding" Value="3,4"/>
         <Setter Property="Margin" Value="2"/>
