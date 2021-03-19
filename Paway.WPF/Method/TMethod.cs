@@ -160,7 +160,7 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-收到消息装入列表
         /// </summary>
-        public static void Slowly(FrameworkElement parent, object msg, double time = 500, double xMove = 0, double yMove = 0, double size = 36, Color? color = null)
+        public static void Slowly(FrameworkElement parent, object msg, int time = 500, double xMove = 0, double yMove = 0, double size = 36, Color? color = null)
         {
             BeginInvoke(parent, () =>
             {
@@ -382,7 +382,7 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-自定义吐泡消息框-Toast
         /// </summary>
-        public static void Toast(DependencyObject parent, object msg, double time, bool iError = false)
+        public static void Toast(DependencyObject parent, object msg, int time, bool iError = false)
         {
             BeginInvoke(parent, () =>
             {
@@ -471,7 +471,7 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-自定义提示框-Hit
         /// </summary>
-        public static void Hit(DependencyObject parent, object msg, double time, bool iError = false)
+        public static void Hit(DependencyObject parent, object msg, int time, bool iError = false)
         {
             BeginInvoke(parent, () =>
             {
@@ -649,7 +649,13 @@ namespace Paway.WPF
                     finally
                     {
                         ProgressClose(parent);
-                        completed?.Invoke();
+                        if (completed != null)
+                        {
+                            BeginInvoke(parent, () =>
+                            {
+                                completed.Invoke();
+                            });
+                        }
                     }
                 });
                 Progress(parent);

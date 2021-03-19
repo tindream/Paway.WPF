@@ -97,22 +97,11 @@ namespace Paway.WPF
         }
         private void ShowText(string text)
         {
-            var anima1 = new DoubleAnimation()
-            {
-                To = 0,
-                Duration = TimeSpan.FromSeconds(0.1),
-            };
-            anima1.Completed += delegate
+            AnimationHelper.Start(TxtBlock, TransitionType.Opacity, 0, 100, () =>
             {
                 TxtBlock.Text = text;
-                var anima2 = new DoubleAnimation()
-                {
-                    To = 1,
-                    Duration = TimeSpan.FromSeconds(0.1),
-                };
-                TxtBlock.BeginAnimation(OpacityProperty, anima2);
-            };
-            TxtBlock.BeginAnimation(OpacityProperty, anima1);
+                AnimationHelper.Start(TxtBlock, TransitionType.Opacity, 1, 100);
+            });
         }
         private void ChangeWaving()
         {

@@ -89,7 +89,7 @@
                         <utils:ButtonEXT Name="btn"
                              Content="{utils:FontImage Value=Adjust}" Click="Commit_Click" 
                              CommandParameter="{Binding ElementName=btn}"/>
-                        <utils:Badge IsWaving="True" HorizontalAlignment="Right" Background="Red" VerticalAlignment="Top" Height="20" Margin="-6"/>
+                        <utils:Badge Name="badge" IsWaving="True" HorizontalAlignment="Right" Text="1" Background="Red" VerticalAlignment="Top" Height="20" Margin="-6"/>
                     </Grid>
                 </Grid>
                 <utils:RichTextBoxEXT x:Name="rt" MaxHeight="100" >

@@ -44,6 +44,8 @@ namespace Paway.Test
 
         private void Commit_Click(object sender, RoutedEventArgs e)
         {
+            badge.Text = DateTime.Now.Second.ToString();
+
             rt.AddLine(DateTime.Now.ToString());
 
             var type = (TransitionType)WPF.TMethod.Random(0, (int)TransitionType.Bottom + 1);

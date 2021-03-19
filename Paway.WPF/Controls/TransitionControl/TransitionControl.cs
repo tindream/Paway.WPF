@@ -49,7 +49,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty TimeProperty =
-            DependencyProperty.RegisterAttached(nameof(Time), typeof(double), typeof(TransitionControl), new PropertyMetadata(0d));
+            DependencyProperty.RegisterAttached(nameof(Time), typeof(int), typeof(TransitionControl), new PropertyMetadata(0));
         /// <summary>
         /// Identifies the Transition dependency property.
         /// </summary>
@@ -84,9 +84,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展")]
         [Description("过渡时间")]
-        public double Time
+        public int Time
         {
-            get { return (double)GetValue(TimeProperty); }
+            get { return (int)GetValue(TimeProperty); }
             set { SetValue(TimeProperty, value); }
         }
         /// <summary>

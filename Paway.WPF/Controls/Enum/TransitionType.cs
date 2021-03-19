@@ -72,5 +72,20 @@ namespace Paway.WPF
         /// </summary>
         [Description("滑入底部")]
         ToBottom,
+        /// <summary>
+        /// 淡入淡出
+        /// </summary>
+        [Description("淡入淡出")]
+        Opacity,
+        /// <summary>
+        /// 宽度(拉抽屉)
+        /// </summary>
+        [Description("拉抽屉")]
+        Width,
+        /// <summary>
+        /// 高度
+        /// </summary>
+        [Description("高度")]
+        Height,
     }
 }

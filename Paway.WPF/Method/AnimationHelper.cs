@@ -53,11 +53,20 @@ namespace Paway.WPF
         /// <summary>
         /// 启动动画
         /// </summary>
-        public static void Start(FrameworkElement element, TransitionType type, double value = 0, double time = 0, Action completed = null)
+        public static void Start(FrameworkElement element, TransitionType type, double value = 0, int time = 0, Action completed = null)
         {
             if (element == null) return;
             switch (type)
             {
+                case TransitionType.Width:
+                    element.BeginAnimation(FrameworkElement.WidthProperty, GetDoubleAnimation(element.ActualWidth, value, element, value, time, completed));
+                    break;
+                case TransitionType.Height:
+                    element.BeginAnimation(FrameworkElement.HeightProperty, GetDoubleAnimation(element.ActualHeight, value, element, value, time, completed));
+                    break;
+                case TransitionType.Opacity:
+                    element.BeginAnimation(FrameworkElement.OpacityProperty, GetDoubleAnimation(element.Opacity, value, element, value, time, completed));
+                    break;
                 case TransitionType.FadeIn:
                     element.BeginAnimation(FrameworkElement.OpacityProperty, GetDoubleAnimation(0, 1, element, value, time, completed));
                     break;

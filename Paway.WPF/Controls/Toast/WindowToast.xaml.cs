@@ -42,7 +42,7 @@ namespace Paway.WPF
         /// <summary>
         /// 显示
         /// </summary>
-        public void Show(object msg, double time = 0, bool iError = false)
+        public void Show(object msg, int time = 0, bool iError = false)
         {
             if (iError)
             {
