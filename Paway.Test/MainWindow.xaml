@@ -39,31 +39,22 @@
                 </utils:SliderEXT>
             </Grid>
         </StackPanel>
-        <Grid Margin="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="2*"/>
-            </Grid.ColumnDefinitions>
-            <StackPanel>
+
+        <utils:ExpanderEXT ExpandDirection="Left" Header="输入" ItemBrush="LightGray;200">
+            <StackPanel Width="250">
                 <utils:ProgressBarEXT Value="95" Name="progress"/>
-
-                <utils:ExpanderEXT Header="下拉框" ItemBrush="LightGray;200">
-                    <StackPanel>
-                        <utils:ComboBoxEXT ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
-                        <utils:ComboBoxMulti ItemsSource="{Binding MultiList}"/>
-                        <utils:ComboBoxDate SelectedValue="{Binding DatePickerTime}"/>
-                        <utils:ComboBoxTree ItemsSource="{Binding TreeList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding TreeId}" IQuery="True"/>
-                        <utils:ComboBoxView ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
-                        <utils:ComboBoxQuery ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="FilterEvent">
-                                    <ip:EventToCommand Command="{Binding CbxFilterCmd}" PassEventArgsToCommand="True"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </utils:ComboBoxQuery>
-                    </StackPanel>
-                </utils:ExpanderEXT>
-
+                <utils:ComboBoxEXT ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
+                <utils:ComboBoxMulti ItemsSource="{Binding MultiList}"/>
+                <utils:ComboBoxDate SelectedValue="{Binding DatePickerTime}"/>
+                <utils:ComboBoxTree ItemsSource="{Binding TreeList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding TreeId}" IQuery="True"/>
+                <utils:ComboBoxView ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
+                <utils:ComboBoxQuery ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="FilterEvent">
+                            <ip:EventToCommand Command="{Binding CbxFilterCmd}" PassEventArgsToCommand="True"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </utils:ComboBoxQuery>
                 <utils:TextBoxEXT Name="tb" Icon="pack://application:,,,/Paway.Test;component/Images/close.png" IAnimation="2" BorderThickness="0,0,0,1">
                     <Binding Path="Value">
                         <Binding.ValidationRules>
@@ -85,13 +76,12 @@
                              Stretch="None" Viewport="0,0,0.35,1"
                              Border="1;0"
                              Command="{Binding Teach}" CommandParameter="{Binding ElementName=btn}" Click="Cancel_Click" />
-                    <Grid Grid.Column="1">
-                        <utils:ButtonEXT Name="btn"
+                    <utils:ButtonEXT Name="btn" Grid.Column="1"
                              Content="{utils:FontImage Value=Adjust}" Click="Commit_Click" 
                              CommandParameter="{Binding ElementName=btn}"/>
-                        <utils:Badge Name="badge" IsWaving="True" HorizontalAlignment="Right" Text="1" Background="Red" VerticalAlignment="Top" Height="20" Margin="-6"/>
-                    </Grid>
+                    <utils:Badge Name="badge" Grid.Column="1" IsWaving="True" HorizontalAlignment="Right" Text="1" Background="Red" VerticalAlignment="Top" Height="20" Margin="-6"/>
                 </Grid>
+
                 <utils:RichTextBoxEXT x:Name="rt" MaxHeight="100" >
                     <FlowDocument>
                         <Paragraph>
@@ -127,23 +117,22 @@
                     <Path Style="{StaticResource PathClose}" />
                     <utils:Progress Width="40" Height="40" />
                 </WrapPanel>
-
-                <utils:TabControlEXT TabStripPlacement="Top" Background="LightGray">
-                    <TabItem Cursor="Hand" Header="音乐电台" />
-                    <TabItem Cursor="Hand" Header="Mv电台"/>
-                </utils:TabControlEXT>
-                <utils:TreeViewEXT x:Name="TreeViewOrg" Height="180" ICheckBox="Visible" ItemTemplate="{StaticResource DefaultNode}" ItemsSource="{Binding TreeList}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectedItemChanged">
-                            <i:InvokeCommandAction Command="{Binding SelectedItemChanged}"
-                                           CommandParameter="{Binding ElementName=TreeViewOrg}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </utils:TreeViewEXT>
-
-
             </StackPanel>
-            <StackPanel Grid.Column="1" Margin="10,0,0,0">
+        </utils:ExpanderEXT>
+
+        <utils:ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="Hello" ItemBrush="LightGray;200">
+            <StackPanel>
+                <oxy:PlotView Model="{Binding Path= PlotModel}" Height="200">
+                    <oxy:PlotView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="重置" Padding="5" FontSize="15" Command="{Binding Reset}"/>
+                        </ContextMenu>
+                    </oxy:PlotView.ContextMenu>
+                </oxy:PlotView>
+            </StackPanel>
+        </utils:ExpanderEXT>
+        <utils:ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="DataGrid" ItemBrush="LightGray;200">
+            <StackPanel Width="250">
                 <utils:DataGridEXT Name="datagrid1"
                                ItemsSource="{Binding PagedList}"
                                SelectedItem="{Binding SelectedItem}"
@@ -174,7 +163,10 @@
                     </DataGrid.Columns>
                 </utils:DataGridEXT>
                 <utils:DataPager Name="dataPager" Margin="0,0,0,3" Source="{Binding PagedList}" IsTotalItemCountFixed="True"/>
-
+            </StackPanel>
+        </utils:ExpanderEXT>
+        <utils:ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="ListView" ItemBrush="LightGray;200">
+            <StackPanel Width="250">
                 <utils:ListViewEXT Name="listView2"
                                Height="84"
                                ItemsSource="{Binding GridList}"
@@ -189,58 +181,35 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </utils:ListViewEXT>
-                <DockPanel Height="300">
-                    <utils:ExpanderEXT ExpandDirection="Left" Header="Hello" ItemBrush="LightGray;200">
-                        <StackPanel>
-                            <Button Background="#23AFFF" BorderThickness="0" Content="默认"/>
-                            <Button Background="#00BCD4" BorderThickness="0" Content="Info"/>
-                            <Button Background="#326CF3" BorderThickness="0" Content="Primary"/>
-
-                            <Button Background="#61B891" BorderThickness="0" Content="成功"/>
-                            <Button Background="#2DB84D" BorderThickness="0" Content="Success"/>
-
-                            <Button Background="#FF9900" BorderThickness="0" Content="警告"/>
-                            <Button Background="#E67E22" BorderThickness="0" Content="Warning"/>
-                            <Button Background="#F38B76" BorderThickness="0" Content="Stop"/>
-                            <Button Background="#E9AF20" BorderThickness="0" Content="Warn"/>
-
-                            <Button Background="#FF5500" BorderThickness="0" Content="错误"/>
-                            <Button Background="#F8491E" BorderThickness="0" Content="Accent"/>
-                            <Button Background="#DB3340" BorderThickness="0" Content="Danger"/>
-                        </StackPanel>
-                    </utils:ExpanderEXT>
-                    <utils:ExpanderEXT ExpandDirection="Up" DockPanel.Dock="Top" Header="Hello" ItemBrush="LightGray;200">
-                        <StackPanel>
-                            <Button Background="#23AFFF" BorderThickness="0" Content="默认"/>
-                            <Button Background="#00BCD4" BorderThickness="0" Content="Info"/>
-                            <Button Background="#326CF3" BorderThickness="0" Content="Primary"/>
-                        </StackPanel>
-                    </utils:ExpanderEXT>
-                    <utils:ExpanderEXT ExpandDirection="Right" DockPanel.Dock="Right" Header="Hello" ItemBrush="LightGray;200">
-                        <StackPanel>
-                            <Button Background="#61B891" BorderThickness="0" Content="成功"/>
-                            <Button Background="#2DB84D" BorderThickness="0" Content="Success"/>
-                        </StackPanel>
-                    </utils:ExpanderEXT>
-                    <utils:ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="Hello" ItemBrush="LightGray;200">
-                        <StackPanel>
-                            <Button Background="#FF9900" BorderThickness="0" Content="警告"/>
-                            <Button Background="#E67E22" BorderThickness="0" Content="Warning"/>
-                            <Button Background="#F38B76" BorderThickness="0" Content="Stop"/>
-                            <Button Background="#E9AF20" BorderThickness="0" Content="Warn"/>
-                        </StackPanel>
-                    </utils:ExpanderEXT>
-                    <oxy:PlotView Model="{Binding Path= PlotModel}" Height="200">
-                        <oxy:PlotView.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="重置" Padding="5" FontSize="15" Command="{Binding Reset}"/>
-                            </ContextMenu>
-                        </oxy:PlotView.ContextMenu>
-                    </oxy:PlotView>
-                </DockPanel>
-
             </StackPanel>
-        </Grid>
+        </utils:ExpanderEXT>
+        <utils:ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="TreeView" ItemBrush="LightGray;200">
+            <StackPanel Width="250">
+                <utils:TreeViewEXT x:Name="TreeViewOrg" Height="180" ICheckBox="Visible" ItemTemplate="{StaticResource DefaultNode}" ItemsSource="{Binding TreeList}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectedItemChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectedItemChanged}"
+                                           CommandParameter="{Binding ElementName=TreeViewOrg}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </utils:TreeViewEXT>
+            </StackPanel>
+        </utils:ExpanderEXT>
+        <utils:ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="TabControl" ItemBrush="LightGray;200">
+            <utils:TabControlEXT TabStripPlacement="Top" Background="LightGray">
+                <TabItem Cursor="Hand" Header="音乐电台" />
+                <TabItem Cursor="Hand" Header="Mv电台"/>
+            </utils:TabControlEXT>
+        </utils:ExpanderEXT>
+
+        <WrapPanel>
+            <Button Background="{StaticResource ColorBrush}" BorderThickness="0" Content="默认" Height="32" Width="100" Foreground="White"/>
+            <Button Background="{StaticResource InfoBrush}" BorderThickness="0" Content="信息" Height="32" Width="100" Foreground="White"/>
+            <Button Background="{StaticResource SuccessBrush}" BorderThickness="0" Content="成功" Height="32" Width="100" Foreground="White"/>
+            <Button Background="{StaticResource WarnBrush}" BorderThickness="0" Content="警告" Height="32" Width="100" Foreground="White"/>
+            <Button Background="{StaticResource ErrorBrush}" BorderThickness="0" Content="错误" Height="32" Width="100" Foreground="White"/>
+        </WrapPanel>
+
     </DockPanel>
     <utils:WindowEXT.FunctionBar>
         <utils:WindowFunctionBar>

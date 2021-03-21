@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Paway.WPF">
 
+    <!--#region 转换器 -->
     <local:BoolReverse x:Key="boolReverse"/>
     <local:BoolToVisible x:Key="boolToVisible"/>
     <local:BoolSelector x:Key="boolSelector"/>
@@ -14,13 +15,14 @@
     <local:VisibleReverse x:Key="visibleReverse"/>
     <local:BrushToColorConverter x:Key="brushToColorConverter" />
     <local:ColorToBrushConverter x:Key="colorToBrushConverter" />
-
     <local:EmptyColorConverter x:Key="emptyColorConverter" />
     <local:NullJudgeConverter x:Key="nullJudgeConverter"/>
-
-    <!--文本图标-->
+    <!--#endregion-->
+    <!--#region 文本图标资源 -->
     <FontFamily x:Key="FontAwesome">/Paway.WPF;component/Resource/#fontawesome</FontFamily>
+    <!--#endregion-->
 
+    <!--#region 默认全局样式 -->
     <Style TargetType="{x:Type Label}">
         <Setter Property="HorizontalContentAlignment" Value="Right" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -36,6 +38,9 @@
     <Style TargetType="{x:Type RadioButton}">
         <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
+    <!--#endregion-->
+
+    <!--#region 通用模板 -->
     <Style x:Key="Config" TargetType="{x:Type Control}">
         <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="FontFamily" Value="Microsoft YaHei"/>
@@ -46,7 +51,6 @@
         <Setter Property="FontFamily" Value="Microsoft YaHei"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
-
     <ControlTemplate x:Key="ErrorTemplate">
         <DockPanel LastChildFill="true">
             <Border Background="Red" DockPanel.Dock="Right"
@@ -62,13 +66,32 @@
             </AdornedElementPlaceholder>
         </DockPanel>
     </ControlTemplate>
+    <Style x:Key="TextLeft" TargetType="{x:Type TextBlock}" >
+        <Setter Property="Margin" Value="2,0" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+    </Style>
+    <Style x:Key="TextCenter" TargetType="{x:Type TextBlock}">
+        <Setter Property="Margin" Value="2,0" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+    </Style>
+    <Style x:Key="TextRight" TargetType="{x:Type TextBlock}">
+        <Setter Property="Margin" Value="2,0" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+    </Style>
+    <!--#endregion-->
 
+    <!--#region 画板 -->
     <Geometry x:Key="Icon_DownArrow">M511.753 624.86499999l292.159-292.15499999c12.27-12.28 32.186-12.28 44.457 0 12.28 12.27 12.28 32.186 0 44.457l-314.388 314.388c-12.27 12.28-32.186 12.28-44.457 0l-314.387-314.388c-6.14-6.136-9.211-14.183-9.211-22.228s3.071-16.092 9.211-22.228c12.27-12.28 32.186-12.28 44.457 0l292.16 292.155z</Geometry>
     <Geometry x:Key="Icon_RightArrow">M624.86499999 512.247l-292.15499999-292.159c-12.28-12.27-12.28-32.186 0-44.457 12.27-12.28 32.186-12.28 44.457 0l314.388 314.388c12.28 12.27 12.28 32.186 0 44.457l-314.388 314.387c-6.136 6.14-14.183 9.211-22.228 9.211s-16.092-3.071-22.228-9.211c-12.28-12.27-12.28-32.186 0-44.457l292.155-292.16z</Geometry>
     <Geometry x:Key="Icon_UpArrow">M512.133 399.517l-292.16 292.155c-12.27 12.28-32.186 12.28-44.457 0-12.281-12.27-12.281-32.186 0-44.457l314.388-314.388c12.27-12.28 32.186-12.28 44.457 0l314.387 314.388c6.14 6.136 9.211 14.183 9.211 22.228s-3.071 16.092-9.211 22.228c-12.27 12.28-32.186 12.28-44.457 0l-292.159-292.155z</Geometry>
     <Geometry x:Key="Icon_LeftArrow">M399.399 512.246l292.155-292.16c12.278-12.27 12.278-32.186 0-44.457-12.27-12.278-32.186-12.278-44.457 0l-314.387 314.389c-12.281 12.27-12.281 32.186 0 44.457l314.388 314.388c6.137 6.14 14.183 9.211 22.228 9.211s16.092-3.071 22.228-9.211c12.281-12.27 12.281-32.186 0-44.457l-292.157-292.161z</Geometry>
     <Geometry x:Key="CheckedGeometry">M 0,2 3,5 8,0</Geometry>
-
     <Style x:Key="PathRound" TargetType="{x:Type Path}" >
         <Setter Property="Margin" Value="1" />
         <Setter Property="Stroke" Value="Gray" />
@@ -146,26 +169,9 @@
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
+    <!--#endregion-->
 
-    <Style x:Key="TextLeft" TargetType="{x:Type TextBlock}" >
-        <Setter Property="Margin" Value="2,0" />
-        <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="TextTrimming" Value="WordEllipsis"/>
-    </Style>
-    <Style x:Key="TextCenter" TargetType="{x:Type TextBlock}">
-        <Setter Property="Margin" Value="2,0" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="TextTrimming" Value="WordEllipsis"/>
-    </Style>
-    <Style x:Key="TextRight" TargetType="{x:Type TextBlock}">
-        <Setter Property="Margin" Value="2,0" />
-        <Setter Property="HorizontalAlignment" Value="Right" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="TextTrimming" Value="WordEllipsis"/>
-    </Style>
-
+    <!--#region 主题 -->
     <Style x:Key="themeBackground" TargetType="Control">
         <Setter Property="Background" Value="{Binding Path=(local:ThemeEXT.Background).Value, RelativeSource={RelativeSource Self}}" />
     </Style>
@@ -195,5 +201,20 @@
         <Setter Property="CornerRadius" Value="2" />
         <Setter Property="Background" Value="{StaticResource ColorSelector}" />
     </Style>
+    <!--#endregion-->
+    <!--#region 配色 -->
+    <Color x:Key="ColorKey" R="35" G="175" B="255" />
+    <SolidColorBrush x:Key="ColorBrush" Color="#23AFFF" />
+    <Color x:Key="InfoKey" R="0" G="188" B="212" />
+    <SolidColorBrush x:Key="InfoBrush" Color="#00BCD4" />
+    <Color x:Key="SuccessKey" R="45" G="184" B="77" />
+    <SolidColorBrush x:Key="SuccessBrush" Color="#2DB84D" />
+    <Color x:Key="WarnKey" R="255" G="153" B="0" />
+    <SolidColorBrush x:Key="WarnBrush" Color="#FF9900" />
+    <Color x:Key="ErrorKey" R="248" G="73" B="30" />
+    <SolidColorBrush x:Key="ErrorBrush" Color="#F8491E" />
+    <Color x:Key="HighKey" R="0" G="63" B="99" />
+    <SolidColorBrush x:Key="HighBrush" Color="#003F63" />
+    <!--#endregion-->
 
 </ResourceDictionary>

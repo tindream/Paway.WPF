@@ -102,6 +102,47 @@ namespace Paway.WPF
             }
         }
 
+        /// <summary>
+        /// 信息色
+        /// </summary>
+        public static Color Info { get; private set; } = Color.FromArgb(255, 0, 188, 212);
+        /// <summary>
+        /// 信息色
+        /// </summary>
+        public static SolidColorBrush InfoBrush { get; private set; } = new SolidColorBrush(Info);
+        /// <summary>
+        /// 成功色
+        /// </summary>
+        public static Color Success { get; private set; } = Color.FromArgb(255, 45, 184, 77);
+        /// <summary>
+        /// 成功色
+        /// </summary>
+        public static SolidColorBrush SuccessBrush { get; private set; } = new SolidColorBrush(Success);
+        /// <summary>
+        /// 警告色
+        /// </summary>
+        public static Color Warn { get; private set; } = Color.FromArgb(255, 255, 153, 0);
+        /// <summary>
+        /// 警告色
+        /// </summary>
+        public static SolidColorBrush WarnBrush { get; private set; } = new SolidColorBrush(Warn);
+        /// <summary>
+        /// 错误色
+        /// </summary>
+        public static Color Error { get; private set; } = Color.FromArgb(255, 248, 73, 30);
+        /// <summary>
+        /// 错误色
+        /// </summary>
+        public static SolidColorBrush ErrorBrush { get; private set; } = new SolidColorBrush(Error);
+        /// <summary>
+        /// 深色
+        /// </summary>
+        public static Color High { get; private set; } = Color.FromArgb(255, 0, 63, 99);
+        /// <summary>
+        /// 深色
+        /// </summary>
+        public static SolidColorBrush HighBrush { get; private set; } = new SolidColorBrush(High);
+
         #endregion
     }
 }
