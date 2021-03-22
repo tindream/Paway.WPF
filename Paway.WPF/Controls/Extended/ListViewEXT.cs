@@ -58,8 +58,8 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(ItemBorder), typeof(ThicknessEXT), typeof(ListViewEXT), new PropertyMetadata(new ThicknessEXT(0)));
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty ItemBorderBrushProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBorderBrush), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(null, 170, 250)));
+        public static readonly DependencyProperty ItemBrushProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(null, 170, 250)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBackgroundProperty =
@@ -71,21 +71,21 @@ namespace Paway.WPF
                 Color? mouseColor = null, pressedColor = null;
                 if (listView.ItemBackground.Mouse is SolidColorBrush mouse && mouse.Color != TMethod.AlphaColor(120, TConfig.Color))
                 {
-                    if ((listView.ItemBorderBrush.Mouse as SolidColorBrush).Color == TMethod.AlphaColor(170, TConfig.Color))
+                    if ((listView.ItemBrush.Mouse as SolidColorBrush).Color == TMethod.AlphaColor(170, TConfig.Color))
                     {
                         mouseColor = TMethod.AlphaColor(mouse.Color.A + 50, mouse.Color);
                     }
                 }
                 if (listView.ItemBackground.Pressed is SolidColorBrush pressed && pressed.Color != TMethod.AlphaColor(150, TConfig.Color))
                 {
-                    if ((listView.ItemBorderBrush.Pressed as SolidColorBrush).Color == TMethod.AlphaColor(250, TConfig.Color))
+                    if ((listView.ItemBrush.Pressed as SolidColorBrush).Color == TMethod.AlphaColor(250, TConfig.Color))
                     {
                         pressedColor = TMethod.AlphaColor(pressed.Color.A + 100, pressed.Color);
                     }
                 }
                 if (mouseColor != null || pressedColor != null)
                 {
-                    listView.ItemBorderBrush = new BrushEXT(null, mouseColor, pressedColor);
+                    listView.ItemBrush = new BrushEXT(null, mouseColor, pressedColor);
                 }
             }
         }
@@ -250,10 +250,10 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展.项")]
         [Description("自定义项外边框颜色")]
-        public BrushEXT ItemBorderBrush
+        public BrushEXT ItemBrush
         {
-            get { return (BrushEXT)GetValue(ItemBorderBrushProperty); }
-            set { SetValue(ItemBorderBrushProperty, value); }
+            get { return (BrushEXT)GetValue(ItemBrushProperty); }
+            set { SetValue(ItemBrushProperty, value); }
         }
         /// <summary>
         /// 自定义项背景颜色

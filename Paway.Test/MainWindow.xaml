@@ -74,7 +74,7 @@
                              ItemBackground="Transparent;#78CA6B38" ItemForeground="#333;;"
                              BackgroundImage="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"
                              Stretch="None" Viewport="0,0,0.35,1"
-                             Border="1;0"
+                             ItemBorder="1;0"
                              Command="{Binding Teach}" CommandParameter="{Binding ElementName=btn}" Click="Cancel_Click" />
                     <utils:ButtonEXT Name="btn" Grid.Column="1"
                              Content="{utils:FontImage Value=Adjust}" Click="Commit_Click" 

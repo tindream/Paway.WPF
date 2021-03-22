@@ -44,28 +44,28 @@ namespace Paway.WPF
                 Color? mouseColor = null, pressedColor = null;
                 if (listBoxItem.ItemBackground.Mouse is SolidColorBrush mouse && mouse.Color != Colors.Transparent)
                 {
-                    if ((listBoxItem.ItemBorderBrush.Mouse as SolidColorBrush).Color == Colors.Transparent)
+                    if ((listBoxItem.ItemBrush.Mouse as SolidColorBrush).Color == Colors.Transparent)
                     {
                         mouseColor = TMethod.AlphaColor(mouse.Color.A + 50, mouse.Color);
                     }
                 }
                 if (listBoxItem.ItemBackground.Pressed is SolidColorBrush pressed && pressed.Color != Colors.Transparent)
                 {
-                    if ((listBoxItem.ItemBorderBrush.Pressed as SolidColorBrush).Color == Colors.Transparent)
+                    if ((listBoxItem.ItemBrush.Pressed as SolidColorBrush).Color == Colors.Transparent)
                     {
                         pressedColor = TMethod.AlphaColor(pressed.Color.A + 100, pressed.Color);
                     }
                 }
                 if (mouseColor != null || pressedColor != null)
                 {
-                    listBoxItem.ItemBorderBrush = new BrushEXT(null, mouseColor, pressedColor);
+                    listBoxItem.ItemBrush = new BrushEXT(null, mouseColor, pressedColor);
                 }
             }
         }
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty ItemBorderBrushProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBorderBrush), typeof(BrushEXT), typeof(ListBoxItemEXT), new PropertyMetadata(new BrushEXT(Colors.Transparent)));
+        public static readonly DependencyProperty ItemBrushProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ListBoxItemEXT), new PropertyMetadata(new BrushEXT(Colors.Transparent)));
 
         /// <summary>
         /// 自定义项文本字体颜色
@@ -92,10 +92,10 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展")]
         [Description("自定义项外边框颜色")]
-        public BrushEXT ItemBorderBrush
+        public BrushEXT ItemBrush
         {
-            get { return (BrushEXT)GetValue(ItemBorderBrushProperty); }
-            set { SetValue(ItemBorderBrushProperty, value); }
+            get { return (BrushEXT)GetValue(ItemBrushProperty); }
+            set { SetValue(ItemBrushProperty, value); }
         }
 
         private bool isPressed;

@@ -23,7 +23,7 @@
                     <Grid>
                         <Border x:Name="border1"
                                 BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{Binding Path=Border.Normal, RelativeSource={RelativeSource TemplatedParent}}"
+                                BorderThickness="{Binding Path=ItemBorder.Normal, RelativeSource={RelativeSource TemplatedParent}}"
                                 CornerRadius="{TemplateBinding Radius}"
                                 Background="{Binding Path=ItemBackground.Normal, RelativeSource={RelativeSource TemplatedParent}}">
                             <Border.Effect>
@@ -48,7 +48,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Foreground" TargetName="txt" Value="{Binding Path=ItemForeground.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
-                            <Setter Property="BorderThickness" TargetName="border1" Value="{Binding Path=Border.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter Property="BorderThickness" TargetName="border1" Value="{Binding Path=ItemBorder.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter Property="Background" TargetName="border1" Value="{Binding Path=ItemBackground.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter Property="Background" TargetName="border2">
                                 <Setter.Value>
@@ -60,7 +60,7 @@
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Foreground" TargetName="txt" Value="{Binding Path=ItemForeground.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
-                            <Setter Property="BorderThickness" TargetName="border1" Value="{Binding Path=Border.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter Property="BorderThickness" TargetName="border1" Value="{Binding Path=ItemBorder.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter Property="Background" TargetName="border1" Value="{Binding Path=ItemBackground.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter Property="Background" TargetName="border2">
                                 <Setter.Value>
