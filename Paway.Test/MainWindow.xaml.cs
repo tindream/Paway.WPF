@@ -47,6 +47,7 @@ namespace Paway.Test
             badge.Text = DateTime.Now.Second.ToString();
 
             rt.AddLine(DateTime.Now.ToString());
+            rt.Focus();
 
             var type = (TransitionType)WPF.TMethod.Random(0, (int)TransitionType.Bottom + 1);
             if (btnCancel.Opacity == 0) type = TransitionType.FadeIn;

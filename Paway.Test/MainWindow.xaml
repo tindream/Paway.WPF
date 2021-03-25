@@ -82,7 +82,7 @@
                     <utils:Badge Name="badge" Grid.Column="1" IsWaving="True" HorizontalAlignment="Right" Text="1" Background="Red" VerticalAlignment="Top" Height="20" Margin="-6"/>
                 </Grid>
 
-                <utils:RichTextBoxEXT x:Name="rt" MaxHeight="100" >
+                <utils:RichTextBoxEXT x:Name="rt" IsReadOnly="True" Height="150" BorderThickness="0" Foreground="#555" >
                     <FlowDocument>
                         <Paragraph>
                             <Run Text="追加内容" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paway.Helper;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Text;
@@ -54,6 +55,7 @@ namespace Paway.WPF
         /// <summary>
         /// 滚动条
         /// </summary>
+        [Browsable(false)]
         public ScrollViewer ScrollViewer { get; set; }
         /// <summary>
         /// </summary>
@@ -151,11 +153,18 @@ namespace Paway.WPF
         /// </summary>
         public void AddLine(string content = null, Color? color = null, Action action = null)
         {
+            var range = new TextRange(this.CaretPosition, this.Document.ContentEnd);
+            var isLast = range.Text.Replace("\r", "").Replace("\n", "").IsEmpty() && (range.Text.IndexOf('\n') == range.Text.LastIndexOf('\n'));
+            if (Document.Blocks.Count <= 0)
+            {
+                Document.Blocks.Add(new Paragraph());
+            }
+            Paragraph block = (Paragraph)Document.Blocks.LastBlock;
             Run run = new Run(content);
             if (action == null)
             {
                 if (color != null) { run.Foreground = new SolidColorBrush(color.Value); }
-                Document.Blocks.Add(new Paragraph(run));
+                block.Inlines.Add(run);
             }
             else
             {
@@ -163,9 +172,30 @@ namespace Paway.WPF
                 if (color != null) { hl.Foreground = new SolidColorBrush(color.Value); }
                 hl.Click += delegate { action(); };
                 hl.MouseLeftButtonDown += delegate { action(); };
-                Document.Blocks.Add(new Paragraph(hl));
+                block.Inlines.Add(hl);
             }
-            this.ScrollViewer.ScrollToEnd();
+            Document.Blocks.Add(new Paragraph());
+            AutoShow(isLast);
+        }
+        private void AutoShow(bool isLast)
+        {
+            if (isLast)
+            {
+                this.ScrollViewer.ScrollToEnd();
+                this.CaretPosition = this.Document.ContentEnd;
+            }
+            else
+            {//无效
+                var currObj = this.CaretPosition.Parent;
+                if (currObj is FrameworkElement fe)
+                {
+                    fe.BringIntoView();
+                }
+                else if (currObj is FrameworkContentElement fce)
+                {
+                    fce.BringIntoView();
+                }
+            }
         }
 
         /// <summary>
@@ -196,15 +226,18 @@ namespace Paway.WPF
         /// </summary>
         public void Add(string content = null, Color? color = null, Action action = null)
         {
+            var range = new TextRange(this.CaretPosition, this.Document.ContentEnd);
+            var isLast = range.Text.Replace("\r", "").Replace("\n", "").IsEmpty() && (range.Text.IndexOf('\n') == range.Text.LastIndexOf('\n'));
             if (Document.Blocks.Count <= 0)
             {
                 Document.Blocks.Add(new Paragraph());
             }
+            Paragraph block = (Paragraph)Document.Blocks.LastBlock;
             Run run = new Run(content);
             if (action == null)
             {
                 if (color != null) { run.Foreground = new SolidColorBrush(color.Value); }
-                (Document.Blocks.LastBlock as Paragraph).Inlines.Add(run);
+                block.Inlines.Add(run);
             }
             else
             {
@@ -212,9 +245,9 @@ namespace Paway.WPF
                 if (color != null) { hl.Foreground = new SolidColorBrush(color.Value); }
                 hl.Click += delegate { action(); };
                 hl.MouseLeftButtonDown += delegate { action(); };
-                (Document.Blocks.LastBlock as Paragraph).Inlines.Add(hl);
+                block.Inlines.Add(hl);
             }
-            this.ScrollViewer.ScrollToEnd();
+            AutoShow(isLast);
         }
 
         #endregion
