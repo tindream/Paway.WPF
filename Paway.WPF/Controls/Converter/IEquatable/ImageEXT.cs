@@ -16,20 +16,25 @@ namespace Paway.WPF
     /// 自定义默认、鼠标划过时、鼠标点击时的图片
     /// </summary>
     [TypeConverter(typeof(ImageEXTConverter))]
-    public class ImageEXT : IEquatable<ImageEXT>
+    public class ImageEXT : ModelBase, IEquatable<ImageEXT>
     {
+        private ImageSource normal;
         /// <summary>
         /// 默认的图片
         /// </summary>
-        public ImageSource Normal { get; set; }
+        public ImageSource Normal { get { return normal; } set { normal = value; OnPropertyChanged(); } }
+
+        private ImageSource mouse;
         /// <summary>
         /// 鼠标划过时的图片
         /// </summary>
-        public ImageSource Mouse { get; set; }
+        public ImageSource Mouse { get { return mouse; } set { mouse = value; OnPropertyChanged(); } }
+
+        private ImageSource pressed;
         /// <summary>
         /// 鼠标点击时的图片
         /// </summary>
-        public ImageSource Pressed { get; set; }
+        public ImageSource Pressed { get { return pressed; } set { pressed = value; OnPropertyChanged(); } }
 
         /// <summary>
         /// </summary>

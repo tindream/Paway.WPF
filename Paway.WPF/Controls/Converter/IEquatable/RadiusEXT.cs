@@ -17,20 +17,25 @@ namespace Paway.WPF
     /// 自定义默认、鼠标划过时、鼠标点击时的CornerRadius圆角
     /// </summary>
     [TypeConverter(typeof(RadiusEXTConverter))]
-    public class RadiusEXT : IEquatable<RadiusEXT>
+    public class RadiusEXT : ModelBase, IEquatable<RadiusEXT>
     {
+        private CornerRadius normal = new CornerRadius(3);
         /// <summary>
         /// 默认的圆角
         /// </summary>
-        public CornerRadius Normal { get; set; } = new CornerRadius(3);
+        public CornerRadius Normal { get { return normal; } set { normal = value; OnPropertyChanged(); } }
+
+        private CornerRadius mouse = new CornerRadius(3);
         /// <summary>
         /// 鼠标划过时的圆角
         /// </summary>
-        public CornerRadius Mouse { get; set; } = new CornerRadius(3);
+        public CornerRadius Mouse { get { return mouse; } set { mouse = value; OnPropertyChanged(); } }
+
+        private CornerRadius pressed = new CornerRadius(3);
         /// <summary>
         /// 鼠标点击时的圆角
         /// </summary>
-        public CornerRadius Pressed { get; set; } = new CornerRadius(3);
+        public CornerRadius Pressed { get { return pressed; } set { pressed = value; OnPropertyChanged(); } }
 
         /// <summary>
         /// </summary>

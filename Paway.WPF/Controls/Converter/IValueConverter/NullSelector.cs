@@ -13,22 +13,24 @@ using System.Windows.Media;
 namespace Paway.WPF
 {
     /// <summary>
-    /// 多颜色值判断选择(跳过空、透明)
+    /// 多字段空值判断转换(取排在最前面的非空字段值)
     /// </summary>
-    internal class EmptyColorConverter : IMultiValueConverter
+    public class NullSelector : IMultiValueConverter
     {
         /// <summary>
-        /// 多颜色值判断选择(跳过空、透明)
+        /// 多字段空值判断转换
         /// </summary>
         public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
         {
             var index = 0;
-            while (value.Length > index && (value[index] == null || value[index] == DependencyProperty.UnsetValue || (value[index] is SolidColorBrush solid && solid.Color == Colors.Transparent)))
+            while (value.Length > index && (value[index] == null || value[index] == DependencyProperty.UnsetValue ||
+                (value[index] is Thickness thickness && thickness == new Thickness(double.NaN)) ||
+                (value[index] is SolidColorBrush solid && solid.Color == Colors.Transparent)))
             {
                 index++;
             }
             if (value.Length > index) return value[index];
-            else return value[value.Length - 1];
+            else return null;
         }
         /// <summary>
         /// </summary>

@@ -4,20 +4,22 @@
 
     <!--#region 转换器 -->
     <local:BoolReverse x:Key="boolReverse"/>
-    <local:BoolToVisible x:Key="boolToVisible"/>
-    <local:BoolSelector x:Key="boolSelector"/>
     <local:DateConverter x:Key="dateConverter"/>
     <local:ValueMultiConverter x:Key="valueMultiConverter"/>
     <local:ValueAddConverter x:Key="valueAddConverter"/>
     <local:EnumConverter x:Key="enumConverter"/>
     <local:IsNotNullConverter x:Key="isNotNull"/>
-    <local:NullToCollapsed x:Key="nullToCollapsed"/>
     <local:VisibleReverse x:Key="visibleReverse"/>
+
+    <local:BoolToVisible x:Key="boolToVisible"/>
+    <local:NullToCollapsed x:Key="nullToCollapsed"/>
     <local:BrushToColorConverter x:Key="brushToColorConverter" />
     <local:ColorToBrushConverter x:Key="colorToBrushConverter" />
-    <local:EmptyColorConverter x:Key="emptyColorConverter" />
-    <local:NullJudgeConverter x:Key="nullJudgeConverter"/>
+
+    <local:BoolToSelector x:Key="boolToSelector"/>
+    <local:NullSelector x:Key="nullSelector"/>
     <!--#endregion-->
+
     <!--#region 文本图标资源 -->
     <FontFamily x:Key="FontAwesome">/Paway.WPF;component/Resource/#fontawesome</FontFamily>
     <!--#endregion-->
@@ -202,19 +204,14 @@
         <Setter Property="Background" Value="{StaticResource ColorSelector}" />
     </Style>
     <!--#endregion-->
+
     <!--#region 配色 -->
-    <Color x:Key="ColorKey" R="35" G="175" B="255" />
-    <SolidColorBrush x:Key="ColorBrush" Color="#23AFFF" />
-    <Color x:Key="InfoKey" R="0" G="188" B="212" />
-    <SolidColorBrush x:Key="InfoBrush" Color="#00BCD4" />
-    <Color x:Key="SuccessKey" R="45" G="184" B="77" />
-    <SolidColorBrush x:Key="SuccessBrush" Color="#2DB84D" />
-    <Color x:Key="WarnKey" R="255" G="153" B="0" />
-    <SolidColorBrush x:Key="WarnBrush" Color="#FF9900" />
-    <Color x:Key="ErrorKey" R="248" G="73" B="30" />
-    <SolidColorBrush x:Key="ErrorBrush" Color="#F8491E" />
-    <Color x:Key="HighKey" R="0" G="63" B="99" />
-    <SolidColorBrush x:Key="HighBrush" Color="#003F63" />
+    <SolidColorBrush x:Key="Color" Color="#23AFFF" />
+    <SolidColorBrush x:Key="Info" Color="#00BCD4" />
+    <SolidColorBrush x:Key="Success" Color="#2DB84D" />
+    <SolidColorBrush x:Key="Warn" Color="#FF9900" />
+    <SolidColorBrush x:Key="Error" Color="#F8331E" />
+    <SolidColorBrush x:Key="High" Color="#003F63" />
     <!--#endregion-->
 
 </ResourceDictionary>

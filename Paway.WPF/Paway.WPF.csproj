@@ -72,14 +72,13 @@
     </Compile>
     <Compile Include="Controls\Converter\IEquatable\ThemeBackground.cs" />
     <Compile Include="Controls\Converter\IEquatable\FontSizeEXT.cs" />
-    <Compile Include="Controls\Converter\IValueConverter\BoolSelector.cs" />
+    <Compile Include="Controls\Converter\IValueConverter\BoolToSelector.cs" />
     <Compile Include="Controls\Converter\IValueConverter\BrushColorConverter.cs" />
     <Compile Include="Controls\Converter\IValueConverter\IsNotNullConverter.cs" />
     <Compile Include="Controls\Converter\IValueConverter\EnumConverter.cs" />
     <Compile Include="Controls\Converter\MarkupExtension\FontImageExtension.cs" />
     <Compile Include="Controls\Converter\ValidationRule\RegexValidationRule.cs" />
     <Compile Include="Controls\Converter\IEquatable\ColorLinear.cs" />
-    <Compile Include="Controls\Converter\IValueConverter\EmptyColorConverter.cs" />
     <Compile Include="Controls\Converter\IValueConverter\ValueConverter.cs" />
     <Compile Include="Controls\Converter\IValueConverter\BoolReverse.cs" />
     <Compile Include="Controls\Converter\IValueConverter\NullToCollapsed.cs" />
@@ -145,7 +144,7 @@
     <Compile Include="Controls\Window\WindowCommandHelper.cs" />
     <Compile Include="Controls\Converter\IEquatable\ColorEXT.cs" />
     <Compile Include="Controls\Converter\IEquatable\ImageEXT.cs" />
-    <Compile Include="Controls\Converter\IValueConverter\NullJudgeConverter.cs" />
+    <Compile Include="Controls\Converter\IValueConverter\NullSelector.cs" />
     <Compile Include="Controls\Converter\IEquatable\RadiusEXT.cs" />
     <Compile Include="Controls\Converter\IEquatable\DoubleEXT.cs" />
     <Compile Include="Controls\Converter\IEquatable\ThicknessEXT.cs" />

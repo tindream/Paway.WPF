@@ -17,20 +17,25 @@ namespace Paway.WPF
     /// 自定义默认、鼠标划过时、鼠标点击时的大小
     /// </summary>
     [TypeConverter(typeof(DoubleEXTConverter))]
-    public class DoubleEXT : IEquatable<DoubleEXT>
+    public class DoubleEXT : ModelBase, IEquatable<DoubleEXT>
     {
+        private double normal;
         /// <summary>
         /// 默认的大小
         /// </summary>
-        public double Normal { get; set; }
+        public double Normal { get { return normal; } set { normal = value; OnPropertyChanged(); } }
+
+        private double mouse;
         /// <summary>
         /// 鼠标划过时的大小
         /// </summary>
-        public double Mouse { get; set; }
+        public double Mouse { get { return mouse; } set { mouse = value; OnPropertyChanged(); } }
+
+        private double pressed;
         /// <summary>
         /// 鼠标点击时的大小
         /// </summary>
-        public double Pressed { get; set; }
+        public double Pressed { get { return pressed; } set { pressed = value; OnPropertyChanged(); } }
 
         /// <summary>
         /// </summary>

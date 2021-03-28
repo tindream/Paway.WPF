@@ -203,11 +203,11 @@
         </utils:ExpanderEXT>
 
         <WrapPanel>
-            <Button Background="{StaticResource ColorBrush}" BorderThickness="0" Content="默认" Height="32" Width="100" Foreground="White"/>
-            <Button Background="{StaticResource InfoBrush}" BorderThickness="0" Content="信息" Height="32" Width="100" Foreground="White"/>
-            <Button Background="{StaticResource SuccessBrush}" BorderThickness="0" Content="成功" Height="32" Width="100" Foreground="White"/>
-            <Button Background="{StaticResource WarnBrush}" BorderThickness="0" Content="警告" Height="32" Width="100" Foreground="White"/>
-            <Button Background="{StaticResource ErrorBrush}" BorderThickness="0" Content="错误" Height="32" Width="100" Foreground="White"/>
+            <Button Background="{StaticResource Color}" BorderThickness="0" Content="默认" Height="32" Width="100" Foreground="White"/>
+            <Button Background="{StaticResource Info}" BorderThickness="0" Content="信息" Height="32" Width="100" Foreground="White"/>
+            <Button Background="{StaticResource Success}" BorderThickness="0" Content="成功" Height="32" Width="100" Foreground="White"/>
+            <Button Background="{StaticResource Warn}" BorderThickness="0" Content="警告" Height="32" Width="100" Foreground="White"/>
+            <Button Background="{StaticResource Error}" BorderThickness="0" Content="错误" Height="32" Width="100" Foreground="White"/>
         </WrapPanel>
 
     </DockPanel>
@@ -244,7 +244,7 @@
             <Button Content="Dino.C" ToolTip="当前档案"/>-->
             <utils:ListViewEXT Name="listView1" Margin="5,5,0,0" IAnimation="True"
                            ItemHeight="67" ItemWidth="100"
-                           ItemBorder="0;0,0,0,4"
+                           ItemBorder="1,1,0,1;1,1,1,4"
                            ItemImageHeight="32" ItemImageDock="Top" ItemPadding="5"
                            Style="{StaticResource themeBackground}"
                            SelectionMode="Extended" VerticalAlignment="Top">
@@ -259,7 +259,7 @@
                 <utils:ListBoxItemEXT Text="World" ItemBackground=";#78FF4633" ItemTextForeground="#FF4633;;"/>
                 <Button Content="Hi"/>
                 <utils:ListBoxItemEXT Text="A" ItemBackground=";#7802E8FA" ItemTextForeground="#02E8FA;;"/>
-                <utils:ListBoxItemEXT Text="C" ItemBackground=";#78024AFA" ItemTextForeground="#024AFA;;"/>
+                <utils:ListBoxItemEXT Text="C" ItemBackground=";#78024AFA" ItemTextForeground="#024AFA;;" ItemBorder="1"/>
             </utils:ListViewEXT>
         </utils:WindowFunctionBar>
     </utils:WindowEXT.FunctionBar>

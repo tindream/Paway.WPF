@@ -129,7 +129,7 @@ namespace Paway.WPF
         /// <summary>
         /// 错误色
         /// </summary>
-        public static Color Error { get; private set; } = Color.FromArgb(255, 248, 73, 30);
+        public static Color Error { get; private set; } = Color.FromArgb(255, 248, 51, 30);
         /// <summary>
         /// 错误色
         /// </summary>

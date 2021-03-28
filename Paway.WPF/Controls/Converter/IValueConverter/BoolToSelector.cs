@@ -6,29 +6,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 
 namespace Paway.WPF
 {
     /// <summary>
-    /// 多字段空值判断转换(取排在最前面的非空字段值)
+    /// bool判断多选择器(true:选择1，false:选择2)
     /// </summary>
-    public class NullJudgeConverter : IMultiValueConverter
+    internal class BoolToSelector : IMultiValueConverter
     {
-        /// <summary>
-        /// 多字段空值判断转换
-        /// </summary>
         public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
         {
-            var index = 0;
-            while (value.Length > index && (value[index] == null || value[index] == DependencyProperty.UnsetValue))
+            if (value.Length == 3)
             {
-                index++;
+                if (value[0] == null || value[0] == DependencyProperty.UnsetValue || (value[0] is bool b && !b))
+                    return value[2];
+                else return value[1];
             }
-            if (value.Length > index) return value[index];
-            else return null;
+            throw new WarningException("参数错误");
         }
         /// <summary>
         /// </summary>

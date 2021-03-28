@@ -64,6 +64,10 @@ namespace Paway.WPF
         }
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty ItemBorderProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemBorder), typeof(ThicknessEXT), typeof(ListBoxItemEXT), new PropertyMetadata(new ThicknessEXT(double.NaN)));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ListBoxItemEXT), new PropertyMetadata(new BrushEXT(Colors.Transparent)));
 
@@ -86,6 +90,16 @@ namespace Paway.WPF
         {
             get { return (BrushEXT)GetValue(ItemBackgroundProperty); }
             set { SetValue(ItemBackgroundProperty, value); }
+        }
+        /// <summary>
+        /// 自定义项外边框
+        /// </summary>
+        [Category("扩展.项")]
+        [Description("自定义项外边框")]
+        public ThicknessEXT ItemBorder
+        {
+            get { return (ThicknessEXT)GetValue(ItemBorderProperty); }
+            set { SetValue(ItemBorderProperty, value); }
         }
         /// <summary>
         /// 自定义项外边框颜色

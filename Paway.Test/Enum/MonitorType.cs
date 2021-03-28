@@ -13,6 +13,7 @@ namespace Paway.Test
     /// </summary>
     public enum MonitorType
     {
+        None,
         /// <summary>
         /// 左束角
         /// </summary>

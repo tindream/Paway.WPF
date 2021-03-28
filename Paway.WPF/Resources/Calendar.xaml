@@ -12,7 +12,7 @@
     <Style x:Key="CalendarButtonStyle" TargetType="{x:Type CalendarButton}">
         <Setter Property="Background">
             <Setter.Value>
-                <MultiBinding Converter="{StaticResource nullJudgeConverter}">
+                <MultiBinding Converter="{StaticResource nullSelector}">
                     <Binding Path="ItemBrush.Mouse" RelativeSource="{RelativeSource AncestorType=local:CalendarEXT}"/>
                     <Binding Path="ItemBrush.Mouse" RelativeSource="{RelativeSource AncestorType=local:DatePickerEXT}"/>
                 </MultiBinding>
@@ -109,7 +109,7 @@
                         <Border x:Name="CalendarButtonFocusVisual" IsHitTestVisible="False" CornerRadius="20" 
                                 BorderThickness="0" Visibility="Collapsed">
                             <Border.BorderBrush>
-                                <MultiBinding Converter="{StaticResource nullJudgeConverter}">
+                                <MultiBinding Converter="{StaticResource nullSelector}">
                                     <Binding Path="ItemBrush.Pressed" RelativeSource="{RelativeSource AncestorType=local:CalendarEXT}"/>
                                     <Binding Path="ItemBrush.Pressed" RelativeSource="{RelativeSource AncestorType=local:DatePickerEXT}"/>
                                 </MultiBinding>
@@ -234,7 +234,7 @@
                         </VisualStateManager.VisualStateGroups>
                         <Border x:Name="TodayBackground" Opacity="0" CornerRadius="22">
                             <Border.Background>
-                                <MultiBinding Converter="{StaticResource nullJudgeConverter}">
+                                <MultiBinding Converter="{StaticResource nullSelector}">
                                     <Binding Path="ItemBrush.Pressed" RelativeSource="{RelativeSource AncestorType=local:CalendarEXT}"/>
                                     <Binding Path="ItemBrush.Pressed" RelativeSource="{RelativeSource AncestorType=local:DatePickerEXT}"/>
                                 </MultiBinding>
@@ -242,7 +242,7 @@
                         </Border>
                         <Border x:Name="SelectedBackground" Opacity="0" CornerRadius="22">
                             <Border.Background>
-                                <MultiBinding Converter="{StaticResource nullJudgeConverter}">
+                                <MultiBinding Converter="{StaticResource nullSelector}">
                                     <Binding Path="ItemBrush.Mouse" RelativeSource="{RelativeSource AncestorType=local:CalendarEXT}"/>
                                     <Binding Path="ItemBrush.Mouse" RelativeSource="{RelativeSource AncestorType=local:DatePickerEXT}"/>
                                 </MultiBinding>
@@ -251,7 +251,7 @@
                         <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"/>
                         <Border x:Name="HighlightBackground" Opacity="0" CornerRadius="22">
                             <Border.Background>
-                                <MultiBinding Converter="{StaticResource nullJudgeConverter}">
+                                <MultiBinding Converter="{StaticResource nullSelector}">
                                     <Binding Path="ItemBrush.Mouse" RelativeSource="{RelativeSource AncestorType=local:CalendarEXT}"/>
                                     <Binding Path="ItemBrush.Mouse" RelativeSource="{RelativeSource AncestorType=local:DatePickerEXT}"/>
                                 </MultiBinding>
@@ -524,7 +524,7 @@
                                     </Grid>
                                     <Grid Grid.Row="2" Grid.ColumnSpan="3">
                                         <Grid.Visibility>
-                                            <MultiBinding Converter="{StaticResource nullJudgeConverter}">
+                                            <MultiBinding Converter="{StaticResource nullSelector}">
                                                 <Binding Path="HasButton" RelativeSource="{RelativeSource AncestorType=local:CalendarEXT}" Converter="{StaticResource boolToVisible}"/>
                                                 <Binding Path="HasButton" RelativeSource="{RelativeSource AncestorType=local:DatePickerEXT}" Converter="{StaticResource boolToVisible}"/>
                                             </MultiBinding>
@@ -534,11 +534,10 @@
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
                                         <local:ButtonEXT x:Name="PART_GoClear" Margin="-2,-4,0,-2" Content="清空" Radius="0" ItemBorder="0,1,0,0"
-                                                         ItemBackground="Transparent;#78CA6B38"
-                                                         ItemForeground="#333;;"/>
+                                                         ItemBackground="#A0FF9900"/>
                                         <local:ButtonEXT x:Name="PART_GoToday" Margin="0,-4,-2,-2" Grid.Column="1" Content="今天" Radius="0" ItemBorder="0,1,0,0">
                                             <local:ButtonEXT.ItemBackground>
-                                                <MultiBinding Converter="{StaticResource nullJudgeConverter}">
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="TodayColor" RelativeSource="{RelativeSource AncestorType=local:CalendarEXT}"/>
                                                     <Binding Path="TodayColor" RelativeSource="{RelativeSource AncestorType=local:DatePickerEXT}"/>
                                                 </MultiBinding>

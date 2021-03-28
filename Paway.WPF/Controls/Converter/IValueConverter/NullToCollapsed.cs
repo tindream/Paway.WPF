@@ -16,10 +16,9 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null || value == DBNull.Value)
-                return Visibility.Collapsed;
-            else
-                return Visibility.Visible;
+            var result = value == null || value == DBNull.Value;
+            if (parameter != null || (parameter is bool p && !p)) result = !result;
+            return result ? Visibility.Collapsed : Visibility.Visible;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

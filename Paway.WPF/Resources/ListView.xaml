@@ -84,7 +84,7 @@
                                                        VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        Padding="{Binding ItemTextPadding, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
                                                     <TextBlock.Text>
-                                                        <MultiBinding Converter="{StaticResource nullJudgeConverter}">
+                                                        <MultiBinding Converter="{StaticResource nullSelector}">
                                                             <Binding Path="Text" />
                                                             <Binding Path="Content" />
                                                         </MultiBinding>
@@ -92,7 +92,7 @@
                                                     <TextBlock.ToolTip>
                                                         <TextBlock>
                                                             <TextBlock.Text>
-                                                                <MultiBinding Converter="{StaticResource nullJudgeConverter}">
+                                                                <MultiBinding Converter="{StaticResource nullSelector}">
                                                                     <Binding Path="Text" />
                                                                     <Binding Path="Content" />
                                                                 </MultiBinding>
@@ -110,7 +110,7 @@
                                               X2="{Binding ItemWidth, Converter={StaticResource valueMultiConverter}, ConverterParameter=0.5, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                               StrokeThickness="{Binding Path=ItemBorder.Mouse.Bottom, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
                                             <Line.Stroke>
-                                                <MultiBinding Converter="{StaticResource emptyColorConverter}">
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemBrush.Pressed" />
                                                     <Binding Path="ItemBrush.Pressed" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
@@ -118,7 +118,7 @@
                                         </Line>
                                         <Line x:Name="line2" StrokeThickness="{Binding Path=ItemBorder.Mouse.Bottom, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
                                             <Line.Stroke>
-                                                <MultiBinding Converter="{StaticResource emptyColorConverter}">
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemBrush.Pressed" />
                                                     <Binding Path="ItemBrush.Pressed" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
@@ -128,7 +128,7 @@
                                     <Grid.ToolTip>
                                         <TextBlock>
                                             <TextBlock.Text>
-                                                <MultiBinding Converter="{StaticResource nullJudgeConverter}">
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="Hit" />
                                                     <Binding Path="Content" />
                                                 </MultiBinding>
@@ -141,7 +141,7 @@
                                         <Setter TargetName="image" Property="Source" Value="{Binding Path=Image.Mouse}"/>
                                         <Setter TargetName="text" Property="Foreground">
                                             <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource emptyColorConverter}">
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemTextForeground.Mouse" />
                                                     <Binding Path="ItemTextForeground.Mouse" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
@@ -149,7 +149,7 @@
                                         </Setter>
                                         <Setter TargetName="border" Property="Background">
                                             <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource emptyColorConverter}">
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemBackground.Mouse" />
                                                     <Binding Path="ItemBackground.Mouse" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
@@ -157,7 +157,7 @@
                                         </Setter>
                                         <Setter TargetName="border" Property="BorderBrush">
                                             <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource emptyColorConverter}">
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemBrush.Mouse" />
                                                     <Binding Path="ItemBrush.Mouse" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
@@ -165,9 +165,13 @@
                                         </Setter>
                                         <Setter TargetName="border" Property="BorderThickness">
                                             <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource boolSelector}">
+                                                <MultiBinding Converter="{StaticResource boolToSelector}">
                                                     <Binding Path="IAnimation" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}"/>
                                                     <Binding Source="0,0,0,0" />
+                                                    <!--<MultiBinding Converter="{StaticResource nullSelector}">
+                                                        <Binding Path="ItemBorder.Mouse" />
+                                                        <Binding Path="ItemBorder.Mouse" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
+                                                    </MultiBinding>-->
                                                     <Binding Path="ItemBorder.Mouse" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
                                             </Setter.Value>
@@ -192,7 +196,7 @@
                                     <Trigger Property="IsSelected" Value="true">
                                         <Setter TargetName="image" Property="Source" >
                                             <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource nullJudgeConverter}">
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="Image.Pressed" />
                                                     <Binding Path="Image.Mouse" />
                                                     <Binding Path="Image.Normal" />
@@ -201,7 +205,7 @@
                                         </Setter>
                                         <Setter TargetName="text" Property="Foreground">
                                             <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource emptyColorConverter}">
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemTextForeground.Pressed" />
                                                     <Binding Path="ItemTextForeground.Pressed" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
@@ -209,22 +213,28 @@
                                         </Setter>
                                         <Setter TargetName="border" Property="Background">
                                             <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource emptyColorConverter}">
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemBackground.Pressed" />
                                                     <Binding Path="ItemBackground.Pressed" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
                                             </Setter.Value>
                                         </Setter>
+                                        <Setter TargetName="border" Property="BorderThickness">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
+                                                    <Binding Path="ItemBorder.Pressed" />
+                                                    <Binding Path="ItemBorder.Pressed" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
                                         <Setter TargetName="border" Property="BorderBrush">
                                             <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource emptyColorConverter}">
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemBrush.Pressed" />
                                                     <Binding Path="ItemBrush.Pressed" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
                                             </Setter.Value>
                                         </Setter>
-                                        <Setter TargetName="border" Property="BorderThickness" 
-                                                Value="{Binding Path=ItemBorder.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="border" Property="CornerRadius" 
                                                 Value="{Binding Path=ItemRadius.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="border2" Property="Padding" 
@@ -249,7 +259,7 @@
                                         </MultiTrigger.Conditions>
                                         <Setter TargetName="text" Property="Foreground">
                                             <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource emptyColorConverter}">
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemTextForeground.PressedMouse" />
                                                     <Binding Path="ItemTextForeground.PressedMouse" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
@@ -257,7 +267,7 @@
                                         </Setter>
                                         <Setter TargetName="border" Property="Background">
                                             <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource emptyColorConverter}">
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemBackground.PressedMouse" />
                                                     <Binding Path="ItemBackground.PressedMouse" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
@@ -265,7 +275,7 @@
                                         </Setter>
                                         <Setter TargetName="border" Property="BorderBrush">
                                             <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource emptyColorConverter}">
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemBrush.PressedMouse" />
                                                     <Binding Path="ItemBrush.PressedMouse" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
@@ -275,7 +285,7 @@
                                     <DataTrigger Binding="{Binding IsPressed}" Value="true">
                                         <Setter TargetName="text" Property="Foreground">
                                             <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource emptyColorConverter}">
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemTextForeground.Pressed" />
                                                     <Binding Path="ItemTextForeground.Pressed" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
@@ -283,22 +293,28 @@
                                         </Setter>
                                         <Setter TargetName="border" Property="Background">
                                             <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource emptyColorConverter}">
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemBackground.Pressed" />
                                                     <Binding Path="ItemBackground.Pressed" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
                                             </Setter.Value>
                                         </Setter>
+                                        <Setter TargetName="border" Property="BorderThickness">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
+                                                    <Binding Path="ItemBorder.Pressed" />
+                                                    <Binding Path="ItemBorder.Pressed" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
                                         <Setter TargetName="border" Property="BorderBrush">
                                             <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource emptyColorConverter}">
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemBrush.Pressed" />
                                                     <Binding Path="ItemBrush.Pressed" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
                                             </Setter.Value>
                                         </Setter>
-                                        <Setter TargetName="border" Property="BorderThickness" 
-                                                Value="{Binding Path=ItemBorder.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                     </DataTrigger>
                                     <MultiTrigger>
                                         <MultiTrigger.Conditions>
@@ -307,7 +323,7 @@
                                         </MultiTrigger.Conditions>
                                         <Setter TargetName="text" Property="Foreground">
                                             <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource emptyColorConverter}">
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemTextForeground.Normal" />
                                                     <Binding Path="ItemTextForeground.Normal" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
@@ -315,22 +331,28 @@
                                         </Setter>
                                         <Setter TargetName="border" Property="Background">
                                             <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource emptyColorConverter}">
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemBackground.Normal" />
                                                     <Binding Path="ItemBackground.Normal" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
                                             </Setter.Value>
                                         </Setter>
+                                        <Setter TargetName="border" Property="BorderThickness">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
+                                                    <Binding Path="ItemBorder.Normal" />
+                                                    <Binding Path="ItemBorder.Normal" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
                                         <Setter TargetName="border" Property="BorderBrush">
                                             <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource emptyColorConverter}">
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemBrush.Normal" />
                                                     <Binding Path="ItemBrush.Normal" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
                                             </Setter.Value>
                                         </Setter>
-                                        <Setter TargetName="border" Property="BorderThickness" 
-                                                Value="{Binding Path=ItemBorder.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                     </MultiTrigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>

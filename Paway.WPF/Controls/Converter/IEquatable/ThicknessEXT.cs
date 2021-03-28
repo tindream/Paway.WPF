@@ -17,20 +17,25 @@ namespace Paway.WPF
     /// 自定义默认、鼠标划过时、鼠标点击时的Thickness宽度
     /// </summary>
     [TypeConverter(typeof(ThicknessEXTConverter))]
-    public class ThicknessEXT : IEquatable<ThicknessEXT>
+    public class ThicknessEXT : ModelBase, IEquatable<ThicknessEXT>
     {
+        private Thickness normal = new Thickness(1);
         /// <summary>
         /// 默认的宽度
         /// </summary>
-        public Thickness Normal { get; set; } = new Thickness(1);
+        public Thickness Normal { get { return normal; } set { normal = value; OnPropertyChanged(); } }
+
+        private Thickness mouse = new Thickness(1);
         /// <summary>
         /// 鼠标划过时的宽度
         /// </summary>
-        public Thickness Mouse { get; set; } = new Thickness(1);
+        public Thickness Mouse { get { return mouse; } set { mouse = value; OnPropertyChanged(); } }
+
+        private Thickness pressed = new Thickness(1);
         /// <summary>
         /// 鼠标点击时的宽度
         /// </summary>
-        public Thickness Pressed { get; set; } = new Thickness(1);
+        public Thickness Pressed { get { return pressed; } set { pressed = value; OnPropertyChanged(); } }
 
         /// <summary>
         /// </summary>
