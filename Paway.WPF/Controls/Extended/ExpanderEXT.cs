@@ -1,6 +1,8 @@
+using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Paway.WPF
@@ -20,6 +22,10 @@ namespace Paway.WPF
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ExpanderEXT),
                 new PropertyMetadata(new BrushEXT(Colors.Transparent)));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty MoveResizerProperty =
+            DependencyProperty.RegisterAttached(nameof(MoveResizer), typeof(bool), typeof(ExpanderEXT), new PropertyMetadata(true));
 
         #endregion
 
@@ -43,6 +49,16 @@ namespace Paway.WPF
         {
             get { return (BrushEXT)GetValue(ItemBrushProperty); }
             set { SetValue(ItemBrushProperty, value); }
+        }
+        /// <summary>
+        /// 鼠标拖动设置大小
+        /// </summary>
+        [Category("扩展")]
+        [Description("鼠标拖动设置大小")]
+        public bool MoveResizer
+        {
+            get { return (bool)GetValue(MoveResizerProperty); }
+            set { SetValue(MoveResizerProperty, value); }
         }
 
         #endregion
@@ -127,6 +143,153 @@ namespace Paway.WPF
             }
         }
 
+        #endregion
+
+        #region 大小拖动控制
+        private bool _pressed;
+        private Point _prevPoint;
+        private bool? LeftDirection;
+        private bool? TopDirection;
+        /// <summary>
+        /// 鼠标拖动设置大小完成事件
+        /// </summary>
+        public event EventHandler ResizeEvent;
+        /// <summary>
+        /// </summary>
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+            if (!MoveResizer) return;
+            var point = e.GetPosition(this);
+            if (!_pressed)
+            {
+                SetCursor(point);
+                return;
+            }
+            double vertiChange, horiChange;
+            vertiChange = horiChange = 0;
+            var pointScr = this.PointToScreen(point);
+            if (LeftDirection.HasValue)
+            {//左右拉伸
+                horiChange = pointScr.X - _prevPoint.X;
+                if (LeftDirection.Value) horiChange *= -1;
+                var value = this.ActualWidth + horiChange;
+                var contentValue = value - this.BorderThickness.Left - this.BorderThickness.Right;
+                if (this.Content is FrameworkElement content)
+                {
+                    var minWidth = content.MinWidth;
+                    if (minWidth == 0) minWidth = 100;
+                    var maxWidth = content.MaxWidth;
+                    if (double.IsInfinity(maxWidth)) maxWidth = (this.Parent as FrameworkElement).ActualWidth - 50;
+                    if (contentValue > minWidth && value < maxWidth)
+                    {
+                        content.Width = contentValue;
+                    }
+                    else return;
+                }
+            }
+            if (TopDirection.HasValue)
+            {//上下拉伸
+                vertiChange = pointScr.Y - _prevPoint.Y;
+                if (TopDirection.Value) vertiChange *= -1;
+                var value = this.ActualHeight + vertiChange;
+                var contentValue = value - this.BorderThickness.Top - this.BorderThickness.Bottom - 30;
+                if (this.Content is FrameworkElement content)
+                {
+                    var minHeight = content.MinHeight;
+                    if (minHeight == 0) minHeight = 50;
+                    var maxHeight = content.MaxHeight;
+                    if (double.IsInfinity(maxHeight)) maxHeight = (this.Parent as FrameworkElement).ActualHeight - 50;
+                    if (contentValue > minHeight && value < maxHeight)
+                    {
+                        content.Height = contentValue;
+                    }
+                    else return;
+                }
+            }
+            _prevPoint = pointScr;
+            if (ResizeEvent != null)
+            {
+                var args = new RoutedEventArgs(e.RoutedEvent, this);
+                ResizeEvent.Invoke(this, args);
+            }
+        }
+        private void SetCursor(Point point)
+        {
+            if (!this.IsExpanded) return;
+            var left = point.X;
+            var top = point.Y;
+            var right = this.ActualWidth - left;
+            var bottom = this.ActualHeight - top;
+
+            LeftDirection = TopDirection = null;
+            switch (this.ExpandDirection)
+            {
+                case ExpandDirection.Left:
+                    if (right < 7) LeftDirection = false;
+                    break;
+                case ExpandDirection.Right:
+                    if (left < 7) LeftDirection = true;
+                    break;
+                case ExpandDirection.Up:
+                    if (bottom < 7) TopDirection = false;
+                    break;
+                case ExpandDirection.Down:
+                    if (top < 7) TopDirection = true;
+                    break;
+            }
+            if (LeftDirection.HasValue)
+            {
+                this.Cursor = Cursors.SizeWE;
+            }
+            else if (TopDirection.HasValue)
+            {
+                this.Cursor = Cursors.SizeNS;
+            }
+            else
+            {
+                this.Cursor = null;
+            }
+        }
+        /// <summary>
+        /// </summary>
+        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
+        {
+            if (MoveResizer && (LeftDirection.HasValue || TopDirection.HasValue))
+            {
+                var point = e.GetPosition(this);
+                _pressed = true;
+                _prevPoint = this.PointToScreen(point);
+                this.CaptureMouse();
+                e.Handled = true;
+            }
+            base.OnPreviewMouseDown(e);
+        }
+        /// <summary>
+        /// </summary>
+        protected override void OnMouseEnter(MouseEventArgs e)
+        {
+            if (MoveResizer)
+            {
+                var point = e.GetPosition(this);
+                if (!_pressed)
+                {
+                    SetCursor(point);
+                }
+            }
+            base.OnMouseEnter(e);
+        }
+        /// <summary>
+        /// </summary>
+        protected override void OnMouseUp(MouseButtonEventArgs e)
+        {
+            if (MoveResizer)
+            {
+                _pressed = false;
+                this.ReleaseMouseCapture();
+            }
+            base.OnMouseUp(e);
+        }
         #endregion
     }
 }

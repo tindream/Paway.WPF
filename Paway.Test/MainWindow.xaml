@@ -120,7 +120,7 @@
             </StackPanel>
         </utils:ExpanderEXT>
 
-        <utils:ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="Hello" ItemBrush="LightGray;200">
+        <utils:ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="PlotView" ItemBrush="LightGray;200">
             <StackPanel>
                 <oxy:PlotView Model="{Binding Path= PlotModel}" Height="200">
                     <oxy:PlotView.ContextMenu>
@@ -166,7 +166,7 @@
             </StackPanel>
         </utils:ExpanderEXT>
         <utils:ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="ListView" ItemBrush="LightGray;200">
-            <StackPanel Width="250">
+            <StackPanel Width="250" MinHeight="100" MaxHeight="300">
                 <utils:ListViewEXT Name="listView2"
                                Height="84"
                                ItemsSource="{Binding GridList}"
@@ -183,8 +183,8 @@
                 </utils:ListViewEXT>
             </StackPanel>
         </utils:ExpanderEXT>
-        <utils:ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="TreeView" ItemBrush="LightGray;200">
-            <StackPanel Width="250">
+        <utils:ExpanderEXT ExpandDirection="Right" DockPanel.Dock="Right" Header="TreeView" ItemBrush="LightGray;200">
+            <StackPanel Width="250" MinWidth="100" MaxWidth="300">
                 <utils:TreeViewEXT x:Name="TreeViewOrg" Height="180" ICheckBox="Visible" ItemTemplate="{StaticResource DefaultNode}" ItemsSource="{Binding TreeList}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectedItemChanged">
@@ -195,8 +195,8 @@
                 </utils:TreeViewEXT>
             </StackPanel>
         </utils:ExpanderEXT>
-        <utils:ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="TabControl" ItemBrush="LightGray;200">
-            <utils:TabControlEXT TabStripPlacement="Top" Background="LightGray">
+        <utils:ExpanderEXT ExpandDirection="Up" DockPanel.Dock="Top" Header="TabControl" ItemBrush="LightGray;200">
+            <utils:TabControlEXT TabStripPlacement="Top" Background="LightGray" MinHeight="100" MaxHeight="300">
                 <TabItem Cursor="Hand" Header="音乐电台" />
                 <TabItem Cursor="Hand" Header="Mv电台"/>
             </utils:TabControlEXT>
