@@ -76,6 +76,7 @@
     <Compile Include="Controls\Converter\IValueConverter\BrushColorConverter.cs" />
     <Compile Include="Controls\Converter\IValueConverter\IsNotNullConverter.cs" />
     <Compile Include="Controls\Converter\IValueConverter\EnumConverter.cs" />
+    <Compile Include="Controls\Converter\MarkupExtension\EnumValuesExtension.cs" />
     <Compile Include="Controls\Converter\MarkupExtension\FontImageExtension.cs" />
     <Compile Include="Controls\Converter\ValidationRule\RegexValidationRule.cs" />
     <Compile Include="Controls\Converter\IEquatable\ColorLinear.cs" />

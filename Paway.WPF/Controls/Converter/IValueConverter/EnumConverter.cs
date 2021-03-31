@@ -25,7 +25,7 @@ namespace Paway.WPF
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return targetType.ParseObj(value);
         }
     }
 }

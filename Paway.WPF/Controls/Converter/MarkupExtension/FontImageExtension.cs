@@ -23,7 +23,7 @@ namespace Paway.WPF
         /// <summary>
         /// 文本图标
         /// </summary>
-        public FontImageType Value { get; set; }
+        public FontImageType FontChar { get; set; }
 
         /// <summary>
         /// </summary>
@@ -32,7 +32,7 @@ namespace Paway.WPF
         /// </summary>
         public FontImageExtension(FontImageType type)
         {
-            this.Value = type;
+            this.FontChar = type;
         }
         /// <summary>
         /// 转换器
@@ -44,7 +44,7 @@ namespace Paway.WPF
             {
                 obj.FontFamily = TConfig.FontAwesome;
             }
-            return Value.Description();
+            return FontChar.Description();
         }
     }
     /// <summary>

@@ -42,7 +42,7 @@
 
         <utils:ExpanderEXT ExpandDirection="Left" Header="输入" ItemBrush="LightGray;200">
             <StackPanel Width="250">
-                <utils:ProgressBarEXT Value="95" Name="progress"/>
+                <utils:ComboBoxEXT ItemsSource="{utils:EnumValues EnumType=local:MonitorType}" SelectedValue="{Binding Path=MonitorType, Converter={StaticResource enumConverter}}"/>
                 <utils:ComboBoxEXT ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
                 <utils:ComboBoxMulti ItemsSource="{Binding MultiList}"/>
                 <utils:ComboBoxDate SelectedValue="{Binding DatePickerTime}"/>
@@ -77,21 +77,17 @@
                              ItemBorder="1;0"
                              Command="{Binding Teach}" CommandParameter="{Binding ElementName=btn}" Click="Cancel_Click" />
                     <utils:ButtonEXT Name="btn" Grid.Column="1"
-                             Content="{utils:FontImage Value=Adjust}" Click="Commit_Click" 
+                             Content="{utils:FontImage FontChar=Adjust}" Click="Commit_Click" 
                              CommandParameter="{Binding ElementName=btn}"/>
                     <utils:Badge Name="badge" Grid.Column="1" IsWaving="True" HorizontalAlignment="Right" Text="1" Background="Red" VerticalAlignment="Top" Height="20" Margin="-6"/>
                 </Grid>
+                <utils:DatePickerEXT Name="dp" Text="{Binding DatePickerTime, Mode=TwoWay}"/>
 
-                <utils:RichTextBoxEXT x:Name="rt" IsReadOnly="True" Height="150" BorderThickness="0" Foreground="#555" >
-                    <FlowDocument>
-                        <Paragraph>
-                            <Run Text="追加内容" />
-                        </Paragraph>
-                        <Paragraph>
-                            <Run Text="自动高度" />
-                        </Paragraph>
-                    </FlowDocument>
-                </utils:RichTextBoxEXT>
+            </StackPanel>
+        </utils:ExpanderEXT>
+        <utils:ExpanderEXT ExpandDirection="Right" DockPanel.Dock="Right" Header="显示" ItemBrush="LightGray;200">
+            <StackPanel Width="250" MaxWidth="300">
+                <utils:ProgressBarEXT Value="95" Name="progress"/>
                 <WrapPanel>
                     <utils:CheckBoxEXT x:Name="cbx" Content="Hello" IsChecked="True"/>
                     <utils:CheckBoxEXT Content="World" IsChecked="{x:Null}"/>
@@ -102,8 +98,16 @@
                     <utils:RadioButtonEXT Content="World" IsChecked="True" />
                     <utils:RadioButtonEXT Content="Watch" IsChecked="{x:Null}" IsEnabled="False"/>
                 </WrapPanel>
-                <utils:DatePickerEXT Name="dp" Text="{Binding DatePickerTime, Mode=TwoWay}"/>
-
+                <utils:RichTextBoxEXT x:Name="rt" IsReadOnly="True" Height="150" BorderThickness="0" Foreground="#555" >
+                    <FlowDocument>
+                        <Paragraph>
+                            <Run Text="追加内容" />
+                        </Paragraph>
+                        <Paragraph>
+                            <Run Text="自动高度" />
+                        </Paragraph>
+                    </FlowDocument>
+                </utils:RichTextBoxEXT>
                 <WrapPanel>
                     <Path Style="{StaticResource PathRound}" />
                     <utils:TransitionControl Name="transition" >
@@ -117,6 +121,7 @@
                     <Path Style="{StaticResource PathClose}" />
                     <utils:Progress Width="40" Height="40" />
                 </WrapPanel>
+                <utils:CalendarEXT/>
             </StackPanel>
         </utils:ExpanderEXT>
 
@@ -166,7 +171,7 @@
             </StackPanel>
         </utils:ExpanderEXT>
         <utils:ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="ListView" ItemBrush="LightGray;200">
-            <StackPanel Width="250" MinHeight="100" MaxHeight="300">
+            <StackPanel Width="250">
                 <utils:ListViewEXT Name="listView2"
                                Height="84"
                                ItemsSource="{Binding GridList}"
@@ -183,8 +188,8 @@
                 </utils:ListViewEXT>
             </StackPanel>
         </utils:ExpanderEXT>
-        <utils:ExpanderEXT ExpandDirection="Right" DockPanel.Dock="Right" Header="TreeView" ItemBrush="LightGray;200">
-            <StackPanel Width="250" MinWidth="100" MaxWidth="300">
+        <utils:ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="TreeView" ItemBrush="LightGray;200">
+            <StackPanel Width="250">
                 <utils:TreeViewEXT x:Name="TreeViewOrg" Height="180" ICheckBox="Visible" ItemTemplate="{StaticResource DefaultNode}" ItemsSource="{Binding TreeList}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectedItemChanged">
@@ -195,8 +200,8 @@
                 </utils:TreeViewEXT>
             </StackPanel>
         </utils:ExpanderEXT>
-        <utils:ExpanderEXT ExpandDirection="Up" DockPanel.Dock="Top" Header="TabControl" ItemBrush="LightGray;200">
-            <utils:TabControlEXT TabStripPlacement="Top" Background="LightGray" MinHeight="100" MaxHeight="300">
+        <utils:ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="TabControl" ItemBrush="LightGray;200">
+            <utils:TabControlEXT TabStripPlacement="Top" Background="LightGray" MaxHeight="300">
                 <TabItem Cursor="Hand" Header="音乐电台" />
                 <TabItem Cursor="Hand" Header="Mv电台"/>
             </utils:TabControlEXT>

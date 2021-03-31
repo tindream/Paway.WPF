@@ -118,6 +118,13 @@ namespace Paway.Test.ViewModel
             set { desc = value; RaisePropertyChanged(); }
         }
 
+        private MonitorType monitorType = MonitorType.RightToeAngle;
+        public MonitorType MonitorType
+        {
+            get { return monitorType; }
+            set { monitorType = value; RaisePropertyChanged(); }
+        }
+
         #endregion
 
         #region 命令

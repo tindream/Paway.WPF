@@ -180,7 +180,7 @@ namespace Paway.WPF
                     var minWidth = content.MinWidth;
                     if (minWidth == 0) minWidth = 100;
                     var maxWidth = content.MaxWidth;
-                    if (double.IsInfinity(maxWidth)) maxWidth = (this.Parent as FrameworkElement).ActualWidth - 50;
+                    if (double.IsInfinity(maxWidth)) maxWidth = (this.Parent as FrameworkElement).ActualWidth - 100;
                     if (contentValue > minWidth && value < maxWidth)
                     {
                         content.Width = contentValue;
@@ -197,9 +197,9 @@ namespace Paway.WPF
                 if (this.Content is FrameworkElement content)
                 {
                     var minHeight = content.MinHeight;
-                    if (minHeight == 0) minHeight = 50;
+                    if (minHeight == 0) minHeight = 100;
                     var maxHeight = content.MaxHeight;
-                    if (double.IsInfinity(maxHeight)) maxHeight = (this.Parent as FrameworkElement).ActualHeight - 50;
+                    if (double.IsInfinity(maxHeight)) maxHeight = (this.Parent as FrameworkElement).ActualHeight - 100;
                     if (contentValue > minHeight && value < maxHeight)
                     {
                         content.Height = contentValue;
