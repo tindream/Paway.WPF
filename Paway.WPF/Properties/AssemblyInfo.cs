@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Markup;
 
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
@@ -27,6 +28,13 @@ using System.Windows;
     ResourceDictionaryLocation.None,
     ResourceDictionaryLocation.SourceAssembly)
 ]
+
+//使用命名空间定义将命名空间映射到一个url 
+[assembly: XmlnsDefinition("http://tindream.github.com/", "Paway.WPF")]
+//使用WPF自动生成好的 命名空间定义，不再需要前辍（本地化标记扩展。）
+[assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "Paway.WPF")]
+//默认命名空间定义前缀
+[assembly: XmlnsPrefix("http://tindream.github.com/", "w")]
 
 // 程序集的版本信息由下列四个值组成: 
 //
