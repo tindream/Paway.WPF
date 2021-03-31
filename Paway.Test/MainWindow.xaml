@@ -42,6 +42,7 @@
 
         <utils:ExpanderEXT ExpandDirection="Left" Header="输入" ItemBrush="LightGray;200">
             <StackPanel Width="250">
+                <utils:ComboBoxEXT ItemsSource="{utils:IntList Count=20}" SelectedValue="{Binding Value}"/>
                 <utils:ComboBoxEXT ItemsSource="{utils:EnumValues EnumType=local:MonitorType}" SelectedValue="{Binding Path=MonitorType, Converter={StaticResource enumConverter}}"/>
                 <utils:ComboBoxEXT ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
                 <utils:ComboBoxMulti ItemsSource="{Binding MultiList}"/>
