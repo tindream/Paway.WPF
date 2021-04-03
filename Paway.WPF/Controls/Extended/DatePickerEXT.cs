@@ -36,8 +36,8 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty TodayColorProperty =
-            DependencyProperty.RegisterAttached(nameof(TodayColor), typeof(ColorEXT), typeof(DatePickerEXT),
-            new PropertyMetadata(new ColorEXT(Colors.Transparent, 120, 170)));
+            DependencyProperty.RegisterAttached(nameof(TodayColor), typeof(BrushEXT), typeof(DatePickerEXT),
+            new PropertyMetadata(new BrushEXT(Colors.Transparent, 120, 170)));
 
         #endregion
 
@@ -87,9 +87,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展")]
         [Description("'今天'按钮颜色")]
-        public ColorEXT TodayColor
+        public BrushEXT TodayColor
         {
-            get { return (ColorEXT)GetValue(TodayColorProperty); }
+            get { return (BrushEXT)GetValue(TodayColorProperty); }
             set { SetValue(TodayColorProperty, value); }
         }
 

@@ -262,7 +262,6 @@
                 <ListBoxItemEXT Text="Hello" IsSelected="True"
                                   Image="pack://application:,,,/Paway.Test;component/Images/close.png"/>
                 <ListBoxItemEXT Text="World" ItemBackground=";#78FF4633" ItemTextForeground="#FF4633;;"/>
-                <Button Content="Hi"/>
                 <ListBoxItemEXT Text="A" ItemBackground=";#7802E8FA" ItemTextForeground="#02E8FA;;"/>
                 <ListBoxItemEXT Text="C" ItemBackground=";#78024AFA" ItemTextForeground="#024AFA;;" ItemBorder="1"/>
             </ListViewEXT>

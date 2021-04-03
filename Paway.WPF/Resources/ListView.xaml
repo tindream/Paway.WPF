@@ -86,7 +86,7 @@
                                                     <TextBlock.Text>
                                                         <MultiBinding Converter="{StaticResource nullSelector}">
                                                             <Binding Path="Text" />
-                                                            <Binding Path="Content" />
+                                                            <!--<Binding Path="Content" />-->
                                                         </MultiBinding>
                                                     </TextBlock.Text>
                                                     <TextBlock.ToolTip>
@@ -94,7 +94,7 @@
                                                             <TextBlock.Text>
                                                                 <MultiBinding Converter="{StaticResource nullSelector}">
                                                                     <Binding Path="Text" />
-                                                                    <Binding Path="Content" />
+                                                                    <!--<Binding Path="Content" />-->
                                                                 </MultiBinding>
                                                             </TextBlock.Text>
                                                         </TextBlock>
