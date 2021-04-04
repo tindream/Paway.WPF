@@ -30,10 +30,7 @@ namespace Paway.WPF
                 index++;
             }
             if (value.Length > index) return value[index];
-            else if (value.Length > 0 && value[value.Length - 1] is SolidColorBrush)
-            {
-                return value[value.Length - 1];
-            }
+            else if (value.Length > 0) return value[value.Length - 1];
             else return null;
         }
         /// <summary>

@@ -118,6 +118,9 @@
     <Compile Include="Info\BaseInfo.cs" />
     <Compile Include="Info\TempInfo.cs" />
     <Compile Include="Interface\IModel.cs" />
+    <Compile Include="TestWindow.xaml.cs">
+      <DependentUpon>TestWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewMessage\RefreshMessage.cs" />
     <Compile Include="ViewMessage\UserMessage.cs" />
     <Compile Include="ViewMessage\StatuMessage.cs" />
@@ -138,6 +141,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="TestWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

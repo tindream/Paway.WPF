@@ -539,6 +539,7 @@
                                             <local:ButtonEXT.ItemBackground>
                                                 <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="TodayColor" RelativeSource="{RelativeSource AncestorType=local:CalendarEXT}"/>
+                                                    <!--可能无法加载?-->
                                                     <Binding Path="TodayColor" RelativeSource="{RelativeSource AncestorType=local:DatePickerEXT}"/>
                                                 </MultiBinding>
                                             </local:ButtonEXT.ItemBackground>
