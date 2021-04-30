@@ -965,7 +965,7 @@ namespace Paway.WPF
         /// <summary>
         /// 控件状态转换
         /// </summary>
-        internal static Tuple<T, I?, I?, I?, int?> ElementStatu<T, I>(ITypeDescriptorContext context, CultureInfo culture, string str,
+        internal static ElementData<T, I> ElementStatu<T, I>(ITypeDescriptorContext context, CultureInfo culture, string str,
             Func<string, I> func, Func<T, string, I?> funcValue)
             //where T : IElementStatu<I> 
             where T : class
@@ -998,7 +998,7 @@ namespace Paway.WPF
                 if (!string.IsNullOrEmpty(strs[3])) alpha = Convert.ToInt32(strs[3], culture);
                 else if (old != null) alpha = (int)old.GetValue("Alpha");
             }
-            return new Tuple<T, I?, I?, I?, int?>(old, normal, mouse, pressed, alpha);
+            return new ElementData<T, I>(old, normal, mouse, pressed, alpha);
         }
 
         #endregion

@@ -134,6 +134,7 @@
     <Compile Include="Controls\Window\FunctionBar\FunctionBarMonitor.cs" />
     <Compile Include="Method\AnimationHelper.cs" />
     <Compile Include="Method\ConverHelper.cs" />
+    <Compile Include="Method\ElementData.cs" />
     <Compile Include="Method\Internal\DpiHelper.cs" />
     <Compile Include="Method\Internal\Enums.cs" />
     <Compile Include="Method\Internal\NativeMethods.cs" />

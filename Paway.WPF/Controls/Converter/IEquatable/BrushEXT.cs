@@ -188,7 +188,7 @@ namespace Paway.WPF
             if (value is string str)
             {
                 var result = TMethod.ElementStatu<BrushEXT, Color>(context, culture, str, Parse, ParseValue);
-                return new BrushEXT(result.Item2, result.Item3, result.Item4, result.Item5, result.Item1);
+                return new BrushEXT(result.Normal, result.Mouse, result.Pressed, result.Alpha, result.Old);
             }
             return base.ConvertFrom(context, culture, value);
         }
