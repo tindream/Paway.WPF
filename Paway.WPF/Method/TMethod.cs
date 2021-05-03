@@ -169,7 +169,7 @@ namespace Paway.WPF
 
                 var block = new TextBlock()
                 {
-                    Text = msg.ToStrs(),
+                    Text = msg.ToStrings(),
                     FontSize = size
                 };
                 if (color != null) block.Foreground = new SolidColorBrush(color.Value);
@@ -319,7 +319,7 @@ namespace Paway.WPF
                 border.Child = dp;
                 tbProgress = new TextBlock()
                 {
-                    Text = msg == null ? TConfig.Loading : msg.ToStrs(),
+                    Text = msg == null ? TConfig.Loading : msg.ToStrings(),
                     FontSize = 15,
                     Foreground = new SolidColorBrush(Colors.Black),
                     Padding = new Thickness(10),
@@ -349,7 +349,7 @@ namespace Paway.WPF
             if (tbProgress == null) return;
             BeginInvoke(tbProgress, () =>
             {
-                tbProgress.Text = msg == null ? Paway.WPF.TConfig.Loading : msg.ToStrs();
+                tbProgress.Text = msg == null ? Paway.WPF.TConfig.Loading : msg.ToStrings();
             });
         }
         /// <summary>
@@ -400,7 +400,7 @@ namespace Paway.WPF
                     };
                     var block = new TextBlock()
                     {
-                        Text = msg.ToStrs(),
+                        Text = msg.ToStrings(),
                         Margin = new Thickness(8, 0, 8, 0),
                         Padding = new Thickness(20, 10, 20, 10),
                         TextWrapping = TextWrapping.Wrap,
@@ -489,7 +489,7 @@ namespace Paway.WPF
                     };
                     var block = new TextBlock()
                     {
-                        Text = msg.ToStrs(),
+                        Text = msg.ToStrings(),
                         Margin = new Thickness(8, 0, 8, 0),
                         Padding = new Thickness(20, 10, 20, 10),
                         TextWrapping = TextWrapping.Wrap,

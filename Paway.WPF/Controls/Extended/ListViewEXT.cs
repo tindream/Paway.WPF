@@ -643,9 +643,9 @@ namespace Paway.WPF
                 {
                     this.Focus();
                     if (item.Content is IListView info) TConfig.AddLog(this, info.Hit);
-                    else if (item.Content is ContentControl content) TConfig.AddLog(this, content.Content.ToStrs());
-                    else if (item.Content is TextBlock textBlock) TConfig.AddLog(this, textBlock.Text.ToStrs());
-                    else TConfig.AddLog(this, item.Content.ToStrs());
+                    else if (item.Content is ContentControl content) TConfig.AddLog(this, content.Content.ToStrings());
+                    else if (item.Content is TextBlock textBlock) TConfig.AddLog(this, textBlock.Text.ToStrings());
+                    else TConfig.AddLog(this, item.Content.ToStrings());
                 }
                 item.IsSelected = value;
                 Animation(item, value);

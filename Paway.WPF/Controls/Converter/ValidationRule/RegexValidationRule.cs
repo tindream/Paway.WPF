@@ -43,7 +43,7 @@ namespace Paway.WPF
         {
             var validResult = new ValidationResult(true, null);
 
-            var text = value.ToStrs();
+            var text = value.ToStrings();
             if (text.Length == 0 && this.MinLength == 0) return validResult;
 
             var result = RegexChecked(text);

@@ -134,7 +134,7 @@ namespace Paway.WPF
         /// </summary>
         public string Text
         {
-            get { return base.Content.ToStrs(); }
+            get { return base.Content.ToStrings(); }
             set { base.Content = value; OnPropertyChanged(); }
         }
         private string desc;

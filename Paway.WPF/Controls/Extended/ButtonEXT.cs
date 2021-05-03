@@ -157,8 +157,8 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnClick()
         {
-            var desc = this.ToolTip.ToStrs();
-            if (desc.IsEmpty()) desc = this.Content.ToStrs();
+            var desc = this.ToolTip.ToStrings();
+            if (desc.IsEmpty()) desc = this.Content.ToStrings();
             TConfig.AddLog(this, desc);
             base.OnClick();
         }

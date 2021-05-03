@@ -71,7 +71,7 @@ namespace Paway.WPF
             if (!item.IsGroup && item.Id == id)
             {
                 this.SelectedItem = item;
-                this.last = item.GetValue(this.DisplayMemberPath).ToStrs();
+                this.last = item.GetValue(this.DisplayMemberPath).ToStrings();
                 this.Text = this.last;
                 if (this.List != null) this.ItemsSource = this.List;
                 return true;

@@ -249,7 +249,7 @@ namespace Paway.WPF
             var properties = this.type.PropertiesCache();
             foreach (var property in properties)
             {
-                var column = columnsReady.Find(c => (c.ClipboardContentBinding is Binding binding && binding.Path.Path == property.Name) || c.Header.ToStrs() == property.Name || c.Header.ToStrs() == property.Text());
+                var column = columnsReady.Find(c => (c.ClipboardContentBinding is Binding binding && binding.Path.Path == property.Name) || c.Header.ToStrings() == property.Name || c.Header.ToStrings() == property.Text());
                 if (column != null)
                 {
                     columns.Add(column);

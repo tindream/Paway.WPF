@@ -93,7 +93,7 @@ namespace Paway.WPF
         private void InitText(IId item)
         {
             this.SelectedItem = item;
-            this.last = item.GetValue(this.DisplayMemberPath).ToStrs();
+            this.last = item.GetValue(this.DisplayMemberPath).ToStrings();
             this.Text = this.last;
             if (this.List != null) this.ItemsSource = this.List;
         }

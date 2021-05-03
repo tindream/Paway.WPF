@@ -49,7 +49,7 @@ namespace Paway.WPF
                 border1.Background = new SolidColorBrush(Color.FromArgb(255, 221, 51, 51));
             }
             var model = this.DataContext as WindowToastModel;
-            model.Message = msg.ToStrs();
+            model.Message = msg.ToStrings();
             if (time != 0) model.Time = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(time));
             this.Show();
         }

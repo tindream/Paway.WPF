@@ -65,7 +65,7 @@ namespace Paway.Test
                 List<AdminBaseInfo> list = Find<AdminBaseInfo>(find, cmd);
                 if (list.Count == 0)
                 {
-                    AdminBaseInfo info = new AdminBaseInfo() { Name = name, Value = value.ToStrs(), DateTime = DateTime.Now };
+                    AdminBaseInfo info = new AdminBaseInfo() { Name = name, Value = value.ToStrings(), DateTime = DateTime.Now };
                     Insert(info, cmd);
                 }
                 else

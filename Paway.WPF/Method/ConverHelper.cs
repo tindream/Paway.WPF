@@ -27,7 +27,7 @@ namespace Paway.WPF
             foreach (var column in columns)
             {
                 if (column.Visibility != Visibility.Visible) continue;
-                var name = column.Header.ToStrs();
+                var name = column.Header.ToStrings();
                 if (column.ClipboardContentBinding is Binding binding)
                 {
                     name = binding.Path.Path;
