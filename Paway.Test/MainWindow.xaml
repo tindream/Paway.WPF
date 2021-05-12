@@ -213,6 +213,27 @@
             <Button Background="{StaticResource Success}" BorderThickness="0" Content="成功" Height="32" Width="100" Foreground="White"/>
             <Button Background="{StaticResource Warn}" BorderThickness="0" Content="警告" Height="32" Width="100" Foreground="White"/>
             <Button Background="{StaticResource Error}" BorderThickness="0" Content="错误" Height="32" Width="100" Foreground="White"/>
+            <ListViewEXT Name="listView3" Margin="5,5,0,0" Background="#272727"
+                           ItemHeight="67" ItemWidth="100"
+                           ItemBorder="2" ItemBrush="Transparent;#AAFFFFFF"
+                           ItemImageHeight="32" ItemImageDock="Top" ItemPadding="5"
+                           Style="{StaticResource themeBackground}" ItemBackground="#373737" ItemTextForeground="White"
+                           SelectionMode="Extended" VerticalAlignment="Top" Height="146" Width="420" Padding="2" ItemMargin="2" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectionCommand}"
+                                           CommandParameter="{Binding ElementName=listView1}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListBoxItemEXT Text="World"/>
+                <ListBoxItemEXT Text="A"/>
+                <ListBoxItemEXT Text="B"/>
+                <ListBoxItemEXT Text="C"/>
+                <ListBoxItemEXT Text="D"/>
+                <ListBoxItemEXT Text="E"/>
+                <ListBoxItemEXT Text="F"/>
+                <ListBoxItemEXT Text="G"/>
+            </ListViewEXT>
         </WrapPanel>
 
     </DockPanel>

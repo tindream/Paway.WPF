@@ -20,11 +20,12 @@ namespace Paway.WPF
         /// <summary>
         /// 构造要将绑定到的装饰器的元素
         /// </summary>
-        public CustomAdorner(FrameworkElement adornedElement, Func<FrameworkElement> elementFunc, Color? color = null, Func<double> xFunc = null, Func<double> yFunc = null, Func<Storyboard> boardFunc = null) : base(adornedElement)
+        public CustomAdorner(FrameworkElement adornedElement, Func<FrameworkElement> elementFunc, Color? color = null, Func<double> xFunc = null, Func<double> yFunc = null, Func<Storyboard> boardFunc = null, bool? hitTest = null) : base(adornedElement)
         {
             //true:不路由事件
             //false:路由事件
-            IsHitTestVisible = boardFunc == null;
+            if (hitTest == null) hitTest = boardFunc == null;
+            IsHitTestVisible = hitTest.Value;
             canvas = new Canvas() { ClipToBounds = true };
             if (color != null) canvas.Background = new SolidColorBrush(color.Value);
             //添加到可视化树中

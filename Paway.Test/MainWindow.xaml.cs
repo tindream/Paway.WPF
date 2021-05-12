@@ -114,5 +114,10 @@ namespace Paway.Test
             //WPF.TMethod.WaterAdorner(e);
             base.OnPreviewMouseDown(e);
         }
+        protected override void OnPreviewMouseMove(MouseEventArgs e)
+        {
+            WPF.TMethod.WaterAdornerFixed(listView3, e);
+            base.OnPreviewMouseMove(e);
+        }
     }
 }

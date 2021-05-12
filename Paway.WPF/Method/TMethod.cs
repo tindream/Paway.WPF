@@ -173,7 +173,7 @@ namespace Paway.WPF
                     FontSize = size
                 };
                 if (color != null) block.Foreground = new SolidColorBrush(color.Value);
-                myAdornerLayer.Add(new CustomAdorner(parent, () => block, null, null, null, () =>
+                myAdornerLayer.Add(new CustomAdorner(parent, () => block, boardFunc: () =>
                 {
                     var storyboard = new Storyboard();
 
@@ -220,6 +220,43 @@ namespace Paway.WPF
                 }));
             });
         }
+
+        private static FrameworkElement Element;
+        /// <summary>
+        /// 装饰器-移动触发水波纹底色
+        /// </summary>
+        public static AdornerLayer WaterAdornerFixed(FrameworkElement element, MouseEventArgs e, double width = 100)
+        {
+            ClearWaterAdornerFixed();
+            var myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
+            if (myAdornerLayer == null) return null;
+
+            var point = e.GetPosition(element);
+            var x = Math.Max(element.ActualWidth - point.X, point.X);
+            var y = Math.Max(element.ActualHeight - point.Y, point.Y);
+            var autoWidth = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2)) * 2;
+            if (width == 0 || width > autoWidth) width = autoWidth;
+
+            var ellipse = new Ellipse() { Width = width, Height = width, Fill = new SolidColorBrush(Color.FromArgb(20, 0, 0, 0)) };
+            var waterAdornerFixed = new CustomAdorner(element, () => ellipse, null, () => point.X - ellipse.ActualWidth / 2, () => point.Y - ellipse.ActualHeight / 2, hitTest: false) { Name = "WaterAdornerFixed" };
+            myAdornerLayer.Add(waterAdornerFixed);
+            Element = element;
+            return myAdornerLayer;
+        }
+        private static void ClearWaterAdornerFixed()
+        {
+            if (Element == null) return;
+            var myAdornerLayer = AdornerLayer.GetAdornerLayer(Element);
+            if (myAdornerLayer == null) return;
+            var list = myAdornerLayer.GetAdorners(Element);
+            while (list != null)
+            {
+                var last = list.FirstOrDefault(c => c.Name == "WaterAdornerFixed");
+                if (last == null) break;
+                myAdornerLayer.Remove(last);
+                list = myAdornerLayer.GetAdorners(Element);
+            }
+        }
         /// <summary>
         /// 装饰器-点击触发水波纹特效
         /// </summary>
@@ -227,7 +264,7 @@ namespace Paway.WPF
         {
             if (!(e.OriginalSource is FrameworkElement element)) return;
             if (element is Adorner adorner)
-            {//暂未使用
+            {//暂未使用(响应事件时?)
                 if (adorner.AdornedElement is FrameworkElement framework)
                 {
                     element = framework;
@@ -269,7 +306,7 @@ namespace Paway.WPF
             if (width == 0 || width > autoWidth) width = autoWidth;
             if (maxWidth > 0 && width > maxWidth) width = maxWidth;
 
-            if (color == null) color = Color.FromArgb(255, 35, 175, 255);
+            if (color == null) color = TConfig.Color;
             var ellipse = new Ellipse() { Width = 10, Height = 10, Fill = new SolidColorBrush(color.Value) };
             myAdornerLayer.Add(new CustomAdorner(element, () => ellipse, null, () => point.X - ellipse.ActualWidth / 2, () => point.Y - ellipse.ActualHeight / 2, () =>
             {
@@ -334,10 +371,7 @@ namespace Paway.WPF
                     Width = 80,
                     Height = 80,
                 });
-                var progress = new CustomAdorner(panel, () => border, Color.FromArgb(10, 0, 0, 0))
-                {
-                    Name = "Progress"
-                };
+                var progress = new CustomAdorner(panel, () => border, Color.FromArgb(10, 0, 0, 0)) { Name = "Progress" };
                 myAdornerLayer.Add(progress);
             }
         }
@@ -411,12 +445,12 @@ namespace Paway.WPF
                     };
                     border.Child = block;
                     if (time == 0) time = 3000;
-                    myAdornerLayer.Add(new CustomAdorner(panel, () => border, null, null, () =>
+                    myAdornerLayer.Add(new CustomAdorner(panel, () => border, yFunc: () =>
                     {
                         var top = window.ActualHeight - border.ActualHeight;
                         top = top * 17 / 20;
                         return top;
-                    }, () =>
+                    }, boardFunc: () =>
                     {
                         var storyboard = new Storyboard();
 
@@ -500,7 +534,7 @@ namespace Paway.WPF
                     };
                     border.Child = block;
                     if (time == 0) time = 3000;
-                    myAdornerLayer.Add(new CustomAdorner(panel, () => border, null, null, null, () =>
+                    myAdornerLayer.Add(new CustomAdorner(panel, () => border, boardFunc: () =>
                     {
                         var storyboard = new Storyboard();
 
