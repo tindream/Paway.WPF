@@ -113,6 +113,7 @@
     <Compile Include="Info\AdminInfo.cs" />
     <Compile Include="Info\AuthInfo.cs" />
     <Compile Include="Info\UserInfo.cs" />
+    <Compile Include="Method\Method.cs" />
     <Compile Include="Method\Config.cs" />
     <Compile Include="Method\PlotHelper.cs" />
     <Compile Include="Info\BaseInfo.cs" />

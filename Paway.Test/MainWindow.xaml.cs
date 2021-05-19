@@ -116,7 +116,13 @@ namespace Paway.Test
         }
         protected override void OnPreviewMouseMove(MouseEventArgs e)
         {
-            WPF.TMethod.WaterAdornerFixed(listView3, e);
+            if (Method.Parent(listView3, out Window window))
+            {
+                if (window.Content is Panel panel)
+                {
+                    Method.WaterAdornerFixed(panel, e, 10);
+                }
+            }
             base.OnPreviewMouseMove(e);
         }
     }

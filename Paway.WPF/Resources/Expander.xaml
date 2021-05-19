@@ -12,7 +12,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Border BorderThickness="{TemplateBinding BorderThickness}"
-                            BorderBrush="#EBEBEB"
+                            BorderBrush="{StaticResource Light}"
                             CornerRadius="{Binding Radius, RelativeSource={RelativeSource AncestorType={x:Type local:ExpanderEXT}}}">
                         <Grid Background="{TemplateBinding Background}" SnapsToDevicePixels="False">
                             <Grid.ColumnDefinitions>
@@ -90,7 +90,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Border BorderThickness="{TemplateBinding BorderThickness}"
-                            BorderBrush="#EBEBEB"
+                            BorderBrush="{StaticResource Light}"
                             CornerRadius="{Binding Radius, RelativeSource={RelativeSource AncestorType={x:Type local:ExpanderEXT}}}">
                         <Grid Background="{TemplateBinding Background}" SnapsToDevicePixels="False">
                             <Grid.ColumnDefinitions>
@@ -172,7 +172,7 @@
                             <DockPanel x:Name="PART_Root">
                                 <ToggleButton
                                 x:Name="HeaderSite"
-                                Background="#EBEBEB"
+                                Background="{StaticResource Light}"
                                 MinWidth="0"
                                 MinHeight="0"
                                 FocusVisualStyle="{x:Null}"
@@ -325,7 +325,7 @@
                             <DockPanel Width="30" Name="dpAngle" Visibility="Collapsed">
                                 <ToggleButton
                                 x:Name="HeaderSiteAngle"
-                                Background="#EBEBEB"
+                                Background="{StaticResource Light}"
                                 MinWidth="0"
                                 MinHeight="0"
                                 FocusVisualStyle="{x:Null}"

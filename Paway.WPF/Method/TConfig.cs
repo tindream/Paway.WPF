@@ -103,6 +103,14 @@ namespace Paway.WPF
         }
 
         /// <summary>
+        /// 轻灰色
+        /// </summary>
+        public static Color Light { get; private set; } = Color.FromArgb(255, 235, 235, 235);
+        /// <summary>
+        /// 信息色
+        /// </summary>
+        public static SolidColorBrush LightBrush { get; private set; } = new SolidColorBrush(Light);
+        /// <summary>
         /// 信息色
         /// </summary>
         public static Color Info { get; private set; } = Color.FromArgb(255, 0, 188, 212);

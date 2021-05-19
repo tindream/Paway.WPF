@@ -207,6 +207,7 @@
 
     <!--#region 配色 -->
     <SolidColorBrush x:Key="Color" Color="#23AFFF" />
+    <SolidColorBrush x:Key="Light" Color="#EBEBEB" />
     <SolidColorBrush x:Key="Info" Color="#00BCD4" />
     <SolidColorBrush x:Key="Success" Color="#2DB84D" />
     <SolidColorBrush x:Key="Warn" Color="#FF9900" />

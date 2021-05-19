@@ -71,7 +71,7 @@
                             <Setter Property="Visibility" TargetName="tbWater" Value="Visible"/>
                         </Trigger>
                         <Trigger Property="IsReadOnly" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="#EBEBEB"/>
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource Light}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" TargetName="border" Value="LightGray"/>

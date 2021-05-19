@@ -213,12 +213,10 @@
             <Button Background="{StaticResource Success}" BorderThickness="0" Content="成功" Height="32" Width="100" Foreground="White"/>
             <Button Background="{StaticResource Warn}" BorderThickness="0" Content="警告" Height="32" Width="100" Foreground="White"/>
             <Button Background="{StaticResource Error}" BorderThickness="0" Content="错误" Height="32" Width="100" Foreground="White"/>
-            <ListViewEXT Name="listView3" Margin="5,5,0,0" Background="#272727"
-                           ItemHeight="67" ItemWidth="100"
-                           ItemBorder="2" ItemBrush="Transparent;#AAFFFFFF"
-                           ItemImageHeight="32" ItemImageDock="Top" ItemPadding="5"
-                           Style="{StaticResource themeBackground}" ItemBackground="#373737" ItemTextForeground="White"
-                           SelectionMode="Extended" VerticalAlignment="Top" Height="146" Width="420" Padding="2" ItemMargin="2" >
+            <ListViewEXT Name="listView3" Margin="5,5,0,0"  Height="140" Width="410"
+                         ItemHeight="67" ItemWidth="100" 
+                         ItemBorder="0;1"
+                         Background="LightGray" ItemBackground="#EBEBEB;" Padding="1" ItemMargin="1">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding SelectionCommand}"
@@ -270,10 +268,7 @@
             <Button Content="Dino.C" ToolTip="当前档案"/>-->
             <ListViewEXT Name="listView1" Margin="5,5,0,0" IAnimation="True"
                            ItemHeight="67" ItemWidth="100"
-                           ItemBorder="1,1,0,1;1,1,1,4"
-                           ItemImageHeight="32" ItemImageDock="Top" ItemPadding="5"
-                           Style="{StaticResource themeBackground}"
-                           SelectionMode="Extended" VerticalAlignment="Top">
+                           ItemBorder="1,1,0,1;1,1,1,4">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding SelectionCommand}"
