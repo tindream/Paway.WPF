@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>Paway.WPF</id>
-		<version>1.2.8</version>
+		<version>1.2.9</version>
 		<title>Paway.WPF</title>
 		<authors>Tinn</authors>
 		<owners>Tinna</owners>
@@ -15,7 +15,7 @@
 		<dependencies>
 			<group targetFramework="net45">
 				<dependency id="log4net" version="2.0.8" />
-				<dependency id="Paway.Helper" version="2.4.0" />
+				<dependency id="Paway.Helper" version="2.4.2" />
 				<dependency id="System.Windows.Interactivity.WPF" version="2.0.20525" />
 			</group>
 		</dependencies>

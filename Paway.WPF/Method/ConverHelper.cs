@@ -34,7 +34,7 @@ namespace Paway.WPF
                 }
                 list.Add(name);
             }
-            return list.Predicate<T>(value, action);
+            return typeof(T).Predicate(list, value, action);
         }
 
         #endregion
