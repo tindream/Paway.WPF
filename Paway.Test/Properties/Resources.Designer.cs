@@ -75,20 +75,18 @@ namespace Paway.Test.Properties {
         ///Create index main.Auths_id on Auths (Id ASC);
         ///GO
         ///
-        ///CREATE TABLE [AlarmRecords](
+        ///-- ----------------------------
+        ///-- Table structure for Users
+        ///-- Date: 2011-11-11
+        ///-- ----------------------------
+        ///CREATE TABLE [Users](
         ///&quot;Id&quot;  integer Primary Key AutoIncrement not null,
-        ///&quot;Code&quot; int,
-        ///&quot;Statu&quot; int,
-        ///&quot;TriggerOn&quot; datetime,
-        ///&quot;EndOn&quot; datetime,
-        /// unique(Id asc)
-        ///);
-        ///GO
-        ///Create index main.AlarmRecords_id on AlarmRecords (Id ASC);
-        ///GO
-        ///
-        ///CREATE TABLE [AlarmCodes](
-        ///&quot;Id&quot;  integer Primary Key AutoInc [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///&quot;Name&quot;  nvarchar(32),
+        ///&quot;Pad&quot;  nvarchar(32),
+        ///&quot;Statu&quot;  bit,
+        ///&quot;UserType&quot;  int,
+        ///&quot;LoginOn&quot;  datetime,
+        ///&quot;CreateOn&quot;   [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string script {
             get {

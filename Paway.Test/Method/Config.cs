@@ -15,6 +15,7 @@ namespace Paway.Test
     {
         #region 常量
         public const string Text = "测试系统";
+        public const string LogConfig = "log.xml";
 
         #endregion
 

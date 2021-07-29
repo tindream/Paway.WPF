@@ -22,7 +22,8 @@ namespace Paway.Test
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            log4net.Config.XmlConfigurator.Configure(new FileInfo("Log.xml"));
+            var repository = log4net.LogManager.CreateRepository(Config.LogRepository);
+            log4net.Config.XmlConfigurator.Configure(repository, new FileInfo(Config.LogConfig));
             var version = Assembly.GetExecutingAssembly().GetName().Version;
             $"v{version} ({Environment.MachineName})".Log();
             {//Test
