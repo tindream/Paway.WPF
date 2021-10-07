@@ -20,8 +20,8 @@ namespace Paway.Test.ViewModel
     public class PlotViewModel : ViewModelPlus
     {
         #region 属性
-        private double minValue = Math.Pow(21, 1.0 / Config.Zoom);
-        private double maxValue = Math.Pow(19990, 1.0 / Config.Zoom);
+        private double minValue = Math.Pow(20.1, 1.0 / Config.Zoom);
+        private double maxValue = Math.Pow(19999.9, 1.0 / Config.Zoom);
         private List<RateInfo> rateList;
         private PlotModel plotModel;
         /// <summary>
@@ -64,7 +64,7 @@ namespace Paway.Test.ViewModel
             rateList.Add(new RateInfo("15", 3000, -12));
             rateList.Add(new RateInfo("16", 4000, 0));
             rateList.Add(new RateInfo("L", 20000, 0));
-            rateList.Add(new RateInfo(null, 45000, 0));
+            rateList.Add(new RateInfo(null, 50000, 0));
 
             this.PlotModel = new PlotModel()
             {
@@ -100,27 +100,45 @@ namespace Paway.Test.ViewModel
             PlotModel.ResetAllAxes();
             PlotModel.InvalidatePlot(true);
         }
-        private bool Axis_NodeMoveEvent(Axis axis, TrackerHitResult result, bool horizontal, double value)
+        private double? Axis_NodeMoveEvent(Axis axis, TrackerHitResult result, bool horizontal, double value)
         {
+            double? resut = null;
             if (result.Item is RateInfo item)
             {
                 double dx = value / axis.Scale;
                 if (horizontal)
                 {
-                    if (item.X + dx < this.minValue) return false;
-                    if (item.X + dx > this.maxValue) return false;
-                    item.X += dx;
+                    if (item.X + dx < this.minValue)
+                    {
+                        resut = (this.minValue - item.X) * axis.Scale;
+                        item.X = this.minValue;
+                    }
+                    else if (item.X + dx > this.maxValue)
+                    {
+                        resut = (this.maxValue - item.X) * axis.Scale;
+                        item.X = this.maxValue;
+                    }
+                    else item.X += dx;
                 }
                 else
                 {
-                    if (item.Value + dx > 18) return false;
-                    if (item.Value + dx < -18) return false;
-                    item.Value += dx;
+                    if (item.Value + dx > 18)
+                    {
+                        resut = (18 - item.Value) * axis.Scale;
+                        item.Value = 18;
+                    }
+                    else if (item.Value + dx < -18)
+                    {
+                        resut = (-18 - item.Value) * axis.Scale;
+                        item.Value = -18;
+                    }
+                    else item.Value += dx;
                 }
+                if (resut == 0) return resut;
                 this.rateList.Sort((x, y) => x.X > y.X ? 1 : -1);
                 PlotModel.InvalidatePlot(true);
             }
-            return true;
+            return resut;
         }
 
         #region LinearAxis
