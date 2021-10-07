@@ -22,4 +22,19 @@ namespace Paway.Test
             Value = value;
         }
     }
+    public class RateInfo
+    {
+        public double X { get; set; }
+        /// <summary>
+        /// 值
+        /// </summary>
+        public double Value { get; private set; }
+
+        public RateInfo() { }
+        public RateInfo(double x, double value)
+        {
+            this.X = Math.Pow(x, 1.0 / Config.Zoom);
+            Value = value;
+        }
+    }
 }
