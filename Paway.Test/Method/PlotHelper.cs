@@ -18,7 +18,7 @@ namespace Paway.Test
     public class PlotHelper
     {
         #region CategoryAxis
-        public static PlotModel LoadCategoryAxis(List<double> valueList, List<string> labelList, Func<string, string, object, string, object, string> action = null)
+        public static PlotModel LoadCategoryAxis(List<double> valueList, List<string> labelList, Func<object, string, string, object, string, object, string> action = null)
         {
             var model = new PlotModel
             {
@@ -182,17 +182,17 @@ namespace Paway.Test
                 //MarkerType = MarkerType.Circle,
                 //InterpolationAlgorithm = InterpolationAlgorithms.CatmullRomSpline,
                 //Smooth = true,
-                TrackerFormatString = "\r\n{0}: {4:0,0.00}"
+                TrackerFormatString = "\n{0}: {4:0,0.00}"
             };
             if (type.Tag() is byte[] colors)
             {
                 line.Color = OxyColor.FromRgb(colors[0], colors[1], colors[2]);
             }
-            if (first) line.TrackerFormatString = "时间: {2}\r\n{0}: {4:0,0.00}";
+            if (first) line.TrackerFormatString = "时间: {2}\n{0}: {4:0,0.00}";
             plotModel.Series.Add(line);
             return line;
         }
-        public static void AddLine(PlotModel model, int index, string title, OxyColor color, List<double> valueList, Func<string, string, object, string, object, string> action = null, string stringFormat = "{2}: {4:#,0.#}")
+        public static void AddLine(PlotModel model, int index, string title, OxyColor color, List<double> valueList, Func<object, string, string, object, string, object, string> action = null, string stringFormat = "{2}: {4:#,0.#}")
         {
             var line = new LinearBarSeries()
             {

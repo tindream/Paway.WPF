@@ -7,10 +7,19 @@
         mc:Ignorable="d"
         DataContext="{Binding Plot ,Source={StaticResource Locator}}"
         xmlns:oxy="http://oxyplot.org/wpf"
-        Title="PlotWindow" Height="450" Width="900" WindowStartupLocation="CenterScreen">
+        Title="滤波图测试" Height="450" Width="900" WindowStartupLocation="CenterScreen">
     <StackPanel>
-        <Border BorderThickness="1" BorderBrush="LightGray">
+        <Border>
             <oxy:PlotView Model="{Binding Path= PlotModel}" Height="250" MinWidth="880">
+                <oxy:PlotView.DefaultTrackerTemplate>
+                    <ControlTemplate>
+                        <Canvas>
+                            <Border CornerRadius="0 6 6 6" BorderBrush="#37000000" BorderThickness="1" Canvas.Left="{Binding Position.X}" Canvas.Top="{Binding Position.Y}" Padding="5" Margin="0">
+                                <TextBlock Text="{Binding}" />
+                            </Border>
+                        </Canvas>
+                    </ControlTemplate>
+                </oxy:PlotView.DefaultTrackerTemplate>
             </oxy:PlotView>
         </Border>
     </StackPanel>
