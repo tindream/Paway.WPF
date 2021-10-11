@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         DataContext="{Binding Plot ,Source={StaticResource Locator}}"
         xmlns:oxy="http://oxyplot.org/wpf"
+        UseLayoutRounding="True"
         Title="滤波图测试" Height="450" Width="900" WindowStartupLocation="CenterScreen">
     <DockPanel>
         <oxy:PlotView Model="{Binding Path= PlotModel}" Height="250" MinWidth="880" DockPanel.Dock="Top">
@@ -38,8 +39,7 @@
                              CommandParameter="{Binding ElementName=btn}" ColorType="Error" IsLight="True"/>
             <ListViewEXT Margin="5,5,0,0"  Height="137" Width="405"
                          ItemHeight="67" ItemWidth="100" 
-                         ItemBorder="0;1"
-                         Background="LightGray" ColorType="Normal" Padding="0.5" ItemMargin="0.5">
+                         ColorType="Normal" IsLight="True">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding SelectionCommand}"

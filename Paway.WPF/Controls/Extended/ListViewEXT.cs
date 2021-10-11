@@ -159,19 +159,25 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ColorTypeProperty =
             DependencyProperty.RegisterAttached(nameof(ColorType), typeof(ColorType), typeof(ListViewEXT),
-            new UIPropertyMetadata(ColorType.Normal, OnColorTypeChanged));
+            new UIPropertyMetadata(ColorType.None, OnColorTypeChanged));
         private static void OnColorTypeChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            if (obj is ListViewEXT view && view.ColorType != ColorType.None)
+            if (obj is ListViewEXT view)
             {
-                var color = view.ColorType.Color();
-                view.ItemBackground = new BrushEXT(PMethod.AlphaColor(160, color));
+                if (view.ColorType != ColorType.None)
+                {
+                    var color = view.ColorType.Color();
+                    view.ItemBackground = new BrushEXT(PMethod.AlphaColor(160, color));
+                }
                 if (view.IsLight)
                 {
-                    //view.ItemBorder = new ThicknessEXT(1, 0);
-                    //view.BorderBrush = view.ItemBackground.Normal;
-                    //view.ItemBackground.Normal = new SolidColorBrush(Colors.White);
+                    view.ItemBorder = new ThicknessEXT(0, 1);
+                    view.Background = new SolidColorBrush(Colors.LightGray);
+                    view.Padding = new Thickness(1, 1, 0.5, 0.5);
+                    view.ItemMargin = new Thickness(0.5);
+                    view.ItemBackground.Normal = new SolidColorBrush(ColorType.Light.Color());
                 }
+                view.UpdateDefaultStyle();
             }
         }
 

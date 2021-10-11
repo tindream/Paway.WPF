@@ -66,17 +66,21 @@ namespace Paway.WPF
             new UIPropertyMetadata(ColorType.None, OnColorTypeChanged));
         private static void OnColorTypeChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            if (obj is ButtonEXT btn && btn.ColorType != ColorType.None)
+            if (obj is ButtonEXT btn)
             {
-                var color = btn.ColorType.Color();
-                btn.ItemBackground = new BrushEXT(PMethod.AlphaColor(160, color));
+                if (btn.ColorType != ColorType.None)
+                {
+                    var color = btn.ColorType.Color();
+                    btn.ItemBackground = new BrushEXT(PMethod.AlphaColor(160, color));
+                }
                 if (btn.IsLight)
                 {
                     btn.ItemBorder = new ThicknessEXT(1, 0);
-                    btn.BorderBrush = btn.ItemBackground.Normal;
+                    btn.BorderBrush = new SolidColorBrush(Colors.LightGray);
                     btn.ItemForeground = new BrushEXT(Color.FromRgb(34, 34, 34), Colors.White, Colors.White);
                     btn.ItemBackground.Normal = new SolidColorBrush(Colors.White);
                 }
+                btn.UpdateDefaultStyle();
             }
         }
 

@@ -49,7 +49,7 @@ namespace Paway.WPF
         /// <summary>
         /// 颜色Alpha值变量
         /// </summary>
-        public int Alpha { get; set; } = 50;
+        public int Alpha { get; set; } = 35;
         internal bool IHigh { get; set; }
 
         /// <summary>

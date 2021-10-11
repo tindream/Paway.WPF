@@ -71,12 +71,11 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <ButtonEXT Name="btnCancel" Content="取消"  AnimationHelper.Value="Bottom"
-                             ItemBackground="Transparent;#78CA6B38" ItemForeground="#333;;"
-                             BackgroundImage="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"
-                             Stretch="None" Viewport="0,0,0.35,1"
-                             ItemBorder="1;0"
-                             Command="{Binding Teach}" CommandParameter="{Binding ElementName=btn}" Click="Cancel_Click" />
-                    <ButtonEXT Name="btn" Grid.Column="1"
+                               ColorType="Warn" IsLight="True"
+                               Stretch="None" Viewport="0,0,0.35,1"
+                               Command="{Binding Teach}" CommandParameter="{Binding ElementName=btn}" Click="Cancel_Click" 
+                               BackgroundImage="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"/>
+                    <ButtonEXT Name="btn" Grid.Column="1" ColorType="Success"
                              Content="{FontImage FontChar=Adjust}" Click="Commit_Click" 
                              CommandParameter="{Binding ElementName=btn}"/>
                     <Badge Name="badge" Grid.Column="1" IsWaving="True" HorizontalAlignment="Right" Text="1" Background="Red" VerticalAlignment="Top" Height="20" Margin="-6"/>
@@ -215,10 +214,9 @@
             <Button Background="{StaticResource Error}" BorderThickness="0" Content="错误" Height="32" Width="100" Foreground="White"/>
             <Button Background="{StaticResource Light}" BorderThickness="0" Content="浅色" Height="32" Width="100"/>
             <Button Background="{StaticResource High}" BorderThickness="0" Content="深色" Height="32" Width="100" Foreground="White"/>
-            <ListViewEXT Name="listView3" Margin="5,5,0,0"  Height="140" Width="410"
+            <ListViewEXT Name="listView3" Margin="5,5,0,0"  Height="137" Width="405"
                          ItemHeight="67" ItemWidth="100" 
-                         ItemBorder="0;1"
-                         Background="LightGray" ItemBackground="#EBEBEB;" Padding="1" ItemMargin="1">
+                         IsLight="True">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding SelectionCommand}"
