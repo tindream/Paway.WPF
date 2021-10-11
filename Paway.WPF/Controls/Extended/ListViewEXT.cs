@@ -150,6 +150,31 @@ namespace Paway.WPF
         public static readonly DependencyProperty ItemDescFontSizeProperty =
         DependencyProperty.RegisterAttached(nameof(ItemDescFontSize), typeof(DoubleEXT), typeof(ListViewEXT));
 
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty IsLightProperty =
+            DependencyProperty.RegisterAttached(nameof(IsLight), typeof(bool), typeof(ListViewEXT),
+            new UIPropertyMetadata(false, OnColorTypeChanged));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ColorTypeProperty =
+            DependencyProperty.RegisterAttached(nameof(ColorType), typeof(ColorType), typeof(ListViewEXT),
+            new UIPropertyMetadata(ColorType.Normal, OnColorTypeChanged));
+        private static void OnColorTypeChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            if (obj is ListViewEXT view && view.ColorType != ColorType.None)
+            {
+                var color = view.ColorType.Color();
+                view.ItemBackground = new BrushEXT(PMethod.AlphaColor(160, color));
+                if (view.IsLight)
+                {
+                    //view.ItemBorder = new ThicknessEXT(1, 0);
+                    //view.BorderBrush = view.ItemBackground.Normal;
+                    //view.ItemBackground.Normal = new SolidColorBrush(Colors.White);
+                }
+            }
+        }
+
         #endregion
 
         #region 扩展.项
@@ -421,6 +446,29 @@ namespace Paway.WPF
         {
             get { return (DoubleEXT)GetValue(ItemDescFontSizeProperty); }
             set { SetValue(ItemDescFontSizeProperty, value); }
+        }
+
+        #endregion
+        #region 扩展.颜色样式
+        /// <summary>
+        /// 轻颜色样式
+        /// </summary>
+        [Category("扩展.轻颜色样式")]
+        [Description("轻颜色样式")]
+        public bool IsLight
+        {
+            get { return (bool)GetValue(IsLightProperty); }
+            set { SetValue(IsLightProperty, value); }
+        }
+        /// <summary>
+        /// 颜色样式
+        /// </summary>
+        [Category("扩展.颜色样式")]
+        [Description("颜色样式")]
+        public ColorType ColorType
+        {
+            get { return (ColorType)GetValue(ColorTypeProperty); }
+            set { SetValue(ColorTypeProperty, value); }
         }
 
         #endregion

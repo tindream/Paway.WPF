@@ -54,6 +54,32 @@ namespace Paway.WPF
         public static readonly DependencyProperty BackgroundImageProperty =
             DependencyProperty.RegisterAttached(nameof(BackgroundImage), typeof(ImageEXT), typeof(ButtonEXT));
 
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty IsLightProperty =
+            DependencyProperty.RegisterAttached(nameof(IsLight), typeof(bool), typeof(ButtonEXT),
+            new UIPropertyMetadata(false, OnColorTypeChanged));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ColorTypeProperty =
+            DependencyProperty.RegisterAttached(nameof(ColorType), typeof(ColorType), typeof(ButtonEXT),
+            new UIPropertyMetadata(ColorType.None, OnColorTypeChanged));
+        private static void OnColorTypeChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            if (obj is ButtonEXT btn && btn.ColorType != ColorType.None)
+            {
+                var color = btn.ColorType.Color();
+                btn.ItemBackground = new BrushEXT(PMethod.AlphaColor(160, color));
+                if (btn.IsLight)
+                {
+                    btn.ItemBorder = new ThicknessEXT(1, 0);
+                    btn.BorderBrush = btn.ItemBackground.Normal;
+                    btn.ItemForeground = new BrushEXT(Color.FromRgb(34, 34, 34), Colors.White, Colors.White);
+                    btn.ItemBackground.Normal = new SolidColorBrush(Colors.White);
+                }
+            }
+        }
+
         #endregion
 
         #region 扩展.前景
@@ -142,6 +168,29 @@ namespace Paway.WPF
         {
             get { return (ImageEXT)GetValue(BackgroundImageProperty); }
             set { SetValue(BackgroundImageProperty, value); }
+        }
+
+        #endregion
+        #region 扩展.颜色样式
+        /// <summary>
+        /// 轻颜色样式
+        /// </summary>
+        [Category("扩展.轻颜色样式")]
+        [Description("轻颜色样式")]
+        public bool IsLight
+        {
+            get { return (bool)GetValue(IsLightProperty); }
+            set { SetValue(IsLightProperty, value); }
+        }
+        /// <summary>
+        /// 颜色样式
+        /// </summary>
+        [Category("扩展.颜色样式")]
+        [Description("颜色样式")]
+        public ColorType ColorType
+        {
+            get { return (ColorType)GetValue(ColorTypeProperty); }
+            set { SetValue(ColorTypeProperty, value); }
         }
 
         #endregion

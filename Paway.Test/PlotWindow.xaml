@@ -9,26 +9,52 @@
         DataContext="{Binding Plot ,Source={StaticResource Locator}}"
         xmlns:oxy="http://oxyplot.org/wpf"
         Title="滤波图测试" Height="450" Width="900" WindowStartupLocation="CenterScreen">
-    <StackPanel>
-        <oxy:PlotView Model="{Binding Path= PlotModel}" Height="250" MinWidth="880">
-                <oxy:PlotView.DefaultTrackerTemplate>
-                    <ControlTemplate>
-                        <Canvas>
-                            <Border CornerRadius="0 6 6 6" BorderBrush="#37000000" BorderThickness="1" Canvas.Left="{Binding Position.X}" Canvas.Top="{Binding Position.Y}" Padding="5" Margin="0">
-                                <TextBlock Text="{Binding}" />
-                            </Border>
-                        </Canvas>
-                    </ControlTemplate>
-                </oxy:PlotView.DefaultTrackerTemplate>
-            </oxy:PlotView>
-        <WrapPanel>
-            <SliderEXT x:Name="sliderSize" Minimum="12" Maximum="21" Value="15" AutoToolTipPrecision="2"  TickFrequency="0.01">
+    <DockPanel>
+        <oxy:PlotView Model="{Binding Path= PlotModel}" Height="250" MinWidth="880" DockPanel.Dock="Top">
+            <oxy:PlotView.DefaultTrackerTemplate>
+                <ControlTemplate>
+                    <Canvas>
+                        <Border CornerRadius="0 6 6 6" BorderBrush="#37000000" BorderThickness="1" Canvas.Left="{Binding Position.X}" Canvas.Top="{Binding Position.Y}" Padding="5" Margin="0">
+                            <TextBlock Text="{Binding}" />
+                        </Border>
+                    </Canvas>
+                </ControlTemplate>
+            </oxy:PlotView.DefaultTrackerTemplate>
+        </oxy:PlotView>
+        <DockPanel>
+            <SliderEXT x:Name="sliderSize" Minimum="12" Maximum="21" Value="15" AutoToolTipPrecision="2"  TickFrequency="0.01" VerticalAlignment="Stretch" Orientation="Vertical"  >
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="ValueChanged">
                         <i:InvokeCommandAction Command="{Binding SliderChanged}"
                                            CommandParameter="{Binding ElementName=sliderSize}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-            </SliderEXT></WrapPanel>
-    </StackPanel>
+            </SliderEXT>
+            <ButtonEXT Name="btn" Grid.Column="1"
+                             Content="{FontImage FontChar=Adjust}"
+                             CommandParameter="{Binding ElementName=btn}" ColorType="Success"/>
+            <ButtonEXT Name="btn3" Grid.Column="1"
+                             Content="{FontImage FontChar=Adjust}"
+                             CommandParameter="{Binding ElementName=btn}" ColorType="Error" IsLight="True"/>
+            <ListViewEXT Margin="5,5,0,0"  Height="137" Width="405"
+                         ItemHeight="67" ItemWidth="100" 
+                         ItemBorder="0;1"
+                         Background="LightGray" ColorType="Normal" Padding="0.5" ItemMargin="0.5">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectionCommand}"
+                                           CommandParameter="{Binding ElementName=listView1}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListBoxItemEXT Text="A"/>
+                <ListBoxItemEXT Text="B"/>
+                <ListBoxItemEXT Text="C"/>
+                <ListBoxItemEXT Text="D"/>
+                <ListBoxItemEXT Text="E"/>
+                <ListBoxItemEXT Text="F"/>
+                <ListBoxItemEXT Text="G"/>
+            </ListViewEXT>
+            <Border/>
+        </DockPanel>
+    </DockPanel>
 </Window>

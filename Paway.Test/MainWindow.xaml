@@ -213,6 +213,8 @@
             <Button Background="{StaticResource Success}" BorderThickness="0" Content="成功" Height="32" Width="100" Foreground="White"/>
             <Button Background="{StaticResource Warn}" BorderThickness="0" Content="警告" Height="32" Width="100" Foreground="White"/>
             <Button Background="{StaticResource Error}" BorderThickness="0" Content="错误" Height="32" Width="100" Foreground="White"/>
+            <Button Background="{StaticResource Light}" BorderThickness="0" Content="浅色" Height="32" Width="100"/>
+            <Button Background="{StaticResource High}" BorderThickness="0" Content="深色" Height="32" Width="100" Foreground="White"/>
             <ListViewEXT Name="listView3" Margin="5,5,0,0"  Height="140" Width="410"
                          ItemHeight="67" ItemWidth="100" 
                          ItemBorder="0;1"

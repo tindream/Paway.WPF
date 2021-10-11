@@ -24,9 +24,9 @@ namespace Paway.WPF
         /// <summary>
         /// 特性.枚举颜色
         /// </summary>
-        public ColorAttribute(Color color)
+        public ColorAttribute(byte r, byte g, byte b)
         {
-            this.Color = color;
+            this.Color = Color.FromRgb(r, g, b);
         }
     }
 }

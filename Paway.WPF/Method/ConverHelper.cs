@@ -156,6 +156,22 @@ namespace Paway.WPF
             }
             return Colors.Transparent;
         }
+        /// <summary>
+        /// 获取枚举颜色
+        /// </summary>
+        public static Color Color(this Enum e)
+        {
+            if (e == null) return Colors.Transparent;
+            var value = e.ToString();
+            foreach (var field in e.GetType().GetFields(TConfig.Flags))
+            {
+                if (value == field.Name)
+                {
+                    return field.Color();
+                }
+            }
+            return Colors.Transparent;
+        }
 
         #endregion
     }
