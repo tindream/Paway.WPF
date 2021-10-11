@@ -157,8 +157,8 @@ namespace Paway.WPF
         }
         private void Animation(bool value)
         {
-            TMethod.Child(this, out Line line1, "line1", false);
-            TMethod.Child(this, out Line line2, "line2", false);
+            PMethod.Child(this, out Line line1, "line1", false);
+            PMethod.Child(this, out Line line2, "line2", false);
             var storyboard = new Storyboard();
             if (value)
             {

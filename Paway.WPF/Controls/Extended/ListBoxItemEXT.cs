@@ -22,7 +22,7 @@ namespace Paway.WPF
         /// </summary>
         public void OnPropertyChanged()
         {
-            var name = TMethod.GetLastModelName();
+            var name = PMethod.GetLastModelName();
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
@@ -46,14 +46,14 @@ namespace Paway.WPF
                 {
                     if ((listBoxItem.ItemBrush.Mouse as SolidColorBrush).Color == Colors.Transparent)
                     {
-                        mouseColor = TMethod.AlphaColor(mouse.Color.A + 50, mouse.Color);
+                        mouseColor = PMethod.AlphaColor(mouse.Color.A + 50, mouse.Color);
                     }
                 }
                 if (listBoxItem.ItemBackground.Pressed is SolidColorBrush pressed && pressed.Color != Colors.Transparent)
                 {
                     if ((listBoxItem.ItemBrush.Pressed as SolidColorBrush).Color == Colors.Transparent)
                     {
-                        pressedColor = TMethod.AlphaColor(pressed.Color.A + 100, pressed.Color);
+                        pressedColor = PMethod.AlphaColor(pressed.Color.A + 100, pressed.Color);
                     }
                 }
                 if (mouseColor != null || pressedColor != null)

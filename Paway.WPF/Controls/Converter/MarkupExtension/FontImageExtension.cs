@@ -42,7 +42,7 @@ namespace Paway.WPF
             var service = (IProvideValueTarget)serviceProvider.GetService(typeof(IProvideValueTarget));
             if (service != null && service.TargetObject is Control obj)
             {
-                obj.FontFamily = TConfig.FontAwesome;
+                obj.FontFamily = PConfig.FontAwesome;
             }
             return FontChar.Description();
         }

@@ -30,13 +30,13 @@ namespace Paway.WPF
         /// </summary>
         public ThemeBackground()
         {
-            TConfig.BackgroundChanged += Config_BackgroundChanged;
+            PConfig.BackgroundChanged += Config_BackgroundChanged;
         }
         private void Config_BackgroundChanged(Color obj)
         {
             if (this.Value is SolidColorBrush value && value.Color.R == obj.R && value.Color.G == obj.G && value.Color.B == obj.B)
             {
-                this.Value = new SolidColorBrush(TConfig.Background);
+                this.Value = new SolidColorBrush(PConfig.Background);
             }
         }
         /// <summary>
@@ -84,7 +84,7 @@ namespace Paway.WPF
             {
                 if (byte.TryParse(str, out byte alpha))
                 {
-                    return new ThemeBackground(TMethod.ThemeColor(alpha));
+                    return new ThemeBackground(PMethod.ThemeColor(alpha));
                 }
                 return new ThemeBackground((Color)ColorConverter.ConvertFromString(str));
             }

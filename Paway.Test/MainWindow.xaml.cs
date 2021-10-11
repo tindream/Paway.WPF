@@ -49,11 +49,11 @@ namespace Paway.Test
             rt.AddLine(DateTime.Now.ToString());
             rt.Focus();
 
-            var type = (TransitionType)WPF.TMethod.Random(0, (int)TransitionType.Bottom + 1);
+            var type = (TransitionType)WPF.PMethod.Random(0, (int)TransitionType.Bottom + 1);
             if (btnCancel.Opacity == 0) type = TransitionType.FadeIn;
             AnimationHelper.Start(btnCancel, type);
 
-            progress.AnimationValue = WPF.TMethod.Random(100);
+            progress.AnimationValue = WPF.PMethod.Random(100);
 
             //WPF.TMethod.Progress(this, () =>
             //{
@@ -61,15 +61,15 @@ namespace Paway.Test
             //});
 
             storyboard.Stop(this);
-            WPF.TMethod.DoEvents();
+            WPF.PMethod.DoEvents();
             storyboard.Begin(this, true);
 
             var r = Validation.GetHasError(tb);
-            WPF.TMethod.Hit(this, r);
+            WPF.PMethod.Hit(this, r);
             //var xml = WPF.TMethod.GetTemplateXaml(dp);
             //Method.Toast(this, xml);
 
-            type = (TransitionType)WPF.TMethod.Random((int)TransitionType.Left, (int)TransitionType.Bottom + 1);
+            type = (TransitionType)WPF.PMethod.Random((int)TransitionType.Left, (int)TransitionType.Bottom + 1);
             transition.TransitionType = type;
             if (transition.Content != pathNew) transition.Content = this.pathNew;
             else transition.Content = this.pathCurrent;
@@ -82,7 +82,7 @@ namespace Paway.Test
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
-            WPF.TMethod.Progress(this, () =>
+            WPF.PMethod.Progress(this, () =>
             {
                 DataService.Default.Load();
             }, () =>
@@ -93,7 +93,7 @@ namespace Paway.Test
             {
                 ex.Log();
                 Messenger.Default.Send(new StatuMessage(ex.Message()));
-                WPF.TMethod.Error(this, ex.Message());
+                WPF.PMethod.Error(this, ex.Message());
             });
         }
         public override void OnApplyTemplate()

@@ -76,7 +76,7 @@ namespace Paway.WPF
         {
             if (obj is ProgressBarEXT bar)
             {
-                var animTime = TMethod.AnimTime((double)e.NewValue - (double)e.OldValue);
+                var animTime = PMethod.AnimTime((double)e.NewValue - (double)e.OldValue);
                 var animValue = new DoubleAnimation((double)e.OldValue, (double)e.NewValue, new Duration(TimeSpan.FromMilliseconds(animTime)))
                 {
                     EasingFunction = new CubicEase() { EasingMode = EasingMode.EaseOut },

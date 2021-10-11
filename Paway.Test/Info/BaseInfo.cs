@@ -22,7 +22,7 @@ namespace Paway.Test
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged()
         {
-            OnPropertyChanged(WPF.TMethod.GetLastModelName());
+            OnPropertyChanged(WPF.PMethod.GetLastModelName());
         }
         public void OnPropertyChanged(string name)
         {

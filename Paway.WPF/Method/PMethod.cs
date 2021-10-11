@@ -28,7 +28,7 @@ namespace Paway.WPF
     /// <summary>
     /// 一些帮助方法
     /// </summary>
-    public class TMethod : Paway.Helper.TMethod
+    public class PMethod : TMethod
     {
         #region 统一Invoke处理
         /// <summary>
@@ -306,7 +306,7 @@ namespace Paway.WPF
             if (width == 0 || width > autoWidth) width = autoWidth;
             if (maxWidth > 0 && width > maxWidth) width = maxWidth;
 
-            if (color == null) color = TConfig.Color;
+            if (color == null) color = PConfig.Color;
             var ellipse = new Ellipse() { Width = 10, Height = 10, Fill = new SolidColorBrush(color.Value) };
             myAdornerLayer.Add(new CustomAdorner(element, () => ellipse, null, () => point.X - ellipse.ActualWidth / 2, () => point.Y - ellipse.ActualHeight / 2, () =>
             {
@@ -356,7 +356,7 @@ namespace Paway.WPF
                 border.Child = dp;
                 tbProgress = new TextBlock()
                 {
-                    Text = msg == null ? TConfig.Loading : msg.ToStrings(),
+                    Text = msg == null ? PConfig.Loading : msg.ToStrings(),
                     FontSize = 15,
                     Foreground = new SolidColorBrush(Colors.Black),
                     Padding = new Thickness(10),
@@ -383,7 +383,7 @@ namespace Paway.WPF
             if (tbProgress == null) return;
             BeginInvoke(tbProgress, () =>
             {
-                tbProgress.Text = msg == null ? Paway.WPF.TConfig.Loading : msg.ToStrings();
+                tbProgress.Text = msg == null ? Paway.WPF.PConfig.Loading : msg.ToStrings();
             });
         }
         /// <summary>
@@ -628,7 +628,7 @@ namespace Paway.WPF
         /// </summary>
         internal static Color ThemeColor(int alpha)
         {
-            return AlphaColor(alpha, TConfig.Color);
+            return AlphaColor(alpha, PConfig.Color);
         }
         /// <summary>
         /// 指定Alpha颜色

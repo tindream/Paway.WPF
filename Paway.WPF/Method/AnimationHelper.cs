@@ -144,7 +144,7 @@ namespace Paway.WPF
                     value = Math.Abs(from - to);
                     if (value <= 1) value = Math.Max(element.ActualWidth, element.ActualHeight);
                 }
-                animTime = TMethod.AnimTime(value);
+                animTime = PMethod.AnimTime(value);
             }
             var anima = new DoubleAnimation()
             {

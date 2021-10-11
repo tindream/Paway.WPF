@@ -13,7 +13,7 @@ namespace Paway.Test.ViewModel
     {
         public void RaisePropertyChanged()
         {
-            base.RaisePropertyChanged(WPF.TMethod.GetLastModelName());
+            base.RaisePropertyChanged(WPF.PMethod.GetLastModelName());
         }
     }
 }

@@ -24,12 +24,12 @@ namespace Paway.WPF
         /// 默认的颜色
         /// </summary>
         public Color Normal { get { return normal; } set { normal = value; OnPropertyChanged(); } }
-        private Color mouse = TMethod.ThemeColor(210);
+        private Color mouse = PMethod.ThemeColor(210);
         /// <summary>
         /// 鼠标划过时的颜色
         /// </summary>
         public Color Mouse { get { return mouse; } set { mouse = value; OnPropertyChanged(); } }
-        private Color pressed = TMethod.ThemeColor(250);
+        private Color pressed = PMethod.ThemeColor(250);
         /// <summary>
         /// 鼠标点击时的颜色
         /// </summary>
@@ -43,7 +43,7 @@ namespace Paway.WPF
         /// </summary>
         public ColorEXT()
         {
-            TConfig.ColorChanged += Config_ColorChanged;
+            PConfig.ColorChanged += Config_ColorChanged;
         }
         private void Config_ColorChanged(Color obj)
         {
@@ -51,22 +51,22 @@ namespace Paway.WPF
             {
                 if (normal != Colors.LightGray && normal != Color.FromArgb(255, 254, 254, 254) && normal != Color.FromArgb(255, 220, 220, 220))
                 {
-                    this.Normal = TMethod.ThemeColor(normal.A);
+                    this.Normal = PMethod.ThemeColor(normal.A);
                 }
             }
             if (this.Mouse is Color mouse && mouse.R == obj.R && mouse.G == obj.G && mouse.B == obj.B)
             {
-                this.Mouse = TMethod.ThemeColor(mouse.A);
+                this.Mouse = PMethod.ThemeColor(mouse.A);
             }
             if (this.Pressed is Color pressed && pressed.R == obj.R && pressed.G == obj.G && pressed.B == obj.B)
             {
-                this.Pressed = TMethod.ThemeColor(pressed.A);
+                this.Pressed = PMethod.ThemeColor(pressed.A);
             }
         }
         /// <summary>
         /// 主题色：普通、鼠标移过、alpha变量
         /// </summary>
-        public ColorEXT(Color? normal, byte mouse, byte pressed) : this(normal, TMethod.ThemeColor(mouse), TMethod.ThemeColor(pressed)) { }
+        public ColorEXT(Color? normal, byte mouse, byte pressed) : this(normal, PMethod.ThemeColor(mouse), PMethod.ThemeColor(pressed)) { }
         /// <summary>
         /// </summary>
         public ColorEXT(Color? normal, Color? mouse = null, Color? pressed = null, int? alpha = null, ColorEXT value = null) : this()
@@ -91,8 +91,8 @@ namespace Paway.WPF
         private ColorEXT Reset(Color color, int alpha)
         {
             Normal = color;
-            Mouse = TMethod.AlphaColor(color.A - alpha, color);
-            Pressed = TMethod.AlphaColor(color.A + alpha, color);
+            Mouse = PMethod.AlphaColor(color.A - alpha, color);
+            Pressed = PMethod.AlphaColor(color.A + alpha, color);
             return this;
         }
         /// <summary>
@@ -101,7 +101,7 @@ namespace Paway.WPF
         private ColorEXT Focused(Color color, int alpha)
         {
             Mouse = color;
-            Pressed = TMethod.AlphaColor(color.A + alpha, color);
+            Pressed = PMethod.AlphaColor(color.A + alpha, color);
             return this;
         }
         /// <summary>
@@ -141,7 +141,7 @@ namespace Paway.WPF
             }
             if (value is string str)
             {
-                var result = TMethod.ElementStatu<ColorEXT, Color>(context, culture, str, Parse, ParseValue);
+                var result = PMethod.ElementStatu<ColorEXT, Color>(context, culture, str, Parse, ParseValue);
                 return new ColorEXT(result.Normal, result.Mouse, result.Pressed, result.Alpha, result.Old);
             }
             return base.ConvertFrom(context, culture, value);
@@ -155,7 +155,7 @@ namespace Paway.WPF
         {
             if (byte.TryParse(str, out byte alpha))
             {
-                return TMethod.ThemeColor(alpha);
+                return PMethod.ThemeColor(alpha);
             }
             return (Color)ColorConverter.ConvertFromString(str);
         }

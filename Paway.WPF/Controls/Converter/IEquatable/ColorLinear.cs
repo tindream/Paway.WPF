@@ -19,12 +19,12 @@ namespace Paway.WPF
     [TypeConverter(typeof(ColorLinearConverter))]
     public class ColorLinear : ModelBase, IEquatable<ColorLinear>
     {
-        private Color start = TMethod.ThemeColor(85);
+        private Color start = PMethod.ThemeColor(85);
         /// <summary>
         /// 起始颜色
         /// </summary>
         public Color Start { get { return start; } set { start = value; OnPropertyChanged(); } }
-        private Color end = TMethod.ThemeColor(250);
+        private Color end = PMethod.ThemeColor(250);
         /// <summary>
         /// 终点颜色
         /// </summary>
@@ -38,23 +38,23 @@ namespace Paway.WPF
         /// </summary>
         public ColorLinear()
         {
-            TConfig.ColorChanged += Config_ColorChanged;
+            PConfig.ColorChanged += Config_ColorChanged;
         }
         private void Config_ColorChanged(Color obj)
         {
             if (this.Start is Color start && start.R == obj.R && start.G == obj.G && start.B == obj.B)
             {
-                this.Start = TMethod.ThemeColor(start.A);
+                this.Start = PMethod.ThemeColor(start.A);
             }
             if (this.End is Color end && end.R == obj.R && end.G == obj.G && end.B == obj.B)
             {
-                this.End = TMethod.ThemeColor(end.A);
+                this.End = PMethod.ThemeColor(end.A);
             }
         }
         /// <summary>
         /// 主题色：普通、鼠标移过、alpha变量
         /// </summary>
-        public ColorLinear(byte start, byte end) : this(TMethod.ThemeColor(start), TMethod.ThemeColor(end)) { }
+        public ColorLinear(byte start, byte end) : this(PMethod.ThemeColor(start), PMethod.ThemeColor(end)) { }
         /// <summary>
         /// </summary>
         public ColorLinear(Color? start, Color? end = null, int? alpha = null, ColorLinear value = null) : this()
@@ -75,7 +75,7 @@ namespace Paway.WPF
         private ColorLinear Reset(Color color, int alpha = 165)
         {
             Start = color;
-            End = TMethod.AlphaColor(color.A + alpha, color);
+            End = PMethod.AlphaColor(color.A + alpha, color);
             return this;
         }
         /// <summary>
@@ -115,7 +115,7 @@ namespace Paway.WPF
             }
             if (value is string str)
             {
-                var old = TMethod.GetValue<ColorLinear>(context);
+                var old = PMethod.GetValue<ColorLinear>(context);
 
                 var strs = str.Split(';');
                 Color? start = null;
@@ -144,7 +144,7 @@ namespace Paway.WPF
         {
             if (byte.TryParse(str, out byte alpha))
             {
-                return TMethod.ThemeColor(alpha);
+                return PMethod.ThemeColor(alpha);
             }
             return (Color)ColorConverter.ConvertFromString(str);
         }

@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\Adorner\CustomAdorner.cs" />
+    <Compile Include="Controls\Attribute\ColorAttribute.cs" />
     <Compile Include="Controls\Badge\Badge.xaml.cs">
       <DependentUpon>Badge.xaml</DependentUpon>
     </Compile>
@@ -102,6 +103,7 @@
     <Compile Include="Controls\DataPager\IPagedCollectionView.cs" />
     <Compile Include="Controls\DataPager\PageChangingEventArgs.cs" />
     <Compile Include="Controls\DataPager\PagedCollectionView.cs" />
+    <Compile Include="Controls\Enum\ColorType.cs" />
     <Compile Include="Controls\Enum\PagerDisplayMode.cs" />
     <Compile Include="Controls\DataPager\TypeHelper.cs" />
     <Compile Include="Controls\DataPager\WeakEventListener.cs" />
@@ -159,8 +161,8 @@
     <Compile Include="Controls\Converter\IEquatable\ThicknessEXT.cs" />
     <Compile Include="Controls\Converter\IEquatable\BrushEXT.cs" />
     <Compile Include="Controls\Extended\ListViewEXT.cs" />
-    <Compile Include="Method\TConfig.cs" />
-    <Compile Include="Method\TMethod.cs" />
+    <Compile Include="Method\PConfig.cs" />
+    <Compile Include="Method\PMethod.cs" />
     <Compile Include="Controls\Interface\IListView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\AssemblyVersion.cs">

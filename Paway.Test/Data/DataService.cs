@@ -36,8 +36,8 @@ namespace Paway.Test
                 var user = new UserInfo { UserType = UserType.Admin, Name = "admin", Pad = EncryptHelper.MD5("admin" + Config.Suffix) };
                 this.Insert(user);
                 var auth = new AuthInfo(user.Id);
-                auth.SetValue(nameof(Test.MenuType), WPF.TMethod.Sum<MenuType>());
-                auth.SetValue(nameof(Test.ButtonType), WPF.TMethod.Sum<ButtonType>());
+                auth.SetValue(nameof(Test.MenuType), WPF.PMethod.Sum<MenuType>());
+                auth.SetValue(nameof(Test.ButtonType), WPF.PMethod.Sum<ButtonType>());
                 this.Insert(auth);
             }
         }
@@ -119,7 +119,7 @@ namespace Paway.Test
             List<AdminBaseInfo> temp = Find<AdminBaseInfo>(cmd);
             List<IInfo> list = new List<IInfo>();
             list.AddRange(temp);
-            return WPF.TMethod.Conversion<AdminInfo, IInfo>(list);
+            return WPF.PMethod.Conversion<AdminInfo, IInfo>(list);
         }
 
         #endregion

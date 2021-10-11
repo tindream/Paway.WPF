@@ -100,8 +100,8 @@ namespace Paway.WPF
         }
         private static void Animation(PasswordBox pad, bool value)
         {
-            TMethod.Child(pad, out Line line1, "line1", false);
-            TMethod.Child(pad, out Line line2, "line2", false);
+            PMethod.Child(pad, out Line line1, "line1", false);
+            PMethod.Child(pad, out Line line2, "line2", false);
             var storyboard = new Storyboard();
             if (value)
             {

@@ -149,7 +149,7 @@ namespace Paway.WPF
                 textBox.PreviewMouseLeftButtonDown -= TextBox_PreviewMouseLeftButtonDown;
                 textBox.PreviewMouseLeftButtonDown += TextBox_PreviewMouseLeftButtonDown;
             }
-            if (TMethod.Parent(this, out Window window))
+            if (PMethod.Parent(this, out Window window))
             {
                 window.LocationChanged -= Window_LocationChanged;
                 window.LocationChanged += Window_LocationChanged;
@@ -196,7 +196,7 @@ namespace Paway.WPF
                     if (isInit && !this.IQuery)
                     {
                         this.SelectedValue = item.GetValue(this.SelectedValuePath);
-                        TMethod.BeginInvoke(this, () => { this.IsDropDownOpen = false; });
+                        PMethod.BeginInvoke(this, () => { this.IsDropDownOpen = false; });
                     }
                 }
                 else
@@ -247,7 +247,7 @@ namespace Paway.WPF
                     this.ItemsSource = list;
                     if (id > 0)
                     {
-                        TMethod.BeginInvoke(this, () =>
+                        PMethod.BeginInvoke(this, () =>
                         {
                             treeView.Selected(id);
                             textBox.Focus();

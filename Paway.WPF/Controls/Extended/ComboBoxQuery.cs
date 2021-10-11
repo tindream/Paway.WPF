@@ -156,7 +156,7 @@ namespace Paway.WPF
                 textBox.PreviewMouseLeftButtonDown -= TextBox_PreviewMouseLeftButtonDown;
                 textBox.PreviewMouseLeftButtonDown += TextBox_PreviewMouseLeftButtonDown;
             }
-            if (TMethod.Parent(this, out Window window))
+            if (PMethod.Parent(this, out Window window))
             {
                 window.LocationChanged -= Window_LocationChanged;
                 window.LocationChanged += Window_LocationChanged;

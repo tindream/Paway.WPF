@@ -19,9 +19,9 @@ namespace Paway.WPF
     /// <summary>
     /// 配置
     /// </summary>
-    public class TConfig : Paway.Helper.TConfig
+    public class PConfig : TConfig
     {
-        static TConfig()
+        static PConfig()
         {
             FontAwesome = new FontFamily(new Uri(@"pack://application:,,,/Paway.WPF;component/Resource/"), "./#fontawesome");
         }
@@ -107,7 +107,7 @@ namespace Paway.WPF
         /// </summary>
         public static Color Light { get; private set; } = Color.FromArgb(255, 235, 235, 235);
         /// <summary>
-        /// 信息色
+        /// 轻灰色
         /// </summary>
         public static SolidColorBrush LightBrush { get; private set; } = new SolidColorBrush(Light);
         /// <summary>

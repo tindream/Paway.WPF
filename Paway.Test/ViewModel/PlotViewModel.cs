@@ -20,8 +20,9 @@ namespace Paway.Test.ViewModel
     public class PlotViewModel : ViewModelPlus
     {
         #region 属性
-        private double minValue = Math.Pow(20.1, 1.0 / Config.Zoom);
-        private double maxValue = Math.Pow(19999.9, 1.0 / Config.Zoom);
+        private readonly double minValue = Math.Pow(20.1, 1.0 / Config.Zoom);
+        private readonly double maxValue = Math.Pow(19999.9, 1.0 / Config.Zoom);
+        private int index;
         private List<RateInfo> rateList;
         private PlotModel plotModel;
         /// <summary>
@@ -42,6 +43,22 @@ namespace Paway.Test.ViewModel
         {
             AddPlot();
         }
+
+        #region Slider
+        private ICommand sliderChanged;
+        public ICommand SliderChanged
+        {
+            get
+            {
+                return sliderChanged ?? (sliderChanged = new RelayCommand<SliderEXT>(slider =>
+                {
+                }));
+            }
+        }
+
+        #endregion
+
+        #region Plot
         private void AddPlot()
         {
             this.rateList = new List<RateInfo>();
@@ -66,35 +83,25 @@ namespace Paway.Test.ViewModel
             rateList.Add(new RateInfo("L", 20000, 0));
             rateList.Add(new RateInfo(null, 50000, 0));
 
-            this.PlotModel = new PlotModel()
-            {
-                PlotAreaBorderColor = OxyColor.FromArgb(50, 0, 0, 0),
-            };
-            AddXY(plotModel);
+            this.PlotModel = new PlotModel() { PlotAreaBorderColor = OxyColor.FromArgb(50, 0, 0, 0) };
+            AddAxis(plotModel);
 
-            var line = AddLine(plotModel, rateList.Count);
-            line.Color = OxyColor.FromRgb(2, 232, 250);
+            var line = AddSeries(plotModel);
             line.DataFieldX = nameof(RateInfo.X);
             line.DataFieldY = nameof(RateInfo.Value);
             line.ItemsSource = rateList;
-            var bottomAxis = plotModel.Axes.FirstOrDefault(c => c.Position == AxisPosition.Bottom);
-            if (rateList.Count > 0)
-            {
-                bottomAxis.Minimum = Math.Pow(10, 1.0 / Config.Zoom);
-                bottomAxis.Maximum = Math.Pow(40000, 1.0 / Config.Zoom);
-            }
 
             plotModel.Annotations.Clear();
-            plotModel.Annotations.Add(AddLineY(-18));
-            plotModel.Annotations.Add(AddLineY(-12));
-            plotModel.Annotations.Add(AddLineY(-6));
-            plotModel.Annotations.Add(AddLineY(0));
-            plotModel.Annotations.Add(AddLineY(6));
-            plotModel.Annotations.Add(AddLineY(12));
-            plotModel.Annotations.Add(AddLineY(18));
+            plotModel.Annotations.Add(AddLine(LineAnnotationType.Horizontal, 0, -18));
+            plotModel.Annotations.Add(AddLine(LineAnnotationType.Horizontal, 0, -12));
+            plotModel.Annotations.Add(AddLine(LineAnnotationType.Horizontal, 0, -6));
+            plotModel.Annotations.Add(AddLine(LineAnnotationType.Horizontal, 0, 0));
+            plotModel.Annotations.Add(AddLine(LineAnnotationType.Horizontal, 0, 6));
+            plotModel.Annotations.Add(AddLine(LineAnnotationType.Horizontal, 0, 12));
+            plotModel.Annotations.Add(AddLine(LineAnnotationType.Horizontal, 0, 18));
             foreach (var point in rateList)
             {
-                plotModel.Annotations.Add(AddLineX(point.X));
+                plotModel.Annotations.Add(AddLine(LineAnnotationType.Vertical, point.X));
             }
 
             PlotModel.ResetAllAxes();
@@ -141,9 +148,7 @@ namespace Paway.Test.ViewModel
             return resut;
         }
 
-        #region LinearAxis
-        private int index;
-        public void AddXY(PlotModel plotModel, bool yZoom = false, bool xZoom = false)
+        public void AddAxis(PlotModel plotModel, bool yZoom = false, bool xZoom = false)
         {
             //定义y轴
             var leftAxis = new LinearAxis()
@@ -179,22 +184,25 @@ namespace Paway.Test.ViewModel
                     if (value > 9600 && value < 10400 && index != 4) { index = 4; return "10KHz"; }
                     return null;
                 },
+                Minimum = Math.Pow(10, 1.0 / Config.Zoom),
+                Maximum = Math.Pow(40000, 1.0 / Config.Zoom),
                 IsNodeMoveEnabled = true,
             };
             bottomAxis.NodeMoveEvent += Axis_NodeMoveEvent;
             plotModel.Axes.Add(bottomAxis);
         }
-        public LineSeries AddLine(PlotModel plotModel, int count)
+        public LineSeries AddSeries(PlotModel plotModel)
         {
             var line = new LineSeries()
             {
                 Title = "增益",
                 MarkerType = MarkerType.Circle,
+                TrackerPoint = 9,
+                Color = OxyColor.FromRgb(Config.Color.R, Config.Color.G, Config.Color.B),
 
-                Color = OxyColor.Parse("#4CAF50"),
                 MarkerSize = 8,
-                MarkerFill = OxyColor.Parse("#FFFFFFFF"),
-                MarkerStroke = OxyColor.Parse("#23AFFF"),
+                MarkerFill = OxyColors.White,
+                MarkerStroke = OxyColor.FromRgb(Config.Color.R, Config.Color.G, Config.Color.B),
                 MarkerStrokeThickness = 1.5,
                 StrokeThickness = 2,
                 LabelMargin = -8,
@@ -220,21 +228,13 @@ namespace Paway.Test.ViewModel
 
             return line;
         }
-        public LineAnnotation AddLineY(double y)
+        public LineAnnotation AddLine(LineAnnotationType type, double x = 0, double y = 0)
         {
             return new LineAnnotation
             {
-                Type = LineAnnotationType.Horizontal,
-                Y = y,
-                Color = OxyColor.FromArgb(50, 0, 0, 0)
-            };
-        }
-        public LineAnnotation AddLineX(double x)
-        {
-            return new LineAnnotation
-            {
-                Type = LineAnnotationType.Vertical,
+                Type = type,
                 X = x,
+                Y = y,
                 Color = OxyColor.FromArgb(50, 0, 0, 0)
             };
         }

@@ -177,9 +177,9 @@ namespace Paway.Test.ViewModel
             {
                 return colorChanged ?? (colorChanged = new RelayCommand<SliderEXT>(slider =>
                 {
-                    var color = WPF.TMethod.ColorSelector(slider.Value / 7);
+                    var color = WPF.PMethod.ColorSelector(slider.Value / 7);
                     Config.Color = color;
-                    Config.Background = TMethod.ColorSelector((slider.Value + 0.4) / 7).AddLight(0.93);
+                    Config.Background = PMethod.ColorSelector((slider.Value + 0.4) / 7).AddLight(0.93);
                     //Method.DoStyles();
                 }));
             }
@@ -210,7 +210,7 @@ namespace Paway.Test.ViewModel
                 {
                     if (listView1.SelectedItem is IListView info)
                     {
-                        WPF.TMethod.Toast(listView1, Value);
+                        WPF.PMethod.Toast(listView1, Value);
                     }
                     //if (listView1.SelectedItem is IListViewInfo info) Method.Show(listView1, info.Content);
                     //listView1.SelectedIndex = -1;
@@ -227,7 +227,7 @@ namespace Paway.Test.ViewModel
                 {
                     MultiList[0].IsChecked = !MultiList[0].IsChecked;
                     var desc = string.Join(",", MultiList.ToList().FindAll(c => c.IsChecked).Select(c => c.Text));
-                    WPF.TMethod.Toast(btn, desc, 5000);
+                    WPF.PMethod.Toast(btn, desc, 5000);
                 }));
             }
         }
@@ -335,7 +335,7 @@ namespace Paway.Test.ViewModel
 
             PlotModel.ResetAllAxes();
             PlotModel.InvalidatePlot(true);
-            WPF.TMethod.BeginInvoke(App.Current.MainWindow, () =>
+            WPF.PMethod.BeginInvoke(App.Current.MainWindow, () =>
             {
                 PlotHelper.AutoMaxMin(PlotModel, 10, 10);
                 PlotModel.InvalidatePlot(true);

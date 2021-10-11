@@ -11,7 +11,7 @@ using System.Windows;
 
 namespace Paway.Test
 {
-    public class Config : WPF.TConfig
+    public class Config : WPF.PConfig
     {
         #region 常量
         public const string Text = "测试系统";

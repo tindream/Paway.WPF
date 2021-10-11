@@ -29,7 +29,7 @@ namespace Paway.WPF
         public WindowProgress(object msg)
         {
             InitializeComponent();
-            desc.Text = msg == null ? TConfig.Loading : msg.ToStrings();
+            desc.Text = msg == null ? PConfig.Loading : msg.ToStrings();
         }
         /// <summary>
         /// 自动大小

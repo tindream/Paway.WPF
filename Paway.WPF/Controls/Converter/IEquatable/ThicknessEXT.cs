@@ -113,7 +113,7 @@ namespace Paway.WPF
             }
             if (value is string str)
             {
-                var result = TMethod.ElementStatu<ThicknessEXT, Thickness>(context, culture, str, Parse, ParseValue);
+                var result = PMethod.ElementStatu<ThicknessEXT, Thickness>(context, culture, str, Parse, ParseValue);
                 return new ThicknessEXT(result.Normal, result.Mouse, result.Pressed, result.Old);
             }
             return base.ConvertFrom(context, culture, value);

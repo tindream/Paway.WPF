@@ -113,7 +113,7 @@ namespace Paway.WPF
             }
             if (value is string str)
             {
-                var result = TMethod.ElementStatu<RadiusEXT, CornerRadius>(context, culture, str, Parse, ParseValue);
+                var result = PMethod.ElementStatu<RadiusEXT, CornerRadius>(context, culture, str, Parse, ParseValue);
                 return new RadiusEXT(result.Normal, result.Mouse, result.Pressed, result.Old);
             }
             return base.ConvertFrom(context, culture, value);

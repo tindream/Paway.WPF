@@ -4,13 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Paway.Test"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
         mc:Ignorable="d"
         DataContext="{Binding Plot ,Source={StaticResource Locator}}"
         xmlns:oxy="http://oxyplot.org/wpf"
         Title="滤波图测试" Height="450" Width="900" WindowStartupLocation="CenterScreen">
     <StackPanel>
-        <Border>
-            <oxy:PlotView Model="{Binding Path= PlotModel}" Height="250" MinWidth="880">
+        <oxy:PlotView Model="{Binding Path= PlotModel}" Height="250" MinWidth="880">
                 <oxy:PlotView.DefaultTrackerTemplate>
                     <ControlTemplate>
                         <Canvas>
@@ -21,6 +21,14 @@
                     </ControlTemplate>
                 </oxy:PlotView.DefaultTrackerTemplate>
             </oxy:PlotView>
-        </Border>
+        <WrapPanel>
+            <SliderEXT x:Name="sliderSize" Minimum="12" Maximum="21" Value="15" AutoToolTipPrecision="2"  TickFrequency="0.01">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="ValueChanged">
+                        <i:InvokeCommandAction Command="{Binding SliderChanged}"
+                                           CommandParameter="{Binding ElementName=sliderSize}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </SliderEXT></WrapPanel>
     </StackPanel>
 </Window>

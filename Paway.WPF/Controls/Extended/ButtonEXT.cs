@@ -159,7 +159,7 @@ namespace Paway.WPF
         {
             var desc = this.ToolTip.ToStrings();
             if (desc.IsEmpty()) desc = this.Content.ToStrings();
-            TConfig.AddLog(this, desc);
+            PConfig.AddLog(this, desc);
             base.OnClick();
         }
     }

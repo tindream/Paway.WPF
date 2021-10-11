@@ -19,7 +19,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty FontSizeProperty =
-            DependencyProperty.RegisterAttached(nameof(FontSize), typeof(FontSizeEXT), typeof(ThemeEXT), new PropertyMetadata(new FontSizeEXT(TConfig.FontSize)));
+            DependencyProperty.RegisterAttached(nameof(FontSize), typeof(FontSizeEXT), typeof(ThemeEXT), new PropertyMetadata(new FontSizeEXT(PConfig.FontSize)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
@@ -34,7 +34,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty BackgroundProperty =
             DependencyProperty.RegisterAttached(nameof(Background), typeof(ThemeBackground), typeof(ThemeEXT),
-                new PropertyMetadata(new ThemeBackground(TConfig.Background)));
+                new PropertyMetadata(new ThemeBackground(PConfig.Background)));
 
         #endregion
 

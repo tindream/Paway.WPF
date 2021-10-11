@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -61,7 +62,7 @@ namespace Paway.WPF
         /// RGB空间到HSL空间的转换
         /// 色调-饱和度-亮度(HSB) 转 Color
         /// </summary>
-        internal static Color HSLToRGB(double h, double s, double l)
+        private static Color HSLToRGB(double h, double s, double l)
         {
             if (l < 0) l = 0;
             if (l > 1) l = 1;
@@ -88,7 +89,7 @@ namespace Paway.WPF
             var r = (byte)R.ToInt();
             var g = (byte)G.ToInt();
             var b = (byte)B.ToInt();
-            return Color.FromArgb(255, r, g, b);
+            return System.Windows.Media.Color.FromArgb(255, r, g, b);
         }
         private static double Hue2RGB(double v1, double v2, double vH)
         {
@@ -138,6 +139,22 @@ namespace Paway.WPF
 
             var HSL = new double[3] { H, S, L };
             return HSL;
+        }
+
+        #endregion
+
+        #region 特性
+        /// <summary>
+        /// 特性-枚举颜色
+        /// </summary>
+        public static Color Color(this MemberInfo pro)
+        {
+            var list = pro.GetCustomAttributes(typeof(ColorAttribute), false) as ColorAttribute[];
+            if (list.Length == 1)
+            {
+                return list[0].Color;
+            }
+            return Colors.Transparent;
         }
 
         #endregion

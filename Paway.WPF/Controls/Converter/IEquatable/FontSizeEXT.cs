@@ -30,13 +30,13 @@ namespace Paway.WPF
         /// </summary>
         public FontSizeEXT()
         {
-            TConfig.FontSizeChanged += Config_FontSizeChanged;
+            PConfig.FontSizeChanged += Config_FontSizeChanged;
         }
         private void Config_FontSizeChanged(double obj)
         {
             if (this.Value == obj)
             {
-                this.Value = TConfig.FontSize;
+                this.Value = PConfig.FontSize;
             }
         }
         /// <summary>

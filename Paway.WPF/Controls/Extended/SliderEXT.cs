@@ -136,12 +136,12 @@ namespace Paway.WPF
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             base.OnPreviewMouseLeftButtonDown(e);
-            this.ToolTip = TMethod.Round(this.Value, this.AutoToolTipPrecision);
+            this.ToolTip = PMethod.Round(this.Value, this.AutoToolTipPrecision);
 
             if (this.AutoToolTipPlacement == System.Windows.Controls.Primitives.AutoToolTipPlacement.None) return;
             if (toolTip == null)
             {
-                if (TMethod.Child(this, out Thumb thumb))
+                if (PMethod.Child(this, out Thumb thumb))
                 {
                     toolTip = new ToolTip
                     {
@@ -152,7 +152,7 @@ namespace Paway.WPF
                     thumb.ToolTip = toolTip;
                 }
             }
-            toolTip.Content = TMethod.Round(this.Value, this.AutoToolTipPrecision);
+            toolTip.Content = PMethod.Round(this.Value, this.AutoToolTipPrecision);
             if (toolTip.IsOpen)
             {
                 toolTip.IsOpen = false;
@@ -160,11 +160,11 @@ namespace Paway.WPF
                 return;
             }
             toolTip.IsOpen = true;
-            TMethod.ExecuteMethod(toolTip.Parent, "Reposition");
+            PMethod.ExecuteMethod(toolTip.Parent, "Reposition");
         }
         private CustomPopupPlacement[] AutoToolTipCustomPlacementCallbackTemp(Size popupSize, Size targetSize, Point offset)
         {
-            if (TMethod.ExecuteMethod(this, "AutoToolTipCustomPlacementCallback", out object result, popupSize, targetSize, offset))
+            if (PMethod.ExecuteMethod(this, "AutoToolTipCustomPlacementCallback", out object result, popupSize, targetSize, offset))
             {
                 return result as CustomPopupPlacement[];
             }
@@ -193,12 +193,12 @@ namespace Paway.WPF
         protected override void OnThumbDragDelta(DragDeltaEventArgs e)
         {
             base.OnThumbDragDelta(e);
-            this.ToolTip = TMethod.Round(this.Value, this.AutoToolTipPrecision);
+            this.ToolTip = PMethod.Round(this.Value, this.AutoToolTipPrecision);
         }
 
         private void SliderEXT_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            this.ToolTip = TMethod.Round(this.Value, this.AutoToolTipPrecision);
+            this.ToolTip = PMethod.Round(this.Value, this.AutoToolTipPrecision);
         }
 
         #endregion
