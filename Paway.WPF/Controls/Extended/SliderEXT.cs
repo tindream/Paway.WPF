@@ -49,6 +49,11 @@ namespace Paway.WPF
         public static readonly DependencyProperty TrackBackgroundProperty =
             DependencyProperty.RegisterAttached(nameof(TrackBackground), typeof(Brush), typeof(SliderEXT),
                 new PropertyMetadata(new SolidColorBrush(Colors.LightGray)));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ButtonTypeProperty =
+            DependencyProperty.RegisterAttached(nameof(ButtonType), typeof(ButtonType), typeof(SliderEXT),
+                new PropertyMetadata(ButtonType.Circle));
 
         private static void OnRadiusChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
@@ -116,6 +121,16 @@ namespace Paway.WPF
         {
             get { return (Brush)GetValue(TrackBackgroundProperty); }
             set { SetValue(TrackBackgroundProperty, value); }
+        }
+        /// <summary>
+        /// 按钮类型
+        /// </summary>
+        [Category("扩展")]
+        [Description("按钮类型")]
+        public ButtonType ButtonType
+        {
+            get { return (ButtonType)GetValue(ButtonTypeProperty); }
+            set { SetValue(ButtonTypeProperty, value); }
         }
 
         #endregion

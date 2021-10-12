@@ -82,36 +82,45 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <ControlTemplate x:Key="SliderThumbDefault" TargetType="Thumb">
-        <Grid
-            UseLayoutRounding="True"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center">
-            <Path Name="grip" Style="{StaticResource PathRound}"
-                  Stretch="Fill"
-                  Fill="#FFF0F0F0"
-                  Stroke="#FFACACAC"
-                  Margin="0"
-                  StrokeThickness="1"
-                  UseLayoutRounding="True"
-                  VerticalAlignment="Center"
-                  SnapsToDevicePixels="True" />
-        </Grid>
-        <ControlTemplate.Triggers>
-            <Trigger Property="UIElement.IsMouseOver" Value="True">
-                <Setter Property="Shape.Fill" TargetName="grip" Value="#FFDCECFC"/>
-                <Setter Property="Shape.Stroke" TargetName="grip" Value="#FF7EB4EA"/>
-            </Trigger>
-            <Trigger Property="Thumb.IsDragging" Value="True">
-                <Setter Property="Shape.Fill" TargetName="grip" Value="#FFDAECFC"/>
-                <Setter Property="Shape.Stroke" TargetName="grip" Value="#FF569DE5"/>
-            </Trigger>
-            <Trigger Property="UIElement.IsEnabled" Value="False">
-                <Setter Property="Shape.Fill" TargetName="grip" Value="#FFF0F0F0"/>
-                <Setter Property="Shape.Stroke" TargetName="grip" Value="#FFD9D9D9"/>
-            </Trigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
+    <Style x:Key="SliderThumbDefault" TargetType="{x:Type Thumb}">
+        <Setter Property="local:SliderMonitor.IsMonitoring" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Grid UseLayoutRounding="True"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center">
+                        <Path Name="grip" Style="{StaticResource PathRound}"
+                              Stretch="Fill"
+                              Fill="#FFF0F0F0"
+                              Stroke="#FFACACAC"
+                              Margin="0"
+                              StrokeThickness="1"
+                              UseLayoutRounding="True"
+                              VerticalAlignment="Center"
+                              SnapsToDevicePixels="True" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="local:SliderMonitor.ButtonType" Value="Rect">
+                            <Setter Property="Style" TargetName="grip" Value="{StaticResource PathRect}"/>
+                        </Trigger>
+                        <Trigger Property="UIElement.IsMouseOver" Value="True">
+                            <Setter Property="Shape.Fill" TargetName="grip" Value="#FFDCECFC"/>
+                            <Setter Property="Shape.Stroke" TargetName="grip" Value="#FF7EB4EA"/>
+                        </Trigger>
+                        <Trigger Property="Thumb.IsDragging" Value="True">
+                            <Setter Property="Shape.Fill" TargetName="grip" Value="#FFDAECFC"/>
+                            <Setter Property="Shape.Stroke" TargetName="grip" Value="#FF569DE5"/>
+                        </Trigger>
+                        <Trigger Property="UIElement.IsEnabled" Value="False">
+                            <Setter Property="Shape.Fill" TargetName="grip" Value="#FFF0F0F0"/>
+                            <Setter Property="Shape.Stroke" TargetName="grip" Value="#FFD9D9D9"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <ControlTemplate x:Key="SliderThumbHorizontalTop" TargetType="Thumb">
         <Grid
             UseLayoutRounding="True"
@@ -283,7 +292,7 @@
                                Height="18"
                                VerticalAlignment="Center"
                                Focusable="False" 
-                               Template="{StaticResource SliderThumbDefault}">
+                               Style="{StaticResource SliderThumbDefault}">
                         </Thumb>
                     </Track.Thumb>
                     <Track.IncreaseRepeatButton>
@@ -366,7 +375,7 @@
                                Height="{TemplateBinding TrackWidth}"
                                VerticalAlignment="Center"
                                Focusable="False" 
-                               Template="{StaticResource SliderThumbDefault}">
+                               Style="{StaticResource SliderThumbDefault}">
                         </Thumb>
                     </Track.Thumb>
                     <Track.IncreaseRepeatButton>

@@ -27,10 +27,10 @@ namespace Paway.WPF
             {
                 if (thumb.TemplatedParent is ScrollBar scrollBar)
                 {
-                    if (scrollBar.TemplatedParent is ScrollViewerEXT ScrollViewerEXT)
+                    if (scrollBar.TemplatedParent is ScrollViewerEXT scrollViewerEXT)
                     {
-                        thumb.SetValue(ScrollBarRadiusProperty, ScrollViewerEXT.ScrollBarRadius);
-                        thumb.SetValue(ScrollBarColorProperty, ScrollViewerEXT.ScrollBarColor);
+                        thumb.SetValue(ScrollBarRadiusProperty, scrollViewerEXT.ScrollBarRadius);
+                        thumb.SetValue(ScrollBarColorProperty, scrollViewerEXT.ScrollBarColor);
                         return;
                     }
                     else if (scrollBar.TemplatedParent is ScrollViewer scrollViewer)
