@@ -34,6 +34,13 @@ namespace Paway.Test.ViewModel
             set { plotModel = value; RaisePropertyChanged(); }
         }
 
+        private string _value = "0.0";
+        public string Value
+        {
+            get { return _value; }
+            set { _value = value; RaisePropertyChanged(); }
+        }
+
         #endregion
 
         /// <summary>
@@ -45,13 +52,28 @@ namespace Paway.Test.ViewModel
         }
 
         #region Slider
-        private ICommand sliderChanged;
-        public ICommand SliderChanged
+        private ICommand sliderToolTipValueChanged;
+        public ICommand SliderToolTipValueChanged
         {
             get
             {
-                return sliderChanged ?? (sliderChanged = new RelayCommand<SliderEXT>(slider =>
+                return sliderToolTipValueChanged ?? (sliderToolTipValueChanged = new RelayCommand<ValueChangeEventArgs>(e =>
                 {
+                    var value = e.Value;
+                    if (e.Value < 0) e.Value = e.Value * 8 / 3;
+                }));
+            }
+        }
+        private ICommand sliderValueChanged;
+        public ICommand SliderValueChanged
+        {
+            get
+            {
+                return sliderValueChanged ?? (sliderValueChanged = new RelayCommand<SliderEXT>(e =>
+                {
+                    var value = e.Value;
+                    if (value < 0) value = e.Value * 8 / 3;
+                    this.Value = Method.Rounds(value, 1);
                 }));
             }
         }

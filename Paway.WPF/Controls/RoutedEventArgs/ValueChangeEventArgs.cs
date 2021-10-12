@@ -16,23 +16,25 @@ using System.Windows.Media.TextFormatting;
 namespace Paway.WPF
 {
     /// <summary>
-    /// DataGridEXT双击路由事件参数
+    /// 值更新路由事件参数
     /// </summary>
-    public class RowDoubleEventArgs : RoutedEventArgs
+    public class ValueChangeEventArgs : RoutedEventArgs
     {
         /// <summary>
-        /// 当前项
+        /// 值
         /// </summary>
-        public object Item { get; set; }
+        public double Value { get; set; }
 
         /// <summary>
+        /// 值更新路由事件参数
         /// </summary>
-        public RowDoubleEventArgs() { }
+        public ValueChangeEventArgs() { }
         /// <summary>
+        /// 值更新路由事件参数
         /// </summary>
-        public RowDoubleEventArgs(object item, RoutedEvent routedEvent, object source) : base(routedEvent, source)
+        public ValueChangeEventArgs(double value, RoutedEvent routedEvent, object source) : base(routedEvent, source)
         {
-            this.Item = item;
+            this.Value = value;
         }
     }
 }

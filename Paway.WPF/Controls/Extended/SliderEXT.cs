@@ -120,6 +120,14 @@ namespace Paway.WPF
 
         #endregion
 
+        #region 事件
+        /// <summary>
+        /// ToolTip值更新路由事件
+        /// </summary>
+        public event EventHandler<ValueChangeEventArgs> ToolTipValueChanged;
+
+        #endregion
+
         /// <summary>
         /// </summary>
         public SliderEXT()
@@ -136,9 +144,8 @@ namespace Paway.WPF
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             base.OnPreviewMouseLeftButtonDown(e);
-            this.ToolTip = PMethod.Round(this.Value, this.AutoToolTipPrecision);
-
-            if (this.AutoToolTipPlacement == System.Windows.Controls.Primitives.AutoToolTipPlacement.None) return;
+            var value = OnToolTipValueChanged(e.RoutedEvent);
+            if (!this.IsMoveToPointEnabled) return;
             if (toolTip == null)
             {
                 if (PMethod.Child(this, out Thumb thumb))
@@ -152,7 +159,7 @@ namespace Paway.WPF
                     thumb.ToolTip = toolTip;
                 }
             }
-            toolTip.Content = PMethod.Round(this.Value, this.AutoToolTipPrecision);
+            toolTip.Content = PMethod.Rounds(value, this.AutoToolTipPrecision, this.AutoToolTipPrecision);
             if (toolTip.IsOpen)
             {
                 toolTip.IsOpen = false;
@@ -193,12 +200,27 @@ namespace Paway.WPF
         protected override void OnThumbDragDelta(DragDeltaEventArgs e)
         {
             base.OnThumbDragDelta(e);
-            this.ToolTip = PMethod.Round(this.Value, this.AutoToolTipPrecision);
+            OnToolTipValueChanged(e.RoutedEvent);
+            if (PMethod.Child(this, out Thumb thumb))
+            {
+                if (thumb.ToolTip is ToolTip toolTip)
+                {
+                    toolTip.Content = this.ToolTip;
+                }
+            }
         }
 
         private void SliderEXT_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            this.ToolTip = PMethod.Round(this.Value, this.AutoToolTipPrecision);
+            OnToolTipValueChanged(e.RoutedEvent);
+        }
+        private double OnToolTipValueChanged(RoutedEvent routedEvent)
+        {
+            var arg = new ValueChangeEventArgs(this.Value, routedEvent, this);
+            ToolTipValueChanged?.Invoke(this, arg);
+            this.ToolTip = PMethod.Rounds(arg.Value, this.AutoToolTipPrecision, this.AutoToolTipPrecision);
+            if (toolTip != null) toolTip.Content = this.ToolTip;
+            return arg.Value;
         }
 
         #endregion

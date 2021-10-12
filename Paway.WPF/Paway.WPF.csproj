@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\Adorner\CustomAdorner.cs" />
+    <Compile Include="Controls\RoutedEventArgs\ValueChangeEventArgs.cs" />
     <Compile Include="Method\Attribute\ColorAttribute.cs" />
     <Compile Include="Controls\Badge\Badge.xaml.cs">
       <DependentUpon>Badge.xaml</DependentUpon>
@@ -136,7 +137,7 @@
       <DependentUpon>WindowProgress.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Extended\ThemeEXT.cs" />
-    <Compile Include="Controls\RoutedEventArgs\DataGridEXTEventArgs.cs" />
+    <Compile Include="Controls\RoutedEventArgs\RowDoubleEventArgs.cs" />
     <Compile Include="Controls\RoutedEventArgs\CustomFilterEventArgs.cs" />
     <Compile Include="Controls\TransitionControl\TransitionControl.cs" />
     <Compile Include="Controls\Enum\TransitionType.cs" />

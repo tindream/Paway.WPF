@@ -16,29 +16,25 @@ using System.Windows.Media.TextFormatting;
 namespace Paway.WPF
 {
     /// <summary>
-    /// 自定义搜索过滤器路由事件参数
+    /// 双击路由事件参数
     /// </summary>
-    public class CustomFilterEventArgs : RoutedEventArgs
+    public class RowDoubleEventArgs : RoutedEventArgs
     {
         /// <summary>
-        /// 过滤输入
+        /// 当前项
         /// </summary>
-        public string Filter { get; set; }
-        /// <summary>
-        /// 结果列表
-        /// </summary>
-        public IList List { get; set; }
+        public object Item { get; set; }
 
         /// <summary>
-        /// 自定义搜索过滤器路由事件参数
+        /// 双击路由事件参数
         /// </summary>
-        public CustomFilterEventArgs() { }
+        public RowDoubleEventArgs() { }
         /// <summary>
-        /// 自定义搜索过滤器路由事件参数
+        /// 双击路由事件参数
         /// </summary>
-        public CustomFilterEventArgs(string filter, RoutedEvent routedEvent, object source) : base(routedEvent, source)
+        public RowDoubleEventArgs(object item, RoutedEvent routedEvent, object source) : base(routedEvent, source)
         {
-            this.Filter = filter;
+            this.Item = item;
         }
     }
 }

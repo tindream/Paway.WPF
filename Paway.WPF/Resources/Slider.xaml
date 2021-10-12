@@ -402,14 +402,15 @@
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="IsMoveToPointEnabled" Value="True"/>
         <Setter Property="AutoToolTipPlacement" Value="TopLeft"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Margin" Value="2"/>
         <!--修改模板属性-->
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Horizontal">
+                <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="Template" Value="{StaticResource SliderHorizontal}"/>
             </Trigger>
             <Trigger Property="Orientation" Value="Vertical">
+                <Setter Property="VerticalAlignment" Value="Stretch"/>
                 <Setter Property="Template" Value="{StaticResource SliderVertical}"/>
             </Trigger>
         </Style.Triggers>

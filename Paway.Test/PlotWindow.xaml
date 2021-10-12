@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Paway.Test"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+        xmlns:ip="http://www.galasoft.ch/mvvmlight"
         mc:Ignorable="d"
         DataContext="{Binding Plot ,Source={StaticResource Locator}}"
         xmlns:oxy="http://oxyplot.org/wpf"
         UseLayoutRounding="True"
-        Title="滤波图测试" Height="450" Width="900" WindowStartupLocation="CenterScreen">
+        Title="滤波图测试" Height="650" Width="900" WindowStartupLocation="CenterScreen">
     <DockPanel>
         <oxy:PlotView Model="{Binding Path= PlotModel}" Height="250" MinWidth="880" DockPanel.Dock="Top">
             <oxy:PlotView.DefaultTrackerTemplate>
@@ -22,39 +23,50 @@
                 </ControlTemplate>
             </oxy:PlotView.DefaultTrackerTemplate>
         </oxy:PlotView>
-        <DockPanel>
-            <SliderEXT x:Name="sliderSize" Minimum="12" Maximum="21" Value="15" AutoToolTipPrecision="2"  TickFrequency="0.01" VerticalAlignment="Stretch" Orientation="Vertical"  >
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="ValueChanged">
-                        <i:InvokeCommandAction Command="{Binding SliderChanged}"
-                                           CommandParameter="{Binding ElementName=sliderSize}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </SliderEXT>
-            <ButtonEXT Name="btn" Grid.Column="1"
-                             Content="{FontImage FontChar=Adjust}"
-                             CommandParameter="{Binding ElementName=btn}" ColorType="Success"/>
-            <ButtonEXT Name="btn3" Grid.Column="1"
-                             Content="{FontImage FontChar=Adjust}"
-                             CommandParameter="{Binding ElementName=btn}" ColorType="Error" IsLight="True"/>
-            <ListViewEXT Margin="5,5,0,0"  Height="137" Width="405"
-                         ItemHeight="67" ItemWidth="100" 
-                         ColorType="Normal" IsLight="True">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding SelectionCommand}"
-                                           CommandParameter="{Binding ElementName=listView1}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-                <ListBoxItemEXT Text="A"/>
-                <ListBoxItemEXT Text="B"/>
-                <ListBoxItemEXT Text="C"/>
-                <ListBoxItemEXT Text="D"/>
-                <ListBoxItemEXT Text="E"/>
-                <ListBoxItemEXT Text="F"/>
-                <ListBoxItemEXT Text="G"/>
-            </ListViewEXT>
-            <Border/>
-        </DockPanel>
+        <StackPanel Orientation="Horizontal">
+            <DockPanel Margin="5">
+                <TextBlock DockPanel.Dock="Top" Text="增益(dB)"></TextBlock>
+                <TextBoxEXT Name="tb" DockPanel.Dock="Top" FontSize="12" Water="" Text="{Binding Value,FallbackValue=0.0}" Margin="4,2" HorizontalContentAlignment="Center" Padding="3,2"/>
+                <Grid Margin="0,7,0,-12">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="12" HorizontalAlignment="Right" Grid.Row="0" Foreground="#555" FontSize="7"/>
+                    <TextBlock Text="9" HorizontalAlignment="Right" Grid.Row="1" Foreground="#555" FontSize="7"/>
+                    <TextBlock Text="6" HorizontalAlignment="Right" Grid.Row="2" Foreground="#555" FontSize="7"/>
+                    <TextBlock Text="3" HorizontalAlignment="Right" Grid.Row="3" Foreground="#555" FontSize="7"/>
+                    <TextBlock Text="0" HorizontalAlignment="Right" Grid.Row="4" Foreground="#555" FontSize="7"/>
+                    <TextBlock Text="-8" HorizontalAlignment="Right" Grid.Row="5" Foreground="#555" FontSize="7"/>
+                    <TextBlock Text="-16" HorizontalAlignment="Right" Grid.Row="6" Foreground="#555" FontSize="7"/>
+                    <TextBlock Text="-24" HorizontalAlignment="Right" Grid.Row="7" Foreground="#555" FontSize="7"/>
+                    <TextBlock Text="-32" HorizontalAlignment="Right" Grid.Row="8" Foreground="#555" FontSize="7"/>
+                    <TextBlock Text="-40" HorizontalAlignment="Right" Grid.Row="9" Foreground="#555" FontSize="7"/>
+                    <TextBlock Text="-48" HorizontalAlignment="Right" Grid.Row="10" Foreground="#555" FontSize="7"/>
+                    <TextBlock Text="-56" HorizontalAlignment="Right" Grid.Row="11" Foreground="#555" FontSize="7"/>
+                </Grid>
+                <SliderEXT x:Name="sliderSize" Minimum="-21" Maximum="12" Value="0" IsMoveToPointEnabled="False" Orientation="Vertical"
+                       TickPlacement="Both" Ticks="-21,-18,-15,-12,-9,-6,-3,0,3,6,9,12" AutoToolTipPrecision="1"  TickFrequency="3">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="ToolTipValueChanged">
+                            <ip:EventToCommand Command="{Binding SliderToolTipValueChanged}" PassEventArgsToCommand="True"/>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="ValueChanged">
+                            <i:InvokeCommandAction Command="{Binding SliderValueChanged}" CommandParameter="{Binding ElementName=sliderSize}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </SliderEXT>
+            </DockPanel>
+        </StackPanel>
     </DockPanel>
 </Window>

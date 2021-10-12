@@ -106,7 +106,7 @@ namespace Paway.WPF
         /// </summary>
         public event Action<DataGridEXT> RefreshEvent;
         /// <summary>
-        /// 行双击事件
+        /// 行双击路由事件
         /// </summary>
         public event EventHandler<RowDoubleEventArgs> RowDoubleEvent;
 

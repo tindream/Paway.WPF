@@ -20,8 +20,7 @@
             <SliderEXT x:Name="sliderSize" Minimum="12" Maximum="21" Value="15" AutoToolTipPrecision="2"  TickFrequency="0.01">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="ValueChanged">
-                        <i:InvokeCommandAction Command="{Binding SizeChanged}"
-                                           CommandParameter="{Binding ElementName=sliderSize}"/>
+                        <i:InvokeCommandAction Command="{Binding SizeChanged}" CommandParameter="{Binding ElementName=sliderSize}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </SliderEXT>
@@ -31,8 +30,7 @@
                                  TrackColorLinear="Transparent;Transparent" TrackBackground="Transparent" IsSnapToTickEnabled="True" SmallChange="0.01">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="ValueChanged">
-                            <i:InvokeCommandAction Command="{Binding ColorChanged}"
-                                           CommandParameter="{Binding ElementName=sliderTheme}"/>
+                            <i:InvokeCommandAction Command="{Binding ColorChanged}" CommandParameter="{Binding ElementName=sliderTheme}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </SliderEXT>
@@ -180,8 +178,7 @@
                                HorizontalContentAlignment="Left" VerticalAlignment="Top" >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction Command="{Binding SelectionCommand}"
-                                           CommandParameter="{Binding ElementName=listView2}"/>
+                            <i:InvokeCommandAction Command="{Binding SelectionCommand}" CommandParameter="{Binding ElementName=listView2}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ListViewEXT>
@@ -192,8 +189,7 @@
                 <TreeViewEXT x:Name="TreeViewOrg" Height="180" ICheckBox="Visible" ItemTemplate="{StaticResource DefaultNode}" ItemsSource="{Binding TreeList}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectedItemChanged">
-                            <i:InvokeCommandAction Command="{Binding SelectedItemChanged}"
-                                           CommandParameter="{Binding ElementName=TreeViewOrg}"/>
+                            <i:InvokeCommandAction Command="{Binding SelectedItemChanged}" CommandParameter="{Binding ElementName=TreeViewOrg}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </TreeViewEXT>
@@ -219,8 +215,7 @@
                          IsLight="True">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding SelectionCommand}"
-                                           CommandParameter="{Binding ElementName=listView1}"/>
+                        <i:InvokeCommandAction Command="{Binding SelectionCommand}" CommandParameter="{Binding ElementName=listView1}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <ListBoxItemEXT Text="World"/>
@@ -271,8 +266,7 @@
                            ItemBorder="1,1,0,1;1,1,1,4">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding SelectionCommand}"
-                                           CommandParameter="{Binding ElementName=listView1}"/>
+                        <i:InvokeCommandAction Command="{Binding SelectionCommand}" CommandParameter="{Binding ElementName=listView1}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <ListBoxItemEXT Text="Hello" IsSelected="True"
