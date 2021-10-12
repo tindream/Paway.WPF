@@ -36,7 +36,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty HeaderEndProperty =
             DependencyProperty.RegisterAttached(nameof(HeaderEnd), typeof(ColorEXT), typeof(DataGridEXT),
-                new PropertyMetadata(new ColorEXT(Color.FromArgb(255, 220, 220, 220), 170, 225)));
+                new PropertyMetadata(new ColorEXT(Colors.LightGray, 170, 225)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ScrollBarWidthProperty =

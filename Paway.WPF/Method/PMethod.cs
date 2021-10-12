@@ -426,7 +426,7 @@ namespace Paway.WPF
                     var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
                     if (myAdornerLayer == null) return;
 
-                    var color = iError ? Color.FromArgb(240, 221, 51, 51) : Color.FromArgb(240, 93, 107, 153);
+                    var color = iError ? AlphaColor(240, PConfig.Error) : AlphaColor(240, PConfig.Hit);
                     var border = new Border
                     {
                         CornerRadius = new CornerRadius(5),
@@ -515,7 +515,7 @@ namespace Paway.WPF
                     var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
                     if (myAdornerLayer == null) return;
 
-                    var color = iError ? Color.FromArgb(240, 221, 51, 51) : Color.FromArgb(240, 93, 107, 153);
+                    var color = iError ? AlphaColor(240, PConfig.Error) : AlphaColor(240, PConfig.Hit);
                     var border = new Border
                     {
                         CornerRadius = new CornerRadius(5),

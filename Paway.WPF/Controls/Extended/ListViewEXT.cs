@@ -119,7 +119,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemTextForegroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemTextForeground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(Color.FromArgb(255, 33, 33, 33), Colors.White)));
+            DependencyProperty.RegisterAttached(nameof(ItemTextForeground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(PConfig.Text, Colors.White)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemTextBackgroundProperty =
@@ -140,7 +140,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemDescForegroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemDescForeground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(Color.FromArgb(255, 66, 66, 66), Colors.White)));
+            DependencyProperty.RegisterAttached(nameof(ItemDescForeground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(PConfig.LightText, Colors.White)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemDescBackgroundProperty =

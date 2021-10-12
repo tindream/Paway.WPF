@@ -19,9 +19,9 @@ namespace Paway.WPF
             if (calendarDayButton.DataContext is DateTime dateTime)
             {
                 if (!calendarDayButton.IsMouseOver && !calendarDayButton.IsSelected && !calendarDayButton.IsBlackedOut && (dateTime.DayOfWeek == DayOfWeek.Saturday || dateTime.DayOfWeek == DayOfWeek.Sunday))
-                    return new SolidColorBrush(Color.FromArgb(255, 255, 47, 47));
+                    return new SolidColorBrush(PConfig.Error);
             }
-            return new SolidColorBrush(Color.FromArgb(255, 51, 51, 51));
+            return new SolidColorBrush(PConfig.LightText);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

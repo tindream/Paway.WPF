@@ -26,7 +26,7 @@ namespace Paway.WPF
         /// </summary>
         public ColorAttribute(byte r, byte g, byte b)
         {
-            this.Color = Color.FromRgb(r, g, b);
+            this.Color = Color.FromArgb(255, r, g, b);
         }
     }
 }

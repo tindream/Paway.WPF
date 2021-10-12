@@ -285,7 +285,7 @@
                     <ControlTemplate.Resources>
                         <!--星期样式-->
                         <DataTemplate x:Key="{ComponentResourceKey ResourceId=DayTitleTemplate, TypeInTargetAssembly={x:Type CalendarItem}}">
-                            <TextBlock x:Name="TxtDayTitle" Foreground="#FF333333"
+                            <TextBlock x:Name="TxtDayTitle" Foreground="{StaticResource LightText}"
                                        FontSize="10" 
                                        HorizontalAlignment="Center" Margin="0,6" Text="{Binding}"/>
                         </DataTemplate>
@@ -569,7 +569,7 @@
         </Setter>
     </Style>
     <Style x:Key="CalendarStyle" TargetType="{x:Type Calendar}">
-        <Setter Property="Foreground" Value="#333"/>
+        <Setter Property="Foreground" Value="#444"/>
         <Setter Property="Background" Value="White"/>
         <Setter Property="FirstDayOfWeek" Value="Sunday"/>
         <Setter Property="BorderBrush">

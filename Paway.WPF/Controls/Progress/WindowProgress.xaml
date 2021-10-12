@@ -7,7 +7,7 @@
         xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" 
         xmlns:local="clr-namespace:Paway.WPF"
         mc:Ignorable="d"
-        AllowsTransparency="True" Background="#F2FFFFFF" WindowStyle="None"
+        AllowsTransparency="True" Background="{Binding Source={StaticResource White}, Converter={StaticResource brushAlphaConverter}, ConverterParameter=240}" WindowStyle="None"
         Title="MessageBox" Height="102" MaxWidth="350" Width="350" MinWidth="150" ShowInTaskbar="False" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" >
 
     <Border BorderBrush="LightGray" BorderThickness="1">

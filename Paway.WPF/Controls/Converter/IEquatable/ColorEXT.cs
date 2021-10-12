@@ -49,7 +49,7 @@ namespace Paway.WPF
         {
             if (this.Normal is Color normal && normal.R == obj.R && normal.G == obj.G && normal.B == obj.B)
             {
-                if (normal != Colors.LightGray && normal != Color.FromArgb(255, 254, 254, 254) && normal != Color.FromArgb(255, 220, 220, 220))
+                if (normal != Colors.LightGray && normal != Color.FromArgb(255, 254, 254, 254) && normal != Colors.LightGray)
                 {
                     this.Normal = PMethod.ThemeColor(normal.A);
                 }

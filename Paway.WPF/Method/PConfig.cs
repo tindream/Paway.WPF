@@ -103,14 +103,6 @@ namespace Paway.WPF
         }
 
         /// <summary>
-        /// 轻灰色
-        /// </summary>
-        public static Color Light { get; private set; } = Color.FromArgb(255, 235, 235, 235);
-        /// <summary>
-        /// 轻灰色
-        /// </summary>
-        public static SolidColorBrush LightBrush { get; private set; } = new SolidColorBrush(Light);
-        /// <summary>
         /// 信息色
         /// </summary>
         public static Color Info { get; private set; } = Color.FromArgb(255, 0, 188, 212);
@@ -143,6 +135,22 @@ namespace Paway.WPF
         /// </summary>
         public static SolidColorBrush ErrorBrush { get; private set; } = new SolidColorBrush(Error);
         /// <summary>
+        /// 提示
+        /// </summary>
+        public static Color Hit { get; private set; } = Color.FromArgb(255, 93, 107, 153);
+        /// <summary>
+        /// 浅色
+        /// </summary>
+        public static Color Light { get; private set; } = Color.FromArgb(255, 235, 235, 235);
+        /// <summary>
+        /// 浅色
+        /// </summary>
+        public static SolidColorBrush LightBrush { get; private set; } = new SolidColorBrush(Light);
+        /// <summary>
+        /// 提示
+        /// </summary>
+        public static SolidColorBrush HitBrush { get; private set; } = new SolidColorBrush(Hit);
+        /// <summary>
         /// 深色
         /// </summary>
         public static Color High { get; private set; } = Color.FromArgb(255, 0, 63, 99);
@@ -150,6 +158,22 @@ namespace Paway.WPF
         /// 深色
         /// </summary>
         public static SolidColorBrush HighBrush { get; private set; } = new SolidColorBrush(High);
+        /// <summary>
+        /// 文本
+        /// </summary>
+        public static Color Text { get; private set; } = Color.FromArgb(255, 34, 34, 34);
+        /// <summary>
+        /// 文本
+        /// </summary>
+        public static SolidColorBrush TextBrush { get; private set; } = new SolidColorBrush(Text);
+        /// <summary>
+        /// 文本(浅色)
+        /// </summary>
+        public static Color LightText { get; private set; } = Color.FromArgb(255, 68, 68, 68);
+        /// <summary>
+        /// 文本(浅色)
+        /// </summary>
+        public static SolidColorBrush LightTextBrush { get; private set; } = new SolidColorBrush(LightText);
 
         #endregion
     }

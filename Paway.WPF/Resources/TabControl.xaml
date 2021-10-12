@@ -69,7 +69,7 @@
         <Setter Property="ItemContainerStyle">
             <Setter.Value>
                 <Style TargetType="TabItem">
-                    <Setter Property="Foreground" Value="#222"/>
+                    <Setter Property="Foreground" Value="{StaticResource Text}"/>
                     <Setter Property="Padding" Value="6"/>
                     <Setter Property="Background" Value="Transparent"/>
                     <Setter Property="BorderBrush" Value="#FFACACAC"/>

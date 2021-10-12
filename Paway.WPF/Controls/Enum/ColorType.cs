@@ -50,9 +50,27 @@ namespace Paway.WPF
         Light,
 
         /// <summary>
+        /// 提示
+        /// </summary>
+        [Color(93, 107, 153)]
+        Hit,
+
+        /// <summary>
         /// 深色
         /// </summary>
         [Color(0, 63, 99)]
         High,
+
+        /// <summary>
+        /// 文本
+        /// </summary>
+        [Color(34, 34, 34)]
+        Text,
+
+        /// <summary>
+        /// 文本(浅色)
+        /// </summary>
+        [Color(68, 68, 68)]
+        LightText,
     }
 }

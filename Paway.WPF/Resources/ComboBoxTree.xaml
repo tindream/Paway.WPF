@@ -55,7 +55,7 @@
                                IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
                                PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" 
                                Placement="Bottom">
-                            <Border x:Name="DropDownBorder" BorderBrush="#CCC" BorderThickness="1" Padding="0">
+                            <Border x:Name="DropDownBorder" BorderBrush="LightGray" BorderThickness="1" Padding="0">
                                 <local:TreeViewEXT x:Name="PART_TreeView" Background="White" 
                                                    Height="180" BorderThickness="0"
                                                    Width="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource valueAddConverter}}" 

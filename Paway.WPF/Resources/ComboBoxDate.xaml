@@ -53,7 +53,7 @@
                                IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
                                PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" 
                                Placement="Bottom">
-                            <Border x:Name="DropDownBorder" BorderBrush="#CCC" BorderThickness="1">
+                            <Border x:Name="DropDownBorder" BorderBrush="LightGray" BorderThickness="1">
                                 <local:CalendarEXT x:Name="PART_Calendar"
                                                    HasButton="True" HorizontalAlignment="Left" Margin="0,-2,0,-3"/>
                             </Border>

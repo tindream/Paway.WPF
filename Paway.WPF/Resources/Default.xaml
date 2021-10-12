@@ -15,6 +15,7 @@
     <local:NullToCollapsed x:Key="nullToCollapsed"/>
     <local:BrushToColorConverter x:Key="brushToColorConverter" />
     <local:ColorToBrushConverter x:Key="colorToBrushConverter" />
+    <local:BrushAlphaConverter x:Key="brushAlphaConverter" />
 
     <local:BoolToSelector x:Key="boolToSelector"/>
     <local:NullSelector x:Key="nullSelector"/>
@@ -212,7 +213,16 @@
     <SolidColorBrush x:Key="Success" Color="#2DB84D" />
     <SolidColorBrush x:Key="Warn" Color="#FF9900" />
     <SolidColorBrush x:Key="Error" Color="#F8331E" />
+    <SolidColorBrush x:Key="Hit" Color="#5D6B99" />
     <SolidColorBrush x:Key="High" Color="#003F63" />
+    <SolidColorBrush x:Key="Text" Color="#222" />
+    <SolidColorBrush x:Key="LightText" Color="#444" />
+    <SolidColorBrush x:Key="White" Color="White" />
+    <SolidColorBrush x:Key="Black" Color="Black" />
+    <SolidColorBrush x:Key="Gray1" Color="LightGray" />
+    <SolidColorBrush x:Key="Gray2" Color="DarkGray" />
+    <SolidColorBrush x:Key="Gray3" Color="Gray" />
+    <SolidColorBrush x:Key="Gray4" Color="DimGray" />
     <!--#endregion-->
 
 </ResourceDictionary>

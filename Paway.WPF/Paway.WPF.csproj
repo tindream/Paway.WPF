@@ -73,6 +73,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\Adorner\CustomAdorner.cs" />
+    <Compile Include="Controls\Converter\IValueConverter\BrushAlphaConverter.cs" />
+    <Compile Include="Controls\Extended\TickBarEXT.cs" />
     <Compile Include="Controls\RoutedEventArgs\ValueChangeEventArgs.cs" />
     <Compile Include="Method\Attribute\ColorAttribute.cs" />
     <Compile Include="Controls\Badge\Badge.xaml.cs">

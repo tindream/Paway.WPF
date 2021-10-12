@@ -8,7 +8,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="CellStyle" TargetType="{x:Type DataGridCell}">
-        <!--<Setter Property="Background" Value="#FFFFFF" />-->
+        <!--<Setter Property="Background" Value="White" />-->
         <Setter Property="BorderThickness" Value="3,6" />
         <!--<Setter Property="Opacity" Value="1" />-->
         <Style.Triggers >
@@ -51,7 +51,7 @@
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>
-        <Setter Property="Foreground" Value="#222" />
+        <Setter Property="Foreground" Value="{StaticResource Text}" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Foreground" Value="White"/>
