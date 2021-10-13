@@ -348,7 +348,7 @@ namespace Paway.WPF
                     CornerRadius = new CornerRadius(3),
                     BorderBrush = new SolidColorBrush(Colors.LightGray),
                     BorderThickness = new Thickness(1),
-                    Background = new SolidColorBrush(Color.FromArgb(240, 255, 255, 255)),
+                    Background = new SolidColorBrush(Color.FromArgb(200, 255, 255, 255)),
                     MinWidth = 200,
                     MaxWidth = 350,
                 };
@@ -426,7 +426,7 @@ namespace Paway.WPF
                     var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
                     if (myAdornerLayer == null) return;
 
-                    var color = iError ? AlphaColor(240, PConfig.Error) : AlphaColor(240, PConfig.Hit);
+                    var color = AlphaColor(200, iError ? PConfig.Error : PConfig.Hit);
                     var border = new Border
                     {
                         CornerRadius = new CornerRadius(5),
@@ -515,7 +515,7 @@ namespace Paway.WPF
                     var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
                     if (myAdornerLayer == null) return;
 
-                    var color = iError ? AlphaColor(240, PConfig.Error) : AlphaColor(240, PConfig.Hit);
+                    var color = AlphaColor(200, iError ? PConfig.Error : PConfig.Hit);
                     var border = new Border
                     {
                         CornerRadius = new CornerRadius(5),

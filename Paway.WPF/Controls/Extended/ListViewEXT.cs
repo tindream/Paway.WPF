@@ -171,11 +171,10 @@ namespace Paway.WPF
                 }
                 if (view.IsLight)
                 {
-                    view.ItemBorder = new ThicknessEXT(0, 1);
-                    view.Background = new SolidColorBrush(Colors.LightGray);
-                    view.Padding = new Thickness(1, 1, 0.5, 0.5);
-                    view.ItemMargin = new Thickness(0.5);
-                    view.ItemBackground.Normal = new SolidColorBrush(ColorType.Light.Color());
+                    view.BorderThickness = new Thickness(1, 1, 0, 0);
+                    view.BorderBrush = new SolidColorBrush(Colors.LightGray);
+                    view.ItemBorder = new ThicknessEXT(new Thickness(0, 0, 1, 1));
+                    view.ItemBackground.Normal = new SolidColorBrush(Colors.Transparent);
                 }
                 view.UpdateDefaultStyle();
             }
