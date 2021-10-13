@@ -55,10 +55,13 @@ namespace Paway.WPF
         protected override void OnRender(DrawingContext dc)
         {
             var trackWidth = 0.0;
+            var showTrackText = false;
             if (PMethod.Parent(this, out SliderEXT slider))
             {
                 trackWidth = slider.TrackWidth;
+                showTrackText = slider.ShowTrackText;
             }
+            var showTrackTextLength = showTrackText ? 2 : 0;
             if (this.normalWidth == 0) this.normalWidth = this.Width;
             if (this.normalHeight == 0) this.normalHeight = this.Height;
             Size size = new Size(base.ActualWidth, base.ActualHeight);
@@ -74,26 +77,29 @@ namespace Paway.WPF
             var maxWidth = 0.0;
             var maxHeight = 0.0;
             var pen = new Pen(this.Fill, 1);
-            for (var i = 0; i <= tickCount; i++)
+            if (showTrackText)
             {
-                var value = (this.Minimum + this.TickFrequency * (horizontal ? i : tickCount - i)).ToDouble();
-                var arg = new ValueChangeEventArgs(value, TrackValueEvent, this);
-                OnTrackValueEvent(arg);
-                var formattedText = new FormattedText(arg.Value.ToString(), CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana"), 8, color);
-                if (this.Name == "TopTick")
+                for (var i = 0; i <= tickCount; i++)
                 {
-                    if (maxWidth < formattedText.Width) maxWidth = formattedText.Width;
-                    if (maxHeight < formattedText.Height) maxHeight = formattedText.Height;
+                    var value = (this.Minimum + this.TickFrequency * (horizontal ? i : tickCount - i)).ToDouble();
+                    var arg = new ValueChangeEventArgs(value, TrackValueEvent, this);
+                    OnTrackValueEvent(arg);
+                    var formattedText = new FormattedText(arg.Value.ToString(), CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana"), 8, color);
+                    if (this.Name == "TopTick")
+                    {
+                        if (maxWidth < formattedText.Width) maxWidth = formattedText.Width;
+                        if (maxHeight < formattedText.Height) maxHeight = formattedText.Height;
+                    }
                 }
             }
             if (horizontal)
             {
-                this.Height = this.normalHeight + maxHeight + 2;
+                this.Height = this.normalHeight + maxHeight + showTrackTextLength;
                 this.Margin = new Thickness(trackWidth / 2, 0, trackWidth / 2, 0);
             }
             else
             {
-                this.Width = this.normalWidth + maxWidth + 2;
+                this.Width = this.normalWidth + maxWidth + showTrackTextLength;
                 this.Margin = new Thickness(0, trackWidth / 2, 0, trackWidth / 2);
             }
             for (var i = 0; i <= tickCount; i++)
@@ -106,13 +112,13 @@ namespace Paway.WPF
                 var x = tickFrequencySize * i;
                 if (horizontal)
                 {
-                    dc.DrawLine(pen, new Point(x, maxHeight + 2), new Point(x, maxHeight + 2 + this.normalHeight));
-                    if (this.Name == "TopTick") dc.DrawText(formattedText, new Point(x - formattedText.Width / 2, maxHeight - formattedText.Height));
+                    dc.DrawLine(pen, new Point(x, maxHeight + showTrackTextLength), new Point(x, maxHeight + showTrackTextLength + this.normalHeight));
+                    if (this.Name == "TopTick" && showTrackText) dc.DrawText(formattedText, new Point(x - formattedText.Width / 2, maxHeight - formattedText.Height));
                 }
                 else
                 {
-                    dc.DrawLine(pen, new Point(maxWidth + 2, x), new Point(maxWidth + 2 + this.normalWidth, x));
-                    if (this.Name == "TopTick") dc.DrawText(formattedText, new Point(maxWidth - formattedText.Width, x - formattedText.Height / 2));
+                    dc.DrawLine(pen, new Point(maxWidth + showTrackTextLength, x), new Point(maxWidth + showTrackTextLength + this.normalWidth, x));
+                    if (this.Name == "TopTick" && showTrackText) dc.DrawText(formattedText, new Point(maxWidth - formattedText.Width, x - formattedText.Height / 2));
                 }
             }
         }

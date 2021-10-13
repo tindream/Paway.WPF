@@ -54,6 +54,11 @@ namespace Paway.WPF
         public static readonly DependencyProperty ButtonTypeProperty =
             DependencyProperty.RegisterAttached(nameof(ButtonType), typeof(ButtonType), typeof(SliderEXT),
                 new PropertyMetadata(ButtonType.Circle));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ShowTrackTextProperty =
+            DependencyProperty.RegisterAttached(nameof(ShowTrackText), typeof(bool), typeof(SliderEXT),
+                new PropertyMetadata(false));
 
         private static void OnRadiusChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
@@ -131,6 +136,16 @@ namespace Paway.WPF
         {
             get { return (ButtonType)GetValue(ButtonTypeProperty); }
             set { SetValue(ButtonTypeProperty, value); }
+        }
+        /// <summary>
+        /// 显示刻度值
+        /// </summary>
+        [Category("扩展")]
+        [Description("显示刻度值")]
+        public bool ShowTrackText
+        {
+            get { return (bool)GetValue(ShowTrackTextProperty); }
+            set { SetValue(ShowTrackTextProperty, value); }
         }
 
         #endregion
