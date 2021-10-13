@@ -141,6 +141,11 @@ namespace Paway.WPF
         /// </summary>
         public event EventHandler<ValueChangeEventArgs> ToolTipValueChanged;
 
+        /// <summary>
+        /// 刻度值重写路由事件
+        /// </summary>
+        public event EventHandler<ValueChangeEventArgs> TrackValueEvent;
+
         #endregion
 
         /// <summary>
@@ -151,6 +156,25 @@ namespace Paway.WPF
             this.ValueChanged += SliderEXT_ValueChanged;
         }
 
+        #region 刻度值
+        /// <summary>
+        /// 注册刻度值重写路由事件
+        /// </summary>
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            if (PMethod.Child(this, out TickBarEXT tickBar, "TopTick"))
+            {
+                tickBar.TrackValue += TickBar_TrackValue;
+            }
+        }
+        private void TickBar_TrackValue(object sender, ValueChangeEventArgs e)
+        {
+            TrackValueEvent?.Invoke(sender, e);
+        }
+
+        #endregion
+
         #region ToolTip
         private ToolTip toolTip;
         /// <summary>
@@ -160,7 +184,7 @@ namespace Paway.WPF
         {
             base.OnPreviewMouseLeftButtonDown(e);
             var value = OnToolTipValueChanged(e.RoutedEvent);
-            if (!this.IsMoveToPointEnabled) return;
+            if (this.AutoToolTipPlacement == AutoToolTipPlacement.None) return;
             if (toolTip == null)
             {
                 if (PMethod.Child(this, out Thumb thumb))
@@ -231,6 +255,7 @@ namespace Paway.WPF
         }
         private double OnToolTipValueChanged(RoutedEvent routedEvent)
         {
+            if (this.AutoToolTipPlacement == AutoToolTipPlacement.None) return this.Value;
             var arg = new ValueChangeEventArgs(this.Value, routedEvent, this);
             ToolTipValueChanged?.Invoke(this, arg);
             this.ToolTip = PMethod.Rounds(arg.Value, this.AutoToolTipPrecision, this.AutoToolTipPrecision);

@@ -16,9 +16,9 @@ using System.Windows.Media.TextFormatting;
 namespace Paway.WPF
 {
     /// <summary>
-    /// 双击路由事件参数
+    /// 选择项路由事件参数
     /// </summary>
-    public class RowDoubleEventArgs : RoutedEventArgs
+    public class SelectItemEventArgs : RoutedEventArgs
     {
         /// <summary>
         /// 当前项
@@ -26,13 +26,13 @@ namespace Paway.WPF
         public object Item { get; set; }
 
         /// <summary>
-        /// 双击路由事件参数
+        /// 选择项路由事件参数
         /// </summary>
-        public RowDoubleEventArgs() { }
+        public SelectItemEventArgs() { }
         /// <summary>
-        /// 双击路由事件参数
+        /// 选择项路由事件参数
         /// </summary>
-        public RowDoubleEventArgs(object item, RoutedEvent routedEvent, object source) : base(routedEvent, source)
+        public SelectItemEventArgs(object item, RoutedEvent routedEvent, object source) : base(routedEvent, source)
         {
             this.Item = item;
         }

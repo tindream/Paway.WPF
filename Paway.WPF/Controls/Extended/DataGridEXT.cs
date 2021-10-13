@@ -108,7 +108,7 @@ namespace Paway.WPF
         /// <summary>
         /// 行双击路由事件
         /// </summary>
-        public event EventHandler<RowDoubleEventArgs> RowDoubleEvent;
+        public event EventHandler<SelectItemEventArgs> RowDoubleEvent;
 
         #endregion
 
@@ -127,7 +127,7 @@ namespace Paway.WPF
         {
             if (CurrentRow(e) is DataGridRow row)
             {
-                RowDoubleEvent?.Invoke(this, new RowDoubleEventArgs(row.Item, e.RoutedEvent, this));
+                RowDoubleEvent?.Invoke(this, new SelectItemEventArgs(row.Item, e.RoutedEvent, this));
             }
         }
 

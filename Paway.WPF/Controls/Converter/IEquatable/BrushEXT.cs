@@ -62,14 +62,14 @@ namespace Paway.WPF
         {
             if (this.Normal is SolidColorBrush normal && normal.Color.R == obj.R && normal.Color.G == obj.G && normal.Color.B == obj.B)
             {
-                if (normal.Color != Colors.Transparent && normal.Color != Colors.Gray && normal.Color != Colors.LightGray && normal.Color != PConfig.Text && normal.Color != PConfig.LightText)
+                if (normal.Color != Colors.Transparent && normal.Color != Colors.Gray && normal.Color != Colors.LightGray && normal.Color != PConfig.TextColor && normal.Color != PConfig.LightText)
                 {
                     this.Normal = new SolidColorBrush(PMethod.ThemeColor(normal.Color.A));
                 }
             }
             if (this.Mouse is SolidColorBrush mouse && mouse.Color.R == obj.R && mouse.Color.G == obj.G && mouse.Color.B == obj.B)
             {
-                if (mouse.Color != Colors.Transparent && mouse.Color != Colors.White && mouse.Color != PConfig.Text)
+                if (mouse.Color != Colors.Transparent && mouse.Color != Colors.White && mouse.Color != PConfig.TextColor)
                 {
                     this.Mouse = new SolidColorBrush(PMethod.ThemeColor(mouse.Color.A));
                 }

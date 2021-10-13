@@ -23,5 +23,9 @@ namespace Paway.Test
         {
             InitializeComponent();
         }
+        private void SliderSize_TrackValueEvent(object sender, WPF.ValueChangeEventArgs e)
+        {
+            if (e.Value < 0) e.Value = e.Value * 8 / 3;
+        }
     }
 }

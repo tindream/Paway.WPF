@@ -76,6 +76,7 @@
     <Compile Include="Controls\Converter\IValueConverter\BrushAlphaConverter.cs" />
     <Compile Include="Controls\Enum\ButtonType.cs" />
     <Compile Include="Controls\Extended\SliderMonitor.cs" />
+    <Compile Include="Controls\Extended\TickBarEXT.cs" />
     <Compile Include="Controls\RoutedEventArgs\ValueChangeEventArgs.cs" />
     <Compile Include="Method\Attribute\ColorAttribute.cs" />
     <Compile Include="Controls\Badge\Badge.xaml.cs">
@@ -140,7 +141,7 @@
       <DependentUpon>WindowProgress.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Extended\ThemeEXT.cs" />
-    <Compile Include="Controls\RoutedEventArgs\RowDoubleEventArgs.cs" />
+    <Compile Include="Controls\RoutedEventArgs\SelectItemEventArgs.cs" />
     <Compile Include="Controls\RoutedEventArgs\CustomFilterEventArgs.cs" />
     <Compile Include="Controls\TransitionControl\TransitionControl.cs" />
     <Compile Include="Controls\Enum\TransitionType.cs" />

@@ -22,7 +22,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemForegroundProperty =
             DependencyProperty.RegisterAttached(nameof(ItemForeground), typeof(BrushEXT), typeof(ComboBoxEXT),
-            new PropertyMetadata(new BrushEXT(PConfig.Text, PConfig.Text, Colors.White)));
+            new PropertyMetadata(new BrushEXT(PConfig.TextColor, PConfig.TextColor, Colors.White)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBackgroundProperty =

@@ -172,7 +172,7 @@ namespace Paway.WPF
         {
             IsDropDownOpen = !IsDropDownOpen;
         }
-        private void GridView_RowDoubleEvent(object arg1, RowDoubleEventArgs arg2)
+        private void GridView_RowDoubleEvent(object arg1, SelectItemEventArgs arg2)
         {
             if (arg2.Item is IId item)
             {
@@ -284,7 +284,7 @@ namespace Paway.WPF
                         var index = gridView.SelectedIndex;
                         if (index < 0) index = 0;
                         if (index >= this.Items.Count) index = this.Items.Count - 1;
-                        GridView_RowDoubleEvent(gridView, new RowDoubleEventArgs(this.Items[index], e.RoutedEvent, gridView));
+                        GridView_RowDoubleEvent(gridView, new SelectItemEventArgs(this.Items[index], e.RoutedEvent, gridView));
                     }
                     break;
             }

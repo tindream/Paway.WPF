@@ -133,7 +133,7 @@ namespace Paway.Test.ViewModel
         {
             get
             {
-                return rowDoubleCommand ?? (rowDoubleCommand = new RelayCommand<RowDoubleEventArgs>(e =>
+                return rowDoubleCommand ?? (rowDoubleCommand = new RelayCommand<SelectItemEventArgs>(e =>
                 {
                     if (e.Source is DataGridEXT datagrid1)
                     {

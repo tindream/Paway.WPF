@@ -161,11 +161,11 @@ namespace Paway.WPF
         /// <summary>
         /// 文本
         /// </summary>
-        public static Color Text { get; private set; } = Color.FromArgb(255, 34, 34, 34);
+        public static Color TextColor { get; private set; } = Color.FromArgb(255, 34, 34, 34);
         /// <summary>
         /// 文本
         /// </summary>
-        public static SolidColorBrush TextBrush { get; private set; } = new SolidColorBrush(Text);
+        public static SolidColorBrush TextBrush { get; private set; } = new SolidColorBrush(TextColor);
         /// <summary>
         /// 文本(浅色)
         /// </summary>

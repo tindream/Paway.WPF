@@ -73,7 +73,7 @@ namespace Paway.Test.ViewModel
                 {
                     var value = e.Value;
                     if (value < 0) value = e.Value * 8 / 3;
-                    this.Value = Method.Rounds(value, 1);
+                    this.Value = PMethod.Rounds(value, 1, 1);
                 }));
             }
         }
