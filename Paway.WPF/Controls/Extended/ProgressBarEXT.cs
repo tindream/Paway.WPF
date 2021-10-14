@@ -76,13 +76,14 @@ namespace Paway.WPF
         {
             if (obj is ProgressBarEXT bar)
             {
-                var animTime = PMethod.AnimTime((double)e.NewValue - (double)e.OldValue) * 1.5;
-                var animValue = new DoubleAnimation((double)e.OldValue, (double)e.NewValue, new Duration(TimeSpan.FromMilliseconds(animTime)))
+                var animTime = PMethod.AnimTime((double)e.NewValue - bar.Value) * 1.5;
+                var animValue = new DoubleAnimation((double)e.NewValue, new Duration(TimeSpan.FromMilliseconds(animTime)))
                 {
-                    AccelerationRatio = 0,
-                    DecelerationRatio = 1,
+                    //AccelerationRatio = 0,
+                    //DecelerationRatio = 1,
+                    EasingFunction = new CubicEase() { EasingMode = EasingMode.EaseOut },
                 };
-                bar.BeginAnimation(ProgressBar.ValueProperty, animValue);
+                bar.BeginAnimation(ProgressBarEXT.ValueProperty, animValue);
             }
         }
 

@@ -20,11 +20,24 @@ namespace Paway.Test.ViewModel
     public class TestViewModel : ViewModelPlus
     {
         #region 属性
+        private double angle = -27;
+        public double Angle
+        {
+            get { return angle; }
+            set { angle = value; RaisePropertyChanged(); }
+        }
+
         private double _value;
         public double Value
         {
             get { return _value; }
-            set { _value = value; RaisePropertyChanged(); }
+            set
+            {
+                var angleMin = -27;
+                var angleMax = 207;
+                Angle = angleMin + (angleMax - angleMin) * value / 100.0;
+                _value = value; RaisePropertyChanged();
+            }
         }
 
         #endregion

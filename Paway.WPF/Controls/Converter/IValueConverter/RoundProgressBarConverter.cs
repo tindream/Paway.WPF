@@ -21,28 +21,25 @@ namespace Paway.WPF
             var width = (double)values[0];
             var height = (double)values[1];
 
-            double radius = 0;
+            double radius;
             if (values[2] is Thickness) radius = ((Thickness)values[2]).Left;
             else radius = values[2].ToDouble();
 
             var percent = 0.33;
             if (values.Length == 6)
             {
-                var min = (double)values[3];
-                var max = (double)values[4];
-                var value = (double)values[5];
+                var min = values[3].ToDouble();
+                var max = values[4].ToDouble();
+                var value = values[5].ToDouble();
                 value = value > max ? max : value;
                 value = value < min ? min : value;
                 percent = (value - min) / (max - min);
             }
 
-            var point1X = height / 2 * Math.Cos((2 * percent - 0.5) * Math.PI) + height / 2;
-            var point1Y = height / 2 - height / 2 * Math.Sin((2 * percent + 0.5) * Math.PI);
             var point2X = (height - radius) / 2 * Math.Cos((2 * percent - 0.5) * Math.PI) + height / 2;
             var point2Y = height / 2 - (height - radius) / 2 * Math.Sin((2 * percent + 0.5) * Math.PI);
 
-            var path = "";
-
+            string path;
             if (percent == 0)
             {
                 path = "";

@@ -18,6 +18,7 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ListView.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Progress.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ProgressBar.xaml" />
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\ProgressBoard.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\RadioButton.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\RichTextBox.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Slider.xaml" />

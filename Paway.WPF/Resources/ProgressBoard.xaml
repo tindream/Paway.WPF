@@ -1,0 +1,59 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Paway.WPF">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="{x:Type local:ProgressBoard}" BasedOn="{StaticResource Config}">
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Maximum" Value="100"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <!--控件模板-->
+                <ControlTemplate TargetType="{x:Type local:ProgressBoard}" >
+                    <Grid>
+                        <Ellipse Stroke="Gray" StrokeThickness="8" />
+                        <Ellipse Stroke="{StaticResource Light}" StrokeThickness="10" Margin="7"/>
+                        <Path Margin="7"
+                              StrokeThickness="10"
+                              StrokeStartLineCap="Round"
+                              StrokeEndLineCap="Round"
+                              RenderTransformOrigin="0.5,0.5">
+                            <Path.Stroke>
+                                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0.4">
+                                    <GradientStop Offset="0" Color="{Binding Source={StaticResource Light}, Converter={StaticResource brushToColorConverter}}" />
+                                    <GradientStop Offset="1" Color="Gray" />
+                                </LinearGradientBrush>
+                            </Path.Stroke>
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="117"/>
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                            <Path.Data>
+                                <MultiBinding Converter="{StaticResource roundProgressBarConverter}">
+                                    <Binding Path="ActualWidth" RelativeSource="{RelativeSource AncestorType=local:ProgressBoard}" Converter="{StaticResource valueAddConverter}" ConverterParameter="-14"></Binding>
+                                    <Binding Path="ActualHeight" RelativeSource="{RelativeSource AncestorType=local:ProgressBoard}" Converter="{StaticResource valueAddConverter}" ConverterParameter="-14"></Binding>
+                                    <Binding Source="10"></Binding>
+                                    <Binding Source="0"></Binding>
+                                    <Binding Source="100"></Binding>
+                                    <Binding Source="35"></Binding>
+                                </MultiBinding>
+                            </Path.Data>
+                        </Path>
+                        <Path Name="Path_Pointer" Style="{StaticResource PathPointer}" RenderTransformOrigin="1,0.5">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="{Binding AngleTemp, FallbackValue=-27.0}"/>
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

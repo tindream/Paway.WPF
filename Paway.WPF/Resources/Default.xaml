@@ -96,11 +96,11 @@
     <Geometry x:Key="Icon_UpArrow">M512.133 399.517l-292.16 292.155c-12.27 12.28-32.186 12.28-44.457 0-12.281-12.27-12.281-32.186 0-44.457l314.388-314.388c12.27-12.28 32.186-12.28 44.457 0l314.387 314.388c6.14 6.136 9.211 14.183 9.211 22.228s-3.071 16.092-9.211 22.228c-12.27 12.28-32.186 12.28-44.457 0l-292.159-292.155z</Geometry>
     <Geometry x:Key="Icon_LeftArrow">M399.399 512.246l292.155-292.16c12.278-12.27 12.278-32.186 0-44.457-12.27-12.278-32.186-12.278-44.457 0l-314.387 314.389c-12.281 12.27-12.281 32.186 0 44.457l314.388 314.388c6.137 6.14 14.183 9.211 22.228 9.211s16.092-3.071 22.228-9.211c12.281-12.27 12.281-32.186 0-44.457l-292.157-292.161z</Geometry>
     <Geometry x:Key="CheckedGeometry">M 0,2 3,5 8,0</Geometry>
-    <Style x:Key="PathRound" TargetType="{x:Type Path}" >
-        <Setter Property="Margin" Value="1" />
-        <Setter Property="Stroke" Value="Gray" />
+    <Style x:Key="PathPointer" TargetType="{x:Type Path}" >
+        <Setter Property="Stretch" Value="Fill" />
+        <Setter Property="Height" Value="3" />
         <Setter Property="Fill" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Pressed, RelativeSource={RelativeSource Self}}"/>
-        <Setter Property="Data" Value="M0,8 A8,8 0 1 1 0,9Z"/>
+        <Setter Property="Data" Value="M10,0 0,1 0,2 10,3z"/>
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
@@ -109,6 +109,14 @@
         <Setter Property="Stroke" Value="Gray" />
         <Setter Property="Fill" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Pressed, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="Data" Value="M0,0 8,0 8,8 0,8Z"/>
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="PathRound" TargetType="{x:Type Path}" >
+        <Setter Property="Margin" Value="1" />
+        <Setter Property="Stroke" Value="Gray" />
+        <Setter Property="Fill" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Pressed, RelativeSource={RelativeSource Self}}"/>
+        <Setter Property="Data" Value="M0,8 A8,8 0 1 1 0,9Z"/>
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>

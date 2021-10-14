@@ -410,6 +410,7 @@
         <Setter Property="IsMoveToPointEnabled" Value="True"/>
         <Setter Property="AutoToolTipPlacement" Value="TopLeft"/>
         <Setter Property="Margin" Value="2"/>
+        <Setter Property="Maximum" Value="100"/>
         <!--修改模板属性-->
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Horizontal">
