@@ -45,8 +45,10 @@ namespace Paway.Test.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<PlotViewModel>();
+            SimpleIoc.Default.Register<TestViewModel>();
         }
 
+        public TestViewModel Test { get { return GetModelInstance<TestViewModel>(); } }
         public PlotViewModel Plot { get { return GetModelInstance<PlotViewModel>(); } }
         public MainViewModel Main { get { return GetModelInstance<MainViewModel>(); } }
         public T GetModelInstance<T>() { return ServiceLocator.Current.GetInstance<T>(); }

@@ -5,8 +5,56 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Paway.Test"
         mc:Ignorable="d"
+        UseLayoutRounding="True"
+        DataContext="{Binding Test ,Source={StaticResource Locator}}"
         Title="TestWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
-        <DatePickerEXT TodayColor="Red" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200"/>
+        <Border BorderBrush="LightGray" BorderThickness="1" Width="100" Height="100">
+            <!--<Track Width="100" Height="100" >
+                <Track.Thumb>
+                    <Thumb Name="Thumb"
+                           Background="Red"
+                               OverridesDefaultStyle="True"
+                               Width="18"
+                               Height="10"
+                               Margin="2,0,2,0"
+                               VerticalAlignment="Center"
+                               Focusable="False" >
+                    </Thumb>
+                </Track.Thumb>
+            </Track>-->
+
+            <!--<Ellipse x:Name="Ellipse_Track"
+                                         Stroke="LightGray"
+                                         Fill="White"
+                                         StrokeThickness="2" />-->
+            <ProgressBarEXT BorderThickness="5"  AnimationValue="{Binding Value}" IRound="True"></ProgressBarEXT>
+        </Border>
+        <SliderEXT Margin="0,200,0,0" Width="200" Value="{Binding Value}" Maximum="100"></SliderEXT>
+        <!--<Border BorderBrush="LightGray" BorderThickness="1" Width="100" Height="100">
+            <Path x:Name="Path_Indicator"
+                                      Stroke="Red"
+                                      StrokeThickness="2"
+                                      StrokeStartLineCap="Round"
+                                      StrokeEndLineCap="Round">
+                <Path.Data>
+                    <MultiBinding Converter="{StaticResource roundProgressBarConverter}">
+                        <Binding Path="ActualWidth"
+                                                     RelativeSource="{RelativeSource AncestorType=ProgressBar}"></Binding>
+                        <Binding Path="ActualHeight"
+                                                     RelativeSource="{RelativeSource AncestorType=ProgressBar}"></Binding>
+                        <Binding Path="BorderThickness"
+                                                     RelativeSource="{RelativeSource AncestorType=ProgressBar}"></Binding>
+                        <Binding Path="Minimum"
+                                                     RelativeSource="{RelativeSource AncestorType=ProgressBar}"></Binding>
+                        <Binding Path="Maximum"
+                                                     RelativeSource="{RelativeSource AncestorType=ProgressBar}"></Binding>
+                        <Binding Path="Value"
+                                                     RelativeSource="{RelativeSource AncestorType=ProgressBar}"></Binding>
+                    </MultiBinding>
+                </Path.Data>
+
+            </Path>
+        </Border>-->
     </Grid>
 </Window>

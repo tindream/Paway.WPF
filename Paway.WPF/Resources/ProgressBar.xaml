@@ -41,11 +41,45 @@
                                    Foreground="{TemplateBinding Foreground}"
                                    Content="{TemplateBinding ProgressValue}"/>
                         </Border>
+                        <Ellipse x:Name="Ellipse_Track" Visibility="Collapsed"
+                                 Stroke="LightGray"
+                                 Fill="{TemplateBinding Background}"
+                                 StrokeThickness="{Binding BorderThickness.Left, RelativeSource={RelativeSource TemplatedParent}}" />
+                        <Path x:Name="Path_Indicator" Visibility="Collapsed"
+                              Stroke="{Binding ForegroundColorLinear.End, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource colorToBrushConverter}}"
+                              StrokeThickness="{Binding BorderThickness.Left, RelativeSource={RelativeSource TemplatedParent}}"
+                              StrokeStartLineCap="Round"
+                              StrokeEndLineCap="Round">
+                            <Path.Data>
+                                <MultiBinding Converter="{StaticResource roundProgressBarConverter}">
+                                    <Binding Path="ActualWidth" RelativeSource="{RelativeSource AncestorType=local:ProgressBarEXT}"></Binding>
+                                    <Binding Path="ActualHeight" RelativeSource="{RelativeSource AncestorType=local:ProgressBarEXT}"></Binding>
+                                    <Binding Path="BorderThickness" RelativeSource="{RelativeSource AncestorType=local:ProgressBarEXT}"></Binding>
+                                    <Binding Path="Minimum" RelativeSource="{RelativeSource AncestorType=local:ProgressBarEXT}"></Binding>
+                                    <Binding Path="Maximum" RelativeSource="{RelativeSource AncestorType=local:ProgressBarEXT}"></Binding>
+                                    <Binding Path="Value" RelativeSource="{RelativeSource AncestorType=local:ProgressBarEXT}"></Binding>
+                                </MultiBinding>
+                            </Path.Data>
+                        </Path>
+                        <Label Name="txt2" Visibility="Collapsed"
+                               FontSize="{TemplateBinding FontSize,Converter={StaticResource valueMultiConverter}}"
+                               Opacity="0.9" 
+                               Padding="5,5"
+                               Foreground="{StaticResource Text}"
+                               Content="{TemplateBinding ProgressValue}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding IRound, RelativeSource={RelativeSource Self}, Mode=OneWay}" Value="True">
+                            <Setter Property="Visibility" TargetName="PART_Track" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="PART_Indicator" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="Ellipse_Track" Value="Visible"/>
+                            <Setter Property="Visibility" TargetName="Path_Indicator" Value="Visible"/>
+                            <Setter Property="Visibility" TargetName="txt2" Value="Visible"/>
+                        </DataTrigger>
                         <Trigger Property="Value" Value="100">
                             <Setter TargetName="txt" Property="Foreground" Value="White" />
                             <Setter TargetName="txt" Property="Opacity" Value="1.0" />
+                            <Setter TargetName="txt2" Property="Opacity" Value="1.0" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -10,6 +10,7 @@
     <local:EnumConverter x:Key="enumConverter"/>
     <local:IsNotNullConverter x:Key="isNotNull"/>
     <local:VisibleReverse x:Key="visibleReverse"/>
+    <local:RoundProgressBarConverter x:Key="roundProgressBarConverter"/>
 
     <local:BoolToVisible x:Key="boolToVisible"/>
     <local:NullToCollapsed x:Key="nullToCollapsed"/>

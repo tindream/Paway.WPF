@@ -76,10 +76,11 @@ namespace Paway.WPF
         {
             if (obj is ProgressBarEXT bar)
             {
-                var animTime = PMethod.AnimTime((double)e.NewValue - (double)e.OldValue);
+                var animTime = PMethod.AnimTime((double)e.NewValue - (double)e.OldValue) * 1.5;
                 var animValue = new DoubleAnimation((double)e.OldValue, (double)e.NewValue, new Duration(TimeSpan.FromMilliseconds(animTime)))
                 {
-                    EasingFunction = new CubicEase() { EasingMode = EasingMode.EaseOut },
+                    AccelerationRatio = 0,
+                    DecelerationRatio = 1,
                 };
                 bar.BeginAnimation(ProgressBar.ValueProperty, animValue);
             }
@@ -101,6 +102,10 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ProgressValueProperty =
             DependencyProperty.RegisterAttached(nameof(ProgressValue), typeof(string), typeof(ProgressBarEXT));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty IRoundProperty =
+            DependencyProperty.RegisterAttached(nameof(IRound), typeof(bool), typeof(ProgressBarEXT));
 
         #endregion
 
@@ -134,6 +139,16 @@ namespace Paway.WPF
         {
             get { return (string)GetValue(ProgressValueProperty); }
             set { SetValue(ProgressValueProperty, value); }
+        }
+        /// <summary>
+        /// 显示圆形
+        /// </summary>
+        [Category("扩展")]
+        [Description("显示圆形")]
+        public bool IRound
+        {
+            get { return (bool)GetValue(IRoundProperty); }
+            set { SetValue(IRoundProperty, value); }
         }
 
         #endregion

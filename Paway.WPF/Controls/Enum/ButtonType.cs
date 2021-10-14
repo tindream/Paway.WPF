@@ -11,7 +11,7 @@ namespace Paway.WPF
         /// <summary>
         /// 圆形
         /// </summary>
-        Circle,
+        Round,
         /// <summary>
         /// 方形
         /// </summary>

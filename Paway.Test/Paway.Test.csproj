@@ -137,6 +137,7 @@
     <Compile Include="ViewMessage\RefreshMessage.cs" />
     <Compile Include="ViewMessage\UserMessage.cs" />
     <Compile Include="ViewMessage\StatuMessage.cs" />
+    <Compile Include="ViewModel\TestViewModel.cs" />
     <Compile Include="ViewModel\PlotViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewPlus\AddViewModelPlus.cs" />

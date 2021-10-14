@@ -53,7 +53,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ButtonTypeProperty =
             DependencyProperty.RegisterAttached(nameof(ButtonType), typeof(ButtonType), typeof(SliderEXT),
-                new PropertyMetadata(ButtonType.Circle));
+                new PropertyMetadata(ButtonType.Round));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ShowTrackTextProperty =
