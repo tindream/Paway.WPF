@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
@@ -49,26 +50,86 @@ namespace Paway.WPF
         #endregion
 
         /// <summary>
-        /// 指针Path
-        /// </summary>
-        private Path path_Pointer;
-        private const double angleMin = -27.0;
-        private const double angleMax = 207.0;
-        /// <summary>
         /// </summary>
         public ProgressBoard()
         {
             DefaultStyleKey = typeof(ProgressBoard);
             this.ValueChanged += ProgressBoard_ValueChanged;
         }
+
+        #region 拖动设置
+        /// <summary>
+        /// 拖动起始点
+        /// </summary>
+        private Point startPoint;
+        /// <summary>
+        /// 按下开始拖动
+        /// </summary>
+        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
+        {
+            base.OnPreviewMouseDown(e);
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.startPoint = e.GetPosition(this);
+            }
+        }
+        /// <summary>
+        /// 移动位置
+        /// </summary>
+        protected override void OnPreviewMouseMove(MouseEventArgs e)
+        {
+            base.OnPreviewMouseMove(e);
+            if (e.LeftButton == MouseButtonState.Pressed && startPoint.X + startPoint.Y != 0)
+            {
+                var movePoint = e.GetPosition(this);
+                Calc(movePoint);
+                this.startPoint = movePoint;
+            }
+        }
+        /// <summary>
+        /// 抬起停止拖动
+        /// </summary>
+        protected override void OnPreviewMouseUp(MouseButtonEventArgs e)
+        {
+            base.OnPreviewMouseUp(e);
+            if (startPoint.X + startPoint.Y != 0 && e.ChangedButton == MouseButton.Left)
+            {
+                Calc(e.GetPosition(this));
+                this.startPoint = new Point();
+            }
+        }
+        /// <summary>
+        /// 计算移动距离
+        /// </summary>
+        private void Calc(Point endPoint)
+        {
+            var x = Math.Pow(endPoint.X - startPoint.X, 2.0);
+            if (endPoint.X < startPoint.X) x *= -1;
+            var y = Math.Pow(endPoint.Y - startPoint.Y, 2.0);
+            if (endPoint.Y > startPoint.Y) y *= -1;
+            var interval = Math.Sqrt(Math.Abs(x + y));
+            if (x + y < 0) interval *= -1;
+            var percent = interval * 1.2 / this.ActualWidth;
+            this.Value += (this.Maximum - this.Minimum) * percent;
+        }
+
+        #endregion
+
+        #region 指针角度
+        /// <summary>
+        /// 指针Path
+        /// </summary>
+        private Path path_Pointer;
+        private const double angleMin = -27.0;
+        private const double angleMax = 207.0;
         private void ProgressBoard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (path_Pointer != null && path_Pointer.RenderTransform is TransformGroup transform)
             {
                 if (transform.Children.Count > 0 && transform.Children[0] is RotateTransform rotate)
                 {
-                    var percent = this.Minimum + (this.Maximum - this.Minimum) * Value / 100.0;
-                    rotate.Angle = angleMin + (angleMax - angleMin) * percent / 100.0;
+                    var percent = (this.Value - this.Minimum) / (this.Maximum - this.Minimum);
+                    rotate.Angle = angleMin + (angleMax - angleMin) * percent;
                 }
             }
         }
@@ -82,7 +143,10 @@ namespace Paway.WPF
             {
                 path_Pointer.Width = this.ActualWidth / 2 - 7 + 1;
                 path_Pointer.Margin = new Thickness(0, 0, path_Pointer.Width, 0);
+                ProgressBoard_ValueChanged(this, null);
             }
         }
+
+        #endregion
     }
 }

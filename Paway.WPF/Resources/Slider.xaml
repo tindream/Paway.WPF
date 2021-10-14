@@ -411,6 +411,7 @@
         <Setter Property="AutoToolTipPlacement" Value="TopLeft"/>
         <Setter Property="Margin" Value="2"/>
         <Setter Property="Maximum" Value="100"/>
+        <Setter Property="Focusable" Value="False"/>
         <!--修改模板属性-->
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Horizontal">

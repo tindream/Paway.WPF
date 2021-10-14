@@ -9,13 +9,15 @@
     <Style TargetType="{x:Type local:ProgressBoard}" BasedOn="{StaticResource Config}">
         <Setter Property="Margin" Value="2"/>
         <Setter Property="Maximum" Value="100"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Focusable" Value="False"/>
         <Setter Property="Template">
             <Setter.Value>
                 <!--控件模板-->
                 <ControlTemplate TargetType="{x:Type local:ProgressBoard}" >
                     <Grid>
                         <Ellipse Stroke="Gray" StrokeThickness="8" />
-                        <Ellipse Stroke="{StaticResource Light}" StrokeThickness="10" Margin="7"/>
+                        <Ellipse Stroke="{StaticResource Light}" StrokeThickness="10" Margin="7"  Fill="{TemplateBinding Background}"/>
                         <Path Margin="7"
                               StrokeThickness="10"
                               StrokeStartLineCap="Round"
