@@ -34,11 +34,42 @@ namespace Paway.Test.ViewModel
             set { plotModel = value; RaisePropertyChanged(); }
         }
 
-        private string _value = "0.0";
-        public string Value
+        private double sliderValue = 3;
+        public double SliderValue
         {
-            get { return _value; }
-            set { _value = value; RaisePropertyChanged(); }
+            get { return sliderValue; }
+            set { sliderValue = value; RaisePropertyChanged(); }
+        }
+        private string sliderValues = "3.0";
+        public string SliderValues
+        {
+            get { return sliderValues; }
+            set
+            {
+                sliderValues = value;
+                if (PMethod.Round(SliderValue, 1) != value.ToDouble())
+                    SliderValue = value.ToDouble() > 0 ? value.ToDouble() : value.ToDouble() * 3 / 8;
+                RaisePropertyChanged();
+            }
+        }
+
+        private double boardValue = -65.0;
+        public double BoardValue
+        {
+            get { return boardValue; }
+            set { boardValue = value; RaisePropertyChanged(); }
+        }
+        private string boardValues = "-65.0";
+        public string BoardValues
+        {
+            get { return boardValues; }
+            set
+            {
+                boardValues = value;
+                if (PMethod.Round(BoardValue, 1) != value.ToDouble())
+                    BoardValue = value.ToDouble();
+                RaisePropertyChanged();
+            }
         }
 
         #endregion
@@ -73,7 +104,18 @@ namespace Paway.Test.ViewModel
                 {
                     var value = e.Value;
                     if (value < 0) value = e.Value * 8 / 3;
-                    this.Value = PMethod.Rounds(value, 1, 1);
+                    this.SliderValues = PMethod.Rounds(value, 1, 1);
+                }));
+            }
+        }
+        private ICommand boardValueChanged;
+        public ICommand BoardValueChanged
+        {
+            get
+            {
+                return boardValueChanged ?? (boardValueChanged = new RelayCommand<ProgressBoard>(e =>
+                {
+                    this.BoardValues = PMethod.Rounds(e.Value, 1, 1);
                 }));
             }
         }
