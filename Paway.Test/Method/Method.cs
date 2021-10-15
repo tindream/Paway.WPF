@@ -11,7 +11,7 @@ using System.Windows;
 
 namespace Paway.Test
 {
-    public class Method : WPF.PMethod
+    public class Method : PMethod
     {
     }
 }

@@ -70,6 +70,7 @@ namespace Paway.WPF
             base.OnPreviewMouseDown(e);
             if (e.ChangedButton == MouseButton.Left)
             {
+                this.Cursor = Cursors.Hand;
                 this.startPoint = e.GetPosition(this);
             }
         }
@@ -96,6 +97,7 @@ namespace Paway.WPF
             {
                 Calc(e.GetPosition(this));
                 this.startPoint = new Point();
+                this.Cursor = null;
             }
         }
         /// <summary>
@@ -110,7 +112,10 @@ namespace Paway.WPF
             var interval = Math.Sqrt(Math.Abs(x + y));
             if (x + y < 0) interval *= -1;
             var percent = interval * 1.2 / this.ActualWidth;
-            this.Value += (this.Maximum - this.Minimum) * percent;
+            var temp = this.Value + (this.Maximum - this.Minimum) * percent;
+            if (temp > this.Maximum) temp = this.Maximum;
+            else if (temp < this.Minimum) temp = this.Minimum;
+            this.Value = temp;
         }
 
         #endregion

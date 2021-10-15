@@ -20,8 +20,6 @@ namespace Paway.Test.ViewModel
     public class PlotViewModel : ViewModelPlus
     {
         #region 属性
-        private readonly double minValue = Math.Pow(20.1, 1.0 / Config.Zoom);
-        private readonly double maxValue = Math.Pow(19999.9, 1.0 / Config.Zoom);
         private int index;
         private List<RateInfo> rateList;
         private PlotModel plotModel;
@@ -32,6 +30,15 @@ namespace Paway.Test.ViewModel
         {
             get { return plotModel; }
             set { plotModel = value; RaisePropertyChanged(); }
+        }
+        private RateInfo currentRate;
+        /// <summary>
+        /// 当前选中点
+        /// </summary>
+        public RateInfo CurrentRate
+        {
+            get { return currentRate; }
+            set { currentRate = value; RaisePropertyChanged(); }
         }
 
         private double sliderValue = 3;
@@ -47,27 +54,8 @@ namespace Paway.Test.ViewModel
             set
             {
                 sliderValues = value;
-                if (PMethod.Round(SliderValue, 1) != value.ToDouble())
+                if (Method.Round(SliderValue, 1) != Method.Round(value.ToDouble(), 1))
                     SliderValue = value.ToDouble() > 0 ? value.ToDouble() : value.ToDouble() * 3 / 8;
-                RaisePropertyChanged();
-            }
-        }
-
-        private double boardValue = -65.0;
-        public double BoardValue
-        {
-            get { return boardValue; }
-            set { boardValue = value; RaisePropertyChanged(); }
-        }
-        private string boardValues = "-65.0";
-        public string BoardValues
-        {
-            get { return boardValues; }
-            set
-            {
-                boardValues = value;
-                if (PMethod.Round(BoardValue, 1) != value.ToDouble())
-                    BoardValue = value.ToDouble();
                 RaisePropertyChanged();
             }
         }
@@ -104,18 +92,36 @@ namespace Paway.Test.ViewModel
                 {
                     var value = e.Value;
                     if (value < 0) value = e.Value * 8 / 3;
-                    this.SliderValues = PMethod.Rounds(value, 1, 1);
+                    this.SliderValues = Method.Rounds(value, 1, 1);
                 }));
             }
         }
-        private ICommand boardValueChanged;
-        public ICommand BoardValueChanged
+        private ICommand increaseValueChanged;
+        public ICommand IncreaseValueChanged
         {
             get
             {
-                return boardValueChanged ?? (boardValueChanged = new RelayCommand<ProgressBoard>(e =>
+                return increaseValueChanged ?? (increaseValueChanged = new RelayCommand<ProgressBoard>(e =>
                 {
-                    this.BoardValues = PMethod.Rounds(e.Value, 1, 1);
+                    this.CurrentRate.Increases = Method.Rounds(e.Value, 1, 1);
+                    PlotModel.InvalidatePlot(true);
+                }));
+            }
+        }
+        private ICommand rateValueChanged;
+        public ICommand RateValueChanged
+        {
+            get
+            {
+                return rateValueChanged ?? (rateValueChanged = new RelayCommand<ProgressBoard>(e =>
+                {
+                    this.CurrentRate.Rates = $"{e.Value}";
+                    try
+                    {
+                        this.rateList.Sort((x, y) => (x?.X ?? 0) > (y?.X ?? 0) ? 1 : -1);
+                    }
+                    catch (Exception) { }
+                    PlotModel.InvalidatePlot(true);
                 }));
             }
         }
@@ -152,8 +158,9 @@ namespace Paway.Test.ViewModel
 
             var line = AddSeries(plotModel);
             line.DataFieldX = nameof(RateInfo.X);
-            line.DataFieldY = nameof(RateInfo.Value);
+            line.DataFieldY = nameof(RateInfo.Increase);
             line.ItemsSource = rateList;
+            this.CurrentRate = rateList[2];
 
             plotModel.Annotations.Clear();
             plotModel.Annotations.Add(AddLine(LineAnnotationType.Horizontal, 0, -18));
@@ -176,34 +183,35 @@ namespace Paway.Test.ViewModel
             double? resut = null;
             if (result.Item is RateInfo item)
             {
+                if (item.Text != "H" && item.Text != "L") this.CurrentRate = item;
                 double dx = value / axis.Scale;
                 if (horizontal)
                 {
-                    if (item.X + dx < this.minValue)
+                    if (item.X + dx < Config.MinRate)
                     {
-                        resut = (this.minValue - item.X) * axis.Scale;
-                        item.X = this.minValue;
+                        resut = (Config.MinRate - item.X) * axis.Scale;
+                        item.X = Config.MinRate;
                     }
-                    else if (item.X + dx > this.maxValue)
+                    else if (item.X + dx > Config.MaxRate)
                     {
-                        resut = (this.maxValue - item.X) * axis.Scale;
-                        item.X = this.maxValue;
+                        resut = (Config.MaxRate - item.X) * axis.Scale;
+                        item.X = Config.MaxRate;
                     }
                     else item.X += dx;
                 }
                 else
                 {
-                    if (item.Value + dx > 18)
+                    if (item.Increase + dx > Config.MaxIncrease)
                     {
-                        resut = (18 - item.Value) * axis.Scale;
-                        item.Value = 18;
+                        resut = (Config.MaxIncrease - item.Increase) * axis.Scale;
+                        item.Increase = Config.MaxIncrease;
                     }
-                    else if (item.Value + dx < -18)
+                    else if (item.Increase + dx < Config.MinIncrease)
                     {
-                        resut = (-18 - item.Value) * axis.Scale;
-                        item.Value = -18;
+                        resut = (Config.MinIncrease - item.Increase) * axis.Scale;
+                        item.Increase = Config.MinIncrease;
                     }
-                    else item.Value += dx;
+                    else item.Increase += dx;
                 }
                 if (resut == 0) return resut;
                 this.rateList.Sort((x, y) => x.X > y.X ? 1 : -1);
@@ -283,7 +291,7 @@ namespace Paway.Test.ViewModel
                 {
                     if (item is RateInfo info)
                     {
-                        return $"频率: {Math.Pow(info.X, Config.Zoom).ToInt()}\n增益: {info.Value:#,0.0}";
+                        return $"频率: {Math.Pow(info.X, Config.Zoom).ToInt()}\n增益: {info.Increase:#,0.0}";
                     }
                     return null;
                 }

@@ -16,7 +16,14 @@ namespace Paway.Test
         #region 常量
         public const string Text = "测试系统";
         public const string LogConfig = "log.xml";
+        /// <summary>
+        /// 图表绽放率
+        /// </summary>
         public const int Zoom = 10;
+        public static double MinRate = Math.Pow(20.1, 1.0 / Config.Zoom);
+        public static double MaxRate = Math.Pow(19999.9, 1.0 / Config.Zoom);
+        public const double MinIncrease = -15;
+        public const double MaxIncrease = 15;
 
         #endregion
 
