@@ -151,7 +151,7 @@ namespace Paway.Test.ViewModel
             rateList.Add(new RateInfo("15", 3000, -12));
             rateList.Add(new RateInfo("16", 4000, 0));
             rateList.Add(new RateInfo("L", 20000, 0));
-            rateList.Add(new RateInfo(null, 50000, 0));
+            rateList.Add(new RateInfo(null, 30000, 0));
 
             this.PlotModel = new PlotModel() { PlotAreaBorderColor = OxyColor.FromArgb(50, 0, 0, 0) };
             AddAxis(plotModel);
@@ -257,7 +257,7 @@ namespace Paway.Test.ViewModel
                     return null;
                 },
                 Minimum = Math.Pow(10, 1.0 / Config.Zoom),
-                Maximum = Math.Pow(40000, 1.0 / Config.Zoom),
+                Maximum = Math.Pow(28000, 1.0 / Config.Zoom),
                 IsNodeMoveEnabled = true,
             };
             bottomAxis.NodeMoveEvent += Axis_NodeMoveEvent;

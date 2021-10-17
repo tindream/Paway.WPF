@@ -61,7 +61,19 @@ namespace Paway.WPF
         /// <summary>
         /// 拖动起始点
         /// </summary>
-        private Point startPoint;
+        private Point? startPoint;
+        /// <summary>
+        /// 注册顶层窗体鼠标事件
+        /// </summary>
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            if (PMethod.Parent(this, out Window window))
+            {
+                window.MouseMove += ProgressBoard_MouseMove;
+                window.MouseUp += ProgressBoard_MouseUp;
+            }
+        }
         /// <summary>
         /// 按下开始拖动
         /// </summary>
@@ -70,17 +82,17 @@ namespace Paway.WPF
             base.OnPreviewMouseDown(e);
             if (e.ChangedButton == MouseButton.Left)
             {
-                this.Cursor = Cursors.Hand;
+                if (PMethod.Parent(this, out Window window))
+                    window.Cursor = Cursors.Hand;
                 this.startPoint = e.GetPosition(this);
             }
         }
         /// <summary>
         /// 移动位置
         /// </summary>
-        protected override void OnPreviewMouseMove(MouseEventArgs e)
+        private void ProgressBoard_MouseMove(object sender, MouseEventArgs e)
         {
-            base.OnPreviewMouseMove(e);
-            if (e.LeftButton == MouseButtonState.Pressed && startPoint.X + startPoint.Y != 0)
+            if (e.LeftButton == MouseButtonState.Pressed && startPoint != null)
             {
                 var movePoint = e.GetPosition(this);
                 Calc(movePoint);
@@ -90,14 +102,14 @@ namespace Paway.WPF
         /// <summary>
         /// 抬起停止拖动
         /// </summary>
-        protected override void OnPreviewMouseUp(MouseButtonEventArgs e)
+        private void ProgressBoard_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            base.OnPreviewMouseUp(e);
-            if (startPoint.X + startPoint.Y != 0 && e.ChangedButton == MouseButton.Left)
+            if (e.ChangedButton == MouseButton.Left && startPoint != null)
             {
                 Calc(e.GetPosition(this));
-                this.startPoint = new Point();
-                this.Cursor = null;
+                this.startPoint = null;
+                if (PMethod.Parent(this, out Window window))
+                    window.Cursor = null;
             }
         }
         /// <summary>
@@ -105,13 +117,13 @@ namespace Paway.WPF
         /// </summary>
         private void Calc(Point endPoint)
         {
-            var x = Math.Pow(endPoint.X - startPoint.X, 2.0);
-            if (endPoint.X < startPoint.X) x *= -1;
-            var y = Math.Pow(endPoint.Y - startPoint.Y, 2.0);
-            if (endPoint.Y > startPoint.Y) y *= -1;
+            var x = Math.Pow(endPoint.X - startPoint.Value.X, 2.0);
+            if (endPoint.X < startPoint.Value.X) x *= -1;
+            var y = Math.Pow(endPoint.Y - startPoint.Value.Y, 2.0);
+            if (endPoint.Y > startPoint.Value.Y) y *= -1;
             var interval = Math.Sqrt(Math.Abs(x + y));
             if (x + y < 0) interval *= -1;
-            var percent = interval * 1.2 / this.ActualWidth;
+            var percent = interval * 0.35 / this.ActualWidth;
             var temp = this.Value + (this.Maximum - this.Minimum) * percent;
             if (temp > this.Maximum) temp = this.Maximum;
             else if (temp < this.Minimum) temp = this.Minimum;

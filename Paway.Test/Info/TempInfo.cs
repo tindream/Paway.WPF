@@ -33,7 +33,8 @@ namespace Paway.Test
             set
             {
                 var temp = value;
-                if (temp > Config.MaxRate) temp = Config.MaxRate;
+                if (this.Text == null) { }
+                else if (temp > Config.MaxRate) temp = Config.MaxRate;
                 else if (temp < Config.MinRate) temp = Config.MinRate;
                 x = temp;
                 Rates = $"{Math.Pow(x, Config.Zoom).ToInt()}";
