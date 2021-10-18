@@ -78,7 +78,7 @@ namespace Paway.WPF
                     btn.ItemBorder = new ThicknessEXT(1, 0);
                     btn.BorderBrush = new SolidColorBrush(Colors.LightGray);
                     btn.ItemForeground = new BrushEXT(PConfig.TextColor, Colors.White, Colors.White);
-                    btn.ItemBackground.Normal = new SolidColorBrush(Colors.White);
+                    btn.ItemBackground.Normal = new SolidColorBrush(Colors.Transparent);
                 }
                 btn.UpdateDefaultStyle();
             }

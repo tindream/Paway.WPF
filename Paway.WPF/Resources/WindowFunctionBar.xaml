@@ -7,12 +7,6 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="WindowFunctionBarTitleBarButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource WindowTitleBarButtonStyle}">
-        <Setter Property="MinWidth" Value="42" />
-        <Setter Property="Width" Value="Auto" />
-        <Setter Property="Padding" Value="9,0" />
-    </Style>
-
     <ControlTemplate x:Key="TopLevelItemTemplate" TargetType="{x:Type MenuItem}">
         <Border x:Name="templateRoot"
                 SnapsToDevicePixels="True"
@@ -440,12 +434,12 @@
         <Setter Property="Control.Template" Value="{StaticResource SubmenuItemTemplate}" />
         <Style.Triggers>
             <Trigger Property="MenuItem.Role" Value="TopLevelHeader">
-                <Setter Property="Margin" Value="0,3" />
+                <Setter Property="Margin" Value="0,2" />
                 <Setter Property="Control.Template" Value="{StaticResource TopLevelHeaderTemplate}" />
                 <Setter Property="Control.Padding" Value="9,0" />
             </Trigger>
             <Trigger Property="MenuItem.Role" Value="TopLevelItem">
-                <Setter Property="Margin" Value="0,3" />
+                <Setter Property="Margin" Value="0,2" />
                 <Setter Property="Control.Template" Value="{StaticResource TopLevelItemTemplate}" />
                 <Setter Property="Control.Padding" Value="9,0" />
             </Trigger>
@@ -515,10 +509,6 @@
                 <ControlTemplate TargetType="local:WindowFunctionBar">
                     <ControlTemplate.Resources>
                         <ResourceDictionary>
-                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource WindowFunctionBarTitleBarButtonStyle}" />
-                            <Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource WindowTitleBarMenuItemStyle}" />
-                            <Style TargetType="{x:Type Menu}" BasedOn="{StaticResource WindowTitleBarMenuStyle}" />
-                            <Style TargetType="{x:Type Separator}" BasedOn="{StaticResource WindowTitleBarSeparatorStyle}" />
                         </ResourceDictionary>
                     </ControlTemplate.Resources>
                     <ItemsPresenter />
@@ -533,4 +523,8 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource WindowTitleBarMenuItemStyle}" />
+    <Style TargetType="{x:Type Menu}" BasedOn="{StaticResource WindowTitleBarMenuStyle}" />
+    <Style TargetType="{x:Type Separator}" BasedOn="{StaticResource WindowTitleBarSeparatorStyle}" />
 </ResourceDictionary>
