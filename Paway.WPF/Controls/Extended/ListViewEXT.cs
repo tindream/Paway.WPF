@@ -581,31 +581,6 @@ namespace Paway.WPF
             }
         }
         /// <summary>
-        /// 重置动画线条位置
-        /// </summary>
-        protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
-        {
-            base.OnRenderSizeChanged(sizeInfo);
-            if (!IAnimation) return;
-            for (int i = 0; i < this.Items.Count; i++)
-            {
-                if (Items[i] is ListViewItem item)
-                {
-                    if (PMethod.Child(item, out Line line1, "line1", false))
-                    {
-                        line1.X2 = this.ItemWidth / 2;
-                    }
-                }
-                else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is ListViewItem listViewItem)
-                {
-                    if (PMethod.Child(listViewItem, out Line line1, "line1", false))
-                    {
-                        line1.X2 = this.ItemWidth / 2;
-                    }
-                }
-            }
-        }
-        /// <summary>
         /// 鼠标离开控件
         /// </summary>
         protected override void OnMouseLeave(MouseEventArgs e)
@@ -712,13 +687,13 @@ namespace Paway.WPF
             var animTime = PMethod.AnimTime(this.ItemWidth / 2) * 0.5;
             if (value)
             {
-                var animX1 = new DoubleAnimation(line1.X1, 0, new Duration(TimeSpan.FromMilliseconds(animTime)));
+                var animX1 = new DoubleAnimation(line1.X2, this.ItemWidth / 2, new Duration(TimeSpan.FromMilliseconds(animTime)));
                 var animX2 = new DoubleAnimation(line2.X2, this.ItemWidth / 2, new Duration(TimeSpan.FromMilliseconds(animTime)));
                 if (line1 != null)
                 {
                     if (line1.X2 > this.ActualWidth) line1.X2 = this.ActualWidth;
                     Storyboard.SetTargetName(animX1, line1.Name);
-                    Storyboard.SetTargetProperty(animX1, new PropertyPath(Line.X1Property));
+                    Storyboard.SetTargetProperty(animX1, new PropertyPath(Line.X2Property));
                     storyboard.Children.Add(animX1);
                 }
                 if (line2 != null)
@@ -730,12 +705,12 @@ namespace Paway.WPF
             }
             else
             {
-                var animX1 = new DoubleAnimation(line1.X1, this.ItemWidth / 2, new Duration(TimeSpan.FromMilliseconds(animTime)));
+                var animX1 = new DoubleAnimation(line1.X2, 0, new Duration(TimeSpan.FromMilliseconds(animTime)));
                 var animX2 = new DoubleAnimation(line2.X2, 0, new Duration(TimeSpan.FromMilliseconds(animTime)));
                 if (line1 != null)
                 {
                     Storyboard.SetTargetName(animX1, line1.Name);
-                    Storyboard.SetTargetProperty(animX1, new PropertyPath(Line.X1Property));
+                    Storyboard.SetTargetProperty(animX1, new PropertyPath(Line.X2Property));
                     storyboard.Children.Add(animX1);
                 }
                 if (line2 != null)

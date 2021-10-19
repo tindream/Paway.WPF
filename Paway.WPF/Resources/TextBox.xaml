@@ -46,18 +46,20 @@
                                            Text="{TemplateBinding Water}"/>
                             </Grid>
                         </Border>
-                        <DockPanel VerticalAlignment="Bottom" >
+                        <Grid VerticalAlignment="Bottom">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
                             <Line x:Name="line1" 
-                                  X1="{Binding ActualWidth, Converter={StaticResource valueMultiConverter}, ConverterParameter=0.5, RelativeSource={RelativeSource TemplatedParent}}" 
-                                  X2="{Binding ActualWidth, Converter={StaticResource valueMultiConverter}, ConverterParameter=0.5, RelativeSource={RelativeSource TemplatedParent}}" 
                                   StrokeThickness="{Binding IAnimation, RelativeSource={RelativeSource TemplatedParent}}" 
-                                  Stroke="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}">
+                                  Stroke="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" FlowDirection="RightToLeft">
                             </Line>
-                            <Line x:Name="line2" 
+                            <Line x:Name="line2" Grid.Column="1"
                                   StrokeThickness="{Binding IAnimation, RelativeSource={RelativeSource TemplatedParent}}"
                                   Stroke="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}">
                             </Line>
-                        </DockPanel>
+                        </Grid>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding Icon, Converter={StaticResource isNotNull}, RelativeSource={RelativeSource Self}}" Value="True">

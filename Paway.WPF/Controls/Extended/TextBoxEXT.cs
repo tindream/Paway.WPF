@@ -162,12 +162,12 @@ namespace Paway.WPF
             var storyboard = new Storyboard();
             if (value)
             {
-                var animX1 = new DoubleAnimation(line1.X1, BorderThickness.Left, new Duration(TimeSpan.FromMilliseconds(100)));
+                var animX1 = new DoubleAnimation(line1.X2, this.ActualWidth / 2 - BorderThickness.Right, new Duration(TimeSpan.FromMilliseconds(100)));
                 var animX2 = new DoubleAnimation(line2.X2, this.ActualWidth / 2 - BorderThickness.Right, new Duration(TimeSpan.FromMilliseconds(100)));
                 if (line1 != null)
                 {
                     Storyboard.SetTargetName(animX1, line1.Name);
-                    Storyboard.SetTargetProperty(animX1, new PropertyPath(Line.X1Property));
+                    Storyboard.SetTargetProperty(animX1, new PropertyPath(Line.X2Property));
                     storyboard.Children.Add(animX1);
                 }
                 if (line2 != null)
@@ -179,12 +179,12 @@ namespace Paway.WPF
             }
             else
             {
-                var animX1 = new DoubleAnimation(line1.X1, this.ActualWidth / 2, new Duration(TimeSpan.FromMilliseconds(100)));
+                var animX1 = new DoubleAnimation(line1.X2, 0, new Duration(TimeSpan.FromMilliseconds(100)));
                 var animX2 = new DoubleAnimation(line2.X2, 0, new Duration(TimeSpan.FromMilliseconds(100)));
                 if (line1 != null)
                 {
                     Storyboard.SetTargetName(animX1, line1.Name);
-                    Storyboard.SetTargetProperty(animX1, new PropertyPath(Line.X1Property));
+                    Storyboard.SetTargetProperty(animX1, new PropertyPath(Line.X2Property));
                     storyboard.Children.Add(animX1);
                 }
                 if (line2 != null)

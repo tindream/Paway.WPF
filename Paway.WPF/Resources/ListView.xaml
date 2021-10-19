@@ -8,6 +8,7 @@
 
     <Style TargetType="{x:Type local:ListViewEXT}" BasedOn="{StaticResource Config}">
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="SelectionMode" Value="Single"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -36,6 +37,7 @@
             <Setter.Value>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="IsSelected" Value="{Binding IsSelected}" />
+                    <Setter Property="Focusable" Value="False" />
                     <Setter Property="Visibility" Value="{Binding Visibility}" />
                     <Setter Property="Template">
                         <Setter.Value>
@@ -108,13 +110,15 @@
                                             </DockPanel>
                                         </DockPanel>
                                     </Border>
-                                    <DockPanel VerticalAlignment="Bottom" 
-                                               Margin="{Binding ItemMargin, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
+                                    <Grid VerticalAlignment="Bottom"
+                                           Margin="{Binding ItemMargin, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
                                                Visibility="{Binding Path=IAnimation, Converter={StaticResource boolToVisible}, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
                                         <Line x:Name="line1" 
-                                              X1="{Binding ItemWidth, Converter={StaticResource valueMultiConverter}, ConverterParameter=0.5, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
-                                              X2="{Binding ItemWidth, Converter={StaticResource valueMultiConverter}, ConverterParameter=0.5, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
-                                              StrokeThickness="{Binding Path=ItemBorder.Mouse.Bottom, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
+                                              StrokeThickness="{Binding Path=ItemBorder.Mouse.Bottom, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" FlowDirection="RightToLeft">
                                             <Line.Stroke>
                                                 <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemBrush.Pressed" />
@@ -122,7 +126,7 @@
                                                 </MultiBinding>
                                             </Line.Stroke>
                                         </Line>
-                                        <Line x:Name="line2" StrokeThickness="{Binding Path=ItemBorder.Mouse.Bottom, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
+                                        <Line x:Name="line2" Grid.Column="1" StrokeThickness="{Binding Path=ItemBorder.Mouse.Bottom, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
                                             <Line.Stroke>
                                                 <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemBrush.Pressed" />
@@ -130,7 +134,7 @@
                                                 </MultiBinding>
                                             </Line.Stroke>
                                         </Line>
-                                    </DockPanel>
+                                    </Grid>
                                     <Grid.ToolTip>
                                         <TextBlock>
                                             <TextBlock.Text>
