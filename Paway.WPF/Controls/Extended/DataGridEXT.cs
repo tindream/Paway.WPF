@@ -246,7 +246,7 @@ namespace Paway.WPF
                 this.type = base.ItemsSource.GetType().GenericType();
             }
             var columns = new List<DataGridColumn>();
-            var properties = this.type.PropertiesCache();
+            var properties = this.type.Properties();
             foreach (var property in properties)
             {
                 var column = columnsReady.Find(c => (c.ClipboardContentBinding is Binding binding && binding.Path.Path == property.Name) || c.Header.ToStrings() == property.Name || c.Header.ToStrings() == property.Text());
