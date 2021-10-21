@@ -25,6 +25,7 @@ namespace Paway.WPF
             var index = 0;
             while (value.Length > index && (value[index] == null || value[index] == DependencyProperty.UnsetValue ||
                 (value[index] is Thickness thickness && thickness == new Thickness(double.NaN)) ||
+                (value[index] is double dValue && dValue.Equals(double.NaN)) ||
                 (value[index] is SolidColorBrush solid && solid.Color == Colors.Transparent)))
             {
                 index++;

@@ -70,6 +70,10 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ListBoxItemEXT), new PropertyMetadata(new BrushEXT(Colors.Transparent)));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ItemWidthProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemWidth), typeof(double), typeof(ListBoxItemEXT), new PropertyMetadata(double.NaN));
 
         /// <summary>
         /// 自定义项文本字体颜色
@@ -110,6 +114,16 @@ namespace Paway.WPF
         {
             get { return (BrushEXT)GetValue(ItemBrushProperty); }
             set { SetValue(ItemBrushProperty, value); }
+        }
+        /// <summary>
+        /// 自定义项宽度
+        /// </summary>
+        [Category("扩展")]
+        [Description("自定义项宽度")]
+        public double ItemWidth
+        {
+            get { return (double)GetValue(ItemWidthProperty); }
+            set { SetValue(ItemWidthProperty, value); }
         }
 
         private bool isPressed;

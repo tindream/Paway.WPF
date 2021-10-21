@@ -240,8 +240,8 @@
         </ExpanderEXT>
 
         <WrapPanel>
-            <ListViewEXT Name="listView3" Margin="5,5,0,0"  Height="121" Width="401"
-                         ItemHeight="60" ItemWidth="100" IsLight="True">
+            <ListViewEXT x:Name="listView3" Margin="5,5,0,0" ItemWidthStar="True"
+                         ItemHeight="60" ItemWidth="100" IsLight="True" Width="433" >
                 <ListViewEXT.ItemBrush>
                     <BrushEXT Alpha="35" Mouse="#AA23AFFF" Normal="LightGray" Pressed="#FA23AFFF"/>
                 </ListViewEXT.ItemBrush>

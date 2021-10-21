@@ -38,6 +38,10 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(ItemWidth), typeof(double), typeof(ListViewEXT), new PropertyMetadata(90d));
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty ItemWidthStarProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemWidthStar), typeof(bool), typeof(ListViewEXT));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty ItemHeightProperty =
             DependencyProperty.RegisterAttached(nameof(ItemHeight), typeof(double), typeof(ListViewEXT), new PropertyMetadata(42d));
         /// <summary>
@@ -223,6 +227,16 @@ namespace Paway.WPF
         {
             get { return (double)GetValue(ItemWidthProperty); }
             set { SetValue(ItemWidthProperty, value); }
+        }
+        /// <summary>
+        /// 等宽
+        /// </summary>
+        [Category("扩展.项")]
+        [Description("等宽")]
+        public bool ItemWidthStar
+        {
+            get { return (bool)GetValue(ItemWidthStarProperty); }
+            set { SetValue(ItemWidthStarProperty, value); }
         }
         /// <summary>
         /// 自定义项高度
@@ -485,8 +499,31 @@ namespace Paway.WPF
             DefaultStyleKey = typeof(ListViewEXT);
             Config_FontSizeChanged(PConfig.FontSize);
             PConfig.FontSizeChanged += Config_FontSizeChanged;
+            this.SizeChanged += ListViewEXT_SizeChanged;
         }
 
+        /// <summary>
+        /// 等宽处理
+        /// </summary>
+        private void ListViewEXT_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (!ItemWidthStar) return;
+            var actualWidth = ActualWidth - BorderThickness.Left - BorderThickness.Right - Padding.Left - Padding.Right;
+            var width = (int)(actualWidth / Items.Count);
+            if (actualWidth % this.Items.Count > 0) width++;
+            var count = Items.Count - (Items.Count * width - actualWidth);
+            for (var i = 0; i < Items.Count; i++)
+            {
+                if (Items[i] is ListBoxItemEXT item)
+                {
+                    item.ItemWidth = count > i ? width : width - 1;
+                }
+                else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is ListBoxItemEXT listViewItem)
+                {
+                    listViewItem.ItemWidth = count > i ? width : width - 1;
+                }
+            }
+        }
         /// <summary>
         /// 更新字体大小
         /// </summary>
