@@ -42,7 +42,7 @@ namespace Paway.WPF
         /// 按钮宽度
         /// </summary>
         public static readonly DependencyProperty BarWidthProperty =
-            DependencyProperty.RegisterAttached(nameof(BarWidth), typeof(double), typeof(FunctionBarMonitor), new PropertyMetadata());
+            DependencyProperty.RegisterAttached(nameof(BarWidth), typeof(double), typeof(FunctionBarMonitor));
         /// <summary>
         /// 按钮宽度
         /// </summary>

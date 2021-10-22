@@ -9,57 +9,17 @@
         DataContext="{Binding Test ,Source={StaticResource Locator}}"
         Title="TestWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="99"/>
-            <ColumnDefinition Width="103"/>
-        </Grid.ColumnDefinitions>
-        <Grid Height="100">
-            <Border BorderBrush="LightGray" BorderThickness="1">
-            </Border>
-            <Ellipse Stroke="Gray" StrokeThickness="8" />
-            <Ellipse Stroke="{StaticResource Light}" StrokeThickness="10" Margin="7"/>
-            <Path Margin="7"
-              StrokeThickness="10"
-              StrokeStartLineCap="Round"
-              StrokeEndLineCap="Round" RenderTransformOrigin="0.5,0.5">
-                <Path.Stroke>
-                    <LinearGradientBrush EndPoint="1,0" StartPoint="0,0.4">
-                        <GradientStop Offset="0" Color="{Binding Source={StaticResource Light}, Converter={StaticResource brushToColorConverter}}" />
-                        <GradientStop Offset="1" Color="Gray" />
-                    </LinearGradientBrush>
-                </Path.Stroke>
-                <Path.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="117"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Path.RenderTransform>
-                <Path.Data>
-                    <MultiBinding Converter="{StaticResource roundProgressBarConverter}">
-                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource AncestorType=Grid}" Converter="{StaticResource valueAddConverter}" ConverterParameter="-14"></Binding>
-                        <Binding Path="ActualHeight" RelativeSource="{RelativeSource AncestorType=Grid}"  Converter="{StaticResource valueAddConverter}" ConverterParameter="-14"></Binding>
-                        <Binding Source="10"></Binding>
-                        <Binding Source="0"></Binding>
-                        <Binding Source="100"></Binding>
-                        <Binding Source="35"></Binding>
-                    </MultiBinding>
-                </Path.Data>
-            </Path>
-            <Path Style="{StaticResource PathPointer}" RenderTransformOrigin="1,0.5" Width="44" Margin="0,0,44,0" >
-                <Path.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="{Binding Angle}"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Path.RenderTransform>
-            </Path>
-        </Grid>
-        <TextBoxEXT Width="44" Height="22" Margin="0,140,0,0" FontSize="12" Water="" Text="{Binding Value,FallbackValue=0.0}" HorizontalContentAlignment="Center" Padding="3,2"/>
-        <ProgressBoard Grid.Column="1"  Height="100" AnimationValue="{Binding Value}"></ProgressBoard>
-        <SliderEXT Margin="0,185,0,0" Grid.ColumnSpan="2" Value="{Binding Value}" TickFrequency="10" IsSnapToTickEnabled="True" ></SliderEXT>
+        <Border Width="200" Height="200">
+            <DockPanel>
+                <Image DockPanel.Dock="Top"/>
+                <DockPanel Background="Green">
+                    <TextBlock Text=""/>
+                    <TextBlock Text=""/>
+                </DockPanel>
+                <Border Background="Red">
+                    <TextBlock Text="123"/>
+                </Border>
+            </DockPanel>
+        </Border>
     </Grid>
 </Window>

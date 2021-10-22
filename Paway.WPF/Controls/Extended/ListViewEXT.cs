@@ -518,9 +518,9 @@ namespace Paway.WPF
                 {
                     item.ItemWidth = count > i ? width : width - 1;
                 }
-                else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is ListBoxItemEXT listViewItem)
+                else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is ListBoxItemEXT listBoxItem)
                 {
-                    listViewItem.ItemWidth = count > i ? width : width - 1;
+                    listBoxItem.ItemWidth = count > i ? width : width - 1;
                 }
             }
         }
@@ -547,15 +547,15 @@ namespace Paway.WPF
         /// <summary>
         /// 鼠标移过项
         /// </summary>
-        private ListViewItem moveItem;
+        private ListBoxItem moveItem;
         /// <summary>
         /// 上一次按下时的item
         /// </summary>
-        private ListViewItem lastItem;
+        private ListBoxItem lastItem;
         /// <summary>
         /// 按下时的item
         /// </summary>
-        private ListViewItem downItem;
+        private ListBoxItem downItem;
         /// <summary>
         /// 鼠标按下时取消触发
         /// </summary>
@@ -610,11 +610,11 @@ namespace Paway.WPF
                     downItem = null;
                 }
             }
-            if (IAnimation && Mouse.DirectlyOver != null && PMethod.Parent<ListViewItem>(Mouse.DirectlyOver, out ListViewItem listViewItem) && this.moveItem != listViewItem)
+            if (IAnimation && Mouse.DirectlyOver != null && PMethod.Parent<ListBoxItem>(Mouse.DirectlyOver, out ListBoxItem listBoxItem) && this.moveItem != listBoxItem)
             {
                 if (this.moveItem != null) Animation(moveItem, false);
-                this.moveItem = listViewItem;
-                Animation(listViewItem, true);
+                this.moveItem = listBoxItem;
+                Animation(listBoxItem, true);
             }
         }
         /// <summary>
@@ -640,7 +640,7 @@ namespace Paway.WPF
             if (ClickMode == ClickMode.Release && e.ChangedButton == MouseButton.Left && downItem != null)
             {
                 IsPressed(false);
-                if (PMethod.Parent(e.OriginalSource, out ListViewItem item) && item == downItem)
+                if (PMethod.Parent(e.OriginalSource, out ListBoxItem item) && item == downItem)
                 {
                     if (SelectionMode == SelectionMode.Extended)
                     {
@@ -690,17 +690,17 @@ namespace Paway.WPF
         {
             for (int i = 0; i < this.Items.Count; i++)
             {
-                if (Items[i] is ListViewItem item)
+                if (Items[i] is ListBoxItem item)
                 {
                     SetSelected(item, action(i));
                 }
-                else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is ListViewItem listViewItem)
+                else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is ListBoxItem listBoxItem)
                 {
-                    SetSelected(listViewItem, action(i));
+                    SetSelected(listBoxItem, action(i));
                 }
             }
         }
-        private void SetSelected(ListViewItem item, bool value)
+        private void SetSelected(ListBoxItem item, bool value)
         {
             if (item.IsSelected != value)
             {
@@ -716,7 +716,7 @@ namespace Paway.WPF
                 Animation(item, value);
             }
         }
-        private void Animation(ListViewItem item, bool value)
+        private void Animation(ListBoxItem item, bool value)
         {
             PMethod.Child(item, out Line line1, "line1", false);
             PMethod.Child(item, out Line line2, "line2", false);
@@ -724,8 +724,9 @@ namespace Paway.WPF
             var animTime = PMethod.AnimTime(this.ItemWidth / 2) * 0.5;
             if (value)
             {
-                var animX1 = new DoubleAnimation(line1.X2, this.ItemWidth / 2, new Duration(TimeSpan.FromMilliseconds(animTime)));
-                var animX2 = new DoubleAnimation(line2.X2, this.ItemWidth / 2, new Duration(TimeSpan.FromMilliseconds(animTime)));
+                var itemWidth = (int)(item.ActualWidth / 2);
+                var animX1 = new DoubleAnimation(line1.X2, itemWidth, new Duration(TimeSpan.FromMilliseconds(animTime)));
+                var animX2 = new DoubleAnimation(line2.X2, itemWidth, new Duration(TimeSpan.FromMilliseconds(animTime)));
                 if (line1 != null)
                 {
                     if (line1.X2 > this.ActualWidth) line1.X2 = this.ActualWidth;
@@ -759,13 +760,13 @@ namespace Paway.WPF
             }
             if (line1 != null) storyboard.Begin(line1);
         }
-        private int Index(ListViewItem item)
+        private int Index(ListBoxItem item)
         {
             for (int i = 0; i < Items.Count; i++)
             {
-                if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is ListViewItem listViewItem)
+                if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is ListBoxItem listBoxItem)
                 {
-                    if (item.Equals(listViewItem)) return i;
+                    if (item.Equals(listBoxItem)) return i;
                 }
             }
             return -1;

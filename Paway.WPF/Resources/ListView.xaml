@@ -66,6 +66,7 @@
                                         </Border.Width>
                                     </Border>
                                     <Border x:Name="border2" 
+                                            Visibility="{Binding StyleEXT, Converter={StaticResource nullToCollapsed}, ConverterParameter=False}"
                                             Padding="{Binding Path=ItemPadding.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                             Height="{Binding ItemHeight, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
                                         <Border.Width>
@@ -125,9 +126,21 @@
                                             </DockPanel>
                                         </DockPanel>
                                     </Border>
+                                    <Border  Visibility="{Binding StyleEXT, Converter={StaticResource nullToCollapsed}}"
+                                             Padding="{Binding Path=ItemPadding.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
+                                             Height="{Binding ItemHeight, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
+                                        <Border.Width>
+                                            <MultiBinding Converter="{StaticResource nullSelector}">
+                                                <Binding Path="ItemWidth" />
+                                                <Binding Path="ItemWidth" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
+                                            </MultiBinding>
+                                        </Border.Width>
+                                        <ContentControl Style="{Binding StyleEXT}">
+                                        </ContentControl>
+                                    </Border>
                                     <Grid VerticalAlignment="Bottom"
-                                           Margin="{Binding ItemMargin, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
-                                               Visibility="{Binding Path=IAnimation, Converter={StaticResource boolToVisible}, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
+                                          Margin="{Binding ItemMargin, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
+                                          Visibility="{Binding Path=IAnimation, Converter={StaticResource boolToVisible}, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition/>
                                             <ColumnDefinition/>

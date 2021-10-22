@@ -28,7 +28,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ColumnWidthProperty =
-            DependencyProperty.RegisterAttached(nameof(ColumnWidth), typeof(DataGridLength), typeof(ComboBoxView), new PropertyMetadata());
+            DependencyProperty.RegisterAttached(nameof(ColumnWidth), typeof(DataGridLength), typeof(ComboBoxView));
 
         /// <summary>
         /// 下拉列表是否显示列
