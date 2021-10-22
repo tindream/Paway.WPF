@@ -90,10 +90,8 @@ namespace Paway.WPF
         {
             if (IHigh)
             {
-                var alpha = this.Normal is SolidColorBrush normal ? normal.Color.A : (byte)250;
-                this.Normal = new SolidColorBrush(PMethod.AlphaColor(alpha, PConfig.Color.AddLight(0.96)));
-                alpha = this.Mouse is SolidColorBrush mouse ? mouse.Color.A : (byte)250;
-                this.Mouse = new SolidColorBrush(PMethod.AlphaColor(alpha, PConfig.Color.AddLight(0.96)));
+                this.Normal = new SolidColorBrush(PConfig.Background.AddLight(-30));
+                this.Mouse = new SolidColorBrush(PConfig.Color.AddLight(0.96));
                 this.Pressed = new SolidColorBrush(PConfig.Color.AddLight(-90));
             }
         }

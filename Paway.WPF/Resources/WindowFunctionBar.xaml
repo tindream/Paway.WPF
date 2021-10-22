@@ -57,11 +57,11 @@
             </Trigger>
             <Trigger Property="IsMouseOver" Value="true">
                 <Setter Property="Fill" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.HighBrush).Mouse, RelativeSource={RelativeSource Self}}" />
-                <Setter Property="Stroke" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}" />
+                <Setter Property="Stroke" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Normal, RelativeSource={RelativeSource Self}}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Fill" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Normal, RelativeSource={RelativeSource Self}}" />
-                <Setter Property="Stroke" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Normal, RelativeSource={RelativeSource Self}}" />
+                <Setter Property="Fill" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}" />
+                <Setter Property="Stroke" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="#FF707070" />
@@ -125,7 +125,7 @@
                        PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
                        Placement="Bottom">
                     <Border x:Name="SubMenuBorder"
-                            BorderBrush="{Binding Path=(local:ThemeEXT.ItemBrush).Normal, RelativeSource={RelativeSource Self}}"
+                            BorderBrush="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}"
                             BorderThickness="1"
                             Background="{Binding Path=(local:ThemeEXT.HighBrush).Mouse, RelativeSource={RelativeSource Self}}"
                             Padding="2">
@@ -174,11 +174,11 @@
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
                 <Setter Property="Fill" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.HighBrush).Mouse, RelativeSource={RelativeSource Self}}" />
-                <Setter Property="Stroke" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}" />
+                <Setter Property="Stroke" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Normal, RelativeSource={RelativeSource Self}}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Fill" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.HighBrush).Mouse, RelativeSource={RelativeSource Self}}" />
-                <Setter Property="Stroke" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Normal, RelativeSource={RelativeSource Self}}" />
+                <Setter Property="Stroke" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}" />
                 <Setter Property="Visibility" TargetName="Line" Value="Visible" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
@@ -197,7 +197,7 @@
                     <Condition Property="IsSubmenuOpen" Value="True" />
                 </MultiTrigger.Conditions>
                 <Setter Property="Fill" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.HighBrush).Mouse, RelativeSource={RelativeSource Self}}" />
-                <Setter Property="Stroke" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Normal, RelativeSource={RelativeSource Self}}" />
+                <Setter Property="Stroke" TargetName="ButtonBackground" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}" />
                 <Setter Property="Visibility" TargetName="Line" Value="Visible" />
             </MultiTrigger>
             <MultiTrigger>
@@ -274,10 +274,10 @@
                 <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter Property="Background" TargetName="templateRoot" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}" />
+                <Setter Property="Background" TargetName="templateRoot" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Normal, RelativeSource={RelativeSource Self}}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" TargetName="templateRoot" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Normal, RelativeSource={RelativeSource Self}}" />
+                <Setter Property="Background" TargetName="templateRoot" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="#FF707070" />
@@ -401,10 +401,10 @@
                 <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter Property="Background" TargetName="templateRoot" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}" />
+                <Setter Property="Background" TargetName="templateRoot" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Normal, RelativeSource={RelativeSource Self}}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" TargetName="templateRoot" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Normal, RelativeSource={RelativeSource Self}}" />
+                <Setter Property="Background" TargetName="templateRoot" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="#FF707070" />
@@ -483,7 +483,7 @@
     </Style>
 
     <Style x:Key="WindowTitleBarSeparatorStyle" TargetType="{x:Type Separator}">
-        <Setter Property="Background" Value="{Binding Path=(local:ThemeEXT.HighBrush).Pressed, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="Background" Value="{Binding Path=(local:ThemeEXT.HighBrush).Normal, RelativeSource={RelativeSource Self}}" />
         <Setter Property="Margin" Value="5,6" />
         <Setter Property="Focusable" Value="false" />
         <Setter Property="Template">

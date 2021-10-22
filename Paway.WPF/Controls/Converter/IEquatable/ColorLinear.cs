@@ -24,7 +24,7 @@ namespace Paway.WPF
         /// 起始颜色
         /// </summary>
         public Color Start { get { return start; } set { start = value; OnPropertyChanged(); } }
-        private Color end = PMethod.ThemeColor(250);
+        private Color end = PMethod.ThemeColor(240);
         /// <summary>
         /// 终点颜色
         /// </summary>

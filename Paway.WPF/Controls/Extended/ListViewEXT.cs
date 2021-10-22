@@ -63,7 +63,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(null, 170, 250)));
+            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(null, 170, 240)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBackgroundProperty =
@@ -82,7 +82,7 @@ namespace Paway.WPF
                 }
                 if (listView.ItemBackground.Pressed is SolidColorBrush pressed && pressed.Color != PMethod.AlphaColor(150, PConfig.Color))
                 {
-                    if ((listView.ItemBrush.Pressed as SolidColorBrush).Color == PMethod.AlphaColor(250, PConfig.Color))
+                    if ((listView.ItemBrush.Pressed as SolidColorBrush).Color == PMethod.AlphaColor(240, PConfig.Color))
                     {
                         pressedColor = PMethod.AlphaColor(pressed.Color.A + 100, pressed.Color);
                     }

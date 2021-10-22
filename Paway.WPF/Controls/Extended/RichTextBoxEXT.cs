@@ -24,7 +24,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(RichTextBoxEXT),
-                new PropertyMetadata(new BrushEXT(null, 170, 250)));
+                new PropertyMetadata(new BrushEXT(null, 170, 240)));
 
         #endregion
 

@@ -43,7 +43,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty TrackColorLinearProperty =
             DependencyProperty.RegisterAttached(nameof(TrackColorLinear), typeof(ColorLinear), typeof(SliderEXT),
-                new PropertyMetadata(new ColorLinear(85, 250)));
+                new PropertyMetadata(new ColorLinear(85, 240)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty TrackBackgroundProperty =

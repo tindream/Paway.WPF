@@ -29,7 +29,7 @@ namespace Paway.WPF
         /// 鼠标划过时的颜色
         /// </summary>
         public Color Mouse { get { return mouse; } set { mouse = value; OnPropertyChanged(); } }
-        private Color pressed = PMethod.ThemeColor(250);
+        private Color pressed = PMethod.ThemeColor(240);
         /// <summary>
         /// 鼠标点击时的颜色
         /// </summary>

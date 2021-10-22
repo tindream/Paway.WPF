@@ -98,7 +98,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ForegroundColorLinearProperty =
             DependencyProperty.RegisterAttached(nameof(ForegroundColorLinear), typeof(ColorLinear), typeof(ProgressBarEXT),
-                new PropertyMetadata(new ColorLinear(85, 250)));
+                new PropertyMetadata(new ColorLinear(85, 240)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ProgressValueProperty =

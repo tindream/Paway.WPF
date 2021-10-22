@@ -71,7 +71,7 @@
                                 <Setter.Value>
                                     <MultiBinding Converter="{StaticResource nullSelector}">
                                         <Binding Path="Background" RelativeSource="{RelativeSource TemplatedParent}"/>
-                                        <Binding Path="(local:ThemeEXT.ItemBrush).Mouse" RelativeSource="{RelativeSource Self}" />
+                                        <Binding Path="(local:ThemeEXT.ItemBrush).Normal" RelativeSource="{RelativeSource Self}" />
                                     </MultiBinding>
                                 </Setter.Value>
                             </Setter>
@@ -81,7 +81,7 @@
                                 <Setter.Value>
                                     <MultiBinding Converter="{StaticResource nullSelector}">
                                         <Binding Path="Background" RelativeSource="{RelativeSource TemplatedParent}"/>
-                                        <Binding Path="(local:ThemeEXT.ItemBrush).Normal" RelativeSource="{RelativeSource Self}" />
+                                        <Binding Path="(local:ThemeEXT.ItemBrush).Mouse" RelativeSource="{RelativeSource Self}" />
                                     </MultiBinding>
                                 </Setter.Value>
                             </Setter>
@@ -129,8 +129,7 @@
     <Style TargetType="{x:Type local:WindowEXT}" BasedOn="{StaticResource Config}">
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
         <Setter Property="Background" Value="#FFF1F1F1" />
-        <Setter Property="BorderBrush" 
-                Value="{Binding Path=(local:ThemeEXT.HighBrush).Pressed, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="BorderBrush" Value="{Binding Path=(local:ThemeEXT.HighBrush).Pressed, RelativeSource={RelativeSource Self}}" />
         <Setter Property="IsTabStop" Value="False" />
         <!--未知，此参数会导致文本放大缩小动画抖动-->
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
