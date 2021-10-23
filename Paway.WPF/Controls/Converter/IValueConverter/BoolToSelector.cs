@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paway.Helper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -20,9 +21,14 @@ namespace Paway.WPF
         {
             if (value.Length == 3)
             {
+                var result = value[1];
                 if (value[0] == null || value[0] == DependencyProperty.UnsetValue || (value[0] is bool b && !b))
                     return value[2];
-                else return value[1];
+                if (targetType.Name == nameof(Thickness) && !(result is Thickness))
+                {
+                    return new Thickness(result.ToDouble());
+                }
+                return result;
             }
             throw new WarningException("参数错误");
         }

@@ -510,6 +510,7 @@ namespace Paway.WPF
             if (!ItemWidthStar) return;
             var actualWidth = ActualWidth - BorderThickness.Left - BorderThickness.Right - Padding.Left - Padding.Right;
             var width = (int)(actualWidth / Items.Count);
+            if (width < 0) width = 0;
             if (actualWidth % this.Items.Count > 0) width++;
             var count = Items.Count - (Items.Count * width - actualWidth);
             for (var i = 0; i < Items.Count; i++)

@@ -10,7 +10,7 @@
                     <Grid>
                         <Border BorderBrush="Red" BorderThickness="1">
                             <StackPanel>
-                                <TextBlock Text="ABC"/>
+                                <TextBlock Text="{Binding Text}"/>
                                 <TextBlock Text="..." HorizontalAlignment="Right"/>
                             </StackPanel>
                         </Border>

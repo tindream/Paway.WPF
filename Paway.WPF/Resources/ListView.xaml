@@ -213,7 +213,7 @@
                                             <Setter.Value>
                                                 <MultiBinding Converter="{StaticResource boolToSelector}">
                                                     <Binding Path="IAnimation" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}"/>
-                                                    <Binding Source="0,0,0,0" />
+                                                    <Binding Source="0" />
                                                     <!--<MultiBinding Converter="{StaticResource nullSelector}">
                                                         <Binding Path="ItemBorder.Mouse" />
                                                         <Binding Path="ItemBorder.Mouse" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />

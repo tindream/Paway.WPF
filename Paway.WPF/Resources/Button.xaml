@@ -52,9 +52,9 @@
                             <Setter Property="Background" TargetName="border1" Value="{Binding Path=ItemBackground.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter Property="Background" TargetName="border2">
                                 <Setter.Value>
-                                    <ImageBrush ImageSource="{Binding Path=BackgroundImage.Mouse, RelativeSource={RelativeSource AncestorType=local:ButtonEXT}}" 
-                                                Stretch="{Binding Stretch, RelativeSource={RelativeSource AncestorType=local:ButtonEXT}}"
-                                                Viewport="{Binding Viewport, RelativeSource={RelativeSource AncestorType=local:ButtonEXT}}"/>
+                                    <ImageBrush ImageSource="{Binding Path=BackgroundImage.Mouse, RelativeSource={RelativeSource TemplatedParent}}"
+                                                Stretch="{Binding Stretch, RelativeSource={RelativeSource TemplatedParent}}"
+                                                Viewport="{Binding Viewport, RelativeSource={RelativeSource TemplatedParent}}"/>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
@@ -64,9 +64,9 @@
                             <Setter Property="Background" TargetName="border1" Value="{Binding Path=ItemBackground.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter Property="Background" TargetName="border2">
                                 <Setter.Value>
-                                    <ImageBrush ImageSource="{Binding Path=BackgroundImage.Pressed, RelativeSource={RelativeSource AncestorType=local:ButtonEXT}}" 
-                                                Stretch="{Binding Stretch, RelativeSource={RelativeSource AncestorType=local:ButtonEXT}}"
-                                                Viewport="{Binding Viewport, RelativeSource={RelativeSource AncestorType=local:ButtonEXT}}"/>
+                                    <ImageBrush ImageSource="{Binding Path=BackgroundImage.Pressed, RelativeSource={RelativeSource TemplatedParent}}" 
+                                                Stretch="{Binding Stretch, RelativeSource={RelativeSource TemplatedParent}}"
+                                                Viewport="{Binding Viewport, RelativeSource={RelativeSource TemplatedParent}}"/>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
