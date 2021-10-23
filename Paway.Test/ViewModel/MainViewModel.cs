@@ -210,7 +210,7 @@ namespace Paway.Test.ViewModel
                 {
                     if (listView1.SelectedItem is IListView info)
                     {
-                        Method.Toast(listView1, Value);
+                        Method.Toast(listView1, info.Text);
                     }
                     //if (listView1.SelectedItem is IListViewInfo info) Method.Show(listView1, info.Content);
                     //listView1.SelectedIndex = -1;

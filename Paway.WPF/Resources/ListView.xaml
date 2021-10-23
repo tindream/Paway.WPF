@@ -42,15 +42,6 @@
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
                                 <Grid>
-                                    <Border x:Name="border3" 
-                                            Height="{Binding ItemHeight, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
-                                        <Border.Width>
-                                            <MultiBinding Converter="{StaticResource nullSelector}">
-                                                <Binding Path="ItemWidth" />
-                                                <Binding Path="ItemWidth" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
-                                            </MultiBinding>
-                                        </Border.Width>
-                                    </Border>
                                     <Border x:Name="border" 
                                         BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                         Background="{Binding Path=ItemBackground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
@@ -135,10 +126,16 @@
                                                 <Binding Path="ItemWidth" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                             </MultiBinding>
                                         </Border.Width>
-                                        <ContentControl Style="{Binding StyleEXT}">
+                                        <ContentControl Name="styleEXT" Style="{Binding StyleEXT}"
+                                                        Foreground="{Binding Path=ItemTextForeground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
+                                                        Background="{Binding Path=ItemTextBackground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
+                                                        FontSize="{Binding Path=ItemTextFontSize.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
+                                                        HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
+                                                        VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
+                                                        Padding="{Binding ItemTextPadding, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
                                         </ContentControl>
                                     </Border>
-                                    <Grid VerticalAlignment="Bottom"
+                                    <Grid Name="AnimationLine" VerticalAlignment="Bottom"
                                           Margin="{Binding ItemMargin, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
                                           Visibility="{Binding Path=IAnimation, Converter={StaticResource boolToVisible}, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
                                         <Grid.ColumnDefinitions>
@@ -177,23 +174,9 @@
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True" >
                                         <Setter TargetName="image" Property="Source" Value="{Binding Path=Image.Mouse}"/>
-                                        <Setter TargetName="text" Property="Foreground">
-                                            <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource nullSelector}">
-                                                    <Binding Path="ItemTextForeground.Mouse" />
-                                                    <Binding Path="ItemTextForeground.Mouse" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
-                                                </MultiBinding>
-                                            </Setter.Value>
-                                        </Setter>
+                                        <Setter TargetName="image" Property="Margin" 
+                                                Value="{Binding Path=ItemImageMargin.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="border" Property="Background">
-                                            <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource nullSelector}">
-                                                    <Binding Path="ItemBackground.Mouse" />
-                                                    <Binding Path="ItemBackground.Mouse" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
-                                                </MultiBinding>
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Setter TargetName="border3" Property="Background">
                                             <Setter.Value>
                                                 <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemBackground.Mouse" />
@@ -226,6 +209,14 @@
                                                 Value="{Binding Path=ItemRadius.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="border2" Property="Padding" 
                                                 Value="{Binding Path=ItemPadding.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
+                                        <Setter TargetName="text" Property="Foreground">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
+                                                    <Binding Path="ItemTextForeground.Mouse" />
+                                                    <Binding Path="ItemTextForeground.Mouse" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
                                         <Setter TargetName="text" Property="Background" 
                                                 Value="{Binding Path=ItemTextBackground.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="text" Property="FontSize" 
@@ -236,8 +227,20 @@
                                                 Value="{Binding Path=ItemDescBackground.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="desc" Property="FontSize" 
                                                 Value="{Binding Path=ItemDescFontSize.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
-                                        <Setter TargetName="image" Property="Margin" 
-                                                Value="{Binding Path=ItemImageMargin.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
+                                        <Setter TargetName="styleEXT" Property="Foreground">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
+                                                    <Binding Path="ItemTextForeground.Mouse" />
+                                                    <Binding Path="ItemTextForeground.Mouse" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter TargetName="styleEXT" Property="Background" 
+                                                Value="{Binding Path=ItemTextBackground.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
+                                        <Setter TargetName="styleEXT" Property="FontSize" 
+                                                Value="{Binding Path=ItemTextFontSize.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
+                                        <Setter TargetName="styleEXT" Property="Padding" 
+                                                Value="{Binding Path=ItemPadding.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                     </Trigger>
                                     <Trigger Property="IsSelected" Value="true">
                                         <Setter TargetName="image" Property="Source" >
@@ -249,14 +252,8 @@
                                                 </MultiBinding>
                                             </Setter.Value>
                                         </Setter>
-                                        <Setter TargetName="text" Property="Foreground">
-                                            <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource nullSelector}">
-                                                    <Binding Path="ItemTextForeground.Pressed" />
-                                                    <Binding Path="ItemTextForeground.Pressed" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
-                                                </MultiBinding>
-                                            </Setter.Value>
-                                        </Setter>
+                                        <Setter TargetName="image" Property="Margin" 
+                                                Value="{Binding Path=ItemImageMargin.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="border" Property="Background">
                                             <Setter.Value>
                                                 <MultiBinding Converter="{StaticResource nullSelector}">
@@ -265,7 +262,7 @@
                                                 </MultiBinding>
                                             </Setter.Value>
                                         </Setter>
-                                        <Setter TargetName="border3" Property="Background">
+                                        <Setter TargetName="border" Property="Background">
                                             <Setter.Value>
                                                 <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemBackground.Pressed" />
@@ -293,6 +290,14 @@
                                                 Value="{Binding Path=ItemRadius.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="border2" Property="Padding" 
                                                 Value="{Binding Path=ItemPadding.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
+                                        <Setter TargetName="text" Property="Foreground">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
+                                                    <Binding Path="ItemTextForeground.Pressed" />
+                                                    <Binding Path="ItemTextForeground.Pressed" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
                                         <Setter TargetName="text" Property="Background" 
                                                 Value="{Binding Path=ItemTextBackground.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="text" Property="FontSize" 
@@ -303,8 +308,20 @@
                                                 Value="{Binding Path=ItemDescBackground.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="desc" Property="FontSize" 
                                                 Value="{Binding Path=ItemDescFontSize.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
-                                        <Setter TargetName="image" Property="Margin" 
-                                                Value="{Binding Path=ItemImageMargin.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
+                                        <Setter TargetName="styleEXT" Property="Foreground">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
+                                                    <Binding Path="ItemTextForeground.Pressed" />
+                                                    <Binding Path="ItemTextForeground.Pressed" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter TargetName="styleEXT" Property="Background" 
+                                                Value="{Binding Path=ItemTextBackground.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
+                                        <Setter TargetName="styleEXT" Property="FontSize" 
+                                                Value="{Binding Path=ItemTextFontSize.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
+                                        <Setter TargetName="styleEXT" Property="Padding" 
+                                                Value="{Binding Path=ItemPadding.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                     </Trigger>
                                     <MultiTrigger>
                                         <MultiTrigger.Conditions>
@@ -327,7 +344,7 @@
                                                 </MultiBinding>
                                             </Setter.Value>
                                         </Setter>
-                                        <Setter TargetName="border3" Property="Background">
+                                        <Setter TargetName="border" Property="Background">
                                             <Setter.Value>
                                                 <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemBackground.PressedMouse" />
@@ -340,6 +357,14 @@
                                                 <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemBrush.PressedMouse" />
                                                     <Binding Path="ItemBrush.PressedMouse" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter TargetName="styleEXT" Property="Foreground">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
+                                                    <Binding Path="ItemTextForeground.PressedMouse" />
+                                                    <Binding Path="ItemTextForeground.PressedMouse" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
                                             </Setter.Value>
                                         </Setter>
@@ -361,7 +386,7 @@
                                                 </MultiBinding>
                                             </Setter.Value>
                                         </Setter>
-                                        <Setter TargetName="border3" Property="Background">
+                                        <Setter TargetName="border" Property="Background">
                                             <Setter.Value>
                                                 <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemBackground.Pressed" />
@@ -382,6 +407,14 @@
                                                 <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemBrush.Pressed" />
                                                     <Binding Path="ItemBrush.Pressed" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter TargetName="styleEXT" Property="Foreground">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
+                                                    <Binding Path="ItemTextForeground.Pressed" />
+                                                    <Binding Path="ItemTextForeground.Pressed" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
                                             </Setter.Value>
                                         </Setter>
@@ -407,7 +440,7 @@
                                                 </MultiBinding>
                                             </Setter.Value>
                                         </Setter>
-                                        <Setter TargetName="border3" Property="Background">
+                                        <Setter TargetName="border" Property="Background">
                                             <Setter.Value>
                                                 <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemBackground.Normal" />
@@ -428,6 +461,14 @@
                                                 <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemBrush.Normal" />
                                                     <Binding Path="ItemBrush.Normal" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter TargetName="styleEXT" Property="Foreground">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
+                                                    <Binding Path="ItemTextForeground.Normal" />
+                                                    <Binding Path="ItemTextForeground.Normal" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                 </MultiBinding>
                                             </Setter.Value>
                                         </Setter>

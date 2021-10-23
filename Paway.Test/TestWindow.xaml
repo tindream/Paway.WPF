@@ -10,16 +10,9 @@
         Title="TestWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <Border Width="200" Height="200">
-            <DockPanel>
-                <Image DockPanel.Dock="Top"/>
-                <DockPanel Background="Green">
-                    <TextBlock Text=""/>
-                    <TextBlock Text=""/>
-                </DockPanel>
-                <Border Background="Red">
-                    <TextBlock Text="123"/>
-                </Border>
-            </DockPanel>
+            <ButtonEXT Content="A"
+                       BackgroundImage="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png">
+            </ButtonEXT>
         </Border>
     </Grid>
 </Window>
