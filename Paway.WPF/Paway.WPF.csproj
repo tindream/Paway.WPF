@@ -73,6 +73,7 @@
     <Compile Include="Controls\Converter\IValueConverter\RoundProgressBarConverter.cs" />
     <Compile Include="Controls\Converter\IValueConverter\BrushAlphaConverter.cs" />
     <Compile Include="Controls\Enum\ButtonType.cs" />
+    <Compile Include="Controls\Enum\WidthType.cs" />
     <Compile Include="Controls\Extended\ProgressBoard.cs" />
     <Compile Include="Controls\Extended\SliderMonitor.cs" />
     <Compile Include="Controls\Extended\TickBarEXT.cs" />

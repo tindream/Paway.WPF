@@ -4,7 +4,7 @@ using System.Windows.Media;
 namespace Paway.WPF
 {
     /// <summary>
-    /// 颜色类型
+    /// 颜色样式类型
     /// </summary>
     public enum ColorType
     {

@@ -105,6 +105,7 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
     <Style x:Key="PathRect" TargetType="{x:Type Path}" >
+        <Setter Property="Stretch" Value="Fill" />
         <Setter Property="Margin" Value="1" />
         <Setter Property="Stroke" Value="Gray" />
         <Setter Property="Fill" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Pressed, RelativeSource={RelativeSource Self}}"/>
@@ -113,6 +114,7 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
     <Style x:Key="PathRound" TargetType="{x:Type Path}" >
+        <Setter Property="Stretch" Value="Fill" />
         <Setter Property="Margin" Value="1" />
         <Setter Property="Stroke" Value="Gray" />
         <Setter Property="Fill" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Pressed, RelativeSource={RelativeSource Self}}"/>
@@ -121,6 +123,7 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
     <Style x:Key="PathTriangle" TargetType="{x:Type Path}" >
+        <Setter Property="Stretch" Value="Fill" />
         <Setter Property="Margin" Value="1" />
         <Setter Property="Stroke" Value="Gray" />
         <Setter Property="Fill" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Pressed, RelativeSource={RelativeSource Self}}"/>
@@ -129,6 +132,7 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
     <Style x:Key="PathTriangleDown" TargetType="{x:Type Path}" >
+        <Setter Property="Stretch" Value="Fill" />
         <Setter Property="Margin" Value="1" />
         <Setter Property="Stroke" Value="Gray" />
         <Setter Property="Fill" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Pressed, RelativeSource={RelativeSource Self}}"/>
@@ -137,6 +141,7 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
     <Style x:Key="PathTriangleRight" TargetType="{x:Type Path}" >
+        <Setter Property="Stretch" Value="Fill" />
         <Setter Property="Margin" Value="1" />
         <Setter Property="Stroke" Value="Gray" />
         <Setter Property="Fill" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Pressed, RelativeSource={RelativeSource Self}}"/>
@@ -155,6 +160,7 @@
         <Setter Property="Stroke" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Pressed, RelativeSource={RelativeSource Self}}"/>
     </Style>
     <Style x:Key="PathClose" TargetType="{x:Type Path}" >
+        <Setter Property="Stretch" Value="Fill" />
         <Setter Property="Margin" Value="1" />
         <Setter Property="Fill" Value="Red" />
         <Setter Property="Data" Value="M1,0 L6,5 L11,0 L12,1 L7,6 L12,11 L11,12 L6,7 L1,12 L0,11 L5,6 L0,1 z" />
@@ -162,8 +168,8 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
     <Style x:Key="PathQuestion" TargetType="{x:Type Path}" >
-        <Setter Property="Margin" Value="1" />
         <Setter Property="Stretch" Value="Fill" />
+        <Setter Property="Margin" Value="1" />
         <Setter Property="Width" Value="8" />
         <Setter Property="Fill" Value="Red" />
         <Setter Property="Data" 

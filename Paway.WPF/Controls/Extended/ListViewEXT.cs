@@ -38,8 +38,8 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(ItemWidth), typeof(double), typeof(ListViewEXT), new PropertyMetadata(90d));
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty ItemWidthStarProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemWidthStar), typeof(bool), typeof(ListViewEXT));
+        public static readonly DependencyProperty ItemWidthTypeProperty =
+            DependencyProperty.RegisterAttached(nameof(WidthType), typeof(WidthType), typeof(ListViewEXT));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemHeightProperty =
@@ -161,16 +161,16 @@ namespace Paway.WPF
             new UIPropertyMetadata(false, OnColorTypeChanged));
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty ColorTypeProperty =
-            DependencyProperty.RegisterAttached(nameof(ColorType), typeof(ColorType), typeof(ListViewEXT),
+        public static readonly DependencyProperty TypeProperty =
+            DependencyProperty.RegisterAttached(nameof(Type), typeof(ColorType), typeof(ListViewEXT),
             new UIPropertyMetadata(ColorType.None, OnColorTypeChanged));
         private static void OnColorTypeChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             if (obj is ListViewEXT view)
             {
-                if (view.ColorType != ColorType.None)
+                if (view.Type != ColorType.None)
                 {
-                    var color = view.ColorType.Color();
+                    var color = view.Type.Color();
                     view.ItemBackground = new BrushEXT(PMethod.AlphaColor(160, color));
                 }
                 if (view.IsLight)
@@ -229,14 +229,14 @@ namespace Paway.WPF
             set { SetValue(ItemWidthProperty, value); }
         }
         /// <summary>
-        /// 等宽
+        /// 宽度样式
         /// </summary>
         [Category("扩展.项")]
-        [Description("等宽")]
-        public bool ItemWidthStar
+        [Description("宽度样式")]
+        public WidthType ItemWidthType
         {
-            get { return (bool)GetValue(ItemWidthStarProperty); }
-            set { SetValue(ItemWidthStarProperty, value); }
+            get { return (WidthType)GetValue(ItemWidthTypeProperty); }
+            set { SetValue(ItemWidthTypeProperty, value); }
         }
         /// <summary>
         /// 自定义项高度
@@ -484,10 +484,10 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展.颜色样式")]
         [Description("颜色样式")]
-        public ColorType ColorType
+        public ColorType Type
         {
-            get { return (ColorType)GetValue(ColorTypeProperty); }
-            set { SetValue(ColorTypeProperty, value); }
+            get { return (ColorType)GetValue(TypeProperty); }
+            set { SetValue(TypeProperty, value); }
         }
 
         #endregion
@@ -507,22 +507,40 @@ namespace Paway.WPF
         /// </summary>
         private void ListViewEXT_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (!ItemWidthStar) return;
+            if (ItemWidthType == WidthType.None) return;
             var actualWidth = ActualWidth - BorderThickness.Left - BorderThickness.Right - Padding.Left - Padding.Right;
-            var width = (int)(actualWidth / Items.Count);
-            if (width < 0) width = 0;
-            if (actualWidth % this.Items.Count > 0) width++;
-            var count = Items.Count - (Items.Count * width - actualWidth);
-            for (var i = 0; i < Items.Count; i++)
+            switch (ItemWidthType)
             {
-                if (Items[i] is ListBoxItemEXT item)
-                {
-                    item.ItemWidth = count > i ? width : width - 1;
-                }
-                else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is ListBoxItemEXT listBoxItem)
-                {
-                    listBoxItem.ItemWidth = count > i ? width : width - 1;
-                }
+                case WidthType.WidthFill:
+                    var width = (int)(actualWidth / Items.Count);
+                    if (width < 0) width = 0;
+                    if (actualWidth % this.Items.Count > 0) width++;
+                    var count = Items.Count - (Items.Count * width - actualWidth);
+                    for (var i = 0; i < Items.Count; i++)
+                    {
+                        if (Items[i] is ListBoxItemEXT item)
+                        {
+                            item.ItemWidth = count > i ? width : width - 1;
+                        }
+                        else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is ListBoxItemEXT listBoxItem)
+                        {
+                            listBoxItem.ItemWidth = count > i ? width : width - 1;
+                        }
+                    }
+                    break;
+                case WidthType.OneColumn:
+                    for (var i = 0; i < Items.Count; i++)
+                    {
+                        if (Items[i] is ListBoxItemEXT item)
+                        {
+                            item.ItemWidth = actualWidth;
+                        }
+                        else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is ListBoxItemEXT listBoxItem)
+                        {
+                            listBoxItem.ItemWidth = actualWidth;
+                        }
+                    }
+                    break;
             }
         }
         /// <summary>

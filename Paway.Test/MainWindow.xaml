@@ -106,11 +106,11 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <ButtonEXT Name="btnCancel" Content="取消"  AnimationHelper.Value="Bottom"
-                               ColorType="Warn" IsLight="True"
+                               Type="Warn" IsLight="True"
                                Stretch="None" Viewport="0,0,0.35,1"
                                Command="{Binding Teach}" CommandParameter="{Binding ElementName=btn}" Click="Cancel_Click" 
                                BackgroundImage="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"/>
-                    <ButtonEXT Name="btn" Grid.Column="1" ColorType="Success"
+                    <ButtonEXT Name="btn" Grid.Column="1" Type="Success"
                              Content="{FontImage FontChar=Adjust}" Click="Commit_Click" 
                              CommandParameter="{Binding ElementName=btn}"/>
                     <Badge Name="badge" Grid.Column="1" IsWaving="True" HorizontalAlignment="Right" Text="1" Background="Red" VerticalAlignment="Top" Height="20" Margin="-6"/>
@@ -142,19 +142,20 @@
                         </Paragraph>
                     </FlowDocument>
                 </RichTextBoxEXT>
-                <WrapPanel>
-                    <Path Style="{StaticResource PathRound}" />
+                <StackPanel Orientation="Horizontal">
+                    <Path Style="{StaticResource PathRound}"/>
                     <TransitionControl Name="transition" >
-                        <Path Style="{StaticResource PathRound}" Fill="Red" />
+                        <Path Style="{StaticResource PathRound}" Fill="Red"/>
                     </TransitionControl>
-                    <Path Style="{StaticResource PathTriangle}" />
+                    <Path Style="{StaticResource PathTriangle}"/>
                     <Path Style="{StaticResource PathTriangleDown}"/>
                     <Path Style="{StaticResource PathTriangleRight}"/>
+                    <Path Style="{StaticResource PathRect}"/>
                     <Path Style="{StaticResource PathRight}" />
-                    <Path Style="{StaticResource PathQuestion}" />
-                    <Path Style="{StaticResource PathClose}" />
+                    <Path Style="{StaticResource PathQuestion}"/>
+                    <Path Style="{StaticResource PathClose}"/>
                     <Progress Width="40" Height="40" />
-                </WrapPanel>
+                </StackPanel>
                 <CalendarEXT/>
             </StackPanel>
         </ExpanderEXT>
@@ -240,7 +241,7 @@
         </ExpanderEXT>
 
         <StackPanel>
-            <ListViewEXT x:Name="listView3" Margin="5,5,0,0" ItemWidthStar="True" IAnimation="True" IsLight="True" ItemBorder="0,0,1,1;0,0,1,3"
+            <ListViewEXT x:Name="listView3" Margin="5,5,0,0" ItemWidthType="WidthFill" IAnimation="True" IsLight="True" ItemBorder="0,0,1,1;0,0,1,3"
                          ItemHeight="60" ItemWidth="100">
                 <ListViewEXT.ItemBrush>
                     <BrushEXT Alpha="35" Mouse="#AA23AFFF" Normal="LightGray" Pressed="#FA23AFFF"/>

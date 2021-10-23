@@ -61,16 +61,16 @@ namespace Paway.WPF
             new UIPropertyMetadata(false, OnColorTypeChanged));
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty ColorTypeProperty =
-            DependencyProperty.RegisterAttached(nameof(ColorType), typeof(ColorType), typeof(ButtonEXT),
+        public static readonly DependencyProperty TypeProperty =
+            DependencyProperty.RegisterAttached(nameof(Type), typeof(ColorType), typeof(ButtonEXT),
             new UIPropertyMetadata(ColorType.None, OnColorTypeChanged));
         private static void OnColorTypeChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             if (obj is ButtonEXT btn)
             {
-                if (btn.ColorType != ColorType.None)
+                if (btn.Type != ColorType.None)
                 {
-                    var color = btn.ColorType.Color();
+                    var color = btn.Type.Color();
                     btn.ItemBackground = new BrushEXT(PMethod.AlphaColor(160, color));
                 }
                 if (btn.IsLight)
@@ -191,10 +191,10 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展.颜色样式")]
         [Description("颜色样式")]
-        public ColorType ColorType
+        public ColorType Type
         {
-            get { return (ColorType)GetValue(ColorTypeProperty); }
-            set { SetValue(ColorTypeProperty, value); }
+            get { return (ColorType)GetValue(TypeProperty); }
+            set { SetValue(TypeProperty, value); }
         }
 
         #endregion
