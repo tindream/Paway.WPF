@@ -315,6 +315,26 @@ namespace Paway.WPF
         [Category("扩展.项")]
         [Description("指定何时应引发事件")]
         public ClickMode ClickMode { get; set; }
+        /// <summary>
+        /// 颜色样式
+        /// </summary>
+        [Category("扩展.项")]
+        [Description("颜色样式")]
+        public ColorType Type
+        {
+            get { return (ColorType)GetValue(TypeProperty); }
+            set { SetValue(TypeProperty, value); }
+        }
+        /// <summary>
+        /// 轻颜色样式
+        /// </summary>
+        [Category("扩展.项")]
+        [Description("轻颜色样式")]
+        public bool IsLight
+        {
+            get { return (bool)GetValue(IsLightProperty); }
+            set { SetValue(IsLightProperty, value); }
+        }
 
         #endregion
         #region 扩展.项图片
@@ -465,29 +485,6 @@ namespace Paway.WPF
         {
             get { return (DoubleEXT)GetValue(ItemDescFontSizeProperty); }
             set { SetValue(ItemDescFontSizeProperty, value); }
-        }
-
-        #endregion
-        #region 扩展.颜色样式
-        /// <summary>
-        /// 轻颜色样式
-        /// </summary>
-        [Category("扩展.轻颜色样式")]
-        [Description("轻颜色样式")]
-        public bool IsLight
-        {
-            get { return (bool)GetValue(IsLightProperty); }
-            set { SetValue(IsLightProperty, value); }
-        }
-        /// <summary>
-        /// 颜色样式
-        /// </summary>
-        [Category("扩展.颜色样式")]
-        [Description("颜色样式")]
-        public ColorType Type
-        {
-            get { return (ColorType)GetValue(TypeProperty); }
-            set { SetValue(TypeProperty, value); }
         }
 
         #endregion
