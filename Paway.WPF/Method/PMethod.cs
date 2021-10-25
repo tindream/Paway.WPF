@@ -416,7 +416,7 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-自定义吐泡消息框-Toast
         /// </summary>
-        public static void Toast(DependencyObject parent, object msg, int time, bool iError = false)
+        public static void Toast(DependencyObject parent, object msg, int time, bool iError = false, bool repeat = true)
         {
             BeginInvoke(parent, () =>
             {
@@ -424,7 +424,15 @@ namespace Paway.WPF
                 if (window.Content is Panel panel)
                 {
                     var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
-                    if (myAdornerLayer == null) return;
+                    if (myAdornerLayer == null)
+                    {
+                        if (repeat)
+                        {//未获取到装饰器层时重复一次
+                            DoEvents();
+                            Toast(parent, msg, time, iError, false);
+                        }
+                        return;
+                    }
 
                     var color = AlphaColor(200, iError ? PConfig.Error : PConfig.Hit);
                     var border = new Border
@@ -505,7 +513,7 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-自定义提示框-Hit
         /// </summary>
-        public static void Hit(DependencyObject parent, object msg, int time, bool iError = false)
+        public static void Hit(DependencyObject parent, object msg, int time, bool iError = false, bool repeat = true)
         {
             BeginInvoke(parent, () =>
             {
@@ -513,7 +521,15 @@ namespace Paway.WPF
                 if (window.Content is Panel panel)
                 {
                     var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
-                    if (myAdornerLayer == null) return;
+                    if (myAdornerLayer == null)
+                    {
+                        if (repeat)
+                        {//未获取到装饰器层时重复一次
+                            DoEvents();
+                            Hit(parent, msg, time, iError, false);
+                        }
+                        return;
+                    }
 
                     var color = AlphaColor(200, iError ? PConfig.Error : PConfig.Hit);
                     var border = new Border
@@ -633,7 +649,7 @@ namespace Paway.WPF
         /// <summary>
         /// 指定Alpha颜色
         /// </summary>
-        internal static Color AlphaColor(int alpha, Color color)
+        public static Color AlphaColor(int alpha, Color color)
         {
             if (color == Colors.Transparent) alpha = 0;
             if (alpha < 0) alpha = 0;
