@@ -47,6 +47,14 @@ namespace Paway.WPF
         /// 选择项
         /// </summary>
         bool IsSelected { get; set; }
+        /// <summary>
+        /// 自定义外部样式
+        /// </summary>
+        Style StyleEXT { get; set; }
+        /// <summary>
+        /// 自定义项宽度
+        /// </summary>
+        double ItemWidth { get; set; }
     }
     /// <summary>
     /// IListView数据模型
@@ -144,27 +152,47 @@ namespace Paway.WPF
             get { return isSelected; }
             set { isSelected = value; OnPropertyChanged(); }
         }
+        private Style styleEXT;
+        /// <summary>
+        /// 自定义外部样式
+        /// </summary>
+        [NoShow]
+        public Style StyleEXT
+        {
+            get { return styleEXT; }
+            set { styleEXT = value; OnPropertyChanged(); }
+        }
+        private double itemWidth;
+        /// <summary>
+        /// 自定义项宽度
+        /// </summary>
+        [NoShow]
+        public double ItemWidth
+        {
+            get { return itemWidth; }
+            set { itemWidth = value; OnPropertyChanged(); }
+        }
 
         /// <summary>
         /// 自定义项文本字体颜色
         /// </summary>
         [NoShow]
-        public virtual BrushEXT ItemTextForeground { get; set; }
+        public BrushEXT ItemTextForeground { get; set; }
         /// <summary>
         /// 自定义项背景颜色
         /// </summary>
         [NoShow]
-        public virtual BrushEXT ItemBackground { get; set; }
+        public BrushEXT ItemBackground { get; set; }
         /// <summary>
         /// 自定义项外边框
         /// </summary>
         [NoShow]
-        public virtual BrushEXT ItemBorder { get; set; }
+        public BrushEXT ItemBorder { get; set; }
         /// <summary>
         /// 自定义项外边框颜色
         /// </summary>
         [NoShow]
-        public virtual BrushEXT ItemBrush { get; set; }
+        public BrushEXT ItemBrush { get; set; }
 
         /// <summary>
         /// </summary>
