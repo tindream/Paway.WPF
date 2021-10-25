@@ -66,6 +66,10 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(null, 170, 240)));
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty StyleEXTProperty =
+            DependencyProperty.RegisterAttached(nameof(StyleEXT), typeof(Style), typeof(ListViewEXT));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty ItemBackgroundProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(Colors.Transparent, 120, 210), OnItemBackgroundChanged));
         private static void OnItemBackgroundChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -298,6 +302,16 @@ namespace Paway.WPF
         {
             get { return (BrushEXT)GetValue(ItemBrushProperty); }
             set { SetValue(ItemBrushProperty, value); }
+        }
+        /// <summary>
+        /// 自定义外部样式
+        /// </summary>
+        [Category("扩展.项")]
+        [Description("自定义外部样式")]
+        public Style StyleEXT
+        {
+            get { return (Style)GetValue(StyleEXTProperty); }
+            set { SetValue(StyleEXTProperty, value); }
         }
         /// <summary>
         /// 自定义项背景颜色

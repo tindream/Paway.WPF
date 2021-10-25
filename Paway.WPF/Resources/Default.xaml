@@ -4,22 +4,27 @@
 
     <!--#region 转换器 -->
     <local:BoolReverse x:Key="boolReverse"/>
+    <local:VisibleReverse x:Key="visibleReverse"/>
     <local:DateConverter x:Key="dateConverter"/>
     <local:ValueMultiConverter x:Key="valueMultiConverter"/>
     <local:ValueAddConverter x:Key="valueAddConverter"/>
     <local:EnumConverter x:Key="enumConverter"/>
     <local:IsNotNullConverter x:Key="isNotNull"/>
-    <local:VisibleReverse x:Key="visibleReverse"/>
-    <local:RoundProgressBarConverter x:Key="roundProgressBarConverter"/>
-
+    
     <local:BoolToVisible x:Key="boolToVisible"/>
+    <local:BoolToCollapsed x:Key="boolToCollapsed"/>
+    <local:NullToVisible x:Key="nullToVisible"/>
     <local:NullToCollapsed x:Key="nullToCollapsed"/>
     <local:BrushToColorConverter x:Key="brushToColorConverter" />
     <local:ColorToBrushConverter x:Key="colorToBrushConverter" />
     <local:BrushAlphaConverter x:Key="brushAlphaConverter" />
 
-    <local:BoolToSelector x:Key="boolToSelector"/>
-    <local:NullSelector x:Key="nullSelector"/>
+    <local:BoolSelector x:Key="boolSelector"/>
+    <local:NullSelector x:Key="nullSelector"/> 
+    <local:IsNotNullAllConverter x:Key="isNotNullAll"/>
+    <local:AnyNotNullToVisible x:Key="anyNotNullToVisible"/>
+    <local:AnyNotNullToCollapsed x:Key="anyNotNullToCollapsed"/>
+    <local:RoundProgressBarConverter x:Key="roundProgressBarConverter"/>
     <!--#endregion-->
 
     <!--#region 文本图标资源 -->

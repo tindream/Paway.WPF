@@ -125,10 +125,6 @@
     </Style>
     <HierarchicalDataTemplate x:Key="UserNode" ItemsSource="{Binding Children}">
         <Grid Background="Transparent">
-            <Grid.Resources>
-                <local:BoolToVisible x:Key="boolToVisible"/>
-                <local:VisibleReverse x:Key="visibleReverse"/>
-            </Grid.Resources>
             <Grid Margin="0,5" 
                   Visibility="{Binding Visibility,ElementName=groupinginfo,Converter={StaticResource visibleReverse}}">
                 <DockPanel>
@@ -158,10 +154,6 @@
     </HierarchicalDataTemplate>
     <HierarchicalDataTemplate x:Key="DefaultNode" ItemsSource="{Binding Children}">
         <Grid Background="Transparent">
-            <Grid.Resources>
-                <local:BoolToVisible x:Key="boolToVisible"/>
-                <local:VisibleReverse x:Key="visibleReverse"/>
-            </Grid.Resources>
             <Grid Margin="0,5" 
                   Visibility="{Binding Visibility,ElementName=groupinginfo,Converter={StaticResource visibleReverse}}">
                 <Grid.ColumnDefinitions>

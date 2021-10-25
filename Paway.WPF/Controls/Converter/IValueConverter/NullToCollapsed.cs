@@ -25,4 +25,20 @@ namespace Paway.WPF
             throw new NotImplementedException();
         }
     }
+    /// <summary>
+    /// null转Visible
+    /// </summary>
+    internal class NullToVisible : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var result = value == null || value == DBNull.Value;
+            if (parameter != null || (parameter is bool p && !p)) result = !result;
+            return result ? Visibility.Visible : Visibility.Collapsed;
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

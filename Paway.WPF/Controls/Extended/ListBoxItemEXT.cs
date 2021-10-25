@@ -132,7 +132,8 @@ namespace Paway.WPF
         /// <summary>
         /// 自定义外部样式
         /// </summary>
-        [Browsable(false)]
+        [Category("扩展")]
+        [Description("自定义外部样式")]
         public Style StyleEXT
         {
             get { return (Style)GetValue(StyleEXTProperty); }
