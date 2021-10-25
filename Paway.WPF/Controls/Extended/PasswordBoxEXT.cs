@@ -81,7 +81,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty IAnimationProperty =
-            DependencyProperty.RegisterAttached(nameof(IAnimation), typeof(double), typeof(PasswordBoxEXT), new PropertyMetadata(0d));
+            DependencyProperty.RegisterAttached(nameof(IAnimation), typeof(double), typeof(PasswordBoxEXT));
         /// <summary>
         /// 动画
         /// </summary>

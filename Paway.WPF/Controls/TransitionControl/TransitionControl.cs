@@ -45,11 +45,11 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.RegisterAttached(nameof(Value), typeof(double), typeof(TransitionControl), new PropertyMetadata(0d));
+            DependencyProperty.RegisterAttached(nameof(Value), typeof(double), typeof(TransitionControl));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty TimeProperty =
-            DependencyProperty.RegisterAttached(nameof(Time), typeof(int), typeof(TransitionControl), new PropertyMetadata(0));
+            DependencyProperty.RegisterAttached(nameof(Time), typeof(int), typeof(TransitionControl));
         /// <summary>
         /// Identifies the Transition dependency property.
         /// </summary>

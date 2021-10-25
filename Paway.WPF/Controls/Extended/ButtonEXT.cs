@@ -22,11 +22,11 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBorderProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBorder), typeof(ThicknessEXT), typeof(ButtonEXT), new PropertyMetadata(new ThicknessEXT(0)));
+            DependencyProperty.RegisterAttached(nameof(ItemBorder), typeof(ThicknessEXT), typeof(ButtonEXT));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty EffectRadiusProperty =
-            DependencyProperty.RegisterAttached(nameof(EffectRadius), typeof(double), typeof(ButtonEXT), new PropertyMetadata(0d));
+            DependencyProperty.RegisterAttached(nameof(EffectRadius), typeof(double), typeof(ButtonEXT));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemForegroundProperty =
@@ -63,7 +63,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty TypeProperty =
             DependencyProperty.RegisterAttached(nameof(Type), typeof(ColorType), typeof(ButtonEXT),
-            new UIPropertyMetadata(ColorType.None, OnColorTypeChanged));
+            new UIPropertyMetadata(ColorType.Normal, OnColorTypeChanged));
         private static void OnColorTypeChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             if (obj is ButtonEXT btn)

@@ -13,11 +13,11 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty MaxSideLengthProperty =
-            DependencyProperty.Register(nameof(MaxSideLength), typeof(double), typeof(ProgressTemplate), new PropertyMetadata(0D));
+            DependencyProperty.Register(nameof(MaxSideLength), typeof(double), typeof(ProgressTemplate));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty EllipseDiameterProperty =
-            DependencyProperty.Register(nameof(EllipseDiameter), typeof(double), typeof(ProgressTemplate), new PropertyMetadata(0D));
+            DependencyProperty.Register(nameof(EllipseDiameter), typeof(double), typeof(ProgressTemplate));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty EllipseOffsetProperty =

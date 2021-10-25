@@ -9,10 +9,11 @@
         DataContext="{Binding Test ,Source={StaticResource Locator}}"
         Title="TestWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Border Width="200" Height="200">
-            <ButtonEXT Content="A"
-                       BackgroundImage="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png">
-            </ButtonEXT>
-        </Border>
+        <WrapPanel Width="200" Height="200">
+            <ButtonEXT Width="120" Content="取消" Type="Warn" IsLight="True"
+                       Command="{Binding Cancel}" CommandParameter="{Binding ElementName=wd}"/>
+            <ButtonEXT Width="120" Content="确认" ItemBorder="1;0"
+                       Command="{Binding Save}" CommandParameter="{Binding ElementName=wd}"/>
+        </WrapPanel>
     </Grid>
 </Window>

@@ -110,7 +110,7 @@
                                Stretch="None" Viewport="0,0,0.35,1"
                                Command="{Binding Teach}" CommandParameter="{Binding ElementName=btn}" Click="Cancel_Click" 
                                BackgroundImage="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"/>
-                    <ButtonEXT Name="btn" Grid.Column="1" Type="Success"
+                    <ButtonEXT Name="btn" Grid.Column="1"
                              Content="{FontImage FontChar=Adjust}" Click="Commit_Click" 
                              CommandParameter="{Binding ElementName=btn}"/>
                     <Badge Name="badge" Grid.Column="1" IsWaving="True" HorizontalAlignment="Right" Text="1" Background="Red" VerticalAlignment="Top" Height="20" Margin="-6"/>
