@@ -9,8 +9,6 @@
     <Style TargetType="{x:Type local:ProgressBoard}" BasedOn="{StaticResource Config}">
         <Setter Property="Margin" Value="2"/>
         <Setter Property="Maximum" Value="100"/>
-        <Setter Property="Width" Value="70"/>
-        <Setter Property="Height" Value="70"/>
         <Setter Property="Background" Value="White"/>
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="Template">
@@ -18,7 +16,6 @@
                 <!--控件模板-->
                 <ControlTemplate TargetType="{x:Type local:ProgressBoard}" >
                     <Grid>
-                        <Ellipse Stroke="Gray" StrokeThickness="8" />
                         <Ellipse Stroke="{StaticResource Light}" StrokeThickness="10" Margin="7"  Fill="{TemplateBinding Background}"/>
                         <Path Margin="7"
                               StrokeThickness="10"
@@ -47,6 +44,7 @@
                                 </MultiBinding>
                             </Path.Data>
                         </Path>
+                        <Ellipse Stroke="#949494" StrokeThickness="8" />
                         <Path Name="Path_Pointer" Style="{StaticResource PathPointer}" RenderTransformOrigin="1,0.5">
                             <Path.RenderTransform>
                                 <TransformGroup>

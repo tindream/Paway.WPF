@@ -1,0 +1,55 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Paway.WPF">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="{x:Type local:ProgressRound}" BasedOn="{StaticResource Config}">
+        <Setter Property="local:ProgressRound.IsMonitoring" Value="True"/>
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <!--控件模板-->
+                <ControlTemplate TargetType="{x:Type local:ProgressRound}" >
+                    <Grid>
+                        <Ellipse x:Name="Ellipse_Track"
+                                 Stroke="{Binding ForegroundColorLinear.Start, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource colorToBrushConverter}}"
+                                 Fill="{TemplateBinding Background}"
+                                 StrokeThickness="{Binding BorderThickness.Left, RelativeSource={RelativeSource TemplatedParent}}" />
+                        <Path x:Name="Path_Indicator"
+                              Stroke="{Binding ForegroundColorLinear.End, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource colorToBrushConverter}}"
+                              StrokeThickness="{Binding BorderThickness.Left, RelativeSource={RelativeSource TemplatedParent}}"
+                              StrokeStartLineCap="Round"
+                              StrokeEndLineCap="Round">
+                            <Path.Data>
+                                <MultiBinding Converter="{StaticResource roundProgressBarConverter}">
+                                    <Binding Path="ActualWidth" RelativeSource="{RelativeSource AncestorType=local:ProgressRound}"></Binding>
+                                    <Binding Path="ActualHeight" RelativeSource="{RelativeSource AncestorType=local:ProgressRound}"></Binding>
+                                    <Binding Path="BorderThickness" RelativeSource="{RelativeSource AncestorType=local:ProgressRound}"></Binding>
+                                    <Binding Path="Minimum" RelativeSource="{RelativeSource AncestorType=local:ProgressRound}"></Binding>
+                                    <Binding Path="Maximum" RelativeSource="{RelativeSource AncestorType=local:ProgressRound}"></Binding>
+                                    <Binding Path="Value" RelativeSource="{RelativeSource AncestorType=local:ProgressRound}"></Binding>
+                                </MultiBinding>
+                            </Path.Data>
+                        </Path>
+                        <Label Name="txt" Visibility="{TemplateBinding IText, Converter={StaticResource boolToVisible}}"
+                               FontSize="{TemplateBinding FontSize,Converter={StaticResource valueMultiConverter}}"
+                               Opacity="0.9" 
+                               Padding="5,5"
+                               Foreground="{StaticResource Text}"
+                               Content="{TemplateBinding ProgressValue}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Value" Value="100">
+                            <Setter TargetName="txt" Property="Opacity" Value="1.0" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

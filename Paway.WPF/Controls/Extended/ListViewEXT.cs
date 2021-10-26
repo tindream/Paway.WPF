@@ -516,15 +516,13 @@ namespace Paway.WPF
             DefaultStyleKey = typeof(ListViewEXT);
             Config_FontSizeChanged(PConfig.FontSize);
             PConfig.FontSizeChanged += Config_FontSizeChanged;
-            this.SizeChanged += ListViewEXT_SizeChanged;
         }
 
         /// <summary>
         /// 等宽处理
         /// </summary>
-        private void ListViewEXT_SizeChanged(object sender, SizeChangedEventArgs e)
+        protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
         {
-            if (ItemWidthType == WidthType.None) return;
             var actualWidth = ActualWidth - BorderThickness.Left - BorderThickness.Right - Padding.Left - Padding.Right;
             switch (ItemWidthType)
             {
@@ -559,6 +557,7 @@ namespace Paway.WPF
                     }
                     break;
             }
+            base.OnRenderSizeChanged(sizeInfo);
         }
         /// <summary>
         /// 更新字体大小

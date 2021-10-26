@@ -10,19 +10,19 @@ using System.Windows.Media.Animation;
 namespace Paway.WPF
 {
     /// <summary>
-    /// ProgressBar扩展
+    /// ProgressBar扩展-圆形
     /// </summary>
-    public partial class ProgressBarEXT : ProgressBar
+    public partial class ProgressRound : ProgressBar
     {
         #region 启用监听，获取进度
         /// <summary>
         /// 启用监听，获取进度
         /// </summary>
         public static readonly DependencyProperty IsMonitoringProperty =
-            DependencyProperty.RegisterAttached(nameof(IsMonitoring), typeof(bool), typeof(ProgressBarEXT), new UIPropertyMetadata(false, OnIsMonitoringChanged));
+            DependencyProperty.RegisterAttached(nameof(IsMonitoring), typeof(bool), typeof(ProgressRound), new UIPropertyMetadata(false, OnIsMonitoringChanged));
         private static void OnIsMonitoringChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            if (obj is ProgressBarEXT bar)
+            if (obj is ProgressRound bar)
             {
                 bar.LayoutUpdated += delegate
                 {
@@ -61,7 +61,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty AnimationValueProperty =
-            DependencyProperty.RegisterAttached(nameof(AnimationValue), typeof(double), typeof(ProgressBarEXT), new FrameworkPropertyMetadata(0d, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnAnimationValueChanged));
+            DependencyProperty.RegisterAttached(nameof(AnimationValue), typeof(double), typeof(ProgressRound), new FrameworkPropertyMetadata(0d, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnAnimationValueChanged));
         /// <summary>
         /// 动画进度值
         /// </summary>
@@ -74,7 +74,7 @@ namespace Paway.WPF
         }
         private static void OnAnimationValueChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            if (obj is ProgressBarEXT bar)
+            if (obj is ProgressRound bar)
             {
                 var animTime = PMethod.AnimTime((double)e.NewValue - bar.Value) * 1.5;
                 var animValue = new DoubleAnimation((double)e.NewValue, new Duration(TimeSpan.FromMilliseconds(animTime)))
@@ -83,7 +83,7 @@ namespace Paway.WPF
                     //DecelerationRatio = 1,
                     EasingFunction = new CubicEase() { EasingMode = EasingMode.EaseOut },
                 };
-                bar.BeginAnimation(ProgressBarEXT.ValueProperty, animValue);
+                bar.BeginAnimation(ProgressRound.ValueProperty, animValue);
             }
         }
 
@@ -92,35 +92,21 @@ namespace Paway.WPF
         #region 依赖属性
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty RadiusProperty =
-            DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(ProgressBarEXT), new PropertyMetadata(new CornerRadius(3)));
-        /// <summary>
-        /// </summary>
         public static readonly DependencyProperty ForegroundColorLinearProperty =
-            DependencyProperty.RegisterAttached(nameof(ForegroundColorLinear), typeof(ColorLinear), typeof(ProgressBarEXT),
-                new PropertyMetadata(new ColorLinear()));
+            DependencyProperty.RegisterAttached(nameof(ForegroundColorLinear), typeof(ColorLinear), typeof(ProgressRound),
+                new PropertyMetadata(new ColorLinear(Colors.LightGray, PMethod.ThemeColor())));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ProgressValueProperty =
-            DependencyProperty.RegisterAttached(nameof(ProgressValue), typeof(string), typeof(ProgressBarEXT));
+            DependencyProperty.RegisterAttached(nameof(ProgressValue), typeof(string), typeof(ProgressRound));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ITextProperty =
-            DependencyProperty.RegisterAttached(nameof(IText), typeof(bool), typeof(ProgressBarEXT));
+            DependencyProperty.RegisterAttached(nameof(IText), typeof(bool), typeof(ProgressRound), new PropertyMetadata(true));
 
         #endregion
 
         #region 扩展
-        /// <summary>
-        /// 自定义边框圆角
-        /// </summary>
-        [Category("扩展")]
-        [Description("自定义边框圆角")]
-        public CornerRadius Radius
-        {
-            get { return (CornerRadius)GetValue(RadiusProperty); }
-            set { SetValue(RadiusProperty, value); }
-        }
         /// <summary>
         /// 进度条线性颜色
         /// </summary>
@@ -156,9 +142,17 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public ProgressBarEXT()
+        public ProgressRound()
         {
-            DefaultStyleKey = typeof(ProgressBarEXT);
+            DefaultStyleKey = typeof(ProgressRound);
+        }
+        /// <summary>
+        /// 锁定长宽比
+        /// </summary>
+        protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
+        {
+            this.Height = this.ActualWidth;
+            base.OnRenderSizeChanged(sizeInfo);
         }
     }
 }

@@ -76,6 +76,7 @@
     <Compile Include="Controls\Enum\ButtonType.cs" />
     <Compile Include="Controls\Enum\WidthType.cs" />
     <Compile Include="Controls\Extended\CheckButton.cs" />
+    <Compile Include="Controls\Extended\ProgressRound.cs" />
     <Compile Include="Controls\Extended\ProgressBoard.cs" />
     <Compile Include="Controls\Extended\SliderMonitor.cs" />
     <Compile Include="Controls\Extended\TickBarEXT.cs" />
@@ -230,6 +231,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Calendar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ProgressRound.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

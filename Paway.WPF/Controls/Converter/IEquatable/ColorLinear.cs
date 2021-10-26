@@ -19,12 +19,12 @@ namespace Paway.WPF
     [TypeConverter(typeof(ColorLinearConverter))]
     public class ColorLinear : ModelBase, IEquatable<ColorLinear>
     {
-        private Color start = PMethod.ThemeColor(85);
+        private Color start = PMethod.ThemeColor(PConfig.Alpha - PConfig.Interval * 3);
         /// <summary>
         /// 起始颜色
         /// </summary>
         public Color Start { get { return start; } set { start = value; OnPropertyChanged(); } }
-        private Color end = PMethod.ThemeColor(240);
+        private Color end = PMethod.ThemeColor();
         /// <summary>
         /// 终点颜色
         /// </summary>

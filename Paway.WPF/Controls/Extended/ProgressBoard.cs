@@ -79,13 +79,14 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
-            base.OnPreviewMouseDown(e);
             if (e.ChangedButton == MouseButton.Left)
             {
                 if (PMethod.Parent(this, out Window window))
                     window.Cursor = Cursors.Hand;
                 this.startPoint = e.GetPosition(this);
+                e.Handled = true;
             }
+            base.OnPreviewMouseDown(e);
         }
         /// <summary>
         /// 移动位置
@@ -155,6 +156,8 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
         {
+            //锁定长宽比
+            this.Height = this.ActualWidth;
             base.OnRenderSizeChanged(sizeInfo);
             if (PMethod.Child(this, out this.path_Pointer, "Path_Pointer"))
             {
