@@ -1,4 +1,4 @@
-﻿<Window x:Class="Paway.Test.TestWindow"
+﻿<WindowEXT x:Class="Paway.Test.TestWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,11 +9,11 @@
         DataContext="{Binding Test ,Source={StaticResource Locator}}"
         Title="TestWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
-        <WrapPanel Width="200" Height="200">
-            <ButtonEXT Width="120" Content="取消" Type="Warn" IsLight="True"
-                       Command="{Binding Cancel}" CommandParameter="{Binding ElementName=wd}"/>
-            <ButtonEXT Width="120" Content="确认" ItemBorder="1;0"
-                       Command="{Binding Save}" CommandParameter="{Binding ElementName=wd}"/>
-        </WrapPanel>
+        <StackPanel Height="200" HorizontalAlignment="Center">
+            <CheckBoxEXT Content="123"/>
+            <CheckButton Content="123"/>
+            <TextBlock Text="123"/>
+            <ButtonEXT Content="123"/>
+        </StackPanel>
     </Grid>
-</Window>
+</WindowEXT>

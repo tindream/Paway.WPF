@@ -6,6 +6,7 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Button.xaml"/>
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Calendar.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\CheckBox.xaml" />
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\CheckButton.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBox.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBoxDate.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBoxMulti.xaml" />

@@ -43,7 +43,7 @@
             <DockPanel Margin="5" VerticalAlignment="Top">
                 <TextBlock DockPanel.Dock="Top" Text="频率(Hz)" HorizontalAlignment="Center"></TextBlock>
                 <TextBoxEXT DockPanel.Dock="Top" FontSize="12" Water="" Text="{Binding CurrentRate.Rates,FallbackValue=0.0}" Margin="4,2" HorizontalContentAlignment="Center" Padding="3,2" Width="58"/>
-                <ProgressBoard Name="boardRate" Grid.Column="1" Value="{Binding CurrentRate.Rate}" Height="100" Width="100" AnimationValue="{Binding Value}" Minimum="20" Maximum="20000">
+                <ProgressBoard Name="boardRate" Grid.Column="1" Value="{Binding CurrentRate.Rate}" AnimationValue="{Binding Value}" Minimum="20" Maximum="20000">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="ValueChanged">
                             <i:InvokeCommandAction Command="{Binding RateValueChanged}" CommandParameter="{Binding ElementName=boardRate}"/>
@@ -54,7 +54,7 @@
             <DockPanel Margin="5" VerticalAlignment="Top">
                 <TextBlock DockPanel.Dock="Top" Text="增益(dB)" HorizontalAlignment="Center"></TextBlock>
                 <TextBoxEXT DockPanel.Dock="Top" FontSize="12" Water="" Text="{Binding CurrentRate.Increases,FallbackValue=0.0}" Margin="4,2" HorizontalContentAlignment="Center" Padding="3,2" Width="58"/>
-                <ProgressBoard Name="boardIncrease" Grid.Column="1" Value="{Binding CurrentRate.Increase}" Height="100" Width="100" AnimationValue="{Binding Value}" Minimum="-15" Maximum="15">
+                <ProgressBoard Name="boardIncrease" Grid.Column="1" Value="{Binding CurrentRate.Increase}" AnimationValue="{Binding Value}" Minimum="-15" Maximum="15">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="ValueChanged">
                             <i:InvokeCommandAction Command="{Binding IncreaseValueChanged}" CommandParameter="{Binding ElementName=boardIncrease}"/>

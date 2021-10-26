@@ -18,7 +18,7 @@ namespace Paway.Test
     /// <summary>
     /// TestWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class TestWindow : Window
+    public partial class TestWindow : WindowEXT
     {
         public TestWindow()
         {
