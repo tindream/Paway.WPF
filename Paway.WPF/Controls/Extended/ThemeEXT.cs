@@ -24,12 +24,12 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ThemeEXT),
-                new PropertyMetadata(new BrushEXT(170, 120, 240)));
+                new PropertyMetadata(new BrushEXT(PConfig.Alpha)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty HighBrushProperty =
             DependencyProperty.RegisterAttached(nameof(HighBrush), typeof(BrushEXT), typeof(ThemeEXT),
-                new PropertyMetadata(new BrushEXT(120, 255, 240, true)));
+                new PropertyMetadata(new BrushEXT(true)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty BackgroundProperty =

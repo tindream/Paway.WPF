@@ -32,11 +32,13 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemTextForegroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemTextForeground), typeof(BrushEXT), typeof(ListBoxItemEXT), new PropertyMetadata(new BrushEXT(Colors.Transparent)));
+            DependencyProperty.RegisterAttached(nameof(ItemTextForeground), typeof(BrushEXT), typeof(ListBoxItemEXT), 
+                new PropertyMetadata(new BrushEXT(Colors.Transparent)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBackgroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ListBoxItemEXT), new PropertyMetadata(new BrushEXT(Colors.Transparent), OnItemBackgroundChanged));
+            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ListBoxItemEXT), 
+                new PropertyMetadata(new BrushEXT(Colors.Transparent), OnItemBackgroundChanged));
         private static void OnItemBackgroundChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is ListBoxItemEXT listBoxItem)
@@ -46,14 +48,14 @@ namespace Paway.WPF
                 {
                     if ((listBoxItem.ItemBrush.Mouse as SolidColorBrush).Color == Colors.Transparent)
                     {
-                        mouseColor = PMethod.AlphaColor(mouse.Color.A + 50, mouse.Color);
+                        mouseColor = PMethod.AlphaColor(mouse.Color.A + PConfig.Interval, mouse.Color);
                     }
                 }
                 if (listBoxItem.ItemBackground.Pressed is SolidColorBrush pressed && pressed.Color != Colors.Transparent)
                 {
                     if ((listBoxItem.ItemBrush.Pressed as SolidColorBrush).Color == Colors.Transparent)
                     {
-                        pressedColor = PMethod.AlphaColor(pressed.Color.A + 100, pressed.Color);
+                        pressedColor = PMethod.AlphaColor(pressed.Color.A + PConfig.Interval, pressed.Color);
                     }
                 }
                 if (mouseColor != null || pressedColor != null)
@@ -69,7 +71,8 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ListBoxItemEXT), new PropertyMetadata(new BrushEXT(Colors.Transparent)));
+            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ListBoxItemEXT), 
+                new PropertyMetadata(new BrushEXT(Colors.Transparent)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemWidthProperty =

@@ -17,7 +17,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty RadiusProperty =
-            DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(CheckButton), new PropertyMetadata(new CornerRadius(2)));
+            DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(CheckButton), new PropertyMetadata(new CornerRadius(3)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBorderProperty =
@@ -26,7 +26,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(CheckButton),
-                new PropertyMetadata(new BrushEXT(Colors.LightGray, 170, 240)));
+                new PropertyMetadata(new BrushEXT(Colors.LightGray, PConfig.Alpha - PConfig.Interval, PConfig.Alpha + PConfig.Interval)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemForegroundProperty =
@@ -44,7 +44,7 @@ namespace Paway.WPF
                 if (cbxBtn.Type != ColorType.None)
                 {
                     var color = cbxBtn.Type.Color();
-                    cbxBtn.ItemBrush = new BrushEXT(color, 170, 240);
+                    cbxBtn.ItemBrush = new BrushEXT(PMethod.AlphaColor(PConfig.Alpha, color));
                     cbxBtn.ItemBrush.Normal = new SolidColorBrush(Colors.Transparent);
                 }
                 cbxBtn.UpdateDefaultStyle();

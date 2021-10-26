@@ -63,7 +63,8 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(null, 170, 240)));
+            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ListViewEXT),
+                new PropertyMetadata(new BrushEXT()));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty StyleEXTProperty =
@@ -71,24 +72,25 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBackgroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(Colors.Transparent, 120, 210), OnItemBackgroundChanged));
+            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ListViewEXT),
+                new PropertyMetadata(new BrushEXT(Colors.Transparent, PConfig.Alpha - PConfig.Interval * 2, PConfig.Alpha), OnItemBackgroundChanged));
         private static void OnItemBackgroundChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is ListViewEXT listView)
             {
                 Color? mouseColor = null, pressedColor = null;
-                if (listView.ItemBackground.Mouse is SolidColorBrush mouse && mouse.Color != PMethod.AlphaColor(120, PConfig.Color))
+                if (listView.ItemBackground.Mouse is SolidColorBrush mouse && mouse.Color != PMethod.AlphaColor(PConfig.Alpha - PConfig.Interval * 2, PConfig.Color))
                 {
-                    if ((listView.ItemBrush.Mouse as SolidColorBrush).Color == PMethod.AlphaColor(170, PConfig.Color))
+                    if ((listView.ItemBrush.Mouse as SolidColorBrush).Color == PMethod.AlphaColor(PConfig.Alpha - PConfig.Interval, PConfig.Color))
                     {
-                        mouseColor = PMethod.AlphaColor(mouse.Color.A + 50, mouse.Color);
+                        mouseColor = PMethod.AlphaColor(mouse.Color.A + PConfig.Interval, mouse.Color);
                     }
                 }
-                if (listView.ItemBackground.Pressed is SolidColorBrush pressed && pressed.Color != PMethod.AlphaColor(150, PConfig.Color))
+                if (listView.ItemBackground.Pressed is SolidColorBrush pressed && pressed.Color != PMethod.AlphaColor(PConfig.Alpha, PConfig.Color))
                 {
-                    if ((listView.ItemBrush.Pressed as SolidColorBrush).Color == PMethod.AlphaColor(240, PConfig.Color))
+                    if ((listView.ItemBrush.Pressed as SolidColorBrush).Color == PMethod.AlphaColor(PConfig.Alpha + PConfig.Interval, PConfig.Color))
                     {
-                        pressedColor = PMethod.AlphaColor(pressed.Color.A + 100, pressed.Color);
+                        pressedColor = PMethod.AlphaColor(pressed.Color.A + PConfig.Interval, pressed.Color);
                     }
                 }
                 if (mouseColor != null || pressedColor != null)
@@ -127,11 +129,13 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemTextForegroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemTextForeground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(PConfig.TextColor, Colors.White)));
+            DependencyProperty.RegisterAttached(nameof(ItemTextForeground), typeof(BrushEXT), typeof(ListViewEXT),
+                new PropertyMetadata(new BrushEXT(PConfig.TextColor, Colors.White)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemTextBackgroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemTextBackground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(Colors.Transparent)));
+            DependencyProperty.RegisterAttached(nameof(ItemTextBackground), typeof(BrushEXT), typeof(ListViewEXT),
+                new PropertyMetadata(new BrushEXT(Colors.Transparent)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemTextFontSizeProperty =
@@ -148,11 +152,13 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemDescForegroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemDescForeground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(PConfig.LightText, Colors.White)));
+            DependencyProperty.RegisterAttached(nameof(ItemDescForeground), typeof(BrushEXT), typeof(ListViewEXT),
+                new PropertyMetadata(new BrushEXT(PConfig.LightText, Colors.White)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemDescBackgroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemDescBackground), typeof(BrushEXT), typeof(ListViewEXT), new PropertyMetadata(new BrushEXT(Colors.Transparent)));
+            DependencyProperty.RegisterAttached(nameof(ItemDescBackground), typeof(BrushEXT), typeof(ListViewEXT),
+                new PropertyMetadata(new BrushEXT(Colors.Transparent)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemDescFontSizeProperty =
@@ -175,7 +181,7 @@ namespace Paway.WPF
                 if (view.Type != ColorType.None)
                 {
                     var color = view.Type.Color();
-                    view.ItemBackground = new BrushEXT(PMethod.AlphaColor(160, color));
+                    view.ItemBackground = new BrushEXT(PMethod.AlphaColor(PConfig.Alpha - PConfig.Interval, color));
                 }
                 if (view.IsLight)
                 {

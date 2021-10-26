@@ -24,12 +24,12 @@ namespace Paway.WPF
         /// 默认的颜色
         /// </summary>
         public Color Normal { get { return normal; } set { normal = value; OnPropertyChanged(); } }
-        private Color mouse = PMethod.ThemeColor(210);
+        private Color mouse = PMethod.ThemeColor();
         /// <summary>
         /// 鼠标划过时的颜色
         /// </summary>
         public Color Mouse { get { return mouse; } set { mouse = value; OnPropertyChanged(); } }
-        private Color pressed = PMethod.ThemeColor(240);
+        private Color pressed = PMethod.ThemeColor();
         /// <summary>
         /// 鼠标点击时的颜色
         /// </summary>
@@ -37,7 +37,7 @@ namespace Paway.WPF
         /// <summary>
         /// 颜色Alpha值变量
         /// </summary>
-        public int Alpha { get; set; } = 35;
+        public int Alpha { get; set; } = PConfig.Interval;
 
         /// <summary>
         /// </summary>

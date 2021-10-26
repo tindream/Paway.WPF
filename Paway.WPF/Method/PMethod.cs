@@ -348,7 +348,7 @@ namespace Paway.WPF
                     CornerRadius = new CornerRadius(3),
                     BorderBrush = new SolidColorBrush(Colors.LightGray),
                     BorderThickness = new Thickness(1),
-                    Background = new SolidColorBrush(Color.FromArgb(200, 255, 255, 255)),
+                    Background = new SolidColorBrush(Color.FromArgb(PConfig.Alpha, 255, 255, 255)),
                     MinWidth = 200,
                     MaxWidth = 350,
                 };
@@ -434,7 +434,7 @@ namespace Paway.WPF
                         return;
                     }
 
-                    var color = AlphaColor(200, iError ? PConfig.Error : PConfig.Hit);
+                    var color = AlphaColor(PConfig.Alpha, iError ? PConfig.Error : PConfig.Hit);
                     var border = new Border
                     {
                         CornerRadius = new CornerRadius(5),
@@ -531,7 +531,7 @@ namespace Paway.WPF
                         return;
                     }
 
-                    var color = AlphaColor(200, iError ? PConfig.Error : PConfig.Hit);
+                    var color = AlphaColor(PConfig.Alpha, iError ? PConfig.Error : PConfig.Hit);
                     var border = new Border
                     {
                         CornerRadius = new CornerRadius(5),
@@ -642,7 +642,7 @@ namespace Paway.WPF
         /// <summary>
         /// 主题颜色
         /// </summary>
-        internal static Color ThemeColor(int alpha)
+        internal static Color ThemeColor(int alpha = PConfig.Alpha)
         {
             return AlphaColor(alpha, PConfig.Color);
         }

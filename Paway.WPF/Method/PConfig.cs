@@ -103,6 +103,15 @@ namespace Paway.WPF
         }
 
         /// <summary>
+        /// 颜色的 Alpha 通道默认值
+        /// </summary>
+        internal const int Alpha = 200;
+        /// <summary>
+        /// 颜色差量
+        /// </summary>
+        internal const int Interval = 40;
+
+        /// <summary>
         /// 信息色
         /// </summary>
         public static Color Info { get; private set; } = Color.FromArgb(255, 0, 188, 212);

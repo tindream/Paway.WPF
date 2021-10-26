@@ -9,11 +9,11 @@
         DataContext="{Binding Test ,Source={StaticResource Locator}}"
         Title="TestWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
-        <StackPanel Height="200" HorizontalAlignment="Center">
+        <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center">
             <CheckBoxEXT Content="123"/>
             <CheckButton Content="123"/>
             <TextBlock Text="123"/>
             <ButtonEXT Content="123"/>
-        </StackPanel>
+        </WrapPanel>
     </Grid>
 </WindowEXT>

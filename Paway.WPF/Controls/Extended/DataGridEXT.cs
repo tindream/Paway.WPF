@@ -26,7 +26,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(DataGridEXT),
-                new PropertyMetadata(new BrushEXT(120)));
+                new PropertyMetadata(new BrushEXT(PConfig.Alpha - PConfig.Interval * 2)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty HeaderStartProperty =

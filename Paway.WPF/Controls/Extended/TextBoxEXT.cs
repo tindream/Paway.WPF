@@ -47,7 +47,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(TextBoxEXT),
-                new PropertyMetadata(new BrushEXT(null, 170, 240)));
+                new PropertyMetadata(new BrushEXT()));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty IconProperty =

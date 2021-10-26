@@ -32,12 +32,12 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(DatePickerEXT),
-                new PropertyMetadata(new BrushEXT(null, 205, 240)));
+                new PropertyMetadata(new BrushEXT()));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty TodayColorProperty =
             DependencyProperty.RegisterAttached(nameof(TodayColor), typeof(BrushEXT), typeof(DatePickerEXT),
-            new PropertyMetadata(new BrushEXT(Colors.Transparent, 120, 170)));
+            new PropertyMetadata(new BrushEXT(Colors.Transparent, PConfig.Alpha - PConfig.Interval * 2, PConfig.Alpha - PConfig.Interval)));
 
         #endregion
 

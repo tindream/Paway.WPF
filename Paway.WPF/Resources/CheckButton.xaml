@@ -9,15 +9,18 @@
     <Style TargetType="{x:Type local:CheckButton}" BasedOn="{StaticResource Config}">
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Padding" Value="0,0,3,0"/>
+        <Setter Property="Padding" Value="5,3"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:CheckButton">
                     <Grid SnapsToDevicePixels="True" Focusable="True">
-                        <Border x:Name="border1" 
-                                Padding="{TemplateBinding Padding}"
+                        <Border x:Name="border1"
                                 BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"
                                 BorderThickness="{Binding Path=ItemBorder.Normal, RelativeSource={RelativeSource TemplatedParent}}"
+                                CornerRadius="{TemplateBinding Radius}">
+                        </Border>
+                        <Border x:Name="border2" 
+                                Padding="{TemplateBinding Padding}"
                                 CornerRadius="{TemplateBinding Radius}">
                             <TextBlock x:Name="txt" Text="{TemplateBinding Content}" Style="{x:Null}"
                                        Foreground="{Binding Path=ItemForeground.Normal, RelativeSource={RelativeSource TemplatedParent}}" 
@@ -39,6 +42,18 @@
                             <Setter Property="BorderThickness" TargetName="border1" Value="{Binding Path=ItemBorder.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter Property="Background" TargetName="border1" Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </Trigger>
+                        <Trigger Property="ToggleButton.IsChecked" Value="True">
+                            <Setter Property="Foreground" TargetName="txt" Value="{Binding Path=ItemForeground.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter Property="BorderThickness" TargetName="border1" Value="{Binding Path=ItemBorder.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter Property="Background" TargetName="border1" Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ButtonBase.IsPressed" Value="true"/>
+                                <Condition Property="UIElement.IsMouseOver" Value="true"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="border1" Property="Background" Value="{Binding Path=ItemBrush.PressedMouse,RelativeSource={RelativeSource AncestorType={x:Type local:CheckButton}}}" />
+                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

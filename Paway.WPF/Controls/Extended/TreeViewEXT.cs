@@ -47,12 +47,12 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(TreeViewEXT),
-                new PropertyMetadata(new BrushEXT(null, 170, 240)));
+                new PropertyMetadata(new BrushEXT()));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBackgroundProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(TreeViewEXT),
-            new PropertyMetadata(new BrushEXT(null, 85, 170)));
+            new PropertyMetadata(new BrushEXT(null, PConfig.Alpha - PConfig.Interval * 3, PConfig.Alpha - PConfig.Interval)));
 
         #endregion
 

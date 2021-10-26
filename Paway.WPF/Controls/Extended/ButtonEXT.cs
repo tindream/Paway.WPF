@@ -37,7 +37,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBackgroundProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ButtonEXT),
-            new PropertyMetadata(new BrushEXT(160)));
+            new PropertyMetadata(new BrushEXT(PConfig.Alpha)));
 
         /// <summary>
         /// </summary>
@@ -71,7 +71,7 @@ namespace Paway.WPF
                 if (btn.Type != ColorType.None)
                 {
                     var color = btn.Type.Color();
-                    btn.ItemBackground = new BrushEXT(PMethod.AlphaColor(160, color));
+                    btn.ItemBackground = new BrushEXT(PMethod.AlphaColor(PConfig.Alpha, color));
                 }
                 if (btn.IsLight)
                 {

@@ -25,12 +25,12 @@ namespace Paway.WPF
         /// 默认的颜色
         /// </summary>
         public Brush Normal { get { return normal; } set { normal = value; OnPropertyChanged(); } }
-        private Brush mouse = new SolidColorBrush(PMethod.ThemeColor(210));
+        private Brush mouse = new SolidColorBrush(PMethod.ThemeColor());
         /// <summary>
         /// 鼠标划过时的颜色
         /// </summary>
         public Brush Mouse { get { return mouse; } set { mouse = value; OnPropertyChanged(); } }
-        private Brush pressed = new SolidColorBrush(PMethod.ThemeColor(210));
+        private Brush pressed = new SolidColorBrush(PMethod.ThemeColor());
         /// <summary>
         /// 鼠标点击时的颜色
         /// </summary>
@@ -49,7 +49,7 @@ namespace Paway.WPF
         /// <summary>
         /// 颜色Alpha值变量
         /// </summary>
-        public int Alpha { get; set; } = 35;
+        public int Alpha { get; set; } = PConfig.Interval;
         internal bool IHigh { get; set; }
 
         /// <summary>
@@ -96,17 +96,17 @@ namespace Paway.WPF
             }
         }
         /// <summary>
-        /// 主题色：设置所有颜色，自动Alpha变量
+        /// 主题背景
         /// </summary>
-        public BrushEXT(byte normal) : this(PMethod.ThemeColor(normal)) { }
-        /// <summary>
-        /// 主题色：设置所有颜色，普通、鼠标移过、按下
-        /// </summary>
-        public BrushEXT(byte normal, byte mouse, byte pressed, bool iHigh = false) : this(PMethod.ThemeColor(normal), mouse, pressed)
+        public BrushEXT(bool iHigh) : this()
         {
             this.IHigh = iHigh;
             High();
         }
+        /// <summary>
+        /// 主题色：设置所有颜色，根据Alpha自动设置
+        /// </summary>
+        public BrushEXT(byte normal) : this(PMethod.ThemeColor(normal)) { }
         /// <summary>
         /// 主题色：普通、鼠标移过、按下
         /// </summary>
