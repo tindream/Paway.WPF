@@ -109,6 +109,14 @@
                                         <Setter Property="BorderBrush" TargetName="InnerBtnBorder" 
                                                 Value="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:DataPager}}}"/>
                                     </Trigger>
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="IsPressed" Value="true"/>
+                                            <Condition Property="IsMouseOver" Value="true"/>
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="Background" TargetName="CheckedStateOuterBorder" 
+                                                Value="{Binding Path=ItemBrush.PressedMouse, RelativeSource={RelativeSource AncestorType={x:Type local:DataPager}}}"/>
+                                    </MultiTrigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Setter.Value>

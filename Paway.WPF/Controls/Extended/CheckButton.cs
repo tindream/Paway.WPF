@@ -45,7 +45,7 @@ namespace Paway.WPF
                 {
                     var color = cbxBtn.Type.Color();
                     cbxBtn.ItemBrush = new BrushEXT(PMethod.AlphaColor(PConfig.Alpha, color));
-                    cbxBtn.ItemBrush.Normal = new SolidColorBrush(Colors.Transparent);
+                    cbxBtn.ItemBrush.Normal = new SolidColorBrush(Colors.LightGray);
                 }
                 cbxBtn.UpdateDefaultStyle();
             }

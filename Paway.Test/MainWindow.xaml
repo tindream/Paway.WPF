@@ -125,7 +125,11 @@
                 <WrapPanel>
                     <CheckBoxEXT x:Name="cbx" Content="Hello" IsChecked="True"/>
                     <CheckBoxEXT Content="World" IsChecked="{x:Null}"/>
-                    <CheckBoxEXT Content="Watch" IsChecked="True" IsEnabled="False"/>
+                </WrapPanel>
+                <WrapPanel>
+                    <CheckButton Content="Hello" IsChecked="True"/>
+                    <CheckButton Content="World" IsChecked="{x:Null}"/>
+                    <CheckButton Content="Watch" IsChecked="True" IsEnabled="False"/>
                 </WrapPanel>
                 <WrapPanel>
                     <RadioButtonEXT Name="rb" Content="Hello" IsChecked="True"/>
