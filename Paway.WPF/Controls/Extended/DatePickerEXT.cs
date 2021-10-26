@@ -117,7 +117,7 @@ namespace Paway.WPF
         }
         private void Calendar_Loaded(object sender, RoutedEventArgs e)
         {
-            if (PMethod.Child(sender, out CalendarItem item))
+            if (PMethod.Child(sender, out CalendarItem item, iParent: false))
             {
                 item.Loaded -= Item_Loaded;
                 item.Loaded += Item_Loaded;
@@ -125,12 +125,12 @@ namespace Paway.WPF
         }
         private void Item_Loaded(object sender, RoutedEventArgs e)
         {
-            if (PMethod.Child(sender, out ButtonEXT goToday, "PART_GoToday"))
+            if (PMethod.Child(sender, out ButtonEXT goToday, "PART_GoToday", false))
             {
                 goToday.Click -= GoToday_Click;
                 goToday.Click += GoToday_Click;
             }
-            if (PMethod.Child(sender, out ButtonEXT goClear, "PART_GoClear"))
+            if (PMethod.Child(sender, out ButtonEXT goClear, "PART_GoClear", false))
             {
                 goClear.Click -= GoClear_Click;
                 goClear.Click += GoClear_Click;

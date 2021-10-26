@@ -9,13 +9,11 @@
     <Style TargetType="{x:Type local:ProgressBarEXT}" BasedOn="{StaticResource Config}">
         <Setter Property="local:ProgressBarEXT.IsMonitoring" Value="True"/>
         <Setter Property="Margin" Value="2"/>
-        <Setter Property="Background" Value="White"/>
-        <Setter Property="Foreground" Value="White"/>
         <Setter Property="Template">
             <Setter.Value>
                 <!--控件模板-->
                 <ControlTemplate TargetType="{x:Type local:ProgressBarEXT}" >
-                    <Grid>
+                    <Grid Name="TemplateRoot">
                         <Border Name="PART_Track"
                                 BorderBrush="LightGray"
                                 CornerRadius="{TemplateBinding Radius}"
@@ -43,6 +41,13 @@
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="Orientation" Value="Vertical">
+                            <Setter Property="FrameworkElement.LayoutTransform" TargetName="TemplateRoot">
+                                <Setter.Value>
+                                    <RotateTransform Angle="-90" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
                         <Trigger Property="Value" Value="100">
                             <Setter TargetName="txt" Property="Foreground" Value="White" />
                             <Setter TargetName="txt" Property="Opacity" Value="1.0" />

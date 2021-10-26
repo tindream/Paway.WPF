@@ -159,7 +159,7 @@ namespace Paway.WPF
             //锁定长宽比
             this.Height = this.ActualWidth;
             base.OnRenderSizeChanged(sizeInfo);
-            if (PMethod.Child(this, out this.path_Pointer, "Path_Pointer"))
+            if (PMethod.Child(this, out this.path_Pointer, "Path_Pointer", false))
             {
                 path_Pointer.Width = this.ActualWidth / 2 - 7 + 1;
                 path_Pointer.Margin = new Thickness(0, 0, path_Pointer.Width, 0);

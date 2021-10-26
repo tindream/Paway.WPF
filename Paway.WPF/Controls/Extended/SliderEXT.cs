@@ -178,7 +178,7 @@ namespace Paway.WPF
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            if (PMethod.Child(this, out TickBarEXT tickBar, "TopTick"))
+            if (PMethod.Child(this, out TickBarEXT tickBar, "TopTick", false))
             {
                 tickBar.TrackValue += TickBar_TrackValue;
             }
@@ -202,7 +202,7 @@ namespace Paway.WPF
             if (this.AutoToolTipPlacement == AutoToolTipPlacement.None) return;
             if (toolTip == null)
             {
-                if (PMethod.Child(this, out Thumb thumb))
+                if (PMethod.Child(this, out Thumb thumb, iParent: false))
                 {
                     toolTip = new ToolTip
                     {
@@ -255,7 +255,7 @@ namespace Paway.WPF
         {
             base.OnThumbDragDelta(e);
             OnToolTipValueChanged(e.RoutedEvent);
-            if (PMethod.Child(this, out Thumb thumb))
+            if (PMethod.Child(this, out Thumb thumb, iParent: false))
             {
                 if (thumb.ToolTip is ToolTip toolTip)
                 {

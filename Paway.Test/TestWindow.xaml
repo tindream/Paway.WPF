@@ -9,13 +9,16 @@
         DataContext="{Binding Test ,Source={StaticResource Locator}}"
         Title="TestWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="74">
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" Height="200" >
             <CheckBoxEXT Content="123"/>
             <CheckButton Content="123" Type="Error"/>
             <ButtonEXT Content="123"/>
-            <ProgressBarEXT Value="50" Orientation="Vertical"/>
+            <ProgressBarEXT Value="35" Orientation="Vertical" Width="51"/>
+            <ProgressBarEXT Value="70" Orientation="Vertical" Width="51" IText="False"/>
             <ProgressRound Value="35" />
-            <ProgressBoard Value="35" />
+            <ProgressRound Value="70" Width="50" IText="False"/>
+            <ProgressBoard Value="35" Width="64"/>
+            <ProgressBoard Value="70" Width="50"/>
 
         </StackPanel>
     </Grid>
