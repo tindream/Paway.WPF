@@ -15,7 +15,7 @@ namespace Paway.Test
     {
         #region 常量
         public const string Text = "测试系统";
-        public const string LogConfig = "log.xml";
+        public const string LogConfig = "Log.xml";
         /// <summary>
         /// 图表绽放率
         /// </summary>

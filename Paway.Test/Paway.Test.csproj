@@ -200,7 +200,9 @@
     <None Include="Resources\script.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Log.xml" />
+    <Content Include="Log.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

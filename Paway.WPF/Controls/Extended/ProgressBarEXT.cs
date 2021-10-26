@@ -106,7 +106,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ITextProperty =
-            DependencyProperty.RegisterAttached(nameof(IText), typeof(bool), typeof(ProgressBarEXT));
+            DependencyProperty.RegisterAttached(nameof(IText), typeof(bool), typeof(ProgressBarEXT), new PropertyMetadata(true));
 
         #endregion
 

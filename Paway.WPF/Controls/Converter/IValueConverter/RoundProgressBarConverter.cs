@@ -18,8 +18,8 @@ namespace Paway.WPF
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            var width = (double)values[0];
-            var height = (double)values[1];
+            var width = values[0].ToDouble();
+            var height = values[1].ToDouble();
 
             double radius;
             if (values[2] is Thickness) radius = ((Thickness)values[2]).Left;

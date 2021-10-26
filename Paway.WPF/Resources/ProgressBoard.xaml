@@ -16,8 +16,8 @@
                 <!--控件模板-->
                 <ControlTemplate TargetType="{x:Type local:ProgressBoard}" >
                     <Grid>
-                        <Ellipse Stroke="{StaticResource Light}" StrokeThickness="10" Margin="7"  Fill="{TemplateBinding Background}"/>
-                        <Path Margin="7"
+                        <Ellipse Stroke="{StaticResource Light}" StrokeThickness="10" Margin="6"  Fill="{TemplateBinding Background}"/>
+                        <Path Margin="6"
                               StrokeThickness="10"
                               StrokeStartLineCap="Round"
                               StrokeEndLineCap="Round"
@@ -35,8 +35,8 @@
                             </Path.RenderTransform>
                             <Path.Data>
                                 <MultiBinding Converter="{StaticResource roundProgressBarConverter}">
-                                    <Binding Path="ActualWidth" RelativeSource="{RelativeSource AncestorType=local:ProgressBoard}" Converter="{StaticResource valueAddConverter}" ConverterParameter="-14"></Binding>
-                                    <Binding Path="ActualHeight" RelativeSource="{RelativeSource AncestorType=local:ProgressBoard}" Converter="{StaticResource valueAddConverter}" ConverterParameter="-14"></Binding>
+                                    <Binding Path="ActualWidth" RelativeSource="{RelativeSource AncestorType=local:ProgressBoard}" Converter="{StaticResource valueAddConverter}" ConverterParameter="-12"></Binding>
+                                    <Binding Path="ActualHeight" RelativeSource="{RelativeSource AncestorType=local:ProgressBoard}" Converter="{StaticResource valueAddConverter}" ConverterParameter="-12"></Binding>
                                     <Binding Source="10"></Binding>
                                     <Binding Source="0"></Binding>
                                     <Binding Source="100"></Binding>
@@ -44,11 +44,11 @@
                                 </MultiBinding>
                             </Path.Data>
                         </Path>
-                        <Ellipse Stroke="#949494" StrokeThickness="8" />
+                        <Ellipse Stroke="#949494" StrokeThickness="7" />
                         <Path Name="Path_Pointer" Style="{StaticResource PathPointer}" RenderTransformOrigin="1,0.5">
                             <Path.RenderTransform>
                                 <TransformGroup>
-                                    <RotateTransform Angle="{Binding AngleTemp, FallbackValue=-27.0}"/>
+                                    <RotateTransform Angle="{Binding Source=-27.0}"/>
                                 </TransformGroup>
                             </Path.RenderTransform>
                         </Path>
