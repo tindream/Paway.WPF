@@ -14,7 +14,7 @@
             <Setter.Value>
                 <!--控件模板-->
                 <ControlTemplate TargetType="{x:Type local:ProgressRound}" >
-                    <Grid>
+                    <Grid Name="TemplateRoot">
                         <Ellipse x:Name="Ellipse_Track"
                                  Stroke="{Binding ForegroundColorLinear.Start, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource colorToBrushConverter}}"
                                  Fill="{TemplateBinding Background}"
@@ -26,12 +26,12 @@
                               StrokeEndLineCap="Round">
                             <Path.Data>
                                 <MultiBinding Converter="{StaticResource roundProgressBarConverter}">
-                                    <Binding Path="ActualWidth" RelativeSource="{RelativeSource AncestorType=local:ProgressRound}"></Binding>
-                                    <Binding Path="ActualHeight" RelativeSource="{RelativeSource AncestorType=local:ProgressRound}"></Binding>
-                                    <Binding Path="BorderThickness" RelativeSource="{RelativeSource AncestorType=local:ProgressRound}"></Binding>
-                                    <Binding Path="Minimum" RelativeSource="{RelativeSource AncestorType=local:ProgressRound}"></Binding>
-                                    <Binding Path="Maximum" RelativeSource="{RelativeSource AncestorType=local:ProgressRound}"></Binding>
-                                    <Binding Path="Value" RelativeSource="{RelativeSource AncestorType=local:ProgressRound}"></Binding>
+                                    <Binding Path="ActualWidth" RelativeSource="{RelativeSource AncestorType={x:Type local:ProgressRound}}"></Binding>
+                                    <Binding Path="ActualHeight" RelativeSource="{RelativeSource AncestorType={x:Type local:ProgressRound}}"></Binding>
+                                    <Binding Path="BorderThickness" RelativeSource="{RelativeSource TemplatedParent}"></Binding>
+                                    <Binding Path="Minimum" RelativeSource="{RelativeSource TemplatedParent}"></Binding>
+                                    <Binding Path="Maximum" RelativeSource="{RelativeSource TemplatedParent}"></Binding>
+                                    <Binding Path="Value" RelativeSource="{RelativeSource TemplatedParent}"></Binding>
                                 </MultiBinding>
                             </Path.Data>
                         </Path>

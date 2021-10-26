@@ -13,10 +13,10 @@
                 <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
                     <GradientStop 
                         Offset="0"
-                        Color="{Binding TrackColorLinear.Start, RelativeSource={RelativeSource AncestorType=local:SliderEXT}}" />
+                        Color="{Binding TrackColorLinear.Start, RelativeSource={RelativeSource TemplatedParent}}" />
                     <GradientStop
                         Offset="1"
-                        Color="{Binding TrackColorLinear.End, RelativeSource={RelativeSource AncestorType=local:SliderEXT}}" />
+                        Color="{Binding TrackColorLinear.End, RelativeSource={RelativeSource TemplatedParent}}" />
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>

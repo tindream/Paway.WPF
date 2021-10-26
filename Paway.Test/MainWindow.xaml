@@ -90,7 +90,7 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ComboBoxQuery>
-                <TextBoxEXT Name="tb" Icon="pack://application:,,,/Paway.Test;component/Images/close.png" IAnimation="2" BorderThickness="0,0,0,1">
+                <TextBoxEXT Name="tb" Icon="pack://application:,,,/Paway.Test;component/Images/close.png" IAnimation="2" BorderThickness="0,0,0,1" Radius="0">
                     <Binding Path="Value">
                         <Binding.ValidationRules>
                             <RegexValidationRule RegexType="UInt" MinLength="2" MaxLength="4"/>
@@ -99,6 +99,7 @@
                 </TextBoxEXT>
                 <PasswordBox PasswordBoxEXT.Icon="pack://application:,,,/Paway.Test;component/Images/close.png"
                              PasswordBoxEXT.Password="{Binding Pad}"
+                             PasswordBoxEXT.Radius="0"
                              PasswordBoxEXT.IAnimation="2" BorderThickness="0,0,0,1"/>
                 <Grid>
                     <Grid.ColumnDefinitions >
@@ -129,7 +130,6 @@
                 <WrapPanel>
                     <CheckButton Content="Hello" IsChecked="True"/>
                     <CheckButton Content="World" IsChecked="{x:Null}"/>
-                    <CheckButton Content="Watch" IsChecked="True" IsEnabled="False"/>
                 </WrapPanel>
                 <WrapPanel>
                     <RadioButtonEXT Name="rb" Content="Hello" IsChecked="True"/>
