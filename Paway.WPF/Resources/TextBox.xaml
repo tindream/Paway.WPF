@@ -29,6 +29,7 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Image x:Name="icon" Visibility="Collapsed"
                                    Source="{TemplateBinding Icon}"
@@ -38,12 +39,18 @@
                                                    VerticalAlignment="Center"
                                                    VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}"
                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                <TextBlock Name="tbWater" Grid.Column="1" Visibility="Collapsed"
+                                <TextBlock x:Name="tbWater" Grid.Column="1" Visibility="Collapsed"
                                            VerticalAlignment="Center"
                                            Padding="5,0,0,0"
                                            FontSize="{TemplateBinding FontSize, Converter={StaticResource valueMultiConverter}}"
-                                           Foreground="#777"
+                                           Foreground="{StaticResource LightText}"
                                            Text="{TemplateBinding Water}"/>
+                                <TextBlock x:Name="tbUnit" Grid.Column="2"
+                                           VerticalAlignment="Center"
+                                           Padding="0,0,3,0"
+                                           FontSize="{TemplateBinding FontSize, Converter={StaticResource valueMultiConverter}}"
+                                           Foreground="{StaticResource LightText}"
+                                           Text="{TemplateBinding Unit}"/>
                             </Grid>
                         </Border>
                         <Grid VerticalAlignment="Bottom">

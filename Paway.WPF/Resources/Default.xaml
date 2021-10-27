@@ -243,7 +243,8 @@
     <SolidColorBrush x:Key="Hit" Color="#5D6B99" />
     <SolidColorBrush x:Key="High" Color="#003F63" />
     <SolidColorBrush x:Key="Text" Color="#222" />
-    <SolidColorBrush x:Key="LightText" Color="#444" />
+    <SolidColorBrush x:Key="TextSub" Color="#444" />
+    <SolidColorBrush x:Key="LightText" Color="#777" />
     <SolidColorBrush x:Key="White" Color="White" />
     <SolidColorBrush x:Key="Black" Color="Black" />
     <SolidColorBrush x:Key="Gray1" Color="LightGray" />

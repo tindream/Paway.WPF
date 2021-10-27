@@ -176,13 +176,21 @@ namespace Paway.WPF
         /// </summary>
         public static SolidColorBrush TextBrush { get; private set; } = new SolidColorBrush(TextColor);
         /// <summary>
-        /// 文本(浅色)
+        /// 文本(二级浅色)
         /// </summary>
-        public static Color LightText { get; private set; } = Color.FromArgb(255, 68, 68, 68);
+        public static Color TextSub { get; private set; } = Color.FromArgb(255, 68, 68, 68);
         /// <summary>
-        /// 文本(浅色)
+        /// 文本(二级浅色)
         /// </summary>
-        public static SolidColorBrush LightTextBrush { get; private set; } = new SolidColorBrush(LightText);
+        public static SolidColorBrush TextSubBrush { get; private set; } = new SolidColorBrush(TextSub);
+        /// <summary>
+        /// 文本(三级浅色)
+        /// </summary>
+        public static Color TextLight { get; private set; } = Color.FromArgb(255, 119, 119, 119);
+        /// <summary>
+        /// 文本(三级浅色)
+        /// </summary>
+        public static SolidColorBrush TextLightBrush { get; private set; } = new SolidColorBrush(TextLight);
 
         #endregion
     }

@@ -153,7 +153,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemDescForegroundProperty =
             DependencyProperty.RegisterAttached(nameof(ItemDescForeground), typeof(BrushEXT), typeof(ListViewEXT),
-                new PropertyMetadata(new BrushEXT(PConfig.LightText, Colors.White)));
+                new PropertyMetadata(new BrushEXT(PConfig.TextSub, Colors.White)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemDescBackgroundProperty =

@@ -285,7 +285,7 @@
                     <ControlTemplate.Resources>
                         <!--星期样式-->
                         <DataTemplate x:Key="{ComponentResourceKey ResourceId=DayTitleTemplate, TypeInTargetAssembly={x:Type CalendarItem}}">
-                            <TextBlock x:Name="TxtDayTitle" Foreground="{StaticResource LightText}"
+                            <TextBlock x:Name="TxtDayTitle" Foreground="{StaticResource TextSub}"
                                        FontSize="10" 
                                        HorizontalAlignment="Center" Margin="0,6" Text="{Binding}"/>
                         </DataTemplate>

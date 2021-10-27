@@ -62,7 +62,7 @@ namespace Paway.WPF
         {
             if (this.Normal is SolidColorBrush normal && normal.Color.R == obj.R && normal.Color.G == obj.G && normal.Color.B == obj.B)
             {
-                if (normal.Color != Colors.Transparent && normal.Color != Colors.DarkGray && normal.Color != Colors.LightGray && normal.Color != PConfig.TextColor && normal.Color != PConfig.LightText)
+                if (normal.Color != Colors.Transparent && normal.Color != Colors.DarkGray && normal.Color != Colors.LightGray && normal.Color != PConfig.TextColor && normal.Color != PConfig.TextSub)
                 {
                     this.Normal = new SolidColorBrush(PMethod.ThemeColor(normal.Color.A));
                 }

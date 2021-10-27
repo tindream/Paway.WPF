@@ -41,6 +41,10 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(Water), typeof(string), typeof(TextBoxEXT), new PropertyMetadata("请输入.."));
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty UnitProperty =
+            DependencyProperty.RegisterAttached(nameof(Unit), typeof(string), typeof(TextBoxEXT));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty RadiusProperty =
             DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(TextBoxEXT), new PropertyMetadata(new CornerRadius(3)));
         /// <summary>
@@ -70,6 +74,16 @@ namespace Paway.WPF
         {
             get { return (string)GetValue(WaterProperty); }
             set { SetValue(WaterProperty, value); }
+        }
+        /// <summary>
+        /// 单位
+        /// </summary>
+        [Category("扩展")]
+        [Description("单位")]
+        public string Unit
+        {
+            get { return (string)GetValue(UnitProperty); }
+            set { SetValue(UnitProperty, value); }
         }
         /// <summary>
         /// 自定义边框圆角
