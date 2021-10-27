@@ -526,23 +526,6 @@ namespace Paway.WPF
             var actualWidth = ActualWidth - BorderThickness.Left - BorderThickness.Right - Padding.Left - Padding.Right;
             switch (ItemWidthType)
             {
-                case WidthType.WidthFill:
-                    var width = (int)(actualWidth / Items.Count);
-                    if (width < 0) width = 0;
-                    if (actualWidth % this.Items.Count > 0) width++;
-                    var count = Items.Count - (Items.Count * width - actualWidth);
-                    for (var i = 0; i < Items.Count; i++)
-                    {
-                        if (Items[i] is IListView item)
-                        {
-                            item.ItemWidth = count > i ? width : width - 1;
-                        }
-                        else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is IListView listViewItem)
-                        {
-                            listViewItem.ItemWidth = count > i ? width : width - 1;
-                        }
-                    }
-                    break;
                 case WidthType.OneColumn:
                     for (var i = 0; i < Items.Count; i++)
                     {
@@ -553,6 +536,32 @@ namespace Paway.WPF
                         else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is IListView listViewItem)
                         {
                             listViewItem.ItemWidth = actualWidth;
+                        }
+                    }
+                    break;
+                case WidthType.OneRow:
+                case WidthType.TwoRow:
+                case WidthType.ThreeRow:
+                case WidthType.FoureRow:
+                case WidthType.FiveRow:
+                    var rowCount = (int)ItemWidthType;
+                    var columnCount = Items.Count / rowCount;
+                    var width = (int)(actualWidth / columnCount);
+                    if (width < 0) width = 0;
+                    if (actualWidth % columnCount > 0) width++;
+                    var count = columnCount - (columnCount * width - actualWidth);
+                    for (var i = 0; i < Items.Count;)
+                    {
+                        for (var j = 0; j < columnCount && i < Items.Count; j++, i++)
+                        {
+                            if (Items[i] is IListView item)
+                            {
+                                item.ItemWidth = count > j ? width : width - 1;
+                            }
+                            else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is IListView listViewItem)
+                            {
+                                listViewItem.ItemWidth = count > j ? width : width - 1;
+                            }
                         }
                     }
                     break;

@@ -181,7 +181,7 @@
                                             <TextBlock.Text>
                                                 <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="Hit" />
-                                                    <Binding Path="Content" />
+                                                    <!--<Binding Path="Content" />-->
                                                 </MultiBinding>
                                             </TextBlock.Text>
                                         </TextBlock>

@@ -162,7 +162,7 @@ namespace Paway.WPF
             get { return styleEXT; }
             set { styleEXT = value; OnPropertyChanged(); }
         }
-        private double itemWidth;
+        private double itemWidth = double.NaN;
         /// <summary>
         /// 自定义项宽度
         /// </summary>

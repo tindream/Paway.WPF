@@ -7,6 +7,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type local:CheckButton}" BasedOn="{StaticResource Config}">
+        <Setter Property="Margin" Value="2"/>
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="5,3"/>
