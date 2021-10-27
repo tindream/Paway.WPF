@@ -136,7 +136,7 @@
                     <RadioButtonEXT Content="World" IsChecked="True" />
                     <RadioButtonEXT Content="Watch" IsChecked="{x:Null}" IsEnabled="False"/>
                 </WrapPanel>
-                <RichTextBoxEXT x:Name="rt" IsReadOnly="True" Height="150" BorderThickness="0" Foreground="#555" >
+                <RichTextBoxEXT x:Name="rt" IsReadOnly="True" Height="50" BorderThickness="0" Foreground="#555" >
                     <FlowDocument>
                         <Paragraph>
                             <Run Text="追加内容" />
@@ -159,6 +159,10 @@
                     <Path Style="{StaticResource PathQuestion}"/>
                     <Path Style="{StaticResource PathClose}"/>
                     <Progress Width="40" Height="40" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <ProgressRound Value="35" Width="70"/>
+                    <ProgressBoard Value="35" Width="70"/>
                 </StackPanel>
                 <CalendarEXT/>
             </StackPanel>
@@ -245,8 +249,8 @@
         </ExpanderEXT>
 
         <StackPanel>
-            <ListViewEXT x:Name="listView3" Margin="5,5,0,0" ItemWidthType="WidthFill" IAnimation="True" IsLight="True" ItemBorder="0,0,1,1;0,0,1,3"
-                         ItemHeight="60" ItemWidth="100">
+            <ListViewEXT x:Name="listView3" Margin="5,5,0,0" IAnimation="True" ItemBorder="0,0,1,1;0,0,1,3"
+                         ItemHeight="60" ItemWidth="100" ItemsSource="{Binding GridList}">
                 <ListViewEXT.ItemBrush>
                     <BrushEXT Alpha="35" Mouse="#AA23AFFF" Normal="LightGray" Pressed="#FA23AFFF"/>
                 </ListViewEXT.ItemBrush>
@@ -255,14 +259,14 @@
                         <i:InvokeCommandAction Command="{Binding SelectionCommand}" CommandParameter="{Binding ElementName=listView3}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-                <ListBoxItemEXT Text="World"/>
+                <!--<ListBoxItemEXT Text="World"/>
                 <ListBoxItemEXT Text="A"/>
                 <ListBoxItemEXT Text="B" StyleEXT="{StaticResource ItemTest}"/>
                 <ListBoxItemEXT Text="C"/>
                 <ListBoxItemEXT Text="D"/>
                 <ListBoxItemEXT Text="E"/>
                 <ListBoxItemEXT Text="F"/>
-                <ListBoxItemEXT Text="G"/>
+                <ListBoxItemEXT Text="G"/>-->
             </ListViewEXT>
         </StackPanel>
 
