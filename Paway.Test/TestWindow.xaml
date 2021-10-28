@@ -10,7 +10,10 @@
         Title="TestWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel HorizontalAlignment="Center" Height="200" Width="100" VerticalAlignment="Center">
-            <TextBoxEXT Unit="ms"/>
+            <TextBoxEXT Icon="pack://application:,,,/Paway.Test;component/Images/close.png" Unit="ms"/>
+            <PasswordBox PasswordBoxEXT.Icon="pack://application:,,,/Paway.Test;component/Images/close.png"
+                         PasswordBoxEXT.Radius="0"
+                         PasswordBoxEXT.IAnimation="2" BorderThickness="0,0,0,1"/>
         </StackPanel>
     </Grid>
 </WindowEXT>

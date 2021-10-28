@@ -124,6 +124,10 @@ namespace Paway.WPF
         public static readonly DependencyProperty IconStretchProperty =
             DependencyProperty.RegisterAttached(nameof(IconStretch), typeof(Stretch), typeof(PasswordBoxEXT),
             new PropertyMetadata(Stretch.None));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty WaterProperty =
+            DependencyProperty.RegisterAttached(nameof(Water), typeof(string), typeof(PasswordBoxEXT), new PropertyMetadata("请输入密码"));
 
         #endregion
 
@@ -210,6 +214,27 @@ namespace Paway.WPF
         public static void SetIconStretch(DependencyObject obj, Stretch value)
         {
             obj.SetValue(IconStretchProperty, value);
+        }
+
+        /// <summary>
+        /// 水印内容
+        /// </summary>
+        [Category("扩展")]
+        [Description("水印内容")]
+        public string Water { get; set; }
+        /// <summary>
+        /// get水印内容
+        /// </summary>
+        public static string GetWater(DependencyObject obj)
+        {
+            return (string)obj.GetValue(WaterProperty);
+        }
+        /// <summary>
+        /// set水印内容
+        /// </summary>
+        public static void SetWater(DependencyObject obj, string value)
+        {
+            obj.SetValue(WaterProperty, value);
         }
 
         #endregion
