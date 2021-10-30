@@ -32,24 +32,6 @@
     <FontFamily x:Key="FontAwesome">/Paway.WPF;component/Resource/#fontawesome</FontFamily>
     <!--#endregion-->
 
-    <!--#region 默认全局样式 -->
-    <Style TargetType="{x:Type Label}">
-        <Setter Property="HorizontalContentAlignment" Value="Right" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-    </Style>
-    <Style TargetType="{x:Type TextBlock}">
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <!--影响全局TextBlock样式，如Button字体等-->
-        <!--<Setter Property="FontFamily" Value="Microsoft YaHei"/>-->
-    </Style>
-    <Style TargetType="{x:Type CheckBox}">
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-    </Style>
-    <Style TargetType="{x:Type RadioButton}">
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-    </Style>
-    <!--#endregion-->
-
     <!--#region 通用模板 -->
     <Style x:Key="Config" TargetType="{x:Type Control}">
         <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
@@ -244,6 +226,26 @@
                 C5.0185547,0.040039063 5.3164063,0 5.625,0 z" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <!--#endregion-->
+
+    <!--#region 默认全局样式 -->
+    <Style TargetType="{x:Type Label}">
+        <Setter Property="HorizontalContentAlignment" Value="Right" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+    <Style TargetType="{x:Type TextBlock}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="{StaticResource Text}" />
+        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
+        <!--影响全局TextBlock样式，如Button字体等-->
+        <!--<Setter Property="FontFamily" Value="Microsoft YaHei"/>-->
+    </Style>
+    <Style TargetType="{x:Type CheckBox}">
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+    <Style TargetType="{x:Type RadioButton}">
+        <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
     <!--#endregion-->
 

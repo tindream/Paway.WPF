@@ -20,25 +20,7 @@
     </Storyboard>
 
     <!-- ScrollViewer 滚动条 -->
-    <Style x:Key="ScrollVerticalThumb" TargetType="{x:Type Thumb}">
-        <Setter Property="local:ScrollViewerMonitor.IsMonitoring" Value="True"/>
-        <Setter Property="OverridesDefaultStyle" Value="true"/>
-        <Setter Property="IsTabStop" Value="false"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Thumb}">
-                    <Grid>
-                        <!--滚动条颜色-->
-                        <Border Background="{TemplateBinding local:ScrollViewerMonitor.ScrollBarColor}"
-                                CornerRadius="{TemplateBinding local:ScrollViewerMonitor.ScrollBarRadius}" 
-                                Margin="{TemplateBinding local:ScrollViewerMonitor.VerticalScrollBarMargin}"/>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    <Style x:Key="ScrollHorizontalThumb" TargetType="{x:Type Thumb}">
+    <Style x:Key="ScrollThumb" TargetType="{x:Type Thumb}">
         <Setter Property="local:ScrollViewerMonitor.IsMonitoring" Value="True"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="IsTabStop" Value="false"/>
@@ -100,7 +82,7 @@
                     <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="{x:Static ScrollBar.PageDownCommand}"/>
                 </Track.IncreaseRepeatButton>
                 <Track.Thumb>
-                    <Thumb Style="{StaticResource ScrollVerticalThumb}"/>
+                    <Thumb Style="{StaticResource ScrollThumb}"/>
                 </Track.Thumb>
             </Track>
             <RepeatButton Grid.Row="2" Style="{StaticResource ScrollBarPageButtonHide}" Command="{x:Static ScrollBar.PageDownCommand}"/>
@@ -122,7 +104,7 @@
                     <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="{x:Static ScrollBar.PageRightCommand}"/>
                 </Track.IncreaseRepeatButton>
                 <Track.Thumb>
-                    <Thumb Style="{StaticResource ScrollHorizontalThumb}"/>
+                    <Thumb Style="{StaticResource ScrollThumb}"/>
                 </Track.Thumb>
             </Track>
             <RepeatButton Grid.Column="2" Style="{StaticResource ScrollBarPageButtonHide}" Command="{x:Static ScrollBar.PageRightCommand}"/>

@@ -55,7 +55,7 @@ namespace Paway.Test
 
             progress.AnimationValue = Method.Random(100);
 
-            //WPF.TMethod.Progress(this, () =>
+            //Method.Progress(this, () =>
             //{
             //    Thread.Sleep(1000);
             //});
@@ -82,6 +82,7 @@ namespace Paway.Test
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
+            if (IsLoaded) return;
             Method.Progress(this, () =>
             {
                 DataService.Default.Load();

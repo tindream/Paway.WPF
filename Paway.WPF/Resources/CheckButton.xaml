@@ -10,7 +10,7 @@
         <Setter Property="Margin" Value="2"/>
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Padding" Value="5,3"/>
+        <Setter Property="Padding" Value="9,3"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:CheckButton">
