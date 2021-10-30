@@ -17,8 +17,8 @@ namespace Paway.WPF
     /// <summary>
     /// 自定义默认、鼠标划过时、鼠标点击时的大小
     /// </summary>
-    [TypeConverter(typeof(FontSizeEXTConverter))]
-    public class FontSizeEXT : ModelBase, IEquatable<FontSizeEXT>
+    [TypeConverter(typeof(ThemeFontSizeConverter))]
+    public class ThemeFontSize : ModelBase, IEquatable<ThemeFontSize>
     {
         private double _value;
         /// <summary>
@@ -28,7 +28,7 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public FontSizeEXT()
+        public ThemeFontSize()
         {
             PConfig.FontSizeChanged += Config_FontSizeChanged;
         }
@@ -41,21 +41,21 @@ namespace Paway.WPF
         }
         /// <summary>
         /// </summary>
-        public FontSizeEXT(double value) : this()
+        public ThemeFontSize(double value) : this()
         {
             this.Value = value;
         }
         /// <summary>
         /// </summary>
-        public bool Equals(FontSizeEXT other)
+        public bool Equals(ThemeFontSize other)
         {
             return Value.Equals(other.Value);
         }
     }
     /// <summary>
-    /// 字符串转FontSizeEXT
+    /// 字符串转ThemeFontSize
     /// </summary>
-    internal class FontSizeEXTConverter : TypeConverter
+    internal class ThemeFontSizeConverter : TypeConverter
     {
         /// <summary>
         /// </summary>
@@ -82,11 +82,11 @@ namespace Paway.WPF
             }
             if (value is double @double)
             {
-                return new FontSizeEXT(@double);
+                return new ThemeFontSize(@double);
             }
             if (value is string str)
             {
-                return new FontSizeEXT(str.ToDouble());
+                return new ThemeFontSize(str.ToDouble());
             }
             return base.ConvertFrom(context, culture, value);
         }

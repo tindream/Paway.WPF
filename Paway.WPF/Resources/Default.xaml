@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xmlns:local="clr-namespace:Paway.WPF">
 
     <!--#region 转换器 -->
@@ -10,7 +11,7 @@
     <local:ValueAddConverter x:Key="valueAddConverter"/>
     <local:EnumConverter x:Key="enumConverter"/>
     <local:IsNotNullConverter x:Key="isNotNull"/>
-    
+
     <local:BoolToVisible x:Key="boolToVisible"/>
     <local:BoolToCollapsed x:Key="boolToCollapsed"/>
     <local:NullToVisible x:Key="nullToVisible"/>
@@ -20,7 +21,7 @@
     <local:BrushAlphaConverter x:Key="brushAlphaConverter" />
 
     <local:BoolSelector x:Key="boolSelector"/>
-    <local:NullSelector x:Key="nullSelector"/> 
+    <local:NullSelector x:Key="nullSelector"/>
     <local:IsNotNullAllConverter x:Key="isNotNullAll"/>
     <local:AnyNotNullToVisible x:Key="anyNotNullToVisible"/>
     <local:AnyNotNullToCollapsed x:Key="anyNotNullToCollapsed"/>
@@ -95,6 +96,51 @@
     </Style>
     <!--#endregion-->
 
+    <!--#region 主题 -->
+    <SolidColorBrush x:Key="ThemeBackground" Color="{Binding Path=(local:ThemeEXT.Background).Value.Color, RelativeSource={RelativeSource Self}}"/>
+    <SolidColorBrush x:Key="ThemeBackgroundHigh" Color="{Binding Path=(local:ThemeEXT.HighBrush).Normal.Color, RelativeSource={RelativeSource Self}}"/>
+    <SolidColorBrush x:Key="ThemeColor" Color="{Binding Path=(local:ThemeEXT.ItemBrush).Pressed.Color, RelativeSource={RelativeSource Self}}"/>
+    <SolidColorBrush x:Key="ThemeColorNormal" Color="{Binding Path=(local:ThemeEXT.ItemBrush).Normal.Color, RelativeSource={RelativeSource Self}}"/>
+    <SolidColorBrush x:Key="ThemeColorMouse" Color="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse.Color, RelativeSource={RelativeSource Self}}"/>
+    <SolidColorBrush x:Key="ThemeHigh" Color="{Binding Path=(local:ThemeEXT.HighBrush).Pressed.Color, RelativeSource={RelativeSource Self}}"/>
+    <SolidColorBrush x:Key="ThemeLight" Color="{Binding Path=(local:ThemeEXT.HighBrush).Mouse.Color, RelativeSource={RelativeSource Self}}"/>
+    <LinearGradientBrush x:Key="ColorSelector">
+        <GradientStop Color="#ff0000" />
+        <GradientStop Color="#ff00ff" Offset="0.571" />
+        <GradientStop Color="#0000ff" Offset="0.45" />
+        <GradientStop Color="#00ffff" Offset="0.3426" />
+        <GradientStop Color="#00ff00" Offset="0.2285" />
+        <GradientStop Color="#ffff00" Offset="0.114" />
+        <GradientStop Color="#ff0000" Offset="0.7994" />
+        <GradientStop Color="White" Offset="0.7995" />
+        <GradientStop Color="Black" Offset="1" />
+    </LinearGradientBrush>
+    <Style x:Key="borderColor" TargetType="{x:Type Border}">
+        <Setter Property="Margin" Value="2" />
+        <Setter Property="Height" Value="3" />
+        <Setter Property="CornerRadius" Value="2" />
+        <Setter Property="Background" Value="{StaticResource ColorSelector}" />
+    </Style>
+    <!--#endregion-->
+
+    <!--#region 配色 -->
+    <SolidColorBrush x:Key="Color" Color="#23AFFF" />
+    <SolidColorBrush x:Key="Info" Color="#00BCD4" />
+    <SolidColorBrush x:Key="Success" Color="#2DB84D" />
+    <SolidColorBrush x:Key="Warn" Color="#FF9900" />
+    <SolidColorBrush x:Key="Error" Color="#F8331E" />
+
+    <SolidColorBrush x:Key="Text" Color="#222" />
+    <SolidColorBrush x:Key="TextSub" Color="#444" />
+    <SolidColorBrush x:Key="LightText" Color="#777" />
+    <SolidColorBrush x:Key="Light" Color="#EBEBEB" />
+
+    <SolidColorBrush x:Key="Gray1" Color="LightGray" />
+    <SolidColorBrush x:Key="Gray2" Color="DarkGray" />
+    <SolidColorBrush x:Key="Gray3" Color="Gray" />
+    <SolidColorBrush x:Key="Gray4" Color="DimGray" />
+    <!--#endregion-->
+
     <!--#region 画板 -->
     <Geometry x:Key="Icon_DownArrow">M511.753 624.86499999l292.159-292.15499999c12.27-12.28 32.186-12.28 44.457 0 12.28 12.27 12.28 32.186 0 44.457l-314.388 314.388c-12.27 12.28-32.186 12.28-44.457 0l-314.387-314.388c-6.14-6.136-9.211-14.183-9.211-22.228s3.071-16.092 9.211-22.228c12.27-12.28 32.186-12.28 44.457 0l292.16 292.155z</Geometry>
     <Geometry x:Key="Icon_RightArrow">M624.86499999 512.247l-292.15499999-292.159c-12.28-12.27-12.28-32.186 0-44.457 12.27-12.28 32.186-12.28 44.457 0l314.388 314.388c12.28 12.27 12.28 32.186 0 44.457l-314.388 314.387c-6.136 6.14-14.183 9.211-22.228 9.211s-16.092-3.071-22.228-9.211c-12.28-12.27-12.28-32.186 0-44.457l292.155-292.16z</Geometry>
@@ -104,7 +150,7 @@
     <Style x:Key="PathPointer" TargetType="{x:Type Path}" >
         <Setter Property="Stretch" Value="Fill" />
         <Setter Property="Height" Value="3" />
-        <Setter Property="Fill" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Pressed, RelativeSource={RelativeSource Self}}"/>
+        <Setter Property="Fill" Value="{StaticResource ThemeColor}"/>
         <Setter Property="Data" Value="M10,0 0,1 0,2 10,3z"/>
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -113,7 +159,7 @@
         <Setter Property="Stretch" Value="Fill" />
         <Setter Property="Margin" Value="1" />
         <Setter Property="Stroke" Value="Gray" />
-        <Setter Property="Fill" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Pressed, RelativeSource={RelativeSource Self}}"/>
+        <Setter Property="Fill" Value="{StaticResource ThemeColor}"/>
         <Setter Property="Data" Value="M0,0 8,0 8,8 0,8Z"/>
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -122,7 +168,7 @@
         <Setter Property="Stretch" Value="Fill" />
         <Setter Property="Margin" Value="1" />
         <Setter Property="Stroke" Value="Gray" />
-        <Setter Property="Fill" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Pressed, RelativeSource={RelativeSource Self}}"/>
+        <Setter Property="Fill" Value="{StaticResource ThemeColor}"/>
         <Setter Property="Data" Value="M0,8 A8,8 0 1 1 0,9Z"/>
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -131,7 +177,7 @@
         <Setter Property="Stretch" Value="Fill" />
         <Setter Property="Margin" Value="1" />
         <Setter Property="Stroke" Value="Gray" />
-        <Setter Property="Fill" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Pressed, RelativeSource={RelativeSource Self}}"/>
+        <Setter Property="Fill" Value="{StaticResource ThemeColor}"/>
         <Setter Property="Data" Value="M10,0 0,10 20,10Z" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -140,7 +186,7 @@
         <Setter Property="Stretch" Value="Fill" />
         <Setter Property="Margin" Value="1" />
         <Setter Property="Stroke" Value="Gray" />
-        <Setter Property="Fill" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Pressed, RelativeSource={RelativeSource Self}}"/>
+        <Setter Property="Fill" Value="{StaticResource ThemeColor}"/>
         <Setter Property="Data" Value="M0,0 10,10 20,0Z" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -149,7 +195,7 @@
         <Setter Property="Stretch" Value="Fill" />
         <Setter Property="Margin" Value="1" />
         <Setter Property="Stroke" Value="Gray" />
-        <Setter Property="Fill" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Pressed, RelativeSource={RelativeSource Self}}"/>
+        <Setter Property="Fill" Value="{StaticResource ThemeColor}"/>
         <Setter Property="Data" Value="M0,0 L10,10 0,20z" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -162,7 +208,7 @@
         <Setter Property="Height" Value="12" />
         <Setter Property="Width" Value="12" />
         <Setter Property="Data" Value="{StaticResource CheckedGeometry}" />
-        <Setter Property="Stroke" Value="{Binding Path=(local:ThemeEXT.ItemBrush).Pressed, RelativeSource={RelativeSource Self}}"/>
+        <Setter Property="Stroke" Value="{StaticResource ThemeColor}"/>
     </Style>
     <Style x:Key="PathClose" TargetType="{x:Type Path}" >
         <Setter Property="Margin" Value="1" />
@@ -199,58 +245,6 @@
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
-    <!--#endregion-->
-
-    <!--#region 主题 -->
-    <Style x:Key="themeBackground" TargetType="Control">
-        <Setter Property="Background" Value="{Binding Path=(local:ThemeEXT.Background).Value, RelativeSource={RelativeSource Self}}" />
-    </Style>
-    <Style x:Key="themeBlockHigh" TargetType="TextBlock">
-        <Setter Property="Background" Value="{Binding Path=(local:ThemeEXT.HighBrush).Pressed, RelativeSource={RelativeSource Self}}" />
-    </Style>
-    <Style x:Key="themeBackHigh" TargetType="Control">
-        <Setter Property="Background" Value="{Binding Path=(local:ThemeEXT.HighBrush).Pressed, RelativeSource={RelativeSource Self}}" />
-    </Style>
-    <Style x:Key="themeFillHigh" TargetType="Shape">
-        <Setter Property="Fill" Value="{Binding Path=(local:ThemeEXT.HighBrush).Pressed, RelativeSource={RelativeSource Self}}" />
-    </Style>
-    <LinearGradientBrush x:Key="ColorSelector">
-        <GradientStop Color="#ff0000" />
-        <GradientStop Color="#ff00ff" Offset="0.571" />
-        <GradientStop Color="#0000ff" Offset="0.45" />
-        <GradientStop Color="#00ffff" Offset="0.3426" />
-        <GradientStop Color="#00ff00" Offset="0.2285" />
-        <GradientStop Color="#ffff00" Offset="0.114" />
-        <GradientStop Color="#ff0000" Offset="0.7994" />
-        <GradientStop Color="White" Offset="0.7995" />
-        <GradientStop Color="Black" Offset="1" />
-    </LinearGradientBrush>
-    <Style x:Key="borderColor" TargetType="{x:Type Border}">
-        <Setter Property="Margin" Value="2" />
-        <Setter Property="Height" Value="3" />
-        <Setter Property="CornerRadius" Value="2" />
-        <Setter Property="Background" Value="{StaticResource ColorSelector}" />
-    </Style>
-    <!--#endregion-->
-
-    <!--#region 配色 -->
-    <SolidColorBrush x:Key="Color" Color="#23AFFF" />
-    <SolidColorBrush x:Key="Light" Color="#EBEBEB" />
-    <SolidColorBrush x:Key="Info" Color="#00BCD4" />
-    <SolidColorBrush x:Key="Success" Color="#2DB84D" />
-    <SolidColorBrush x:Key="Warn" Color="#FF9900" />
-    <SolidColorBrush x:Key="Error" Color="#F8331E" />
-    <SolidColorBrush x:Key="Hit" Color="#5D6B99" />
-    <SolidColorBrush x:Key="High" Color="#003F63" />
-    <SolidColorBrush x:Key="Text" Color="#222" />
-    <SolidColorBrush x:Key="TextSub" Color="#444" />
-    <SolidColorBrush x:Key="LightText" Color="#777" />
-    <SolidColorBrush x:Key="White" Color="White" />
-    <SolidColorBrush x:Key="Black" Color="Black" />
-    <SolidColorBrush x:Key="Gray1" Color="LightGray" />
-    <SolidColorBrush x:Key="Gray2" Color="DarkGray" />
-    <SolidColorBrush x:Key="Gray3" Color="Gray" />
-    <SolidColorBrush x:Key="Gray4" Color="DimGray" />
     <!--#endregion-->
 
 </ResourceDictionary>

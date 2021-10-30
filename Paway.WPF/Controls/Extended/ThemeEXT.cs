@@ -19,7 +19,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty FontSizeProperty =
-            DependencyProperty.RegisterAttached(nameof(FontSize), typeof(FontSizeEXT), typeof(ThemeEXT), new PropertyMetadata(new FontSizeEXT(PConfig.FontSize)));
+            DependencyProperty.RegisterAttached(nameof(FontSize), typeof(ThemeFontSize), typeof(ThemeEXT), new PropertyMetadata(new ThemeFontSize(PConfig.FontSize)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
@@ -44,18 +44,18 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展")]
         [Description("字体大小")]
-        public FontSizeEXT FontSize { get; set; }
+        public ThemeFontSize FontSize { get; set; }
         /// <summary>
         /// get字体大小
         /// </summary>
-        public static FontSizeEXT GetFontSize(DependencyObject obj)
+        public static ThemeFontSize GetFontSize(DependencyObject obj)
         {
-            return (FontSizeEXT)obj.GetValue(FontSizeProperty);
+            return (ThemeFontSize)obj.GetValue(FontSizeProperty);
         }
         /// <summary>
         /// set字体大小
         /// </summary>
-        public static void SetFontSize(DependencyObject obj, FontSizeEXT value)
+        public static void SetFontSize(DependencyObject obj, ThemeFontSize value)
         {
             obj.SetValue(FontSizeProperty, value);
         }

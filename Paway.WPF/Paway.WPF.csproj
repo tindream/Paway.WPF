@@ -86,7 +86,7 @@
       <DependentUpon>Badge.xaml</DependentUpon>
     </Compile>
     <Compile Include="Method\Converter\IEquatable\ThemeBackground.cs" />
-    <Compile Include="Method\Converter\IEquatable\FontSizeEXT.cs" />
+    <Compile Include="Method\Converter\IEquatable\ThemeFontSize.cs" />
     <Compile Include="Method\Converter\IValueConverter\BoolSelector.cs" />
     <Compile Include="Method\Converter\IValueConverter\BrushColorConverter.cs" />
     <Compile Include="Method\Converter\IValueConverter\IsNotNullConverter.cs" />

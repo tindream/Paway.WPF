@@ -63,24 +63,24 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty TypeProperty =
             DependencyProperty.RegisterAttached(nameof(Type), typeof(ColorType), typeof(ButtonEXT),
-            new UIPropertyMetadata(ColorType.Normal, OnColorTypeChanged));
+            new UIPropertyMetadata(ColorType.Color, OnColorTypeChanged));
         private static void OnColorTypeChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            if (obj is ButtonEXT btn)
+            if (obj is ButtonEXT view)
             {
-                if (btn.Type != ColorType.None)
+                if (view.Type != ColorType.None)
                 {
-                    var color = btn.Type.Color();
-                    btn.ItemBackground = new BrushEXT(PMethod.AlphaColor(PConfig.Alpha, color));
+                    var color = view.Type == ColorType.Color ? PConfig.Color : view.Type.Color();
+                    view.ItemBackground = new BrushEXT(PMethod.AlphaColor(PConfig.Alpha, color));
                 }
-                if (btn.IsLight)
+                if (view.IsLight)
                 {
-                    btn.ItemBorder = new ThicknessEXT(1, 0);
-                    btn.BorderBrush = new SolidColorBrush(Colors.LightGray);
-                    btn.ItemForeground = new BrushEXT(PConfig.TextColor, Colors.White, Colors.White);
-                    btn.ItemBackground.Normal = new SolidColorBrush(Colors.Transparent);
+                    view.ItemBorder = new ThicknessEXT(1, 0);
+                    view.BorderBrush = new SolidColorBrush(Colors.LightGray);
+                    view.ItemForeground = new BrushEXT(PConfig.TextColor, Colors.White, Colors.White);
+                    view.ItemBackground.Normal = new SolidColorBrush(Colors.Transparent);
                 }
-                btn.UpdateDefaultStyle();
+                view.UpdateDefaultStyle();
             }
         }
 

@@ -36,18 +36,18 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty TypeProperty =
             DependencyProperty.RegisterAttached(nameof(Type), typeof(ColorType), typeof(CheckButton),
-            new UIPropertyMetadata(ColorType.Normal, OnColorTypeChanged));
+            new UIPropertyMetadata(ColorType.Color, OnColorTypeChanged));
         private static void OnColorTypeChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            if (obj is CheckButton cbxBtn)
+            if (obj is CheckButton view)
             {
-                if (cbxBtn.Type != ColorType.None)
+                if (view.Type != ColorType.None)
                 {
-                    var color = cbxBtn.Type.Color();
-                    cbxBtn.ItemBrush = new BrushEXT(PMethod.AlphaColor(PConfig.Alpha, color));
-                    cbxBtn.ItemBrush.Normal = new SolidColorBrush(Colors.LightGray);
+                    var color = view.Type == ColorType.Color ? PConfig.Color : view.Type.Color();
+                    view.ItemBrush = new BrushEXT(PMethod.AlphaColor(PConfig.Alpha, color));
+                    view.ItemBrush.Normal = new SolidColorBrush(Colors.LightGray);
                 }
-                cbxBtn.UpdateDefaultStyle();
+                view.UpdateDefaultStyle();
             }
         }
 

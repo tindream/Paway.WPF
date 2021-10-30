@@ -13,7 +13,7 @@
                   UseLayoutRounding="True"
                   VerticalAlignment="Center"
                   HorizontalAlignment="Center"
-                  Style="{StaticResource themeFillHigh}" />
+                  Fill="{StaticResource ThemeHigh}" />
     </DataTemplate>
     <DataTemplate x:Key="MaximizeBlack">
         <Path Data="M1,1  L1 ,11 L11,11 L11,1 z M0,0 L12,0 L12,12 L0,12 z"
@@ -22,7 +22,7 @@
               UseLayoutRounding="True"
               VerticalAlignment="Center"
               HorizontalAlignment="Center"
-              Style="{StaticResource themeFillHigh}"/>
+              Fill="{StaticResource ThemeHigh}"/>
     </DataTemplate>
     <DataTemplate x:Key="RestoreBlack">
         <Path Data="M1,3 L1,11 L9,11 L9,3 z M3,1 L3,2 L10,2 L10,9 L11,9 L11,1 z M2 ,0 L12,0 L12,10 L10,10 L10,12 L0,12 L0,2 L2 ,2 z"
@@ -31,11 +31,11 @@
               UseLayoutRounding="True"
               VerticalAlignment="Center"
               HorizontalAlignment="Center"
-              Style="{StaticResource themeFillHigh}"/>
+              Fill="{StaticResource ThemeHigh}"/>
     </DataTemplate>
     <DataTemplate x:Key="CloseBlack">
-        <Path Style="{StaticResource PathClose}" 
-              Fill="{Binding Path=(local:ThemeEXT.HighBrush).Pressed, RelativeSource={RelativeSource Self}}" />
+        <Path Style="{StaticResource PathClose}"
+              Fill="{StaticResource ThemeHigh}" />
     </DataTemplate>
     <DataTemplate x:Key="CloseWhite">
         <Path Style="{StaticResource PathClose}" Fill="White" />
@@ -129,7 +129,7 @@
     <Style TargetType="{x:Type local:WindowEXT}" BasedOn="{StaticResource Config}">
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
         <Setter Property="Background" Value="#FFF1F1F1" />
-        <Setter Property="BorderBrush" Value="{Binding Path=(local:ThemeEXT.HighBrush).Pressed, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="BorderBrush" Value="{StaticResource ThemeHigh}" />
         <Setter Property="IsTabStop" Value="False" />
         <!--未知，此参数会导致文本放大缩小动画抖动-->
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />

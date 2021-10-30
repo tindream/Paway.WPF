@@ -12,6 +12,11 @@ namespace Paway.WPF
         /// 无
         /// </summary>
         None,
+        /// <summary>
+        /// 主题颜色
+        /// </summary>
+        [Color(35, 175, 255)]
+        Color,
 
         /// <summary>
         /// 信息
@@ -33,27 +38,7 @@ namespace Paway.WPF
         /// </summary>
         [Color(248, 51, 30)]
         Error,
-        /// <summary>
-        /// 默认
-        /// </summary>
-        [Color(35, 175, 255)]
-        Normal,
 
-        /// <summary>
-        /// 浅色
-        /// </summary>
-        [Color(235, 235, 235)]
-        Light,
-        /// <summary>
-        /// 提示
-        /// </summary>
-        [Color(93, 107, 153)]
-        Hit,
-        /// <summary>
-        /// 深色
-        /// </summary>
-        [Color(0, 63, 99)]
-        High,
         /// <summary>
         /// 文本
         /// </summary>
@@ -69,5 +54,10 @@ namespace Paway.WPF
         /// </summary>
         [Color(119, 119, 119)]
         LightText,
+        /// <summary>
+        /// 浅色
+        /// </summary>
+        [Color(235, 235, 235)]
+        Light,
     }
 }

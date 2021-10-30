@@ -13,7 +13,7 @@
         Title="MainWindow" Height="800" Width="850" WindowStartupLocation="CenterScreen">
 
     <DockPanel Name="panel">
-        <StatusBar DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Foreground="White" Height="30" Style="{StaticResource themeBackHigh}">
+        <StatusBar DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Foreground="White" Height="30" Background="{StaticResource ThemeHigh}">
             <TextBlock Text="{Binding Desc}" Padding="10,6" FontSize="14" Margin="-3"></TextBlock>
         </StatusBar>
         <Menu DockPanel.Dock="Top">
@@ -63,14 +63,21 @@
                 </SliderEXT>
             </Grid>
             <StackPanel Orientation="Horizontal">
-                <Button Background="{StaticResource Color}" BorderThickness="0" Content="默认" Height="32" Width="100" Foreground="White"/>
                 <Button Background="{StaticResource Info}" BorderThickness="0" Content="信息" Height="32" Width="100" Foreground="White"/>
                 <Button Background="{StaticResource Success}" BorderThickness="0" Content="成功" Height="32" Width="100" Foreground="White"/>
                 <Button Background="{StaticResource Warn}" BorderThickness="0" Content="警告" Height="32" Width="100" Foreground="White"/>
                 <Button Background="{StaticResource Error}" BorderThickness="0" Content="错误" Height="32" Width="100" Foreground="White"/>
-                <Button Background="{StaticResource Light}" BorderThickness="0" Content="浅色" Height="32" Width="100" Foreground="{StaticResource Text}"/>
-                <Button Background="{StaticResource Hit}" BorderThickness="0" Content="提示" Height="32" Width="100" Foreground="White"/>
-                <Button Background="{StaticResource High}" BorderThickness="0" Content="深色" Height="32" Width="100" Foreground="White"/>
+                <Button Background="{StaticResource Light}" BorderThickness="0" Content="浅色" Height="32" Width="100"/>
+                <Button Background="{StaticResource ThemeColor}" BorderThickness="0" Content="主题" Height="32" Width="100" Foreground="White"/>
+                <Button Background="{StaticResource ThemeLight}" BorderThickness="0" Content="主题浅色" Height="32" Width="100" Foreground="{StaticResource Text}"/>
+                <Button Background="{StaticResource ThemeHigh}" BorderThickness="0" Content="主题深色" Height="32" Width="100" Foreground="White"/>
+                <Button Background="{StaticResource ThemeBackground}" BorderThickness="0" Content="主题背景" Height="32" Width="100" Foreground="White"/>
+                <Button Background="{StaticResource ThemeBackgroundHigh}" BorderThickness="0" Content="主题背景深色" Height="32" Width="100" Foreground="White"/>
+
+
+                <Button Background="Transparent" Foreground="{StaticResource Text}" BorderThickness="0" Content="文本" Height="32" Width="100" />
+                <Button Background="Transparent" Foreground="{StaticResource TextSub}" BorderThickness="0" Content="二级" Height="32" Width="100" />
+                <Button Background="Transparent" Foreground="{StaticResource LightText}" BorderThickness="0" Content="三级" Height="32" Width="100" />
             </StackPanel>
         </StackPanel>
 

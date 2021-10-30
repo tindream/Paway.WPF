@@ -66,7 +66,7 @@ namespace Paway.Test
 
             var r = Validation.GetHasError(tb);
             Method.Hit(this, r);
-            //var xml = WPF.TMethod.GetTemplateXaml(dp);
+            var xml = Method.GetTemplateXaml(dp);
             //Method.Toast(this, xml);
 
             type = (TransitionType)Method.Random((int)TransitionType.Left, (int)TransitionType.Bottom + 1);

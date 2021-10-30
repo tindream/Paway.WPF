@@ -409,14 +409,14 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-自定义吐泡消息框-Toast
         /// </summary>
-        public static void Toast(DependencyObject parent, object msg, bool iError = false)
+        public static void Toast(DependencyObject parent, object msg, ColorType type = ColorType.Color)
         {
-            Toast(parent, msg, 0, iError);
+            Toast(parent, msg, 0, type);
         }
         /// <summary>
         /// 装饰器-自定义吐泡消息框-Toast
         /// </summary>
-        public static void Toast(DependencyObject parent, object msg, int time, bool iError = false, bool repeat = true)
+        public static void Toast(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color, bool repeat = true)
         {
             BeginInvoke(parent, () =>
             {
@@ -429,12 +429,12 @@ namespace Paway.WPF
                         if (repeat)
                         {//未获取到装饰器层时重复一次
                             DoEvents();
-                            Toast(parent, msg, time, iError, false);
+                            Toast(parent, msg, time, type, false);
                         }
                         return;
                     }
 
-                    var color = AlphaColor(PConfig.Alpha, iError ? PConfig.Error : PConfig.Hit);
+                    var color = AlphaColor(PConfig.Alpha, type.Color());
                     var border = new Border
                     {
                         CornerRadius = new CornerRadius(5),
@@ -506,14 +506,14 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-自定义提示框-Hit
         /// </summary>
-        public static void Hit(DependencyObject parent, object msg, bool iError = false)
+        public static void Hit(DependencyObject parent, object msg, ColorType type = ColorType.Color)
         {
-            Hit(parent, msg, 0, iError);
+            Hit(parent, msg, 0, type);
         }
         /// <summary>
         /// 装饰器-自定义提示框-Hit
         /// </summary>
-        public static void Hit(DependencyObject parent, object msg, int time, bool iError = false, bool repeat = true)
+        public static void Hit(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color, bool repeat = true)
         {
             BeginInvoke(parent, () =>
             {
@@ -526,12 +526,12 @@ namespace Paway.WPF
                         if (repeat)
                         {//未获取到装饰器层时重复一次
                             DoEvents();
-                            Hit(parent, msg, time, iError, false);
+                            Hit(parent, msg, time, type, false);
                         }
                         return;
                     }
 
-                    var color = AlphaColor(PConfig.Alpha, iError ? PConfig.Error : PConfig.Hit);
+                    var color = AlphaColor(PConfig.Alpha, type.Color());
                     var border = new Border
                     {
                         CornerRadius = new CornerRadius(5),
