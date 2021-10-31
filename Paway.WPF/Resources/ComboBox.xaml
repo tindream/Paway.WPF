@@ -79,7 +79,7 @@
                                IsOpen="{TemplateBinding IsDropDownOpen}" 
                                Placement="Bottom" 
                                PopupAnimation="Slide">
-                            <Grid MaxHeight="149" MinWidth="{TemplateBinding ActualWidth}" x:Name="DropDown" 
+                            <Grid MaxHeight="152" MinWidth="{TemplateBinding ActualWidth}" x:Name="DropDown" 
                                   Background="White"
                                   SnapsToDevicePixels="True">
                                 <Border x:Name="DropDownBorder" BorderBrush="#CCC" BorderThickness="1"/>

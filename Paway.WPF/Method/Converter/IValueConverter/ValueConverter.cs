@@ -17,16 +17,18 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is double size)
+            if (value is double temp)
             {
                 var param = parameter == null ? 0.85 : parameter.ToDouble();
-                return size * param;
+                return temp * param;
             }
             throw new NotImplementedException();
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            var temp = value.ToDouble();
+            var param = parameter == null ? 0.85 : parameter.ToDouble();
+            return temp / param;
         }
     }
     /// <summary>
@@ -36,16 +38,18 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is double size)
+            if (value is double temp)
             {
                 var param = parameter == null ? -2 : parameter.ToDouble();
-                return size > 2 ? size + param : 0;
+                return temp + param;
             }
             throw new NotImplementedException();
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            var temp = value.ToDouble();
+            var param = parameter == null ? -2 : parameter.ToDouble();
+            return temp - param;
         }
     }
 }
