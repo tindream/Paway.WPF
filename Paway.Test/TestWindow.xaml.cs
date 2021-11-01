@@ -24,5 +24,9 @@ namespace Paway.Test
         {
             InitializeComponent();
         }
+        private void ButtonEXT_Click(object sender, RoutedEventArgs e)
+        {
+            Method.Show(this, new Window() { Foreground = new SolidColorBrush(Colors.White), Title = "Test123" });
+        }
     }
 }

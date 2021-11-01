@@ -766,6 +766,10 @@ namespace Paway.WPF
                 //赋给父级窗体
                 owner.Content = originalOld;
             };
+            if (!(window is WindowEXT))
+            {
+                //window.Loaded += delegate { window.Activate(); };
+            }
             //父级窗体原来的内容
             var original = owner.Content as UIElement;
             //将父级窗体原来的内容在容器Grid中移除

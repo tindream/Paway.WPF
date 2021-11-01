@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paway.Helper;
+using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
@@ -10,8 +11,10 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is SolidColorBrush brush && parameter is int alpha)
+            if (value is SolidColorBrush brush)
             {
+                var alpha = parameter.ToInt();
+                if (alpha == 0) alpha = PConfig.Alpha;
                 var color = PMethod.AlphaColor(alpha, brush.Color);
                 return new SolidColorBrush(color);
             }

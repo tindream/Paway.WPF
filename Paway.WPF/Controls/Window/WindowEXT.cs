@@ -109,9 +109,10 @@ namespace Paway.WPF
         public WindowEXT()
         {
             DefaultStyleKey = typeof(WindowEXT);
-            this.ContentRendered += WindowEXT_ContentRendered;
+            //this.ContentRendered += WindowEXT_ContentRendered;
+            this.Loaded += WindowEXT_Loaded;
         }
-        private void WindowEXT_ContentRendered(object sender, EventArgs e)
+        private void WindowEXT_Loaded(object sender, RoutedEventArgs e)
         {
             this.Activate();
         }

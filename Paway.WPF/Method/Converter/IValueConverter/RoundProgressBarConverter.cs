@@ -18,12 +18,14 @@ namespace Paway.WPF
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            var width = values[0].ToDouble(); if (width < 0 || width == double.NaN) width = 0;
-            var height = values[1].ToDouble(); if (height < 0 || height == double.NaN) height = 0;
+            var width = values[0].ToDouble(); if (width < 0) width = 0;
+            var height = values[1].ToDouble(); if (height < 0) height = 0;
 
             double radius;
             if (values[2] is Thickness) radius = ((Thickness)values[2]).Left;
             else radius = values[2].ToDouble();
+            if (width < radius) width = radius;
+            if (height < radius) height = radius;
 
             var percent = 0.33;
             if (values.Length == 6)
