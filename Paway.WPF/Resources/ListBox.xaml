@@ -17,10 +17,9 @@
                             Padding="{TemplateBinding Padding}"
                             BorderBrush="{TemplateBinding Border.BorderBrush}"
                             Background="{TemplateBinding Panel.Background}"
-                            CornerRadius="{TemplateBinding Radius}"
-                            SnapsToDevicePixels="True">
+                            CornerRadius="{TemplateBinding Radius}">
                         <local:ScrollViewerEXT Padding="{TemplateBinding Control.Padding}" >
-                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                            <ItemsPresenter />
                         </local:ScrollViewerEXT>
                     </Border>
                     <ControlTemplate.Triggers>

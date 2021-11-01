@@ -10,7 +10,6 @@
         <Setter Property="Background" Value="#FFF2F3F4" />
         <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="BorderThickness" Value="1,0,1,1" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="NumericButtonStyle">
             <Setter.Value>
                 <Style TargetType="ToggleButton">
@@ -225,8 +224,7 @@
                                             <Border x:Name="border"
                                                     BorderBrush="{TemplateBinding BorderBrush}"
                                                     BorderThickness="{TemplateBinding BorderThickness}"
-                                                    Background="{TemplateBinding Background}"
-                                                    SnapsToDevicePixels="True">
+                                                    Background="{TemplateBinding Background}">
                                                 <ScrollViewer x:Name="PART_ContentHost"
                                                               Focusable="false"
                                                               HorizontalScrollBarVisibility="Hidden"

@@ -14,7 +14,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:CheckButton">
-                    <Grid SnapsToDevicePixels="True" Focusable="True">
+                    <Grid Focusable="True">
                         <Border x:Name="border1"
                                 BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"
                                 BorderThickness="{Binding Path=ItemBorder.Normal, RelativeSource={RelativeSource TemplatedParent}}"

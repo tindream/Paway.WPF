@@ -19,12 +19,11 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:TextBoxEXT}">
                     <Grid>
-                        <Border Name="border" 
-                            SnapsToDevicePixels="true"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"
-                            CornerRadius="{TemplateBinding Radius}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Border Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"
+                                CornerRadius="{TemplateBinding Radius}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
@@ -37,8 +36,7 @@
                                 <local:ScrollViewerEXT x:Name="PART_ContentHost"
                                                    Grid.Column="1"
                                                    VerticalAlignment="Center"
-                                                   VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}"
-                                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                                   VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}"/>
                                 <TextBlock x:Name="tbWater" Grid.Column="1" Visibility="Collapsed"
                                            VerticalAlignment="Center"
                                            Padding="5,0,0,0"

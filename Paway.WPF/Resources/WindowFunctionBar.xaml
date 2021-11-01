@@ -9,7 +9,6 @@
 
     <ControlTemplate x:Key="TopLevelItemTemplate" TargetType="{x:Type MenuItem}">
         <Border x:Name="templateRoot"
-                SnapsToDevicePixels="True"
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}"
                 Background="{TemplateBinding Background}">
@@ -28,7 +27,6 @@
                                   HorizontalAlignment="Center"
                                   Width="12" 
                                   Margin="4,4,-5,4"
-                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                   VerticalAlignment="Center"/>
                 <Path x:Name="GlyphPanel"
                       Style="{StaticResource PathRight}" Width="12"
@@ -43,8 +41,7 @@
                                   ContentStringFormat="{TemplateBinding HeaderStringFormat}"
                                   ContentSource="Header"
                                   Margin="{TemplateBinding Padding}"
-                                  RecognizesAccessKey="True"
-                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                  RecognizesAccessKey="True"/>
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
@@ -77,7 +74,7 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <ControlTemplate x:Key="TopLevelHeaderTemplate" TargetType="{x:Type MenuItem}">
-        <Border x:Name="templateRoot" SnapsToDevicePixels="True">
+        <Border x:Name="templateRoot">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -100,7 +97,6 @@
                                   HorizontalAlignment="Center"
                                   Width="12"
                                   Margin="4,4,-5,4"
-                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                   VerticalAlignment="Center"/>
                 <Path x:Name="GlyphPanel"
                       Style="{StaticResource PathRight}" Width="12"
@@ -116,8 +112,7 @@
                                    ContentStringFormat="{TemplateBinding HeaderStringFormat}"
                                    ContentSource="Header"
                                    Margin="{TemplateBinding Padding}"
-                                   RecognizesAccessKey="True"
-                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                   RecognizesAccessKey="True"/>
                 <Popup x:Name="PART_Popup"
                        AllowsTransparency="True"
                        Focusable="False"
@@ -152,7 +147,6 @@
                                     <ItemsPresenter x:Name="ItemsPresenter"
                                                 KeyboardNavigation.DirectionalNavigation="Cycle"
                                                 Grid.IsSharedSizeScope="True"
-                                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                                 KeyboardNavigation.TabNavigation="Cycle" />
                                 </Grid>
                             </ScrollViewer>
@@ -213,8 +207,7 @@
         <Border x:Name="templateRoot"
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}"
-                Background="{StaticResource ThemeLight}"
-                SnapsToDevicePixels="True">
+                Background="{StaticResource ThemeLight}">
             <Grid Margin="-1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" MinWidth="22" SharedSizeGroup="MenuItemIconColumnGroup" />
@@ -230,7 +223,6 @@
                                   TextBlock.FontSize="{TemplateBinding FontSize, Converter={StaticResource valueMultiConverter}}"
                                   HorizontalAlignment="Center"
                                   Width="12"
-                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                   VerticalAlignment="Center"/>
                 <Border x:Name="GlyphPanel"
                         Visibility="Hidden"
@@ -256,7 +248,6 @@
                                   HorizontalAlignment="Left"
                                   Margin="{TemplateBinding Padding}"
                                   RecognizesAccessKey="True"
-                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                   VerticalAlignment="Center" />
                 <TextBlock x:Name="menuGestureText"
                            Grid.Column="4"
@@ -297,8 +288,7 @@
         <Border x:Name="templateRoot"
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}"
-                Background="{TemplateBinding Background}"
-                SnapsToDevicePixels="True">
+                Background="{TemplateBinding Background}">
             <Grid Margin="-1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" MinWidth="22" SharedSizeGroup="MenuItemIconColumnGroup" />
@@ -314,7 +304,6 @@
                                   TextBlock.FontSize="{TemplateBinding FontSize, Converter={StaticResource valueMultiConverter}}"
                                   HorizontalAlignment="Center"
                                   Width="12"
-                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                   VerticalAlignment="Center"/>
                 <Border x:Name="GlyphPanel"
                         Visibility="Hidden"
@@ -337,7 +326,6 @@
                                   HorizontalAlignment="Left"
                                   Margin="{TemplateBinding Padding}"
                                   RecognizesAccessKey="True"
-                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                   VerticalAlignment="Center" />
                 <TextBlock Grid.Column="4"
                            Margin="{TemplateBinding Padding}"
@@ -381,7 +369,6 @@
                                 <ItemsPresenter x:Name="ItemsPresenter"
                                                 KeyboardNavigation.DirectionalNavigation="Cycle"
                                                 Grid.IsSharedSizeScope="True"
-                                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                                 KeyboardNavigation.TabNavigation="Cycle" />
                             </Grid>
                         </ScrollViewer>
@@ -466,9 +453,8 @@
                     <Border BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Background="{TemplateBinding Background}"
-                            Padding="{TemplateBinding Padding}"
-                            SnapsToDevicePixels="true">
-                        <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            Padding="{TemplateBinding Padding}">
+                        <ItemsPresenter/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -493,8 +479,7 @@
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Background="{TemplateBinding Background}"
                             Width="1"
-                            VerticalAlignment="Stretch"
-                            SnapsToDevicePixels="true" />
+                            VerticalAlignment="Stretch"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

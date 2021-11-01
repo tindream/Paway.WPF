@@ -14,7 +14,7 @@
                     <Border BorderThickness="{TemplateBinding BorderThickness}"
                             BorderBrush="{StaticResource Light}"
                             CornerRadius="{Binding Radius, RelativeSource={RelativeSource AncestorType={x:Type local:ExpanderEXT}}}">
-                        <Grid Background="{TemplateBinding Background}" SnapsToDevicePixels="False">
+                        <Grid Background="{TemplateBinding Background}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="*" />
@@ -28,8 +28,7 @@
                                 Content="{TemplateBinding Content}"
                                 ContentStringFormat="{TemplateBinding ContentStringFormat}"
                                 ContentTemplate="{TemplateBinding ContentTemplate}"
-                                RecognizesAccessKey="True"
-                                SnapsToDevicePixels="True" />
+                                RecognizesAccessKey="True"/>
                             <Path
                                 x:Name="arrow"
                                 Grid.Column="2"
@@ -39,7 +38,6 @@
                                 VerticalAlignment="Center"
                                 Data="{StaticResource Icon_DownArrow}"
                                 Fill="{TemplateBinding Foreground}"
-                                SnapsToDevicePixels="False"
                                 Stretch="Fill"/>
                         </Grid>
                     </Border>
@@ -92,7 +90,7 @@
                     <Border BorderThickness="{TemplateBinding BorderThickness}"
                             BorderBrush="{StaticResource Light}"
                             CornerRadius="{Binding Radius, RelativeSource={RelativeSource AncestorType={x:Type local:ExpanderEXT}}}">
-                        <Grid Background="{TemplateBinding Background}" SnapsToDevicePixels="False">
+                        <Grid Background="{TemplateBinding Background}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="25" />
@@ -106,8 +104,7 @@
                                 Content="{TemplateBinding Content}"
                                 ContentStringFormat="{TemplateBinding ContentStringFormat}"
                                 ContentTemplate="{TemplateBinding ContentTemplate}"
-                                RecognizesAccessKey="True"
-                                SnapsToDevicePixels="True" />
+                                RecognizesAccessKey="True"/>
                             <Path
                                 x:Name="arrow"
                                 Grid.Column="1"
@@ -117,7 +114,6 @@
                                 VerticalAlignment="Center"
                                 Data="{StaticResource Icon_DownArrow}"
                                 Fill="{TemplateBinding Foreground}"
-                                SnapsToDevicePixels="False"
                                 Stretch="Fill"/>
                         </Grid>
                     </Border>
@@ -163,7 +159,6 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ExpanderEXT}">
                     <Border Name="border" 
-                            SnapsToDevicePixels="True"
                             BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"
                             Padding="{Binding BorderThickness}"
                             CornerRadius="{TemplateBinding Radius}"

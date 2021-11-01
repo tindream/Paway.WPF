@@ -87,18 +87,14 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Thumb}">
-                    <Grid UseLayoutRounding="True"
-                          HorizontalAlignment="Center"
-                          VerticalAlignment="Center">
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Path Name="grip" Style="{StaticResource PathRound}"
                               Stretch="Fill"
                               Fill="#FFF0F0F0"
                               Stroke="#FFACACAC"
                               Margin="0"
                               StrokeThickness="1"
-                              UseLayoutRounding="True"
-                              VerticalAlignment="Center"
-                              SnapsToDevicePixels="True" />
+                              VerticalAlignment="Center"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="local:SliderMonitor.ButtonType" Value="Rect">
@@ -122,19 +118,14 @@
         </Setter>
     </Style>
     <ControlTemplate x:Key="SliderThumbHorizontalTop" TargetType="Thumb">
-        <Grid
-            UseLayoutRounding="True"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center">
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
             <Path Name="grip"
                   Data="M0,6C0,6 5.5,0 5.5,0 5.5,0 11,6 11,6 11,6 11,18 11,18 11,18 0,18 0,18 0,18 0,6 0,6z"
                   Stretch="Fill"
                   Fill="#FFF0F0F0"
                   Stroke="#FFACACAC"
                   StrokeThickness="1"
-                  UseLayoutRounding="True"
-                  VerticalAlignment="Center"
-                  SnapsToDevicePixels="True" />
+                  VerticalAlignment="Center"/>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="UIElement.IsMouseOver" Value="True">
@@ -152,19 +143,14 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <ControlTemplate x:Key="SliderThumbHorizontalBottom" TargetType="Thumb">
-        <Grid
-            UseLayoutRounding="True"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center">
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
             <Path Name="grip"
                   Data="M0,12C0,12 5.5,18 5.5,18 5.5,18 11,12 11,12 11,12 11,0 11,0 11,0 0,0 0,0 0,0 0,12 0,12z"
                   Stretch="Fill"
                   Fill="#FFF0F0F0"
                   Stroke="#FFACACAC"
                   StrokeThickness="1"
-                  UseLayoutRounding="True"
-                  VerticalAlignment="Center"
-                  SnapsToDevicePixels="True" />
+                  VerticalAlignment="Center"/>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="UIElement.IsMouseOver" Value="True">
@@ -182,19 +168,14 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <ControlTemplate x:Key="SliderThumbVerticalTop" TargetType="Thumb">
-        <Grid
-            UseLayoutRounding="True"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center">
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
             <Path Name="grip"
                   Data="M6,11C6,11 0,5.5 0,5.5 0,5.5 6,0 6,0 6,0 18,0 18,0 18,0 18,11 18,11 18,11 6,11 6,11z"
                   Stretch="Fill"
                   Fill="#FFF0F0F0"
                   Stroke="#FFACACAC"
                   StrokeThickness="1"
-                  UseLayoutRounding="True"
-                  VerticalAlignment="Center"
-                  SnapsToDevicePixels="True" />
+                  VerticalAlignment="Center"/>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="UIElement.IsMouseOver" Value="True">
@@ -212,19 +193,14 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <ControlTemplate x:Key="SliderThumbVerticalBottom" TargetType="Thumb">
-        <Grid
-            UseLayoutRounding="True"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center">
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
             <Path Name="grip"
                   Data="M12,11C12,11 18,5.5 18,5.5 18,5.5 12,0 12,0 12,0 0,0 0,0 0,0 0,11 0,11 0,11 12,11 12,11z"
                   Stretch="Fill"
                   Fill="#FFF0F0F0"
                   Stroke="#FFACACAC"
                   StrokeThickness="1"
-                  UseLayoutRounding="True"
-                  VerticalAlignment="Center"
-                  SnapsToDevicePixels="True" />
+                  VerticalAlignment="Center"/>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="UIElement.IsMouseOver" Value="True">
@@ -245,8 +221,7 @@
         <Border Name="border"
                 BorderThickness="{TemplateBinding Border.BorderThickness}"
                 BorderBrush="{TemplateBinding Border.BorderBrush}"
-                Background="{TemplateBinding Panel.Background}"
-                SnapsToDevicePixels="True">
+                Background="{TemplateBinding Panel.Background}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -327,8 +302,7 @@
         <Border Name="border"
                 BorderThickness="{TemplateBinding Border.BorderThickness}"
                 BorderBrush="{TemplateBinding Border.BorderBrush}"
-                Background="{TemplateBinding Panel.Background}"
-                SnapsToDevicePixels="True">
+                Background="{TemplateBinding Panel.Background}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />

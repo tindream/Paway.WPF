@@ -8,7 +8,6 @@
     
     <Style x:Key="DefaultTreeViewItem" TargetType="{x:Type TreeViewItem}">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="Template">
             <Setter.Value>
@@ -195,14 +194,12 @@
                 <ControlTemplate TargetType="local:TreeViewEXT" >
                     <Border Name="border"
                             BorderThickness="{TemplateBinding Border.BorderThickness}"
-                            BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"
-                            SnapsToDevicePixels="True">
+                            BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}">
                         <local:ScrollViewerEXT x:Name="_tv_scrollviewer_"
                                       HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                       VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
                                       Background="{TemplateBinding Panel.Background}"
                                       Padding="{TemplateBinding Control.Padding}"
-                                      SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"
                                       Focusable="False">
                             <ItemsPresenter />
                         </local:ScrollViewerEXT>

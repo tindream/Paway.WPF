@@ -80,11 +80,9 @@
                                Placement="Bottom" 
                                PopupAnimation="Slide">
                             <Grid MaxHeight="152" MinWidth="{TemplateBinding ActualWidth}" x:Name="DropDown" 
-                                  Background="White"
-                                  SnapsToDevicePixels="True">
+                                  Background="White">
                                 <Border x:Name="DropDownBorder" BorderBrush="#CCC" BorderThickness="1"/>
                                 <local:ScrollViewerEXT Margin="1" 
-                                              SnapsToDevicePixels="True" 
                                               HorizontalScrollBarVisibility="Auto" 
                                               VerticalScrollBarVisibility="Auto" 
                                               CanContentScroll="True">

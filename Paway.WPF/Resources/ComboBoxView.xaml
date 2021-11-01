@@ -8,7 +8,6 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type local:ComboBoxView}" BasedOn="{StaticResource Config}">
-        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Margin" Value="2"/>
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
         <Setter Property="Template">
