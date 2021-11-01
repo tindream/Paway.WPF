@@ -236,8 +236,8 @@
     </Style>
     <Style TargetType="{x:Type TextBlock}">
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Foreground" Value="{StaticResource Text}" />
-        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
+        <!--<Setter Property="Foreground" Value="{StaticResource Text}" />-->
+        <!--<Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>-->
         <!--影响全局TextBlock样式，如Button字体等-->
         <!--<Setter Property="FontFamily" Value="Microsoft YaHei"/>-->
     </Style>

@@ -31,12 +31,13 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Image x:Name="icon" Visibility="Collapsed"
-                                   Source="{TemplateBinding Icon}"
-                                   Stretch="{TemplateBinding IconStretch}"/>
-                                <local:ScrollViewerEXT x:Name="PART_ContentHost"
-                                                   Grid.Column="1"
-                                                   VerticalAlignment="Center"
-                                                   VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}"/>
+                                       Source="{TemplateBinding Icon}"
+                                       Stretch="{TemplateBinding IconStretch}"/>
+                                <ScrollViewer x:Name="PART_ContentHost"
+                                              Grid.Column="1"
+                                              VerticalAlignment="Center"
+                                              VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}">
+                                </ScrollViewer>
                                 <TextBlock x:Name="tbWater" Grid.Column="1" Visibility="Collapsed"
                                            VerticalAlignment="Center"
                                            Padding="5,0,0,0"

@@ -6,6 +6,8 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <local:LessRadiusConverter x:Key="lessRadiusConverter"/>
+    
     <Style x:Key="ToggleButtonStyle" TargetType="{x:Type ToggleButton}">
         <Setter Property="Height" Value="30"/>
         <Setter Property="Template">
@@ -13,7 +15,7 @@
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Border BorderThickness="{TemplateBinding BorderThickness}"
                             BorderBrush="{StaticResource Light}"
-                            CornerRadius="{Binding Radius, RelativeSource={RelativeSource AncestorType={x:Type local:ExpanderEXT}}}">
+                            CornerRadius="{Binding Radius, RelativeSource={RelativeSource AncestorType={x:Type local:ExpanderEXT}}, Converter={StaticResource lessRadiusConverter}}">
                         <Grid Background="{TemplateBinding Background}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto" />
@@ -89,7 +91,7 @@
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Border BorderThickness="{TemplateBinding BorderThickness}"
                             BorderBrush="{StaticResource Light}"
-                            CornerRadius="{Binding Radius, RelativeSource={RelativeSource AncestorType={x:Type local:ExpanderEXT}}}">
+                            CornerRadius="{Binding Radius, RelativeSource={RelativeSource AncestorType={x:Type local:ExpanderEXT}}, Converter={StaticResource lessRadiusConverter}}">
                         <Grid Background="{TemplateBinding Background}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto" />

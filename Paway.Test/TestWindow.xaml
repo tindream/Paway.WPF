@@ -13,7 +13,7 @@
             <TextBoxEXT Icon="pack://application:,,,/Paway.Test;component/Images/close.png" Unit="ms"/>
             <PasswordBox PasswordBoxEXT.Icon="pack://application:,,,/Paway.Test;component/Images/close.png"
                          PasswordBoxEXT.Radius="0"
-                         PasswordBoxEXT.IAnimation="2" BorderThickness="0,0,0,1"/>
+                         PasswordBoxEXT.IAnimation="2" BorderThickness="1"/>
             <ButtonEXT Content="事件" Click="ButtonEXT_Click"/>
         </StackPanel>
     </Grid>
