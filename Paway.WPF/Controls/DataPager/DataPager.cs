@@ -231,7 +231,7 @@ namespace Paway.WPF
                 "IsTotalItemCountFixed",
                 typeof(bool),
                 typeof(DataPager),
-                new PropertyMetadata(OnIsTotalItemCountFixedPropertyChanged));
+                new PropertyMetadata(true, OnIsTotalItemCountFixedPropertyChanged));
 
         /// <summary>
         /// Identifies the ItemCount dependency property.

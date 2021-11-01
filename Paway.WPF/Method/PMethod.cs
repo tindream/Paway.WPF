@@ -434,7 +434,7 @@ namespace Paway.WPF
                         return;
                     }
 
-                    var color = AlphaColor(PConfig.Alpha, type.Color());
+                    var color = AlphaColor(PConfig.Alpha, type == ColorType.Color ? PConfig.Color : type.Color());
                     var border = new Border
                     {
                         CornerRadius = new CornerRadius(5),
@@ -531,7 +531,7 @@ namespace Paway.WPF
                         return;
                     }
 
-                    var color = AlphaColor(PConfig.Alpha, type.Color());
+                    var color = AlphaColor(PConfig.Alpha, type == ColorType.Color ? PConfig.Color : type.Color());
                     var border = new Border
                     {
                         CornerRadius = new CornerRadius(5),

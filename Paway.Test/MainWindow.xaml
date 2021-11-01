@@ -81,7 +81,7 @@
             </StackPanel>
         </StackPanel>
 
-        <ExpanderEXT ExpandDirection="Left" Header="输入" ItemBrush="LightGray;200">
+        <ExpanderEXT ExpandDirection="Left" Header="输入">
             <StackPanel Width="250">
                 <ComboBoxEXT ItemsSource="{IntList Count=20}" SelectedValue="{Binding Value}"/>
                 <ComboBoxEXT ItemsSource="{EnumValues EnumType=local:MonitorType}" SelectedValue="{Binding Path=MonitorType, Converter={StaticResource enumConverter}}"/>
@@ -127,7 +127,7 @@
 
             </StackPanel>
         </ExpanderEXT>
-        <ExpanderEXT ExpandDirection="Right" DockPanel.Dock="Right" Header="显示" ItemBrush="LightGray;200">
+        <ExpanderEXT ExpandDirection="Right" DockPanel.Dock="Right" Header="显示">
             <StackPanel Width="250" MaxWidth="300">
                 <ProgressBarEXT Value="95" Name="progress"/>
                 <WrapPanel>
@@ -175,7 +175,7 @@
             </StackPanel>
         </ExpanderEXT>
 
-        <ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="PlotView" ItemBrush="LightGray;200">
+        <ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="PlotView">
             <StackPanel>
                 <oxy:PlotView Model="{Binding Path= PlotModel}" Height="200">
                     <oxy:PlotView.ContextMenu>
@@ -186,7 +186,7 @@
                 </oxy:PlotView>
             </StackPanel>
         </ExpanderEXT>
-        <ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="DataGrid" ItemBrush="LightGray;200">
+        <ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="DataGrid">
             <StackPanel Width="250">
                 <DataGridEXT Name="datagrid1"
                                ItemsSource="{Binding PagedList}"
@@ -217,10 +217,10 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGridEXT>
-                <DataPager Name="dataPager" Margin="0,0,0,3" Source="{Binding PagedList}" IsTotalItemCountFixed="True"/>
+                <DataPager Name="dataPager" Margin="0,0,0,3" Source="{Binding PagedList}"/>
             </StackPanel>
         </ExpanderEXT>
-        <ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="ListView" ItemBrush="LightGray;200">
+        <ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="ListView">
             <StackPanel Width="250">
                 <ListViewEXT Name="listView2"
                                Height="84"
@@ -237,7 +237,7 @@
                 </ListViewEXT>
             </StackPanel>
         </ExpanderEXT>
-        <ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="TreeView" ItemBrush="LightGray;200">
+        <ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="TreeView">
             <StackPanel Width="250">
                 <TreeViewEXT x:Name="TreeViewOrg" Height="180" ICheckBox="Visible" ItemTemplate="{StaticResource DefaultNode}" ItemsSource="{Binding TreeList}">
                     <i:Interaction.Triggers>
@@ -248,7 +248,7 @@
                 </TreeViewEXT>
             </StackPanel>
         </ExpanderEXT>
-        <ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="TabControl" ItemBrush="LightGray;200">
+        <ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="TabControl">
             <TabControlEXT TabStripPlacement="Top" Background="LightGray" MaxHeight="300">
                 <TabItem Cursor="Hand" Header="音乐电台" />
                 <TabItem Cursor="Hand" Header="Mv电台"/>
