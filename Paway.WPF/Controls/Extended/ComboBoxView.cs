@@ -106,7 +106,7 @@ namespace Paway.WPF
             try
             {
                 selecting = true;
-                gridView.Selected(this.SelectedValue.ToInt());
+                gridView.Select(this.SelectedValue.ToInt());
             }
             finally
             {

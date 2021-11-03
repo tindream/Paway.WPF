@@ -9,12 +9,13 @@
         DataContext="{Binding Test ,Source={StaticResource Locator}}"
         Title="TestWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
-        <StackPanel HorizontalAlignment="Center" Height="200" Width="100" VerticalAlignment="Center">
-            <TextBoxEXT Icon="pack://application:,,,/Paway.Test;component/Images/close.png" Unit="ms"/>
-            <PasswordBox PasswordBoxEXT.Icon="pack://application:,,,/Paway.Test;component/Images/close.png"
-                         PasswordBoxEXT.Radius="0"
-                         PasswordBoxEXT.IAnimation="2" BorderThickness="1"/>
-            <ButtonEXT Content="事件" Click="ButtonEXT_Click"/>
-        </StackPanel>
+        <DockPanel HorizontalAlignment="Center" Height="200" Width="200" VerticalAlignment="Center">
+            <ExpanderEXT DockPanel.Dock="Bottom">
+                <Border BorderBrush="Red" BorderThickness="1" Height="100">
+                    <TextBlock Text="World"/>
+                </Border>
+            </ExpanderEXT>
+            <TextBlock Text="Hello"/>
+        </DockPanel>
     </Grid>
 </WindowEXT>

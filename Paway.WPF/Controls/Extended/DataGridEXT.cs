@@ -316,31 +316,50 @@ namespace Paway.WPF
             return new DataGridTextColumn();
         }
         /// <summary>
-        /// 选中行列
+        /// 选中行
         /// </summary>
-        public bool Selected(int id)
+        public bool Select(int id)
         {
             for (int i = 0; i < this.Items.Count; i++)
             {
                 if (this.Items[i] is IId item && item.Id == id)
                 {
-                    this.ScrollIntoView(item);
-                    if (this.ItemContainerGenerator.ContainerFromIndex(i) is DataGridRow row)
+                    return Select(item);
+                }
+            }
+            return false;
+        }
+        /// <summary>
+        /// 选中最后一行
+        /// </summary>
+        public bool SelectLast()
+        {
+            if (this.Items.Count > 0 && this.Items[this.Items.Count - 1] is IId item)
+            {
+                return Select(item);
+            }
+            return false;
+        }
+        /// <summary>
+        /// 选中行
+        /// </summary>
+        public bool Select(IId item)
+        {
+            this.ScrollIntoView(item);
+            if (this.ItemContainerGenerator.ContainerFromItem(item) is DataGridRow row)
+            {
+                row.IsSelected = true;
+                if (PMethod.Child(row, out DataGridCellsPresenter presenter, iParent: false))
+                {
+                    for (int i = 0; i < this.Columns.Count; i++)
                     {
-                        row.IsSelected = true;
-                        if (PMethod.Child(row, out DataGridCellsPresenter presenter, iParent: false))
+                        if (this.Columns[i].Visibility == Visibility.Visible)
                         {
-                            for (int j = 0; j < this.Columns.Count; j++)
+                            if (presenter.ItemContainerGenerator.ContainerFromIndex(i) is DataGridCell cell)
                             {
-                                if (this.Columns[j].Visibility == Visibility.Visible)
-                                {
-                                    if (presenter.ItemContainerGenerator.ContainerFromIndex(j) is DataGridCell cell)
-                                    {
-                                        cell.Focus();
-                                    }
-                                    return true;
-                                }
+                                cell.Focus();
                             }
+                            return true;
                         }
                     }
                 }

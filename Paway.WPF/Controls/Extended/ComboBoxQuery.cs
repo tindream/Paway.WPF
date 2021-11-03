@@ -186,7 +186,7 @@ namespace Paway.WPF
         }
         private void Popup_Opened(object sender, EventArgs e)
         {
-            var result = gridView.Selected(this.SelectedValue.ToInt());
+            var result = gridView.Select(this.SelectedValue.ToInt());
             if (result) textBox.Focus();
         }
         private void GridView_RefreshEvent(DataGridEXT obj)
@@ -294,11 +294,11 @@ namespace Paway.WPF
         {
             if (gridView.SelectedItem is IId item)
             {
-                return gridView.Selected(item.Id);
+                return gridView.Select(item.Id);
             }
             if (this.Items.Count > 0 && this.Items[0] is IId item2)
             {
-                return gridView.Selected(item2.Id);
+                return gridView.Select(item2.Id);
             }
             return false;
         }
