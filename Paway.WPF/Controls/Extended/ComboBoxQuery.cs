@@ -294,11 +294,11 @@ namespace Paway.WPF
         {
             if (gridView.SelectedItem is IId item)
             {
-                return gridView.Select(item.Id);
+                return gridView.Select(item.Id, true);
             }
             if (this.Items.Count > 0 && this.Items[0] is IId item2)
             {
-                return gridView.Select(item2.Id);
+                return gridView.Select(item2.Id, true);
             }
             return false;
         }

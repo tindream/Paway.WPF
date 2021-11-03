@@ -318,13 +318,13 @@ namespace Paway.WPF
         /// <summary>
         /// 选中行
         /// </summary>
-        public bool Select(int id)
+        public bool Select(int id, bool iCell = false)
         {
             for (int i = 0; i < this.Items.Count; i++)
             {
                 if (this.Items[i] is IId item && item.Id == id)
                 {
-                    return Select(item);
+                    return Select(item, iCell);
                 }
             }
             return false;
@@ -343,12 +343,14 @@ namespace Paway.WPF
         /// <summary>
         /// 选中行
         /// </summary>
-        public bool Select(IId item)
+        public bool Select(IId item, bool iCell = false)
         {
             this.ScrollIntoView(item);
             if (this.ItemContainerGenerator.ContainerFromItem(item) is DataGridRow row)
             {
                 row.IsSelected = true;
+                row.Focus();
+                if (!iCell) return true;
                 if (PMethod.Child(row, out DataGridCellsPresenter presenter, iParent: false))
                 {
                     for (int i = 0; i < this.Columns.Count; i++)
