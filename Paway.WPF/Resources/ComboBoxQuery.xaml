@@ -9,6 +9,7 @@
 
     <Style TargetType="{x:Type local:ComboBoxQuery}" BasedOn="{StaticResource Config}">
         <Setter Property="Margin" Value="2"/>
+        <Setter Property="MaxDropDownHeight" Value="165"/>
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -54,10 +55,10 @@
                                IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
                                PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" 
                                Placement="Bottom">
-                            <Border x:Name="DropDownBorder" BorderBrush="LightGray" BorderThickness="1" Padding="0">
+                            <Border x:Name="DropDownBorder" BorderBrush="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" BorderThickness="1,0,1,1" Padding="0">
                                 <local:DataGridEXT x:Name="PART_DataGrid" Background="White" 
                                                    ColumnWidth="{Binding ColumnWidth, RelativeSource={RelativeSource TemplatedParent}}"
-                                                   Height="180" BorderThickness="0"
+                                                   BorderThickness="0"
                                                    Width="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource valueAddConverter}}" 
                                                    MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}"
                                                    ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource TemplatedParent}}"/>
@@ -79,6 +80,10 @@
                         <Trigger Property="IsDropDownOpen" Value="True">
                             <Setter TargetName="border" Property="BorderBrush" 
                                     Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter TargetName="border" Property="BorderThickness" 
+                                    Value="{Binding BorderThickness, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource noBottomThicknessConverter}}" />
+                            <Setter TargetName="border" Property="CornerRadius" 
+                                    Value="{Binding Radius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource noBottomRadiusConverter}}" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>

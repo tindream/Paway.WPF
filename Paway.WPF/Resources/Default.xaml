@@ -26,6 +26,9 @@
     <local:AnyNotNullToVisible x:Key="anyNotNullToVisible"/>
     <local:AnyNotNullToCollapsed x:Key="anyNotNullToCollapsed"/>
     <local:RoundProgressBarConverter x:Key="roundProgressBarConverter"/>
+
+    <local:NoBottomRadiusConverter x:Key="noBottomRadiusConverter"/>
+    <local:NoBottomThicknessConverter x:Key="noBottomThicknessConverter"/>
     <!--#endregion-->
 
     <!--#region 文本图标资源 -->

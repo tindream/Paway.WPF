@@ -18,9 +18,9 @@
                             BorderBrush="{TemplateBinding Border.BorderBrush}"
                             Background="{TemplateBinding Panel.Background}"
                             CornerRadius="{TemplateBinding Radius}">
-                        <ScrollViewer Padding="{TemplateBinding Control.Padding}" >
+                        <local:ScrollViewerEXT Padding="{TemplateBinding Control.Padding}" >
                             <ItemsPresenter />
-                        </ScrollViewer>
+                        </local:ScrollViewerEXT>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="UIElement.IsEnabled" Value="False">

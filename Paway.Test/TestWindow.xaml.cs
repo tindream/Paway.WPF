@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,6 +24,28 @@ namespace Paway.Test
         public TestWindow()
         {
             InitializeComponent();
+        }
+        protected override void OnRender(DrawingContext drawingContext)
+        {
+            base.OnRender(drawingContext);
+            tbDesc.SelectionStart = 0;
+            Task.Run(() =>
+            {
+                var index = 0;
+                while (true)
+                {
+                    index++;
+                    Method.Invoke(tbDesc, () =>
+                    {
+                        tbDesc.AppendText($"{index}\n");
+                        if (tbDesc.SelectionStart == tbDesc.Text.Length)
+                        {
+                            tbDesc.ScrollToEnd();
+                        }
+                    });
+                    Thread.Sleep(200);
+                }
+            });
         }
         private void ButtonEXT_Click(object sender, RoutedEventArgs e)
         {

@@ -19,7 +19,7 @@
                     </Border>
                 </DockPanel>
             </ExpanderEXT>
-            <TextBlock Text="{Binding Info.Value, StringFormat=F1}"/>
+            <TextBoxEXT Name="tbDesc" />
         </DockPanel>
     </Grid>
 </WindowEXT>

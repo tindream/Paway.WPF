@@ -151,6 +151,15 @@
                         <Paragraph>
                             <Run Text="自动高度" />
                         </Paragraph>
+                        <Paragraph>
+                            <Run Text="1" />
+                        </Paragraph>
+                        <Paragraph>
+                            <Run Text="2" />
+                        </Paragraph>
+                        <Paragraph>
+                            <Run Text="3" />
+                        </Paragraph>
                     </FlowDocument>
                 </RichTextBoxEXT>
                 <StackPanel Orientation="Horizontal">

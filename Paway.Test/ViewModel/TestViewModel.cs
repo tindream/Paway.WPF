@@ -41,24 +41,9 @@ namespace Paway.Test.ViewModel
                 _value = value; RaisePropertyChanged();
             }
         }
-        public TempInfo Info { get; set; }
 
         #endregion
 
-        public TestViewModel()
-        {
-            Task.Run(() =>
-            {
-                Info = new TempInfo();
-                Task.Run(() =>
-                {
-                    while (true)
-                    {
-                        Info.Value++;
-                        Thread.Sleep(300);
-                    }
-                });
-            });
-        }
+        public TestViewModel() { }
     }
 }

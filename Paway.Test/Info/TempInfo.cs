@@ -20,6 +20,16 @@ namespace Paway.Test
             set { _value = value; OnPropertyChanged(); }
         }
 
+        private string _values;
+        /// <summary>
+        /// 值
+        /// </summary>
+        public string Values
+        {
+            get { return _values; }
+            set { _values = value; OnPropertyChanged(); }
+        }
+
         public TempInfo() { }
         public TempInfo(DateTime time, double value)
         {

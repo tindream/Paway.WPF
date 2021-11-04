@@ -36,6 +36,7 @@
 
     <Style TargetType="{x:Type local:ComboBoxEXT}" BasedOn="{StaticResource Config}">
         <Setter Property="Margin" Value="2"/>
+        <Setter Property="MaxDropDownHeight" Value="151"/>
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -79,17 +80,17 @@
                                IsOpen="{TemplateBinding IsDropDownOpen}" 
                                Placement="Bottom" 
                                PopupAnimation="Slide">
-                            <Grid MaxHeight="152" MinWidth="{TemplateBinding ActualWidth}" x:Name="DropDown" 
+                            <Grid MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}" 
+                                  MinWidth="{TemplateBinding ActualWidth}" x:Name="DropDown" 
                                   Background="White">
-                                <Border x:Name="DropDownBorder" BorderBrush="#CCC" BorderThickness="1"/>
-                                <ScrollViewer Margin="1" 
-                                              HorizontalScrollBarVisibility="Auto" 
+                                <Border x:Name="DropDownBorder" BorderBrush="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" BorderThickness="1,0,1,1" Padding="0"/>
+                                <local:ScrollViewerEXT HorizontalScrollBarVisibility="Auto" 
                                               VerticalScrollBarVisibility="Auto" 
                                               CanContentScroll="True">
                                     <!--StackPanel 用于显示子级，方法是将 IsItemsHost 设置为 True-->
                                     <StackPanel IsItemsHost="True"
                                                 KeyboardNavigation.DirectionalNavigation="Contained" />
-                                </ScrollViewer>
+                                </local:ScrollViewerEXT>
                             </Grid>
                         </Popup>
                     </Grid>
@@ -112,6 +113,10 @@
                         <Trigger Property="IsDropDownOpen" Value="True">
                             <Setter TargetName="border" Property="BorderBrush" 
                                     Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter TargetName="border" Property="BorderThickness" 
+                                    Value="{Binding BorderThickness, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource noBottomThicknessConverter}}" />
+                            <Setter TargetName="border" Property="CornerRadius" 
+                                    Value="{Binding Radius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource noBottomRadiusConverter}}" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>

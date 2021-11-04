@@ -23,4 +23,36 @@ namespace Paway.WPF
             return DependencyProperty.UnsetValue;
         }
     }
+    internal class NoBottomRadiusConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is CornerRadius radius)
+            {
+                return new CornerRadius(radius.TopLeft, radius.TopRight, 0, 0);
+            }
+            return value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return DependencyProperty.UnsetValue;
+        }
+    }
+    internal class NoBottomThicknessConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is Thickness thickness)
+            {
+                return new Thickness(thickness.Left, thickness.Top, thickness.Right, 0);
+            }
+            return value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return DependencyProperty.UnsetValue;
+        }
+    }
 }

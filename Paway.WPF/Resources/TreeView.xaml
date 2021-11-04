@@ -195,14 +195,14 @@
                     <Border Name="border"
                             BorderThickness="{TemplateBinding Border.BorderThickness}"
                             BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}">
-                        <ScrollViewer x:Name="_tv_scrollviewer_"
+                        <local:ScrollViewerEXT x:Name="_tv_scrollviewer_"
                                       HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                       VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
                                       Background="{TemplateBinding Panel.Background}"
                                       Padding="{TemplateBinding Control.Padding}"
                                       Focusable="False">
                             <ItemsPresenter />
-                        </ScrollViewer>
+                        </local:ScrollViewerEXT>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="UIElement.IsEnabled" Value="False">

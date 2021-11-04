@@ -9,6 +9,7 @@
 
     <Style TargetType="{x:Type local:ComboBoxMulti}" BasedOn="{StaticResource Config}">
         <Setter Property="Margin" Value="2"/>
+        <Setter Property="MaxDropDownHeight" Value="153"/>
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -80,15 +81,14 @@
                                IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
                                PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" 
                                Placement="Bottom">
-                            <Grid 
-                                Width="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
-                                MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}" >
+                            <Grid Width="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
+                                  MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}" >
                                 <ListBox x:Name="PART_ListBox" 
                                          SelectionMode="Multiple" 
-                                         BorderThickness="1"
+                                         BorderThickness="1,0,1,1"
                                          ItemsSource="{Binding ItemsSource,RelativeSource={RelativeSource TemplatedParent}}"
                                          MaxHeight="{TemplateBinding MaxDropDownHeight}" 
-                                         BorderBrush="#CCC" >
+                                         BorderBrush="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" >
                                     <ListBox.ItemContainerStyle>
                                         <Style TargetType="ListBoxItem">
                                             <Setter Property="Padding" Value="3,15"/>
@@ -158,6 +158,10 @@
                         <Trigger Property="IsDropDownOpen" Value="True">
                             <Setter TargetName="border" Property="BorderBrush" 
                                     Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter TargetName="border" Property="BorderThickness" 
+                                    Value="{Binding BorderThickness, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource noBottomThicknessConverter}}" />
+                            <Setter TargetName="border" Property="CornerRadius" 
+                                    Value="{Binding Radius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource noBottomRadiusConverter}}" />
                         </Trigger>
                         <!--<Trigger Property="IsFocused" Value="True">
                             <Setter Property="IsDropDownOpen" Value="True" />

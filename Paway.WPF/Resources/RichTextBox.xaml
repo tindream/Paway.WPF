@@ -33,13 +33,13 @@
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 CornerRadius="{TemplateBinding Radius}"/>
 
-                        <ScrollViewer Margin="{TemplateBinding BorderThickness}" Focusable="False" Name="ScrollViewer"
+                        <local:ScrollViewerEXT Margin="{TemplateBinding BorderThickness}" Focusable="False" x:Name="ScrollViewer"
                                       VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}">
                             <ScrollViewer x:Name="PART_ContentHost" 
                                           Margin="{TemplateBinding Padding}" 
                                           Focusable="False" 
                                           HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
-                        </ScrollViewer>
+                        </local:ScrollViewerEXT>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
