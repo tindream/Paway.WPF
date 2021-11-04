@@ -7,13 +7,18 @@ using System.Text;
 
 namespace Paway.Test
 {
-    public class TempInfo
+    public class TempInfo : BaseInfo
     {
         public DateTime DateTime { get; set; }
+        private double _value;
         /// <summary>
         /// 值
         /// </summary>
-        public double Value { get; private set; }
+        public double Value
+        {
+            get { return _value; }
+            set { _value = value; OnPropertyChanged(); }
+        }
 
         public TempInfo() { }
         public TempInfo(DateTime time, double value)

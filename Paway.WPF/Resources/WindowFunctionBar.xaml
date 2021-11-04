@@ -236,7 +236,7 @@
                     <Path x:Name="Glyph"
                           Style="{StaticResource PathRight}" Width="12"
                           Margin="0"
-                          Stroke="#222" />
+                          Stroke="{StaticResource Text}" />
                 </Border>
                 <ContentPresenter x:Name="menuHeaderContainer"
                                   ContentTemplate="{TemplateBinding HeaderTemplate}"
@@ -315,7 +315,7 @@
                     <Path x:Name="Glyph"
                           Style="{StaticResource PathRight}" Width="12"
                           Margin="0"
-                          Stroke="#222"/>
+                          Stroke="{StaticResource Text}"/>
                 </Border>
                 <ContentPresenter ContentTemplate="{TemplateBinding HeaderTemplate}"
                                   Content="{TemplateBinding Header}"
@@ -334,7 +334,7 @@
                 <Path x:Name="RightArrow"
                       Style="{StaticResource PathTriangleRight}" StrokeThickness="0" Stretch="Fill" Width="4" Height="7"
                       Grid.Column="5"
-                      Fill="#222"
+                      Fill="{StaticResource Text}"
                       HorizontalAlignment="Left"
                       Margin="10,0,0,0" />
                 <Popup x:Name="PART_Popup"

@@ -53,7 +53,7 @@ namespace Paway.WPF
         /// 文本(三级浅色)
         /// </summary>
         [Color(119, 119, 119)]
-        LightText,
+        TextLight,
         /// <summary>
         /// 浅色
         /// </summary>

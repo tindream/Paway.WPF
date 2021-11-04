@@ -54,7 +54,7 @@
                             </Grid.ColumnDefinitions>
                             <Button Name="PART_Button"
                                     Grid.Column="1"
-                                    Foreground="#222"
+                                    Foreground="{StaticResource Text}"
                                     Background="White" 
                                     Width="20"
                                     Margin="5,0,2,0"
@@ -98,7 +98,7 @@
                                                 <Border Name="Background"
                                                         BorderThickness="1,1,1,1"
                                                         CornerRadius="0.5,0.5,0.5,0.5"
-                                                        BorderBrush="#FFFFFFFF"
+                                                        BorderBrush="White"
                                                         Background="#FF1F3B53"
                                                         Margin="0,-1,0,0"
                                                         Opacity="1"
@@ -131,7 +131,7 @@
                                                       Grid.Row="1"
                                                       Grid.ColumnSpan="4"
                                                       Grid.RowSpan="3" />
-                                                <Ellipse Fill="#FFFFFFFF"
+                                                <Ellipse Fill="White"
                                                          StrokeThickness="0"
                                                          Width="3"
                                                          Height="3"

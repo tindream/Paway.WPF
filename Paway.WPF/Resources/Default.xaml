@@ -114,7 +114,7 @@
 
     <SolidColorBrush x:Key="Text" Color="#222" />
     <SolidColorBrush x:Key="TextSub" Color="#444" />
-    <SolidColorBrush x:Key="LightText" Color="#777" />
+    <SolidColorBrush x:Key="TextLight" Color="#777" />
     <SolidColorBrush x:Key="Light" Color="#EBEBEB" />
 
     <SolidColorBrush x:Key="Gray1" Color="LightGray" />

@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -39,7 +41,24 @@ namespace Paway.Test.ViewModel
                 _value = value; RaisePropertyChanged();
             }
         }
+        public TempInfo Info { get; set; }
 
         #endregion
+
+        public TestViewModel()
+        {
+            Task.Run(() =>
+            {
+                Info = new TempInfo();
+                Task.Run(() =>
+                {
+                    while (true)
+                    {
+                        Info.Value++;
+                        Thread.Sleep(300);
+                    }
+                });
+            });
+        }
     }
 }

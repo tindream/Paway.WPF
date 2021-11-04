@@ -17,7 +17,7 @@
                     <Setter Property="MinWidth" Value="30" />
                     <Setter Property="HorizontalAlignment" Value="Right" />
                     <Setter Property="VerticalAlignment" Value="Center" />
-                    <Setter Property="Background" Value="#00000000" />
+                    <Setter Property="Background" Value="Transparent" />
                     <Setter Property="BorderThickness" Value="1" />
                     <Setter Property="Padding" Value="1" />
                     <Setter Property="Template">
@@ -66,7 +66,7 @@
                                     <Border x:Name="CheckedStateOuterBorder"
                                             CornerRadius="4"
                                             Background="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:DataPager}}}"
-                                            BorderBrush="#00FFFFFF"
+                                            BorderBrush="Transparent"
                                             BorderThickness="{TemplateBinding BorderThickness}"
                                             Opacity="0" >
                                         <ContentPresenter x:Name="contentPresenterWhite"
@@ -78,11 +78,11 @@
                                     </Border>
                                     <Border x:Name="OuterBtnBorder"
                                             Background="{TemplateBinding Background}"
-                                            BorderBrush="#00FFFFFF"
+                                            BorderBrush="Transparent"
                                             BorderThickness="{TemplateBinding BorderThickness}">
                                         <Border x:Name="InnerBtnBorder"
                                             CornerRadius="4"
-                                                BorderBrush="#00CCD1D6"
+                                                BorderBrush="Transparent"
                                                 BorderThickness="{TemplateBinding BorderThickness}">
                                             <ContentPresenter x:Name="contentPresenter"
                                                               Content="{TemplateBinding Content}"
@@ -129,9 +129,9 @@
                 <ControlTemplate TargetType="local:DataPager">
                     <Grid Name="Root" Background="Transparent">
                         <Grid.Resources>
-                            <SolidColorBrush x:Key="BackgroundColor" Color="#00000000" />
-                            <SolidColorBrush x:Key="ForegroundColor" Color="#FF000000" />
-                            <SolidColorBrush x:Key="BorderBrushColor" Color="#FFFFFFFF" />
+                            <SolidColorBrush x:Key="BackgroundColor" Color="Transparent" />
+                            <SolidColorBrush x:Key="ForegroundColor" Color="Black" />
+                            <SolidColorBrush x:Key="BorderBrushColor" Color="White" />
                             <ControlTemplate x:Key="ButtonTemplate" TargetType="Button">
                                 <Grid>
                                     <VisualStateManager.VisualStateGroups>
@@ -142,7 +142,7 @@
                                                     <ColorAnimation Duration="0"
                                                                     Storyboard.TargetName="InnerBtnBorder"
                                                                     Storyboard.TargetProperty="(BorderBrush).Color"
-                                                                    To="#00FFFFFF" />
+                                                                    To="Transparent" />
                                                 </Storyboard>
                                             </VisualState>
                                             <VisualState x:Name="Disabled">
@@ -167,12 +167,12 @@
                                         </VisualStateGroup>
                                     </VisualStateManager.VisualStateGroups>
                                     <Border x:Name="OuterBtnBorder"
-                                            BorderBrush="#00FFFFFF"
+                                            BorderBrush="Transparent"
                                             Background="{TemplateBinding Background}"
                                             BorderThickness="{TemplateBinding BorderThickness}">
                                         <Border x:Name="InnerBtnBorder"
                                                 CornerRadius="4"
-                                                BorderBrush="#00CCD1D6"
+                                                BorderBrush="Transparent"
                                                 BorderThickness="{TemplateBinding BorderThickness}">
                                             <ContentPresenter x:Name="path"
                                                               Content="{TemplateBinding Content}" />

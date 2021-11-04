@@ -42,13 +42,13 @@
                                            VerticalAlignment="Center"
                                            Padding="5,0,0,0"
                                            FontSize="{TemplateBinding FontSize, Converter={StaticResource valueMultiConverter}}"
-                                           Foreground="{StaticResource LightText}"
+                                           Foreground="{StaticResource TextLight}"
                                            Text="{TemplateBinding Water}"/>
                                 <TextBlock x:Name="tbUnit" Grid.Column="2"
                                            VerticalAlignment="Center"
                                            Padding="0,0,3,0"
                                            FontSize="{TemplateBinding FontSize, Converter={StaticResource valueMultiConverter}}"
-                                           Foreground="{StaticResource LightText}"
+                                           Foreground="{StaticResource TextLight}"
                                            Text="{TemplateBinding Unit}"/>
                             </Grid>
                         </Border>
