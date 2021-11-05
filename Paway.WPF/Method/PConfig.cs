@@ -114,19 +114,19 @@ namespace Paway.WPF
         /// <summary>
         /// 信息色
         /// </summary>
-        public static Color Info { get; private set; } = Color.FromArgb(255, 0, 188, 212);
+        public static Color Info { get; set; } = Color.FromArgb(255, 0, 188, 212);
         /// <summary>
         /// 成功色
         /// </summary>
-        public static Color Success { get; private set; } = Color.FromArgb(255, 45, 184, 77);
+        public static Color Success { get; set; } = Color.FromArgb(255, 45, 184, 77);
         /// <summary>
         /// 警告色
         /// </summary>
-        public static Color Warn { get; private set; } = Color.FromArgb(255, 255, 153, 0);
+        public static Color Warn { get; set; } = Color.FromArgb(255, 255, 153, 0);
         /// <summary>
         /// 错误色
         /// </summary>
-        public static Color Error { get; private set; } = Color.FromArgb(255, 248, 51, 30);
+        public static Color Error { get; set; } = Color.FromArgb(255, 248, 51, 30);
 
         /// <summary>
         /// 文本

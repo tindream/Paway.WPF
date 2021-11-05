@@ -70,7 +70,7 @@ namespace Paway.WPF
             {
                 if (view.Type != ColorType.None)
                 {
-                    var color = view.Type == ColorType.Color ? PConfig.Color : view.Type.Color();
+                    var color = view.Type.Color();
                     view.ItemBackground = new BrushEXT(PMethod.AlphaColor(PConfig.Alpha, color));
                 }
                 if (view.IsLight)

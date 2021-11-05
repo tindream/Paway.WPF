@@ -147,6 +147,28 @@ namespace Paway.WPF
         /// <summary>
         /// 特性-枚举颜色
         /// </summary>
+        public static Color Color(this ColorType type)
+        {
+            switch (type)
+            {
+                case ColorType.Color: return PConfig.Color;
+                case ColorType.Info: return PConfig.Info;
+                case ColorType.Success: return PConfig.Success;
+                case ColorType.Warn: return PConfig.Warn;
+                case ColorType.Error: return PConfig.Error;
+
+                case ColorType.Text: return PConfig.TextColor;
+                case ColorType.TextSub: return PConfig.TextSub;
+                case ColorType.TextLight: return PConfig.TextLight;
+                case ColorType.Light: return PConfig.Light;
+                case ColorType.High: return PConfig.Color.AddLight(-90);
+
+                default: return Colors.Transparent;
+            }
+        }
+        /// <summary>
+        /// 特性-枚举颜色
+        /// </summary>
         public static Color Color(this MemberInfo pro)
         {
             var list = pro.GetCustomAttributes(typeof(ColorAttribute), false) as ColorAttribute[];
