@@ -102,7 +102,14 @@ namespace Paway.WPF
             if (value is string str)
             {
                 var strs = str.Split('|');
-                return new ImageEXT(strs.Length > 0 ? strs[0] : null, strs.Length > 1 ? strs[1] : null, strs.Length > 2 ? strs[2] : null);
+                try
+                {
+                    return new ImageEXT(strs.Length > 0 ? strs[0] : null, strs.Length > 1 ? strs[1] : null, strs.Length > 2 ? strs[2] : null);
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
             }
             return base.ConvertFrom(context, culture, value);
         }
