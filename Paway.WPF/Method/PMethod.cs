@@ -40,72 +40,88 @@ namespace Paway.WPF
         /// </summary>
         public static void Invoke(DependencyObject obj, Action action, Action<Exception> error = null)
         {
-            obj.Dispatcher.Invoke(() =>
+            try
             {
-                try
+                obj.Dispatcher.Invoke(() =>
                 {
-                    action.Invoke();
-                }
-                catch (Exception ex)
-                {
-                    if (error == null) ex.Log();
-                    else error.Invoke(ex);
-                }
-            });
+                    try
+                    {
+                        action.Invoke();
+                    }
+                    catch (Exception ex)
+                    {
+                        if (error == null) ex.Log();
+                        else error.Invoke(ex);
+                    }
+                });
+            }
+            catch (Exception) { }
         }
         /// <summary>
         /// 带参数同步调用
         /// </summary>
         public static void Invoke<T>(DependencyObject obj, Action<T> action, T t, Action<Exception> error = null)
         {
-            obj.Dispatcher.Invoke(() =>
+            try
             {
-                try
+                obj.Dispatcher.Invoke(() =>
                 {
-                    action.Invoke(t);
-                }
-                catch (Exception ex)
-                {
-                    if (error == null) ex.Log();
-                    else error.Invoke(ex);
-                }
-            });
+                    try
+                    {
+                        action.Invoke(t);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (error == null) ex.Log();
+                        else error.Invoke(ex);
+                    }
+                });
+            }
+            catch (Exception) { }
         }
         /// <summary>
         /// 异步调用
         /// </summary>
         public static void BeginInvoke(DependencyObject obj, Action action, Action<Exception> error = null)
         {
-            obj.Dispatcher.BeginInvoke(new Action(() =>
+            try
             {
-                try
+                obj.Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    action.Invoke();
-                }
-                catch (Exception ex)
-                {
-                    if (error == null) ex.Log();
-                    else error.Invoke(ex);
-                }
-            }));
+                    try
+                    {
+                        action.Invoke();
+                    }
+                    catch (Exception ex)
+                    {
+                        if (error == null) ex.Log();
+                        else error.Invoke(ex);
+                    }
+                }));
+            }
+            catch (Exception) { }
         }
         /// <summary>
         /// 带参数异步调用
         /// </summary>
         public static void BeginInvoke<T>(DependencyObject obj, Action<T> action, T t, Action<Exception> error = null)
         {
-            obj.Dispatcher.BeginInvoke(new Action(() =>
+            try
             {
-                try
+                obj.Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    action.Invoke(t);
-                }
-                catch (Exception ex)
-                {
-                    if (error == null) ex.Log();
-                    else error.Invoke(ex);
-                }
-            }));
+                    try
+                    {
+                        action.Invoke(t);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (error == null) ex.Log();
+                        else error.Invoke(ex);
+                    }
+                }));
+            }
+            catch (Exception) { }
         }
 
         #endregion
@@ -234,7 +250,7 @@ namespace Paway.WPF
             var myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
             if (myAdornerLayer == null) return null;
 
-            if (Element != null) ClearAdorner(AdornerLayer.GetAdornerLayer(Element), NameWater);
+            if (Element != null) ClearAdorner(AdornerLayer.GetAdornerLayer(Element), Element, NameWater);
             var point = e.GetPosition(element);
             var x = Math.Max(element.ActualWidth - point.X, point.X);
             var y = Math.Max(element.ActualHeight - point.Y, point.Y);
@@ -250,16 +266,16 @@ namespace Paway.WPF
         /// <summary>
         /// 清除装饰器上指定名称装饰
         /// </summary>
-        private static void ClearAdorner(AdornerLayer myAdornerLayer, string name)
+        private static void ClearAdorner(AdornerLayer myAdornerLayer, FrameworkElement element, string name)
         {
             if (myAdornerLayer == null) return;
-            var list = myAdornerLayer.GetAdorners(Element);
+            var list = myAdornerLayer.GetAdorners(element);
             while (list != null)
             {
                 var last = list.FirstOrDefault(c => c.Name == name);
                 if (last == null) break;
                 myAdornerLayer.Remove(last);
-                list = myAdornerLayer.GetAdorners(Element);
+                list = myAdornerLayer.GetAdorners(element);
             }
         }
         /// <summary>
@@ -556,7 +572,7 @@ namespace Paway.WPF
                     border.Child = block;
                     if (time == 0) time = 3000;
 
-                    ClearAdorner(myAdornerLayer, NameHit);
+                    ClearAdorner(myAdornerLayer, panel, NameHit);
                     myAdornerLayer.Add(new CustomAdorner(panel, () => border, boardFunc: () =>
                     {
                         var storyboard = new Storyboard();
