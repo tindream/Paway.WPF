@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paway.Helper;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -126,9 +127,11 @@ namespace Paway.WPF
             if (x + y < 0) interval *= -1;
             var percent = interval * 0.35 / this.ActualWidth;
             var temp = this.Value + (this.Maximum - this.Minimum) * percent;
+            var count = (temp / this.SmallChange).ToInt();
+            temp = count * this.SmallChange;
             if (temp > this.Maximum) temp = this.Maximum;
             else if (temp < this.Minimum) temp = this.Minimum;
-            this.Value = temp;
+            if (this.Value != temp) this.Value = temp;
         }
 
         #endregion

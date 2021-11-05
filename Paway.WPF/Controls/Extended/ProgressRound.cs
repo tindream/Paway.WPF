@@ -24,11 +24,7 @@ namespace Paway.WPF
         {
             if (obj is ProgressRound bar)
             {
-                bar.LayoutUpdated += delegate
-                {
-                    var value = $"{bar.Value * 100 / bar.Maximum:F0}%";
-                    if (bar.ProgressValue != value) bar.SetValue(ProgressValueProperty, value);
-                };
+                UpdateText(bar);
                 if ((bool)e.NewValue)
                 {
                     bar.ValueChanged += Bar_ValueChanged;
@@ -41,10 +37,22 @@ namespace Paway.WPF
         }
         private static void Bar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (sender is ProgressBar bar)
+            if (sender is ProgressRound bar) UpdateText(bar);
+        }
+        private static void UpdateText(ProgressRound bar)
+        {
+            if (bar.Dot == -2)
             {
-                bar.SetValue(ProgressValueProperty, $"{bar.Value * 100 / bar.Maximum:F0}%");
+                var value = (bar.Maximum - bar.Minimum) / bar.SmallChange;
+                while (value / 10 >= 0.5)
+                {
+                    bar.Dot++;
+                    value /= 10;
+                }
+                if (bar.Dot < 0) bar.Dot = 0;
             }
+            var text = $"{PMethod.Rounds((bar.Value - bar.Minimum) * 100 / (bar.Maximum - bar.Minimum), bar.Dot)}%";
+            if (bar.ProgressValue != text) bar.SetValue(ProgressValueProperty, text);
         }
         /// <summary>
         /// 启用监听
@@ -54,6 +62,10 @@ namespace Paway.WPF
             get { return (bool)GetValue(IsMonitoringProperty); }
             set { SetValue(IsMonitoringProperty, value); }
         }
+        /// <summary>
+        /// 小数位数
+        /// </summary>
+        internal int Dot { get; set; } = -2;
 
         #endregion
 
@@ -145,6 +157,14 @@ namespace Paway.WPF
         public ProgressRound()
         {
             DefaultStyleKey = typeof(ProgressRound);
+        }
+        /// <summary>
+        /// 呈现时更新进度文本
+        /// </summary>
+        protected override void OnRender(DrawingContext drawingContext)
+        {
+            base.OnRender(drawingContext);
+            UpdateText(this);
         }
         /// <summary>
         /// 锁定长宽比

@@ -129,7 +129,7 @@
         </ExpanderEXT>
         <ExpanderEXT ExpandDirection="Right" DockPanel.Dock="Right" Header="显示">
             <StackPanel Width="250" MaxWidth="300">
-                <ProgressBarEXT Value="95" Name="progress"/>
+                <ProgressBarEXT Value="20.4" Minimum="-20" Maximum="50" Name="progress" SmallChange="0.2"/>
                 <WrapPanel>
                     <CheckBoxEXT x:Name="cbx" Content="Hello" IsChecked="True"/>
                     <CheckBoxEXT Content="World" IsChecked="{x:Null}"/>
@@ -177,7 +177,7 @@
                     <Progress Width="40" Height="40" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <ProgressRound Value="35" Width="70"/>
+                    <ProgressRound Value="35.2" Width="70"/>
                     <ProgressBoard Value="35" Width="70"/>
                 </StackPanel>
                 <CalendarEXT/>

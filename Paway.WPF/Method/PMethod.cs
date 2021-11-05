@@ -30,6 +30,10 @@ namespace Paway.WPF
     /// </summary>
     public class PMethod : TMethod
     {
+        private static string NameWater = $"{nameof(PMethod)}_{nameof(WaterAdornerFixed)}";
+        private static string NameProgress = $"{nameof(PMethod)}_{nameof(Progress)}";
+        private static string NameHit = $"{nameof(PMethod)}_{nameof(Hit)}";
+
         #region 统一Invoke处理
         /// <summary>
         /// 同步调用
@@ -227,10 +231,10 @@ namespace Paway.WPF
         /// </summary>
         public static AdornerLayer WaterAdornerFixed(FrameworkElement element, MouseEventArgs e, double width = 100)
         {
-            ClearWaterAdornerFixed();
             var myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
             if (myAdornerLayer == null) return null;
 
+            if (Element != null) ClearAdorner(AdornerLayer.GetAdornerLayer(Element), NameWater);
             var point = e.GetPosition(element);
             var x = Math.Max(element.ActualWidth - point.X, point.X);
             var y = Math.Max(element.ActualHeight - point.Y, point.Y);
@@ -238,20 +242,21 @@ namespace Paway.WPF
             if (width == 0 || width > autoWidth) width = autoWidth;
 
             var ellipse = new Ellipse() { Width = width, Height = width, Fill = new SolidColorBrush(Color.FromArgb(20, 0, 0, 0)) };
-            var waterAdornerFixed = new CustomAdorner(element, () => ellipse, null, () => point.X - ellipse.ActualWidth / 2, () => point.Y - ellipse.ActualHeight / 2, hitTest: false) { Name = "WaterAdornerFixed" };
+            var waterAdornerFixed = new CustomAdorner(element, () => ellipse, null, () => point.X - ellipse.ActualWidth / 2, () => point.Y - ellipse.ActualHeight / 2, hitTest: false) { Name = NameWater };
             myAdornerLayer.Add(waterAdornerFixed);
             Element = element;
             return myAdornerLayer;
         }
-        private static void ClearWaterAdornerFixed()
+        /// <summary>
+        /// 清除装饰器上指定名称装饰
+        /// </summary>
+        private static void ClearAdorner(AdornerLayer myAdornerLayer, string name)
         {
-            if (Element == null) return;
-            var myAdornerLayer = AdornerLayer.GetAdornerLayer(Element);
             if (myAdornerLayer == null) return;
             var list = myAdornerLayer.GetAdorners(Element);
             while (list != null)
             {
-                var last = list.FirstOrDefault(c => c.Name == "WaterAdornerFixed");
+                var last = list.FirstOrDefault(c => c.Name == name);
                 if (last == null) break;
                 myAdornerLayer.Remove(last);
                 list = myAdornerLayer.GetAdorners(Element);
@@ -371,7 +376,7 @@ namespace Paway.WPF
                     Width = 80,
                     Height = 80,
                 });
-                var progress = new CustomAdorner(panel, () => border, Color.FromArgb(10, 0, 0, 0)) { Name = "Progress" };
+                var progress = new CustomAdorner(panel, () => border, Color.FromArgb(10, 0, 0, 0)) { Name = NameProgress };
                 myAdornerLayer.Add(progress);
             }
         }
@@ -401,7 +406,7 @@ namespace Paway.WPF
                     var list = myAdornerLayer.GetAdorners(panel);
                     if (list != null)
                     {
-                        myAdornerLayer.Remove(list.FirstOrDefault(c => c.Name == "Progress"));
+                        myAdornerLayer.Remove(list.FirstOrDefault(c => c.Name == NameProgress));
                     }
                 }
             });
@@ -550,6 +555,8 @@ namespace Paway.WPF
                     };
                     border.Child = block;
                     if (time == 0) time = 3000;
+
+                    ClearAdorner(myAdornerLayer, NameHit);
                     myAdornerLayer.Add(new CustomAdorner(panel, () => border, boardFunc: () =>
                     {
                         var storyboard = new Storyboard();
@@ -588,7 +595,8 @@ namespace Paway.WPF
                         storyboard.Children.Add(animColor);
 
                         return storyboard;
-                    }));
+                    })
+                    { Name = NameHit });
                 }
             });
         }
