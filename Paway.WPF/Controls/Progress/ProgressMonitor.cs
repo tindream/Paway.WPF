@@ -23,7 +23,8 @@ namespace Paway.WPF
         {
             if (obj is Progress progress)
             {
-                progress.LayoutUpdated += delegate
+                //LayoutUpdated 在设计器设计可观察效果，但运行过程中一直触发
+                progress.Loaded += delegate
                 {
                     var width = 20d;
                     var height = 20d;

@@ -64,7 +64,7 @@ namespace Paway.WPF
         {
             if (obj is SliderEXT slider)
             {
-                slider.LayoutUpdated += delegate
+                slider.Loaded += delegate
                 {
                     if (((CornerRadius)slider.GetValue(RadiusLeftProperty)).TopLeft != slider.Radius.TopLeft)
                         slider.SetValue(RadiusLeftProperty, new CornerRadius(slider.Radius.TopLeft, 0, 0, slider.Radius.BottomLeft));

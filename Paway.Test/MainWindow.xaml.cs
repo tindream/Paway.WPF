@@ -57,7 +57,7 @@ namespace Paway.Test
 
             //Method.Progress(this, () =>
             //{
-            //    Thread.Sleep(1000);
+            //    Thread.Sleep(2000);
             //});
 
             storyboard.Stop(this);
