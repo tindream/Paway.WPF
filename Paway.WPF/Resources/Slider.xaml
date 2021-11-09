@@ -7,16 +7,17 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="DecreaseRepeatButtonLeft" TargetType="{x:Type RepeatButton}">
+        <Setter Property="local:SliderMonitor.IsMonitoring" Value="True"/>
         <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True"/>
         <Setter Property="Panel.Background" >
             <Setter.Value>
                 <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
                     <GradientStop 
                         Offset="0"
-                        Color="{Binding TrackColorLinear.Start, RelativeSource={RelativeSource TemplatedParent}}" />
+                        Color="{Binding Path=(local:SliderMonitor.TrackColorLinear).Start, RelativeSource={RelativeSource Self}}" />
                     <GradientStop
                         Offset="1"
-                        Color="{Binding TrackColorLinear.End, RelativeSource={RelativeSource TemplatedParent}}" />
+                        Color="{Binding Path=(local:SliderMonitor.TrackColorLinear).End, RelativeSource={RelativeSource Self}}" />
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>
@@ -37,16 +38,17 @@
         </Setter>
     </Style>
     <Style x:Key="DecreaseRepeatButtonBottom" TargetType="{x:Type RepeatButton}">
+        <Setter Property="local:SliderMonitor.IsMonitoring" Value="True"/>
         <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True"/>
         <Setter Property="Panel.Background" >
             <Setter.Value>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop 
                         Offset="1"
-                        Color="{Binding TrackColorLinear.Start, RelativeSource={RelativeSource AncestorType=local:SliderEXT}}" />
+                        Color="{Binding Path=(local:SliderMonitor.TrackColorLinear).Start, RelativeSource={RelativeSource Self}}" />
                     <GradientStop
                         Offset="0"
-                        Color="{Binding TrackColorLinear.End, RelativeSource={RelativeSource AncestorType=local:SliderEXT}}" />
+                        Color="{Binding Path=(local:SliderMonitor.TrackColorLinear).End, RelativeSource={RelativeSource Self}}" />
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>

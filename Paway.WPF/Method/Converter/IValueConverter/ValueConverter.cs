@@ -37,13 +37,17 @@ namespace Paway.WPF
         {
             var temp = value.ToDouble();
             var param = parameter == null ? -2 : parameter.ToDouble();
-            return temp + param;
+            var result = temp + param;
+            if (result < 0) result = 0;
+            return result;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var temp = value.ToDouble();
             var param = parameter == null ? -2 : parameter.ToDouble();
-            return temp - param;
+            var result = temp - param;
+            if (result < 0) result = 0;
+            return result;
         }
     }
 }

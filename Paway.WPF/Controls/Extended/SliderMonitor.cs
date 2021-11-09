@@ -15,9 +15,9 @@ namespace Paway.WPF
     /// </summary>
     internal class SliderMonitor : DependencyObject
     {
-        #region 启用监听，获取Slider属性并设置到Thumb
+        #region 启用监听，获取Slider属性并设置到Thumb、RepeatButton
         /// <summary>
-        /// 启用监听，获取ScrollViewer属性并设置到Thumb
+        /// 启用监听，获取ScrollViewer属性并设置到Thumb、RepeatButton
         /// </summary>
         public static readonly DependencyProperty IsMonitoringProperty =
             DependencyProperty.RegisterAttached(nameof(IsMonitoring), typeof(bool), typeof(SliderMonitor), new UIPropertyMetadata(false, OnIsMonitoringChanged));
@@ -31,6 +31,15 @@ namespace Paway.WPF
                     return;
                 }
                 thumb.SetValue(ButtonTypeProperty, new SliderEXT().ButtonType);
+            }
+            else if (obj is RepeatButton repeatButton)
+            {
+                if (repeatButton.TemplatedParent is SliderEXT sliderEXT)
+                {
+                    repeatButton.SetValue(TrackColorLinearProperty, sliderEXT.TrackColorLinear);
+                    return;
+                }
+                repeatButton.SetValue(TrackColorLinearProperty, new SliderEXT().TrackColorLinear);
             }
         }
         /// <summary>
@@ -57,6 +66,19 @@ namespace Paway.WPF
         {
             get { return (ButtonType)GetValue(ButtonTypeProperty); }
             set { SetValue(ButtonTypeProperty, value); }
+        }
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty TrackColorLinearProperty =
+            DependencyProperty.RegisterAttached(nameof(TrackColorLinear), typeof(ColorLinear), typeof(SliderMonitor),
+                new PropertyMetadata(new ColorLinear()));
+        /// <summary>
+        /// 轨道线性颜色
+        /// </summary>
+        public ColorLinear TrackColorLinear
+        {
+            get { return (ColorLinear)GetValue(TrackColorLinearProperty); }
+            set { SetValue(TrackColorLinearProperty, value); }
         }
 
         #endregion

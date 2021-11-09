@@ -80,7 +80,7 @@ namespace Paway.Test
         #endregion
 
         #region 自动升级
-        private void AutoUpdate()
+        private void AutoUpdate(DbCommand arg)
         {
             #region 1.0
             if (Config.Admin.Version == 0)
@@ -90,7 +90,7 @@ namespace Paway.Test
                     //base.Execute("alter table [AlarmRecords] add column [DeviceId] int;", cmd);
                     //Config.Admin.Version = 32;
                     //Update(nameof(Config.Admin.Version), cmd);
-                });
+                }, arg);
             }
 
             #endregion
@@ -111,7 +111,7 @@ namespace Paway.Test
             base.ExecuteCommand(cmd =>
             {
                 Config.Admin = FindAdmin(cmd);
-                AutoUpdate();
+                AutoUpdate(cmd);
             });
         }
         private AdminInfo FindAdmin(DbCommand cmd = null)

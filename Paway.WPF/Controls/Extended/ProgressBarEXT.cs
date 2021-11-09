@@ -25,13 +25,10 @@ namespace Paway.WPF
             if (obj is ProgressBarEXT bar)
             {
                 UpdateText(bar);
+                bar.ValueChanged -= Bar_ValueChanged;
                 if ((bool)e.NewValue)
                 {
                     bar.ValueChanged += Bar_ValueChanged;
-                }
-                else
-                {
-                    bar.ValueChanged -= Bar_ValueChanged;
                 }
             }
         }

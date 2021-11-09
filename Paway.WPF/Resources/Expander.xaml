@@ -162,7 +162,6 @@
                 <ControlTemplate TargetType="{x:Type local:ExpanderEXT}">
                     <Border Name="border" 
                             BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"
-                            Padding="{Binding BorderThickness}"
                             CornerRadius="{TemplateBinding Radius}"
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid>

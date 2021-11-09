@@ -32,17 +32,14 @@ namespace Paway.WPF
             if (obj is PasswordBox pad)
             {
                 pad.SetValue(PasswordLengthProperty, pad.Password.Length);
+                pad.PasswordChanged -= PasswordChanged;
+                pad.MouseEnter -= Pad_MouseEnter;
+                pad.MouseLeave -= Pad_MouseLeave;
                 if ((bool)e.NewValue)
                 {
                     pad.PasswordChanged += PasswordChanged;
                     pad.MouseEnter += Pad_MouseEnter;
                     pad.MouseLeave += Pad_MouseLeave;
-                }
-                else
-                {
-                    pad.PasswordChanged -= PasswordChanged;
-                    pad.MouseEnter -= Pad_MouseEnter;
-                    pad.MouseLeave -= Pad_MouseLeave;
                 }
             }
         }
