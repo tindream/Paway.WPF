@@ -278,6 +278,7 @@
         </Setter>
     </Style>
     <Style x:Key="CalendarItemStyle" TargetType="{x:Type CalendarItem}">
+        <Setter Property="local:CalendarMonitor.IsMonitoring" Value="True"/>
         <Setter Property="Margin" Value="0,3"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -523,13 +524,8 @@
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
                                     </Grid>
-                                    <Grid Grid.Row="2" Grid.ColumnSpan="3">
-                                        <Grid.Visibility>
-                                            <MultiBinding Converter="{StaticResource nullSelector}">
-                                                <Binding Path="HasButton" RelativeSource="{RelativeSource AncestorType=local:CalendarEXT}" Converter="{StaticResource boolToVisible}"/>
-                                                <Binding Path="HasButton" RelativeSource="{RelativeSource AncestorType=local:DatePickerEXT}" Converter="{StaticResource boolToVisible}"/>
-                                            </MultiBinding>
-                                        </Grid.Visibility>
+                                    <Grid Grid.Row="2" Grid.ColumnSpan="3" 
+                                          Visibility="{Binding Path=(local:CalendarMonitor.HasButton), RelativeSource={RelativeSource Self}, Converter={StaticResource boolToVisible}}">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                             <ColumnDefinition Width="*"></ColumnDefinition>

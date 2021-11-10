@@ -17,7 +17,7 @@ namespace Paway.WPF
     {
         #region 启用监听，获取Slider属性并设置到Thumb、RepeatButton
         /// <summary>
-        /// 启用监听，获取ScrollViewer属性并设置到Thumb、RepeatButton
+        /// 启用监听，获取Slider属性并设置到Thumb、RepeatButton
         /// </summary>
         public static readonly DependencyProperty IsMonitoringProperty =
             DependencyProperty.RegisterAttached(nameof(IsMonitoring), typeof(bool), typeof(SliderMonitor), new UIPropertyMetadata(false, OnIsMonitoringChanged));
@@ -28,18 +28,14 @@ namespace Paway.WPF
                 if (thumb.TemplatedParent is SliderEXT sliderEXT)
                 {
                     thumb.SetValue(ButtonTypeProperty, sliderEXT.ButtonType);
-                    return;
                 }
-                thumb.SetValue(ButtonTypeProperty, new SliderEXT().ButtonType);
             }
             else if (obj is RepeatButton repeatButton)
             {
                 if (repeatButton.TemplatedParent is SliderEXT sliderEXT)
                 {
                     repeatButton.SetValue(TrackColorLinearProperty, sliderEXT.TrackColorLinear);
-                    return;
                 }
-                repeatButton.SetValue(TrackColorLinearProperty, new SliderEXT().TrackColorLinear);
             }
         }
         /// <summary>
@@ -58,7 +54,8 @@ namespace Paway.WPF
         /// 按钮类型
         /// </summary>
         public static readonly DependencyProperty ButtonTypeProperty =
-            DependencyProperty.RegisterAttached(nameof(ButtonType), typeof(ButtonType), typeof(SliderMonitor));
+            DependencyProperty.RegisterAttached(nameof(ButtonType), typeof(ButtonType), typeof(SliderMonitor),
+                new PropertyMetadata(ButtonType.Round));
         /// <summary>
         /// 按钮类型
         /// </summary>

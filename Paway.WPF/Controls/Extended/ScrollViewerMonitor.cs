@@ -31,7 +31,6 @@ namespace Paway.WPF
                     {
                         thumb.SetValue(ScrollBarRadiusProperty, scrollViewerEXT.ScrollBarRadius);
                         thumb.SetValue(ScrollBarColorProperty, scrollViewerEXT.ScrollBarColor);
-                        return;
                     }
                     else if (scrollBar.TemplatedParent is ScrollViewer scrollViewer)
                     {
@@ -42,8 +41,6 @@ namespace Paway.WPF
                         }
                     }
                 }
-                thumb.SetValue(ScrollBarRadiusProperty, new ScrollViewerEXT().ScrollBarRadius);
-                thumb.SetValue(ScrollBarColorProperty, new ScrollViewerEXT().ScrollBarColor);
             }
         }
         private static void SetVerticalScrollBarMargin(Thumb thumb, DataGridEXT dataGrid)
@@ -69,12 +66,12 @@ namespace Paway.WPF
         /// 滚动条圆角
         /// </summary>
         public static readonly DependencyProperty ScrollBarRadiusProperty =
-            DependencyProperty.RegisterAttached("ScrollBarRadius", typeof(CornerRadius), typeof(ScrollViewerMonitor));
+            DependencyProperty.RegisterAttached("ScrollBarRadius", typeof(CornerRadius), typeof(ScrollViewerMonitor), new PropertyMetadata(new CornerRadius(4)));
         /// <summary>
         /// 滚动条颜色
         /// </summary>
         public static readonly DependencyProperty ScrollBarColorProperty =
-            DependencyProperty.RegisterAttached("ScrollBarColor", typeof(Brush), typeof(ScrollViewerMonitor));
+            DependencyProperty.RegisterAttached("ScrollBarColor", typeof(Brush), typeof(ScrollViewerMonitor), new PropertyMetadata(new SolidColorBrush(PMethod.AlphaColor(PConfig.Alpha, Colors.DarkGray))));
         /// <summary>
         /// 垂直滚动条外边距
         /// </summary>

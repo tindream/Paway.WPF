@@ -9,13 +9,14 @@
         DataContext="{Binding Test ,Source={StaticResource Locator}}"
         Title="TestWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
-        <DockPanel HorizontalAlignment="Center" Height="200" Width="200" VerticalAlignment="Center">
+        <DockPanel HorizontalAlignment="Center" Width="200" VerticalAlignment="Center">
             <ButtonEXT Name="btnCancel" Content="取消"  AnimationHelper.Value="Bottom"
-                               Type="Warn" IsLight="True" ShadowRadius="10" ShadowColor="Red"
+                               Type="Warn" IsLight="True" ShadowRadius="10"
                                ImageStretch="None" ImageMargin="0,0,-24,0"
                                Image="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"
                        DockPanel.Dock="Top"/>
-            <DataGridEXT ItemsSource="{Binding List}"/>
+            <CalendarEXT DockPanel.Dock="Top"/>
+            <!--<DatePickerEXT Name="dp"/>-->
         </DockPanel>
     </Grid>
 </WindowEXT>
