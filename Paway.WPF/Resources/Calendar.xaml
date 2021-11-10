@@ -10,14 +10,8 @@
 
     <!--选择年月按钮-->
     <Style x:Key="CalendarButtonStyle" TargetType="{x:Type CalendarButton}">
-        <Setter Property="Background">
-            <Setter.Value>
-                <MultiBinding Converter="{StaticResource nullSelector}">
-                    <Binding Path="ItemBrush.Mouse" RelativeSource="{RelativeSource AncestorType=local:CalendarEXT}"/>
-                    <Binding Path="ItemBrush.Mouse" RelativeSource="{RelativeSource AncestorType=local:DatePickerEXT}"/>
-                </MultiBinding>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="local:CalendarMonitor.IsMonitoring" Value="True"/>
+        <Setter Property="Background" Value="{Binding Path=(local:CalendarMonitor.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="Width" Value="40"/>
         <Setter Property="Height" Value="40"/>
         <Setter Property="FontSize" Value="12"/>
@@ -107,14 +101,8 @@
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         <Border x:Name="CalendarButtonFocusVisual" IsHitTestVisible="False" CornerRadius="20" 
-                                BorderThickness="0" Visibility="Collapsed">
-                            <Border.BorderBrush>
-                                <MultiBinding Converter="{StaticResource nullSelector}">
-                                    <Binding Path="ItemBrush.Pressed" RelativeSource="{RelativeSource AncestorType=local:CalendarEXT}"/>
-                                    <Binding Path="ItemBrush.Pressed" RelativeSource="{RelativeSource AncestorType=local:DatePickerEXT}"/>
-                                </MultiBinding>
-                            </Border.BorderBrush>
-                        </Border>
+                                BorderThickness="0" Visibility="Collapsed"
+                                BorderBrush="{Binding Path=(local:CalendarMonitor.ItemBrush).Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">
@@ -127,6 +115,7 @@
     </Style>
     <!--选择日按钮-->
     <Style x:Key="CalendarDayButtonStyle" TargetType="{x:Type CalendarDayButton}">
+        <Setter Property="local:CalendarMonitor.IsMonitoring" Value="True"/>
         <Setter Property="Width" Value="28"/>
         <Setter Property="Height" Value="22"/>
         <Setter Property="FontSize" Value="12"/>
@@ -232,31 +221,13 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Border x:Name="TodayBackground" Opacity="0" CornerRadius="22">
-                            <Border.Background>
-                                <MultiBinding Converter="{StaticResource nullSelector}">
-                                    <Binding Path="ItemBrush.Pressed" RelativeSource="{RelativeSource AncestorType=local:CalendarEXT}"/>
-                                    <Binding Path="ItemBrush.Pressed" RelativeSource="{RelativeSource AncestorType=local:DatePickerEXT}"/>
-                                </MultiBinding>
-                            </Border.Background>
-                        </Border>
-                        <Border x:Name="SelectedBackground" Opacity="0" CornerRadius="22">
-                            <Border.Background>
-                                <MultiBinding Converter="{StaticResource nullSelector}">
-                                    <Binding Path="ItemBrush.Mouse" RelativeSource="{RelativeSource AncestorType=local:CalendarEXT}"/>
-                                    <Binding Path="ItemBrush.Mouse" RelativeSource="{RelativeSource AncestorType=local:DatePickerEXT}"/>
-                                </MultiBinding>
-                            </Border.Background>
-                        </Border>
+                        <Border x:Name="TodayBackground" Opacity="0" CornerRadius="22"
+                                Background="{Binding Path=(local:CalendarMonitor.ItemBrush).Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        <Border x:Name="SelectedBackground" Opacity="0" CornerRadius="22"
+                                Background="{Binding Path=(local:CalendarMonitor.ItemBrush).Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
                         <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"/>
-                        <Border x:Name="HighlightBackground" Opacity="0" CornerRadius="22">
-                            <Border.Background>
-                                <MultiBinding Converter="{StaticResource nullSelector}">
-                                    <Binding Path="ItemBrush.Mouse" RelativeSource="{RelativeSource AncestorType=local:CalendarEXT}"/>
-                                    <Binding Path="ItemBrush.Mouse" RelativeSource="{RelativeSource AncestorType=local:DatePickerEXT}"/>
-                                </MultiBinding>
-                            </Border.Background>
-                        </Border>
+                        <Border x:Name="HighlightBackground" Opacity="0" CornerRadius="22"
+                                Background="{Binding Path=(local:CalendarMonitor.ItemBrush).Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
                         <ContentPresenter x:Name="NormalText" ContentTemplate="{TemplateBinding ContentTemplate}" 
                                           Margin="5,1" 
                                           Content="{TemplateBinding Content}" 
@@ -525,7 +496,7 @@
                                         </Grid.RowDefinitions>
                                     </Grid>
                                     <Grid Grid.Row="2" Grid.ColumnSpan="3" 
-                                          Visibility="{Binding Path=(local:CalendarMonitor.HasButton), RelativeSource={RelativeSource Self}, Converter={StaticResource boolToVisible}}">
+                                          Visibility="{Binding Path=(local:CalendarMonitor.HasButton), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource boolToVisible}}">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                             <ColumnDefinition Width="*"></ColumnDefinition>

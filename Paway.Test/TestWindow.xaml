@@ -12,11 +12,11 @@
         <DockPanel HorizontalAlignment="Center" Width="200" VerticalAlignment="Center">
             <ButtonEXT Name="btnCancel" Content="取消"  AnimationHelper.Value="Bottom"
                                Type="Warn" IsLight="True" ShadowRadius="10"
-                               ImageStretch="None" ImageMargin="0,0,-24,0"
+                               ImageStretch="None" ImageMargin="-24,0,0,0" ImageDock="Right"
                                Image="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"
                        DockPanel.Dock="Top"/>
-            <CalendarEXT DockPanel.Dock="Top"/>
-            <!--<DatePickerEXT Name="dp"/>-->
+            <CalendarEXT DockPanel.Dock="Top" HasButton="True" ItemBrush="Red"/>
+            <DatePickerEXT Name="dp" HasButton="False" ItemBrush="Green"/>
         </DockPanel>
     </Grid>
 </WindowEXT>

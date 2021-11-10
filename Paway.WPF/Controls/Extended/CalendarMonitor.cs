@@ -29,20 +29,51 @@ namespace Paway.WPF
                 {
                     calendarItem.SetValue(HasButtonProperty, calendar.HasButton);
                 }
+                else if (calendarItem.TemplatedParent is Calendar calendar1)
+                {
+                    if (calendar1.Parent is FrameworkElement element)
+                    {
+                        if (element.TemplatedParent is DatePickerEXT datePicker)
+                        {
+                            calendarItem.SetValue(HasButtonProperty, datePicker.HasButton);
+                        }
+                    }
+                }
             }
             else if (obj is CalendarButton calendarButton)
             {
-                if (calendarButton.Parent != null)
-                { }
-                if (calendarButton.TemplatedParent != null)
-                { }
-                if (calendarButton.TemplatedParent is CalendarEXT calendar)
-                {
-                    calendarButton.SetValue(ItemBrushProperty, calendar.ItemBrush);
-                }
+                ButtonBrush(calendarButton);
             }
-            else
-            { }
+            else if (obj is CalendarDayButton calendarDayButton)
+            {
+                ButtonBrush(calendarDayButton);
+            }
+        }
+        private static void ButtonBrush(Button buttom)
+        {
+            buttom.Loaded += delegate
+            {
+                if (buttom.Parent is FrameworkElement element)
+                {
+                    if (element.TemplatedParent is CalendarItem calendarItem1)
+                    {
+                        if (calendarItem1.TemplatedParent is CalendarEXT calendar)
+                        {
+                            buttom.SetValue(ItemBrushProperty, calendar.ItemBrush);
+                        }
+                        else if (calendarItem1.TemplatedParent is Calendar calendar1)
+                        {
+                            if (calendar1.Parent is FrameworkElement element1)
+                            {
+                                if (element1.TemplatedParent is DatePickerEXT datePicker)
+                                {
+                                    buttom.SetValue(ItemBrushProperty, datePicker.ItemBrush);
+                                }
+                            }
+                        }
+                    }
+                }
+            };
         }
         /// <summary>
         /// 启用监听
