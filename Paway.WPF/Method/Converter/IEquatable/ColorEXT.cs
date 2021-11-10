@@ -49,10 +49,7 @@ namespace Paway.WPF
         {
             if (this.Normal is Color normal && normal.R == obj.R && normal.G == obj.G && normal.B == obj.B)
             {
-                if (normal != Colors.LightGray && normal != Color.FromArgb(255, 254, 254, 254) && normal != Colors.LightGray)
-                {
-                    this.Normal = PMethod.ThemeColor(normal.A);
-                }
+                this.Normal = PMethod.ThemeColor(normal.A);
             }
             if (this.Mouse is Color mouse && mouse.R == obj.R && mouse.G == obj.G && mouse.B == obj.B)
             {
@@ -63,10 +60,6 @@ namespace Paway.WPF
                 this.Pressed = PMethod.ThemeColor(pressed.A);
             }
         }
-        /// <summary>
-        /// 主题色：普通、鼠标移过、alpha变量
-        /// </summary>
-        public ColorEXT(Color? normal, byte mouse, byte pressed) : this(normal, PMethod.ThemeColor(mouse), PMethod.ThemeColor(pressed)) { }
         /// <summary>
         /// </summary>
         public ColorEXT(Color? normal, Color? mouse = null, Color? pressed = null, int? alpha = null, ColorEXT value = null) : this()

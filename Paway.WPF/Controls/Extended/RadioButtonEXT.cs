@@ -18,7 +18,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(RadioButtonEXT),
-                new PropertyMetadata(new BrushEXT(Colors.DarkGray, PConfig.Alpha - PConfig.Interval, PConfig.Alpha + PConfig.Interval)));
+                new PropertyMetadata(new BrushEXT() { Normal = new SolidColorBrush(Colors.DarkGray) }));
 
         #endregion
 

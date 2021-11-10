@@ -10,21 +10,12 @@
         Title="TestWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <DockPanel HorizontalAlignment="Center" Height="200" Width="200" VerticalAlignment="Center">
-            <ExpanderEXT DockPanel.Dock="Bottom" Header="你好">
-                <DockPanel>
-                    <ButtonEXT DockPanel.Dock="Top" ItemBackground="Transparent" Margin="40,-30,0,0" HorizontalAlignment="Left"
-                               Image="pack://application:,,,/Paway.Test;component/Images/clear.png|pack://application:,,,/Paway.Test;component/Images/clear_color.png"/>
-                    <Border BorderBrush="Red" BorderThickness="1" Height="100" Margin="3">
-                        <TextBlock Text="World"/>
-                    </Border>
-                </DockPanel>
-            </ExpanderEXT>
             <ButtonEXT Name="btnCancel" Content="取消"  AnimationHelper.Value="Bottom"
                                Type="Warn" IsLight="True" ShadowRadius="10" ShadowColor="Red"
                                ImageStretch="None" ImageMargin="0,0,-24,0"
                                Image="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"
                        DockPanel.Dock="Top"/>
-            <TextBoxEXT Name="tbDesc"/>
+            <DataGridEXT ItemsSource="{Binding List}"/>
         </DockPanel>
     </Grid>
 </WindowEXT>

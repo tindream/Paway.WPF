@@ -29,14 +29,9 @@ namespace Paway.WPF
                 new PropertyMetadata(new BrushEXT(PConfig.Alpha - PConfig.Interval * 2)));
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty HeaderStartProperty =
-            DependencyProperty.RegisterAttached(nameof(HeaderStart), typeof(ColorEXT), typeof(DataGridEXT),
-                new PropertyMetadata(new ColorEXT(Color.FromArgb(255, 254, 254, 254), 85, 135)));
-        /// <summary>
-        /// </summary>
-        public static readonly DependencyProperty HeaderEndProperty =
-            DependencyProperty.RegisterAttached(nameof(HeaderEnd), typeof(ColorEXT), typeof(DataGridEXT),
-                new PropertyMetadata(new ColorEXT(Colors.LightGray, 170, 225)));
+        public static readonly DependencyProperty HeaderBrushProperty =
+            DependencyProperty.RegisterAttached(nameof(HeaderBrush), typeof(BrushEXT), typeof(DataGridEXT),
+                new PropertyMetadata(new BrushEXT() { Normal = new SolidColorBrush(Color.FromArgb(200, 245, 245, 245)) }));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ScrollBarWidthProperty =
@@ -57,24 +52,14 @@ namespace Paway.WPF
             set { SetValue(ItemBrushProperty, value); }
         }
         /// <summary>
-        /// 标题列背景开始颜色
+        /// 标题列背景颜色
         /// </summary>
         [Category("扩展")]
-        [Description("标题列背景开始颜色")]
-        public ColorEXT HeaderStart
+        [Description("标题列背景颜色")]
+        public BrushEXT HeaderBrush
         {
-            get { return (ColorEXT)GetValue(HeaderStartProperty); }
-            set { SetValue(HeaderStartProperty, value); }
-        }
-        /// <summary>
-        /// 标题列背景结束颜色
-        /// </summary>
-        [Category("扩展")]
-        [Description("标题列背景结束颜色")]
-        public ColorEXT HeaderEnd
-        {
-            get { return (ColorEXT)GetValue(HeaderEndProperty); }
-            set { SetValue(HeaderEndProperty, value); }
+            get { return (BrushEXT)GetValue(HeaderBrushProperty); }
+            set { SetValue(HeaderBrushProperty, value); }
         }
         /// <summary>
         /// 滚动条高度(宽度)

@@ -144,6 +144,10 @@ namespace Paway.WPF
         /// 浅色
         /// </summary>
         public static Color Light { get; private set; } = Color.FromArgb(255, 235, 235, 235);
+        /// <summary>
+        /// 深色
+        /// </summary>
+        public static Color High { get; private set; } = Color.AddLight(-90);
 
         #endregion
     }

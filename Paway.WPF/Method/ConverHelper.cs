@@ -161,7 +161,7 @@ namespace Paway.WPF
                 case ColorType.TextSub: return PConfig.TextSub;
                 case ColorType.TextLight: return PConfig.TextLight;
                 case ColorType.Light: return PConfig.Light;
-                case ColorType.High: return PConfig.Color.AddLight(-90);
+                case ColorType.High: return PConfig.High;
 
                 default: return Colors.Transparent;
             }

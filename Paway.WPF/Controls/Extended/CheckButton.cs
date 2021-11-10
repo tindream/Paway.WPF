@@ -26,7 +26,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(CheckButton),
-                new PropertyMetadata(new BrushEXT(Colors.LightGray, PConfig.Alpha - PConfig.Interval, PConfig.Alpha + PConfig.Interval)));
+                new PropertyMetadata(new BrushEXT()));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemForegroundProperty =

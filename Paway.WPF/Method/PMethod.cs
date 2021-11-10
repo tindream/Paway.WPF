@@ -257,7 +257,7 @@ namespace Paway.WPF
             var autoWidth = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2)) * 2;
             if (width == 0 || width > autoWidth) width = autoWidth;
 
-            var ellipse = new Ellipse() { Width = width, Height = width, Fill = new SolidColorBrush(Color.FromArgb(20, 0, 0, 0)) };
+            var ellipse = new Ellipse() { Width = width, Height = width, Fill = new SolidColorBrush(AlphaColor(20, Colors.Black)) };
             var waterAdornerFixed = new CustomAdorner(element, () => ellipse, null, () => point.X - ellipse.ActualWidth / 2, () => point.Y - ellipse.ActualHeight / 2, hitTest: false) { Name = NameWater };
             myAdornerLayer.Add(waterAdornerFixed);
             Element = element;
@@ -342,7 +342,7 @@ namespace Paway.WPF
                 Storyboard.SetTargetProperty(animHeight, new PropertyPath(FrameworkElement.HeightProperty));
                 storyboard.Children.Add(animHeight);
 
-                var animColor = new ColorAnimation(color.Value, Color.FromArgb(10, color.Value.R, color.Value.G, color.Value.B), new Duration(TimeSpan.FromMilliseconds(300)));
+                var animColor = new ColorAnimation(color.Value, AlphaColor(10, color.Value), new Duration(TimeSpan.FromMilliseconds(300)));
                 //ellipse.Fill.BeginAnimation(SolidColorBrush.ColorProperty, animColor);
                 var propertyChain = new DependencyProperty[] { Ellipse.FillProperty, SolidColorBrush.ColorProperty };
                 Storyboard.SetTargetProperty(animColor, new PropertyPath("(0).(1)", propertyChain));
@@ -369,7 +369,7 @@ namespace Paway.WPF
                     CornerRadius = new CornerRadius(3),
                     BorderBrush = new SolidColorBrush(Colors.LightGray),
                     BorderThickness = new Thickness(1),
-                    Background = new SolidColorBrush(Color.FromArgb(PConfig.Alpha, 255, 255, 255)),
+                    Background = new SolidColorBrush(AlphaColor(PConfig.Alpha, Colors.White)),
                     MinWidth = 200,
                     MaxWidth = 350,
                 };
@@ -392,7 +392,7 @@ namespace Paway.WPF
                     Width = 80,
                     Height = 80,
                 });
-                var progress = new CustomAdorner(panel, () => border, Color.FromArgb(10, 0, 0, 0)) { Name = NameProgress };
+                var progress = new CustomAdorner(panel, () => border, AlphaColor(0, Colors.Black)) { Name = NameProgress };
                 myAdornerLayer.Add(progress);
             }
         }
@@ -491,7 +491,7 @@ namespace Paway.WPF
                         storyboard.Children.Add(animIn);
 
                         var animTime = AnimTime(border.ActualHeight);
-                        var animColor = new ColorAnimation(color, Color.FromArgb(0, color.R, color.G, color.B), new Duration(TimeSpan.FromMilliseconds(animTime)))
+                        var animColor = new ColorAnimation(color, AlphaColor(0, color), new Duration(TimeSpan.FromMilliseconds(animTime)))
                         {
                             BeginTime = TimeSpan.FromMilliseconds(time + 125)
                         };
@@ -577,7 +577,7 @@ namespace Paway.WPF
                     {
                         var storyboard = new Storyboard();
 
-                        var animInColor = new ColorAnimation(Color.FromArgb(0, color.R, color.G, color.B), color, new Duration(TimeSpan.FromMilliseconds(125)));
+                        var animInColor = new ColorAnimation(AlphaColor(0, color), color, new Duration(TimeSpan.FromMilliseconds(125)));
                         var propertyChain = new DependencyProperty[] { Border.BackgroundProperty, SolidColorBrush.ColorProperty };
                         Storyboard.SetTargetProperty(animInColor, new PropertyPath("(0).(1)", propertyChain));
                         storyboard.Children.Add(animInColor);
@@ -603,7 +603,7 @@ namespace Paway.WPF
                         //storyboard.Children.Add(animInY);
 
                         var animTime = AnimTime(Math.Max(border.ActualWidth, border.ActualHeight));
-                        var animColor = new ColorAnimation(color, Color.FromArgb(0, color.R, color.G, color.B), new Duration(TimeSpan.FromMilliseconds(animTime)))
+                        var animColor = new ColorAnimation(color, AlphaColor(0, color), new Duration(TimeSpan.FromMilliseconds(animTime)))
                         {
                             BeginTime = TimeSpan.FromMilliseconds(time + 125)
                         };
@@ -803,7 +803,7 @@ namespace Paway.WPF
             //放入原来的内容
             container.Children.Add(original);
             //蒙板
-            var layer = new Grid() { Background = new SolidColorBrush(Color.FromArgb(100, 0, 0, 0)) };
+            var layer = new Grid() { Background = new SolidColorBrush(AlphaColor(100, Colors.Black)) };
             //在上面放一层蒙板
             container.Children.Add(layer);
             //将装有原来内容和蒙板的容器赋给父级窗体
