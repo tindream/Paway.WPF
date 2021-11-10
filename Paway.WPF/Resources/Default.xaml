@@ -145,7 +145,7 @@
     <Style x:Key="PathRect" TargetType="{x:Type Path}" >
         <Setter Property="Stretch" Value="Fill" />
         <Setter Property="Margin" Value="1" />
-        <Setter Property="Stroke" Value="Gray" />
+        <Setter Property="Stroke" Value="LightGray" />
         <Setter Property="Fill" Value="{StaticResource ThemeColor}"/>
         <Setter Property="Data" Value="M0,0 8,0 8,8 0,8Z"/>
         <Setter Property="HorizontalAlignment" Value="Center" />
@@ -154,7 +154,7 @@
     <Style x:Key="PathRound" TargetType="{x:Type Path}" >
         <Setter Property="Stretch" Value="Fill" />
         <Setter Property="Margin" Value="1" />
-        <Setter Property="Stroke" Value="Gray" />
+        <Setter Property="Stroke" Value="LightGray" />
         <Setter Property="Fill" Value="{StaticResource ThemeColor}"/>
         <Setter Property="Data" Value="M0,8 A8,8 0 1 1 0,9Z"/>
         <Setter Property="HorizontalAlignment" Value="Center" />
@@ -163,7 +163,7 @@
     <Style x:Key="PathTriangle" TargetType="{x:Type Path}" >
         <Setter Property="Stretch" Value="Fill" />
         <Setter Property="Margin" Value="1" />
-        <Setter Property="Stroke" Value="Gray" />
+        <Setter Property="Stroke" Value="LightGray" />
         <Setter Property="Fill" Value="{StaticResource ThemeColor}"/>
         <Setter Property="Data" Value="M10,0 0,10 20,10Z" />
         <Setter Property="HorizontalAlignment" Value="Center" />
@@ -172,7 +172,7 @@
     <Style x:Key="PathTriangleDown" TargetType="{x:Type Path}" >
         <Setter Property="Stretch" Value="Fill" />
         <Setter Property="Margin" Value="1" />
-        <Setter Property="Stroke" Value="Gray" />
+        <Setter Property="Stroke" Value="LightGray" />
         <Setter Property="Fill" Value="{StaticResource ThemeColor}"/>
         <Setter Property="Data" Value="M0,0 10,10 20,0Z" />
         <Setter Property="HorizontalAlignment" Value="Center" />
@@ -181,7 +181,7 @@
     <Style x:Key="PathTriangleRight" TargetType="{x:Type Path}" >
         <Setter Property="Stretch" Value="Fill" />
         <Setter Property="Margin" Value="1" />
-        <Setter Property="Stroke" Value="Gray" />
+        <Setter Property="Stroke" Value="LightGray" />
         <Setter Property="Fill" Value="{StaticResource ThemeColor}"/>
         <Setter Property="Data" Value="M0,0 L10,10 0,20z" />
         <Setter Property="HorizontalAlignment" Value="Center" />

@@ -45,11 +45,37 @@
         <Setter Property="Padding" Value="5,10"/>
         <Setter Property="Background" Value="{Binding Path=HeaderBrush.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}}"/>
         <Setter Property="Foreground" Value="{StaticResource Text}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}">
+                        <WrapPanel>
+                            <ContentPresenter Content="{TemplateBinding Content}"/>
+                            <Path Name="sort" Style="{StaticResource PathTriangle}" Width="10" Height="10" Visibility="Collapsed"/>
+                        </WrapPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="DataGridColumnHeader.SortDirection" Value="0">
+                            <Setter Property="Style" TargetName="sort" Value="{StaticResource PathTriangle}"/>
+                            <Setter Property="Margin" TargetName="sort" Value="2,0,0,7"/>
+                            <Setter Property="Visibility" TargetName="sort" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="DataGridColumnHeader.SortDirection" Value="1">
+                            <Setter Property="Style" TargetName="sort" Value="{StaticResource PathTriangleDown}"/>
+                            <Setter Property="Margin" TargetName="sort" Value="2,10,0,0"/>
+                            <Setter Property="Visibility" TargetName="sort" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Foreground" Value="White"/>
                 <Setter Property="Background" Value="{Binding Path=HeaderBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}}"/>
-
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Foreground" Value="White"/>
@@ -77,7 +103,7 @@
         <!--标题-->
         <Setter Property="RowHeaderWidth" Value="0"/>
         <!--外观-->
-        <Setter Property="Background" Value="#FAFAFA"/>
+        <Setter Property="Background" Value="#FCFCFC"/>
         <!--由ElementStyle样式转换-->
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <!--网格线-->

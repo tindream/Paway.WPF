@@ -41,15 +41,15 @@ namespace Paway.Test.ViewModel
                 _value = value; RaisePropertyChanged();
             }
         }
-        public ObservableCollection<TreeViewModel> List { get; private set; } = new ObservableCollection<TreeViewModel>();
+        public ObservableCollection<ListViewModel> List { get; private set; } = new ObservableCollection<ListViewModel>();
 
         #endregion
 
         public TestViewModel()
         {
-            List.Add(new TreeViewModel("1"));
-            List.Add(new TreeViewModel("2"));
-            List.Add(new TreeViewModel("3"));
+            List.Add(new ListViewModel("1"));
+            List.Add(new ListViewModel("2"));
+            List.Add(new ListViewModel("3"));
         }
     }
 }
