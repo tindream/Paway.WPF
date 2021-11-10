@@ -46,12 +46,25 @@ namespace Paway.WPF
         }
     }
 
-    internal class NullableColorToColoConverter : IValueConverter
+    internal class NullToColoConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var color = value as Color?;
             return color ?? Colors.Transparent;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return DependencyProperty.UnsetValue;
+        }
+    }
+    internal class NullToDoubleConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var color = value as double?;
+            return color ?? 0;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

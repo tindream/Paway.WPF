@@ -115,9 +115,9 @@
                     </Grid.ColumnDefinitions>
                     <ButtonEXT Name="btnCancel" Content="取消"  AnimationHelper.Value="Bottom"
                                Type="Warn" IsLight="True"
-                               Stretch="None" Viewport="0,0,0.35,1"
+                               ImageStretch="None"
                                Command="{Binding Teach}" CommandParameter="{Binding ElementName=btn}" Click="Cancel_Click" 
-                               BackgroundImage="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"/>
+                               Image="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"/>
                     <ButtonEXT Name="btn" Grid.Column="1"
                              Content="{FontImage FontChar=Adjust}" Click="Commit_Click" 
                              CommandParameter="{Binding ElementName=btn}"/>

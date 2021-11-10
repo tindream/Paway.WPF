@@ -103,11 +103,11 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemImageWidthProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemImageWidth), typeof(double), typeof(ListViewEXT), new PropertyMetadata(32d));
+            DependencyProperty.RegisterAttached(nameof(ItemImageWidth), typeof(double), typeof(ListViewEXT), new PropertyMetadata(double.NaN));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemImageHeightProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemImageHeight), typeof(double), typeof(ListViewEXT), new PropertyMetadata(32d));
+            DependencyProperty.RegisterAttached(nameof(ItemImageHeight), typeof(double), typeof(ListViewEXT), new PropertyMetadata(double.NaN));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemImageDockProperty =

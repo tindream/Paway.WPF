@@ -27,21 +27,28 @@
                                 CornerRadius="{TemplateBinding Radius}"
                                 Background="{Binding Path=ItemBackground.Normal, RelativeSource={RelativeSource TemplatedParent}}">
                             <Border.Effect>
-                                <DropShadowEffect Color="LightGray" BlurRadius="{Binding EffectRadius, RelativeSource={RelativeSource TemplatedParent}}" ShadowDepth="0"/>
+                                <DropShadowEffect ShadowDepth="0"
+                                                  Color="{Binding ShadowColor, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullToColoConverter}}"
+                                                  BlurRadius="{Binding ShadowRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullToDoubleConverter}}"/>
                             </Border.Effect>
                         </Border>
                         <Border x:Name="border2" 
                                 Padding="{TemplateBinding Padding}"
                                 CornerRadius="{TemplateBinding Radius}">
-                            <Border.Background>
-                                <ImageBrush ImageSource="{Binding Path=BackgroundImage.Normal, RelativeSource={RelativeSource TemplatedParent}}"
-                                            Stretch="{Binding Stretch, RelativeSource={RelativeSource TemplatedParent}}"
-                                            Viewport="{Binding Viewport, RelativeSource={RelativeSource TemplatedParent}}"/>
-                            </Border.Background>
-                            <TextBlock x:Name="txt" Text="{TemplateBinding Content}" Style="{x:Null}"
+                            <DockPanel>
+                                <Image Name="image"
+                                       Source="{Binding Path=Image.Normal, RelativeSource={RelativeSource Mode=TemplatedParent}}" 
+                                       Visibility="{Binding Source, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource nullToCollapsed}}"
+                                       DockPanel.Dock="{Binding ImageDock, RelativeSource={RelativeSource TemplatedParent}}"
+                                       Width="{Binding ImageWidth, RelativeSource={RelativeSource TemplatedParent}}" 
+                                       Height="{Binding ImageHeight, RelativeSource={RelativeSource TemplatedParent}}"
+                                       Margin="{Binding Path=ImageMargin.Normal, RelativeSource={RelativeSource TemplatedParent}}" 
+                                       Stretch="{Binding Path=ImageStretch, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                <TextBlock x:Name="txt" Text="{TemplateBinding Content}" Style="{x:Null}"
                                        Foreground="{Binding Path=ItemForeground.Normal, RelativeSource={RelativeSource TemplatedParent}}" 
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </DockPanel>
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -49,25 +56,15 @@
                             <Setter Property="Foreground" TargetName="txt" Value="{Binding Path=ItemForeground.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter Property="BorderThickness" TargetName="border1" Value="{Binding Path=ItemBorder.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter Property="Background" TargetName="border1" Value="{Binding Path=ItemBackground.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
-                            <Setter Property="Background" TargetName="border2">
-                                <Setter.Value>
-                                    <ImageBrush ImageSource="{Binding Path=BackgroundImage.Mouse, RelativeSource={RelativeSource TemplatedParent}}"
-                                                Stretch="{Binding Stretch, RelativeSource={RelativeSource TemplatedParent}}"
-                                                Viewport="{Binding Viewport, RelativeSource={RelativeSource TemplatedParent}}"/>
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="image" Property="Margin" Value="{Binding Path=ImageMargin.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter TargetName="image" Property="Source" Value="{Binding Path=Image.Mouse, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Foreground" TargetName="txt" Value="{Binding Path=ItemForeground.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter Property="BorderThickness" TargetName="border1" Value="{Binding Path=ItemBorder.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter Property="Background" TargetName="border1" Value="{Binding Path=ItemBackground.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
-                            <Setter Property="Background" TargetName="border2">
-                                <Setter.Value>
-                                    <ImageBrush ImageSource="{Binding Path=BackgroundImage.Pressed, RelativeSource={RelativeSource AncestorType=local:ButtonEXT}}" 
-                                                Stretch="{Binding Stretch, RelativeSource={RelativeSource AncestorType=local:ButtonEXT}}"
-                                                Viewport="{Binding Viewport, RelativeSource={RelativeSource AncestorType=local:ButtonEXT}}"/>
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="image" Property="Margin" Value="{Binding Path=ImageMargin.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter TargetName="image" Property="Source" Value="{Binding Path=Image.Pressed, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" TargetName="border1" Value="LightGray"/>

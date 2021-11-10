@@ -25,8 +25,12 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(ItemBorder), typeof(ThicknessEXT), typeof(ButtonEXT));
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty EffectRadiusProperty =
-            DependencyProperty.RegisterAttached(nameof(EffectRadius), typeof(double), typeof(ButtonEXT));
+        public static readonly DependencyProperty ShadowRadiusProperty =
+            DependencyProperty.RegisterAttached(nameof(ShadowRadius), typeof(double), typeof(ButtonEXT));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ShadowColorProperty =
+            DependencyProperty.RegisterAttached(nameof(ShadowColor), typeof(Color), typeof(ButtonEXT), new PropertyMetadata(Colors.LightGray));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemForegroundProperty =
@@ -41,18 +45,29 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty ViewportProperty =
-            DependencyProperty.RegisterAttached(nameof(Viewport), typeof(Rect), typeof(ButtonEXT),
-            new PropertyMetadata(new Rect(0, 0, 1, 1)));
+        public static readonly DependencyProperty ImageWidthProperty =
+            DependencyProperty.RegisterAttached(nameof(ImageWidth), typeof(double), typeof(ButtonEXT), new PropertyMetadata(double.NaN));
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty StretchProperty =
-            DependencyProperty.RegisterAttached(nameof(Stretch), typeof(Stretch), typeof(ButtonEXT),
+        public static readonly DependencyProperty ImageHeightProperty =
+            DependencyProperty.RegisterAttached(nameof(ImageHeight), typeof(double), typeof(ButtonEXT), new PropertyMetadata(double.NaN));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ImageDockProperty =
+            DependencyProperty.RegisterAttached(nameof(ImageDock), typeof(Dock), typeof(ButtonEXT), new PropertyMetadata(Dock.Left));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ImageMarginProperty =
+            DependencyProperty.RegisterAttached(nameof(ImageMargin), typeof(ThicknessEXT), typeof(ButtonEXT));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ImageStretchProperty =
+            DependencyProperty.RegisterAttached(nameof(ImageStretch), typeof(Stretch), typeof(ButtonEXT),
             new PropertyMetadata(Stretch.None));
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty BackgroundImageProperty =
-            DependencyProperty.RegisterAttached(nameof(BackgroundImage), typeof(ImageEXT), typeof(ButtonEXT));
+        public static readonly DependencyProperty ImageProperty =
+            DependencyProperty.RegisterAttached(nameof(Image), typeof(ImageEXT), typeof(ButtonEXT));
 
         /// <summary>
         /// </summary>
@@ -108,14 +123,24 @@ namespace Paway.WPF
             set { SetValue(ItemBorderProperty, value); }
         }
         /// <summary>
-        /// 自定义边框圆角阴影宽度
+        /// 自定义边框阴影宽度
         /// </summary>
         [Category("扩展.前景")]
-        [Description("自定义边框圆角阴影宽度")]
-        public double EffectRadius
+        [Description("自定义边框阴影宽度")]
+        public double ShadowRadius
         {
-            get { return (double)GetValue(EffectRadiusProperty); }
-            set { SetValue(EffectRadiusProperty, value); }
+            get { return (double)GetValue(ShadowRadiusProperty); }
+            set { SetValue(ShadowRadiusProperty, value); }
+        }
+        /// <summary>
+        /// 自定义边框阴影颜色
+        /// </summary>
+        [Category("扩展.前景")]
+        [Description("自定义边框阴影颜色")]
+        public Color ShadowColor
+        {
+            get { return (Color)GetValue(ShadowColorProperty); }
+            set { SetValue(ShadowColorProperty, value); }
         }
         /// <summary>
         /// 自定义文本颜色
@@ -144,34 +169,66 @@ namespace Paway.WPF
         #endregion
         #region 扩展.背景图片
         /// <summary>
+        /// 背景图片宽度
+        /// </summary>
+        [Category("扩展.背景图片")]
+        [Description("背景图片宽度")]
+        [TypeConverter(typeof(LengthConverter))]
+        public double ImageWidth
+        {
+            get { return (double)GetValue(ImageWidthProperty); }
+            set { SetValue(ImageWidthProperty, value); }
+        }
+        /// <summary>
+        /// 背景图片高度
+        /// </summary>
+        [Category("扩展.背景图片")]
+        [Description("背景图片高度")]
+        [TypeConverter(typeof(LengthConverter))]
+        public double ImageHeight
+        {
+            get { return (double)GetValue(ImageHeightProperty); }
+            set { SetValue(ImageHeightProperty, value); }
+        }
+        /// <summary>
         /// 背景图片位置
         /// </summary>
         [Category("扩展.背景图片")]
         [Description("背景图片位置")]
-        public Rect Viewport
+        public Dock ImageDock
         {
-            get { return (Rect)GetValue(ViewportProperty); }
-            set { SetValue(ViewportProperty, value); }
+            get { return (Dock)GetValue(ImageDockProperty); }
+            set { SetValue(ImageDockProperty, value); }
+        }
+        /// <summary>
+        /// 背景图片外边距
+        /// </summary>
+        [Category("扩展.背景图片")]
+        [Description("背景图片外边距")]
+        public ThicknessEXT ImageMargin
+        {
+            get { return (ThicknessEXT)GetValue(ImageMarginProperty); }
+            set { SetValue(ImageMarginProperty, value); }
         }
         /// <summary>
         /// 背景图片的内容如何拉伸才适合其磁贴
         /// </summary>
         [Category("扩展.背景图片")]
         [Description("背景图片的内容如何拉伸才适合其磁贴")]
-        public Stretch Stretch
+        public Stretch ImageStretch
         {
-            get { return (Stretch)GetValue(StretchProperty); }
-            set { SetValue(StretchProperty, value); }
+            get { return (Stretch)GetValue(ImageStretchProperty); }
+            set { SetValue(ImageStretchProperty, value); }
         }
         /// <summary>
         /// 背景图片
         /// </summary>
         [Category("扩展.背景图片")]
         [Description("背景图片")]
-        public ImageEXT BackgroundImage
+        public ImageEXT Image
         {
-            get { return (ImageEXT)GetValue(BackgroundImageProperty); }
-            set { SetValue(BackgroundImageProperty, value); }
+            get { return (ImageEXT)GetValue(ImageProperty); }
+            set { SetValue(ImageProperty, value); }
         }
 
         #endregion

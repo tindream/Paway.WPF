@@ -19,6 +19,8 @@
     <local:BrushToColorConverter x:Key="brushToColorConverter" />
     <local:ColorToBrushConverter x:Key="colorToBrushConverter" />
     <local:BrushAlphaConverter x:Key="brushAlphaConverter" />
+    <local:NullToColoConverter x:Key="nullToColoConverter" />
+    <local:NullToDoubleConverter x:Key="nullToDoubleConverter" />
 
     <local:BoolSelector x:Key="boolSelector"/>
     <local:NullSelector x:Key="nullSelector"/>
