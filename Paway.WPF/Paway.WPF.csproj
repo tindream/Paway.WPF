@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\Extended\CalendarMonitor.cs" />
+    <Compile Include="Method\Converter\IValueConverter\BrushLightConverter.cs" />
     <Compile Include="Method\Converter\IValueConverter\ColorToBrushConverter.cs" />
     <Compile Include="Method\Converter\IValueConverter\LessRadiusConverter.cs" />
     <Compile Include="Method\CustomAdorner.cs" />

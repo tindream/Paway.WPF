@@ -14,9 +14,10 @@
 
     <local:BoolToVisible x:Key="boolToVisible"/>
     <local:BoolToCollapsed x:Key="boolToCollapsed"/>
-    <local:BrushToColorConverter x:Key="brushToColorConverter" />
     <local:ColorToBrushConverter x:Key="colorToBrushConverter" />
+    <local:BrushToColorConverter x:Key="brushToColorConverter" />
     <local:BrushAlphaConverter x:Key="brushAlphaConverter" />
+    <local:BrushLightConverter x:Key="brushLightConverter" />
     <local:NullToVisible x:Key="nullToVisible"/>
     <local:NullToCollapsed x:Key="nullToCollapsed"/>
     <local:NullToDoubleConverter x:Key="nullToDoubleConverter" />
