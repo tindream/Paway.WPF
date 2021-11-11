@@ -92,8 +92,8 @@
                     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Path Name="grip" Style="{StaticResource PathRound}"
                               Stretch="Fill"
-                              Fill="#FFF0F0F0"
-                              Stroke="#FFACACAC"
+                              Fill="{StaticResource Light}"
+                              Stroke="DarkGray"
                               Margin="0"
                               StrokeThickness="1"
                               VerticalAlignment="Center"/>
@@ -111,8 +111,8 @@
                             <Setter Property="Shape.Stroke" TargetName="grip" Value="#FF569DE5"/>
                         </Trigger>
                         <Trigger Property="UIElement.IsEnabled" Value="False">
-                            <Setter Property="Shape.Fill" TargetName="grip" Value="#FFF0F0F0"/>
-                            <Setter Property="Shape.Stroke" TargetName="grip" Value="#FFD9D9D9"/>
+                            <Setter Property="Shape.Fill" TargetName="grip" Value="{StaticResource Light}"/>
+                            <Setter Property="Shape.Stroke" TargetName="grip" Value="LightGray"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -124,8 +124,8 @@
             <Path Name="grip"
                   Data="M0,6C0,6 5.5,0 5.5,0 5.5,0 11,6 11,6 11,6 11,18 11,18 11,18 0,18 0,18 0,18 0,6 0,6z"
                   Stretch="Fill"
-                  Fill="#FFF0F0F0"
-                  Stroke="#FFACACAC"
+                  Fill="{StaticResource Light}"
+                  Stroke="DarkGray"
                   StrokeThickness="1"
                   VerticalAlignment="Center"/>
         </Grid>
@@ -139,8 +139,8 @@
                 <Setter Property="Shape.Stroke" TargetName="grip" Value="#FF569DE5"/>
             </Trigger>
             <Trigger Property="UIElement.IsEnabled" Value="False">
-                <Setter Property="Shape.Fill" TargetName="grip" Value="#FFF0F0F0"/>
-                <Setter Property="Shape.Stroke" TargetName="grip" Value="#FFD9D9D9"/>
+                <Setter Property="Shape.Fill" TargetName="grip" Value="{StaticResource Light}"/>
+                <Setter Property="Shape.Stroke" TargetName="grip" Value="LightGray"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -149,8 +149,8 @@
             <Path Name="grip"
                   Data="M0,12C0,12 5.5,18 5.5,18 5.5,18 11,12 11,12 11,12 11,0 11,0 11,0 0,0 0,0 0,0 0,12 0,12z"
                   Stretch="Fill"
-                  Fill="#FFF0F0F0"
-                  Stroke="#FFACACAC"
+                  Fill="{StaticResource Light}"
+                  Stroke="DarkGray"
                   StrokeThickness="1"
                   VerticalAlignment="Center"/>
         </Grid>
@@ -164,8 +164,8 @@
                 <Setter Property="Shape.Stroke" TargetName="grip" Value="#FF569DE5"/>
             </Trigger>
             <Trigger Property="UIElement.IsEnabled" Value="False">
-                <Setter Property="Shape.Fill" TargetName="grip" Value="#FFF0F0F0"/>
-                <Setter Property="Shape.Stroke" TargetName="grip" Value="#FFD9D9D9"/>
+                <Setter Property="Shape.Fill" TargetName="grip" Value="{StaticResource Light}"/>
+                <Setter Property="Shape.Stroke" TargetName="grip" Value="LightGray"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -174,8 +174,8 @@
             <Path Name="grip"
                   Data="M6,11C6,11 0,5.5 0,5.5 0,5.5 6,0 6,0 6,0 18,0 18,0 18,0 18,11 18,11 18,11 6,11 6,11z"
                   Stretch="Fill"
-                  Fill="#FFF0F0F0"
-                  Stroke="#FFACACAC"
+                  Fill="{StaticResource Light}"
+                  Stroke="DarkGray"
                   StrokeThickness="1"
                   VerticalAlignment="Center"/>
         </Grid>
@@ -189,8 +189,8 @@
                 <Setter Property="Shape.Stroke" TargetName="grip" Value="#FF569DE5"/>
             </Trigger>
             <Trigger Property="UIElement.IsEnabled" Value="False">
-                <Setter Property="Shape.Fill" TargetName="grip" Value="#FFF0F0F0"/>
-                <Setter Property="Shape.Stroke" TargetName="grip" Value="#FFD9D9D9"/>
+                <Setter Property="Shape.Fill" TargetName="grip" Value="{StaticResource Light}"/>
+                <Setter Property="Shape.Stroke" TargetName="grip" Value="LightGray"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -199,8 +199,8 @@
             <Path Name="grip"
                   Data="M12,11C12,11 18,5.5 18,5.5 18,5.5 12,0 12,0 12,0 0,0 0,0 0,0 0,11 0,11 0,11 12,11 12,11z"
                   Stretch="Fill"
-                  Fill="#FFF0F0F0"
-                  Stroke="#FFACACAC"
+                  Fill="{StaticResource Light}"
+                  Stroke="DarkGray"
                   StrokeThickness="1"
                   VerticalAlignment="Center"/>
         </Grid>
@@ -214,8 +214,8 @@
                 <Setter Property="Shape.Stroke" TargetName="grip" Value="#FF569DE5"/>
             </Trigger>
             <Trigger Property="UIElement.IsEnabled" Value="False">
-                <Setter Property="Shape.Fill" TargetName="grip" Value="#FFF0F0F0"/>
-                <Setter Property="Shape.Stroke" TargetName="grip" Value="#FFD9D9D9"/>
+                <Setter Property="Shape.Fill" TargetName="grip" Value="{StaticResource Light}"/>
+                <Setter Property="Shape.Stroke" TargetName="grip" Value="LightGray"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

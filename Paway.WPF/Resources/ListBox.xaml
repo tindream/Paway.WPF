@@ -25,7 +25,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="UIElement.IsEnabled" Value="False">
                             <Setter Property="Panel.Background" TargetName="Bd" Value="White"/>
-                            <Setter Property="Border.BorderBrush" TargetName="Bd" Value="#FFD9D9D9"/>
+                            <Setter Property="Border.BorderBrush" TargetName="Bd" Value="LightGray"/>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>

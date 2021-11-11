@@ -143,7 +143,7 @@ namespace Paway.WPF
         /// <summary>
         /// 浅色
         /// </summary>
-        public static Color Light { get; private set; } = Color.FromArgb(255, 235, 235, 235);
+        public static Color Light { get; private set; } = Color.FromArgb(255, 240, 240, 240);
         /// <summary>
         /// 深色
         /// </summary>

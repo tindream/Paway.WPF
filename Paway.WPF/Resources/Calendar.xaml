@@ -56,7 +56,7 @@
                                 <VisualState x:Name="Active"/>
                                 <VisualState x:Name="Inactive">
                                     <Storyboard>
-                                        <ColorAnimation Duration="0" To="#FF777777" Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="NormalText"/>
+                                        <ColorAnimation Duration="0" To="{Binding Source={StaticResource TextLight}, Converter={StaticResource brushToColorConverter}}" Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="NormalText"/>
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
@@ -193,7 +193,7 @@
                                 <VisualState x:Name="Active"/>
                                 <VisualState x:Name="Inactive">
                                     <Storyboard>
-                                        <ColorAnimation Duration="0" To="#FF777777" Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="NormalText"/>
+                                        <ColorAnimation Duration="0" To="{Binding Source={StaticResource TextLight}, Converter={StaticResource brushToColorConverter}}" Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="NormalText"/>
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>

@@ -7,7 +7,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type local:DataPager}">
-        <Setter Property="Background" Value="#FFF2F3F4" />
+        <Setter Property="Background" Value="{StaticResource Light}" />
         <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="BorderThickness" Value="1,0,1,1" />
         <Setter Property="NumericButtonStyle">

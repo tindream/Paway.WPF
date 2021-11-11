@@ -267,9 +267,6 @@
         <StackPanel>
             <ListViewEXT x:Name="listView3" Margin="5,5,0,0" IAnimation="True" ItemBorder="0,0,1,1;0,0,1,3" ItemWidthType="TwoRow"
                          ItemHeight="60" ItemWidth="100" ItemsSource="{Binding GridList}">
-                <ListViewEXT.ItemBrush>
-                    <BrushEXT Alpha="35" Mouse="#AA23AFFF" Normal="LightGray" Pressed="#FA23AFFF"/>
-                </ListViewEXT.ItemBrush>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding SelectionCommand}" CommandParameter="{Binding ElementName=listView3}"/>

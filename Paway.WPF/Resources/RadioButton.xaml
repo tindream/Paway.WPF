@@ -53,7 +53,7 @@
                         <Trigger Property="UIElement.IsEnabled" Value="False">
                             <Setter Property="Panel.Background" TargetName="radioButtonBorder" Value="#FFE6E6E6"/>
                             <Setter Property="Border.BorderBrush" TargetName="radioButtonBorder" Value="#FFBCBCBC"/>
-                            <Setter Property="Shape.Fill" TargetName="optionMark" Value="#FF707070"/>
+                            <Setter Property="Shape.Fill" TargetName="optionMark" Value="Gray"/>
                         </Trigger>
                         <Trigger Property="ButtonBase.IsPressed" Value="True">
                             <Setter Property="Panel.Background" TargetName="radioButtonBorder" Value="#FFD9ECFF"/>

@@ -146,7 +146,7 @@ namespace Paway.WPF
         private BrushEXT Focused(Color color, int alpha)
         {
             Mouse = new SolidColorBrush(color);
-            Pressed = new SolidColorBrush(PMethod.AlphaColor(color.A + alpha, color));
+            Pressed = new SolidColorBrush(PMethod.AlphaColor(color.A + alpha * 2, color));
             return this;
         }
         /// <summary>

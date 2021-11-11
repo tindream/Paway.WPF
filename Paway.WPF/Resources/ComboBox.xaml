@@ -7,7 +7,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <LinearGradientBrush x:Key="backLine" EndPoint="0,1" StartPoint="0,0">
-        <GradientStop Color="#FFF0F0F0" Offset="0"/>
+        <GradientStop Color="{Binding Source={StaticResource Light}, Converter={StaticResource brushToColorConverter}}" Offset="0"/>
         <GradientStop Color="#FFE5E5E5" Offset="1"/>
     </LinearGradientBrush>
     <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
@@ -16,7 +16,7 @@
             <Path x:Name="Arrow" Grid.Column="1" Margin="9,0"
                   Style="{StaticResource PathTriangleDown}" Width="12" Height="6"
                   HorizontalAlignment="Right" StrokeThickness="0"
-                  Stretch="Fill" Fill="#B1B1B1" />
+                  Stretch="Fill" Fill="DarkGray" />
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsChecked" Value="true">

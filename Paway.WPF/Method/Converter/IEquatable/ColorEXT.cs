@@ -94,7 +94,7 @@ namespace Paway.WPF
         private ColorEXT Focused(Color color, int alpha)
         {
             Mouse = color;
-            Pressed = PMethod.AlphaColor(color.A + alpha, color);
+            Pressed = PMethod.AlphaColor(color.A + alpha * 2, color);
             return this;
         }
         /// <summary>

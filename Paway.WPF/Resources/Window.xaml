@@ -124,7 +124,7 @@
 
     <Style TargetType="{x:Type local:WindowEXT}" BasedOn="{StaticResource Config}">
         <Setter Property="Foreground" Value="{StaticResource Text}" />
-        <Setter Property="Background" Value="#FFF1F1F1" />
+        <Setter Property="Background" Value="{StaticResource Light}" />
         <Setter Property="BorderBrush" Value="{StaticResource ThemeHigh}" />
         <Setter Property="IsTabStop" Value="False" />
         <!--未知，此参数会导致文本放大缩小动画抖动-->
@@ -229,7 +229,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsNonClientActive" Value="False">
-                            <Setter Property="BorderBrush" Value="#FF6F7785" />
+                            <Setter Property="BorderBrush" Value="Gray" />
                             <Setter Property="Foreground" TargetName="Text_Title" Value="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource brushAlphaConverter}, ConverterParameter=160}"/>
                         </Trigger>
                         <Trigger Property="WindowState" Value="Maximized">

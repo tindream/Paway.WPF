@@ -61,7 +61,7 @@
                 <Setter Property="Stroke" TargetName="ButtonBackground" Value="{StaticResource ThemeColorMouse}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="#FF707070" />
+                <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="Gray" />
                 <Setter Property="Fill" TargetName="GlyphPanel" Value="LightGray" />
             </Trigger>
             <MultiTrigger>
@@ -176,8 +176,8 @@
                 <Setter Property="Visibility" TargetName="Line" Value="Visible" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="#FF707070" />
-                <Setter Property="Fill" TargetName="GlyphPanel" Value="#FF707070" />
+                <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="Gray" />
+                <Setter Property="Fill" TargetName="GlyphPanel" Value="Gray" />
             </Trigger>
             <Trigger Property="CanContentScroll" SourceName="SubMenuScrollViewer" Value="False">
                 <Setter Property="Canvas.Top" TargetName="OpaqueRect"
@@ -227,7 +227,7 @@
                 <Border x:Name="GlyphPanel"
                         Visibility="Hidden"
                         BorderThickness="0" 
-                        Background="#0026A0DA"
+                        Background="Transparent"
                         Padding="0,9,0,9" 
                         ClipToBounds="False"
                         HorizontalAlignment="Center"
@@ -271,8 +271,8 @@
                 <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ThemeColorMouse}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="#FF707070" />
-                <Setter Property="Fill" TargetName="Glyph" Value="#FF707070" />
+                <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="Gray" />
+                <Setter Property="Fill" TargetName="Glyph" Value="Gray" />
             </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
@@ -308,7 +308,7 @@
                 <Border x:Name="GlyphPanel"
                         Visibility="Hidden"
                         BorderThickness="0"
-                        Background="#0026A0DA"
+                        Background="Transparent"
                         Padding="0,9,0,9" 
                         VerticalAlignment="Center"
                         Width="22">
@@ -394,9 +394,9 @@
                 <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ThemeColorMouse}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="#FF707070" />
-                <Setter Property="Fill" TargetName="Glyph" Value="#FF707070" />
-                <Setter Property="Fill" TargetName="RightArrow" Value="#FF707070" />
+                <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="Gray" />
+                <Setter Property="Fill" TargetName="Glyph" Value="Gray" />
+                <Setter Property="Fill" TargetName="RightArrow" Value="Gray" />
             </Trigger>
             <Trigger Property="CanContentScroll" SourceName="SubMenuScrollViewer" Value="False">
                 <Setter Property="Canvas.Top" TargetName="OpaqueRect" 

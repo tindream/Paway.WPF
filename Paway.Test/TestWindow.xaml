@@ -15,8 +15,7 @@
                                ImageStretch="None" ImageMargin="-24,0,0,0" ImageDock="Right"
                                Image="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"
                        DockPanel.Dock="Top"/>
-            <CalendarEXT DockPanel.Dock="Top" HasButton="True" ItemBrush="Red"/>
-            <DatePickerEXT Name="dp" HasButton="False" ItemBrush="Green"/>
+            <DataGridEXT ItemsSource="{Binding List}"/>
         </DockPanel>
     </Grid>
 </WindowEXT>

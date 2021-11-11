@@ -41,7 +41,7 @@
                                                     <Setter.Value>
                                                         <ControlTemplate TargetType="{x:Type ToggleButton}">
                                                             <Border Background="Transparent" Height="16" Padding="5" Width="16">
-                                                                <Path x:Name="ExpandPath" Data="M0,0 L0,6 L6,0 z" Fill="#66645e" Stroke="#66645e">
+                                                                <Path x:Name="ExpandPath" Data="M0,0 L0,6 L6,0 z" Fill="DimGray" Stroke="DimGray">
                                                                     <Path.RenderTransform>
                                                                         <RotateTransform Angle="135" CenterY="3" CenterX="3"/>
                                                                     </Path.RenderTransform>
@@ -54,20 +54,20 @@
                                                                             <RotateTransform Angle="180" CenterY="3" CenterX="3"/>
                                                                         </Setter.Value>
                                                                     </Setter>
-                                                                    <Setter Property="Fill" TargetName="ExpandPath" Value="#66645e"/>
-                                                                    <Setter Property="Stroke" TargetName="ExpandPath" Value="#66645e"/>
+                                                                    <Setter Property="Fill" TargetName="ExpandPath" Value="DimGray"/>
+                                                                    <Setter Property="Stroke" TargetName="ExpandPath" Value="DimGray"/>
                                                                 </Trigger>
                                                                 <Trigger Property="IsMouseOver" Value="True">
-                                                                    <Setter Property="Stroke" TargetName="ExpandPath" Value="#66645e"/>
-                                                                    <Setter Property="Fill" TargetName="ExpandPath" Value="#66645e"/>
+                                                                    <Setter Property="Stroke" TargetName="ExpandPath" Value="DimGray"/>
+                                                                    <Setter Property="Fill" TargetName="ExpandPath" Value="DimGray"/>
                                                                 </Trigger>
                                                                 <MultiTrigger>
                                                                     <MultiTrigger.Conditions>
                                                                         <Condition Property="IsMouseOver" Value="True"/>
                                                                         <Condition Property="IsChecked" Value="True"/>
                                                                     </MultiTrigger.Conditions>
-                                                                    <Setter Property="Stroke" TargetName="ExpandPath" Value="#66645e"/>
-                                                                    <Setter Property="Fill" TargetName="ExpandPath" Value="#66645e"/>
+                                                                    <Setter Property="Stroke" TargetName="ExpandPath" Value="DimGray"/>
+                                                                    <Setter Property="Fill" TargetName="ExpandPath" Value="DimGray"/>
                                                                 </MultiTrigger>
                                                             </ControlTemplate.Triggers>
                                                         </ControlTemplate>
@@ -133,11 +133,11 @@
                     <DockPanel Margin="10 0 0 0">
                         <TextBlock Text="{Binding Desc}" 
                                    FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}, Converter={StaticResource valueMultiConverter}}" 
-                                   Foreground="#808080" DockPanel.Dock="Right" Margin="0,0,3,0"/>
+                                   Foreground="Gray" DockPanel.Dock="Right" Margin="0,0,3,0"/>
                         <DockPanel>
                             <TextBlock Text="{Binding Subtitle}" 
                                        FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}, Converter={StaticResource valueMultiConverter}}" 
-                                       Foreground="#808080" DockPanel.Dock="Bottom"/>
+                                       Foreground="Gray" DockPanel.Dock="Bottom"/>
                             <TextBlock Text="{Binding Text}"/>
                         </DockPanel>
                     </DockPanel>
