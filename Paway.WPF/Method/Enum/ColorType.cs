@@ -16,11 +16,11 @@ namespace Paway.WPF
         /// 主题颜色
         /// </summary>
         Color,
-
         /// <summary>
-        /// 信息
+        /// 主题深色
         /// </summary>
-        Info,
+        High,
+
         /// <summary>
         /// 成功
         /// </summary>
@@ -46,13 +46,10 @@ namespace Paway.WPF
         /// 文本(三级浅色)
         /// </summary>
         TextLight,
+
         /// <summary>
         /// 浅色
         /// </summary>
         Light,
-        /// <summary>
-        /// 深色
-        /// </summary>
-        High,
     }
 }

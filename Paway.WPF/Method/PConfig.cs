@@ -62,7 +62,7 @@ namespace Paway.WPF
         /// 主题颜色变化事件
         /// </summary>
         public static event Action<Color> ColorChanged;
-        private static Color color = Color.FromArgb(255, 35, 175, 255);
+        private static Color color = Color.FromArgb(255, 64, 158, 255);
         /// <summary>
         /// 主题颜色
         /// </summary>
@@ -112,9 +112,10 @@ namespace Paway.WPF
         internal const int Interval = 40;
 
         /// <summary>
-        /// 信息色
+        /// 主题深色
         /// </summary>
-        public static Color Info { get; set; } = Color.FromArgb(255, 0, 188, 212);
+        public static Color High { get; private set; } = Color.AddLight(-90);
+
         /// <summary>
         /// 成功色
         /// </summary>
@@ -140,14 +141,11 @@ namespace Paway.WPF
         /// 文本(三级浅色)
         /// </summary>
         public static Color TextLight { get; private set; } = Color.FromArgb(255, 119, 119, 119);
+
         /// <summary>
         /// 浅色
         /// </summary>
-        public static Color Light { get; private set; } = Color.FromArgb(255, 240, 240, 240);
-        /// <summary>
-        /// 深色
-        /// </summary>
-        public static Color High { get; private set; } = Color.AddLight(-90);
+        public static Color Light { get; private set; } = Color.FromArgb(255, 242, 246, 252);
 
         #endregion
     }

@@ -152,7 +152,8 @@ namespace Paway.WPF
             switch (type)
             {
                 case ColorType.Color: return PConfig.Color;
-                case ColorType.Info: return PConfig.Info;
+                case ColorType.High: return PConfig.High;
+
                 case ColorType.Success: return PConfig.Success;
                 case ColorType.Warn: return PConfig.Warn;
                 case ColorType.Error: return PConfig.Error;
@@ -160,8 +161,8 @@ namespace Paway.WPF
                 case ColorType.Text: return PConfig.TextColor;
                 case ColorType.TextSub: return PConfig.TextSub;
                 case ColorType.TextLight: return PConfig.TextLight;
+
                 case ColorType.Light: return PConfig.Light;
-                case ColorType.High: return PConfig.High;
 
                 default: return Colors.Transparent;
             }

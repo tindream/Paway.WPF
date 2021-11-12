@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Paway.Test"
         mc:Ignorable="d"
         UseLayoutRounding="True"
-        DataContext="{Binding Test ,Source={StaticResource Locator}}"
+        DataContext="{Binding Test, Source={StaticResource Locator}}"
         Title="TestWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <DockPanel HorizontalAlignment="Center" Width="200" VerticalAlignment="Center">
