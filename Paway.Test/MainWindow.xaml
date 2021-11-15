@@ -228,23 +228,6 @@
                 <DataPager Name="dataPager" Margin="0,0,0,3" Source="{Binding PagedList}"/>
             </StackPanel>
         </ExpanderEXT>
-        <ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="ListView">
-            <StackPanel Width="250">
-                <ListViewEXT Name="listView2"
-                               Height="84"
-                               ItemsSource="{Binding GridList}"
-                               ItemPadding="10,5,10,5" ItemWidth="120" 
-                               SelectionMode="Multiple"
-                               ItemDescForeground="Green"
-                               HorizontalContentAlignment="Left" VerticalAlignment="Top" >
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction Command="{Binding SelectionCommand}" CommandParameter="{Binding ElementName=listView2}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </ListViewEXT>
-            </StackPanel>
-        </ExpanderEXT>
         <ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="TreeView">
             <StackPanel Width="250">
                 <TreeViewEXT x:Name="TreeViewOrg" Height="180" ICheckBox="Visible" ItemTemplate="{StaticResource DefaultNode}" ItemsSource="{Binding TreeList}">
@@ -264,7 +247,7 @@
         </ExpanderEXT>
 
         <StackPanel>
-            <ListViewEXT x:Name="listView3" Margin="5,5,0,0" IAnimation="True" ItemBorder="0,0,1,1;0,0,1,3" ItemWidthType="TwoRow"
+            <ListViewEXT x:Name="listView3" Margin="5,5,0,0" IsLight="True" ItemWidthType="TwoRow"
                          ItemHeight="60" ItemWidth="100" ItemsSource="{Binding GridList}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">

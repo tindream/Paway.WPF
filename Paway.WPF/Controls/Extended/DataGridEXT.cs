@@ -72,7 +72,7 @@ namespace Paway.WPF
             set { SetValue(ScrollBarWidthProperty, value); }
         }
         /// <summary>
-        /// 滚动条高度(宽度)
+        /// 自定义列头
         /// </summary>
         [Category("扩展")]
         [Description("自定义列头")]

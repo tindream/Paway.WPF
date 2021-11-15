@@ -188,6 +188,7 @@ namespace Paway.WPF
                     view.BorderThickness = new Thickness(1, 1, 0, 0);
                     view.BorderBrush = new SolidColorBrush(Colors.LightGray);
                     view.ItemBorder = new ThicknessEXT(new Thickness(0, 0, 1, 1));
+                    view.ItemBrush = new BrushEXT(Colors.LightGray, alpha: 0);
                     view.ItemBackground.Normal = new SolidColorBrush(Colors.Transparent);
                 }
                 view.UpdateDefaultStyle();
