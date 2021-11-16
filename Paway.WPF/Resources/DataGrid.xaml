@@ -65,7 +65,7 @@
                         </Trigger>
                         <Trigger Property="DataGridColumnHeader.SortDirection" Value="1">
                             <Setter Property="Style" TargetName="sort" Value="{StaticResource PathTriangleDown}"/>
-                            <Setter Property="Margin" TargetName="sort" Value="2,10,0,0"/>
+                            <Setter Property="Margin" TargetName="sort" Value="2,8,0,0"/>
                             <Setter Property="Visibility" TargetName="sort" Value="Visible"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
