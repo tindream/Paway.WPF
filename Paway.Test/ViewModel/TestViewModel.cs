@@ -47,9 +47,7 @@ namespace Paway.Test.ViewModel
 
         public TestViewModel()
         {
-            List.Add(new ListViewModel("1"));
-            List.Add(new ListViewModel("2"));
-            List.Add(new ListViewModel("3"));
+            for (var i = 0; i < 5; i++) List.Add(new ListViewModel($"{i + 1}"));
         }
     }
 }
