@@ -9,7 +9,7 @@
 
     <Style TargetType="{x:Type local:ComboBoxMulti}" BasedOn="{StaticResource Config}">
         <Setter Property="Margin" Value="2"/>
-        <Setter Property="MaxDropDownHeight" Value="153"/>
+        <Setter Property="MaxDropDownHeight" Value="152"/>
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -83,12 +83,12 @@
                                Placement="Bottom">
                             <Grid Width="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
                                   MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}" >
-                                <ListBox x:Name="PART_ListBox" 
+                                <ListBox x:Name="PART_ListBox"
                                          SelectionMode="Multiple" 
-                                         BorderThickness="1,0,1,1"
+                                         BorderThickness="0"
+                                         Margin="0,-1,0,0"
                                          ItemsSource="{Binding ItemsSource,RelativeSource={RelativeSource TemplatedParent}}"
-                                         MaxHeight="{TemplateBinding MaxDropDownHeight}" 
-                                         BorderBrush="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" >
+                                         MaxHeight="{TemplateBinding MaxDropDownHeight}">
                                     <ListBox.ItemContainerStyle>
                                         <Style TargetType="ListBoxItem">
                                             <Setter Property="Padding" Value="3,15"/>
@@ -141,6 +141,7 @@
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
                                 </ListBox>
+                                <Border x:Name="DropDownBorder" BorderBrush="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" BorderThickness="1,0,1,1" />
                             </Grid>
                         </Popup>
                     </Grid>
