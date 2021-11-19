@@ -14,13 +14,13 @@ namespace Paway.WPF
     /// <summary>
     /// ComboBox扩展选择日期
     /// </summary>
-    public class ComboBoxDate : ComboBoxEXT
+    public class ComboDate : ComboBoxEXT
     {
         /// <summary>
         /// </summary>
-        public ComboBoxDate()
+        public ComboDate()
         {
-            DefaultStyleKey = typeof(ComboBoxDate);
+            DefaultStyleKey = typeof(ComboDate);
         }
 
         #region 关联选择

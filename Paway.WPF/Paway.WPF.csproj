@@ -96,7 +96,7 @@
     <Compile Include="Method\Converter\IValueConverter\IsNotNullConverter.cs" />
     <Compile Include="Method\Converter\IValueConverter\EnumConverter.cs" />
     <Compile Include="Method\Converter\MarkupExtension\IntListExtension.cs" />
-    <Compile Include="Method\Converter\MarkupExtension\EnumValuesExtension.cs" />
+    <Compile Include="Method\Converter\MarkupExtension\EnumListExtension.cs" />
     <Compile Include="Method\Converter\MarkupExtension\FontImageExtension.cs" />
     <Compile Include="Method\Converter\ValidationRule\RegexValidationRule.cs" />
     <Compile Include="Method\Converter\IEquatable\ColorLinear.cs" />
@@ -202,19 +202,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Resources\ComboBoxQuery.xaml">
+    <Page Include="Resources\ComboQuery.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Resources\ComboBoxView.xaml">
+    <Page Include="Resources\ComboView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Resources\ComboBoxTree.xaml">
+    <Page Include="Resources\ComboTree.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Resources\ComboBoxDate.xaml">
+    <Page Include="Resources\ComboDate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -226,7 +226,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Resources\ComboBoxMulti.xaml">
+    <Page Include="Resources\ComboMulti.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

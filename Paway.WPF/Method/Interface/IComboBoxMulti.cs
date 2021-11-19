@@ -11,9 +11,9 @@ using System.Windows.Media;
 namespace Paway.WPF
 {
     /// <summary>
-    /// ComboBoxMulti数接口据定义
+    /// ComboMulti数接口据定义
     /// </summary>
-    public interface IComboBoxMulti : IId
+    public interface IComboMulti : IId
     {
         /// <summary>
         /// 文本
@@ -25,9 +25,9 @@ namespace Paway.WPF
         bool IsChecked { get; set; }
     }
     /// <summary>
-    /// IComboBoxMulti数据模型
+    /// IComboMulti数据模型
     /// </summary>
-    public class ComboBoxMultiModel : ModelBase, IComboBoxMulti
+    public class ComboMultiModel : ModelBase, IComboMulti
     {
         private int id;
         /// <summary>
@@ -61,13 +61,13 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public ComboBoxMultiModel()
+        public ComboMultiModel()
         {
             this.Id = this.GetHashCode();
         }
         /// <summary>
         /// </summary>
-        public ComboBoxMultiModel(string text) : this()
+        public ComboMultiModel(string text) : this()
         {
             this.Text = text;
         }

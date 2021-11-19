@@ -18,25 +18,25 @@ namespace Paway.WPF
     /// <summary>
     /// ComboBox扩展搜索(DataGrid)
     /// </summary>
-    public class ComboBoxQuery : ComboBoxEXT
+    public class ComboQuery : ComboBoxEXT
     {
         #region 扩展
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ColumnHeaderProperty =
-            DependencyProperty.RegisterAttached(nameof(ColumnHeader), typeof(bool), typeof(ComboBoxQuery), new PropertyMetadata(false));
+            DependencyProperty.RegisterAttached(nameof(ColumnHeader), typeof(bool), typeof(ComboQuery), new PropertyMetadata(false));
         /// <summary>
         /// </summary>
         public static readonly new DependencyProperty SelectedValueProperty =
-            DependencyProperty.RegisterAttached(nameof(SelectedValue), typeof(object), typeof(ComboBoxQuery), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedValueChanged));
+            DependencyProperty.RegisterAttached(nameof(SelectedValue), typeof(object), typeof(ComboQuery), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedValueChanged));
         /// <summary>
         /// </summary>
         public static readonly new DependencyProperty SelectedItemProperty =
-            DependencyProperty.RegisterAttached(nameof(SelectedItem), typeof(object), typeof(ComboBoxQuery));
+            DependencyProperty.RegisterAttached(nameof(SelectedItem), typeof(object), typeof(ComboQuery));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ColumnWidthProperty =
-            DependencyProperty.RegisterAttached(nameof(ColumnWidth), typeof(DataGridLength), typeof(ComboBoxQuery));
+            DependencyProperty.RegisterAttached(nameof(ColumnWidth), typeof(DataGridLength), typeof(ComboQuery));
 
         /// <summary>
         /// 下拉列表是否显示列
@@ -76,7 +76,7 @@ namespace Paway.WPF
         }
         private static void OnSelectedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is ComboBoxQuery view)
+            if (d is ComboQuery view)
             {
                 IEnumerable list = view.List;
                 if (list == null) list = view.ItemsSource;
@@ -114,9 +114,9 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public ComboBoxQuery()
+        public ComboQuery()
         {
-            DefaultStyleKey = typeof(ComboBoxQuery);
+            DefaultStyleKey = typeof(ComboQuery);
         }
 
         #region 关联选择
@@ -161,8 +161,8 @@ namespace Paway.WPF
                 window.LocationChanged -= Window_LocationChanged;
                 window.LocationChanged += Window_LocationChanged;
             }
-            this.KeyUp -= ComboBoxQuery_KeyUp;
-            this.KeyUp += ComboBoxQuery_KeyUp;
+            this.KeyUp -= ComboQuery_KeyUp;
+            this.KeyUp += ComboQuery_KeyUp;
         }
         private void Window_LocationChanged(object sender, EventArgs e)
         {
@@ -200,7 +200,7 @@ namespace Paway.WPF
         private List<IListView> List;
         private TextBoxEXT textBox;
         private string last;
-        private void ComboBoxQuery_KeyUp(object sender, KeyEventArgs e)
+        private void ComboQuery_KeyUp(object sender, KeyEventArgs e)
         {
             var text = textBox.Text;
             if (last == text) return;

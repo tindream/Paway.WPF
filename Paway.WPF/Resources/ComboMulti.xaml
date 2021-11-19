@@ -7,13 +7,13 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type local:ComboBoxMulti}" BasedOn="{StaticResource Config}">
+    <Style TargetType="{x:Type local:ComboMulti}" BasedOn="{StaticResource Config}">
         <Setter Property="Margin" Value="2"/>
         <Setter Property="MaxDropDownHeight" Value="152"/>
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:ComboBoxMulti}">
+                <ControlTemplate TargetType="{x:Type local:ComboMulti}">
                     <Grid>
                         <Border x:Name="border" 
                                 BorderThickness="{TemplateBinding BorderThickness}" 
@@ -48,14 +48,14 @@
                                                     <ControlTemplate TargetType="ListBoxItem">
                                                         <WrapPanel VerticalAlignment="Center">
                                                             <Path x:Name="path" Style="{StaticResource PathRight}" 
-                                                                  Stroke="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxMulti}}}"/>
+                                                                  Stroke="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ComboMulti}}}"/>
                                                             <TextBlock x:Name="txt" Text="{Binding Text}" Padding="3"/>
                                                         </WrapPanel>
                                                         <ControlTemplate.Triggers>
                                                             <Trigger Property="IsMouseOver" Value="true">
                                                                 <Setter TargetName="path" Property="Stroke" Value="#AAFF0000" />
                                                                 <Setter TargetName="txt" Property="Foreground" 
-                                                                            Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxMulti}}}" />
+                                                                            Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ComboMulti}}}" />
                                                             </Trigger>
                                                         </ControlTemplate.Triggers>
                                                     </ControlTemplate>
@@ -103,15 +103,15 @@
                                                         <ControlTemplate.Triggers>
                                                             <Trigger Property="IsSelected" Value="True">
                                                                 <Setter TargetName="_borderbg" Property="Background" 
-                                                                        Value="{Binding Path=ItemBackground.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxMulti}}}" />
+                                                                        Value="{Binding Path=ItemBackground.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboMulti}}}" />
                                                                 <Setter Property="Foreground" 
-                                                                        Value="{Binding Path=ItemForeground.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxMulti}}}" />
+                                                                        Value="{Binding Path=ItemForeground.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboMulti}}}" />
                                                             </Trigger>
                                                             <Trigger Property="IsMouseOver" Value="true">
                                                                 <Setter TargetName="_borderbg" Property="Background" 
-                                                                        Value="{Binding Path=ItemBackground.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxMulti}}}" />
+                                                                        Value="{Binding Path=ItemBackground.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboMulti}}}" />
                                                                 <Setter Property="Foreground" 
-                                                                        Value="{Binding Path=ItemForeground.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxMulti}}}"/>
+                                                                        Value="{Binding Path=ItemForeground.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboMulti}}}"/>
                                                             </Trigger>
                                                             <MultiTrigger>
                                                                 <MultiTrigger.Conditions>
@@ -119,9 +119,9 @@
                                                                     <Condition Property="IsMouseOver" Value="true"/>
                                                                 </MultiTrigger.Conditions>
                                                                 <Setter TargetName="_borderbg" Property="Background" 
-                                                                        Value="{Binding Path=ItemBackground.PressedMouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxMulti}}}" />
+                                                                        Value="{Binding Path=ItemBackground.PressedMouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboMulti}}}" />
                                                                 <Setter Property="Foreground" 
-                                                                        Value="{Binding Path=ItemForeground.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxMulti}}}"/>
+                                                                        Value="{Binding Path=ItemForeground.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboMulti}}}"/>
                                                             </MultiTrigger>
                                                             <Trigger Property="IsEnabled" Value="False">
                                                                 <Setter TargetName="_borderbg" Property="Opacity" Value="0.3" />

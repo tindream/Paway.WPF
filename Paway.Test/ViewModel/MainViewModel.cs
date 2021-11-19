@@ -89,7 +89,7 @@ namespace Paway.Test.ViewModel
             set { plotModel = value; RaisePropertyChanged(); }
         }
 
-        public ObservableCollection<IComboBoxMulti> MultiList { get; } = new ObservableCollection<IComboBoxMulti>();
+        public ObservableCollection<IComboMulti> MultiList { get; } = new ObservableCollection<IComboMulti>();
 
         private DateTime datePickerTime = DateTime.Now;
         public DateTime DatePickerTime
@@ -260,19 +260,19 @@ namespace Paway.Test.ViewModel
             });
             this.PagedList = new PagedCollectionView(list) { PageSize = 10 };
 
-            AddComboBoxMulti();
+            AddComboMulti();
             AddTree();
             AddPlot();
         }
-        private void AddComboBoxMulti()
+        private void AddComboMulti()
         {
-            MultiList.Add(new ComboBoxMultiModel("张三") { IsChecked = true });
-            MultiList.Add(new ComboBoxMultiModel("李四"));
-            MultiList.Add(new ComboBoxMultiModel("王五"));
-            MultiList.Add(new ComboBoxMultiModel("马六"));
-            MultiList.Add(new ComboBoxMultiModel("赵七") { IsChecked = true });
-            MultiList.Add(new ComboBoxMultiModel("王八"));
-            MultiList.Add(new ComboBoxMultiModel("陈九"));
+            MultiList.Add(new ComboMultiModel("张三") { IsChecked = true });
+            MultiList.Add(new ComboMultiModel("李四"));
+            MultiList.Add(new ComboMultiModel("王五"));
+            MultiList.Add(new ComboMultiModel("马六"));
+            MultiList.Add(new ComboMultiModel("赵七") { IsChecked = true });
+            MultiList.Add(new ComboMultiModel("王八"));
+            MultiList.Add(new ComboMultiModel("陈九"));
         }
         private void AddTree()
         {

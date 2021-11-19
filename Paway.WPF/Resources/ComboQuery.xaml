@@ -7,13 +7,13 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type local:ComboBoxQuery}" BasedOn="{StaticResource Config}">
+    <Style TargetType="{x:Type local:ComboQuery}" BasedOn="{StaticResource Config}">
         <Setter Property="Margin" Value="2"/>
         <Setter Property="MaxDropDownHeight" Value="165"/>
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:ComboBoxQuery}">
+                <ControlTemplate TargetType="{x:Type local:ComboQuery}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.7*"/>

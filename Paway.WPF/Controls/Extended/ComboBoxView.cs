@@ -18,17 +18,17 @@ namespace Paway.WPF
     /// <summary>
     /// ComboBox扩展视图(DataGrid)
     /// </summary>
-    public class ComboBoxView : ComboBoxEXT
+    public class ComboView : ComboBoxEXT
     {
         #region 扩展
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ColumnHeaderProperty =
-            DependencyProperty.RegisterAttached(nameof(ColumnHeader), typeof(bool), typeof(ComboBoxView), new PropertyMetadata(false));
+            DependencyProperty.RegisterAttached(nameof(ColumnHeader), typeof(bool), typeof(ComboView), new PropertyMetadata(false));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ColumnWidthProperty =
-            DependencyProperty.RegisterAttached(nameof(ColumnWidth), typeof(DataGridLength), typeof(ComboBoxView));
+            DependencyProperty.RegisterAttached(nameof(ColumnWidth), typeof(DataGridLength), typeof(ComboView));
 
         /// <summary>
         /// 下拉列表是否显示列
@@ -63,9 +63,9 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public ComboBoxView()
+        public ComboView()
         {
-            DefaultStyleKey = typeof(ComboBoxView);
+            DefaultStyleKey = typeof(ComboView);
         }
 
         #region 关联选择

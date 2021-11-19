@@ -18,12 +18,12 @@ namespace Paway.WPF
     /// <summary>
     /// 枚举列表转换器
     /// </summary>
-    public class EnumValuesExtension : MarkupExtension
+    public class EnumListExtension : MarkupExtension
     {
         /// <summary>
-        /// 文本图标
+        /// 枚举类型
         /// </summary>
-        public Type EnumType { get; set; }
+        public Type Type { get; set; }
         /// <summary>
         /// 从指定位置开始显示
         /// </summary>
@@ -35,19 +35,19 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public EnumValuesExtension() { }
+        public EnumListExtension() { }
         /// <summary>
         /// </summary>
-        public EnumValuesExtension(Type type)
+        public EnumListExtension(Type type)
         {
-            this.EnumType = type;
+            this.Type = type;
         }
         /// <summary>
         /// 转换器
         /// </summary>
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            var list = EnumType.GetFields(PConfig.Flags).ToList();
+            var list = Type.GetFields(PConfig.Flags).ToList();
             if (Count == 0 || Count > list.Count - Start) Count = list.Count - Start;
             if (Count < 0) Count += list.Count - Start;
             var result = new List<string>();

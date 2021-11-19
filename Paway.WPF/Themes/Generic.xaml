@@ -8,11 +8,11 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\CheckBox.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\CheckButton.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBox.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBoxDate.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBoxMulti.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBoxQuery.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBoxTree.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBoxView.xaml" />
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboDate.xaml" />
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboMulti.xaml" />
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboQuery.xaml" />
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboTree.xaml" />
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboView.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\DataPager.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Expander.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ListBox.xaml" />

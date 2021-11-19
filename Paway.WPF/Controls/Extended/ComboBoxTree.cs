@@ -18,21 +18,21 @@ namespace Paway.WPF
     /// <summary>
     /// ComboBox扩展树
     /// </summary>
-    public class ComboBoxTree : ComboBoxEXT
+    public class ComboTree : ComboBoxEXT
     {
         #region 扩展
         /// <summary>
         /// </summary>
         public static readonly new DependencyProperty SelectedValueProperty =
-            DependencyProperty.RegisterAttached(nameof(SelectedValue), typeof(object), typeof(ComboBoxTree), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedValueChanged));
+            DependencyProperty.RegisterAttached(nameof(SelectedValue), typeof(object), typeof(ComboTree), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedValueChanged));
         /// <summary>
         /// </summary>
         public static readonly new DependencyProperty SelectedItemProperty =
-            DependencyProperty.RegisterAttached(nameof(SelectedItem), typeof(object), typeof(ComboBoxTree));
+            DependencyProperty.RegisterAttached(nameof(SelectedItem), typeof(object), typeof(ComboTree));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty IQueryProperty =
-            DependencyProperty.RegisterAttached(nameof(IQuery), typeof(bool), typeof(ComboBoxTree), new PropertyMetadata(false));
+            DependencyProperty.RegisterAttached(nameof(IQuery), typeof(bool), typeof(ComboTree), new PropertyMetadata(false));
 
         /// <summary>
         /// 重写
@@ -52,7 +52,7 @@ namespace Paway.WPF
         }
         private static void OnSelectedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is ComboBoxTree tree)
+            if (d is ComboTree tree)
             {
                 IEnumerable list = tree.List;
                 if (list == null) list = tree.ItemsSource;
@@ -108,9 +108,9 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public ComboBoxTree()
+        public ComboTree()
         {
-            DefaultStyleKey = typeof(ComboBoxTree);
+            DefaultStyleKey = typeof(ComboTree);
         }
 
         #region 关联选择
@@ -154,8 +154,8 @@ namespace Paway.WPF
                 window.LocationChanged -= Window_LocationChanged;
                 window.LocationChanged += Window_LocationChanged;
             }
-            this.KeyUp -= ComboBoxTree_KeyUp;
-            this.KeyUp += ComboBoxTree_KeyUp;
+            this.KeyUp -= ComboTree_KeyUp;
+            this.KeyUp += ComboTree_KeyUp;
         }
         private void Window_LocationChanged(object sender, EventArgs e)
         {
@@ -218,7 +218,7 @@ namespace Paway.WPF
         private readonly IList<ITreeView> Childs = new List<ITreeView>();
         private TextBoxEXT textBox;
         private string last;
-        private void ComboBoxTree_KeyUp(object sender, KeyEventArgs e)
+        private void ComboTree_KeyUp(object sender, KeyEventArgs e)
         {
             var text = textBox.Text;
             if (last == text) return;

@@ -14,13 +14,13 @@ namespace Paway.WPF
     /// <summary>
     /// ComboBox扩展多选
     /// </summary>
-    public class ComboBoxMulti : ComboBoxEXT
+    public class ComboMulti : ComboBoxEXT
     {
         /// <summary>
         /// </summary>
-        public ComboBoxMulti()
+        public ComboMulti()
         {
-            DefaultStyleKey = typeof(ComboBoxMulti);
+            DefaultStyleKey = typeof(ComboMulti);
         }
 
         #region 属性
@@ -28,7 +28,7 @@ namespace Paway.WPF
         /// 选中项列表
         /// </summary>
         [Browsable(false)]
-        public ObservableCollection<IComboBoxMulti> ChekedItems { get; } = new ObservableCollection<IComboBoxMulti>();
+        public ObservableCollection<IComboMulti> ChekedItems { get; } = new ObservableCollection<IComboMulti>();
 
         #endregion
 
@@ -57,7 +57,7 @@ namespace Paway.WPF
             {
                 foreach (var item in ItemsSource)
                 {
-                    if (item is IComboBoxMulti multi)
+                    if (item is IComboMulti multi)
                     {
                         if (multi.IsChecked)
                         {
@@ -71,11 +71,11 @@ namespace Paway.WPF
         {
             foreach (var item in e.RemovedItems)
             {
-                if (item is IComboBoxMulti multi)
+                if (item is IComboMulti multi)
                 {
                     for (int i = 0; i < _ListBoxV.SelectedItems.Count; i++)
                     {
-                        if (_ListBoxV.SelectedItems[i] is IComboBoxMulti temp)
+                        if (_ListBoxV.SelectedItems[i] is IComboMulti temp)
                         {
                             if (temp.Id == multi.Id)
                             {
@@ -91,7 +91,7 @@ namespace Paway.WPF
         {
             foreach (var item in e.AddedItems)
             {
-                if (item is IComboBoxMulti multi)
+                if (item is IComboMulti multi)
                 {
                     multi.IsChecked = true;
                     if (ChekedItems.IndexOf(multi) < 0)
@@ -110,7 +110,7 @@ namespace Paway.WPF
 
             foreach (var item in e.RemovedItems)
             {
-                if (item is IComboBoxMulti multi)
+                if (item is IComboMulti multi)
                 {
                     multi.IsChecked = false;
                     ChekedItems.Remove(multi);

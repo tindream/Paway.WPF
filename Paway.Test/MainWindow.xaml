@@ -83,19 +83,19 @@
         <ExpanderEXT ExpandDirection="Left" Header="输入">
             <StackPanel Width="250">
                 <ComboBoxEXT ItemsSource="{IntList Count=20}" SelectedValue="{Binding Value}"/>
-                <ComboBoxEXT ItemsSource="{EnumValues EnumType=local:MonitorType}" SelectedValue="{Binding Path=MonitorType, Converter={StaticResource enumConverter}}"/>
+                <ComboBoxEXT ItemsSource="{EnumList Type=local:MonitorType}" SelectedValue="{Binding Path=MonitorType, Converter={StaticResource enumConverter}}"/>
                 <ComboBoxEXT ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
-                <ComboBoxMulti ItemsSource="{Binding MultiList}"/>
-                <ComboBoxDate SelectedValue="{Binding DatePickerTime}"/>
-                <ComboBoxTree ItemsSource="{Binding TreeList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding TreeId}" IQuery="True"/>
-                <ComboBoxView ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
-                <ComboBoxQuery ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}">
+                <ComboMulti ItemsSource="{Binding MultiList}"/>
+                <ComboDate SelectedValue="{Binding DatePickerTime}"/>
+                <ComboTree ItemsSource="{Binding TreeList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding TreeId}" IQuery="True"/>
+                <ComboView ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
+                <ComboQuery ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="FilterEvent">
                             <ip:EventToCommand Command="{Binding CbxFilterCmd}" PassEventArgsToCommand="True"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                </ComboBoxQuery>
+                </ComboQuery>
                 <TextBoxEXT Name="tb" Icon="pack://application:,,,/Paway.Test;component/Images/close.png" IAnimation="2" BorderThickness="0,0,0,1" Radius="0">
                     <Binding Path="Value">
                         <Binding.ValidationRules>
@@ -118,7 +118,7 @@
                                Command="{Binding Teach}" CommandParameter="{Binding ElementName=btn}" Click="Cancel_Click" 
                                Image="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"/>
                     <ButtonEXT Name="btn" Grid.Column="1"
-                             Content="{FontImage FontChar=Adjust}" Click="Commit_Click" 
+                             Content="{FontImage Type=Adjust}" Click="Commit_Click" 
                              CommandParameter="{Binding ElementName=btn}"/>
                     <Badge Name="badge" Grid.Column="1" IsWaving="True" HorizontalAlignment="Right" Text="1" Background="Red" VerticalAlignment="Top" Height="20" Margin="-6"/>
                 </Grid>
