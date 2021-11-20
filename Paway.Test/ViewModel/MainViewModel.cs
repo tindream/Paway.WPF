@@ -252,10 +252,12 @@ namespace Paway.Test.ViewModel
             list.Add(new ListViewModel("Hello"));
             list.Add(new ListViewModel("你好123")
             {
+                IsEnabled = false,
                 Image = new ImageEXT(null, @"pack://application:,,,/Paway.Test;component/Images/close_while.png")
             });
             for (int i = 0; i < 20; i++) list.Add(new ListViewModel("A" + i, "D" + i)
             {
+                IsEnabled = i != 5,
                 Image = new ImageEXT(@"pack://application:,,,/Paway.Test;component/Images/close.png")
             });
             this.PagedList = new PagedCollectionView(list) { PageSize = 10 };

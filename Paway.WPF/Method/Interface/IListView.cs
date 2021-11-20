@@ -48,6 +48,10 @@ namespace Paway.WPF
         /// </summary>
         bool IsSelected { get; set; }
         /// <summary>
+        /// 获取或设置一个值，该值指示是否 用户界面 (UI) 中启用此元素。
+        /// </summary>
+        bool IsEnabled { get; set; }
+        /// <summary>
         /// 自定义外部样式
         /// </summary>
         Style StyleEXT { get; set; }
@@ -151,6 +155,16 @@ namespace Paway.WPF
         {
             get { return isSelected; }
             set { isSelected = value; OnPropertyChanged(); }
+        }
+        private bool isEnabled = true;
+        /// <summary>
+        /// 获取或设置一个值，该值指示是否 用户界面 (UI) 中启用此元素。
+        /// </summary>
+        [NoShow]
+        public bool IsEnabled
+        {
+            get { return isEnabled; }
+            set { isEnabled = value; OnPropertyChanged(); }
         }
         private Style styleEXT;
         /// <summary>

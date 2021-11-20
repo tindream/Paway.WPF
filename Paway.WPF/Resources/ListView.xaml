@@ -36,6 +36,7 @@
             <Setter.Value>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="IsSelected" Value="{Binding IsSelected}" />
+                    <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
                     <Setter Property="Focusable" Value="False" />
                     <Setter Property="Visibility" Value="{Binding Visibility}" />
                     <Setter Property="Template">
@@ -489,6 +490,10 @@
                                             </Setter.Value>
                                         </Setter>
                                     </MultiTrigger>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="Background" TargetName="border" Value="LightGray"/>
+                                        <Setter Property="BorderBrush" TargetName="border" Value="DarkGray"/>
+                                    </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Setter.Value>

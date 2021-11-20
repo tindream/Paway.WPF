@@ -32,12 +32,12 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemTextForegroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemTextForeground), typeof(BrushEXT), typeof(ListBoxItemEXT), 
+            DependencyProperty.RegisterAttached(nameof(ItemTextForeground), typeof(BrushEXT), typeof(ListBoxItemEXT),
                 new PropertyMetadata(new BrushEXT(Colors.Transparent)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBackgroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ListBoxItemEXT), 
+            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ListBoxItemEXT),
                 new PropertyMetadata(new BrushEXT(Colors.Transparent), OnItemBackgroundChanged));
         private static void OnItemBackgroundChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -71,7 +71,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ListBoxItemEXT), 
+            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ListBoxItemEXT),
                 new PropertyMetadata(new BrushEXT(Colors.Transparent)));
         /// <summary>
         /// </summary>
