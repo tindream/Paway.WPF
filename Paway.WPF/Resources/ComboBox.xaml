@@ -43,10 +43,11 @@
                 <ControlTemplate TargetType="{x:Type local:ComboBoxEXT}">
                     <Grid>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="0.7*"/>
                             <ColumnDefinition Width="0.3*" MaxWidth="30"/>
                         </Grid.ColumnDefinitions>
-                        <Border Name="border" Grid.ColumnSpan="2" 
+                        <Border Name="border" Grid.ColumnSpan="3" 
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 CornerRadius="{TemplateBinding Radius}"
                                 Padding="{TemplateBinding Padding}"
@@ -59,19 +60,24 @@
                                           ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" 
                                           ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" />
                         <!--ToggleButton 已数据绑定到 ComboBox 本身以切换 IsDropDownOpen-->
-                        <ToggleButton x:Name="ToggleButton" Grid.ColumnSpan="2" 
+                        <ToggleButton x:Name="ToggleButton" Grid.ColumnSpan="3" 
                                       Focusable="false" 
                                       ClickMode="Press"
                                       Template="{StaticResource ComboBoxToggleButton}"
                                       IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" />
+                        <Image x:Name="icon" Visibility="Collapsed" Margin="1,0,0,0"
+                                       Source="{TemplateBinding Icon}"
+                                       Stretch="{TemplateBinding IconStretch}"/>
                         <!--必须将 TextBox 命名为 PART_EditableTextBox，否则 ComboBox 将无法识别它-->
-                        <local:TextBoxEXT x:Name="PART_EditableTextBox"
-                                          Margin="0"
+                        <local:TextBoxEXT x:Name="PART_EditableTextBox" BorderThickness="0"
+                                          Grid.Column="1"
+                                          Margin="-4,0,0,0"
                                           ItemBrush="Transparent"
                                           Visibility="Hidden" 
                                           Focusable="True" 
                                           Background="Transparent" 
                                           Radius="{TemplateBinding Radius}"
+                                          Water="{TemplateBinding Water}"
                                           IsReadOnly="{TemplateBinding IsReadOnly}"/>
                         <!--Popup 可显示 ComboBox 中的项列表。IsOpen 已数据绑定到通过 ComboBoxToggleButton 来切换的 IsDropDownOpen-->
                         <Popup x:Name="PART_Popup"
@@ -99,6 +105,14 @@
                             <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible" />
                             <Setter TargetName="border" Property="Background" Value="White" />
                         </Trigger>
+                        <DataTrigger Binding="{Binding Icon, Converter={StaticResource isNotNull}, RelativeSource={RelativeSource Self}}" Value="True">
+                            <Setter TargetName="icon" Property="Visibility" Value="Visible" />
+                            <Setter Property="Padding" Value="0,4" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=PART_EditableTextBox, Path=IsKeyboardFocused}" Value="True">
+                            <Setter Property="BorderBrush" TargetName="border" 
+                                    Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </DataTrigger>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="border" Property="BorderBrush" 
                                     Value="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}" />

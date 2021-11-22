@@ -33,6 +33,19 @@ namespace Paway.WPF
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ComboBoxEXT),
                 new PropertyMetadata(new BrushEXT()));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty IconProperty =
+            DependencyProperty.RegisterAttached(nameof(Icon), typeof(ImageSource), typeof(ComboBoxEXT));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty IconStretchProperty =
+            DependencyProperty.RegisterAttached(nameof(IconStretch), typeof(Stretch), typeof(ComboBoxEXT),
+            new PropertyMetadata(Stretch.None));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty WaterProperty =
+            DependencyProperty.RegisterAttached(nameof(Water), typeof(string), typeof(ComboBoxEXT), new PropertyMetadata("请输入.."));
 
         #endregion
 
@@ -76,6 +89,36 @@ namespace Paway.WPF
         {
             get { return (BrushEXT)GetValue(ItemBrushProperty); }
             set { SetValue(ItemBrushProperty, value); }
+        }
+        /// <summary>
+        /// 图片
+        /// </summary>
+        [Category("扩展")]
+        [Description("图片")]
+        public ImageSource Icon
+        {
+            get { return (ImageSource)GetValue(IconProperty); }
+            set { SetValue(IconProperty, value); }
+        }
+        /// <summary>
+        /// 图片的内容如何拉伸才适合其磁贴
+        /// </summary>
+        [Category("扩展")]
+        [Description("图片的内容如何拉伸才适合其磁贴")]
+        public Stretch IconStretch
+        {
+            get { return (Stretch)GetValue(IconStretchProperty); }
+            set { SetValue(IconStretchProperty, value); }
+        }
+        /// <summary>
+        /// 可编辑时的输入框水印内容
+        /// </summary>
+        [Category("扩展")]
+        [Description("可编辑时的输入框水印内容")]
+        public string Water
+        {
+            get { return (string)GetValue(WaterProperty); }
+            set { SetValue(WaterProperty, value); }
         }
 
         #endregion
