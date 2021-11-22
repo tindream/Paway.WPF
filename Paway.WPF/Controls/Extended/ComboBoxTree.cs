@@ -115,7 +115,7 @@ namespace Paway.WPF
         }
         private void ComboQuery_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (this.textBox != null && this.IsFocused) this.textBox.Focus();
+            if (this.textBox != null && this.IsFocused && this.IQuery) this.textBox.Focus();
         }
 
         #region 关联选择

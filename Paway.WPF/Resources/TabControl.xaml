@@ -80,6 +80,7 @@
                 <Style TargetType="TabItem">
                     <Setter Property="Foreground" Value="{StaticResource Text}"/>
                     <Setter Property="Padding" Value="6"/>
+                    <Setter Property="Cursor" Value="Hand"/>
                     <Setter Property="Background" Value="Transparent"/>
                     <Setter Property="BorderBrush" Value="DarkGray"/>
                     <Setter Property="Margin" Value="0"/>

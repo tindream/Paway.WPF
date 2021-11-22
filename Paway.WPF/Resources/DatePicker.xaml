@@ -147,6 +147,7 @@
                                                HorizontalContentAlignment="Stretch"
                                                VerticalContentAlignment="Stretch"
                                                Focusable="{TemplateBinding UIElement.Focusable}"
+                                               FocusVisualStyle="{x:Null}"
                                                Grid.Column="0"
                                                Grid.Row="0"
                                                Margin="1"
@@ -189,6 +190,10 @@
                                     <Binding Path="Foreground" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
                                 </Setter.Value>
                             </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=PART_TextBox, Path=IsKeyboardFocused}" Value="True">
+                            <Setter Property="Foreground" TargetName="PART_Button" 
+                                    Value="{Binding ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:DatePickerEXT}}}"/>
                         </DataTrigger>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="Foreground" TargetName="PART_Button" 

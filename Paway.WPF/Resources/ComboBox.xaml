@@ -34,10 +34,7 @@
         </Grid>
     </ControlTemplate>
 
-    <Style TargetType="{x:Type local:ComboBoxEXT}" BasedOn="{StaticResource Config}">
-        <Setter Property="Margin" Value="2"/>
-        <Setter Property="MaxDropDownHeight" Value="151"/>
-        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
+    <Style TargetType="{x:Type local:ComboBoxEXT}" BasedOn="{StaticResource ComboConfig}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ComboBoxEXT}">

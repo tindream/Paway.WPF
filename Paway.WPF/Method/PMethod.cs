@@ -790,6 +790,10 @@ namespace Paway.WPF
                 //赋给父级窗体
                 owner.Content = originalOld;
             };
+            window.LostKeyboardFocus += delegate
+            {
+                window.Focus();
+            };
             if (!(window is WindowEXT))
             {
                 //window.Loaded += delegate { window.Activate(); };

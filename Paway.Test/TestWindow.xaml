@@ -8,16 +8,18 @@
         UseLayoutRounding="True"
         DataContext="{Binding Test, Source={StaticResource Locator}}"
         Title="TestWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
-    <Grid>
+    <Grid FocusManager.FocusedElement="{Binding ElementName=t1}">
         <DockPanel HorizontalAlignment="Center" Width="200" VerticalAlignment="Center">
             <ButtonEXT Name="btnCancel" Content="取消"  AnimationHelper.Value="Bottom"
                                Type="Warn" IsLight="True" ShadowRadius="10"
+                       Click="btnCancel_Click"
                                ImageStretch="None" ImageMargin="-24,0,0,0" ImageDock="Right"
                                Image="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"
                        DockPanel.Dock="Top"/>
-            <ComboBoxEXT ItemsSource="{Binding List}" DockPanel.Dock="Top"/>
-            <TextBoxEXT DockPanel.Dock="Top"/>
-            <ComboBoxEXT ItemsSource="{Binding List}" IsEditable="True"  Water="请输入"/>
+            <ButtonEXT DockPanel.Dock="Top"/>
+            <TextBoxEXT Name="t1" DockPanel.Dock="Top"/>
+            <CheckBoxEXT Content="1" DockPanel.Dock="Top"/>
+            <CheckButton Content="1"/>
         </DockPanel>
     </Grid>
 </WindowEXT>
