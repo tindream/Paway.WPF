@@ -792,7 +792,7 @@ namespace Paway.WPF
             };
             window.LostKeyboardFocus += delegate
             {
-                window.Focus();
+                if (!window.IsKeyboardFocusWithin) window.Focus();
             };
             if (!(window is WindowEXT))
             {
