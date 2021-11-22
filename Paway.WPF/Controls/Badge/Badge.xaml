@@ -10,6 +10,7 @@
                 MinWidth="{Binding ActualHeight,ElementName=badge}"
                 x:Name="badge"
                 Foreground="White"
+                Focusable="False"
                 RenderTransformOrigin="0.5,0.5">
     <ContentControl.Resources>
         <Storyboard x:Key="Storyboard_ScaleBigger">

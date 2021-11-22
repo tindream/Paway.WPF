@@ -120,10 +120,6 @@
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" TargetName="border" Value="LightGray"/>
                         </Trigger>
-                        <!--<Trigger Property="IsKeyboardFocused" Value="True">
-                            <Setter TargetName="border" Property="BorderBrush" 
-                                    Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" />
-                        </Trigger>-->
                         <Trigger Property="IsDropDownOpen" Value="True">
                             <Setter TargetName="border" Property="BorderBrush" 
                                     Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" />

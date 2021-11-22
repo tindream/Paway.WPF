@@ -111,10 +111,10 @@ namespace Paway.WPF
             set { SetValue(IconStretchProperty, value); }
         }
         /// <summary>
-        /// 可编辑时的输入框水印内容
+        /// 输入框水印内容
         /// </summary>
         [Category("扩展")]
-        [Description("可编辑时的输入框水印内容")]
+        [Description("输入框水印内容")]
         public string Water
         {
             get { return (string)GetValue(WaterProperty); }

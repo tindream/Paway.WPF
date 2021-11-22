@@ -7,6 +7,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type local:TextBoxEXT}" BasedOn="{StaticResource Config}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Cursor" Value="IBeam"/>
         <Setter Property="Background" Value="White"/>
         <Setter Property="Padding" Value="3,4"/>
@@ -71,6 +72,7 @@
                         <DataTrigger Binding="{Binding Icon, Converter={StaticResource isNotNull}, RelativeSource={RelativeSource Self}}" Value="True">
                             <Setter TargetName="icon" Property="Visibility" Value="Visible" />
                             <Setter Property="Padding" Value="0,4" />
+                            <Setter TargetName="tbWater" Property="Padding" Value="2,0,0,0" />
                         </DataTrigger>
                         <Trigger Property="Text" Value="{x:Null}">
                             <Setter Property="Visibility" TargetName="tbWater" Value="Collapsed"/>

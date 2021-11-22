@@ -15,7 +15,9 @@
                                ImageStretch="None" ImageMargin="-24,0,0,0" ImageDock="Right"
                                Image="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"
                        DockPanel.Dock="Top"/>
-            <DataGridEXT ItemsSource="{Binding List}"/>
+            <ComboBoxEXT ItemsSource="{Binding List}" DockPanel.Dock="Top"/>
+            <TextBoxEXT DockPanel.Dock="Top"/>
+            <ComboBoxEXT ItemsSource="{Binding List}" IsEditable="True"  Water="请输入"/>
         </DockPanel>
     </Grid>
 </WindowEXT>

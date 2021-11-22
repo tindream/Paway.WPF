@@ -89,7 +89,7 @@
                 <ComboDate SelectedValue="{Binding DatePickerTime}"/>
                 <ComboTree ItemsSource="{Binding TreeList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding TreeId}" IQuery="True"/>
                 <ComboView ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
-                <ComboQuery ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}">
+                <ComboQuery ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}" Water="输入搜索...">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="FilterEvent">
                             <ip:EventToCommand Command="{Binding CbxFilterCmd}" PassEventArgsToCommand="True"/>

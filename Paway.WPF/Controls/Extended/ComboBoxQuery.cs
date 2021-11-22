@@ -117,6 +117,11 @@ namespace Paway.WPF
         public ComboQuery()
         {
             DefaultStyleKey = typeof(ComboQuery);
+            this.GotFocus += ComboQuery_GotFocus;
+        }
+        private void ComboQuery_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (this.textBox != null && this.IsFocused) this.textBox.Focus();
         }
 
         #region 关联选择

@@ -70,6 +70,10 @@
                             <Setter TargetName="ContentSite" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="border" Property="Background" Value="White" />
                         </Trigger>
+                        <DataTrigger Binding="{Binding ElementName=PART_EditableTextBox, Path=IsKeyboardFocused}" Value="True">
+                            <Setter Property="BorderBrush" TargetName="border" 
+                                    Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </DataTrigger>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="border" Property="BorderBrush" 
                                     Value="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}" />
