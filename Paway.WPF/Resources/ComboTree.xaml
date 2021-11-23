@@ -66,6 +66,7 @@
                             <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible" />
                             <Setter TargetName="ContentSite" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="border" Property="Background" Value="White" />
+                            <Setter Property="IsTabStop" Value="False" />
                         </Trigger>
                         <DataTrigger Binding="{Binding ElementName=PART_EditableTextBox, Path=IsKeyboardFocused}" Value="True">
                             <Setter Property="BorderBrush" TargetName="border" 

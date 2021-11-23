@@ -6,14 +6,13 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type local:RadioButtonEXT}" BasedOn="{StaticResource Config}">
-        <Setter Property="IsTabStop" Value="False" />
+    <Style TargetType="{x:Type local:RadioButtonEXT}" BasedOn="{StaticResource FocusConfig}">
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="0,0,3,0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:RadioButtonEXT">
-                    <Grid Background="Transparent" Name="templateRoot" Focusable="True">
+                    <Grid Background="Transparent" Name="templateRoot">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
@@ -41,7 +40,6 @@
                             Margin="{TemplateBinding Control.Padding}"
                             HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}"
-                            Focusable="False"
                             Grid.Column="1" />
                     </Grid>
                     <ControlTemplate.Triggers>

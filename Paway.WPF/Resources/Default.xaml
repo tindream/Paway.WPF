@@ -248,11 +248,14 @@
     <Style x:Key="MiniConfig" TargetType="{x:Type Control}" BasedOn="{StaticResource Config}">
         <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}, Converter={StaticResource valueMultiConverter}}"/>
     </Style>
-    <Style x:Key="ComboConfig" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource Config}">
+    <Style x:Key="FocusConfig" TargetType="{x:Type Control}" BasedOn="{StaticResource Config}">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualStyle}"/>
+    </Style>
+    <Style x:Key="ComboConfig" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource FocusConfig}">
         <Setter Property="Margin" Value="2"/>
         <Setter Property="MaxDropDownHeight" Value="151"/>
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
-        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualStyle}"/>
     </Style>
     <ControlTemplate x:Key="ErrorTemplate">
         <DockPanel LastChildFill="true">

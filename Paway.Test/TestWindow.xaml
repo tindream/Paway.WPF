@@ -16,9 +16,10 @@
                                ImageStretch="None" ImageMargin="-24,0,0,0" ImageDock="Right"
                                Image="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"
                        DockPanel.Dock="Top"/>
-            <ButtonEXT DockPanel.Dock="Top"/>
             <TextBoxEXT Name="t1" DockPanel.Dock="Top"/>
             <CheckBoxEXT Content="1" DockPanel.Dock="Top"/>
+            <RadioButtonEXT Content="1" DockPanel.Dock="Top"/>
+            <ComboBoxEXT DockPanel.Dock="Top"/>
             <CheckButton Content="1"/>
         </DockPanel>
     </Grid>

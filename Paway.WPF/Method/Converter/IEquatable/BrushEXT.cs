@@ -25,12 +25,12 @@ namespace Paway.WPF
         /// 默认的颜色
         /// </summary>
         public Brush Normal { get { return normal; } set { normal = value; OnPropertyChanged(); } }
-        private Brush mouse = new SolidColorBrush(PMethod.ThemeColor());
+        private Brush mouse = new SolidColorBrush(PMethod.ThemeColor(PConfig.Alpha - PConfig.Interval));
         /// <summary>
         /// 鼠标划过时的颜色
         /// </summary>
         public Brush Mouse { get { return mouse; } set { mouse = value; OnPropertyChanged(); } }
-        private Brush pressed = new SolidColorBrush(PMethod.ThemeColor());
+        private Brush pressed = new SolidColorBrush(PMethod.ThemeColor(PConfig.Alpha + PConfig.Interval));
         /// <summary>
         /// 鼠标点击时的颜色
         /// </summary>
