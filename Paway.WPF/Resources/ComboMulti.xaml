@@ -23,10 +23,10 @@
                             <DockPanel x:Name="PART_InnerGrid" Margin="0">
                                 <!--下拉按钮-->
                                 <ToggleButton Name="PART_DropDownToggle" 
-                                                  Width="30" DockPanel.Dock="Right"
-                                                  IsTabStop="False" 
-                                                  IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
-                                                  Template="{StaticResource ComboBoxToggleButton}" />
+                                              Focusable="False"
+                                              Width="30" DockPanel.Dock="Right"
+                                              IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                                              Template="{StaticResource ComboBoxToggleButton}" />
                                 <local:ListBoxEXT x:Name="PART_ListBoxChk"
                                                   SelectionMode="Multiple" 
                                                   BorderThickness="0" 
@@ -65,16 +65,15 @@
                                 <!--<TextBlock Name="tbOpen" Cursor="Hand" Background="{StaticResource backLine}"/>-->
                                 <local:TextBoxEXT Width="0" Margin="0" Focusable="False"/>
                                 <ToggleButton Name="PART_DropDownToggle2" 
-                                                  DockPanel.Dock="Right"
-                                                  IsTabStop="False"
-                                                  IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
-                                                  Template="{StaticResource ComboBoxToggleNone}" />
+                                              Focusable="False"
+                                              DockPanel.Dock="Right"
+                                              IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                                              Template="{StaticResource ComboBoxToggleNone}" />
                             </DockPanel>
                         </Grid>
                         <!--弹出多选列表-->
                         <Popup x:Name="PART_Popup" 
                                AllowsTransparency="True" 
-                               Focusable="False" 
                                StaysOpen="True"
                                IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
                                PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" 

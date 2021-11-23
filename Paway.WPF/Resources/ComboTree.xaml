@@ -41,13 +41,11 @@
                                           ItemBrush="Transparent"
                                           BorderThickness="0,1"
                                           Visibility="Hidden" 
-                                          Focusable="True" 
                                           Background="Transparent" 
                                           Radius="{TemplateBinding Radius}"
                                           IsReadOnly="{TemplateBinding IsReadOnly}"/>
                         <Popup x:Name="PART_Popup" 
                                AllowsTransparency="True" 
-                               Focusable="False" 
                                StaysOpen="True"
                                IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
                                PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" 

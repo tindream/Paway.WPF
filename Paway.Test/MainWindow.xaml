@@ -142,25 +142,6 @@
                     <RadioButtonEXT Content="World" IsChecked="True" />
                     <RadioButtonEXT Content="Watch" IsChecked="{x:Null}" IsEnabled="False"/>
                 </WrapPanel>
-                <RichTextBoxEXT x:Name="rt" IsReadOnly="True" Height="50" BorderThickness="0">
-                    <FlowDocument>
-                        <Paragraph>
-                            <Run Text="追加内容" />
-                        </Paragraph>
-                        <Paragraph>
-                            <Run Text="自动高度" />
-                        </Paragraph>
-                        <Paragraph>
-                            <Run Text="1" />
-                        </Paragraph>
-                        <Paragraph>
-                            <Run Text="2" />
-                        </Paragraph>
-                        <Paragraph>
-                            <Run Text="3" />
-                        </Paragraph>
-                    </FlowDocument>
-                </RichTextBoxEXT>
                 <StackPanel Orientation="Horizontal">
                     <Path Style="{StaticResource PathRound}"/>
                     <TransitionControl Name="transition" >
@@ -180,6 +161,25 @@
                     <ProgressBoard Value="35" Width="70"/>
                 </StackPanel>
                 <CalendarEXT/>
+                <RichTextBoxEXT x:Name="rt" IsReadOnly="True" Height="50" BorderThickness="0">
+                    <FlowDocument>
+                        <Paragraph>
+                            <Run Text="追加内容" />
+                        </Paragraph>
+                        <Paragraph>
+                            <Run Text="自动高度" />
+                        </Paragraph>
+                        <Paragraph>
+                            <Run Text="1" />
+                        </Paragraph>
+                        <Paragraph>
+                            <Run Text="2" />
+                        </Paragraph>
+                        <Paragraph>
+                            <Run Text="3" />
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBoxEXT>
             </StackPanel>
         </ExpanderEXT>
 

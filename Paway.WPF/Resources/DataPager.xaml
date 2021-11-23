@@ -10,9 +10,11 @@
         <Setter Property="Background" Value="{StaticResource Light}" />
         <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="BorderThickness" Value="1,0,1,1" />
+        <Setter Property="Focusable" Value="False"/>
         <Setter Property="NumericButtonStyle">
             <Setter.Value>
                 <Style TargetType="ToggleButton">
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
                     <Setter Property="MinHeight" Value="30" />
                     <Setter Property="MinWidth" Value="30" />
                     <Setter Property="HorizontalAlignment" Value="Right" />
@@ -567,6 +569,7 @@
                                         VerticalAlignment="Stretch">
                                 <!--FirstPage Button-->
                                 <Button x:Name="FirstPageButton"
+                                        FocusVisualStyle="{x:Null}"
                                         Height="30"
                                         Width="30"
                                         Background="{StaticResource BackgroundColor}"
@@ -595,6 +598,7 @@
 
                                 <!--PreviousPage Button-->
                                 <Button Name="PreviousPageButton"
+                                        FocusVisualStyle="{x:Null}"
                                         Background="{StaticResource BackgroundColor}"
                                         Foreground="{StaticResource ForegroundColor}"
                                         BorderBrush="{StaticResource BorderBrushColor}"
@@ -656,6 +660,7 @@
 
                                 <!--NextPage Button-->
                                 <Button x:Name="NextPageButton"
+                                        FocusVisualStyle="{x:Null}"
                                         Background="{StaticResource BackgroundColor}"
                                         Foreground="{StaticResource ForegroundColor}"
                                         BorderBrush="{StaticResource BorderBrushColor}"
@@ -678,6 +683,7 @@
 
                                 <!--LastPage Button-->
                                 <Button x:Name="LastPageButton"
+                                        FocusVisualStyle="{x:Null}"
                                         Background="{StaticResource BackgroundColor}"
                                         Foreground="{StaticResource ForegroundColor}"
                                         BorderBrush="{StaticResource BorderBrushColor}"

@@ -10,7 +10,7 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="MinHeight" Value="20" />
         <Setter Property="MinWidth" Value="20" />
-        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="Foreground" Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="Template">
             <Setter.Value>

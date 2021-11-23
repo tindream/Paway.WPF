@@ -71,7 +71,6 @@
                                           Margin="-4,0,0,0"
                                           ItemBrush="Transparent"
                                           Visibility="Hidden" 
-                                          Focusable="True" 
                                           Background="Transparent" 
                                           Radius="{TemplateBinding Radius}"
                                           Water="{TemplateBinding Water}"
@@ -79,7 +78,6 @@
                         <!--Popup 可显示 ComboBox 中的项列表。IsOpen 已数据绑定到通过 ComboBoxToggleButton 来切换的 IsDropDownOpen-->
                         <Popup x:Name="PART_Popup"
                                AllowsTransparency="True" 
-                               Focusable="False" 
                                IsOpen="{TemplateBinding IsDropDownOpen}" 
                                Placement="Bottom" 
                                PopupAnimation="Slide">
