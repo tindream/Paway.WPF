@@ -1,4 +1,5 @@
 ﻿using Paway.Helper;
+using Paway.WPF;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace Paway.Test
 {
-    public class TempInfo : BaseInfo
+    public class TempInfo : ModelBase
     {
         public DateTime DateTime { get; set; }
         private double _value;
@@ -37,7 +38,7 @@ namespace Paway.Test
             Value = value;
         }
     }
-    public class RateInfo : BaseInfo
+    public class RateInfo : ModelBase
     {
         public string Text { get; set; }
 

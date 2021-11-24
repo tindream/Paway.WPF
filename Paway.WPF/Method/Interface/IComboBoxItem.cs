@@ -13,7 +13,7 @@ namespace Paway.WPF
     /// <summary>
     /// ComboMulti数接口据定义
     /// </summary>
-    public interface IComboMulti : IId
+    public interface IComboBoxItem : IId
     {
         /// <summary>
         /// 文本
@@ -27,7 +27,7 @@ namespace Paway.WPF
     /// <summary>
     /// IComboMulti数据模型
     /// </summary>
-    public class ComboMultiModel : ModelBase, IComboMulti
+    public class ComboBoxItemModel : ModelBase, IComboBoxItem
     {
         private int id;
         /// <summary>
@@ -61,13 +61,13 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public ComboMultiModel()
+        public ComboBoxItemModel()
         {
             this.Id = this.GetHashCode();
         }
         /// <summary>
         /// </summary>
-        public ComboMultiModel(string text) : this()
+        public ComboBoxItemModel(string text) : this()
         {
             this.Text = text;
         }

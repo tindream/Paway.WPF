@@ -70,7 +70,7 @@ namespace Paway.Test.ViewModel
             DataService.Default.Delete(info);
             List.Remove(info);
         }
-        protected virtual void Selectioned(ListViewEXT listView1, IListView item)
+        protected virtual void Selectioned(ListViewEXT listView1, IListViewItem item)
         {
             switch (item.Text)
             {
@@ -118,7 +118,7 @@ namespace Paway.Test.ViewModel
             {
                 return selectionCommand ?? (selectionCommand = new RelayCommand<ListViewEXT>(listView1 =>
                 {
-                    if (listView1.SelectedItem is IListView item)
+                    if (listView1.SelectedItem is IListViewItem item)
                     {
                         Selectioned(listView1, item);
                     }

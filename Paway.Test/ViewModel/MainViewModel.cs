@@ -31,13 +31,13 @@ namespace Paway.Test.ViewModel
     public class MainViewModel : ViewModelPlus
     {
         #region 属性
-        private readonly List<ListViewModel> list = new List<ListViewModel>();
-        public List<ListViewModel> GridList { get { return list; } }
+        private readonly List<ListViewItemModel> list = new List<ListViewItemModel>();
+        public List<ListViewItemModel> GridList { get { return list; } }
         public PagedCollectionView PagedList { get; private set; }
-        public ObservableCollection<TreeViewModel> TreeList { get; private set; } = new ObservableCollection<TreeViewModel>();
+        public ObservableCollection<TreeViewItemModel> TreeList { get; private set; } = new ObservableCollection<TreeViewItemModel>();
 
-        private ListViewModel selectedItem;
-        public ListViewModel SelectedItem
+        private ListViewItemModel selectedItem;
+        public ListViewItemModel SelectedItem
         {
             get { return selectedItem; }
             set
@@ -89,7 +89,7 @@ namespace Paway.Test.ViewModel
             set { plotModel = value; RaisePropertyChanged(); }
         }
 
-        public ObservableCollection<IComboMulti> MultiList { get; } = new ObservableCollection<IComboMulti>();
+        public ObservableCollection<IComboBoxItem> MultiList { get; } = new ObservableCollection<IComboBoxItem>();
 
         private DateTime datePickerTime = DateTime.Now;
         public DateTime DatePickerTime
@@ -137,7 +137,7 @@ namespace Paway.Test.ViewModel
                 {
                     if (e.Source is DataGridEXT datagrid1)
                     {
-                        if (e.Item is ListViewModel info)
+                        if (e.Item is ListViewItemModel info)
                         {
                         }
                     }
@@ -152,7 +152,7 @@ namespace Paway.Test.ViewModel
             {
                 return selectedItemChanged ?? (selectedItemChanged = new RelayCommand<TreeViewEXT>(treeView =>
                 {
-                    if (treeView.SelectedItem is ITreeView item)
+                    if (treeView.SelectedItem is ITreeViewItem item)
                     {
                         this.TreeId = item.Id;
                     }
@@ -194,7 +194,7 @@ namespace Paway.Test.ViewModel
                 {
                     if (e.Source is DataGridEXT dataGrid)
                     {
-                        var p = dataGrid.Columns.Predicate<ListViewModel>(e.Filter);
+                        var p = dataGrid.Columns.Predicate<ListViewItemModel>(e.Filter);
                         e.List = this.list.AsParallel().Where(p).ToList();
                     }
                 }));
@@ -208,12 +208,31 @@ namespace Paway.Test.ViewModel
             {
                 return selectionCommand ?? (selectionCommand = new RelayCommand<ListViewEXT>(listView1 =>
                 {
-                    if (listView1.SelectedItem is IListView info)
+                    if (listView1.SelectedItem is IListViewItem info)
                     {
                         Method.Toast(listView1, info.Text);
                     }
                     //if (listView1.SelectedItem is IListViewInfo info) Method.Show(listView1, info.Content);
                     //listView1.SelectedIndex = -1;
+                }));
+            }
+        }
+        private ICommand rectDoubleCommand;
+        public ICommand RectDoubleCommand
+        {
+            get
+            {
+                return rectDoubleCommand ?? (rectDoubleCommand = new RelayCommand<MouseButtonEventArgs>(e =>
+                {
+                    if (e.Source is ListView listvew)
+                    {
+                        var point = e.GetPosition(listvew);
+                        var obj = listvew.InputHitTest(point);
+                        if (PMethod.Parent(obj, out ListViewItem temp) && temp.Content is IListViewItem item)
+                        {
+                            Method.Hit(listvew, item.Text);
+                        }
+                    }
                 }));
             }
         }
@@ -249,13 +268,13 @@ namespace Paway.Test.ViewModel
         {
             this.MessengerInstance.Register<StatuMessage>(this, msg => Statu(msg.Msg));
 
-            list.Add(new ListViewModel("Hello"));
-            list.Add(new ListViewModel("你好123")
+            list.Add(new ListViewItemModel("Hello"));
+            list.Add(new ListViewItemModel("你好123")
             {
                 IsEnabled = false,
                 Image = new ImageEXT(null, @"pack://application:,,,/Paway.Test;component/Images/close_while.png")
             });
-            for (int i = 0; i < 20; i++) list.Add(new ListViewModel("A" + i, "D" + i)
+            for (int i = 0; i < 20; i++) list.Add(new ListViewItemModel("A" + i, "D" + i)
             {
                 IsEnabled = i != 5,
                 Image = new ImageEXT(@"pack://application:,,,/Paway.Test;component/Images/close.png")
@@ -268,19 +287,19 @@ namespace Paway.Test.ViewModel
         }
         private void AddComboMulti()
         {
-            MultiList.Add(new ComboMultiModel("张三") { IsChecked = true });
-            MultiList.Add(new ComboMultiModel("李四"));
-            MultiList.Add(new ComboMultiModel("王五"));
-            MultiList.Add(new ComboMultiModel("马六"));
-            MultiList.Add(new ComboMultiModel("赵七") { IsChecked = true });
-            MultiList.Add(new ComboMultiModel("王八"));
-            MultiList.Add(new ComboMultiModel("陈九"));
+            MultiList.Add(new ComboBoxItemModel("张三") { IsChecked = true });
+            MultiList.Add(new ComboBoxItemModel("李四"));
+            MultiList.Add(new ComboBoxItemModel("王五"));
+            MultiList.Add(new ComboBoxItemModel("马六"));
+            MultiList.Add(new ComboBoxItemModel("赵七") { IsChecked = true });
+            MultiList.Add(new ComboBoxItemModel("王八"));
+            MultiList.Add(new ComboBoxItemModel("陈九"));
         }
         private void AddTree()
         {
-            var treeInfo = new TreeViewModel("单位名称(3/7)", true);
+            var treeInfo = new TreeViewItemModel("单位名称(3/7)", true);
             this.TreeList.Add(treeInfo);
-            var treeInfo2 = new TreeViewModel("未分组联系人(2/4)", true);
+            var treeInfo2 = new TreeViewItemModel("未分组联系人(2/4)", true);
             treeInfo.Add(treeInfo2);
             treeInfo2.Add("刘棒", "我要走向天空！", "3人");
             treeInfo2.Add("刘棒1", "我要走向天空！", "3人");
@@ -291,7 +310,7 @@ namespace Paway.Test.ViewModel
             treeInfo2.Add("刘棒6", "我要走向天空！", "3人");
             treeInfo2.Add("刘棒7", "我要走向天空！", "3人");
 
-            treeInfo2 = new TreeViewModel("未分组联系人", true);
+            treeInfo2 = new TreeViewItemModel("未分组联系人", true);
             treeInfo.Add(treeInfo2);
             treeInfo2.Add("刘棒A", "我要走向天空！", "3人");
             treeInfo2.Add("刘棒B", "我要走向天空！", "3人");

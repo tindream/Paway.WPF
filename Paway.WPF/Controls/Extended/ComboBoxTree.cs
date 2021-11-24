@@ -59,14 +59,14 @@ namespace Paway.WPF
                 if (list != null)
                 {
                     var id = tree.SelectedValue.ToInt();
-                    foreach (ITreeView item in list)
+                    foreach (ITreeViewItem item in list)
                     {
                         if (tree.InitText(item, id)) break;
                     }
                 }
             }
         }
-        private bool InitText(ITreeView item, int id)
+        private bool InitText(ITreeViewItem item, int id)
         {
             if (!item.IsGroup && item.Id == id)
             {
@@ -124,10 +124,10 @@ namespace Paway.WPF
             base.OnApplyTemplate();
             IsEditable = false;
             if (this.ItemsSource != null) this.type = this.ItemsSource.GenericType();
-            if (typeof(ITreeView).IsAssignableFrom(type))
+            if (typeof(ITreeViewItem).IsAssignableFrom(type))
             {
-                this.List = new List<ITreeView>();
-                foreach (ITreeView item in this.ItemsSource) this.List.Add(item);
+                this.List = new List<ITreeViewItem>();
+                foreach (ITreeViewItem item in this.ItemsSource) this.List.Add(item);
                 LoadChilds(this.List);
             }
             if (Template.FindName("PART_Popup", this) is Popup popup)
@@ -161,7 +161,7 @@ namespace Paway.WPF
         {
             this.IsDropDownOpen = false;
         }
-        private void LoadChilds(IEnumerable<ITreeView> list)
+        private void LoadChilds(IEnumerable<ITreeViewItem> list)
         {
             foreach (var item in list)
             {
@@ -176,7 +176,7 @@ namespace Paway.WPF
         private void TreeView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var treeView = sender as TreeViewEXT;
-            if (treeView.SelectedItem is ITreeView item && !item.IsGroup)
+            if (treeView.SelectedItem is ITreeViewItem item && !item.IsGroup)
             {
                 var id = item.GetValue(this.SelectedValuePath);
                 if (this.SelectedValue.Equals(id))
@@ -189,7 +189,7 @@ namespace Paway.WPF
         private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             var treeView = sender as TreeViewEXT;
-            if (e.NewValue is ITreeView item)
+            if (e.NewValue is ITreeViewItem item)
             {
                 if (!item.IsGroup)
                 {
@@ -214,8 +214,8 @@ namespace Paway.WPF
         #endregion
 
         #region 搜索
-        private IList<ITreeView> List;
-        private readonly IList<ITreeView> Childs = new List<ITreeView>();
+        private IList<ITreeViewItem> List;
+        private readonly IList<ITreeViewItem> Childs = new List<ITreeViewItem>();
         private TextBoxEXT textBox;
         private string last;
         private void ComboTree_KeyUp(object sender, KeyEventArgs e)
@@ -240,7 +240,7 @@ namespace Paway.WPF
                 }
                 else if (this.List != null)
                 {
-                    var p = this.type.Predicate<ITreeView>(text, c => c.IsGroup);
+                    var p = this.type.Predicate<ITreeViewItem>(text, c => c.IsGroup);
                     var list = this.Childs.AsParallel().Where(p).ToList();
                     var id = list.Count > 0 ? list[0].Id : 0;
                     list = LoadQuery(list);
@@ -257,10 +257,10 @@ namespace Paway.WPF
             }
             IsDropDownOpen = true;
         }
-        private List<ITreeView> LoadQuery(List<ITreeView> list)
+        private List<ITreeViewItem> LoadQuery(List<ITreeViewItem> list)
         {
             var result = false;
-            var resultList = new List<ITreeView>();
+            var resultList = new List<ITreeViewItem>();
             foreach (var item in list)
             {
                 if (item.Parent != null)

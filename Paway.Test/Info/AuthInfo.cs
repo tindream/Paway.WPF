@@ -1,4 +1,5 @@
 ﻿using Paway.Helper;
+using Paway.WPF;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +14,7 @@ namespace Paway.Test
     [Serializable]
     [Table("Auths")]
     [Description("权限")]
-    public class AuthInfo : BaseInfo
+    public class AuthInfo : ModelBase
     {
         [NoShow]
         public int UserId { get; set; }
@@ -39,7 +40,7 @@ namespace Paway.Test
     }
     [Serializable]
     [Description("权限")]
-    public class AuthReportInfo : BaseInfo
+    public class AuthReportInfo : ModelBase
     {
         [NoShow]
         public int UserId { get; set; }

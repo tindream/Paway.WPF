@@ -22,12 +22,12 @@ namespace Paway.WPF
         /// 选中项列表
         /// </summary>
         [Browsable(false)]
-        public IList<ITreeView> ChekedItems
+        public IList<ITreeViewItem> ChekedItems
         {
             get
             {
-                var list = new List<ITreeView>();
-                foreach (ITreeView item in this.ItemsSource)
+                var list = new List<ITreeViewItem>();
+                foreach (ITreeViewItem item in this.ItemsSource)
                 {
                     if (item.IsChecked == true) list.Add(item);
                 }
@@ -133,7 +133,7 @@ namespace Paway.WPF
         /// <summary>
         /// 展开指定节点
         /// </summary>
-        public bool Expand(ITreeView model)
+        public bool Expand(ITreeViewItem model)
         {
             return Selected(model.Id, false);
         }
@@ -148,14 +148,14 @@ namespace Paway.WPF
         {
             foreach (var item in view.Items)
             {
-                if (item is ITreeView temp)
+                if (item is ITreeViewItem temp)
                 {
                     if (Expand(view, temp, id, iSelected)) return true;
                 }
             }
             return false;
         }
-        private bool Expand(ItemsControl view, ITreeView item, int id, bool iSelected)
+        private bool Expand(ItemsControl view, ITreeViewItem item, int id, bool iSelected)
         {
             if (view.ItemContainerGenerator.ContainerFromItem(item) is TreeViewItem treeItem)
             {

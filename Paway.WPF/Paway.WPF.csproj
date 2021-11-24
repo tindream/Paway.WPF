@@ -139,8 +139,8 @@
     <Compile Include="Controls\Extended\ListBoxItemEXT.cs" />
     <Compile Include="Controls\Extended\RadioButtonEXT.cs" />
     <Compile Include="Controls\Extended\CheckBoxEXT.cs" />
-    <Compile Include="Method\Interface\IComboBoxMulti.cs" />
-    <Compile Include="Method\Interface\ITreeView.cs" />
+    <Compile Include="Method\Interface\IComboBoxItem.cs" />
+    <Compile Include="Method\Interface\ITreeViewItem.cs" />
     <Compile Include="Controls\Progress\Progress.cs" />
     <Compile Include="Controls\Progress\ProgressTemplate.cs" />
     <Compile Include="Controls\Progress\ProgressMonitor.cs" />
@@ -175,7 +175,7 @@
     <Compile Include="Controls\Extended\ListViewEXT.cs" />
     <Compile Include="Method\PConfig.cs" />
     <Compile Include="Method\PMethod.cs" />
-    <Compile Include="Method\Interface\IListView.cs" />
+    <Compile Include="Method\Interface\IListViewItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\AssemblyVersion.cs">
       <Link>Properties\AssemblyVersion.cs</Link>

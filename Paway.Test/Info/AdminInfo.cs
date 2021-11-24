@@ -1,4 +1,5 @@
 ﻿using Paway.Helper;
+using Paway.WPF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace Paway.Test
     /// </summary>
     [Serializable]
     [Table("Admins")]
-    public class AdminBaseInfo : BaseInfo, IInfo
+    public class AdminBaseInfo : ModelBase, IInfo
     {
         public string Name { get; set; }
 

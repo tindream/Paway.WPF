@@ -41,13 +41,13 @@ namespace Paway.Test.ViewModel
                 _value = value; RaisePropertyChanged();
             }
         }
-        public ObservableCollection<ListViewModel> List { get; private set; } = new ObservableCollection<ListViewModel>();
+        public ObservableCollection<ListViewItemModel> List { get; private set; } = new ObservableCollection<ListViewItemModel>();
 
         #endregion
 
         public TestViewModel()
         {
-            for (var i = 0; i < 5; i++) List.Add(new ListViewModel($"{i + 1}"));
+            for (var i = 0; i < 5; i++) List.Add(new ListViewItemModel($"{i + 1}"));
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Paway.Helper;
+using Paway.WPF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace Paway.Test
 {
     [Serializable]
     [Table("Users")]
-    public class UserInfo : BaseInfo, IName
+    public class UserInfo : ModelBase, IName
     {
         private string name;
         [Text("用户名")]

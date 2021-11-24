@@ -530,11 +530,11 @@ namespace Paway.WPF
                 case WidthType.OneColumn:
                     for (var i = 0; i < Items.Count; i++)
                     {
-                        if (Items[i] is IListView item)
+                        if (Items[i] is IListViewItem item)
                         {
                             item.ItemWidth = actualWidth;
                         }
-                        else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is IListView listViewItem)
+                        else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is IListViewItem listViewItem)
                         {
                             listViewItem.ItemWidth = actualWidth;
                         }
@@ -555,11 +555,11 @@ namespace Paway.WPF
                     {
                         for (var j = 0; j < columnCount && i < Items.Count; j++, i++)
                         {
-                            if (Items[i] is IListView item)
+                            if (Items[i] is IListViewItem item)
                             {
                                 item.ItemWidth = count > j ? width : width - 1;
                             }
-                            else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is IListView listViewItem)
+                            else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is IListViewItem listViewItem)
                             {
                                 listViewItem.ItemWidth = count > j ? width : width - 1;
                             }
@@ -617,7 +617,7 @@ namespace Paway.WPF
             {
                 if (ClickMode == ClickMode.Release && PMethod.Parent(e.OriginalSource, out downItem))
                 {
-                    e.Handled = true;
+                    //e.Handled = true;
                     IsPressed(true);
                 }
                 else if (e.ButtonState == MouseButtonState.Pressed)
@@ -632,7 +632,7 @@ namespace Paway.WPF
         }
         private void IsPressed(bool value)
         {
-            if (downItem.Content is IListView model)
+            if (downItem.Content is IListViewItem model)
             {
                 if (model.IsPressed != value)
                 {
@@ -655,7 +655,7 @@ namespace Paway.WPF
                     downItem = null;
                 }
             }
-            if (IAnimation && Mouse.DirectlyOver != null && PMethod.Parent<ListViewItem>(Mouse.DirectlyOver, out ListViewItem listViewItem) && this.moveItem != listViewItem)
+            if (IAnimation && Mouse.DirectlyOver != null && PMethod.Parent(Mouse.DirectlyOver, out ListViewItem listViewItem) && this.moveItem != listViewItem)
             {
                 if (this.moveItem != null) Animation(moveItem, false);
                 this.moveItem = listViewItem;
@@ -752,7 +752,7 @@ namespace Paway.WPF
                 if (value)
                 {
                     this.Focus();
-                    if (item.Content is IListView info) PConfig.AddLog(this, info.Hit);
+                    if (item.Content is IListViewItem info) PConfig.AddLog(this, info.Hit);
                     else if (item.Content is ContentControl content) PConfig.AddLog(this, content.Content.ToStrings());
                     else if (item.Content is TextBlock textBlock) PConfig.AddLog(this, textBlock.Text.ToStrings());
                     else PConfig.AddLog(this, item.Content.ToStrings());

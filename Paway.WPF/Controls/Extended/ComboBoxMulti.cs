@@ -28,7 +28,7 @@ namespace Paway.WPF
         /// 选中项列表
         /// </summary>
         [Browsable(false)]
-        public ObservableCollection<IComboMulti> ChekedItems { get; } = new ObservableCollection<IComboMulti>();
+        public ObservableCollection<IComboBoxItem> ChekedItems { get; } = new ObservableCollection<IComboBoxItem>();
 
         #endregion
 
@@ -57,7 +57,7 @@ namespace Paway.WPF
             {
                 foreach (var item in ItemsSource)
                 {
-                    if (item is IComboMulti multi)
+                    if (item is IComboBoxItem multi)
                     {
                         if (multi.IsChecked)
                         {
@@ -71,11 +71,11 @@ namespace Paway.WPF
         {
             foreach (var item in e.RemovedItems)
             {
-                if (item is IComboMulti multi)
+                if (item is IComboBoxItem multi)
                 {
                     for (int i = 0; i < _ListBoxV.SelectedItems.Count; i++)
                     {
-                        if (_ListBoxV.SelectedItems[i] is IComboMulti temp)
+                        if (_ListBoxV.SelectedItems[i] is IComboBoxItem temp)
                         {
                             if (temp.Id == multi.Id)
                             {
@@ -91,7 +91,7 @@ namespace Paway.WPF
         {
             foreach (var item in e.AddedItems)
             {
-                if (item is IComboMulti multi)
+                if (item is IComboBoxItem multi)
                 {
                     multi.IsChecked = true;
                     if (ChekedItems.IndexOf(multi) < 0)
@@ -110,7 +110,7 @@ namespace Paway.WPF
 
             foreach (var item in e.RemovedItems)
             {
-                if (item is IComboMulti multi)
+                if (item is IComboBoxItem multi)
                 {
                     multi.IsChecked = false;
                     ChekedItems.Remove(multi);

@@ -128,9 +128,7 @@
     <Compile Include="Method\Method.cs" />
     <Compile Include="Method\Config.cs" />
     <Compile Include="Method\PlotHelper.cs" />
-    <Compile Include="Info\BaseInfo.cs" />
     <Compile Include="Info\TempInfo.cs" />
-    <Compile Include="Interface\IModel.cs" />
     <Compile Include="TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
@@ -200,6 +198,9 @@
     <Content Include="Log.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interface\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

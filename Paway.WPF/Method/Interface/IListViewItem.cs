@@ -13,7 +13,7 @@ namespace Paway.WPF
     /// <summary>
     /// ListView数接口据定义
     /// </summary>
-    public interface IListView : IId
+    public interface IListViewItem : IId
     {
         /// <summary>
         /// 数据
@@ -59,11 +59,28 @@ namespace Paway.WPF
         /// 自定义项宽度
         /// </summary>
         double ItemWidth { get; set; }
+
+        /// <summary>
+        /// 自定义项文本字体颜色
+        /// </summary>
+        BrushEXT ItemTextForeground { get; set; }
+        /// <summary>
+        /// 自定义项背景颜色
+        /// </summary>
+        BrushEXT ItemBackground { get; set; }
+        /// <summary>
+        /// 自定义项外边框
+        /// </summary>
+        ThicknessEXT ItemBorder { get; set; }
+        /// <summary>
+        /// 自定义项外边框颜色
+        /// </summary>
+        BrushEXT ItemBrush { get; set; }
     }
     /// <summary>
     /// IListView数据模型
     /// </summary>
-    public class ListViewModel : ModelBase, IListView
+    public class ListViewItemModel : ModelBase, IListViewItem
     {
         /// <summary>
         /// 数据
@@ -187,36 +204,56 @@ namespace Paway.WPF
             set { itemWidth = value; OnPropertyChanged(); }
         }
 
+        private BrushEXT itemTextForeground;
         /// <summary>
         /// 自定义项文本字体颜色
         /// </summary>
         [NoShow]
-        public BrushEXT ItemTextForeground { get; set; }
+        public BrushEXT ItemTextForeground
+        {
+            get { return itemTextForeground; }
+            set { itemTextForeground = value; OnPropertyChanged(); }
+        }
+        private BrushEXT itemBackground;
         /// <summary>
         /// 自定义项背景颜色
         /// </summary>
         [NoShow]
-        public BrushEXT ItemBackground { get; set; }
+        public BrushEXT ItemBackground
+        {
+            get { return itemBackground; }
+            set { itemBackground = value; OnPropertyChanged(); }
+        }
+        private ThicknessEXT itemBorder;
         /// <summary>
         /// 自定义项外边框
         /// </summary>
         [NoShow]
-        public BrushEXT ItemBorder { get; set; }
+        public ThicknessEXT ItemBorder
+        {
+            get { return itemBorder; }
+            set { itemBorder = value; OnPropertyChanged(); }
+        }
+        private BrushEXT itemBrush;
         /// <summary>
         /// 自定义项外边框颜色
         /// </summary>
         [NoShow]
-        public BrushEXT ItemBrush { get; set; }
+        public BrushEXT ItemBrush
+        {
+            get { return itemBrush; }
+            set { itemBrush = value; OnPropertyChanged(); }
+        }
 
         /// <summary>
         /// </summary>
-        public ListViewModel()
+        public ListViewItemModel()
         {
             this.Id = this.GetHashCode();
         }
         /// <summary>
         /// </summary>
-        public ListViewModel(string text, string desc = null) : this()
+        public ListViewItemModel(string text, string desc = null) : this()
         {
             this.Text = text;
             this.Desc = desc;

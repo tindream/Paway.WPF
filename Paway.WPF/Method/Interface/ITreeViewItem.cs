@@ -11,7 +11,7 @@ namespace Paway.WPF
     /// <summary>
     /// TreeView数接口据定义
     /// </summary>
-    public interface ITreeView : IId
+    public interface ITreeViewItem : IId
     {
         /// <summary>
         /// 数据
@@ -46,16 +46,16 @@ namespace Paway.WPF
         /// <summary>
         /// 父级
         /// </summary>
-        ITreeView Parent { get; set; }
+        ITreeViewItem Parent { get; set; }
         /// <summary>
         /// 子级列表
         /// </summary>
-        ObservableCollection<ITreeView> Children { get; set; }
+        ObservableCollection<ITreeViewItem> Children { get; set; }
 
         /// <summary>
         /// 添加子级
         /// </summary>
-        void Add(ITreeView model);
+        void Add(ITreeViewItem model);
         /// <summary>
         /// 添加子级
         /// </summary>
@@ -76,7 +76,7 @@ namespace Paway.WPF
     /// <summary>
     /// ITreeView数据模型
     /// </summary>
-    public class TreeViewModel : ModelBase, ITreeView
+    public class TreeViewItemModel : ModelBase, ITreeViewItem
     {
         /// <summary>
         /// 数据
@@ -163,21 +163,21 @@ namespace Paway.WPF
         /// <summary>
         /// 父级
         /// </summary>
-        public ITreeView Parent { get; set; }
+        public ITreeViewItem Parent { get; set; }
         /// <summary>
         /// 子级列表
         /// </summary>
-        public virtual ObservableCollection<ITreeView> Children { get; set; } = new ObservableCollection<ITreeView>();
+        public virtual ObservableCollection<ITreeViewItem> Children { get; set; } = new ObservableCollection<ITreeViewItem>();
 
         /// <summary>
         /// </summary>
-        public TreeViewModel()
+        public TreeViewItemModel()
         {
             this.Id = this.GetHashCode();
         }
         /// <summary>
         /// </summary>
-        public TreeViewModel(string text, bool isGroup = false) : this()
+        public TreeViewItemModel(string text, bool isGroup = false) : this()
         {
             this.Text = text;
             this.IsGroup = isGroup;
@@ -185,7 +185,7 @@ namespace Paway.WPF
         /// <summary>
         /// 添加子级
         /// </summary>
-        public void Add(ITreeView model)
+        public void Add(ITreeViewItem model)
         {
             model.Parent = this;
             this.Children.Add(model);
@@ -195,7 +195,7 @@ namespace Paway.WPF
         /// </summary>
         public void Add(string text, string subtitle = null, string desc = null)
         {
-            var child = new TreeViewModel
+            var child = new TreeViewItemModel
             {
                 Text = text,
                 ShortName = text.ToSpell(),
