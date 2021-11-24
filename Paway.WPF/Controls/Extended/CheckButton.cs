@@ -99,7 +99,7 @@ namespace Paway.WPF
         /// <summary>
         /// 颜色样式
         /// </summary>
-        [Category("扩展.颜色样式")]
+        [Category("扩展")]
         [Description("颜色样式")]
         public ColorType Type
         {

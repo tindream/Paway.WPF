@@ -197,11 +197,11 @@ namespace Paway.WPF
 
         #endregion
 
-        #region 扩展.项
+        #region 扩展
         /// <summary>
         /// 动画
         /// </summary>
-        [Category("扩展.项")]
+        [Category("扩展")]
         [Description("动画")]
         public bool IAnimation
         {
@@ -211,7 +211,7 @@ namespace Paway.WPF
         /// <summary>
         /// 项显示方向
         /// </summary>
-        [Category("扩展.项")]
+        [Category("扩展")]
         [Description("项显示方向")]
         public Orientation Orientation
         {
@@ -221,7 +221,7 @@ namespace Paway.WPF
         /// <summary>
         /// 普通项，不响应鼠标事件
         /// </summary>
-        [Category("扩展.项")]
+        [Category("扩展")]
         [Description("普通项，不响应鼠标事件")]
         public bool INormal
         {
@@ -231,7 +231,7 @@ namespace Paway.WPF
         /// <summary>
         /// 自定义项宽度
         /// </summary>
-        [Category("扩展.项")]
+        [Category("扩展")]
         [Description("自定义项宽度")]
         [TypeConverter(typeof(LengthConverter))]
         public double ItemWidth
@@ -242,7 +242,7 @@ namespace Paway.WPF
         /// <summary>
         /// 宽度样式
         /// </summary>
-        [Category("扩展.项")]
+        [Category("扩展")]
         [Description("宽度样式")]
         public WidthType ItemWidthType
         {
@@ -252,7 +252,7 @@ namespace Paway.WPF
         /// <summary>
         /// 自定义项高度
         /// </summary>
-        [Category("扩展.项")]
+        [Category("扩展")]
         [Description("自定义项高度")]
         [TypeConverter(typeof(LengthConverter))]
         public double ItemHeight
@@ -263,7 +263,7 @@ namespace Paway.WPF
         /// <summary>
         /// 自定义项圆角
         /// </summary>
-        [Category("扩展.项")]
+        [Category("扩展")]
         [Description("自定义项圆角")]
         public RadiusEXT ItemRadius
         {
@@ -273,7 +273,7 @@ namespace Paway.WPF
         /// <summary>
         /// 自定义项外边距
         /// </summary>
-        [Category("扩展.项")]
+        [Category("扩展")]
         [Description("自定义项外边距")]
         public Thickness ItemMargin
         {
@@ -283,7 +283,7 @@ namespace Paway.WPF
         /// <summary>
         /// 自定义项内边距
         /// </summary>
-        [Category("扩展.项")]
+        [Category("扩展")]
         [Description("自定义项内边距")]
         public ThicknessEXT ItemPadding
         {
@@ -293,7 +293,7 @@ namespace Paway.WPF
         /// <summary>
         /// 自定义项外边框
         /// </summary>
-        [Category("扩展.项")]
+        [Category("扩展")]
         [Description("自定义项外边框")]
         public ThicknessEXT ItemBorder
         {
@@ -303,7 +303,7 @@ namespace Paway.WPF
         /// <summary>
         /// 自定义项外边框颜色
         /// </summary>
-        [Category("扩展.项")]
+        [Category("扩展")]
         [Description("自定义项外边框颜色")]
         public BrushEXT ItemBrush
         {
@@ -313,7 +313,7 @@ namespace Paway.WPF
         /// <summary>
         /// 自定义外部样式
         /// </summary>
-        [Category("扩展.项")]
+        [Category("扩展")]
         [Description("自定义外部样式")]
         public Style StyleEXT
         {
@@ -323,7 +323,7 @@ namespace Paway.WPF
         /// <summary>
         /// 自定义项背景颜色
         /// </summary>
-        [Category("扩展.项")]
+        [Category("扩展")]
         [Description("自定义项背景颜色")]
         public BrushEXT ItemBackground
         {
@@ -333,13 +333,13 @@ namespace Paway.WPF
         /// <summary>
         /// 指定何时应引发事件
         /// </summary>
-        [Category("扩展.项")]
+        [Category("扩展")]
         [Description("指定何时应引发事件")]
         public ClickMode ClickMode { get; set; }
         /// <summary>
         /// 颜色样式
         /// </summary>
-        [Category("扩展.项")]
+        [Category("扩展")]
         [Description("颜色样式")]
         public ColorType Type
         {
@@ -349,7 +349,7 @@ namespace Paway.WPF
         /// <summary>
         /// 轻颜色样式
         /// </summary>
-        [Category("扩展.项")]
+        [Category("扩展")]
         [Description("轻颜色样式")]
         public bool IsLight
         {
@@ -620,7 +620,7 @@ namespace Paway.WPF
                     //e.Handled = true;
                     IsPressed(true);
                 }
-                else if (e.ButtonState == MouseButtonState.Pressed)
+                else if (ClickMode == ClickMode.Hover && e.ButtonState == MouseButtonState.Pressed)
                 {
                     if (PMethod.Parent(this, out Window window))
                     {

@@ -105,7 +105,7 @@ namespace Paway.WPF
         /// <summary>
         /// 自定义项外边框
         /// </summary>
-        [Category("扩展.项")]
+        [Category("扩展")]
         [Description("自定义项外边框")]
         public ThicknessEXT ItemBorder
         {

@@ -248,7 +248,7 @@
 
         <StackPanel>
             <ListViewEXT x:Name="listView3" Margin="5,5,0,0" IsLight="True" ItemWidthType="TwoRow"
-                         ItemHeight="60" ItemWidth="100" ItemsSource="{Binding GridList}">
+                         ItemHeight="60" ItemWidth="100" ItemsSource="{Binding GridList}" ClickMode="Press">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding SelectionCommand}" CommandParameter="{Binding ElementName=listView3}"/>

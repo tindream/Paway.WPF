@@ -101,11 +101,11 @@ namespace Paway.WPF
 
         #endregion
 
-        #region 扩展.前景
+        #region 扩展
         /// <summary>
         /// 自定义边框圆角
         /// </summary>
-        [Category("扩展.前景")]
+        [Category("扩展")]
         [Description("自定义边框圆角")]
         public CornerRadius Radius
         {
@@ -115,7 +115,7 @@ namespace Paway.WPF
         /// <summary>
         /// 自定义边框线
         /// </summary>
-        [Category("扩展.前景")]
+        [Category("扩展")]
         [Description("自定义边框线")]
         public ThicknessEXT ItemBorder
         {
@@ -125,7 +125,7 @@ namespace Paway.WPF
         /// <summary>
         /// 自定义边框阴影宽度
         /// </summary>
-        [Category("扩展.前景")]
+        [Category("扩展")]
         [Description("自定义边框阴影宽度")]
         public double ShadowRadius
         {
@@ -135,7 +135,7 @@ namespace Paway.WPF
         /// <summary>
         /// 自定义边框阴影颜色
         /// </summary>
-        [Category("扩展.前景")]
+        [Category("扩展")]
         [Description("自定义边框阴影颜色")]
         public Color ShadowColor
         {
@@ -145,7 +145,7 @@ namespace Paway.WPF
         /// <summary>
         /// 自定义文本颜色
         /// </summary>
-        [Category("扩展.前景")]
+        [Category("扩展")]
         [Description("自定义文本颜色")]
         public BrushEXT ItemForeground
         {
@@ -153,12 +153,10 @@ namespace Paway.WPF
             set { SetValue(ItemForegroundProperty, value); }
         }
 
-        #endregion
-        #region 扩展.背景颜色
         /// <summary>
         /// 自定义背景颜色
         /// </summary>
-        [Category("扩展.背景颜色")]
+        [Category("扩展")]
         [Description("自定义背景颜色")]
         public BrushEXT ItemBackground
         {
@@ -166,12 +164,10 @@ namespace Paway.WPF
             set { SetValue(ItemBackgroundProperty, value); }
         }
 
-        #endregion
-        #region 扩展.背景图片
         /// <summary>
         /// 背景图片宽度
         /// </summary>
-        [Category("扩展.背景图片")]
+        [Category("扩展")]
         [Description("背景图片宽度")]
         [TypeConverter(typeof(LengthConverter))]
         public double ImageWidth
@@ -182,7 +178,7 @@ namespace Paway.WPF
         /// <summary>
         /// 背景图片高度
         /// </summary>
-        [Category("扩展.背景图片")]
+        [Category("扩展")]
         [Description("背景图片高度")]
         [TypeConverter(typeof(LengthConverter))]
         public double ImageHeight
@@ -193,7 +189,7 @@ namespace Paway.WPF
         /// <summary>
         /// 背景图片位置
         /// </summary>
-        [Category("扩展.背景图片")]
+        [Category("扩展")]
         [Description("背景图片位置")]
         public Dock ImageDock
         {
@@ -203,7 +199,7 @@ namespace Paway.WPF
         /// <summary>
         /// 背景图片外边距
         /// </summary>
-        [Category("扩展.背景图片")]
+        [Category("扩展")]
         [Description("背景图片外边距")]
         public ThicknessEXT ImageMargin
         {
@@ -213,7 +209,7 @@ namespace Paway.WPF
         /// <summary>
         /// 背景图片的内容如何拉伸才适合其磁贴
         /// </summary>
-        [Category("扩展.背景图片")]
+        [Category("扩展")]
         [Description("背景图片的内容如何拉伸才适合其磁贴")]
         public Stretch ImageStretch
         {
@@ -223,7 +219,7 @@ namespace Paway.WPF
         /// <summary>
         /// 背景图片
         /// </summary>
-        [Category("扩展.背景图片")]
+        [Category("扩展")]
         [Description("背景图片")]
         public ImageEXT Image
         {
@@ -231,12 +227,10 @@ namespace Paway.WPF
             set { SetValue(ImageProperty, value); }
         }
 
-        #endregion
-        #region 扩展.颜色样式
         /// <summary>
         /// 轻颜色样式
         /// </summary>
-        [Category("扩展.轻颜色样式")]
+        [Category("扩展")]
         [Description("轻颜色样式")]
         public bool IsLight
         {
@@ -246,7 +240,7 @@ namespace Paway.WPF
         /// <summary>
         /// 颜色样式
         /// </summary>
-        [Category("扩展.颜色样式")]
+        [Category("扩展")]
         [Description("颜色样式")]
         public ColorType Type
         {
