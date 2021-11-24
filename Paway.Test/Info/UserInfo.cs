@@ -34,7 +34,7 @@ namespace Paway.Test
         [NoShow]
         public DateTime CreateOn { get; set; }
 
-        public override string Desc()
+        public override string ToString()
         {
             return $"{this.name}";
         }

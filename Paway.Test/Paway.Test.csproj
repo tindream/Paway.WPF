@@ -140,7 +140,6 @@
     <Compile Include="ViewPlus\AddViewModelPlus.cs" />
     <Compile Include="ViewPlus\DataGridViewModel.cs" />
     <Compile Include="ViewPlus\ViewModelLocator.cs" />
-    <Compile Include="ViewPlus\ViewModelPlus.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -22,7 +22,7 @@ namespace Paway.WPF
             var height = values[1].ToDouble(); if (height < 0) height = 0;
 
             double radius;
-            if (values[2] is Thickness) radius = ((Thickness)values[2]).Left;
+            if (values[2] is Thickness thickness) radius = thickness.Left;
             else radius = values[2].ToDouble();
             if (width < radius) width = radius;
             if (height < radius) height = radius;

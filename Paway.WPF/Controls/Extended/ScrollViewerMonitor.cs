@@ -32,22 +32,7 @@ namespace Paway.WPF
                         thumb.SetValue(ScrollBarRadiusProperty, scrollViewerEXT.ScrollBarRadius);
                         thumb.SetValue(ScrollBarColorProperty, scrollViewerEXT.ScrollBarColor);
                     }
-                    else if (scrollBar.TemplatedParent is ScrollViewer scrollViewer)
-                    {
-                        if (scrollViewer.TemplatedParent is DataGridEXT dataGrid)
-                        {//已重写DataGrid滚动样式
-                            //SetVerticalScrollBarMargin(thumb, dataGrid);
-                            //dataGrid.Loaded += delegate { SetVerticalScrollBarMargin(thumb, dataGrid); };
-                        }
-                    }
                 }
-            }
-        }
-        private static void SetVerticalScrollBarMargin(Thumb thumb, DataGridEXT dataGrid)
-        {
-            if (PMethod.Child(dataGrid, out DataGridColumnHeadersPresenter headersPresenter, iParent: false))
-            {
-                thumb.SetValue(VerticalScrollBarMarginProperty, new Thickness(0, -headersPresenter.ActualHeight, 0, 0));
             }
         }
         /// <summary>

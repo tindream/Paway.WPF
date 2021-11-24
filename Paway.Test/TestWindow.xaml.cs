@@ -29,7 +29,7 @@ namespace Paway.Test
         {
             base.OnRender(drawingContext);
         }
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
             //Method.Show(this, new Window() { Height = 200, Width = 200, Foreground = new SolidColorBrush(Colors.White), Title = "Test123" });
         }

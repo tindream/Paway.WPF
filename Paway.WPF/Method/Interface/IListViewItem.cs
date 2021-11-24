@@ -88,16 +88,6 @@ namespace Paway.WPF
         [NoShow]
         public object Tag { get; set; }
 
-        private int id;
-        /// <summary>
-        /// 标识符
-        /// </summary>
-        [NoShow]
-        public virtual int Id
-        {
-            get { return id; }
-            set { id = value; OnPropertyChanged(); }
-        }
         private bool isPressed;
         /// <summary>
         /// 按下状态

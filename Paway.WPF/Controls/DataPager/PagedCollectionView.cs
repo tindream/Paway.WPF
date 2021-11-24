@@ -20,7 +20,6 @@ namespace System.Windows.Data
     public sealed class PagedCollectionView : ICollectionView, IPagedCollectionView, IEditableCollectionView, INotifyPropertyChanged
     {
         private const string OperationNotAllowedDuringAddOrEdit = "'{0}' is not allowed during an AddNew or EditItem transaction.";
-        private const string InvalidEnumArgument = "The value of argument '{0}' ({1}) is invalid for Enum type '{2}'.";
         private const string InvalidPageSize = "PageSize cannot have a negative value.";
         private const string CannotFilter = "The Filter property cannot be set when the CanFilter property returns false.";
         private const string ChangingPageSizeNotAllowedDuringAddOrEdit = "Changing the PageSize is not allowed during an AddNew or EditItem transaction.";

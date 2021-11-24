@@ -14,7 +14,7 @@ using System.Windows.Media;
 
 namespace Paway.Test.ViewModel
 {
-    public class DataGridViewModel<T> : ViewModelPlus where T : class, IModel, IId, new()
+    public class DataGridViewModel<T> : ViewModelBase where T : class, IId, new()
     {
         #region 属性
         public ObservableCollection<T> List { get; protected set; } = new ObservableCollection<T>();
@@ -95,7 +95,7 @@ namespace Paway.Test.ViewModel
                 case "删除":
                     if (selectedItem is T infoDel)
                     {
-                        if (Method.Ask(listView1, "确认删除：" + infoDel.Desc()))
+                        if (Method.Ask(listView1, "确认删除：" + infoDel))
                         {
                             var index = -1;
                             if (Method.Child(listView1, out DataGridEXT datagrid))

@@ -28,7 +28,7 @@ namespace Paway.Test.ViewModel
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class MainViewModel : ViewModelPlus
+    public class MainViewModel : ViewModelBase
     {
         #region 属性
         private readonly List<ListViewItemModel> list = new List<ListViewItemModel>();

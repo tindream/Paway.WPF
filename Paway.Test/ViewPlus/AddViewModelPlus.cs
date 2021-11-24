@@ -12,7 +12,7 @@ using System.Windows.Media;
 
 namespace Paway.Test.ViewModel
 {
-    public class AddViewModelPlus<T> : ViewModelPlus where T : class, IModel, IId
+    public class AddViewModelPlus<T> : ViewModelBase where T : class, IId
     {
         #region 属性
         private T info;
@@ -24,7 +24,7 @@ namespace Paway.Test.ViewModel
             {
                 normal = value;
                 info = value.Clone();
-                Title = info.Id == 0 ? $"新加{info.GetType().Description()}" : $"编辑{info.GetType().Description()} - {info.Desc()}";
+                Title = info.Id == 0 ? $"新加{info.GetType().Description()}" : $"编辑{info.GetType().Description()} - {info}";
                 RaisePropertyChanged();
             }
         }

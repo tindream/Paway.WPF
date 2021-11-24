@@ -84,16 +84,6 @@ namespace Paway.WPF
         [NoShow]
         public object Tag { get; set; }
 
-        private int id;
-        /// <summary>
-        /// 标识符
-        /// </summary>
-        [NoShow]
-        public virtual int Id
-        {
-            get { return id; }
-            set { id = value; OnPropertyChanged(); }
-        }
         private bool isGrouping;
         /// <summary>
         /// 组标记

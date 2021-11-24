@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,44 +13,30 @@ using System.Windows.Media;
 namespace Paway.WPF
 {
     /// <summary>
-    /// 模型接口
-    /// </summary>
-    public interface IModel
-    {
-        /// <summary>
-        /// 描述
-        /// </summary>
-        string Desc();
-    }
-    /// <summary>
     /// INotifyPropertyChanged接口基类
     /// </summary>
-    public class ModelBase : IId, IModel, INotifyPropertyChanged
+    public class ModelBase : IId, INotifyPropertyChanged
     {
         /// <summary>
         /// 唯一标识
         /// </summary>
         [NoShow, NoExcel]
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
         /// <summary>
-        /// 描述
+        /// 当前对象的描述
         /// </summary>
-        public virtual string Desc() { return null; }
+        public override string ToString()
+        {
+            return $"{Id}";
+        }
 
         /// <summary>
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
         /// <summary>
-        /// 自动实现
+        /// 触发更新
         /// </summary>
-        public void OnPropertyChanged()
-        {
-            OnPropertyChanged(PMethod.GetLastModelName());
-        }
-        /// <summary>
-        /// 手动引发
-        /// </summary>
-        public void OnPropertyChanged(string name)
+        public void OnPropertyChanged([CallerMemberName] string name = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }

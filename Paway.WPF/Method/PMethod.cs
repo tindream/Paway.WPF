@@ -30,9 +30,9 @@ namespace Paway.WPF
     /// </summary>
     public class PMethod : TMethod
     {
-        private static string NameWater = $"{nameof(PMethod)}_{nameof(WaterAdornerFixed)}";
-        private static string NameProgress = $"{nameof(PMethod)}_{nameof(Progress)}";
-        private static string NameHit = $"{nameof(PMethod)}_{nameof(Hit)}";
+        private static readonly string NameWater = $"{nameof(PMethod)}_{nameof(WaterAdornerFixed)}";
+        private static readonly string NameProgress = $"{nameof(PMethod)}_{nameof(Progress)}";
+        private static readonly string NameHit = $"{nameof(PMethod)}_{nameof(Hit)}";
 
         #region 统一Invoke处理
         /// <summary>

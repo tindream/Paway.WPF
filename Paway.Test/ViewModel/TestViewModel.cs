@@ -19,7 +19,7 @@ using System.Windows.Media;
 
 namespace Paway.Test.ViewModel
 {
-    public class TestViewModel : ViewModelPlus
+    public class TestViewModel : ViewModelBase
     {
         #region 属性
         private double angle = -27;

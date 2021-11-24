@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,9 +21,8 @@ namespace Paway.WPF
         public event PropertyChangedEventHandler PropertyChanged;
         /// <summary>
         /// </summary>
-        public void OnPropertyChanged()
+        public void OnPropertyChanged([CallerMemberName] string name = "")
         {
-            var name = PMethod.GetLastModelName();
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 

@@ -29,16 +29,6 @@ namespace Paway.WPF
     /// </summary>
     public class ComboBoxItemModel : ModelBase, IComboBoxItem
     {
-        private int id;
-        /// <summary>
-        /// 标识符
-        /// </summary>
-        [NoShow]
-        public virtual int Id
-        {
-            get { return id; }
-            set { id = value; OnPropertyChanged(); }
-        }
         private string text;
         /// <summary>
         /// 文本

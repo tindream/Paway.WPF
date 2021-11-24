@@ -751,22 +751,6 @@ namespace Paway.WPF
 
         #endregion Internal Properties
 
-        /// <summary>
-        /// Gets or sets the items to page through.
-        /// </summary>
-        private Brush PrivateForeground
-        {
-            get
-            {
-                return GetValue(PrivateForegroundProperty) as Brush;
-            }
-
-            set
-            {
-                SetValue(PrivateForegroundProperty, value);
-            }
-        }
-
         ////------------------------------------------------------
         ////
         ////  Public Methods
