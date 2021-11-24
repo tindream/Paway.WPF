@@ -44,10 +44,12 @@ namespace Paway.WPF
             var validResult = new ValidationResult(true, null);
 
             var text = value.ToStrings();
-            if (text.Length == 0 && this.MinLength == 0) return validResult;
-
-            var result = RegexChecked(text);
-            if (!result)
+            if (text.Length == 0)
+            {
+                if (this.MinLength == 0) return validResult;
+                else validResult = new ValidationResult(false, $"不可为空");
+            }
+            else if (!RegexChecked(text))
             {
                 if (ErrorMessage == null) ErrorMessage = RegexType.Description() + ": {0}";
                 validResult = new ValidationResult(false, string.Format(ErrorMessage, text));

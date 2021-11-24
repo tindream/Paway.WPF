@@ -104,7 +104,10 @@ namespace Paway.WPF
                 var strs = str.Split('|');
                 try
                 {
-                    return new ImageEXT(strs.Length > 0 ? strs[0] : null, strs.Length > 1 ? strs[1] : null, strs.Length > 2 ? strs[2] : null);
+                    var imageConverter = new ImageSourceConverter();
+                    return new ImageEXT(strs.Length > 0 ? (ImageSource)imageConverter.ConvertFrom(context, culture, strs[0]) : null,
+                        strs.Length > 1 ? (ImageSource)imageConverter.ConvertFrom(context, culture, strs[1]) : null,
+                        strs.Length > 2 ? (ImageSource)imageConverter.ConvertFrom(context, culture, strs[2]) : null);
                 }
                 catch (Exception)
                 {

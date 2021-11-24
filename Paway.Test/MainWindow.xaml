@@ -96,7 +96,7 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ComboQuery>
-                <TextBoxEXT Name="tb" Icon="pack://application:,,,/Paway.Test;component/Images/close.png" IAnimation="2" BorderThickness="0,0,0,1" Radius="0">
+                <TextBoxEXT Name="tb" Icon="Images/close.png" IAnimation="2" BorderThickness="0,0,0,1" Radius="0" MaxLength="4">
                     <Binding Path="Value">
                         <Binding.ValidationRules>
                             <RegexValidationRule RegexType="UInt" MinLength="2" MaxLength="4"/>
