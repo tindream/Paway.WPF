@@ -139,11 +139,9 @@
                                         </Border.Width>
                                         <ContentControl Name="styleEXT"
                                                         Foreground="{Binding Path=ItemTextForeground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
-                                                        Background="{Binding Path=ItemTextBackground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                         FontSize="{Binding Path=ItemTextFontSize.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                         HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
-                                                        VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
-                                                        Padding="{Binding ItemTextPadding, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
+                                                        VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" >
                                             <ContentControl.Style>
                                                 <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="StyleEXT" />
@@ -252,12 +250,8 @@
                                                 </MultiBinding>
                                             </Setter.Value>
                                         </Setter>
-                                        <Setter TargetName="styleEXT" Property="Background" 
-                                                Value="{Binding Path=ItemTextBackground.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="styleEXT" Property="FontSize" 
                                                 Value="{Binding Path=ItemTextFontSize.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
-                                        <Setter TargetName="styleEXT" Property="Padding" 
-                                                Value="{Binding Path=ItemPadding.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                     </Trigger>
                                     <Trigger Property="IsSelected" Value="true">
                                         <Setter TargetName="image" Property="Source" >
@@ -333,12 +327,8 @@
                                                 </MultiBinding>
                                             </Setter.Value>
                                         </Setter>
-                                        <Setter TargetName="styleEXT" Property="Background" 
-                                                Value="{Binding Path=ItemTextBackground.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="styleEXT" Property="FontSize" 
                                                 Value="{Binding Path=ItemTextFontSize.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
-                                        <Setter TargetName="styleEXT" Property="Padding" 
-                                                Value="{Binding Path=ItemPadding.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                     </Trigger>
                                     <MultiTrigger>
                                         <MultiTrigger.Conditions>
