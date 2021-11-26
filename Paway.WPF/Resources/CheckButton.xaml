@@ -54,11 +54,19 @@
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="ButtonBase.IsPressed" Value="true"/>
+                                <Condition Property="ToggleButton.IsChecked" Value="true"/>
                                 <Condition Property="UIElement.IsMouseOver" Value="true"/>
                             </MultiTrigger.Conditions>
                             <Setter TargetName="border1" Property="Background" 
                                     Value="{Binding Path=ItemBrush.PressedMouse,RelativeSource={RelativeSource AncestorType={x:Type local:CheckButton}}}" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ButtonBase.IsPressed" Value="true"/>
+                                <Condition Property="UIElement.IsMouseOver" Value="true"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="border1" Property="Background" 
+                                    Value="{Binding Path=ItemBrush.MousePressed,RelativeSource={RelativeSource AncestorType={x:Type local:CheckButton}}}" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

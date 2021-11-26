@@ -52,7 +52,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBackgroundProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(TreeViewEXT),
-            new PropertyMetadata(new BrushEXT(null, PConfig.Alpha - PConfig.Interval * 3, PConfig.Alpha - PConfig.Interval)));
+            new PropertyMetadata(new BrushEXT(null, PConfig.Alpha - PConfig.Interval * 2, PConfig.Alpha)));
 
         #endregion
 

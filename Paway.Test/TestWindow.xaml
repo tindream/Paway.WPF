@@ -18,7 +18,7 @@
                        DockPanel.Dock="Top"/>
             <TextBoxEXT Name="t1" DockPanel.Dock="Top"/>
             <ComboBoxEXT DockPanel.Dock="Top"/>
-            <CheckButton Content=""/>
+            <CheckButton Content="A"/>
         </DockPanel>
     </Grid>
 </WindowEXT>

@@ -29,7 +29,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty TodayColorProperty =
             DependencyProperty.RegisterAttached(nameof(TodayColor), typeof(BrushEXT), typeof(CalendarEXT),
-            new PropertyMetadata(new BrushEXT(Colors.Transparent, PConfig.Alpha - PConfig.Interval * 2, PConfig.Alpha - PConfig.Interval)));
+            new PropertyMetadata(new BrushEXT(Colors.Transparent, PConfig.Alpha - PConfig.Interval * 2, PConfig.Alpha)));
 
         /// <summary>
         /// 启用扩展按钮

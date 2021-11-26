@@ -30,6 +30,18 @@ namespace Paway.WPF
         /// 鼠标划过时的颜色
         /// </summary>
         public Brush Mouse { get { return mouse; } set { mouse = value; OnPropertyChanged(); } }
+        /// <summary>
+        /// 鼠标划过时的未选中颜色
+        /// </summary>
+        public Brush MousePressed
+        {
+            get
+            {
+                var mouse = Mouse as SolidColorBrush;
+                return new SolidColorBrush(PMethod.AlphaColor(mouse.Color.A + Alpha / 2, mouse.Color));
+            }
+        }
+
         private Brush pressed = new SolidColorBrush(PMethod.ThemeColor(PConfig.Alpha + PConfig.Interval));
         /// <summary>
         /// 鼠标点击时的颜色
