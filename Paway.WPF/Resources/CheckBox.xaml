@@ -35,13 +35,12 @@
                                            Opacity="0" />
                             </Grid>
                         </Border>
-                        <ContentPresenter Name="contentPresenter"
-                                          Grid.Column="1"
+                        <ContentPresenter Name="contentPresenter" Grid.Column="1"
+                                          Margin="{TemplateBinding Control.Padding}"
                                           RecognizesAccessKey="True"
                                           Content="{TemplateBinding ContentControl.Content}"
                                           ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
                                           ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"
-                                          Margin="{TemplateBinding Control.Padding}"
                                           HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
                                           VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}"/>
                     </Grid>

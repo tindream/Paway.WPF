@@ -82,21 +82,22 @@
 
         <ExpanderEXT ExpandDirection="Left" Header="输入">
             <StackPanel Width="250">
-                <ComboBoxEXT ItemsSource="{IntList Count=20}" SelectedValue="{Binding Value}"/>
+                <ComboBoxEXT ItemsSource="{IntList Count=20}" SelectedValue="{Binding Value}" HorizontalContentAlignment="Center" />
                 <ComboBoxEXT ItemsSource="{EnumList Type=local:MonitorType}" SelectedValue="{Binding Path=MonitorType, Converter={StaticResource enumConverter}}"/>
                 <ComboBoxEXT ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
-                <ComboMulti ItemsSource="{Binding MultiList}"/>
-                <ComboDate SelectedValue="{Binding DatePickerTime}"/>
-                <ComboTree ItemsSource="{Binding TreeList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding TreeId}" IQuery="True"/>
-                <ComboView ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
-                <ComboQuery ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}" Water="输入搜索...">
+                <ComboMulti ItemsSource="{Binding MultiList}" HorizontalContentAlignment="Center"/>
+                <ComboDate SelectedValue="{Binding DatePickerTime}" HorizontalContentAlignment="Center"/>
+                <ComboTree ItemsSource="{Binding TreeList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding TreeId}" IQuery="True" HorizontalContentAlignment="Center"/>
+                <ComboView ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}" HorizontalContentAlignment="Center"/>
+                <ComboQuery ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}" Water="输入搜索..." HorizontalContentAlignment="Center">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="FilterEvent">
                             <ip:EventToCommand Command="{Binding CbxFilterCmd}" PassEventArgsToCommand="True"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ComboQuery>
-                <TextBoxEXT Name="tb" Icon="Images/close.png" IAnimation="2" BorderThickness="0,0,0,1" Radius="0" MaxLength="4">
+                <TextBoxEXT Name="tb" Icon="Images/close.png" IAnimation="2" BorderThickness="0,0,0,1" Radius="0" MaxLength="4"
+                            HorizontalContentAlignment="Center">
                     <Binding Path="Value">
                         <Binding.ValidationRules>
                             <RegexValidationRule RegexType="UInt" MinLength="2" MaxLength="4"/>
@@ -104,6 +105,7 @@
                     </Binding>
                 </TextBoxEXT>
                 <PasswordBox PasswordBoxEXT.Icon="pack://application:,,,/Paway.Test;component/Images/close.png"
+                             HorizontalContentAlignment="Center"
                              PasswordBoxEXT.Password="{Binding Pad}"
                              PasswordBoxEXT.Radius="0"
                              PasswordBoxEXT.IAnimation="2" BorderThickness="0,0,0,1"/>

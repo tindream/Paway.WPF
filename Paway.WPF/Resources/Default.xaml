@@ -274,18 +274,21 @@
     </ControlTemplate>
     <Style x:Key="TextLeft" TargetType="{x:Type TextBlock}" >
         <Setter Property="Margin" Value="2,0" />
+        <Setter Property="Padding" Value="3,6" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
     </Style>
     <Style x:Key="TextCenter" TargetType="{x:Type TextBlock}">
         <Setter Property="Margin" Value="2,0" />
+        <Setter Property="Padding" Value="3,6" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
     </Style>
     <Style x:Key="TextRight" TargetType="{x:Type TextBlock}">
         <Setter Property="Margin" Value="2,0" />
+        <Setter Property="Padding" Value="3,6" />
         <Setter Property="HorizontalAlignment" Value="Right" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="TextTrimming" Value="WordEllipsis"/>

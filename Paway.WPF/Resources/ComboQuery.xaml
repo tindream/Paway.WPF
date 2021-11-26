@@ -47,7 +47,9 @@
                                           Background="Transparent" 
                                           Radius="{TemplateBinding Radius}"
                                           Water="{TemplateBinding Water}"
-                                          IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                                          IsReadOnly="{TemplateBinding IsReadOnly}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         <Popup x:Name="PART_Popup" 
                                AllowsTransparency="True" 
                                Focusable="False" 

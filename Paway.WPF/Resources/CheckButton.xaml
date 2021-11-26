@@ -24,11 +24,11 @@
                                 CornerRadius="{TemplateBinding Radius}">
                             <ContentPresenter Name="contentPresenter"
                                               RecognizesAccessKey="True" 
-                                              TextElement.Foreground="{Binding Path=ItemForeground.Normal, RelativeSource={RelativeSource TemplatedParent}}" 
+                                              Margin="{TemplateBinding Control.Padding}"
                                               Content="{TemplateBinding ContentControl.Content}"
                                               ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
                                               ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"
-                                              Margin="{TemplateBinding Control.Padding}"
+                                              TextElement.Foreground="{Binding Path=ItemForeground.Normal, RelativeSource={RelativeSource TemplatedParent}}" 
                                               HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}"/>
                         </Border>

@@ -94,8 +94,8 @@
                                 Background="{TemplateBinding Background}" />
                         <ContentPresenter x:Name="NormalText" 
                                           Margin="1,0,1,1" 
-                                          ContentTemplate="{TemplateBinding ContentTemplate}" 
                                           Content="{TemplateBinding Content}" 
+                                          ContentTemplate="{TemplateBinding ContentTemplate}" 
                                           ContentStringFormat="{TemplateBinding ContentStringFormat}" 
                                           TextElement.Foreground="{StaticResource TextSub}" 
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
@@ -228,9 +228,10 @@
                         <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"/>
                         <Border x:Name="HighlightBackground" Opacity="0" CornerRadius="22"
                                 Background="{Binding Path=(local:CalendarMonitor.ItemBrush).Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
-                        <ContentPresenter x:Name="NormalText" ContentTemplate="{TemplateBinding ContentTemplate}" 
+                        <ContentPresenter x:Name="NormalText" 
                                           Margin="5,1" 
                                           Content="{TemplateBinding Content}" 
+                                          ContentTemplate="{TemplateBinding ContentTemplate}" 
                                           ContentStringFormat="{TemplateBinding ContentStringFormat}" 
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
@@ -350,9 +351,9 @@
                                                 </VisualStateManager.VisualStateGroups>
                                                 <ContentPresenter x:Name="buttonContent" 
                                                                   Margin="1,4,1,9" 
-                                                                  TextElement.Foreground="{StaticResource TextSub}" 
-                                                                  ContentTemplate="{TemplateBinding ContentTemplate}" 
                                                                   Content="{TemplateBinding Content}" 
+                                                                  ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                                                  TextElement.Foreground="{StaticResource TextSub}" 
                                                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                             </Grid>
@@ -422,8 +423,8 @@
                                                     </VisualStateManager.VisualStateGroups>
                                                     <ContentPresenter x:Name="buttonContent" 
                                                                       Margin="1,4,1,9" 
-                                                                      ContentTemplate="{TemplateBinding ContentTemplate}" 
                                                                       Content="{TemplateBinding Content}" 
+                                                                      ContentTemplate="{TemplateBinding ContentTemplate}" 
                                                                       TextElement.Foreground="{StaticResource TextSub}" 
                                                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>

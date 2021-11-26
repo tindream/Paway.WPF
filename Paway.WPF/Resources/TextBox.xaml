@@ -41,6 +41,7 @@
                                 </local:ScrollViewerEXT>
                                 <TextBlock x:Name="tbWater" Grid.Column="1" Visibility="Collapsed"
                                            VerticalAlignment="Center"
+                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                            Padding="5,0,0,0"
                                            FontSize="{TemplateBinding FontSize, Converter={StaticResource valueMultiConverter}}"
                                            Foreground="{StaticResource TextLight}"

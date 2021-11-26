@@ -9,7 +9,7 @@
 
     <Style x:Key="CellStyle" TargetType="{x:Type DataGridCell}">
         <!--<Setter Property="Background" Value="White" />-->
-        <Setter Property="BorderThickness" Value="3,6" />
+        <Setter Property="BorderThickness" Value="0" />
         <!--<Setter Property="Opacity" Value="1" />-->
         <Style.Triggers >
             <Trigger Property="IsSelected" Value="True">
