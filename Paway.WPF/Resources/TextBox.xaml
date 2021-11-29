@@ -9,6 +9,7 @@
     <Style TargetType="{x:Type local:TextBoxEXT}" BasedOn="{StaticResource Config}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Cursor" Value="IBeam"/>
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Background" Value="White"/>
         <Setter Property="Padding" Value="3,4"/>
         <Setter Property="Margin" Value="2"/>
@@ -40,14 +41,14 @@
                                               VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}">
                                 </local:ScrollViewerEXT>
                                 <TextBlock x:Name="tbWater" Grid.Column="1" Visibility="Collapsed"
-                                           VerticalAlignment="Center"
+                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                            Padding="5,0,0,0"
                                            FontSize="{TemplateBinding FontSize, Converter={StaticResource valueMultiConverter}}"
                                            Foreground="{StaticResource TextLight}"
                                            Text="{TemplateBinding Water}"/>
                                 <TextBlock x:Name="tbUnit" Grid.Column="2"
-                                           VerticalAlignment="Center"
+                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                            Padding="0,0,3,0"
                                            FontSize="{TemplateBinding FontSize, Converter={StaticResource valueMultiConverter}}"
                                            Foreground="{StaticResource TextLight}"

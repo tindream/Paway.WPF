@@ -24,12 +24,6 @@
                                 Padding="{TemplateBinding Padding}"
                                 Background="White"
                                 BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}" />
-                        <!--<ContentPresenter x:Name="ContentSite" Margin="5,3,0,3" 
-                                          VerticalAlignment="Center"
-                                          IsHitTestVisible="False"
-                                          Content="{TemplateBinding Text}" 
-                                          ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" 
-                                          ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" />-->
                         <!--ToggleButton 已数据绑定到 ComboBox 本身以切换 IsDropDownOpen-->
                         <ToggleButton x:Name="ToggleButton" Grid.ColumnSpan="2" 
                                       Focusable="false" 

@@ -215,12 +215,9 @@
         <Setter Property="HorizontalContentAlignment" Value="Right" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
+    <!--影响全局TextBlock样式，如ContentPresenter内容等-->
     <Style TargetType="{x:Type TextBlock}">
         <Setter Property="VerticalAlignment" Value="Center" />
-        <!--<Setter Property="Foreground" Value="{StaticResource Text}" />-->
-        <!--<Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>-->
-        <!--影响全局TextBlock样式，如Button字体等-->
-        <!--<Setter Property="FontFamily" Value="Microsoft YaHei"/>-->
     </Style>
     <Style TargetType="{x:Type CheckBox}">
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -250,6 +247,7 @@
     </Style>
     <Style x:Key="FocusConfig" TargetType="{x:Type Control}" BasedOn="{StaticResource Config}">
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualStyle}"/>
     </Style>
     <Style x:Key="ComboConfig" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource FocusConfig}">

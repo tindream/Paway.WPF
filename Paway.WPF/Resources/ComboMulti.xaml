@@ -44,7 +44,7 @@
                                             <Setter Property="Template">
                                                 <Setter.Value>
                                                     <ControlTemplate TargetType="ListBoxItem">
-                                                        <WrapPanel VerticalAlignment="Center">
+                                                        <WrapPanel VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ComboMulti}}}">
                                                             <Path x:Name="path" Style="{StaticResource PathRight}" 
                                                                   Stroke="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ComboMulti}}}"/>
                                                             <TextBlock x:Name="txt" Text="{Binding Text}" Padding="3"/>

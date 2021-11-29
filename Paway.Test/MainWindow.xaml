@@ -85,7 +85,7 @@
                 <ComboBoxEXT ItemsSource="{IntList Count=20}" SelectedValue="{Binding Value}" HorizontalContentAlignment="Center" />
                 <ComboBoxEXT ItemsSource="{EnumList Type=local:MonitorType}" SelectedValue="{Binding Path=MonitorType, Converter={StaticResource enumConverter}}"/>
                 <ComboBoxEXT ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
-                <ComboMulti ItemsSource="{Binding MultiList}" HorizontalContentAlignment="Center"/>
+                <ComboMulti ItemsSource="{Binding MultiList}" HorizontalContentAlignment="Center" />
                 <ComboDate SelectedValue="{Binding DatePickerTime}" HorizontalContentAlignment="Center"/>
                 <ComboTree ItemsSource="{Binding TreeList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding TreeId}" IQuery="True" HorizontalContentAlignment="Center"/>
                 <ComboView ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}" HorizontalContentAlignment="Center"/>
