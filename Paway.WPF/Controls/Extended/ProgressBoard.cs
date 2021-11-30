@@ -64,18 +64,6 @@ namespace Paway.WPF
         /// </summary>
         private Point? startPoint;
         /// <summary>
-        /// 注册顶层窗体鼠标事件
-        /// </summary>
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-            if (PMethod.Parent(this, out Window window))
-            {
-                window.MouseMove += ProgressBoard_MouseMove;
-                window.MouseUp += ProgressBoard_MouseUp;
-            }
-        }
-        /// <summary>
         /// 按下开始拖动
         /// </summary>
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
@@ -85,6 +73,8 @@ namespace Paway.WPF
                 if (PMethod.Parent(this, out Window window))
                     window.Cursor = Cursors.Hand;
                 this.startPoint = e.GetPosition(this);
+                //尝试将鼠标强制捕获到控件
+                CaptureMouse();
                 e.Handled = true;
             }
             base.OnPreviewMouseDown(e);
@@ -92,8 +82,9 @@ namespace Paway.WPF
         /// <summary>
         /// 移动位置
         /// </summary>
-        private void ProgressBoard_MouseMove(object sender, MouseEventArgs e)
+        protected override void OnPreviewMouseMove(MouseEventArgs e)
         {
+            base.OnPreviewMouseMove(e);
             if (e.LeftButton == MouseButtonState.Pressed && startPoint != null)
             {
                 var movePoint = e.GetPosition(this);
@@ -104,12 +95,15 @@ namespace Paway.WPF
         /// <summary>
         /// 抬起停止拖动
         /// </summary>
-        private void ProgressBoard_MouseUp(object sender, MouseButtonEventArgs e)
+        protected override void OnPreviewMouseUp(MouseButtonEventArgs e)
         {
+            base.OnPreviewMouseUp(e);
             if (e.ChangedButton == MouseButton.Left && startPoint != null)
             {
                 Calc(e.GetPosition(this));
                 this.startPoint = null;
+                //当控件具有鼠标捕获的话，则释放该捕获。
+                ReleaseMouseCapture();
                 if (PMethod.Parent(this, out Window window))
                     window.Cursor = null;
             }

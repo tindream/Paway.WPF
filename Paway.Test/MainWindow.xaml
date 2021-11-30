@@ -137,7 +137,7 @@
                 </WrapPanel>
                 <WrapPanel>
                     <CheckButton Content="Hello" IsChecked="True"/>
-                    <CheckButton Content="World" IsChecked="{x:Null}"/>
+                    <CheckButton Content="World"/>
                 </WrapPanel>
                 <WrapPanel>
                     <RadioButtonEXT Name="rb" Content="Hello" IsChecked="True"/>

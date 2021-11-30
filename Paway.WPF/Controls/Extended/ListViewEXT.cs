@@ -617,7 +617,6 @@ namespace Paway.WPF
             {
                 if (ClickMode == ClickMode.Release && PMethod.Parent(e.OriginalSource, out downItem))
                 {
-                    //e.Handled = true;
                     IsPressed(true);
                 }
                 else if (ClickMode == ClickMode.Hover && e.ButtonState == MouseButtonState.Pressed)
@@ -628,7 +627,6 @@ namespace Paway.WPF
                     }
                 }
             }
-            else e.Handled = true;
         }
         private void IsPressed(bool value)
         {
