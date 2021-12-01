@@ -400,16 +400,9 @@ namespace Paway.WPF
                 {
                     IsPressed(true);
                 }
-                else if (ClickMode == ClickMode.Hover)
+                else if (PMethod.Parent(this, out Window window))
                 {
-                    if (PMethod.Parent(this, out Window window))
-                    {
-                        window.DragMove();
-                    }
-                }
-                else if (ClickMode == ClickMode.Press)
-                {
-                    e.Handled = true;
+                    window.DragMove();
                 }
             }
         }
