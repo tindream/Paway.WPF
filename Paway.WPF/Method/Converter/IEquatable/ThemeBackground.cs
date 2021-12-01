@@ -28,6 +28,12 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
+        public override string ToString()
+        {
+            return $"{Value}";
+        }
+        /// <summary>
+        /// </summary>
         public ThemeBackground()
         {
             PConfig.BackgroundChanged += Config_BackgroundChanged;

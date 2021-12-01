@@ -66,6 +66,13 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
+        public override string ToString()
+        {
+            if ((Mouse as SolidColorBrush)?.Color != (Normal as SolidColorBrush)?.Color || (Pressed as SolidColorBrush)?.Color != (Normal as SolidColorBrush)?.Color) return $"{Normal};{Mouse};{Pressed};{Alpha}";
+            return $"{Normal}";
+        }
+        /// <summary>
+        /// </summary>
         public BrushEXT()
         {
             PConfig.ColorChanged += Config_ColorChanged;

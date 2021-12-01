@@ -28,6 +28,12 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
+        public override string ToString()
+        {
+            return $"{Value}";
+        }
+        /// <summary>
+        /// </summary>
         public ThemeFontSize()
         {
             PConfig.FontSizeChanged += Config_FontSizeChanged;

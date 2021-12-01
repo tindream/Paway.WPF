@@ -161,6 +161,12 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
+        public override string ToString()
+        {
+            return Text;
+        }
+        /// <summary>
+        /// </summary>
         public TreeViewItemModel()
         {
             this.Id = this.GetHashCode();

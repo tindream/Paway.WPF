@@ -237,6 +237,12 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
+        public override string ToString()
+        {
+            return Text;
+        }
+        /// <summary>
+        /// </summary>
         public ListViewItemModel()
         {
             this.Id = this.GetHashCode();

@@ -36,6 +36,13 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
+        public override string ToString()
+        {
+            if (End != Start) return $"{Start};{End};{Alpha}";
+            return $"{Start}";
+        }
+        /// <summary>
+        /// </summary>
         public ColorLinear()
         {
             PConfig.ColorChanged += Config_ColorChanged;

@@ -41,6 +41,13 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
+        public override string ToString()
+        {
+            if (Mouse != Normal || Pressed != Normal) return $"{Normal};{Mouse};{Pressed};{Alpha}";
+            return $"{Normal}";
+        }
+        /// <summary>
+        /// </summary>
         public ColorEXT()
         {
             PConfig.ColorChanged += Config_ColorChanged;
