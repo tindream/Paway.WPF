@@ -17,6 +17,7 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Expander.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ListBox.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ListView.xaml" />
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\ListViewCustom.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Progress.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ProgressBar.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ProgressBoard.xaml" />

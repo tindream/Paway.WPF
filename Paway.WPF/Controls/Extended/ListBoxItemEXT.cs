@@ -32,38 +32,11 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemTextForegroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemTextForeground), typeof(BrushEXT), typeof(ListBoxItemEXT),
-                new PropertyMetadata(new BrushEXT(Colors.Transparent)));
+            DependencyProperty.RegisterAttached(nameof(ItemTextForeground), typeof(BrushEXT), typeof(ListBoxItemEXT));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBackgroundProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ListBoxItemEXT),
-                new PropertyMetadata(new BrushEXT(Colors.Transparent), OnItemBackgroundChanged));
-        private static void OnItemBackgroundChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is ListBoxItemEXT listBoxItem)
-            {
-                Color? mouseColor = null, pressedColor = null;
-                if (listBoxItem.ItemBackground.Mouse is SolidColorBrush mouse && mouse.Color != Colors.Transparent)
-                {
-                    if ((listBoxItem.ItemBrush.Mouse as SolidColorBrush).Color == Colors.Transparent)
-                    {
-                        mouseColor = PMethod.AlphaColor(mouse.Color.A + PConfig.Interval, mouse.Color);
-                    }
-                }
-                if (listBoxItem.ItemBackground.Pressed is SolidColorBrush pressed && pressed.Color != Colors.Transparent)
-                {
-                    if ((listBoxItem.ItemBrush.Pressed as SolidColorBrush).Color == Colors.Transparent)
-                    {
-                        pressedColor = PMethod.AlphaColor(pressed.Color.A + PConfig.Interval, pressed.Color);
-                    }
-                }
-                if (mouseColor != null || pressedColor != null)
-                {
-                    listBoxItem.ItemBrush = new BrushEXT(null, mouseColor, pressedColor);
-                }
-            }
-        }
+            DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ListBoxItemEXT));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBorderProperty =

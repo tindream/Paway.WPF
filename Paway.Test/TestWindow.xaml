@@ -17,8 +17,19 @@
                        Image="Images/close.png|/Images/close_while.png"
                        DockPanel.Dock="Top"/>
             <TextBoxEXT Name="t1" DockPanel.Dock="Top"/>
-            <ComboBoxEXT DockPanel.Dock="Top"/>
-            <CheckButton Content="A"/>
+            <CheckButton Content="A" DockPanel.Dock="Top"/>
+            <ListViewCustom x:Name="listView3" Margin="5,5,0,0" IsLight="True" ItemWidthType="ThreeRow" SelectionMode="Extended"
+                         ItemHeight="60" ItemWidth="100" DockPanel.Dock="Top" ItemTemplate="{StaticResource ItemTest}">
+                <ListBoxItemEXT Text="A"/>
+                <ListBoxItemEXT Text="B"/>
+                <ListBoxItemEXT Text="C"/>
+                <ListBoxItemEXT Text="D"/>
+                <ListBoxItemEXT Text="E" IsEnabled="False"/>
+                <ListBoxItemEXT Text="F"/>
+                <ListBoxItemEXT Text="G"/>
+                <ListBoxItemEXT Text="H"/>
+                <ListBoxItemEXT Text="I"/>
+            </ListViewCustom>
         </DockPanel>
     </Grid>
 </WindowEXT>

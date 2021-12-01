@@ -261,7 +261,7 @@
                 </i:Interaction.Triggers>
                 <!--<ListBoxItemEXT Text="World"/>
                 <ListBoxItemEXT Text="A"/>
-                <ListBoxItemEXT Text="B" StyleEXT="{StaticResource ItemTest}"/>
+                <ListBoxItemEXT Text="B"/>
                 <ListBoxItemEXT Text="C"/>
                 <ListBoxItemEXT Text="D"/>
                 <ListBoxItemEXT Text="E"/>

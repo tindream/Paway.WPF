@@ -67,38 +67,9 @@ namespace Paway.WPF
                 new PropertyMetadata(new BrushEXT()));
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty StyleEXTProperty =
-            DependencyProperty.RegisterAttached(nameof(StyleEXT), typeof(Style), typeof(ListViewEXT));
-        /// <summary>
-        /// </summary>
         public static readonly DependencyProperty ItemBackgroundProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(ListViewEXT),
-                new PropertyMetadata(new BrushEXT(Colors.Transparent, PConfig.Alpha - PConfig.Interval * 2, PConfig.Alpha), OnItemBackgroundChanged));
-        private static void OnItemBackgroundChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is ListViewEXT listView)
-            {
-                Color? mouseColor = null, pressedColor = null;
-                if (listView.ItemBackground.Mouse is SolidColorBrush mouse && mouse.Color != PMethod.AlphaColor(PConfig.Alpha - PConfig.Interval * 2, PConfig.Color))
-                {
-                    if ((listView.ItemBrush.Mouse as SolidColorBrush).Color == PMethod.AlphaColor(PConfig.Alpha - PConfig.Interval, PConfig.Color))
-                    {
-                        mouseColor = PMethod.AlphaColor(mouse.Color.A + PConfig.Interval, mouse.Color);
-                    }
-                }
-                if (listView.ItemBackground.Pressed is SolidColorBrush pressed && pressed.Color != PMethod.AlphaColor(PConfig.Alpha, PConfig.Color))
-                {
-                    if ((listView.ItemBrush.Pressed as SolidColorBrush).Color == PMethod.AlphaColor(PConfig.Alpha + PConfig.Interval, PConfig.Color))
-                    {
-                        pressedColor = PMethod.AlphaColor(pressed.Color.A + PConfig.Interval, pressed.Color);
-                    }
-                }
-                if (mouseColor != null || pressedColor != null)
-                {
-                    listView.ItemBrush = new BrushEXT(null, mouseColor, pressedColor);
-                }
-            }
-        }
+                new PropertyMetadata(new BrushEXT(Colors.Transparent, PConfig.Alpha - PConfig.Interval * 2, PConfig.Alpha)));
 
         /// <summary>
         /// </summary>
@@ -311,16 +282,6 @@ namespace Paway.WPF
             set { SetValue(ItemBrushProperty, value); }
         }
         /// <summary>
-        /// 自定义外部样式
-        /// </summary>
-        [Category("扩展")]
-        [Description("自定义外部样式")]
-        public Style StyleEXT
-        {
-            get { return (Style)GetValue(StyleEXTProperty); }
-            set { SetValue(StyleEXTProperty, value); }
-        }
-        /// <summary>
         /// 自定义项背景颜色
         /// </summary>
         [Category("扩展")]
@@ -517,6 +478,21 @@ namespace Paway.WPF
             DefaultStyleKey = typeof(ListViewEXT);
             Config_FontSizeChanged(PConfig.FontSize);
             PConfig.FontSizeChanged += Config_FontSizeChanged;
+            this.SelectionChanged += ListViewEXT_SelectionChanged;
+        }
+        private void ListViewEXT_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            foreach (var temp in e.AddedItems)
+            {
+                if (temp is ListViewItem item && item.Content is IListViewItem info)
+                {
+                    PConfig.AddLog(this, info.Hit);
+                }
+                else if (this.ItemContainerGenerator.ContainerFromItem(temp) is ListViewItem listViewItem && listViewItem.Content is IListViewItem info2)
+                {
+                    PConfig.AddLog(this, info2.Hit);
+                }
+            }
         }
 
         /// <summary>
@@ -586,17 +562,9 @@ namespace Paway.WPF
 
         #region 指定按钮按下并释放时，应引发事件。
         /// <summary>
-        /// 第一次按下时的item序号(Shift)
-        /// </summary>
-        private int firstIndex = -1;
-        /// <summary>
         /// 鼠标移过项
         /// </summary>
         private ListViewItem moveItem;
-        /// <summary>
-        /// 上一次按下时的item
-        /// </summary>
-        private ListViewItem lastItem;
         /// <summary>
         /// 按下时的item
         /// </summary>
@@ -683,80 +651,6 @@ namespace Paway.WPF
             if (ClickMode == ClickMode.Release && e.ChangedButton == MouseButton.Left && downItem != null)
             {
                 IsPressed(false);
-                if (PMethod.Parent(e.OriginalSource, out ListViewItem item) && item == downItem)
-                {
-                    if (SelectionMode == SelectionMode.Extended)
-                    {
-                        if (System.Windows.Forms.Control.ModifierKeys == System.Windows.Forms.Keys.Shift)
-                        {
-                            if (firstIndex == -1)
-                            {
-                                firstIndex = Index(item);
-                                SetSelected(item, true);
-                            }
-                            else
-                            {
-                                var index = Index(item);
-                                var min = Math.Min(firstIndex, index);
-                                var max = Math.Max(firstIndex, index);
-                                Selected(i => i >= min && i <= max);
-                            }
-                        }
-                        else
-                        {
-                            firstIndex = Index(item);
-                            if (System.Windows.Forms.Control.ModifierKeys == System.Windows.Forms.Keys.Control)
-                            {
-                                SetSelected(item, !item.IsSelected);
-                            }
-                            else
-                            {
-                                Selected(i => false);
-                                Selected(i => i == Index(item));
-                            }
-                        }
-                    }
-                    else if (SelectionMode == SelectionMode.Multiple)
-                    {
-                        SetSelected(item, !item.IsSelected);
-                    }
-                    else
-                    {
-                        if (lastItem != null && lastItem != item) SetSelected(lastItem, false);
-                        SetSelected(item, true);
-                        lastItem = item;
-                    }
-                }
-            }
-        }
-        private void Selected(Func<int, bool> action)
-        {
-            for (int i = 0; i < this.Items.Count; i++)
-            {
-                if (Items[i] is ListViewItem item)
-                {
-                    SetSelected(item, action(i));
-                }
-                else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is ListViewItem listViewItem)
-                {
-                    SetSelected(listViewItem, action(i));
-                }
-            }
-        }
-        private void SetSelected(ListViewItem item, bool value)
-        {
-            if (item.IsSelected != value)
-            {
-                if (value)
-                {
-                    this.Focus();
-                    if (item.Content is IListViewItem info) PConfig.AddLog(this, info.Hit);
-                    else if (item.Content is ContentControl content) PConfig.AddLog(this, content.Content.ToStrings());
-                    else if (item.Content is TextBlock textBlock) PConfig.AddLog(this, textBlock.Text.ToStrings());
-                    else PConfig.AddLog(this, item.Content.ToStrings());
-                }
-                item.IsSelected = value;
-                Animation(item, value);
             }
         }
         private void Animation(ListViewItem item, bool value)
@@ -802,17 +696,6 @@ namespace Paway.WPF
                 }
             }
             if (line1 != null) storyboard.Begin(line1);
-        }
-        private int Index(ListViewItem item)
-        {
-            for (int i = 0; i < Items.Count; i++)
-            {
-                if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is ListViewItem listViewItem)
-                {
-                    if (item.Equals(listViewItem)) return i;
-                }
-            }
-            return -1;
         }
 
         #endregion

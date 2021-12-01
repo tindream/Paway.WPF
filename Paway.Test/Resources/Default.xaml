@@ -3,21 +3,13 @@
                     xmlns:local="clr-namespace:Paway.Test"
                     xmlns:util="clr-namespace:Paway.WPF;assembly=Paway.WPF">
 
-    <Style x:Key="ItemTest" TargetType="{x:Type ContentControl}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ContentControl}">
-                    <Grid>
-                        <Border BorderBrush="Red" BorderThickness="1">
-                            <StackPanel>
-                                <TextBlock Text="{Binding Text}"/>
-                                <TextBlock Text="..." HorizontalAlignment="Right"/>
-                            </StackPanel>
-                        </Border>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+    <DataTemplate x:Key="ItemTest">
+        <Border BorderBrush="Red" BorderThickness="0">
+            <StackPanel>
+                <TextBlock Text="{Binding Text}"/>
+                <TextBlock Text="..." HorizontalAlignment="Right"/>
+            </StackPanel>
+        </Border>
+    </DataTemplate>
 
 </ResourceDictionary>

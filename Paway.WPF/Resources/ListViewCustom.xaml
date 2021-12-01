@@ -1,0 +1,170 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Paway.WPF">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="{x:Type local:ListViewCustom}" BasedOn="{StaticResource Config}">
+        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="SelectionMode" Value="Single"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="LightGray"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Padding" Value="0"/>
+        <!--修改模板属性-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate >
+                    <Border BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}">
+                        <local:ScrollViewerEXT HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                            <WrapPanel  x:Name="WrapPanel" Orientation="{Binding Orientation, RelativeSource={RelativeSource TemplatedParent}}" ScrollViewer.CanContentScroll="True" IsItemsHost="True" />
+                        </local:ScrollViewerEXT>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="IsSelected" Value="{Binding IsSelected}" />
+                    <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
+                    <Setter Property="Visibility" Value="{Binding Visibility}" />
+                    <Setter Property="FocusVisualStyle">
+                        <Setter.Value>
+                            <Style TargetType="Control">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Border BorderThickness="1" BorderBrush="{StaticResource ThemeColor}" 
+                                                    CornerRadius="{Binding Path=ItemRadius.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"/>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <Grid>
+                                    <Border x:Name="border" 
+                                        BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}" 
+                                        Background="{Binding Path=ItemBackground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"
+                                        BorderThickness="{Binding Path=ItemBorder.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}" 
+                                        CornerRadius="{Binding Path=ItemRadius.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"
+                                        Margin="{Binding ItemMargin, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}" />
+                                    <Border x:Name="border2" 
+                                            Padding="{Binding Path=ItemPadding.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}" 
+                                            Height="{Binding ItemHeight, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}">
+                                        <Border.Width>
+                                            <MultiBinding Converter="{StaticResource nullSelector}">
+                                                <Binding Path="ItemWidth" />
+                                                <Binding Path="ItemWidth" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
+                                            </MultiBinding>
+                                        </Border.Width>
+                                        <ContentPresenter Name="styleEXT"
+                                                          TextBlock.Foreground="{Binding Path=ItemTextForeground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}" 
+                                                          TextBlock.FontSize="{Binding Path=ItemTextFontSize.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}" 
+                                                          HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}" 
+                                                          VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}" >
+                                        </ContentPresenter>
+                                    </Border>
+                                    <Grid.ToolTip>
+                                        <TextBlock>
+                                            <TextBlock.Text>
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
+                                                    <Binding Path="Hit" />
+                                                    <!--<Binding Path="Content" />-->
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </Grid.ToolTip>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True" >
+                                        <Setter TargetName="border" Property="BorderBrush"
+                                                Value="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"/>
+                                        <Setter TargetName="border" Property="Background"
+                                                Value="{Binding Path=ItemBackground.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"/>
+                                        <Setter TargetName="border" Property="BorderThickness" 
+                                                Value="{Binding Path=ItemBorder.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"/>
+                                        <Setter TargetName="border" Property="CornerRadius" 
+                                                Value="{Binding Path=ItemRadius.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"/>
+                                        <Setter TargetName="border2" Property="Padding" 
+                                                Value="{Binding Path=ItemPadding.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"/>
+                                        <Setter TargetName="styleEXT" Property="TextBlock.Foreground"
+                                                Value="{Binding Path=ItemTextForeground.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"/>
+                                        <Setter TargetName="styleEXT" Property="TextBlock.FontSize" 
+                                                Value="{Binding Path=ItemTextFontSize.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"/>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="true">
+                                        <Setter TargetName="border" Property="BorderBrush"
+                                                Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"/>
+                                        <Setter TargetName="border" Property="Background"
+                                                Value="{Binding Path=ItemBackground.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"/>
+                                        <Setter TargetName="border" Property="BorderThickness" 
+                                                Value="{Binding Path=ItemBorder.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"/>
+                                        <Setter TargetName="border" Property="CornerRadius" 
+                                                Value="{Binding Path=ItemRadius.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"/>
+                                        <Setter TargetName="border2" Property="Padding" 
+                                                Value="{Binding Path=ItemPadding.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"/>
+                                        <Setter TargetName="styleEXT" Property="TextBlock.Foreground"
+                                                Value="{Binding Path=ItemTextForeground.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"/>
+                                        <Setter TargetName="styleEXT" Property="TextBlock.FontSize" 
+                                                Value="{Binding Path=ItemTextFontSize.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"/>
+                                    </Trigger>
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="IsSelected" Value="true"/>
+                                            <Condition Property="IsMouseOver" Value="true"/>
+                                        </MultiTrigger.Conditions>
+                                        <Setter TargetName="border" Property="BorderBrush"
+                                                Value="{Binding Path=ItemBrush.PressedMouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"/>
+                                        <Setter TargetName="border" Property="Background"
+                                                Value="{Binding Path=ItemBackground.PressedMouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"/>
+                                        <Setter TargetName="styleEXT" Property="TextBlock.Foreground"
+                                                Value="{Binding Path=ItemTextForeground.PressedMouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"/>
+                                    </MultiTrigger>
+                                    <DataTrigger Binding="{Binding IsPressed}" Value="true">
+                                        <Setter TargetName="border" Property="BorderBrush"
+                                                Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"/>
+                                        <Setter TargetName="border" Property="Background"
+                                                Value="{Binding Path=ItemBackground.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"/>
+                                        <Setter TargetName="styleEXT" Property="TextBlock.Foreground"
+                                                Value="{Binding Path=ItemTextForeground.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"/>
+                                    </DataTrigger>
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="IsSelected" Value="false"/>
+                                            <Condition Property="IsMouseOver" Value="false"/>
+                                        </MultiTrigger.Conditions>
+                                        <Setter TargetName="border" Property="BorderBrush"
+                                                Value="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"/>
+                                        <Setter TargetName="border" Property="Background"
+                                                Value="{Binding Path=ItemBackground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"/>
+                                        <Setter TargetName="styleEXT" Property="TextBlock.Foreground"
+                                                Value="{Binding Path=ItemTextForeground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"/>
+                                    </MultiTrigger>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="Background" TargetName="border" Value="LightGray"/>
+                                        <Setter Property="BorderBrush" TargetName="border" Value="DarkGray"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>
