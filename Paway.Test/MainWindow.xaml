@@ -242,7 +242,7 @@
             </StackPanel>
         </ExpanderEXT>
         <ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="TabControl">
-            <TabControlEXT TabStripPlacement="Top" Background="LightGray" MaxHeight="300">
+            <TabControlEXT TabStripPlacement="Top" MaxHeight="300">
                 <TabItem Cursor="Hand" Header="音乐电台" />
                 <TabItem Cursor="Hand" Header="Mv电台"/>
             </TabControlEXT>

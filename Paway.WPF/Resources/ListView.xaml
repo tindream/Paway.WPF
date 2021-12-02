@@ -72,7 +72,14 @@
                                         </Border.Width>
                                     </Border>
                                     <Border x:Name="border2" 
-                                            Padding="{Binding Path=ItemPadding.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" >
+                                            Padding="{Binding Path=ItemPadding.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
+                                            Height="{Binding ItemHeight, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
+                                        <Border.Width>
+                                            <MultiBinding Converter="{StaticResource nullSelector}">
+                                                <Binding Path="ItemWidth" />
+                                                <Binding Path="ItemWidth" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
+                                            </MultiBinding>
+                                        </Border.Width>
                                         <DockPanel>
                                             <Image Name="image"
                                                Visibility="{Binding Source, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource nullToCollapsed}}"
@@ -82,8 +89,7 @@
                                                DockPanel.Dock="{Binding ItemImageDock, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
                                                Margin="{Binding Path=ItemImageMargin.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                Stretch="{Binding Path=ItemImageStretch, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
-                                            <DockPanel>
-                                                <TextBlock Name="desc" Text="{Binding Desc}"
+                                            <TextBlock Name="desc" Text="{Binding Desc}"
                                                        TextTrimming="WordEllipsis" 
                                                        Foreground="{Binding Path=ItemDescForeground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        Background="{Binding Path=ItemDescBackground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
@@ -92,11 +98,11 @@
                                                        VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
                                                        Padding="{Binding ItemDescPadding, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
                                                        DockPanel.Dock="{Binding ItemDescDock, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
-                                                    <TextBlock.ToolTip>
-                                                        <TextBlock Text="{Binding Desc}"/>
-                                                    </TextBlock.ToolTip>
+                                                <TextBlock.ToolTip>
+                                                    <TextBlock Text="{Binding Desc}"/>
+                                                </TextBlock.ToolTip>
                                                 </TextBlock>
-                                                <TextBlock Name="text"
+                                            <TextBlock Name="text"
                                                        TextTrimming="WordEllipsis" 
                                                        Foreground="{Binding Path=ItemTextForeground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        Background="{Binding Path=ItemTextBackground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
@@ -104,24 +110,23 @@
                                                        HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        Padding="{Binding ItemTextPadding, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
-                                                    <TextBlock.Text>
-                                                        <MultiBinding Converter="{StaticResource nullSelector}">
-                                                            <Binding Path="Text" />
-                                                            <!--<Binding Path="Content" />-->
-                                                        </MultiBinding>
-                                                    </TextBlock.Text>
-                                                    <TextBlock.ToolTip>
-                                                        <TextBlock>
-                                                            <TextBlock.Text>
-                                                                <MultiBinding Converter="{StaticResource nullSelector}">
-                                                                    <Binding Path="Text" />
-                                                                    <!--<Binding Path="Content" />-->
-                                                                </MultiBinding>
-                                                            </TextBlock.Text>
-                                                        </TextBlock>
-                                                    </TextBlock.ToolTip>
+                                                <TextBlock.Text>
+                                                    <MultiBinding Converter="{StaticResource nullSelector}">
+                                                        <Binding Path="Text" />
+                                                        <!--<Binding Path="Content" />-->
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                                <TextBlock.ToolTip>
+                                                    <TextBlock>
+                                                        <TextBlock.Text>
+                                                            <MultiBinding Converter="{StaticResource nullSelector}">
+                                                                <Binding Path="Text" />
+                                                                <!--<Binding Path="Content" />-->
+                                                            </MultiBinding>
+                                                        </TextBlock.Text>
+                                                    </TextBlock>
+                                                </TextBlock.ToolTip>
                                                 </TextBlock>
-                                            </DockPanel>
                                         </DockPanel>
                                     </Border>
                                     <Grid Name="AnimationLine" VerticalAlignment="Bottom"
@@ -340,44 +345,6 @@
                                             </Setter.Value>
                                         </Setter>
                                     </DataTrigger>
-                                    <MultiTrigger>
-                                        <MultiTrigger.Conditions>
-                                            <Condition Property="IsSelected" Value="false"/>
-                                            <Condition Property="IsMouseOver" Value="false"/>
-                                        </MultiTrigger.Conditions>
-                                        <Setter TargetName="text" Property="Foreground">
-                                            <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource nullSelector}">
-                                                    <Binding Path="ItemTextForeground.Normal" />
-                                                    <Binding Path="ItemTextForeground.Normal" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
-                                                </MultiBinding>
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Setter TargetName="border" Property="Background">
-                                            <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource nullSelector}">
-                                                    <Binding Path="ItemBackground.Normal" />
-                                                    <Binding Path="ItemBackground.Normal" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
-                                                </MultiBinding>
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Setter TargetName="border" Property="BorderThickness">
-                                            <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource nullSelector}">
-                                                    <Binding Path="ItemBorder.Normal" />
-                                                    <Binding Path="ItemBorder.Normal" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
-                                                </MultiBinding>
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Setter TargetName="border" Property="BorderBrush">
-                                            <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource nullSelector}">
-                                                    <Binding Path="ItemBrush.Normal" />
-                                                    <Binding Path="ItemBrush.Normal" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
-                                                </MultiBinding>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </MultiTrigger>
                                     <Trigger Property="IsEnabled" Value="False">
                                         <Setter Property="Background" TargetName="border" Value="LightGray"/>
                                         <Setter Property="BorderBrush" TargetName="border" Value="DarkGray"/>
