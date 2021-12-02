@@ -270,6 +270,9 @@
             </AdornedElementPlaceholder>
         </DockPanel>
     </ControlTemplate>
+    <DataTemplate x:Key="ViewItem">
+        <TextBlock Text="{Binding Text}"/>
+    </DataTemplate>
     <Style x:Key="TextLeft" TargetType="{x:Type TextBlock}" >
         <Setter Property="Margin" Value="2,0" />
         <Setter Property="Padding" Value="3,6" />

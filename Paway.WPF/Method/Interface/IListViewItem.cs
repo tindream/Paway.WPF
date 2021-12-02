@@ -52,10 +52,6 @@ namespace Paway.WPF
         /// </summary>
         bool IsEnabled { get; set; }
         /// <summary>
-        /// 自定义外部样式
-        /// </summary>
-        Style StyleEXT { get; set; }
-        /// <summary>
         /// 自定义项宽度
         /// </summary>
         double ItemWidth { get; set; }

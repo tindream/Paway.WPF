@@ -19,7 +19,7 @@
             <TextBoxEXT Name="t1" DockPanel.Dock="Top"/>
             <CheckButton Content="A" DockPanel.Dock="Top"/>
             <ListViewCustom x:Name="listView3" Margin="5,5,0,0" IsLight="True" ItemWidthType="ThreeRow" SelectionMode="Extended"
-                         ItemHeight="60" ItemWidth="100" DockPanel.Dock="Top" ItemTemplate="{StaticResource ItemTest}">
+                         ItemHeight="60" ItemWidth="100" DockPanel.Dock="Top">
                 <ListBoxItemEXT Text="A"/>
                 <ListBoxItemEXT Text="B"/>
                 <ListBoxItemEXT Text="C"/>
