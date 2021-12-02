@@ -260,7 +260,10 @@ namespace Paway.WPF
                 column.Header = property.Text();
                 if (column is DataGridTextColumn text && text.ElementStyle.Setters.Count == 1 && (text.ElementStyle.Setters[0] as Setter).Property.Name == "Margin")
                 {
-                    text.ElementStyle = (Style)FindResource("Text" + this.HorizontalContentAlignment);
+                    if (TryFindResource("Text" + this.HorizontalContentAlignment) is Style style)
+                    {
+                        text.ElementStyle = style;
+                    }
                 }
                 column.Visibility = property.IShow() ? Visibility.Visible : Visibility.Collapsed;
             }
@@ -269,12 +272,17 @@ namespace Paway.WPF
             if (ICustomColumnHeader)
             {
                 var lastColumn = columns.FindLast(c => c.Visibility == Visibility.Visible);
-                if (lastColumn != null) lastColumn.HeaderStyle = (Style)FindResource("LastColumnHeaderStyle");
-                var noLastStyle = (Style)FindResource("NormalColumnHeaderStyle");
-                var fill = columns.Any(c => c.Width.UnitType == DataGridLengthUnitType.Star);
-                foreach (var column in columns)
+                if (lastColumn != null && TryFindResource("LastColumnHeaderStyle") is Style lastHeaderStyle)
                 {
-                    if (!fill || column != lastColumn) column.HeaderStyle = noLastStyle;
+                    lastColumn.HeaderStyle = lastHeaderStyle;
+                }
+                if (TryFindResource("NormalColumnHeaderStyle") is Style noLastStyle)
+                {
+                    var fill = columns.Any(c => c.Width.UnitType == DataGridLengthUnitType.Star);
+                    foreach (var column in columns)
+                    {
+                        if (!fill || column != lastColumn) column.HeaderStyle = noLastStyle;
+                    }
                 }
             }
             foreach (var column in columns)
