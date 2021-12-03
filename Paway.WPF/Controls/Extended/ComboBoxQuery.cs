@@ -130,10 +130,9 @@ namespace Paway.WPF
             if (this.ItemsSource != null)
             {
                 var type = this.ItemsSource.GenericType();
-                if (typeof(IListViewItem).IsAssignableFrom(type))
                 {
-                    this.List = new List<IListViewItem>();
-                    foreach (IListViewItem item in this.ItemsSource) this.List.Add(item);
+                    this.List = new List<dynamic>();
+                    foreach (var item in this.ItemsSource) this.List.Add(item);
                 }
             }
             if (Template.FindName("PART_Popup", this) is Popup popup)
@@ -197,7 +196,7 @@ namespace Paway.WPF
         #endregion
 
         #region 搜索
-        private List<IListViewItem> List;
+        private List<dynamic> List;
         private TextBoxEXT textBox;
         private string last;
         private void ComboQuery_KeyUp(object sender, KeyEventArgs e)
@@ -223,7 +222,8 @@ namespace Paway.WPF
                 }
                 else if (this.List != null)
                 {
-                    var p = gridView.Columns.Predicate<IListViewItem>(text);
+                    var type = this.ItemsSource.GenericType();
+                    var p = type.Predicate<dynamic>(gridView.Columns, text);
                     this.ItemsSource = this.List.AsParallel().Where(p).ToList();
                 }
                 if (textBox.Text != text)
