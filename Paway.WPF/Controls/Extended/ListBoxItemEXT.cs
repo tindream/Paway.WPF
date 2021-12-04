@@ -64,16 +64,15 @@ namespace Paway.WPF
                 }
             }
         }
-
-        /// <summary>
-        /// </summary>
-        public static readonly DependencyProperty ItemBorderProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBorder), typeof(ThicknessEXT), typeof(ListBoxItemEXT), new PropertyMetadata(new ThicknessEXT(double.NaN)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ListBoxItemEXT),
                 new PropertyMetadata(new BrushEXT(Colors.Transparent)));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ItemBorderProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemBorder), typeof(ThicknessEXT), typeof(ListBoxItemEXT), new PropertyMetadata(new ThicknessEXT(double.NaN)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemWidthProperty =
@@ -100,16 +99,6 @@ namespace Paway.WPF
             set { SetValue(ItemBackgroundProperty, value); }
         }
         /// <summary>
-        /// 自定义项外边框
-        /// </summary>
-        [Category("扩展")]
-        [Description("自定义项外边框")]
-        public ThicknessEXT ItemBorder
-        {
-            get { return (ThicknessEXT)GetValue(ItemBorderProperty); }
-            set { SetValue(ItemBorderProperty, value); }
-        }
-        /// <summary>
         /// 自定义项外边框颜色
         /// </summary>
         [Category("扩展")]
@@ -118,6 +107,16 @@ namespace Paway.WPF
         {
             get { return (BrushEXT)GetValue(ItemBrushProperty); }
             set { SetValue(ItemBrushProperty, value); }
+        }
+        /// <summary>
+        /// 自定义项外边框
+        /// </summary>
+        [Category("扩展")]
+        [Description("自定义项外边框")]
+        public ThicknessEXT ItemBorder
+        {
+            get { return (ThicknessEXT)GetValue(ItemBorderProperty); }
+            set { SetValue(ItemBorderProperty, value); }
         }
         /// <summary>
         /// 自定义项宽度
