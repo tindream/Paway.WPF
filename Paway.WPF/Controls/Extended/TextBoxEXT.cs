@@ -135,6 +135,26 @@ namespace Paway.WPF
             DefaultStyleKey = typeof(TextBoxEXT);
         }
         /// <summary>
+        /// 回车时移动焦点到下一控件
+        /// </summary>
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                // MoveFocus takes a TraveralReqest as its argument.
+                var request = new TraversalRequest(FocusNavigationDirection.Next);
+                // Gets the element with keyboard focus.
+                var elementWithFocus = Keyboard.FocusedElement as UIElement;
+                // Change keyboard focus.
+                if (elementWithFocus != null)
+                {
+                    elementWithFocus.MoveFocus(request);
+                }
+                //e.Handled = true;
+            }
+            base.OnKeyDown(e);
+        }
+        /// <summary>
         /// 响应滚动条
         /// </summary>
         public override void OnApplyTemplate()
