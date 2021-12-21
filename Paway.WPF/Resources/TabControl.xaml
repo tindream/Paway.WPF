@@ -6,12 +6,157 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <Style x:Key="TabItem" TargetType="{x:Type TabItem}">
+        <Setter Property="Foreground" Value="{StaticResource Text}"/>
+        <Setter Property="Padding" Value="6"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="LightGray"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <Grid x:Name="templateRoot" Background="Transparent">
+                        <Border x:Name="_underline" BorderThickness="0" Margin="{TemplateBinding Margin}"
+                                BorderBrush="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
+                        <TextBlock x:Name="txt" 
+                                   Padding="{TemplateBinding Padding}"
+                                   Visibility="Visible" 
+                                   HorizontalAlignment="Center" 
+                                   Text="{TemplateBinding Header}" ToolTip="{TemplateBinding Header}" 
+                                   Foreground="{TemplateBinding Foreground}" 
+                                   TextTrimming="CharacterEllipsis" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Foreground" TargetName="txt" 
+                                    Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter Property="Panel.ZIndex" Value="1"/>
+                            <Setter Property="Foreground" TargetName="txt" 
+                                    Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
+                        </Trigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true"/>
+                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Top"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="BorderThickness" TargetName="_underline" Value="0 0 0 2"/>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true"/>
+                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Left"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="BorderThickness" TargetName="_underline" Value="0 0 2 0"/>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true"/>
+                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Bottom"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="BorderThickness" TargetName="_underline" Value="0 2 0 0"/>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true"/>
+                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Right"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="BorderThickness" TargetName="_underline" Value="2 0 0 0"/>
+                        </MultiDataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="TabMenuItem" TargetType="{x:Type TabItem}">
+        <Setter Property="Foreground" Value="{StaticResource Text}"/>
+        <Setter Property="Padding" Value="6"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="LightGray"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <Grid x:Name="templateRoot" Background="Transparent">
+                        <Border x:Name="_underline" BorderThickness="0" Margin="{TemplateBinding Margin}"
+                                BorderBrush="LightGray"/>
+                        <Border x:Name="_underline2" BorderThickness="0" Margin="{TemplateBinding Margin}"
+                                BorderBrush="{Binding Background, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
+                        <TextBlock x:Name="txt" 
+                                   Padding="{TemplateBinding Padding}"
+                                   Visibility="Visible" 
+                                   HorizontalAlignment="Center" 
+                                   Text="{TemplateBinding Header}" ToolTip="{TemplateBinding Header}" 
+                                   Foreground="{TemplateBinding Foreground}" 
+                                   TextTrimming="CharacterEllipsis" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Foreground" TargetName="txt" 
+                                    Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter Property="Panel.ZIndex" Value="1"/>
+                            <Setter Property="Foreground" TargetName="txt" 
+                                    Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
+                        </Trigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true"/>
+                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Top"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="BorderThickness" TargetName="_underline" Value="1 1 1 0"/>
+                            <Setter Property="BorderThickness" TargetName="_underline2" Value="0 0 0 1"/>
+                            <Setter Property="Margin" TargetName="_underline2" Value="1,0"/>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true"/>
+                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Left"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="BorderThickness" TargetName="_underline" Value="1 1 0 1"/>
+                            <Setter Property="BorderThickness" TargetName="_underline2" Value="0 0 1 0"/>
+                            <Setter Property="Margin" TargetName="_underline2" Value="0,1"/>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true"/>
+                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Bottom"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="BorderThickness" TargetName="_underline" Value="1 0 1 1"/>
+                            <Setter Property="BorderThickness" TargetName="_underline2" Value="0 1 0 0"/>
+                            <Setter Property="Margin" TargetName="_underline2" Value="1,0"/>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true"/>
+                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Right"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="BorderThickness" TargetName="_underline" Value="0 1 1 1"/>
+                            <Setter Property="BorderThickness" TargetName="_underline2" Value="1 0 0 0"/>
+                            <Setter Property="Margin" TargetName="_underline2" Value="0,1"/>
+                        </MultiDataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style TargetType="{x:Type local:TabControlEXT}" BasedOn="{StaticResource Config}">
         <Setter Property="Padding" Value="2"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Background" Value="White"/>
-        <Setter Property="BorderBrush" Value="DarkGray"/>
+        <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
         <Setter Property="Template">
@@ -28,8 +173,8 @@
                         </Grid.RowDefinitions>
                         <TabPanel x:Name="HeaderPanel" HorizontalAlignment="Center" Background="Transparent" Grid.Column="0" IsItemsHost="True" Margin="0" Grid.Row="0" 
                                   KeyboardNavigation.TabIndex="1" Panel.ZIndex="1"/>
-                        <Line X1="0" X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" Stroke="Gray" StrokeThickness="0.1" 
-                              VerticalAlignment="Bottom" Margin="0 0 0 1"/>
+                        <Line X1="0" X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" Stroke="DarkGray" StrokeThickness="1" 
+                              VerticalAlignment="Bottom" Margin="0 0 0 0"/>
                         <Border x:Name="ContentPanel" BorderBrush="{TemplateBinding BorderBrush}" 
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 Background="{TemplateBinding Background}" 
@@ -75,112 +220,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="ItemContainerStyle">
-            <Setter.Value>
-                <Style TargetType="TabItem">
-                    <Setter Property="Foreground" Value="{StaticResource Text}"/>
-                    <Setter Property="Padding" Value="6"/>
-                    <Setter Property="Cursor" Value="Hand"/>
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="BorderBrush" Value="DarkGray"/>
-                    <Setter Property="Margin" Value="0"/>
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type TabItem}">
-                                <Grid x:Name="templateRoot" Background="Transparent">
-                                    <Border x:Name="_underline" BorderThickness="0" Margin="{TemplateBinding Margin}"
-                                            BorderBrush="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
-                                    <TextBlock x:Name="txt" 
-                                               Padding="{TemplateBinding Padding}"
-                                               Visibility="Visible" 
-                                               HorizontalAlignment="Center" 
-                                               Text="{TemplateBinding Header}" ToolTip="{TemplateBinding Header}" 
-                                               Foreground="{TemplateBinding Foreground}" 
-                                               TextTrimming="CharacterEllipsis" />
-                                </Grid>
-                                <ControlTemplate.Triggers>
-                                    <MultiDataTrigger>
-                                        <MultiDataTrigger.Conditions>
-                                            <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>
-                                            <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Top"/>
-                                        </MultiDataTrigger.Conditions>
-                                        <Setter Property="Foreground" TargetName="txt" 
-                                                Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
-                                    </MultiDataTrigger>
-                                    <MultiDataTrigger>
-                                        <MultiDataTrigger.Conditions>
-                                            <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>
-                                            <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Left"/>
-                                        </MultiDataTrigger.Conditions>
-                                        <Setter Property="Foreground" TargetName="txt" 
-                                                Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
-                                    </MultiDataTrigger>
-                                    <MultiDataTrigger>
-                                        <MultiDataTrigger.Conditions>
-                                            <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>
-                                            <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Bottom"/>
-                                        </MultiDataTrigger.Conditions>
-                                        <Setter Property="Foreground" TargetName="txt" 
-                                                Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
-                                    </MultiDataTrigger>
-                                    <MultiDataTrigger>
-                                        <MultiDataTrigger.Conditions>
-                                            <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>
-                                            <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Right"/>
-                                        </MultiDataTrigger.Conditions>
-                                        <Setter Property="Foreground" TargetName="txt" 
-                                                Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
-                                    </MultiDataTrigger>
-
-                                    <MultiDataTrigger>
-                                        <MultiDataTrigger.Conditions>
-                                            <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true"/>
-                                            <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Top"/>
-                                        </MultiDataTrigger.Conditions>
-                                        <Setter Property="Panel.ZIndex" Value="1"/>
-                                        <Setter Property="Foreground" TargetName="txt" 
-                                                Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
-                                        <Setter Property="BorderThickness" TargetName="_underline" Value="0 0 0 2"/>
-                                    </MultiDataTrigger>
-                                    <MultiDataTrigger>
-                                        <MultiDataTrigger.Conditions>
-                                            <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true"/>
-                                            <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Left"/>
-                                        </MultiDataTrigger.Conditions>
-                                        <Setter Property="Panel.ZIndex" Value="1"/>
-                                        <Setter Property="Foreground" TargetName="txt" 
-                                                Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
-                                        <Setter Property="BorderThickness" TargetName="_underline" Value="0 0 2 0"/>
-                                    </MultiDataTrigger>
-                                    <MultiDataTrigger>
-                                        <MultiDataTrigger.Conditions>
-                                            <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true"/>
-                                            <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Bottom"/>
-                                        </MultiDataTrigger.Conditions>
-                                        <Setter Property="Panel.ZIndex" Value="1"/>
-                                        <Setter Property="Foreground" TargetName="txt" 
-                                                Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
-                                        <Setter Property="BorderThickness" TargetName="_underline" Value="0 2 0 0"/>
-                                    </MultiDataTrigger>
-                                    <MultiDataTrigger>
-                                        <MultiDataTrigger.Conditions>
-                                            <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true"/>
-                                            <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Right"/>
-                                        </MultiDataTrigger.Conditions>
-                                        <Setter Property="Panel.ZIndex" Value="1"/>
-                                        <Setter Property="Foreground" TargetName="txt" 
-                                                Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
-                                        <Setter Property="BorderThickness" TargetName="_underline" Value="2 0 0 0"/>
-                                    </MultiDataTrigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="ItemContainerStyle" Value="{StaticResource TabItem}"/>
     </Style>
 
 </ResourceDictionary>

@@ -9,6 +9,7 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\PasswordBox.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ScrollBar.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\TreeView.xaml" />
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\TabControl.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\WindowFunctionBar.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

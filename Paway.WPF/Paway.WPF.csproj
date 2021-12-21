@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\Extended\CalendarMonitor.cs" />
+    <Compile Include="Controls\Extended\RadioBox.cs" />
     <Compile Include="Controls\Extended\ListViewCustom.cs" />
     <Compile Include="Method\Converter\IValueConverter\BrushLightConverter.cs" />
     <Compile Include="Method\Converter\IValueConverter\ColorToBrushConverter.cs" />
@@ -192,6 +193,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\Badge\Badge.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\RadioBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
