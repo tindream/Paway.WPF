@@ -8,23 +8,27 @@
         UseLayoutRounding="True"
         DataContext="{Binding Test, Source={StaticResource Locator}}"
         Title="TestWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
-    <Grid HorizontalAlignment="Center" Width="250" VerticalAlignment="Center">
-        <TabControlEXT TabStripPlacement="Top" MaxHeight="300" ItemContainerStyle="{StaticResource TabMenuItem}">
-            <TabItem Cursor="Hand" Header="音乐电台">
-                <WrapPanel Margin="5,5,0,0" Height="61">
-                    <CheckButton Content="A" Margin="0" Radius="3,0,0,3"/>
-                    <CheckButton Content="B" Margin="-1,0,0,0" Radius="0"/>
-                    <CheckButton Content="C" Margin="-1,0,0,0" Radius="0,3,3,0"/>
-                    <ComboBoxEXT ItemsSource="{IntList Count=10}" IsEditable="True" Width="94"/>
-                </WrapPanel>
-            </TabItem>
-            <TabItem Cursor="Hand" Header="Mv电台">
-                <WrapPanel Margin="5,5,0,0" Height="61">
-                    <RadioBox Content="A" Margin="0,0,0,0" Radius="3,0,0,3"/>
-                    <RadioBox Content="B" Margin="-1,0,0,0" Radius="0"/>
-                    <RadioBox Content="C" Margin="-1,0,0,0" Radius="0,3,3,0"/>
-                </WrapPanel>
-            </TabItem>
-        </TabControlEXT>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <ButtonEXT VerticalAlignment="Center" Content="随机" Click="ButtonEXT_Click"/>
+        <Border BorderThickness="0,0,1,0" BorderBrush="LightGray"/>
+        <Canvas Grid.Column="1" Name="canvas">
+            <Line X1="0" X2="{Binding ActualWidth, ElementName=canvas}" Stroke="DarkGray" StrokeThickness="1" 
+                              VerticalAlignment="Bottom" Margin="0 0 0 0"/>
+            <Thumb Name="thumb1" Background="Red" Height="50" Width="50" Canvas.Left="50" Canvas.Top="50" Template="{StaticResource ThumbButton}"
+                   DragDelta="DragDelta" DragStarted="DragStarted" DragCompleted="DragCompleted" />
+            <Line X1="0" X2="{Binding ActualWidth, ElementName=canvas}" Stroke="LightGray" RenderOptions.EdgeMode="Aliased" StrokeDashArray="2 2" 
+                  Y1="50" Y2="50"/>
+            <Line X1="0" X2="{Binding ActualWidth, ElementName=canvas}" Stroke="LightGray" RenderOptions.EdgeMode="Aliased" StrokeDashArray="2 2" 
+                  Y1="100" Y2="100"/>
+
+            <Line Y1="0" Y2="{Binding ActualHeight, ElementName=canvas}" Stroke="LightGray" RenderOptions.EdgeMode="Aliased" StrokeDashArray="2 2" 
+                  X1="50" X2="50"/>
+            <Line Y1="0" Y2="{Binding ActualHeight, ElementName=canvas}" Stroke="LightGray" RenderOptions.EdgeMode="Aliased" StrokeDashArray="2 2" 
+                  X1="100" X2="100"/>
+        </Canvas>
     </Grid>
 </WindowEXT>

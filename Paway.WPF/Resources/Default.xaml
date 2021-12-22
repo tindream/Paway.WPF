@@ -51,6 +51,7 @@
     <SolidColorBrush x:Key="ThemeHigh" Color="{Binding Path=(local:ThemeEXT.HighBrush).Pressed.Color, RelativeSource={RelativeSource Self}}"/>
     <!--主题浅色-->
     <SolidColorBrush x:Key="ThemeLight" Color="{Binding Path=(local:ThemeEXT.HighBrush).Mouse.Color, RelativeSource={RelativeSource Self}}"/>
+    <!--颜色选择器-->
     <LinearGradientBrush x:Key="ColorSelector">
         <GradientStop Color="#ff0000" />
         <GradientStop Color="#ff00ff" Offset="0.571" />
@@ -62,12 +63,22 @@
         <GradientStop Color="White" Offset="0.7995" />
         <GradientStop Color="Black" Offset="1" />
     </LinearGradientBrush>
-    <Style x:Key="borderColor" TargetType="{x:Type Border}">
-        <Setter Property="Margin" Value="2" />
-        <Setter Property="Height" Value="3" />
-        <Setter Property="CornerRadius" Value="2" />
-        <Setter Property="Background" Value="{StaticResource ColorSelector}" />
-    </Style>
+    <!--马赛克背景-->
+    <DrawingBrush x:Key="MosaicBrush" RenderOptions.CachingHint="Cache" Viewport="0,0,16,16" ViewportUnits="Absolute" Stretch="None" TileMode="Tile">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <GeometryDrawing Brush="#C8D3D3D3">
+                    <GeometryDrawing.Geometry>
+                        <GeometryGroup>
+                            <RectangleGeometry Rect="0,0,8,8" />
+                            <RectangleGeometry Rect="8,8,8,8" />
+                        </GeometryGroup>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
     <!--#endregion-->
 
     <!--#region 配色 -->
@@ -208,6 +219,7 @@
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
+
     <!--#endregion-->
 
     <!--#region 默认全局样式 -->

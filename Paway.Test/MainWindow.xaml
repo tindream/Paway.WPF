@@ -52,8 +52,8 @@
                 </i:Interaction.Triggers>
             </SliderEXT>
             <Grid>
-                <Border Style="{StaticResource borderColor}"/>
-                <SliderEXT x:Name="sliderTheme" Maximum="7" Value="2.62" AutoToolTipPrecision="2" TickFrequency="0.01" Margin="0"
+                <Border Background="{StaticResource ColorSelector}" Height="3" CornerRadius="2" Margin="2"/>
+                <SliderEXT x:Name="sliderTheme" Maximum="7" Value="2.62" AutoToolTipPrecision="2" TickFrequency="0.01"
                                  TrackColorLinear="Transparent;Transparent" TrackBackground="Transparent" IsSnapToTickEnabled="True" SmallChange="0.01">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="ValueChanged">
@@ -232,7 +232,7 @@
         </ExpanderEXT>
         <ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="TreeView">
             <StackPanel Width="250">
-                <TreeViewEXT x:Name="TreeViewOrg" Height="180" ICheckBox="Visible" ItemTemplate="{StaticResource DefaultNode}" ItemsSource="{Binding TreeList}">
+                <TreeViewEXT x:Name="TreeViewOrg" Height="180" ICheckBox="Visible" ItemTemplate="{StaticResource TreeNode}" ItemsSource="{Binding TreeList}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectedItemChanged">
                             <i:InvokeCommandAction Command="{Binding SelectedItemChanged}" CommandParameter="{Binding ElementName=TreeViewOrg}"/>
