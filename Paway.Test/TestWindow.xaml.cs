@@ -35,6 +35,7 @@ namespace Paway.Test
         private List<ThumbInfo> list = new List<ThumbInfo>();
         private ThumbInfo last;
         private ThumbInfo next;
+        private Thumb nextThumb;
         private void ButtonEXT_Click(object sender, RoutedEventArgs e)
         {
             //Method.Show(this, new Window() { Height = 200, Width = 200, Foreground = new SolidColorBrush(Colors.White), Title = "Test123" });
@@ -104,6 +105,9 @@ namespace Paway.Test
                 if (this.last != null) this.last.IStop = false;
                 var toX = Canvas.GetLeft(thumb) + e.HorizontalChange; if (toX < 0) toX = 0; else if (toX > canvas.ActualWidth - thumb.ActualWidth) toX = canvas.ActualWidth - thumb.ActualWidth;
                 var toY = Canvas.GetTop(thumb) + e.VerticalChange; if (toY < 0) toY = 0; else if (toY > canvas.ActualHeight - thumb.ActualHeight) toY = canvas.ActualHeight - thumb.ActualHeight;
+                Canvas.SetLeft(thumb, toX);
+                Canvas.SetTop(thumb, toY);
+
                 var toXI = (toX / 50).ToInt();
                 toX = toXI * 50;
                 var toYI = (toY / 50).ToInt();
@@ -112,20 +116,52 @@ namespace Paway.Test
                 if (this.last != null)
                 {
                     this.last.IStop = true;
-                    return;
                 }
-                info.X = toX; info.Y = toY;
-                Canvas.SetLeft(thumb, toX);
-                Canvas.SetTop(thumb, toY);
+                else
+                {
+                    next.X = toX; next.Y = toY;
+                    Canvas.SetLeft(nextThumb, toX);
+                    Canvas.SetTop(nextThumb, toY);
+                }
             }
         }
         private void DragStarted(object sender, DragStartedEventArgs e)
         {
-            if (sender is Thumb thumb && thumb.Tag is ThumbInfo info) info.Selected = true;
+            if (sender is Thumb thumb && thumb.Tag is ThumbInfo info)
+            {
+                info.Selected = true;
+
+                var template = FindResource("ThumbButton") as ControlTemplate;
+                next = new ThumbInfo() { Index = info.Index, ITemp = true };
+                next.X = info.X;
+                next.Y = info.Y;
+                nextThumb = new Thumb()
+                {
+                    Width = 50,
+                    Height = 50,
+                    Template = template,
+                    Tag = next,
+                };
+
+                Canvas.SetLeft(nextThumb, info.X);
+                Canvas.SetTop(nextThumb, info.Y);
+                canvas.Children.Add(nextThumb);
+            }
         }
         private void DragCompleted(object sender, DragCompletedEventArgs e)
         {
-            if (sender is Thumb thumb && thumb.Tag is ThumbInfo info) info.Selected = false;
+            if (sender is Thumb thumb && thumb.Tag is ThumbInfo info)
+            {
+                info.Selected = false;
+                if (nextThumb != null)
+                {
+                    canvas.Children.Remove(nextThumb);
+                    info.X = next.X;
+                    info.Y = next.Y;
+                    Canvas.SetLeft(thumb, info.X);
+                    Canvas.SetTop(thumb, info.Y);
+                }
+            }
             if (this.last != null) this.last.IStop = false;
         }
     }
@@ -174,10 +210,20 @@ namespace Paway.Test
                 Load();
             }
         }
+        private bool iTemp;
+        public bool ITemp
+        {
+            get { return iTemp; }
+            set
+            {
+                iTemp = value;
+                Load();
+            }
+        }
         private void Load()
         {
-            Color = IStop ? new SolidColorBrush(Config.Error) : Selected ? new SolidColorBrush(Config.Success) : new SolidColorBrush(Colors.Gray);
-            Border = IStop ? new SolidColorBrush(Config.Error) : Selected ? new SolidColorBrush(Colors.DarkGray) : new SolidColorBrush(Colors.Transparent);
+            Color = IStop ? new SolidColorBrush(Config.Error) : ITemp ? new SolidColorBrush(Config.Warn) : Selected ? new SolidColorBrush(Config.Success) : new SolidColorBrush(Colors.Gray);
+            Border = IStop ? new SolidColorBrush(Config.Error) : ITemp ? new SolidColorBrush(Config.Warn) : Selected ? new SolidColorBrush(Colors.DarkGray) : new SolidColorBrush(Colors.Transparent);
         }
 
         private Brush color = new SolidColorBrush(Colors.Gray);

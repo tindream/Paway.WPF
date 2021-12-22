@@ -13,7 +13,8 @@
     </DataTemplate>
 
     <ControlTemplate x:Key="ThumbButton" TargetType="Thumb">
-        <Border BorderThickness="1" CornerRadius="3" BorderBrush="{Binding Tag.Border, RelativeSource={RelativeSource TemplatedParent}}">
+        <Border BorderThickness="1" CornerRadius="3" BorderBrush="{Binding Tag.Border, RelativeSource={RelativeSource TemplatedParent}}"
+                Background="Transparent">
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
