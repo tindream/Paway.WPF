@@ -62,10 +62,6 @@
                         </Popup>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <!--<Trigger Property="IsEditable" Value="true">
-                            <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="border" Property="Background" Value="White" />
-                        </Trigger>-->
                         <DataTrigger Binding="{Binding ElementName=PART_EditableTextBox, Path=IsKeyboardFocused}" Value="True">
                             <Setter Property="BorderBrush" TargetName="border" 
                                     Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" />

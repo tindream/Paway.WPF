@@ -8,13 +8,14 @@
         UseLayoutRounding="True"
         DataContext="{Binding Test, Source={StaticResource Locator}}"
         Title="TestWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
-    <Grid FocusManager.FocusedElement="{Binding ElementName=t1}" HorizontalAlignment="Center" Width="250" VerticalAlignment="Center">
+    <Grid HorizontalAlignment="Center" Width="250" VerticalAlignment="Center">
         <TabControlEXT TabStripPlacement="Top" MaxHeight="300" ItemContainerStyle="{StaticResource TabMenuItem}">
             <TabItem Cursor="Hand" Header="音乐电台">
                 <WrapPanel Margin="5,5,0,0" Height="61">
                     <CheckButton Content="A" Margin="0" Radius="3,0,0,3"/>
                     <CheckButton Content="B" Margin="-1,0,0,0" Radius="0"/>
                     <CheckButton Content="C" Margin="-1,0,0,0" Radius="0,3,3,0"/>
+                    <ComboBoxEXT ItemsSource="{IntList Count=10}" IsEditable="True" Width="94"/>
                 </WrapPanel>
             </TabItem>
             <TabItem Cursor="Hand" Header="Mv电台">
