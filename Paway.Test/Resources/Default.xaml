@@ -13,8 +13,9 @@
     </DataTemplate>
 
     <ControlTemplate x:Key="ThumbButton" TargetType="Thumb">
-        <Border BorderThickness="1" CornerRadius="3" BorderBrush="{Binding Tag.Border, RelativeSource={RelativeSource TemplatedParent}}"
-                Background="Transparent">
+        <Border BorderThickness="{Binding Tag.Border, RelativeSource={RelativeSource TemplatedParent}}" 
+                CornerRadius="2" Background="Transparent"
+                BorderBrush="{StaticResource DotLineBrush}">
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -22,7 +23,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock Text="{Binding Tag.Index, RelativeSource={RelativeSource TemplatedParent}}" TextAlignment="Center"/>
                 <TextBlock Grid.Row="1" Text="{FontImage Type=User}" Foreground="{Binding Tag.Color, RelativeSource={RelativeSource TemplatedParent}}"
-                       FontFamily="{StaticResource FontAwesome}" FontSize="20" TextAlignment="Center" />
+                           FontFamily="{StaticResource FontAwesome}" FontSize="20" TextAlignment="Center" />
             </Grid>
         </Border>
     </ControlTemplate>

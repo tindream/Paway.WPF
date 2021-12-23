@@ -223,7 +223,7 @@ namespace Paway.Test
         private void Load()
         {
             Color = IStop ? new SolidColorBrush(Config.Error) : ITemp ? new SolidColorBrush(Config.Warn) : Selected ? new SolidColorBrush(Config.Success) : new SolidColorBrush(Colors.Gray);
-            Border = IStop ? new SolidColorBrush(Config.Error) : ITemp ? new SolidColorBrush(Config.Warn) : Selected ? new SolidColorBrush(Colors.DarkGray) : new SolidColorBrush(Colors.Transparent);
+            Border = Selected ? new Thickness(1) : new Thickness(0);
         }
 
         private Brush color = new SolidColorBrush(Colors.Gray);
@@ -236,8 +236,8 @@ namespace Paway.Test
                 OnPropertyChanged();
             }
         }
-        private Brush border = new SolidColorBrush(Colors.Transparent);
-        public Brush Border
+        private Thickness border = new Thickness(0);
+        public Thickness Border
         {
             get { return border; }
             set

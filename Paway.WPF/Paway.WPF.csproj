@@ -72,6 +72,7 @@
     <Compile Include="Controls\Extended\CalendarMonitor.cs" />
     <Compile Include="Controls\Extended\RadioBox.cs" />
     <Compile Include="Controls\Extended\ListViewCustom.cs" />
+    <Compile Include="Controls\Theme\RenderEXT.cs" />
     <Compile Include="Method\Converter\IValueConverter\BrushLightConverter.cs" />
     <Compile Include="Method\Converter\IValueConverter\ColorToBrushConverter.cs" />
     <Compile Include="Method\Converter\IValueConverter\LessRadiusConverter.cs" />
@@ -149,7 +150,7 @@
     <Compile Include="Controls\Progress\WindowProgress.xaml.cs">
       <DependentUpon>WindowProgress.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Extended\ThemeEXT.cs" />
+    <Compile Include="Controls\Theme\ThemeEXT.cs" />
     <Compile Include="Method\RoutedEventArgs\SelectItemEventArgs.cs" />
     <Compile Include="Method\RoutedEventArgs\CustomFilterEventArgs.cs" />
     <Compile Include="Controls\TransitionControl\TransitionControl.cs" />

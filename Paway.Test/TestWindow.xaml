@@ -13,13 +13,10 @@
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <ButtonEXT VerticalAlignment="Center" Content="随机" Click="ButtonEXT_Click"/>
+        <Border Background="{StaticResource MosaicBrush}"/>
         <Border BorderThickness="0,0,1,0" BorderBrush="LightGray"/>
+        <ButtonEXT VerticalAlignment="Center" Content="随机" Click="ButtonEXT_Click"/>
         <Canvas Grid.Column="1" Name="canvas">
-            <Line X1="0" X2="{Binding ActualWidth, ElementName=canvas}" Stroke="DarkGray" StrokeThickness="1" 
-                              VerticalAlignment="Bottom" Margin="0 0 0 0"/>
-            <Thumb Name="thumb1" Background="Red" Height="50" Width="50" Canvas.Left="50" Canvas.Top="50" Template="{StaticResource ThumbButton}"
-                   DragDelta="DragDelta" DragStarted="DragStarted" DragCompleted="DragCompleted" />
             <Line X1="0" X2="{Binding ActualWidth, ElementName=canvas}" Stroke="LightGray" RenderOptions.EdgeMode="Aliased" StrokeDashArray="2 2" 
                   Y1="50" Y2="50"/>
             <Line X1="0" X2="{Binding ActualWidth, ElementName=canvas}" Stroke="LightGray" RenderOptions.EdgeMode="Aliased" StrokeDashArray="2 2" 

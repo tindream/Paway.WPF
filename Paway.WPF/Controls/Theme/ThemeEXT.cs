@@ -42,9 +42,7 @@ namespace Paway.WPF
         /// <summary>
         /// 字体大小
         /// </summary>
-        [Category("扩展")]
-        [Description("字体大小")]
-        public ThemeFontSize FontSize { get; set; }
+        private ThemeFontSize FontSize { get; set; }
         /// <summary>
         /// get字体大小
         /// </summary>
@@ -63,24 +61,17 @@ namespace Paway.WPF
         /// <summary>
         /// 项颜色(禁止个性设置，通过主题色更新)
         /// </summary>
-        [Category("扩展")]
-        [Description("项颜色")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public BrushEXT ItemBrush { get; set; }
 
         /// <summary>
         /// 主题深色(禁止个性设置，通过主题色更新)
         /// </summary>
-        [Category("扩展")]
-        [Description("主题深色")]
         public BrushEXT HighBrush { get; set; }
 
         /// <summary>
         /// 窗体背景颜色
         /// </summary>
-        [Category("扩展")]
-        [Description("窗体背景颜色")]
-        public ThemeBackground Background { get; set; }
+        private ThemeBackground Background { get; set; }
         /// <summary>
         /// get窗体背景颜色
         /// </summary>
