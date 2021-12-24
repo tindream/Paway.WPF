@@ -242,8 +242,10 @@
             </StackPanel>
         </ExpanderEXT>
         <ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="TabControl">
-            <TabControlEXT TabStripPlacement="Top" MaxHeight="300">
-                <TabItem Cursor="Hand" Header="音乐电台" />
+            <TabControlEXT MaxHeight="300">
+                <TabItem Cursor="Hand" Header="音乐电台">
+                    <TextBlock Text="Hello"/>
+                </TabItem>
                 <TabItem Cursor="Hand" Header="Mv电台"/>
             </TabControlEXT>
         </ExpanderEXT>
@@ -288,6 +290,7 @@
                 <ListBoxItemEXT Text="World" Desc="1" ItemBackground=";#78FF4633" ItemTextForeground="#FF4633;;"/>
                 <ListBoxItemEXT Text="A" ItemBackground=";#7802E8FA" ItemTextForeground="#02E8FA;;"/>
                 <ListBoxItemEXT Text="C" ItemBackground=";#78024AFA" ItemTextForeground="#024AFA;;" ItemBorder="1"/>
+                <ListBoxItemEXT Text="D" ItemBackground=";#78024AFA" ItemTextForeground="#024AFA;;" ItemBorder="1"/>
             </ListViewEXT>
         </WindowFunctionBar>
     </WindowEXT.FunctionBar>

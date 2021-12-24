@@ -13,9 +13,19 @@
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <Border Background="{StaticResource MosaicBrush}"/>
-        <Border BorderThickness="0,0,1,0" BorderBrush="LightGray"/>
-        <ButtonEXT VerticalAlignment="Center" Content="随机" Click="ButtonEXT_Click" Visibility="{Binding UserType, Converter={StaticResource valueToCollapsed}, ConverterParameter=2}"/>
+        <Border >
+            <TabControlEXT Padding="5,10,0,0" ItemContainerStyle="{StaticResource TabMenuItem}" 
+                           HorizontalContentAlignment="Left">
+                <TabItem Header="AAA" Background="White">
+                    <Border BorderThickness="0,0,1,0" BorderBrush="LightGray"/>
+                </TabItem>
+                <TabItem Header="BBB" Background="White">
+                    <WrapPanel HorizontalAlignment="Center">
+                        <ButtonEXT VerticalAlignment="Center" Content="随机" Click="ButtonEXT_Click" Visibility="{Binding UserType, Converter={StaticResource valueToCollapsed}, ConverterParameter=2}"/>
+                    </WrapPanel>
+                </TabItem>
+            </TabControlEXT>
+        </Border>
         <Canvas Grid.Column="1" Name="canvas">
             <Line X1="0" X2="{Binding ActualWidth, ElementName=canvas}" Stroke="LightGray" RenderOptions.EdgeMode="Aliased" StrokeDashArray="2 2" 
                   Y1="50" Y2="50"/>

@@ -7,24 +7,25 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="TabItem" TargetType="{x:Type TabItem}">
+        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
         <Setter Property="Foreground" Value="{StaticResource Text}"/>
         <Setter Property="Padding" Value="6"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="LightGray"/>
+        <Setter Property="BorderBrush" Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
         <Setter Property="Margin" Value="0"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Grid x:Name="templateRoot" Background="Transparent">
+                    <Grid x:Name="templateRoot" Background="{TemplateBinding Background}">
                         <Border x:Name="_underline" BorderThickness="0" Margin="{TemplateBinding Margin}"
-                                BorderBrush="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
+                                BorderBrush="{TemplateBinding BorderBrush}"/>
                         <TextBlock x:Name="txt" 
                                    Padding="{TemplateBinding Padding}"
                                    Visibility="Visible" 
-                                   HorizontalAlignment="Center" 
+                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                    Text="{TemplateBinding Header}" ToolTip="{TemplateBinding Header}" 
                                    Foreground="{TemplateBinding Foreground}" 
                                    TextTrimming="CharacterEllipsis" />
@@ -74,6 +75,7 @@
         </Setter>
     </Style>
     <Style x:Key="TabMenuItem" TargetType="{x:Type TabItem}">
+        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
         <Setter Property="Foreground" Value="{StaticResource Text}"/>
         <Setter Property="Padding" Value="6"/>
         <Setter Property="Cursor" Value="Hand"/>
@@ -85,28 +87,32 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Grid x:Name="templateRoot" Background="Transparent">
+                    <Grid x:Name="templateRoot">
                         <Border x:Name="_underline" BorderThickness="0" Margin="{TemplateBinding Margin}"
-                                BorderBrush="LightGray"/>
+                                BorderBrush="{TemplateBinding BorderBrush}"/>
                         <Border x:Name="_underline2" BorderThickness="0" Margin="{TemplateBinding Margin}"
-                                BorderBrush="{Binding Background, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
+                                BorderBrush="{TemplateBinding Background}"/>
                         <TextBlock x:Name="txt" 
                                    Padding="{TemplateBinding Padding}"
                                    Visibility="Visible" 
-                                   HorizontalAlignment="Center" 
+                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                    Text="{TemplateBinding Header}" ToolTip="{TemplateBinding Header}" 
                                    Foreground="{TemplateBinding Foreground}" 
                                    TextTrimming="CharacterEllipsis" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Foreground" TargetName="txt" 
+                            <Setter Property="Foreground" TargetName="txt"  
                                     Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
+                            <Setter Property="Background" TargetName="_underline2" 
+                                    Value="{Binding Background, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="true">
                             <Setter Property="Panel.ZIndex" Value="1"/>
-                            <Setter Property="Foreground" TargetName="txt" 
+                            <Setter Property="Foreground" TargetName="txt"  
                                     Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
+                            <Setter Property="Background" TargetName="_underline2" 
+                                    Value="{Binding Background, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                         </Trigger>
 
                         <MultiDataTrigger>
@@ -116,7 +122,7 @@
                             </MultiDataTrigger.Conditions>
                             <Setter Property="BorderThickness" TargetName="_underline" Value="1 1 1 0"/>
                             <Setter Property="BorderThickness" TargetName="_underline2" Value="0 0 0 1"/>
-                            <Setter Property="Margin" TargetName="_underline2" Value="1,0"/>
+                            <Setter Property="Margin" TargetName="_underline2" Value="1,1,1,0"/>
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
@@ -125,7 +131,7 @@
                             </MultiDataTrigger.Conditions>
                             <Setter Property="BorderThickness" TargetName="_underline" Value="1 1 0 1"/>
                             <Setter Property="BorderThickness" TargetName="_underline2" Value="0 0 1 0"/>
-                            <Setter Property="Margin" TargetName="_underline2" Value="0,1"/>
+                            <Setter Property="Margin" TargetName="_underline2" Value="1 1 0 1"/>
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
@@ -134,7 +140,7 @@
                             </MultiDataTrigger.Conditions>
                             <Setter Property="BorderThickness" TargetName="_underline" Value="1 0 1 1"/>
                             <Setter Property="BorderThickness" TargetName="_underline2" Value="0 1 0 0"/>
-                            <Setter Property="Margin" TargetName="_underline2" Value="1,0"/>
+                            <Setter Property="Margin" TargetName="_underline2" Value="1 0 1 1"/>
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
@@ -143,7 +149,7 @@
                             </MultiDataTrigger.Conditions>
                             <Setter Property="BorderThickness" TargetName="_underline" Value="0 1 1 1"/>
                             <Setter Property="BorderThickness" TargetName="_underline2" Value="1 0 0 0"/>
-                            <Setter Property="Margin" TargetName="_underline2" Value="0,1"/>
+                            <Setter Property="Margin" TargetName="_underline2" Value="0 1 1 1"/>
                         </MultiDataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -152,7 +158,8 @@
     </Style>
 
     <Style TargetType="{x:Type local:TabControlEXT}" BasedOn="{StaticResource Config}">
-        <Setter Property="Padding" Value="2"/>
+        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+        <Setter Property="Padding" Value="2,0"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Background" Value="White"/>
@@ -171,10 +178,12 @@
                             <RowDefinition x:Name="RowDefinition0" Height="Auto"/>
                             <RowDefinition x:Name="RowDefinition1" Height="*"/>
                         </Grid.RowDefinitions>
-                        <TabPanel x:Name="HeaderPanel" HorizontalAlignment="Center" Background="Transparent" Grid.Column="0" IsItemsHost="True" Margin="0" Grid.Row="0" 
-                                  KeyboardNavigation.TabIndex="1" Panel.ZIndex="1"/>
-                        <Line X1="0" X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" Stroke="DarkGray" StrokeThickness="1" 
-                              VerticalAlignment="Bottom" Margin="0 0 0 0"/>
+                        <TabPanel x:Name="HeaderPanel" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Grid.Column="0" IsItemsHost="True" Grid.Row="0" 
+                                  KeyboardNavigation.TabIndex="1" Panel.ZIndex="1"
+                                  Margin="{TemplateBinding Padding}"
+                                  Background="Transparent"/>
+                        <Line X1="0" X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" StrokeThickness="1" 
+                              Stroke="{TemplateBinding BorderBrush}" RenderOptions.EdgeMode="Aliased" VerticalAlignment="Bottom" Margin="0"/>
                         <Border x:Name="ContentPanel" BorderBrush="{TemplateBinding BorderBrush}" 
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 Background="{TemplateBinding Background}" 
