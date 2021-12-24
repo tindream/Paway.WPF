@@ -73,6 +73,7 @@
     <Compile Include="Controls\Extended\RadioBox.cs" />
     <Compile Include="Controls\Extended\ListViewCustom.cs" />
     <Compile Include="Controls\Theme\RenderEXT.cs" />
+    <Compile Include="Method\Converter\IValueConverter\ValueToVisible.cs" />
     <Compile Include="Method\Converter\IValueConverter\BrushLightConverter.cs" />
     <Compile Include="Method\Converter\IValueConverter\ColorToBrushConverter.cs" />
     <Compile Include="Method\Converter\IValueConverter\LessRadiusConverter.cs" />

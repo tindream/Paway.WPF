@@ -10,16 +10,11 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null)
-                return Colors.Transparent;
-            if (value is SolidColorBrush)
-                return (value as SolidColorBrush).Color;
-            else if (value is LinearGradientBrush)
-                return (value as LinearGradientBrush).GradientStops[0].Color;
-            else if (value is RadialGradientBrush)
-                return (value as RadialGradientBrush).GradientStops[0].Color;
-            else
-                return Colors.Transparent;
+            if (value == null || value == DBNull.Value) return Colors.Transparent;
+            if (value is SolidColorBrush solid) return solid.Color;
+            else if (value is LinearGradientBrush linear) return linear.GradientStops[0].Color;
+            else if (value is RadialGradientBrush radial) return radial.GradientStops[0].Color;
+            else return Colors.Transparent;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -43,6 +43,13 @@ namespace Paway.Test.ViewModel
         }
         public ObservableCollection<ListViewItemModel> List { get; private set; } = new ObservableCollection<ListViewItemModel>();
 
+        private MonitorType userType = MonitorType.LeftToeAngle;
+        public MonitorType UserType
+        {
+            get { return userType; }
+            set { userType = value; RaisePropertyChanged(); }
+        }
+
         #endregion
 
         public TestViewModel()

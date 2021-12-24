@@ -10,12 +10,10 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null)
-                return value;
-            var color = (Color)value;
-            if (color == null)
-                return new SolidColorBrush(Colors.Transparent);
-            return new SolidColorBrush(color);
+            if (value == null || value == DBNull.Value) return value;
+            if (value is Color color) return new SolidColorBrush(color);
+            return new SolidColorBrush(Colors.Transparent);
+
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
