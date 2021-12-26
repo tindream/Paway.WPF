@@ -40,6 +40,10 @@ namespace Paway.WPF
         /// </summary>
         private static readonly DependencyProperty ButtonAlignmentProperty =
             DependencyProperty.Register(nameof(ButtonAlignment), typeof(VerticalAlignment), typeof(WindowEXT), new FrameworkPropertyMetadata(VerticalAlignment.Stretch));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty TextPaddingProperty =
+            DependencyProperty.Register(nameof(TextPadding), typeof(Thickness), typeof(WindowEXT));
 
         #endregion
 
@@ -100,6 +104,16 @@ namespace Paway.WPF
         {
             get { return (VerticalAlignment)GetValue(ButtonAlignmentProperty); }
             set { SetValue(ButtonAlignmentProperty, value); }
+        }
+        /// <summary>
+        /// 标题内边距
+        /// </summary>
+        [Category("扩展")]
+        [Description("标题内边距")]
+        public Thickness TextPadding
+        {
+            get { return (Thickness)GetValue(TextPaddingProperty); }
+            set { SetValue(TextPaddingProperty, value); }
         }
 
         #endregion

@@ -132,7 +132,7 @@
         <Setter Property="WindowStyle" Value="SingleBorderWindow" />
         <!--<Setter Property="FontFamily" Value="Microsoft YaHei"/>-->
         <!--解决Chrome窗体下元素边缘模糊的问题，此参数会导致放大缩小动画抖动-->
-        <Setter Property="UseLayoutRounding" Value="True" /> 
+        <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="WindowChrome.WindowChrome">
@@ -169,7 +169,8 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <WrapPanel>
+                                <WrapPanel VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
                                     <Image Source="{TemplateBinding Icon}"
                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                            Margin="5,0,0,0"
@@ -179,6 +180,7 @@
                                            WindowChrome.IsHitTestVisibleInChrome="True"/>
                                     <TextBlock Name="Text_Title" 
                                                Margin="5,0,0,0"
+                                               Padding="{Binding TextPadding, RelativeSource={RelativeSource TemplatedParent}}"
                                                Foreground="{TemplateBinding Foreground}"
                                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
