@@ -42,13 +42,15 @@ namespace Paway.Test
             list.Clear();
             canvas.Children.Clear();
 
-            var width = (int)canvas.ActualWidth / 50; if (canvas.ActualWidth % 50 > 0) width++;
-            var height = (int)canvas.ActualHeight / 50; if (canvas.ActualHeight % 50 > 0) height++;
-            for (var i = 1; i < height; i++)
+            var width = Method.Random(1, 40);
+            var height = Method.Random(1, 40);
+            canvas.Width = width * 50; if (canvas.Width < 50 * 4) canvas.Width = 50 * 4;
+            canvas.Height = height * 50; if (canvas.Height < 50 * 4) canvas.Height = 50 * 4;
+            for (var i = 1; i < canvas.Height / 50; i++)
             {
                 var line = new Line
                 {
-                    X2 = canvas.ActualWidth,
+                    X2 = canvas.Width,
                     Stroke = new SolidColorBrush(Colors.LightGray),
                     StrokeDashArray = new DoubleCollection(new double[] { 2, 2 }),
                 };
@@ -56,11 +58,11 @@ namespace Paway.Test
                 line.Y1 = line.Y2 = i * 50;
                 canvas.Children.Add(line);
             }
-            for (var i = 1; i < width; i++)
+            for (var i = 1; i < canvas.Width / 50; i++)
             {
                 var line = new Line
                 {
-                    Y2 = canvas.ActualHeight,
+                    Y2 = canvas.Height,
                     Stroke = new SolidColorBrush(Colors.LightGray),
                     StrokeDashArray = new DoubleCollection(new double[] { 2, 2 }),
                 };
@@ -69,8 +71,6 @@ namespace Paway.Test
                 canvas.Children.Add(line);
             }
 
-            width = (int)canvas.ActualWidth / 50;
-            height = (int)canvas.ActualHeight / 50;
             var count = Method.Random(1, width * height);
             for (var i = 0; i < count; i++) list.Add(new ThumbInfo { Index = i + 1 });
             var template = FindResource("ThumbButton") as ControlTemplate;

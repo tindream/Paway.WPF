@@ -27,7 +27,10 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ScrollBarWidthProperty =
             DependencyProperty.RegisterAttached(nameof(ScrollBarWidth), typeof(double), typeof(ScrollViewerEXT), new PropertyMetadata(8d));
-
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ScrollIntervalProperty =
+            DependencyProperty.RegisterAttached(nameof(ScrollInterval), typeof(double), typeof(ScrollViewerEXT));
         #endregion
 
         #region 扩展
@@ -61,6 +64,16 @@ namespace Paway.WPF
             get { return (double)GetValue(ScrollBarWidthProperty); }
             set { SetValue(ScrollBarWidthProperty, value); }
         }
+        /// <summary>
+        /// 滚动间隔
+        /// </summary>
+        [Category("扩展")]
+        [Description("滚动间隔")]
+        public double ScrollInterval
+        {
+            get { return (double)GetValue(ScrollIntervalProperty); }
+            set { SetValue(ScrollIntervalProperty, value); }
+        }
 
         #endregion
 
@@ -77,7 +90,17 @@ namespace Paway.WPF
                 RoutedEvent = UIElement.MouseWheelEvent,
                 Source = this
             };
-            this.RaiseEvent(eventArg);
+            if (this.ScrollableHeight > 0 && this.VerticalScrollBarVisibility != ScrollBarVisibility.Hidden)
+            {
+                if (ScrollInterval != 0) this.ScrollToVerticalOffset(this.VerticalOffset - e.Delta / 120 * ScrollInterval);
+                else this.RaiseEvent(eventArg);
+            }
+            else if (this.ScrollableWidth > 0 && this.HorizontalScrollBarVisibility != ScrollBarVisibility.Hidden)
+            {
+                if (ScrollInterval != 0) this.ScrollToHorizontalOffset(this.HorizontalOffset - e.Delta / 120 * 50);
+                else if (e.Delta > 0) this.LineLeft();
+                else this.LineRight();
+            }
             base.OnPreviewMouseWheel(e);
         }
         /// <summary>
