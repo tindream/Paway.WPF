@@ -80,6 +80,72 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public ScrollViewerEXT() { }
+        #region 拖动滚动
+        private Point? startPoint;
+        /// <summary>
+        /// 按下开始拖动
+        /// </summary>
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            if (e.ButtonState == MouseButtonState.Pressed)
+            {
+                if ((this.ScrollableHeight > 0 && this.VerticalScrollBarVisibility != ScrollBarVisibility.Hidden) || (this.ScrollableWidth > 0 && this.HorizontalScrollBarVisibility != ScrollBarVisibility.Hidden))
+                {
+                    if (PMethod.Parent(this, out Window window)) window.Cursor = Cursors.Hand;
+                    this.startPoint = e.GetPosition(this);
+                    //尝试将鼠标强制捕获到控件
+                    CaptureMouse();
+                    e.Handled = true;
+                }
+            }
+            base.OnMouseLeftButtonDown(e);
+        }
+        /// <summary>
+        /// 移动位置
+        /// </summary>
+        protected override void OnPreviewMouseMove(MouseEventArgs e)
+        {
+            base.OnPreviewMouseMove(e);
+            if (e.LeftButton == MouseButtonState.Pressed && startPoint != null)
+            {
+                var movePoint = e.GetPosition(this);
+                Calc(movePoint);
+                this.startPoint = movePoint;
+            }
+        }
+        /// <summary>
+        /// 抬起停止拖动
+        /// </summary>
+        protected override void OnPreviewMouseLeftButtonUp(MouseButtonEventArgs e)
+        {
+            base.OnPreviewMouseUp(e);
+            if (startPoint != null)
+            {
+                Calc(e.GetPosition(this));
+                this.startPoint = null;
+                //当控件具有鼠标捕获的话，则释放该捕获。
+                ReleaseMouseCapture();
+                if (PMethod.Parent(this, out Window window)) window.Cursor = null;
+            }
+        }
+        /// <summary>
+        /// 计算移动距离
+        /// </summary>
+        private void Calc(Point endPoint)
+        {
+            var verticalOffset = endPoint.Y - startPoint.Value.Y;
+            var horizontalOffset = endPoint.X - startPoint.Value.X;
+            if (verticalOffset != 0 && this.ScrollableHeight > 0 && this.VerticalScrollBarVisibility != ScrollBarVisibility.Hidden)
+            {
+                this.ScrollToVerticalOffset(this.VerticalOffset - verticalOffset);
+            }
+            if (horizontalOffset != 0 && this.ScrollableWidth > 0 && this.HorizontalScrollBarVisibility != ScrollBarVisibility.Hidden)
+            {
+                this.ScrollToHorizontalOffset(this.HorizontalOffset - horizontalOffset);
+            }
+        }
+
+        #endregion
         /// <summary>
         /// 滚动响应
         /// </summary>

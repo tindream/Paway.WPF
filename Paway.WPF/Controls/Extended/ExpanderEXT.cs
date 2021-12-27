@@ -253,9 +253,9 @@ namespace Paway.WPF
         }
         /// <summary>
         /// </summary>
-        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
+        protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            if (MoveResizer && (LeftDirection.HasValue || TopDirection.HasValue))
+            if (e.ButtonState == MouseButtonState.Pressed && MoveResizer && (LeftDirection.HasValue || TopDirection.HasValue))
             {
                 var point = e.GetPosition(this);
                 _pressed = true;
@@ -281,7 +281,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// </summary>
-        protected override void OnMouseUp(MouseButtonEventArgs e)
+        protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
         {
             if (MoveResizer)
             {

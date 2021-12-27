@@ -66,12 +66,11 @@ namespace Paway.WPF
         /// <summary>
         /// 按下开始拖动
         /// </summary>
-        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
+        protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
+            if (e.ButtonState == MouseButtonState.Pressed)
             {
-                if (PMethod.Parent(this, out Window window))
-                    window.Cursor = Cursors.Hand;
+                if (PMethod.Parent(this, out Window window)) window.Cursor = Cursors.Hand;
                 this.startPoint = e.GetPosition(this);
                 //尝试将鼠标强制捕获到控件
                 CaptureMouse();
@@ -95,17 +94,16 @@ namespace Paway.WPF
         /// <summary>
         /// 抬起停止拖动
         /// </summary>
-        protected override void OnPreviewMouseUp(MouseButtonEventArgs e)
+        protected override void OnPreviewMouseLeftButtonUp(MouseButtonEventArgs e)
         {
             base.OnPreviewMouseUp(e);
-            if (e.ChangedButton == MouseButton.Left && startPoint != null)
+            if (startPoint != null)
             {
                 Calc(e.GetPosition(this));
                 this.startPoint = null;
                 //当控件具有鼠标捕获的话，则释放该捕获。
                 ReleaseMouseCapture();
-                if (PMethod.Parent(this, out Window window))
-                    window.Cursor = null;
+                if (PMethod.Parent(this, out Window window)) window.Cursor = null;
             }
         }
         /// <summary>

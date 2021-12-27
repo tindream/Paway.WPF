@@ -385,7 +385,7 @@ namespace Paway.WPF
         /// <summary>
         /// 鼠标按下时取消触发
         /// </summary>
-        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
+        protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             base.OnPreviewMouseDown(e);
             if (INormal)
@@ -394,7 +394,7 @@ namespace Paway.WPF
                 return;
             }
             downItem = null;
-            if (e.ChangedButton == MouseButton.Left)
+            if (e.ButtonState == MouseButtonState.Pressed)
             {
                 if (ClickMode == ClickMode.Release && PMethod.Parent(e.OriginalSource, out downItem))
                 {
@@ -433,10 +433,10 @@ namespace Paway.WPF
         /// 鼠标抬起时判断触发
         /// </summary>
         /// <param name="e"></param>
-        protected override void OnPreviewMouseUp(MouseButtonEventArgs e)
+        protected override void OnPreviewMouseLeftButtonUp(MouseButtonEventArgs e)
         {
             base.OnPreviewMouseUp(e);
-            if (ClickMode == ClickMode.Release && e.ChangedButton == MouseButton.Left && downItem != null)
+            if (ClickMode == ClickMode.Release && e.ButtonState == MouseButtonState.Pressed && downItem != null)
             {
                 IsPressed(false);
             }
