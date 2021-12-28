@@ -16,7 +16,9 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value != null && value != DependencyProperty.UnsetValue;
+            var result = value != null && value != DependencyProperty.UnsetValue;
+            if (value is double dValue) result &= dValue != 0;
+            return result;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

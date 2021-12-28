@@ -47,7 +47,7 @@
                                            FontSize="{TemplateBinding FontSize, Converter={StaticResource valueMultiConverter}}"
                                            Opacity="0.6"
                                            Text="{TemplateBinding Water}"/>
-                                <TextBlock x:Name="tbUnit" Grid.Column="2"
+                                <TextBlock x:Name="tbUnit" Grid.Column="2" Visibility="Collapsed"
                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                            Padding="0,0,3,0"
                                            FontSize="{TemplateBinding FontSize, Converter={StaticResource valueMultiConverter}}"
@@ -55,7 +55,7 @@
                                            Text="{TemplateBinding Unit}"/>
                             </Grid>
                         </Border>
-                        <Grid VerticalAlignment="Bottom">
+                        <Grid Name="grid" VerticalAlignment="Bottom" Visibility="Collapsed">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
@@ -75,6 +75,12 @@
                             <Setter TargetName="icon" Property="Visibility" Value="Visible" />
                             <Setter Property="Padding" Value="0,4" />
                             <Setter TargetName="tbWater" Property="Padding" Value="2,0,0,0" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Unit, Converter={StaticResource isNotNull}, RelativeSource={RelativeSource Self}}" Value="True">
+                            <Setter TargetName="tbUnit" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IAnimation, Converter={StaticResource isNotNull}, RelativeSource={RelativeSource Self}}" Value="True">
+                            <Setter TargetName="grid" Property="Visibility" Value="Visible" />
                         </DataTrigger>
                         <Trigger Property="Text" Value="{x:Null}">
                             <Setter Property="Visibility" TargetName="tbWater" Value="Collapsed"/>
