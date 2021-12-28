@@ -61,6 +61,14 @@ namespace Paway.WPF
         public static readonly DependencyProperty IconStretchProperty =
             DependencyProperty.RegisterAttached(nameof(IconStretch), typeof(Stretch), typeof(TextBoxEXT),
             new PropertyMetadata(Stretch.None));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty TitleProperty =
+            DependencyProperty.RegisterAttached(nameof(Title), typeof(string), typeof(TextBoxEXT));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty TitleMinWidthProperty =
+            DependencyProperty.RegisterAttached(nameof(TitleMinWidth), typeof(double), typeof(TextBoxEXT));
 
         #endregion
 
@@ -124,6 +132,26 @@ namespace Paway.WPF
         {
             get { return (Stretch)GetValue(IconStretchProperty); }
             set { SetValue(IconStretchProperty, value); }
+        }
+        /// <summary>
+        /// 标题
+        /// </summary>
+        [Category("扩展")]
+        [Description("标题")]
+        public string Title
+        {
+            get { return (string)GetValue(TitleProperty); }
+            set { SetValue(TitleProperty, value); }
+        }
+        /// <summary>
+        /// 标题长度
+        /// </summary>
+        [Category("扩展")]
+        [Description("标题长度")]
+        public double TitleMinWidth
+        {
+            get { return (double)GetValue(TitleMinWidthProperty); }
+            set { SetValue(TitleMinWidthProperty, value); }
         }
 
         #endregion

@@ -128,6 +128,14 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty WaterProperty =
             DependencyProperty.RegisterAttached(nameof(Water), typeof(string), typeof(PasswordBoxEXT), new PropertyMetadata("请输入密码"));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty TitleProperty =
+            DependencyProperty.RegisterAttached(nameof(Title), typeof(string), typeof(PasswordBoxEXT));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty TitleMinWidthProperty =
+            DependencyProperty.RegisterAttached(nameof(TitleMinWidth), typeof(double), typeof(PasswordBoxEXT));
 
         #endregion
 
@@ -235,6 +243,47 @@ namespace Paway.WPF
         public static void SetWater(DependencyObject obj, string value)
         {
             obj.SetValue(WaterProperty, value);
+        }
+
+        /// <summary>
+        /// 标题
+        /// </summary>
+        [Category("扩展")]
+        [Description("标题")]
+        public string Title { get; set; }
+        /// <summary>
+        /// get标题
+        /// </summary>
+        public static string GetTitle(DependencyObject obj)
+        {
+            return (string)obj.GetValue(TitleProperty);
+        }
+        /// <summary>
+        /// set标题
+        /// </summary>
+        public static void SetTitle(DependencyObject obj, string value)
+        {
+            obj.SetValue(TitleProperty, value);
+        }
+        /// <summary>
+        /// 标题长度
+        /// </summary>
+        [Category("扩展")]
+        [Description("标题长度")]
+        public double TitleMinWidth { get; set; }
+        /// <summary>
+        /// get标题
+        /// </summary>
+        public static double GetTitleMinWidth(DependencyObject obj)
+        {
+            return (double)obj.GetValue(TitleMinWidthProperty);
+        }
+        /// <summary>
+        /// set标题
+        /// </summary>
+        public static void SetTitleMinWidth(DependencyObject obj, double value)
+        {
+            obj.SetValue(TitleMinWidthProperty, value);
         }
 
         #endregion

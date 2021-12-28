@@ -21,7 +21,17 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:TextBoxEXT}">
                     <Grid>
-                        <Border Name="border"
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" MinWidth="{TemplateBinding TitleMinWidth}"/>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="tbTitle" Visibility="{Binding Title, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullToCollapsed}}"
+                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                   HorizontalAlignment="Right"
+                                   Padding="0,0,6,0"
+                                   FontSize="{TemplateBinding FontSize}"
+                                   Text="{TemplateBinding Title}"/>
+                        <Border Name="border" Grid.Column="1"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"
                                 CornerRadius="{TemplateBinding Radius}"
@@ -55,7 +65,7 @@
                                            Text="{TemplateBinding Unit}"/>
                             </Grid>
                         </Border>
-                        <Grid Name="grid" VerticalAlignment="Bottom" Visibility="Collapsed">
+                        <Grid Name="grid" Grid.Column="1" VerticalAlignment="Bottom" Visibility="Collapsed">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>

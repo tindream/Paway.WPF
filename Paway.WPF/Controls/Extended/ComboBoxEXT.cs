@@ -46,6 +46,14 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty WaterProperty =
             DependencyProperty.RegisterAttached(nameof(Water), typeof(string), typeof(ComboBoxEXT), new PropertyMetadata("请输入.."));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty TitleProperty =
+            DependencyProperty.RegisterAttached(nameof(Title), typeof(string), typeof(ComboBoxEXT));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty TitleMinWidthProperty =
+            DependencyProperty.RegisterAttached(nameof(TitleMinWidth), typeof(double), typeof(ComboBoxEXT));
 
         #endregion
 
@@ -119,6 +127,26 @@ namespace Paway.WPF
         {
             get { return (string)GetValue(WaterProperty); }
             set { SetValue(WaterProperty, value); }
+        }
+        /// <summary>
+        /// 标题
+        /// </summary>
+        [Category("扩展")]
+        [Description("标题")]
+        public string Title
+        {
+            get { return (string)GetValue(TitleProperty); }
+            set { SetValue(TitleProperty, value); }
+        }
+        /// <summary>
+        /// 标题长度
+        /// </summary>
+        [Category("扩展")]
+        [Description("标题长度")]
+        public double TitleMinWidth
+        {
+            get { return (double)GetValue(TitleMinWidthProperty); }
+            set { SetValue(TitleMinWidthProperty, value); }
         }
 
         #endregion
