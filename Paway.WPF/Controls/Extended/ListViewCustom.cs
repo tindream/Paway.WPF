@@ -410,6 +410,7 @@ namespace Paway.WPF
                                 if (totalWidth < 0)
                                 {
                                     item.ItemMargin = new Thickness(0, -1, 0, 0);
+                                    itemWidth -= margin;
                                     totalWidth = actualWidth - itemWidth;
                                 }
                             }

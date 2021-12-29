@@ -10,7 +10,7 @@
         Title="TestWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="211"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <StackPanel>
@@ -21,15 +21,17 @@
                 <ComboBoxEXT Title="你好" ItemsSource="{IntList Count=23}" Water="{x:Null}" Margin="2,2,0,2" Radius="3,0,0,3" Width="66"/>
                 <ComboBoxEXT ItemsSource="{IntList Count=12, Start=0, Interval=5}" Water="{x:Null}" Margin="-1,2,2,2" Radius="0,3,3,0" Width="30"/>
             </WrapPanel>
-            <ListViewCustom Name="listView1" Margin="5"
+            <ListViewCustom Name="listViewLine2" ItemRadius="3"
+                            Margin="6,30" ItemWidth="55" ItemBorder="1" ItemMargin="5" ItemHeight="32" ItemTextFontSize="12" ItemsSource="{Binding List}" Width="262"/>
+            <ListViewCustom Name="listView1" Margin="5" ItemsSource="{Binding List}"
                            ItemHeight="67" ItemWidth="51"
                            IsLight="True">
-                <ListBoxItemEXT Text="1"/>
+                <!--<ListBoxItemEXT Text="1"/>
                 <ListBoxItemEXT Text="A"/>
                 <ListBoxItemEXT Text="B"/>
                 <ListBoxItemEXT Text="C"/>
                 <ListBoxItemEXT Text="D"/>
-                <ListBoxItemEXT Text="E"/>
+                <ListBoxItemEXT Text="E"/>-->
             </ListViewCustom>
         </StackPanel>
         <ScrollViewerEXT Grid.Column="1" Background="{StaticResource MosaicBrush}" ScrollInterval="50">

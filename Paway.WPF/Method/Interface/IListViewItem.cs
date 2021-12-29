@@ -224,7 +224,7 @@ namespace Paway.WPF
             get { return itemBorder; }
             set { itemBorder = value; OnPropertyChanged(); }
         }
-        private Thickness itemMargin;
+        private Thickness itemMargin = new Thickness(double.NaN);
         /// <summary>
         /// 自定义项外边距
         /// </summary>

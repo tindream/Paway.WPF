@@ -54,7 +54,7 @@ namespace Paway.Test.ViewModel
 
         public TestViewModel()
         {
-            for (var i = 0; i < 5; i++) List.Add(new ListViewItemModel($"{i + 1}"));
+            for (var i = 0; i < 16; i++) List.Add(new ListViewItemModel($"{i + 1}"));
         }
     }
 }
