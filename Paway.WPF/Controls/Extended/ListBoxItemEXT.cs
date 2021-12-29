@@ -75,6 +75,10 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(ItemBorder), typeof(ThicknessEXT), typeof(ListBoxItemEXT), new PropertyMetadata(new ThicknessEXT(double.NaN)));
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty ItemMarginProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemMargin), typeof(Thickness), typeof(ListBoxItemEXT), new PropertyMetadata(new Thickness(double.NaN)));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty ItemWidthProperty =
             DependencyProperty.RegisterAttached(nameof(ItemWidth), typeof(double), typeof(ListBoxItemEXT), new PropertyMetadata(double.NaN));
 
@@ -117,6 +121,16 @@ namespace Paway.WPF
         {
             get { return (ThicknessEXT)GetValue(ItemBorderProperty); }
             set { SetValue(ItemBorderProperty, value); }
+        }
+        /// <summary>
+        /// 自定义项外边距
+        /// </summary>
+        [Category("扩展")]
+        [Description("自定义项外边距")]
+        public Thickness ItemMargin
+        {
+            get { return (Thickness)GetValue(ItemMarginProperty); }
+            set { SetValue(ItemMarginProperty, value); }
         }
         /// <summary>
         /// 自定义项宽度

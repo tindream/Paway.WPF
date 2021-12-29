@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
                     xmlns:local="clr-namespace:Paway.WPF">
 
     <ResourceDictionary.MergedDictionaries>
@@ -46,8 +47,14 @@
                                     <Setter.Value>
                                         <ControlTemplate>
                                             <Border BorderThickness="1" BorderBrush="{StaticResource ThemeColor}" 
-                                                    Margin="{Binding ItemMargin, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}" 
-                                                    CornerRadius="{Binding Path=ItemRadius.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"/>
+                                                    CornerRadius="{Binding Path=ItemRadius.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}">
+                                                <Border.Margin>
+                                                    <MultiBinding Converter="{StaticResource nullSelector}">
+                                                        <Binding Path="ItemMargin" />
+                                                        <Binding Path="ItemMargin" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewCustom}}" />
+                                                    </MultiBinding>
+                                                </Border.Margin>
+                                            </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
@@ -60,7 +67,6 @@
                                 <Grid>
                                     <Border x:Name="border" 
                                             CornerRadius="{Binding Path=ItemRadius.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"
-                                            Margin="{Binding ItemMargin, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}" 
                                             Height="{Binding ItemHeight, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}">
                                         <Border.Width>
                                             <MultiBinding Converter="{StaticResource nullSelector}">
@@ -86,6 +92,12 @@
                                                 <Binding Path="ItemBorder.Normal" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewCustom}}" />
                                             </MultiBinding>
                                         </Border.BorderThickness>
+                                        <Border.Margin>
+                                            <MultiBinding Converter="{StaticResource nullSelector}">
+                                                <Binding Path="ItemMargin" />
+                                                <Binding Path="ItemMargin" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewCustom}}" />
+                                            </MultiBinding>
+                                        </Border.Margin>
                                     </Border>
                                     <Border x:Name="border2" 
                                             Padding="{Binding Path=ItemPadding.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}" 
@@ -121,6 +133,7 @@
                                 </Grid>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True" >
+                                        <Setter Property="Panel.ZIndex" Value="{x:Static system:Int32.MaxValue}" />
                                         <Setter TargetName="border" Property="Background">
                                             <Setter.Value>
                                                 <MultiBinding Converter="{StaticResource nullSelector}">
@@ -161,6 +174,7 @@
                                                 Value="{Binding Path=ItemTextFontSize.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}"/>
                                     </Trigger>
                                     <Trigger Property="IsSelected" Value="true">
+                                        <Setter Property="Panel.ZIndex" Value="{x:Static system:Int32.MaxValue}" />
                                         <Setter TargetName="border" Property="Background">
                                             <Setter.Value>
                                                 <MultiBinding Converter="{StaticResource nullSelector}">
@@ -263,7 +277,7 @@
                                                 </MultiBinding>
                                             </Setter.Value>
                                         </Setter>
-                                      </DataTrigger>
+                                    </DataTrigger>
                                     <Trigger Property="IsEnabled" Value="False">
                                         <Setter Property="Background" TargetName="border" Value="LightGray"/>
                                         <Setter Property="BorderBrush" TargetName="border" Value="DarkGray"/>
