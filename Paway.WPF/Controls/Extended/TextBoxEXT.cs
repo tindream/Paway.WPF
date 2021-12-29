@@ -172,9 +172,8 @@ namespace Paway.WPF
                 // MoveFocus takes a TraveralReqest as its argument.
                 var request = new TraversalRequest(FocusNavigationDirection.Next);
                 // Gets the element with keyboard focus.
-                var elementWithFocus = Keyboard.FocusedElement as UIElement;
                 // Change keyboard focus.
-                if (elementWithFocus != null)
+                if (Keyboard.FocusedElement is UIElement elementWithFocus)
                 {
                     elementWithFocus.MoveFocus(request);
                 }

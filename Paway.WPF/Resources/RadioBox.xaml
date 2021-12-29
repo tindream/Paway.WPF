@@ -22,6 +22,7 @@
                                    HorizontalAlignment="Right"
                                    Padding="0,0,6,0"
                                    FontSize="{TemplateBinding FontSize}"
+                                   Opacity="0.9"
                                    Text="{TemplateBinding Title}"/>
                         <Border x:Name="border1" Grid.Column="1"
                                 BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"

@@ -17,20 +17,9 @@
             <ButtonEXT VerticalAlignment="Center" Content="随机" Click="ButtonEXT_Click" Visibility="{Binding UserType, Converter={StaticResource valueToCollapsed}, ConverterParameter=2}"/>
 
             <TextBoxEXT Title="你好"/>
-            <PasswordBox PasswordBoxEXT.Title="你好"/>
-            <ComboBoxEXT Title="你好" ItemsSource="{Binding List}"/>
-            <ComboDate Title="你好"/>
-            <ComboMulti Title="你好"/>
-            <ComboQuery Title="你好"/>
-            <ComboTree Title="你好"/>
-            <ComboView Title="你好"/>
             <WrapPanel>
-                <CheckButton Title="你好" Content="Hello"/>
-                <CheckButton Content="Hello"/>
-            </WrapPanel>
-            <WrapPanel>
-                <RadioBox Title="你好" Content="Hello"/>
-                <RadioBox Content="Hello"/>
+                <ComboBoxEXT Title="你好" ItemsSource="{IntList Count=23}" Water="{x:Null}" Margin="2,2,0,2" Radius="3,0,0,3" Width="66"/>
+                <ComboBoxEXT ItemsSource="{IntList Count=12, Start=0, Interval=5}" Water="{x:Null}" Margin="-1,2,2,2" Radius="0,3,3,0" Width="30"/>
             </WrapPanel>
         </StackPanel>
         <ScrollViewerEXT Grid.Column="1" Background="{StaticResource MosaicBrush}" ScrollInterval="50">

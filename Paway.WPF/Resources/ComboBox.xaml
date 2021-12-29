@@ -31,7 +31,7 @@
     </ControlTemplate>
     <ControlTemplate x:Key="ComboBoxToggleNone" TargetType="{x:Type ToggleButton}">
         <Grid>
-            <Border Grid.Column="1" Background="White" Opacity="0" Cursor="Hand"/>
+            <Border Background="White" Opacity="0" Cursor="Hand"/>
         </Grid>
     </ControlTemplate>
 
@@ -51,6 +51,7 @@
                                    HorizontalAlignment="Right"
                                    Padding="0,0,6,0"
                                    FontSize="{TemplateBinding FontSize}"
+                                   Opacity="0.9"
                                    Text="{TemplateBinding Title}"/>
                         <Border Name="border" Grid.Column="1" Grid.ColumnSpan="3" 
                                 BorderThickness="{TemplateBinding BorderThickness}" 
