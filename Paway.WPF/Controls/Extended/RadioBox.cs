@@ -52,6 +52,14 @@ namespace Paway.WPF
                 view.UpdateDefaultStyle();
             }
         }
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty TitleProperty =
+            DependencyProperty.RegisterAttached(nameof(Title), typeof(string), typeof(RadioBox));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty TitleMinWidthProperty =
+            DependencyProperty.RegisterAttached(nameof(TitleMinWidth), typeof(double), typeof(RadioBox));
 
         #endregion
 
@@ -105,6 +113,26 @@ namespace Paway.WPF
         {
             get { return (ColorType)GetValue(TypeProperty); }
             set { SetValue(TypeProperty, value); }
+        }
+        /// <summary>
+        /// 标题
+        /// </summary>
+        [Category("扩展")]
+        [Description("标题")]
+        public string Title
+        {
+            get { return (string)GetValue(TitleProperty); }
+            set { SetValue(TitleProperty, value); }
+        }
+        /// <summary>
+        /// 标题长度
+        /// </summary>
+        [Category("扩展")]
+        [Description("标题长度")]
+        public double TitleMinWidth
+        {
+            get { return (double)GetValue(TitleMinWidthProperty); }
+            set { SetValue(TitleMinWidthProperty, value); }
         }
 
         #endregion

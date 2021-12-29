@@ -19,6 +19,19 @@
             <TextBoxEXT Title="你好"/>
             <PasswordBox PasswordBoxEXT.Title="你好"/>
             <ComboBoxEXT Title="你好" ItemsSource="{Binding List}"/>
+            <ComboDate Title="你好"/>
+            <ComboMulti Title="你好"/>
+            <ComboQuery Title="你好"/>
+            <ComboTree Title="你好"/>
+            <ComboView Title="你好"/>
+            <WrapPanel>
+                <CheckButton Title="你好" Content="Hello"/>
+                <CheckButton Content="Hello"/>
+            </WrapPanel>
+            <WrapPanel>
+                <RadioBox Title="你好" Content="Hello"/>
+                <RadioBox Content="Hello"/>
+            </WrapPanel>
         </StackPanel>
         <ScrollViewerEXT Grid.Column="1" Background="{StaticResource MosaicBrush}" ScrollInterval="50">
             <Canvas Name="canvas" Background="White" Width="200" Height="200">
