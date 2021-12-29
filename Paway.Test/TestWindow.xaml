@@ -18,19 +18,21 @@
 
             <TextBoxEXT Title="你好"/>
             <WrapPanel>
-                <ComboBoxEXT Title="你好" ItemsSource="{IntList Count=23}" Water="{x:Null}" Margin="-1,2,0,2" Radius="3,0,0,3" Width="66"/>
+                <ComboBoxEXT Title="你好" ItemsSource="{IntList Count=23}" Water="{x:Null}" Margin="2,2,0,2" Radius="3,0,0,3" Width="66"/>
                 <ComboBoxEXT ItemsSource="{IntList Count=12, Start=0, Interval=5}" Water="{x:Null}" Margin="-1,2,2,2" Radius="0,3,3,0" Width="30"/>
             </WrapPanel>
-            <ListViewCustom Name="listView1" Margin="5,5,0,0" 
-                           ItemHeight="67" ItemWidth="50"
-                           ItemBorder="1" HorizontalAlignment="Center">
-                <ListBoxItemEXT Text="1"/>
-                <ListBoxItemEXT Text="A" ItemMargin="-2,0,0,0"/>
-                <ListBoxItemEXT Text="B" ItemMargin="-5,0,0,0"/>
-                <ListBoxItemEXT Text="C" ItemMargin="0,-2,0,0"/>
-                <ListBoxItemEXT Text="D" ItemMargin="-2,-2,0,0"/>
-                <ListBoxItemEXT Text="E" ItemMargin="-5,-2,0,0"/>
-            </ListViewCustom>
+            <Border BorderBrush="Red" BorderThickness="1" Margin="5" >
+                <ListViewCustom Name="listView1" 
+                           ItemHeight="67" ItemWidth="51" ItemWidthType="TwoRow"
+                           IsLight="True">
+                    <ListBoxItemEXT Text="1"/>
+                    <ListBoxItemEXT Text="A"/>
+                    <ListBoxItemEXT Text="B"/>
+                    <ListBoxItemEXT Text="C"/>
+                    <ListBoxItemEXT Text="D"/>
+                    <ListBoxItemEXT Text="E"/>
+                </ListViewCustom>
+            </Border>
         </StackPanel>
         <ScrollViewerEXT Grid.Column="1" Background="{StaticResource MosaicBrush}" ScrollInterval="50">
             <Canvas Name="canvas" Background="White" Width="200" Height="200">

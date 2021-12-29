@@ -108,6 +108,12 @@
                                                 <Binding Path="ItemWidth" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewCustom}}" />
                                             </MultiBinding>
                                         </Border.Width>
+                                        <Border.Margin>
+                                            <MultiBinding Converter="{StaticResource nullSelector}">
+                                                <Binding Path="ItemMargin" />
+                                                <Binding Path="ItemMargin" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewCustom}}" />
+                                            </MultiBinding>
+                                        </Border.Margin>
                                         <ContentPresenter Name="content"
                                                           TextBlock.FontSize="{Binding Path=ItemTextFontSize.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}" 
                                                           HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}" 

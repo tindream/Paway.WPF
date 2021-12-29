@@ -69,6 +69,10 @@ namespace Paway.WPF
         /// </summary>
         ThicknessEXT ItemBorder { get; set; }
         /// <summary>
+        /// 自定义项外边距
+        /// </summary>
+        Thickness ItemMargin { get; set; }
+        /// <summary>
         /// 自定义项外边框颜色
         /// </summary>
         BrushEXT ItemBrush { get; set; }
@@ -219,6 +223,16 @@ namespace Paway.WPF
         {
             get { return itemBorder; }
             set { itemBorder = value; OnPropertyChanged(); }
+        }
+        private Thickness itemMargin;
+        /// <summary>
+        /// 自定义项外边距
+        /// </summary>
+        [NoShow]
+        public Thickness ItemMargin
+        {
+            get { return itemMargin; }
+            set { itemMargin = value; OnPropertyChanged(); }
         }
         private BrushEXT itemBrush;
         /// <summary>

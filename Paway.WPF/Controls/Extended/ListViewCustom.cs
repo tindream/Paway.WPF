@@ -57,10 +57,8 @@ namespace Paway.WPF
                 }
                 if (view.IsLight)
                 {
-                    view.BorderThickness = new Thickness(1, 1, 0, 0);
-                    view.BorderBrush = new SolidColorBrush(Colors.LightGray);
-                    view.ItemBorder = new ThicknessEXT(new Thickness(0, 0, 1, 1));
-                    view.ItemBrush = new BrushEXT(Colors.LightGray, alpha: 0);
+                    view.ItemBorder = new ThicknessEXT(1);
+                    view.ItemMargin = new Thickness(-1, -1, 0, 0);
                     view.ItemBackground.Normal = new SolidColorBrush(Colors.Transparent);
                 }
                 view.UpdateDefaultStyle();
@@ -327,19 +325,29 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
         {
-            var actualWidth = ActualWidth - BorderThickness.Left - BorderThickness.Right - Padding.Left - Padding.Right;
             switch (ItemWidthType)
             {
                 case WidthType.OneColumn:
+                    var actualWidth = ActualWidth - BorderThickness.Left - BorderThickness.Right - Padding.Left - Padding.Right;
                     for (var i = 0; i < Items.Count; i++)
                     {
                         if (Items[i] is IListViewItem item)
                         {
                             item.ItemWidth = actualWidth;
+                            if (IsLight)
+                            {
+                                if (i == 0) item.ItemMargin = new Thickness(0);
+                                else item.ItemMargin = new Thickness(0, -1, 0, 0);
+                            }
                         }
                         else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is IListViewItem listViewItem)
                         {
                             listViewItem.ItemWidth = actualWidth;
+                            if (IsLight)
+                            {
+                                if (i == 0) listViewItem.ItemMargin = new Thickness(0);
+                                else listViewItem.ItemMargin = new Thickness(0, -1, 0, 0);
+                            }
                         }
                     }
                     break;
@@ -348,23 +356,40 @@ namespace Paway.WPF
                 case WidthType.ThreeRow:
                 case WidthType.FoureRow:
                 case WidthType.FiveRow:
+                    actualWidth = ActualWidth - BorderThickness.Left - BorderThickness.Right - Padding.Left - Padding.Right;
                     var rowCount = (int)ItemWidthType;
                     var columnCount = Items.Count / rowCount;
                     var width = (int)(actualWidth / columnCount);
                     if (width < 0) width = 0;
                     if (actualWidth % columnCount > 0) width++;
                     var count = columnCount - (columnCount * width - actualWidth);
+                    var margin = ItemMargin.Left + ItemMargin.Right;
                     for (var i = 0; i < Items.Count;)
                     {
                         for (var j = 0; j < columnCount && i < Items.Count; j++, i++)
                         {
+                            var width2 = (count > j ? width : width - 1) - margin;
                             if (Items[i] is IListViewItem item)
                             {
-                                item.ItemWidth = count > j ? width : width - 1;
+                                item.ItemWidth = width2;
+                                if (IsLight)
+                                {
+                                    if (i == 0 && j == 0) item.ItemMargin = new Thickness(0);
+                                    else if (i < columnCount) item.ItemMargin = new Thickness(-1, 0, 0, 0);
+                                    else if (j == 0) item.ItemMargin = new Thickness(0, -1, 0, 0);
+                                    if (j == 0) item.ItemWidth += margin;
+                                }
                             }
                             else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is IListViewItem listViewItem)
                             {
-                                listViewItem.ItemWidth = count > j ? width : width - 1;
+                                listViewItem.ItemWidth = width2;
+                                if (IsLight)
+                                {
+                                    if (i == 0 && j == 0) listViewItem.ItemMargin = new Thickness(0);
+                                    else if (i < columnCount) listViewItem.ItemMargin = new Thickness(-1, 0, 0, 0);
+                                    else if (j == 0) listViewItem.ItemMargin = new Thickness(0, -1, 0, 0);
+                                    if (j == 0) listViewItem.ItemWidth += margin;
+                                }
                             }
                         }
                     }
