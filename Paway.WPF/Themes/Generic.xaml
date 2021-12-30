@@ -10,6 +10,7 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBox.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboDate.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboMulti.xaml" />
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboTime.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboQuery.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboTree.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboView.xaml" />

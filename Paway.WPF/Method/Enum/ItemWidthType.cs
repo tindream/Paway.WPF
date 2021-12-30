@@ -4,9 +4,9 @@ using System.Windows.Media;
 namespace Paway.WPF
 {
     /// <summary>
-    /// 宽度样式类型
+    /// 项宽度样式类型
     /// </summary>
-    public enum WidthType
+    public enum ItemWidthType
     {
         /// <summary>
         /// 无

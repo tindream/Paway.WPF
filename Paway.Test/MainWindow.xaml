@@ -124,7 +124,6 @@
                              CommandParameter="{Binding ElementName=btn}"/>
                     <Badge Name="badge" Grid.Column="1" IsWaving="True" HorizontalAlignment="Right" Text="1" Background="Red" VerticalAlignment="Top" Height="20" Margin="-6"/>
                 </Grid>
-                <DatePickerEXT Name="dp" Text="{Binding DatePickerTime, Mode=TwoWay}"/>
 
             </StackPanel>
         </ExpanderEXT>

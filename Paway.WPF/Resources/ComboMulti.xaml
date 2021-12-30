@@ -106,8 +106,8 @@
                                                     <ControlTemplate TargetType="{x:Type ListBoxItem}" >
                                                         <Grid>
                                                             <Border x:Name="_borderbg" Padding="{TemplateBinding Padding}"/>
-                                                            <ContentPresenter x:Name="_txt"/>
-                                                            <Border Background="White" Opacity="0"/>
+                                                            <ContentPresenter/>
+                                                            <!--<Border Background="White" Opacity="0"/>-->
                                                         </Grid>
                                                         <ControlTemplate.Triggers>
                                                             <Trigger Property="IsSelected" Value="True">

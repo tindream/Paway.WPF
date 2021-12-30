@@ -54,14 +54,14 @@ namespace Paway.WPF
         /// 按钮类型
         /// </summary>
         public static readonly DependencyProperty ButtonTypeProperty =
-            DependencyProperty.RegisterAttached(nameof(ButtonType), typeof(ButtonType), typeof(SliderMonitor),
-                new PropertyMetadata(ButtonType.Round));
+            DependencyProperty.RegisterAttached(nameof(ButtonType), typeof(SliderButtonType), typeof(SliderMonitor),
+                new PropertyMetadata(SliderButtonType.Round));
         /// <summary>
         /// 按钮类型
         /// </summary>
-        public ButtonType ButtonType
+        public SliderButtonType ButtonType
         {
-            get { return (ButtonType)GetValue(ButtonTypeProperty); }
+            get { return (SliderButtonType)GetValue(ButtonTypeProperty); }
             set { SetValue(ButtonTypeProperty, value); }
         }
         /// <summary>

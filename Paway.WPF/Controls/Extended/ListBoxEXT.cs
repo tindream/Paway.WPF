@@ -19,6 +19,16 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty RadiusProperty =
             DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(ListBoxEXT), new PropertyMetadata(new CornerRadius(3)));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ItemBrushProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ListBoxEXT),
+                new PropertyMetadata(new BrushEXT()));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ItemForegroundProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemForeground), typeof(BrushEXT), typeof(ListBoxEXT),
+            new PropertyMetadata(new BrushEXT(PConfig.TextColor, PConfig.TextColor, Colors.White)));
 
         #endregion
 
@@ -32,6 +42,26 @@ namespace Paway.WPF
         {
             get { return (CornerRadius)GetValue(RadiusProperty); }
             set { SetValue(RadiusProperty, value); }
+        }
+        /// <summary>
+        /// 项颜色
+        /// </summary>
+        [Category("扩展")]
+        [Description("项颜色")]
+        public BrushEXT ItemBrush
+        {
+            get { return (BrushEXT)GetValue(ItemBrushProperty); }
+            set { SetValue(ItemBrushProperty, value); }
+        }
+        /// <summary>
+        /// 项字体颜色
+        /// </summary>
+        [Category("扩展")]
+        [Description("项字体颜色")]
+        public BrushEXT ItemForeground
+        {
+            get { return (BrushEXT)GetValue(ItemForegroundProperty); }
+            set { SetValue(ItemForegroundProperty, value); }
         }
 
         #endregion

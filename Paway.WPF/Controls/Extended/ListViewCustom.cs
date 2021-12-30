@@ -31,7 +31,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemWidthTypeProperty =
-            DependencyProperty.RegisterAttached(nameof(WidthType), typeof(WidthType), typeof(ListViewCustom));
+            DependencyProperty.RegisterAttached(nameof(ItemWidthType), typeof(ItemWidthType), typeof(ListViewCustom));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemHeightProperty =
@@ -168,9 +168,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展")]
         [Description("宽度样式")]
-        public WidthType ItemWidthType
+        public ItemWidthType ItemWidthType
         {
-            get { return (WidthType)GetValue(ItemWidthTypeProperty); }
+            get { return (ItemWidthType)GetValue(ItemWidthTypeProperty); }
             set { SetValue(ItemWidthTypeProperty, value); }
         }
         /// <summary>
@@ -328,7 +328,7 @@ namespace Paway.WPF
             var actualWidth = ActualWidth - BorderThickness.Left - BorderThickness.Right - Padding.Left - Padding.Right;
             switch (ItemWidthType)
             {
-                case WidthType.OneColumn:
+                case ItemWidthType.OneColumn:
                     for (var i = 0; i < Items.Count; i++)
                     {
                         IListViewItem item = null;
@@ -345,11 +345,11 @@ namespace Paway.WPF
                         }
                     }
                     break;
-                case WidthType.OneRow:
-                case WidthType.TwoRow:
-                case WidthType.ThreeRow:
-                case WidthType.FoureRow:
-                case WidthType.FiveRow:
+                case ItemWidthType.OneRow:
+                case ItemWidthType.TwoRow:
+                case ItemWidthType.ThreeRow:
+                case ItemWidthType.FoureRow:
+                case ItemWidthType.FiveRow:
                     var rowCount = (int)ItemWidthType;
                     var columnCount = Items.Count / rowCount;
                     var width = (int)(actualWidth / columnCount);
@@ -397,7 +397,6 @@ namespace Paway.WPF
                             if (i == 0)
                             {
                                 item.ItemMargin = new Thickness(0);
-                                itemWidth -= margin;
                                 totalWidth += margin;
                             }
                             else if (iFirst && totalWidth >= 0)

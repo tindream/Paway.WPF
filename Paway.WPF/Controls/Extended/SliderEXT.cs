@@ -52,8 +52,8 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ButtonTypeProperty =
-            DependencyProperty.RegisterAttached(nameof(ButtonType), typeof(ButtonType), typeof(SliderEXT),
-                new PropertyMetadata(ButtonType.Round));
+            DependencyProperty.RegisterAttached(nameof(ButtonType), typeof(SliderButtonType), typeof(SliderEXT),
+                new PropertyMetadata(SliderButtonType.Round));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ShowTrackTextProperty =
@@ -132,9 +132,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展")]
         [Description("按钮类型")]
-        public ButtonType ButtonType
+        public SliderButtonType ButtonType
         {
-            get { return (ButtonType)GetValue(ButtonTypeProperty); }
+            get { return (SliderButtonType)GetValue(ButtonTypeProperty); }
             set { SetValue(ButtonTypeProperty, value); }
         }
         /// <summary>

@@ -6,7 +6,7 @@ namespace Paway.WPF
     /// <summary>
     /// 按钮类型
     /// </summary>
-    public enum ButtonType
+    public enum SliderButtonType
     {
         /// <summary>
         /// 圆形

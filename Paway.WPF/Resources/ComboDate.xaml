@@ -24,7 +24,7 @@
                                    FontSize="{TemplateBinding FontSize}"
                                    Opacity="0.9"
                                    Text="{TemplateBinding Title}"/>
-                        <Border Name="border" Grid.Column="1" Grid.ColumnSpan="3" 
+                        <Border Name="border" Grid.Column="1" Grid.ColumnSpan="2" 
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 CornerRadius="{TemplateBinding Radius}"
                                 Padding="{TemplateBinding Padding}"
@@ -39,7 +39,7 @@
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         <!--ToggleButton 已数据绑定到 ComboBox 本身以切换 IsDropDownOpen-->
-                        <ToggleButton x:Name="ToggleButton" Grid.Column="1" Grid.ColumnSpan="3" 
+                        <ToggleButton x:Name="ToggleButton" Grid.Column="1" Grid.ColumnSpan="2" 
                                       Focusable="false" 
                                       ClickMode="Press"
                                       Template="{StaticResource ComboBoxToggleButton}"

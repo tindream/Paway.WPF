@@ -41,7 +41,6 @@ namespace Paway.Test.ViewModel
                 _value = value; RaisePropertyChanged();
             }
         }
-        public ObservableCollection<ListViewItemModel> List { get; private set; } = new ObservableCollection<ListViewItemModel>();
 
         private MonitorType userType = MonitorType.LeftToeAngle;
         public MonitorType UserType
@@ -52,9 +51,12 @@ namespace Paway.Test.ViewModel
 
         #endregion
 
+        public ObservableCollection<ListViewItemModel> List { get; private set; } = new ObservableCollection<ListViewItemModel>();
+        public ObservableCollection<IComboBoxItem> MultiList { get; } = new ObservableCollection<IComboBoxItem>();
         public TestViewModel()
         {
             for (var i = 0; i < 16; i++) List.Add(new ListViewItemModel($"{i + 1}"));
+            for (var i = 0; i < 16; i++) MultiList.Add(new ComboBoxItemModel($"{i + 1}"));
         }
     }
 }

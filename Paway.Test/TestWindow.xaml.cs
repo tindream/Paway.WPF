@@ -52,7 +52,7 @@ namespace Paway.Test
                 {
                     X2 = canvas.Width,
                     Stroke = new SolidColorBrush(Colors.LightGray),
-                    StrokeDashArray = new DoubleCollection(new double[] { 2, 2 }),
+                    StrokeDashArray = new DoubleCollection(new double[] { 2 }),
                 };
                 RenderOptions.SetEdgeMode(line, EdgeMode.Aliased);
                 line.Y1 = line.Y2 = i * 50;
@@ -64,7 +64,7 @@ namespace Paway.Test
                 {
                     Y2 = canvas.Height,
                     Stroke = new SolidColorBrush(Colors.LightGray),
-                    StrokeDashArray = new DoubleCollection(new double[] { 2, 2 }),
+                    StrokeDashArray = new DoubleCollection(new double[] { 2 }),
                 };
                 RenderOptions.SetEdgeMode(line, EdgeMode.Aliased);
                 line.X1 = line.X2 = i * 50;
