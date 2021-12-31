@@ -131,7 +131,6 @@
     </Style>
     <Style TargetType="{x:Type local:ScrollViewerEXT}">
         <Setter Property="BorderBrush" Value="LightGray"/>
-        <Setter Property="HorizontalScrollBarVisibility" Value="Visible"/>
         <!--<Setter Property="PanningMode" Value="Both"/>-->
         <Setter Property="Template">
             <Setter.Value>

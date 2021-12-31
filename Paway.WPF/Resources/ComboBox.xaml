@@ -101,7 +101,9 @@
                                   Background="White">
                                 <Border x:Name="DropDownBorder" BorderBrush="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" 
                                         BorderThickness="1,0,1,1" Padding="0"/>
-                                <local:ScrollViewerEXT CanContentScroll="True">
+                                <local:ScrollViewerEXT CanContentScroll="True"
+                                                       HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                                       VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
                                     <!--StackPanel 用于显示子级，方法是将 IsItemsHost 设置为 True-->
                                     <StackPanel IsItemsHost="True"
                                                 KeyboardNavigation.DirectionalNavigation="Contained" />

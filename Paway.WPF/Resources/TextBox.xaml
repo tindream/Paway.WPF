@@ -46,10 +46,10 @@
                                 <Image x:Name="icon" Visibility="Collapsed"
                                        Source="{TemplateBinding Icon}"
                                        Stretch="{TemplateBinding IconStretch}"/>
-                                <local:ScrollViewerEXT x:Name="PART_ContentHost"
-                                              Grid.Column="1"
-                                              VerticalAlignment="Center"
-                                              VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}">
+                                <local:ScrollViewerEXT x:Name="PART_ContentHost" Grid.Column="1"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                                       VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
                                 </local:ScrollViewerEXT>
                                 <TextBlock x:Name="tbWater" Grid.Column="1" Visibility="Collapsed"
                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
