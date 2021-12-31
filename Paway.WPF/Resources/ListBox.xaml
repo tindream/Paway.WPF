@@ -7,18 +7,20 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type local:ListBoxEXT}" BasedOn="{StaticResource Config}">
-        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="BorderBrush" Value="LightGray"/>
+        <Setter Property="Background" Value="Transparent"/>
         <!--修改模板属性-->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ListBoxEXT}" >
                     <Border Name="Bd"
                             BorderThickness="{TemplateBinding Border.BorderThickness}"
-                            Padding="{TemplateBinding Padding}"
                             BorderBrush="{TemplateBinding Border.BorderBrush}"
                             Background="{TemplateBinding Panel.Background}"
                             CornerRadius="{TemplateBinding Radius}">
-                        <local:ScrollViewerEXT Padding="{TemplateBinding Control.Padding}" >
+                        <local:ScrollViewerEXT x:Name="scrollView">
                             <ItemsPresenter />
                         </local:ScrollViewerEXT>
                     </Border>
@@ -41,27 +43,28 @@
         <Setter Property="ItemContainerStyle">
             <Setter.Value>
                 <Style TargetType="ListBoxItem">
-                    <Setter Property="Padding" Value="3,15"/>
                     <Setter Property="Template">
                         <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type ListBoxItem}" >
+                            <ControlTemplate TargetType="ListBoxItem">
                                 <Grid>
-                                    <Border x:Name="_borderbg" Padding="{TemplateBinding Padding}"/>
-                                    <ContentPresenter/>
-                                    <!--<Border Background="White" Opacity="0"/>-->
+                                    <Border x:Name="_borderbg" Padding="{Binding Padding, RelativeSource={RelativeSource AncestorType={x:Type local:ListBoxEXT}}}">
+                                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    </Border>
+                                    <Border Background="White" Opacity="0"/>
                                 </Grid>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
                                         <Setter TargetName="_borderbg" Property="Background" 
-                                                Value="{Binding Path=ItemBrush.Pressed,RelativeSource={RelativeSource TemplatedParent}}" />
+                                                Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListBoxEXT}}}" />
                                         <Setter Property="Foreground" 
-                                                Value="{Binding Path=ItemForeground.Pressed,RelativeSource={RelativeSource TemplatedParent}}" />
+                                                Value="{Binding Path=ItemForeground.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListBoxEXT}}}" />
                                     </Trigger>
                                     <Trigger Property="IsMouseOver" Value="true">
                                         <Setter TargetName="_borderbg" Property="Background" 
-                                                Value="{Binding Path=ItemBrush.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:ListBoxEXT}}}" />
+                                                Value="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListBoxEXT}}}" />
                                         <Setter Property="Foreground" 
-                                                Value="{Binding Path=ItemForeground.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:ListBoxEXT}}}"/>
+                                                Value="{Binding Path=ItemForeground.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListBoxEXT}}}"/>
                                     </Trigger>
                                     <MultiTrigger>
                                         <MultiTrigger.Conditions>
@@ -69,9 +72,9 @@
                                             <Condition Property="IsMouseOver" Value="true"/>
                                         </MultiTrigger.Conditions>
                                         <Setter TargetName="_borderbg" Property="Background" 
-                                                Value="{Binding Path=ItemBrush.PressedMouse,RelativeSource={RelativeSource AncestorType={x:Type local:ListBoxEXT}}}" />
+                                                Value="{Binding Path=ItemBrush.PressedMouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListBoxEXT}}}" />
                                         <Setter Property="Foreground" 
-                                                Value="{Binding Path=ItemForeground.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ListBoxEXT}}}"/>
+                                                Value="{Binding Path=ItemForeground.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListBoxEXT}}}"/>
                                     </MultiTrigger>
                                     <Trigger Property="IsEnabled" Value="False">
                                         <Setter TargetName="_borderbg" Property="Opacity" Value="0.3" />

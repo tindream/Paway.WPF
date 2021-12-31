@@ -32,7 +32,7 @@ namespace Paway.Test
             base.OnRender(drawingContext);
         }
 
-        private List<ThumbInfo> list = new List<ThumbInfo>();
+        private readonly List<ThumbInfo> list = new List<ThumbInfo>();
         private ThumbInfo last;
         private ThumbInfo next;
         private Thumb nextThumb;

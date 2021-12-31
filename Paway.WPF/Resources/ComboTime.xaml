@@ -9,7 +9,8 @@
 
     <Style TargetType="{x:Type local:ComboTime}" BasedOn="{StaticResource ComboConfig}">
         <Setter Property="MaxDropDownHeight" Value="152"/>
-        <Setter Property="Padding" Value="5,5,0,5"/>
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ComboTime}">
@@ -55,46 +56,59 @@
                                   MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}" >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
+                                    <ColumnDefinition x:Name="columnMinute"/>
+                                    <ColumnDefinition x:Name="columnSecond"/>
                                 </Grid.ColumnDefinitions>
-                                <ListBox BorderThickness="0"
-                                         Margin="0,-1,0,0"
-                                         ItemsSource="{local:IntList Count=24, Start=0}"
-                                         MaxHeight="{TemplateBinding MaxDropDownHeight}">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <local:CheckBoxEXT Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-                                                      IsChecked="{Binding  RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=IsSelected}" 
-                                                      Content="{Binding Path=Text}" />
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                                <ListBox BorderThickness="0" Grid.Column="1"
-                                         Margin="0,-1,0,0"
-                                         ItemsSource="{local:IntList Count=60, Start=0}"
-                                         MaxHeight="{TemplateBinding MaxDropDownHeight}">
-                                </ListBox>
-                                <ListBox BorderThickness="0" Grid.Column="2"
-                                         Margin="0,-1,0,0"
-                                         ItemsSource="{local:IntList Count=60, Start=0}"
-                                         MaxHeight="{TemplateBinding MaxDropDownHeight}">
-                                </ListBox>
+                                <local:ListBoxEXT x:Name="listHour"
+                                                  ItemBrush="{Binding ItemBrush, RelativeSource={RelativeSource TemplatedParent}}"
+                                                  Padding="{TemplateBinding Padding}"
+                                                  BorderThickness="0,1,0,0"
+                                                  Background="White"
+                                                  SelectedValue="{Binding Hour, RelativeSource={RelativeSource TemplatedParent}}"
+                                                  ItemsSource="{local:IntList Count=24, Start=0}"
+                                                  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                </local:ListBoxEXT>
+                                <local:ListBoxEXT x:Name="listMinute"
+                                                  ItemBrush="{Binding ItemBrush, RelativeSource={RelativeSource TemplatedParent}}"
+                                                  Padding="{TemplateBinding Padding}"
+                                                  BorderThickness="1,1,1,0" Grid.Column="1"
+                                                  Background="White"
+                                                  SelectedValue="{Binding Minute, RelativeSource={RelativeSource TemplatedParent}}"
+                                                  ItemsSource="{local:IntList Count=60, Start=0}"
+                                                  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                </local:ListBoxEXT>
+                                <local:ListBoxEXT x:Name="listSecond"
+                                                  ItemBrush="{Binding ItemBrush, RelativeSource={RelativeSource TemplatedParent}}"
+                                                  Padding="{TemplateBinding Padding}"
+                                                  BorderThickness="0,1,0,0" Grid.Column="2"
+                                                  Background="White"
+                                                  SelectedValue="{Binding Second, RelativeSource={RelativeSource TemplatedParent}}"
+                                                  ItemsSource="{local:IntList Count=60, Start=0}"
+                                                  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                </local:ListBoxEXT>
                                 <Border x:Name="DropDownBorder" Grid.ColumnSpan="3"
                                         BorderBrush="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" 
                                         BorderThickness="1,0,1,1" />
-                                <Grid.Triggers>
-                                    <!--<DataTrigger Binding="{Binding TimeType, RelativeSource={RelativeSource Self}}" Value="Hour">
-                                        <Setter Property="Template" Value="{StaticResource Hour}"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding TimeType, RelativeSource={RelativeSource Self}}" Value="HourMinute">
-                                        <Setter Property="Template" Value="{StaticResource HourMinute}"/>
-                                    </DataTrigger>-->
-                                </Grid.Triggers>
                             </Grid>
                         </Popup>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding TimeType, RelativeSource={RelativeSource Self}}" Value="Hour">
+                            <Setter Property="Width" TargetName="columnMinute" Value="0"/>
+                            <Setter Property="Width" TargetName="columnSecond" Value="0"/>
+                            <Setter Property="Visibility" TargetName="listMinute" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="listSecond" Value="Collapsed"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding TimeType, RelativeSource={RelativeSource Self}}" Value="HourMinute">
+                            <Setter Property="Width" TargetName="columnSecond" Value="0"/>
+                            <Setter Property="Visibility" TargetName="listSecond" Value="Collapsed"/>
+                        </DataTrigger>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="border" Property="BorderBrush" 
                                     Value="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}" />

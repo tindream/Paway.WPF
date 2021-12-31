@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Paway.WPF
 {
@@ -20,37 +21,55 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty TimeTypeProperty =
-            DependencyProperty.RegisterAttached(nameof(TimeType), typeof(TimePickerType), typeof(ComboTime), new UIPropertyMetadata(OnValueChanged));
+            DependencyProperty.RegisterAttached(nameof(TimeType), typeof(TimePickerType), typeof(ComboTime), new UIPropertyMetadata(TimePickerType.HourMinute, OnValueChanged));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty HourProperty =
-            DependencyProperty.RegisterAttached(nameof(Hour), typeof(int), typeof(ComboTime), new UIPropertyMetadata(OnValueChanged));
+            DependencyProperty.RegisterAttached(nameof(Hour), typeof(int), typeof(ComboTime), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnValueChanged));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty MinuteProperty =
-            DependencyProperty.RegisterAttached(nameof(Minute), typeof(int), typeof(ComboTime), new UIPropertyMetadata(OnValueChanged));
+            DependencyProperty.RegisterAttached(nameof(Minute), typeof(int), typeof(ComboTime), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnValueChanged));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty SecondProperty =
-            DependencyProperty.RegisterAttached(nameof(Second), typeof(int), typeof(ComboTime), new UIPropertyMetadata(OnValueChanged));
-        /// <summary>
-        /// </summary>
-        public static readonly DependencyProperty TimeProperty =
-            DependencyProperty.RegisterAttached(nameof(Time), typeof(DateTime), typeof(ComboTime), new UIPropertyMetadata(DateTime.Now, OnValueChanged));
+            DependencyProperty.RegisterAttached(nameof(Second), typeof(int), typeof(ComboTime), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnValueChanged));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty TimesProperty =
             DependencyProperty.RegisterAttached(nameof(Times), typeof(string), typeof(ComboTime));
+        /// <summary>
+        /// </summary>
+        public static readonly new DependencyProperty SelectedValueProperty =
+            DependencyProperty.RegisterAttached(nameof(SelectedValue), typeof(object), typeof(ComboTime), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnValueChanged));
+
         private static void OnValueChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            if (obj is ComboTime cbxTime)
+            if (obj is ComboTime cbxTime && cbxTime.SelectedValue is DateTime time)
             {
-                switch (cbxTime.TimeType)
+                LoadTimes(cbxTime);
+                if (e.Property.Name == nameof(SelectedValue))
                 {
-                    case TimePickerType.Hour: cbxTime.Times = $"{cbxTime.Time.Hour:D2}"; break;
-                    case TimePickerType.HourMinute: cbxTime.Times = $"{cbxTime.Time.Hour:D2}:{cbxTime.Time.Minute:D2}"; break;
-                    case TimePickerType.Time: cbxTime.Times = $"{cbxTime.Time.Hour:D2}:{cbxTime.Time.Minute:D2}:{cbxTime.Time.Second:D2}"; break;
+                    switch (cbxTime.TimeType)
+                    {
+                        case TimePickerType.Hour: cbxTime.Hour = time.Hour; break;
+                        case TimePickerType.HourMinute: cbxTime.Hour = time.Hour; cbxTime.Minute = time.Minute; break;
+                        case TimePickerType.Time: cbxTime.Hour = time.Hour; cbxTime.Minute = time.Minute; cbxTime.Second = time.Second; break;
+                    }
                 }
+                else
+                {
+                    cbxTime.SelectedValue = new DateTime(time.Year, time.Month, time.Day, cbxTime.Hour, cbxTime.Minute, cbxTime.Second);
+                }
+            }
+        }
+        private static void LoadTimes(ComboTime cbxTime)
+        {
+            switch (cbxTime.TimeType)
+            {
+                case TimePickerType.Hour: cbxTime.Times = $"{cbxTime.Hour:D2}"; break;
+                case TimePickerType.HourMinute: cbxTime.Times = $"{cbxTime.Hour:D2}:{cbxTime.Minute:D2}"; break;
+                case TimePickerType.Time: cbxTime.Times = $"{cbxTime.Hour:D2}:{cbxTime.Minute:D2}:{cbxTime.Second:D2}"; break;
             }
         }
 
@@ -102,65 +121,55 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展")]
         [Description("时间")]
-        public DateTime Time
-        {
-            get { return (DateTime)GetValue(TimeProperty); }
-            set { SetValue(TimeProperty, value); }
-        }
-        /// <summary>
-        /// 时间
-        /// </summary>
-        [Category("扩展")]
-        [Description("时间")]
         public string Times
         {
             get { return (string)GetValue(TimesProperty); }
             set { SetValue(TimesProperty, value); }
         }
+        /// <summary>
+        /// 重写
+        /// </summary>
+        public new object SelectedValue
+        {
+            get { return (object)GetValue(SelectedValueProperty); }
+            set { SetValue(SelectedValueProperty, value); }
+        }
 
         #endregion
 
-        /// <summary>
-        /// 时
-        /// </summary>
-        public List<ListViewItemModel> HourList = new List<ListViewItemModel>();
-        /// <summary>
-        /// 分
-        /// </summary>
-        public List<ListViewItemModel> MinuteList = new List<ListViewItemModel>();
-        /// <summary>
-        /// 秒
-        /// </summary>
-        public List<ListViewItemModel> SecondList = new List<ListViewItemModel>();
         /// <summary>
         /// </summary>
         public ComboTime()
         {
             DefaultStyleKey = typeof(ComboTime);
-            for (var i = 0; i < 24; i++) HourList.Add(new ListViewItemModel($"{i}") { Id = i });
-            for (var i = 0; i < 60; i++) MinuteList.Add(new ListViewItemModel($"{i}") { Id = i });
-            for (var i = 0; i < 60; i++) SecondList.Add(new ListViewItemModel($"{i}") { Id = i });
-            this.ItemsSource = new List<int> { 1 };
-            this.Hour = this.Time.Hour;
-            this.Minute = this.Time.Minute;
-            this.Second = this.Time.Second;
         }
-
-        #region 属性
         /// <summary>
-        /// 选中项列表
+        /// 滚动到指定位置
         /// </summary>
-        [Browsable(false)]
-        public ObservableCollection<IComboBoxItem> ChekedItems { get; } = new ObservableCollection<IComboBoxItem>();
-
-        #endregion
-
-        #region 关联选择
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+            if (this.SelectedValue == null) this.SelectedValue = DateTime.Now;
+            if (Template.FindName("PART_Popup", this) is Popup popup)
+            {
+                popup.Opened -= Popup_Opened;
+                popup.Opened += Popup_Opened;
+            }
         }
-
-        #endregion
+        private void Popup_Opened(object sender, EventArgs e)
+        {
+            if (Template.FindName("listHour", this) is ListBoxEXT listHour)
+            {
+                listHour.ScrollViewer(this.Hour / (24.0 - 5.0));
+            }
+            if (Template.FindName("listMinute", this) is ListBoxEXT listMinute)
+            {
+                listMinute.ScrollViewer(this.Minute / (60.0 - 5.0));
+            }
+            if (Template.FindName("listSecond", this) is ListBoxEXT listSecond)
+            {
+                listSecond.ScrollViewer(this.Second / (60.0 - 5.0));
+            }
+        }
     }
 }

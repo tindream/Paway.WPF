@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paway.Helper;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty RadiusProperty =
-            DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(ListBoxEXT), new PropertyMetadata(new CornerRadius(3)));
+            DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(ListBoxEXT), new PropertyMetadata(new CornerRadius(0)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
@@ -71,6 +72,19 @@ namespace Paway.WPF
         public ListBoxEXT()
         {
             DefaultStyleKey = typeof(ListBoxEXT);
+        }
+        /// <summary>
+        /// 滚动到指定比例位置
+        /// </summary>
+        public void ScrollViewer(double percent)
+        {
+            if (Template.FindName("scrollView", this) is ScrollViewerEXT scrollViewer)
+            {
+                var height = scrollViewer.ScrollableHeight * percent;
+                var iHeight = height.ToInt();
+                if (iHeight < height) iHeight += 1;
+                scrollViewer.ScrollToVerticalOffset(iHeight);
+            }
         }
     }
 }

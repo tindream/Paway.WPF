@@ -34,7 +34,7 @@
                                 CornerRadius="{TemplateBinding Radius}"/>
 
                         <local:ScrollViewerEXT Margin="{TemplateBinding BorderThickness}" Focusable="False" x:Name="ScrollViewer"
-                                      VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}">
+                                               VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}">
                             <ScrollViewer x:Name="PART_ContentHost" 
                                           Margin="{TemplateBinding Padding}" 
                                           Focusable="False" 

@@ -48,6 +48,25 @@ namespace Paway.Test.ViewModel
             get { return userType; }
             set { userType = value; RaisePropertyChanged(); }
         }
+        private DateTime time = DateTime.Now.Date;
+        public DateTime Time
+        {
+            get { return time; }
+            set { time = value; RaisePropertyChanged(); }
+        }
+        private ICommand buttonCommand;
+        public ICommand ButtonCommand
+        {
+            get
+            {
+                return buttonCommand ?? (buttonCommand = new RelayCommand(() =>
+                {
+                    if (Time.Second < 59) Time = Time.AddSeconds(1);
+                    else if (Time.Minute < 59) Time = Time.AddMinutes(1);
+                    else if (Time.Hour < 23) Time = Time.AddHours(1);
+                }));
+            }
+        }
 
         #endregion
 

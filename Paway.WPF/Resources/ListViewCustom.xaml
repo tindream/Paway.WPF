@@ -27,7 +27,7 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             Background="{TemplateBinding Background}"
                             Padding="{TemplateBinding Padding}">
-                        <local:ScrollViewerEXT HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                        <local:ScrollViewerEXT>
                             <WrapPanel  x:Name="WrapPanel" Orientation="{Binding Orientation, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}" ScrollViewer.CanContentScroll="True" IsItemsHost="True" />
                         </local:ScrollViewerEXT>
                     </Border>

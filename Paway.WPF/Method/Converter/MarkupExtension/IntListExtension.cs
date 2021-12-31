@@ -23,7 +23,7 @@ namespace Paway.WPF
         /// <summary>
         /// 显示数量
         /// </summary>
-        public int Count { get; set; }
+        public int Count { get; set; } = 9;
         /// <summary>
         /// 从指定值开始显示
         /// </summary>
