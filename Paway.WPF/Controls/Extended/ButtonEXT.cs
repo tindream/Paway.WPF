@@ -30,7 +30,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ShadowColorProperty =
-            DependencyProperty.RegisterAttached(nameof(ShadowColor), typeof(Color), typeof(ButtonEXT), new PropertyMetadata(Colors.LightGray));
+            DependencyProperty.RegisterAttached(nameof(ShadowColor), typeof(Color), typeof(ButtonEXT), new PropertyMetadata(Colors.Transparent));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemForegroundProperty =
