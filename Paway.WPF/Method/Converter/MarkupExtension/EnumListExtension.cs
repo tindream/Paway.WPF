@@ -27,7 +27,7 @@ namespace Paway.WPF
         /// <summary>
         /// 从指定位置开始显示
         /// </summary>
-        public int Start { get; set; } = 1;
+        public int Start { get; set; }
         /// <summary>
         /// 显示数量
         /// </summary>

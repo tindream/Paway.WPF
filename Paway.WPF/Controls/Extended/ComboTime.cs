@@ -155,6 +155,25 @@ namespace Paway.WPF
                 popup.Opened -= Popup_Opened;
                 popup.Opened += Popup_Opened;
             }
+            if (Template.FindName("listHour", this) is ListBoxEXT listHour)
+            {
+                listHour.MouseDoubleClick -= ListBox_MouseDoubleClick;
+                listHour.MouseDoubleClick += ListBox_MouseDoubleClick;
+            }
+            if (Template.FindName("listMinute", this) is ListBoxEXT listMinute)
+            {
+                listMinute.MouseDoubleClick -= ListBox_MouseDoubleClick;
+                listMinute.MouseDoubleClick += ListBox_MouseDoubleClick;
+            }
+            if (Template.FindName("listSecond", this) is ListBoxEXT listSecond)
+            {
+                listSecond.MouseDoubleClick -= ListBox_MouseDoubleClick;
+                listSecond.MouseDoubleClick += ListBox_MouseDoubleClick;
+            }
+        }
+        private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            this.IsDropDownOpen = false;
         }
         private void Popup_Opened(object sender, EventArgs e)
         {
