@@ -17,7 +17,7 @@
             <Path x:Name="Arrow" Margin="9,0"
                   Style="{StaticResource PathTriangleDown}" Width="12" Height="6"
                   HorizontalAlignment="Right" StrokeThickness="0"
-                  Opacity="0.5"
+                  Opacity="0.35"
                   Stretch="Fill" Fill="{TemplateBinding Foreground}" />
         </Grid>
         <ControlTemplate.Triggers>

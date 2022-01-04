@@ -14,6 +14,8 @@
 
     <local:BoolToVisible x:Key="boolToVisible"/>
     <local:BoolToCollapsed x:Key="boolToCollapsed"/>
+    <local:ValueToTrue x:Key="valueToTrue"/>
+    <local:ValueToFalse x:Key="valueToFalse"/>
     <local:ValueToVisible x:Key="valueToVisible"/>
     <local:ValueToCollapsed x:Key="valueToCollapsed"/>
     <local:ColorToBrushConverter x:Key="colorToBrushConverter" />
@@ -69,7 +71,7 @@
     <DrawingBrush x:Key="MosaicBrush" RenderOptions.CachingHint="Cache" Viewport="0,0,16,16" ViewportUnits="Absolute" TileMode="Tile">
         <DrawingBrush.Drawing>
             <DrawingGroup>
-                <GeometryDrawing Brush="#C8D3D3D3">
+                <GeometryDrawing Brush="#A0D3D3D3">
                     <GeometryDrawing.Geometry>
                         <GeometryGroup>
                             <RectangleGeometry Rect="0,0,8,8" />
