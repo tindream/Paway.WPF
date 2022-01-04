@@ -9,7 +9,7 @@
 
     <Style TargetType="{x:Type local:RadioBox}" BasedOn="{StaticResource FocusConfig}">
         <Setter Property="Margin" Value="2"/>
-        <Setter Property="Padding" Value="6,3"/>
+        <Setter Property="Padding" Value="6,5"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:RadioBox">
@@ -35,7 +35,6 @@
                                 CornerRadius="{TemplateBinding Radius}">
                             <ContentPresenter Name="contentPresenter"
                                               RecognizesAccessKey="True" 
-                                              Margin="{TemplateBinding Control.Padding}"
                                               Content="{TemplateBinding ContentControl.Content}"
                                               ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
                                               ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"

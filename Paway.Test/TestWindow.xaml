@@ -17,8 +17,10 @@
             <ButtonEXT VerticalAlignment="Center" Content="随机" Click="ButtonEXT_Click" Visibility="{Binding UserType, Converter={StaticResource valueToCollapsed}, ConverterParameter=2}"
                        Command="{Binding ButtonCommand}"/>
 
-            <ComboMulti ItemsSource="{Binding MultiList}" HorizontalContentAlignment="Center"/>
+            <ComboBoxEXT ItemsSource="{IntList}" HorizontalContentAlignment="Center"/>
             <ComboTime />
+            <RadioBox Content="1"/>
+            <CheckButton Content="2"/>
             <WrapPanel>
                 <ButtonEXT Width="80" Content="取消" Type="Warn" IsLight="True"/>
                 <ButtonEXT Width="80" Content="确认" IsEnabled="{Binding IPad}"/>

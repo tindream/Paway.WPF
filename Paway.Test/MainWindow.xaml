@@ -96,6 +96,7 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ComboQuery>
+                <ComboTime Background="White"/>
                 <TextBoxEXT Name="tb" Icon="Images/close.png" IAnimation="2" BorderThickness="0,0,0,1" Radius="0" MaxLength="4"
                             HorizontalContentAlignment="Center">
                     <Binding Path="Value">

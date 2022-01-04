@@ -29,7 +29,7 @@
                         <Border x:Name="border" Grid.Column="1"
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 CornerRadius="{TemplateBinding Radius}"
-                                Padding="{TemplateBinding Padding}"
+                                Background="{TemplateBinding Background}"
                                 BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}" />
                         <ContentPresenter x:Name="ContentSite" Margin="{TemplateBinding Padding}" 
                                           Grid.Column="1"

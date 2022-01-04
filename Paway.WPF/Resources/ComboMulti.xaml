@@ -27,7 +27,6 @@
                         <Border x:Name="border" Grid.Column="1"
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 CornerRadius="{TemplateBinding Radius}"
-                                Padding="{TemplateBinding Padding}"
                                 Background="{StaticResource backLine}"
                                 BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}" />
                         <Grid x:Name="PART_Root" Grid.Column="1">
