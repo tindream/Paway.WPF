@@ -73,6 +73,7 @@
     <Compile Include="Controls\Extended\ComboTime.cs" />
     <Compile Include="Controls\Extended\RadioBox.cs" />
     <Compile Include="Controls\Extended\ListViewCustom.cs" />
+    <Compile Include="Controls\Extended\TextBoxNumeric.cs" />
     <Compile Include="Controls\Theme\RenderEXT.cs" />
     <Compile Include="Method\Converter\IValueConverter\ValueToVisible.cs" />
     <Compile Include="Method\Converter\IValueConverter\BrushLightConverter.cs" />
@@ -265,6 +266,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\RichTextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\TextBoxNumeric.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
