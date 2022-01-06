@@ -11,7 +11,10 @@ using System.Windows.Media;
 
 namespace Paway.WPF
 {
-    internal class DateConvertToColor : IValueConverter
+    /// <summary>
+    /// 日历-周末颜色转换器
+    /// </summary>
+    internal class WeekendConvert : IValueConverter
     {
         public object Convert(object values, Type targetType, object parameter, CultureInfo culture)
         {

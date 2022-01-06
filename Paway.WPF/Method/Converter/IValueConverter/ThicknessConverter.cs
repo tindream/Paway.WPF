@@ -1,29 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Paway.Helper;
+using System;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace Paway.WPF
 {
     /// <summary>
-    /// bool值反转
+    /// 无下边线
     /// </summary>
-    internal class BoolReverse : IValueConverter
+    internal class NoBottomThicknessConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is bool b && b)
-                return false;
-            else
-                return true;
+            if (value is Thickness thickness)
+            {
+                return new Thickness(thickness.Left, thickness.Top, thickness.Right, 0);
+            }
+            return value;
         }
+
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return Convert(value, targetType, parameter, culture);
+            return DependencyProperty.UnsetValue;
         }
     }
 }

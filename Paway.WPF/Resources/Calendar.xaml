@@ -6,7 +6,7 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <local:DateConvertToColor x:Key="dateConvertToColor"/>
+    <local:WeekendConvert x:Key="weekendConvert"/>
 
     <!--选择年月按钮-->
     <Style x:Key="CalendarButtonStyle" TargetType="{x:Type CalendarButton}">
@@ -236,7 +236,7 @@
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                             <TextElement.Foreground>
-                                <Binding RelativeSource="{RelativeSource TemplatedParent}" Converter="{StaticResource dateConvertToColor}">
+                                <Binding RelativeSource="{RelativeSource TemplatedParent}" Converter="{StaticResource weekendConvert}">
                                 </Binding>
                             </TextElement.Foreground>
                         </ContentPresenter>

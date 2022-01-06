@@ -6,6 +6,8 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
+    <local:NoBottomRadiusConverter x:Key="noBottomRadiusConverter"/>
+    <local:NoBottomThicknessConverter x:Key="noBottomThicknessConverter"/>
 
     <LinearGradientBrush x:Key="backLine" EndPoint="0,1" StartPoint="0,0">
         <GradientStop Color="{Binding Source={StaticResource Light}, Converter={StaticResource brushToColorConverter}}" Offset="0"/>

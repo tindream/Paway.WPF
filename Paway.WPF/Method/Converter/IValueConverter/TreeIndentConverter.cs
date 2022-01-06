@@ -11,7 +11,10 @@ using System.Windows.Media;
 
 namespace Paway.WPF
 {
-    internal class IndentConverter : IValueConverter
+    /// <summary>
+    /// 树内边距转换器
+    /// </summary>
+    internal class TreeIndentConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

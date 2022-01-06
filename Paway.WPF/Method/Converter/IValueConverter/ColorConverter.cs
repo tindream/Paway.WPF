@@ -6,6 +6,9 @@ using System.Windows.Media;
 
 namespace Paway.WPF
 {
+    /// <summary>
+    /// Color转Brush
+    /// </summary>
     internal class ColorToBrushConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

@@ -265,15 +265,16 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
+            switch (e.Key)
+            {
+                case Key.Up:
+                    AddValue(Interval);
+                    break;
+                case Key.Down:
+                    AddValue(-Interval);
+                    break;
+            }
             base.OnPreviewKeyDown(e);
-            if (e.Key == Key.Up)
-            {
-                AddValue(Interval);
-            }
-            else if (e.Key == Key.Down)
-            {
-                AddValue(-Interval);
-            }
         }
         /// <summary>
         /// 滑动加减
@@ -281,7 +282,7 @@ namespace Paway.WPF
         protected override void OnMouseWheel(MouseWheelEventArgs e)
         {
             base.OnMouseWheel(e);
-            if (this.IsFocused && !IsReadOnly)
+            if (/*this.IsFocused &&*/ !IsReadOnly)
             {
                 if (e.Delta > 0) AddValue(Interval);
                 else AddValue(-Interval);

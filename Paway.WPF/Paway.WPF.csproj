@@ -75,14 +75,12 @@
     <Compile Include="Controls\Extended\ListViewCustom.cs" />
     <Compile Include="Controls\Extended\TextBoxNumeric.cs" />
     <Compile Include="Controls\Theme\RenderEXT.cs" />
-    <Compile Include="Method\Converter\IValueConverter\ValueToVisible.cs" />
-    <Compile Include="Method\Converter\IValueConverter\BrushLightConverter.cs" />
-    <Compile Include="Method\Converter\IValueConverter\ColorToBrushConverter.cs" />
-    <Compile Include="Method\Converter\IValueConverter\LessRadiusConverter.cs" />
+    <Compile Include="Method\Converter\IValueConverter\ColorConverter.cs" />
+    <Compile Include="Method\Converter\IValueConverter\ThicknessConverter.cs" />
+    <Compile Include="Method\Converter\IValueConverter\RadiusConverter.cs" />
     <Compile Include="Method\CustomAdorner.cs" />
-    <Compile Include="Method\Converter\IValueConverter\AnyNotNullToVisible.cs" />
-    <Compile Include="Method\Converter\IValueConverter\RoundProgressBarConverter.cs" />
-    <Compile Include="Method\Converter\IValueConverter\BrushAlphaConverter.cs" />
+    <Compile Include="Method\Converter\IValueConverter\RingConverter.cs" />
+    <Compile Include="Method\Converter\IValueConverter\BrushConverter.cs" />
     <Compile Include="Method\Enum\TimePickerType.cs" />
     <Compile Include="Method\Enum\SliderButtonType.cs" />
     <Compile Include="Method\Enum\ItemWidthType.cs" />
@@ -98,9 +96,8 @@
     </Compile>
     <Compile Include="Method\Converter\IEquatable\ThemeBackground.cs" />
     <Compile Include="Method\Converter\IEquatable\ThemeFontSize.cs" />
-    <Compile Include="Method\Converter\IValueConverter\BoolSelector.cs" />
-    <Compile Include="Method\Converter\IValueConverter\BrushColorConverter.cs" />
-    <Compile Include="Method\Converter\IValueConverter\IsNotNullConverter.cs" />
+    <Compile Include="Method\Converter\IValueConverter\BoolConverter.cs" />
+    <Compile Include="Method\Converter\IValueConverter\NotNullConverter.cs" />
     <Compile Include="Method\Converter\IValueConverter\EnumConverter.cs" />
     <Compile Include="Method\Converter\MarkupExtension\IntListExtension.cs" />
     <Compile Include="Method\Converter\MarkupExtension\EnumListExtension.cs" />
@@ -108,13 +105,11 @@
     <Compile Include="Method\Converter\ValidationRule\RegexValidationRule.cs" />
     <Compile Include="Method\Converter\IEquatable\ColorLinear.cs" />
     <Compile Include="Method\Converter\IValueConverter\ValueConverter.cs" />
-    <Compile Include="Method\Converter\IValueConverter\BoolReverse.cs" />
-    <Compile Include="Method\Converter\IValueConverter\NullToCollapsed.cs" />
+    <Compile Include="Method\Converter\IValueConverter\NullConverter.cs" />
     <Compile Include="Method\Converter\IValueConverter\DateConverter.cs" />
-    <Compile Include="Method\Converter\IValueConverter\DateConvertToColor.cs" />
-    <Compile Include="Method\Converter\IValueConverter\IndentConverter.cs" />
-    <Compile Include="Method\Converter\IValueConverter\VisibleReverse.cs" />
-    <Compile Include="Method\Converter\IValueConverter\BoolToVisible.cs" />
+    <Compile Include="Method\Converter\IValueConverter\WeekendConvert.cs" />
+    <Compile Include="Method\Converter\IValueConverter\TreeIndentConverter.cs" />
+    <Compile Include="Method\Converter\IValueConverter\VisibleConverter.cs" />
     <Compile Include="Controls\DataPager\CollectionViewGroupInternal.cs" />
     <Compile Include="Controls\DataPager\CollectionViewGroupRoot.cs" />
     <Compile Include="Controls\DataPager\DataPager.cs" />
@@ -174,7 +169,6 @@
     <Compile Include="Controls\Window\WindowCommandHelper.cs" />
     <Compile Include="Method\Converter\IEquatable\ColorEXT.cs" />
     <Compile Include="Method\Converter\IEquatable\ImageEXT.cs" />
-    <Compile Include="Method\Converter\IValueConverter\NullSelector.cs" />
     <Compile Include="Method\Converter\IEquatable\RadiusEXT.cs" />
     <Compile Include="Method\Converter\IEquatable\DoubleEXT.cs" />
     <Compile Include="Method\Converter\IEquatable\ThicknessEXT.cs" />

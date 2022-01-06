@@ -13,7 +13,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TreeViewItem}">
                     <ControlTemplate.Resources>
-                        <local:IndentConverter  x:Key="indentConverter"/>
+                        <local:TreeIndentConverter  x:Key="treeIndentConverter"/>
                     </ControlTemplate.Resources>
                     <Grid Background="Transparent">
                         <Grid.RowDefinitions>
@@ -26,7 +26,7 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Padding="{TemplateBinding Padding}">
                             <Grid Background="Transparent">
-                                <Grid x:Name="ItemRoot" Margin="{Binding Converter={StaticResource indentConverter},RelativeSource={RelativeSource TemplatedParent}}" Background="Transparent">
+                                <Grid x:Name="ItemRoot" Margin="{Binding Converter={StaticResource treeIndentConverter},RelativeSource={RelativeSource TemplatedParent}}" Background="Transparent">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="16" />
                                         <ColumnDefinition Width="*"/>

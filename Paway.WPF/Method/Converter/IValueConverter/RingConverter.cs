@@ -14,7 +14,7 @@ namespace Paway.WPF
     /// <summary>
     /// 绘制进度圆环
     /// </summary>
-    internal class RoundProgressBarConverter : IMultiValueConverter
+    internal class RingConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {

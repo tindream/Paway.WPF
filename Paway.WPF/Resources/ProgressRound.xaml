@@ -25,7 +25,7 @@
                               StrokeStartLineCap="Round"
                               StrokeEndLineCap="Round">
                             <Path.Data>
-                                <MultiBinding Converter="{StaticResource roundProgressBarConverter}">
+                                <MultiBinding Converter="{StaticResource ringConverter}">
                                     <Binding Path="ActualWidth" RelativeSource="{RelativeSource AncestorType={x:Type local:ProgressRound}}"></Binding>
                                     <Binding Path="ActualHeight" RelativeSource="{RelativeSource AncestorType={x:Type local:ProgressRound}}"></Binding>
                                     <Binding Path="BorderThickness" RelativeSource="{RelativeSource TemplatedParent}"></Binding>
