@@ -17,6 +17,9 @@
             <ButtonEXT VerticalAlignment="Center" Content="随机" Click="ButtonEXT_Click" Visibility="{Binding UserType, Converter={StaticResource valueToCollapsed}, ConverterParameter=2}"
                        Command="{Binding ButtonCommand}"/>
             <TextBoxNumeric Interval="1.06" Decimal="2" MaxValue="100" MinValue="0" Text="4"/>
+
+            <CheckButton Content="A" Margin="-3,2,2,0" Radius="0,3,0,0" HorizontalContentAlignment="Center" Padding="4,0" Height="32"
+                                     IsChecked="{Binding UserType, Converter={StaticResource valueToTrue}, ConverterParameter=1}"/>
         </StackPanel>
         <ScrollViewerEXT Grid.Column="1" ScrollInterval="50">
             <Canvas Name="canvas" Background="White" Width="200" Height="200"/>

@@ -46,7 +46,12 @@ namespace Paway.Test.ViewModel
         public MonitorType UserType
         {
             get { return userType; }
-            set { userType = value; RaisePropertyChanged(); }
+            set
+            {
+                if (value > 0) userType &= value;
+                else userType = (MonitorType)(userType.GetHashCode() + value.GetHashCode());
+                RaisePropertyChanged();
+            }
         }
         private DateTime time = DateTime.Now.Date;
         public DateTime Time
