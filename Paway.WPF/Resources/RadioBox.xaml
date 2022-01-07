@@ -44,13 +44,13 @@
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.6"/>
+                        </Trigger>
                         <Trigger Property="UIElement.IsMouseOver" Value="True">
                             <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{Binding Path=ItemForeground.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter Property="BorderThickness" TargetName="border1" Value="{Binding Path=ItemBorder.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter Property="Background" TargetName="border1" Value="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
-                        </Trigger>
-                        <Trigger Property="UIElement.IsEnabled" Value="False">
-                            <Setter Property="Background" TargetName="border1" Value="LightGray"/>
                         </Trigger>
                         <Trigger Property="ButtonBase.IsPressed" Value="True">
                             <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{Binding Path=ItemForeground.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>

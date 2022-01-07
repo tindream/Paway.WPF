@@ -76,6 +76,9 @@
                         </Popup>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.6"/>
+                        </Trigger>
                         <Trigger Property="IsEditable" Value="true">
                             <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible" />
                             <Setter TargetName="border" Property="Background" Value="{Binding Background, RelativeSource={RelativeSource TemplatedParent}}" />
@@ -83,9 +86,6 @@
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="border" Property="BorderBrush" 
                                     Value="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}" />
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" TargetName="border" Value="LightGray"/>
                         </Trigger>
                         <Trigger Property="IsDropDownOpen" Value="True">
                             <Setter TargetName="border" Property="BorderBrush" 

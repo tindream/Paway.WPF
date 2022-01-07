@@ -206,7 +206,7 @@
                         </local:ScrollViewerEXT>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="UIElement.IsEnabled" Value="False">
+                        <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Panel.Background" TargetName="border" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">

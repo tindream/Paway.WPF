@@ -27,7 +27,7 @@
                         </local:ScrollViewerEXT>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="UIElement.IsEnabled" Value="False">
+                        <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Panel.Background" TargetName="Bd" Value="White"/>
                             <Setter Property="Border.BorderBrush" TargetName="Bd" Value="LightGray"/>
                         </Trigger>
@@ -79,8 +79,7 @@
                                                 Value="{Binding Path=ItemForeground.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListBoxEXT}}}"/>
                                     </MultiTrigger>
                                     <Trigger Property="IsEnabled" Value="False">
-                                        <Setter TargetName="_borderbg" Property="Opacity" Value="0.3" />
-                                        <Setter Property="Foreground" Value="Gray" />
+                                        <Setter Property="Opacity" Value="0.6"/>
                                     </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>

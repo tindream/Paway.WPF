@@ -50,6 +50,9 @@
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.6"/>
+                        </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Foreground" TargetName="txt" Value="{Binding Path=ItemForeground.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter Property="BorderThickness" TargetName="border1" Value="{Binding Path=ItemBorder.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
@@ -63,9 +66,6 @@
                             <Setter Property="Background" TargetName="border1" Value="{Binding Path=ItemBackground.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter TargetName="image" Property="Margin" Value="{Binding Path=ImageMargin.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter TargetName="image" Property="Source" Value="{Binding Path=Image.Pressed, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" TargetName="border1" Value="LightGray"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

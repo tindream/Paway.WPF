@@ -82,6 +82,9 @@
                         </Grid>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.6"/>
+                        </Trigger>
                         <DataTrigger Binding="{Binding Icon, Converter={StaticResource isNotNull}, RelativeSource={RelativeSource Self}}" Value="True">
                             <Setter TargetName="icon" Property="Visibility" Value="Visible" />
                             <Setter Property="Padding" Value="0,4" />
@@ -101,9 +104,6 @@
                         </Trigger>
                         <Trigger Property="IsReadOnly" Value="True">
                             <Setter Property="Background" TargetName="border" Value="{StaticResource Light}"/>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" TargetName="border" Value="LightGray"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="BorderBrush" TargetName="border" 
