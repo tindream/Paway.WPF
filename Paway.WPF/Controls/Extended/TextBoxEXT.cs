@@ -167,18 +167,7 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
-            {
-                // MoveFocus takes a TraveralReqest as its argument.
-                var request = new TraversalRequest(FocusNavigationDirection.Next);
-                // Gets the element with keyboard focus.
-                // Change keyboard focus.
-                if (Keyboard.FocusedElement is UIElement elementWithFocus)
-                {
-                    elementWithFocus.MoveFocus(request);
-                }
-                //e.Handled = true;
-            }
+            PMethod.OnKeyDown(e);
             base.OnKeyDown(e);
         }
         /// <summary>
@@ -206,7 +195,7 @@ namespace Paway.WPF
         protected override void OnMouseEnter(MouseEventArgs e)
         {
             base.OnMouseEnter(e);
-            if (IAnimation > 0) Animation(true);
+            if (IAnimation > 0) PMethod.Animation(this, true);
         }
         /// <summary>
         /// 鼠标离开时关闭
@@ -214,48 +203,7 @@ namespace Paway.WPF
         protected override void OnMouseLeave(MouseEventArgs e)
         {
             base.OnMouseLeave(e);
-            if (IAnimation > 0) Animation(false);
-        }
-        private void Animation(bool value)
-        {
-            PMethod.Child(this, out Line line1, "line1", false);
-            PMethod.Child(this, out Line line2, "line2", false);
-            var storyboard = new Storyboard();
-            if (value)
-            {
-                var animX1 = new DoubleAnimation(line1.X2, this.ActualWidth / 2 - BorderThickness.Right, new Duration(TimeSpan.FromMilliseconds(100)));
-                var animX2 = new DoubleAnimation(line2.X2, this.ActualWidth / 2 - BorderThickness.Right, new Duration(TimeSpan.FromMilliseconds(100)));
-                if (line1 != null)
-                {
-                    Storyboard.SetTargetName(animX1, line1.Name);
-                    Storyboard.SetTargetProperty(animX1, new PropertyPath(Line.X2Property));
-                    storyboard.Children.Add(animX1);
-                }
-                if (line2 != null)
-                {
-                    Storyboard.SetTargetName(animX2, line2.Name);
-                    Storyboard.SetTargetProperty(animX2, new PropertyPath(Line.X2Property));
-                    storyboard.Children.Add(animX2);
-                }
-            }
-            else
-            {
-                var animX1 = new DoubleAnimation(line1.X2, 0, new Duration(TimeSpan.FromMilliseconds(100)));
-                var animX2 = new DoubleAnimation(line2.X2, 0, new Duration(TimeSpan.FromMilliseconds(100)));
-                if (line1 != null)
-                {
-                    Storyboard.SetTargetName(animX1, line1.Name);
-                    Storyboard.SetTargetProperty(animX1, new PropertyPath(Line.X2Property));
-                    storyboard.Children.Add(animX1);
-                }
-                if (line2 != null)
-                {
-                    Storyboard.SetTargetName(animX2, line2.Name);
-                    Storyboard.SetTargetProperty(animX2, new PropertyPath(Line.X2Property));
-                    storyboard.Children.Add(animX2);
-                }
-            }
-            if (line1 != null) storyboard.Begin(line1);
+            if (IAnimation > 0) PMethod.Animation(this, false);
         }
 
         #endregion

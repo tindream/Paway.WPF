@@ -53,6 +53,11 @@ namespace Paway.WPF
         public static readonly DependencyProperty ItemBackgroundProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBackground), typeof(BrushEXT), typeof(TreeViewEXT),
             new PropertyMetadata(new BrushEXT(null, PConfig.Alpha - PConfig.Interval * 2, PConfig.Alpha)));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ItemForegroundProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemForeground), typeof(BrushEXT), typeof(TreeViewEXT),
+            new PropertyMetadata(new BrushEXT(PConfig.TextColor, PConfig.TextColor, Colors.White)));
 
         #endregion
 
@@ -86,6 +91,16 @@ namespace Paway.WPF
         {
             get { return (BrushEXT)GetValue(ItemBackgroundProperty); }
             set { SetValue(ItemBackgroundProperty, value); }
+        }
+        /// <summary>
+        /// 项字体颜色
+        /// </summary>
+        [Category("扩展")]
+        [Description("项字体颜色")]
+        public BrushEXT ItemForeground
+        {
+            get { return (BrushEXT)GetValue(ItemForegroundProperty); }
+            set { SetValue(ItemForegroundProperty, value); }
         }
 
         #endregion

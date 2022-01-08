@@ -28,7 +28,7 @@ namespace Paway.WPF
     /// <summary>
     /// 一些帮助方法
     /// </summary>
-    public class PMethod : TMethod
+    public partial class PMethod : TMethod
     {
         private static readonly string NameWater = $"{nameof(PMethod)}_{nameof(WaterAdornerFixed)}";
         private static readonly string NameProgress = $"{nameof(PMethod)}_{nameof(Progress)}";
@@ -1022,69 +1022,6 @@ namespace Paway.WPF
                 }
             }
             return false;
-        }
-
-        #endregion
-
-        #endregion
-
-        #region internal
-        #region TypeConverter
-        /// <summary>
-        /// 获取ITypeDescriptorContext中的属性值
-        /// </summary>
-        internal static T GetValue<T>(ITypeDescriptorContext context)
-        {
-            if (context != null)
-            {
-                var service = (IProvideValueTarget)context.GetService(typeof(IProvideValueTarget));
-                if (service != null && service.TargetObject != null)
-                {
-                    var objType = service.TargetObject.GetType();
-                    var obj = (DependencyObject)Activator.CreateInstance(objType);
-                    var property = (DependencyProperty)service.TargetProperty;
-                    return (T)obj.GetValue(property);
-                }
-            }
-            return default;
-        }
-        /// <summary>
-        /// 控件状态转换
-        /// </summary>
-        internal static ElementData<T, I> ElementStatu<T, I>(ITypeDescriptorContext context, CultureInfo culture, string str,
-            Func<string, I> func, Func<T, string, I?> funcValue)
-            //where T : IElementStatu<I> 
-            where T : class
-            where I : struct
-        {
-            var old = GetValue<T>(context);
-
-            var strs = str.Split(';');
-            I? normal = null;
-            I? mouse = null;
-            I? pressed = null;
-            int? alpha = null;
-            if (strs.Length > 0)
-            {
-                if (!string.IsNullOrEmpty(strs[0])) normal = func(strs[0]);
-                else normal = funcValue(old, "Normal");
-            }
-            if (strs.Length > 1)
-            {
-                if (!string.IsNullOrEmpty(strs[1])) mouse = func(strs[1]);
-                else mouse = funcValue(old, "Mouse");
-            }
-            if (strs.Length > 2)
-            {
-                if (!string.IsNullOrEmpty(strs[2])) pressed = func(strs[2]);
-                else pressed = funcValue(old, "Pressed");
-            }
-            if (strs.Length > 3)
-            {
-                if (!string.IsNullOrEmpty(strs[3])) alpha = Convert.ToInt32(strs[3], culture);
-                else if (old != null) alpha = (int)old.GetValue("Alpha");
-            }
-            return new ElementData<T, I>(old, normal, mouse, pressed, alpha);
         }
 
         #endregion

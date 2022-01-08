@@ -256,9 +256,9 @@ namespace Paway.WPF
             base.OnPreviewMouseMove(e);
             if (IAnimation && Mouse.DirectlyOver != null && PMethod.Parent(Mouse.DirectlyOver, out ListViewItem listViewItem) && this.moveItem != listViewItem)
             {
-                if (this.moveItem != null) Animation(moveItem, false);
+                if (this.moveItem != null) PMethod.Animation(moveItem, false);
                 this.moveItem = listViewItem;
-                Animation(listViewItem, true);
+                PMethod.Animation(listViewItem, true);
             }
         }
         /// <summary>
@@ -269,53 +269,9 @@ namespace Paway.WPF
             base.OnMouseLeave(e);
             if (IAnimation && this.moveItem != null)
             {
-                Animation(moveItem, false);
+                PMethod.Animation(moveItem, false);
                 this.moveItem = null;
             }
-        }
-        private void Animation(ListViewItem item, bool value)
-        {
-            PMethod.Child(item, out Line line1, "line1", false);
-            PMethod.Child(item, out Line line2, "line2", false);
-            var storyboard = new Storyboard();
-            var animTime = PMethod.AnimTime(this.ItemWidth / 2) * 0.5;
-            if (value)
-            {
-                var itemWidth = (int)(item.ActualWidth / 2);
-                var animX1 = new DoubleAnimation(line1.X2, itemWidth, new Duration(TimeSpan.FromMilliseconds(animTime)));
-                var animX2 = new DoubleAnimation(line2.X2, itemWidth, new Duration(TimeSpan.FromMilliseconds(animTime)));
-                if (line1 != null)
-                {
-                    if (line1.X2 > this.ActualWidth) line1.X2 = this.ActualWidth;
-                    Storyboard.SetTargetName(animX1, line1.Name);
-                    Storyboard.SetTargetProperty(animX1, new PropertyPath(Line.X2Property));
-                    storyboard.Children.Add(animX1);
-                }
-                if (line2 != null)
-                {
-                    Storyboard.SetTargetName(animX2, line2.Name);
-                    Storyboard.SetTargetProperty(animX2, new PropertyPath(Line.X2Property));
-                    storyboard.Children.Add(animX2);
-                }
-            }
-            else
-            {
-                var animX1 = new DoubleAnimation(line1.X2, 0, new Duration(TimeSpan.FromMilliseconds(animTime)));
-                var animX2 = new DoubleAnimation(line2.X2, 0, new Duration(TimeSpan.FromMilliseconds(animTime)));
-                if (line1 != null)
-                {
-                    Storyboard.SetTargetName(animX1, line1.Name);
-                    Storyboard.SetTargetProperty(animX1, new PropertyPath(Line.X2Property));
-                    storyboard.Children.Add(animX1);
-                }
-                if (line2 != null)
-                {
-                    Storyboard.SetTargetName(animX2, line2.Name);
-                    Storyboard.SetTargetProperty(animX2, new PropertyPath(Line.X2Property));
-                    storyboard.Children.Add(animX2);
-                }
-            }
-            if (line1 != null) storyboard.Begin(line1);
         }
 
         #endregion

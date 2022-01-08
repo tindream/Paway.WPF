@@ -278,7 +278,7 @@
             <Separator />
             <ButtonEXT Content="Dino.C" IsLight="True" Margin="0" Radius="0" ToolTip="当前档案"/>
             <ListViewEXT Name="listView1" Margin="5,5,0,0" IAnimation="True"
-                           ItemHeight="67" ItemWidth="100"
+                           ItemHeight="67" ItemWidth="101"
                            ItemBorder="1,1,0,1;1,1,1,4">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">

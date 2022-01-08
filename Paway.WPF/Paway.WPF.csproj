@@ -89,6 +89,7 @@
     <Compile Include="Controls\Extended\ProgressBoard.cs" />
     <Compile Include="Controls\Extended\SliderMonitor.cs" />
     <Compile Include="Controls\Extended\TickBarEXT.cs" />
+    <Compile Include="Method\PMethod.Internal.cs" />
     <Compile Include="Method\RoutedEventArgs\ValueChangeEventArgs.cs" />
     <Compile Include="Method\Attribute\ColorAttribute.cs" />
     <Compile Include="Controls\Badge\Badge.xaml.cs">

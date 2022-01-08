@@ -97,6 +97,8 @@
                         <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="itemBackground" Property="Background" 
                                     Value="{Binding Path=ItemBackground.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
+                            <Setter TargetName="PART_Header" Property="TextBox.Foreground" 
+                                                Value="{Binding Path=ItemForeground.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -105,6 +107,8 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="itemBackground" Property="Background" 
                                     Value="{Binding Path=ItemBackground.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
+                            <Setter TargetName="PART_Header" Property="TextBox.Foreground" 
+                                                Value="{Binding Path=ItemForeground.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>

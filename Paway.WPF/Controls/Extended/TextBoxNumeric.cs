@@ -179,18 +179,7 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
-            {
-                // MoveFocus takes a TraveralReqest as its argument.
-                var request = new TraversalRequest(FocusNavigationDirection.Next);
-                // Gets the element with keyboard focus.
-                // Change keyboard focus.
-                if (Keyboard.FocusedElement is UIElement elementWithFocus)
-                {
-                    elementWithFocus.MoveFocus(request);
-                }
-                //e.Handled = true;
-            }
+            PMethod.OnKeyDown(e);
             base.OnKeyDown(e);
         }
 
