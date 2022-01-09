@@ -150,31 +150,31 @@ namespace Paway.WPF
         /// </summary>
         public bool Expand(ITreeViewItem model)
         {
-            return Selected(model.Id, false);
+            return Selected(model.Id, false, model.IsGroup);
         }
         /// <summary>
         /// 选中指定节点
         /// </summary>
-        public bool Selected(int id, bool iSelected = true)
+        public bool Selected(int id, bool iSelected = true, bool? iGroup = null)
         {
-            return Expand(this, id, iSelected);
+            return Expand(this, id, iSelected, iGroup);
         }
-        private bool Expand(ItemsControl view, int id, bool iSelected)
+        private bool Expand(ItemsControl view, int id, bool iSelected, bool? iGroup = null)
         {
             foreach (var item in view.Items)
             {
                 if (item is ITreeViewItem temp)
                 {
-                    if (Expand(view, temp, id, iSelected)) return true;
+                    if (Expand(view, temp, id, iSelected, iGroup)) return true;
                 }
             }
             return false;
         }
-        private bool Expand(ItemsControl view, ITreeViewItem item, int id, bool iSelected)
+        private bool Expand(ItemsControl view, ITreeViewItem item, int id, bool iSelected, bool? iGroup = null)
         {
             if (view.ItemContainerGenerator.ContainerFromItem(item) is TreeViewItem treeItem)
             {
-                if (item.Id == id)
+                if (item.Id == id && (iGroup == null || iGroup.Value == item.IsGroup))
                 {
                     treeItem.IsExpanded = true;
                     if (iSelected)
@@ -197,7 +197,7 @@ namespace Paway.WPF
                         }
                         //treeItem.ExpandSubtree();
                     }
-                    if (Expand(treeItem, id, iSelected)) return true;
+                    if (Expand(treeItem, id, iSelected, iGroup)) return true;
                     else treeItem.IsExpanded = oldExpanded;
                 }
             }
