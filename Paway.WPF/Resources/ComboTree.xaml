@@ -14,7 +14,7 @@
                 <ControlTemplate TargetType="{x:Type local:ComboTree}">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" MinWidth="{TemplateBinding TitleMinWidth}"/>
                             <ColumnDefinition Width="0.7*"/>
                             <ColumnDefinition Width="0.3*" MaxWidth="30"/>
                         </Grid.ColumnDefinitions>

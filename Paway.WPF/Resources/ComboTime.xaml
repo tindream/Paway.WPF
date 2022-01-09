@@ -16,7 +16,7 @@
                 <ControlTemplate TargetType="{x:Type local:ComboTime}">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" MinWidth="{TemplateBinding TitleMinWidth}"/>
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock x:Name="tbTitle" Visibility="{Binding Title, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullToCollapsed}}"

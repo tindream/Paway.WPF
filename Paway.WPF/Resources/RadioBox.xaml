@@ -9,7 +9,8 @@
 
     <Style TargetType="{x:Type local:RadioBox}" BasedOn="{StaticResource FocusConfig}">
         <Setter Property="Margin" Value="2"/>
-        <Setter Property="Padding" Value="6,5"/>
+        <Setter Property="Padding" Value="8,5"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:RadioBox">
