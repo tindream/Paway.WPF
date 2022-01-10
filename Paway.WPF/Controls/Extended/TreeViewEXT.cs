@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Paway.WPF
@@ -111,6 +112,141 @@ namespace Paway.WPF
         {
             DefaultStyleKey = typeof(TreeViewEXT);
         }
+
+        #region 拖拽节点
+        private Point? _lastMouseDown;
+        public event Func<ITreeViewItem, ITreeViewItem, bool> DragChecked;
+        private bool OnDragChecked(ITreeViewItem fromItem, ITreeViewItem toItem)
+        {
+            return DragChecked?.Invoke(fromItem, toItem) == true;
+        }
+        /// <summary>
+        /// 按下记录位置
+        /// </summary>
+        protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            if (e.ButtonState == MouseButtonState.Pressed && this.AllowDrop)
+            {
+                _lastMouseDown = e.GetPosition(this);
+            }
+            base.OnPreviewMouseLeftButtonDown(e);
+        }
+        /// <summary>
+        /// 抬起停止拖动
+        /// </summary>
+        protected override void OnPreviewMouseLeftButtonUp(MouseButtonEventArgs e)
+        {
+            if (_lastMouseDown != null)
+            {
+                _lastMouseDown = null;
+                if (PMethod.Parent(this, out Window window)) window.Cursor = null;
+                //if (PMethod.Parent(this, out Window window)) window.Cursor = Cursors.Hand;
+            }
+            base.OnPreviewMouseLeftButtonUp(e);
+        }
+        /// <summary>
+        /// 启动拖动
+        /// </summary>
+        protected override void OnPreviewMouseMove(MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed && _lastMouseDown != null)
+            {
+                Point currentPosition = e.GetPosition(this);
+                if ((Math.Abs(currentPosition.X - _lastMouseDown.Value.X) > SystemParameters.MinimumHorizontalDragDistance) ||
+                    (Math.Abs(currentPosition.Y - _lastMouseDown.Value.Y) > SystemParameters.MinimumVerticalDragDistance))
+                {
+                    if (this.SelectedItem is ITreeViewItem item)
+                    {
+                        DragDrop.DoDragDrop(this, item, DragDropEffects.Move);
+                    }
+                }
+            }
+            base.OnPreviewMouseMove(e);
+        }
+        /// <summary>
+        /// 拖动进入时检查状态
+        /// </summary>
+        protected override void OnDragEnter(DragEventArgs e)
+        {
+            DragCheck(e);
+            base.OnDragEnter(e);
+        }
+        /// <summary>
+        /// 拖动离开时检查状态
+        /// </summary>
+        protected override void OnDragLeave(DragEventArgs e)
+        {
+            DragCheck(e);
+            base.OnDragLeave(e);
+        }
+        /// <summary>
+        /// 拖动过程中检查状态
+        /// </summary>
+        protected override void OnDragOver(DragEventArgs e)
+        {
+            DragCheck(e);
+            base.OnDragOver(e);
+        }
+        private void DragCheck(DragEventArgs e)
+        {
+            if (PMethod.Parent(e.OriginalSource, out TreeViewItem item) && item.DataContext is ITreeViewItem toItem)
+            {
+                if (e.Data.GetData(typeof(TreeViewItemModel)) is ITreeViewItem fromItem)
+                {
+                    if (IsExist(fromItem, toItem))
+                    {
+                        e.Effects = DragDropEffects.None;
+                        e.Handled = true;
+                    }
+                }
+            }
+        }
+        private bool IsExist(ITreeViewItem fromItem, ITreeViewItem toItem)
+        {
+            if (fromItem.IsGroup == toItem.IsGroup && fromItem.Id == toItem.Id) return true;
+            if (OnDragChecked(fromItem, toItem)) return true;
+            foreach (var item in fromItem.Children.ToList())
+            {
+                if (IsExist(item, toItem)) return true;
+            }
+            return false;
+        }
+        /// <summary>
+        /// 开始拖动-完成
+        /// </summary>
+        protected override void OnDrop(DragEventArgs e)
+        {
+            if (PMethod.Parent(e.OriginalSource, out TreeViewItem item) && item.DataContext is ITreeViewItem toItem)
+            {
+                if (e.Data.GetData(typeof(TreeViewItemModel)) is TreeViewItemModel fromItem)
+                {
+                    if (toItem.IsGroup)
+                    {
+                        MoveItem(fromItem, toItem);
+                    }
+                    else
+                    {
+                        toItem = toItem.Parent;
+                        if (toItem != null) MoveItem(fromItem, toItem);
+                        else if (this.ItemsSource is ObservableCollection<TreeViewItemModel> list) list.Add(fromItem);
+                    }
+                }
+            }
+            base.OnDrop(e);
+        }
+        private void MoveItem(TreeViewItemModel fromItem, ITreeViewItem toItem)
+        {
+            if (toItem.IsGroup)
+            {
+                if (fromItem.Parent != null) fromItem.Parent.Remove(fromItem);
+                else if (this.ItemsSource is ObservableCollection<TreeViewItemModel> list) list.Remove(fromItem);
+                toItem.Add(fromItem);
+            }
+        }
+
+        #endregion
+
+        #region 展开/收缩节点
         /// <summary>
         /// 收缩全部节点
         /// </summary>
@@ -203,5 +339,7 @@ namespace Paway.WPF
             }
             return false;
         }
+
+        #endregion
     }
 }

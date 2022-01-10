@@ -61,6 +61,10 @@ namespace Paway.WPF
         /// </summary>
         void Add(string text, string subtitle = null, string desc = null);
         /// <summary>
+        /// 添加子级
+        /// </summary>
+        void Remove(ITreeViewItem model);
+        /// <summary>
         /// 更新节点选中
         /// </summary>
         void Checked(bool? value);
@@ -185,6 +189,14 @@ namespace Paway.WPF
         {
             model.Parent = this;
             this.Children.Add(model);
+        }
+        /// <summary>
+        /// 添加子级
+        /// </summary>
+        public void Remove(ITreeViewItem model)
+        {
+            model.Parent = null;
+            this.Children.Remove(model);
         }
         /// <summary>
         /// 添加子级

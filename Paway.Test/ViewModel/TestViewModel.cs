@@ -59,6 +59,8 @@ namespace Paway.Test.ViewModel
             get { return time; }
             set { time = value; RaisePropertyChanged(); }
         }
+        public ObservableCollection<TreeViewItemModel> TreeList { get; private set; } = new ObservableCollection<TreeViewItemModel>();
+
         private ICommand buttonCommand;
         public ICommand ButtonCommand
         {
@@ -81,6 +83,18 @@ namespace Paway.Test.ViewModel
         {
             for (var i = 0; i < 16; i++) List.Add(new ListViewItemModel($"{i + 1}"));
             for (var i = 0; i < 16; i++) MultiList.Add(new ComboBoxItemModel($"{i + 1}"));
+            var treeInfo = new TreeViewItemModel("分类1", true);
+            this.TreeList.Add(treeInfo);
+            treeInfo.Add("刘棒1");
+            treeInfo.Add("刘棒2");
+            treeInfo = new TreeViewItemModel("分类A", true);
+            this.TreeList.Add(treeInfo);
+            var treeInfo2 = new TreeViewItemModel("分类A1", true);
+            treeInfo.Add(treeInfo2);
+            treeInfo2.Add("刘棒A1");
+            treeInfo2.Add("刘棒B1");
+            treeInfo.Add("刘棒A");
+            treeInfo.Add("刘棒B");
         }
     }
 }

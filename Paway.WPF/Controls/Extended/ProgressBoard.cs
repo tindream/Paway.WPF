@@ -76,27 +76,26 @@ namespace Paway.WPF
                 CaptureMouse();
                 e.Handled = true;
             }
-            base.OnPreviewMouseDown(e);
+            base.OnPreviewMouseLeftButtonDown(e);
         }
         /// <summary>
         /// 移动位置
         /// </summary>
         protected override void OnPreviewMouseMove(MouseEventArgs e)
         {
-            base.OnPreviewMouseMove(e);
             if (e.LeftButton == MouseButtonState.Pressed && startPoint != null)
             {
                 var movePoint = e.GetPosition(this);
                 Calc(movePoint);
                 this.startPoint = movePoint;
             }
+            base.OnPreviewMouseMove(e);
         }
         /// <summary>
         /// 抬起停止拖动
         /// </summary>
         protected override void OnPreviewMouseLeftButtonUp(MouseButtonEventArgs e)
         {
-            base.OnPreviewMouseUp(e);
             if (startPoint != null)
             {
                 Calc(e.GetPosition(this));
@@ -105,6 +104,7 @@ namespace Paway.WPF
                 ReleaseMouseCapture();
                 if (PMethod.Parent(this, out Window window)) window.Cursor = null;
             }
+            base.OnPreviewMouseLeftButtonUp(e);
         }
         /// <summary>
         /// 计算移动距离

@@ -14,17 +14,11 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <StackPanel VerticalAlignment="Center">
-            <ButtonEXT VerticalAlignment="Center" Content="随机" Click="ButtonEXT_Click" Visibility="{Binding UserType, Converter={StaticResource valueToCollapsed}, ConverterParameter=2}"
+            <ButtonEXT VerticalAlignment="Center" Content="测试" Click="ButtonEXT_Click" Visibility="{Binding UserType, Converter={StaticResource valueToCollapsed}, ConverterParameter=2}"
                        Command="{Binding ButtonCommand}" IsLight="True"/>
-            <TextBoxNumeric Interval="1.06" Decimal="2" MaxValue="100" MinValue="0" Text="4"/>
-            <WrapPanel>
-                <CheckButton Content="启用"/>
-                <RadioBox Content="启用"/>
-                <ButtonEXT Content="启用"/>
-            </WrapPanel>
+
+            <TreeViewEXT x:Name="TreeViewOrg" AllowDrop="True" Height="180" ItemTemplate="{StaticResource TreeNode}" ItemsSource="{Binding TreeList}"/>
+
         </StackPanel>
-        <ScrollViewerEXT Grid.Column="1" ScrollInterval="50">
-            <Canvas Name="canvas" Background="White" Width="200" Height="200"/>
-        </ScrollViewerEXT>
     </Grid>
 </WindowEXT>
