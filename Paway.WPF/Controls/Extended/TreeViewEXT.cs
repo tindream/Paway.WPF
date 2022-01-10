@@ -114,12 +114,42 @@ namespace Paway.WPF
         }
 
         #region 拖拽节点
-        private Point? _lastMouseDown;
-        public event Func<ITreeViewItem, ITreeViewItem, bool> DragChecked;
-        private bool OnDragChecked(ITreeViewItem fromItem, ITreeViewItem toItem)
+        #region 节点拖动检查过滤路由事件
+        /// <summary>
+        /// 节点拖动检查过滤路由事件
+        /// </summary>
+        public event EventHandler<TreeFilterEventArgs> DragFilter;
+        /// <summary>
+        /// 节点拖动检查过滤路由事件
+        /// </summary>
+        private bool? OnDragFilter(ITreeViewItem fromItem, ITreeViewItem toItem, RoutedEvent routed)
         {
-            return DragChecked?.Invoke(fromItem, toItem) == true;
+            var args = new TreeFilterEventArgs(fromItem, toItem, routed, this);
+            if (DragFilter != null)
+            {
+                DragFilter.Invoke(this, args);
+                return args.Result;
+            }
+            return null;
         }
+
+        #endregion
+        #region 节点拖动完成路由事件
+        /// <summary>
+        /// 节点拖动完成路由事件
+        /// </summary>
+        public event EventHandler<TreeDragCompletedEventArgs> DragCompleted;
+        /// <summary>
+        /// 节点拖动完成路由事件
+        /// </summary>
+        private void OnDragCompleted(ITreeViewItem treeItem, RoutedEvent routed)
+        {
+            var args = new TreeDragCompletedEventArgs(treeItem, routed, this);
+            DragCompleted?.Invoke(this, args);
+        }
+
+        #endregion
+        private Point? _lastMouseDown;
         /// <summary>
         /// 按下记录位置
         /// </summary>
@@ -189,25 +219,32 @@ namespace Paway.WPF
         }
         private void DragCheck(DragEventArgs e)
         {
-            if (PMethod.Parent(e.OriginalSource, out TreeViewItem item) && item.DataContext is ITreeViewItem toItem)
+            if (e.Data.GetData(typeof(TreeViewItemModel)) is ITreeViewItem fromItem)
             {
-                if (e.Data.GetData(typeof(TreeViewItemModel)) is ITreeViewItem fromItem)
+                if (PMethod.Parent(e.OriginalSource, out TreeViewItem item) && item.DataContext is ITreeViewItem toItem)
                 {
-                    if (IsExist(fromItem, toItem))
+                    if (IsFilter(fromItem, toItem, e.RoutedEvent))
                     {
                         e.Effects = DragDropEffects.None;
                         e.Handled = true;
                     }
                 }
+                else if (IsFilter(fromItem, null, e.RoutedEvent))
+                {
+                    e.Effects = DragDropEffects.None;
+                    e.Handled = true;
+                }
             }
         }
-        private bool IsExist(ITreeViewItem fromItem, ITreeViewItem toItem)
+        private bool IsFilter(ITreeViewItem fromItem, ITreeViewItem toItem, RoutedEvent routed)
         {
+            var result = OnDragFilter(fromItem, toItem, routed);
+            if (result != null) return result.Value;
+            if (toItem == null) return !fromItem.IsGroup;
             if (fromItem.IsGroup == toItem.IsGroup && fromItem.Id == toItem.Id) return true;
-            if (OnDragChecked(fromItem, toItem)) return true;
             foreach (var item in fromItem.Children.ToList())
             {
-                if (IsExist(item, toItem)) return true;
+                if (IsFilter(item, toItem, routed)) return true;
             }
             return false;
         }
@@ -216,32 +253,37 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnDrop(DragEventArgs e)
         {
-            if (PMethod.Parent(e.OriginalSource, out TreeViewItem item) && item.DataContext is ITreeViewItem toItem)
+            if (e.Data.GetData(typeof(TreeViewItemModel)) is TreeViewItemModel fromItem)
             {
-                if (e.Data.GetData(typeof(TreeViewItemModel)) is TreeViewItemModel fromItem)
+                if (PMethod.Parent(e.OriginalSource, out TreeViewItem item) && item.DataContext is ITreeViewItem toItem)
                 {
                     if (toItem.IsGroup)
                     {
-                        MoveItem(fromItem, toItem);
+                        RemoveItem(fromItem);
+                        toItem.Add(fromItem);
+                        OnDragCompleted(toItem, e.RoutedEvent);
                     }
-                    else
+                    else if (toItem.Parent != null && toItem.Parent.IsGroup)
                     {
-                        toItem = toItem.Parent;
-                        if (toItem != null) MoveItem(fromItem, toItem);
-                        else if (this.ItemsSource is ObservableCollection<TreeViewItemModel> list) list.Add(fromItem);
+                        var index = toItem.Parent.Children.IndexOf(toItem);
+                        RemoveItem(fromItem);
+                        toItem.Parent.Insert(index, fromItem);
+                        OnDragCompleted(toItem.Parent, e.RoutedEvent);
                     }
+                }
+                else if (this.ItemsSource is ObservableCollection<TreeViewItemModel> list)
+                {
+                    RemoveItem(fromItem);
+                    list.Add(fromItem);
+                    OnDragCompleted(null, e.RoutedEvent);
                 }
             }
             base.OnDrop(e);
         }
-        private void MoveItem(TreeViewItemModel fromItem, ITreeViewItem toItem)
+        private void RemoveItem(TreeViewItemModel fromItem)
         {
-            if (toItem.IsGroup)
-            {
-                if (fromItem.Parent != null) fromItem.Parent.Remove(fromItem);
-                else if (this.ItemsSource is ObservableCollection<TreeViewItemModel> list) list.Remove(fromItem);
-                toItem.Add(fromItem);
-            }
+            if (fromItem.Parent != null) fromItem.Parent.Remove(fromItem);
+            else if (this.ItemsSource is ObservableCollection<TreeViewItemModel> list) list.Remove(fromItem);
         }
 
         #endregion

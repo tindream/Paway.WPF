@@ -57,11 +57,15 @@ namespace Paway.WPF
         /// </summary>
         void Add(ITreeViewItem model);
         /// <summary>
+        /// 插入子级
+        /// </summary>
+        void Insert(int index, ITreeViewItem model);
+        /// <summary>
         /// 添加子级
         /// </summary>
         void Add(string text, string subtitle = null, string desc = null);
         /// <summary>
-        /// 添加子级
+        /// 移除子级
         /// </summary>
         void Remove(ITreeViewItem model);
         /// <summary>
@@ -191,12 +195,12 @@ namespace Paway.WPF
             this.Children.Add(model);
         }
         /// <summary>
-        /// 添加子级
+        /// 插入子级
         /// </summary>
-        public void Remove(ITreeViewItem model)
+        public void Insert(int index, ITreeViewItem model)
         {
-            model.Parent = null;
-            this.Children.Remove(model);
+            model.Parent = this;
+            this.Children.Insert(index, model);
         }
         /// <summary>
         /// 添加子级
@@ -214,6 +218,14 @@ namespace Paway.WPF
             child.ShortName = text.ToSpell();
             if (child.ShortName.Length > 2) child.ShortName = child.ShortName.Substring(0, 2);
             this.Children.Add(child);
+        }
+        /// <summary>
+        /// 移除子级
+        /// </summary>
+        public void Remove(ITreeViewItem model)
+        {
+            model.Parent = null;
+            this.Children.Remove(model);
         }
 
         #region 关联选中项

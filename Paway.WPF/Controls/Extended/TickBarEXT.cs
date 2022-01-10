@@ -27,24 +27,24 @@ namespace Paway.WPF
         /// <parm>通过首先注册RoutedEventID创建自定义路由事件Create a custom routed event by first registering a RoutedEventID</parm>
         /// <parm>此事件使用冒泡路由策略This event uses the bubbling routing strategy</parm>
         /// </summary>
-        public static readonly RoutedEvent TrackValueEvent = EventManager.RegisterRoutedEvent(
-            nameof(TrackValue), RoutingStrategy.Tunnel, typeof(EventHandler<ValueChangeEventArgs>), typeof(TickBarEXT));
-
+        public static readonly RoutedEvent TrackValueChangedEvent = EventManager.RegisterRoutedEvent(
+            nameof(TrackValueChanged), RoutingStrategy.Tunnel, typeof(EventHandler<ValueChangeEventArgs>), typeof(TickBarEXT));
         /// <summary>
         /// 为事件提供CLR访问器Provide CLR accessors for the event
         /// </summary>
-        public event EventHandler<ValueChangeEventArgs> TrackValue
+        public event EventHandler<ValueChangeEventArgs> TrackValueChanged
         {
-            add { AddHandler(TrackValueEvent, value); }
-            remove { RemoveHandler(TrackValueEvent, value); }
+            add { AddHandler(TrackValueChangedEvent, value); }
+            remove { RemoveHandler(TrackValueChangedEvent, value); }
         }
-
         /// <summary>
         /// 此方法引发TrackValue事件This method raises the TrackValue event
         /// </summary>
-        private void OnTrackValueEvent(ValueChangeEventArgs arg)
+        private double OnTrackValueChanged(double value)
         {
+            var arg = new ValueChangeEventArgs(value, TrackValueChangedEvent, this);
             RaiseEvent(arg);
+            return arg.Value;
         }
 
         #endregion
@@ -82,9 +82,8 @@ namespace Paway.WPF
                 for (var i = 0; i <= tickCount; i++)
                 {
                     var value = (this.Minimum + this.TickFrequency * (horizontal ? i : tickCount - i)).ToDouble();
-                    var arg = new ValueChangeEventArgs(value, TrackValueEvent, this);
-                    OnTrackValueEvent(arg);
-                    var formattedText = new FormattedText(arg.Value.ToString(), CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana"), 8, color);
+                    value = OnTrackValueChanged(value);
+                    var formattedText = new FormattedText(value.ToString(), CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana"), 8, color);
                     if (this.Name == "TopTick")
                     {
                         if (maxWidth < formattedText.Width) maxWidth = formattedText.Width;
@@ -105,9 +104,8 @@ namespace Paway.WPF
             for (var i = 0; i <= tickCount; i++)
             {
                 var value = (this.Minimum + this.TickFrequency * (horizontal ? i : tickCount - i)).ToDouble();
-                var arg = new ValueChangeEventArgs(value, TrackValueEvent, this);
-                OnTrackValueEvent(arg);
-                var formattedText = new FormattedText(arg.Value.ToString(), CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana"), 8, color);
+                value = OnTrackValueChanged(value);
+                var formattedText = new FormattedText(value.ToString(), CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana"), 8, color);
 
                 var x = tickFrequencySize * i;
                 if (horizontal)

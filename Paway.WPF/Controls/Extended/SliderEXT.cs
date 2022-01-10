@@ -150,16 +150,34 @@ namespace Paway.WPF
 
         #endregion
 
-        #region 事件
+        #region ToolTip值更新路由事件
         /// <summary>
         /// ToolTip值更新路由事件
         /// </summary>
-        public event EventHandler<ValueChangeEventArgs> ToolTipValueChanged;
+        public event EventHandler<ValueChangeEventArgs> TipValueChanged;
+        /// <summary>
+        /// ToolTip值更新路由事件
+        /// </summary>
+        private double OnTipValueChanged(double value, RoutedEvent routedEvent)
+        {
+            var args = new ValueChangeEventArgs(value, routedEvent, this);
+            TipValueChanged?.Invoke(this, args);
+            return args.Value;
+        }
 
+        #endregion
+        #region 刻度值重写路由事件
         /// <summary>
         /// 刻度值重写路由事件
         /// </summary>
-        public event EventHandler<ValueChangeEventArgs> TrackValueEvent;
+        public event EventHandler<ValueChangeEventArgs> TrackValueChanged;
+        /// <summary>
+        /// 刻度值重写路由事件
+        /// </summary>
+        private void OnTrackValueChanged(ValueChangeEventArgs e)
+        {
+            TrackValueChanged?.Invoke(this, e);
+        }
 
         #endregion
 
@@ -180,12 +198,12 @@ namespace Paway.WPF
             base.OnApplyTemplate();
             if (PMethod.Child(this, out TickBarEXT tickBar, "TopTick", false))
             {
-                tickBar.TrackValue += TickBar_TrackValue;
+                tickBar.TrackValueChanged += TickBar_TrackValue;
             }
         }
         private void TickBar_TrackValue(object sender, ValueChangeEventArgs e)
         {
-            TrackValueEvent?.Invoke(sender, e);
+            OnTrackValueChanged(e);
         }
 
         #endregion
@@ -271,11 +289,10 @@ namespace Paway.WPF
         private double OnToolTipValueChanged(RoutedEvent routedEvent)
         {
             if (this.AutoToolTipPlacement == AutoToolTipPlacement.None) return this.Value;
-            var arg = new ValueChangeEventArgs(this.Value, routedEvent, this);
-            ToolTipValueChanged?.Invoke(this, arg);
-            this.ToolTip = PMethod.Rounds(arg.Value, this.AutoToolTipPrecision, this.AutoToolTipPrecision);
+            var value = OnTipValueChanged(this.Value, routedEvent);
+            this.ToolTip = PMethod.Rounds(value, this.AutoToolTipPrecision, this.AutoToolTipPrecision);
             if (toolTip != null) toolTip.Content = this.ToolTip;
-            return arg.Value;
+            return value;
         }
 
         #endregion

@@ -83,18 +83,21 @@ namespace Paway.Test.ViewModel
         {
             for (var i = 0; i < 16; i++) List.Add(new ListViewItemModel($"{i + 1}"));
             for (var i = 0; i < 16; i++) MultiList.Add(new ComboBoxItemModel($"{i + 1}"));
-            var treeInfo = new TreeViewItemModel("分类1", true);
+            var treeInfo = new TreeViewItemModel("分类A", true);
             this.TreeList.Add(treeInfo);
-            treeInfo.Add("刘棒1");
-            treeInfo.Add("刘棒2");
-            treeInfo = new TreeViewItemModel("分类A", true);
+            treeInfo.Add("刘棒A1");
+            treeInfo.Add("刘棒A2");
+            treeInfo.Add("刘棒A3");
+            treeInfo.Add("刘棒A4");
+            treeInfo.Add("刘棒A5");
+            treeInfo = new TreeViewItemModel("分类B", true);
             this.TreeList.Add(treeInfo);
-            var treeInfo2 = new TreeViewItemModel("分类A1", true);
+            var treeInfo2 = new TreeViewItemModel("分类C", true);
             treeInfo.Add(treeInfo2);
-            treeInfo2.Add("刘棒A1");
-            treeInfo2.Add("刘棒B1");
-            treeInfo.Add("刘棒A");
-            treeInfo.Add("刘棒B");
+            treeInfo2.Add("刘棒C1");
+            treeInfo2.Add("刘棒C1");
+            treeInfo.Add("刘棒B1");
+            treeInfo.Add("刘棒B2");
         }
     }
 }
