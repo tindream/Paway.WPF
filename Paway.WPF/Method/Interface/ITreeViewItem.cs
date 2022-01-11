@@ -30,6 +30,15 @@ namespace Paway.WPF
         /// </summary>
         string Text { get; set; }
         /// <summary>
+        /// 带数量的文本
+        /// </summary>
+        string Texts { get; set; }
+        /// <summary>
+        /// 加载带数量的文本
+        /// </summary>
+        void OnTexts();
+
+        /// <summary>
         /// 副标题
         /// </summary>
         string Subtitle { get; set; }
@@ -119,8 +128,39 @@ namespace Paway.WPF
         public virtual string Text
         {
             get { return text; }
-            set { text = value; OnPropertyChanged(); }
+            set { text = value; OnPropertyChanged(); OnTexts(); }
         }
+        /// <summary>
+        /// 带数量的文本
+        /// </summary>
+        public string Texts { get; set; }
+        /// <summary>
+        /// 加载带数量的文本
+        /// </summary>
+        public void OnTexts()
+        {
+            if (IsGroup)
+            {
+                int count = 0;
+                LoadCount(Children, ref count);
+                this.Texts = $"{Text}({count})";
+            }
+            else
+            {
+                this.Texts = Text;
+            }
+            OnPropertyChanged(nameof(Texts));
+            if (Parent != null) Parent.OnTexts();
+        }
+        private void LoadCount(ObservableCollection<ITreeViewItem> children, ref int count)
+        {
+            foreach (var item in children)
+            {
+                if (item.IsGroup) LoadCount(item.Children, ref count);
+                else count++;
+            }
+        }
+
         private string subtitle;
         /// <summary>
         /// 副标题
@@ -178,7 +218,13 @@ namespace Paway.WPF
         public TreeViewItemModel()
         {
             this.Id = this.GetHashCode();
+            Children.CollectionChanged += Children_CollectionChanged;
         }
+        private void Children_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            OnTexts();
+        }
+
         /// <summary>
         /// </summary>
         public TreeViewItemModel(string text, bool isGroup = false) : this()
