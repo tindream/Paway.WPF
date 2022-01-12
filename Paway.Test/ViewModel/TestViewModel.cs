@@ -95,7 +95,7 @@ namespace Paway.Test.ViewModel
             var treeInfo2 = new TreeViewItemModel("分类C", true);
             treeInfo.Add(treeInfo2);
             treeInfo2.Add("刘棒C1");
-            treeInfo2.Add("刘棒C1");
+            treeInfo2.Add("刘棒C2");
             treeInfo.Add("刘棒B1");
             treeInfo.Add("刘棒B2");
         }

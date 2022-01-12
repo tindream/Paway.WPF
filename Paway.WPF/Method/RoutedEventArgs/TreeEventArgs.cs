@@ -21,9 +21,13 @@ namespace Paway.WPF
     public class TreeDragCompletedEventArgs : RoutedEventArgs
     {
         /// <summary>
-        /// 父节点(为空时则为根)
+        /// 从某节点
         /// </summary>
-        public ITreeViewItem TreeItem { get; set; }
+        public ITreeViewItem FromItem { get; set; }
+        /// <summary>
+        /// 到某节点
+        /// </summary>
+        public ITreeViewItem ToItem { get; set; }
 
         /// <summary>
         /// 树节点拖拽完成路由事件参数
@@ -32,9 +36,10 @@ namespace Paway.WPF
         /// <summary>
         /// 树节点拖拽完成路由事件参数
         /// </summary>
-        public TreeDragCompletedEventArgs(ITreeViewItem treeItem, RoutedEvent routedEvent, object source) : base(routedEvent, source)
+        public TreeDragCompletedEventArgs(ITreeViewItem fromItem, ITreeViewItem toItem, RoutedEvent routedEvent, object source) : base(routedEvent, source)
         {
-            this.TreeItem = treeItem;
+            this.FromItem = fromItem;
+            this.ToItem = toItem;
         }
     }
 

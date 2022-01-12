@@ -142,14 +142,21 @@ namespace Paway.WPF
         /// <summary>
         /// 节点拖动完成路由事件
         /// </summary>
-        private void OnDragCompleted(ITreeViewItem treeItem, RoutedEvent routed)
+        private void OnDragCompleted(ITreeViewItem fromItem, ITreeViewItem toItem, RoutedEvent routed)
         {
-            var args = new TreeDragCompletedEventArgs(treeItem, routed, this);
+            var args = new TreeDragCompletedEventArgs(fromItem, toItem, routed, this);
             DragCompleted?.Invoke(this, args);
         }
 
         #endregion
+        /// <summary>
+        /// 拖拽起点
+        /// </summary>
         private Point? _lastMouseDown;
+        /// <summary>
+        /// 存在分组标记
+        /// </summary>
+        private bool IsGroup;
         /// <summary>
         /// 按下记录位置
         /// </summary>
@@ -158,6 +165,10 @@ namespace Paway.WPF
             if (e.ButtonState == MouseButtonState.Pressed && this.AllowDrop)
             {
                 _lastMouseDown = e.GetPosition(this);
+                if (this.ItemsSource is ObservableCollection<TreeViewItemModel> list)
+                {
+                    IsGroup = list.Any(c => c.IsGroup);
+                }
             }
             base.OnPreviewMouseLeftButtonDown(e);
         }
@@ -240,7 +251,7 @@ namespace Paway.WPF
         {
             var result = OnDragFilter(fromItem, toItem, routed);
             if (result != null) return result.Value;
-            if (toItem == null) return !fromItem.IsGroup;
+            if (toItem == null) return IsGroup && !fromItem.IsGroup;
             if (fromItem.IsGroup == toItem.IsGroup && fromItem.Id == toItem.Id) return true;
             foreach (var item in fromItem.Children.ToList())
             {
@@ -255,27 +266,51 @@ namespace Paway.WPF
         {
             if (e.Data.GetData(typeof(TreeViewItemModel)) is TreeViewItemModel fromItem)
             {
-                if (PMethod.Parent(e.OriginalSource, out TreeViewItem item) && item.DataContext is ITreeViewItem toItem)
+                if (PMethod.Parent(e.OriginalSource, out TreeViewItem item) && item.DataContext is TreeViewItemModel toItem)
                 {
+                    var iSame = fromItem.Parent == toItem.Parent;
+                    RemoveItem(fromItem);
                     if (toItem.IsGroup)
                     {
-                        RemoveItem(fromItem);
-                        toItem.Add(fromItem);
-                        OnDragCompleted(toItem, e.RoutedEvent);
+                        if (fromItem.IsGroup)
+                        {
+                            var index = toItem.Children.ToList().FindLastIndex(c => c.IsGroup);
+                            toItem.Insert(index + 1, fromItem);
+                            OnDragCompleted(fromItem, null, e.RoutedEvent);
+                        }
+                        else
+                        {
+                            toItem.Add(fromItem);
+                            OnDragCompleted(fromItem, null, e.RoutedEvent);
+                        }
                     }
                     else if (toItem.Parent != null && toItem.Parent.IsGroup)
                     {
-                        var index = toItem.Parent.Children.IndexOf(toItem);
-                        RemoveItem(fromItem);
-                        toItem.Parent.Insert(index, fromItem);
-                        OnDragCompleted(toItem.Parent, e.RoutedEvent);
+                        if (fromItem.IsGroup)
+                        {
+                            var index = toItem.Children.ToList().FindLastIndex(c => c.IsGroup);
+                            toItem.Insert(index + 1, fromItem);
+                            OnDragCompleted(fromItem, null, e.RoutedEvent);
+                        }
+                        else
+                        {
+                            var index = toItem.Parent.Children.IndexOf(toItem);
+                            toItem.Parent.Insert(index, fromItem);
+                            OnDragCompleted(fromItem, iSame ? toItem : null, e.RoutedEvent);
+                        }
+                    }
+                    else if (!IsGroup && this.ItemsSource is ObservableCollection<TreeViewItemModel> list)
+                    {
+                        var index = list.IndexOf(toItem);
+                        list.Insert(index, fromItem);
+                        OnDragCompleted(fromItem, toItem, e.RoutedEvent);
                     }
                 }
                 else if (this.ItemsSource is ObservableCollection<TreeViewItemModel> list)
                 {
-                    RemoveItem(fromItem);
+                    list.Remove(fromItem);
                     list.Add(fromItem);
-                    OnDragCompleted(null, e.RoutedEvent);
+                    OnDragCompleted(fromItem, null, e.RoutedEvent);
                 }
             }
             base.OnDrop(e);

@@ -17,7 +17,7 @@
             <ButtonEXT VerticalAlignment="Center" Content="测试" Click="ButtonEXT_Click" Visibility="{Binding UserType, Converter={StaticResource valueToCollapsed}, ConverterParameter=2}"
                        Command="{Binding ButtonCommand}" IsLight="True"/>
 
-            <TreeViewEXT x:Name="TreeViewOrg" AllowDrop="True" Height="180" ItemTemplate="{StaticResource TreeNode}" ItemsSource="{Binding TreeList}"/>
+            <TreeViewEXT x:Name="TreeViewOrg" AllowDrop="True" Height="250" ItemTemplate="{StaticResource TreeNode}" ItemsSource="{Binding TreeList}"/>
 
         </StackPanel>
     </Grid>
