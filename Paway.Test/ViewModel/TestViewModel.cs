@@ -59,7 +59,7 @@ namespace Paway.Test.ViewModel
             get { return time; }
             set { time = value; RaisePropertyChanged(); }
         }
-        public ObservableCollection<TreeViewItemModel> TreeList { get; private set; } = new ObservableCollection<TreeViewItemModel>();
+        public ObservableCollection<ITreeViewItem> TreeList { get; private set; } = new ObservableCollection<ITreeViewItem>();
 
         private ICommand buttonCommand;
         public ICommand ButtonCommand

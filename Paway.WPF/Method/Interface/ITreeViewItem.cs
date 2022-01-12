@@ -55,6 +55,7 @@ namespace Paway.WPF
         /// <summary>
         /// 父级
         /// </summary>
+        [NoClone]
         ITreeViewItem Parent { get; set; }
         /// <summary>
         /// 子级列表
@@ -109,7 +110,7 @@ namespace Paway.WPF
         public virtual bool IsGroup
         {
             get { return isGrouping; }
-            set { isGrouping = value; OnPropertyChanged(); }
+            set { isGrouping = value; OnPropertyChanged(); OnTexts(); }
         }
         private string shortName;
         /// <summary>
@@ -201,6 +202,7 @@ namespace Paway.WPF
         /// <summary>
         /// 父级
         /// </summary>
+        [NoClone]
         public ITreeViewItem Parent { get; set; }
         /// <summary>
         /// 子级列表
