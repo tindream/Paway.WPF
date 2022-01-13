@@ -216,7 +216,6 @@ namespace Paway.WPF
             base.OnApplyTemplate();
             if (base.ItemsSource != null)
             {
-                this.type = base.ItemsSource.GetType().GenericType();
                 LoadColumns();
             }
         }
@@ -373,6 +372,207 @@ namespace Paway.WPF
                 return row;
             }
             return null;
+        }
+
+        #endregion
+
+        #region 拖拽节点
+        #region 节点拖动检查过滤路由事件
+        /// <summary>
+        /// 节点拖动检查过滤路由事件
+        /// </summary>
+        public event EventHandler<DataGridRowDragEventArgs> DragFilter;
+        /// <summary>
+        /// 节点拖动检查过滤路由事件
+        /// </summary>
+        private bool? OnDragFilter(DataGridRow fromItem, DataGridRow toItem, RoutedEvent routed)
+        {
+            var args = new DataGridRowDragEventArgs(fromItem, toItem, routed, this);
+            if (DragFilter != null)
+            {
+                DragFilter.Invoke(this, args);
+                return args.Result;
+            }
+            return null;
+        }
+
+        #endregion
+        #region 节点拖动完成路由事件
+        /// <summary>
+        /// 节点拖动完成路由事件
+        /// </summary>
+        public event EventHandler<DataGridRowDragEventArgs> DragCompleted;
+        /// <summary>
+        /// 节点拖动完成路由事件
+        /// </summary>
+        private void OnDragCompleted(DataGridRow fromItem, DataGridRow toItem, RoutedEvent routed)
+        {
+            var args = new DataGridRowDragEventArgs(fromItem, toItem, routed, this);
+            DragCompleted?.Invoke(this, args);
+        }
+
+        #endregion
+        #region 节点拖动外部路由事件
+        /// <summary>
+        /// 节点拖动外部路由事件
+        /// </summary>
+        public event EventHandler<DragEventArgs> DragExternal;
+        /// <summary>
+        /// 节点拖动外部路由事件
+        /// </summary>
+        private void OnDragExternal(DragEventArgs e)
+        {
+            DragExternal?.Invoke(this, e);
+        }
+
+        #endregion
+        /// <summary>
+        /// 拖拽起点
+        /// </summary>
+        private Point? _lastMouseDown;
+        private DataGridRow fromItem;
+        /// <summary>
+        /// 按下记录位置
+        /// </summary>
+        protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            if (e.ButtonState == MouseButtonState.Pressed && this.AllowDrop)
+            {
+                _lastMouseDown = e.GetPosition(this);
+                if (PMethod.Parent(e.OriginalSource, out DataGridRow item))
+                {
+                    if (this.SelectedItem != null && this.SelectedItem.Equals(item.DataContext))
+                    {
+                        e.Handled = true;
+                    }
+                }
+            }
+            base.OnPreviewMouseLeftButtonDown(e);
+        }
+        /// <summary>
+        /// 抬起停止拖动
+        /// </summary>
+        protected override void OnPreviewMouseLeftButtonUp(MouseButtonEventArgs e)
+        {
+            if (_lastMouseDown != null)
+            {
+                _lastMouseDown = null;
+            }
+            base.OnPreviewMouseLeftButtonUp(e);
+        }
+        /// <summary>
+        /// 启动拖动
+        /// </summary>
+        protected override void OnPreviewMouseMove(MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed && _lastMouseDown != null)
+            {
+                Point currentPosition = e.GetPosition(this);
+                if ((Math.Abs(currentPosition.X - _lastMouseDown.Value.X) > SystemParameters.MinimumHorizontalDragDistance) ||
+                    (Math.Abs(currentPosition.Y - _lastMouseDown.Value.Y) > SystemParameters.MinimumVerticalDragDistance))
+                {
+                    try
+                    {
+                        if (PMethod.Parent(e.OriginalSource, out fromItem))
+                        {
+                            DragDrop.DoDragDrop(this, fromItem, DragDropEffects.Move);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        PMethod.Hit(this, ex.Message);
+                    }
+                    finally
+                    {
+                        fromItem = null;
+                    }
+                }
+            }
+            base.OnPreviewMouseMove(e);
+        }
+        /// <summary>
+        /// 拖动进入时检查状态
+        /// </summary>
+        protected override void OnDragEnter(DragEventArgs e)
+        {
+            DragCheck(e);
+            base.OnDragEnter(e);
+        }
+        /// <summary>
+        /// 拖动离开时检查状态
+        /// </summary>
+        protected override void OnDragLeave(DragEventArgs e)
+        {
+            DragCheck(e);
+            base.OnDragLeave(e);
+        }
+        /// <summary>
+        /// 拖动过程中检查状态
+        /// </summary>
+        protected override void OnDragOver(DragEventArgs e)
+        {
+            DragCheck(e);
+            base.OnDragOver(e);
+        }
+        private void DragCheck(DragEventArgs e)
+        {
+            if (this.fromItem != null)
+            {
+                PMethod.Parent(e.OriginalSource, out DataGridRow toItem);
+                if (IsFilter(fromItem, toItem, e.RoutedEvent))
+                {
+                    e.Effects = DragDropEffects.None;
+                    e.Handled = true;
+                }
+            }
+        }
+        private bool IsFilter(DataGridRow fromItem, DataGridRow toItem, RoutedEvent routed)
+        {
+            var result = OnDragFilter(fromItem, toItem, routed);
+            if (result != null) return result.Value;
+            if (fromItem.Equals(toItem)) return true;
+            return false;
+        }
+        /// <summary>
+        /// 开始拖动-完成
+        /// </summary>
+        protected override void OnDrop(DragEventArgs e)
+        {
+            if (this.fromItem != null)
+            {
+                var source = CollectionViewSource.GetDefaultView(this.ItemsSource);
+                if (source is ListCollectionView list)
+                {
+                    var fromInfo = fromItem.DataContext;
+                    list.Remove(fromItem.DataContext);
+                    if (PMethod.Parent(e.OriginalSource, out DataGridRow toItem))
+                    {
+                        var toIndex = list.IndexOf(toItem.DataContext);
+                        var moveList = this.type.GenericList();
+                        while (list.Count > toIndex)
+                        {
+                            moveList.Add(list.GetItemAt(toIndex));
+                            list.RemoveAt(toIndex);
+                        }
+                        list.AddNewItem(fromInfo);
+                        foreach (var item in moveList)
+                        {
+                            list.AddNewItem(item);
+                        }
+                        list.CommitNew();
+                        moveList.Clear();
+                        OnDragCompleted(fromItem, toItem, e.RoutedEvent);
+                    }
+                    else
+                    {
+                        list.AddNewItem(fromInfo);
+                        list.CommitNew();
+                        OnDragCompleted(fromItem, null, e.RoutedEvent);
+                    }
+                }
+            }
+            else OnDragExternal(e);
+            base.OnDrop(e);
         }
 
         #endregion

@@ -119,13 +119,13 @@ namespace Paway.WPF
         /// <summary>
         /// 节点拖动检查过滤路由事件
         /// </summary>
-        public event EventHandler<TreeFilterEventArgs> DragFilter;
+        public event EventHandler<TreeDragEventArgs> DragFilter;
         /// <summary>
         /// 节点拖动检查过滤路由事件
         /// </summary>
         private bool? OnDragFilter(ITreeViewItem fromItem, ITreeViewItem toItem, RoutedEvent routed)
         {
-            var args = new TreeFilterEventArgs(fromItem, toItem, routed, this);
+            var args = new TreeDragEventArgs(fromItem, toItem, routed, this);
             if (DragFilter != null)
             {
                 DragFilter.Invoke(this, args);
@@ -139,14 +139,28 @@ namespace Paway.WPF
         /// <summary>
         /// 节点拖动完成路由事件
         /// </summary>
-        public event EventHandler<TreeDragCompletedEventArgs> DragCompleted;
+        public event EventHandler<TreeDragEventArgs> DragCompleted;
         /// <summary>
         /// 节点拖动完成路由事件
         /// </summary>
         private void OnDragCompleted(ITreeViewItem fromItem, ITreeViewItem toItem, RoutedEvent routed)
         {
-            var args = new TreeDragCompletedEventArgs(fromItem, toItem, routed, this);
+            var args = new TreeDragEventArgs(fromItem, toItem, routed, this);
             DragCompleted?.Invoke(this, args);
+        }
+
+        #endregion
+        #region 节点拖动外部路由事件
+        /// <summary>
+        /// 节点拖动外部路由事件
+        /// </summary>
+        public event EventHandler<DragEventArgs> DragExternal;
+        /// <summary>
+        /// 节点拖动外部路由事件
+        /// </summary>
+        private void OnDragExternal(DragEventArgs e)
+        {
+            DragExternal?.Invoke(this, e);
         }
 
         #endregion
@@ -184,9 +198,6 @@ namespace Paway.WPF
             if (_lastMouseDown != null)
             {
                 _lastMouseDown = null;
-                fromItem = null;
-                if (PMethod.Parent(this, out Window window)) window.Cursor = null;
-                //if (PMethod.Parent(this, out Window window)) window.Cursor = Cursors.Hand;
             }
             base.OnPreviewMouseLeftButtonUp(e);
         }
@@ -204,7 +215,18 @@ namespace Paway.WPF
                     if (this.SelectedItem is ITreeViewItem item)
                     {
                         this.fromItem = item;
-                        DragDrop.DoDragDrop(this, item, DragDropEffects.Move);
+                        try
+                        {
+                            DragDrop.DoDragDrop(this, item, DragDropEffects.Move);
+                        }
+                        catch (Exception ex)
+                        {
+                            PMethod.Hit(this, ex.Message);
+                        }
+                        finally
+                        {
+                            fromItem = null;
+                        }
                     }
                 }
             }
@@ -319,6 +341,7 @@ namespace Paway.WPF
                     OnDragCompleted(fromItem, null, e.RoutedEvent);
                 }
             }
+            else OnDragExternal(e);
             base.OnDrop(e);
         }
         private void RemoveItem(ITreeViewItem fromItem)
