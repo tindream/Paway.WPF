@@ -13,12 +13,22 @@
             <ColumnDefinition Width="211"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel VerticalAlignment="Center">
-            <ButtonEXT VerticalAlignment="Center" Content="测试" Click="ButtonEXT_Click" Visibility="{Binding UserType, Converter={StaticResource valueToCollapsed}, ConverterParameter=2}"
-                       Command="{Binding ButtonCommand}" IsLight="True"/>
-
-            <TreeViewEXT x:Name="TreeViewOrg" AllowDrop="True" Height="250" ItemTemplate="{StaticResource TreeNode}" ItemsSource="{Binding TreeList}"/>
-
-        </StackPanel>
+        <TreeViewEXT x:Name="TreeViewOrg" AllowDrop="True" Height="250" ItemTemplate="{StaticResource TreeNode}" ItemsSource="{Binding TreeList}"/>
+        <DataGridEXT Name="datagrid1" Grid.Column="1" AllowDrop="True"
+                               ItemsSource="{Binding GridList}"
+                               Height="250" VerticalAlignment="Top">
+            <DataGrid.Columns>
+                <DataGridTextColumn MinWidth="130" Binding="{Binding Money}" ElementStyle="{StaticResource TextRight}"/>
+                <DataGridTemplateColumn Header="IsSelected">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DockPanel>
+                                <CheckBoxEXT IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}"/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGridEXT>
     </Grid>
 </WindowEXT>

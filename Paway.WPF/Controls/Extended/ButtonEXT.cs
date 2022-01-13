@@ -58,7 +58,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ImageMarginProperty =
-            DependencyProperty.RegisterAttached(nameof(ImageMargin), typeof(ThicknessEXT), typeof(ButtonEXT));
+            DependencyProperty.RegisterAttached(nameof(ImageMargin), typeof(Thickness), typeof(ButtonEXT), new PropertyMetadata(new Thickness(0, 0, 2, 0)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ImageStretchProperty =
@@ -201,9 +201,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展")]
         [Description("背景图片外边距")]
-        public ThicknessEXT ImageMargin
+        public Thickness ImageMargin
         {
-            get { return (ThicknessEXT)GetValue(ImageMarginProperty); }
+            get { return (Thickness)GetValue(ImageMarginProperty); }
             set { SetValue(ImageMarginProperty, value); }
         }
         /// <summary>

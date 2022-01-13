@@ -53,14 +53,17 @@ namespace Paway.Test.ViewModel
                 RaisePropertyChanged();
             }
         }
+
         private DateTime time = DateTime.Now.Date;
         public DateTime Time
         {
             get { return time; }
             set { time = value; RaisePropertyChanged(); }
         }
-        public ObservableCollection<ITreeViewItem> TreeList { get; private set; } = new ObservableCollection<ITreeViewItem>();
 
+        #endregion
+
+        #region 命令
         private ICommand buttonCommand;
         public ICommand ButtonCommand
         {
@@ -79,6 +82,9 @@ namespace Paway.Test.ViewModel
 
         public ObservableCollection<ListViewItemModel> List { get; private set; } = new ObservableCollection<ListViewItemModel>();
         public ObservableCollection<IComboBoxItem> MultiList { get; } = new ObservableCollection<IComboBoxItem>();
+        public ObservableCollection<ITreeViewItem> TreeList { get; private set; } = new ObservableCollection<ITreeViewItem>();
+        public ObservableCollection<ListViewItemModel> GridList { get; } = new ObservableCollection<ListViewItemModel>();
+
         public TestViewModel()
         {
             for (var i = 0; i < 16; i++) List.Add(new ListViewItemModel($"{i + 1}"));
@@ -98,6 +104,18 @@ namespace Paway.Test.ViewModel
             treeInfo2.Add("刘棒C2");
             treeInfo.Add("刘棒B1");
             treeInfo.Add("刘棒B2");
+
+            GridList.Add(new ListViewItemModel("Hello"));
+            GridList.Add(new ListViewItemModel("你好123")
+            {
+                IsEnabled = false,
+                Image = new ImageEXT(null, @"pack://application:,,,/Paway.Test;component/Images/close_while.png")
+            });
+            for (int i = 0; i < 20; i++) GridList.Add(new ListViewItemModel("A" + i, "D" + i)
+            {
+                IsEnabled = i != 5,
+                Image = new ImageEXT(@"pack://application:,,,/Paway.Test;component/Images/close.png")
+            });
         }
     }
 }
