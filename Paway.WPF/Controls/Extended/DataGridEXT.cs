@@ -110,7 +110,7 @@ namespace Paway.WPF
         }
         private void DataGridEXT_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (CurrentRow(e) is DataGridRow row)
+            if (PMethod.Parent(e.OriginalSource, out DataGridRow row))
             {
                 RowDoubleEvent?.Invoke(this, new SelectItemEventArgs(row.Item, e.RoutedEvent, this));
             }
@@ -385,9 +385,9 @@ namespace Paway.WPF
         /// <summary>
         /// 节点拖动检查过滤路由事件
         /// </summary>
-        private bool? OnDragFilter(DataGridRow fromItem, DataGridRow toItem, RoutedEvent routed)
+        private bool? OnDragFilter(DataGridRow fromRow, DataGridRow toRow, RoutedEvent routed)
         {
-            var args = new DataGridRowDragEventArgs(fromItem, toItem, routed, this);
+            var args = new DataGridRowDragEventArgs(fromRow, toRow, routed, this);
             if (DragFilter != null)
             {
                 DragFilter.Invoke(this, args);
@@ -405,9 +405,9 @@ namespace Paway.WPF
         /// <summary>
         /// 节点拖动完成路由事件
         /// </summary>
-        private void OnDragCompleted(DataGridRow fromItem, DataGridRow toItem, RoutedEvent routed)
+        private void OnDragCompleted(DataGridRow fromRow, DataGridRow toRow, RoutedEvent routed)
         {
-            var args = new DataGridRowDragEventArgs(fromItem, toItem, routed, this);
+            var args = new DataGridRowDragEventArgs(fromRow, toRow, routed, this);
             DragCompleted?.Invoke(this, args);
         }
 
@@ -430,7 +430,7 @@ namespace Paway.WPF
         /// 拖拽起点
         /// </summary>
         private Point? _lastMouseDown;
-        private DataGridRow fromItem;
+        private DataGridRow fromRow;
         /// <summary>
         /// 按下记录位置
         /// </summary>
@@ -439,9 +439,9 @@ namespace Paway.WPF
             if (e.ButtonState == MouseButtonState.Pressed && this.AllowDrop)
             {
                 _lastMouseDown = e.GetPosition(this);
-                if (PMethod.Parent(e.OriginalSource, out DataGridRow item))
+                if (PMethod.Parent(e.OriginalSource, out DataGridRow row))
                 {
-                    if (this.SelectedItem != null && this.SelectedItem.Equals(item.DataContext))
+                    if (this.SelectedItem != null && this.SelectedItem.Equals(row.Item))
                     {
                         e.Handled = true;
                     }
@@ -473,9 +473,9 @@ namespace Paway.WPF
                 {
                     try
                     {
-                        if (PMethod.Parent(e.OriginalSource, out fromItem))
+                        if (PMethod.Parent(e.OriginalSource, out fromRow))
                         {
-                            DragDrop.DoDragDrop(this, fromItem, DragDropEffects.Move);
+                            DragDrop.DoDragDrop(this, fromRow, DragDropEffects.Move);
                         }
                     }
                     catch (Exception ex)
@@ -484,7 +484,7 @@ namespace Paway.WPF
                     }
                     finally
                     {
-                        fromItem = null;
+                        fromRow = null;
                     }
                 }
             }
@@ -516,21 +516,21 @@ namespace Paway.WPF
         }
         private void DragCheck(DragEventArgs e)
         {
-            if (this.fromItem != null)
+            if (this.fromRow != null)
             {
-                PMethod.Parent(e.OriginalSource, out DataGridRow toItem);
-                if (IsFilter(fromItem, toItem, e.RoutedEvent))
+                PMethod.Parent(e.OriginalSource, out DataGridRow toRow);
+                if (IsFilter(fromRow, toRow, e.RoutedEvent))
                 {
                     e.Effects = DragDropEffects.None;
                     e.Handled = true;
                 }
             }
         }
-        private bool IsFilter(DataGridRow fromItem, DataGridRow toItem, RoutedEvent routed)
+        private bool IsFilter(DataGridRow fromRow, DataGridRow toRow, RoutedEvent routed)
         {
-            var result = OnDragFilter(fromItem, toItem, routed);
+            var result = OnDragFilter(fromRow, toRow, routed);
             if (result != null) return result.Value;
-            if (fromItem.Equals(toItem)) return true;
+            if (fromRow.Equals(toRow)) return true;
             return false;
         }
         /// <summary>
@@ -538,16 +538,16 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnDrop(DragEventArgs e)
         {
-            if (this.fromItem != null)
+            if (this.fromRow != null)
             {
                 var source = CollectionViewSource.GetDefaultView(this.ItemsSource);
                 if (source is ListCollectionView list)
                 {
-                    var fromInfo = fromItem.DataContext;
-                    list.Remove(fromItem.DataContext);
-                    if (PMethod.Parent(e.OriginalSource, out DataGridRow toItem))
+                    var fromInfo = fromRow.Item;
+                    list.Remove(fromRow.Item);
+                    if (PMethod.Parent(e.OriginalSource, out DataGridRow toRow))
                     {
-                        var toIndex = list.IndexOf(toItem.DataContext);
+                        var toIndex = list.IndexOf(toRow.Item);
                         var moveList = this.type.GenericList();
                         while (list.Count > toIndex)
                         {
@@ -561,13 +561,13 @@ namespace Paway.WPF
                         }
                         list.CommitNew();
                         moveList.Clear();
-                        OnDragCompleted(fromItem, toItem, e.RoutedEvent);
+                        OnDragCompleted(fromRow, toRow, e.RoutedEvent);
                     }
                     else
                     {
                         list.AddNewItem(fromInfo);
                         list.CommitNew();
-                        OnDragCompleted(fromItem, null, e.RoutedEvent);
+                        OnDragCompleted(fromRow, null, e.RoutedEvent);
                     }
                 }
             }

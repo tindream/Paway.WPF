@@ -107,11 +107,27 @@ namespace Paway.WPF
 
         #endregion
 
+        #region 事件
+        /// <summary>
+        /// 行双击路由事件
+        /// </summary>
+        public event EventHandler<SelectItemEventArgs> RowDoubleEvent;
+
+        #endregion
+
         /// <summary>
         /// </summary>
         public TreeViewEXT()
         {
             DefaultStyleKey = typeof(TreeViewEXT);
+            this.MouseDoubleClick += TreeViewEXT_MouseDoubleClick;
+        }
+        private void TreeViewEXT_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (PMethod.Parent(e.OriginalSource, out TreeViewItem item) && item.DataContext is ITreeViewItem treeItem && !treeItem.IsGroup)
+            {
+                RowDoubleEvent?.Invoke(this, new SelectItemEventArgs(item.DataContext, e.RoutedEvent, this));
+            }
         }
 
         #region 拖拽节点
