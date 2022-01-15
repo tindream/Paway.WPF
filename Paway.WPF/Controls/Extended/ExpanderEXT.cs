@@ -63,6 +63,14 @@ namespace Paway.WPF
 
         #endregion
 
+        #region 事件
+        /// <summary>
+        /// 鼠标拖动设置大小完成事件
+        /// </summary>
+        public event EventHandler ResizeEvent;
+
+        #endregion
+
         /// <summary>
         /// </summary>
         public ExpanderEXT()
@@ -150,10 +158,6 @@ namespace Paway.WPF
         private Point _prevPoint;
         private bool? LeftDirection;
         private bool? TopDirection;
-        /// <summary>
-        /// 鼠标拖动设置大小完成事件
-        /// </summary>
-        public event EventHandler ResizeEvent;
         /// <summary>
         /// </summary>
         protected override void OnMouseMove(MouseEventArgs e)

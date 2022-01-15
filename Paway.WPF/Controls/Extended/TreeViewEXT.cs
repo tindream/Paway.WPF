@@ -19,26 +19,6 @@ namespace Paway.WPF
     /// </summary>
     public partial class TreeViewEXT : TreeView
     {
-        #region 属性
-        /// <summary>
-        /// 选中项列表
-        /// </summary>
-        [Browsable(false)]
-        public IList<ITreeViewItem> ChekedItems
-        {
-            get
-            {
-                var list = new List<ITreeViewItem>();
-                foreach (ITreeViewItem item in this.ItemsSource)
-                {
-                    if (item.IsChecked == true) list.Add(item);
-                }
-                return list;
-            }
-        }
-
-        #endregion
-
         #region 依赖属性
         /// <summary>
         /// </summary>
@@ -112,25 +92,6 @@ namespace Paway.WPF
         /// 行双击路由事件
         /// </summary>
         public event EventHandler<SelectItemEventArgs> RowDoubleEvent;
-
-        #endregion
-
-        /// <summary>
-        /// </summary>
-        public TreeViewEXT()
-        {
-            DefaultStyleKey = typeof(TreeViewEXT);
-            this.MouseDoubleClick += TreeViewEXT_MouseDoubleClick;
-        }
-        private void TreeViewEXT_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            if (PMethod.Parent(e.OriginalSource, out TreeViewItem item) && item.DataContext is ITreeViewItem treeItem && !treeItem.IsGroup)
-            {
-                RowDoubleEvent?.Invoke(this, new SelectItemEventArgs(item.DataContext, e.RoutedEvent, this));
-            }
-        }
-
-        #region 拖拽节点
         #region 节点拖动检查过滤路由事件
         /// <summary>
         /// 节点拖动检查过滤路由事件
@@ -180,6 +141,72 @@ namespace Paway.WPF
         }
 
         #endregion
+
+        #endregion
+
+        #region 数据
+        /// <summary>
+        /// 选中项列表
+        /// </summary>
+        [Browsable(false)]
+        public List<ITreeViewItem> CheckedItems
+        {
+            get
+            {
+                var checkList = new List<ITreeViewItem>();
+                if (this.ItemsSource is ObservableCollection<ITreeViewItem> list)
+                {
+                    GetCheckedItems(list, checkList, true);
+                }
+                return checkList;
+            }
+        }
+        /// <summary>
+        /// 普通项列表
+        /// </summary>
+        [Browsable(false)]
+        public List<ITreeViewItem> NormalItems
+        {
+            get
+            {
+                var checkList = new List<ITreeViewItem>();
+                if (this.ItemsSource is ObservableCollection<ITreeViewItem> list)
+                {
+                    GetCheckedItems(list, checkList);
+                }
+                return checkList;
+            }
+        }
+        /// <summary>
+        /// 获取列表下选中项
+        /// </summary>
+        public void GetCheckedItems(ObservableCollection<ITreeViewItem> list, List<ITreeViewItem> checkList, bool? isChecked = null)
+        {
+            foreach (var item in list)
+            {
+                if (item.IsGroup) GetCheckedItems(item.Children, checkList, isChecked);
+                else if (isChecked == null || item.IsChecked == isChecked) checkList.Add(item);
+            }
+        }
+
+        #endregion
+
+        /// <summary>
+        /// </summary>
+        public TreeViewEXT()
+        {
+            DefaultStyleKey = typeof(TreeViewEXT);
+            this.MouseDoubleClick += TreeViewEXT_MouseDoubleClick;
+        }
+        private void TreeViewEXT_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (PMethod.Parent(e.OriginalSource, out TreeViewItem item) && item.DataContext is ITreeViewItem treeItem && !treeItem.IsGroup)
+            {
+                RowDoubleEvent?.Invoke(this, new SelectItemEventArgs(item.DataContext, e.RoutedEvent, this));
+            }
+        }
+
+        #region 拖拽节点
         /// <summary>
         /// 拖拽起点
         /// </summary>
@@ -234,10 +261,6 @@ namespace Paway.WPF
                         try
                         {
                             DragDrop.DoDragDrop(this, item, DragDropEffects.Move);
-                        }
-                        catch (Exception ex)
-                        {
-                            PMethod.Hit(this, ex.Message);
                         }
                         finally
                         {

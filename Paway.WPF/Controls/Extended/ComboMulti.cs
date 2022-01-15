@@ -28,7 +28,7 @@ namespace Paway.WPF
         /// 选中项列表
         /// </summary>
         [Browsable(false)]
-        public ObservableCollection<IComboBoxItem> ChekedItems { get; } = new ObservableCollection<IComboBoxItem>();
+        public ObservableCollection<IComboBoxItem> CheckedItems { get; } = new ObservableCollection<IComboBoxItem>();
 
         #endregion
 
@@ -48,7 +48,7 @@ namespace Paway.WPF
             base.OnApplyTemplate();
             _ListBoxV = Template.FindName("PART_ListBox", this) as ListBox;
             _ListBoxH = Template.FindName("PART_ListBoxChk", this) as ListBox;
-            _ListBoxH.ItemsSource = ChekedItems;
+            _ListBoxH.ItemsSource = CheckedItems;
             _ListBoxV.SelectionChanged -= ListBoxV_SelectionChanged;
             _ListBoxV.SelectionChanged += ListBoxV_SelectionChanged;
             _ListBoxH.SelectionChanged -= ListBoxH_SelectionChanged;
@@ -94,16 +94,16 @@ namespace Paway.WPF
                 if (item is IComboBoxItem multi)
                 {
                     multi.IsChecked = true;
-                    if (ChekedItems.IndexOf(multi) < 0)
+                    if (CheckedItems.IndexOf(multi) < 0)
                     {
                         var value = _ListBoxV.Items.IndexOf(multi);
                         var index = 0;
-                        for (var i = 0; i < ChekedItems.Count; i++)
+                        for (var i = 0; i < CheckedItems.Count; i++)
                         {
-                            var j = _ListBoxV.Items.IndexOf(ChekedItems[i]);
+                            var j = _ListBoxV.Items.IndexOf(CheckedItems[i]);
                             if (j < value) index = i + 1;
                         }
-                        ChekedItems.Insert(index, multi);
+                        CheckedItems.Insert(index, multi);
                     }
                 }
             }
@@ -113,7 +113,7 @@ namespace Paway.WPF
                 if (item is IComboBoxItem multi)
                 {
                     multi.IsChecked = false;
-                    ChekedItems.Remove(multi);
+                    CheckedItems.Remove(multi);
                 }
             }
         }

@@ -18,7 +18,7 @@ namespace Paway.WPF
     /// <summary>
     /// DataGrid节点拖拽路由事件参数
     /// </summary>
-    public class DataGridRowDragEventArgs : RoutedEventArgs
+    public class DataGridDragEventArgs : RoutedEventArgs
     {
         /// <summary>
         /// 从某节点
@@ -36,11 +36,11 @@ namespace Paway.WPF
         /// <summary>
         /// DataGrid节点拖拽路由事件参数
         /// </summary>
-        public DataGridRowDragEventArgs() { }
+        public DataGridDragEventArgs() { }
         /// <summary>
         /// DataGrid节点拖拽路由事件参数
         /// </summary>
-        public DataGridRowDragEventArgs(DataGridRow fromItem, DataGridRow toItem, RoutedEvent routedEvent, object source) : base(routedEvent, source)
+        public DataGridDragEventArgs(DataGridRow fromItem, DataGridRow toItem, RoutedEvent routedEvent, object source) : base(routedEvent, source)
         {
             this.FromItem = fromItem;
             this.ToItem = toItem;

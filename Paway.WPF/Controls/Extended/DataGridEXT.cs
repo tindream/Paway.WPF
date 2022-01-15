@@ -94,6 +94,55 @@ namespace Paway.WPF
         /// 行双击路由事件
         /// </summary>
         public event EventHandler<SelectItemEventArgs> RowDoubleEvent;
+        #region 节点拖动检查过滤路由事件
+        /// <summary>
+        /// 节点拖动检查过滤路由事件
+        /// </summary>
+        public event EventHandler<DataGridDragEventArgs> DragFilter;
+        /// <summary>
+        /// 节点拖动检查过滤路由事件
+        /// </summary>
+        private bool? OnDragFilter(DataGridRow fromRow, DataGridRow toRow, RoutedEvent routed)
+        {
+            var args = new DataGridDragEventArgs(fromRow, toRow, routed, this);
+            if (DragFilter != null)
+            {
+                DragFilter.Invoke(this, args);
+                return args.Result;
+            }
+            return null;
+        }
+
+        #endregion
+        #region 节点拖动完成路由事件
+        /// <summary>
+        /// 节点拖动完成路由事件
+        /// </summary>
+        public event EventHandler<DataGridDragEventArgs> DragCompleted;
+        /// <summary>
+        /// 节点拖动完成路由事件
+        /// </summary>
+        private void OnDragCompleted(DataGridRow fromRow, DataGridRow toRow, RoutedEvent routed)
+        {
+            var args = new DataGridDragEventArgs(fromRow, toRow, routed, this);
+            DragCompleted?.Invoke(this, args);
+        }
+
+        #endregion
+        #region 节点拖动外部路由事件
+        /// <summary>
+        /// 节点拖动外部路由事件
+        /// </summary>
+        public event EventHandler<DragEventArgs> DragExternal;
+        /// <summary>
+        /// 节点拖动外部路由事件
+        /// </summary>
+        private void OnDragExternal(DragEventArgs e)
+        {
+            DragExternal?.Invoke(this, e);
+        }
+
+        #endregion
 
         #endregion
 
@@ -377,55 +426,6 @@ namespace Paway.WPF
         #endregion
 
         #region 拖拽节点
-        #region 节点拖动检查过滤路由事件
-        /// <summary>
-        /// 节点拖动检查过滤路由事件
-        /// </summary>
-        public event EventHandler<DataGridRowDragEventArgs> DragFilter;
-        /// <summary>
-        /// 节点拖动检查过滤路由事件
-        /// </summary>
-        private bool? OnDragFilter(DataGridRow fromRow, DataGridRow toRow, RoutedEvent routed)
-        {
-            var args = new DataGridRowDragEventArgs(fromRow, toRow, routed, this);
-            if (DragFilter != null)
-            {
-                DragFilter.Invoke(this, args);
-                return args.Result;
-            }
-            return null;
-        }
-
-        #endregion
-        #region 节点拖动完成路由事件
-        /// <summary>
-        /// 节点拖动完成路由事件
-        /// </summary>
-        public event EventHandler<DataGridRowDragEventArgs> DragCompleted;
-        /// <summary>
-        /// 节点拖动完成路由事件
-        /// </summary>
-        private void OnDragCompleted(DataGridRow fromRow, DataGridRow toRow, RoutedEvent routed)
-        {
-            var args = new DataGridRowDragEventArgs(fromRow, toRow, routed, this);
-            DragCompleted?.Invoke(this, args);
-        }
-
-        #endregion
-        #region 节点拖动外部路由事件
-        /// <summary>
-        /// 节点拖动外部路由事件
-        /// </summary>
-        public event EventHandler<DragEventArgs> DragExternal;
-        /// <summary>
-        /// 节点拖动外部路由事件
-        /// </summary>
-        private void OnDragExternal(DragEventArgs e)
-        {
-            DragExternal?.Invoke(this, e);
-        }
-
-        #endregion
         /// <summary>
         /// 拖拽起点
         /// </summary>
@@ -477,10 +477,6 @@ namespace Paway.WPF
                         {
                             DragDrop.DoDragDrop(this, fromRow, DragDropEffects.Move);
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        PMethod.Hit(this, ex.Message);
                     }
                     finally
                     {

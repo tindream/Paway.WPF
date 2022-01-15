@@ -106,6 +106,20 @@ namespace Paway.WPF
 
         #endregion
 
+        #region 数据
+        /// <summary>
+        /// 选中项列表
+        /// </summary>
+        [Browsable(false)]
+        public List<ITreeViewItem> CheckedItems { get { return treeView.CheckedItems; } }
+        /// <summary>
+        /// 普通项列表
+        /// </summary>
+        [Browsable(false)]
+        public List<ITreeViewItem> NormalItems { get { return treeView.NormalItems; } }
+
+        #endregion
+
         /// <summary>
         /// </summary>
         public ComboTree()
