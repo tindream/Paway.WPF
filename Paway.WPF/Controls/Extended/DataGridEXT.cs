@@ -282,9 +282,11 @@ namespace Paway.WPF
             var properties = this.type.Properties();
             foreach (var property in properties)
             {
+                var iReady = false;
                 var column = columnsReady.Find(c => (c.ClipboardContentBinding is Binding binding && binding.Path.Path == property.Name) || c.Header.ToStrings() == property.Name || c.Header.ToStrings() == property.Text());
                 if (column != null)
                 {
+                    iReady = true;
                     columns.Add(column);
                 }
                 else
@@ -313,7 +315,7 @@ namespace Paway.WPF
                         text.ElementStyle = style;
                     }
                 }
-                column.Visibility = property.IShow() ? Visibility.Visible : Visibility.Collapsed;
+                if (!iReady) column.Visibility = property.IShow() ? Visibility.Visible : Visibility.Collapsed;
             }
             this.Columns.Clear();
             RefreshEvent?.Invoke(this);
