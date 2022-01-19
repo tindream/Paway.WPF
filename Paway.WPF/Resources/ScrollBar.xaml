@@ -69,6 +69,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="Fill" TargetName="rectangle" Value="DarkGray" />
+                            <Setter Property="Cursor" TargetName="rectangle" Value="Hand" />
                         </Trigger>
                         <Trigger Property="IsDragging" Value="true">
                             <Setter Property="Fill" TargetName="rectangle" Value="#333" />
@@ -134,6 +135,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="Fill" TargetName="rectangle" Value="DarkGray" />
+                            <Setter Property="Cursor" TargetName="rectangle" Value="Hand" />
                         </Trigger>
                         <Trigger Property="IsDragging" Value="true">
                             <Setter Property="Fill" TargetName="rectangle" Value="#333" />

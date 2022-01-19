@@ -217,6 +217,22 @@ namespace Paway.WPF
         /// </summary>
         private bool IsGroup;
         /// <summary>
+        /// 滚动条
+        /// </summary>
+        private ScrollViewerEXT scrollViewer;
+        /// <summary>
+        /// 滚动标记
+        /// </summary>
+        private string scrollFlag;
+        /// <summary>
+        /// 获取滚动条
+        /// </summary>
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            scrollViewer = Template.FindName("_tv_scrollviewer_", this) as ScrollViewerEXT;
+        }
+        /// <summary>
         /// 按下记录位置
         /// </summary>
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
@@ -230,6 +246,7 @@ namespace Paway.WPF
                 }
                 _lastMouseDown = e.GetPosition(this);
                 IsGroup = list.Any(c => c.IsGroup);
+                if (scrollViewer != null) scrollFlag = $"V{scrollViewer.VerticalOffset}H{scrollViewer.HorizontalOffset}";
             }
             base.OnPreviewMouseLeftButtonDown(e);
         }
@@ -251,6 +268,11 @@ namespace Paway.WPF
         {
             if (e.LeftButton == MouseButtonState.Pressed && _lastMouseDown != null)
             {
+                if (scrollViewer != null && scrollFlag != $"V{scrollViewer.VerticalOffset}H{scrollViewer.HorizontalOffset}")
+                {
+                    _lastMouseDown = null;
+                    return;
+                }
                 Point currentPosition = e.GetPosition(this);
                 if ((Math.Abs(currentPosition.X - _lastMouseDown.Value.X) > SystemParameters.MinimumHorizontalDragDistance) ||
                     (Math.Abs(currentPosition.Y - _lastMouseDown.Value.Y) > SystemParameters.MinimumVerticalDragDistance))
