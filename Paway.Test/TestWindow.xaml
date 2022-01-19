@@ -13,13 +13,25 @@
             <ColumnDefinition Width="211"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <TreeViewEXT x:Name="TreeViewOrg" AllowDrop="True" Height="250" ItemTemplate="{StaticResource TreeNode}" ItemsSource="{Binding TreeList}"/>
-        <DataGridEXT Name="datagrid1" Grid.Column="1" AllowDrop="True"
-                               ItemsSource="{Binding GridList}"
-                               Height="250" VerticalAlignment="Top">
-            <DataGrid.Columns>
-                <DataGridTextColumn MinWidth="130" Binding="{Binding Money}" ElementStyle="{StaticResource TextRight}"/>
-            </DataGrid.Columns>
-        </DataGridEXT>
+        <Border Name="borderClip" BorderBrush="Gray" BorderThickness="1" Background="Green" Width="100" Height="100">
+            <Border.Clip>
+                <RectangleGeometry  Rect="0,10,100,2"/>
+            </Border.Clip>
+        </Border>
+
+        <Border Name="borderLine" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1"  Margin="20">
+            <Canvas Name="canvas" Grid.Column="1" Background="White">
+                <!--文本框-->
+                <Border Name="borderText" Canvas.Left="186" Canvas.Top="82" Background="Transparent"
+                        BorderBrush="DarkKhaki" BorderThickness="1"  Padding="5"
+                        Height="94" Width="198" MinHeight="10" MinWidth="10">
+                    <!--需要Label/textblock的文字大小随resize改变，则使用Viewbox，否则，去掉Viewbox-->
+                    <!--https://stackoverflow.com/questions/1464185/how-to-set-textblock-or-label-with-resizable-font-size-in-wpf-->
+                    <Viewbox TextOptions.TextFormattingMode="Ideal">
+                        <TextBlock Name="myTextBlock" Text="move and rezise TextBlock" TextWrapping="Wrap" TextTrimming="WordEllipsis"/>
+                    </Viewbox>
+                </Border>
+            </Canvas>
+        </Border>
     </Grid>
 </WindowEXT>
