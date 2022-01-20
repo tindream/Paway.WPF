@@ -60,6 +60,23 @@ namespace Paway.Test.ViewModel
             get { return time; }
             set { time = value; RaisePropertyChanged(); }
         }
+        private FontFamily font;
+        public FontFamily Font
+        {
+            get { return font; }
+            set { font = value; RaisePropertyChanged(); }
+        }
+        private ColorInfo color;
+        public ColorInfo Color
+        {
+            get { return color; }
+            set
+            {
+                color = value; RaisePropertyChanged();
+                if (value != null) ColorBrush = new SolidColorBrush(value.Color); RaisePropertyChanged(nameof(ColorBrush));
+            }
+        }
+        public SolidColorBrush ColorBrush { get; set; }
 
         #endregion
 
@@ -84,9 +101,21 @@ namespace Paway.Test.ViewModel
         public ObservableCollection<IComboBoxItem> MultiList { get; } = new ObservableCollection<IComboBoxItem>();
         public ObservableCollection<ITreeViewItem> TreeList { get; private set; } = new ObservableCollection<ITreeViewItem>();
         public ObservableCollection<ListViewItemModel> GridList { get; } = new ObservableCollection<ListViewItemModel>();
+        public List<ColorInfo> ColorList { get; } = new List<ColorInfo>();
 
         public TestViewModel()
         {
+            this.Font = Config.Window.FontFamily;
+
+            var familyList = Fonts.SystemFontFamilies;
+            foreach (var pi in typeof(Colors).Properties())
+            {
+                var color = (Color)ColorConverter.ConvertFromString(pi.Name);
+                var info = new ColorInfo { Name = pi.Name, Color = color };
+                ColorList.Add(info);
+                if (pi.Name == nameof(Colors.White)) this.Color = info;
+            }
+
             for (var i = 0; i < 16; i++) List.Add(new ListViewItemModel($"{i + 1}"));
             for (var i = 0; i < 16; i++) MultiList.Add(new ComboBoxItemModel($"{i + 1}"));
             var treeInfo = new TreeViewItemModel("分类A", true);
@@ -117,5 +146,11 @@ namespace Paway.Test.ViewModel
                 Image = new ImageEXT(@"pack://application:,,,/Paway.Test;component/Images/close.png")
             });
         }
+    }
+    public class ColorInfo : ModelBase
+    {
+        public string Name { get; set; }
+        public Color Color { get; set; }
+        public SolidColorBrush ColorBrush { get; set; }
     }
 }

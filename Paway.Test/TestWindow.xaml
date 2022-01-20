@@ -13,23 +13,39 @@
             <ColumnDefinition Width="211"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <Border Name="borderClip" BorderBrush="Gray" BorderThickness="1" Background="Green" Width="100" Height="100">
-            <Border.Clip>
-                <RectangleGeometry  Rect="0,10,100,2"/>
-            </Border.Clip>
-        </Border>
+        <StackPanel VerticalAlignment="Center">
+            <Border Name="borderClip" BorderBrush="Gray" BorderThickness="1" Background="Green" Width="100" Height="100">
+                <Border.Clip>
+                    <RectangleGeometry  Rect="0,10,100,2"/>
+                </Border.Clip>
+            </Border>
+            <TextBoxEXT/>
+            <TextBoxEXT AcceptsReturn="True" TextWrapping="Wrap"/>
+            <WrapPanel>
+                <ComboBoxEXT ItemsSource="{x:Static Fonts.SystemFontFamilies}" DisplayMemberPath="Source" SelectedItem="{Binding Font}" Width="152"/>
+                <Border BorderBrush="LightGray" BorderThickness="1" Width="34" Margin="2" CornerRadius="3">
+                    <TextBlock Text="字体" FontFamily="{Binding Font}" HorizontalAlignment="Center"/>
+                </Border>
+            </WrapPanel>
+            <WrapPanel>
+                <ComboBoxEXT ItemsSource="{Binding ColorList}" DisplayMemberPath="Name" SelectedItem="{Binding Color}" Width="152"/>
+                <Border BorderBrush="LightGray" BorderThickness="1" Background="{Binding ColorBrush}" Width="34" Margin="2" CornerRadius="3">
+                    <TextBlock Text="颜色" HorizontalAlignment="Center"/>
+                </Border>
+            </WrapPanel>
+        </StackPanel>
 
         <Border Name="borderLine" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1"  Margin="20">
             <Canvas Name="canvas" Grid.Column="1" Background="White">
-                <!--文本框-->
-                <Border Name="borderText" Canvas.Left="186" Canvas.Top="82" Background="Transparent"
-                        BorderBrush="DarkKhaki" BorderThickness="1"  Padding="5"
-                        Height="94" Width="198" MinHeight="10" MinWidth="10">
-                    <!--需要Label/textblock的文字大小随resize改变，则使用Viewbox，否则，去掉Viewbox-->
-                    <!--https://stackoverflow.com/questions/1464185/how-to-set-textblock-or-label-with-resizable-font-size-in-wpf-->
-                    <Viewbox TextOptions.TextFormattingMode="Ideal">
-                        <TextBlock Name="myTextBlock" Text="move and rezise TextBlock" TextWrapping="Wrap" TextTrimming="WordEllipsis"/>
-                    </Viewbox>
+                <Border Canvas.Left="186" Canvas.Top="82" Background="Transparent"
+                        BorderBrush="LightGray" BorderThickness="1"  Padding="5"
+                        Height="120" Width="140" MinHeight="20" MinWidth="20">
+                    <Grid>
+                        <Viewbox TextOptions.TextFormattingMode="Ideal" Visibility="Collapsed">
+                            <TextBlock Text="move and rezise TextBlock"/>
+                        </Viewbox>
+                        <TextBlock Text="move and rezise TextBlock" TextWrapping="Wrap" TextTrimming="WordEllipsis"/>
+                    </Grid>
                 </Border>
             </Canvas>
         </Border>

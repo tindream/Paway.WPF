@@ -13,7 +13,8 @@
         <Setter Property="Background" Value="White"/>
         <Setter Property="Padding" Value="3,4"/>
         <Setter Property="Margin" Value="2"/>
-        <Setter Property="TextWrapping" Value="Wrap"/>
+        <!--输入的文本在到达 TextBox 控件的边缘时换至新行，必要时会自动扩展 TextBox 控件以便为新行留出空间。-->
+        <!--<Setter Property="TextWrapping" Value="Wrap"/>-->
         <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
         <!--修改模板属性-->
