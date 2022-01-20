@@ -258,6 +258,13 @@ namespace Paway.WPF
             base.OnInitialized(e);
         }
         /// <summary>
+        /// 手动添加预定义列
+        /// </summary>
+        internal void AddColumn(string header, DataTemplate template)
+        {
+            columnsReady.Add(new DataGridTemplateColumn() { Header = header, CellTemplate = template, Width = new DataGridLength(1, DataGridLengthUnitType.Star) });
+        }
+        /// <summary>
         /// 加载列
         /// </summary>
         public override void OnApplyTemplate()

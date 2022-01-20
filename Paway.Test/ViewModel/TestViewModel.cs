@@ -60,8 +60,8 @@ namespace Paway.Test.ViewModel
             get { return time; }
             set { time = value; RaisePropertyChanged(); }
         }
-        private FontFamily font;
-        public FontFamily Font
+        private FontInfo font;
+        public FontInfo Font
         {
             get { return font; }
             set { font = value; RaisePropertyChanged(); }
@@ -102,18 +102,24 @@ namespace Paway.Test.ViewModel
         public ObservableCollection<ITreeViewItem> TreeList { get; private set; } = new ObservableCollection<ITreeViewItem>();
         public ObservableCollection<ListViewItemModel> GridList { get; } = new ObservableCollection<ListViewItemModel>();
         public List<ColorInfo> ColorList { get; } = new List<ColorInfo>();
+        public List<FontInfo> FontList { get; } = new List<FontInfo>();
 
         public TestViewModel()
         {
-            this.Font = Config.Window.FontFamily;
-
-            var familyList = Fonts.SystemFontFamilies;
-            foreach (var pi in typeof(Colors).Properties())
+            var index = 0;
+            foreach (var font in Fonts.SystemFontFamilies)
             {
-                var color = (Color)ColorConverter.ConvertFromString(pi.Name);
-                var info = new ColorInfo { Name = pi.Name, Color = color };
+                var info = new FontInfo { Id = index++, Name = font.Source, FontFamily = font };
+                FontList.Add(info);
+                if (info.Name == Config.Window.FontFamily.Source) this.Font = info;
+            }
+            var piList = typeof(Colors).Properties();
+            for (var i = 0; i < piList.Count; i++)
+            {
+                var color = (Color)ColorConverter.ConvertFromString(piList[i].Name);
+                var info = new ColorInfo { Id = i, Name = piList[i].Name, Color = color };
                 ColorList.Add(info);
-                if (pi.Name == nameof(Colors.White)) this.Color = info;
+                if (piList[i].Name == nameof(Colors.White)) this.Color = info;
             }
 
             for (var i = 0; i < 16; i++) List.Add(new ListViewItemModel($"{i + 1}"));
@@ -147,10 +153,20 @@ namespace Paway.Test.ViewModel
             });
         }
     }
+    public class FontInfo : ModelBase
+    {
+        [FillSize]
+        public string Name { get; set; }
+        [NoShow]
+        public FontFamily FontFamily { get; set; }
+    }
     public class ColorInfo : ModelBase
     {
+        [FillSize]
         public string Name { get; set; }
+        [NoShow]
         public Color Color { get; set; }
-        public SolidColorBrush ColorBrush { get; set; }
+        [NoShow]
+        public SolidColorBrush ColorBrush { get { return new SolidColorBrush(Color); } }
     }
 }

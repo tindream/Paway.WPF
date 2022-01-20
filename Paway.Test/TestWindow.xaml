@@ -21,18 +21,20 @@
             </Border>
             <TextBoxEXT/>
             <TextBoxEXT AcceptsReturn="True" TextWrapping="Wrap"/>
-            <WrapPanel>
-                <ComboBoxEXT ItemsSource="{x:Static Fonts.SystemFontFamilies}" DisplayMemberPath="Source" SelectedItem="{Binding Font}" Width="152"/>
-                <Border BorderBrush="LightGray" BorderThickness="1" Width="34" Margin="2" CornerRadius="3">
-                    <TextBlock Text="字体" FontFamily="{Binding Font}" HorizontalAlignment="Center"/>
-                </Border>
-            </WrapPanel>
-            <WrapPanel>
-                <ComboBoxEXT ItemsSource="{Binding ColorList}" DisplayMemberPath="Name" SelectedItem="{Binding Color}" Width="152"/>
-                <Border BorderBrush="LightGray" BorderThickness="1" Background="{Binding ColorBrush}" Width="34" Margin="2" CornerRadius="3">
-                    <TextBlock Text="颜色" HorizontalAlignment="Center"/>
-                </Border>
-            </WrapPanel>
+            <ComboView ItemsSource="{Binding FontList}" DisplayMemberPath="Name" SelectedItem="{Binding Font}" FontFamily="{Binding Font.FontFamily}">
+                <ComboView.ColumnTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" FontFamily="{Binding FontFamily}" Style="{StaticResource TextLeft}"/>
+                    </DataTemplate>
+                </ComboView.ColumnTemplate>
+            </ComboView>
+            <ComboView ItemsSource="{Binding ColorList}" DisplayMemberPath="Name" SelectedItem="{Binding Color}" Foreground="{Binding Color.ColorBrush}">
+                <ComboView.ColumnTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" Foreground="{Binding ColorBrush}" Style="{StaticResource TextLeft}"/>
+                    </DataTemplate>
+                </ComboView.ColumnTemplate>
+            </ComboView>
         </StackPanel>
 
         <Border Name="borderLine" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1"  Margin="20">

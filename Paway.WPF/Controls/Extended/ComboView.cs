@@ -29,7 +29,21 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ColumnWidthProperty =
             DependencyProperty.RegisterAttached(nameof(ColumnWidth), typeof(DataGridLength), typeof(ComboView));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ColumnTemplateProperty =
+            DependencyProperty.Register(nameof(ColumnTemplate), typeof(DataTemplate), typeof(ComboView));
 
+        /// <summary>
+        /// 外部定义列模板
+        /// </summary>
+        [Category("扩展")]
+        [Description("外部定义列模板")]
+        public DataTemplate ColumnTemplate
+        {
+            get => (DataTemplate)GetValue(ColumnTemplateProperty);
+            set => SetValue(ColumnTemplateProperty, value);
+        }
         /// <summary>
         /// 下拉列表是否显示列
         /// </summary>
@@ -85,6 +99,10 @@ namespace Paway.WPF
             {
                 this.gridView = gridView;
                 if (!ColumnHeader) gridView.ColumnHeaderHeight = 0;
+                if (this.ColumnTemplate != null)
+                {
+                    gridView.AddColumn(this.DisplayMemberPath, this.ColumnTemplate);
+                }
                 gridView.RefreshEvent -= GridView_RefreshEvent;
                 gridView.RefreshEvent += GridView_RefreshEvent;
                 gridView.CurrentCellChanged -= GridView_CurrentCellChanged;
@@ -97,7 +115,7 @@ namespace Paway.WPF
             var gridView = sender as DataGridEXT;
             if (gridView.CurrentCell != null && gridView.CurrentCell.Item is IId item)
             {
-                this.SelectedValue = item.GetValue(this.SelectedValuePath);
+                this.SelectedValue = this.SelectedValuePath.IsEmpty() ? item : item.GetValue(this.SelectedValuePath);
                 this.IsDropDownOpen = false;
             }
         }

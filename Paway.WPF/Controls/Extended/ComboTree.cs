@@ -71,7 +71,7 @@ namespace Paway.WPF
             if (!item.IsGroup && item.Id == id)
             {
                 this.SelectedItem = item;
-                this.last = item.GetValue(this.DisplayMemberPath).ToStrings();
+                this.last = this.DisplayMemberPath.IsEmpty() ? item.ToString() : item.GetValue(this.DisplayMemberPath).ToStrings();
                 this.Text = this.last;
                 if (this.List != null) this.ItemsSource = this.List;
                 return true;
@@ -192,7 +192,7 @@ namespace Paway.WPF
             var treeView = sender as TreeViewEXT;
             if (treeView.SelectedItem is ITreeViewItem item && !item.IsGroup)
             {
-                var id = item.GetValue(this.SelectedValuePath);
+                var id = this.SelectedValuePath.IsEmpty() ? item : item.GetValue(this.SelectedValuePath);
                 if (this.SelectedValue.Equals(id))
                     this.Text = null;
                 this.SelectedValue = id;
@@ -209,7 +209,7 @@ namespace Paway.WPF
                 {
                     if (isInit && !this.IQuery)
                     {
-                        this.SelectedValue = item.GetValue(this.SelectedValuePath);
+                        this.SelectedValue = this.SelectedValuePath.IsEmpty() ? item : item.GetValue(this.SelectedValuePath);
                         PMethod.BeginInvoke(this, () => { this.IsDropDownOpen = false; });
                     }
                 }

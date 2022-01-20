@@ -93,7 +93,7 @@ namespace Paway.WPF
         private void InitText(IId item)
         {
             this.SelectedItem = item;
-            this.last = item.GetValue(this.DisplayMemberPath).ToStrings();
+            this.last = this.DisplayMemberPath.IsEmpty() ? item.ToString() : item.GetValue(this.DisplayMemberPath).ToStrings();
             this.Text = this.last;
             if (this.List != null) this.ItemsSource = this.List;
         }
@@ -175,7 +175,7 @@ namespace Paway.WPF
         {
             if (arg2.Item is IId item)
             {
-                var id = item.GetValue(this.SelectedValuePath);
+                var id = this.SelectedValuePath.IsEmpty() ? item : item.GetValue(this.SelectedValuePath);
                 if (this.SelectedValue.Equals(id))
                     this.Text = null;
                 this.SelectedValue = id;

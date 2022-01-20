@@ -26,8 +26,8 @@
                                 Background="{Binding Path=ItemBackground.Normal, RelativeSource={RelativeSource TemplatedParent}}">
                             <Border.Effect>
                                 <DropShadowEffect ShadowDepth="0"
-                                                  Color="{Binding ShadowColor, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullToColorConverter}}"
-                                                  BlurRadius="{Binding ShadowRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullToDoubleConverter}}"/>
+                                                  Color="{Binding ShadowColor, RelativeSource={RelativeSource TemplatedParent}}"
+                                                  BlurRadius="{Binding ShadowRadius, RelativeSource={RelativeSource TemplatedParent}}"/>
                             </Border.Effect>
                         </Border>
                         <Border x:Name="border2" 
