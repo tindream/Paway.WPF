@@ -13,29 +13,31 @@
             <ColumnDefinition Width="211"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel VerticalAlignment="Center">
-            <Border Name="borderClip" BorderBrush="Gray" BorderThickness="1" Background="Green" Width="100" Height="100">
-                <Border.Clip>
-                    <RectangleGeometry  Rect="0,10,100,2"/>
-                </Border.Clip>
-            </Border>
-            <TextBoxEXT/>
-            <TextBoxEXT AcceptsReturn="True" TextWrapping="Wrap"/>
-            <ComboView ItemsSource="{Binding FontList}" DisplayMemberPath="Name" SelectedItem="{Binding Font}" FontFamily="{Binding Font.FontFamily}">
-                <ComboView.ColumnTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Name}" FontFamily="{Binding FontFamily}" Style="{StaticResource TextLeft}"/>
-                    </DataTemplate>
-                </ComboView.ColumnTemplate>
-            </ComboView>
-            <ComboView ItemsSource="{Binding ColorList}" DisplayMemberPath="Name" SelectedItem="{Binding Color}" Foreground="{Binding Color.ColorBrush}">
-                <ComboView.ColumnTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Name}" Foreground="{Binding ColorBrush}" Style="{StaticResource TextLeft}"/>
-                    </DataTemplate>
-                </ComboView.ColumnTemplate>
-            </ComboView>
-        </StackPanel>
+        <ScrollViewerEXT HorizontalScrollBarVisibility="Visible">
+            <StackPanel VerticalAlignment="Center" Height="800">
+                <Border Name="borderClip" BorderBrush="Gray" BorderThickness="1" Background="Green" Width="100" Height="100">
+                    <Border.Clip>
+                        <RectangleGeometry  Rect="0,10,100,2"/>
+                    </Border.Clip>
+                </Border>
+                <TextBoxEXT/>
+                <TextBoxEXT Height="69" AcceptsReturn="True" TextWrapping="Wrap"/>
+                <ComboView ItemsSource="{Binding FontList}" DisplayMemberPath="Name" SelectedItem="{Binding Font}" FontFamily="{Binding Font.FontFamily}">
+                    <ComboView.ColumnTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" FontFamily="{Binding FontFamily}" Style="{StaticResource TextLeft}"/>
+                        </DataTemplate>
+                    </ComboView.ColumnTemplate>
+                </ComboView>
+                <ComboView ItemsSource="{Binding ColorList}" DisplayMemberPath="Name" SelectedItem="{Binding Color}" Foreground="{Binding Color.ColorBrush}">
+                    <ComboView.ColumnTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" Foreground="{Binding ColorBrush}" Style="{StaticResource TextLeft}"/>
+                        </DataTemplate>
+                    </ComboView.ColumnTemplate>
+                </ComboView>
+            </StackPanel>
+        </ScrollViewerEXT>
 
         <Border Name="borderLine" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1"  Margin="20">
             <Canvas Name="canvas" Grid.Column="1" Background="White">

@@ -184,8 +184,11 @@ namespace Paway.WPF
         }
         private void ScrollViewer_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
-            var scrollViewer = sender as ScrollViewerEXT;
-            scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - (e.Delta >> 2));
+            if (sender is ScrollViewerEXT scrollViewer && scrollViewer.ScrollableHeight > 0)
+            {
+                scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - (e.Delta >> 2));
+                e.Handled = true;
+            }
         }
 
         #region 动画
