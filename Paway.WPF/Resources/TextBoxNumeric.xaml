@@ -77,7 +77,7 @@
                             <Setter Property="Padding" Value="0,4" />
                         </DataTrigger>
                         <Trigger Property="IsReadOnly" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource Light}"/>
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource BorderLight}"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="BorderBrush" TargetName="border" 

@@ -394,6 +394,8 @@
                                     </DataTrigger>
                                     <Trigger Property="IsEnabled" Value="False">
                                         <Setter Property="Opacity" Value="0.6"/>
+                                        <Setter Property="Background" TargetName="border" Value="LightGray"/>
+                                        <Setter Property="BorderBrush" TargetName="border" Value="DarkGray"/>
                                     </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>

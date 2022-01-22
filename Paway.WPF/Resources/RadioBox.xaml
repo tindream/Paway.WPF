@@ -47,6 +47,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="0.6"/>
+                            <Setter Property="Background" TargetName="border1" Value="{StaticResource BorderLight}"/>
                         </Trigger>
                         <Trigger Property="UIElement.IsMouseOver" Value="True">
                             <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{Binding Path=ItemForeground.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
