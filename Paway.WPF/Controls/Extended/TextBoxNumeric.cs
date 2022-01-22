@@ -275,6 +275,7 @@ namespace Paway.WPF
             {
                 if (e.Delta > 0) AddValue(Interval);
                 else AddValue(-Interval);
+                e.Handled = true;
             }
         }
 

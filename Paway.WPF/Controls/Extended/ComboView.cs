@@ -107,7 +107,13 @@ namespace Paway.WPF
                 gridView.RefreshEvent += GridView_RefreshEvent;
                 gridView.CurrentCellChanged -= GridView_CurrentCellChanged;
                 gridView.CurrentCellChanged += GridView_CurrentCellChanged;
+                gridView.RowDoubleEvent -= GridView_RowDoubleEvent;
+                gridView.RowDoubleEvent += GridView_RowDoubleEvent;
             }
+        }
+        private void GridView_RowDoubleEvent(object sender, SelectItemEventArgs e)
+        {
+            GridView_CurrentCellChanged(sender, e);
         }
         private void GridView_CurrentCellChanged(object sender, EventArgs e)
         {

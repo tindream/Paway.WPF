@@ -52,12 +52,14 @@
                                                        VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
                                 </local:ScrollViewerEXT>
                                 <local:ButtonEXT x:Name="UpButton" Focusable="False" Grid.Column="2" 
+                                                 IsEnabled="{TemplateBinding IsReadOnly, Converter={StaticResource boolReverse}}"
                                                  FontFamily="{StaticResource FontAwesome}" Content="{local:FontImage Type=AngleUp}" 
                                                  ItemBackground="Transparent" ItemForeground="{Binding ItemBrush, RelativeSource={RelativeSource TemplatedParent}}"
                                                  FontSize="18" 
                                                  Padding="5,7,5,1" Margin="0,0,0,14" 
                                                  Width="30" VerticalAlignment="Center" Height="14" />
                                 <local:ButtonEXT x:Name="DownButton" Focusable="False" Grid.Column="2" 
+                                                 IsEnabled="{TemplateBinding IsReadOnly, Converter={StaticResource boolReverse}}"
                                                  FontFamily="{StaticResource FontAwesome}" Content="{local:FontImage Type=AngleDown}" 
                                                  ItemBackground="Transparent" ItemForeground="{Binding ItemBrush, RelativeSource={RelativeSource TemplatedParent}}"
                                                  FontSize="18" 
