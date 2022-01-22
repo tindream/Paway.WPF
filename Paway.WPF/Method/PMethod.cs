@@ -306,9 +306,9 @@ namespace Paway.WPF
             if (myAdornerLayer == null)
             {
                 if (!Parent(element, out Window window)) return;
-                if (window.Content is Panel panel)
+                if (window.Content is FrameworkElement element2)
                 {
-                    WaterAdorner(panel, e, null, width, maxWidth);
+                    WaterAdorner(element2, e, null, width, maxWidth);
                 }
             }
         }
@@ -359,9 +359,9 @@ namespace Paway.WPF
         public static void Progress(DependencyObject parent, object msg = null)
         {
             if (!Parent(parent, out Window window)) return;
-            if (window.Content is Panel panel)
+            if (window.Content is FrameworkElement element)
             {
-                var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
+                var myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
                 if (myAdornerLayer == null) return;
 
                 var border = new Border
@@ -392,7 +392,7 @@ namespace Paway.WPF
                     Width = 80,
                     Height = 80,
                 });
-                var progress = new CustomAdorner(panel, () => border, AlphaColor(0, Colors.Black)) { Name = NameProgress };
+                var progress = new CustomAdorner(element, () => border, AlphaColor(0, Colors.Black)) { Name = NameProgress };
                 myAdornerLayer.Add(progress);
             }
         }
@@ -415,11 +415,11 @@ namespace Paway.WPF
             Invoke(parent, () =>
             {
                 if (!Parent(parent, out Window window)) return;
-                if (window.Content is Panel panel)
+                if (window.Content is FrameworkElement element)
                 {
-                    var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
+                    var myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
                     if (myAdornerLayer == null) return;
-                    var list = myAdornerLayer.GetAdorners(panel);
+                    var list = myAdornerLayer.GetAdorners(element);
                     if (list != null)
                     {
                         myAdornerLayer.Remove(list.FirstOrDefault(c => c.Name == NameProgress));
@@ -442,9 +442,9 @@ namespace Paway.WPF
             BeginInvoke(parent, () =>
             {
                 if (!Parent(parent, out Window window)) return;
-                if (window.Content is Panel panel)
+                if (window.Content is FrameworkElement element)
                 {
-                    var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
+                    var myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
                     if (myAdornerLayer == null)
                     {
                         if (repeat)
@@ -474,7 +474,7 @@ namespace Paway.WPF
                     };
                     border.Child = block;
                     if (time == 0) time = 3000;
-                    myAdornerLayer.Add(new CustomAdorner(panel, () => border, yFunc: () =>
+                    myAdornerLayer.Add(new CustomAdorner(element, () => border, yFunc: () =>
                     {
                         var top = window.ActualHeight - border.ActualHeight;
                         top = top * 17 / 20;
@@ -539,9 +539,9 @@ namespace Paway.WPF
             BeginInvoke(parent, () =>
             {
                 if (!Parent(parent, out Window window)) return;
-                if (window.Content is Panel panel)
+                if (window.Content is FrameworkElement element)
                 {
-                    var myAdornerLayer = AdornerLayer.GetAdornerLayer(panel);
+                    var myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
                     if (myAdornerLayer == null)
                     {
                         if (repeat)
@@ -572,8 +572,8 @@ namespace Paway.WPF
                     border.Child = block;
                     if (time == 0) time = 3000;
 
-                    ClearAdorner(myAdornerLayer, panel, NameHit);
-                    myAdornerLayer.Add(new CustomAdorner(panel, () => border, boardFunc: () =>
+                    ClearAdorner(myAdornerLayer, element, NameHit);
+                    myAdornerLayer.Add(new CustomAdorner(element, () => border, boardFunc: () =>
                     {
                         var storyboard = new Storyboard();
 
@@ -774,7 +774,7 @@ namespace Paway.WPF
         /// <summary>
         /// Window弹框
         /// </summary>
-        public static bool? Show(DependencyObject parent, Window window, bool iEscExit = true)
+        public static bool? Show(DependencyObject parent, Window window, int alpha = 100, bool iEscExit = true)
         {
             if (!Parent(parent, out Window owner)) return null;
             window.ShowInTaskbar = false;
@@ -807,7 +807,7 @@ namespace Paway.WPF
             //放入原来的内容
             container.Children.Add(original);
             //蒙板
-            var layer = new Grid() { Background = new SolidColorBrush(AlphaColor(100, Colors.Black)) };
+            var layer = new Grid() { Background = new SolidColorBrush(AlphaColor(alpha, Colors.Black)) };
             //在上面放一层蒙板
             container.Children.Add(layer);
             //将装有原来内容和蒙板的容器赋给父级窗体
