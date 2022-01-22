@@ -380,20 +380,34 @@ namespace Paway.WPF
             return false;
         }
         /// <summary>
+        /// 选中行
+        /// </summary>
+        public bool Select(string name, object value, bool iCell = false)
+        {
+            for (int i = 0; i < this.Items.Count; i++)
+            {
+                if (this.Items[i].GetValue(name).Equals(value))
+                {
+                    return Select(this.Items[i], iCell);
+                }
+            }
+            return false;
+        }
+        /// <summary>
         /// 选中最后一行
         /// </summary>
         public bool SelectLast()
         {
-            if (this.Items.Count > 0 && this.Items[this.Items.Count - 1] is IId item)
+            if (this.Items.Count > 0)
             {
-                return Select(item);
+                return Select(this.Items[this.Items.Count - 1]);
             }
             return false;
         }
         /// <summary>
         /// 选中行
         /// </summary>
-        public bool Select(IId item, bool iCell = false)
+        public bool Select(object item, bool iCell = false)
         {
             this.ScrollIntoView(item);
             if (this.ItemContainerGenerator.ContainerFromItem(item) is DataGridRow row)

@@ -982,8 +982,9 @@ namespace Paway.WPF
         /// <param name="child">返回指定类型控件</param>
         /// <param name="name">指定控件名称</param>
         /// <param name="iParent">指定搜索同级控件</param>
+        /// <param name="func">外部条件，在多子项时判断</param>
         /// <returns></returns>
-        public static bool Child<T>(object obj, out T child, string name = null, bool iParent = true) where T : FrameworkElement
+        public static bool Child<T>(object obj, out T child, string name = null, bool iParent = true, Func<T, bool> func = null) where T : FrameworkElement
         {
             child = null;
             if (!(obj is DependencyObject dependency)) return false;
@@ -998,13 +999,13 @@ namespace Paway.WPF
                 var value = VisualTreeHelper.GetChild(dependency, i);
                 if (value is T temp)
                 {
-                    if (name == null || temp.Name == name)
+                    if ((name == null || temp.Name == name) && func?.Invoke(temp) != false)
                     {
                         child = temp;
                         return true;
                     }
                 }
-                if (Child(value, out child, name, false))
+                if (Child(value, out child, name, false, func))
                 {
                     return true;
                 }
@@ -1014,7 +1015,7 @@ namespace Paway.WPF
                 dependency = control.Content as DependencyObject;
                 if (dependency is T temp)
                 {
-                    if (name == null || temp.Name == name)
+                    if ((name == null || temp.Name == name) && func?.Invoke(temp) != false)
                     {
                         child = temp;
                         return true;

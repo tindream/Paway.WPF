@@ -64,6 +64,30 @@ namespace Paway.WPF
             {
                 var valueNormal = value.GetHashCode();
                 var valueReg = parameter.ToInt();
+                result = valueNormal == valueReg;
+            }
+            else result = value.ToString() == parameter.ToStrings();
+            return result;
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var result = value.ToBool() ? 1 : -1;
+            return (result * parameter.ToInt()).ToString();
+        }
+    }
+    /// <summary>
+    /// 值转True(多原始枚举值)
+    /// </summary>
+    internal class ValueMoreToTrue : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            bool result;
+            if (value == null || value == DBNull.Value) result = true;
+            else if (value is Enum)
+            {
+                var valueNormal = value.GetHashCode();
+                var valueReg = parameter.ToInt();
                 result = (valueNormal & valueReg) == valueReg;
             }
             else result = value.ToString() == parameter.ToStrings();
@@ -76,7 +100,7 @@ namespace Paway.WPF
         }
     }
     /// <summary>
-    /// 值转True(多枚举值)
+    /// 值转True(多目标枚举值)
     /// </summary>
     internal class ValueToMoreTrue : IValueConverter
     {
@@ -111,10 +135,10 @@ namespace Paway.WPF
             {
                 var valueNormal = value.GetHashCode();
                 var valueReg = parameter.ToInt();
-                result = (valueNormal & valueReg) == valueReg;
+                result = valueNormal == valueReg;
             }
             else result = value.ToString() == parameter.ToStrings();
-            return result;
+            return !result;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -123,7 +147,31 @@ namespace Paway.WPF
         }
     }
     /// <summary>
-    /// 值转False(多枚举值)
+    /// 值转False(多原始枚举值)
+    /// </summary>
+    internal class ValueMoreToFalse : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            bool result;
+            if (value == null || value == DBNull.Value) result = true;
+            else if (value is Enum)
+            {
+                var valueNormal = value.GetHashCode();
+                var valueReg = parameter.ToInt();
+                result = (valueNormal & valueReg) == valueReg;
+            }
+            else result = value.ToString() == parameter.ToStrings();
+            return !result;
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var result = value.ToBool() ? -1 : 1;
+            return (result * parameter.ToInt()).ToString();
+        }
+    }
+    /// <summary>
+    /// 值转False(多目标枚举值)
     /// </summary>
     internal class ValueToMoreFalse : IValueConverter
     {
@@ -138,7 +186,7 @@ namespace Paway.WPF
                 result = (valueNormal & valueReg) == valueNormal;
             }
             else result = value.ToString() == parameter.ToStrings();
-            return result;
+            return !result;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

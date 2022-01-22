@@ -119,9 +119,9 @@ namespace Paway.WPF
         {
             if (selecting) return;
             var gridView = sender as DataGridEXT;
-            if (gridView.CurrentCell != null && gridView.CurrentCell.Item is IId item)
+            if (gridView.CurrentCell != null)
             {
-                this.SelectedValue = this.SelectedValuePath.IsEmpty() ? item : item.GetValue(this.SelectedValuePath);
+                this.SelectedValue = this.SelectedValuePath.IsEmpty() ? gridView.CurrentCell.Item : gridView.CurrentCell.Item.GetValue(this.SelectedValuePath);
                 this.IsDropDownOpen = false;
             }
         }
@@ -130,7 +130,7 @@ namespace Paway.WPF
             try
             {
                 selecting = true;
-                gridView.Select(this.SelectedValue.ToInt());
+                gridView.Select(this.SelectedValuePath, this.SelectedValue);
             }
             finally
             {

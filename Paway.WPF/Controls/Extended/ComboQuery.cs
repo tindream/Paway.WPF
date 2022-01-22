@@ -173,19 +173,17 @@ namespace Paway.WPF
         }
         private void GridView_RowDoubleEvent(object arg1, SelectItemEventArgs arg2)
         {
-            if (arg2.Item is IId item)
             {
-                var id = this.SelectedValuePath.IsEmpty() ? item : item.GetValue(this.SelectedValuePath);
-                if (this.SelectedValue.Equals(id))
-                    this.Text = null;
-                this.SelectedValue = id;
+                var value = this.SelectedValuePath.IsEmpty() ? arg2.Item : arg2.Item.GetValue(this.SelectedValuePath);
+                if (this.SelectedValue.Equals(value)) this.Text = null;
+                this.SelectedValue = value;
             }
             IsDropDownOpen = false;
             textBox.Focus();
         }
         private void Popup_Opened(object sender, EventArgs e)
         {
-            var result = gridView.Select(this.SelectedValue.ToInt());
+            var result = gridView.Select(this.SelectedValuePath, this.SelectedValue);
             if (result) textBox.Focus();
         }
         private void GridView_RefreshEvent(DataGridEXT obj)
