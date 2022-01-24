@@ -20,7 +20,7 @@
                             BorderBrush="{TemplateBinding Border.BorderBrush}"
                             Background="{TemplateBinding Panel.Background}"
                             CornerRadius="{TemplateBinding Radius}">
-                        <local:ScrollViewerEXT x:Name="scrollView"
+                        <local:ScrollViewerEXT x:Name="Part_ScrollViewer"
                                                HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                                VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
                             <ItemsPresenter />

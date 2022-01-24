@@ -78,7 +78,7 @@ namespace Paway.WPF
         /// </summary>
         public void ScrollViewer(double percent)
         {
-            if (Template.FindName("scrollView", this) is ScrollViewerEXT scrollViewer)
+            if (Template.FindName("Part_ScrollViewer", this) is ScrollViewerEXT scrollViewer)
             {
                 var height = scrollViewer.ScrollableHeight * percent;
                 var iHeight = height.ToInt();

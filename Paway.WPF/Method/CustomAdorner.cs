@@ -22,8 +22,8 @@ namespace Paway.WPF
         /// </summary>
         public CustomAdorner(FrameworkElement adornedElement, Func<FrameworkElement> elementFunc, Color? color = null, Func<double> xFunc = null, Func<double> yFunc = null, Func<Storyboard> boardFunc = null, bool? hitTest = null) : base(adornedElement)
         {
-            //true:不路由事件
-            //false:路由事件
+            //true:不路由事件（不穿透）
+            //false:路由事件（穿透）
             if (hitTest == null) hitTest = boardFunc == null;
             IsHitTestVisible = hitTest.Value;
             canvas = new Canvas() { ClipToBounds = true };

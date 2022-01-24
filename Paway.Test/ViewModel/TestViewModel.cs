@@ -42,6 +42,16 @@ namespace Paway.Test.ViewModel
             }
         }
 
+        private string _text;
+        public string Text
+        {
+            get { return _text; }
+            set
+            {
+                _text = value; RaisePropertyChanged();
+            }
+        }
+
         private MonitorType userType = MonitorType.LeftToeAngle;
         public MonitorType UserType
         {
@@ -106,6 +116,7 @@ namespace Paway.Test.ViewModel
 
         public TestViewModel()
         {
+            this.Text = "111\r\n222\r\n333";
             var index = 0;
             foreach (var font in Fonts.SystemFontFamilies)
             {

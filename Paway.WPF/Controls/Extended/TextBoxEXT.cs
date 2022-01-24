@@ -170,26 +170,6 @@ namespace Paway.WPF
             PMethod.OnKeyDown(e);
             base.OnKeyDown(e);
         }
-        /// <summary>
-        /// 响应滚动条
-        /// </summary>
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-            if (GetTemplateChild("PART_ContentHost") is ScrollViewerEXT scrollViewer)
-            {
-                scrollViewer.PreviewMouseWheel -= ScrollViewer_PreviewMouseWheel;
-                scrollViewer.PreviewMouseWheel += ScrollViewer_PreviewMouseWheel;
-            }
-        }
-        private void ScrollViewer_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
-        {
-            if (sender is ScrollViewerEXT scrollViewer && scrollViewer.ScrollableHeight > 0)
-            {
-                scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - (e.Delta >> 2));
-                e.Handled = true;
-            }
-        }
 
         #region 动画
         /// <summary>

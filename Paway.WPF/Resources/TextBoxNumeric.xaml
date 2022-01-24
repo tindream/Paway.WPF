@@ -13,7 +13,6 @@
         <Setter Property="Background" Value="White"/>
         <Setter Property="Padding" Value="3,4,0,4"/>
         <Setter Property="Margin" Value="2"/>
-        <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
         <!--修改模板属性-->
@@ -46,11 +45,11 @@
                                 <Image x:Name="icon" Visibility="Collapsed"
                                        Source="{TemplateBinding Icon}"
                                        Stretch="{TemplateBinding IconStretch}"/>
-                                <local:ScrollViewerEXT x:Name="PART_ContentHost" Grid.Column="1"
-                                                       VerticalAlignment="Center"
-                                                       HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
-                                                       VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
-                                </local:ScrollViewerEXT>
+                                <ScrollViewer x:Name="PART_ContentHost" Grid.Column="1"
+                                              VerticalAlignment="Center"
+                                              HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                              VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+                                </ScrollViewer>
                                 <local:ButtonEXT x:Name="UpButton" Focusable="False" Grid.Column="2" 
                                                  IsEnabled="{TemplateBinding IsReadOnly, Converter={StaticResource boolReverse}}"
                                                  FontFamily="{StaticResource FontAwesome}" Content="{local:FontImage Type=AngleUp}" 

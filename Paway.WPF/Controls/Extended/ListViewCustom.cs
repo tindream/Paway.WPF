@@ -466,7 +466,7 @@ namespace Paway.WPF
                     IsPressed(true);
                 }
                 else if (ScrollViewer != null && (ScrollViewer.ScrollableHeight > 0 || ScrollViewer.ScrollableWidth > 0)) { }
-                else if (PMethod.Parent(this, out Window window))
+                else if (PMethod.Parent(this, out WindowEXT window))
                 {
                     var eventArg = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, e.ChangedButton)
                     {
@@ -474,7 +474,10 @@ namespace Paway.WPF
                         Source = this
                     };
                     PMethod.ExecuteMethod(window, "OnMouseLeftButtonDown", eventArg);
-                    if (!eventArg.Handled) window.DragMove();
+                    if (!eventArg.Handled && (bool)window.GetValue(WindowMonitor.IsDragMoveEnabledProperty))
+                    {
+                        window.DragMove();
+                    }
                     //this.RaiseEvent(eventArg);
                 }
             }

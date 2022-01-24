@@ -230,7 +230,7 @@ namespace Paway.WPF
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            scrollViewer = Template.FindName("_tv_scrollviewer_", this) as ScrollViewerEXT;
+            scrollViewer = Template.FindName("Part_ScrollViewer", this) as ScrollViewerEXT;
         }
         /// <summary>
         /// 按下记录位置

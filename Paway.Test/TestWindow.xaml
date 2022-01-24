@@ -19,7 +19,7 @@
                     <RectangleGeometry  Rect="0,10,100,2"/>
                 </Border.Clip>
             </Border>
-            <TextBoxEXT Height="69" AcceptsReturn="True" TextWrapping="Wrap"/>
+            <TextBoxEXT Height="70" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Text}"/>
             <ButtonEXT Command="{Binding ButtonCommand}" CommandParameter="{Binding ElementName=listView}" Click="ButtonEXT_Click"/>
         </StackPanel>
 

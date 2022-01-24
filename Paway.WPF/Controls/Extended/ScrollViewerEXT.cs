@@ -90,7 +90,7 @@ namespace Paway.WPF
         {
             if (e.ButtonState == MouseButtonState.Pressed)
             {
-                if ((this.ScrollableHeight > 0 && this.VerticalScrollBarVisibility != ScrollBarVisibility.Hidden) || (this.ScrollableWidth > 0 && this.HorizontalScrollBarVisibility != ScrollBarVisibility.Hidden))
+                if (this.ScrollableHeight > 0 || this.ScrollableWidth > 0)
                 {
                     if (PMethod.Parent(this, out Window window)) window.Cursor = Cursors.Hand;
                     this.startPoint = e.GetPosition(this);

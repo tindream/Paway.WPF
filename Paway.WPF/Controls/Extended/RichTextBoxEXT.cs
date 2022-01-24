@@ -56,7 +56,7 @@ namespace Paway.WPF
         /// 滚动条
         /// </summary>
         [Browsable(false)]
-        public ScrollViewer ScrollViewer { get; set; }
+        public ScrollViewer ScrollViewer { get; private set; }
         /// <summary>
         /// </summary>
         public RichTextBoxEXT()
@@ -78,7 +78,7 @@ namespace Paway.WPF
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            this.ScrollViewer = this.GetTemplateChild("ScrollViewer") as ScrollViewer;
+            this.ScrollViewer = this.GetTemplateChild("Part_ScrollViewer") as ScrollViewer;
         }
         private void SetColor()
         {
