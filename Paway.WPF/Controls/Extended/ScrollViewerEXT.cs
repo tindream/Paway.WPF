@@ -80,6 +80,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public ScrollViewerEXT() { }
+
         #region 拖动滚动
         private Point? startPoint;
         /// <summary>

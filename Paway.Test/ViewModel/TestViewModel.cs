@@ -88,7 +88,9 @@ namespace Paway.Test.ViewModel
             {
                 return buttonCommand ?? (buttonCommand = new RelayCommand<ListViewCustom>(view =>
                 {
-                    if (view.ItemsSource == null) view.ItemsSource = ViewList;
+                    var index = Method.Random(0, ViewList.Count);
+                    ViewList[index].ItemTextForeground = new BrushEXT(Colors.Red);
+                    //if (view.ItemsSource == null) view.ItemsSource = ViewList;
                 }));
             }
         }

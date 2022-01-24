@@ -39,23 +39,11 @@ namespace Paway.Test
 
         private void ButtonEXT_Click(object sender, RoutedEventArgs e)
         {
-            var ofd = new OpenFileDialog
-            {
-                Title = $"选择要导入的 图标 文件",
-                Filter = "JPG图像|*.jpg;*.jpeg",
-            };
-            if (ofd.ShowDialog() == true)
-            {
-                var file = ofd.FileName;
-                var imageConverter = new ImageSourceConverter();
-                var value = (ImageSource)imageConverter.ConvertFrom(null, CultureInfo.InvariantCulture, file);
-                //image.Source = value;// new BitmapImage(new Uri(ofd.FileName));
-            }
         }
 
         private FrameworkElement current;
         private int reverse;
-        private Point lastPoint;
+        private Point? lastPoint;
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             if (current == null && PMethod.Child(canvas, out Border border))
@@ -82,13 +70,14 @@ namespace Paway.Test
             {
                 this.current.ReleaseMouseCapture();
                 this.current = null;
+                this.lastPoint = null;
             }
             this.Cursor = Cursors.Arrow;
         }
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
-            if (e.LeftButton == MouseButtonState.Pressed && current != null)
+            if (e.LeftButton == MouseButtonState.Pressed && current != null && lastPoint != null)
             {
                 var movePoint = e.GetPosition(canvas);
                 if (this.Cursor == Cursors.SizeNWSE)
@@ -118,7 +107,7 @@ namespace Paway.Test
         private void MoveXY(ref Point move)
         {
             var left = Canvas.GetLeft(current);
-            var toLeft = left + move.X - lastPoint.X;
+            var toLeft = left + move.X - lastPoint.Value.X;
             if (toLeft < 0)
             {
                 toLeft = 0;
@@ -132,7 +121,7 @@ namespace Paway.Test
             Canvas.SetLeft(current, toLeft);
 
             var top = Canvas.GetTop(current);
-            var toTop = top + move.Y - lastPoint.Y;
+            var toTop = top + move.Y - lastPoint.Value.Y;
             if (toTop < 0)
             {
                 toTop = 0;
@@ -150,16 +139,16 @@ namespace Paway.Test
             var left = Canvas.GetLeft(current);
             if (reverse == -1)
             {
-                var toLeft = left + move.X - lastPoint.X;
+                var toLeft = left + move.X - lastPoint.Value.X;
                 if (toLeft < 0)
                 {
                     toLeft = 0;
-                    move.X = toLeft + lastPoint.X - left;
+                    move.X = toLeft + lastPoint.Value.X - left;
                 }
                 else if (toLeft > left + current.Width - 20)
                 {
                     toLeft = left + current.Width - 20;
-                    move.X = toLeft + lastPoint.X - left;
+                    move.X = toLeft + lastPoint.Value.X - left;
                 }
                 var width = current.Width + reverse * (toLeft - left);
                 current.Width = width;
@@ -167,17 +156,17 @@ namespace Paway.Test
             }
             else
             {
-                var widthAdd = move.X - lastPoint.X;
+                var widthAdd = move.X - lastPoint.Value.X;
                 var width = current.Width + widthAdd;
                 if (left + current.Width + widthAdd > canvas.ActualWidth)
                 {
                     width = canvas.ActualWidth - left;
-                    move.X = lastPoint.X - width + current.Width;
+                    move.X = lastPoint.Value.X - width + current.Width;
                 }
                 if (width < 20)
                 {
                     width = 20;
-                    move.X = lastPoint.X - width + current.Width;
+                    move.X = lastPoint.Value.X - width + current.Width;
                 }
                 current.Width = width;
             }
@@ -187,16 +176,16 @@ namespace Paway.Test
             var top = Canvas.GetTop(current);
             if (reverse == -1)
             {
-                var toTop = top + move.Y - lastPoint.Y;
+                var toTop = top + move.Y - lastPoint.Value.Y;
                 if (toTop < 0)
                 {
                     toTop = 0;
-                    move.Y = toTop + lastPoint.Y - top;
+                    move.Y = toTop + lastPoint.Value.Y - top;
                 }
                 else if (toTop > top + current.Height - 20)
                 {
                     toTop = top + current.Height - 20;
-                    move.Y = toTop + lastPoint.Y - top;
+                    move.Y = toTop + lastPoint.Value.Y - top;
                 }
                 var height = current.Height + reverse * (toTop - top);
                 current.Height = height;
@@ -204,17 +193,17 @@ namespace Paway.Test
             }
             else
             {
-                var heightAdd = move.Y - lastPoint.Y;
+                var heightAdd = move.Y - lastPoint.Value.Y;
                 var height = current.Height + heightAdd;
                 if (top + current.Height + heightAdd > canvas.ActualHeight)
                 {
                     height = canvas.ActualHeight - top;
-                    move.Y = lastPoint.Y - height + current.Height;
+                    move.Y = lastPoint.Value.Y - height + current.Height;
                 }
                 if (height < 20)
                 {
                     height = 20;
-                    move.Y = lastPoint.Y - height + current.Height;
+                    move.Y = lastPoint.Value.Y - height + current.Height;
                 }
                 current.Height = height;
             }

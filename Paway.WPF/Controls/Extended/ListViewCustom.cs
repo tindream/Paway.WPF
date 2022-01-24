@@ -310,6 +310,15 @@ namespace Paway.WPF
             PConfig.FontSizeChanged += Config_FontSizeChanged;
             this.SelectionChanged += ListViewCustom_SelectionChanged;
         }
+        private ScrollViewerEXT ScrollViewer;
+        /// <summary>
+        /// 获取内部控件-滚动条
+        /// </summary>
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            ScrollViewer = Template.FindName("Part_ScrollViewer", this) as ScrollViewerEXT;
+        }
         private void ListViewCustom_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             foreach (var temp in e.AddedItems)
@@ -444,7 +453,6 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            base.OnPreviewMouseDown(e);
             if (INormal)
             {
                 e.Handled = true;
@@ -457,11 +465,20 @@ namespace Paway.WPF
                 {
                     IsPressed(true);
                 }
+                else if (ScrollViewer != null && (ScrollViewer.ScrollableHeight > 0 || ScrollViewer.ScrollableWidth > 0)) { }
                 else if (PMethod.Parent(this, out Window window))
                 {
-                    window.DragMove();
+                    var eventArg = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, e.ChangedButton)
+                    {
+                        RoutedEvent = UIElement.MouseLeftButtonDownEvent,
+                        Source = this
+                    };
+                    PMethod.ExecuteMethod(window, "OnMouseLeftButtonDown", eventArg);
+                    if (!eventArg.Handled) window.DragMove();
+                    //this.RaiseEvent(eventArg);
                 }
             }
+            base.OnPreviewMouseLeftButtonDown(e);
         }
         private void IsPressed(bool value)
         {
@@ -479,12 +496,12 @@ namespace Paway.WPF
         /// <param name="e"></param>
         protected override void OnPreviewMouseMove(MouseEventArgs e)
         {
-            base.OnPreviewMouseMove(e);
             if (ClickMode == ClickMode.Release && downItem != null)
             {
                 IsPressed(false);
                 downItem = null;
             }
+            base.OnPreviewMouseMove(e);
         }
         /// <summary>
         /// 鼠标抬起时判断触发
@@ -492,11 +509,11 @@ namespace Paway.WPF
         /// <param name="e"></param>
         protected override void OnPreviewMouseLeftButtonUp(MouseButtonEventArgs e)
         {
-            base.OnPreviewMouseUp(e);
-            if (ClickMode == ClickMode.Release && e.ButtonState == MouseButtonState.Pressed && downItem != null)
+            if (ClickMode == ClickMode.Release && downItem != null)
             {
                 IsPressed(false);
             }
+            base.OnPreviewMouseLeftButtonUp(e);
         }
 
         #endregion
