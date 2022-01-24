@@ -129,15 +129,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            bool result;
-            if (value == null || value == DBNull.Value) result = true;
-            else if (value is Enum)
-            {
-                var valueNormal = value.GetHashCode();
-                var valueReg = parameter.ToInt();
-                result = valueNormal == valueReg;
-            }
-            else result = value.ToString() == parameter.ToStrings();
+            var result = (bool)(new ValueToTrue().Convert(value, targetType, parameter, culture));
             return !result;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -153,15 +145,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            bool result;
-            if (value == null || value == DBNull.Value) result = true;
-            else if (value is Enum)
-            {
-                var valueNormal = value.GetHashCode();
-                var valueReg = parameter.ToInt();
-                result = (valueNormal & valueReg) == valueReg;
-            }
-            else result = value.ToString() == parameter.ToStrings();
+            var result = (bool)(new ValueMoreToTrue().Convert(value, targetType, parameter, culture));
             return !result;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -177,15 +161,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            bool result;
-            if (value == null || value == DBNull.Value) result = true;
-            else if (value is Enum)
-            {
-                var valueNormal = value.GetHashCode();
-                var valueReg = parameter.ToInt();
-                result = (valueNormal & valueReg) == valueNormal;
-            }
-            else result = value.ToString() == parameter.ToStrings();
+            var result = (bool)(new ValueToMoreTrue().Convert(value, targetType, parameter, culture));
             return !result;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -210,7 +186,22 @@ namespace Paway.WPF
         }
     }
     /// <summary>
-    /// 值转Visibility
+    /// 值转Visibility(多原始枚举值)
+    /// </summary>
+    internal class ValueMoreToVisible : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var result = (bool)(new ValueMoreToTrue().Convert(value, targetType, parameter, culture));
+            return result ? Visibility.Visible : Visibility.Collapsed;
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    /// <summary>
+    /// 值转Visibility(多目标枚举值)
     /// </summary>
     internal class ValueToMoreVisible : IValueConverter
     {
@@ -231,7 +222,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)(new ValueToFalse().Convert(value, targetType, parameter, culture));
+            var result = (bool)(new ValueToTrue().Convert(value, targetType, parameter, culture));
             return result ? Visibility.Collapsed : Visibility.Visible;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -240,13 +231,28 @@ namespace Paway.WPF
         }
     }
     /// <summary>
-    /// 值转Collapsed
+    /// 值转Collapsed(多原始枚举值)
+    /// </summary>
+    internal class ValueMoreToCollapsed : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var result = (bool)(new ValueMoreToTrue().Convert(value, targetType, parameter, culture));
+            return result ? Visibility.Collapsed : Visibility.Visible;
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    /// <summary>
+    /// 值转Collapsed(多目标枚举值)
     /// </summary>
     internal class ValueToMoreCollapsed : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)(new ValueToMoreFalse().Convert(value, targetType, parameter, culture));
+            var result = (bool)(new ValueToMoreTrue().Convert(value, targetType, parameter, culture));
             return result ? Visibility.Collapsed : Visibility.Visible;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

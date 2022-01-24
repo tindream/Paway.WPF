@@ -29,8 +29,10 @@
     <local:ValueMoreToFalse x:Key="valueMoreToFalse"/>
     <local:ValueToMoreFalse x:Key="valueToMoreFalse"/>
     <local:ValueToVisible x:Key="valueToVisible"/>
+    <local:ValueMoreToVisible x:Key="valueMoreToVisible"/>
     <local:ValueToMoreVisible x:Key="valueToMoreVisible"/>
     <local:ValueToCollapsed x:Key="valueToCollapsed"/>
+    <local:ValueMoreToCollapsed x:Key="valueMoreToCollapsed"/>
     <local:ValueToMoreCollapsed x:Key="valueToMoreCollapsed"/>
 
     <local:IsNotNullConverter x:Key="isNotNull"/>
