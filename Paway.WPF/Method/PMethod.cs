@@ -34,6 +34,29 @@ namespace Paway.WPF
         private static readonly string NameProgress = $"{nameof(PMethod)}_{nameof(Progress)}";
         private static readonly string NameHit = $"{nameof(PMethod)}_{nameof(Hit)}";
 
+        #region 转换器枚举计算
+        /// <summary>
+        /// 转换器枚举计算
+        /// </summary>
+        public static T AddValue<T>(T result, T value) where T : Enum
+        {
+            if (!PConfig.IConvertBack) return value;
+            var valueInt = value.GetHashCode();
+            var resultInt = result.GetHashCode();
+            if (valueInt > 0) resultInt |= valueInt;
+            else
+            {
+                if ((resultInt & -valueInt) == -valueInt)
+                {
+                    resultInt += valueInt;
+                }
+            }
+            PConfig.IConvertBack = false;
+            return (T)(object)resultInt;
+        }
+
+        #endregion
+
         #region 统一Invoke处理
         /// <summary>
         /// 同步调用

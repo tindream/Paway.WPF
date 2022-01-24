@@ -26,6 +26,14 @@ namespace Paway.WPF
             FontAwesome = new FontFamily(new Uri(@"pack://application:,,,/Paway.WPF;component/Resource/"), "./#fontawesome");
         }
 
+        #region 全局
+        /// <summary>
+        /// 转换器ConvertBack标记
+        /// </summary>
+        public static bool IConvertBack { get; set; }
+
+        #endregion
+
         #region 字体
         /// <summary>
         /// QuartZ字体
