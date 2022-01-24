@@ -16,31 +16,11 @@ namespace Paway.WPF
         /// <summary>
         /// 单列并水平填满
         /// </summary>
-        OneColumn = 21,
+        OneColumn,
 
         /// <summary>
-        /// 单列并水平填满
+        /// 自定义行数并水平填满
         /// </summary>
-        OneRow = 1,
-
-        /// <summary>
-        /// 双列并水平填满
-        /// </summary>
-        TwoRow,
-
-        /// <summary>
-        /// 三列并水平填满
-        /// </summary>
-        ThreeRow,
-
-        /// <summary>
-        /// 四列并水平填满
-        /// </summary>
-        FoureRow,
-
-        /// <summary>
-        /// 五列并水平填满
-        /// </summary>
-        FiveRow,
+        CustomRow,
     }
 }

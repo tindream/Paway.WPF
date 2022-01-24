@@ -251,7 +251,7 @@
         </ExpanderEXT>
 
         <StackPanel>
-            <ListViewEXT x:Name="listView3" Margin="5,5,0,0" IsLight="True" ItemWidthType="TwoRow"
+            <ListViewEXT x:Name="listView3" Margin="5,5,0,0" IsLight="True" ItemWidthType="CustomRow" Row="2"
                          ItemHeight="60" ItemWidth="100" ItemsSource="{Binding GridList}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">

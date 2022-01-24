@@ -13,43 +13,26 @@
             <ColumnDefinition Width="211"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <ScrollViewerEXT HorizontalScrollBarVisibility="Visible">
-            <StackPanel VerticalAlignment="Center" Height="800">
-                <Border Name="borderClip" BorderBrush="Gray" BorderThickness="1" Background="Green" Width="100" Height="100">
-                    <Border.Clip>
-                        <RectangleGeometry  Rect="0,10,100,2"/>
-                    </Border.Clip>
-                </Border>
-                <TextBoxEXT/>
-                <TextBoxEXT Height="69" AcceptsReturn="True" TextWrapping="Wrap"/>
-                <ComboView ItemsSource="{Binding FontList}" DisplayMemberPath="Name" SelectedItem="{Binding Font}" FontFamily="{Binding Font.FontFamily}">
-                    <ComboView.ColumnTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}" FontFamily="{Binding FontFamily}" Style="{StaticResource TextLeft}"/>
-                        </DataTemplate>
-                    </ComboView.ColumnTemplate>
-                </ComboView>
-                <ComboView ItemsSource="{Binding ColorList}" DisplayMemberPath="Name" SelectedItem="{Binding Color}" Foreground="{Binding Color.ColorBrush}">
-                    <ComboView.ColumnTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}" Foreground="{Binding ColorBrush}" Style="{StaticResource TextLeft}"/>
-                        </DataTemplate>
-                    </ComboView.ColumnTemplate>
-                </ComboView>
-            </StackPanel>
-        </ScrollViewerEXT>
+        <StackPanel VerticalAlignment="Center">
+            <Border Name="borderClip" BorderBrush="Gray" BorderThickness="1" Background="Green" Width="100" Height="100">
+                <Border.Clip>
+                    <RectangleGeometry  Rect="0,10,100,2"/>
+                </Border.Clip>
+            </Border>
+            <TextBoxEXT Height="69" AcceptsReturn="True" TextWrapping="Wrap"/>
+            <ButtonEXT Command="{Binding ButtonCommand}" CommandParameter="{Binding ElementName=listView}"/>
+        </StackPanel>
 
         <Border Name="borderLine" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1"  Margin="20">
             <Canvas Name="canvas" Grid.Column="1" Background="White">
-                <Border Canvas.Left="186" Canvas.Top="82" Background="Transparent"
-                        BorderBrush="LightGray" BorderThickness="1"  Padding="5"
-                        Height="120" Width="140" MinHeight="20" MinWidth="20">
-                    <Grid>
-                        <Viewbox TextOptions.TextFormattingMode="Ideal" Visibility="Collapsed">
-                            <TextBlock Text="move and rezise TextBlock"/>
-                        </Viewbox>
-                        <TextBlock Text="move and rezise TextBlock" TextWrapping="Wrap" TextTrimming="WordEllipsis"/>
-                    </Grid>
+                <Border Canvas.Left="124" Canvas.Top="82" Background="Transparent"
+                        BorderBrush="LightGray" BorderThickness="1"
+                        Height="112" Width="216" MinHeight="20" MinWidth="20">
+                    <Viewbox>
+                        <!--<RichTextBoxEXT Name="rct"/>-->
+                        <ListViewCustom Name="listView" ItemWidthType="CustomRow" Row="100">
+                        </ListViewCustom>
+                    </Viewbox>
                 </Border>
             </Canvas>
         </Border>

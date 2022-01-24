@@ -1,7 +1,9 @@
-﻿using Paway.Helper;
+﻿using Microsoft.Win32;
+using Paway.Helper;
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -37,6 +39,18 @@ namespace Paway.Test
 
         private void ButtonEXT_Click(object sender, RoutedEventArgs e)
         {
+            var ofd = new OpenFileDialog
+            {
+                Title = $"选择要导入的 图标 文件",
+                Filter = "JPG图像|*.jpg;*.jpeg",
+            };
+            if (ofd.ShowDialog() == true)
+            {
+                var file = ofd.FileName;
+                var imageConverter = new ImageSourceConverter();
+                var value = (ImageSource)imageConverter.ConvertFrom(null, CultureInfo.InvariantCulture, file);
+                //image.Source = value;// new BitmapImage(new Uri(ofd.FileName));
+            }
         }
 
         private FrameworkElement current;

@@ -149,9 +149,23 @@ namespace Paway.WPF
             });
         }
         /// <summary>
+        /// 添加文本
+        /// </summary>
+        public void AddText(string content, Action action)
+        {
+            AddLine(content, null, action, false);
+        }
+        /// <summary>
+        /// 添加文本
+        /// </summary>
+        public void AddText(string content, Color color)
+        {
+            AddLine(content, color, null, false);
+        }
+        /// <summary>
         /// 添加文本并换行
         /// </summary>
-        public void AddLine(string content = null, Color? color = null, Action action = null)
+        public void AddLine(string content = null, Color? color = null, Action action = null, bool line = true)
         {
             var range = new TextRange(this.CaretPosition, this.Document.ContentEnd);
             var isLast = range.Text.Replace("\r", "").Replace("\n", "").IsEmpty() && (range.Text.IndexOf('\n') == range.Text.LastIndexOf('\n'));
@@ -174,7 +188,7 @@ namespace Paway.WPF
                 hl.MouseLeftButtonDown += delegate { action(); };
                 block.Inlines.Add(hl);
             }
-            Document.Blocks.Add(new Paragraph());
+            if (line) Document.Blocks.Add(new Paragraph());
             AutoShow(isLast);
         }
         private void AutoShow(bool isLast)

@@ -34,6 +34,10 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(ItemWidthType), typeof(ItemWidthType), typeof(ListViewCustom));
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty RowProperty =
+            DependencyProperty.RegisterAttached(nameof(Row), typeof(int), typeof(ListViewCustom), new PropertyMetadata(1));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty ItemHeightProperty =
             DependencyProperty.RegisterAttached(nameof(ItemHeight), typeof(double), typeof(ListViewCustom), new PropertyMetadata(42d));
         /// <summary>
@@ -172,6 +176,16 @@ namespace Paway.WPF
         {
             get { return (ItemWidthType)GetValue(ItemWidthTypeProperty); }
             set { SetValue(ItemWidthTypeProperty, value); }
+        }
+        /// <summary>
+        /// 行数
+        /// </summary>
+        [Category("扩展")]
+        [Description("行数")]
+        public int Row
+        {
+            get { return (int)GetValue(RowProperty); }
+            set { SetValue(RowProperty, value); }
         }
         /// <summary>
         /// 自定义项高度
@@ -345,15 +359,11 @@ namespace Paway.WPF
                         }
                     }
                     break;
-                case ItemWidthType.OneRow:
-                case ItemWidthType.TwoRow:
-                case ItemWidthType.ThreeRow:
-                case ItemWidthType.FoureRow:
-                case ItemWidthType.FiveRow:
-                    var rowCount = (int)ItemWidthType;
-                    var columnCount = Items.Count / rowCount;
+                case ItemWidthType.CustomRow:
+                    if (Row < 1) Row = 1;
+                    var columnCount = Items.Count / Row;
+                    if (Items.Count % Row > 0) columnCount++;
                     var width = (int)(actualWidth / columnCount);
-                    if (width < 0) width = 0;
                     if (actualWidth % columnCount > 0) width++;
                     var count = columnCount - (columnCount * width - actualWidth);
                     var margin = ItemMargin.Left + ItemMargin.Right;

@@ -86,18 +86,16 @@ namespace Paway.Test.ViewModel
         {
             get
             {
-                return buttonCommand ?? (buttonCommand = new RelayCommand(() =>
+                return buttonCommand ?? (buttonCommand = new RelayCommand<ListViewCustom>(view =>
                 {
-                    if (Time.Second < 59) Time = Time.AddSeconds(1);
-                    else if (Time.Minute < 59) Time = Time.AddMinutes(1);
-                    else if (Time.Hour < 23) Time = Time.AddHours(1);
+                    if (view.ItemsSource == null) view.ItemsSource = ViewList;
                 }));
             }
         }
 
         #endregion
 
-        public ObservableCollection<ListViewItemModel> List { get; private set; } = new ObservableCollection<ListViewItemModel>();
+        public ObservableCollection<ListViewItemModel> ViewList { get; private set; } = new ObservableCollection<ListViewItemModel>();
         public ObservableCollection<IComboBoxItem> MultiList { get; } = new ObservableCollection<IComboBoxItem>();
         public ObservableCollection<ITreeViewItem> TreeList { get; private set; } = new ObservableCollection<ITreeViewItem>();
         public ObservableCollection<ListViewItemModel> GridList { get; } = new ObservableCollection<ListViewItemModel>();
@@ -122,7 +120,7 @@ namespace Paway.Test.ViewModel
                 if (piList[i].Name == nameof(Colors.White)) this.Color = info;
             }
 
-            for (var i = 0; i < 16; i++) List.Add(new ListViewItemModel($"{i + 1}"));
+            for (var i = 0; i < 16; i++) ViewList.Add(new ListViewItemModel($"{i + 1}"));
             for (var i = 0; i < 16; i++) MultiList.Add(new ComboBoxItemModel($"{i + 1}"));
             var treeInfo = new TreeViewItemModel("分类A", true);
             this.TreeList.Add(treeInfo);
