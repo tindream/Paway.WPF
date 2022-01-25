@@ -22,20 +22,5 @@
             <TextBoxEXT Height="70" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Text}"/>
             <ButtonEXT Command="{Binding ButtonCommand}" CommandParameter="{Binding ElementName=listView}" Click="ButtonEXT_Click"/>
         </StackPanel>
-
-        <Border Name="borderLine" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1"  Margin="20">
-            <Canvas Name="canvas" Grid.Column="1" Background="White">
-                <Border Canvas.Left="124" Canvas.Top="82" Background="Transparent"
-                        BorderBrush="LightGray" BorderThickness="1"
-                        Height="112" Width="216" MinHeight="20" MinWidth="20">
-                    <!--<Viewbox>-->
-                    <!--<RichTextBoxEXT Name="rct"/>-->
-                    <ListViewCustom Name="listView" ItemsSource="{Binding ViewList}" ItemTextForeground="Gray"
-                                    ItemTextFontSize="20" ItemBackground="Transparent" HorizontalContentAlignment="Left"/>
-
-                    <!--</Viewbox>-->
-                </Border>
-            </Canvas>
-        </Border>
     </Grid>
 </WindowEXT>

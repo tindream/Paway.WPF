@@ -129,7 +129,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemTextFontSizeProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemTextFontSize), typeof(DoubleEXT), typeof(ListViewCustom));
+            DependencyProperty.RegisterAttached(nameof(ItemTextFontSize), typeof(DoubleEXT), typeof(ListViewCustom), new PropertyMetadata(new DoubleEXT(PConfig.FontSize)));
 
         #endregion
 
@@ -306,7 +306,6 @@ namespace Paway.WPF
         public ListViewCustom()
         {
             DefaultStyleKey = typeof(ListViewCustom);
-            Config_FontSizeChanged(PConfig.FontSize);
             PConfig.FontSizeChanged += Config_FontSizeChanged;
             this.SelectionChanged += ListViewCustom_SelectionChanged;
         }
@@ -466,19 +465,25 @@ namespace Paway.WPF
                     IsPressed(true);
                 }
                 else if (ScrollViewer != null && (ScrollViewer.ScrollableHeight > 0 || ScrollViewer.ScrollableWidth > 0)) { }
-                else if (PMethod.Parent(this, out WindowEXT window))
+                else if (PMethod.Parent(this, out Window window))
                 {
                     var eventArg = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, e.ChangedButton)
                     {
                         RoutedEvent = UIElement.MouseLeftButtonDownEvent,
                         Source = this
                     };
-                    PMethod.ExecuteMethod(window, "OnMouseLeftButtonDown", eventArg);
-                    if (!eventArg.Handled && (bool)window.GetValue(WindowMonitor.IsDragMoveEnabledProperty))
+                    this.RaiseEvent(eventArg);
+                    if (!eventArg.Handled) PMethod.ExecuteMethod(window, "OnMouseLeftButtonDown", eventArg);
+                    if (!eventArg.Handled)
                     {
-                        window.DragMove();
+                        if (PMethod.Parent(this, out Canvas Canvas))
+                        {//父级存在Canvas时不再继续
+                        }
+                        else if (!eventArg.Handled && (bool)window.GetValue(WindowMonitor.IsDragMoveEnabledProperty))
+                        {
+                            window.DragMove();
+                        }
                     }
-                    //this.RaiseEvent(eventArg);
                 }
             }
             base.OnPreviewMouseLeftButtonDown(e);

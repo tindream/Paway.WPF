@@ -86,6 +86,7 @@ namespace Paway.Test.ViewModel
                 if (value != null) ColorBrush = new SolidColorBrush(value.Color); RaisePropertyChanged(nameof(ColorBrush));
             }
         }
+        public DoubleEXT FontSizes { get; set; } = new DoubleEXT(20);
         public SolidColorBrush ColorBrush { get; set; }
 
         #endregion
@@ -133,8 +134,8 @@ namespace Paway.Test.ViewModel
                 if (piList[i].Name == nameof(Colors.White)) this.Color = info;
             }
 
-            for (var i = 0; i < 16; i++) ViewList.Add(new ListViewItemModel($"{i + 1}"));
-            for (var i = 0; i < 16; i++) MultiList.Add(new ComboBoxItemModel($"{i + 1}"));
+            for (var i = 0; i < 9; i++) ViewList.Add(new ListViewItemModel($"{i + 1}"));
+            for (var i = 0; i < 9; i++) MultiList.Add(new ComboBoxItemModel($"{i + 1}"));
             var treeInfo = new TreeViewItemModel("分类A", true);
             this.TreeList.Add(treeInfo);
             treeInfo.Add("刘棒A1");
