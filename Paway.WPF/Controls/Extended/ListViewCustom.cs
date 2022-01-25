@@ -301,6 +301,35 @@ namespace Paway.WPF
 
         #endregion
 
+        #region 点击空白处抛出路由事件
+        /// <summary>
+        /// 点击空白处抛出路由事件
+        /// </summary>
+        public event EventHandler<MouseButtonEventArgs> MouseClick;
+        /// <summary>
+        /// 点击空白处抛出路由事件
+        /// </summary>
+        private void OnMouseClick(MouseButtonEventArgs e)
+        {
+            MouseClick?.Invoke(this, e);
+        }
+
+        #endregion
+        #region 点击项抛出路由事件
+        /// <summary>
+        /// 点击项抛出路由事件
+        /// </summary>
+        public event EventHandler<MouseButtonEventArgs> ItemClick;
+        /// <summary>
+        /// 点击项抛出路由事件
+        /// </summary>
+        private void OnItemClick(MouseButtonEventArgs e)
+        {
+            ItemClick?.Invoke(this, e);
+        }
+
+        #endregion
+
         /// <summary>
         /// </summary>
         public ListViewCustom()
@@ -463,6 +492,7 @@ namespace Paway.WPF
                 if (ClickMode == ClickMode.Release && PMethod.Parent(e.OriginalSource, out downItem))
                 {
                     IsPressed(true);
+                    OnItemClick(e);
                 }
                 else if (ScrollViewer != null && (ScrollViewer.ScrollableHeight > 0 || ScrollViewer.ScrollableWidth > 0)) { }
                 else if (PMethod.Parent(this, out Window window))
@@ -472,18 +502,10 @@ namespace Paway.WPF
                         RoutedEvent = UIElement.MouseLeftButtonDownEvent,
                         Source = this
                     };
-                    this.RaiseEvent(eventArg);
-                    if (!eventArg.Handled) PMethod.ExecuteMethod(window, "OnMouseLeftButtonDown", eventArg);
-                    if (!eventArg.Handled)
-                    {
-                        if (PMethod.Parent(this, out Canvas Canvas))
-                        {//父级存在Canvas时不再继续
-                        }
-                        else if (!eventArg.Handled && (bool)window.GetValue(WindowMonitor.IsDragMoveEnabledProperty))
-                        {
-                            window.DragMove();
-                        }
-                    }
+                    //this.RaiseEvent(eventArg);
+                    PMethod.ExecuteMethod(window, "OnMouseLeftButtonDown", eventArg);
+                    if (!eventArg.Handled) OnMouseClick(eventArg);
+                    if (!eventArg.Handled && (bool)window.GetValue(WindowMonitor.IsDragMoveEnabledProperty)) window.DragMove();
                 }
             }
             base.OnPreviewMouseLeftButtonDown(e);
