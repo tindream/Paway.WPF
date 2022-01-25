@@ -22,5 +22,9 @@
             <TextBoxEXT Height="70" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Text}"/>
             <ButtonEXT Command="{Binding ButtonCommand}" CommandParameter="{Binding ElementName=listView}" Click="ButtonEXT_Click"/>
         </StackPanel>
+        <Border Grid.Column="1" BorderBrush="LightGray" BorderThickness="1"
+                Width="350" Height="300">
+            <ListViewCustom ItemsSource="{Binding ViewList}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
     </Grid>
 </WindowEXT>

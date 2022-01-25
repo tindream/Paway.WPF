@@ -1017,7 +1017,7 @@ namespace Paway.WPF
                 if (parent != null) dependency = parent;
             }
             var count = VisualTreeHelper.GetChildrenCount(dependency);
-            for (int i = 0; i < count; i++)
+            for (int i = count - 1; i >= 0; i--)
             {
                 var value = VisualTreeHelper.GetChild(dependency, i);
                 if (value is T temp)
