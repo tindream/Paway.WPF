@@ -457,7 +457,7 @@ namespace Paway.WPF
         /// <summary>
         /// 按下记录位置
         /// </summary>
-        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             if (e.ButtonState == MouseButtonState.Pressed && this.AllowDrop)
             {
@@ -466,11 +466,11 @@ namespace Paway.WPF
                 {
                     if (this.SelectedItem != null && this.SelectedItem.Equals(row.Item))
                     {
-                        e.Handled = true;
+                        e.Handled = e.ClickCount == 1;
                     }
                 }
             }
-            base.OnMouseLeftButtonDown(e);
+            base.OnPreviewMouseLeftButtonDown(e);
         }
         /// <summary>
         /// 抬起停止拖动
