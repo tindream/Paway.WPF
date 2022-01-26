@@ -139,7 +139,7 @@
                 <ControlTemplate TargetType="DataGrid">
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
                             Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
-                        <ScrollViewer x:Name="DG_ScrollViewer" Focusable="false">
+                        <local:ScrollViewerEXT x:Name="Part_ScrollViewer" Focusable="false">
                             <ScrollViewer.Template>
                                 <ControlTemplate TargetType="ScrollViewer">
                                     <Grid>
@@ -184,7 +184,7 @@
                                 </ControlTemplate>
                             </ScrollViewer.Template>
                             <ItemsPresenter Margin="0,0,0,-1"/>
-                        </ScrollViewer>
+                        </local:ScrollViewerEXT>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

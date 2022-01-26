@@ -270,6 +270,7 @@ namespace Paway.WPF
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+            ScrollViewer = Template.FindName("Part_ScrollViewer", this) as ScrollViewerEXT;
             if (base.ItemsSource != null)
             {
                 LoadColumns();
@@ -592,6 +593,27 @@ namespace Paway.WPF
             }
             else OnDragExternal(e);
             base.OnDrop(e);
+        }
+
+        #endregion
+
+        #region 抛出滚动事件
+        private ScrollViewerEXT ScrollViewer;
+        /// <summary>
+        /// 当控件无需滚动时，抛出滚动事件
+        /// </summary>
+        protected override void OnPreviewMouseWheel(MouseWheelEventArgs e)
+        {
+            if (ScrollViewer.ScrollableHeight == 0 && ScrollViewer.ScrollableWidth == 0)
+            {
+                var eventArg = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta)
+                {
+                    RoutedEvent = UIElement.MouseWheelEvent,
+                    Source = this
+                };
+                this.RaiseEvent(eventArg);
+            }
+            base.OnPreviewMouseWheel(e);
         }
 
         #endregion

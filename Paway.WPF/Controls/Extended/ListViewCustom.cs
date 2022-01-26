@@ -305,13 +305,13 @@ namespace Paway.WPF
         /// <summary>
         /// 点击空白处抛出路由事件
         /// </summary>
-        public event EventHandler<MouseButtonEventArgs> MouseClick;
+        public event EventHandler<MouseButtonEventArgs> PreviewMouseClick;
         /// <summary>
         /// 点击空白处抛出路由事件
         /// </summary>
-        private void OnMouseClick(MouseButtonEventArgs e)
+        private void OnPreviewMouseClick(MouseButtonEventArgs e)
         {
-            MouseClick?.Invoke(this, e);
+            PreviewMouseClick?.Invoke(this, e);
         }
 
         #endregion
@@ -319,13 +319,13 @@ namespace Paway.WPF
         /// <summary>
         /// 点击项抛出路由事件
         /// </summary>
-        public event EventHandler<MouseButtonEventArgs> ItemClick;
+        public event EventHandler<MouseButtonEventArgs> PreviewItemClick;
         /// <summary>
         /// 点击项抛出路由事件
         /// </summary>
-        private void OnItemClick(MouseButtonEventArgs e)
+        private void OnPreviewItemClick(MouseButtonEventArgs e)
         {
-            ItemClick?.Invoke(this, e);
+            PreviewItemClick?.Invoke(this, e);
         }
 
         #endregion
@@ -492,7 +492,7 @@ namespace Paway.WPF
                 if (ClickMode == ClickMode.Release && PMethod.Parent(e.OriginalSource, out downItem))
                 {
                     IsPressed(true);
-                    OnItemClick(e);
+                    OnPreviewItemClick(e);
                 }
                 else if (ScrollViewer != null && (ScrollViewer.ScrollableHeight > 0 || ScrollViewer.ScrollableWidth > 0)) { }
                 else if (PMethod.Parent(this, out Window window))
@@ -502,9 +502,7 @@ namespace Paway.WPF
                         RoutedEvent = UIElement.MouseLeftButtonDownEvent,
                         Source = this
                     };
-                    //this.RaiseEvent(eventArg);
-                    PMethod.ExecuteMethod(window, "OnMouseLeftButtonDown", eventArg);
-                    if (!eventArg.Handled) OnMouseClick(eventArg);
+                    OnPreviewMouseClick(eventArg);
                     if (!eventArg.Handled && (bool)window.GetValue(WindowMonitor.IsDragMoveEnabledProperty)) window.DragMove();
                 }
             }
@@ -544,6 +542,26 @@ namespace Paway.WPF
                 IsPressed(false);
             }
             base.OnPreviewMouseLeftButtonUp(e);
+        }
+
+        #endregion
+
+        #region 抛出滚动事件
+        /// <summary>
+        /// 当控件无需滚动时，抛出滚动事件
+        /// </summary>
+        protected override void OnPreviewMouseWheel(MouseWheelEventArgs e)
+        {
+            if (ScrollViewer.ScrollableHeight == 0 && ScrollViewer.ScrollableWidth == 0)
+            {
+                var eventArg = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta)
+                {
+                    RoutedEvent = UIElement.MouseWheelEvent,
+                    Source = this
+                };
+                this.RaiseEvent(eventArg);
+            }
+            base.OnPreviewMouseWheel(e);
         }
 
         #endregion

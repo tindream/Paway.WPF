@@ -154,13 +154,7 @@ namespace Paway.WPF
         {
             if (this.ScrollableHeight > 0 && this.VerticalScrollBarVisibility != ScrollBarVisibility.Hidden)
             {
-                //var eventArg = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta)
-                //{
-                //    RoutedEvent = UIElement.PreviewMouseWheelEvent,
-                //    Source = this
-                //};
                 if (ScrollInterval != 0) this.ScrollToVerticalOffset(this.VerticalOffset - e.Delta / 120 * ScrollInterval);
-                //else this.RaiseEvent(eventArg);
             }
             else if (this.ScrollableWidth > 0 && this.HorizontalScrollBarVisibility != ScrollBarVisibility.Hidden)
             {
@@ -178,6 +172,7 @@ namespace Paway.WPF
         /// <param name="forever">无限重复(默认true)</param>
         public void AutoScroll(double time, double beginTime = 2, bool forever = true)
         {
+            if (time < 0) time = 0;
             ScrollViewerBehavior.AutoScroll(this, time, beginTime, forever);
         }
     }
