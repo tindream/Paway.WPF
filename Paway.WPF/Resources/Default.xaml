@@ -117,6 +117,11 @@
     <SolidColorBrush x:Key="Warn" Color="#FF9900" />
     <SolidColorBrush x:Key="Error" Color="#F8331E" />
 
+    <Color x:Key="MainColor">#409EFF</Color>
+    <Color x:Key="SuccessColor">#2DB84D</Color>
+    <Color x:Key="WarnColor">#FF9900</Color>
+    <Color x:Key="ErrorColor">#F8331E</Color>
+
     <!--34-->
     <SolidColorBrush x:Key="Text" Color="#222" />
     <!--68-->

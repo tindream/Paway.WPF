@@ -14,17 +14,30 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <StackPanel VerticalAlignment="Center">
-            <Border Name="borderClip" BorderBrush="Gray" BorderThickness="1" Background="Green" Width="100" Height="100">
-                <Border.Clip>
-                    <RectangleGeometry  Rect="0,10,100,2"/>
-                </Border.Clip>
+            <Border x:Name="b1" Margin="3,2" Height="100" Width="21" Background="#333" Padding="1">
+                <ProgressBar Name="p1" Orientation="Vertical" Foreground="#C8D4D4D4" BorderThickness="0"
+                         Value="{Binding Value2}" Minimum="-40" Maximum="20"
+                         RenderTransformOrigin="0.5,0.5">
+                    <ProgressBar.Background>
+                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                            <GradientStop Offset="0" Color="#FFFF00" />
+                            <GradientStop Offset="0.33" Color="#FFFF00" />
+                            <GradientStop Offset="0.33" Color="#00FF00" />
+                            <GradientStop Offset="1" Color="#00FF00" />
+                        </LinearGradientBrush>
+                    </ProgressBar.Background>
+                    <ProgressBar.RenderTransform>
+                        <RotateTransform Angle="180"/>
+                    </ProgressBar.RenderTransform>
+                </ProgressBar>
             </Border>
-            <TextBoxEXT Height="70" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Text}"/>
-            <ButtonEXT Command="{Binding ButtonCommand}" CommandParameter="{Binding ElementName=listView}" Click="ButtonEXT_Click"/>
+            <Line X1="0" X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" Stroke="Red" StrokeThickness="0.1" Margin="2"/>
+            <Line X1="0" X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" Stroke="Red" StrokeThickness="0.1" Margin="2" RenderOptions.EdgeMode="Aliased"/>
+            <Line X1="0" X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" Stroke="Red" StrokeThickness="0.1" Margin="2" RenderOptions.CachingHint="Cache"/>
+            <Line X1="0" X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" Stroke="Red" StrokeThickness="0.1" Margin="2" RenderOptions.ClearTypeHint="Enabled"/>
+            <Border BorderBrush="Red" BorderThickness="1" Height="1" Margin="2"/>
+            <SliderEXT Minimum="-40" Maximum="20" Value="{Binding Value2}"/>
+            <ButtonEXT Click="ButtonEXT_Click"/>
         </StackPanel>
-        <Border Grid.Column="1" BorderBrush="LightGray" BorderThickness="1"
-                Width="350" Height="200">
-            <DataGridEXT ItemsSource="{Binding ViewList}" AllowDrop="True"/>
-        </Border>
     </Grid>
 </WindowEXT>
