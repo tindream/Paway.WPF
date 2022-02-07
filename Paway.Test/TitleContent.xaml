@@ -27,7 +27,7 @@
             <MenuItem Header="设置..." />
             <MenuItem Header="发送反馈C" Icon="A">
                 <MenuItem Header="报告问题"
-                              IsCheckable="True"  Icon="B"/>
+                              IsCheckable="True"/>
                 <MenuItem Header="提供反馈"
                               IsCheckable="True" />
                 <Separator />

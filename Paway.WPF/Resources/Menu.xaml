@@ -119,9 +119,10 @@
                        PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
                        Placement="Bottom">
                     <Border x:Name="SubMenuBorder"
-                            BorderBrush="{StaticResource ThemeColorMouse}"
+                            BorderBrush="LightGray"
                             BorderThickness="1"
                             Background="{StaticResource ThemeLight}"
+                            CornerRadius="0,0,2,2"
                             Padding="0,3">
                         <StackPanel>
                             <TextBlock x:Name="Line2"
@@ -190,7 +191,7 @@
                     <Condition Property="IsSubmenuOpen" Value="True" />
                 </MultiTrigger.Conditions>
                 <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeLight}" />
-                <Setter Property="Stroke" TargetName="ButtonBackground" Value="{StaticResource ThemeColorMouse}" />
+                <Setter Property="Stroke" TargetName="ButtonBackground" Value="LightGray" />
                 <Setter Property="Visibility" TargetName="Line" Value="Visible" />
             </MultiTrigger>
             <MultiTrigger>
@@ -345,8 +346,9 @@
                        Placement="Right"
                        VerticalOffset="1">
                     <Border x:Name="SubMenuBorder"
-                            BorderBrush="{StaticResource ThemeColorMouse}"
+                            BorderBrush="LightGray"
                             BorderThickness="1"
+                            CornerRadius="2"
                             Background="{StaticResource ThemeLight}"
                             Padding="0,3">
                         <ScrollViewer x:Name="SubMenuScrollViewer"
@@ -463,6 +465,25 @@
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal" />
                 </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="ContextMenu">
+        <Setter Property="Background" Value="{StaticResource ThemeLight}" />
+        <Setter Property="BorderBrush" Value="LightGray" />
+        <Setter Property="Padding" Value="0,3" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContextMenu">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="2"
+                            Padding="{TemplateBinding Padding}">
+                        <ItemsPresenter/>
+                    </Border>
+                </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
