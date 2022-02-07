@@ -7,7 +7,7 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ScrollBar.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="CellStyle" TargetType="{x:Type DataGridCell}">
+    <Style TargetType="{x:Type DataGridCell}">
         <!--<Setter Property="Background" Value="White" />-->
         <Setter Property="BorderThickness" Value="0" />
         <!--<Setter Property="Opacity" Value="1" />-->
@@ -19,7 +19,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="RowStyle" TargetType="{x:Type DataGridRow}">
+    <Style TargetType="{x:Type DataGridRow}">
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{Binding ItemBrush.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}}"/>
@@ -95,8 +95,6 @@
         <Setter Property="ICustomColumnHeader" Value="True"/>
         <!--样式-->
         <Setter Property="ColumnHeaderStyle" Value="{StaticResource ColumnHeaderStyle}"/>
-        <Setter Property="RowStyle" Value="{StaticResource RowStyle}"/>
-        <Setter Property="CellStyle" Value="{StaticResource CellStyle}"/>
         <!--其它-->
         <Setter Property="IsReadOnly" Value="True"/>
         <Setter Property="BorderBrush" Value="LightGray"/>
@@ -190,10 +188,5 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-    <!--默认DataGridCell-->
-    <Style TargetType="DataGridCell" BasedOn="{StaticResource CellStyle}"/>
-    <!--默认DataGridRow-->
-    <Style TargetType="DataGridRow" BasedOn="{StaticResource RowStyle}"/>
 
 </ResourceDictionary>

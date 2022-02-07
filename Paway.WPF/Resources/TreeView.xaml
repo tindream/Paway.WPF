@@ -126,7 +126,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <HierarchicalDataTemplate x:Key="TreeUserNode" ItemsSource="{Binding Children}">
+    <HierarchicalDataTemplate x:Key="UserTreeNode" ItemsSource="{Binding Children}">
         <Grid Background="Transparent">
             <Grid Margin="0,5" 
                   Visibility="{Binding Visibility,ElementName=groupinginfo,Converter={StaticResource visibleReverse}}">
@@ -155,7 +155,7 @@
             </StackPanel>
         </Grid>
     </HierarchicalDataTemplate>
-    <HierarchicalDataTemplate x:Key="TreeNode" ItemsSource="{Binding Children}">
+    <HierarchicalDataTemplate x:Key="DefaultTreeNode" ItemsSource="{Binding Children}">
         <Grid Background="Transparent">
             <Grid Margin="0,5" 
                   Visibility="{Binding Visibility,ElementName=groupinginfo,Converter={StaticResource visibleReverse}}">
@@ -192,7 +192,7 @@
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Visible" />
         <Setter Property="Padding" Value="0"/>
         <Setter Property="ItemContainerStyle" Value="{StaticResource DefaultTreeViewItem}"/>
-        <Setter Property="ItemTemplate" Value="{StaticResource TreeNode}"/>
+        <Setter Property="ItemTemplate" Value="{StaticResource DefaultTreeNode}"/>
         <!--修改模板属性-->
         <Setter Property="Template">
             <Setter.Value>
@@ -225,6 +225,11 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="UserMode" Value="True">
+                <Setter Property="ItemTemplate" Value="{StaticResource UserTreeNode}"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
 </ResourceDictionary>

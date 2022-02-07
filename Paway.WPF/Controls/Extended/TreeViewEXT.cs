@@ -40,6 +40,10 @@ namespace Paway.WPF
         public static readonly DependencyProperty ItemForegroundProperty =
             DependencyProperty.RegisterAttached(nameof(ItemForeground), typeof(BrushEXT), typeof(TreeViewEXT),
             new PropertyMetadata(new BrushEXT(PConfig.TextColor, PConfig.TextColor, Colors.White)));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty UserModeProperty =
+            DependencyProperty.RegisterAttached(nameof(UserMode), typeof(bool), typeof(TreeViewEXT));
 
         #endregion
 
@@ -83,6 +87,16 @@ namespace Paway.WPF
         {
             get { return (BrushEXT)GetValue(ItemForegroundProperty); }
             set { SetValue(ItemForegroundProperty, value); }
+        }
+        /// <summary>
+        /// 用户模式
+        /// </summary>
+        [Category("扩展")]
+        [Description("用户模式")]
+        public bool UserMode
+        {
+            get { return (bool)GetValue(UserModeProperty); }
+            set { SetValue(UserModeProperty, value); }
         }
 
         #endregion

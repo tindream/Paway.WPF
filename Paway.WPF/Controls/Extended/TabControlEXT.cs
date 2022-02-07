@@ -21,6 +21,10 @@ namespace Paway.WPF
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(TabControlEXT),
                 new PropertyMetadata(new BrushEXT()));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty MenuModeProperty =
+            DependencyProperty.RegisterAttached(nameof(MenuMode), typeof(bool), typeof(TabControlEXT), new PropertyMetadata(true));
 
         #endregion
 
@@ -34,6 +38,16 @@ namespace Paway.WPF
         {
             get { return (BrushEXT)GetValue(ItemBrushProperty); }
             set { SetValue(ItemBrushProperty, value); }
+        }
+        /// <summary>
+        /// 菜单模式
+        /// </summary>
+        [Category("扩展")]
+        [Description("菜单模式")]
+        public bool MenuMode
+        {
+            get { return (bool)GetValue(MenuModeProperty); }
+            set { SetValue(MenuModeProperty, value); }
         }
 
         #endregion

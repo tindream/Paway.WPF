@@ -10,8 +10,8 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBox.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboDate.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboMulti.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboTime.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboQuery.xaml" />
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboTime.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboTree.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboView.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\DataPager.xaml" />
@@ -23,8 +23,8 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ProgressBar.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ProgressBoard.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ProgressRound.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\RadioButton.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\RadioBox.xaml" />
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\RadioButton.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\RichTextBox.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Slider.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\TabControl.xaml" />
