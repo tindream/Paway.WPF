@@ -13,12 +13,12 @@
     </WindowEXT.FunctionBar>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="211"/>
             <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <StackPanel VerticalAlignment="Center">
-            <Border BorderBrush="Blue" BorderThickness="1" Width="180">
-                <ListViewCustom ItemsSource="{Binding ViewList}" ItemWidthType="OneColumn" ItemHeight="30" ItemBrush="LightGray" IsLight="True"/>
+            <Border BorderBrush="Blue" BorderThickness="1">
+                <ListViewCustom ItemsSource="{Binding ViewList}" ItemWidth="49" IsLight="True" ItemHeight="32"/>
             </Border>
             <SliderEXT Minimum="-40" Maximum="20" Value="{Binding Value2}"/>
             <ButtonEXT Click="ButtonEXT_Click"/>

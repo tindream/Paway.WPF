@@ -459,6 +459,10 @@ namespace Paway.WPF
                                     itemWidth -= margin;
                                     totalWidth = actualWidth - itemWidth;
                                 }
+                                else
+                                {
+                                    item.ItemMargin = new Thickness(double.NaN);
+                                }
                             }
                         }
                     }
