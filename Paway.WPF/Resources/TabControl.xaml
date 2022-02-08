@@ -6,7 +6,7 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="DefaultTabItem" TargetType="{x:Type TabItem}">
+    <Style x:Key="MenuTabItem" TargetType="{x:Type TabItem}">
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
         <Setter Property="Foreground" Value="{StaticResource Text}"/>
         <Setter Property="Padding" Value="6"/>
@@ -74,7 +74,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="MenuTabItem" TargetType="{x:Type TabItem}">
+    <Style x:Key="DefaultTabItem" TargetType="{x:Type TabItem}">
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
         <Setter Property="Foreground" Value="{StaticResource Text}"/>
         <Setter Property="Padding" Value="6"/>

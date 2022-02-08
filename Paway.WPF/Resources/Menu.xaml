@@ -52,24 +52,14 @@
                 <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeLight}" />
-                <!--<Setter Property="Stroke" TargetName="ButtonBackground" Value="{StaticResource ThemeColorNormal}" />-->
+                <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeColorMouse}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeColorMouse}" />
-                <Setter Property="Stroke" TargetName="ButtonBackground" Value="{StaticResource ThemeColorMouse}" />
+                <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeColorNormal}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="Gray" />
-                <Setter Property="Fill" TargetName="GlyphPanel" Value="LightGray" />
+                <Setter Property="Opacity" Value="0.6"/>
             </Trigger>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsHighlighted" Value="True" />
-                    <Condition Property="IsEnabled" Value="False" />
-                </MultiTrigger.Conditions>
-                <Setter Property="Fill" TargetName="ButtonBackground" Value="LightGray" />
-            </MultiTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <ControlTemplate x:Key="TopLevelHeaderTemplate" TargetType="{x:Type MenuItem}">
@@ -167,8 +157,7 @@
                 <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeLight}" />
-                <!--<Setter Property="Stroke" TargetName="ButtonBackground" Value="{StaticResource ThemeColorNormal}" />-->
+                <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeColorMouse}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeLight}" />
@@ -176,8 +165,7 @@
                 <Setter Property="Visibility" TargetName="Line" Value="Visible" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="Gray" />
-                <Setter Property="Fill" TargetName="GlyphPanel" Value="Gray" />
+                <Setter Property="Opacity" Value="0.6"/>
             </Trigger>
             <Trigger Property="CanContentScroll" SourceName="SubMenuScrollViewer" Value="False">
                 <Setter Property="Canvas.Top" TargetName="OpaqueRect"
@@ -265,14 +253,13 @@
                 <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ThemeColorNormal}" />
-            </Trigger>
-            <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ThemeColorMouse}" />
             </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ThemeColorNormal}" />
+            </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="Gray" />
-                <Setter Property="Fill" TargetName="Glyph" Value="Gray" />
+                <Setter Property="Opacity" Value="0.6"/>
             </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
@@ -389,15 +376,13 @@
                 <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ThemeColorNormal}" />
-            </Trigger>
-            <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ThemeColorMouse}" />
             </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ThemeColorNormal}" />
+            </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="Gray" />
-                <Setter Property="Fill" TargetName="Glyph" Value="Gray" />
-                <Setter Property="Fill" TargetName="RightArrow" Value="Gray" />
+                <Setter Property="Opacity" Value="0.6"/>
             </Trigger>
             <Trigger Property="CanContentScroll" SourceName="SubMenuScrollViewer" Value="False">
                 <Setter Property="Canvas.Top" TargetName="OpaqueRect" 
