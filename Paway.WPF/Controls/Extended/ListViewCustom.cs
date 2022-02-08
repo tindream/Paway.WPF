@@ -61,8 +61,8 @@ namespace Paway.WPF
                 }
                 if (view.IsLight)
                 {
-                    view.ItemBorder = new ThicknessEXT(1);
-                    view.ItemMargin = new Thickness(-1, -1, 0, 0);
+                    if (view.ItemBorder == null || view.ItemBorder.ToString() == new ThicknessEXT(0).ToString()) view.ItemBorder = new ThicknessEXT(1);
+                    if (view.ItemBorder != null) view.ItemMargin = new Thickness(-view.ItemBorder.Normal.Left, -view.ItemBorder.Normal.Top, 0, 0);
                     view.ItemBackground.Normal = new SolidColorBrush(Colors.Transparent);
                 }
                 view.UpdateDefaultStyle();
@@ -85,9 +85,9 @@ namespace Paway.WPF
                 Color? mouseColor = null, pressedColor = null;
                 if (listView.ItemBackground.Mouse is SolidColorBrush mouse && mouse.Color != PMethod.AlphaColor(PConfig.Alpha - PConfig.Interval, PConfig.Color))
                 {
-                    if ((listView.ItemBrush.Mouse as SolidColorBrush).Color == PMethod.AlphaColor(PConfig.Alpha - PConfig.Interval, PConfig.Color))
+                    if ((listView.ItemBrush.Mouse as SolidColorBrush).Color == PMethod.AlphaColor(PConfig.Alpha, PConfig.Color))
                     {
-                        mouseColor = PMethod.AlphaColor(mouse.Color.A + PConfig.Interval, mouse.Color);
+                        mouseColor = PMethod.AlphaColor(mouse.Color.A, mouse.Color);
                     }
                 }
                 if (listView.ItemBackground.Pressed is SolidColorBrush pressed && pressed.Color != PMethod.AlphaColor(PConfig.Alpha, PConfig.Color))
@@ -108,7 +108,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ListViewCustom),
-                new PropertyMetadata(new BrushEXT()));
+                new PropertyMetadata(new BrushEXT(null, PConfig.Alpha, PConfig.Alpha + PConfig.Interval)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBorderProperty =
@@ -391,7 +391,7 @@ namespace Paway.WPF
                             if (IsLight)
                             {
                                 if (i == 0) item.ItemMargin = new Thickness(0);
-                                else item.ItemMargin = new Thickness(0, -1, 0, 0);
+                                else item.ItemMargin = new Thickness(0, ItemMargin.Top, 0, 0);
                             }
                         }
                     }
@@ -417,8 +417,8 @@ namespace Paway.WPF
                                 if (IsLight)
                                 {
                                     if (i == 0 && j == 0) item.ItemMargin = new Thickness(0);
-                                    else if (i < columnCount) item.ItemMargin = new Thickness(-1, 0, 0, 0);
-                                    else if (j == 0) item.ItemMargin = new Thickness(0, -1, 0, 0);
+                                    else if (i < columnCount) item.ItemMargin = new Thickness(ItemMargin.Left, 0, 0, 0);
+                                    else if (j == 0) item.ItemMargin = new Thickness(0, ItemMargin.Top, 0, 0);
                                     if (j == 0) item.ItemWidth += margin;
                                 }
                             }
@@ -448,14 +448,14 @@ namespace Paway.WPF
                             }
                             else if (iFirst && totalWidth >= 0)
                             {
-                                item.ItemMargin = new Thickness(-1, 0, 0, 0);
+                                item.ItemMargin = new Thickness(ItemMargin.Left, 0, 0, 0);
                             }
                             else
                             {
                                 iFirst = false;
                                 if (totalWidth < 0)
                                 {
-                                    item.ItemMargin = new Thickness(0, -1, 0, 0);
+                                    item.ItemMargin = new Thickness(0, ItemMargin.Top, 0, 0);
                                     itemWidth -= margin;
                                     totalWidth = actualWidth - itemWidth;
                                 }

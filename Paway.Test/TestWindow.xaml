@@ -17,11 +17,9 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <StackPanel VerticalAlignment="Center">
-            <Line X1="0" X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" Stroke="Red" StrokeThickness="0.1" Margin="2"/>
-            <Line X1="0" X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" Stroke="Red" StrokeThickness="0.1" Margin="2" RenderOptions.EdgeMode="Aliased"/>
-            <Line X1="0" X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" Stroke="Red" StrokeThickness="0.1" Margin="2" RenderOptions.CachingHint="Cache"/>
-            <Line X1="0" X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" Stroke="Red" StrokeThickness="0.1" Margin="2" RenderOptions.ClearTypeHint="Enabled"/>
-            <Border BorderBrush="Red" BorderThickness="1" Height="1" Margin="2"/>
+            <Border BorderBrush="Blue" BorderThickness="1" Width="180">
+                <ListViewCustom ItemsSource="{Binding ViewList}" ItemWidthType="OneColumn" ItemHeight="30" ItemBrush="LightGray" IsLight="True"/>
+            </Border>
             <SliderEXT Minimum="-40" Maximum="20" Value="{Binding Value2}"/>
             <ButtonEXT Click="ButtonEXT_Click"/>
         </StackPanel>
