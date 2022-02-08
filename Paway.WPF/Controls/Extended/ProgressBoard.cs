@@ -163,5 +163,26 @@ namespace Paway.WPF
         }
 
         #endregion
+
+        #region 鼠标滚轮滚动设置
+        /// <summary>
+        /// 滚动设置
+        /// </summary>
+        protected override void OnMouseWheel(MouseWheelEventArgs e)
+        {
+            var interval = e.Delta / 120 * (this.Maximum - this.Minimum) / 30;
+            if ((Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.Shift) interval /= 3;
+            else if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control) interval *= 3;
+            var temp = this.Value + interval;
+            var count = (temp / this.SmallChange).ToInt();
+            temp = count * this.SmallChange;
+            if (temp > this.Maximum) temp = this.Maximum;
+            else if (temp < this.Minimum) temp = this.Minimum;
+            if (this.Value != temp) this.Value = temp;
+            e.Handled = true;
+            base.OnMouseWheel(e);
+        }
+
+        #endregion
     }
 }

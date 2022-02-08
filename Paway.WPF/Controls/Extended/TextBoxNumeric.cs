@@ -266,17 +266,19 @@ namespace Paway.WPF
             base.OnPreviewKeyDown(e);
         }
         /// <summary>
-        /// 滑动加减
+        /// 滚动加减
         /// </summary>
         protected override void OnMouseWheel(MouseWheelEventArgs e)
         {
-            base.OnMouseWheel(e);
             if (/*this.IsFocused &&*/ !IsReadOnly)
             {
-                if (e.Delta > 0) AddValue(Interval);
-                else AddValue(-Interval);
+                var interval = (e.Delta > 0 ? 1 : -1) * Interval;
+                if ((Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.Shift) interval /= 5;
+                else if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control) interval *= 5;
+                AddValue(interval);
                 e.Handled = true;
             }
+            base.OnMouseWheel(e);
         }
 
         #endregion
