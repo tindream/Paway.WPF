@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Paway.Test"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+        xmlns:ip="http://www.galasoft.ch/mvvmlight"
         mc:Ignorable="d"
         UseLayoutRounding="True"
         DataContext="{Binding Test, Source={StaticResource Locator}}"
@@ -29,6 +31,13 @@
                 <Border BorderThickness="0,0,0,2" BorderBrush="{StaticResource ThemeHigh}"/>
             </Grid>
             <ButtonEXT Click="ButtonEXT_Click"/>
+            <ListViewCustom ItemsSource="{Binding GridList}" Name="listView">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectionDeviceCommand}" CommandParameter="{Binding ElementName=listView}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ListViewCustom>
         </StackPanel>
     </Grid>
 </WindowEXT>

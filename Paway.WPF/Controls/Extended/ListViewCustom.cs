@@ -525,7 +525,6 @@ namespace Paway.WPF
         /// <summary>
         /// 判断按下状态
         /// </summary>
-        /// <param name="e"></param>
         protected override void OnPreviewMouseMove(MouseEventArgs e)
         {
             if (ClickMode == ClickMode.Release && downItem != null)
@@ -536,9 +535,19 @@ namespace Paway.WPF
             base.OnPreviewMouseMove(e);
         }
         /// <summary>
+        /// 鼠标离开取消按下状态
+        /// </summary>
+        protected override void OnMouseLeave(MouseEventArgs e)
+        {
+            if (this.SelectedItem is IListViewItem model)
+            {
+                model.IsPressed = false;
+            }
+            base.OnMouseLeave(e);
+        }
+        /// <summary>
         /// 鼠标抬起时判断触发
         /// </summary>
-        /// <param name="e"></param>
         protected override void OnPreviewMouseLeftButtonUp(MouseButtonEventArgs e)
         {
             if (ClickMode == ClickMode.Release && downItem != null)

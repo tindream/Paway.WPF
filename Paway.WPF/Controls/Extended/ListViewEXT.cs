@@ -250,7 +250,6 @@ namespace Paway.WPF
         /// <summary>
         /// 判断按下状态
         /// </summary>
-        /// <param name="e"></param>
         protected override void OnPreviewMouseMove(MouseEventArgs e)
         {
             base.OnPreviewMouseMove(e);
