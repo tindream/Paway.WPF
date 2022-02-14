@@ -172,13 +172,13 @@
                                     <Trigger Property="IsSelected" Value="true">
                                         <Setter TargetName="_borderbg" Property="Background" 
                                                 Value="{Binding Path=ItemBackground.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}" />
-                                        <Setter TargetName="_txt" Property="TextBox.Foreground" 
+                                        <Setter TargetName="_txt" Property="TextBlock.Foreground" 
                                                 Value="{Binding Path=ItemForeground.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}"/>
                                     </Trigger>
                                     <Trigger Property="IsMouseOver" Value="true">
                                         <Setter TargetName="_borderbg" Property="Background" 
                                                 Value="{Binding Path=ItemBackground.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}" />
-                                        <Setter TargetName="_txt" Property="TextBox.Foreground" 
+                                        <Setter TargetName="_txt" Property="TextBlock.Foreground" 
                                                 Value="{Binding Path=ItemForeground.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}"/>
                                     </Trigger>
                                     <MultiTrigger>
@@ -188,7 +188,7 @@
                                         </MultiTrigger.Conditions>
                                         <Setter TargetName="_borderbg" Property="Background" 
                                                 Value="{Binding Path=ItemBackground.PressedMouse,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}" />
-                                        <Setter TargetName="_txt" Property="TextBox.Foreground" 
+                                        <Setter TargetName="_txt" Property="TextBlock.Foreground" 
                                                 Value="{Binding Path=ItemForeground.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:ComboBoxEXT}}}"/>
                                     </MultiTrigger>
                                 </ControlTemplate.Triggers>

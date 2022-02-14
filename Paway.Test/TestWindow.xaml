@@ -20,24 +20,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel VerticalAlignment="Center">
             <SliderEXT Minimum="-40" Maximum="20" Value="{Binding Value2}"/>
-            <Grid>
-                <Menu Padding="2,0,0,2" DockPanel.Dock="Top" Height="33">
-                    <MenuItem Header="升级">
-                        <MenuItem Header="升级"/>
-                        <MenuItem Header="升级"/>
-                    </MenuItem>
-                    <MenuItem Header="设置"/>
-                </Menu>
-                <Border BorderThickness="0,0,0,2" BorderBrush="{StaticResource ThemeHigh}"/>
-            </Grid>
             <ButtonEXT Click="ButtonEXT_Click"/>
-            <ListViewCustom ItemsSource="{Binding GridList}" Name="listView">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding SelectionDeviceCommand}" CommandParameter="{Binding ElementName=listView}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </ListViewCustom>
         </StackPanel>
     </Grid>
 </WindowEXT>
