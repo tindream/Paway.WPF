@@ -60,6 +60,10 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty DecimalProperty =
             DependencyProperty.RegisterAttached(nameof(Decimal), typeof(int), typeof(TextBoxNumeric), new PropertyMetadata(0));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty UnitProperty =
+            DependencyProperty.RegisterAttached(nameof(Unit), typeof(string), typeof(TextBoxNumeric));
 
         #endregion
 
@@ -163,6 +167,16 @@ namespace Paway.WPF
         {
             get { return (int)GetValue(DecimalProperty); }
             set { SetValue(DecimalProperty, value); }
+        }
+        /// <summary>
+        /// 单位
+        /// </summary>
+        [Category("扩展")]
+        [Description("单位")]
+        public string Unit
+        {
+            get { return (string)GetValue(UnitProperty); }
+            set { SetValue(UnitProperty, value); }
         }
 
         #endregion

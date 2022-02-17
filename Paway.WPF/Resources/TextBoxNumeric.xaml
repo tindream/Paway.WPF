@@ -42,6 +42,7 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Image x:Name="icon" Visibility="Collapsed"
                                        Source="{TemplateBinding Icon}"
@@ -51,20 +52,26 @@
                                               HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                               VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
                                 </ScrollViewer>
-                                <local:ButtonEXT x:Name="UpButton" Focusable="False" Grid.Column="2" 
+                                <TextBlock x:Name="tbUnit" Grid.Column="2" Visibility="Collapsed"
+                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                           Padding="3,0"
+                                           FontSize="{TemplateBinding FontSize, Converter={StaticResource valueMultiConverter}}"
+                                           Foreground="{StaticResource TextLight}"
+                                           Text="{TemplateBinding Unit}"/>
+                                <local:ButtonEXT x:Name="UpButton" Focusable="False" Grid.Column="3" 
                                                  IsEnabled="{TemplateBinding IsReadOnly, Converter={StaticResource boolReverse}}"
                                                  FontFamily="{StaticResource FontAwesome}" Content="{local:FontImage Type=AngleUp}" 
                                                  ItemBackground="Transparent" ItemForeground="{Binding ItemBrush, RelativeSource={RelativeSource TemplatedParent}}"
                                                  FontSize="18" 
-                                                 Padding="5,7,5,1" Margin="0,0,0,14" 
-                                                 Width="30" VerticalAlignment="Center" Height="14" />
-                                <local:ButtonEXT x:Name="DownButton" Focusable="False" Grid.Column="2" 
+                                                 Padding="0,7,5,1" Margin="0,0,0,14" 
+                                                 Width="25" VerticalAlignment="Center" Height="14" />
+                                <local:ButtonEXT x:Name="DownButton" Focusable="False" Grid.Column="3" 
                                                  IsEnabled="{TemplateBinding IsReadOnly, Converter={StaticResource boolReverse}}"
                                                  FontFamily="{StaticResource FontAwesome}" Content="{local:FontImage Type=AngleDown}" 
                                                  ItemBackground="Transparent" ItemForeground="{Binding ItemBrush, RelativeSource={RelativeSource TemplatedParent}}"
-                                                 FontSize="18" 
-                                                 Padding="5,1,5,7" Margin="0,14,0,0" 
-                                                 Width="30" VerticalAlignment="Center" Height="14" />
+                                                 FontSize="18"
+                                                 Padding="0,1,5,7" Margin="0,14,0,0" 
+                                                 Width="25" VerticalAlignment="Center" Height="14" />
                             </Grid>
                         </Border>
                     </Grid>
@@ -75,6 +82,9 @@
                         <DataTrigger Binding="{Binding Icon, Converter={StaticResource isNotNull}, RelativeSource={RelativeSource Self}}" Value="True">
                             <Setter TargetName="icon" Property="Visibility" Value="Visible" />
                             <Setter Property="Padding" Value="0,4" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Unit, Converter={StaticResource isNotNull}, RelativeSource={RelativeSource Self}}" Value="True">
+                            <Setter TargetName="tbUnit" Property="Visibility" Value="Visible" />
                         </DataTrigger>
                         <Trigger Property="IsReadOnly" Value="True">
                             <Setter Property="Background" TargetName="border" Value="{StaticResource BorderLight}"/>

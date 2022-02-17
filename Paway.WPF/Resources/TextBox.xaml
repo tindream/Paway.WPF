@@ -62,7 +62,7 @@
                                            Text="{TemplateBinding Water}"/>
                                 <TextBlock x:Name="tbUnit" Grid.Column="2" Visibility="Collapsed"
                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                           Padding="0,0,3,0"
+                                           Padding="3,0"
                                            FontSize="{TemplateBinding FontSize, Converter={StaticResource valueMultiConverter}}"
                                            Foreground="{StaticResource TextLight}"
                                            Text="{TemplateBinding Unit}"/>
