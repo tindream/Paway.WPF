@@ -14,12 +14,13 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:RadioBox">
-                    <Grid Background="Transparent" Name="templateRoot">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" MinWidth="{TemplateBinding TitleMinWidth}"/>
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock x:Name="tbTitle" Visibility="{Binding Title, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullToCollapsed}}"
+                                   IsHitTestVisible="False"
                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                    HorizontalAlignment="Right"
                                    Padding="0,0,6,0"
@@ -27,6 +28,7 @@
                                    Opacity="0.9"
                                    Text="{TemplateBinding Title}"/>
                         <Border x:Name="border1" Grid.Column="1"
+                                Background="Transparent"
                                 BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"
                                 BorderThickness="{Binding Path=ItemBorder.Normal, RelativeSource={RelativeSource TemplatedParent}}"
                                 CornerRadius="{TemplateBinding Radius}">

@@ -51,6 +51,7 @@
                             <ColumnDefinition Width="0.3*" MaxWidth="30"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock x:Name="tbTitle" Visibility="{Binding Title, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullToCollapsed}}"
+                                   IsHitTestVisible="False"
                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                    HorizontalAlignment="Right"
                                    Padding="0,0,6,0"

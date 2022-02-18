@@ -59,6 +59,14 @@ namespace Paway.WPF
         public static readonly DependencyProperty ShowTrackTextProperty =
             DependencyProperty.RegisterAttached(nameof(ShowTrackText), typeof(bool), typeof(SliderEXT),
                 new PropertyMetadata(false));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty TitleProperty =
+            DependencyProperty.RegisterAttached(nameof(Title), typeof(string), typeof(SliderEXT));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty TitleMinWidthProperty =
+            DependencyProperty.RegisterAttached(nameof(TitleMinWidth), typeof(double), typeof(SliderEXT));
 
         private static void OnRadiusChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
@@ -146,6 +154,26 @@ namespace Paway.WPF
         {
             get { return (bool)GetValue(ShowTrackTextProperty); }
             set { SetValue(ShowTrackTextProperty, value); }
+        }
+        /// <summary>
+        /// 标题
+        /// </summary>
+        [Category("扩展")]
+        [Description("标题")]
+        public string Title
+        {
+            get { return (string)GetValue(TitleProperty); }
+            set { SetValue(TitleProperty, value); }
+        }
+        /// <summary>
+        /// 标题长度
+        /// </summary>
+        [Category("扩展")]
+        [Description("标题长度")]
+        public double TitleMinWidth
+        {
+            get { return (double)GetValue(TitleMinWidthProperty); }
+            set { SetValue(TitleMinWidthProperty, value); }
         }
 
         #endregion

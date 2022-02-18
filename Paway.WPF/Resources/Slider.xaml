@@ -224,44 +224,53 @@
                 BorderThickness="{TemplateBinding Border.BorderThickness}"
                 BorderBrush="{TemplateBinding Border.BorderBrush}"
                 Background="{TemplateBinding Panel.Background}">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto"
+            <DockPanel>
+                <TextBlock x:Name="tbTitle" Visibility="{Binding Title, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullToCollapsed}}"
+                           IsHitTestVisible="False" MinWidth="{TemplateBinding TitleMinWidth}"
+                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                           HorizontalAlignment="Right"
+                           Padding="0,0,6,0"
+                           FontSize="{TemplateBinding FontSize}"
+                           Opacity="0.9"
+                           Text="{TemplateBinding Title}"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto"
                                    MinHeight="{TemplateBinding FrameworkElement.MinHeight}" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <local:TickBarEXT x:Name="TopTick"
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <local:TickBarEXT x:Name="TopTick"
                          Fill="{TemplateBinding TextElement.Foreground}"
                          Placement="Top"
                          Height="4"
                          Visibility="Collapsed"
                          Grid.Row="0" />
-                <local:TickBarEXT x:Name="BottomTick"
+                    <local:TickBarEXT x:Name="BottomTick"
                          Fill="{TemplateBinding TextElement.Foreground}"
                          Placement="Bottom"
                          Height="4"
                          Visibility="Collapsed"
                          Grid.Row="2" />
-                <Border Name="TrackBackground"
+                    <Border Name="TrackBackground"
                         Background="{TemplateBinding TrackBackground}"
                         CornerRadius="{TemplateBinding Radius}"
                         Height="{TemplateBinding TrackHeight}"
                         VerticalAlignment="Center"
                         Grid.Row="1">
-                    <Canvas Margin="-6,-1">
-                        <Rectangle Name="PART_SelectionRange"
+                        <Canvas Margin="-6,-1">
+                            <Rectangle Name="PART_SelectionRange"
                                    Fill="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"
                                    Height="4"
                                    Visibility="Hidden" />
-                    </Canvas>
-                </Border>
-                <Track Name="PART_Track" Grid.Row="1">
-                    <Track.DecreaseRepeatButton>
-                        <RepeatButton Style="{StaticResource DecreaseRepeatButtonLeft}"/>
-                    </Track.DecreaseRepeatButton>
-                    <Track.Thumb>
-                        <Thumb Name="Thumb"
+                        </Canvas>
+                    </Border>
+                    <Track Name="PART_Track" Grid.Row="1">
+                        <Track.DecreaseRepeatButton>
+                            <RepeatButton Style="{StaticResource DecreaseRepeatButtonLeft}"/>
+                        </Track.DecreaseRepeatButton>
+                        <Track.Thumb>
+                            <Thumb Name="Thumb"
                                OverridesDefaultStyle="True"
                                Width="{TemplateBinding TrackWidth}"
                                Margin="0,2,0,2"
@@ -269,13 +278,14 @@
                                VerticalAlignment="Center"
                                Focusable="False" 
                                Style="{StaticResource SliderThumbDefault}">
-                        </Thumb>
-                    </Track.Thumb>
-                    <Track.IncreaseRepeatButton>
-                        <RepeatButton Style="{StaticResource IncreaseRepeatButton}"/>
-                    </Track.IncreaseRepeatButton>
-                </Track>
-            </Grid>
+                            </Thumb>
+                        </Track.Thumb>
+                        <Track.IncreaseRepeatButton>
+                            <RepeatButton Style="{StaticResource IncreaseRepeatButton}"/>
+                        </Track.IncreaseRepeatButton>
+                    </Track>
+                </Grid>
+            </DockPanel>
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="Slider.TickPlacement" Value="TopLeft">

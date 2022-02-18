@@ -19,17 +19,16 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <StackPanel VerticalAlignment="Center">
-            <SliderEXT Minimum="-40" Maximum="20" Value="{Binding Value2}"/>
+            <CheckButton Title="你好Hello"/>
+            <ComboBoxEXT Title="你好Hello" ItemsSource="{Binding ViewList}"/>
+            <PasswordBox PasswordBoxEXT.Title="你好Hello"/>
+            <RadioBox Title="你好Hello"/>
+            <SliderEXT Title="你好Hello" Minimum="-40" Maximum="20" Value="{Binding Value2}"/>
+            <TextBoxEXT Title="你好Hello"/>
+            <TextBoxNumeric Title="你好Hello"/>
             <ButtonEXT Click="ButtonEXT_Click"/>
         </StackPanel>
         <Border Grid.Column="1" Background="Transparent">
-            <Border.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="1"/>
-                    <MenuItem Header="2"/>
-                    <MenuItem Header="3"/>
-                </ContextMenu>
-            </Border.ContextMenu>
         </Border>
     </Grid>
 </WindowEXT>
