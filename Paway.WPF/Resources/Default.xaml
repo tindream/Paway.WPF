@@ -256,6 +256,8 @@
     <!--#endregion-->
 
     <!--#region 默认全局样式 -->
+    <!--取消右键动画，防止闪烁-->
+    <PopupAnimation x:Key="{x:Static SystemParameters.MenuPopupAnimationKey}">None</PopupAnimation>
     <Style TargetType="{x:Type Label}">
         <Setter Property="HorizontalContentAlignment" Value="Right" />
         <Setter Property="VerticalContentAlignment" Value="Center" />

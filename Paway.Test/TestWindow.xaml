@@ -22,5 +22,14 @@
             <SliderEXT Minimum="-40" Maximum="20" Value="{Binding Value2}"/>
             <ButtonEXT Click="ButtonEXT_Click"/>
         </StackPanel>
+        <Border Grid.Column="1" Background="Transparent">
+            <Border.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="1"/>
+                    <MenuItem Header="2"/>
+                    <MenuItem Header="3"/>
+                </ContextMenu>
+            </Border.ContextMenu>
+        </Border>
     </Grid>
 </WindowEXT>
