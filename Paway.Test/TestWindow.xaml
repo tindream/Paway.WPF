@@ -19,10 +19,10 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <StackPanel VerticalAlignment="Center">
-            <CheckButton Title="你好Hello"/>
-            <ComboBoxEXT Title="你好Hello" ItemsSource="{Binding ViewList}"/>
+            <CheckButton Title="你好Hello" Content="你好"/>
+            <ComboBoxEXT Title="你好Hello" Text="你好" ItemsSource="{Binding ViewList}"/>
             <PasswordBox PasswordBoxEXT.Title="你好Hello"/>
-            <RadioBox Title="你好Hello"/>
+            <RadioBox Content="你好" Title="你好Hello"/>
             <SliderEXT Title="你好Hello" Minimum="-40" Maximum="20" Value="{Binding Value2}"/>
             <TextBoxEXT Title="你好Hello"/>
             <TextBoxNumeric Title="你好Hello"/>

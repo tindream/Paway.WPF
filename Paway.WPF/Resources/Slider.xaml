@@ -391,10 +391,11 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    <Style TargetType="{x:Type local:SliderEXT}">
+    <Style TargetType="{x:Type local:SliderEXT}" BasedOn="{StaticResource Config}">
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="IsMoveToPointEnabled" Value="True"/>
         <Setter Property="AutoToolTipPlacement" Value="TopLeft"/>
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Margin" Value="2"/>
         <Setter Property="Maximum" Value="100"/>
         <Setter Property="Focusable" Value="False"/>
