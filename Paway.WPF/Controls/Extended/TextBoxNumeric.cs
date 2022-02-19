@@ -252,7 +252,7 @@ namespace Paway.WPF
             if (!MinValue.Equals(double.NaN) && value < MinValue) value = MinValue;
             else if (!MaxValue.Equals(double.NaN) && value > MaxValue) value = MaxValue;
             this.Value = value;
-            this.Text = PMethod.Rounds(value, Decimal, Decimal);
+            this.Text = value.Rounds(Decimal, Decimal);
             this.Select(this.Text.Length, 0);
         }
         /// <summary>

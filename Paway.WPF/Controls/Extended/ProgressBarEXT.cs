@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paway.Helper;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -48,7 +49,7 @@ namespace Paway.WPF
                 }
                 if (bar.Dot < 0) bar.Dot = 0;
             }
-            var text = $"{PMethod.Rounds((bar.Value - bar.Minimum) * 100 / (bar.Maximum - bar.Minimum), bar.Dot)}%";
+            var text = $"{((bar.Value - bar.Minimum) * 100 / (bar.Maximum - bar.Minimum)).Rounds(bar.Dot)}%";
             if (bar.ProgressValue != text) bar.SetValue(ProgressValueProperty, text);
         }
         /// <summary>

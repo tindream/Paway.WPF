@@ -259,7 +259,7 @@ namespace Paway.WPF
                     thumb.ToolTip = toolTip;
                 }
             }
-            toolTip.Content = PMethod.Rounds(value, this.AutoToolTipPrecision, this.AutoToolTipPrecision);
+            toolTip.Content = value.Rounds(this.AutoToolTipPrecision, this.AutoToolTipPrecision);
             if (toolTip.IsOpen)
             {
                 toolTip.IsOpen = false;
@@ -318,7 +318,7 @@ namespace Paway.WPF
         {
             if (this.AutoToolTipPlacement == AutoToolTipPlacement.None) return this.Value;
             var value = OnTipValueChanged(this.Value, routedEvent);
-            this.ToolTip = PMethod.Rounds(value, this.AutoToolTipPrecision, this.AutoToolTipPrecision);
+            this.ToolTip = value.Rounds(this.AutoToolTipPrecision, this.AutoToolTipPrecision);
             if (toolTip != null) toolTip.Content = this.ToolTip;
             return value;
         }

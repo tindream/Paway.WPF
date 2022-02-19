@@ -163,42 +163,6 @@ namespace Paway.WPF
 
         #endregion
 
-        #region 获取控件模板的XAML代码
-        /// <summary>
-        /// 获取控件模板的XAML代码
-        /// </summary>
-        public static string GetTemplateXaml(Control ctrl)
-        {
-            string xaml;
-            if (ctrl.Template != null)
-            {
-                var settings = new XmlWriterSettings
-                {
-                    Indent = true,
-                    IndentChars = new string(' ', 4),
-                    NewLineOnAttributes = true
-                };
-                var strbuild = new StringBuilder();
-                var xmlwrite = XmlWriter.Create(strbuild, settings);
-                try
-                {
-                    XamlWriter.Save(ctrl.Template, xmlwrite);
-                    xaml = strbuild.ToString();
-                }
-                catch (Exception ex)
-                {
-                    xaml = ex.Message;
-                }
-            }
-            else
-            {
-                xaml = "no template";
-            }
-            return xaml;
-        }
-
-        #endregion
-
         #region 装饰器-自定义消息
         /// <summary>
         /// 装饰器-收到消息装入列表
@@ -375,81 +339,7 @@ namespace Paway.WPF
             }));
             return myAdornerLayer;
         }
-        private static TextBlock tbProgress;
-        /// <summary>
-        /// 装饰器-同步显示Window进度条
-        /// </summary>
-        public static void Progress(DependencyObject parent, object msg = null)
-        {
-            if (!Parent(parent, out Window window)) return;
-            if (window.Content is FrameworkElement element)
-            {
-                var myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
-                if (myAdornerLayer == null) return;
 
-                var border = new Border
-                {
-                    CornerRadius = new CornerRadius(3),
-                    BorderBrush = new SolidColorBrush(Colors.LightGray),
-                    BorderThickness = new Thickness(1),
-                    Background = new SolidColorBrush(AlphaColor(PConfig.Alpha, Colors.White)),
-                    MinWidth = 200,
-                    MaxWidth = 350,
-                };
-                var dp = new DockPanel();
-                border.Child = dp;
-                tbProgress = new TextBlock()
-                {
-                    Text = msg == null ? PConfig.Loading : msg.ToStrings(),
-                    FontSize = 15,
-                    Foreground = new SolidColorBrush(Colors.Black),
-                    Padding = new Thickness(10),
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    TextTrimming = TextTrimming.WordEllipsis,
-                };
-                dp.Children.Add(tbProgress);
-                DockPanel.SetDock(tbProgress, Dock.Bottom);
-                dp.Children.Add(new Progress
-                {
-                    Margin = new Thickness(20),
-                    Width = 80,
-                    Height = 80,
-                });
-                var progress = new CustomAdorner(element, () => border, AlphaColor(0, Colors.Black)) { Name = NameProgress };
-                myAdornerLayer.Add(progress);
-            }
-        }
-        /// <summary>
-        /// 装饰器-Window进度条提示信息
-        /// </summary>
-        public static void ProgressMsg(object msg = null)
-        {
-            if (tbProgress == null) return;
-            BeginInvoke(tbProgress, () =>
-            {
-                tbProgress.Text = msg == null ? Paway.WPF.PConfig.Loading : msg.ToStrings();
-            });
-        }
-        /// <summary>
-        /// 装饰器-关闭Window进度条
-        /// </summary>
-        public static void ProgressClose(DependencyObject parent)
-        {
-            Invoke(parent, () =>
-            {
-                if (!Parent(parent, out Window window)) return;
-                if (window.Content is FrameworkElement element)
-                {
-                    var myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
-                    if (myAdornerLayer == null) return;
-                    var list = myAdornerLayer.GetAdorners(element);
-                    if (list != null)
-                    {
-                        myAdornerLayer.Remove(list.FirstOrDefault(c => c.Name == NameProgress));
-                    }
-                }
-            });
-        }
         /// <summary>
         /// 装饰器-自定义吐泡消息框-Toast
         /// </summary>
@@ -642,7 +532,7 @@ namespace Paway.WPF
 
         #endregion
 
-        #region Window
+        #region WPF
         #region 让系统可以处理队列中的所有Windows消息
         /// <summary>
         /// 让系统可以处理队列中的所有Windows消息
@@ -710,8 +600,7 @@ namespace Paway.WPF
 
         #endregion
 
-        #region Window忙碌提示
-        private static WindowProgress progress;
+        #region 装饰器-Window忙碌提示
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
@@ -744,7 +633,7 @@ namespace Paway.WPF
                         else
                         {
                             ex.Log();
-                            Error(parent, ex.Message());
+                            ShowError(parent, ex.Message());
                         }
                     }
                     finally
@@ -762,33 +651,80 @@ namespace Paway.WPF
                 Progress(parent);
             });
         }
+        private static TextBlock tbProgress;
         /// <summary>
-        /// 同步显示Window进度条(弹框模式)
+        /// 装饰器-同步显示Window进度条
         /// </summary>
-        public static void ProgressWindow(DependencyObject parent, object msg = null)
+        public static void Progress(DependencyObject parent, object msg = null)
         {
-            if (progress == null) progress = new WindowProgress(msg);
-            if (Parent(parent, out Window owner))
+            if (!Parent(parent, out Window window)) return;
+            if (window.Content is FrameworkElement element)
             {
-                owner.Closed += delegate
+                var myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
+                if (myAdornerLayer == null) return;
+
+                var border = new Border
                 {
-                    ProgressWindowClose(owner);
+                    CornerRadius = new CornerRadius(3),
+                    BorderBrush = new SolidColorBrush(Colors.LightGray),
+                    BorderThickness = new Thickness(1),
+                    Background = new SolidColorBrush(AlphaColor(PConfig.Alpha, Colors.White)),
+                    MinWidth = 200,
+                    MaxWidth = 350,
                 };
-                progress.Owner = owner;
-                progress.ShowDialog();
+                var dp = new DockPanel();
+                border.Child = dp;
+                tbProgress = new TextBlock()
+                {
+                    Text = msg == null ? PConfig.Loading : msg.ToStrings(),
+                    FontSize = 15,
+                    Foreground = new SolidColorBrush(Colors.Black),
+                    Padding = new Thickness(10),
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    TextTrimming = TextTrimming.WordEllipsis,
+                };
+                dp.Children.Add(tbProgress);
+                DockPanel.SetDock(tbProgress, Dock.Bottom);
+                dp.Children.Add(new Progress
+                {
+                    Margin = new Thickness(20),
+                    Width = 80,
+                    Height = 80,
+                });
+                var progress = new CustomAdorner(element, () => border, AlphaColor(0, Colors.Black)) { Name = NameProgress };
+                myAdornerLayer.Add(progress);
             }
         }
         /// <summary>
-        /// 隐藏Window进度条(弹框模式)
+        /// 装饰器-Window进度条提示信息
         /// </summary>
-        public static void ProgressWindowClose(DependencyObject parent)
+        public static void ProgressMsg(object msg = null)
         {
-            if (progress != null) progress.Close();
-            progress = null;
-            if (Parent(parent, out Window owner))
+            if (tbProgress == null) return;
+            BeginInvoke(tbProgress, () =>
             {
-                owner.Focus();
-            }
+                tbProgress.Text = msg == null ? Paway.WPF.PConfig.Loading : msg.ToStrings();
+            });
+        }
+        /// <summary>
+        /// 装饰器-关闭Window进度条
+        /// </summary>
+        public static void ProgressClose(DependencyObject parent)
+        {
+            Invoke(parent, () =>
+            {
+                if (!Parent(parent, out Window window)) return;
+                if (window.Content is FrameworkElement element)
+                {
+                    var myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
+                    if (myAdornerLayer == null) return;
+                    var list = myAdornerLayer.GetAdorners(element);
+                    if (list != null)
+                    {
+                        myAdornerLayer.Remove(list.FirstOrDefault(c => c.Name == NameProgress));
+                    }
+                }
+            });
         }
 
         #endregion
@@ -797,7 +733,7 @@ namespace Paway.WPF
         /// <summary>
         /// Window弹框
         /// </summary>
-        public static bool? Show(DependencyObject parent, Window window, int alpha = 100, bool iEscExit = true)
+        public static bool? ShowDialog(DependencyObject parent, Window window, int alpha = 100, bool iEscExit = true)
         {
             if (!Parent(parent, out Window owner)) return null;
             window.ShowInTaskbar = false;
@@ -864,17 +800,9 @@ namespace Paway.WPF
         #region Window系统消息框
         /// <summary>
         /// Window系统消息框
-        /// <para>该消息框显示消息、 标题栏标题、 OK按钮和Information图标。</para>
-        /// </summary>
-        public static void Debug(DependencyObject parent, string msg)
-        {
-            Show(parent, msg, LeveType.Debug);
-        }
-        /// <summary>
-        /// Window系统消息框
         /// <para>该消息框显示消息、 标题栏标题、 OK按钮和Warning图标。</para>
         /// </summary>
-        public static void Warning(DependencyObject parent, string msg)
+        public static void ShowWarning(DependencyObject parent, string msg)
         {
             Show(parent, msg, LeveType.Warn);
         }
@@ -882,13 +810,13 @@ namespace Paway.WPF
         /// Window系统消息框
         /// <para>该消息框显示消息、 标题栏标题、 OK按钮和Error图标。</para>
         /// </summary>
-        public static void Error(DependencyObject parent, string msg)
+        public static void ShowError(DependencyObject parent, string msg)
         {
             Show(parent, msg, LeveType.Error);
         }
         /// <summary>
         /// Window系统消息框
-        /// <para>该消息框显示消息、 标题栏标题、 OK按钮和指定图标。</para>
+        /// <para>该消息框显示消息、 标题栏标题、 OK按钮和指定图标(默认Information)。</para>
         /// </summary>
         public static void Show(DependencyObject parent, string msg, LeveType level = LeveType.Debug)
         {
@@ -1046,6 +974,42 @@ namespace Paway.WPF
                 }
             }
             return false;
+        }
+
+        #endregion
+
+        #region 获取控件模板的XAML代码
+        /// <summary>
+        /// 获取控件模板的XAML代码
+        /// </summary>
+        public static string GetTemplateXaml(Control ctrl)
+        {
+            string xaml;
+            if (ctrl.Template != null)
+            {
+                var settings = new XmlWriterSettings
+                {
+                    Indent = true,
+                    IndentChars = new string(' ', 4),
+                    NewLineOnAttributes = true
+                };
+                var strbuild = new StringBuilder();
+                var xmlwrite = XmlWriter.Create(strbuild, settings);
+                try
+                {
+                    XamlWriter.Save(ctrl.Template, xmlwrite);
+                    xaml = strbuild.ToString();
+                }
+                catch (Exception ex)
+                {
+                    xaml = ex.Message;
+                }
+            }
+            else
+            {
+                xaml = "no template";
+            }
+            return xaml;
         }
 
         #endregion

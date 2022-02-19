@@ -149,9 +149,6 @@
     <Compile Include="Controls\Progress\Progress.cs" />
     <Compile Include="Controls\Progress\ProgressTemplate.cs" />
     <Compile Include="Controls\Progress\ProgressMonitor.cs" />
-    <Compile Include="Controls\Progress\WindowProgress.xaml.cs">
-      <DependentUpon>WindowProgress.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Theme\ThemeEXT.cs" />
     <Compile Include="Method\RoutedEventArgs\SelectItemEventArgs.cs" />
     <Compile Include="Method\RoutedEventArgs\CustomFilterEventArgs.cs" />
@@ -283,10 +280,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\CheckBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\Progress\WindowProgress.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

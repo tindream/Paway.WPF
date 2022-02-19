@@ -95,7 +95,7 @@ namespace Paway.Test
             {
                 ex.Log();
                 Messenger.Default.Send(new StatuMessage(ex.Message()));
-                Method.Error(this, ex.Message());
+                Method.ShowError(this, ex.Message());
             });
         }
         public override void OnApplyTemplate()
