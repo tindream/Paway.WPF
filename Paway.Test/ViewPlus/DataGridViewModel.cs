@@ -80,7 +80,7 @@ namespace Paway.Test.ViewModel
                 case "新加":
                     AddViewModel.Info = new T();
                     var add = AddWindow();
-                    if (add != null && Method.ShowDialog(listView1, add) == true)
+                    if (add != null && Method.Show(listView1, add) == true)
                     {
                         Added(AddViewModel.Info);
                         if (Method.Child(listView1, out DataGridEXT datagrid))
@@ -143,7 +143,7 @@ namespace Paway.Test.ViewModel
             {
                 AddViewModel.Info = info;
                 var edit = AddWindow();
-                if (Method.ShowDialog(obj, edit) == true)
+                if (Method.Show(obj, edit) == true)
                 {
                     Updated(obj, info);
                 }

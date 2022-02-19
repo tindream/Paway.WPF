@@ -167,7 +167,7 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-收到消息装入列表
         /// </summary>
-        public static void Slowly(FrameworkElement parent, object msg, int time = 500, double xMove = 0, double yMove = 0, double size = 36, Color? color = null)
+        public static void SlowIn(FrameworkElement parent, object msg, int time = 500, double xMove = 0, double yMove = 0, double size = 36, Color? color = null)
         {
             BeginInvoke(parent, () =>
             {
@@ -733,7 +733,7 @@ namespace Paway.WPF
         /// <summary>
         /// Window弹框
         /// </summary>
-        public static bool? ShowDialog(DependencyObject parent, Window window, int alpha = 100, bool iEscExit = true)
+        public static bool? Show(DependencyObject parent, Window window, int alpha = 100, bool iEscExit = true)
         {
             if (!Parent(parent, out Window owner)) return null;
             window.ShowInTaskbar = false;

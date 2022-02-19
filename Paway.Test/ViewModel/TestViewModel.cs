@@ -120,7 +120,7 @@ namespace Paway.Test.ViewModel
                 return selectionDeviceCommand ?? (selectionDeviceCommand = new RelayCommand<ListViewCustom>(listView =>
                 {
                     if (!(listView.SelectedItem is IListViewItem item)) return;
-                    Method.ShowDialog(listView, new Window());
+                    Method.Show(listView, new Window());
                     listView.SelectedIndex = -1;
                 }));
             }
