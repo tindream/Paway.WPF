@@ -19,13 +19,8 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <StackPanel VerticalAlignment="Center">
-            <CheckButton Title="你好Hello" Content="你好"/>
-            <ComboBoxEXT Title="你好Hello" Text="你好" ItemsSource="{Binding ViewList}"/>
-            <PasswordBox PasswordBoxEXT.Title="你好Hello"/>
-            <RadioBox Content="你好" Title="你好Hello"/>
-            <SliderEXT Title="你好Hello" Minimum="-40" Maximum="20" Value="{Binding Value2}"/>
-            <TextBoxEXT Title="你好Hello"/>
-            <TextBoxNumeric Title="你好Hello"/>
+            <ListViewCustom ItemsSource="{Binding ViewList}" 
+                        ItemWidth="36" ItemHeight="36" ItemRadius="18" Type="Error" ItemBorder="1" ItemMargin="1"/>
             <ButtonEXT Click="ButtonEXT_Click"/>
         </StackPanel>
         <Border Grid.Column="1" Background="Transparent">

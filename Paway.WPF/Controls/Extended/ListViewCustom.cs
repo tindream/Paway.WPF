@@ -57,13 +57,12 @@ namespace Paway.WPF
                 if (view.Type != ColorType.None)
                 {
                     var color = view.Type.Color();
-                    view.ItemBackground = new BrushEXT(PMethod.AlphaColor(PConfig.Alpha - PConfig.Interval, color));
+                    view.ItemBackground = new BrushEXT(Colors.Transparent, PMethod.AlphaColor(PConfig.Alpha - PConfig.Interval, color), PMethod.AlphaColor(PConfig.Alpha, color));
                 }
                 if (view.IsLight)
                 {
                     if (view.ItemBorder == null || view.ItemBorder.ToString() == new ThicknessEXT(0).ToString()) view.ItemBorder = new ThicknessEXT(1);
                     if (view.ItemBorder != null) view.ItemMargin = new Thickness(-view.ItemBorder.Normal.Left, -view.ItemBorder.Normal.Top, 0, 0);
-                    view.ItemBackground.Normal = new SolidColorBrush(Colors.Transparent);
                 }
                 view.UpdateDefaultStyle();
             }
@@ -80,7 +79,7 @@ namespace Paway.WPF
                 new PropertyMetadata(new BrushEXT(Colors.Transparent, PConfig.Alpha - PConfig.Interval, PConfig.Alpha), OnItemBackgroundChanged));
         private static void OnItemBackgroundChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is ListViewEXT listView)
+            if (d is ListViewCustom listView)
             {
                 Color? mouseColor = null, pressedColor = null;
                 if (listView.ItemBackground.Mouse is SolidColorBrush mouse && mouse.Color != PMethod.AlphaColor(PConfig.Alpha - PConfig.Interval, PConfig.Color))
