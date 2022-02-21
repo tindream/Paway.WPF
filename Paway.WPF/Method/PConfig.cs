@@ -139,19 +139,38 @@ namespace Paway.WPF
 
         /// <summary>
         /// 文本
+        /// <para>34</para>
         /// </summary>
         public static Color TextColor { get; private set; } = Color.FromArgb(255, 34, 34, 34);
         /// <summary>
         /// 文本(二级浅色)
+        /// <para>68</para>
         /// </summary>
         public static Color TextSub { get; private set; } = Color.FromArgb(255, 68, 68, 68);
         /// <summary>
         /// 文本(三级浅色)
+        /// <para>119</para>
         /// </summary>
         public static Color TextLight { get; private set; } = Color.FromArgb(255, 119, 119, 119);
 
         /// <summary>
+        /// 浅色(一级)
+        /// <para>220</para>
+        /// </summary>
+        public static Color Border { get; private set; } = Color.FromArgb(255, 220, 223, 230);
+        /// <summary>
+        /// 浅色(二级)
+        /// <para>228</para>
+        /// </summary>
+        public static Color BorderSub { get; private set; } = Color.FromArgb(255, 228, 231, 237);
+        /// <summary>
+        /// 浅色(二级)
+        /// <para>235</para>
+        /// </summary>
+        public static Color BorderLight { get; private set; } = Color.FromArgb(255, 235, 238, 245);
+        /// <summary>
         /// 浅色
+        /// <para>242</para>
         /// </summary>
         public static Color Light { get; private set; } = Color.FromArgb(255, 242, 246, 252);
 

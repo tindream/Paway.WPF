@@ -9,6 +9,7 @@
 
     <Style TargetType="{x:Type local:ComboView}" BasedOn="{StaticResource ComboConfig}">
         <Setter Property="MaxDropDownHeight" Value="165"/>
+        <Setter Property="Background" Value="{StaticResource backLine}"/>
         <Setter Property="Padding" Value="5"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -29,7 +30,7 @@
                         <Border Name="border" Grid.Column="1" Grid.ColumnSpan="2" 
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 CornerRadius="{TemplateBinding Radius}"
-                                Background="{StaticResource backLine}"
+                                Background="{TemplateBinding Background}"
                                 BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}" />
                         <ContentPresenter x:Name="ContentSite" 
                                           Margin="{TemplateBinding Padding}" 
@@ -90,8 +91,7 @@
                         <Trigger Property="IsDropDownOpen" Value="True">
                             <Setter TargetName="border" Property="BorderBrush" 
                                     Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" />
-                            <Setter TargetName="border" Property="BorderThickness" 
-                                    Value="{Binding BorderThickness, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource noBottomThicknessConverter}}" />
+                            <Setter TargetName="border" Property="BorderThickness" Value="1,1,1,0" />
                             <Setter TargetName="border" Property="CornerRadius" 
                                     Value="{Binding Radius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource noBottomRadiusConverter}}" />
                         </Trigger>

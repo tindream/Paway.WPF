@@ -19,8 +19,8 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <StackPanel VerticalAlignment="Center">
-            <ListViewCustom ItemsSource="{Binding ViewList}" 
-                        ItemWidth="36" ItemHeight="36" ItemRadius="18" Type="Error" ItemBorder="1" ItemMargin="1"/>
+            <ComboBoxEXT ItemsSource="{Binding ViewList}" Background="Transparent" BorderThickness="0,0,0,1" Radius="3,3,0,0"/>
+            <ComboView ItemsSource="{Binding ViewList}" SelectedValuePath="Text"/>
             <ButtonEXT Click="ButtonEXT_Click"/>
         </StackPanel>
         <Border Grid.Column="1" Background="Transparent">
