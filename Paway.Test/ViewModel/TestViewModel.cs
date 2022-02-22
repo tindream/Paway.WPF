@@ -154,7 +154,7 @@ namespace Paway.Test.ViewModel
                 if (piList[i].Name == nameof(Colors.White)) this.Color = info;
             }
 
-            for (var i = 0; i < 9; i++) ViewList.Add(new ListViewItemModel($"{i + 1}"));
+            for (var i = 0; i < 9; i++) ViewList.Add(new ListViewItemModel($"{Method.Random(1, 1000000) * Method.Random(1, 1000000)};{Method.Random(1, 1000000) * Method.Random(1, 1000000)};{Method.Random(1, 1000000) * Method.Random(1, 1000000)}"));
             for (var i = 0; i < 9; i++) MultiList.Add(new ComboBoxItemModel($"{i + 1}"));
             var treeInfo = new TreeViewItemModel("分类A", true);
             this.TreeList.Add(treeInfo);

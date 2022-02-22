@@ -16,8 +16,8 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" MinWidth="{TemplateBinding TitleMinWidth}"/>
-                            <ColumnDefinition Width="0.7*"/>
-                            <ColumnDefinition Width="0.3*" MaxWidth="30"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="24"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock x:Name="tbTitle" Visibility="{Binding Title, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullToCollapsed}}"
                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
