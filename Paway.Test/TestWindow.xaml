@@ -19,7 +19,6 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <StackPanel VerticalAlignment="Center">
-            <ComboView ItemsSource="{Binding ViewList}" SelectedValuePath="Text"/>
             <ButtonEXT Click="ButtonEXT_Click"/>
             <WrapPanel Orientation="Vertical" Height="66">
                 <ButtonEXT IsLight="True"
@@ -41,7 +40,8 @@
         </StackPanel>
         <Border Grid.Column="1" Background="Transparent">
             <WrapPanel>
-                <ComboBoxEXT ItemsSource="{Binding ViewList}" Background="Transparent" BorderThickness="0,0,0,1" Radius="3,3,0,0"/>
+                <ComboBoxEXT Width="150" ItemsSource="{Binding ViewList}" Background="Transparent" BorderThickness="0,0,0,1" Radius="3,3,0,0"/>
+                <ComboView ItemsSource="{Binding ViewList}" SelectedValuePath="Text"/>
             </WrapPanel>
         </Border>
     </Grid>

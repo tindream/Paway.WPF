@@ -14,7 +14,7 @@
     <local:DateConverter x:Key="dateConverter"/>
     <local:TimeConverter x:Key="timeConverter"/>
     <local:RingConverter x:Key="ringConverter"/>
-    
+
     <local:BrushAlphaConverter x:Key="brushAlphaConverter" />
     <local:BrushLightConverter x:Key="brushLightConverter" />
     <local:BrushToColorConverter x:Key="brushToColorConverter" />
@@ -296,6 +296,7 @@
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualStyle}"/>
+        <!--<Setter Property="FocusVisualStyle" Value="{x:Null}"/>-->
     </Style>
     <Style x:Key="ComboConfig" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource FocusConfig}">
         <Setter Property="Margin" Value="2"/>
