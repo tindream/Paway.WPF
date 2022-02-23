@@ -14,10 +14,10 @@
                 <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
                     <GradientStop 
                         Offset="0"
-                        Color="{Binding Path=(local:SliderMonitor.TrackColorLinear).Start, RelativeSource={RelativeSource Self}}" />
+                        Color="{Binding TrackColorLinear.Start, RelativeSource={RelativeSource AncestorType={x:Type local:SliderEXT}}}" />
                     <GradientStop
                         Offset="1"
-                        Color="{Binding Path=(local:SliderMonitor.TrackColorLinear).End, RelativeSource={RelativeSource Self}}" />
+                        Color="{Binding TrackColorLinear.End, RelativeSource={RelativeSource AncestorType={x:Type local:SliderEXT}}}" />
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>
@@ -45,10 +45,10 @@
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop 
                         Offset="1"
-                        Color="{Binding Path=(local:SliderMonitor.TrackColorLinear).Start, RelativeSource={RelativeSource Self}}" />
+                        Color="{Binding TrackColorLinear.Start, RelativeSource={RelativeSource AncestorType={x:Type local:SliderEXT}}}" />
                     <GradientStop
                         Offset="0"
-                        Color="{Binding Path=(local:SliderMonitor.TrackColorLinear).End, RelativeSource={RelativeSource Self}}" />
+                        Color="{Binding TrackColorLinear.End, RelativeSource={RelativeSource AncestorType={x:Type local:SliderEXT}}}" />
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>

@@ -30,13 +30,6 @@ namespace Paway.WPF
                     thumb.SetValue(ButtonTypeProperty, sliderEXT.ButtonType);
                 }
             }
-            else if (obj is RepeatButton repeatButton)
-            {
-                if (repeatButton.TemplatedParent is SliderEXT sliderEXT)
-                {
-                    repeatButton.SetValue(TrackColorLinearProperty, sliderEXT.TrackColorLinear);
-                }
-            }
         }
         /// <summary>
         /// 启用监听
@@ -63,19 +56,6 @@ namespace Paway.WPF
         {
             get { return (SliderButtonType)GetValue(ButtonTypeProperty); }
             set { SetValue(ButtonTypeProperty, value); }
-        }
-        /// <summary>
-        /// </summary>
-        public static readonly DependencyProperty TrackColorLinearProperty =
-            DependencyProperty.RegisterAttached(nameof(TrackColorLinear), typeof(ColorLinear), typeof(SliderMonitor),
-                new PropertyMetadata(new ColorLinear()));
-        /// <summary>
-        /// 轨道线性颜色
-        /// </summary>
-        public ColorLinear TrackColorLinear
-        {
-            get { return (ColorLinear)GetValue(TrackColorLinearProperty); }
-            set { SetValue(TrackColorLinearProperty, value); }
         }
 
         #endregion
