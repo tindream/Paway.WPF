@@ -62,5 +62,32 @@ namespace Paway.WPF
         }
 
         #endregion
+
+        #region 渐变色
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ColorLinearProperty =
+            DependencyProperty.RegisterAttached(nameof(ColorLinear), typeof(ColorLinear), typeof(RenderEXT),
+                new PropertyMetadata(new ColorLinear()));
+        /// <summary>
+        /// 渐变色
+        /// </summary>
+        private ColorLinear ColorLinear { get; set; }
+        /// <summary>
+        /// get渐变色
+        /// </summary>
+        public static ColorLinear GetColorLinear(DependencyObject obj)
+        {
+            return (ColorLinear)obj.GetValue(ColorLinearProperty);
+        }
+        /// <summary>
+        /// set渐变色
+        /// </summary>
+        public static void SetColorLinear(DependencyObject obj, ColorLinear value)
+        {
+            obj.SetValue(ColorLinearProperty, value);
+        }
+
+        #endregion
     }
 }

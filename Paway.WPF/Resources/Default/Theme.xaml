@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:Paway.WPF">
+
+    <!--#region 主题 -->
+    <!--主题背景-->
+    <SolidColorBrush x:Key="ThemeBackground" Color="{Binding Path=(local:ThemeEXT.Background).Value.Color, RelativeSource={RelativeSource Self}}"/>
+    <!--主题背景深色-->
+    <SolidColorBrush x:Key="ThemeBackgroundHigh" Color="{Binding Path=(local:ThemeEXT.HighBrush).Normal.Color, RelativeSource={RelativeSource Self}}"/>
+    <!--主题-->
+    <SolidColorBrush x:Key="ThemeColor" Color="{Binding Path=(local:ThemeEXT.ItemBrush).Pressed.Color, RelativeSource={RelativeSource Self}}"/>
+    <SolidColorBrush x:Key="ThemeColorNormal" Color="{Binding Path=(local:ThemeEXT.ItemBrush).Normal.Color, RelativeSource={RelativeSource Self}}"/>
+    <SolidColorBrush x:Key="ThemeColorMouse" Color="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse.Color, RelativeSource={RelativeSource Self}}"/>
+    <!--主题深色-->
+    <SolidColorBrush x:Key="ThemeHigh" Color="{Binding Path=(local:ThemeEXT.HighBrush).Pressed.Color, RelativeSource={RelativeSource Self}}"/>
+    <!--主题浅色-->
+    <SolidColorBrush x:Key="ThemeLight" Color="{Binding Path=(local:ThemeEXT.HighBrush).Mouse.Color, RelativeSource={RelativeSource Self}}"/>
+    <!--#endregion-->
+
+</ResourceDictionary>

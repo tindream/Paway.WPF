@@ -3,256 +3,15 @@
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xmlns:local="clr-namespace:Paway.WPF">
 
-    <!--#region 转换器 -->
-    <local:BoolSelector x:Key="boolSelector"/>
-    <local:BoolReverse x:Key="boolReverse"/>
-    <local:BoolToVisible x:Key="boolToVisible"/>
-    <local:BoolToCollapsed x:Key="boolToCollapsed"/>
-
-    <local:EnumConverter x:Key="enumConverter"/>
-    <local:VisibleReverse x:Key="visibleReverse"/>
-    <local:DateConverter x:Key="dateConverter"/>
-    <local:TimeConverter x:Key="timeConverter"/>
-    <local:RingConverter x:Key="ringConverter"/>
-
-    <local:BrushAlphaConverter x:Key="brushAlphaConverter" />
-    <local:BrushLightConverter x:Key="brushLightConverter" />
-    <local:BrushToColorConverter x:Key="brushToColorConverter" />
-    <local:ColorToBrushConverter x:Key="colorToBrushConverter" />
-
-    <local:ValueMultiConverter x:Key="valueMultiConverter"/>
-    <local:ValueAddConverter x:Key="valueAddConverter"/>
-    <local:ValueToTrue x:Key="valueToTrue"/>
-    <local:ValueMoreToTrue x:Key="valueMoreToTrue"/>
-    <local:ValueToMoreTrue x:Key="valueToMoreTrue"/>
-    <local:ValueToFalse x:Key="valueToFalse"/>
-    <local:ValueMoreToFalse x:Key="valueMoreToFalse"/>
-    <local:ValueToMoreFalse x:Key="valueToMoreFalse"/>
-    <local:ValueToVisible x:Key="valueToVisible"/>
-    <local:ValueMoreToVisible x:Key="valueMoreToVisible"/>
-    <local:ValueToMoreVisible x:Key="valueToMoreVisible"/>
-    <local:ValueToCollapsed x:Key="valueToCollapsed"/>
-    <local:ValueMoreToCollapsed x:Key="valueMoreToCollapsed"/>
-    <local:ValueToMoreCollapsed x:Key="valueToMoreCollapsed"/>
-
-    <local:IsNotNullConverter x:Key="isNotNull"/>
-    <local:IsNotNullAllConverter x:Key="isNotNullAll"/>
-    <local:AnyNotNullToVisible x:Key="anyNotNullToVisible"/>
-    <local:AnyNotNullToCollapsed x:Key="anyNotNullToCollapsed"/>
-
-    <local:NullSelector x:Key="nullSelector"/>
-    <local:NullToVisible x:Key="nullToVisible"/>
-    <local:NullToCollapsed x:Key="nullToCollapsed"/>
-    <local:NullToDoubleConverter x:Key="nullToDoubleConverter" />
-    <local:NullToColorConverter x:Key="nullToColorConverter" />
-    <!--#endregion-->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\Default\Color.xaml" />
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\Default\Converter.xaml" />
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\Default\Path.xaml" />
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\Default\Theme.xaml" />
+    </ResourceDictionary.MergedDictionaries>
 
     <!--#region 文本图标资源 -->
     <FontFamily x:Key="FontAwesome">/Paway.WPF;component/Resource/#fontawesome</FontFamily>
-    <!--#endregion-->
-
-    <!--#region 主题 -->
-    <!--主题背景-->
-    <SolidColorBrush x:Key="ThemeBackground" Color="{Binding Path=(local:ThemeEXT.Background).Value.Color, RelativeSource={RelativeSource Self}}"/>
-    <!--主题背景深色-->
-    <SolidColorBrush x:Key="ThemeBackgroundHigh" Color="{Binding Path=(local:ThemeEXT.HighBrush).Normal.Color, RelativeSource={RelativeSource Self}}"/>
-    <!--主题-->
-    <SolidColorBrush x:Key="ThemeColor" Color="{Binding Path=(local:ThemeEXT.ItemBrush).Pressed.Color, RelativeSource={RelativeSource Self}}"/>
-    <SolidColorBrush x:Key="ThemeColorNormal" Color="{Binding Path=(local:ThemeEXT.ItemBrush).Normal.Color, RelativeSource={RelativeSource Self}}"/>
-    <SolidColorBrush x:Key="ThemeColorMouse" Color="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse.Color, RelativeSource={RelativeSource Self}}"/>
-    <!--主题深色-->
-    <SolidColorBrush x:Key="ThemeHigh" Color="{Binding Path=(local:ThemeEXT.HighBrush).Pressed.Color, RelativeSource={RelativeSource Self}}"/>
-    <!--主题浅色-->
-    <SolidColorBrush x:Key="ThemeLight" Color="{Binding Path=(local:ThemeEXT.HighBrush).Mouse.Color, RelativeSource={RelativeSource Self}}"/>
-    <!--颜色选择器-->
-    <LinearGradientBrush x:Key="ColorSelector">
-        <GradientStop Color="#ff0000" />
-        <GradientStop Color="#ff00ff" Offset="0.571" />
-        <GradientStop Color="#0000ff" Offset="0.45" />
-        <GradientStop Color="#00ffff" Offset="0.3426" />
-        <GradientStop Color="#00ff00" Offset="0.2285" />
-        <GradientStop Color="#ffff00" Offset="0.114" />
-        <GradientStop Color="#ff0000" Offset="0.7994" />
-        <GradientStop Color="White" Offset="0.7995" />
-        <GradientStop Color="Black" Offset="1" />
-    </LinearGradientBrush>
-    <!--马赛克背景-->
-    <DrawingBrush x:Key="MosaicBrush" RenderOptions.CachingHint="Cache" Viewport="0,0,16,16" ViewportUnits="Absolute" TileMode="Tile">
-        <DrawingBrush.Drawing>
-            <DrawingGroup>
-                <GeometryDrawing Brush="#A0D3D3D3">
-                    <GeometryDrawing.Geometry>
-                        <GeometryGroup>
-                            <RectangleGeometry Rect="0,0,8,8" />
-                            <RectangleGeometry Rect="8,8,8,8" />
-                        </GeometryGroup>
-                    </GeometryDrawing.Geometry>
-                </GeometryDrawing>
-            </DrawingGroup>
-        </DrawingBrush.Drawing>
-    </DrawingBrush>
-    <!--虚线边框-->
-    <DrawingBrush x:Key="DotLineBrush" RenderOptions.CachingHint="Cache" Viewport="0,0,4,4" ViewportUnits="Absolute" TileMode="Tile">
-        <DrawingBrush.Drawing>
-            <DrawingGroup>
-                <GeometryDrawing Brush="LightGray">
-                    <GeometryDrawing.Geometry>
-                        <GeometryGroup>
-                            <RectangleGeometry Rect="0,0,8,8" />
-                            <RectangleGeometry Rect="8,8,8,8" />
-                        </GeometryGroup>
-                    </GeometryDrawing.Geometry>
-                </GeometryDrawing>
-            </DrawingGroup>
-        </DrawingBrush.Drawing>
-    </DrawingBrush>
-
-    <!--#endregion-->
-
-    <!--#region 配色 -->
-    <SolidColorBrush x:Key="Color" Color="#409EFF" />
-    <SolidColorBrush x:Key="High" Color="#003F80" />
-
-    <SolidColorBrush x:Key="Success" Color="#2DB84D" />
-    <SolidColorBrush x:Key="Warn" Color="#FF9900" />
-    <SolidColorBrush x:Key="Error" Color="#F8331E" />
-
-    <Color x:Key="MainColor">#409EFF</Color>
-    <Color x:Key="SuccessColor">#2DB84D</Color>
-    <Color x:Key="WarnColor">#FF9900</Color>
-    <Color x:Key="ErrorColor">#F8331E</Color>
-
-    <!--34-->
-    <SolidColorBrush x:Key="Text" Color="#222" />
-    <!--68-->
-    <SolidColorBrush x:Key="TextSub" Color="#444" />
-    <!--119-->
-    <SolidColorBrush x:Key="TextLight" Color="#777" />
-
-    <!--220-->
-    <SolidColorBrush x:Key="Border" Color="#DCDFE6" />
-    <!--228-->
-    <SolidColorBrush x:Key="BorderSub" Color="#E4E7ED" />
-    <!--235-->
-    <SolidColorBrush x:Key="BorderLight" Color="#EBEEF5" />
-    <!--242-->
-    <SolidColorBrush x:Key="Light" Color="#F2F6FC" />
-
-    <!--211-->
-    <SolidColorBrush x:Key="Gray1" Color="LightGray" />
-    <!--169-->
-    <SolidColorBrush x:Key="Gray2" Color="DarkGray" />
-    <!--128-->
-    <SolidColorBrush x:Key="Gray3" Color="Gray" />
-    <!--105-->
-    <SolidColorBrush x:Key="Gray4" Color="DimGray" />
-    <!--#endregion-->
-
-    <!--#region 画板 -->
-    <Geometry x:Key="Icon_DownArrow">M511.753 624.86499999l292.159-292.15499999c12.27-12.28 32.186-12.28 44.457 0 12.28 12.27 12.28 32.186 0 44.457l-314.388 314.388c-12.27 12.28-32.186 12.28-44.457 0l-314.387-314.388c-6.14-6.136-9.211-14.183-9.211-22.228s3.071-16.092 9.211-22.228c12.27-12.28 32.186-12.28 44.457 0l292.16 292.155z</Geometry>
-    <Geometry x:Key="Icon_RightArrow">M624.86499999 512.247l-292.15499999-292.159c-12.28-12.27-12.28-32.186 0-44.457 12.27-12.28 32.186-12.28 44.457 0l314.388 314.388c12.28 12.27 12.28 32.186 0 44.457l-314.388 314.387c-6.136 6.14-14.183 9.211-22.228 9.211s-16.092-3.071-22.228-9.211c-12.28-12.27-12.28-32.186 0-44.457l292.155-292.16z</Geometry>
-    <Geometry x:Key="Icon_UpArrow">M512.133 399.517l-292.16 292.155c-12.27 12.28-32.186 12.28-44.457 0-12.281-12.27-12.281-32.186 0-44.457l314.388-314.388c12.27-12.28 32.186-12.28 44.457 0l314.387 314.388c6.14 6.136 9.211 14.183 9.211 22.228s-3.071 16.092-9.211 22.228c-12.27 12.28-32.186 12.28-44.457 0l-292.159-292.155z</Geometry>
-    <Geometry x:Key="Icon_LeftArrow">M399.399 512.246l292.155-292.16c12.278-12.27 12.278-32.186 0-44.457-12.27-12.278-32.186-12.278-44.457 0l-314.387 314.389c-12.281 12.27-12.281 32.186 0 44.457l314.388 314.388c6.137 6.14 14.183 9.211 22.228 9.211s16.092-3.071 22.228-9.211c12.281-12.27 12.281-32.186 0-44.457l-292.157-292.161z</Geometry>
-    <Geometry x:Key="CheckedGeometry">M 0,2 3,5 8,0</Geometry>
-    <Style x:Key="PathPointer" TargetType="{x:Type Path}" >
-        <Setter Property="Stretch" Value="Fill" />
-        <Setter Property="Height" Value="3" />
-        <Setter Property="Fill" Value="{StaticResource ThemeColor}"/>
-        <Setter Property="Data" Value="M10,0 0,1 0,2 10,3z"/>
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-    </Style>
-    <Style x:Key="PathRect" TargetType="{x:Type Path}" >
-        <Setter Property="Stretch" Value="Fill" />
-        <Setter Property="Margin" Value="1" />
-        <Setter Property="Stroke" Value="LightGray" />
-        <Setter Property="Fill" Value="{StaticResource ThemeColor}"/>
-        <Setter Property="Data" Value="M0,0 8,0 8,8 0,8Z"/>
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-    </Style>
-    <Style x:Key="PathRound" TargetType="{x:Type Path}" >
-        <Setter Property="Stretch" Value="Fill" />
-        <Setter Property="Margin" Value="1" />
-        <Setter Property="Stroke" Value="LightGray" />
-        <Setter Property="Fill" Value="{StaticResource ThemeColor}"/>
-        <Setter Property="Data" Value="M0,8 A8,8 0 1 1 0,9Z"/>
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-    </Style>
-    <Style x:Key="PathTriangle" TargetType="{x:Type Path}" >
-        <Setter Property="Stretch" Value="Fill" />
-        <Setter Property="Margin" Value="1" />
-        <Setter Property="Stroke" Value="LightGray" />
-        <Setter Property="Fill" Value="{StaticResource ThemeColor}"/>
-        <Setter Property="Data" Value="M10,0 0,10 20,10Z" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-    </Style>
-    <Style x:Key="PathTriangleDown" TargetType="{x:Type Path}" >
-        <Setter Property="Stretch" Value="Fill" />
-        <Setter Property="Margin" Value="1" />
-        <Setter Property="Stroke" Value="LightGray" />
-        <Setter Property="Fill" Value="{StaticResource ThemeColor}"/>
-        <Setter Property="Data" Value="M0,0 10,10 20,0Z" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-    </Style>
-    <Style x:Key="PathTriangleRight" TargetType="{x:Type Path}" >
-        <Setter Property="Stretch" Value="Fill" />
-        <Setter Property="Margin" Value="1" />
-        <Setter Property="Stroke" Value="LightGray" />
-        <Setter Property="Fill" Value="{StaticResource ThemeColor}"/>
-        <Setter Property="Data" Value="M0,0 L10,10 0,20z" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-    </Style>
-    <Style x:Key="PathRight" TargetType="{x:Type Path}" >
-        <Setter Property="FlowDirection" Value="LeftToRight" />
-        <Setter Property="StrokeDashArray" Value="8,8" />
-        <Setter Property="Stretch" Value="Uniform" />
-        <Setter Property="StrokeThickness" Value="2" />
-        <Setter Property="Height" Value="12" />
-        <Setter Property="Width" Value="12" />
-        <Setter Property="Data" Value="{StaticResource CheckedGeometry}" />
-        <Setter Property="Stroke" Value="{StaticResource ThemeColor}"/>
-    </Style>
-    <Style x:Key="PathClose" TargetType="{x:Type Path}" >
-        <Setter Property="Margin" Value="1" />
-        <Setter Property="Fill" Value="Red" />
-        <Setter Property="Data" Value="M1,0 L6,5 L11,0 L12,1 L7,6 L12,11 L11,12 L6,7 L1,12 L0,11 L5,6 L0,1 z" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-    </Style>
-    <Style x:Key="PathQuestion" TargetType="{x:Type Path}" >
-        <Setter Property="Stretch" Value="Fill" />
-        <Setter Property="Margin" Value="1" />
-        <Setter Property="Width" Value="8" />
-        <Setter Property="Fill" Value="Red" />
-        <Setter Property="Data" 
-                Value="M5.25,11.25 L6,11.25 L6,12 L5.25,12 z M5.625,0 C5.9335933,0 6.2314448,0.040039063 6.5185547,0.12011719 
-                C6.8056636,0.20019531 7.0742183,0.31347656 7.3242188,0.45996094 C7.5742183,0.60644531 7.8027339,0.78320313 8.0097656,0.99023438 
-                C8.2167969,1.1972656 8.3935547,1.4257813 8.5400391,1.6757813 C8.6865234,1.9257813 8.7998047,2.1943359 8.8798828,2.4814453 
-                C8.9599609,2.7685547 9,3.0664063 9,3.375 C9,3.703125 8.9570313,4.0000005 8.8710938,4.265625 
-                C8.7851563,4.5312505 8.671875,4.7744145 8.53125,4.9951172 C8.390625,5.2158208 8.2304688,5.4199224 8.0507813,5.6074219 
-                C7.8710933,5.7949224 7.6874995,5.976563 7.5,6.1523438 C7.3124995,6.328125 7.1289058,6.5029297 6.9492188,6.6767578 
-                C6.7695308,6.8505859 6.6093745,7.0351563 6.46875,7.2304688 C6.3281245,7.4257813 6.2148433,7.6367188 6.1289063,7.8632813 
-                C6.0429688,8.0898438 6,8.34375 6,8.625 L6,9.75 L5.25,9.75 L5.25,8.625 C5.25,8.296875 5.2929688,8 5.3789063,7.734375 
-                C5.4648438,7.46875 5.578125,7.2255859 5.71875,7.0048828 C5.859375,6.7841797 6.0195313,6.5810547 6.1992188,6.3955078 
-                C6.3789058,6.2099609 6.5624995,6.0292969 6.75,5.8535156 C6.9374995,5.6777349 7.1210933,5.5019536 7.3007813,5.3261719 
-                C7.4804683,5.1503911 7.6406245,4.9648442 7.78125,4.7695313 C7.9218745,4.5742192 8.0351563,4.3632817 8.1210938,4.1367188 
-                C8.2070313,3.9101563 8.25,3.65625 8.25,3.375 C8.25,3.0117188 8.1806641,2.6708984 8.0419922,2.3525391 
-                C7.9033198,2.0341797 7.7158198,1.7568359 7.4794922,1.5205078 C7.2431636,1.2841797 6.9658198,1.0966797 6.6474609,0.95800781 
-                C6.3291011,0.81933594 5.9882808,0.75 5.625,0.75 C5.2617188,0.75 4.9208984,0.81933594 4.6025391,0.95800781 
-                C4.2841797,1.0966797 4.0068359,1.2841797 3.7705078,1.5205078 C3.5341794,1.7568359 3.3466794,2.0341797 3.2080078,2.3525391 
-                C3.0693359,2.6708984 3,3.0117188 3,3.375 L2.25,3.375 C2.25,3.0664063 2.2900391,2.7685547 2.3701172,2.4814453 
-                C2.4501953,2.1943359 2.5634766,1.9257813 2.7099609,1.6757813 C2.8564453,1.4257813 3.0332031,1.1972656 3.2402344,0.99023438 
-                C3.4472654,0.78320313 3.675781,0.60644531 3.9257813,0.45996094 C4.1757813,0.31347656 4.4443359,0.20019531 4.7314453,0.12011719 
-                C5.0185547,0.040039063 5.3164063,0 5.625,0 z" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-    </Style>
-
     <!--#endregion-->
 
     <!--#region 默认全局样式 -->
@@ -271,15 +30,6 @@
     </Style>
     <Style TargetType="{x:Type RadioButton}">
         <Setter Property="VerticalContentAlignment" Value="Center" />
-    </Style>
-    <Style x:Key="FocusVisualStyle">
-        <Setter Property="Control.Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Border BorderThickness="1" BorderBrush="{StaticResource ThemeColor}" CornerRadius="3"/>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
     </Style>
     <!--#endregion-->
 
@@ -318,6 +68,15 @@
             </AdornedElementPlaceholder>
         </DockPanel>
     </ControlTemplate>
+    <Style x:Key="FocusVisualStyle">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border BorderThickness="1" BorderBrush="{StaticResource ThemeColor}" CornerRadius="3"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <DataTemplate x:Key="ViewItem">
         <TextBlock Text="{Binding Text}"/>
     </DataTemplate>
@@ -342,6 +101,36 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
     </Style>
+    <!--马赛克背景-->
+    <DrawingBrush x:Key="MosaicBrush" RenderOptions.CachingHint="Cache" Viewport="0,0,16,16" ViewportUnits="Absolute" TileMode="Tile">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <GeometryDrawing Brush="#A0D3D3D3">
+                    <GeometryDrawing.Geometry>
+                        <GeometryGroup>
+                            <RectangleGeometry Rect="0,0,8,8" />
+                            <RectangleGeometry Rect="8,8,8,8" />
+                        </GeometryGroup>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <!--虚线边框-->
+    <DrawingBrush x:Key="DotLineBrush" RenderOptions.CachingHint="Cache" Viewport="0,0,4,4" ViewportUnits="Absolute" TileMode="Tile">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <GeometryDrawing Brush="LightGray">
+                    <GeometryDrawing.Geometry>
+                        <GeometryGroup>
+                            <RectangleGeometry Rect="0,0,8,8" />
+                            <RectangleGeometry Rect="8,8,8,8" />
+                        </GeometryGroup>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
     <!--#endregion-->
 
 </ResourceDictionary>

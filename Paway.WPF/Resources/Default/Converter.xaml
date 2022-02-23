@@ -1,0 +1,50 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:Paway.WPF">
+
+    <!--#region 转换器 -->
+    <local:BoolSelector x:Key="boolSelector"/>
+    <local:BoolReverse x:Key="boolReverse"/>
+    <local:BoolToVisible x:Key="boolToVisible"/>
+    <local:BoolToCollapsed x:Key="boolToCollapsed"/>
+
+    <local:EnumConverter x:Key="enumConverter"/>
+    <local:VisibleReverse x:Key="visibleReverse"/>
+    <local:DateConverter x:Key="dateConverter"/>
+    <local:TimeConverter x:Key="timeConverter"/>
+    <local:RingConverter x:Key="ringConverter"/>
+
+    <local:BrushAlphaConverter x:Key="brushAlphaConverter" />
+    <local:BrushLightConverter x:Key="brushLightConverter" />
+    <local:BrushToColorConverter x:Key="brushToColorConverter" />
+    <local:ColorToBrushConverter x:Key="colorToBrushConverter" />
+
+    <local:ValueMultiConverter x:Key="valueMultiConverter"/>
+    <local:ValueAddConverter x:Key="valueAddConverter"/>
+    <local:ValueToTrue x:Key="valueToTrue"/>
+    <local:ValueMoreToTrue x:Key="valueMoreToTrue"/>
+    <local:ValueToMoreTrue x:Key="valueToMoreTrue"/>
+    <local:ValueToFalse x:Key="valueToFalse"/>
+    <local:ValueMoreToFalse x:Key="valueMoreToFalse"/>
+    <local:ValueToMoreFalse x:Key="valueToMoreFalse"/>
+    <local:ValueToVisible x:Key="valueToVisible"/>
+    <local:ValueMoreToVisible x:Key="valueMoreToVisible"/>
+    <local:ValueToMoreVisible x:Key="valueToMoreVisible"/>
+    <local:ValueToCollapsed x:Key="valueToCollapsed"/>
+    <local:ValueMoreToCollapsed x:Key="valueMoreToCollapsed"/>
+    <local:ValueToMoreCollapsed x:Key="valueToMoreCollapsed"/>
+
+    <local:IsNotNullConverter x:Key="isNotNull"/>
+    <local:IsNotNullAllConverter x:Key="isNotNullAll"/>
+    <local:AnyNotNullToVisible x:Key="anyNotNullToVisible"/>
+    <local:AnyNotNullToCollapsed x:Key="anyNotNullToCollapsed"/>
+
+    <local:NullSelector x:Key="nullSelector"/>
+    <local:NullToVisible x:Key="nullToVisible"/>
+    <local:NullToCollapsed x:Key="nullToCollapsed"/>
+    <local:NullToDoubleConverter x:Key="nullToDoubleConverter" />
+    <local:NullToColorConverter x:Key="nullToColorConverter" />
+    <!--#endregion-->
+
+</ResourceDictionary>

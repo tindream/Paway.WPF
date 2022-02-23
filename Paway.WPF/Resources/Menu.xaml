@@ -350,10 +350,6 @@
                                                Height="{Binding ActualHeight, ElementName=SubMenuBorder}"
                                                Width="{Binding ActualWidth, ElementName=SubMenuBorder}" />
                                 </Canvas>
-                                <!--<Rectangle Fill="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"
-                                           HorizontalAlignment="Left"
-                                           Margin="29,2,0,2"
-                                           Width="1" />-->
                                 <ItemsPresenter x:Name="ItemsPresenter"
                                                 KeyboardNavigation.DirectionalNavigation="Cycle"
                                                 Grid.IsSharedSizeScope="True"
