@@ -119,7 +119,7 @@
                                Type="Warn" IsLight="True"
                                ImageStretch="None"
                                Command="{Binding Teach}" CommandParameter="{Binding ElementName=btn}" Click="Cancel_Click" 
-                               Image="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_while.png"/>
+                               Image="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_white.png"/>
                     <ButtonEXT Name="btn" Grid.Column="1"
                              Content="{FontImage Type=Adjust}" Click="Commit_Click" 
                              CommandParameter="{Binding ElementName=btn}"/>

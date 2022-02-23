@@ -19,30 +19,14 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <StackPanel VerticalAlignment="Center">
-            <ButtonEXT Click="ButtonEXT_Click"/>
-            <WrapPanel Orientation="Vertical" Height="66">
-                <ButtonEXT IsLight="True"
-                   Image="pack://application:,,,/Paway.Test;component/Images/left.png|pack://application:,,,/Paway.Test;component/Images/left_white.png" 
-                    ImageStretch="Uniform" Radius="4,0,0,4" Margin="2,22,0,18" ImageWidth="18"  Padding="3,1"/>
-                <ButtonEXT IsLight="True" Margin="-1,2,0,0" Radius="4,4,0,0" 
-                   Image="pack://application:,,,/Paway.Test;component/Images/up.png|pack://application:,,,/Paway.Test;component/Images/up_white.png"  ImageStretch="Uniform"
-                   Padding="4,1,2,0" ImageWidth="18"/>
-                <ButtonEXT IsLight="True" Margin="-1,-1,0,0" Radius="0" 
-                   Image="pack://application:,,,/Paway.Test;component/Images/refresh.png|pack://application:,,,/Paway.Test;component/Images/refresh_white.png"  ImageStretch="Uniform"
-                   Padding="4,1,2,1" ImageWidth="18"/>
-                <ButtonEXT IsLight="True" Margin="-1,-1,0,2" Radius="0,0,4,4" 
-                   Image="pack://application:,,,/Paway.Test;component/Images/right.png|pack://application:,,,/Paway.Test;component/Images/right_white.png"  ImageStretch="Uniform"
-                   Padding="4,0,2,1" ImageWidth="18"/>
-                <ButtonEXT IsLight="True" Margin="-1,22,2,0" Radius="0,4,4,0"  
-                   Image="pack://application:,,,/Paway.Test;component/Images/down.png|pack://application:,,,/Paway.Test;component/Images/down_white.png"  ImageStretch="Uniform"
-                   ImageWidth="18" Padding="3,1"/>
-            </WrapPanel>
-        </StackPanel>
-        <Border Grid.Column="1" Background="Transparent">
             <WrapPanel>
-                <ComboBoxEXT Width="150" ItemsSource="{Binding ViewList}" Background="Transparent" BorderThickness="0,0,0,1" Radius="3,3,0,0"/>
+                <ComboBoxEXT ItemsSource="{Binding ViewList}" Background="Transparent" BorderThickness="0,0,0,1" Radius="3,3,0,0" Width="90"/>
                 <ComboView ItemsSource="{Binding ViewList}" SelectedValuePath="Text"/>
             </WrapPanel>
+            <SliderEXT Value="85" TrackColorLinear="Red"/>
+            <ButtonEXT Click="ButtonEXT_Click"/>
+        </StackPanel>
+        <Border Grid.Column="1" Background="Transparent">
         </Border>
     </Grid>
 </WindowEXT>

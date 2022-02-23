@@ -193,7 +193,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\close_while.png" />
+    <Resource Include="Images\close_white.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\script.sql" />

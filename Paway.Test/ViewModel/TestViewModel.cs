@@ -154,7 +154,7 @@ namespace Paway.Test.ViewModel
                 if (piList[i].Name == nameof(Colors.White)) this.Color = info;
             }
 
-            for (var i = 0; i < 9; i++) ViewList.Add(new ListViewItemModel($"{Method.Random(1, 1000000) * Method.Random(1, 1000000)};{Method.Random(1, 1000000) * Method.Random(1, 1000000)};{Method.Random(1, 1000000) * Method.Random(1, 1000000)}"));
+            for (var i = 0; i < 9; i++) ViewList.Add(new ListViewItemModel($"{Method.Random(1, 1000000) * Method.Random(1, 1000000)}"));
             for (var i = 0; i < 9; i++) MultiList.Add(new ComboBoxItemModel($"{i + 1}"));
             var treeInfo = new TreeViewItemModel("分类A", true);
             this.TreeList.Add(treeInfo);
@@ -176,7 +176,7 @@ namespace Paway.Test.ViewModel
             GridList.Add(new ListViewItemModel("你好123")
             {
                 IsEnabled = false,
-                Image = new ImageEXT(null, @"pack://application:,,,/Paway.Test;component/Images/close_while.png")
+                Image = new ImageEXT(null, @"pack://application:,,,/Paway.Test;component/Images/close_white.png")
             });
             for (int i = 0; i < 20; i++) GridList.Add(new ListViewItemModel("A" + i, "D" + i)
             {

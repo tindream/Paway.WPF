@@ -272,7 +272,7 @@ namespace Paway.Test.ViewModel
             list.Add(new ListViewItemModel("你好123")
             {
                 IsEnabled = false,
-                Image = new ImageEXT(null, @"pack://application:,,,/Paway.Test;component/Images/close_while.png")
+                Image = new ImageEXT(null, @"pack://application:,,,/Paway.Test;component/Images/close_white.png")
             });
             for (int i = 0; i < 20; i++) list.Add(new ListViewItemModel("A" + i, "D" + i)
             {
