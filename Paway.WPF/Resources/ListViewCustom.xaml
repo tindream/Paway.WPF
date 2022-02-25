@@ -41,8 +41,8 @@
                     <Setter Property="IsSelected" Value="{Binding IsSelected}" />
                     <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
                     <Setter Property="Visibility" Value="{Binding Visibility}" />
-                    <Setter Property="FocusVisualStyle">
-                        <Setter.Value>
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}">
+                        <!--<Setter.Value>
                             <Style TargetType="Control">
                                 <Setter Property="Template">
                                     <Setter.Value>
@@ -60,7 +60,7 @@
                                     </Setter.Value>
                                 </Setter>
                             </Style>
-                        </Setter.Value>
+                        </Setter.Value>-->
                     </Setter>
                     <Setter Property="Template">
                         <Setter.Value>
