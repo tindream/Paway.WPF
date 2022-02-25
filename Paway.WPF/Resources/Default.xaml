@@ -15,7 +15,7 @@
     <!--#endregion-->
 
     <!--#region 默认全局样式 -->
-    <!--取消右键动画，防止闪烁-->
+    <!--取消右键动画，防止连续右键菜单闪烁-->
     <PopupAnimation x:Key="{x:Static SystemParameters.MenuPopupAnimationKey}">None</PopupAnimation>
     <Style TargetType="{x:Type Label}">
         <Setter Property="HorizontalContentAlignment" Value="Right" />
@@ -34,24 +34,14 @@
     <!--#endregion-->
 
     <!--#region 通用模板 -->
-    <Style x:Key="Config" TargetType="{x:Type Control}">
-        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
-        <Setter Property="FontFamily" Value="Microsoft YaHei"/>
-        <Setter Property="BorderThickness" Value="1"/>
-    </Style>
-    <Style x:Key="MiniConfig" TargetType="{x:Type Control}" BasedOn="{StaticResource Config}">
-        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}, Converter={StaticResource valueMultiConverter}}"/>
-    </Style>
-    <Style x:Key="FocusConfig" TargetType="{x:Type Control}" BasedOn="{StaticResource Config}">
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualStyle}"/>
-        <!--<Setter Property="FocusVisualStyle" Value="{x:Null}"/>-->
-    </Style>
-    <Style x:Key="ComboConfig" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource FocusConfig}">
-        <Setter Property="Margin" Value="2"/>
-        <Setter Property="MaxDropDownHeight" Value="151"/>
-        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
+    <Style x:Key="FocusVisualStyle">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border BorderThickness="1" BorderBrush="{StaticResource ThemeColor}" CornerRadius="3"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
     <ControlTemplate x:Key="ErrorTemplate">
         <DockPanel LastChildFill="true">
@@ -68,14 +58,24 @@
             </AdornedElementPlaceholder>
         </DockPanel>
     </ControlTemplate>
-    <Style x:Key="FocusVisualStyle">
-        <Setter Property="Control.Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Border BorderThickness="1" BorderBrush="{StaticResource ThemeColor}" CornerRadius="3"/>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+    <Style x:Key="Config" TargetType="{x:Type Control}">
+        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
+        <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+    <Style x:Key="MiniConfig" TargetType="{x:Type Control}" BasedOn="{StaticResource Config}">
+        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}, Converter={StaticResource valueMultiConverter}}"/>
+    </Style>
+    <Style x:Key="FocusConfig" TargetType="{x:Type Control}" BasedOn="{StaticResource Config}">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <!--<Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualStyle}"/>-->
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+    </Style>
+    <Style x:Key="ComboConfig" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource FocusConfig}">
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="MaxDropDownHeight" Value="151"/>
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
     </Style>
     <DataTemplate x:Key="ViewItem">
         <TextBlock Text="{Binding Text}"/>
