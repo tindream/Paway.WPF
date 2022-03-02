@@ -27,6 +27,7 @@
             <ButtonEXT Click="ButtonEXT_Click"/>
         </StackPanel>
         <Border Grid.Column="1" Background="Transparent">
+            <DataGridEXT ItemsSource="{Binding GridList}" HorizontalContentAlignment="Center"/>
         </Border>
     </Grid>
 </WindowEXT>
