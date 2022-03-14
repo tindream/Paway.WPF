@@ -34,11 +34,13 @@
     <!--#endregion-->
 
     <!--#region 通用模板 -->
+    <!--焦点样式动态边框-->
+    <Thickness x:Key="FocusBorderThickness">1</Thickness>
     <Style x:Key="FocusVisualStyle">
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Border BorderThickness="1" BorderBrush="{StaticResource ThemeColor}" CornerRadius="3"/>
+                    <Border BorderThickness="{DynamicResource FocusBorderThickness}" BorderBrush="{StaticResource ThemeColor}" CornerRadius="3"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -69,8 +71,8 @@
     <Style x:Key="FocusConfig" TargetType="{x:Type Control}" BasedOn="{StaticResource Config}">
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <!--<Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualStyle}"/>-->
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualStyle}"/>
+        <!--<Setter Property="FocusVisualStyle" Value="{x:Null}"/>-->
     </Style>
     <Style x:Key="ComboConfig" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource FocusConfig}">
         <Setter Property="Margin" Value="2"/>

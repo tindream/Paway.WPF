@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Paway.WPF
@@ -156,6 +157,14 @@ namespace Paway.WPF
         public ComboBoxEXT()
         {
             DefaultStyleKey = typeof(ComboBoxEXT);
+        }
+        /// <summary>
+        /// 回车时移动焦点到下一控件
+        /// </summary>
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            PMethod.OnKeyDown(e);
+            base.OnKeyDown(e);
         }
     }
 }

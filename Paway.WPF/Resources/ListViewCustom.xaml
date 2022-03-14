@@ -41,13 +41,14 @@
                     <Setter Property="IsSelected" Value="{Binding IsSelected}" />
                     <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
                     <Setter Property="Visibility" Value="{Binding Visibility}" />
-                    <Setter Property="FocusVisualStyle" Value="{x:Null}">
-                        <!--<Setter.Value>
+                    <Setter Property="FocusVisualStyle">
+                        <Setter.Value>
                             <Style TargetType="Control">
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate>
-                                            <Border BorderThickness="1" BorderBrush="{StaticResource ThemeColor}" 
+                                            <Border BorderThickness="{DynamicResource FocusBorderThickness}" 
+                                                    BorderBrush="{StaticResource ThemeColor}" 
                                                     CornerRadius="{Binding Path=ItemRadius.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}">
                                                 <Border.Margin>
                                                     <MultiBinding Converter="{StaticResource nullSelector}">
@@ -60,7 +61,7 @@
                                     </Setter.Value>
                                 </Setter>
                             </Style>
-                        </Setter.Value>-->
+                        </Setter.Value>
                     </Setter>
                     <Setter Property="Template">
                         <Setter.Value>
