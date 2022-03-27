@@ -19,14 +19,7 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <StackPanel VerticalAlignment="Center">
-            <TextBoxEXT/>
-            <TextBoxEXT/>
-            <TextBoxEXT/>
-            <WrapPanel>
-                <ComboBoxEXT ItemsSource="{Binding ViewList}" Background="Transparent" BorderThickness="0,0,0,1" Radius="3,3,0,0" Width="90"/>
-                <ComboView ItemsSource="{Binding ViewList}" SelectedValuePath="Text"/>
-            </WrapPanel>
-            <SliderEXT Value="85" RenderEXT.ColorLinear="Red" TrackColorLinear="Red"/>
+            <ListViewCustom ItemsSource="{Binding GridList}" INormal="True"/>
             <ButtonEXT Click="ButtonEXT_Click"/>
         </StackPanel>
         <Border Grid.Column="1" Background="Transparent">

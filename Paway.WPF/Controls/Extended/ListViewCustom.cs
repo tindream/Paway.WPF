@@ -484,11 +484,6 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            if (INormal)
-            {
-                e.Handled = true;
-                return;
-            }
             downItem = null;
             if (e.ButtonState == MouseButtonState.Pressed)
             {
@@ -509,6 +504,7 @@ namespace Paway.WPF
                     if (!eventArg.Handled && (bool)window.GetValue(WindowMonitor.IsDragMoveEnabledProperty)) window.DragMove();
                 }
             }
+            e.Handled = INormal;
             base.OnPreviewMouseLeftButtonDown(e);
         }
         private void IsPressed(bool value)
