@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data.Odbc;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security;
@@ -18,6 +19,7 @@ using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Xml;
@@ -34,11 +36,67 @@ namespace Paway.WPF
         private static readonly string NameProgress = $"{nameof(PMethod)}_{nameof(Progress)}";
         private static readonly string NameHit = $"{nameof(PMethod)}_{nameof(Hit)}";
 
-        #region 转换器枚举计算
+        #region 文件
+        /// <summary>
+        /// 文件转图片资源(不占用文件)
+        /// </summary>
+        public static ImageSource Image(string file)
+        {
+            using (var binaryReader = new BinaryReader(File.Open(file, FileMode.Open)))
+            {
+                var fileInfo = new FileInfo(file);
+                var buffer = binaryReader.ReadBytes((int)fileInfo.Length);
+                var image = new BitmapImage();
+                image.BeginInit();
+                image.StreamSource = new MemoryStream(buffer);
+                image.EndInit();
+                return image;
+            }
+        }
+
+        #endregion
+
+        #region 颜色
+        /// <summary>
+        /// 取颜色拾取器中的颜色值
+        /// </summary>
+        /// <param name="offset"></param>
+        public static Color ColorSelector(double offset)
+        {
+            if (!(Application.Current.FindResource("ColorSelector") is LinearGradientBrush linearGradientBrush)) return Colors.Transparent;
+
+            var collection = linearGradientBrush.GradientStops;
+            var stops = collection.OrderBy(x => x.Offset).ToArray();
+            if (offset <= 0) return stops[0].Color;
+            if (offset >= 1) return stops[stops.Length - 1].Color;
+            var left = stops.Where(s => s.Offset <= offset).Last();
+            var right = stops.Where(s => s.Offset > offset).First();
+            offset = Math.Round((offset - left.Offset) / (right.Offset - left.Offset), 2);
+            var a = (byte)((right.Color.A - left.Color.A) * offset + left.Color.A);
+            var r = (byte)((right.Color.R - left.Color.R) * offset + left.Color.R);
+            var g = (byte)((right.Color.G - left.Color.G) * offset + left.Color.G);
+            var b = (byte)((right.Color.B - left.Color.B) * offset + left.Color.B);
+            return Color.FromArgb(a, r, g, b);
+        }
+        /// <summary>
+        /// 指定Alpha颜色
+        /// </summary>
+        public static Color AlphaColor(int alpha, Color color)
+        {
+            if (color == Colors.Transparent) alpha = 0;
+            if (alpha < 0) alpha = 0;
+            else if (alpha > 255) alpha = 255;
+            return Color.FromArgb((byte)alpha, color.R, color.G, color.B);
+        }
+
+        #endregion
+
+        #region 枚举
         /// <summary>
         /// 转换器枚举计算
+        /// <para>valueMoreToTrue多选时枚举值更新</para>
         /// </summary>
-        public static T AddValue<T>(T result, T value) where T : Enum
+        public static T EnumMoreValue<T>(T result, T value) where T : Enum
         {
             if (!PConfig.IConvertBack) return value;
             var valueInt = value.GetHashCode();
@@ -530,76 +588,6 @@ namespace Paway.WPF
             });
         }
 
-        #endregion
-
-        #region WPF
-        #region 让系统可以处理队列中的所有Windows消息
-        /// <summary>
-        /// 让系统可以处理队列中的所有Windows消息
-        /// </summary>
-        public static void DoEvents()
-        {
-            var frame = new DispatcherFrame();
-            Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background, new DispatcherOperationCallback(ExitFrame), frame);
-            Dispatcher.PushFrame(frame);
-        }
-        private static Object ExitFrame(Object state)
-        {
-            ((DispatcherFrame)state).Continue = false;
-            return null;
-        }
-        /// <summary>
-        /// 刷新主题样式
-        /// </summary>
-        public static void DoStyles()
-        {
-            var list = new List<ResourceDictionary>();
-            foreach (var item in Application.Current.Resources.MergedDictionaries) list.Add(item);
-
-            Application.Current.Resources.MergedDictionaries.Clear();
-            foreach (var item in list) Application.Current.Resources.MergedDictionaries.Add(item);
-        }
-        /// <summary>
-        /// 取进度条中的颜色值
-        /// </summary>
-        /// <param name="offset"></param>
-        public static Color ColorSelector(double offset)
-        {
-            if (!(Application.Current.FindResource("ColorSelector") is LinearGradientBrush linearGradientBrush)) return Colors.Transparent;
-
-            var collection = linearGradientBrush.GradientStops;
-            var stops = collection.OrderBy(x => x.Offset).ToArray();
-            if (offset <= 0) return stops[0].Color;
-            if (offset >= 1) return stops[stops.Length - 1].Color;
-            var left = stops.Where(s => s.Offset <= offset).Last();
-            var right = stops.Where(s => s.Offset > offset).First();
-            offset = Math.Round((offset - left.Offset) / (right.Offset - left.Offset), 2);
-            var a = (byte)((right.Color.A - left.Color.A) * offset + left.Color.A);
-            var r = (byte)((right.Color.R - left.Color.R) * offset + left.Color.R);
-            var g = (byte)((right.Color.G - left.Color.G) * offset + left.Color.G);
-            var b = (byte)((right.Color.B - left.Color.B) * offset + left.Color.B);
-            return Color.FromArgb(a, r, g, b);
-        }
-        /// <summary>
-        /// 主题颜色
-        /// </summary>
-        internal static Color ThemeColor(int alpha = PConfig.Alpha)
-        {
-            return AlphaColor(alpha, PConfig.Color);
-        }
-        /// <summary>
-        /// 指定Alpha颜色
-        /// </summary>
-        public static Color AlphaColor(int alpha, Color color)
-        {
-            if (color == Colors.Transparent) alpha = 0;
-            if (alpha < 0) alpha = 0;
-            else if (alpha > 255) alpha = 255;
-            return Color.FromArgb((byte)alpha, color.R, color.G, color.B);
-        }
-
-        #endregion
-
         #region 装饰器-Window忙碌提示
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
@@ -725,6 +713,38 @@ namespace Paway.WPF
                     }
                 }
             });
+        }
+
+        #endregion
+
+        #endregion
+
+        #region 系统
+        #region 让系统可以处理队列中的所有Windows消息
+        /// <summary>
+        /// 让系统可以处理队列中的所有Windows消息
+        /// </summary>
+        public static void DoEvents()
+        {
+            var frame = new DispatcherFrame();
+            Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background, new DispatcherOperationCallback(ExitFrame), frame);
+            Dispatcher.PushFrame(frame);
+        }
+        private static Object ExitFrame(Object state)
+        {
+            ((DispatcherFrame)state).Continue = false;
+            return null;
+        }
+        /// <summary>
+        /// 刷新主题样式
+        /// </summary>
+        public static void DoStyles()
+        {
+            var list = new List<ResourceDictionary>();
+            foreach (var item in Application.Current.Resources.MergedDictionaries) list.Add(item);
+
+            Application.Current.Resources.MergedDictionaries.Clear();
+            foreach (var item in list) Application.Current.Resources.MergedDictionaries.Add(item);
         }
 
         #endregion

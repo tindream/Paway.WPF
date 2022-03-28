@@ -31,6 +31,14 @@ namespace Paway.WPF
     public partial class PMethod
     {
         /// <summary>
+        /// 主题颜色
+        /// </summary>
+        internal static Color ThemeColor(int alpha = PConfig.Alpha)
+        {
+            return AlphaColor(alpha, PConfig.Color);
+        }
+
+        /// <summary>
         /// 鼠标移入移出动画
         /// </summary>
         internal static void Animation(FrameworkElement obj, bool value)

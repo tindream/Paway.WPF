@@ -59,15 +59,18 @@ namespace Paway.Test.ViewModel
             }
         }
 
-        private MonitorType userType = MonitorType.LeftToeAngle;
-        public MonitorType UserType
+        private MenuType userType = MenuType.None;
+        public MenuType UserType
         {
             get { return userType; }
             set
             {
-                if (value > 0) userType &= value;
-                else userType = (MonitorType)(userType.GetHashCode() + value.GetHashCode());
-                RaisePropertyChanged();
+                Console.WriteLine(value);
+                if (userType != value)
+                {
+                    userType = value;
+                    RaisePropertyChanged();
+                }
             }
         }
 
@@ -106,9 +109,10 @@ namespace Paway.Test.ViewModel
             {
                 return buttonCommand ?? (buttonCommand = new RelayCommand<ListViewCustom>(view =>
                 {
-                    var index = Method.Random(0, ViewList.Count);
-                    ViewList[index].ItemTextForeground = new BrushEXT(Colors.Red);
+                    //var index = Method.Random(0, ViewList.Count);
+                    //ViewList[index].ItemTextForeground = new BrushEXT(Colors.Red);
                     //if (view.ItemsSource == null) view.ItemsSource = ViewList;
+                    UserType = MenuType.N2;
                 }));
             }
         }
@@ -178,7 +182,7 @@ namespace Paway.Test.ViewModel
                 IsEnabled = false,
                 Image = new ImageEXT(null, @"pack://application:,,,/Paway.Test;component/Images/close_white.png")
             });
-            for (int i = 0; i < 20; i++) GridList.Add(new ListViewItemModel("A" + i, "D" + i)
+            for (int i = 0; i < 10; i++) GridList.Add(new ListViewItemModel("A" + i, "D" + i)
             {
                 IsEnabled = i != 5,
                 Image = new ImageEXT(@"pack://application:,,,/Paway.Test;component/Images/close.png")

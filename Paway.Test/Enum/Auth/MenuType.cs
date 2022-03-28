@@ -16,14 +16,16 @@ namespace Paway.Test
         [Description(Config.None)]
         None,
         /// <summary>
-        /// 用户
+        /// N
         /// </summary>
-        [Description("用户")]
-        User = 1 << 0,
+        N1 = 1 << 0,
         /// <summary>
-        /// 权限
+        /// N
         /// </summary>
-        [Description("权限")]
-        Auth = 1 << 3,
+        N2 = 1 << 1,
+        /// <summary>
+        /// N
+        /// </summary>
+        N3 = 1 << 2,
     }
 }
