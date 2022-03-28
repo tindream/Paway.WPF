@@ -65,7 +65,6 @@ namespace Paway.Test.ViewModel
             get { return userType; }
             set
             {
-                Console.WriteLine(value);
                 if (userType != value)
                 {
                     userType = value;

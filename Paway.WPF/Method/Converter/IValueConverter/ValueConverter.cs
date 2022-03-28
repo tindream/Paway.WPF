@@ -71,8 +71,8 @@ namespace Paway.WPF
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = value.ToBool() ? 1 : -1;
-            return (result * parameter.ToInt()).ToString();
+            if (!value.ToBool()) return 0;//重复绑定且枚举值超出范围时绑定报错
+            return parameter;
         }
     }
     /// <summary>

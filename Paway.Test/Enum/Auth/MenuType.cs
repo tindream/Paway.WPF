@@ -11,7 +11,7 @@ namespace Paway.Test
     /// 菜单权限
     /// </summary>
     [Flags]
-    public enum MenuType
+    public enum MenuType : byte
     {
         [Description(Config.None)]
         None,
