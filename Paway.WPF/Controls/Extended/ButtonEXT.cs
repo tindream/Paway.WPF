@@ -25,14 +25,6 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(ItemBorder), typeof(ThicknessEXT), typeof(ButtonEXT));
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty ShadowRadiusProperty =
-            DependencyProperty.RegisterAttached(nameof(ShadowRadius), typeof(double), typeof(ButtonEXT));
-        /// <summary>
-        /// </summary>
-        public static readonly DependencyProperty ShadowColorProperty =
-            DependencyProperty.RegisterAttached(nameof(ShadowColor), typeof(Color), typeof(ButtonEXT), new PropertyMetadata(Colors.Transparent));
-        /// <summary>
-        /// </summary>
         public static readonly DependencyProperty ItemForegroundProperty =
             DependencyProperty.RegisterAttached(nameof(ItemForeground), typeof(BrushEXT), typeof(ButtonEXT),
             new PropertyMetadata(new BrushEXT(Colors.White, Colors.White, Colors.White)));
@@ -121,26 +113,6 @@ namespace Paway.WPF
         {
             get { return (ThicknessEXT)GetValue(ItemBorderProperty); }
             set { SetValue(ItemBorderProperty, value); }
-        }
-        /// <summary>
-        /// 自定义边框阴影宽度
-        /// </summary>
-        [Category("扩展")]
-        [Description("自定义边框阴影宽度")]
-        public double ShadowRadius
-        {
-            get { return (double)GetValue(ShadowRadiusProperty); }
-            set { SetValue(ShadowRadiusProperty, value); }
-        }
-        /// <summary>
-        /// 自定义边框阴影颜色
-        /// </summary>
-        [Category("扩展")]
-        [Description("自定义边框阴影颜色")]
-        public Color ShadowColor
-        {
-            get { return (Color)GetValue(ShadowColorProperty); }
-            set { SetValue(ShadowColorProperty, value); }
         }
         /// <summary>
         /// 自定义文本颜色

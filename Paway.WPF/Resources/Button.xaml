@@ -24,13 +24,7 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{Binding Path=ItemBorder.Normal, RelativeSource={RelativeSource TemplatedParent}}"
                                 CornerRadius="{TemplateBinding Radius}"
-                                Background="{Binding Path=ItemBackground.Normal, RelativeSource={RelativeSource TemplatedParent}}">
-                            <Border.Effect>
-                                <DropShadowEffect ShadowDepth="0"
-                                                  Color="{Binding ShadowColor, RelativeSource={RelativeSource TemplatedParent}}"
-                                                  BlurRadius="{Binding ShadowRadius, RelativeSource={RelativeSource TemplatedParent}}"/>
-                            </Border.Effect>
-                        </Border>
+                                Background="{Binding Path=ItemBackground.Normal, RelativeSource={RelativeSource TemplatedParent}}"/>
                         <Border x:Name="border2" 
                                 Padding="{TemplateBinding Padding}"
                                 CornerRadius="{TemplateBinding Radius}">
