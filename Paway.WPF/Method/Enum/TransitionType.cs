@@ -21,12 +21,12 @@ namespace Paway.WPF
         /// 渐入
         /// <para>使控件立即进行透明度从0至1的渐变动画。若控件尚未加载完成，则将在其加载完成后再执行动画。</para>
         /// </summary>
-        [Description("淡入")]
+        [Description("渐入")]
         FadeIn,
         /// <summary>
         /// 渐出
         /// </summary>
-        [Description("淡入")]
+        [Description("渐出")]
         FadeOut,
         /// <summary>
         /// 从左侧滑入
@@ -80,7 +80,7 @@ namespace Paway.WPF
         /// <summary>
         /// 宽度(拉抽屉)
         /// </summary>
-        [Description("拉抽屉")]
+        [Description("宽度")]
         Width,
         /// <summary>
         /// 高度
