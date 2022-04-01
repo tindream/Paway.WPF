@@ -753,7 +753,7 @@ namespace Paway.WPF
         /// <summary>
         /// Window弹框
         /// </summary>
-        public static bool? Show(DependencyObject parent, Window window, int alpha = 100, bool iEscExit = true)
+        public static bool? Show(DependencyObject parent, Window window, int alpha = 100, bool iFocus = true, bool iEscExit = true)
         {
             if (!Parent(parent, out Window owner)) return null;
             window.ShowInTaskbar = false;
@@ -769,7 +769,7 @@ namespace Paway.WPF
                 //赋给父级窗体
                 owner.Content = originalOld;
             };
-            window.LostKeyboardFocus += delegate
+            if (iFocus) window.LostKeyboardFocus += delegate
             {
                 if (!window.IsKeyboardFocusWithin) window.Focus();
             };
