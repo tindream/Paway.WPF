@@ -228,7 +228,7 @@
                 <TextBlock x:Name="tbTitle" Visibility="{Binding Title, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullToCollapsed}}"
                            IsHitTestVisible="False" MinWidth="{TemplateBinding TitleMinWidth}"
                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                           HorizontalAlignment="Right"
+                           TextAlignment="Right"
                            Padding="0,0,6,0"
                            FontSize="{TemplateBinding FontSize}"
                            Opacity="0.9"
