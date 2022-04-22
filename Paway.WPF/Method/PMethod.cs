@@ -229,7 +229,7 @@ namespace Paway.WPF
         {
             BeginInvoke(parent, () =>
             {
-                var myAdornerLayer = AdornerLayer.GetAdornerLayer(parent);
+                var myAdornerLayer = ReloadAdorner(parent);
                 if (myAdornerLayer == null) return;
 
                 var block = new TextBlock()
@@ -408,23 +408,15 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-自定义吐泡消息框-Toast
         /// </summary>
-        public static void Toast(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color, bool repeat = true)
+        public static void Toast(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color)
         {
             BeginInvoke(parent, () =>
             {
                 if (!Parent(parent, out Window window)) return;
                 if (window.Content is FrameworkElement element)
                 {
-                    var myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
-                    if (myAdornerLayer == null)
-                    {
-                        if (repeat)
-                        {//未获取到装饰器层时重复一次
-                            DoEvents();
-                            Toast(parent, msg, time, type, false);
-                        }
-                        return;
-                    }
+                    var myAdornerLayer = ReloadAdorner(element);
+                    if (myAdornerLayer == null) return;
 
                     var color = AlphaColor(PConfig.Alpha, type.Color());
                     var border = new Border
@@ -505,23 +497,15 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-自定义提示框-Hit
         /// </summary>
-        public static void Hit(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color, bool repeat = true)
+        public static void Hit(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color)
         {
             BeginInvoke(parent, () =>
             {
                 if (!Parent(parent, out Window window)) return;
                 if (window.Content is FrameworkElement element)
                 {
-                    var myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
-                    if (myAdornerLayer == null)
-                    {
-                        if (repeat)
-                        {//未获取到装饰器层时重复一次
-                            DoEvents();
-                            Hit(parent, msg, time, type, false);
-                        }
-                        return;
-                    }
+                    var myAdornerLayer = ReloadAdorner(element);
+                    if (myAdornerLayer == null) return;
 
                     var color = AlphaColor(PConfig.Alpha, type.Color());
                     var border = new Border
@@ -596,6 +580,7 @@ namespace Paway.WPF
         {
             Invoke(parent, () =>
             {
+                Progress(parent);
                 Task.Run(() =>
                 {
                     try
@@ -636,7 +621,6 @@ namespace Paway.WPF
                         }
                     }
                 });
-                Progress(parent);
             });
         }
         private static TextBlock tbProgress;
@@ -648,7 +632,7 @@ namespace Paway.WPF
             if (!Parent(parent, out Window window)) return;
             if (window.Content is FrameworkElement element)
             {
-                var myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
+                var myAdornerLayer = ReloadAdorner(element);
                 if (myAdornerLayer == null) return;
 
                 var border = new Border
@@ -713,6 +697,19 @@ namespace Paway.WPF
                     }
                 }
             });
+        }
+        /// <summary>
+        /// 重复一次获取装饰器
+        /// </summary>
+        private static AdornerLayer ReloadAdorner(FrameworkElement element)
+        {
+            var myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
+            if (myAdornerLayer == null)
+            {
+                DoEvents();
+                myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
+            }
+            return myAdornerLayer;
         }
 
         #endregion
