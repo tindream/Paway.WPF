@@ -33,7 +33,6 @@ namespace Paway.WPF
     public partial class PMethod : TMethod
     {
         private static readonly string NameWater = $"{nameof(PMethod)}_{nameof(WaterAdornerFixed)}";
-        private static readonly string NameProgress = $"{nameof(PMethod)}_{nameof(Progress)}";
         private static readonly string NameHit = $"{nameof(PMethod)}_{nameof(Hit)}";
 
         #region 文件
@@ -580,7 +579,7 @@ namespace Paway.WPF
         {
             Invoke(parent, () =>
             {
-                Progress(parent);
+                var code = Progress(parent);
                 Task.Run(() =>
                 {
                     try
@@ -611,7 +610,7 @@ namespace Paway.WPF
                     }
                     finally
                     {
-                        ProgressClose(parent);
+                        if (code > 0) ProgressClose(parent, code);
                         if (completed != null)
                         {
                             BeginInvoke(parent, () =>
@@ -627,13 +626,13 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-同步显示Window进度条
         /// </summary>
-        public static void Progress(DependencyObject parent, object msg = null)
+        public static int Progress(DependencyObject parent, object msg = null)
         {
-            if (!Parent(parent, out Window window)) return;
+            if (!Parent(parent, out Window window)) return 0;
             if (window.Content is FrameworkElement element)
             {
                 var myAdornerLayer = ReloadAdorner(element);
-                if (myAdornerLayer == null) return;
+                if (myAdornerLayer == null) return 0;
 
                 var border = new Border
                 {
@@ -663,9 +662,11 @@ namespace Paway.WPF
                     Width = 80,
                     Height = 80,
                 });
-                var progress = new CustomAdorner(element, () => border, AlphaColor(0, Colors.Black)) { Name = NameProgress };
+                var progress = new CustomAdorner(element, () => border, AlphaColor(0, Colors.Black));
                 myAdornerLayer.Add(progress);
+                return progress.GetHashCode();
             }
+            return 0;
         }
         /// <summary>
         /// 装饰器-Window进度条提示信息
@@ -681,33 +682,43 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-关闭Window进度条
         /// </summary>
-        public static void ProgressClose(DependencyObject parent)
+        public static void ProgressClose(DependencyObject parent, int code)
         {
             Invoke(parent, () =>
             {
                 if (!Parent(parent, out Window window)) return;
-                if (window.Content is FrameworkElement element)
+                if (window.Content is Panel element)
                 {
-                    var myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
-                    if (myAdornerLayer == null) return;
-                    var list = myAdornerLayer.GetAdorners(element);
-                    if (list != null)
-                    {
-                        myAdornerLayer.Remove(list.FirstOrDefault(c => c.Name == NameProgress));
-                    }
+                    if (ProgressCloseClild(element, code)) { }
+                    else if (element.Children.Count > 0) ProgressCloseClild(element.Children[0], code);
                 }
             });
         }
         /// <summary>
+        /// 有弹出层时重新尝试关闭进度条
+        /// </summary>
+        private static bool ProgressCloseClild(UIElement element, int code)
+        {
+            var myAdornerLayer = ReloadAdorner(element, int.MaxValue);
+            var list = myAdornerLayer.GetAdorners(element);
+            if (list != null)
+            {
+                myAdornerLayer.Remove(list.FirstOrDefault(c => c.GetHashCode() == code));
+                return true;
+            }
+            return false;
+        }
+        /// <summary>
         /// 重复一次获取装饰器
         /// </summary>
-        private static AdornerLayer ReloadAdorner(FrameworkElement element)
+        private static AdornerLayer ReloadAdorner(UIElement element, int count = 1)
         {
             var myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
-            if (myAdornerLayer == null)
+            while (myAdornerLayer == null && count > 0)
             {
                 DoEvents();
                 myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
+                count--;
             }
             return myAdornerLayer;
         }
