@@ -610,7 +610,7 @@ namespace Paway.WPF
                     }
                     finally
                     {
-                        if (progress != null) ProgressClose(parent, progress);
+                        ProgressClose(parent, progress);
                         if (completed != null)
                         {
                             BeginInvoke(parent, () =>
@@ -685,11 +685,13 @@ namespace Paway.WPF
         /// </summary>
         public static void ProgressClose(DependencyObject parent, CustomAdorner progress)
         {
+            if (progress == null) return;
             Invoke(parent, () =>
             {
                 if (progress.Tag is AdornerLayer adorner)
                 {
                     adorner.Remove(progress);
+                    progress.Tag = null;
                 }
             });
         }
