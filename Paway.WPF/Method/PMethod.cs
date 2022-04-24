@@ -35,7 +35,7 @@ namespace Paway.WPF
         private static readonly string NameWater = $"{nameof(PMethod)}_{nameof(WaterAdornerFixed)}";
         private static readonly string NameHit = $"{nameof(PMethod)}_{nameof(Hit)}";
 
-        #region 文件
+        #region Image
         /// <summary>
         /// 文件转图片资源(不占用文件)
         /// </summary>
@@ -45,12 +45,19 @@ namespace Paway.WPF
             {
                 var fileInfo = new FileInfo(file);
                 var buffer = binaryReader.ReadBytes((int)fileInfo.Length);
-                var image = new BitmapImage();
-                image.BeginInit();
-                image.StreamSource = new MemoryStream(buffer);
-                image.EndInit();
-                return image;
+                return StreamImage(buffer);
             }
+        }
+        /// <summary>
+        /// 从内存流获取图片
+        /// </summary>
+        public static ImageSource StreamImage(byte[] buffer)
+        {
+            var image = new BitmapImage();
+            image.BeginInit();
+            image.StreamSource = new MemoryStream(buffer);
+            image.EndInit();
+            return image;
         }
 
         #endregion
