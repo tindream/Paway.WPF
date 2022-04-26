@@ -148,7 +148,7 @@ namespace Paway.Test.ViewModel
                 FontList.Add(info);
                 if (info.Name == Config.Window.FontFamily.Source) this.Font = info;
             }
-            var piList = typeof(Colors).Properties();
+            var piList = typeof(Colors).Properties(Config.Flags);
             for (var i = 0; i < piList.Count; i++)
             {
                 var color = (Color)ColorConverter.ConvertFromString(piList[i].Name);

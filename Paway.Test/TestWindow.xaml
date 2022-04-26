@@ -19,27 +19,16 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <StackPanel VerticalAlignment="Center">
-            <WrapPanel Orientation="Vertical" Height="34">
-                <RadioBox Content="N1" GroupName="MikeMode" Margin="2,2,0,2" Radius="3,0,0,3"
-                                  IsChecked="{Binding UserType, Converter={StaticResource valueToTrue}, ConverterParameter=1}"/>
-                <RadioBox Content="N2" GroupName="MikeMode" Margin="-1,2,0,2" Radius="0" HorizontalContentAlignment="Center"
-                                  IsChecked="{Binding UserType, Converter={StaticResource valueToTrue}, ConverterParameter=2}"/>
-                <RadioBox Content="N3" GroupName="MikeMode" Margin="-1,2,0,2" Radius="0,3,3,0"
-                                  IsChecked="{Binding UserType, Converter={StaticResource valueToTrue}, ConverterParameter=4}"/>
-            </WrapPanel>
-            <!--<ListViewCustom ItemsSource="{Binding GridList}" INormal="True"/>-->
+            <TextBoxEXT FontSize="24" BorderThickness="5" Padding="10"/>
+            <TextBoxEXT Icon="Images/clear.png" FontSize="24" BorderThickness="5" Padding="10"/>
+            <PasswordBox FontSize="24" BorderThickness="5" Padding="10"/>
+            <PasswordBox PasswordBoxEXT.Icon="Images/clear.png" FontSize="24" BorderThickness="5" Padding="10"/>
+            <ComboBoxEXT ItemsSource="{Binding ColorList}" FontSize="24" BorderThickness="5" Padding="10"/>
+            <ComboBoxEXT IsEditable="True" ItemsSource="{Binding ColorList}" FontSize="24" BorderThickness="5" Padding="10"/>
+            
             <ButtonEXT Click="ButtonEXT_Click" Command="{Binding ButtonCommand}"/>
-            <WrapPanel Orientation="Vertical" Height="34">
-                <RadioBox Content="N1" GroupName="MikeMode2" Margin="2,2,0,2" Radius="3,0,0,3"
-                                  IsChecked="{Binding UserType, Converter={StaticResource valueToTrue}, ConverterParameter=1}"/>
-                <RadioBox Content="N2" GroupName="MikeMode2" Margin="-1,2,0,2" Radius="0" HorizontalContentAlignment="Center"
-                                  IsChecked="{Binding UserType, Converter={StaticResource valueToTrue}, ConverterParameter=2}"/>
-                <RadioBox Content="N3" GroupName="MikeMode2" Margin="-1,2,0,2" Radius="0,3,3,0"
-                                  IsChecked="{Binding UserType, Converter={StaticResource valueToTrue}, ConverterParameter=4}"/>
-            </WrapPanel>
         </StackPanel>
         <Border Grid.Column="1" Background="Transparent">
-            <!--<DataGridEXT ItemsSource="{Binding GridList}" HorizontalContentAlignment="Center"/>-->
         </Border>
     </Grid>
 </WindowEXT>
