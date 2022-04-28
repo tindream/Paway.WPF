@@ -584,9 +584,16 @@ namespace Paway.WPF
         /// </summary>
         public static void Progress(DependencyObject parent, Action action, Action success = null, Action<Exception> error = null, Action completed = null)
         {
+            Progress(parent, null, action, success, error, completed);
+        }
+        /// <summary>
+        /// 模式显示Window忙提示框，执行完成后关闭
+        /// </summary>
+        public static void Progress(DependencyObject parent, object msg, Action action, Action success = null, Action<Exception> error = null, Action completed = null)
+        {
             Invoke(parent, () =>
             {
-                var progress = Progress(parent);
+                var progress = Progress(parent, msg);
                 Task.Run(() =>
                 {
                     try
