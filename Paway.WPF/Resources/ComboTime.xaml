@@ -60,6 +60,7 @@
                                     <ColumnDefinition x:Name="columnSecond"/>
                                 </Grid.ColumnDefinitions>
                                 <local:ListBoxEXT x:Name="listHour"
+                                                  FontSize="{TemplateBinding FontSize}"
                                                   ItemBrush="{Binding ItemBrush, RelativeSource={RelativeSource TemplatedParent}}"
                                                   Padding="{TemplateBinding Padding}"
                                                   BorderThickness="0,1,0,0"
@@ -71,6 +72,7 @@
                                                   MaxHeight="{TemplateBinding MaxDropDownHeight}">
                                 </local:ListBoxEXT>
                                 <local:ListBoxEXT x:Name="listMinute"
+                                                  FontSize="{TemplateBinding FontSize}"
                                                   ItemBrush="{Binding ItemBrush, RelativeSource={RelativeSource TemplatedParent}}"
                                                   Padding="{TemplateBinding Padding}"
                                                   BorderThickness="1,1,1,0" Grid.Column="1"
@@ -82,6 +84,7 @@
                                                   MaxHeight="{TemplateBinding MaxDropDownHeight}">
                                 </local:ListBoxEXT>
                                 <local:ListBoxEXT x:Name="listSecond"
+                                                  FontSize="{TemplateBinding FontSize}"
                                                   ItemBrush="{Binding ItemBrush, RelativeSource={RelativeSource TemplatedParent}}"
                                                   Padding="{TemplateBinding Padding}"
                                                   BorderThickness="0,1,0,0" Grid.Column="2"

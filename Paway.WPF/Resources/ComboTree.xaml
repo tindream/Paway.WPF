@@ -49,10 +49,11 @@
                         <!--必须将 TextBox 命名为 PART_EditableTextBox，否则 ComboBox 将无法识别它-->
                         <local:TextBoxEXT x:Name="PART_EditableTextBox"
                                           Grid.Column="1"
-                                          Text="{TemplateBinding Text}"
-                                          Margin="0"
+                                          Text="{TemplateBinding Text}" 
+                                          Margin="-2,0,0,0" BorderThickness="0"
+                                          FontSize="{TemplateBinding FontSize}"
+                                          Padding="{TemplateBinding Padding}"
                                           ItemBrush="Transparent"
-                                          BorderThickness="0,1"
                                           Visibility="Hidden" 
                                           Background="Transparent" 
                                           Radius="{TemplateBinding Radius}"
@@ -69,6 +70,8 @@
                             <Border x:Name="DropDownBorder" BorderBrush="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" 
                                     BorderThickness="1,0,1,1" Padding="0">
                                 <local:TreeViewEXT x:Name="PART_TreeView" Background="White" 
+                                                   FontSize="{TemplateBinding FontSize}"
+                                                   Padding="{TemplateBinding Padding}"
                                                    BorderThickness="0"
                                                    Width="{Binding ActualWidth, ElementName=border, Converter={StaticResource valueAddConverter}}" 
                                                    MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}"

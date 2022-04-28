@@ -10,22 +10,17 @@
         UseLayoutRounding="True"
         DataContext="{Binding Test, Source={StaticResource Locator}}"
         Title="TestWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
-    <WindowEXT.FunctionBar>
+    <!--<WindowEXT.FunctionBar>
         <local:TitleContent/>
-    </WindowEXT.FunctionBar>
+    </WindowEXT.FunctionBar>-->
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <StackPanel VerticalAlignment="Center">
-            <TextBoxEXT FontSize="24" BorderThickness="5" Padding="10"/>
-            <TextBoxEXT Icon="Images/clear.png" FontSize="24" BorderThickness="5" Padding="10"/>
-            <PasswordBox FontSize="24" BorderThickness="5" Padding="10"/>
-            <PasswordBox PasswordBoxEXT.Icon="Images/clear.png" FontSize="24" BorderThickness="5" Padding="10"/>
-            <ComboBoxEXT ItemsSource="{Binding ColorList}" FontSize="24" BorderThickness="5" Padding="10"/>
-            <ComboBoxEXT IsEditable="True" ItemsSource="{Binding ColorList}" FontSize="24" BorderThickness="5" Padding="10"/>
-            
+            <Border BorderBrush="Red" BorderThickness="1">
+            </Border>
             <ButtonEXT Click="ButtonEXT_Click" Command="{Binding ButtonCommand}"/>
         </StackPanel>
         <Border Grid.Column="1" Background="Transparent">

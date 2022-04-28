@@ -6,6 +6,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
+    <local:NoLeftThicknessConverter x:Key="noLeftThicknessConverter"/>
 
     <Style TargetType="{x:Type local:TextBoxEXT}" BasedOn="{StaticResource Config}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -46,7 +47,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <Image x:Name="icon" Visibility="Collapsed"
+                                <Image x:Name="icon" Visibility="Collapsed" Margin="1,0"
                                        Source="{TemplateBinding Icon}"
                                        Stretch="{TemplateBinding IconStretch}"/>
                                 <ScrollViewer x:Name="PART_ContentHost" Grid.Column="1"
@@ -55,9 +56,10 @@
                                               VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
                                 </ScrollViewer>
                                 <TextBlock x:Name="tbWater" Grid.Column="1" Visibility="Collapsed"
+                                           Margin="2,0,0,0"
                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                           Padding="5,0,0,0"
+                                           Padding="{TemplateBinding Padding}"
                                            FontSize="{TemplateBinding FontSize, Converter={StaticResource valueMultiConverter}}"
                                            Opacity="0.6"
                                            Text="{TemplateBinding Water}"/>
@@ -90,8 +92,7 @@
                         </Trigger>
                         <DataTrigger Binding="{Binding Icon, Converter={StaticResource isNotNull}, RelativeSource={RelativeSource Self}}" Value="True">
                             <Setter TargetName="icon" Property="Visibility" Value="Visible" />
-                            <Setter Property="Padding" Value="0,4" />
-                            <Setter TargetName="tbWater" Property="Padding" Value="2,0,0,0" />
+                            <Setter Property="Padding" Value="{Binding Padding, RelativeSource={RelativeSource Self}, Converter={StaticResource noLeftThicknessConverter}}" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Unit, Converter={StaticResource isNotNull}, RelativeSource={RelativeSource Self}}" Value="True">
                             <Setter TargetName="tbUnit" Property="Visibility" Value="Visible" />

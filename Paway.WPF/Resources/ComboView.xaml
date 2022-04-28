@@ -50,7 +50,9 @@
                         <!--必须将 TextBox 命名为 PART_EditableTextBox，否则 ComboBox 将无法识别它-->
                         <local:TextBoxEXT x:Name="PART_EditableTextBox"
                                           Grid.Column="1"
-                                          Margin="0"
+                                          Margin="-2,0,0,0" BorderThickness="0"
+                                          FontSize="{TemplateBinding FontSize}"
+                                          Padding="{TemplateBinding Padding}"
                                           ItemBrush="Transparent"
                                           Visibility="Hidden" 
                                           Background="Transparent" 
@@ -67,7 +69,8 @@
                                PlacementTarget="{Binding ElementName=border}">
                             <Border x:Name="DropDownBorder" BorderBrush="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" 
                                     BorderThickness="1,0,1,1" Padding="0">
-                                <local:DataGridEXT x:Name="PART_DataGrid" Background="White" 
+                                <local:DataGridEXT x:Name="PART_DataGrid" Background="White"
+                                                   FontSize="{TemplateBinding FontSize}"
                                                    ColumnWidth="{Binding ColumnWidth, RelativeSource={RelativeSource TemplatedParent}}"
                                                    BorderThickness="0"
                                                    Width="{Binding ActualWidth, ElementName=border, Converter={StaticResource valueAddConverter}}" 
@@ -82,7 +85,7 @@
                         </Trigger>
                         <Trigger Property="IsEditable" Value="true">
                             <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="border" Property="Background" Value="{Binding Background, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter TargetName="border" Property="Background" Value="White" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="border" Property="BorderBrush" 

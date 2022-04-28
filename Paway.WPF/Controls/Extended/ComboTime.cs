@@ -177,17 +177,18 @@ namespace Paway.WPF
         }
         private void Popup_Opened(object sender, EventArgs e)
         {
+            var count = 150 / this.ActualHeight;
             if (Template.FindName("listHour", this) is ListBoxEXT listHour)
             {
-                listHour.ScrollViewer(this.Hour / (24.0 - 5.0));
+                listHour.ScrollViewer(this.Hour / (24.0 - count));
             }
             if (Template.FindName("listMinute", this) is ListBoxEXT listMinute)
             {
-                listMinute.ScrollViewer(this.Minute / (60.0 - 5.0));
+                listMinute.ScrollViewer(this.Minute / (60.0 - count));
             }
             if (Template.FindName("listSecond", this) is ListBoxEXT listSecond)
             {
-                listSecond.ScrollViewer(this.Second / (60.0 - 5.0));
+                listSecond.ScrollViewer(this.Second / (60.0 - count));
             }
         }
     }

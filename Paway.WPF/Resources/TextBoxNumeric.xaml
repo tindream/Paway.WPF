@@ -6,6 +6,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
+    <local:NoLeftThicknessConverter x:Key="noLeftThicknessConverter"/>
 
     <Style TargetType="{x:Type local:TextBoxNumeric}" BasedOn="{StaticResource Config}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -41,7 +42,7 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <Image x:Name="icon" Visibility="Collapsed"
+                                <Image x:Name="icon" Visibility="Collapsed" Margin="1,0"
                                        Source="{TemplateBinding Icon}"
                                        Stretch="{TemplateBinding IconStretch}"/>
                                 <ScrollViewer x:Name="PART_ContentHost" Grid.Column="1"
@@ -78,7 +79,7 @@
                         </Trigger>
                         <DataTrigger Binding="{Binding Icon, Converter={StaticResource isNotNull}, RelativeSource={RelativeSource Self}}" Value="True">
                             <Setter TargetName="icon" Property="Visibility" Value="Visible" />
-                            <Setter Property="Padding" Value="0,4" />
+                            <Setter Property="Padding" Value="{Binding Padding, RelativeSource={RelativeSource Self}, Converter={StaticResource noLeftThicknessConverter}}" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Unit, Converter={StaticResource isNotNull}, RelativeSource={RelativeSource Self}}" Value="True">
                             <Setter TargetName="tbUnit" Property="Visibility" Value="Visible" />

@@ -46,15 +46,6 @@
                                       ClickMode="Press"
                                       Template="{StaticResource ComboBoxToggleButton}"
                                       IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" />
-                        <!--必须将 TextBox 命名为 PART_EditableTextBox，否则 ComboBox 将无法识别它-->
-                        <local:TextBoxEXT x:Name="PART_EditableTextBox"
-                                          Grid.Column="1"
-                                          Margin="0"
-                                          ItemBrush="Transparent"
-                                          Visibility="Hidden" 
-                                          Background="Transparent" 
-                                          Radius="{TemplateBinding Radius}"
-                                          IsReadOnly="{TemplateBinding IsReadOnly}"/>
                         <Popup x:Name="PART_Popup" 
                                AllowsTransparency="True" 
                                StaysOpen="True"

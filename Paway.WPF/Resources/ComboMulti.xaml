@@ -31,7 +31,7 @@
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}" />
                         <Grid x:Name="PART_Root" Grid.Column="1">
-                            <DockPanel x:Name="PART_InnerGrid" Margin="0">
+                            <DockPanel x:Name="PART_InnerGrid" Margin="{TemplateBinding Padding}">
                                 <!--下拉按钮-->
                                 <ToggleButton Name="PART_DropDownToggle" 
                                               Focusable="False"
@@ -41,8 +41,8 @@
                                 <local:ListBoxEXT x:Name="PART_ListBoxChk"
                                                   SelectionMode="Multiple" 
                                                   BorderThickness="0" 
-                                                  Margin="4,1" 
                                                   Radius="{TemplateBinding Radius}" 
+                                                  FontSize="{TemplateBinding FontSize}"
                                                   ScrollViewer.HorizontalScrollBarVisibility="Auto">
                                     <local:ListBoxEXT.ItemsPanel>
                                         <ItemsPanelTemplate>
@@ -58,7 +58,7 @@
                                                         <WrapPanel VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ComboMulti}}}">
                                                             <Path x:Name="path" Style="{StaticResource PathRight}" 
                                                                   Stroke="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ComboMulti}}}"/>
-                                                            <TextBlock x:Name="txt" Text="{Binding Text}" Padding="3"/>
+                                                            <TextBlock x:Name="txt" Text="{Binding Text}" Padding="3,-1"/>
                                                         </WrapPanel>
                                                         <ControlTemplate.Triggers>
                                                             <Trigger Property="IsMouseOver" Value="true">
@@ -102,7 +102,9 @@
                                          MaxHeight="{TemplateBinding MaxDropDownHeight}">
                                     <local:ListBoxEXT.ItemTemplate>
                                         <DataTemplate>
-                                            <local:CheckBoxEXT Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                            <local:CheckBoxEXT Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                                               FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type local:ComboMulti}}}"
+                                                               Padding="{Binding Padding, RelativeSource={RelativeSource AncestorType={x:Type local:ComboMulti}}}"
                                                       IsChecked="{Binding  RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=IsSelected}" 
                                                       Content="{Binding Path=Text}" />
                                         </DataTemplate>
