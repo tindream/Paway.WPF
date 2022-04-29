@@ -20,7 +20,7 @@ namespace Paway.WPF
         /// <summary>
         /// 构造要将绑定到的装饰器的元素
         /// </summary>
-        public CustomAdorner(FrameworkElement adornedElement, Func<FrameworkElement> elementFunc, Color? color = null, Func<double> xFunc = null, Func<double> yFunc = null, Func<Storyboard> boardFunc = null, bool? hitTest = null) : base(adornedElement)
+        public CustomAdorner(FrameworkElement adornedElement, FrameworkElement element, Color? color = null, Func<double> xFunc = null, Func<double> yFunc = null, Func<Storyboard> boardFunc = null, bool? hitTest = null) : base(adornedElement)
         {
             //true:不路由事件（不穿透）
             //false:路由事件（穿透）
@@ -34,7 +34,6 @@ namespace Paway.WPF
                 canvas
             };
 
-            FrameworkElement element = elementFunc();
             canvas.Children.Add(element);
             this.Loaded += (sender, e) =>
             {
@@ -60,6 +59,13 @@ namespace Paway.WPF
                 };
                 board.Begin(element);
             };
+        }
+        /// <summary>
+        /// 获取画板
+        /// </summary>
+        public Canvas GetCanvas()
+        {
+            return canvas;
         }
         /// <summary>
         /// 指定子元素

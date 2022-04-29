@@ -84,7 +84,7 @@ namespace Paway.Test
         {
             base.OnRender(drawingContext);
             if (IsLoaded) return;
-            Method.Progress(this, () =>
+            Method.Progress(this, adorner =>
             {
                 DataService.Default.Load();
             }, () =>

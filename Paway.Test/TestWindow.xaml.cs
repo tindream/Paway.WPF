@@ -51,6 +51,16 @@ namespace Paway.Test
 
         private void ButtonEXT_Click(object sender, RoutedEventArgs e)
         {
+            Method.Progress(this, adorner =>
+            {
+                Thread.Sleep(1000);
+                Method.ProgressMsg(adorner, "1");
+                Thread.Sleep(1000);
+                Method.ProgressMsg(adorner, "2");
+                Thread.Sleep(1000);
+                Method.ProgressMsg(adorner, "3");
+                Thread.Sleep(1000);
+            });
         }
     }
 }

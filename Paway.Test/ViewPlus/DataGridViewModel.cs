@@ -127,7 +127,7 @@ namespace Paway.Test.ViewModel
         }
         protected virtual void Refresh(DependencyObject obj)
         {
-            Method.Progress(obj, () =>
+            Method.Progress(obj, adorner =>
             {
                 var list = Find();
                 Method.BeginInvoke(obj, () =>

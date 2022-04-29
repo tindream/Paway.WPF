@@ -244,7 +244,7 @@ namespace Paway.WPF
                     FontSize = size
                 };
                 if (color != null) block.Foreground = new SolidColorBrush(color.Value);
-                myAdornerLayer.Add(new CustomAdorner(parent, () => block, boardFunc: () =>
+                myAdornerLayer.Add(new CustomAdorner(parent, block, boardFunc: () =>
                 {
                     var storyboard = new Storyboard();
 
@@ -309,7 +309,7 @@ namespace Paway.WPF
             if (width == 0 || width > autoWidth) width = autoWidth;
 
             var ellipse = new Ellipse() { Width = width, Height = width, Fill = new SolidColorBrush(AlphaColor(20, Colors.Black)) };
-            var waterAdornerFixed = new CustomAdorner(element, () => ellipse, null, () => point.X - ellipse.ActualWidth / 2, () => point.Y - ellipse.ActualHeight / 2, hitTest: false) { Name = NameWater };
+            var waterAdornerFixed = new CustomAdorner(element, ellipse, null, () => point.X - ellipse.ActualWidth / 2, () => point.Y - ellipse.ActualHeight / 2, hitTest: false) { Name = NameWater };
             myAdornerLayer.Add(waterAdornerFixed);
             Element = element;
             return myAdornerLayer;
@@ -380,7 +380,7 @@ namespace Paway.WPF
 
             if (color == null) color = PConfig.Color;
             var ellipse = new Ellipse() { Width = 10, Height = 10, Fill = new SolidColorBrush(color.Value) };
-            myAdornerLayer.Add(new CustomAdorner(element, () => ellipse, null, () => point.X - ellipse.ActualWidth / 2, () => point.Y - ellipse.ActualHeight / 2, () =>
+            myAdornerLayer.Add(new CustomAdorner(element, ellipse, null, () => point.X - ellipse.ActualWidth / 2, () => point.Y - ellipse.ActualHeight / 2, () =>
             {
                 var storyboard = new Storyboard();
                 var animTime = AnimTime(width) * 1.3;
@@ -443,7 +443,7 @@ namespace Paway.WPF
                     };
                     border.Child = block;
                     if (time == 0) time = 3000;
-                    myAdornerLayer.Add(new CustomAdorner(element, () => border, yFunc: () =>
+                    myAdornerLayer.Add(new CustomAdorner(element, border, yFunc: () =>
                     {
                         var top = window.ActualHeight - border.ActualHeight;
                         top = top * 17 / 20;
@@ -534,7 +534,7 @@ namespace Paway.WPF
                     if (time == 0) time = 3000;
 
                     ClearAdorner(myAdornerLayer, element, NameHit);
-                    myAdornerLayer.Add(new CustomAdorner(element, () => border, boardFunc: () =>
+                    myAdornerLayer.Add(new CustomAdorner(element, border, boardFunc: () =>
                     {
                         var storyboard = new Storyboard();
 
@@ -582,14 +582,14 @@ namespace Paway.WPF
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
-        public static void Progress(DependencyObject parent, Action action, Action success = null, Action<Exception> error = null, Action completed = null)
+        public static void Progress(DependencyObject parent, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null)
         {
             Progress(parent, null, action, success, error, completed);
         }
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
-        public static void Progress(DependencyObject parent, object msg, Action action, Action success = null, Action<Exception> error = null, Action completed = null)
+        public static void Progress(DependencyObject parent, object msg, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null)
         {
             Invoke(parent, () =>
             {
@@ -598,7 +598,7 @@ namespace Paway.WPF
                 {
                     try
                     {
-                        action.Invoke();
+                        action.Invoke(progress);
                         if (success != null)
                         {
                             BeginInvoke(parent, () =>
@@ -636,7 +636,6 @@ namespace Paway.WPF
                 });
             });
         }
-        private static TextBlock tbProgress;
         /// <summary>
         /// 装饰器-同步显示Window进度条
         /// </summary>
@@ -659,7 +658,7 @@ namespace Paway.WPF
                 };
                 var dp = new DockPanel();
                 border.Child = dp;
-                tbProgress = new TextBlock()
+                var tbProgress = new TextBlock()
                 {
                     Text = msg == null ? PConfig.Loading : msg.ToStrings(),
                     FontSize = 15,
@@ -676,7 +675,7 @@ namespace Paway.WPF
                     Width = 80,
                     Height = 80,
                 });
-                var progress = new CustomAdorner(element, () => border, AlphaColor(0, Colors.Black));
+                var progress = new CustomAdorner(element, border, AlphaColor(0, Colors.Black));
                 myAdornerLayer.Add(progress);
                 progress.Tag = myAdornerLayer;
                 return progress;
@@ -686,13 +685,19 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-Window进度条提示信息
         /// </summary>
-        public static void ProgressMsg(object msg = null)
+        public static void ProgressMsg(CustomAdorner progress, object msg = null)
         {
-            if (tbProgress == null) return;
-            BeginInvoke(tbProgress, () =>
+            var canvas = progress.GetCanvas();
+            if (canvas != null)
             {
-                tbProgress.Text = msg == null ? Paway.WPF.PConfig.Loading : msg.ToStrings();
-            });
+                BeginInvoke(canvas, () =>
+                {
+                    if (Child(canvas, out TextBlock textBlock, iParent: false))
+                    {
+                        textBlock.Text = msg == null ? PConfig.Loading : msg.ToStrings();
+                    }
+                });
+            }
         }
         /// <summary>
         /// 装饰器-关闭Window进度条
