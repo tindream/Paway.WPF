@@ -1056,5 +1056,63 @@ namespace Paway.WPF
         #endregion
 
         #endregion
+
+        #region Init
+        /// <summary>
+        /// 初始化App
+        /// </summary>
+        public static void InitApp(Application app, string fileName)
+        {
+            log4net.Config.XmlConfigurator.Configure(new FileInfo(fileName));
+            var version = Assembly.GetEntryAssembly().GetName().Version;
+            $"v{version} ({Environment.MachineName})".Log();
+
+            //禁用Backspace退格返回Page页
+            NavigationCommands.BrowseBack.InputGestures.Clear();
+            TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            app.DispatcherUnhandledException += App_DispatcherUnhandledException;
+        }
+        private static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
+        {
+            // 设置该异常已察觉（这样处理后就不会引起程序崩溃）
+            e.SetObserved();
+            var desc = $"未经处理的Task异常";
+            e.Exception.Log(desc);
+        }
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            try
+            {
+                if (e.ExceptionObject is Exception ex)
+                {
+                    var desc = $"未经处理的线程异常";
+                    if (e.IsTerminating) desc += $"(致命错误)";
+                    ex.Log(desc);
+                }
+            }
+            catch (Exception ex)
+            {
+                var desc = $"不可恢复的未经处理线程异常";
+                ex.Log(desc);
+            }
+
+        }
+        private static void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            try
+            {
+                var desc = $"未经处理的UI异常";
+                e.Exception.Log(desc);
+                e.Handled = true;
+            }
+            catch (Exception ex)
+            {
+                var desc = $"不可恢复的未经处理UI异常";
+                ex.Log(desc);
+            }
+        }
+
+        #endregion
     }
 }
