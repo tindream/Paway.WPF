@@ -7,6 +7,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Cryptography;
 using System.Text;
@@ -16,6 +17,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -34,6 +36,14 @@ namespace Paway.WPF
     {
         private static readonly string NameWater = $"{nameof(PMethod)}_{nameof(WaterAdornerFixed)}";
         private static readonly string NameHit = $"{nameof(PMethod)}_{nameof(Hit)}";
+        #region MyRegion
+        /// <summary>
+        /// 释放资源
+        /// </summary>
+        [DllImport("gdi32.dll", SetLastError = true)]
+        private static extern bool DeleteObject(IntPtr hObject);
+
+        #endregion
 
         #region Image
         /// <summary>
@@ -45,18 +55,28 @@ namespace Paway.WPF
             {
                 var fileInfo = new FileInfo(file);
                 var buffer = binaryReader.ReadBytes((int)fileInfo.Length);
-                return StreamImage(buffer);
+                return Image(buffer);
             }
         }
         /// <summary>
-        /// 从内存流获取图片
+        /// 内存流转图片资源
         /// </summary>
-        public static ImageSource StreamImage(byte[] buffer)
+        public static ImageSource Image(byte[] buffer)
         {
             var image = new BitmapImage();
             image.BeginInit();
             image.StreamSource = new MemoryStream(buffer);
             image.EndInit();
+            return image;
+        }
+        /// <summary>
+        /// 图像转图片资源
+        /// </summary>
+        public static ImageSource Image(System.Drawing.Bitmap bitmap)
+        {
+            var intPtr = bitmap.GetHbitmap();
+            var image = Imaging.CreateBitmapSourceFromHBitmap(intPtr, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+            DeleteObject(intPtr);
             return image;
         }
 
