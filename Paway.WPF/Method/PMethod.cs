@@ -7,7 +7,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Cryptography;
 using System.Text;
@@ -36,14 +35,6 @@ namespace Paway.WPF
     {
         private static readonly string NameWater = $"{nameof(PMethod)}_{nameof(WaterAdornerFixed)}";
         private static readonly string NameHit = $"{nameof(PMethod)}_{nameof(Hit)}";
-        #region MyRegion
-        /// <summary>
-        /// 释放资源
-        /// </summary>
-        [DllImport("gdi32.dll", SetLastError = true)]
-        private static extern bool DeleteObject(IntPtr hObject);
-
-        #endregion
 
         #region Image
         /// <summary>
@@ -76,7 +67,7 @@ namespace Paway.WPF
         {
             var intPtr = bitmap.GetHbitmap();
             var image = Imaging.CreateBitmapSourceFromHBitmap(intPtr, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-            DeleteObject(intPtr);
+            NativeMethods.DeleteObject(intPtr);
             return image;
         }
 
@@ -427,14 +418,14 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-自定义吐泡消息框-Toast
         /// </summary>
-        public static void Toast(DependencyObject parent, object msg, ColorType type = ColorType.Color)
+        public static void Toast(DependencyObject parent, object msg, ColorType type = ColorType.Color, int? fontSize = null)
         {
-            Toast(parent, msg, 0, type);
+            Toast(parent, msg, 0, type, fontSize);
         }
         /// <summary>
         /// 装饰器-自定义吐泡消息框-Toast
         /// </summary>
-        public static void Toast(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color)
+        public static void Toast(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color, int? fontSize = null)
         {
             BeginInvoke(parent, () =>
             {
@@ -461,6 +452,7 @@ namespace Paway.WPF
                         MinWidth = 200,
                         MaxWidth = 600
                     };
+                    if (fontSize != null) block.FontSize = fontSize.Value;
                     border.Child = block;
                     if (time == 0) time = 3000;
                     myAdornerLayer.Add(new CustomAdorner(element, border, yFunc: () =>
@@ -516,14 +508,14 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-自定义提示框-Hit
         /// </summary>
-        public static void Hit(DependencyObject parent, object msg, ColorType type = ColorType.Color)
+        public static void Hit(DependencyObject parent, object msg, ColorType type = ColorType.Color, int? fontSize = null)
         {
-            Hit(parent, msg, 0, type);
+            Hit(parent, msg, 0, type, fontSize);
         }
         /// <summary>
         /// 装饰器-自定义提示框-Hit
         /// </summary>
-        public static void Hit(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color)
+        public static void Hit(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color, int? fontSize = null)
         {
             BeginInvoke(parent, () =>
             {
@@ -550,6 +542,7 @@ namespace Paway.WPF
                         MinWidth = 200,
                         MaxWidth = 600
                     };
+                    if (fontSize != null) block.FontSize = fontSize.Value;
                     border.Child = block;
                     if (time == 0) time = 3000;
 
@@ -616,11 +609,11 @@ namespace Paway.WPF
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
-        public static void Progress(DependencyObject parent, object msg, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null)
+        public static void Progress(DependencyObject parent, object msg, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null, int? fontSize = null)
         {
             Invoke(parent, () =>
             {
-                var progress = Progress(parent, msg);
+                var progress = Progress(parent, msg, fontSize);
                 Task.Run(() =>
                 {
                     try
@@ -666,7 +659,7 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-同步显示Window进度条
         /// </summary>
-        public static CustomAdorner Progress(DependencyObject parent, object msg = null)
+        public static CustomAdorner Progress(DependencyObject parent, object msg = null, int? fontSize = null)
         {
             if (!Parent(parent, out Window window)) return null;
             if (window.Content is FrameworkElement element)
@@ -688,12 +681,12 @@ namespace Paway.WPF
                 var tbProgress = new TextBlock()
                 {
                     Text = msg == null ? PConfig.Loading : msg.ToStrings(),
-                    FontSize = 15,
                     Foreground = new SolidColorBrush(Colors.Black),
                     Padding = new Thickness(10),
                     HorizontalAlignment = HorizontalAlignment.Center,
                     TextTrimming = TextTrimming.WordEllipsis,
                 };
+                if (fontSize != null) tbProgress.FontSize = fontSize.Value;
                 dp.Children.Add(tbProgress);
                 DockPanel.SetDock(tbProgress, Dock.Bottom);
                 dp.Children.Add(new Progress

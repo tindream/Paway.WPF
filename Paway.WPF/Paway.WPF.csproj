@@ -158,8 +158,8 @@
     <Compile Include="Method\Enum\TransitionType.cs" />
     <Compile Include="Controls\Window\FunctionBar\FunctionBar.cs" />
     <Compile Include="Controls\Window\FunctionBar\WindowFunctionBar.cs" />
-    <Compile Include="Method\AnimationHelper.cs" />
-    <Compile Include="Method\ConverHelper.cs" />
+    <Compile Include="Method\Helper\AnimationHelper.cs" />
+    <Compile Include="Method\Helper\ConverHelper.cs" />
     <Compile Include="Method\Data\ElementData.cs" />
     <Compile Include="Method\Internal\DpiHelper.cs" />
     <Compile Include="Method\Internal\Enums.cs" />
