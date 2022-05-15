@@ -401,6 +401,9 @@
         <Setter Property="Focusable" Value="False"/>
         <!--修改模板属性-->
         <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.6"/>
+            </Trigger>
             <Trigger Property="Orientation" Value="Horizontal">
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="Template" Value="{StaticResource SliderHorizontal}"/>
