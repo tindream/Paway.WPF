@@ -24,6 +24,11 @@
             <ButtonEXT Click="ButtonEXT_Click" Command="{Binding ButtonCommand}"/>
         </StackPanel>
         <Border Grid.Column="1" Background="Transparent">
+            <DataGridEXT ItemsSource="{Binding GridList}">
+                <DataGrid.Columns>
+                    <!--<DataGridTextColumn Binding="{Binding Desc}" Width="1000"/>-->
+                </DataGrid.Columns>
+            </DataGridEXT>
         </Border>
     </Grid>
 </WindowEXT>

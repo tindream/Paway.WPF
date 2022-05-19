@@ -29,7 +29,7 @@
                         <local:ScrollViewerEXT x:Name="Part_ScrollViewer" 
                                                HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                                VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
-                            <WrapPanel  x:Name="WrapPanel" Orientation="{Binding Orientation, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" ScrollViewer.CanContentScroll="True" IsItemsHost="True" />
+                            <WrapPanel  x:Name="WrapPanel" Orientation="{Binding Orientation, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" IsItemsHost="True" />
                         </local:ScrollViewerEXT>
                     </Border>
                 </ControlTemplate>

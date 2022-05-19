@@ -188,7 +188,6 @@
 
     <Style TargetType="{x:Type local:TreeViewEXT}" BasedOn="{StaticResource Config}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
         <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Visible" />
         <Setter Property="Padding" Value="0"/>

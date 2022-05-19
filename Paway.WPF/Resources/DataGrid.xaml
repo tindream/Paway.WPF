@@ -94,7 +94,9 @@
 
     <Style TargetType="{x:Type local:DataGridEXT}" BasedOn="{StaticResource Config}">
         <Setter Property="ICustomColumnHeader" Value="True"/>
-        <!--样式-->
+        <!--使其平滑滚动，默认是整行滚动-->
+        <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+        <!--标题样式-->
         <Setter Property="ColumnHeaderStyle" Value="{StaticResource ColumnHeaderStyle}"/>
         <!--其它-->
         <Setter Property="IsReadOnly" Value="True"/>
