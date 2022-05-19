@@ -460,14 +460,14 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            if (e.ButtonState == MouseButtonState.Pressed && this.AllowDrop)
+            if (e.ButtonState == MouseButtonState.Pressed && this.AllowDrop && e.ClickCount == 1)
             {
                 _lastMouseDown = e.GetPosition(this);
                 if (PMethod.Parent(e.OriginalSource, out DataGridRow row))
                 {
                     if (this.SelectedItem != null && this.SelectedItem.Equals(row.Item))
                     {
-                        e.Handled = e.ClickCount == 1;
+                        e.Handled = true;
                     }
                 }
             }

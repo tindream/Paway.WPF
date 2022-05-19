@@ -251,7 +251,7 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            if (e.ButtonState == MouseButtonState.Pressed && this.AllowDrop)
+            if (e.ButtonState == MouseButtonState.Pressed && this.AllowDrop && e.ClickCount == 1)
             {
                 if (!(this.ItemsSource is ObservableCollection<ITreeViewItem> list))
                 {

@@ -68,7 +68,7 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            if (e.ButtonState == MouseButtonState.Pressed)
+            if (e.ButtonState == MouseButtonState.Pressed && e.ClickCount == 1)
             {
                 if (PMethod.Parent(this, out Window window)) window.Cursor = Cursors.Hand;
                 this.startPoint = e.GetPosition(this);

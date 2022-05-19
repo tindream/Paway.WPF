@@ -88,7 +88,7 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            if (e.ButtonState == MouseButtonState.Pressed)
+            if (e.ButtonState == MouseButtonState.Pressed && e.ClickCount == 1)
             {
                 if (this.ScrollableHeight > 0 || this.ScrollableWidth > 0)
                 {
