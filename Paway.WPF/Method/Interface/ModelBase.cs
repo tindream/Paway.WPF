@@ -36,8 +36,9 @@ namespace Paway.WPF
         /// <summary>
         /// 触发更新
         /// </summary>
-        public void OnPropertyChanged([CallerMemberName] string name = "")
+        public void OnPropertyChanged(string name = "")
         {
+            if (name == "") name = PMethod.GetLastModelName();
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }

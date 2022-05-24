@@ -49,7 +49,6 @@ namespace Paway.WPF
                         Normal = new SolidColorBrush(Colors.LightGray)
                     };
                 }
-                view.UpdateDefaultStyle();
             }
         }
         /// <summary>

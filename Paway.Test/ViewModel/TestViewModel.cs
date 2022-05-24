@@ -1,9 +1,5 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using OxyPlot;
-using OxyPlot.Annotations;
-using OxyPlot.Axes;
-using OxyPlot.Series;
 using Paway.Helper;
 using Paway.WPF;
 using System;
@@ -19,7 +15,7 @@ using System.Windows.Media;
 
 namespace Paway.Test.ViewModel
 {
-    public class TestViewModel : ViewModelBase
+    public class TestViewModel : ViewModelPlusBase
     {
         #region 属性
         private double angle = -27;

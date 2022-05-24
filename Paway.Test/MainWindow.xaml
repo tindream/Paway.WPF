@@ -1,4 +1,4 @@
-﻿<WindowEXT x:Class="Paway.Test.MainWindow"
+﻿<Window x:Class="Paway.Test.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,7 +9,6 @@
         xmlns:oxy="http://oxyplot.org/wpf"
         DataContext="{Binding Main, Source={StaticResource Locator}}"
         mc:Ignorable="d"
-        HeaderHeight="72" ButtonAlignment="Top"
         Title="MainWindow" Height="800" Width="850" WindowStartupLocation="CenterScreen">
 
     <DockPanel Name="panel">
@@ -187,13 +186,6 @@
 
         <ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="PlotView">
             <StackPanel>
-                <oxy:PlotView Model="{Binding Path= PlotModel}" Height="200">
-                    <oxy:PlotView.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="重置" Padding="5" FontSize="15" Command="{Binding Reset}"/>
-                        </ContextMenu>
-                    </oxy:PlotView.ContextMenu>
-                </oxy:PlotView>
             </StackPanel>
         </ExpanderEXT>
         <ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="DataGrid">
@@ -273,30 +265,4 @@
         </StackPanel>
 
     </DockPanel>
-    <WindowEXT.FunctionBar>
-        <WindowFunctionBar>
-            <Separator />
-            <ButtonEXT Content="Dino.C" IsLight="True" Margin="0" Radius="0" ToolTip="当前档案"/>
-            <ListViewEXT Name="listView1" Margin="5,5,0,0" IAnimation="True"
-                           ItemHeight="67" ItemWidth="101"
-                           ItemBorder="1,1,0,1;1,1,1,4">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding SelectionCommand}" CommandParameter="{Binding ElementName=listView1}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-                <ListBoxItemEXT Text="Hello" IsSelected="True"
-                                  Image="pack://application:,,,/Paway.Test;component/Images/close.png"/>
-                <ListBoxItemEXT Text="World" Desc="1" ItemBackground=";#78FF4633" ItemTextForeground="#FF4633;;"/>
-                <ListBoxItemEXT Text="A" ItemBackground=";#7802E8FA" ItemTextForeground="#02E8FA;;"/>
-                <ListBoxItemEXT Text="C" ItemBackground=";#78024AFA" ItemTextForeground="#024AFA;;" ItemBorder="1"/>
-                <ListBoxItemEXT Text="D" ItemBackground=";#78024AFA" ItemTextForeground="#024AFA;;" ItemBorder="1"/>
-            </ListViewEXT>
-        </WindowFunctionBar>
-    </WindowEXT.FunctionBar>
-    <WindowEXT.FunctionBarRight>
-        <WindowFunctionBar>
-            <!--<Button Content="Sign in" />-->
-        </WindowFunctionBar>
-    </WindowEXT.FunctionBarRight>
-</WindowEXT>
+</Window>

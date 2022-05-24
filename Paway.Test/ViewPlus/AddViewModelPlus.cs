@@ -12,7 +12,7 @@ using System.Windows.Media;
 
 namespace Paway.Test.ViewModel
 {
-    public class AddViewModelPlus<T> : ViewModelBase where T : class, IId
+    public class AddViewModelPlus<T> : ViewModelPlusBase where T : class, IId
     {
         #region 属性
         private T info;

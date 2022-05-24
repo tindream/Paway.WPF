@@ -21,8 +21,9 @@ namespace Paway.WPF
         public event PropertyChangedEventHandler PropertyChanged;
         /// <summary>
         /// </summary>
-        public void OnPropertyChanged([CallerMemberName] string name = "")
+        public void OnPropertyChanged(string name = "")
         {
+            if (name == "") name = PMethod.GetLastModelName();
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 

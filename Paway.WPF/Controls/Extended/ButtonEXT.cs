@@ -87,7 +87,6 @@ namespace Paway.WPF
                     view.ItemForeground = new BrushEXT(PConfig.TextColor, Colors.White, Colors.White);
                     view.ItemBackground.Normal = new SolidColorBrush(Colors.Transparent);
                 }
-                view.UpdateDefaultStyle();
             }
         }
 

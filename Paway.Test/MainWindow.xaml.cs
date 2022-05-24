@@ -28,7 +28,7 @@ namespace Paway.Test
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : WindowEXT
+    public partial class MainWindow : Window
     {
         /// <summary>
         /// 故事板
@@ -86,7 +86,6 @@ namespace Paway.Test
             if (IsLoaded) return;
             Method.Progress(this, () =>
             {
-                DataService.Default.Load();
             }, () =>
             {
                 Messenger.Default.Send(new StatuMessage("加载完成"));

@@ -147,7 +147,7 @@ namespace Paway.WPF
                 this.PauseTime = DateTime.Now;
                 this.Storyboard.Pause();
                 this.Storyboard.Seek(TimeSpan.FromSeconds(autoTime));
-                Task.Run(() =>
+                Task.Factory.StartNew(() =>
                 {
                     Thread.Sleep((int)(this.BeginTime * 1000 / 2));
                     this.Storyboard.Resume();

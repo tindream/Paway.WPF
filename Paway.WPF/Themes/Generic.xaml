@@ -32,7 +32,5 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\TextBoxNumeric.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\TransitionControl.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\TreeView.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\Window.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\WindowFunctionBar.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

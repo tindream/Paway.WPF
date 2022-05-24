@@ -8,7 +8,6 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type local:ListViewEXT}" BasedOn="{StaticResource Config}">
-        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="SelectionMode" Value="Single"/>

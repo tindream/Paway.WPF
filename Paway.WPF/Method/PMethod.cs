@@ -140,7 +140,7 @@ namespace Paway.WPF
         {
             try
             {
-                obj.Dispatcher.Invoke(() =>
+                obj.Dispatcher.Invoke(new Action(() =>
                 {
                     try
                     {
@@ -151,7 +151,7 @@ namespace Paway.WPF
                         if (error == null) ex.Log();
                         else error.Invoke(ex);
                     }
-                });
+                }));
             }
             catch (Exception) { }
         }
@@ -162,7 +162,7 @@ namespace Paway.WPF
         {
             try
             {
-                obj.Dispatcher.Invoke(() =>
+                obj.Dispatcher.Invoke(new Action(() =>
                 {
                     try
                     {
@@ -173,7 +173,7 @@ namespace Paway.WPF
                         if (error == null) ex.Log();
                         else error.Invoke(ex);
                     }
-                });
+                }));
             }
             catch (Exception) { }
         }
@@ -614,7 +614,7 @@ namespace Paway.WPF
             Invoke(parent, () =>
             {
                 var progress = Progress(parent, msg, fontSize);
-                Task.Run(() =>
+                Task.Factory.StartNew(() =>
                 {
                     try
                     {
@@ -807,10 +807,6 @@ namespace Paway.WPF
             {
                 if (!window.IsKeyboardFocusWithin) window.Focus();
             };
-            if (!(window is WindowEXT))
-            {
-                //window.Loaded += delegate { window.Activate(); };
-            }
             //父级窗体原来的内容
             var original = owner.Content as UIElement;
             //将父级窗体原来的内容在容器Grid中移除

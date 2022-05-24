@@ -7,7 +7,6 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="MenuTabItem" TargetType="{x:Type TabItem}">
-        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
         <Setter Property="Foreground" Value="{StaticResource Text}"/>
         <Setter Property="Padding" Value="6"/>
         <Setter Property="Cursor" Value="Hand"/>
@@ -76,7 +75,6 @@
         </Setter>
     </Style>
     <Style x:Key="DefaultTabItem" TargetType="{x:Type TabItem}">
-        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
         <Setter Property="Foreground" Value="{StaticResource Text}"/>
         <Setter Property="Padding" Value="6"/>
         <Setter Property="Cursor" Value="Hand"/>
@@ -160,7 +158,6 @@
     </Style>
 
     <Style TargetType="{x:Type local:TabControlEXT}" BasedOn="{StaticResource Config}">
-        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
         <Setter Property="Padding" Value="2,0"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>

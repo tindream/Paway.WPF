@@ -64,7 +64,6 @@ namespace Paway.WPF
                     if (view.ItemBorder == null || view.ItemBorder.ToString() == new ThicknessEXT(0).ToString()) view.ItemBorder = new ThicknessEXT(1);
                     if (view.ItemBorder != null) view.ItemMargin = new Thickness(-view.ItemBorder.Normal.Left, -view.ItemBorder.Normal.Top, 0, 0);
                 }
-                view.UpdateDefaultStyle();
             }
         }
 
@@ -501,7 +500,6 @@ namespace Paway.WPF
                         Source = this
                     };
                     OnPreviewMouseClick(eventArg);
-                    if (!eventArg.Handled && (bool)window.GetValue(WindowMonitor.IsDragMoveEnabledProperty)) window.DragMove();
                 }
             }
             e.Handled = INormal;

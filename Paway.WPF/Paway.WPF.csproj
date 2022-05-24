@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Paway.WPF</RootNamespace>
     <AssemblyName>Paway.WPF</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -36,20 +36,20 @@
     <DocumentationFile>..\bin\Release\Paway.WPF.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=1.3.3.11, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpZipLib.1.3.3\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    <Reference Include="ChnCharInfo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=18f031bd02e5e291, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.International.Converters.PinYinConverter.1.0.0\lib\ChnCharInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.9.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.10\lib\net45\log4net.dll</HintPath>
+      <HintPath>..\packages\log4net.2.0.10\lib\net40\log4net.dll</HintPath>
     </Reference>
     <Reference Include="NPinyin.Core, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NPinyin.Core.3.0.0\lib\net45\NPinyin.Core.dll</HintPath>
+      <HintPath>..\packages\NPinyin.Core.3.0.0\lib\net40\NPinyin.Core.dll</HintPath>
     </Reference>
     <Reference Include="Paway.Helper, Version=2.4.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Paway.Helper.2.4.6\lib\net45\Paway.Helper.dll</HintPath>
-    </Reference>
-    <Reference Include="PinYinConverterCore, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PinYinConverterCore.1.0.2\lib\net45\PinYinConverterCore.dll</HintPath>
+      <HintPath>..\packages\Paway.Helper.2.4.6\lib\net40\Paway.Helper.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -161,10 +161,7 @@
     <Compile Include="Method\Internal\DpiHelper.cs" />
     <Compile Include="Method\Internal\Enums.cs" />
     <Compile Include="Method\Internal\NativeMethods.cs" />
-    <Compile Include="Controls\Window\WindowEXT.cs" />
     <Compile Include="Controls\Window\WindowParameters.cs" />
-    <Compile Include="Controls\Window\WindowMonitor.cs" />
-    <Compile Include="Controls\Window\WindowCommandHelper.cs" />
     <Compile Include="Method\Converter\IEquatable\ColorEXT.cs" />
     <Compile Include="Method\Converter\IEquatable\ImageEXT.cs" />
     <Compile Include="Method\Converter\IEquatable\RadiusEXT.cs" />
@@ -317,14 +314,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Resources\WindowFunctionBar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Resources\Window.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Themes\Paway.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -367,9 +356,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <Resource Include="Resource\fontawesome.ttf" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
