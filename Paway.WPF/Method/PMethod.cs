@@ -611,7 +611,7 @@ namespace Paway.WPF
         /// </summary>
         public static void Progress(DependencyObject parent, object msg, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null, int? fontSize = null)
         {
-            Invoke(parent, () =>
+            BeginInvoke(parent, () =>
             {
                 var progress = Progress(parent, msg, fontSize);
                 Task.Run(() =>
@@ -725,7 +725,7 @@ namespace Paway.WPF
         public static void ProgressClose(DependencyObject parent, CustomAdorner progress)
         {
             if (progress == null) return;
-            Invoke(parent, () =>
+            BeginInvoke(parent, () =>
             {
                 if (progress.Tag is AdornerLayer adorner)
                 {
@@ -1074,7 +1074,7 @@ namespace Paway.WPF
         /// <summary>
         /// 初始化App
         /// </summary>
-        public static void InitApp(Application app, string fileName)
+        public static void InitApp(Application app, string fileName = "Log.xml")
         {
             log4net.Config.XmlConfigurator.Configure(new FileInfo(fileName));
             var version = Assembly.GetEntryAssembly().GetName().Version;
