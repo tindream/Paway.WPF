@@ -31,7 +31,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty HeaderBrushProperty =
             DependencyProperty.RegisterAttached(nameof(HeaderBrush), typeof(BrushEXT), typeof(DataGridEXT),
-                new PropertyMetadata(new BrushEXT() { Normal = new SolidColorBrush(PMethod.AlphaColor(200, PConfig.Light)) }));
+                new PropertyMetadata(new BrushEXT() { Normal = PMethod.AlphaColor(200, PConfig.Light).ToBrush() }));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ScrollBarWidthProperty =

@@ -22,9 +22,9 @@ namespace Paway.WPF
             if (calendarDayButton.DataContext is DateTime dateTime)
             {
                 if (!calendarDayButton.IsMouseOver && !calendarDayButton.IsSelected && !calendarDayButton.IsBlackedOut && (dateTime.DayOfWeek == DayOfWeek.Saturday || dateTime.DayOfWeek == DayOfWeek.Sunday))
-                    return new SolidColorBrush(PConfig.Error);
+                    return PConfig.Error.ToBrush();
             }
-            return new SolidColorBrush(PConfig.TextSub);
+            return PConfig.TextSub.ToBrush();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

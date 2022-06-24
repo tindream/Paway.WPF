@@ -27,7 +27,7 @@ namespace Paway.WPF
             if (hitTest == null) hitTest = boardFunc == null;
             IsHitTestVisible = hitTest.Value;
             canvas = new Canvas() { ClipToBounds = true };
-            if (color != null) canvas.Background = new SolidColorBrush(color.Value);
+            if (color != null) canvas.Background = color.Value.ToBrush();
             //添加到可视化树中
             var visCollec = new VisualCollection(this)
             {

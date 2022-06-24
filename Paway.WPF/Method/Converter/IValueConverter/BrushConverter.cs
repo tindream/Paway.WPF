@@ -19,7 +19,7 @@ namespace Paway.WPF
                 var alpha = parameter.ToInt();
                 if (alpha == 0) alpha = PConfig.Alpha;
                 var color = PMethod.AlphaColor(alpha, brush.Color);
-                return new SolidColorBrush(color);
+                return color.ToBrush();
             }
             return value;
         }
@@ -41,7 +41,7 @@ namespace Paway.WPF
             {
                 var light = parameter.ToInt();
                 if (light == 0) light = 30;
-                return new SolidColorBrush(brush.Color.AddLight(light));
+                return brush.Color.AddLight(light).ToBrush();
             }
             return value;
         }
@@ -60,10 +60,7 @@ namespace Paway.WPF
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null || value == DBNull.Value) return Colors.Transparent;
-            if (value is SolidColorBrush solid) return solid.Color;
-            else if (value is LinearGradientBrush linear) return linear.GradientStops[0].Color;
-            else if (value is RadialGradientBrush radial) return radial.GradientStops[0].Color;
-            else return Colors.Transparent;
+            return (value as Brush).ToColor();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

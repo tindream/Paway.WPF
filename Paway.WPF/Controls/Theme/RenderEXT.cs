@@ -20,7 +20,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(Brush), typeof(RenderEXT),
-                new PropertyMetadata(new SolidColorBrush(Colors.LightGray), OnItemBrushChanged));
+                new PropertyMetadata(Colors.LightGray.ToBrush(), OnItemBrushChanged));
         private static void OnItemBrushChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             if (obj is Border border && border.BorderBrush is DrawingBrush drawing)

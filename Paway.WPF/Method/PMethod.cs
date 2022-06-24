@@ -254,7 +254,7 @@ namespace Paway.WPF
                     Text = msg.ToStrings(),
                     FontSize = size
                 };
-                if (color != null) block.Foreground = new SolidColorBrush(color.Value);
+                if (color != null) block.Foreground = color.Value.ToBrush();
                 myAdornerLayer.Add(new CustomAdorner(parent, block, boardFunc: () =>
                 {
                     var storyboard = new Storyboard();
@@ -319,7 +319,7 @@ namespace Paway.WPF
             var autoWidth = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2)) * 2;
             if (width == 0 || width > autoWidth) width = autoWidth;
 
-            var ellipse = new Ellipse() { Width = width, Height = width, Fill = new SolidColorBrush(AlphaColor(20, Colors.Black)) };
+            var ellipse = new Ellipse() { Width = width, Height = width, Fill = AlphaColor(20, Colors.Black).ToBrush() };
             var waterAdornerFixed = new CustomAdorner(element, ellipse, null, () => point.X - ellipse.ActualWidth / 2, () => point.Y - ellipse.ActualHeight / 2, hitTest: false) { Name = NameWater };
             myAdornerLayer.Add(waterAdornerFixed);
             Element = element;
@@ -390,7 +390,7 @@ namespace Paway.WPF
             if (maxWidth > 0 && width > maxWidth) width = maxWidth;
 
             if (color == null) color = PConfig.Color;
-            var ellipse = new Ellipse() { Width = 10, Height = 10, Fill = new SolidColorBrush(color.Value) };
+            var ellipse = new Ellipse() { Width = 10, Height = 10, Fill = color.Value.ToBrush() };
             myAdornerLayer.Add(new CustomAdorner(element, ellipse, null, () => point.X - ellipse.ActualWidth / 2, () => point.Y - ellipse.ActualHeight / 2, () =>
             {
                 var storyboard = new Storyboard();
@@ -439,7 +439,7 @@ namespace Paway.WPF
                     var border = new Border
                     {
                         CornerRadius = new CornerRadius(5),
-                        Background = new SolidColorBrush(color),
+                        Background = color.ToBrush(),
                     };
                     var block = new TextBlock()
                     {
@@ -448,7 +448,7 @@ namespace Paway.WPF
                         Padding = new Thickness(20, 10, 20, 10),
                         TextWrapping = TextWrapping.Wrap,
                         TextAlignment = TextAlignment.Center,
-                        Foreground = new SolidColorBrush(Colors.White),
+                        Foreground = Colors.White.ToBrush(),
                         MinWidth = 200,
                         MaxWidth = 600
                     };
@@ -529,7 +529,7 @@ namespace Paway.WPF
                     var border = new Border
                     {
                         CornerRadius = new CornerRadius(5),
-                        Background = new SolidColorBrush(color),
+                        Background = color.ToBrush(),
                     };
                     var block = new TextBlock()
                     {
@@ -538,7 +538,7 @@ namespace Paway.WPF
                         Padding = new Thickness(20, 10, 20, 10),
                         TextWrapping = TextWrapping.Wrap,
                         TextAlignment = TextAlignment.Center,
-                        Foreground = new SolidColorBrush(Colors.White),
+                        Foreground = Colors.White.ToBrush(),
                         MinWidth = 200,
                         MaxWidth = 600
                     };
@@ -670,9 +670,9 @@ namespace Paway.WPF
                 var border = new Border
                 {
                     CornerRadius = new CornerRadius(3),
-                    BorderBrush = new SolidColorBrush(Colors.LightGray),
+                    BorderBrush = Colors.LightGray.ToBrush(),
                     BorderThickness = new Thickness(1),
-                    Background = new SolidColorBrush(AlphaColor(PConfig.Alpha, Colors.White)),
+                    Background = AlphaColor(PConfig.Alpha, Colors.White).ToBrush(),
                     MinWidth = 200,
                     MaxWidth = 350,
                 };
@@ -681,7 +681,7 @@ namespace Paway.WPF
                 var tbProgress = new TextBlock()
                 {
                     Text = msg == null ? PConfig.Loading : msg.ToStrings(),
-                    Foreground = new SolidColorBrush(Colors.Black),
+                    Foreground = Colors.Black.ToBrush(),
                     Padding = new Thickness(10),
                     HorizontalAlignment = HorizontalAlignment.Center,
                     TextTrimming = TextTrimming.WordEllipsis,
@@ -820,7 +820,7 @@ namespace Paway.WPF
             //放入原来的内容
             container.Children.Add(original);
             //蒙板
-            var layer = new Grid() { Background = new SolidColorBrush(AlphaColor(alpha, Colors.Black)) };
+            var layer = new Grid() { Background = AlphaColor(alpha, Colors.Black).ToBrush() };
             //在上面放一层蒙板
             container.Children.Add(layer);
             //将装有原来内容和蒙板的容器赋给父级窗体

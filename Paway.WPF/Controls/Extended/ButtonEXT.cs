@@ -83,9 +83,9 @@ namespace Paway.WPF
                 if (view.IsLight)
                 {
                     view.ItemBorder = new ThicknessEXT(1, 0);
-                    view.BorderBrush = new SolidColorBrush(Colors.LightGray);
+                    view.BorderBrush = Colors.LightGray.ToBrush();
                     view.ItemForeground = new BrushEXT(PConfig.TextColor, Colors.White, Colors.White);
-                    view.ItemBackground.Normal = new SolidColorBrush(Colors.Transparent);
+                    view.ItemBackground.Normal = Colors.Transparent.ToBrush();
                 }
                 view.UpdateDefaultStyle();
             }

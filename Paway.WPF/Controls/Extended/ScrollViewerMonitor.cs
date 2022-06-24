@@ -56,7 +56,7 @@ namespace Paway.WPF
         /// 滚动条颜色
         /// </summary>
         public static readonly DependencyProperty ScrollBarColorProperty =
-            DependencyProperty.RegisterAttached("ScrollBarColor", typeof(Brush), typeof(ScrollViewerMonitor), new PropertyMetadata(new SolidColorBrush(PMethod.AlphaColor(PConfig.Alpha, Colors.DarkGray))));
+            DependencyProperty.RegisterAttached("ScrollBarColor", typeof(Brush), typeof(ScrollViewerMonitor), new PropertyMetadata(PMethod.AlphaColor(PConfig.Alpha, Colors.DarkGray).ToBrush()));
         /// <summary>
         /// 垂直滚动条外边距
         /// </summary>

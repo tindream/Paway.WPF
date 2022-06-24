@@ -42,14 +42,14 @@ namespace Paway.WPF
         {
             if (this.Value is SolidColorBrush value && value.Color.R == obj.R && value.Color.G == obj.G && value.Color.B == obj.B)
             {
-                this.Value = new SolidColorBrush(PConfig.Background);
+                this.Value = PConfig.Background.ToBrush();
             }
         }
         /// <summary>
         /// </summary>
         public ThemeBackground(Color value) : this()
         {
-            this.Value = new SolidColorBrush(value);
+            this.Value = value.ToBrush();
         }
         /// <summary>
         /// </summary>

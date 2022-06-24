@@ -92,7 +92,7 @@ namespace Paway.Test.ViewModel
             set
             {
                 color = value; RaisePropertyChanged();
-                if (value != null) ColorBrush = new SolidColorBrush(value.Color); RaisePropertyChanged(nameof(ColorBrush));
+                if (value != null) ColorBrush = value.Color.ToBrush(); RaisePropertyChanged(nameof(ColorBrush));
             }
         }
         public DoubleEXT FontSizes { get; set; } = new DoubleEXT(20);
@@ -202,6 +202,6 @@ namespace Paway.Test.ViewModel
         [NoShow]
         public Color Color { get; set; }
         [NoShow]
-        public SolidColorBrush ColorBrush { get { return new SolidColorBrush(Color); } }
+        public SolidColorBrush ColorBrush { get { return Color.ToBrush(); } }
     }
 }

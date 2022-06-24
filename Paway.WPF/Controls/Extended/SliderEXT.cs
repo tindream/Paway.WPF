@@ -48,7 +48,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty TrackBackgroundProperty =
             DependencyProperty.RegisterAttached(nameof(TrackBackground), typeof(Brush), typeof(SliderEXT),
-                new PropertyMetadata(new SolidColorBrush(Colors.LightGray)));
+                new PropertyMetadata(Colors.LightGray.ToBrush()));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ButtonTypeProperty =

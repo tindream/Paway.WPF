@@ -73,7 +73,7 @@ namespace Paway.WPF
             // Calculate tick's setting 
             var tickFrequencySize = length * this.TickFrequency / (this.Maximum - this.Minimum);
             // Draw each tick text 
-            var color = new SolidColorBrush(PConfig.TextSub);
+            var color = PConfig.TextSub.ToBrush();
             var maxWidth = 0.0;
             var maxHeight = 0.0;
             var pen = new Pen(this.Fill, 1);

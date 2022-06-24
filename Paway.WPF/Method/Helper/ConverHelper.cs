@@ -148,6 +148,35 @@ namespace Paway.WPF
             return HSL;
         }
 
+        /// <summary>
+        /// Color->Brush
+        /// </summary>
+        public static SolidColorBrush ToBrush(this Color color)
+        {
+            var brush = new SolidColorBrush(color);
+            brush.Freeze();
+            return brush;
+        }
+        /// <summary>
+        /// String->Color
+        /// <para>"#FFFFFF".ToColor()</para>
+        /// </summary>
+        public static Color ToColor(this string color)
+        {
+            return (Color)ColorConverter.ConvertFromString(color);
+        }
+        /// <summary>
+        /// Brush->Color
+        /// </summary>
+        public static Color ToColor(this Brush brush)
+        {
+            if (brush == null) return Colors.Transparent;
+            if (brush is SolidColorBrush solid) return solid.Color;
+            if (brush is LinearGradientBrush line) return line.GradientStops[0].Color;
+            if (brush is RadialGradientBrush radial) return radial.GradientStops[0].Color;
+            return Colors.Transparent;
+        }
+
         #endregion
 
         #region 特性

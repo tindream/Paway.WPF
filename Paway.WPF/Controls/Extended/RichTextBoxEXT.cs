@@ -177,13 +177,13 @@ namespace Paway.WPF
             Run run = new Run(content);
             if (action == null)
             {
-                if (color != null) { run.Foreground = new SolidColorBrush(color.Value); }
+                if (color != null) { run.Foreground = color.Value.ToBrush(); }
                 block.Inlines.Add(run);
             }
             else
             {
                 Hyperlink hl = new Hyperlink(run);
-                if (color != null) { hl.Foreground = new SolidColorBrush(color.Value); }
+                if (color != null) { hl.Foreground = color.Value.ToBrush(); }
                 hl.Click += delegate { action(); };
                 hl.MouseLeftButtonDown += delegate { action(); };
                 block.Inlines.Add(hl);
@@ -250,13 +250,13 @@ namespace Paway.WPF
             Run run = new Run(content);
             if (action == null)
             {
-                if (color != null) { run.Foreground = new SolidColorBrush(color.Value); }
+                if (color != null) { run.Foreground = color.Value.ToBrush(); }
                 block.Inlines.Add(run);
             }
             else
             {
                 Hyperlink hl = new Hyperlink(run);
-                if (color != null) { hl.Foreground = new SolidColorBrush(color.Value); }
+                if (color != null) { hl.Foreground = color.Value.ToBrush(); }
                 hl.Click += delegate { action(); };
                 hl.MouseLeftButtonDown += delegate { action(); };
                 block.Inlines.Add(hl);

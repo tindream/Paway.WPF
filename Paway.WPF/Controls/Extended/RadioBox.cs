@@ -46,7 +46,7 @@ namespace Paway.WPF
                     var color = view.Type.Color();
                     view.ItemBrush = new BrushEXT(PMethod.AlphaColor(PConfig.Alpha, color))
                     {
-                        Normal = new SolidColorBrush(Colors.LightGray)
+                        Normal = Colors.LightGray.ToBrush()
                     };
                 }
                 view.UpdateDefaultStyle();
