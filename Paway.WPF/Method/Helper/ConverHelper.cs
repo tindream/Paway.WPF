@@ -153,9 +153,7 @@ namespace Paway.WPF
         /// </summary>
         public static SolidColorBrush ToBrush(this Color color)
         {
-            var brush = new SolidColorBrush(color);
-            brush.Freeze();
-            return brush;
+            return new SolidColorBrush(color);
         }
         /// <summary>
         /// String->Color

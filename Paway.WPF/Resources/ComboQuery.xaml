@@ -10,6 +10,7 @@
     <Style TargetType="{x:Type local:ComboQuery}" BasedOn="{StaticResource ComboConfig}">
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="MaxDropDownHeight" Value="165"/>
+        <Setter Property="Padding" Value="3,4"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ComboQuery}">

@@ -175,7 +175,7 @@ namespace Paway.WPF
         {
             {
                 var value = this.SelectedValuePath.IsEmpty() ? arg2.Item : arg2.Item.GetValue(this.SelectedValuePath);
-                if (this.SelectedValue.Equals(value)) this.Text = null;
+                if (this.SelectedValue?.Equals(value) == true) this.Text = null;
                 this.SelectedValue = value;
             }
             IsDropDownOpen = false;
