@@ -1078,7 +1078,7 @@ namespace Paway.WPF
         {
             log4net.Config.XmlConfigurator.Configure(new FileInfo(fileName));
             var version = Assembly.GetEntryAssembly().GetName().Version;
-            $"v{version} ({Environment.MachineName})".Log();
+            $"v{version} ({Environment.MachineName})".Log(LeveType.Error);
 
             //禁用Backspace退格返回Page页
             NavigationCommands.BrowseBack.InputGestures.Clear();
