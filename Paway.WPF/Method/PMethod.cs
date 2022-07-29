@@ -1080,7 +1080,7 @@ namespace Paway.WPF
             var version = Assembly.GetEntryAssembly().GetName().Version;
             $"v{version} ({Environment.MachineName})".Log(LeveType.Error);
 
-            //禁用Backspace退格返回Page页
+            //禁用Backspace退格导航返回Page页
             NavigationCommands.BrowseBack.InputGestures.Clear();
             TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;

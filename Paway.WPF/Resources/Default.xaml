@@ -9,12 +9,16 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default\Path.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default\Theme.xaml" />
     </ResourceDictionary.MergedDictionaries>
-
+    
     <!--#region 文本图标资源 -->
     <FontFamily x:Key="FontAwesome">/Paway.WPF;component/Resource/#fontawesome</FontFamily>
     <!--#endregion-->
 
     <!--#region 默认全局样式 -->
+    <!--优化Image图片缩小时锯齿问题-->
+    <Style TargetType="{x:Type Image}">
+        <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality"/>
+    </Style>
     <!--取消右键动画，防止连续右键菜单闪烁-->
     <PopupAnimation x:Key="{x:Static SystemParameters.MenuPopupAnimationKey}">None</PopupAnimation>
     <Style TargetType="{x:Type Label}">

@@ -12,6 +12,7 @@
         </Border>
     </DataTemplate>
 
+    <!--#region 取消焦点样式 -->
     <Thickness x:Key="FocusBorderThickness">0</Thickness>
     <ControlTemplate x:Key="ThumbButton" TargetType="Thumb">
         <Border BorderThickness="{Binding Tag.Border, RelativeSource={RelativeSource TemplatedParent}}" 
