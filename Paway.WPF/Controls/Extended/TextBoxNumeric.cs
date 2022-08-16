@@ -254,6 +254,10 @@ namespace Paway.WPF
             this.Value = value;
             this.Text = value.Rounds(Decimal, Decimal);
             this.Select(this.Text.Length, 0);
+            if (!this.IsFocused && interval != 0)
+            {
+                this.Focus();
+            }
         }
         /// <summary>
         /// 丢失焦点时判断

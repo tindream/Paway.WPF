@@ -22,6 +22,7 @@
             <Border BorderBrush="Red" BorderThickness="1">
             </Border>
             <ButtonEXT Click="ButtonEXT_Click" Command="{Binding ButtonCommand}"/>
+            <TextBoxNumeric Title="计数:" Text="{Binding Value3}" />
         </StackPanel>
         <Border Grid.Column="1" Background="Transparent">
             <DataGridEXT ItemsSource="{Binding GridList}">

@@ -42,11 +42,18 @@ namespace Paway.Test.ViewModel
             }
         }
 
-        public double _value2 = 10;
+        private double _value2 = 10;
         public double Value2
         {
             get { return _value2; }
             set { _value2 = value; RaisePropertyChanged(); }
+        }
+
+        private int _value3 = 10;
+        public int Value3
+        {
+            get { return _value3; }
+            set { _value3 = value; RaisePropertyChanged(); }
         }
 
         private string _text;
