@@ -92,6 +92,7 @@
                                           Background="Transparent" 
                                           Radius="{TemplateBinding Radius}"
                                           Water="{TemplateBinding Water}"
+                                          WaterSize="{TemplateBinding WaterSize}"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           IsReadOnly="{TemplateBinding IsReadOnly}"/>

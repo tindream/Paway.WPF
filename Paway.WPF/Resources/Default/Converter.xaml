@@ -20,6 +20,7 @@
     <local:BrushToColorConverter x:Key="brushToColorConverter" />
     <local:ColorToBrushConverter x:Key="colorToBrushConverter" />
 
+    <local:MoreValueMultiConverter x:Key="moreValueMultiConverter"/>
     <local:ValueMultiConverter x:Key="valueMultiConverter"/>
     <local:ValueAddConverter x:Key="valueAddConverter"/>
     <local:ValueToTrue x:Key="valueToTrue"/>

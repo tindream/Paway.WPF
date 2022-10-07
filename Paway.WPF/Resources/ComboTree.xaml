@@ -57,6 +57,8 @@
                                           Visibility="Hidden" 
                                           Background="Transparent" 
                                           Radius="{TemplateBinding Radius}"
+                                          Water="{TemplateBinding Water}"
+                                          WaterSize="{TemplateBinding WaterSize}"
                                           IsReadOnly="{TemplateBinding IsReadOnly}"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>

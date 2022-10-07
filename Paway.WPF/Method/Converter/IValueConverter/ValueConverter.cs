@@ -11,6 +11,35 @@ using System.Windows.Data;
 namespace Paway.WPF
 {
     /// <summary>
+    /// 多值相乘转换
+    /// </summary>
+    public class MoreValueMultiConverter : IMultiValueConverter
+    {
+        /// <summary>
+        /// 多值相乘转换
+        /// </summary>
+        public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (targetType == typeof(int))
+            {
+                var result = 1;
+                for (var i = 0; i < value.Length; i++) result *= value[i].ToInt();
+                return result;
+            }
+            {
+                var result = 1d;
+                for (var i = 0; i < value.Length; i++) result *= value[i].ToDouble();
+                return result;
+            }
+        }
+        /// <summary>
+        /// </summary>
+        public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    /// <summary>
     /// 值乘数转换(默认*0.85)
     /// </summary>
     internal class ValueMultiConverter : IValueConverter

@@ -60,9 +60,15 @@
                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                            Padding="{TemplateBinding Padding}"
-                                           FontSize="{TemplateBinding FontSize, Converter={StaticResource valueMultiConverter}}"
                                            Opacity="0.6"
-                                           Text="{TemplateBinding Water}"/>
+                                           Text="{TemplateBinding Water}">
+                                    <TextBlock.FontSize>
+                                        <MultiBinding Converter="{StaticResource moreValueMultiConverter}">
+                                            <Binding Path="FontSize" RelativeSource="{RelativeSource TemplatedParent}" />
+                                            <Binding Path="WaterSize" RelativeSource="{RelativeSource TemplatedParent}" />
+                                        </MultiBinding>
+                                    </TextBlock.FontSize>
+                                </TextBlock>
                                 <TextBlock x:Name="tbUnit" Grid.Column="2" Visibility="Collapsed"
                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                            Padding="3,0"

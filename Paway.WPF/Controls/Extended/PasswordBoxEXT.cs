@@ -130,6 +130,10 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(Water), typeof(string), typeof(PasswordBoxEXT), new PropertyMetadata("请输入密码"));
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty WaterSizeProperty =
+            DependencyProperty.RegisterAttached(nameof(WaterSize), typeof(double), typeof(PasswordBoxEXT), new PropertyMetadata(0.85));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty TitleProperty =
             DependencyProperty.RegisterAttached(nameof(Title), typeof(string), typeof(PasswordBoxEXT));
         /// <summary>
@@ -243,6 +247,27 @@ namespace Paway.WPF
         public static void SetWater(DependencyObject obj, string value)
         {
             obj.SetValue(WaterProperty, value);
+        }
+
+        /// <summary>
+        /// 水印字体大小系数
+        /// </summary>
+        [Category("扩展")]
+        [Description("水印字体大小系数")]
+        public double WaterSize { get; set; }
+        /// <summary>
+        /// get水印字体大小系数
+        /// </summary>
+        public static double GetWaterSize(DependencyObject obj)
+        {
+            return (double)obj.GetValue(WaterSizeProperty);
+        }
+        /// <summary>
+        /// set水印字体大小系数
+        /// </summary>
+        public static void SetWaterSize(DependencyObject obj, double value)
+        {
+            obj.SetValue(WaterSizeProperty, value);
         }
 
         /// <summary>

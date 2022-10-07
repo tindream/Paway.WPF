@@ -41,6 +41,10 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(Water), typeof(string), typeof(TextBoxEXT), new PropertyMetadata("请输入.."));
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty WaterSizeProperty =
+            DependencyProperty.RegisterAttached(nameof(WaterSize), typeof(double), typeof(TextBoxEXT), new PropertyMetadata(0.85));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty UnitProperty =
             DependencyProperty.RegisterAttached(nameof(Unit), typeof(string), typeof(TextBoxEXT));
         /// <summary>
@@ -82,6 +86,16 @@ namespace Paway.WPF
         {
             get { return (string)GetValue(WaterProperty); }
             set { SetValue(WaterProperty, value); }
+        }
+        /// <summary>
+        /// 水印字体大小系数
+        /// </summary>
+        [Category("扩展")]
+        [Description("水印字体大小系数")]
+        public double WaterSize
+        {
+            get { return (double)GetValue(WaterSizeProperty); }
+            set { SetValue(WaterSizeProperty, value); }
         }
         /// <summary>
         /// 单位
