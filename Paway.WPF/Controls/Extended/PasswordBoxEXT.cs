@@ -121,6 +121,14 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(Icon), typeof(ImageSource), typeof(PasswordBoxEXT));
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty IconWidthProperty =
+            DependencyProperty.RegisterAttached(nameof(IconWidth), typeof(double), typeof(PasswordBoxEXT), new PropertyMetadata(double.NaN));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty IconHeightProperty =
+            DependencyProperty.RegisterAttached(nameof(IconHeight), typeof(double), typeof(PasswordBoxEXT), new PropertyMetadata(double.NaN));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty IconStretchProperty =
             DependencyProperty.RegisterAttached(nameof(IconStretch), typeof(Stretch), typeof(PasswordBoxEXT),
             new PropertyMetadata(Stretch.None));
@@ -187,20 +195,20 @@ namespace Paway.WPF
         }
 
         /// <summary>
-        /// 图片
+        /// 图标
         /// </summary>
         [Category("扩展")]
-        [Description("图片")]
+        [Description("图标")]
         public ImageSource Icon { get; set; }
         /// <summary>
-        /// get图片
+        /// get图标
         /// </summary>
         public static ImageSource GetIcon(DependencyObject obj)
         {
             return (ImageSource)obj.GetValue(IconProperty);
         }
         /// <summary>
-        /// set图片
+        /// set图标
         /// </summary>
         public static void SetIcon(DependencyObject obj, ImageSource value)
         {
@@ -208,20 +216,64 @@ namespace Paway.WPF
         }
 
         /// <summary>
-        /// 图片的内容如何拉伸才适合其磁贴
+        /// 图标宽度
         /// </summary>
         [Category("扩展")]
-        [Description("图片的内容如何拉伸才适合其磁贴")]
+        [Description("图标宽度")]
+        [TypeConverter(typeof(LengthConverter))]
+        public double IconWidth { get; set; }
+        /// <summary>
+        /// get图标宽度
+        /// </summary>
+        public static double GetIconWidth(DependencyObject obj)
+        {
+            return (double)obj.GetValue(IconWidthProperty);
+        }
+        /// <summary>
+        /// set图标宽度
+        /// </summary>
+        public static void SetIconWidth(DependencyObject obj, double value)
+        {
+            obj.SetValue(IconWidthProperty, value);
+        }
+
+        /// <summary>
+        /// 图标高度
+        /// </summary>
+        [Category("扩展")]
+        [Description("图标高度")]
+        [TypeConverter(typeof(LengthConverter))]
+        public double IconHeight { get; set; }
+        /// <summary>
+        /// get图标高度
+        /// </summary>
+        public static double GetIconHeight(DependencyObject obj)
+        {
+            return (double)obj.GetValue(IconHeightProperty);
+        }
+        /// <summary>
+        /// set图标高度
+        /// </summary>
+        public static void SetIconHeight(DependencyObject obj, double value)
+        {
+            obj.SetValue(IconHeightProperty, value);
+        }
+
+        /// <summary>
+        /// 图标的内容如何拉伸才适合其磁贴
+        /// </summary>
+        [Category("扩展")]
+        [Description("图标的内容如何拉伸才适合其磁贴")]
         public Stretch IconStretch { get; set; }
         /// <summary>
-        /// get图片的内容如何拉伸才适合其磁贴
+        /// get图标的内容如何拉伸才适合其磁贴
         /// </summary>
         public static Stretch GetIconStretch(DependencyObject obj)
         {
             return (Stretch)obj.GetValue(IconStretchProperty);
         }
         /// <summary>
-        /// set图片的内容如何拉伸才适合其磁贴
+        /// set图标的内容如何拉伸才适合其磁贴
         /// </summary>
         public static void SetIconStretch(DependencyObject obj, Stretch value)
         {

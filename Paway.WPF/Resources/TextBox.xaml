@@ -49,6 +49,8 @@
                                 </Grid.ColumnDefinitions>
                                 <Image x:Name="icon" Visibility="Collapsed" Margin="1,0"
                                        Source="{TemplateBinding Icon}"
+                                       Width="{TemplateBinding IconWidth}" 
+                                       Height="{TemplateBinding IconHeight}"
                                        Stretch="{TemplateBinding IconStretch}"/>
                                 <ScrollViewer x:Name="PART_ContentHost" Grid.Column="1"
                                               VerticalAlignment="Center"

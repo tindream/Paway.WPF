@@ -19,13 +19,8 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <StackPanel VerticalAlignment="Center">
-            <Border BorderBrush="Red" BorderThickness="1">
-            </Border>
             <ButtonEXT Click="ButtonEXT_Click" Command="{Binding ButtonCommand}"/>
-            <TextBoxNumeric Title="计数:" Text="{Binding Value3}" />
-            <TextBoxEXT FontSize="32" WaterSize="0.5"/>
             <PasswordBox FontSize="32"/>
-            <ComboView/>
         </StackPanel>
         <Border Grid.Column="1" Background="Transparent">
             <DataGridEXT ItemsSource="{Binding GridList}">
