@@ -52,6 +52,10 @@ namespace Paway.WPF
         /// </summary>
         bool IsEnabled { get; set; }
         /// <summary>
+        /// 占位标记，该值指示是该项是否可用
+        /// </summary>
+        bool IsNormal { get; set; }
+        /// <summary>
         /// 自定义项宽度
         /// </summary>
         double ItemWidth { get; set; }
@@ -172,6 +176,16 @@ namespace Paway.WPF
         {
             get { return isEnabled; }
             set { isEnabled = value; OnPropertyChanged(); }
+        }
+        private bool isNormal;
+        /// <summary>
+        /// 占位标记，该值指示是该项是否可用
+        /// </summary>
+        [NoShow]
+        public bool IsNormal
+        {
+            get { return isNormal; }
+            set { isNormal = value; OnPropertyChanged(); }
         }
         private Style styleEXT;
         /// <summary>

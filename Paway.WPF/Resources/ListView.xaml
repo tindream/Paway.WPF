@@ -420,11 +420,15 @@
                                             </Setter.Value>
                                         </Setter>
                                     </DataTrigger>
-                                    <Trigger Property="IsEnabled" Value="False">
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding IsNormal}" Value="False"/>
+                                            <Condition Binding="{Binding IsEnabled}" Value="False"/>
+                                        </MultiDataTrigger.Conditions>
                                         <Setter Property="Opacity" Value="0.6"/>
                                         <Setter Property="Background" TargetName="border" Value="LightGray"/>
-                                        <Setter Property="BorderBrush" TargetName="border" Value="DarkGray"/>
-                                    </Trigger>
+                                        <!--<Setter Property="BorderBrush" TargetName="border" Value="DarkGray"/>-->
+                                    </MultiDataTrigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Setter.Value>

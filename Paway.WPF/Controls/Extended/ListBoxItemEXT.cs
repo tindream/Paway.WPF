@@ -91,6 +91,20 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(ItemRadius), typeof(RadiusEXT), typeof(ListBoxItemEXT));
 
         /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty IsNormalProperty =
+            DependencyProperty.RegisterAttached(nameof(IsNormal), typeof(bool), typeof(ListViewCustom),
+            new UIPropertyMetadata(false, OnNormalChanged));
+        private static void OnNormalChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            if (obj is ListBoxItemEXT listBoxItem)
+            {
+                listBoxItem.IsEnabled = !(bool)e.NewValue;
+                //view.UpdateDefaultStyle();
+            }
+        }
+
+        /// <summary>
         /// 自定义项文本字体颜色
         /// </summary>
         [Category("扩展")]
@@ -180,6 +194,17 @@ namespace Paway.WPF
         {
             get { return isPressed; }
             set { isPressed = value; OnPropertyChanged(); }
+        }
+
+        /// <summary>
+        /// 占位标记
+        /// </summary>
+        [Category("扩展")]
+        [Description("占位标记")]
+        public bool IsNormal
+        {
+            get { return (bool)GetValue(IsNormalProperty); }
+            set { SetValue(IsNormalProperty, value); }
         }
 
         #endregion
