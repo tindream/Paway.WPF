@@ -81,6 +81,14 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemWidthProperty =
             DependencyProperty.RegisterAttached(nameof(ItemWidth), typeof(double), typeof(ListBoxItemEXT), new PropertyMetadata(double.NaN));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ItemHeightProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemHeight), typeof(double), typeof(ListBoxItemEXT), new PropertyMetadata(double.NaN));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ItemRadiusProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemRadius), typeof(RadiusEXT), typeof(ListBoxItemEXT));
 
         /// <summary>
         /// 自定义项文本字体颜色
@@ -141,6 +149,26 @@ namespace Paway.WPF
         {
             get { return (double)GetValue(ItemWidthProperty); }
             set { SetValue(ItemWidthProperty, value); }
+        }
+        /// <summary>
+        /// 自定义项高度
+        /// </summary>
+        [Category("扩展")]
+        [Description("自定义项高度")]
+        public double ItemHeight
+        {
+            get { return (double)GetValue(ItemHeightProperty); }
+            set { SetValue(ItemHeightProperty, value); }
+        }
+        /// <summary>
+        /// 自定义项圆角
+        /// </summary>
+        [Category("扩展")]
+        [Description("自定义项圆角")]
+        public RadiusEXT ItemRadius
+        {
+            get { return (RadiusEXT)GetValue(ItemRadiusProperty); }
+            set { SetValue(ItemRadiusProperty, value); }
         }
 
         private bool isPressed;

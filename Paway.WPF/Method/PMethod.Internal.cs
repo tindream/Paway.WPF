@@ -26,7 +26,7 @@ using Paway.Helper;
 namespace Paway.WPF
 {
     /// <summary>
-    /// 一些帮助方法-内部
+    /// 一些帮助方法 - 内部
     /// </summary>
     public partial class PMethod
     {

@@ -67,15 +67,25 @@
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
                                 <Grid>
-                                    <Border x:Name="border" 
-                                            CornerRadius="{Binding Path=ItemRadius.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
-                                            Height="{Binding ItemHeight, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
+                                    <Border x:Name="border">
                                         <Border.Width>
                                             <MultiBinding Converter="{StaticResource nullSelector}">
                                                 <Binding Path="ItemWidth" />
                                                 <Binding Path="ItemWidth" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                             </MultiBinding>
                                         </Border.Width>
+                                        <Border.Height>
+                                            <MultiBinding Converter="{StaticResource nullSelector}">
+                                                <Binding Path="ItemHeight" />
+                                                <Binding Path="ItemHeight" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
+                                            </MultiBinding>
+                                        </Border.Height>
+                                        <Border.CornerRadius>
+                                            <MultiBinding Converter="{StaticResource nullSelector}">
+                                                <Binding Path="ItemRadius.Normal" />
+                                                <Binding Path="ItemRadius.Normal" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
+                                            </MultiBinding>
+                                        </Border.CornerRadius>
                                         <Border.Background>
                                             <MultiBinding Converter="{StaticResource nullSelector}">
                                                 <Binding Path="ItemBackground.Normal" />
@@ -102,14 +112,19 @@
                                         </Border.Margin>
                                     </Border>
                                     <Border x:Name="border2" 
-                                            Padding="{Binding Path=ItemPadding.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
-                                            Height="{Binding ItemHeight, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
+                                            Padding="{Binding Path=ItemPadding.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" >
                                         <Border.Width>
                                             <MultiBinding Converter="{StaticResource nullSelector}">
                                                 <Binding Path="ItemWidth" />
                                                 <Binding Path="ItemWidth" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                             </MultiBinding>
                                         </Border.Width>
+                                        <Border.Height>
+                                            <MultiBinding Converter="{StaticResource nullSelector}">
+                                                <Binding Path="ItemHeight" />
+                                                <Binding Path="ItemHeight" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
+                                            </MultiBinding>
+                                        </Border.Height>
                                         <Border.Margin>
                                             <MultiBinding Converter="{StaticResource nullSelector}">
                                                 <Binding Path="ItemMargin" />
@@ -217,6 +232,14 @@
                                         <Setter TargetName="image" Property="Source" Value="{Binding Path=Image.Mouse}"/>
                                         <Setter TargetName="image" Property="Margin" 
                                                 Value="{Binding Path=ItemImageMargin.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
+                                        <Setter TargetName="border" Property="CornerRadius">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
+                                                    <Binding Path="ItemRadius.Mouse" />
+                                                    <Binding Path="ItemRadius.Mouse" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
                                         <Setter TargetName="border" Property="Background">
                                             <Setter.Value>
                                                 <MultiBinding Converter="{StaticResource nullSelector}">
@@ -246,8 +269,6 @@
                                                 </MultiBinding>
                                             </Setter.Value>
                                         </Setter>
-                                        <Setter TargetName="border" Property="CornerRadius" 
-                                                Value="{Binding Path=ItemRadius.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="border2" Property="Padding" 
                                                 Value="{Binding Path=ItemPadding.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="text" Property="Foreground">
@@ -282,6 +303,14 @@
                                         </Setter>
                                         <Setter TargetName="image" Property="Margin" 
                                                 Value="{Binding Path=ItemImageMargin.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
+                                        <Setter TargetName="border" Property="CornerRadius">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource nullSelector}">
+                                                    <Binding Path="ItemRadius.Pressed" />
+                                                    <Binding Path="ItemRadius.Pressed" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
                                         <Setter TargetName="border" Property="Background">
                                             <Setter.Value>
                                                 <MultiBinding Converter="{StaticResource nullSelector}">
@@ -306,8 +335,6 @@
                                                 </MultiBinding>
                                             </Setter.Value>
                                         </Setter>
-                                        <Setter TargetName="border" Property="CornerRadius" 
-                                                Value="{Binding Path=ItemRadius.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="border2" Property="Padding" 
                                                 Value="{Binding Path=ItemPadding.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                         <Setter TargetName="text" Property="Foreground">
