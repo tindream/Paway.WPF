@@ -51,7 +51,7 @@ namespace Paway.WPF
                     FontSize = size
                 };
                 if (color != null) block.Foreground = color.Value.ToBrush();
-                myAdornerLayer.Add(new CustomAdorner(parent, block, boardFunc: () =>
+                myAdornerLayer.Add(new CustomAdorner(parent, block, storyboardFunc: () =>
                 {
                     var storyboard = new Storyboard();
 
@@ -258,7 +258,7 @@ namespace Paway.WPF
                         var top = window.ActualHeight - border.ActualHeight;
                         top = top * 17 / 20;
                         return top;
-                    }, boardFunc: () =>
+                    }, storyboardFunc: () =>
                     {
                         var storyboard = new Storyboard();
 
@@ -345,7 +345,7 @@ namespace Paway.WPF
                     if (time == 0) time = 3000;
 
                     ClearAdorner(myAdornerLayer, element, NameHit);
-                    myAdornerLayer.Add(new CustomAdorner(element, border, boardFunc: () =>
+                    myAdornerLayer.Add(new CustomAdorner(element, border, storyboardFunc: () =>
                     {
                         var storyboard = new Storyboard();
 

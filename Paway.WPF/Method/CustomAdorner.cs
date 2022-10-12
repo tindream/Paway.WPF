@@ -20,11 +20,11 @@ namespace Paway.WPF
         /// <summary>
         /// 构造要将绑定到的装饰器的元素
         /// </summary>
-        public CustomAdorner(FrameworkElement adornedElement, FrameworkElement element, Color? color = null, Func<double> xFunc = null, Func<double> yFunc = null, Func<Storyboard> boardFunc = null, bool? hitTest = null) : base(adornedElement)
+        public CustomAdorner(FrameworkElement adornedElement, FrameworkElement element, Color? color = null, Func<double> xFunc = null, Func<double> yFunc = null, Func<Storyboard> storyboardFunc = null, bool? hitTest = null) : base(adornedElement)
         {
             //true:不路由事件（不穿透）
             //false:路由事件（穿透）
-            if (hitTest == null) hitTest = boardFunc == null;
+            if (hitTest == null) hitTest = storyboardFunc == null;
             IsHitTestVisible = hitTest.Value;
             canvas = new Canvas() { ClipToBounds = true };
             if (color != null) canvas.Background = color.Value.ToBrush();
@@ -42,14 +42,14 @@ namespace Paway.WPF
             };
             element.Loaded += (sender, e) =>
             {
-                if (boardFunc == null) return;
-                var board = boardFunc();
-                board.CurrentTimeInvalidated += (sender2, e2) =>
+                if (storyboardFunc == null) return;
+                var storyboard = storyboardFunc();
+                storyboard.CurrentTimeInvalidated += (sender2, e2) =>
                 {
                     Canvas.SetLeft(element, xFunc != null ? xFunc() : (canvas.ActualWidth - element.ActualWidth) / 2);
                     Canvas.SetTop(element, yFunc != null ? yFunc() : (canvas.ActualHeight - element.ActualHeight) / 2);
                 };
-                board.Completed += (sender2, e2) =>
+                storyboard.Completed += (sender2, e2) =>
                 {
                     var myAdornerLayer = AdornerLayer.GetAdornerLayer(adornedElement);
                     if (myAdornerLayer != null)
@@ -57,7 +57,7 @@ namespace Paway.WPF
                         myAdornerLayer.Remove(this);
                     }
                 };
-                board.Begin(element);
+                storyboard.Begin(element);
             };
         }
         /// <summary>
