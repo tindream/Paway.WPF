@@ -87,5 +87,15 @@ namespace Paway.WPF
         /// </summary>
         [Description("高度")]
         Height,
+        /// <summary>
+        /// X轴缩放
+        /// </summary>
+        [Description("X轴缩放")]
+        ScanX,
+        /// <summary>
+        /// Y轴缩放
+        /// </summary>
+        [Description("Y轴缩放")]
+        ScanY,
     }
 }

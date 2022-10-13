@@ -95,11 +95,12 @@ namespace Paway.WPF
                         {
                             ((TransformGroup)element.RenderTransform).Children.Add(transform);
                         }
-                        else if (element.RenderTransform.GetType() == typeof(Transform))
+                        else if (element.RenderTransform.GetType() == typeof(TranslateTransform))
                         {
                             var group = new TransformGroup();
                             group.Children.Add(element.RenderTransform);
                             group.Children.Add(transform);
+                            element.RenderTransform = group;
                         }
                         else
                         {
@@ -135,6 +136,41 @@ namespace Paway.WPF
                             break;
                         case TransitionType.ToBottom:
                             transform.BeginAnimation(TranslateTransform.YProperty, GetDoubleAnimation(toValue, fromValue ?? element.ActualHeight, element, time, completed));
+                            break;
+                    }
+                    break;
+                case TransitionType.ScanX:
+                case TransitionType.ScanY:
+                    var scaleTransform = new ScaleTransform();
+                    if (element.RenderTransform != null)
+                    {
+                        if (element.RenderTransform.GetType() == typeof(TransformGroup))
+                        {
+                            ((TransformGroup)element.RenderTransform).Children.Add(scaleTransform);
+                        }
+                        else if (element.RenderTransform.GetType() == typeof(ScaleTransform))
+                        {
+                            var group = new TransformGroup();
+                            group.Children.Add(element.RenderTransform);
+                            group.Children.Add(scaleTransform);
+                            element.RenderTransform = group;
+                        }
+                        else
+                        {
+                            element.RenderTransform = scaleTransform;
+                        }
+                    }
+                    else
+                    {
+                        element.RenderTransform = scaleTransform;
+                    }
+                    switch (type)
+                    {
+                        case TransitionType.ScanX:
+                            scaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, GetDoubleAnimation(fromValue ?? 0, toValue, element, time, completed));
+                            break;
+                        case TransitionType.ScanY:
+                            scaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, GetDoubleAnimation(fromValue ?? 0, toValue, element, time, completed));
                             break;
                     }
                     break;
