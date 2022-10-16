@@ -89,6 +89,10 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemRadiusProperty =
             DependencyProperty.RegisterAttached(nameof(ItemRadius), typeof(RadiusEXT), typeof(ListBoxItemEXT));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ItemPaddingProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemPadding), typeof(ThicknessEXT), typeof(ListBoxItemEXT), new PropertyMetadata(new ThicknessEXT(double.NaN)));
 
         /// <summary>
         /// </summary>
@@ -183,6 +187,16 @@ namespace Paway.WPF
         {
             get { return (RadiusEXT)GetValue(ItemRadiusProperty); }
             set { SetValue(ItemRadiusProperty, value); }
+        }
+        /// <summary>
+        /// 自定义项文本内边距
+        /// </summary>
+        [Category("扩展")]
+        [Description("自定义项文本内边距")]
+        public ThicknessEXT ItemPadding
+        {
+            get { return (ThicknessEXT)GetValue(ItemPaddingProperty); }
+            set { SetValue(ItemPaddingProperty, value); }
         }
 
         private bool isPressed;
