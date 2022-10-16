@@ -29,7 +29,7 @@ namespace Paway.WPF
         /// <summary>
         /// 鼠标划过时的颜色
         /// </summary>
-        public Brush Mouse { get { return mouse; } set { mouse = value; OnPropertyChanged(); } }
+        public Brush Mouse { get { return mouse; } set { mouse = value; OnPressedMouse(); OnPropertyChanged(); } }
         /// <summary>
         /// 鼠标划过时的未选中颜色
         /// </summary>
@@ -46,18 +46,18 @@ namespace Paway.WPF
         /// <summary>
         /// 鼠标点击时的颜色
         /// </summary>
-        public Brush Pressed { get { return pressed; } set { pressed = value; OnPropertyChanged(); } }
-        /// <summary>
-        /// 鼠标划过时的选中颜色
-        /// </summary>
-        public Brush PressedMouse
+        public Brush Pressed { get { return pressed; } set { pressed = value; OnPressedMouse(); OnPropertyChanged(); } }
+        private void OnPressedMouse()
         {
-            get
-            {
-                var pressed = Pressed as SolidColorBrush;
-                return PMethod.AlphaColor(pressed.Color.A - Alpha / 2, pressed.Color).ToBrush();
-            }
+            var mouse = Mouse as SolidColorBrush;
+            var pressed = Pressed as SolidColorBrush;
+            var a = (pressed.Color.A - mouse.Color.A) / 2;
+            this.PressedMouse = PMethod.AlphaColor(Math.Abs(pressed.Color.A - a), pressed.Color).ToBrush();
         }
+        /// <summary>
+        /// 鼠标划过选中项时的颜色
+        /// </summary>
+        public Brush PressedMouse { get; private set; }
         /// <summary>
         /// 颜色Alpha值变量
         /// </summary>
