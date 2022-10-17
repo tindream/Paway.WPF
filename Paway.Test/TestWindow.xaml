@@ -20,7 +20,12 @@
         </Grid.ColumnDefinitions>
         <StackPanel VerticalAlignment="Center">
             <ButtonEXT Click="ButtonEXT_Click" Command="{Binding ButtonCommand}"/>
-            <PasswordBox FontSize="32"/>
+            <ListViewEXT FontSize="18" ItemWidth="200">
+                <ListBoxItemEXT Text="Hello世界" Desc="{FontImage Type=Adjust}"/>
+            </ListViewEXT>
+            <ListViewEXT FontSize="18" ItemWidth="200">
+                <ListBoxItemEXT Text="Hello世界" Desc="+"/>
+            </ListViewEXT>
         </StackPanel>
         <Border Grid.Column="1" Background="Transparent">
             <DataGridEXT ItemsSource="{Binding GridList}">

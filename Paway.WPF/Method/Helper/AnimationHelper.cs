@@ -66,19 +66,19 @@ namespace Paway.WPF
             switch (type)
             {
                 case TransitionType.Width:
-                    element.BeginAnimation(FrameworkElement.WidthProperty, GetDoubleAnimation(fromValue ?? element.ActualWidth, toValue, element, time, () => { element.BeginAnimation(FrameworkElement.WidthProperty, null); completed?.Invoke(); }));
+                    Start(element, FrameworkElement.WidthProperty, fromValue ?? element.ActualWidth, toValue, time, completed);
                     break;
                 case TransitionType.Height:
-                    element.BeginAnimation(FrameworkElement.HeightProperty, GetDoubleAnimation(fromValue ?? element.ActualHeight, toValue, element, time, () => { element.BeginAnimation(FrameworkElement.HeightProperty, null); completed?.Invoke(); }));
+                    Start(element, FrameworkElement.HeightProperty, fromValue ?? element.ActualHeight, toValue, time, completed);
                     break;
                 case TransitionType.Opacity:
-                    element.BeginAnimation(UIElement.OpacityProperty, GetDoubleAnimation(fromValue ?? element.Opacity, toValue, element, time, () => { element.BeginAnimation(UIElement.OpacityProperty, null); completed?.Invoke(); }));
+                    Start(element, UIElement.OpacityProperty, fromValue ?? element.Opacity, toValue, time, completed);
                     break;
                 case TransitionType.FadeIn:
-                    element.BeginAnimation(UIElement.OpacityProperty, GetDoubleAnimation(0, 1, element, time, () => { element.BeginAnimation(UIElement.OpacityProperty, null); completed?.Invoke(); }));
+                    Start(element, UIElement.OpacityProperty, 0, 1, time, completed);
                     break;
                 case TransitionType.FadeOut:
-                    element.BeginAnimation(UIElement.OpacityProperty, GetDoubleAnimation(1, 0, element, time, () => { element.BeginAnimation(UIElement.OpacityProperty, null); completed?.Invoke(); }));
+                    Start(element, UIElement.OpacityProperty, 1, 0, time, completed);
                     break;
                 #region TranslateTransform
                 case TransitionType.Left:
@@ -115,28 +115,28 @@ namespace Paway.WPF
                     switch (type)
                     {
                         case TransitionType.Left:
-                            translateTransform.BeginAnimation(TranslateTransform.XProperty, GetDoubleAnimation(fromValue ?? -element.ActualWidth, toValue, element, time, () => { translateTransform.BeginAnimation(TranslateTransform.XProperty, null); completed?.Invoke(); }));
+                            Start(translateTransform, element, TranslateTransform.XProperty, fromValue ?? -element.ActualWidth, toValue, time, completed);
                             break;
                         case TransitionType.Right:
-                            translateTransform.BeginAnimation(TranslateTransform.XProperty, GetDoubleAnimation(fromValue ?? element.ActualWidth, toValue, element, time, () => { translateTransform.BeginAnimation(TranslateTransform.XProperty, null); completed?.Invoke(); }));
+                            Start(translateTransform, element, TranslateTransform.XProperty, fromValue ?? element.ActualWidth, toValue, time, completed);
                             break;
                         case TransitionType.Top:
-                            translateTransform.BeginAnimation(TranslateTransform.YProperty, GetDoubleAnimation(fromValue ?? -element.ActualHeight, toValue, element, time, () => { translateTransform.BeginAnimation(TranslateTransform.YProperty, null); completed?.Invoke(); }));
+                            Start(translateTransform, element, TranslateTransform.YProperty, fromValue ?? -element.ActualHeight, toValue, time, completed);
                             break;
                         case TransitionType.Bottom:
-                            translateTransform.BeginAnimation(TranslateTransform.YProperty, GetDoubleAnimation(fromValue ?? element.ActualHeight, toValue, element, time, () => { translateTransform.BeginAnimation(TranslateTransform.YProperty, null); completed?.Invoke(); }));
+                            Start(translateTransform, element, TranslateTransform.YProperty, fromValue ?? element.ActualHeight, toValue, time, completed);
                             break;
                         case TransitionType.ToLeft:
-                            translateTransform.BeginAnimation(TranslateTransform.XProperty, GetDoubleAnimation(toValue, fromValue ?? -element.ActualWidth, element, time, () => { translateTransform.BeginAnimation(TranslateTransform.XProperty, null); completed?.Invoke(); }));
+                            Start(translateTransform, element, TranslateTransform.XProperty, toValue, fromValue ?? -element.ActualWidth, time, completed);
                             break;
                         case TransitionType.ToRight:
-                            translateTransform.BeginAnimation(TranslateTransform.XProperty, GetDoubleAnimation(toValue, fromValue ?? element.ActualWidth, element, time, () => { translateTransform.BeginAnimation(TranslateTransform.XProperty, null); completed?.Invoke(); }));
+                            Start(translateTransform, element, TranslateTransform.XProperty, toValue, fromValue ?? element.ActualWidth, time, completed);
                             break;
                         case TransitionType.ToTop:
-                            translateTransform.BeginAnimation(TranslateTransform.YProperty, GetDoubleAnimation(toValue, fromValue ?? -element.ActualHeight, element, time, () => { translateTransform.BeginAnimation(TranslateTransform.YProperty, null); completed?.Invoke(); }));
+                            Start(translateTransform, element, TranslateTransform.YProperty, toValue, fromValue ?? -element.ActualHeight, time, completed);
                             break;
                         case TransitionType.ToBottom:
-                            translateTransform.BeginAnimation(TranslateTransform.YProperty, GetDoubleAnimation(toValue, fromValue ?? element.ActualHeight, element, time, () => { translateTransform.BeginAnimation(TranslateTransform.YProperty, null); completed?.Invoke(); }));
+                            Start(translateTransform, element, TranslateTransform.YProperty, toValue, fromValue ?? element.ActualHeight, time, completed);
                             break;
                     }
                     break;
@@ -171,10 +171,10 @@ namespace Paway.WPF
                     switch (type)
                     {
                         case TransitionType.ScanX:
-                            scaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, GetDoubleAnimation(fromValue ?? 0, toValue, element, time, () => { scaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null); completed?.Invoke(); }));
+                            Start(scaleTransform, element, ScaleTransform.ScaleXProperty, fromValue ?? 0, toValue, time, completed);
                             break;
                         case TransitionType.ScanY:
-                            scaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, GetDoubleAnimation(fromValue ?? 0, toValue, element, time, () => { scaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, null); completed?.Invoke(); }));
+                            Start(scaleTransform, element, ScaleTransform.ScaleYProperty, fromValue ?? 0, toValue, time, completed);
                             break;
                     }
                     break;
@@ -183,12 +183,19 @@ namespace Paway.WPF
             }
         }
         /// <summary>
-        /// 启动动画
+        /// 直接启动二维动画
         /// </summary>
-        public static void Start(FrameworkElement element, DependencyProperty property, double toValue = 0, double? fromValue = null, int time = 0, Action completed = null)
+        public static void Start(Transform transform, FrameworkElement element, DependencyProperty property, double fromValue, double toValue, int time = 0, Action completed = null)
+        {
+            transform.BeginAnimation(property, GetDoubleAnimation(fromValue, toValue, element, time, () => { transform.BeginAnimation(property, null); completed?.Invoke(); }));
+        }
+        /// <summary>
+        /// 直接启动动画
+        /// </summary>
+        public static void Start(FrameworkElement element, DependencyProperty property, double fromValue, double toValue, int time = 0, Action completed = null)
         {
             if (element == null) return;
-            element.BeginAnimation(property, GetDoubleAnimation(fromValue ?? element.ActualWidth, toValue, element, time, () => { element.BeginAnimation(property, null); completed?.Invoke(); }));
+            element.BeginAnimation(property, GetDoubleAnimation(fromValue, toValue, element, time, () => { element.BeginAnimation(property, null); completed?.Invoke(); }));
         }
 
         #region Function

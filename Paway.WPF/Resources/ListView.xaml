@@ -147,6 +147,7 @@
                                                Stretch="{Binding Path=ItemImageStretch, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                             <TextBlock Name="desc" Text="{Binding Desc}"
                                                        TextTrimming="WordEllipsis" 
+                                                       FontFamily="{Binding FontFamily}" 
                                                        Foreground="{Binding Path=ItemDescForeground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        Background="{Binding Path=ItemDescBackground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        FontSize="{Binding Path=ItemDescFontSize.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
@@ -160,6 +161,7 @@
                                                 </TextBlock>
                                             <TextBlock Name="text"
                                                        TextTrimming="WordEllipsis" 
+                                                       FontFamily="{Binding FontFamily, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        Background="{Binding Path=ItemTextBackground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        FontSize="{Binding Path=ItemTextFontSize.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
