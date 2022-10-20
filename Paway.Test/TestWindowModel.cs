@@ -13,13 +13,14 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Paway.Test.ViewModel
 {
-    public class TestViewModel : ViewModelBase
+    public class TestWindowModel : ViewModelBase
     {
         #region 属性
         private double angle = -27;
@@ -104,37 +105,79 @@ namespace Paway.Test.ViewModel
         }
         public DoubleEXT FontSizes { get; set; } = new DoubleEXT(20);
         public SolidColorBrush ColorBrush { get; set; }
+        private MenuType _menuType;
+        public MenuType MenuType
+        {
+            get { return _menuType; }
+            set { if (_menuType != value) { _menuType = value; RaisePropertyChanged(); } }
+        }
 
         #endregion
 
         #region 命令
-        private ICommand buttonCommand;
-        public ICommand ButtonCommand
+        public ICommand ButtonCommand => new RelayCommand<ListViewCustom>(view =>
         {
-            get
-            {
-                return buttonCommand ?? (buttonCommand = new RelayCommand<ListViewCustom>(view =>
-                {
-                    //var index = Method.Random(0, ViewList.Count);
-                    //ViewList[index].ItemTextForeground = new BrushEXT(Colors.Red);
-                    //if (view.ItemsSource == null) view.ItemsSource = ViewList;
-                    UserType = MenuType.N2;
-                }));
-            }
-        }
-        private ICommand selectionDeviceCommand;
-        public ICommand SelectionDeviceCommand
+            //var index = Method.Random(0, ViewList.Count);
+            //ViewList[index].ItemTextForeground = new BrushEXT(Colors.Red);
+            //if (view.ItemsSource == null) view.ItemsSource = ViewList;
+            UserType = MenuType.N2;
+        });
+        public ICommand SelectionDeviceCommand => new RelayCommand<ListViewCustom>(listView =>
         {
-            get
+            if (!(listView.SelectedItem is IListViewItem item)) return;
+            Method.Show(listView, new Window());
+            listView.SelectedIndex = -1;
+        });
+        public ICommand ListViewMouseDown => new RelayCommand<MouseButtonEventArgs>(e =>
+        {
+            if (e.Source is ListViewEXT listView1)
             {
-                return selectionDeviceCommand ?? (selectionDeviceCommand = new RelayCommand<ListViewCustom>(listView =>
+                var point = Mouse.GetPosition(listView1);
+                var obj = listView1.InputHitTest(point);
+                if (PMethod.Parent(obj, out ListViewItem viewItem))
                 {
-                    if (!(listView.SelectedItem is IListViewItem item)) return;
-                    Method.Show(listView, new Window());
-                    listView.SelectedIndex = -1;
-                }));
+                    Method.WaterAdorner(e, viewItem, 0, 0);
+                }
             }
-        }
+        });
+        public ICommand SelectionCommand => new RelayCommand<ListViewEXT>(listView1 =>
+        {
+            if (listView1.SelectedItem is IListViewItem info)
+            {
+                switch (info.Text)
+                {
+                    case "A":
+                    case "B":
+                    case "C":
+                    case "D":
+                        var menuType = info.Text.Parse<MenuType>();
+                        if (MenuType != menuType)
+                        {
+                            if (listView1.Items.Find("Text", MenuType.Description()) is IListViewItem last)
+                            {
+                                last.Desc = "\uf0d7";
+                            }
+                            MenuType = menuType;
+                            info.Desc = "\uf0d8";
+                        }
+                        else
+                        {
+                            info.Desc = "\uf0d7";
+                            MenuType = MenuType.None;
+                        }
+                        listView1.SelectedIndex = -1;
+                        listView1.ReleaseMouseCapture();
+                        break;
+                }
+                switch (info.Text)
+                {
+                    case "C1":
+                    case "C2":
+                    case "D1":
+                        break;
+                }
+            }
+        });
 
         #endregion
 
@@ -145,7 +188,7 @@ namespace Paway.Test.ViewModel
         public List<ColorInfo> ColorList { get; } = new List<ColorInfo>();
         public List<FontInfo> FontList { get; } = new List<FontInfo>();
 
-        public TestViewModel()
+        public TestWindowModel()
         {
             this.Text = "111\r\n222\r\n333";
             var index = 0;

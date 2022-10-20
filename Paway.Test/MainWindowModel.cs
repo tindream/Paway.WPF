@@ -28,7 +28,7 @@ namespace Paway.Test.ViewModel
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class MainViewModel : ViewModelBase
+    public class MainWindowModel : ViewModelBase
     {
         #region 属性
         private readonly List<ListViewItemModel> list = new List<ListViewItemModel>();
@@ -264,7 +264,7 @@ namespace Paway.Test.ViewModel
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainViewModel()
+        public MainWindowModel()
         {
             this.MessengerInstance.Register<StatuMessage>(this, msg => Statu(msg.Msg));
 

@@ -148,8 +148,8 @@
     <Compile Include="ViewMessage\RefreshMessage.cs" />
     <Compile Include="ViewMessage\UserMessage.cs" />
     <Compile Include="ViewMessage\StatuMessage.cs" />
-    <Compile Include="ViewModel\TestViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="TestWindowModel.cs" />
+    <Compile Include="MainWindowModel.cs" />
     <Compile Include="ViewPlus\AddViewModelPlus.cs" />
     <Compile Include="ViewPlus\DataGridViewModel.cs" />
     <Compile Include="ViewPlus\ViewModelLocator.cs" />

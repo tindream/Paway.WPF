@@ -138,9 +138,13 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-点击触发水波纹特效
         /// </summary>
-        public static void WaterAdorner(MouseEventArgs e, double width = 0, double maxWidth = 300)
+        public static void WaterAdorner(MouseEventArgs e, FrameworkElement element = null, double width = 0, double maxWidth = 300)
         {
-            if (!(e.OriginalSource is FrameworkElement element)) return;
+            if (element == null)
+            {
+                if (e.OriginalSource is FrameworkElement temp) element = temp;
+                else return;
+            }
             if (element is Adorner adorner)
             {//暂未使用(响应事件时?)
                 if (adorner.AdornedElement is FrameworkElement framework)

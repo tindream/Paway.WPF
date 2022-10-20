@@ -43,12 +43,12 @@ namespace Paway.Test.ViewModel
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
-            SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<TestViewModel>();
+            SimpleIoc.Default.Register<MainWindowModel>();
+            SimpleIoc.Default.Register<TestWindowModel>();
         }
 
-        public TestViewModel Test { get { return GetModelInstance<TestViewModel>(); } }
-        public MainViewModel Main { get { return GetModelInstance<MainViewModel>(); } }
+        public TestWindowModel Test { get { return GetModelInstance<TestWindowModel>(); } }
+        public MainWindowModel Main { get { return GetModelInstance<MainWindowModel>(); } }
         public T GetModelInstance<T>() { return ServiceLocator.Current.GetInstance<T>(); }
 
         public static void Cleanup()

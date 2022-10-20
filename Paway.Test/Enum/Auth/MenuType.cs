@@ -16,16 +16,24 @@ namespace Paway.Test
         [Description(Config.None)]
         None,
         /// <summary>
-        /// N
+        /// N1
         /// </summary>
+        [Description("D")]
         N1 = 1 << 0,
         /// <summary>
-        /// N
+        /// N2
         /// </summary>
+        [Description("C")]
         N2 = 1 << 1,
         /// <summary>
-        /// N
+        /// N3
         /// </summary>
+        [Description("B")]
         N3 = 1 << 2,
+        /// <summary>
+        /// N4
+        /// </summary>
+        [Description("A")]
+        N4 = 1 << 3,
     }
 }
