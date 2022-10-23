@@ -18,59 +18,11 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel >
+        <StackPanel VerticalAlignment="Center" >
             <ButtonEXT Click="ButtonEXT_Click" Command="{Binding ButtonCommand}"/>
-            <ListViewEXT Name="listMenu" ItemWidth="190" ItemHeight="42" ItemTextFontSize="18"
-                             ItemImageDock="Left" ItemImageStretch="Uniform" ItemImageHeight="28" ItemImageMargin="5,0,5,0"
-                             ItemPadding="10" HorizontalContentAlignment="Left" 
-                             ItemDescForeground="White" ItemDescFontSize="12"
-                             ItemBrush=";240;255" ItemBackground="0;120;160" Margin="0,-10,0,0"  >
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding SelectionCommand}" CommandParameter="{Binding ElementName=listMenu}"/>
-                    </i:EventTrigger>
-                    <i:EventTrigger EventName="PreviewMouseDown">
-                        <ip:EventToCommand Command="{Binding ListViewMouseDown}" PassEventArgsToCommand="True"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-                <ListBoxItemEXT Text="A" Desc="{FontImage Type=CaretDown}"/>
-                <ListBoxItemEXT Text="A1"
-                                    ItemPadding="48,0,0,0"
-                                    Visibility="{Binding MenuType, Converter={StaticResource valueToVisible}, ConverterParameter=8}"/>
-                <ListBoxItemEXT Text="A2"
-                                    ItemPadding="48,0,0,0"
-                                    Visibility="{Binding MenuType, Converter={StaticResource valueToVisible}, ConverterParameter=8}"/>
-                <ListBoxItemEXT Text="A3"
-                                    ItemPadding="48,0,0,0"
-                                    Visibility="{Binding MenuType, Converter={StaticResource valueToVisible}, ConverterParameter=8}"/>
-                <ListBoxItemEXT Text="A4"
-                                    ItemPadding="48,0,0,0"
-                                    Visibility="{Binding MenuType, Converter={StaticResource valueToVisible}, ConverterParameter=8}"/>
-
-                <ListBoxItemEXT Text="B" Desc="{FontImage Type=CaretDown}"/>
-                <ListBoxItemEXT Text="B1"
-                                    ItemPadding="48,0,0,0"
-                                    Visibility="{Binding MenuType, Converter={StaticResource valueToVisible}, ConverterParameter=4}"/>
-                <ListBoxItemEXT Text="B2"
-                                    ItemPadding="48,0,0,0"
-                                    Visibility="{Binding MenuType, Converter={StaticResource valueToVisible}, ConverterParameter=4}"/>
-                <ListBoxItemEXT Text="B3"
-                                    ItemPadding="48,0,0,0"
-                                    Visibility="{Binding MenuType, Converter={StaticResource valueToVisible}, ConverterParameter=4}"/>
-
-                <ListBoxItemEXT Text="C" Desc="{FontImage Type=CaretDown}"/>
-                <ListBoxItemEXT Text="C1"
-                                    ItemPadding="48,0,0,0"
-                                    Visibility="{Binding MenuType, Converter={StaticResource valueToVisible}, ConverterParameter=2}"/>
-                <ListBoxItemEXT Text="C2"
-                                    ItemPadding="48,0,0,0"
-                                    Visibility="{Binding MenuType, Converter={StaticResource valueToVisible}, ConverterParameter=2}"/>
-
-                <ListBoxItemEXT Text="D" Desc="{FontImage Type=CaretDown}"/>
-                <ListBoxItemEXT Text="D1"
-                                    ItemPadding="48,0,0,0"
-                                    Visibility="{Binding MenuType, Converter={StaticResource valueToVisible}, ConverterParameter=1}"/>
-            </ListViewEXT>
+            <ComboBoxEXT Name="cbxUserName" Water="请输入用户名" 
+                     IAnimation="2" BorderThickness="0,0,0,1" FontSize="30" WaterSize="0.7"
+                     IsEditable="True" IconWidth="36" IconStretch="Uniform"/>
         </StackPanel>
         <Border Grid.Column="1" Background="Transparent">
             <DataGridEXT ItemsSource="{Binding GridList}">

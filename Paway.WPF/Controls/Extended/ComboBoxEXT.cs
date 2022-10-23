@@ -40,6 +40,14 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(Icon), typeof(ImageSource), typeof(ComboBoxEXT));
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty IconWidthProperty =
+            DependencyProperty.RegisterAttached(nameof(IconWidth), typeof(double), typeof(ComboBoxEXT), new PropertyMetadata(double.NaN));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty IconHeightProperty =
+            DependencyProperty.RegisterAttached(nameof(IconHeight), typeof(double), typeof(ComboBoxEXT), new PropertyMetadata(double.NaN));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty IconStretchProperty =
             DependencyProperty.RegisterAttached(nameof(IconStretch), typeof(Stretch), typeof(ComboBoxEXT),
             new PropertyMetadata(Stretch.None));
@@ -59,6 +67,10 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty TitleMinWidthProperty =
             DependencyProperty.RegisterAttached(nameof(TitleMinWidth), typeof(double), typeof(ComboBoxEXT));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty IAnimationProperty =
+            DependencyProperty.RegisterAttached(nameof(IAnimation), typeof(double), typeof(ComboBoxEXT));
 
         #endregion
 
@@ -114,6 +126,28 @@ namespace Paway.WPF
             set { SetValue(IconProperty, value); }
         }
         /// <summary>
+        /// 图标宽度
+        /// </summary>
+        [Category("扩展")]
+        [Description("图标宽度")]
+        [TypeConverter(typeof(LengthConverter))]
+        public double IconWidth
+        {
+            get { return (double)GetValue(IconWidthProperty); }
+            set { SetValue(IconWidthProperty, value); }
+        }
+        /// <summary>
+        /// 图标高度
+        /// </summary>
+        [Category("扩展")]
+        [Description("图标高度")]
+        [TypeConverter(typeof(LengthConverter))]
+        public double IconHeight
+        {
+            get { return (double)GetValue(IconHeightProperty); }
+            set { SetValue(IconHeightProperty, value); }
+        }
+        /// <summary>
         /// 图片的内容如何拉伸才适合其磁贴
         /// </summary>
         [Category("扩展")]
@@ -162,6 +196,16 @@ namespace Paway.WPF
         {
             get { return (double)GetValue(TitleMinWidthProperty); }
             set { SetValue(TitleMinWidthProperty, value); }
+        }
+        /// <summary>
+        /// 动画
+        /// </summary>
+        [Category("扩展")]
+        [Description("IsEditable为true时，输入框的动画标记")]
+        public double IAnimation
+        {
+            get { return (double)GetValue(IAnimationProperty); }
+            set { SetValue(IAnimationProperty, value); }
         }
 
         #endregion
