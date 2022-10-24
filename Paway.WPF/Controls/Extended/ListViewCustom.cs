@@ -359,6 +359,7 @@ namespace Paway.WPF
                     PConfig.AddLog(this, info2.Hit);
                 }
             }
+            this.ReleaseMouseCapture();
         }
         /// <summary>
         /// 更新字体大小
@@ -480,17 +481,31 @@ namespace Paway.WPF
         /// </summary>
         private ListViewItem downItem;
         /// <summary>
-        /// 鼠标按下时取消触发
+        /// 鼠标按下前判断触发
         /// </summary>
-        protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
+        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
+            if (e.ChangedButton != MouseButton.Left)
+            {
+                e.Handled = true;
+                return;
+            }
             downItem = null;
             if (e.ButtonState == MouseButtonState.Pressed)
             {
-                if (ClickMode == ClickMode.Release && PMethod.Parent(e.OriginalSource, out downItem))
+                if (PMethod.Parent(e.OriginalSource, out downItem))
                 {
                     IsPressed(true);
-                    OnPreviewItemClick(e);
+                    if (ClickMode == ClickMode.Press || SelectionMode != SelectionMode.Single)
+                    {
+                        OnPreviewItemClick(e);
+                        this.ReleaseMouseCapture();
+                    }
+                    else
+                    {
+                        e.Handled = true;
+                        return;
+                    }
                 }
                 else if (ScrollViewer != null && (ScrollViewer.ScrollableHeight > 0 || ScrollViewer.ScrollableWidth > 0)) { }
                 else if (PMethod.Parent(this, out Window window))
@@ -505,8 +520,9 @@ namespace Paway.WPF
                 }
             }
             e.Handled = INormal;
-            base.OnPreviewMouseLeftButtonDown(e);
+            base.OnPreviewMouseDown(e);
         }
+
         private void IsPressed(bool value)
         {
             if (downItem.Content is IListViewItem model)
@@ -517,15 +533,24 @@ namespace Paway.WPF
                 }
             }
         }
+        private void IsSelected(bool value)
+        {
+            if (downItem.Content is IListViewItem model)
+            {
+                if (model.IsSelected != value)
+                {
+                    model.IsSelected = value;
+                }
+            }
+        }
         /// <summary>
-        /// 判断按下状态
+        /// 鼠标移动取消按下状态
         /// </summary>
         protected override void OnPreviewMouseMove(MouseEventArgs e)
         {
-            if (ClickMode == ClickMode.Release && downItem != null)
+            if (downItem != null)
             {
                 IsPressed(false);
-                downItem = null;
             }
             base.OnPreviewMouseMove(e);
         }
@@ -534,22 +559,32 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnMouseLeave(MouseEventArgs e)
         {
-            if (this.SelectedItem is IListViewItem model)
+            if (downItem != null)
             {
-                model.IsPressed = false;
+                IsPressed(false);
             }
             base.OnMouseLeave(e);
         }
         /// <summary>
         /// 鼠标抬起时判断触发
         /// </summary>
-        protected override void OnPreviewMouseLeftButtonUp(MouseButtonEventArgs e)
+        protected override void OnPreviewMouseUp(MouseButtonEventArgs e)
         {
-            if (ClickMode == ClickMode.Release && downItem != null)
+            if (downItem != null)
             {
                 IsPressed(false);
+                if (ClickMode == ClickMode.Release && SelectionMode == SelectionMode.Single)
+                {
+                    var point = Mouse.GetPosition(this);
+                    var obj = this.InputHitTest(point);
+                    if (PMethod.Parent(obj, out ListViewItem viewItem) && viewItem.Equals(downItem))
+                    {
+                        IsSelected(true);
+                    }
+                }
+                downItem = null;
             }
-            base.OnPreviewMouseLeftButtonUp(e);
+            base.OnPreviewMouseUp(e);
         }
 
         #endregion

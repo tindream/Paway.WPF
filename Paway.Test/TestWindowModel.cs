@@ -166,14 +166,6 @@ namespace Paway.Test.ViewModel
                             MenuType = MenuType.None;
                         }
                         listView1.SelectedIndex = -1;
-                        listView1.ReleaseMouseCapture();
-                        break;
-                }
-                switch (info.Text)
-                {
-                    case "C1":
-                    case "C2":
-                    case "D1":
                         break;
                 }
             }
