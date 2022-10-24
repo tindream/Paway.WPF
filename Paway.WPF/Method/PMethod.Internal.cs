@@ -41,10 +41,10 @@ namespace Paway.WPF
         /// <summary>
         /// 鼠标移入移出动画
         /// </summary>
-        internal static void Animation(FrameworkElement obj, bool value)
+        internal static void Animation(FrameworkElement obj, bool value, string line1Name = "line1", string line2Name = "line2")
         {
-            PMethod.Child(obj, out Line line1, "line1", false);
-            PMethod.Child(obj, out Line line2, "line2", false);
+            PMethod.Child(obj, out Line line1, line1Name, false);
+            PMethod.Child(obj, out Line line2, line2Name, false);
             var storyboard = new Storyboard();
             if (value)
             {

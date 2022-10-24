@@ -224,5 +224,27 @@ namespace Paway.WPF
             PMethod.OnKeyDown(e);
             base.OnKeyDown(e);
         }
+
+        #region 动画
+        /// <summary>
+        /// 鼠标进入时启动
+        /// </summary>
+        protected override void OnMouseEnter(MouseEventArgs e)
+        {
+            base.OnMouseEnter(e);
+            Console.WriteLine("鼠标进入时启动");
+            if (IAnimation > 0) PMethod.Animation(this, true, "line11", "line12");
+        }
+        /// <summary>
+        /// 鼠标离开时关闭
+        /// </summary>
+        protected override void OnMouseLeave(MouseEventArgs e)
+        {
+            base.OnMouseLeave(e);
+            Console.WriteLine("鼠标离开时关闭5");
+            if (IAnimation > 0) PMethod.Animation(this, false, "line11", "line12");
+        }
+
+        #endregion
     }
 }

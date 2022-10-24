@@ -20,8 +20,9 @@
         </Grid.ColumnDefinitions>
         <StackPanel VerticalAlignment="Center" >
             <ButtonEXT Click="ButtonEXT_Click" Command="{Binding ButtonCommand}"/>
-            <ComboBoxEXT Name="cbxUserName" Water="请输入用户名" 
-                     IAnimation="2" BorderThickness="0,0,0,1" FontSize="30" WaterSize="0.7"
+            <TextBoxEXT IAnimation="3"/>
+            <ComboBoxEXT Name="cbxUserName" Water="请输入" 
+                     IAnimation="3"
                      IsEditable="True" IconWidth="36" IconStretch="Uniform"/>
         </StackPanel>
         <Border Grid.Column="1" Background="Transparent">
