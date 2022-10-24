@@ -10,7 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Paway.Test.ViewModel
+namespace Paway.Test
 {
     public class AddViewModelPlus<T> : ViewModelBase where T : class, IId
     {

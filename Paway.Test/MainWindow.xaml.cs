@@ -1,6 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using Paway.Helper;
-using Paway.Test.ViewModel;
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
@@ -39,6 +38,7 @@ namespace Paway.Test
 
         public MainWindow()
         {
+            Config.Window = this;
             InitializeComponent();
         }
 

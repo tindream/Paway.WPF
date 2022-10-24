@@ -14,7 +14,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Paway.Test.ViewModel
+namespace Paway.Test
 {
     /// <summary>
     /// This class contains properties that the main View can data bind to.

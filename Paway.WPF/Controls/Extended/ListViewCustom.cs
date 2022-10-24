@@ -348,6 +348,17 @@ namespace Paway.WPF
         }
         private void ListViewCustom_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            foreach (var temp in e.RemovedItems)
+            {
+                if (temp is ListViewItem item && item.Content is IListViewItem info)
+                {
+                    info.IsSelected = false;
+                }
+                else if (this.ItemContainerGenerator.ContainerFromItem(temp) is ListViewItem listViewItem && listViewItem.Content is IListViewItem info2)
+                {
+                    info2.IsSelected = false;
+                }
+            }
             foreach (var temp in e.AddedItems)
             {
                 if (temp is ListViewItem item && item.Content is IListViewItem info)

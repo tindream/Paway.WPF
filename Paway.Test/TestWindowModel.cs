@@ -18,7 +18,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Paway.Test.ViewModel
+namespace Paway.Test
 {
     public class TestWindowModel : ViewModelBase
     {

@@ -1,0 +1,49 @@
+﻿<WindowEXT x:Class="Paway.Test.TipWindow"
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           xmlns:local="clr-namespace:Paway.Test"
+           mc:Ignorable="d"
+           xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+           xmlns:ip="http://www.galasoft.ch/mvvmlight"
+           Background="Transparent"
+           DataContext="{Binding Tip, Source={StaticResource Locator}}"
+           Title="TipWindow" 
+           Width="248" Height="248"
+           WindowStyle="None" Topmost="True" ResizeMode="NoResize" AllowsTransparency="True" ShowInTaskbar="False">
+    <Grid>
+        <Border Name="borderOne" Width="{Binding TipWidth}" Height="{Binding TipWidth}" BorderBrush="{StaticResource ThemeColor}" BorderThickness="15" CornerRadius="40" Visibility="{Binding IAll, Converter={StaticResource boolToCollapsed}}" RenderTransformOrigin="0.5,0.5">
+            <Border.RenderTransform>
+                <ScaleTransform CenterX="94" CenterY="94"/>
+            </Border.RenderTransform>
+            <ButtonEXT Content="O" Width="52" Height="52" Margin="-1,-1,0,0" Radius="30" FontSize="21" Command="{Binding MenuCommand}" CommandParameter="展开"/>
+        </Border>
+        <Border Name="borderAll" Width="{Binding TipWidth}" Height="{Binding TipWidth}" BorderBrush="#C8D3D3F3" BorderThickness="5" CornerRadius="20" Visibility="{Binding IAll, Converter={StaticResource boolToVisible}}" RenderTransformOrigin="0.5,0.5">
+            <Border.RenderTransform>
+                <TransformGroup/>
+            </Border.RenderTransform>
+            <ListViewEXT x:Name="listView3" IsLight="True" Type="Color" ItemTextForeground="White"
+                         ItemWidth="80" ItemHeight="80" ItemBackground="200;160;240" ItemTextFontSize="17"
+                         ItemImageWidth="42" ItemImageStretch="Uniform">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectionCommand}" CommandParameter="{Binding ElementName=listView3}"/>
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="PreviewMouseDown">
+                        <ip:EventToCommand Command="{Binding ListViewMouseDown}" PassEventArgsToCommand="True"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListBoxItemEXT Text="呼叫" ItemRadius="16,0,0,0" />
+                <ListBoxItemEXT IsNormal="True"/>
+                <ListBoxItemEXT Text="软键盘" ItemRadius="0,16,0,0" />
+                <ListBoxItemEXT Text="投影" />
+                <ListBoxItemEXT Tag="收缩" ItemPadding="0,19,0,0" />
+                <ListBoxItemEXT Text="结束投影" />
+                <ListBoxItemEXT Text="发起同屏" ItemRadius="0,0,0,16" />
+                <ListBoxItemEXT Text="加入同屏" />
+                <ListBoxItemEXT Text="结束同屏" ItemRadius="0,0,16,0" />
+            </ListViewEXT>
+        </Border>
+    </Grid>
+</WindowEXT>

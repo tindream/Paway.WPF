@@ -142,9 +142,16 @@
     <Compile Include="TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TipWindow.xaml.cs">
+      <DependentUpon>TipWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TipWindowModel.cs" />
     <Compile Include="TitleContent.xaml.cs">
       <DependentUpon>TitleContent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewLocator\ViewlLocator.cs" />
+    <Compile Include="ViewLocator\ViewModelLocator.cs" />
+    <Compile Include="ViewMessage\LoadMessage.cs" />
     <Compile Include="ViewMessage\RefreshMessage.cs" />
     <Compile Include="ViewMessage\UserMessage.cs" />
     <Compile Include="ViewMessage\StatuMessage.cs" />
@@ -152,7 +159,6 @@
     <Compile Include="MainWindowModel.cs" />
     <Compile Include="ViewPlus\AddViewModelPlus.cs" />
     <Compile Include="ViewPlus\DataGridViewModel.cs" />
-    <Compile Include="ViewPlus\ViewModelLocator.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -172,6 +178,10 @@
     <Page Include="TestWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TipWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="TitleContent.xaml">
       <SubType>Designer</SubType>
