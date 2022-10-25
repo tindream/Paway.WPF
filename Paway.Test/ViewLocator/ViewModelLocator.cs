@@ -17,6 +17,9 @@ namespace Paway.Test
         public TestWindowModel Test => GetInstance<TestWindowModel>();
         public MainWindowModel Main => GetInstance<MainWindowModel>();
 
+        public NameWindowModel Name => GetInstance<NameWindowModel>();
+        public LoginPageModel Login => GetInstance<LoginPageModel>();
+
         /// <summary>
         /// 单实例模型已注册列表
         /// </summary>

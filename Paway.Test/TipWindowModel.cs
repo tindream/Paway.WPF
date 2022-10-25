@@ -97,7 +97,7 @@ namespace Paway.Test
                         break;
                 }
             }
-            //listView1.SelectedIndex = -1;
+            listView1.SelectedIndex = -1;
         });
         public ICommand MenuCommand => new RelayCommand<string>(item => Action(item));
         public void Action(string item)

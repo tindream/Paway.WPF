@@ -127,18 +127,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="..\AssemblyVersion.cs">
+      <Link>Properties\AssemblyVersion.cs</Link>
+    </Compile>
     <Compile Include="Data\DataService.cs" />
-    <Compile Include="Enum\Auth\ButtonType.cs" />
-    <Compile Include="Enum\Auth\MenuType.cs" />
-    <Compile Include="Enum\MonitorType.cs" />
-    <Compile Include="Enum\UserType.cs" />
-    <Compile Include="Info\AdminInfo.cs" />
-    <Compile Include="Info\AuthInfo.cs" />
-    <Compile Include="Info\UserInfo.cs" />
+    <Compile Include="Model\Auth\ButtonType.cs" />
+    <Compile Include="Model\Auth\MenuType.cs" />
+    <Compile Include="Model\Enum\MealType.cs" />
+    <Compile Include="Model\Enum\MonitorType.cs" />
+    <Compile Include="Model\Enum\UserType.cs" />
+    <Compile Include="Model\Info\AdminInfo.cs" />
+    <Compile Include="Model\Info\AuthInfo.cs" />
+    <Compile Include="Model\Info\BaseInfo.cs" />
+    <Compile Include="Model\Info\UserInfo.cs" />
+    <Compile Include="Method\Cache.cs" />
     <Compile Include="Method\Method.cs" />
     <Compile Include="Method\Config.cs" />
     <Compile Include="Method\PlotHelper.cs" />
-    <Compile Include="Info\TempInfo.cs" />
+    <Compile Include="Model\Info\TempInfo.cs" />
+    <Compile Include="Model\interface\IBaseInfo.cs" />
+    <Compile Include="Model\interface\IChecked.cs" />
+    <Compile Include="Model\interface\IMessage.cs" />
     <Compile Include="TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
@@ -151,14 +160,28 @@
     </Compile>
     <Compile Include="ViewLocator\ViewlLocator.cs" />
     <Compile Include="ViewLocator\ViewModelLocator.cs" />
+    <Compile Include="ViewMessage\ClientMessage.cs" />
+    <Compile Include="ViewMessage\KeyMessage.cs" />
     <Compile Include="ViewMessage\LoadMessage.cs" />
     <Compile Include="ViewMessage\RefreshMessage.cs" />
     <Compile Include="ViewMessage\UserMessage.cs" />
     <Compile Include="ViewMessage\StatuMessage.cs" />
     <Compile Include="TestWindowModel.cs" />
     <Compile Include="MainWindowModel.cs" />
-    <Compile Include="ViewPlus\AddViewModelPlus.cs" />
-    <Compile Include="ViewPlus\DataGridViewModel.cs" />
+    <Compile Include="ViewPlus\AddWindowModel.cs" />
+    <Compile Include="ViewPlus\BaseWindowModel.cs" />
+    <Compile Include="ViewPlus\DataGridPageModel.cs" />
+    <Compile Include="Views\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginPageModel.cs" />
+    <Compile Include="Views\NameWindow.xaml.cs">
+      <DependentUpon>NameWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NameWindowModel.cs" />
+    <Compile Include="Views\WelcomePage.xaml.cs">
+      <DependentUpon>WelcomePage.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -186,6 +209,18 @@
     <Page Include="TitleContent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\NameWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\WelcomePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -235,8 +270,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interface\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

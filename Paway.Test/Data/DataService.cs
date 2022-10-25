@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Linq.Expressions;
 
 namespace Paway.Test
 {
@@ -110,16 +111,19 @@ namespace Paway.Test
         {
             base.ExecuteCommand(cmd =>
             {
-                Config.Admin = FindAdmin(cmd);
+                Config.Admin = Method.Conversion<AdminInfo, AdminBaseInfo>(Find<AdminBaseInfo>(cmd));
                 AutoUpdate(cmd);
             });
         }
-        private AdminInfo FindAdmin(DbCommand cmd = null)
+        public List<T> FindSort<T>(DbCommand cmd = null) where T : class, new()
         {
-            List<AdminBaseInfo> temp = Find<AdminBaseInfo>(cmd);
-            List<IInfo> list = new List<IInfo>();
-            list.AddRange(temp);
-            return Method.Conversion<AdminInfo, IInfo>(list);
+            return FindSort<T>(null, cmd);
+        }
+        public List<T> FindSort<T>(Expression<Func<T, bool>> action, DbCommand cmd = null) where T : class, new()
+        {
+            var list = Find(action, cmd);
+            Method.Sorted(list);
+            return list;
         }
 
         #endregion

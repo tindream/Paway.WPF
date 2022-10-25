@@ -12,4 +12,5 @@ namespace Paway.Test
         public DependencyObject Obj { get; set; }
     }
     public class TipLoadMessage : LoadMessage { }
+    public class LoginLoadMessage : LoadMessage { }
 }

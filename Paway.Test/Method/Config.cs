@@ -14,7 +14,8 @@ namespace Paway.Test
     public class Config : WPF.PConfig
     {
         #region 常量
-        public const string Text = "测试系统";
+        public const string Title = "测试系统";
+        public static string Text;
         public const string LogConfig = "Log.xml";
         /// <summary>
         /// 图表绽放率
