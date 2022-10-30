@@ -24,15 +24,19 @@
     <local:ValueMultiConverter x:Key="valueMultiConverter"/>
     <local:ValueAddConverter x:Key="valueAddConverter"/>
     <local:ValueToTrue x:Key="valueToTrue"/>
+    <local:ValueUnionToTrue x:Key="valueUnionToTrue"/>
     <local:ValueMoreToTrue x:Key="valueMoreToTrue"/>
     <local:ValueToMoreTrue x:Key="valueToMoreTrue"/>
     <local:ValueToFalse x:Key="valueToFalse"/>
+    <local:ValueUnionToFalse x:Key="valueUnionToFalse"/>
     <local:ValueMoreToFalse x:Key="valueMoreToFalse"/>
     <local:ValueToMoreFalse x:Key="valueToMoreFalse"/>
     <local:ValueToVisible x:Key="valueToVisible"/>
+    <local:ValueUnionToVisible x:Key="valueUnionToVisible"/>
     <local:ValueMoreToVisible x:Key="valueMoreToVisible"/>
     <local:ValueToMoreVisible x:Key="valueToMoreVisible"/>
     <local:ValueToCollapsed x:Key="valueToCollapsed"/>
+    <local:ValueUnionToCollapsed x:Key="valueUnionToCollapsed"/>
     <local:ValueMoreToCollapsed x:Key="valueMoreToCollapsed"/>
     <local:ValueToMoreCollapsed x:Key="valueToMoreCollapsed"/>
 

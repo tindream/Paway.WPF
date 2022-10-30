@@ -105,6 +105,28 @@ namespace Paway.WPF
         }
     }
     /// <summary>
+    /// 值转True(多枚举有并集)
+    /// </summary>
+    internal class ValueUnionToTrue : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            bool result = false;
+            if (value == null || value == DBNull.Value) result = true;
+            else if (value is Enum)
+            {
+                var valueNormal = value.GetHashCode();
+                var valueReg = parameter.ToInt();
+                result = (valueNormal & valueReg) != 0;
+            }
+            return result;
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    /// <summary>
     /// 值转True(多原始枚举值)
     /// </summary>
     internal class ValueMoreToTrue : IValueConverter
@@ -152,6 +174,7 @@ namespace Paway.WPF
             throw new NotImplementedException();
         }
     }
+
     /// <summary>
     /// 值转False
     /// </summary>
@@ -166,6 +189,21 @@ namespace Paway.WPF
         {
             var result = value.ToBool() ? -1 : 1;
             return (result * parameter.ToInt()).ToString();
+        }
+    }
+    /// <summary>
+    /// 值转False(多枚举无并集)
+    /// </summary>
+    internal class ValueUnionToFalse : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var result = (bool)(new ValueUnionToTrue().Convert(value, targetType, parameter, culture));
+            return !result;
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
     /// <summary>
@@ -217,6 +255,21 @@ namespace Paway.WPF
         }
     }
     /// <summary>
+    /// 值转Visibility(多枚举无并集)
+    /// </summary>
+    internal class ValueUnionToVisible : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var result = (bool)(new ValueUnionToTrue().Convert(value, targetType, parameter, culture));
+            return result ? Visibility.Visible : Visibility.Collapsed;
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    /// <summary>
     /// 值转Visibility(多原始枚举值)
     /// </summary>
     internal class ValueMoreToVisible : IValueConverter
@@ -246,6 +299,7 @@ namespace Paway.WPF
             throw new NotImplementedException();
         }
     }
+
     /// <summary>
     /// 值转Collapsed
     /// </summary>
@@ -254,6 +308,21 @@ namespace Paway.WPF
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var result = (bool)(new ValueToTrue().Convert(value, targetType, parameter, culture));
+            return result ? Visibility.Collapsed : Visibility.Visible;
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    /// <summary>
+    /// 值转Collapsed(多枚举无并集)
+    /// </summary>
+    internal class ValueUnionToCollapsed : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var result = (bool)(new ValueUnionToTrue().Convert(value, targetType, parameter, culture));
             return result ? Visibility.Collapsed : Visibility.Visible;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
