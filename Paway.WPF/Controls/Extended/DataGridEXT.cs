@@ -336,7 +336,7 @@ namespace Paway.WPF
                 }
                 if (TryFindResource("NormalColumnHeaderStyle") is Style noLastStyle)
                 {
-                    var fill = columns.Any(c => c.Width.UnitType == DataGridLengthUnitType.Star);
+                    var fill = this.ColumnWidth.UnitType == DataGridLengthUnitType.Star || columns.Any(c => c.Width.UnitType == DataGridLengthUnitType.Star);
                     foreach (var column in columns)
                     {
                         if (!fill || column != lastColumn) column.HeaderStyle = noLastStyle;
