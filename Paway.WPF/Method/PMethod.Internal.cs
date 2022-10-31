@@ -91,7 +91,7 @@ namespace Paway.WPF
         /// </summary>
         internal static void OnKeyDown(KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
+            if (e.Key == Key.Enter || e.Key == Key.Tab)
             {
                 // MoveFocus takes a TraveralReqest as its argument.
                 var direction = FocusNavigationDirection.Down;

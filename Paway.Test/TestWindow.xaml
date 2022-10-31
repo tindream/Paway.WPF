@@ -20,6 +20,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel VerticalAlignment="Center" >
             <ButtonEXT Click="ButtonEXT_Click" Command="{Binding ButtonCommand}"/>
+            <TextBoxEXT IAnimation="2"/>
             <TextBoxEXT IAnimation="3"/>
             <ComboBoxEXT Name="cbxUserName" Water="请输入" 
                      IAnimation="3"
