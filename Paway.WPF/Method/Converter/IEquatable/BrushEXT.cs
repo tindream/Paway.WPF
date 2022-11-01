@@ -75,6 +75,7 @@ namespace Paway.WPF
         /// </summary>
         public BrushEXT()
         {
+            OnPressedMouse();
             PConfig.ColorChanged += Config_ColorChanged;
         }
         private void Config_ColorChanged(Color obj)

@@ -67,23 +67,28 @@
                                     </VisualStateManager.VisualStateGroups>
                                     <Border x:Name="CheckedStateOuterBorder"
                                             CornerRadius="4"
-                                            Background="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:DataPager}}}"
                                             BorderBrush="Transparent"
                                             BorderThickness="{TemplateBinding BorderThickness}"
                                             Opacity="0" >
+                                        <Border.Background>
+                                            <MultiBinding Converter="{StaticResource nullSelector}">
+                                                <Binding Path="ItemBrush.Mouse" RelativeSource="{RelativeSource AncestorType={x:Type local:DataPager}}" />
+                                                <Binding Path="(local:ThemeEXT.ItemBrush).Mouse" RelativeSource="{RelativeSource Self}" />
+                                            </MultiBinding>
+                                        </Border.Background>
                                         <ContentPresenter x:Name="contentPresenterWhite"
-                                                              TextBlock.Foreground="White"
-                                                              Content="{TemplateBinding Content}"
-                                                              ContentTemplate="{TemplateBinding ContentTemplate}"
-                                                              HorizontalAlignment="Center"
-                                                              VerticalAlignment="Center" />
+                                                          TextBlock.Foreground="White"
+                                                          Content="{TemplateBinding Content}"
+                                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                          HorizontalAlignment="Center"
+                                                          VerticalAlignment="Center" />
                                     </Border>
                                     <Border x:Name="OuterBtnBorder"
                                             Background="{TemplateBinding Background}"
                                             BorderBrush="Transparent"
                                             BorderThickness="{TemplateBinding BorderThickness}">
                                         <Border x:Name="InnerBtnBorder"
-                                            CornerRadius="4"
+                                                CornerRadius="4"
                                                 BorderBrush="Transparent"
                                                 BorderThickness="{TemplateBinding BorderThickness}">
                                             <ContentPresenter x:Name="contentPresenter"
