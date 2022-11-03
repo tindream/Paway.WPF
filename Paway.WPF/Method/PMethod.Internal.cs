@@ -87,20 +87,21 @@ namespace Paway.WPF
         }
 
         /// <summary>
-        /// 回车时移动焦点到下一控件
+        /// 回车、Tab时移动焦点到下一控件
         /// </summary>
         internal static void OnKeyDown(KeyEventArgs e)
         {
             if (e.Key == Key.Enter || e.Key == Key.Tab)
             {
-                // MoveFocus takes a TraveralReqest as its argument.
-                var direction = FocusNavigationDirection.Down;
-                if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control) direction = FocusNavigationDirection.Up;
-                var request = new TraversalRequest(direction);
                 // Gets the element with keyboard focus.
-                // Change keyboard focus.
-                if (Keyboard.FocusedElement is UIElement elementWithFocus)
+                // Change keyboard focus. 
+                //if (Keyboard.FocusedElement is UIElement elementWithFocus)
+                if (e.Source is UIElement elementWithFocus)
                 {
+                    // MoveFocus takes a TraveralReqest as its argument.
+                    var direction = FocusNavigationDirection.Down;
+                    if ((Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.Shift) direction = FocusNavigationDirection.Up;
+                    var request = new TraversalRequest(direction);
                     elementWithFocus.MoveFocus(request);
                 }
                 //e.Handled = true;

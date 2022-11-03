@@ -19,42 +19,12 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <StackPanel VerticalAlignment="Center" >
-            <ButtonEXT Click="ButtonEXT_Click" Command="{Binding ButtonCommand}"/>
             <TextBoxEXT IAnimation="2"/>
-            <TextBoxEXT IAnimation="3"/>
             <ComboBoxEXT Name="cbxUserName" Water="请输入" 
                      IAnimation="3"
                      IsEditable="True" IconWidth="36" IconStretch="Uniform"/>
-            <ListViewEXT Name="listMenu" ItemWidth="190" ItemHeight="42" ItemTextFontSize="18"
-                             ItemImageDock="Left" ItemImageStretch="Uniform" ItemImageHeight="28" ItemImageMargin="5,0,5,0"
-                             ItemPadding="10" HorizontalContentAlignment="Left" 
-                             ItemDescForeground="White" ItemDescFontSize="12"
-                             ItemBrush=";240;255" ItemBackground="0;120;160" Margin="0,-10,0,0" ClickMode="Release" SelectionMode="Single">
-                <ListViewEXT.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Header="1"/>
-                        <MenuItem Header="2"/>
-                        <MenuItem Header="3"/>
-                        <MenuItem Header="4"/>
-                    </ContextMenu>
-                </ListViewEXT.ContextMenu>
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding SelectionCommand}" CommandParameter="{Binding ElementName=listMenu}"/>
-                    </i:EventTrigger>
-                    <i:EventTrigger EventName="PreviewMouseDown">
-                        <ip:EventToCommand Command="{Binding ListViewMouseDown}" PassEventArgsToCommand="True"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-                <ListBoxItemEXT Text="B1"
-                                    ItemPadding="48,0,0,0"/>
-                <ListBoxItemEXT Text="B2"
-                                    ItemPadding="48,0,0,0"/>
-                <ListBoxItemEXT Text="B3"
-                                    ItemPadding="48,0,0,0"/>
-                <ListBoxItemEXT Text="B4"
-                                    ItemPadding="48,0,0,0"/>
-            </ListViewEXT>
+            <TextBoxEXT IAnimation="3"/>
+            <ButtonEXT Click="ButtonEXT_Click" Command="{Binding ButtonCommand}"/>
         </StackPanel>
         <Border Grid.Column="1" Background="Transparent">
             <DataGridEXT ItemsSource="{Binding GridList}">
