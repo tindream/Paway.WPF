@@ -161,7 +161,7 @@
 
     <Style TargetType="{x:Type local:TabControlEXT}" BasedOn="{StaticResource Config}">
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
-        <Setter Property="Padding" Value="2,0"/>
+        <Setter Property="Padding" Value="0"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Background" Value="White"/>
@@ -184,8 +184,18 @@
                                   KeyboardNavigation.TabIndex="1" Panel.ZIndex="1"
                                   Margin="{TemplateBinding Padding}"
                                   Background="Transparent"/>
-                        <Line X1="0" X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" StrokeThickness="1" 
-                              Stroke="{TemplateBinding BorderBrush}" RenderOptions.EdgeMode="Aliased" VerticalAlignment="Bottom" Margin="0"/>
+                        <Line Name="lineTop" X1="0" X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" StrokeThickness="1" 
+                              Stroke="{TemplateBinding BorderBrush}" RenderOptions.EdgeMode="Aliased" VerticalAlignment="Bottom" Margin="0"
+                              Visibility="Collapsed"/>
+                        <Line Name="lineLeft" Y1="0" Y2="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" StrokeThickness="1" 
+                              Stroke="{TemplateBinding BorderBrush}" RenderOptions.EdgeMode="Aliased" HorizontalAlignment="Right" Margin="0"
+                              Visibility="Collapsed"/>
+                        <Line Name="lineRight" Y1="0" Y2="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" StrokeThickness="1" 
+                              Stroke="{TemplateBinding BorderBrush}" RenderOptions.EdgeMode="Aliased" HorizontalAlignment="Left" Margin="0"
+                              Grid.Column="1" Visibility="Collapsed"/>
+                        <Line Name="lineBottom" X1="0" X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" StrokeThickness="1" 
+                              Stroke="{TemplateBinding BorderBrush}" RenderOptions.EdgeMode="Aliased" VerticalAlignment="Top" Margin="0"
+                              Grid.Row="1" Visibility="Collapsed"/>
                         <Border x:Name="ContentPanel" BorderBrush="{TemplateBinding BorderBrush}" 
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 Background="{TemplateBinding Background}" 
@@ -198,11 +208,15 @@
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="TabStripPlacement" Value="Top">
+                            <Setter Property="Visibility" TargetName="lineTop" Value="Visible"/>
+                        </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Bottom">
                             <Setter Property="Grid.Row" TargetName="HeaderPanel" Value="1"/>
                             <Setter Property="Grid.Row" TargetName="ContentPanel" Value="0"/>
                             <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
                             <Setter Property="Height" TargetName="RowDefinition1" Value="Auto"/>
+                            <Setter Property="Visibility" TargetName="lineBottom" Value="Visible"/>
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Left">
                             <Setter Property="Grid.Row" TargetName="HeaderPanel" Value="0"/>
@@ -213,6 +227,7 @@
                             <Setter Property="Width" TargetName="ColumnDefinition1" Value="*"/>
                             <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
                             <Setter Property="Height" TargetName="RowDefinition1" Value="0"/>
+                            <Setter Property="Visibility" TargetName="lineLeft" Value="Visible"/>
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Right">
                             <Setter Property="Grid.Row" TargetName="HeaderPanel" Value="0"/>
@@ -223,6 +238,7 @@
                             <Setter Property="Width" TargetName="ColumnDefinition1" Value="Auto"/>
                             <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
                             <Setter Property="Height" TargetName="RowDefinition1" Value="0"/>
+                            <Setter Property="Visibility" TargetName="lineRight" Value="Visible"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>

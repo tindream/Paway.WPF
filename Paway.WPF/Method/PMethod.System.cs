@@ -391,6 +391,58 @@ namespace Paway.WPF
             catch (Exception) { }
         }
         /// <summary>
+        /// 同步调用，并返回结果
+        /// </summary>
+        public static T Invoke<T>(DependencyObject obj, Func<T> action, Action<Exception> error = null)
+        {
+            try
+            {
+                return obj.Dispatcher.Invoke(() =>
+                {
+                    try
+                    {
+                        return action.Invoke();
+                    }
+                    catch (Exception ex)
+                    {
+                        if (error == null) ex.Log();
+                        else error.Invoke(ex);
+                        return default;
+                    }
+                });
+            }
+            catch (Exception)
+            {
+                return default;
+            }
+        }
+        /// <summary>
+        /// 带参数同步调用，并返回结果
+        /// </summary>
+        public static O Invoke<T, O>(DependencyObject obj, Func<T, O> action, T t, Action<Exception> error = null)
+        {
+            try
+            {
+                return obj.Dispatcher.Invoke(() =>
+                {
+                    try
+                    {
+                        return action.Invoke(t);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (error == null) ex.Log();
+                        else error.Invoke(ex);
+                        return default;
+                    }
+                });
+            }
+            catch (Exception)
+            {
+                return default;
+            }
+        }
+        /// <summary>
         /// 异步调用
         /// </summary>
         public static void BeginInvoke(DependencyObject obj, Action action, Action<Exception> error = null)
