@@ -82,11 +82,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Root\OxyPlot1.1\OxyPlot.Wpf.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Paway.Helper, Version=2.4.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Paway.Helper.2.4.8\lib\net45\Paway.Helper.dll</HintPath>
+    <Reference Include="Paway.Helper, Version=2.4.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Paway.Helper.2.4.9\lib\net45\Paway.Helper.dll</HintPath>
     </Reference>
     <Reference Include="Paway.Utils, Version=2.4.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Paway.Utils.2.4.8\lib\net45\Paway.Utils.dll</HintPath>
+      <HintPath>..\packages\Paway.Utils.2.4.9\lib\net45\Paway.Utils.dll</HintPath>
     </Reference>
     <Reference Include="PinYinConverterCore, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\PinYinConverterCore.1.0.2\lib\net45\PinYinConverterCore.dll</HintPath>
