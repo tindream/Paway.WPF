@@ -100,7 +100,7 @@ namespace Paway.WPF
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!value.ToBool()) return 0;//重复绑定且枚举值超出范围时绑定报错
+            if (!value.ToBool()) return null;//重复绑定且枚举值超出范围时绑定报错
             return parameter;
         }
     }
@@ -148,7 +148,7 @@ namespace Paway.WPF
         {
             PConfig.IConvertBack = true;
             var result = value.ToBool() ? 1 : -1;
-            return (result * parameter.ToInt()).ToString();
+            return result * parameter.ToInt();
         }
     }
     /// <summary>
@@ -182,13 +182,13 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)(new ValueToTrue().Convert(value, targetType, parameter, culture));
+            var result = (bool)new ValueToTrue().Convert(value, targetType, parameter, culture);
             return !result;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = value.ToBool() ? -1 : 1;
-            return (result * parameter.ToInt()).ToString();
+            if (value.ToBool()) return null;//重复绑定且枚举值超出范围时绑定报错
+            return parameter;
         }
     }
     /// <summary>
@@ -198,7 +198,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)(new ValueUnionToTrue().Convert(value, targetType, parameter, culture));
+            var result = (bool)new ValueUnionToTrue().Convert(value, targetType, parameter, culture);
             return !result;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -213,14 +213,14 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)(new ValueMoreToTrue().Convert(value, targetType, parameter, culture));
+            var result = (bool)new ValueMoreToTrue().Convert(value, targetType, parameter, culture);
             return !result;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             PConfig.IConvertBack = true;
             var result = value.ToBool() ? -1 : 1;
-            return (result * parameter.ToInt()).ToString();
+            return result * parameter.ToInt();
         }
     }
     /// <summary>
@@ -230,7 +230,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)(new ValueToMoreTrue().Convert(value, targetType, parameter, culture));
+            var result = (bool)new ValueToMoreTrue().Convert(value, targetType, parameter, culture);
             return !result;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -246,7 +246,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)(new ValueToTrue().Convert(value, targetType, parameter, culture));
+            var result = (bool)new ValueToTrue().Convert(value, targetType, parameter, culture);
             return result ? Visibility.Visible : Visibility.Collapsed;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -261,7 +261,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)(new ValueUnionToTrue().Convert(value, targetType, parameter, culture));
+            var result = (bool)new ValueUnionToTrue().Convert(value, targetType, parameter, culture);
             return result ? Visibility.Visible : Visibility.Collapsed;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -276,7 +276,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)(new ValueMoreToTrue().Convert(value, targetType, parameter, culture));
+            var result = (bool)new ValueMoreToTrue().Convert(value, targetType, parameter, culture);
             return result ? Visibility.Visible : Visibility.Collapsed;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -291,7 +291,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)(new ValueToMoreTrue().Convert(value, targetType, parameter, culture));
+            var result = (bool)new ValueToMoreTrue().Convert(value, targetType, parameter, culture);
             return result ? Visibility.Visible : Visibility.Collapsed;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -307,7 +307,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)(new ValueToTrue().Convert(value, targetType, parameter, culture));
+            var result = (bool)new ValueToTrue().Convert(value, targetType, parameter, culture);
             return result ? Visibility.Collapsed : Visibility.Visible;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -322,7 +322,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)(new ValueUnionToTrue().Convert(value, targetType, parameter, culture));
+            var result = (bool)new ValueUnionToTrue().Convert(value, targetType, parameter, culture);
             return result ? Visibility.Collapsed : Visibility.Visible;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -337,7 +337,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)(new ValueMoreToTrue().Convert(value, targetType, parameter, culture));
+            var result = (bool)new ValueMoreToTrue().Convert(value, targetType, parameter, culture);
             return result ? Visibility.Collapsed : Visibility.Visible;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -352,7 +352,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)(new ValueToMoreTrue().Convert(value, targetType, parameter, culture));
+            var result = (bool)new ValueToMoreTrue().Convert(value, targetType, parameter, culture);
             return result ? Visibility.Collapsed : Visibility.Visible;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

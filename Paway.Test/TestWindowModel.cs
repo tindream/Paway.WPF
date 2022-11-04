@@ -112,6 +112,13 @@ namespace Paway.Test
             set { if (_menuType != value) { _menuType = value; RaisePropertyChanged(); } }
         }
 
+        private bool _statu;
+        public bool Statu
+        {
+            get { return _statu; }
+            set { if (_statu != value) { _statu = value; RaisePropertyChanged(); } }
+        }
+
         #endregion
 
         #region 命令
