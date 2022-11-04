@@ -2,6 +2,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Paway.WPF">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
+    </ResourceDictionary.MergedDictionaries>
     <Storyboard x:Key="sbEnter">
         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PART_VerticalScrollBar">
             <EasingDoubleKeyFrame KeyTime="0:0:.2" Value=".8"/>
@@ -260,7 +263,8 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style TargetType="{x:Type local:ScrollViewerEXT}">
+    <Style TargetType="{x:Type local:ScrollViewerEXT}" BasedOn="{StaticResource Config}">
+        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="BorderBrush" Value="LightGray"/>
         <!--<Setter Property="PanningMode" Value="Both"/>-->
         <Setter Property="Template">

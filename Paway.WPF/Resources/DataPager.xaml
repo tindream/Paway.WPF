@@ -6,7 +6,7 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type local:DataPager}">
+    <Style TargetType="{x:Type local:DataPager}" BasedOn="{StaticResource Config}">
         <Setter Property="Background" Value="{StaticResource Light}" />
         <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="BorderThickness" Value="1,0,1,1" />

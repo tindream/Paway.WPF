@@ -5,7 +5,6 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
-
     <local:WeekendConvert x:Key="weekendConvert"/>
 
     <!--选择年月按钮-->
@@ -530,20 +529,11 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="CalendarStyle" TargetType="{x:Type Calendar}">
+    <Style x:Key="CalendarStyle" TargetType="{x:Type Calendar}" BasedOn="{StaticResource Config}">
         <Setter Property="Foreground" Value="{StaticResource TextSub}"/>
         <Setter Property="Background" Value="White"/>
         <Setter Property="FirstDayOfWeek" Value="Sunday"/>
-        <Setter Property="BorderBrush">
-            <Setter.Value>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFA3AEB9" Offset="0"/>
-                    <GradientStop Color="#FF8399A9" Offset="0.375"/>
-                    <GradientStop Color="#FF718597" Offset="0.375"/>
-                    <GradientStop Color="#FF617584" Offset="1"/>
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="CalendarButtonStyle" Value="{StaticResource CalendarButtonStyle}"/>
         <Setter Property="CalendarDayButtonStyle" Value="{StaticResource CalendarDayButtonStyle}"/>
         <Setter Property="CalendarItemStyle" Value="{StaticResource CalendarItemStyle}"/>

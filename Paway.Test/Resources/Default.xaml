@@ -14,20 +14,5 @@
 
     <!--#region 取消焦点样式 -->
     <Thickness x:Key="FocusBorderThickness">0</Thickness>
-    <ControlTemplate x:Key="ThumbButton" TargetType="Thumb">
-        <Border BorderThickness="{Binding Tag.Border, RelativeSource={RelativeSource TemplatedParent}}" 
-                CornerRadius="2" Background="Transparent"
-                BorderBrush="{StaticResource DotLineBrush}">
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <TextBlock Text="{Binding Tag.Index, RelativeSource={RelativeSource TemplatedParent}}" TextAlignment="Center"/>
-                <TextBlock Grid.Row="1" Text="{FontImage Type=User}" Foreground="{Binding Tag.Color, RelativeSource={RelativeSource TemplatedParent}}"
-                           FontFamily="{StaticResource FontAwesome}" FontSize="20" TextAlignment="Center" />
-            </Grid>
-        </Border>
-    </ControlTemplate>
 
 </ResourceDictionary>
