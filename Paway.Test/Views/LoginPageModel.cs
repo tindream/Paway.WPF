@@ -6,6 +6,7 @@ using Paway.WPF;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Sockets;
 using System.Windows;
@@ -115,7 +116,14 @@ namespace Paway.Test
 
         public LoginPageModel()
         {
+            Debug();
             Messenger.Default.Register<LoginLoadMessage>(this, msg => this.Root = msg.Obj);
+        }
+        [Conditional("DEBUG")]
+        private void Debug()
+        {
+            UserName = "admin";
+            Password = "admin";
         }
     }
 }

@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         DataContext="{Binding Name, Source={StaticResource Locator}}"
         Name="wd"
+        UseLayoutRounding="True"
         Title="{Binding Title}" Height="250" Width="350" ResizeMode="NoResize">
     <Grid FocusManager.FocusedElement="{Binding ElementName=tbName}">
         <Grid.RowDefinitions>

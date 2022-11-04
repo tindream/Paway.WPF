@@ -23,17 +23,15 @@ namespace Paway.Test
     /// </summary>
     [Serializable]
     [Table("Admins")]
-    public class AdminBaseInfo : ModelBase, IInfo
+    public class AdminBaseInfo : BaseInfo, IInfo
     {
         public string Name { get; set; }
 
         public string Value { get; set; }
 
-        public DateTime DateTime { get; set; }
-
         public AdminBaseInfo()
         {
-            this.DateTime = DateTime.Now;
+            this.CreateOn = DateTime.Now;
         }
     }
 }

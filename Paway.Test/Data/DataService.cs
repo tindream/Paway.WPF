@@ -9,13 +9,13 @@ using System.ComponentModel;
 using System.Data.Common;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
-using System.Linq.Expressions;
 
 namespace Paway.Test
 {
-    public class DataService : SQLiteHelper
+    public partial class DataService : SQLiteHelper
     {
         private const string dbName = "test.db";
         private static DataService intance;
@@ -43,18 +43,46 @@ namespace Paway.Test
             }
         }
 
+        #region Login
         public UserInfo Login(string name, string pad)
         {
-            var find = "Name = @name  and Pad = @pad";
-            List<UserInfo> list = Find<UserInfo>(find, new { name, pad });
+            var list = Find<UserInfo>(c => c.Name == name && c.Pad == pad);
             if (list.Count == 0)
             {
-                throw new WarningException("用户名或密码错误");
+                var error = "用户名或密码错误";
+                UserLog(new UserInfo(name), LogType.LoginError, error);
+                throw new WarningException(error);
             }
+            UserChecked(list[0]);
             list[0].LoginOn = DateTime.Now;
-            Update(list[0], nameof(UserInfo.LoginOn));
+            base.Update(list[0], nameof(UserInfo.LoginOn));
+            UserLog(list[0], LogType.Login);
             return list[0];
         }
+        private UserInfo UserChecked(UserInfo user)
+        {
+            if (!user.Statu)
+            {
+                var error = "用户已停用";
+                UserLog(user, LogType.LoginError, error);
+                throw new WarningException(error);
+            }
+            return user;
+        }
+        public LogInfo UserLog(UserInfo user, LogType type, string msg = null)
+        {
+            var log = new LogInfo(type, user.Name, msg);
+            base.Insert(log);
+            return log;
+        }
+        public UserInfo Login(int userId)
+        {
+            var info = Cache.UserList.Find(c => c.Id == userId);
+            if (info == null) throw new WarningException("用户不存在");
+            return UserChecked(info);
+        }
+
+        #endregion
 
         #region Admin.Update
         public void Update(string name, DbCommand arg = null)
@@ -62,17 +90,16 @@ namespace Paway.Test
             var value = Config.Admin.GetValue(name);
             base.ExecuteCommand(cmd =>
             {
-                string find = string.Format("Name = '{0}'", name);
-                List<AdminBaseInfo> list = Find<AdminBaseInfo>(find, cmd);
+                var list = Find<AdminBaseInfo>(c => c.Name == name, cmd);
                 if (list.Count == 0)
                 {
-                    AdminBaseInfo info = new AdminBaseInfo() { Name = name, Value = value.ToStrings(), DateTime = DateTime.Now };
+                    AdminBaseInfo info = new AdminBaseInfo() { Name = name, Value = value.ToStrings() };
                     Insert(info, cmd);
                 }
                 else
                 {
-                    list[0].Value = value.ToString();
-                    list[0].DateTime = DateTime.Now;
+                    list[0].Value = value.ToStrings();
+                    list[0].UpdateOn = DateTime.Now;
                     Update(list[0], cmd);
                 }
             }, arg);
@@ -81,20 +108,18 @@ namespace Paway.Test
         #endregion
 
         #region 自动升级
-        private void AutoUpdate(DbCommand arg)
+        private void AutoUpdate()
         {
-            #region 1.0
-            if (Config.Admin.Version == 0)
+            if (Config.Admin.Version >= 0) return;
+            base.ExecuteCommand(cmd =>
             {
-                base.ExecuteCommand(cmd =>
+                if (Config.Admin.Version == 0)
                 {
-                    //base.Execute("alter table [AlarmRecords] add column [DeviceId] int;", cmd);
-                    //Config.Admin.Version = 32;
-                    //Update(nameof(Config.Admin.Version), cmd);
-                }, arg);
-            }
-
-            #endregion
+                    //base.Execute($"alter table [MeetScreens] add column [{nameof(MeetScreenInfo.BackImage)}] nvarchar(256);", cmd);
+                    Config.Admin.Version = 1;
+                    Update(nameof(Config.Admin.Version), cmd);
+                }
+            });
         }
 
         #endregion
@@ -109,11 +134,8 @@ namespace Paway.Test
         }
         public void Load()
         {
-            base.ExecuteCommand(cmd =>
-            {
-                Config.Admin = Method.Conversion<AdminInfo, AdminBaseInfo>(Find<AdminBaseInfo>(cmd));
-                AutoUpdate(cmd);
-            });
+            Config.Admin = Method.Conversion<AdminInfo, AdminBaseInfo>(Find<AdminBaseInfo>());
+            AutoUpdate();
         }
         public List<T> FindSort<T>(DbCommand cmd = null) where T : class, new()
         {

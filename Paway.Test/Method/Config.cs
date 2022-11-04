@@ -25,6 +25,10 @@ namespace Paway.Test
         public static double MaxRate = Math.Pow(19999.9, 1.0 / Config.Zoom);
         public const double MinIncrease = -15;
         public const double MaxIncrease = 15;
+        /// <summary>
+        /// 双击间隔
+        /// </summary>
+        public static int Interval;
 
         #endregion
 
@@ -32,7 +36,16 @@ namespace Paway.Test
         public static Window Window { get; set; }
         public static AdminInfo Admin { get; set; }
         public static AuthInfo Auth { get; set; } = new AuthInfo();
+        /// <summary>
+        /// 当前菜单
+        /// </summary>
+        public static string Menu { get; set; }
 
         #endregion
+
+        static Config()
+        {
+            Interval = NativeMethods.GetDoubleClickTime();
+        }
     }
 }

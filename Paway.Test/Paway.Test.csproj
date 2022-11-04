@@ -40,6 +40,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.8.9\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
@@ -67,8 +70,23 @@
     <Reference Include="log4net, Version=2.0.9.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.10\lib\net45\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NPinyin.Core, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NPinyin.Core.3.0.0\lib\net45\NPinyin.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.5.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.6\lib\net45\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.5.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.6\lib\net45\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.5.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.6\lib\net45\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.5.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.6\lib\net45\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="OxyPlot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -133,12 +151,16 @@
     <Compile Include="Data\DataService.cs" />
     <Compile Include="Model\Auth\ButtonType.cs" />
     <Compile Include="Model\Auth\MenuType.cs" />
+    <Compile Include="Model\Enum\LogType.cs" />
     <Compile Include="Model\Enum\MealType.cs" />
     <Compile Include="Model\Enum\MonitorType.cs" />
+    <Compile Include="Model\Enum\OperateType.cs" />
+    <Compile Include="Model\Enum\SexType.cs" />
     <Compile Include="Model\Enum\UserType.cs" />
     <Compile Include="Model\Info\AdminInfo.cs" />
     <Compile Include="Model\Info\AuthInfo.cs" />
     <Compile Include="Model\Info\BaseInfo.cs" />
+    <Compile Include="Model\Info\LogInfo.cs" />
     <Compile Include="Model\Info\UserInfo.cs" />
     <Compile Include="Method\Cache.cs" />
     <Compile Include="Method\Method.cs" />
@@ -147,6 +169,7 @@
     <Compile Include="Model\Info\TempInfo.cs" />
     <Compile Include="Model\interface\IBaseInfo.cs" />
     <Compile Include="Model\interface\IChecked.cs" />
+    <Compile Include="Model\interface\ICompare.cs" />
     <Compile Include="Model\interface\IMessage.cs" />
     <Compile Include="TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
@@ -179,6 +202,10 @@
       <DependentUpon>NameWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NameWindowModel.cs" />
+    <Compile Include="Views\ToolItems\OperateItem.xaml.cs">
+      <DependentUpon>OperateItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ToolItems\OperateItemModel.cs" />
     <Compile Include="Views\WelcomePage.xaml.cs">
       <DependentUpon>WelcomePage.xaml</DependentUpon>
     </Compile>
@@ -215,6 +242,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\NameWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ToolItems\OperateItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

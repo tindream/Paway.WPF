@@ -19,11 +19,14 @@ GO
 CREATE TABLE [Users](
 "Id"  integer Primary Key AutoIncrement not null,
 "Name"  nvarchar(32),
+"Display"  nvarchar(32),
 "Pad"  nvarchar(32),
+"Sex" int,
 "Statu"  bit,
 "UserType"  int,
 "LoginOn"  datetime,
 "CreateOn"  datetime,
+"UpdateOn"  datetime,
  unique(Id asc)
 );
 GO
@@ -36,9 +39,10 @@ GO
 -- ----------------------------
 CREATE TABLE [Admins](
 "Id"  integer Primary Key AutoIncrement not null,
-"Name"  nvarchar(32),
-"Value"  nvarchar(32),
-"DateTime"  datetime,
+"Name"  nvarchar(255),
+"Value"  nvarchar(255),
+"CreateOn"  datetime,
+"UpdateOn"  datetime,
  unique(Id asc)
 );
 GO

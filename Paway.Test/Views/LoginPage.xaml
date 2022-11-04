@@ -19,7 +19,7 @@
                      IAnimation="2" BorderThickness="0,0,0,1" Width="450" FontSize="30" WaterSize="0.7"
                      IsEditable="True" Icon="/Paway.Test;component/Images/user.png" IconWidth="36" IconStretch="Uniform"/>
         <PasswordBox Name="tbPad" MaxLength="16" 
-                     BorderThickness="0,0,0,1" FontSize="30" PasswordBoxEXT.WaterSize="0.7" Margin="2,35,2,2"
+                     BorderThickness="0,1" FontSize="30" PasswordBoxEXT.WaterSize="0.7" Margin="2,35,2,2"
                      PasswordBoxEXT.Password="{Binding Password}"
                      PasswordBoxEXT.IAnimation="2" 
                      PasswordBoxEXT.Icon="/Paway.Test;component/Images/password.png" PasswordBoxEXT.IconWidth="36" PasswordBoxEXT.IconStretch="Uniform"/>

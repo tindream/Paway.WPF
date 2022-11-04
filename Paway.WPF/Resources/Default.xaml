@@ -68,8 +68,8 @@
         <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="FontFamily" Value="Microsoft YaHei"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <!--解决Chrome窗体下元素边缘模糊的问题，此参数会导致放大缩小动画抖动-->
-        <Setter Property="UseLayoutRounding" Value="True"/>
+        <!--解决Chrome窗体下元素边缘模糊的问题，此参数会导致放大缩小动画抖动，但会出现异常-->
+        <!--<Setter Property="UseLayoutRounding" Value="True"/>-->
     </Style>
     <Style x:Key="MiniConfig" TargetType="{x:Type Control}" BasedOn="{StaticResource Config}">
         <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}, Converter={StaticResource valueMultiConverter}}"/>

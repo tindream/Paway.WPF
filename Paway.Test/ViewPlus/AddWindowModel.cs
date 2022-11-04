@@ -26,15 +26,21 @@ namespace Paway.Test
                 info = value.Clone();
                 Title = info.Id == 0 ? $"新加{info.GetType().Description()}" : $"编辑{info.GetType().Description()} - {info}";
                 RaisePropertyChanged();
+                ReLoad();
             }
         }
 
         #endregion
 
         #region 命令
+        protected virtual void ReLoad() { }
         protected virtual bool? OnSave(Window wd, T info) { return true; }
         protected override bool? OnCommit(Window wd)
         {
+            if (info is IChecked @checked)
+            {
+                @checked.Checked();
+            }
             OnSave(wd, info);
             info.Clone(normal);
             return base.OnCommit(wd);
