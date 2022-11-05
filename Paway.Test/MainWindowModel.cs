@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Command;
 using OxyPlot;
 using OxyPlot.Annotations;
 using OxyPlot.Axes;
+using Paway.Model;
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
@@ -118,8 +119,8 @@ namespace Paway.Test
             set { desc = value; RaisePropertyChanged(); }
         }
 
-        private MonitorType monitorType = MonitorType.RightToeAngle;
-        public MonitorType MonitorType
+        private PlotLineType monitorType = PlotLineType.RightToeAngle;
+        public PlotLineType MonitorType
         {
             get { return monitorType; }
             set { monitorType = value; RaisePropertyChanged(); }
@@ -332,7 +333,7 @@ namespace Paway.Test
             this.PlotModel = new PlotModel();
             PlotHelper.AddXY(plotModel);
 
-            var line = PlotHelper.AddLine(plotModel, MonitorType.LeftToeAngle);
+            var line = PlotHelper.AddLine(plotModel, PlotLineType.LeftToeAngle);
             line.Color = OxyColor.FromRgb(2, 232, 250);
             line.DataFieldX = "DateTime";
             line.DataFieldY = "Value";

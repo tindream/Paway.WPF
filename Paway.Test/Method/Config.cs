@@ -11,12 +11,12 @@ using System.Windows;
 
 namespace Paway.Test
 {
-    public class Config : WPF.PConfig
+    public class Config : Paway.Model.Config
     {
         #region 常量
         public const string Title = "测试系统";
         public static string Text;
-        public const string LogConfig = "Log.xml";
+        public static string LogConfig = "Log.xml";
         /// <summary>
         /// 图表绽放率
         /// </summary>
@@ -25,27 +25,12 @@ namespace Paway.Test
         public static double MaxRate = Math.Pow(19999.9, 1.0 / Config.Zoom);
         public const double MinIncrease = -15;
         public const double MaxIncrease = 15;
-        /// <summary>
-        /// 双击间隔
-        /// </summary>
-        public static int Interval;
 
         #endregion
 
-        #region 全局数据
-        public static Window Window { get; set; }
+        #region 全局数据 
         public static AdminInfo Admin { get; set; }
-        public static AuthInfo Auth { get; set; } = new AuthInfo();
-        /// <summary>
-        /// 当前菜单
-        /// </summary>
-        public static string Menu { get; set; }
 
         #endregion
-
-        static Config()
-        {
-            Interval = NativeMethods.GetDoubleClickTime();
-        }
     }
 }

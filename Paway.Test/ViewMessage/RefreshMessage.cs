@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paway.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,12 +8,6 @@ using System.Windows;
 
 namespace Paway.Test
 {
-    public class RefreshMessage
-    {
-        public DependencyObject Obj { get; set; }
-    }
-    public class UserRefreshMessage : RefreshMessage { }
-
-
+    public class UserRefreshMessage : LoadMessage { }
     public class AuthApplyMessage { }
 }

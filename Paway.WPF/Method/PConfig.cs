@@ -23,6 +23,7 @@ namespace Paway.WPF
     {
         static PConfig()
         {
+            DoubleInterval = NativeMethods.GetDoubleClickTime();
             FontAwesome = new FontFamily(new Uri(@"pack://application:,,,/Paway.WPF;component/Resource/"), "./#fontawesome");
         }
 
@@ -31,6 +32,10 @@ namespace Paway.WPF
         /// 转换器ConvertBack标记
         /// </summary>
         public static bool IConvertBack { get; set; }
+        /// <summary>
+        /// 双击间隔
+        /// </summary>
+        public static int DoubleInterval;
 
         #endregion
 

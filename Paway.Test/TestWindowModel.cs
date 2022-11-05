@@ -5,6 +5,7 @@ using OxyPlot.Annotations;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using Paway.Helper;
+using Paway.Model;
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
@@ -127,7 +128,6 @@ namespace Paway.Test
             //var index = Method.Random(0, ViewList.Count);
             //ViewList[index].ItemTextForeground = new BrushEXT(Colors.Red);
             //if (view.ItemsSource == null) view.ItemsSource = ViewList;
-            UserType = MenuType.N2;
         });
         public ICommand SelectionDeviceCommand => new RelayCommand<ListViewCustom>(listView =>
         {

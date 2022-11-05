@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using Paway.Helper;
+using Paway.Model;
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
