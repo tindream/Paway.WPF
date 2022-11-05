@@ -51,15 +51,21 @@ namespace Paway.Test
 
         private void ButtonEXT_Click(object sender, RoutedEventArgs e)
         {
+            var errorList = Method.ValidationError(this);
+            if (errorList.Count > 0)
+            {
+                Method.Hit(this, errorList.Join("\r\n"), ColorType.Error);
+                return;
+            }
             Method.Progress(this, adorner =>
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(125);
                 Method.ProgressMsg(adorner, "1");
-                Thread.Sleep(1000);
+                Thread.Sleep(125);
                 Method.ProgressMsg(adorner, "2");
-                Thread.Sleep(1000);
+                Thread.Sleep(125);
                 Method.ProgressMsg(adorner, "3");
-                Thread.Sleep(1000);
+                Thread.Sleep(125);
             });
         }
     }

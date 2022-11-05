@@ -100,7 +100,7 @@
                             HorizontalContentAlignment="Center">
                     <Binding Path="Value">
                         <Binding.ValidationRules>
-                            <RegexValidationRule RegexType="UInt" MinLength="2" MaxLength="4"/>
+                            <RegexValidationRule RegexType="Word" MinLength="2" MaxLength="4"/>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBoxEXT>

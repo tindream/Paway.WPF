@@ -189,7 +189,7 @@ namespace Paway.Test
 
         public TestWindowModel()
         {
-            this.Text = "111\r\n222\r\n333";
+            //this.Text = "111\r\n222\r\n333";
             var index = 0;
             foreach (var font in Fonts.SystemFontFamilies)
             {

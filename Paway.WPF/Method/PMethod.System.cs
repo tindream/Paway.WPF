@@ -306,6 +306,31 @@ namespace Paway.WPF
             }
             return false;
         }
+        /// <summary>
+        /// 获取验证错误列表
+        /// </summary>
+        public static List<string> ValidationError(DependencyObject dependency)
+        {
+            var errorList = new List<string>();
+            ValidationError(dependency, errorList);
+            return errorList;
+        }
+        private static void ValidationError(DependencyObject dependency, List<string> errorList)
+        {
+            var count = VisualTreeHelper.GetChildrenCount(dependency);
+            for (var i = 0; i < count; i++)
+            {
+                var value = VisualTreeHelper.GetChild(dependency, i);
+                if (Validation.GetHasError(value))
+                {
+                    foreach (ValidationError error in Validation.GetErrors(value))
+                    {
+                        errorList.Add(error.ErrorContent.ToString());
+                    }
+                }
+                ValidationError(value, errorList);
+            }
+        }
 
         #endregion
 

@@ -18,17 +18,13 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <StackPanel VerticalAlignment="Center" >
-            <TextBoxEXT IAnimation="2"/>
-            <ComboBoxEXT Name="cbxUserName" Water="请输入" 
-                     IAnimation="3"
-                     IsEditable="True" IconWidth="36" IconStretch="Uniform"/>
-            <TextBoxEXT IAnimation="3"/>
-            <WrapPanel>
-                <RadioBox Title="状态:" TitleMinWidth="60" Content="启用" Radius="3,0,0,3" Margin="2,2,0,2" Padding="11,5"
-                          GroupName="Statu" IsChecked="{Binding Statu, Converter={StaticResource valueToTrue}, ConverterParameter=True}"/>
-                <RadioBox Content="停用" Radius="0,3,3,0" Margin="-1,2,2,2" Padding="11,5"
-                          GroupName="Statu" IsChecked="{Binding Statu, Converter={StaticResource valueToTrue}, ConverterParameter=False}"/>
-            </WrapPanel>
+            <TextBoxEXT >
+                <Binding Path="Text">
+                    <Binding.ValidationRules>
+                        <RegexValidationRule ValidatesOnTargetUpdated="True" RegexType="Word" MinLength="1"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBoxEXT>
             <ButtonEXT IsLight="True" Click="ButtonEXT_Click" Command="{Binding ButtonCommand}"/>
         </StackPanel>
         <Border Grid.Column="1" Background="Transparent">

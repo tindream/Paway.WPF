@@ -51,7 +51,7 @@ namespace Paway.WPF
             }
             else if (!RegexChecked(text))
             {
-                if (ErrorMessage == null) ErrorMessage = RegexType.Description() + ": {0}";
+                if (ErrorMessage == null) ErrorMessage = RegexType.Description();
                 validResult = new ValidationResult(false, string.Format(ErrorMessage, text));
             }
             else if (this.MinLength != 0 && text.Length < this.MinLength)
@@ -72,7 +72,7 @@ namespace Paway.WPF
                 case RegexType.None: return true;
                 case RegexType.Custom: break;
                 default:
-                    pattern = $"^{RegexType.Tag()}$";
+                    pattern = $"{RegexType.Tag()}";
                     break;
             }
             return Regex.IsMatch(text, pattern, RegexOptions.Singleline);
