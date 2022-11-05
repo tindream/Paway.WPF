@@ -17,8 +17,8 @@ namespace Paway.Model
     {
         #region 权限控制
         public abstract string Menu { get; }
-        private MenuType _auth;
-        public MenuType Auth
+        private MenuAuthType _auth;
+        public MenuAuthType Auth
         {
             get { return _auth; }
             set { _auth = value; RaisePropertyChanged(); }

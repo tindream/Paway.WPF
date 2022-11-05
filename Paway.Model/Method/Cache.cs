@@ -24,7 +24,7 @@ namespace Paway.Model
         public static void Init<T>(DataService server, List<T> list = null, Expression<Func<T, bool>> action = null) where T : class, new()
         {
             var tempList = list ?? new List<T>();
-            tempList.AddRange(server.FindSort<T>(action));
+            if (server != null) tempList.AddRange(server.FindSort<T>(action));
             Dic[typeof(T)] = tempList;
         }
         public static List<T> List<T>()

@@ -18,11 +18,11 @@ GO
 -- ----------------------------
 CREATE TABLE [Users](
 "Id"  integer Primary Key AutoIncrement not null,
-"Name"  nvarchar(32),
+"UserName"  nvarchar(32),
 "Display"  nvarchar(32),
-"Pad"  nvarchar(32),
+"Password"  nvarchar(32),
 "Sex" int,
-"Statu"  bit,
+"IStatu"  bit,
 "UserType"  int,
 "LoginOn"  datetime,
 "CreateOn"  datetime,

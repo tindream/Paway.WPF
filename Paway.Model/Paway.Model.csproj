@@ -140,9 +140,11 @@
     <Compile Include="Method\Config.cs" />
     <Compile Include="Method\Method.cs" />
     <Compile Include="Method\PlotHelper.cs" />
-    <Compile Include="Model\Enum\ButtonType.cs" />
+    <Compile Include="Model\Enum\ButtonAuthType.cs" />
+    <Compile Include="Model\Interface\IDataGridServer.cs" />
+    <Compile Include="Model\Interface\IIndex.cs" />
     <Compile Include="Model\Enum\PlotLineType.cs" />
-    <Compile Include="Model\Enum\MenuType.cs" />
+    <Compile Include="Model\Enum\MenuAuthType.cs" />
     <Compile Include="Model\Enum\SexType.cs" />
     <Compile Include="Model\Info\AdminBaseInfo.cs" />
     <Compile Include="Model\Info\AuthInfo.cs" />
@@ -192,46 +194,49 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\clear.png" />
+    <Resource Include="Images\operate\add.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\clear_color.png" />
+    <Resource Include="Images\operate\add_white.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\close.png" />
+    <Resource Include="Images\operate\close.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\close_white.png" />
+    <Resource Include="Images\operate\close_red.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\down.png" />
+    <Resource Include="Images\operate\close_white.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\down_white.png" />
+    <Resource Include="Images\operate\edit.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\left.png" />
+    <Resource Include="Images\operate\edit_white.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\left_white.png" />
+    <Resource Include="Images\operate\export.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\refresh.png" />
+    <Resource Include="Images\operate\export_white.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\refresh_white.png" />
+    <Resource Include="Images\operate\import.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\right.png" />
+    <Resource Include="Images\operate\import_white.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\right_white.png" />
+    <Resource Include="Images\operate\refresh.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\up.png" />
+    <Resource Include="Images\operate\refresh_white.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\up_white.png" />
+    <Resource Include="Images\operate\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\operate\search_gray.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

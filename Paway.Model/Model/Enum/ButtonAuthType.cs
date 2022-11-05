@@ -11,7 +11,7 @@ namespace Paway.Model
     /// 按钮权限
     /// </summary>
     [Flags]
-    public enum ButtonType
+    public enum ButtonAuthType
     {
         None,
         /// <summary>

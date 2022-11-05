@@ -24,7 +24,7 @@ namespace Paway.Model
             {
                 normal = value;
                 info = value.Clone();
-                Title = info.Id == 0 ? $"新加{info.GetType().Description()}" : $"编辑{info.GetType().Description()} - {info}";
+                Title = info.Id == 0 ? $"新加 - {info.GetType().Description()}" : $"{info.GetType().Description()} - {info}";
                 RaisePropertyChanged();
                 ReLoad();
             }
@@ -34,14 +34,29 @@ namespace Paway.Model
 
         #region 命令
         protected virtual void ReLoad() { }
-        protected virtual bool? OnSave(Window wd, T info) { return true; }
-        protected override bool? OnCommit(Window wd)
+        protected virtual bool? OnSave(Window wd, T info)
         {
+            var errorList = Method.ValidationError(wd);
+            if (errorList.Count > 0)
+            {
+                Method.Hit(wd, errorList.Join("\r\n"), ColorType.Error);
+                return null;
+            }
             if (info is IChecked @checked)
             {
                 @checked.Checked();
             }
-            OnSave(wd, info);
+            if (info.Id == 0 && info is IIndex index)
+            {
+                var tList = Cache.List<T>();
+                index.Index = tList.Count == 0 ? 0 : tList.Max(c => ((IIndex)c).Index) + 1;
+            }
+            return true;
+        }
+        protected override bool? OnCommit(Window wd)
+        {
+            var result = OnSave(wd, info);
+            if (result != true) return result;
             info.Clone(normal);
             return base.OnCommit(wd);
         }

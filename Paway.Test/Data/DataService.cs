@@ -33,8 +33,8 @@ namespace Paway.Test
             var user = new UserInfo { UserType = UserType.Admin, Name = "admin", Pad = EncryptHelper.MD5("admin" + Config.Suffix) };
             this.Insert(user);
             var auth = new AuthInfo(user.Id);
-            auth.SetValue(nameof(auth.MenuType), Method.Sum<MenuType>());
-            auth.SetValue(nameof(auth.ButtonType), Method.Sum<ButtonType>());
+            auth.SetValue(nameof(auth.MenuType), Method.Sum<MenuAuthType>());
+            auth.SetValue(nameof(auth.ButtonType), Method.Sum<MenuAuthType>());
             this.Insert(auth);
         }
 

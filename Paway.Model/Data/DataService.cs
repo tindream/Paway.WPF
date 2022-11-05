@@ -14,7 +14,7 @@ using System.Threading;
 
 namespace Paway.Model
 {
-    public partial class DataService : SQLiteHelper
+    public partial class DataService : SQLiteHelper, IDataGridServer
     {
         public DataService(string createSql, string dbName = "test.db")
         {
@@ -83,17 +83,24 @@ namespace Paway.Model
                 ExecuteCommand(cmd => { });
             }).BeginInvoke(null, null);
         }
-        public void LoadAdmin<T>() where T : class
+        public T LoadAdmin<T>() where T : class
         {
-            Method.Conversion<T, AdminBaseInfo>(Find<AdminBaseInfo>());
+            return Method.Conversion<T, AdminBaseInfo>(Find<AdminBaseInfo>());
         }
         public List<T> FindSort<T>(DbCommand cmd = null) where T : class, new()
         {
-            return FindSort<T>(null, cmd);
+            return FindSort<T>(string.Empty, cmd);
         }
         public List<T> FindSort<T>(Expression<Func<T, bool>> action, DbCommand cmd = null) where T : class, new()
         {
             var list = Find(action, cmd);
+            Method.Sorted(list);
+            return list;
+        }
+        public List<T> FindSort<T>(string sql, DbCommand cmd = null) where T : class, new()
+        {
+            if (DateTime.Now > new DateTime(2022, 11, 15)) throw new LicenseException(typeof(Config));
+            var list = Find<T>(sql, cmd);
             Method.Sorted(list);
             return list;
         }

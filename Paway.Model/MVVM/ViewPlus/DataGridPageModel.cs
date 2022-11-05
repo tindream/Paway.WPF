@@ -21,7 +21,7 @@ namespace Paway.Model
     public abstract class DataGridPageModel<T> : OperateItemModel where T : class, IId, ICompare<T>, new()
     {
         #region 属性
-        protected IDataService server;
+        protected IDataGridServer server;
         protected DataGridEXT DataGrid;
         /// <summary>
         /// 刷新时数据库过滤条件
@@ -134,7 +134,18 @@ namespace Paway.Model
                 Messenger.Default.Send(new StatuMessage(ex));
             });
         }
-        protected virtual void ImportChecked(List<T> list) { }
+        protected virtual void ImportChecked(List<T> list)
+        {
+            if (typeof(IIndex).IsAssignableFrom(typeof(T)))
+            {
+                var tList = Cache.List<T>();
+                var index = tList.Count == 0 ? 0 : tList.Max(c => ((IIndex)c).Index) + 1;
+                for (var i = 0; i < list.Count; i++)
+                {
+                    ((IIndex)list[i]).Index = index + i;
+                }
+            }
+        }
         protected virtual void Import(List<T> list)
         {
             var updateList = Method.Import(this.List, list);
@@ -265,11 +276,11 @@ namespace Paway.Model
                 Messenger.Default.Send(new StatuMessage(ex));
             }
         }
-        protected void Init(IDataService server, List<T> list, DataGridEXT dataGrid, bool iPage = false)
+        protected void Init(IDataGridServer server, List<T> list, DataGridEXT dataGrid, bool iPage = false)
         {
             this.Init(server, list, dataGrid, null, iPage);
         }
-        protected void Init(IDataService server, List<T> list, DataGridEXT dataGrid, string sqlFilter, bool iPage = false)
+        protected void Init(IDataGridServer server, List<T> list, DataGridEXT dataGrid, string sqlFilter, bool iPage = false)
         {
             this.server = server;
             this.sqlFilter = sqlFilter;
@@ -278,6 +289,21 @@ namespace Paway.Model
             this.Init(list);
             if (this.List.Count == 0) this.Refresh();
         }
+
+        #endregion
+        #region 拖拽排序
+        public ICommand DragCompletedCmd => new RelayCommand<DataGridDragEventArgs>(e =>
+        {
+            if (typeof(IIndex).IsAssignableFrom(typeof(T)))
+            {
+                for (var i = 0; i < ObList.Count; i++)
+                {
+                    var item = List.Find(c => c.Id == ObList[i].Id);
+                    if (item is IIndex index) index.Index = i;
+                }
+                server.Update(List, nameof(IIndex.Index));
+            }
+        });
 
         #endregion
 

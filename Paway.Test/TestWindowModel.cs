@@ -68,8 +68,8 @@ namespace Paway.Test
             }
         }
 
-        private MenuType userType = MenuType.None;
-        public MenuType UserType
+        private MenuAuthType userType = MenuAuthType.None;
+        public MenuAuthType UserType
         {
             get { return userType; }
             set
@@ -106,8 +106,8 @@ namespace Paway.Test
         }
         public DoubleEXT FontSizes { get; set; } = new DoubleEXT(20);
         public SolidColorBrush ColorBrush { get; set; }
-        private MenuType _menuType;
-        public MenuType MenuType
+        private MenuAuthType _menuType;
+        public MenuAuthType MenuType
         {
             get { return _menuType; }
             set { if (_menuType != value) { _menuType = value; RaisePropertyChanged(); } }
@@ -157,7 +157,7 @@ namespace Paway.Test
                     case "B":
                     case "C":
                     case "D":
-                        var menuType = info.Text.Parse<MenuType>();
+                        var menuType = info.Text.Parse<MenuAuthType>();
                         if (MenuType != menuType)
                         {
                             if (listView1.Items.Find("Text", MenuType.Description()) is IListViewItem last)
@@ -170,7 +170,7 @@ namespace Paway.Test
                         else
                         {
                             info.Desc = "\uf0d7";
-                            MenuType = MenuType.None;
+                            MenuType = MenuAuthType.None;
                         }
                         listView1.SelectedIndex = -1;
                         break;

@@ -10,7 +10,7 @@ namespace Paway.Model
     /// 菜单权限
     /// </summary>
     [Flags]
-    public enum MenuType
+    public enum MenuAuthType
     {
         None = 0,
         Refresh = 1 << 0,

@@ -17,17 +17,17 @@ namespace Paway.Model
     public class AuthInfo : ParentBase
     {
         [Text("菜单权限")]
-        public MenuType MenuType { get; set; }
+        public MenuAuthType MenuType { get; set; }
 
         [Text("操作权限")]
-        public ButtonType ButtonType { get; set; }
+        public ButtonAuthType ButtonType { get; set; }
 
         [NoSelect]
-        public bool Insert { get { return (ButtonType & ButtonType.Insert) == ButtonType.Insert; } }
+        public bool Insert { get { return (ButtonType & ButtonAuthType.Insert) == ButtonAuthType.Insert; } }
         [NoSelect]
-        public bool Update { get { return (ButtonType & ButtonType.Update) == ButtonType.Update; } }
+        public bool Update { get { return (ButtonType & ButtonAuthType.Update) == ButtonAuthType.Update; } }
         [NoSelect]
-        public bool Delete { get { return (ButtonType & ButtonType.Delete) == ButtonType.Delete; } }
+        public bool Delete { get { return (ButtonType & ButtonAuthType.Delete) == ButtonAuthType.Delete; } }
 
         public AuthInfo() { }
         public AuthInfo(int parentId)

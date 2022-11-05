@@ -18,7 +18,7 @@ using System.Windows;
 
 namespace Paway.Model
 {
-    public class Method : PMethod
+    public partial class Method : PMethod
     {
         #region HTTP同步
         /// <summary>
