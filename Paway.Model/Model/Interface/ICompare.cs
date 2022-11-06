@@ -10,6 +10,7 @@ namespace Paway.Model
 {
     /// <summary>
     /// 比较
+    /// <para>模型中的导入自动比较</para>
     /// </summary>
     public interface ICompare<T>
     {

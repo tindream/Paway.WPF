@@ -35,6 +35,16 @@ namespace Paway.Model
         }
     }
     /// <summary>
+    /// Info基类
+    /// <para>无更新</para>
+    /// </summary>
+    [Serializable]
+    public class BaseOnce : BaseInfo
+    {
+        [NoShow, NoExcel, NoSelect]
+        public override DateTime UpdateOn { get; set; }
+    }
+    /// <summary>
     /// 父子结构
     /// </summary>
     [Serializable]

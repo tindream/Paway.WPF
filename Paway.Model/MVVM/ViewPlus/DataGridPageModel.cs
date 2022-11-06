@@ -18,7 +18,7 @@ using System.Windows.Media;
 
 namespace Paway.Model
 {
-    public abstract class DataGridPageModel<T> : OperateItemModel where T : class, IId, ICompare<T>, new()
+    public abstract class DataGridPageModel<T> : OperateItemModel where T : class, IBaseInfo, ICompare<T>, new()
     {
         #region 属性
         protected IDataGridServer server;
@@ -103,6 +103,7 @@ namespace Paway.Model
         }
         protected virtual void Updated(T info)
         {
+            info.UpdateOn = DateTime.Now;
             server.Update(info);
             Method.Sorted(List);
             this.SearchReset();
@@ -149,6 +150,8 @@ namespace Paway.Model
         protected virtual void Import(List<T> list)
         {
             var updateList = Method.Import(this.List, list);
+            var timeNow = DateTime.Now;
+            updateList.ForEach(c => c.UpdateOn = timeNow);
             server.Replace(updateList);
             Method.Update(updateList);
             Method.Sorted(List);

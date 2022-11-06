@@ -17,10 +17,5 @@ namespace Paway.Model
         public string Name { get; set; }
 
         public string Value { get; set; }
-
-        public AdminBaseInfo()
-        {
-            this.CreateOn = DateTime.Now;
-        }
     }
 }

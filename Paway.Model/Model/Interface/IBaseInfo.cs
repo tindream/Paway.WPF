@@ -11,7 +11,7 @@ namespace Paway.Model
     /// <summary>
     /// 数据更新时间
     /// </summary>
-    public interface IBaseInfo
+    public interface IBaseInfo : IId
     {
         /// <summary>
         ///创建时间

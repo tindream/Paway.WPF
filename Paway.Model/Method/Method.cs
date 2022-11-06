@@ -121,6 +121,22 @@ namespace Paway.Model
             }
             return false;
         }
+        public static bool Imports(string title, out string[] file, string filter = "Excel 工作簿|*.xls;*.xlsx")
+        {
+            file = null;
+            var ofd = new OpenFileDialog
+            {
+                Title = title,
+                Filter = filter,
+                Multiselect = true,
+            };
+            if (ofd.ShowDialog() == true)
+            {
+                file = ofd.FileNames;
+                return true;
+            }
+            return false;
+        }
         /// <summary>
         /// 导入后更新列表
         /// </summary>
