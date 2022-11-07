@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7B81D476-B91B-42ED-8CF3-D45EE312EE92}</ProjectGuid>
+    <ProjectGuid>{71028011-C6B2-4F4D-A0E2-47D14B67123B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Paway.Test</RootNamespace>
     <AssemblyName>Paway.Test</AssemblyName>

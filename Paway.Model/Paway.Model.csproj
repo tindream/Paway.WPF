@@ -154,6 +154,12 @@
     <Compile Include="Model\Interface\IBaseInfo.cs" />
     <Compile Include="Model\Interface\IChecked.cs" />
     <Compile Include="Model\Interface\ICompare.cs" />
+    <Compile Include="MVVM\ViewMessage\ConnectMessage.cs" />
+    <Compile Include="MVVM\ViewMessage\LoginMessage.cs" />
+    <Compile Include="MVVM\Views\ToolItems\StatuItem.xaml.cs">
+      <DependentUpon>StatuItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\ToolItems\StatuItemModel.cs" />
     <Compile Include="MVVM\Views\WelcomePageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MVVM\ViewLocator\ViewlLocator.cs" />
@@ -185,6 +191,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MVVM\Views\ToolItems\OperateItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\Views\ToolItems\StatuItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -66,6 +66,19 @@ namespace Paway.Model
             }
         }
 
+        /// <summary>
+        /// 选择单元格时，SelectedItem为空
+        /// </summary>
+        protected T SelectedInfo()
+        {
+            if (SelectedItem != null) return SelectedItem;
+            if (DataGrid.SelectionUnit != DataGridSelectionUnit.FullRow && DataGrid.CurrentCell != null)
+            {
+                if (DataGrid.CurrentCell.Item is T t) return t;
+            }
+            return default;
+        }
+
         #endregion
 
         #region 命令
@@ -106,8 +119,9 @@ namespace Paway.Model
             info.UpdateOn = DateTime.Now;
             server.Update(info);
             Method.Sorted(List);
-            this.SearchReset();
             var index = List.FindIndex(c => c.Id == info.Id);
+            ObList.Remove(info);
+            if (!this.SearchReset()) ObList.Insert(index, info);
             SelectIndex(info, index);
         }
         protected virtual void Deleted(T info)
@@ -228,7 +242,7 @@ namespace Paway.Model
                         }
                         break;
                     case "编辑":
-                        if (SelectedItem is T info)
+                        if (SelectedInfo() is T info)
                         {
                             AddViewModel.Info = info;
                             var edit = AddWindow();
@@ -239,7 +253,7 @@ namespace Paway.Model
                         }
                         break;
                     case "删除":
-                        if (SelectedItem is T infoDel)
+                        if (SelectedInfo() is T infoDel)
                         {
                             if (Method.Ask(DataGrid, $"确认删除：[{infoDel.GetType().Description()}]" + infoDel))
                             {

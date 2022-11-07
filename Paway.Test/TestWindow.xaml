@@ -28,10 +28,20 @@
             <ButtonEXT IsLight="True" Click="ButtonEXT_Click" Command="{Binding ButtonCommand}"/>
         </StackPanel>
         <Border Grid.Column="1" Background="Transparent">
-            <!--<DataGridEXT ItemsSource="{Binding GridList}">
+            <DataGridEXT Name="dataGrid" ItemsSource="{Binding GridList}">
                 <DataGrid.Columns>
+                    <DataGridTemplateColumn Width="120" Header="Desc" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <ButtonEXT Content="{Binding Desc}" IsLight="True"
+                                           Command="{Binding ElementName=dataGrid, Path=DataContext.ItemCommand}" CommandParameter="{Binding Desc}" />
+                                </WrapPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
-            </DataGridEXT>-->
+            </DataGridEXT>
         </Border>
     </Grid>
 </WindowEXT>

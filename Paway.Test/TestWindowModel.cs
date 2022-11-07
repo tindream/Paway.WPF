@@ -129,6 +129,10 @@ namespace Paway.Test
             //ViewList[index].ItemTextForeground = new BrushEXT(Colors.Red);
             //if (view.ItemsSource == null) view.ItemsSource = ViewList;
         });
+        public ICommand ItemCommand => new RelayCommand<string>(item =>
+        {
+            Method.Hit(Config.Window, item);
+        });
         public ICommand SelectionDeviceCommand => new RelayCommand<ListViewCustom>(listView =>
         {
             if (!(listView.SelectedItem is IListViewItem item)) return;

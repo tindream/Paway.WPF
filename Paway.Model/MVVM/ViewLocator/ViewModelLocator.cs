@@ -13,6 +13,7 @@ namespace Paway.Model
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
         }
 
+        public StatuItemModel StatuItem => GetInstance<StatuItemModel>();
         public NameWindowModel Name => GetInstance<NameWindowModel>();
         public WelcomePageModel Welcome => GetInstance<WelcomePageModel>();
 
