@@ -156,6 +156,10 @@
     <Compile Include="Model\Interface\ICompare.cs" />
     <Compile Include="MVVM\ViewMessage\ConnectMessage.cs" />
     <Compile Include="MVVM\ViewMessage\LoginMessage.cs" />
+    <Compile Include="MVVM\Views\Login\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\Login\LoginPageModel.cs" />
     <Compile Include="MVVM\Views\ToolItems\StatuItem.xaml.cs">
       <DependentUpon>StatuItem.xaml</DependentUpon>
     </Compile>
@@ -186,6 +190,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="MVVM\Views\Login\LoginPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MVVM\Views\NameWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -247,6 +255,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\operate\search_gray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\password.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
