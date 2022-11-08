@@ -139,7 +139,7 @@ namespace Paway.Model
                 DataGrid.SelectedIndex = index;
             }
         }
-        protected virtual void Refresh()
+        protected override void Refresh()
         {
             Method.Progress(DataGrid, () =>
             {
@@ -235,12 +235,12 @@ namespace Paway.Model
                 Messenger.Default.Send(new StatuMessage(ex));
             }
         }
-        protected virtual void Action(string item)
+        protected override void Action(string item)
         {
             switch (item)
             {
-                case "刷新":
-                    Refresh();
+                default:
+                    base.Action(item);
                     break;
                 case "添加":
                     AddViewModel.Info = new T();
@@ -374,6 +374,30 @@ namespace Paway.Model
                 ObList.Clear();
                 foreach (var item in this.ShowList) ObList.Add(item);
             });
+        }
+        /// <summary>
+        /// 默认权限
+        /// <para>MenuAuthType.Refresh | MenuAuthType.Add | MenuAuthType.Edit | MenuAuthType.Delete | MenuAuthType.Import | MenuAuthType.Export | MenuAuthType.Search</para>
+        /// <para>刷新、添加、编辑、删除、导入、导出、搜索</para>
+        /// </summary>
+        protected override void AuthNormal()
+        {
+            this.Auth = MenuAuthType.Refresh | MenuAuthType.Add | MenuAuthType.Edit | MenuAuthType.Delete | MenuAuthType.Import | MenuAuthType.Export | MenuAuthType.Search;
+        }
+        /// <summary>
+        /// 只读权限
+        /// <para>刷新、导出、搜索</para>
+        /// </summary>
+        protected void AuthView()
+        {
+            this.Auth = MenuAuthType.Refresh | MenuAuthType.Export | MenuAuthType.Search;
+        }
+        /// <summary>
+        /// 无搜索
+        /// </summary>
+        protected void AuthNoSearch()
+        {
+            this.Auth ^= MenuAuthType.Search;
         }
 
         #endregion

@@ -27,7 +27,31 @@ namespace Paway.Model
         #endregion
 
         #region 菜单
-        internal virtual void ActionInternal(string item) { }
+        internal virtual void ActionInternal(string item)
+        {
+            try
+            {
+                Action(item);
+            }
+            catch (Exception ex)
+            {
+                Messenger.Default.Send(new StatuMessage(ex));
+            }
+        }
+        protected virtual void Action(string item)
+        {
+            switch (item)
+            {
+                case "刷新":
+                    Refresh();
+                    break;
+                case "保存":
+                    Save();
+                    break;
+            }
+        }
+        protected virtual void Refresh() { }
+        protected virtual void Save() { }
         public ICommand ItemClickCommand => new RelayCommand<string>(item => ActionInternal(item));
 
         #endregion
@@ -43,5 +67,20 @@ namespace Paway.Model
         protected void ClearSearch() { this._searchText = null; RaisePropertyChanged(nameof(SearchText)); }
 
         #endregion
+
+        /// <summary>
+        /// 默认权限
+        /// <para>MenuAuthType.Refresh | MenuAuthType.Save</para>
+        /// <para>刷新、保存</para>
+        /// </summary>
+        protected virtual void AuthNormal()
+        {
+            this.Auth = MenuAuthType.Refresh | MenuAuthType.Save;
+        }
+
+        public OperateItemModel()
+        {
+            AuthNormal();
+        }
     }
 }

@@ -25,10 +25,5 @@ namespace Paway.Model
         {
             InitializeComponent();
         }
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-            Messenger.Default.Send(new StatuLoadMessage() { Obj = Root });
-        }
     }
 }

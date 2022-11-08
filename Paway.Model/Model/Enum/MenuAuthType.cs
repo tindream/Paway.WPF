@@ -14,11 +14,15 @@ namespace Paway.Model
     {
         None = 0,
         Refresh = 1 << 0,
+
         Add = 1 << 1,
         Edit = 1 << 2,
         Delete = 1 << 3,
-        Import = 1 << 4,
-        Export = 1 << 5,
-        Search = 1 << 6,
+        Save = 1 << 4,
+
+        Import = 1 << 5,
+        Export = 1 << 6,
+
+        Search = 1 << 10,
     }
 }

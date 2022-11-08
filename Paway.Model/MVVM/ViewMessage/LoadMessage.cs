@@ -12,5 +12,4 @@ namespace Paway.Model
         public DependencyObject Obj { get; set; }
     }
     public class LoginLoadMessage : LoadMessage { }
-    public class StatuLoadMessage : LoadMessage { }
 }
