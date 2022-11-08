@@ -24,9 +24,9 @@ namespace Paway.Model
         public LoginPage()
         {
             InitializeComponent();
-            tbPad.KeyDown += TbPad_KeyDown;
+            tbPassword.KeyDown += TbPassword_KeyDown;
         }
-        private void TbPad_KeyDown(object sender, KeyEventArgs e)
+        private void TbPassword_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter && this.DataContext is LoginPageModel login) login.Login();
         }

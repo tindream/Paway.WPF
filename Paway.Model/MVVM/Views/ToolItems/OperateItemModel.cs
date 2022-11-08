@@ -27,8 +27,8 @@ namespace Paway.Model
         #endregion
 
         #region 菜单
-        protected virtual void Action(string item) { }
-        public ICommand ItemClickCommand => new RelayCommand<string>(item => Action(item));
+        internal virtual void ActionInternal(string item) { }
+        public ICommand ItemClickCommand => new RelayCommand<string>(item => ActionInternal(item));
 
         #endregion
 

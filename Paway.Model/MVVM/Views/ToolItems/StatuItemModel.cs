@@ -17,6 +17,7 @@ namespace Paway.Model
     public partial class StatuItemModel : ViewModelBase
     {
         #region 属性
+        protected DependencyObject Root;
         private bool _iConnect;
         public bool IConnect
         {
@@ -58,12 +59,13 @@ namespace Paway.Model
 
         public StatuItemModel()
         {
+            Messenger.Default.Register<StatuLoadMessage>(this, msg => this.Root = msg.Obj);
             Config.OperateLogEvent += msg => AddDesc(msg.Text, iHit: false);
             Messenger.Default.Register<StatuMessage>(this, msg => AddDesc(msg.Msg, msg.Level, msg.IHit, msg.Ower));
             Messenger.Default.Register<ConnectMessage>(this, msg =>
             {
                 Messenger.Default.Send(new StatuMessage(msg.Connectd ? $"连接成功" : $"连接断开", !msg.Connectd), msg.Connectd ? LeveType.Debug : LeveType.Error);
-                Method.BeginInvoke(Config.Window, () =>
+                Method.BeginInvoke(Root, () =>
                 {
                     ConnectBrush = msg.Connectd ? ColorType.Success.Color().ToBrush() : ColorType.Error.Color().ToBrush();
                 });
@@ -98,21 +100,21 @@ namespace Paway.Model
         private void AddDesc(string msg, LeveType level = LeveType.Debug, bool iHit = true, DependencyObject ower = null)
         {
             this.Desc = msg;
-            Method.BeginInvoke(Config.Window, () =>
+            Method.BeginInvoke(Root, () =>
             {
                 switch (level)
                 {
                     case LeveType.Warn:
                         DescBrush = Config.Warn.ToBrush();
-                        if (iHit) Method.Hit(ower ?? Config.Window, msg, ColorType.Warn);
+                        if (iHit) Method.Hit(ower ?? Root, msg, ColorType.Warn);
                         break;
                     case LeveType.Error:
                         DescBrush = Config.Error.ToBrush();
-                        if (iHit) Method.Hit(ower ?? Config.Window, msg, ColorType.Error);
+                        if (iHit) Method.Hit(ower ?? Root, msg, ColorType.Error);
                         break;
                     default:
                         DescBrush = ColorType.High.Color().ToBrush();
-                        if (iHit) Method.Hit(ower ?? Config.Window, msg);
+                        if (iHit) Method.Hit(ower ?? Root, msg);
                         break;
                 }
             });

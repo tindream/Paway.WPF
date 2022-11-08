@@ -22,6 +22,7 @@ namespace Paway.Model
     public class LoginPageModel : ViewModelBase
     {
         #region 属性
+        protected DependencyObject Root;
         public ObservableCollection<object> ObList { get; private set; } = new ObservableCollection<object>();
         /// <summary>
         /// 登陆锁
@@ -86,6 +87,25 @@ namespace Paway.Model
         {
             try
             {
+                if (UserName.IsEmpty())
+                {
+                    Method.Hit(Root, "请输入用户名");
+                    if (IUserList)
+                    {
+                        if (Method.Find(Root, out ComboBoxEXT cbxUserName, "cbxUserName")) cbxUserName.Focus();
+                    }
+                    else
+                    {
+                        if (Method.Find(Root, out TextBoxEXT tbUserName, "tbUserName")) tbUserName.Focus();
+                    }
+                    return;
+                }
+                if (Password.IsEmpty())
+                {
+                    Method.Hit(Root, "请输入密码");
+                    if (Method.Find(Root, out PasswordBox tbPassword, "tbPassword")) tbPassword.Focus();
+                    return;
+                }
                 if (!iLogining)
                 {
                     iLogining = true;
@@ -101,6 +121,9 @@ namespace Paway.Model
 
         #endregion
 
-        public LoginPageModel() { }
+        public LoginPageModel()
+        {
+            Messenger.Default.Register<LoginLoadMessage>(this, msg => this.Root = msg.Obj);
+        }
     }
 }

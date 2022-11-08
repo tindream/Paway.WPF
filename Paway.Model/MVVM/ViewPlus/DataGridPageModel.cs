@@ -186,7 +186,7 @@ namespace Paway.Model
         #region 操作命令
         public ICommand RowDoubleCommand => new RelayCommand<SelectItemEventArgs>(e =>
         {
-            Action("编辑");
+            ActionInternal("编辑");
         });
         public ICommand SelectionCommand => new RelayCommand<ListViewEXT>(listView1 =>
         {
@@ -197,7 +197,7 @@ namespace Paway.Model
         });
         protected virtual void Selectioned(ListViewEXT listView1, IListViewItem item)
         {
-            Action(item.Text);
+            ActionInternal(item.Text);
             listView1.SelectedIndex = -1;
         }
         protected void Action(KeyMessage msg)
@@ -205,8 +205,8 @@ namespace Paway.Model
             if (Config.Menu != this.Menu) return;
             switch (msg.Key)
             {
-                case Key.F5: Action("刷新"); break;
-                case Key.Delete: Action("删除"); break;
+                case Key.F5: ActionInternal("刷新"); break;
+                case Key.Delete: ActionInternal("删除"); break;
             }
             if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {
@@ -216,81 +216,85 @@ namespace Paway.Model
                 }
                 switch (msg.Key)
                 {
-                    case Key.A: Action("添加"); break;
-                    case Key.E: Action("编辑"); break;
-                    case Key.D: Action("删除"); break;
-                    case Key.I: Action("导入"); break;
-                    case Key.O: Action("导出"); break;
+                    case Key.A: ActionInternal("添加"); break;
+                    case Key.E: ActionInternal("编辑"); break;
+                    case Key.D: ActionInternal("删除"); break;
+                    case Key.I: ActionInternal("导入"); break;
+                    case Key.O: ActionInternal("导出"); break;
                 }
             }
         }
-        protected override void Action(string item)
+        internal override void ActionInternal(string item)
         {
             try
             {
-                switch (item)
-                {
-                    case "刷新":
-                        Refresh();
-                        break;
-                    case "添加":
-                        AddViewModel.Info = new T();
-                        var add = AddWindow();
-                        if (add != null && Method.Show(DataGrid, add) == true)
-                        {
-                            Insert(AddViewModel.Info);
-                        }
-                        break;
-                    case "编辑":
-                        if (SelectedInfo() is T info)
-                        {
-                            AddViewModel.Info = info;
-                            var edit = AddWindow();
-                            if (edit != null && Method.Show(DataGrid, edit) == true)
-                            {
-                                Updated(info);
-                            }
-                        }
-                        break;
-                    case "删除":
-                        if (SelectedInfo() is T infoDel)
-                        {
-                            if (Method.Ask(DataGrid, $"确认删除：[{infoDel.GetType().Description()}]" + infoDel))
-                            {
-                                Deleted(infoDel);
-                            }
-                        }
-                        break;
-                    case "导入":
-                        var title = typeof(T).Description();
-                        if (Method.Import($"选择要导入的 {title} 表", out string file))
-                        {
-                            Method.Progress(Config.Window, "正在导入..", adorner =>
-                            {
-                                var list = Method.FromExcel<T>(file).Result;
-                                ImportChecked(list);
-                                Import(list);
-                            }, () =>
-                            {
-                                Messenger.Default.Send(new StatuMessage($"{title} 导入完成", DataGrid));
-                            }, error: ex =>
-                            {
-                                Messenger.Default.Send(new StatuMessage("导入失败", ex, DataGrid));
-                            });
-                        }
-                        break;
-                    case "导出":
-                        title = $"{typeof(T).Description()}{DateTime.Now:yyyy-MM-dd}";
-                        if (Method.Export(title, out file))
-                        {
-                            Export(file);
-                        }
-                        break;
-                }
+                Action(item);
             }
             catch (Exception ex)
             {
                 Messenger.Default.Send(new StatuMessage(ex));
+            }
+        }
+        protected virtual void Action(string item)
+        {
+            switch (item)
+            {
+                case "刷新":
+                    Refresh();
+                    break;
+                case "添加":
+                    AddViewModel.Info = new T();
+                    var add = AddWindow();
+                    if (add != null && Method.Show(DataGrid, add) == true)
+                    {
+                        Insert(AddViewModel.Info);
+                    }
+                    break;
+                case "编辑":
+                    if (SelectedInfo() is T info)
+                    {
+                        AddViewModel.Info = info;
+                        var edit = AddWindow();
+                        if (edit != null && Method.Show(DataGrid, edit) == true)
+                        {
+                            Updated(info);
+                        }
+                    }
+                    break;
+                case "删除":
+                    if (SelectedInfo() is T infoDel)
+                    {
+                        if (Method.Ask(DataGrid, $"确认删除：[{infoDel.GetType().Description()}]" + infoDel))
+                        {
+                            Deleted(infoDel);
+                        }
+                    }
+                    break;
+                case "导入":
+                    var title = typeof(T).Description();
+                    if (Method.Import($"选择要导入的 {title} 表", out string file))
+                    {
+                        Method.Progress(DataGrid, "正在导入..", adorner =>
+                        {
+                            var list = Method.FromExcel<T>(file).Result;
+                            ImportChecked(list);
+                            Import(list);
+                        }, () =>
+                        {
+                            Messenger.Default.Send(new StatuMessage($"{title} 导入完成", DataGrid));
+                        }, error: ex =>
+                        {
+                            Messenger.Default.Send(new StatuMessage("导入失败", ex, DataGrid));
+                        });
+                    }
+                    break;
+                case "导出":
+                    title = $"{typeof(T).Description()}{DateTime.Now:yyyy-MM-dd}";
+                    if (Method.Export(title, out file))
+                    {
+                        Export(file);
+                    }
+                    break;
             }
         }
         protected void Init(IDataGridServer server, List<T> list, DataGridEXT dataGrid, bool iPage = false)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Messaging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,11 @@ namespace Paway.Model
         public StatuItem()
         {
             InitializeComponent();
+        }
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            Messenger.Default.Send(new StatuLoadMessage() { Obj = Root });
         }
     }
 }
