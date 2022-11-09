@@ -9,8 +9,8 @@ namespace Paway.Test
     {
         public static ViewModelLocator Default => new ViewModelLocator();
 
-        public TipWindowModel Tip => GetInstance<TipWindowModel>();
-        public TestWindowModel Test => GetInstance<TestWindowModel>();
-        public MainWindowModel Main => GetInstance<MainWindowModel>();
+        public TipWindowModel Tip => GetModelInstance<TipWindowModel>();
+        public TestWindowModel Test => GetModelInstance<TestWindowModel>();
+        public MainWindowModel Main => GetModelInstance<MainWindowModel>();
     }
 }

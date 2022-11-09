@@ -15,7 +15,7 @@ using System.Windows.Media;
 
 namespace Paway.Model
 {
-    public abstract partial class OperateItemModel : ViewModelBase
+    public abstract partial class OperateItemModel : ViewModelBase, IPageReload
     {
         #region 属性
         protected DependencyObject Root;
@@ -182,6 +182,21 @@ namespace Paway.Model
                 dpOperateItem.Children.Insert(dpOperateItem.Children.Count - 1, btn);
             }
         }
+        /// <summary>
+        /// 添加自定义控件
+        /// </summary>
+        protected void AddUIElement(FrameworkElement parent, Func<UIElement> func, int index = -1)
+        {
+            if (Method.Find(parent, out DockPanel dpOperateItem, "dpOperateItem"))
+            {
+                var element = func();
+                dpOperateItem.Children.Insert(index != -1 ? index : dpOperateItem.Children.Count - 1, element);
+            }
+        }
+        #endregion
+
+        #region 页重加载
+        public virtual void PageReload() { }
 
         #endregion
 
