@@ -34,11 +34,19 @@ namespace Paway.Model
         /// 源数据列表
         /// </summary>
         public List<T> List;
-        private List<T> showList;
+        /// <summary>
+        /// List为全局缓存，当前页可能需要过滤显示
+        /// </summary>
+        protected Func<T, bool> listFilter;
+        protected List<T> FilterList()
+        {
+            if (listFilter == null) return List;
+            return List.FindAll(c => listFilter(c));
+        }
         /// <summary>
         /// 当前显示数据列表
         /// </summary>
-        public List<T> ShowList => showList ?? List;
+        private List<T> showList;
         /// <summary>
         /// 界面绑定列表
         /// </summary>
@@ -100,7 +108,7 @@ namespace Paway.Model
             server.Insert(info);
             Method.Update(info);
             Method.Sorted(List);
-            var index = List.FindIndex(c => c.Id == info.Id);
+            var index = this.FilterList().FindIndex(c => c.Id == info.Id);
             if (!this.SearchReset()) ObList.Insert(index, info);
             SelectIndex(info, index);
         }
@@ -122,7 +130,7 @@ namespace Paway.Model
             info.UpdateOn = DateTime.Now;
             server.Update(info);
             Method.Sorted(List);
-            var index = List.FindIndex(c => c.Id == info.Id);
+            var index = this.FilterList().FindIndex(c => c.Id == info.Id);
             ObList.Remove(info);
             if (!this.SearchReset()) ObList.Insert(index, info);
             SelectIndex(info, index);
@@ -166,7 +174,7 @@ namespace Paway.Model
         }
         protected virtual void Import(List<T> list)
         {
-            var updateList = Method.Import(this.List, list);
+            var updateList = Method.Import(this.FilterList(), list);
             var timeNow = DateTime.Now;
             updateList.ForEach(c => c.UpdateOn = timeNow);
             server.Replace(updateList);
@@ -176,7 +184,7 @@ namespace Paway.Model
         }
         protected virtual void Export(string file)
         {
-            ExcelHelper.ToExcel(this.List, null, file);
+            ExcelHelper.ToExcel(this.FilterList(), null, file);
             Messenger.Default.Send(new StatuMessage("导出成功", DataGrid));
             if (Method.Ask(DataGrid, "导出成功,是否打开文件?"))
             {
@@ -308,12 +316,17 @@ namespace Paway.Model
         {
             if (typeof(IIndex).IsAssignableFrom(typeof(T)))
             {
+                var updateList = new List<T>();
                 for (var i = 0; i < ObList.Count; i++)
                 {
                     var item = List.Find(c => c.Id == ObList[i].Id);
-                    if (item is IIndex index) index.Index = i;
+                    if (item is IIndex index)
+                    {
+                        index.Index = i;
+                        updateList.Add(item);
+                    }
                 }
-                server.Update(List, nameof(IIndex.Index));
+                server.Update(updateList, null, nameof(IIndex.Index));
             }
         });
 
@@ -339,7 +352,7 @@ namespace Paway.Model
             else
             {
                 var filter = typeof(T).Predicate<T>(SearchText.Trim());
-                this.showList = List.Where(filter).ToList();
+                this.showList = this.FilterList().Where(filter).ToList();
             }
             this.ReloadObList();
         }
@@ -363,7 +376,8 @@ namespace Paway.Model
             Method.BeginInvoke(DataGrid, () =>
             {
                 ObList.Clear();
-                foreach (var item in this.ShowList) ObList.Add(item);
+                var list = showList ?? this.FilterList();
+                foreach (var item in list) ObList.Add(item);
             });
         }
         /// <summary>

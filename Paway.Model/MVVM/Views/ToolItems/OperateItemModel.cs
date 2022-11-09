@@ -126,7 +126,7 @@ namespace Paway.Model
         /// <summary>
         /// 自定义按键快捷按键命令对应表
         /// </summary>
-        private Dictionary<Key, string> KeyCmdDic = new Dictionary<Key, string>();
+        private readonly Dictionary<Key, string> KeyCmdDic = new Dictionary<Key, string>();
         /// <summary>
         /// 默认权限
         /// <para>刷新、保存</para>
@@ -142,8 +142,10 @@ namespace Paway.Model
         {
             if (Method.Find(parent, out DockPanel dpOperateItem, "dpOperateItem"))
             {
-                var border = new Border();
-                border.Style = parent.FindResource("Interval") as Style;
+                var border = new Border
+                {
+                    Style = parent.FindResource("Interval") as Style
+                };
                 action?.Invoke(border);
                 dpOperateItem.Children.Insert(dpOperateItem.Children.Count - 1, border);
             }
@@ -164,15 +166,17 @@ namespace Paway.Model
         {
             if (Method.Find(parent, out DockPanel dpOperateItem, "dpOperateItem"))
             {
-                var btn = new ButtonEXT();
-                btn.Style = parent.FindResource("MenuButton") as Style;
-                btn.ItemBorder = new ThicknessEXT(0);
-                btn.Content = content;
-                btn.ToolTip = toolTip ?? content;
-                btn.Image = imageEXT;
-                btn.ImageDock = imageDock;
-                btn.Command = ItemClickCommand;
-                btn.CommandParameter = cmd ?? content;
+                var btn = new ButtonEXT
+                {
+                    Style = parent.FindResource("MenuButton") as Style,
+                    ItemBorder = new ThicknessEXT(0),
+                    Content = content,
+                    ToolTip = toolTip ?? content,
+                    Image = imageEXT,
+                    ImageDock = imageDock,
+                    Command = ItemClickCommand,
+                    CommandParameter = cmd ?? content
+                };
                 if (key != Key.None)
                 {
                     if (KeyCmdDic.ContainsKey(key)) throw new WarningException($"按键{key}已存在");

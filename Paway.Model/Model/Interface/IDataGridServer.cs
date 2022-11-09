@@ -16,10 +16,10 @@ namespace Paway.Model
     {
         int Insert<T>(T t, DbCommand cmd = null) where T : class;
         int Delete<T>(T t, DbCommand cmd = null) where T : class;
-        int Update<T>(T t, params string[] args) where T : class;
-        int Update<T>(List<T> list, params string[] args) where T : class;
+        int Update<T>(T t, DbCommand cmd = null, params string[] args) where T : class;
+        int Update<T>(List<T> list, DbCommand cmd = null, params string[] args) where T : class;
         int Replace<T>(T t, params string[] args) where T : class;
         int Replace<T>(List<T> list, params string[] args) where T : class;
-        List<T> Find<T>(string find = null, params string[] args) where T : class, new();
+        List<T> Find<T>(string find = null, DbCommand cmd = null, params string[] args) where T : class, new();
     }
 }
