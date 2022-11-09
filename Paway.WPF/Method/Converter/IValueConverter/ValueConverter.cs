@@ -148,7 +148,7 @@ namespace Paway.WPF
         {
             PConfig.IConvertBack = true;
             var result = value.ToBool() ? 1 : -1;
-            return result * parameter.ToInt();
+            return (result * parameter.ToInt()).ToString();//需返回字符串格式
         }
     }
     /// <summary>
@@ -220,7 +220,7 @@ namespace Paway.WPF
         {
             PConfig.IConvertBack = true;
             var result = value.ToBool() ? -1 : 1;
-            return result * parameter.ToInt();
+            return (result * parameter.ToInt()).ToString();
         }
     }
     /// <summary>

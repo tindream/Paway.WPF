@@ -23,39 +23,43 @@
     <TextBoxEXT Name="tbSearch" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Water="搜索" MaxLength="32" DockPanel.Dock="Right" Width="200" VerticalAlignment="Center"
                 Icon="/Paway.Model;component/Images/operate/search_gray.png"  IconHeight="20" IconStretch="Uniform"
                 Visibility="{Binding Auth, Converter={StaticResource valueMoreToVisible}, ConverterParameter=1024}"/>
-    <ButtonEXT Style="{StaticResource MenuButton}" ItemBorder="0" Content="刷新(F5)" ToolTip="刷新"
-               Image="pack://application:,,,/Paway.Model;component/Images/operate/refresh.png|pack://application:,,,/Paway.Model;component/Images/operate/refresh_white.png" ImageDock="Top"
-               Visibility="{Binding Auth, Converter={StaticResource valueMoreToVisible}, ConverterParameter=1}"
-               Command="{Binding ItemClickCommand}" CommandParameter="刷新"/>
+    <ScrollViewerEXT HorizontalScrollBarVisibility="Auto">
+        <DockPanel>
+            <ButtonEXT Style="{StaticResource MenuButton}" ItemBorder="0" Content="刷新(F5)" ToolTip="刷新"
+                       Image="pack://application:,,,/Paway.Model;component/Images/operate/refresh.png|pack://application:,,,/Paway.Model;component/Images/operate/refresh_white.png" ImageDock="Top"
+                       Visibility="{Binding Auth, Converter={StaticResource valueMoreToVisible}, ConverterParameter=1}"
+                       Command="{Binding ItemClickCommand}" CommandParameter="刷新"/>
 
-    <Border Style="{StaticResource Interval}"
-            Visibility="{Binding Auth, Converter={StaticResource valueUnionToVisible}, ConverterParameter=30}"/>
-    <ButtonEXT Style="{StaticResource MenuButton}" ItemBorder="0" Content="添加(A)" ToolTip="添加项"
-               Image="pack://application:,,,/Paway.Model;component/Images/operate/add.png|pack://application:,,,/Paway.Model;component/Images/operate/add_white.png" ImageDock="Top"
-               Visibility="{Binding Auth, Converter={StaticResource valueMoreToVisible}, ConverterParameter=2}"
-               Command="{Binding ItemClickCommand}" CommandParameter="添加"/>
-    <ButtonEXT Style="{StaticResource MenuButton}" ItemBorder="0" Content="编辑(E)" ToolTip="编辑项"
-               Image="pack://application:,,,/Paway.Model;component/Images/operate/edit.png|pack://application:,,,/Paway.Model;component/Images/operate/edit_white.png" ImageDock="Top"
-               Visibility="{Binding Auth, Converter={StaticResource valueMoreToVisible}, ConverterParameter=4}"
-               Command="{Binding ItemClickCommand}" CommandParameter="编辑"/>
-    <ButtonEXT Style="{StaticResource MenuButton}" ItemBorder="0" Content="删除(D)" ToolTip="删除项"
-               Image="pack://application:,,,/Paway.Model;component/Images/operate/close_red.png|pack://application:,,,/Paway.Model;component/Images/operate/close_white.png" ImageDock="Top"
-               Visibility="{Binding Auth, Converter={StaticResource valueMoreToVisible}, ConverterParameter=8}"
-               Command="{Binding ItemClickCommand}" CommandParameter="删除"/>
-    <ButtonEXT Style="{StaticResource MenuButton}" ItemBorder="0" Content="保存(S)" ToolTip="保存项"
-               Image="pack://application:,,,/Paway.Model;component/Images/operate/save.png|pack://application:,,,/Paway.Model;component/Images/operate/save_white.png" ImageDock="Top"
-               Visibility="{Binding Auth, Converter={StaticResource valueMoreToVisible}, ConverterParameter=16}"
-               Command="{Binding ItemClickCommand}" CommandParameter="保存"/>
+            <Border Style="{StaticResource Interval}"
+                    Visibility="{Binding Auth, Converter={StaticResource valueUnionToVisible}, ConverterParameter=30}"/>
+            <ButtonEXT Style="{StaticResource MenuButton}" ItemBorder="0" Content="添加(A)" ToolTip="添加项"
+                       Image="pack://application:,,,/Paway.Model;component/Images/operate/add.png|pack://application:,,,/Paway.Model;component/Images/operate/add_white.png" ImageDock="Top"
+                       Visibility="{Binding Auth, Converter={StaticResource valueMoreToVisible}, ConverterParameter=2}"
+                       Command="{Binding ItemClickCommand}" CommandParameter="添加"/>
+            <ButtonEXT Style="{StaticResource MenuButton}" ItemBorder="0" Content="编辑(E)" ToolTip="编辑项"
+                       Image="pack://application:,,,/Paway.Model;component/Images/operate/edit.png|pack://application:,,,/Paway.Model;component/Images/operate/edit_white.png" ImageDock="Top"
+                       Visibility="{Binding Auth, Converter={StaticResource valueMoreToVisible}, ConverterParameter=4}"
+                       Command="{Binding ItemClickCommand}" CommandParameter="编辑"/>
+            <ButtonEXT Style="{StaticResource MenuButton}" ItemBorder="0" Content="删除(D)" ToolTip="删除项"
+                       Image="pack://application:,,,/Paway.Model;component/Images/operate/close_red.png|pack://application:,,,/Paway.Model;component/Images/operate/close_white.png" ImageDock="Top"
+                       Visibility="{Binding Auth, Converter={StaticResource valueMoreToVisible}, ConverterParameter=8}"
+                       Command="{Binding ItemClickCommand}" CommandParameter="删除"/>
+            <ButtonEXT Style="{StaticResource MenuButton}" ItemBorder="0" Content="保存(S)" ToolTip="保存项"
+                       Image="pack://application:,,,/Paway.Model;component/Images/operate/save.png|pack://application:,,,/Paway.Model;component/Images/operate/save_white.png" ImageDock="Top"
+                       Visibility="{Binding Auth, Converter={StaticResource valueMoreToVisible}, ConverterParameter=16}"
+                       Command="{Binding ItemClickCommand}" CommandParameter="保存"/>
 
-    <Border Style="{StaticResource Interval}"
-            Visibility="{Binding Auth, Converter={StaticResource valueUnionToVisible}, ConverterParameter=96}"/>
-    <ButtonEXT Style="{StaticResource MenuButton}" ItemBorder="0" Content="导入(I)" ToolTip="导入列表"
-               Image="pack://application:,,,/Paway.Model;component/Images/operate/import.png|pack://application:,,,/Paway.Model;component/Images/operate/import_white.png" ImageDock="Top"
-               Visibility="{Binding Auth, Converter={StaticResource valueMoreToVisible}, ConverterParameter=32}"
-               Command="{Binding ItemClickCommand}" CommandParameter="导入"/>
-    <ButtonEXT Style="{StaticResource MenuButton}" ItemBorder="0" Content="导出(O)" ToolTip="导出列表"
-               Image="pack://application:,,,/Paway.Model;component/Images/operate/export.png|pack://application:,,,/Paway.Model;component/Images/operate/export_white.png" ImageDock="Top"
-               Visibility="{Binding Auth, Converter={StaticResource valueMoreToVisible}, ConverterParameter=64}"
-               Command="{Binding ItemClickCommand}" CommandParameter="导出"/>
-    <Border/>
+            <Border Style="{StaticResource Interval}"
+                    Visibility="{Binding Auth, Converter={StaticResource valueUnionToVisible}, ConverterParameter=96}"/>
+            <ButtonEXT Style="{StaticResource MenuButton}" ItemBorder="0" Content="导入(I)" ToolTip="导入列表"
+                       Image="pack://application:,,,/Paway.Model;component/Images/operate/import.png|pack://application:,,,/Paway.Model;component/Images/operate/import_white.png" ImageDock="Top"
+                       Visibility="{Binding Auth, Converter={StaticResource valueMoreToVisible}, ConverterParameter=32}"
+                       Command="{Binding ItemClickCommand}" CommandParameter="导入"/>
+            <ButtonEXT Style="{StaticResource MenuButton}" ItemBorder="0" Content="导出(O)" ToolTip="导出列表"
+                       Image="pack://application:,,,/Paway.Model;component/Images/operate/export.png|pack://application:,,,/Paway.Model;component/Images/operate/export_white.png" ImageDock="Top"
+                       Visibility="{Binding Auth, Converter={StaticResource valueMoreToVisible}, ConverterParameter=64}"
+                       Command="{Binding ItemClickCommand}" CommandParameter="导出"/>
+            <Border/>
+        </DockPanel>
+    </ScrollViewerEXT>
 </DockPanel>

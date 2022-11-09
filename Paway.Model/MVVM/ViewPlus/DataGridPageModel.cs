@@ -83,9 +83,9 @@ namespace Paway.Model
         protected T SelectedInfo()
         {
             if (SelectedItem != null) return SelectedItem;
-            if (DataGrid.SelectionUnit != DataGridSelectionUnit.FullRow && DataGrid.CurrentCell != null)
+            if (DataGrid.SelectionUnit != DataGridSelectionUnit.FullRow && DataGrid.SelectedCells.Count > 0)
             {
-                if (DataGrid.CurrentCell.Item is T t) return t;
+                if (DataGrid.SelectedCells.First().Item is T t) return t;
             }
             return default;
         }
