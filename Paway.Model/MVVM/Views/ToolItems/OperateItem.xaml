@@ -5,6 +5,8 @@
            xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
            mc:Ignorable="d" 
            Background="White"
+           Name="dpOperateItem" 
+           UseLayoutRounding="True"
            Height="66" d:DesignWidth="800">
     <DockPanel.Resources>
         <Style x:Key="MenuButton" TargetType="{x:Type ButtonEXT}" BasedOn="{StaticResource {x:Type ButtonEXT}}">
@@ -25,7 +27,7 @@
                Image="pack://application:,,,/Paway.Model;component/Images/operate/refresh.png|pack://application:,,,/Paway.Model;component/Images/operate/refresh_white.png" ImageDock="Top"
                Visibility="{Binding Auth, Converter={StaticResource valueMoreToVisible}, ConverterParameter=1}"
                Command="{Binding ItemClickCommand}" CommandParameter="刷新"/>
-    
+
     <Border Style="{StaticResource Interval}"
             Visibility="{Binding Auth, Converter={StaticResource valueUnionToVisible}, ConverterParameter=30}"/>
     <ButtonEXT Style="{StaticResource MenuButton}" ItemBorder="0" Content="添加(A)" ToolTip="添加项"
@@ -44,7 +46,7 @@
                Image="pack://application:,,,/Paway.Model;component/Images/operate/save.png|pack://application:,,,/Paway.Model;component/Images/operate/save_white.png" ImageDock="Top"
                Visibility="{Binding Auth, Converter={StaticResource valueMoreToVisible}, ConverterParameter=16}"
                Command="{Binding ItemClickCommand}" CommandParameter="保存"/>
-    
+
     <Border Style="{StaticResource Interval}"
             Visibility="{Binding Auth, Converter={StaticResource valueUnionToVisible}, ConverterParameter=96}"/>
     <ButtonEXT Style="{StaticResource MenuButton}" ItemBorder="0" Content="导入(I)" ToolTip="导入列表"

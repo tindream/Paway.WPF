@@ -19,7 +19,10 @@ using System.Windows.Media;
 
 namespace Paway.Model
 {
-    public class LoginPageModel : ViewModelBase
+    /// <summary>
+    /// 登陆基类，必须实现登陆方法
+    /// </summary>
+    public abstract class LoginPageModel : ViewModelBase
     {
         #region 属性
         protected DependencyObject Root;
@@ -117,7 +120,7 @@ namespace Paway.Model
                 iLogining = false;
             }
         });
-        public virtual void Login() { }
+        public abstract void Login();
 
         #endregion
 

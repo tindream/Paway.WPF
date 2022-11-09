@@ -18,6 +18,9 @@ using System.Windows.Media;
 
 namespace Paway.Model
 {
+    /// <summary>
+    /// 数据管理基类，必须指定当前菜单、及初始化
+    /// </summary>
     public abstract class DataGridPageModel<T> : OperateItemModel where T : class, IBaseInfo, ICompare<T>, new()
     {
         #region 属性
@@ -200,30 +203,6 @@ namespace Paway.Model
             ActionInternal(item.Text);
             listView1.SelectedIndex = -1;
         }
-        protected void Action(KeyMessage msg)
-        {
-            if (Config.Menu != this.Menu) return;
-            switch (msg.Key)
-            {
-                case Key.F5: ActionInternal("刷新"); break;
-                case Key.Delete: ActionInternal("删除"); break;
-            }
-            if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
-            {
-                if (Method.Find(DataGrid, out TextBoxEXT tbSearch, "tbSearch"))
-                {
-                    if (tbSearch.IsKeyboardFocusWithin) return;
-                }
-                switch (msg.Key)
-                {
-                    case Key.A: ActionInternal("添加"); break;
-                    case Key.E: ActionInternal("编辑"); break;
-                    case Key.D: ActionInternal("删除"); break;
-                    case Key.I: ActionInternal("导入"); break;
-                    case Key.O: ActionInternal("导出"); break;
-                }
-            }
-        }
         internal override void ActionInternal(string item)
         {
             try
@@ -234,6 +213,18 @@ namespace Paway.Model
             {
                 Messenger.Default.Send(new StatuMessage(ex));
             }
+        }
+        protected override void Action(KeyMessage msg)
+        {
+            if (Config.Menu != this.Menu) return;
+            if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                if (Method.Find(DataGrid, out TextBoxEXT tbSearch, "tbSearch"))
+                {
+                    if (tbSearch.IsKeyboardFocusWithin) return;
+                }
+            }
+            base.Action(msg);
         }
         protected override void Action(string item)
         {
@@ -377,7 +368,6 @@ namespace Paway.Model
         }
         /// <summary>
         /// 默认权限
-        /// <para>MenuAuthType.Refresh | MenuAuthType.Add | MenuAuthType.Edit | MenuAuthType.Delete | MenuAuthType.Import | MenuAuthType.Export | MenuAuthType.Search</para>
         /// <para>刷新、添加、编辑、删除、导入、导出、搜索</para>
         /// </summary>
         protected override void AuthNormal()
