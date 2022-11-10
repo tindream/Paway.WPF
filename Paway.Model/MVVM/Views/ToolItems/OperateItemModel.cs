@@ -17,11 +17,6 @@ namespace Paway.Model
 {
     public abstract partial class OperateItemModel : ViewModelBase, IPageReload
     {
-        #region 属性
-        protected DependencyObject Root;
-
-        #endregion
-
         #region 权限控制
         public abstract string Menu { get; }
         private MenuAuthType _auth;

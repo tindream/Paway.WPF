@@ -17,17 +17,17 @@
         <TextBlock Text="欢迎使用" Foreground="White" Margin="2,40" FontSize="36"  />
         <TextBoxEXT  Name="tbUserName" Text="{Binding UserName}" Water="请输入用户名" 
                      IAnimation="2" BorderThickness="0,0,0,1" Width="450" FontSize="30" WaterSize="0.7"
-                     Icon="/Paway.Model;component/Images/user.png" IconWidth="36" IconStretch="Uniform"
+                     Icon="/Paway.Model;component/Images/login/user.png" IconWidth="36" IconStretch="Uniform"
                      Visibility="{Binding IUserList, Converter={StaticResource boolToCollapsed}}"/>
         <ComboBoxEXT Name="cbxUserName" Text="{Binding UserName}" Water="请输入用户名" ItemsSource="{Binding ObList}" SelectedValuePath="Id" DisplayMemberPath="Desc"
                      IAnimation="2" BorderThickness="0,0,0,1" Width="450" FontSize="30" WaterSize="0.7"
-                     IsEditable="True" Icon="/Paway.Model;component/Images/user.png" IconWidth="36" IconStretch="Uniform"
+                     IsEditable="True" Icon="/Paway.Model;component/Images/login/user.png" IconWidth="36" IconStretch="Uniform"
                      Visibility="{Binding IUserList, Converter={StaticResource boolToVisible}}"/>
         <PasswordBox Name="tbPassword" MaxLength="16" 
                      BorderThickness="0,1" FontSize="30" PasswordBoxEXT.WaterSize="0.7" Margin="2,35,2,2"
                      PasswordBoxEXT.Password="{Binding Password}"
                      PasswordBoxEXT.IAnimation="2" 
-                     PasswordBoxEXT.Icon="/Paway.Model;component/Images/password.png" PasswordBoxEXT.IconWidth="36" PasswordBoxEXT.IconStretch="Uniform"/>
+                     PasswordBoxEXT.Icon="/Paway.Model;component/Images/login/password.png" PasswordBoxEXT.IconWidth="36" PasswordBoxEXT.IconStretch="Uniform"/>
         <ButtonEXT Content="登陆" Command="{Binding LoginCommand}" FontSize="30" IsLight="True" Margin="2,40,2,2" BorderBrush="White" ItemForeground="White;;" Padding="12,9"/>
     </StackPanel>
 </Page>
