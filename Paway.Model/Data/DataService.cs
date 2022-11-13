@@ -16,12 +16,12 @@ namespace Paway.Model
 {
     public partial class DataService : SQLiteHelper, IDataGridServer
     {
-        public DataService(string createSql, string dbName = "test.db")
+        public DataService(string dbName = "test.db", string createSql = null)
         {
             string path = AppDomain.CurrentDomain.BaseDirectory;
             string file = Path.Combine(path, dbName);
             base.InitConnect(file);
-            if (base.InitCreate(createSql))
+            if (!createSql.IsEmpty() && base.InitCreate(createSql))
             {
                 Created();
             }
@@ -86,23 +86,6 @@ namespace Paway.Model
         public T LoadAdmin<T>() where T : class
         {
             return Method.Conversion<T, AdminBaseInfo>(Find<AdminBaseInfo>());
-        }
-        public List<T> FindSort<T>(DbCommand cmd = null) where T : class, new()
-        {
-            return FindSort<T>(string.Empty, cmd);
-        }
-        public List<T> FindSort<T>(Expression<Func<T, bool>> action, DbCommand cmd = null) where T : class, new()
-        {
-            var list = Find(action, cmd);
-            Method.Sorted(list);
-            return list;
-        }
-        public List<T> FindSort<T>(string sql, DbCommand cmd = null) where T : class, new()
-        {
-            if (DateTime.Now > new DateTime(2022, 11, 15)) throw new LicenseException(typeof(Config));
-            var list = Find<T>(sql, cmd);
-            Method.Sorted(list);
-            return list;
         }
 
         #endregion

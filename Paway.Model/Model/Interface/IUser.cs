@@ -18,6 +18,14 @@ namespace Paway.Model
         /// </summary>
         string UserName { get; set; }
         /// <summary>
+        /// 昵称
+        /// </summary>
+        string Display { get; set; }
+        /// <summary>
+        /// 综合描述
+        /// </summary>
+        string Desc { get; }
+        /// <summary>
         /// 密码
         /// </summary>
         string Password { get; set; }

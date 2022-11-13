@@ -21,6 +21,9 @@ using System.Windows;
 //请将此类型的 ComVisible 特性设置为 true。
 [assembly: ComVisible(false)]
 
+// 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
+[assembly: Guid("71028011-c6b2-4f4d-a0e2-47d14b67123b")]
+
 //若要开始生成可本地化的应用程序，请设置
 //.csproj 文件中的 <UICulture>CultureYouAreCodingWith</UICulture>
 //例如，如果您在源文件中使用的是美国英语，

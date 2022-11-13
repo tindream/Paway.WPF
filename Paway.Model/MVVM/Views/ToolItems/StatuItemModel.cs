@@ -14,6 +14,9 @@ using System.Windows.Media;
 
 namespace Paway.Model
 {
+    /// <summary>
+    /// 需优先初始化Init()，以接收消息
+    /// </summary>
     public partial class StatuItemModel : ViewModelBase
     {
         #region 属性

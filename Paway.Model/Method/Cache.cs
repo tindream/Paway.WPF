@@ -21,11 +21,16 @@ namespace Paway.Model
         /// </summary>
         public static Dictionary<Type, dynamic> Dic { get; private set; } = new Dictionary<Type, dynamic>();
 
-        public static void Init<T>(DataService server, List<T> list = null, Expression<Func<T, bool>> action = null) where T : class, new()
+        public static void Init<T>(IDataService server, List<T> list = null, Expression<Func<T, bool>> action = null) where T : class, new()
         {
-            var tempList = list ?? new List<T>();
-            if (server != null) tempList.AddRange(server.FindSort<T>(action));
-            Dic[typeof(T)] = tempList;
+            var dyList = list ?? new List<T>();
+            if (server != null)
+            {
+                var tempList = server.Find(action);
+                Method.Sorted(tempList);
+                dyList.AddRange(tempList);
+            }
+            Dic[typeof(T)] = dyList;
         }
         public static List<T> List<T>()
         {
