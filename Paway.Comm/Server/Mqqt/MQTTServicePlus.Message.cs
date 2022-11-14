@@ -15,7 +15,7 @@ namespace Paway.Comm
     public partial class MQTTServicePlus
     {
         #region 消息处理
-        protected virtual bool MessageReceived(IMessage msg, MqttApplicationMessage e, ref string logMsg) { return true; }
+        protected virtual bool MessageReceived(ApplicationMessageNotConsumedEventArgs e, string data, IMessage msg, ref string logMsg) { return true; }
         protected override void MessageReceived(ApplicationMessageNotConsumedEventArgs e)
         {
             if (e.SenderId == null) return;
@@ -33,7 +33,7 @@ namespace Paway.Comm
                 var data = e.ApplicationMessage.Payload.Decompress();
                 var msg = JsonConvert.DeserializeObject<IMessage>(data);
                 logMsg += $">{msg.Type.Description()}";
-                if (!MessageReceived(msg, e.ApplicationMessage, ref logMsg))
+                if (!MessageReceived(e, data, msg, ref logMsg))
                 {
                     throw new WarningException("未定义的消息");
                 }

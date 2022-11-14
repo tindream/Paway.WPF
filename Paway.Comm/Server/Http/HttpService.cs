@@ -125,6 +125,7 @@ namespace Paway.Comm
             }
             catch (Exception ex)
             {
+                if (context == null) return;
                 string error = ex.Message();
                 if (ex.InnerException() is DbException || ex.InnerException() is WarningException)
                 {
@@ -153,7 +154,7 @@ namespace Paway.Comm
             {
                 try
                 {
-                    context.Response.Close();
+                    context?.Response.Close();
                 }
                 catch (HttpListenerException) { }
                 catch (Exception e)

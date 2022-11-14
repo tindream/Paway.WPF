@@ -33,3 +33,4 @@ packages/
 AssemblyVersion.cs
 *.nupkg
 /Document/Paway.*/*
+/Root/Spire.Office7.9.0/*

@@ -12,11 +12,21 @@ namespace Paway.Comm
 {
     /// <summary>
     /// 通讯命令
+    /// <para>预留1-10</para>
     /// </summary>
     public enum CommType
     {
         None,
+        /// <summary>
+        /// 错误
+        /// </summary>
+        [Description("错误")]
         Error,
+        /// <summary>
+        /// 通知
+        /// </summary>
+        [Description("通知")]
+        Notice,
 
         /// <summary>
         /// 同步
