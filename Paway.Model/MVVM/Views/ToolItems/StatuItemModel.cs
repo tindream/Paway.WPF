@@ -101,7 +101,7 @@ namespace Paway.Model
         private void AddDesc(string msg, LeveType level = LeveType.Debug, bool iHit = true, DependencyObject ower = null)
         {
             this.Desc = msg;
-            Method.BeginInvoke(Config.Window, () =>
+            Method.Invoke(Config.Window, () =>
             {
                 switch (level)
                 {

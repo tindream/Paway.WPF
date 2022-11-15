@@ -27,11 +27,16 @@ namespace Paway.Comm
         protected ClientHelper gClient;
 
         public MQTTServicePlus() { }
-        public new void Start(int port)
+        public void Start(int port)
         {
             gClient = new ClientHelper();
-            base.Start(port).Wait();
+            base.StartAsync(port).Wait();
             Messenger.Default.Send(new StatuMessage($"mq://+:{port} 已启动"));
+        }
+        public void Stop()
+        {
+            base.StopAsync().Wait();
+            Messenger.Default.Send(new StatuMessage($"mqtt 已关闭"));
         }
         public MClientInfo Client(int userId)
         {

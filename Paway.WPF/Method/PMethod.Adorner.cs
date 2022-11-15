@@ -40,7 +40,7 @@ namespace Paway.WPF
         /// </summary>
         public static void SlowIn(FrameworkElement parent, object msg, int time = 500, double xMove = 0, double yMove = 0, double size = 36, Color? color = null)
         {
-            BeginInvoke(parent, () =>
+            Invoke(parent, () =>
             {
                 var myAdornerLayer = ReloadAdorner(parent);
                 if (myAdornerLayer == null) return;
@@ -229,7 +229,7 @@ namespace Paway.WPF
         /// </summary>
         public static void Toast(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color, int? fontSize = null)
         {
-            BeginInvoke(parent, () =>
+            Invoke(parent, () =>
             {
                 if (!Parent(parent, out Window window)) return;
                 if (window.Content is FrameworkElement element)
@@ -319,7 +319,7 @@ namespace Paway.WPF
         /// </summary>
         public static void Hit(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color, int? fontSize = null)
         {
-            BeginInvoke(parent, () =>
+            Invoke(parent, () =>
             {
                 if (!Parent(parent, out Window window)) return;
                 if (window.Content is FrameworkElement element)

@@ -32,16 +32,17 @@ namespace Paway.Comm
         /// 启动，完成后引发StartEvent
         /// </summary>
         /// <param name="port">服务端口</param>
-        public virtual Task Start(int port)
+        public virtual Task StartAsync(int port)
         {
             return CreateMQTTServer(port);
         }
         /// <summary>
         /// 停止服务
         /// </summary>
-        public void Stop()
+        public Task StopAsync()
         {
-            mqttServer?.StopAsync();
+            if (mqttServer == null) return Task.Delay(0);
+            return mqttServer.StopAsync();
         }
         /// <summary>
         /// 获取客户端连接列表
