@@ -14,6 +14,7 @@ using MQTTnet.Protocol;
 using MQTTnet;
 using System.Net;
 using Paway.Helper;
+using MQTTnet.Internal;
 
 namespace Paway.Comm
 {
@@ -41,7 +42,7 @@ namespace Paway.Comm
         /// </summary>
         public Task StopAsync()
         {
-            if (mqttServer == null) return Task.Delay(0);
+            if (mqttServer == null) return CompletedTask.Instance;
             return mqttServer.StopAsync();
         }
         /// <summary>
@@ -57,7 +58,7 @@ namespace Paway.Comm
         /// </summary>
         public virtual Task Publish(string topic, string data, MqttQualityOfServiceLevel level = MqttQualityOfServiceLevel.AtMostOnce)
         {
-            if (data == null) return Task.Delay(0);
+            if (data == null) return CompletedTask.Instance;
             return Publish(topic, Encoding.UTF8.GetBytes(data), level);
         }
         /// <summary>
@@ -66,7 +67,7 @@ namespace Paway.Comm
         /// </summary>
         public virtual Task Publish(string topic, byte[] buffer, MqttQualityOfServiceLevel level = MqttQualityOfServiceLevel.AtMostOnce)
         {
-            if (topic == null || buffer == null) return Task.Delay(0);
+            if (topic == null || buffer == null) return CompletedTask.Instance;
             var message = new MqttApplicationMessage()
             {
                 Topic = topic,
@@ -105,43 +106,23 @@ namespace Paway.Comm
         /// <summary>
         /// 客户端发起订阅主题通知
         /// </summary>
-        protected virtual Task SubScribedTopicAsync(ClientSubscribedTopicEventArgs args) { return Task.Run(() => { SubScribedTopic(args); }); }
-        /// <summary>
-        /// 客户端发起订阅主题通知
-        /// </summary>
-        protected virtual void SubScribedTopic(ClientSubscribedTopicEventArgs args) { }
+        protected virtual Task SubScribedTopicAsync(ClientSubscribedTopicEventArgs args) { return CompletedTask.Instance; }
         /// <summary>
         /// 客户端取消主题订阅通知
         /// </summary>
-        protected virtual Task UnScribedTopicAsync(ClientUnsubscribedTopicEventArgs args) { return Task.Run(() => { UnScribedTopic(args); }); }
-        /// <summary>
-        /// 客户端取消主题订阅通知
-        /// </summary>
-        protected virtual void UnScribedTopic(ClientUnsubscribedTopicEventArgs args) { }
+        protected virtual Task UnScribedTopicAsync(ClientUnsubscribedTopicEventArgs args) { return CompletedTask.Instance; }
         /// <summary>
         /// 客户端连接成功后的的处理通知
         /// </summary>
-        protected virtual Task ClientConnectedAsync(ClientConnectedEventArgs args) { return Task.Run(() => { ClientConnected(args); }); }
-        /// <summary>
-        /// 客户端连接成功后的的处理通知
-        /// </summary>
-        protected virtual void ClientConnected(ClientConnectedEventArgs args) { }
+        protected virtual Task ClientConnectedAsync(ClientConnectedEventArgs args) { return CompletedTask.Instance; }
         /// <summary>
         /// 客户端断开连接通知
         /// </summary>
-        protected virtual Task ClientDisConnectedAsync(ClientDisconnectedEventArgs args) { return Task.Run(() => { ClientDisConnected(args); }); }
-        /// <summary>
-        /// 客户端断开连接通知
-        /// </summary>
-        protected virtual void ClientDisConnected(ClientDisconnectedEventArgs args) { }
+        protected virtual Task ClientDisConnectedAsync(ClientDisconnectedEventArgs args) { return CompletedTask.Instance; }
         /// <summary>
         /// 接收客户端发送的消息
         /// </summary>
-        protected virtual Task MessageReceivedAsync(ApplicationMessageNotConsumedEventArgs args) { return Task.Run(() => { MessageReceived(args); }); }
-        /// <summary>
-        /// 接收客户端发送的消息
-        /// </summary>
-        protected virtual void MessageReceived(ApplicationMessageNotConsumedEventArgs args) { }
+        protected virtual Task MessageReceivedAsync(InterceptingPublishEventArgs args) { return CompletedTask.Instance; }
 
         #endregion
 
@@ -169,7 +150,7 @@ namespace Paway.Comm
                     e.ResponseUserProperties.Add(new MQTTnet.Packets.MqttUserProperty("error", ex.Message()));
                     e.ReasonCode = MqttConnectReasonCode.BadUserNameOrPassword;
                 }
-                return Task.Delay(0);
+                return CompletedTask.Instance;
             };
 
             // 设置消息订阅通知
@@ -181,7 +162,7 @@ namespace Paway.Comm
             // 设置客户端断开后的处理程序
             mqttServer.ClientDisconnectedAsync += ClientDisConnectedAsync;
             // 设置消息处理程序
-            mqttServer.ApplicationMessageNotConsumedAsync += MessageReceivedAsync;
+            mqttServer.InterceptingPublishAsync += MessageReceivedAsync;
             return mqttServer.StartAsync();
         }
 

@@ -9,41 +9,41 @@ using System.Data.Common;
 using System.Text;
 using GalaSoft.MvvmLight.Messaging;
 using MQTTnet.Server;
+using System.Threading.Tasks;
+using MQTTnet.Internal;
 
 namespace Paway.Comm
 {
     public partial class MQTTServicePlus
     {
         #region 消息处理
-        protected virtual bool MessageReceived(ApplicationMessageNotConsumedEventArgs e, string data, IMessage msg, ref string logMsg) { return true; }
-        protected override void MessageReceived(ApplicationMessageNotConsumedEventArgs e)
+        protected virtual Task MessageReceivedAsync(InterceptingPublishEventArgs e, string data, IMessage msg, ref string logMsg) { return CompletedTask.Instance; }
+        protected override Task MessageReceivedAsync(InterceptingPublishEventArgs e)
         {
-            if (e.SenderId == null) return;
+            if (e.ClientId == null) return CompletedTask.Instance;
             string logMsg = null;
             var type = CommType.None;
             try
             {
-                var client = gClient.Client(e.SenderId);
+                var client = gClient.Client(e.ClientId);
                 if (client == null)
                 {
-                    $"{e.SenderId}>未授权连接".Log(LeveType.Error);
-                    return;
+                    $"{e.ClientId}>未授权连接".Log(LeveType.Error);
+                    return CompletedTask.Instance;
                 }
                 logMsg = $"{client.Desc}";
                 var data = e.ApplicationMessage.Payload.Decompress();
                 var msg = JsonConvert.DeserializeObject<IMessage>(data);
                 logMsg += $">{msg.Type.Description()}";
-                if (!MessageReceived(e, data, msg, ref logMsg))
-                {
-                    throw new WarningException("未定义的消息");
-                }
+                var task = MessageReceivedAsync(e, data, msg, ref logMsg);
                 logMsg.Log();
+                return task;
             }
             #region catch
             catch (JsonReaderException)
             {
                 $"{logMsg}>未定义消息>{Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}".Log(LeveType.Error);
-                Publish(e.ApplicationMessage.Topic, new ErrorMessage(CommType.None, "未定义消息"));
+                return Publish(e.ApplicationMessage.Topic, new ErrorMessage(CommType.None, "未定义消息"));
             }
             catch (Exception ex)
             {
@@ -58,8 +58,9 @@ namespace Paway.Comm
                 }
                 if (type != CommType.None)
                 {
-                    Publish(e.ApplicationMessage.Topic, new ErrorMessage(type, error));
+                    return Publish(e.ApplicationMessage.Topic, new ErrorMessage(type, error));
                 }
+                return CompletedTask.Instance;
             }
             finally
             {//不回复

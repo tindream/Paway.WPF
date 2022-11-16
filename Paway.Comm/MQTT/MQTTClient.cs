@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using MQTTnet.Exceptions;
 using MQTTnet.Packets;
+using MQTTnet.Internal;
 
 namespace Paway.Comm
 {
@@ -76,9 +77,9 @@ namespace Paway.Comm
             // 设置消息接收处理程序
             mqttClient.ApplicationMessageReceivedAsync += MessageReceivedAsync;
             // 重连机制
-            mqttClient.DisconnectedAsync += Disconnected;
+            mqttClient.DisconnectedAsync += DisconnectedAsync;
             //连接默认订阅
-            mqttClient.ConnectedAsync += Connected;
+            mqttClient.ConnectedAsync += ConnectedAsync;
         }
         /// <summary>
         /// 断开
@@ -125,7 +126,7 @@ namespace Paway.Comm
         /// </summary>
         public virtual Task Send(string data, MqttQualityOfServiceLevel level, string topic = null)
         {
-            if (data == null) return Task.Delay(0);
+            if (data == null) return CompletedTask.Instance;
             return Send(Encoding.UTF8.GetBytes(data), level, topic);
         }
         /// <summary>
@@ -133,7 +134,7 @@ namespace Paway.Comm
         /// </summary>
         public virtual Task Send(byte[] buffer, MqttQualityOfServiceLevel level, string topic = null)
         {
-            if (buffer == null) return Task.Delay(0);
+            if (buffer == null) return CompletedTask.Instance;
             var appMsg = new MqttApplicationMessageBuilder()
                 .WithTopic(topic ?? this.Topic)     // 主题
                 .WithPayload(buffer)                // 消息
@@ -188,49 +189,44 @@ namespace Paway.Comm
         /// <summary>
         /// 消息处理
         /// </summary>
-        protected virtual Task MessageReceivedAsync(MqttApplicationMessageReceivedEventArgs args) { return Task.Run(() => { MessageReceived(args); }); }
-        /// <summary>
-        /// 消息处理
-        /// </summary>
-        protected virtual void MessageReceived(MqttApplicationMessageReceivedEventArgs args) { }
+        protected virtual Task MessageReceivedAsync(MqttApplicationMessageReceivedEventArgs args) { return CompletedTask.Instance; }
         /// <summary>
         /// 连接订阅
         /// </summary>
-        private Task Connected(MqttClientConnectedEventArgs args)
+        private Task ConnectedAsync(MqttClientConnectedEventArgs args)
         {
-            return Task.Run(() => { ConnectEvent?.Invoke(true, null); });
+            ConnectEvent?.Invoke(true, null);
+            return CompletedTask.Instance;
         }
         /// <summary>
         /// 断开重连
         /// </summary>
-        private Task Disconnected(MqttClientDisconnectedEventArgs args)
+        private Task DisconnectedAsync(MqttClientDisconnectedEventArgs args)
         {
-            return Task.Run(() =>
+            ConnectEvent?.Invoke(false, args.Exception);
+            if (args.Exception?.InnerException is SocketException error)
             {
-                ConnectEvent?.Invoke(false, args.Exception);
-                if (args.Exception?.InnerException is SocketException error)
+                switch (error.SocketErrorCode)
                 {
-                    switch (error.SocketErrorCode)
-                    {
-                        case SocketError.HostUnreachable:
-                        case SocketError.ConnectionAborted:
-                        case SocketError.NetworkUnreachable:
-                        case SocketError.ConnectionRefused:
-                            Thread.Sleep(3000);
-                            break;
-                        default:
-                            Thread.Sleep(1000);
-                            break;
-                    }
+                    case SocketError.HostUnreachable:
+                    case SocketError.ConnectionAborted:
+                    case SocketError.NetworkUnreachable:
+                    case SocketError.ConnectionRefused:
+                        Thread.Sleep(3000);
+                        break;
+                    default:
+                        Thread.Sleep(1000);
+                        break;
                 }
-                else Thread.Sleep(125);
-                if (args.Exception is MqttProtocolViolationException) { return; }//违反协议
-                else if (args.Exception is MqttProtocolViolationException) { return; }// 验证失败
-                else
-                {
-                    Connect(this.host, this.port, true);
-                }
-            });
+            }
+            else Thread.Sleep(125);
+            if (args.Exception is MqttProtocolViolationException) { }//违反协议
+            else if (args.Exception is MqttProtocolViolationException) { }// 验证失败
+            else
+            {
+                Connect(this.host, this.port, true);
+            }
+            return CompletedTask.Instance;
         }
 
         #endregion

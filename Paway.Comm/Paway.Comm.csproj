@@ -82,7 +82,7 @@
     <Compile Include="..\AssemblyVersion.cs">
       <Link>Properties\AssemblyVersion.cs</Link>
     </Compile>
-    <Compile Include="Client\Mqqt\MQTTClientPlus.cs" />
+    <Compile Include="Client\Mqtt\MQTTClientPlus.cs" />
     <Compile Include="Client\Http\WebApiClient.IDataGridServer.cs" />
     <Compile Include="Client\Http\WebApiClient.cs" />
     <Compile Include="Client\Http\WebClientPro.cs">
@@ -102,10 +102,10 @@
     <Compile Include="Server\Http\HttpServicePlus.cs" />
     <Compile Include="Server\Http\HttpServicePlus.File.cs" />
     <Compile Include="Server\Http\ResponseMessage.cs" />
-    <Compile Include="Server\Mqqt\ClientHelper.cs" />
-    <Compile Include="Server\Mqqt\MClientInfo.cs" />
-    <Compile Include="Server\Mqqt\MQTTServicePlus.cs" />
-    <Compile Include="Server\Mqqt\MQTTServicePlus.Message.cs" />
+    <Compile Include="Server\Mqtt\ClientHelper.cs" />
+    <Compile Include="Server\Mqtt\MClientInfo.cs" />
+    <Compile Include="Server\Mqtt\MQTTServicePlus.cs" />
+    <Compile Include="Server\Mqtt\MQTTServicePlus.Message.cs" />
     <Compile Include="Method\Method.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

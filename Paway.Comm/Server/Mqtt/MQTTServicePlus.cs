@@ -19,6 +19,7 @@ using MQTTnet.Server;
 using MQTTnet.Protocol;
 using GalaSoft.MvvmLight.Messaging;
 using Paway.Model;
+using MQTTnet.Internal;
 
 namespace Paway.Comm
 {
@@ -44,16 +45,20 @@ namespace Paway.Comm
         }
 
         #region 内部事件
-        protected override void ClientConnected(ClientConnectedEventArgs args)
+        protected override Task ClientConnectedAsync(ClientConnectedEventArgs args)
         {
             var client = gClient.Connect(args.ClientId);
             Messenger.Default.Send(new StatuMessage($"{client?.Desc}上线"));
+            return CompletedTask.Instance;
         }
-        protected override void ClientDisConnected(ClientDisconnectedEventArgs args)
+        protected override Task ClientDisConnectedAsync(ClientDisconnectedEventArgs args)
         {
             var client = gClient.DisConnect(args.ClientId);
-            if (client == null) return;
-            Messenger.Default.Send(new StatuMessage($"{client?.Desc}下线"));
+            if (client != null)
+            {
+                Messenger.Default.Send(new StatuMessage($"{client?.Desc}下线"));
+            }
+            return CompletedTask.Instance;
         }
 
         #endregion
@@ -64,7 +69,7 @@ namespace Paway.Comm
         /// </summary>
         public Task Publish(string topic, IMessage msg)
         {
-            if (topic == null) return Task.Delay(0);
+            if (topic == null) return CompletedTask.Instance;
             return Publish(topic, JsonConvert.SerializeObject(msg).Compress(), msg.Level);
         }
 
