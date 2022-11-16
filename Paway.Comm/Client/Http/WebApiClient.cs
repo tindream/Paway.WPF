@@ -124,7 +124,7 @@ namespace Paway.Comm
             return result.Data;
         }
 
-        private static ResponseMessage Send(MealMessage sync, int timeout = 30)
+        private static HttpResponseMessage Send(CommMessage sync, int timeout = 30)
         {
             var task = Task.Run(() =>
             {
@@ -135,7 +135,7 @@ namespace Paway.Comm
                     using (var client = new WebClientPro(timeout))
                     {
                         string response = client.UploadString(url, "POST", json).Decompress();
-                        return JsonConvert.DeserializeObject<ResponseMessage>(response);
+                        return JsonConvert.DeserializeObject<HttpResponseMessage>(response);
                     }
                 }
                 catch (WebException ex)

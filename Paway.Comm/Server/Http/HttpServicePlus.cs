@@ -48,7 +48,7 @@ namespace Paway.Comm
             logMsg = client?.Desc;
             if (MessageHandleFile(context, data, ref logMsg)) return;
 
-            var msg = JsonConvert.DeserializeObject<MealMessage>(data);
+            var msg = JsonConvert.DeserializeObject<CommMessage>(data);
             if (msg == null)
             {
                 base.MessageHandle(context, data, ref logMsg);

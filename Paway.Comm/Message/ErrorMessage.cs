@@ -7,7 +7,7 @@ using System.Text;
 namespace Paway.Comm
 {
     [Serializable]
-    public class ErrorMessage : MealMessage
+    public class ErrorMessage : CommMessage
     {
         public CommType FromType { get; set; }
         public string Message { get; set; }

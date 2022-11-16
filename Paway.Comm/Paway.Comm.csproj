@@ -89,7 +89,8 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Message\ErrorMessage.cs" />
-    <Compile Include="Message\MealMessage.cs" />
+    <Compile Include="Message\CommMessage.cs" />
+    <Compile Include="Message\ResponseMessage.cs" />
     <Compile Include="Message\SyncMessage.cs" />
     <Compile Include="Method\Config.cs" />
     <Compile Include="Model\Enum\CommType.cs" />
@@ -101,7 +102,7 @@
     <Compile Include="Server\Http\HttpService.cs" />
     <Compile Include="Server\Http\HttpServicePlus.cs" />
     <Compile Include="Server\Http\HttpServicePlus.File.cs" />
-    <Compile Include="Server\Http\ResponseMessage.cs" />
+    <Compile Include="Server\Http\HttpResponseMessage.cs" />
     <Compile Include="Server\Mqtt\ClientHelper.cs" />
     <Compile Include="Server\Mqtt\MClientInfo.cs" />
     <Compile Include="Server\Mqtt\MQTTServicePlus.cs" />

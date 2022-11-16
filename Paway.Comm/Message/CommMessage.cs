@@ -1,5 +1,6 @@
 ﻿using MQTTnet.Protocol;
 using Newtonsoft.Json;
+using Paway.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +9,14 @@ using System.Text;
 namespace Paway.Comm
 {
     [Serializable]
-    public class MealMessage : IMessage
+    public class CommMessage : IMessage
     {
         public CommType Type { get; set; }
         [JsonIgnore]
         public MqttQualityOfServiceLevel Level { get; set; }
 
-        public MealMessage() { }
-        public MealMessage(CommType type)
+        public CommMessage() { }
+        public CommMessage(CommType type)
         {
             this.Type = type;
             this.Level = MqttQualityOfServiceLevel.AtLeastOnce;

@@ -61,19 +61,19 @@ namespace Paway.Comm
         /// </summary>
         protected void Response(HttpListenerContext context, string msg, bool result = true)
         {
-            Response(context, new ResponseMessage(result, msg));
+            Response(context, new HttpResponseMessage(result, msg));
         }
         /// <summary>
         /// Http回复数据
         /// </summary>
         protected void Response(HttpListenerContext context, object data = null, int total = 0, string msg = "success")
         {
-            Response(context, new ResponseMessage(true, msg, data, total));
+            Response(context, new HttpResponseMessage(true, msg, data, total));
         }
         /// <summary>
         /// Http回复
         /// </summary>
-        private void Response(HttpListenerContext context, ResponseMessage data)
+        private void Response(HttpListenerContext context, HttpResponseMessage data)
         {
             var zip = JsonConvert.SerializeObject(data).CompressBase64();
             var buffer = Encoding.UTF8.GetBytes(zip);

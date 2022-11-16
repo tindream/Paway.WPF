@@ -13,7 +13,7 @@ namespace Paway.Comm
     /// 客户端基础消息(不回送到本客户端)
     /// </summary>
     [Serializable]
-    public class ClientMessage : MealMessage
+    public class ClientMessage : CommMessage
     {
         public string ClientId { get; set; }
         public ClientMessage() { }
@@ -92,6 +92,7 @@ namespace Paway.Comm
         public SyncDeleteMessage() : base() { }
         public SyncDeleteMessage(object obj) : base(obj, OperType.Delete) { }
     }
+
     /// <summary>
     /// 同步查询操作
     /// </summary>
@@ -115,8 +116,10 @@ namespace Paway.Comm
             this.Args = args;
         }
     }
+
+
     [Serializable]
-    public class SyncExecuteScalarMessage : MealMessage
+    public class SyncExecuteScalarMessage : ClientMessage
     {
         public string Sql { get; set; }
 
