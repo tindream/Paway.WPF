@@ -70,7 +70,7 @@ namespace Paway.Comm
         public Task Publish(string topic, IMessage msg)
         {
             if (topic == null) return CompletedTask.Instance;
-            return Publish(topic, JsonConvert.SerializeObject(msg).Compress(), msg.Level);
+            return Publish(topic, JsonConvert.SerializeObject(msg).Compress());
         }
 
         #endregion

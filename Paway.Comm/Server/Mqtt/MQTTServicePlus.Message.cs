@@ -17,10 +17,15 @@ namespace Paway.Comm
     public partial class MQTTServicePlus
     {
         #region 消息处理
-        protected virtual Task MessageReceivedAsync(InterceptingPublishEventArgs e, string data, IMessage msg, ref string logMsg) { return CompletedTask.Instance; }
+        protected virtual void MessageReceivedAsync(InterceptingPublishEventArgs e, string data, IMessage msg, ref string logMsg) { }
         protected override Task MessageReceivedAsync(InterceptingPublishEventArgs e)
         {
-            if (e.ClientId == null) return CompletedTask.Instance;
+            if (e.ClientId == "SenderClientId") return CompletedTask.Instance;
+            if (e.ClientId == null)
+            {
+                e.ApplicationMessage.Topic = string.Empty;
+                return CompletedTask.Instance;
+            }
             string logMsg = null;
             var type = CommType.None;
             try
@@ -33,17 +38,15 @@ namespace Paway.Comm
                 }
                 logMsg = $"{client.Desc}";
                 var data = e.ApplicationMessage.Payload.Decompress();
-                var msg = JsonConvert.DeserializeObject<IMessage>(data);
-                logMsg += $">{msg.Type.Description()}";
-                var task = MessageReceivedAsync(e, data, msg, ref logMsg);
+                var msg = JsonConvert.DeserializeObject<CommMessage>(data);
+                MessageReceivedAsync(e, data, msg, ref logMsg);
                 logMsg.Log();
-                return task;
             }
             #region catch
             catch (JsonReaderException)
             {
                 $"{logMsg}>未定义消息>{Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}".Log(LeveType.Error);
-                return Publish(e.ApplicationMessage.Topic, new ErrorMessage(CommType.None, "未定义消息"));
+                Publish(e.ApplicationMessage.Topic, new ErrorMessage(CommType.None, "未定义消息"));
             }
             catch (Exception ex)
             {
@@ -58,14 +61,14 @@ namespace Paway.Comm
                 }
                 if (type != CommType.None)
                 {
-                    return Publish(e.ApplicationMessage.Topic, new ErrorMessage(type, error));
+                    Publish(e.ApplicationMessage.Topic, new ErrorMessage(type, error));
                 }
-                return CompletedTask.Instance;
             }
             finally
-            {//不回复
-                e.ApplicationMessage.Topic = "";
+            {// 当前消息处理进程中止
+                e.ApplicationMessage.Topic = string.Empty;
             }
+            return CompletedTask.Instance;
 
             #endregion
         }

@@ -56,44 +56,38 @@ namespace Paway.Comm
         /// 发布消息
         /// <para>客户端接收以订阅主题等级为准</para>
         /// </summary>
-        public virtual Task Publish(string topic, string data, MqttQualityOfServiceLevel level = MqttQualityOfServiceLevel.AtMostOnce)
+        public virtual Task Publish(string topic, string data)
         {
             if (data == null) return CompletedTask.Instance;
-            return Publish(topic, Encoding.UTF8.GetBytes(data), level);
+            return Publish(topic, Encoding.UTF8.GetBytes(data));
         }
         /// <summary>
         /// 发布消息
         /// <para>客户端接收以订阅主题等级为准</para>
         /// </summary>
-        public virtual Task Publish(string topic, byte[] buffer, MqttQualityOfServiceLevel level = MqttQualityOfServiceLevel.AtMostOnce)
+        public virtual Task Publish(string topic, byte[] buffer)
         {
             if (topic == null || buffer == null) return CompletedTask.Instance;
-            var message = new MqttApplicationMessage()
-            {
-                Topic = topic,
-                Payload = buffer,
-                QualityOfServiceLevel = level,
-            };
-            return mqttServer.InjectApplicationMessage(new InjectedMqttApplicationMessage(message));
+            var message = new MqttApplicationMessageBuilder().WithTopic(topic).WithPayload(buffer).Build();
+            return mqttServer.InjectApplicationMessage(new InjectedMqttApplicationMessage(message) { SenderClientId = "SenderClientId" });
         }
         /// <summary>
         /// 响应消息
         /// <para>客户端接收以订阅主题等级为准</para>
         /// </summary>
-        protected void Response(ApplicationMessageNotConsumedEventArgs e, string data, MqttQualityOfServiceLevel level = MqttQualityOfServiceLevel.AtMostOnce)
+        protected void Response(ApplicationMessageNotConsumedEventArgs e, string data)
         {
             if (data == null) return;
-            Response(e, Encoding.UTF8.GetBytes(data), level);
+            Response(e, Encoding.UTF8.GetBytes(data));
         }
         /// <summary>
         /// 响应消息
         /// <para>客户端接收以订阅主题等级为准</para>
         /// </summary>
-        protected void Response(ApplicationMessageNotConsumedEventArgs e, byte[] buffer, MqttQualityOfServiceLevel level = MqttQualityOfServiceLevel.AtMostOnce)
+        protected void Response(ApplicationMessageNotConsumedEventArgs e, byte[] buffer)
         {
             if (buffer == null) return;
             e.ApplicationMessage.Payload = buffer;
-            e.ApplicationMessage.QualityOfServiceLevel = level;
         }
 
         #endregion
