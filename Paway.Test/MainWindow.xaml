@@ -4,6 +4,7 @@
            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
            xmlns:local="clr-namespace:Paway.Test"
+           xmlns:model="clr-namespace:Paway.Model;assembly=Paway.Model"
            xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
            xmlns:ip="http://www.galasoft.ch/mvvmlight"
            xmlns:oxy="http://oxyplot.org/wpf"
@@ -82,7 +83,7 @@
         <ExpanderEXT ExpandDirection="Left" Header="输入">
             <StackPanel Width="250">
                 <ComboBoxEXT ItemsSource="{IntList Count=20}" SelectedValue="{Binding Value}" HorizontalContentAlignment="Center" />
-                <ComboBoxEXT ItemsSource="{EnumList Type=local:MonitorType}" SelectedValue="{Binding Path=MonitorType, Converter={StaticResource enumConverter}}"/>
+                <ComboBoxEXT ItemsSource="{EnumList Type=model:MenuAuthType}" SelectedValue="{Binding Path=MenuAuthType, Converter={StaticResource enumConverter}}"/>
                 <ComboBoxEXT ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
                 <ComboMulti ItemsSource="{Binding MultiList}" HorizontalContentAlignment="Center" />
                 <ComboDate SelectedValue="{Binding DatePickerTime}" HorizontalContentAlignment="Center"/>

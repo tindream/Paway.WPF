@@ -1,22 +1,28 @@
 
 
 
-CREATE TABLE [Auths](
+-- ----------------------------
+-- Table structure for Organ_Auths
+-- Date: 2022-11-11
+-- ----------------------------
+CREATE TABLE [Organ_Auths](
 "Id"  integer Primary Key AutoIncrement not null,
-"UserId" int,
+"ParentId" int,
 "MenuType" int,
 "ButtonType" int,
+"CreateOn"  datetime,
+"UpdateOn"  datetime,
  unique(Id asc)
 );
 GO
-Create index main.Auths_id on Auths (Id ASC);
+Create index main.Organ_Auths_id on Organ_Auths (Id ASC);
 GO
 
 -- ----------------------------
--- Table structure for Users
+-- Table structure for Sys_Users
 -- Date: 2011-11-11
 -- ----------------------------
-CREATE TABLE [Users](
+CREATE TABLE [Sys_Users](
 "Id"  integer Primary Key AutoIncrement not null,
 "UserName"  nvarchar(32),
 "Display"  nvarchar(32),
@@ -30,14 +36,14 @@ CREATE TABLE [Users](
  unique(Id asc)
 );
 GO
-Create index main.Users_id on Users (Id ASC);
+Create index main.Sys_Users_id on Sys_Users (Id ASC);
 GO
 
 -- ----------------------------
--- Table structure for Admins
+-- Table structure for Sys_Sys_Admins
 -- Date: 2011-11-11
 -- ----------------------------
-CREATE TABLE [Admins](
+CREATE TABLE [Sys_Admins](
 "Id"  integer Primary Key AutoIncrement not null,
 "Name"  nvarchar(255),
 "Value"  nvarchar(255),
@@ -46,5 +52,5 @@ CREATE TABLE [Admins](
  unique(Id asc)
 );
 GO
-Create index main.Admins_id on Admins (Id ASC);
+Create index main.Sys_Admins_id on Sys_Admins (Id ASC);
 GO

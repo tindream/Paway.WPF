@@ -10,19 +10,19 @@ using System.Text;
 namespace Paway.Test
 {
     [Serializable]
-    [Table("Users")]
+    [Table("Sys_Users")]
     [Description("用户")]
-    public class UserInfo : BaseInfo, IChecked, ICompare<UserInfo>
+    public class UserInfo : BaseInfo, IUser, IChecked, ICompare<UserInfo>
     {
-        private string _name;
+        private string _userName;
         /// <summary>
         /// 用户名
         /// </summary>
         [Text("用户名")]
-        public string Name
+        public string UserName
         {
-            get => _name;
-            set { _name = value; OnPropertyChanged(); }
+            get => _userName;
+            set { _userName = value; OnPropertyChanged(); }
         }
         private string _display;
         /// <summary>
@@ -43,12 +43,12 @@ namespace Paway.Test
             get
             {
                 if (!Display.IsEmpty()) return Display;
-                return Name;
+                return UserName;
             }
         }
         [NoShow]
         [Text("密码")]
-        public string Pad { get; set; }
+        public string Password { get; set; }
 
         private SexType _sex;
         [Text("性别")]
@@ -58,22 +58,22 @@ namespace Paway.Test
             set { _sex = value; OnPropertyChanged(); }
         }
 
-        private bool _statu = true;
+        private bool _iStatu = true;
         /// <summary>
         /// 启用状态
         /// </summary>
         [NoShow, NoExcel]
-        public bool Statu
+        public bool IStatu
         {
-            get => _statu;
-            set { _statu = value; OnPropertyChanged(); OnPropertyChanged(nameof(Status)); }
+            get => _iStatu;
+            set { _iStatu = value; OnPropertyChanged(); OnPropertyChanged(nameof(Status)); }
         }
         [Text("状态")]
         [NoSelect]
         public string Status
         {
-            get => Statu ? "启用" : "停用";
-            set { Statu = value == "启用"; }
+            get => IStatu ? "启用" : "停用";
+            set { IStatu = value == "启用"; }
         }
 
         private UserType _userType;
@@ -93,12 +93,12 @@ namespace Paway.Test
 
         public void Checked()
         {
-            if (Cache.UserList.Any(c => c.Id != this.Id && c.Name == this.Name)) throw new WarningException($"[{this.GetType().Description()}]{this.Name} 已存在");
+            if (Cache.UserList.Any(c => c.Id != this.Id && c.UserName == this.UserName)) throw new WarningException($"[{this.GetType().Description()}]{this.UserName} 已存在");
             if (!this.Display.IsEmpty() && Cache.UserList.Any(c => c.Id != this.Id && c.Display == this.Display)) throw new WarningException($"[{this.GetType().Description()}]{this.Display} 已存在");
         }
         public bool Compare(UserInfo item)
         {
-            if (this.Name == item.Name) return true;
+            if (this.UserName == item.UserName) return true;
             if (!this.Display.IsEmpty() && !item.Display.IsEmpty()) return this.Display == item.Display;
             return false;
         }
@@ -106,7 +106,7 @@ namespace Paway.Test
         public UserInfo() { }
         public UserInfo(string name)
         {
-            this.Name = name;
+            this.UserName = name;
         }
         public override string ToString()
         {

@@ -105,30 +105,6 @@ namespace Paway.WPF
 
         #endregion
 
-        #region 枚举
-        /// <summary>
-        /// 转换器枚举计算
-        /// <para>valueMoreToTrue多选时枚举值更新</para>
-        /// </summary>
-        public static T EnumMoreValue<T>(T result, T value) where T : Enum
-        {
-            if (!PConfig.IConvertBack) return value;
-            var valueInt = value.GetHashCode();
-            var resultInt = result.GetHashCode();
-            if (valueInt > 0) resultInt |= valueInt;
-            else
-            {
-                if ((resultInt & -valueInt) == -valueInt)
-                {
-                    resultInt += valueInt;
-                }
-            }
-            PConfig.IConvertBack = false;
-            return (T)(object)resultInt;
-        }
-
-        #endregion
-
         #region 位移动画
         /// <summary>
         /// 计算动画时间

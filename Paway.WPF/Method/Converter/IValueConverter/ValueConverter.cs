@@ -146,7 +146,6 @@ namespace Paway.WPF
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            PConfig.IConvertBack = true;
             var result = value.ToBool() ? 1 : -1;
             return (result * parameter.ToInt()).ToString();//需返回字符串格式
         }
@@ -218,7 +217,6 @@ namespace Paway.WPF
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            PConfig.IConvertBack = true;
             var result = value.ToBool() ? -1 : 1;
             return (result * parameter.ToInt()).ToString();
         }

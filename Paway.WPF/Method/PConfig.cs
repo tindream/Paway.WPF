@@ -29,10 +29,6 @@ namespace Paway.WPF
 
         #region 全局
         /// <summary>
-        /// 转换器ConvertBack标记
-        /// </summary>
-        public static bool IConvertBack { get; set; }
-        /// <summary>
         /// 双击间隔
         /// </summary>
         public static int DoubleInterval;

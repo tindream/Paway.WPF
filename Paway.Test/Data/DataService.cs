@@ -27,10 +27,10 @@ namespace Paway.Test
                 return intance;
             }
         }
-        public DataService() : base(Resources.script) { }
+        public DataService() : base(createSql: Resources.script) { }
         protected override void Created()
         {
-            var user = new UserInfo { UserType = UserType.Admin, Name = "admin", Pad = EncryptHelper.MD5("admin" + Config.Suffix) };
+            var user = new UserInfo { UserType = UserType.Admin, UserName = "admin", Password = EncryptHelper.MD5("admin" + Config.Suffix) };
             this.Insert(user);
             var auth = new AuthInfo(user.Id);
             auth.SetValue(nameof(auth.MenuType), Method.Sum<MenuAuthType>());
@@ -41,6 +41,7 @@ namespace Paway.Test
         #region 自动升级
         public void Load()
         {
+            Config.Admin = LoadAdmin<AdminInfo>();
             AutoUpdate();
         }
         private void AutoUpdate()

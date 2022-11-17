@@ -405,7 +405,10 @@ namespace Paway.Model
         /// </summary>
         protected void AuthNoSearch()
         {
-            this.Auth ^= MenuAuthType.Search;
+            if ((Auth & MenuAuthType.Search) == MenuAuthType.Search)
+            {
+                this.Auth ^= MenuAuthType.Search;
+            }
         }
 
         #endregion

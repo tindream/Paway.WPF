@@ -21,10 +21,17 @@
             <TextBoxEXT >
                 <Binding Path="Text">
                     <Binding.ValidationRules>
-                        <RegexValidationRule ValidatesOnTargetUpdated="True" RegexType="Word" MinLength="1"/>
+                        <RegexValidationRule RegexType="Word"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBoxEXT>
+            <CheckButton Content="A" IsChecked="{Binding UserType, Converter={StaticResource valueMoreToTrue}, ConverterParameter=1}" Padding="11,8" Margin="2,2,0,0" Radius="3,0,0,0"/>
+            <CheckButton Content="B" IsChecked="{Binding UserType, Converter={StaticResource valueMoreToTrue}, ConverterParameter=2}" Padding="11,8" Margin="-1,2,2,0" Radius="0,3,0,0"/>
+            <CheckButton Content="C" IsChecked="{Binding UserType, Converter={StaticResource valueMoreToTrue}, ConverterParameter=4}" Padding="11,8" Margin="2,-1,0,0" Radius="0"/>
+            <CheckButton Content="D" IsChecked="{Binding UserType, Converter={StaticResource valueMoreToTrue}, ConverterParameter=8}" Padding="11,8" Margin="-1,-1,2,0" Radius="0"/>
+            <CheckButton Content="E" IsChecked="{Binding UserType, Converter={StaticResource valueMoreToTrue}, ConverterParameter=16}" Padding="11,8" Margin="2,-1,0,2" Radius="0,0,0,3"/>
+            <CheckButton Content="F" IsChecked="{Binding UserType, Converter={StaticResource valueMoreToTrue}, ConverterParameter=32}" Padding="11,8" Margin="-1,-1,2,2" Radius="0,3,0,0"/>
+
             <ButtonEXT IsLight="True" Click="ButtonEXT_Click" Command="{Binding ButtonCommand}"/>
         </StackPanel>
         <Border Grid.Column="1" Background="Transparent">

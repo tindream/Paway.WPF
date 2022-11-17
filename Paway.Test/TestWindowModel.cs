@@ -74,11 +74,8 @@ namespace Paway.Test
             get { return userType; }
             set
             {
-                if (userType != value)
-                {
-                    userType = value;
-                    RaisePropertyChanged();
-                }
+                userType ^= (MenuAuthType)Math.Abs((int)value);
+                RaisePropertyChanged();
             }
         }
 
