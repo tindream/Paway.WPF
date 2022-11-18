@@ -10,7 +10,7 @@
            Height="35" d:DesignWidth="800">
     <DockPanel.Background>
         <MultiBinding Converter="{StaticResource boolSelector}">
-            <Binding Path="IBackColor" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
+            <Binding Path="IBackColor" RelativeSource="{RelativeSource Mode=Self}"/>
             <Binding Path="DescBrush" />
             <Binding Source="{x:Static Brushes.Transparent}"/>
         </MultiBinding>

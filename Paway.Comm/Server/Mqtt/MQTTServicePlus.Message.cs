@@ -39,6 +39,7 @@ namespace Paway.Comm
                 logMsg = $"{client.Desc}";
                 var data = e.ApplicationMessage.Payload.Decompress();
                 var msg = JsonConvert.DeserializeObject<CommMessage>(data);
+                type = msg.Type;
                 MessageReceivedAsync(e, data, msg, ref logMsg);
                 logMsg.Log();
             }
