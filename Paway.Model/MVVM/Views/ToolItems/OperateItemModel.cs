@@ -2,10 +2,12 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Paway.Helper;
+using Paway.Utils;
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -66,6 +68,18 @@ namespace Paway.Model
         /// 保存
         /// </summary>
         protected virtual void Save() { }
+        /// <summary>
+        /// 导出列表
+        /// </summary>
+        protected virtual void Export<T>(DependencyObject obj, List<T> list, string file) where T : class
+        {
+            ExcelHelper.ToExcel(list, null, file);
+            Messenger.Default.Send(new StatuMessage("导出成功", obj));
+            if (Method.Ask(obj, "导出成功,是否打开文件?"))
+            {
+                Process.Start(file);
+            }
+        }
         public ICommand ItemClickCommand => new RelayCommand<string>(item => ActionInternal(item));
 
         #endregion

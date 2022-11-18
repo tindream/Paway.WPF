@@ -184,16 +184,14 @@ namespace Paway.Model
         }
         protected virtual void Export(string file)
         {
-            Export(this.FilterList(), file);
+            Export(DataGrid, this.FilterList(), file);
         }
+        /// <summary>
+        /// 导出列表
+        /// </summary>
         protected virtual void Export<O>(List<O> list, string file) where O : class
         {
-            ExcelHelper.ToExcel(list, null, file);
-            Messenger.Default.Send(new StatuMessage("导出成功", DataGrid));
-            if (Method.Ask(DataGrid, "导出成功,是否打开文件?"))
-            {
-                Process.Start(file);
-            }
+            base.Export(DataGrid, list, file);
         }
 
         #endregion

@@ -20,12 +20,6 @@ namespace Paway.Model
     public partial class StatuItemModel : ViewModelBase
     {
         #region 属性
-        private bool _iConnect;
-        public bool IConnect
-        {
-            get { return _iConnect; }
-            set { _iConnect = value; RaisePropertyChanged(); }
-        }
         private string _userName;
         public string UserName
         {
@@ -44,6 +38,7 @@ namespace Paway.Model
             get { return _timeNow; }
             set { if (_timeNow != value) { _timeNow = value; RaisePropertyChanged(); } }
         }
+
         private Brush descBrush = ColorType.High.Color().ToBrush();
         public Brush DescBrush
         {
@@ -55,6 +50,15 @@ namespace Paway.Model
         {
             get { return _connectBrush; }
             set { if (_connectBrush != value) { _connectBrush = value; RaisePropertyChanged(); } }
+        }
+        private Brush _connect2Brush = ColorType.Warn.Color().ToBrush();
+        /// <summary>
+        /// 连接2状态
+        /// </summary>
+        public Brush Connect2Brush
+        {
+            get { return _connect2Brush; }
+            set { if (_connect2Brush != value) { _connect2Brush = value; RaisePropertyChanged(); } }
         }
 
         #endregion
@@ -69,6 +73,13 @@ namespace Paway.Model
                 Method.BeginInvoke(Config.Window, () =>
                 {
                     ConnectBrush = msg.Connectd ? ColorType.Success.Color().ToBrush() : ColorType.Error.Color().ToBrush();
+                });
+            });
+            Messenger.Default.Register<Connect2Message>(this, msg =>
+            {
+                Method.BeginInvoke(Config.Window, () =>
+                {
+                    Connect2Brush = msg.Connectd ? ColorType.Success.Color().ToBrush() : ColorType.Error.Color().ToBrush();
                 });
             });
             Messenger.Default.Register<LoginMessage>(this, msg =>
@@ -89,10 +100,7 @@ namespace Paway.Model
                 }
             });
         }
-        public void Init(bool iConnect = false)
-        {
-            this.IConnect = iConnect;
-        }
+        public void Init() { }
 
         #region 系统消息
         /// <summary>

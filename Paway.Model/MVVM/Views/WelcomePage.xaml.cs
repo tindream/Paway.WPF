@@ -25,9 +25,5 @@ namespace Paway.Model
         {
             InitializeComponent();
         }
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-        }
     }
 }

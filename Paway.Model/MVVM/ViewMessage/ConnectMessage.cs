@@ -18,4 +18,20 @@ namespace Paway.Model
             this.Connectd = connectd;
         }
     }
+    /// <summary>
+    /// 连接状态2
+    /// </summary>
+    public class Connect2Message
+    {
+        public bool Connectd { get; set; }
+
+        public Connect2Message() { }
+        /// <summary>
+        /// 连接状态2
+        /// </summary>
+        public Connect2Message(bool connectd)
+        {
+            this.Connectd = connectd;
+        }
+    }
 }
