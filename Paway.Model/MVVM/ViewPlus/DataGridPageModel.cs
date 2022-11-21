@@ -93,10 +93,7 @@ namespace Paway.Model
         #endregion
 
         #region 命令
-        protected virtual Window AddWindow()
-        {
-            return null;
-        }
+        protected virtual Window AddWindow() { return null; }
         protected virtual List<T> Find()
         {
             var list = server.Find<T>(this.sqlFilter);

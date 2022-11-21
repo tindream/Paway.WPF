@@ -83,9 +83,17 @@ namespace Paway.Model
             set { _logoImage = value; RaisePropertyChanged(); }
         }
 
+        private bool _setting;
+        public bool ISetting
+        {
+            get { return _setting; }
+            set { _setting = value; RaisePropertyChanged(); }
+        }
+
         #endregion
 
         #region 命令
+        public abstract void Login();
         public ICommand LoginCommand => new RelayCommand<string>(item =>
         {
             try
@@ -120,7 +128,23 @@ namespace Paway.Model
                 iLogining = false;
             }
         });
-        public abstract void Login();
+        protected virtual Window SetWindow() { return null; }
+        protected virtual void OnCommit(DependencyObject obj) { }
+        public ICommand SettingCommand => new RelayCommand<string>(item =>
+        {
+            try
+            {
+                var window = SetWindow();
+                if (window != null && Method.Show(Root, window) == true)
+                {
+                    OnCommit(Root);
+                }
+            }
+            catch (Exception ex)
+            {
+                Messenger.Default.Send(new StatuMessage(ex));
+            }
+        });
 
         #endregion
 

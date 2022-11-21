@@ -7,7 +7,7 @@
            Background="White"
            Name="dpOperateItem" 
            UseLayoutRounding="True"
-           Height="66" d:DesignWidth="800">
+           Height="66" d:DesignWidth="800" VerticalAlignment="Bottom" >
     <DockPanel.Resources>
         <Style x:Key="MenuButton" TargetType="{x:Type ButtonEXT}" BasedOn="{StaticResource {x:Type ButtonEXT}}">
             <Setter Property="IsLight" Value="True"/>
@@ -20,10 +20,10 @@
             <Setter Property="Margin" Value="2,7"/>
         </Style>
     </DockPanel.Resources>
-    <TextBoxEXT Name="tbSearch" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Water="搜索" MaxLength="32" DockPanel.Dock="Right" Width="200" VerticalAlignment="Center"
+    <TextBoxEXT Name="tbSearch" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Water="搜索" MaxLength="32" DockPanel.Dock="Right" Width="200" VerticalAlignment="Bottom"
                 Icon="/Paway.Model;component/Images/operate/search_gray.png"  IconHeight="20" IconStretch="Uniform"
                 Visibility="{Binding Auth, Converter={StaticResource valueMoreToVisible}, ConverterParameter=1024}"/>
-    <ScrollViewerEXT HorizontalScrollBarVisibility="Auto">
+    <ScrollViewerEXT HorizontalScrollBarVisibility="Auto" VerticalAlignment="{Binding VerticalAlignment, ElementName=dpOperateItem}">
         <DockPanel>
             <ButtonEXT Style="{StaticResource MenuButton}" ItemBorder="0" Content="刷新(F5)" ToolTip="刷新"
                        Image="pack://application:,,,/Paway.Model;component/Images/operate/refresh.png|pack://application:,,,/Paway.Model;component/Images/operate/refresh_white.png" ImageDock="Top"

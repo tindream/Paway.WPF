@@ -38,24 +38,9 @@ namespace Paway.Model
         /// 检查模型中的值
         /// <para>输入控件限定为TextBoxEXT，控件名称为tb+name</para>
         /// </summary>
-        protected bool CheckedError(Window wd, string name, bool allEmpty = false)
+        protected bool ValidationError(Window wd, string name, bool allEmpty = false)
         {
-            if (Method.Find(wd, out TextBoxEXT tbName, "tb" + name))
-            {
-                if (!allEmpty && info.GetValue(name).ToStrings().IsEmpty())
-                {
-                    Method.Hit(wd, "请输入" + info.Property(name).Text());
-                    tbName.Focus();
-                    return false;
-                }
-                if (Validation.GetHasError(tbName))
-                {
-                    Method.Hit(wd, Validation.GetErrors(tbName).First().ErrorContent);
-                    tbName.Focus();
-                    return false;
-                }
-            }
-            return true;
+            return Method.ValidationError(wd, info, name, allEmpty);
         }
         protected virtual bool? OnSave(Window wd, T info)
         {

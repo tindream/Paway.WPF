@@ -31,6 +31,33 @@ namespace Paway.WPF
     /// </summary>
     public partial class PMethod
     {
+        #region 唯一实例 
+        /// <summary>
+        /// 必须将mutex声明为局部变量才有效，加入列表同理
+        /// </summary>
+        private static readonly Dictionary<string, Mutex> MutexForSingletonExeDic = new Dictionary<string, Mutex>();
+        /// <summary>
+        /// 检查实例是否存在
+        /// </summary>
+        public static bool IsAppInstanceExist()
+        {
+            return IsAppInstanceExist(Assembly.GetEntryAssembly().GetName().Name);
+        }
+        /// <summary>
+        /// 检查实例是否存在
+        /// </summary>
+        public static bool IsAppInstanceExist(string instanceName)
+        {
+            Mutex mutex = new Mutex(false, instanceName, out bool createdNew);
+            if (createdNew)
+            {
+                MutexForSingletonExeDic.Add(instanceName, mutex);
+            }
+            return !createdNew;
+        }
+
+        #endregion
+
         #region 让系统可以处理队列中的所有Windows消息
         /// <summary>
         /// 让系统可以处理队列中的所有Windows消息
@@ -307,7 +334,7 @@ namespace Paway.WPF
             return false;
         }
         /// <summary>
-        /// 获取验证错误列表
+        /// 获取所有子控件中的验证错误列表
         /// </summary>
         public static List<string> ValidationError(DependencyObject dependency)
         {
@@ -330,6 +357,29 @@ namespace Paway.WPF
                 }
                 ValidationError(value, errorList);
             }
+        }
+        /// <summary>
+        /// 验证模型中的指定名称控件值输入错误
+        /// <para>输入控件限定为TextBoxEXT，控件名称为tb+name</para>
+        /// </summary>
+        public static bool ValidationError<T>(FrameworkElement parent, T mode, string name, bool allEmpty = false) where T : class
+        {
+            if (Find(parent, out TextBoxEXT tbName, "tb" + name))
+            {
+                if (!allEmpty && mode.GetValue(name).ToStrings().IsEmpty())
+                {
+                    Hit(parent, "请输入" + mode.Property(name).Text());
+                    tbName.Focus();
+                    return false;
+                }
+                if (Validation.GetHasError(tbName))
+                {
+                    Hit(parent, Validation.GetErrors(tbName).First().ErrorContent);
+                    tbName.Focus();
+                    return false;
+                }
+            }
+            return true;
         }
 
         #endregion
