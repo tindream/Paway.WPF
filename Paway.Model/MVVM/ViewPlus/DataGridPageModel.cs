@@ -119,7 +119,8 @@ namespace Paway.Model
                     temp %= PagedList.PageSize;
                 }
                 DataGrid.ScrollIntoView(info);
-                DataGrid.SelectedIndex = temp;
+                if (DataGrid.SelectionUnit != DataGridSelectionUnit.Cell) DataGrid.SelectedIndex = temp;
+                else DataGrid.Select(info.Id, true);
             }, index);
         }
         protected virtual void Updated(T info)
@@ -144,7 +145,8 @@ namespace Paway.Model
             finally
             {
                 if (index >= DataGrid.Items.Count) index = DataGrid.Items.Count - 1;
-                DataGrid.SelectedIndex = index;
+                if (DataGrid.SelectionUnit != DataGridSelectionUnit.Cell) DataGrid.SelectedIndex = index;
+                else DataGrid.Select(info.Id, true);
             }
         }
         protected override void Refresh()
@@ -305,7 +307,7 @@ namespace Paway.Model
             this.sqlFilter = sqlFilter;
             this.IPage = iPage;
             this.DataGrid = dataGrid;
-            this.Init(list);
+            this.Init(list, list.Count > 0);
             if (this.List.Count == 0) this.Refresh();
         }
 
@@ -332,7 +334,7 @@ namespace Paway.Model
         #endregion
 
         #region 加载列表
-        protected void Init(List<T> list)
+        protected void Init(List<T> list, bool iReload = true)
         {
             if (this.List == null) this.List = list;
             else
@@ -340,7 +342,7 @@ namespace Paway.Model
                 this.List.Clear();
                 this.List.AddRange(list);
             }
-            this.Reload();
+            if (iReload) this.Reload();
         }
         protected override void Search()
         {

@@ -1,4 +1,5 @@
-﻿using Paway.Helper;
+﻿using Newtonsoft.Json;
+using Paway.Helper;
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
@@ -22,11 +23,11 @@ namespace Paway.Model
         [Text("操作权限")]
         public ButtonAuthType ButtonType { get; set; }
 
-        [NoSelect]
+        [NoShow, NoExcel, NoSelect, JsonIgnore]
         public bool Insert { get { return (ButtonType & ButtonAuthType.Insert) == ButtonAuthType.Insert; } }
-        [NoSelect]
+        [NoShow, NoExcel, NoSelect, JsonIgnore]
         public bool Update { get { return (ButtonType & ButtonAuthType.Update) == ButtonAuthType.Update; } }
-        [NoSelect]
+        [NoShow, NoExcel, NoSelect, JsonIgnore]
         public bool Delete { get { return (ButtonType & ButtonAuthType.Delete) == ButtonAuthType.Delete; } }
 
         public AuthInfo() { }

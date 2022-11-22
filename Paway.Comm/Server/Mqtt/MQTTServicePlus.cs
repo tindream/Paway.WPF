@@ -49,7 +49,7 @@ namespace Paway.Comm
         {
             var client = gClient.Connect(args.ClientId);
             Messenger.Default.Send(new StatuMessage($"{client?.Desc}上线"));
-            return CompletedTask.Instance;
+            return base.ClientConnectedAsync(args);
         }
         protected override Task ClientDisConnectedAsync(ClientDisconnectedEventArgs args)
         {
@@ -58,7 +58,7 @@ namespace Paway.Comm
             {
                 Messenger.Default.Send(new StatuMessage($"{client?.Desc}下线"));
             }
-            return CompletedTask.Instance;
+            return base.ClientDisConnectedAsync(args);
         }
 
         #endregion

@@ -406,14 +406,14 @@ namespace Paway.WPF
             return false;
         }
         /// <summary>
-        /// 选中行
+        /// 选中行或列
         /// </summary>
         public bool Select(object item, bool iCell = false)
         {
             this.ScrollIntoView(item);
             if (this.ItemContainerGenerator.ContainerFromItem(item) is DataGridRow row)
             {
-                row.IsSelected = true;
+                if (this.SelectionUnit != DataGridSelectionUnit.Cell) row.IsSelected = true;
                 row.Focus();
                 if (!iCell) return true;
                 if (PMethod.Child(row, out DataGridCellsPresenter presenter, iParent: false))
@@ -424,6 +424,7 @@ namespace Paway.WPF
                         {
                             if (presenter.ItemContainerGenerator.ContainerFromIndex(i) is DataGridCell cell)
                             {
+                                cell.IsSelected = true;
                                 cell.Focus();
                             }
                             return true;

@@ -13,6 +13,13 @@ namespace Paway.Model
     /// </summary>
     public interface IPageReload
     {
+        /// <summary>
+        /// 加载状态
+        /// </summary>
+        bool ILoad { get; set; }
+        /// <summary>
+        /// 在Loaded第一次触发或重加载时调用
+        /// </summary>
         void PageReload();
     }
 }

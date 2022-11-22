@@ -17,6 +17,7 @@ namespace Paway.Model
     public class BaseWindowModel : ViewModelBase
     {
         #region 属性
+        public bool ILoad { get; set; }
         private string title;
         public string Title
         {

@@ -44,9 +44,17 @@ namespace Paway.Model
             if (!dicView.ContainsKey(name))
             {
                 var obj = Activator.CreateInstance<T>();
+                if (obj.DataContext is IPageReload pageReload) obj.Loaded += (sender, e) =>
+                {
+                    if (!pageReload.ILoad)
+                    {
+                        pageReload.ILoad = true;
+                        pageReload.PageReload();
+                    }
+                };
                 dicView.Add(name, obj);
             }
-            if (((FrameworkElement)dicView[name]).DataContext is IPageReload pageReload)
+            else if (((FrameworkElement)dicView[name]).DataContext is IPageReload pageReload)
             {
                 pageReload.PageReload();
             }

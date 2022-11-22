@@ -1,4 +1,5 @@
-﻿using Paway.Helper;
+﻿using Newtonsoft.Json;
+using Paway.Helper;
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
@@ -41,7 +42,7 @@ namespace Paway.Model
     [Serializable]
     public class BaseOnce : BaseInfo
     {
-        [NoShow, NoExcel, NoSelect]
+        [NoShow, NoExcel, NoSelect, JsonIgnore]
         public override DateTime UpdateOn { get; set; }
     }
     /// <summary>
@@ -60,7 +61,7 @@ namespace Paway.Model
     [Serializable]
     public class ParentBaseOnce : ParentBase
     {
-        [NoShow, NoExcel, NoSelect]
+        [NoShow, NoExcel, NoSelect, JsonIgnore]
         public override DateTime UpdateOn { get; set; }
     }
 }

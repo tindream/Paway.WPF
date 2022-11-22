@@ -209,6 +209,7 @@ namespace Paway.Model
         #endregion
 
         #region 页重加载
+        public bool ILoad { get; set; }
         public virtual void PageReload() { }
 
         #endregion
