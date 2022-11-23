@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paway.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -60,6 +61,8 @@ namespace Paway.WPF
                 storyboard.Begin(element);
             };
         }
+
+        #region 对外提供接口
         /// <summary>
         /// 获取画板
         /// </summary>
@@ -67,6 +70,43 @@ namespace Paway.WPF
         {
             return canvas;
         }
+        /// <summary>
+        /// 装饰器-Window进度条提示信息
+        /// </summary>
+        public void Text(object msg = null, Action<TextBlock> action = null)
+        {
+            if (canvas != null)
+            {
+                PMethod.BeginInvoke(canvas, () =>
+                {
+                    if (PMethod.Child(canvas, out TextBlock textBlock, iParent: false))
+                    {
+                        if (action != null) action(textBlock);
+                        else textBlock.Text = msg == null ? PConfig.Loading : msg.ToStrings();
+                    }
+                });
+            }
+        }
+        /// <summary>
+        /// 装饰器-Window进度条进度
+        /// </summary>
+        public void Progress(double value, Action<ProgressBarEXT> action = null)
+        {
+            if (canvas != null)
+            {
+                PMethod.BeginInvoke(canvas, () =>
+                {
+                    if (PMethod.Child(canvas, out ProgressBarEXT progressBar, iParent: false))
+                    {
+                        if (action != null) action(progressBar);
+                        else progressBar.AnimationValue = value;
+                    }
+                });
+            }
+        }
+
+        #endregion
+
         /// <summary>
         /// 指定子元素
         /// </summary>

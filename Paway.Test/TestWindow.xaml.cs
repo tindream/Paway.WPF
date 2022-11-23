@@ -59,14 +59,24 @@ namespace Paway.Test
             }
             Method.Progress(this, adorner =>
             {
-                Thread.Sleep(125);
-                Method.ProgressMsg(adorner, "1");
-                Thread.Sleep(125);
-                Method.ProgressMsg(adorner, "2");
-                Thread.Sleep(125);
-                Method.ProgressMsg(adorner, "3");
-                Thread.Sleep(125);
-            });
+                adorner.Progress(1);
+                Thread.Sleep(500);
+                adorner.Text("12");
+                adorner.Progress(12);
+                Thread.Sleep(500);
+                adorner.Text("25");
+                adorner.Progress(25);
+                Thread.Sleep(500);
+                adorner.Text("48");
+                adorner.Progress(48);
+                Thread.Sleep(500);
+                adorner.Text("70");
+                adorner.Progress(70);
+                Thread.Sleep(500);
+                adorner.Text("99");
+                adorner.Progress(99);
+                Thread.Sleep(500);
+            }, iProgressBar: true);
         }
     }
 }

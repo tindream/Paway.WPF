@@ -9,15 +9,8 @@
            mc:Ignorable="d"
            DataContext="{Binding Test, Source={StaticResource Locator}}"
            Title="TestWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
-    <!--<WindowEXT.FunctionBar>
-        <local:TitleContent/>
-    </WindowEXT.FunctionBar>-->
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="3*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel VerticalAlignment="Center" >
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" >
             <TextBoxEXT >
                 <Binding Path="Text">
                     <Binding.ValidationRules>
@@ -25,30 +18,8 @@
                     </Binding.ValidationRules>
                 </Binding>
             </TextBoxEXT>
-            <CheckButton Content="A" IsChecked="{Binding UserType, Converter={StaticResource valueMoreToTrue}, ConverterParameter=1}" Padding="11,8" Margin="2,2,0,0" Radius="3,0,0,0"/>
-            <CheckButton Content="B" IsChecked="{Binding UserType, Converter={StaticResource valueMoreToTrue}, ConverterParameter=2}" Padding="11,8" Margin="-1,2,2,0" Radius="0,3,0,0"/>
-            <CheckButton Content="C" IsChecked="{Binding UserType, Converter={StaticResource valueMoreToTrue}, ConverterParameter=4}" Padding="11,8" Margin="2,-1,0,0" Radius="0"/>
-            <CheckButton Content="D" IsChecked="{Binding UserType, Converter={StaticResource valueMoreToTrue}, ConverterParameter=8}" Padding="11,8" Margin="-1,-1,2,0" Radius="0"/>
-            <CheckButton Content="E" IsChecked="{Binding UserType, Converter={StaticResource valueMoreToTrue}, ConverterParameter=16}" Padding="11,8" Margin="2,-1,0,2" Radius="0,0,0,3"/>
-            <CheckButton Content="F" IsChecked="{Binding UserType, Converter={StaticResource valueMoreToTrue}, ConverterParameter=32}" Padding="11,8" Margin="-1,-1,2,2" Radius="0,3,0,0"/>
-
+            <ProgressBarEXT Value="20.4" Minimum="-20" Maximum="50" Name="progress" SmallChange="10" IText="False"/>
             <ButtonEXT IsLight="True" Click="ButtonEXT_Click" Command="{Binding ButtonCommand}"/>
         </StackPanel>
-        <Border Grid.Column="1" Background="Transparent">
-            <DataGridEXT Name="dataGrid" ItemsSource="{Binding GridList}">
-                <DataGrid.Columns>
-                    <DataGridTemplateColumn Width="120" Header="Desc" >
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                                    <ButtonEXT Content="{Binding Desc}" IsLight="True"
-                                           Command="{Binding ElementName=dataGrid, Path=DataContext.ItemCommand}" CommandParameter="{Binding Desc}" />
-                                </WrapPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGridEXT>
-        </Border>
     </Grid>
 </WindowEXT>

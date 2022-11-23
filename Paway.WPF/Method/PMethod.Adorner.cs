@@ -399,25 +399,25 @@ namespace Paway.WPF
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
-        public static void Progress(DependencyObject parent, Action action, Action success = null, Action<Exception> error = null, Action completed = null)
+        public static void Progress(DependencyObject parent, Action action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, int? fontSize = null)
         {
-            Progress(parent, adorner => action?.Invoke(), success, error, completed);
+            Progress(parent, null, adorner => action?.Invoke(), success, error, completed, iProgressBar, fontSize);
         }
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
-        public static void Progress(DependencyObject parent, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null)
+        public static void Progress(DependencyObject parent, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, int? fontSize = null)
         {
-            Progress(parent, null, action, success, error, completed);
+            Progress(parent, null, action, success, error, completed, iProgressBar, fontSize);
         }
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
-        public static void Progress(DependencyObject parent, object msg, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null, int? fontSize = null)
+        public static void Progress(DependencyObject parent, object msg, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, int? fontSize = null)
         {
             BeginInvoke(parent, () =>
             {
-                var progress = Progress(parent, msg, fontSize);
+                var progress = ProgressAdorner(parent, msg, iProgressBar, fontSize);
                 Task.Run(() =>
                 {
                     try
@@ -463,7 +463,7 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-同步显示Window进度条
         /// </summary>
-        public static CustomAdorner Progress(DependencyObject parent, object msg = null, int? fontSize = null)
+        public static CustomAdorner ProgressAdorner(DependencyObject parent, object msg = null, bool iProgressBar = false, int? fontSize = null)
         {
             if (!Parent(parent, out Window window)) return null;
             if (window.Content is FrameworkElement element)
@@ -493,35 +493,27 @@ namespace Paway.WPF
                 if (fontSize != null) tbProgress.FontSize = fontSize.Value;
                 dp.Children.Add(tbProgress);
                 DockPanel.SetDock(tbProgress, Dock.Bottom);
+                if (iProgressBar)
+                {
+                    var progressBar = new ProgressBarEXT
+                    {
+                        IText = false
+                    };
+                    dp.Children.Add(progressBar);
+                    DockPanel.SetDock(progressBar, Dock.Bottom);
+                }
                 dp.Children.Add(new Progress
                 {
                     Margin = new Thickness(20),
                     Width = 80,
                     Height = 80,
                 });
-                var progress = new CustomAdorner(element, border, AlphaColor(0, Colors.Black));
-                myAdornerLayer.Add(progress);
-                progress.Tag = myAdornerLayer;
-                return progress;
+                var progressAd = new CustomAdorner(element, border, AlphaColor(0, Colors.Black));
+                myAdornerLayer.Add(progressAd);
+                progressAd.Tag = myAdornerLayer;
+                return progressAd;
             }
             return null;
-        }
-        /// <summary>
-        /// 装饰器-Window进度条提示信息
-        /// </summary>
-        public static void ProgressMsg(CustomAdorner progress, object msg = null)
-        {
-            var canvas = progress.GetCanvas();
-            if (canvas != null)
-            {
-                BeginInvoke(canvas, () =>
-                {
-                    if (Child(canvas, out TextBlock textBlock, iParent: false))
-                    {
-                        textBlock.Text = msg == null ? PConfig.Loading : msg.ToStrings();
-                    }
-                });
-            }
         }
         /// <summary>
         /// 装饰器-关闭Window进度条

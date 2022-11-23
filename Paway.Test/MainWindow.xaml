@@ -212,7 +212,11 @@
                         <DataGridTemplateColumn Header="Desc">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Desc}" Foreground="Red" Style="{StaticResource TextLeft}"/>
+                                    <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding Desc}" Foreground="Red" Style="{StaticResource TextLeft}"/>
+                                        <ButtonEXT Content="{Binding Desc}" IsLight="True" 
+                                           Command="{Binding ElementName=dataGrid, Path=DataContext.ItemCommand}" CommandParameter="{Binding Desc}" />
+                                    </WrapPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -296,6 +300,7 @@
     </WindowEXT.FunctionBar>
     <WindowEXT.FunctionBarRight>
         <WindowFunctionBar>
+            <local:TitleContent/>
             <!--<Button Content="Sign in" />-->
         </WindowFunctionBar>
     </WindowEXT.FunctionBarRight>
