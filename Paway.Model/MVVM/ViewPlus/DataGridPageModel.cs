@@ -366,7 +366,7 @@ namespace Paway.Model
         }
         private void ReloadObList()
         {
-            Method.BeginInvoke(DataGrid, () =>
+            Method.Invoke(DataGrid, () =>
             {
                 ObList.Clear();
                 var list = showList ?? this.FilterList();

@@ -454,11 +454,11 @@ namespace Paway.WPF
                             BeginInvoke(parent, () =>
                             {
                                 completed.Invoke();
-                            });
+                            }, error);
                         }
                     }
                 });
-            });
+            }, error);
         }
         /// <summary>
         /// 装饰器-同步显示Window进度条

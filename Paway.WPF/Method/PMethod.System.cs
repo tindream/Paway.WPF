@@ -430,15 +430,7 @@ namespace Paway.WPF
             {
                 obj.Dispatcher.Invoke(() =>
                 {
-                    try
-                    {
-                        action.Invoke();
-                    }
-                    catch (Exception ex)
-                    {
-                        if (error == null) ex.Log();
-                        else error.Invoke(ex);
-                    }
+                    action.Invoke();
                 });
             }
             catch (Exception ex)
@@ -456,15 +448,7 @@ namespace Paway.WPF
             {
                 obj.Dispatcher.Invoke(() =>
                 {
-                    try
-                    {
-                        action.Invoke(t);
-                    }
-                    catch (Exception ex)
-                    {
-                        if (error == null) ex.Log();
-                        else error.Invoke(ex);
-                    }
+                    action.Invoke(t);
                 });
             }
             catch (Exception ex)
@@ -482,16 +466,7 @@ namespace Paway.WPF
             {
                 return obj.Dispatcher.Invoke(() =>
                 {
-                    try
-                    {
-                        return action.Invoke();
-                    }
-                    catch (Exception ex)
-                    {
-                        if (error == null) ex.Log();
-                        else error.Invoke(ex);
-                        return default;
-                    }
+                    return action.Invoke();
                 });
             }
             catch (Exception ex)
@@ -510,16 +485,7 @@ namespace Paway.WPF
             {
                 return obj.Dispatcher.Invoke(() =>
                 {
-                    try
-                    {
-                        return action.Invoke(t);
-                    }
-                    catch (Exception ex)
-                    {
-                        if (error == null) ex.Log();
-                        else error.Invoke(ex);
-                        return default;
-                    }
+                    return action.Invoke(t);
                 });
             }
             catch (Exception ex)
