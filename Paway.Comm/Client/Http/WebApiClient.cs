@@ -150,7 +150,7 @@ namespace Paway.Comm
         #endregion
 
         #region 文件上传下载
-        public static string UpFile(string target, string file, double max)
+        public static string UpFile(string toFile, string file, double max)
         {
             return Task.Run(() =>
             {
@@ -158,7 +158,7 @@ namespace Paway.Comm
                 {
                     using (var client = new WebClientPro(2 * 60))
                     {
-                        return client.UpFile(httpUrl, target, file, max);
+                        return client.UpFile(httpUrl, toFile, file, max);
                     }
                 }
                 catch (WebException ex)
@@ -167,7 +167,7 @@ namespace Paway.Comm
                 }
             }).Result;
         }
-        public static void DownFile(string target, string file, bool iThrow = false)
+        public static void DownFile(string toFile, string file, bool iThrow = false)
         {
             Task.Run(() =>
             {
@@ -175,7 +175,7 @@ namespace Paway.Comm
                 {
                     using (var client = new WebClientPro(2 * 60))
                     {
-                        client.DownFile(httpUrl, target, file);
+                        client.DownFile(httpUrl, toFile, file);
                     }
                 }
                 catch (WebException ex)

@@ -83,61 +83,74 @@ namespace Paway.Model
             set { _logoImage = value; RaisePropertyChanged(); }
         }
 
-        private bool _setting;
+        private bool _iSetting;
         public bool ISetting
         {
-            get { return _setting; }
-            set { _setting = value; RaisePropertyChanged(); }
+            get { return _iSetting; }
+            set { _iSetting = value; RaisePropertyChanged(); }
+        }
+
+        private bool _iClose;
+        public bool IClose
+        {
+            get { return _iClose; }
+            set { _iClose = value; RaisePropertyChanged(); }
         }
 
         #endregion
 
         #region 命令
         public abstract void Login();
-        public ICommand LoginCommand => new RelayCommand<string>(item =>
-        {
-            try
-            {
-                if (UserName.IsEmpty())
-                {
-                    Method.Hit(Root, "请输入用户名");
-                    if (IUserList)
-                    {
-                        if (Method.Find(Root, out ComboBoxEXT cbxUserName, "cbxUserName")) cbxUserName.Focus();
-                    }
-                    else
-                    {
-                        if (Method.Find(Root, out TextBoxEXT tbUserName, "tbUserName")) tbUserName.Focus();
-                    }
-                    return;
-                }
-                if (Password.IsEmpty())
-                {
-                    Method.Hit(Root, "请输入密码");
-                    if (Method.Find(Root, out PasswordBox tbPassword, "tbPassword")) tbPassword.Focus();
-                    return;
-                }
-                if (!iLogining)
-                {
-                    iLogining = true;
-                    Login();
-                }
-            }
-            finally
-            {
-                iLogining = false;
-            }
-        });
         protected virtual Window SetWindow() { return null; }
         protected virtual void OnCommit(DependencyObject obj) { }
-        public ICommand SettingCommand => new RelayCommand<string>(item =>
+        protected virtual void OnClose(DependencyObject obj) { }
+        public ICommand MenuCommand => new RelayCommand<string>(item =>
         {
             try
             {
-                var window = SetWindow();
-                if (window != null && Method.Show(Root, window) == true)
+                switch (item)
                 {
-                    OnCommit(Root);
+                    case "登陆":
+                        try
+                        {
+                            if (!iLogining)
+                            {
+                                iLogining = true;
+                                if (UserName.IsEmpty())
+                                {
+                                    Method.Hit(Root, "请输入用户名");
+                                    if (IUserList)
+                                    {
+                                        if (Method.Find(Root, out ComboBoxEXT cbxUserName, "cbxUserName")) cbxUserName.Focus();
+                                    }
+                                    else
+                                    {
+                                        if (Method.Find(Root, out TextBoxEXT tbUserName, "tbUserName")) tbUserName.Focus();
+                                    }
+                                    return;
+                                }
+                                if (Password.IsEmpty())
+                                {
+                                    Method.Hit(Root, "请输入密码");
+                                    if (Method.Find(Root, out PasswordBox tbPassword, "tbPassword")) tbPassword.Focus();
+                                    return;
+                                }
+                                Login();
+                            }
+                        }
+                        finally
+                        {
+                            iLogining = false;
+                        }
+                        break;
+                    case "设置":
+                        var window = SetWindow();
+                        if (window != null && Method.Show(Root, window) == true)
+                        {
+                            OnCommit(Root);
+                        }
+                        break;
+                    case "关闭": OnClose(Root); break;
                 }
             }
             catch (Exception ex)

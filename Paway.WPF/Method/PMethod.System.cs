@@ -368,13 +368,13 @@ namespace Paway.WPF
             {
                 if (!allEmpty && mode.GetValue(name).ToStrings().IsEmpty())
                 {
-                    Hit(parent, "请输入" + mode.Property(name).Text());
+                    Hit(parent, "请输入" + mode.Property(name).Text(), ColorType.Warn);
                     tbName.Focus();
                     return false;
                 }
                 if (Validation.GetHasError(tbName))
                 {
-                    Hit(parent, Validation.GetErrors(tbName).First().ErrorContent);
+                    Hit(parent, Validation.GetErrors(tbName).First().ErrorContent, ColorType.Error);
                     tbName.Focus();
                     return false;
                 }
@@ -441,7 +441,11 @@ namespace Paway.WPF
                     }
                 });
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                if (error == null) ex.Log();
+                else error.Invoke(ex);
+            }
         }
         /// <summary>
         /// 带参数同步调用
@@ -463,7 +467,11 @@ namespace Paway.WPF
                     }
                 });
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                if (error == null) ex.Log();
+                else error.Invoke(ex);
+            }
         }
         /// <summary>
         /// 同步调用，并返回结果
@@ -486,8 +494,10 @@ namespace Paway.WPF
                     }
                 });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                if (error == null) ex.Log();
+                else error.Invoke(ex);
                 return default;
             }
         }
@@ -512,8 +522,10 @@ namespace Paway.WPF
                     }
                 });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                if (error == null) ex.Log();
+                else error.Invoke(ex);
                 return default;
             }
         }
@@ -537,7 +549,11 @@ namespace Paway.WPF
                     }
                 }));
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                if (error == null) ex.Log();
+                else error.Invoke(ex);
+            }
         }
         /// <summary>
         /// 带参数异步调用
@@ -559,7 +575,11 @@ namespace Paway.WPF
                     }
                 }));
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                if (error == null) ex.Log();
+                else error.Invoke(ex);
+            }
         }
 
         #endregion

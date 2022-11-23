@@ -58,9 +58,9 @@ namespace Paway.Comm
         /// <summary>
         /// 下载用户附件
         /// </summary>
-        public void DownFile(string httpUrl, string toPath, string file)
+        public void DownFile(string httpUrl, string toFile, string file)
         {
-            var url = $"{httpUrl}/{Config.UploadPath}/{toPath}?id={Config.User?.Id}";
+            var url = $"{httpUrl}/{Config.UploadPath}/{toFile}?id={Config.User?.Id}";
             var path = Path.GetDirectoryName(file);
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
             var str = this.DownloadString(url).Decompress();
@@ -70,9 +70,9 @@ namespace Paway.Comm
         /// <summary>
         /// 上传附件
         /// </summary>
-        public string UpFile(string httpUrl, string toPath, string file, double max)
+        public string UpFile(string httpUrl, string toFile, string file, double max)
         {
-            var url = $"{httpUrl}/{Config.UploadPath}/{toPath}?id={Config.User?.Id}";
+            var url = $"{httpUrl}/{Config.UploadPath}/{toFile}?id={Config.User?.Id}";
             var str = Method.ReadFile(file, out int length);
             if (length > max * 1024 * 1024)
             {

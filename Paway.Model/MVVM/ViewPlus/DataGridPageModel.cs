@@ -107,10 +107,6 @@ namespace Paway.Model
             Method.Sorted(List);
             var index = this.FilterList().FindIndex(c => c.Id == info.Id);
             if (!this.SearchReset()) ObList.Insert(index, info);
-            SelectIndex(info, index);
-        }
-        private void SelectIndex(T info, int index)
-        {
             Method.BeginInvoke(DataGrid, temp =>
             {
                 if (IPage)
@@ -128,10 +124,6 @@ namespace Paway.Model
             info.UpdateOn = DateTime.Now;
             server.Update(info);
             Method.Sorted(List);
-            var index = this.FilterList().FindIndex(c => c.Id == info.Id);
-            ObList.Remove(info);
-            if (!this.SearchReset()) ObList.Insert(index, info);
-            SelectIndex(info, index);
         }
         protected virtual void Deleted(T info)
         {
