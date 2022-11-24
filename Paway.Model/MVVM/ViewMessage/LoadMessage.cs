@@ -11,5 +11,6 @@ namespace Paway.Model
     {
         public DependencyObject Obj { get; set; }
     }
+    public class OperateLoadMessage : LoadMessage { }
     public class LoginLoadMessage : LoadMessage { }
 }

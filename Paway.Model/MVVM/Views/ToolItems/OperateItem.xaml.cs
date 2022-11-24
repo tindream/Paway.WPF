@@ -21,39 +21,10 @@ namespace Paway.Model
     /// </summary>
     public partial class OperateItem
     {
-        #region 快捷键
-        private bool iExit = false;
-        private DateTime exitTime = DateTime.MinValue;
-        protected void Action(KeyMessage msg)
-        {
-            if (!(this.DataContext is OperateItemModel operate) || operate.Menu != Config.Menu) return;
-            switch (msg.Key)
-            {
-                case Key.Escape:
-                    if (iExit && DateTime.Now.Subtract(exitTime).TotalMilliseconds < Config.DoubleInterval)
-                    {
-                        this.tbSearch.Text = null;
-                        return;
-                    }
-                    iExit = true;
-                    exitTime = DateTime.Now;
-                    break;
-            }
-            if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
-            {
-                switch (msg.Key)
-                {
-                    case Key.F: tbSearch.Focus(); break;
-                }
-            }
-        }
-
-        #endregion
-
         public OperateItem()
         {
-            Messenger.Default.Register<KeyMessage>(this, msg => Action(msg));
             InitializeComponent();
+            Messenger.Default.Send(new OperateLoadMessage() { Obj = dpOperateItem });
         }
     }
 }

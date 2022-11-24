@@ -107,18 +107,18 @@ namespace Paway.Model
             }
             return updateList;
         }
-        public static bool Export(string name, out string file, string filter = "Excel 工作簿|*.xlsx|Excel 97-2003 工作簿|*.xls")
+        public static bool Export(string fileName, out string outFile, string filter = "Excel 工作簿|*.xlsx|Excel 97-2003 工作簿|*.xls")
         {
-            file = null;
+            outFile = null;
             var sfd = new SaveFileDialog()
             {
                 Title = $"选择要导出的文件位置",
                 Filter = filter,
-                FileName = name,
+                FileName = fileName,
             };
             if (sfd.ShowDialog() == true)
             {
-                file = sfd.FileName;
+                outFile = sfd.FileName;
                 return true;
             }
             return false;

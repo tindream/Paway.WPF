@@ -19,6 +19,13 @@ namespace Paway.Model
 {
     public abstract partial class OperateItemModel : ViewModelBase, IPageReload
     {
+        #region 属性
+        private DockPanel DockPanel;
+        private bool iExit = false;
+        private DateTime exitTime = DateTime.MinValue;
+
+        #endregion
+
         #region 权限控制
         public abstract string Menu { get; }
         private MenuAuthType _auth;
@@ -113,18 +120,31 @@ namespace Paway.Model
             {
                 case Key.F5: ActionInternal("刷新"); break;
                 case Key.Delete: ActionInternal("删除"); break;
+                case Key.Escape:
+                    if (iExit && DateTime.Now.Subtract(exitTime).TotalMilliseconds < Config.DoubleInterval)
+                    {
+                        if (Method.Find(DockPanel, out TextBoxEXT tbSearch, "tbSearch")) tbSearch.Text = null;
+                        return;
+                    }
+                    iExit = true;
+                    exitTime = DateTime.Now;
+                    break;
             }
             if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {
-                switch (msg.Key)
+                if (KeyCmdDic.ContainsKey(msg.Key)) ActionInternal(KeyCmdDic[msg.Key]);
+                else
                 {
-                    case Key.A: ActionInternal("添加"); break;
-                    case Key.E: ActionInternal("编辑"); break;
-                    case Key.D: ActionInternal("删除"); break;
-                    case Key.I: ActionInternal("导入"); break;
-                    case Key.O: ActionInternal("导出"); break;
-                    case Key.S: ActionInternal("保存"); break;
-                    default: if (KeyCmdDic.ContainsKey(msg.Key)) ActionInternal(KeyCmdDic[msg.Key]); break;
+                    switch (msg.Key)
+                    {
+                        case Key.A: ActionInternal("添加"); break;
+                        case Key.E: ActionInternal("编辑"); break;
+                        case Key.D: ActionInternal("删除"); break;
+                        case Key.I: ActionInternal("导入"); break;
+                        case Key.O: ActionInternal("导出"); break;
+                        case Key.S: ActionInternal("保存"); break;
+                        case Key.F: if (Method.Find(DockPanel, out TextBoxEXT tbSearch, "tbSearch")) tbSearch.Focus(); break;
+                    }
                 }
             }
         }
@@ -149,62 +169,53 @@ namespace Paway.Model
         /// </summary>
         protected void AddInterval(FrameworkElement parent, Action<Border> action = null)
         {
-            if (Method.Find(parent, out DockPanel dpOperateItem, "dpOperateItem"))
+            var border = new Border
             {
-                var border = new Border
-                {
-                    Style = parent.FindResource("Interval") as Style
-                };
-                action?.Invoke(border);
-                dpOperateItem.Children.Insert(dpOperateItem.Children.Count - 1, border);
-            }
+                Style = parent.FindResource("Interval") as Style
+            };
+            action?.Invoke(border);
+            DockPanel.Children.Insert(DockPanel.Children.Count - 1, border);
         }
         /// <summary>
         /// 添加按钮
         /// <para>可指定图标、快捷键，可自定义</para>
         /// </summary>
-        protected void AddButton(FrameworkElement parent, object cmd, ImageEXT imageEXT = null, Key key = Key.None, Action<ButtonEXT> action = null)
+        protected void AddButton(object cmd, ImageEXT imageEXT = null, Key key = Key.None, int index = -1, Action<ButtonEXT> action = null)
         {
-            AddButton(parent, imageEXT, Dock.Top, cmd, cmd, key, cmd, action);
+            AddButton(imageEXT, Dock.Top, cmd, cmd, key, index, cmd, action);
         }
         /// <summary>
         /// 添加按钮
         /// <para>可指定图标位置、命令、提示、快捷键，可自定义</para>
         /// </summary>
-        protected void AddButton(FrameworkElement parent, ImageEXT imageEXT, Dock imageDock, object content, object cmd = null, Key key = Key.None, object toolTip = null, Action<ButtonEXT> action = null)
+        protected void AddButton(ImageEXT imageEXT, Dock imageDock, object content, object cmd = null, Key key = Key.None, int index = -1, object toolTip = null, Action<ButtonEXT> action = null)
         {
-            if (Method.Find(parent, out DockPanel dpOperateItem, "dpOperateItem"))
+            var btn = new ButtonEXT
             {
-                var btn = new ButtonEXT
-                {
-                    Style = parent.FindResource("MenuButton") as Style,
-                    ItemBorder = new ThicknessEXT(0),
-                    Content = content,
-                    ToolTip = toolTip ?? content,
-                    Image = imageEXT,
-                    ImageDock = imageDock,
-                    Command = ItemClickCommand,
-                    CommandParameter = cmd ?? content
-                };
-                if (key != Key.None)
-                {
-                    if (KeyCmdDic.ContainsKey(key)) throw new WarningException($"按键{key}已存在");
-                    KeyCmdDic.Add(key, (cmd ?? content).ToStrings());
-                }
-                action?.Invoke(btn);
-                dpOperateItem.Children.Insert(dpOperateItem.Children.Count - 1, btn);
+                Style = DockPanel.FindResource("MenuButton") as Style,
+                ItemBorder = new ThicknessEXT(0),
+                Content = content,
+                ToolTip = toolTip ?? content,
+                Image = imageEXT,
+                ImageDock = imageDock,
+                Command = ItemClickCommand,
+                CommandParameter = cmd ?? content
+            };
+            if (key != Key.None)
+            {
+                if (KeyCmdDic.ContainsKey(key)) throw new WarningException($"按键{key}已存在");
+                KeyCmdDic.Add(key, (cmd ?? content).ToStrings());
             }
+            action?.Invoke(btn);
+            DockPanel.Children.Insert(index != -1 ? index : DockPanel.Children.Count - 1, btn);
         }
         /// <summary>
         /// 添加自定义控件
         /// </summary>
-        protected void AddUIElement(FrameworkElement parent, Func<UIElement> func, int index = -1)
+        protected void AddUIElement(Func<UIElement> func, int index = -1)
         {
-            if (Method.Find(parent, out DockPanel dpOperateItem, "dpOperateItem"))
-            {
-                var element = func();
-                dpOperateItem.Children.Insert(index != -1 ? index : dpOperateItem.Children.Count - 1, element);
-            }
+            var element = func();
+            DockPanel.Children.Insert(index != -1 ? index : DockPanel.Children.Count - 1, element);
         }
         #endregion
 
@@ -216,8 +227,15 @@ namespace Paway.Model
 
         public OperateItemModel()
         {
-            AuthNormal();
             Messenger.Default.Register<KeyMessage>(this, msg => Action(msg));
+            Messenger.Default.Register<OperateLoadMessage>(this, msg =>
+            {
+                if (this.DockPanel == null && msg.Obj is DockPanel dockPanel)
+                {
+                    this.DockPanel = dockPanel;
+                    AuthNormal();
+                }
+            });
         }
     }
 }

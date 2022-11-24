@@ -35,6 +35,7 @@ namespace Paway.Comm
             Timeout = timeout * 1000;
             Encoding = Encoding.UTF8;
             Headers[HttpRequestHeader.ContentType] = "application/json";
+            //this.Proxy = WebRequest.DefaultWebProxy;
         }
         public WebClientPro(string user, string pad, int timeout = 30) : this(timeout)
         {
@@ -54,24 +55,46 @@ namespace Paway.Comm
             return request;
         }
 
-        #region 扩展方法
+        #region 下载文件
+        private Action<double> downPercentage;
         /// <summary>
-        /// 下载用户附件
+        /// 下载文件
         /// </summary>
-        public void DownFile(string httpUrl, string toFile, string file)
+        public string DownFileAsync(string httpUrl, string toFile, string file, Action<double> percentage = null, Action completed = null)
         {
+            if (percentage != null)
+            {
+                this.downPercentage = percentage;
+                this.DownloadProgressChanged += WebClientPro_DownloadProgressChanged;
+            }
+
             var url = $"{httpUrl}/{Config.UploadPath}/{toFile}?id={Config.User?.Id}";
             var path = Path.GetDirectoryName(file);
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
-            var str = this.DownloadString(url).Decompress();
-            Method.SaveFile(file, str);
+            string result = this.DownloadStringTaskAsync(url).Result.Decompress();
+            completed();
+            return result;
+        }
+        private void WebClientPro_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            downPercentage(e.ProgressPercentage);
         }
 
+        #endregion
+
+        #region 上传文件
+        private Action<double> upPercentage;
         /// <summary>
-        /// 上传附件
+        /// 异步上传文件
         /// </summary>
-        public string UpFile(string httpUrl, string toFile, string file, double max)
+        public string UpFileAsync(string httpUrl, string toFile, string file, double max, Action<double> percentage = null, Action completed = null)
         {
+            if (percentage != null)
+            {
+                this.upPercentage = percentage;
+                this.UploadProgressChanged += WebClientPro_UploadProgressChanged;
+            }
+
             var url = $"{httpUrl}/{Config.UploadPath}/{toFile}?id={Config.User?.Id}";
             var str = Method.ReadFile(file, out int length);
             if (length > max * 1024 * 1024)
@@ -79,8 +102,13 @@ namespace Paway.Comm
                 var desc = max >= 1 ? $"{max:0.#}M" : $"{max * 1024:F0}K";
                 throw new WarningException($"上传附件不得大于{desc}");
             }
-            var result = this.UploadString(url, str.CompressBase64()).Decompress();
+            var result = this.UploadStringTaskAsync(url, str.CompressBase64()).Result.Decompress();
+            completed();
             return result;
+        }
+        private void WebClientPro_UploadProgressChanged(object sender, UploadProgressChangedEventArgs e)
+        {
+            upPercentage(e.ProgressPercentage);
         }
 
         #endregion

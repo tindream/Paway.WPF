@@ -150,43 +150,46 @@ namespace Paway.Comm
         #endregion
 
         #region 文件上传下载
-        public static string UpFile(string toFile, string file, double max)
+        public static string UpFile(string toFile, string file, double max, Action<double> percentage = null, Action completed = null)
         {
-            return Task.Run(() =>
+            var task = Task.Run(() =>
             {
                 try
                 {
                     using (var client = new WebClientPro(2 * 60))
                     {
-                        return client.UpFile(httpUrl, toFile, file, max);
+                        string response = client.UpFileAsync(httpUrl, toFile, file, max, percentage, completed);
+                        return JsonConvert.DeserializeObject<HttpResponseMessage>(response);
                     }
                 }
                 catch (WebException ex)
                 {
                     throw Method.HttpError(ex);
                 }
-            }).Result;
+            });
+            if (task.Result.Code != 200) throw new Exception(task.Result.Msg);
+            return task.Result.Msg;
         }
-        public static void DownFile(string toFile, string file, bool iThrow = false)
+        public static void DownFile(string fromFile, string file, Action<double> percentage = null, Action completed = null)
         {
-            Task.Run(() =>
+            var task = Task.Run(() =>
             {
                 try
                 {
                     using (var client = new WebClientPro(2 * 60))
                     {
-                        client.DownFile(httpUrl, toFile, file);
+                        string response = client.DownFileAsync(httpUrl, fromFile, file, percentage, completed);
+                        var result = JsonConvert.DeserializeObject<HttpResponseMessage>(response);
+                        if (result.Code != 200) Method.SaveFile(file, result.Msg);
+                        return result;
                     }
                 }
                 catch (WebException ex)
                 {
-                    var wx = Method.HttpError(ex);
-                    if (!wx.Message.Contains("文件不存在") || iThrow)
-                    {
-                        wx.Show();
-                    }
+                    throw Method.HttpError(ex);
                 }
-            }).Wait();
+            });
+            if (task.Result.Code != 200) throw new Exception(task.Result.Msg);
         }
 
         #endregion

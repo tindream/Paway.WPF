@@ -106,7 +106,7 @@ namespace Paway.Model
             Method.Update(info);
             Method.Sorted(List);
             var index = this.FilterList().FindIndex(c => c.Id == info.Id);
-            if (!this.SearchReset()) ObList.Insert(index, info);
+            if (!this.SearchReset()) Method.Invoke(DataGrid, () => ObList.Insert(index, info));
             Method.BeginInvoke(DataGrid, temp =>
             {
                 if (IPage)
@@ -132,7 +132,7 @@ namespace Paway.Model
             {
                 server.Delete(info);
                 Method.Delete(info);
-                ObList.Remove(info);
+                Method.Invoke(DataGrid, () => ObList.Remove(info));
             }
             finally
             {
