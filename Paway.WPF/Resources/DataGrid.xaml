@@ -65,21 +65,27 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Border BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="0,0,0,1"
                                 Padding="{TemplateBinding Padding}"
                                 Background="{TemplateBinding Background}">
+                            <Border.BorderThickness>
+                                <MultiBinding Converter="{StaticResource boolSelector}">
+                                    <Binding Path="CanUserResizeColumns" RelativeSource="{RelativeSource AncestorType={x:Type local:DataGridEXT}}"/>
+                                    <Binding Source="0,0,0,1" />
+                                    <Binding Path="BorderThickness" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                </MultiBinding>
+                            </Border.BorderThickness>
                             <DockPanel>
                                 <Path Name="sort" Style="{StaticResource PathTriangle}" Width="10" Height="10" Margin="2" DockPanel.Dock="Right" Visibility="Collapsed"/>
                                 <ContentPresenter Content="{TemplateBinding Content}"
                                                   HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}}"/>
                             </DockPanel>
                         </Border>
-                        <Thumb Grid.Column="1" x:Name="PART_RightHeaderGripper"
+                        <Thumb Grid.Column="1" x:Name="PART_RightHeaderGripper" Width="6"
                                Style="{StaticResource DataGridThumbDefault}"
                                BorderThickness="{TemplateBinding BorderThickness}" 
                                BorderBrush="{TemplateBinding BorderBrush}"
                                Background="{TemplateBinding Background}"
-                               Cursor="SizeWE" Width="5" />
+                               Cursor="SizeWE" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="DataGridColumnHeader.SortDirection" Value="0">

@@ -23,10 +23,15 @@ namespace Paway.WPF
             {
                 var result = value[1];
                 if (value[0] == null || value[0] == DependencyProperty.UnsetValue || (value[0] is bool b && !b))
-                    return value[2];
+                {
+                    result = value[2];
+                }
                 if (targetType.Name == nameof(Thickness) && !(result is Thickness))
                 {
-                    return new Thickness(result.ToDouble());
+                    var values = result.ToStrings().Split(',');
+                    if (values.Length == 1) return new Thickness(result.ToDouble());
+                    else if (values.Length == 4) return new Thickness(values[0].ToDouble(), values[1].ToDouble(), values[2].ToDouble(), values[3].ToDouble());
+                    else throw new WarningException("参数3值不是预期的");
                 }
                 return result;
             }
