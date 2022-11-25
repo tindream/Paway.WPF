@@ -37,6 +37,17 @@
             </MultiTrigger>
         </Style.Triggers>
     </Style>
+    <Style x:Key="DataGridThumbDefault" TargetType="{x:Type Thumb}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Border BorderThickness="{TemplateBinding BorderThickness}" 
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style x:Key="ColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="Cursor" Value="Hand" />
@@ -48,16 +59,28 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            Padding="{TemplateBinding Padding}"
-                            Background="{TemplateBinding Background}">
-                        <DockPanel>
-                            <Path Name="sort" Style="{StaticResource PathTriangle}" Width="10" Height="10" Margin="2" DockPanel.Dock="Right" Visibility="Collapsed"/>
-                            <ContentPresenter Content="{TemplateBinding Content}"
-                                              HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}}"/>
-                        </DockPanel>
-                    </Border>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="0,0,0,1"
+                                Padding="{TemplateBinding Padding}"
+                                Background="{TemplateBinding Background}">
+                            <DockPanel>
+                                <Path Name="sort" Style="{StaticResource PathTriangle}" Width="10" Height="10" Margin="2" DockPanel.Dock="Right" Visibility="Collapsed"/>
+                                <ContentPresenter Content="{TemplateBinding Content}"
+                                                  HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}}"/>
+                            </DockPanel>
+                        </Border>
+                        <Thumb Grid.Column="1" x:Name="PART_RightHeaderGripper"
+                               Style="{StaticResource DataGridThumbDefault}"
+                               BorderThickness="{TemplateBinding BorderThickness}" 
+                               BorderBrush="{TemplateBinding BorderBrush}"
+                               Background="{TemplateBinding Background}"
+                               Cursor="SizeWE" Width="5" />
+                    </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="DataGridColumnHeader.SortDirection" Value="0">
                             <Setter Property="Style" TargetName="sort" Value="{StaticResource PathTriangle}"/>
@@ -86,7 +109,7 @@
     </Style>
     <Style x:Key="LastColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource ColumnHeaderStyle}">
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
-        <Setter Property="Margin" Value="0,0,-1,0"/>
+        <!--<Setter Property="Margin" Value="0,0,-1,0"/>-->
     </Style>
     <Style x:Key="NormalColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource ColumnHeaderStyle}">
         <Setter Property="BorderThickness" Value="0,0,1,1"/>

@@ -20,6 +20,7 @@
             </TextBoxEXT>
             <ProgressBarEXT Value="20.4" Minimum="-20" Maximum="50" Name="progress" SmallChange="10" IText="False"/>
             <ButtonEXT IsLight="True" Click="ButtonEXT_Click" Command="{Binding ButtonCommand}"/>
+            <DataGridEXT ItemsSource="{Binding GridList}" Height="250" SelectionUnit="Cell" CanUserResizeColumns="False"/>
         </StackPanel>
     </Grid>
 </WindowEXT>
