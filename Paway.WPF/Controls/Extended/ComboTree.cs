@@ -254,8 +254,7 @@ namespace Paway.WPF
                 }
                 else if (this.List != null)
                 {
-                    var p = this.type.Predicate<ITreeViewItem>(text, c => c.IsGroup);
-                    var list = this.Childs.AsParallel().Where(p).ToList();
+                    var list = this.Childs.FindLabbda(text, c => c.IsGroup);
                     var id = list.Count > 0 ? list[0].Id : 0;
                     list = LoadQuery(list);
                     this.ItemsSource = list;

@@ -11,6 +11,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
+using System.Windows;
 
 namespace Paway.Model
 {
@@ -24,6 +25,22 @@ namespace Paway.Model
             if (!createSql.IsEmpty() && base.InitCreate(createSql))
             {
                 Created();
+            }
+        }
+        /// <summary>
+        /// 从资源文件创建数据库文件
+        /// </summary>
+        public void Create(string url)
+        {
+            Uri uri = new Uri(url);
+            var info = Application.GetResourceStream(uri);
+            using (var reader = new StreamReader(info.Stream, Encoding.UTF8))
+            {
+                var sql = reader.ReadToEnd();
+                if (base.InitCreate(sql))
+                {
+                    Created();
+                }
             }
         }
         protected virtual void Created() { }

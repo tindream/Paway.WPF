@@ -1,6 +1,5 @@
 ﻿using Paway.Helper;
 using Paway.Model;
-using Paway.Test.Properties;
 using Paway.Utils;
 using Paway.WPF;
 using System;
@@ -27,7 +26,10 @@ namespace Paway.Test
                 return intance;
             }
         }
-        public DataService() : base(createSql: Resources.script) { }
+        public DataService() : base()
+        {
+            base.Create(@"pack://application:,,,/Paway.Test;component/Resources/script.sql");
+        }
         protected override void Created()
         {
             var user = new UserInfo { UserType = UserType.Admin, UserName = "admin", Password = EncryptHelper.MD5("admin" + Config.Suffix) };

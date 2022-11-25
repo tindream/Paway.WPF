@@ -344,8 +344,7 @@ namespace Paway.Model
             }
             else
             {
-                var filter = typeof(T).Predicate<T>(SearchText.Trim());
-                this.showList = this.FilterList().Where(filter).ToList();
+                this.showList = this.FilterList().FindLabbda(SearchText.Trim());
             }
             this.ReloadObList();
         }
