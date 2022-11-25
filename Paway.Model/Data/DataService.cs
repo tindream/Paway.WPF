@@ -30,17 +30,12 @@ namespace Paway.Model
         /// <summary>
         /// 从资源文件创建数据库文件
         /// </summary>
-        public void Create(string url)
+        protected void Create(Uri uri)
         {
-            Uri uri = new Uri(url);
-            var info = Application.GetResourceStream(uri);
-            using (var reader = new StreamReader(info.Stream, Encoding.UTF8))
+            var sql = Method.ResourceText(uri);
+            if (base.InitCreate(sql))
             {
-                var sql = reader.ReadToEnd();
-                if (base.InitCreate(sql))
-                {
-                    Created();
-                }
+                Created();
             }
         }
         protected virtual void Created() { }

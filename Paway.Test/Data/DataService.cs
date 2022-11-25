@@ -28,7 +28,7 @@ namespace Paway.Test
         }
         public DataService() : base()
         {
-            base.Create(@"pack://application:,,,/Paway.Test;component/Resources/script.sql");
+            base.Create(new Uri(@"pack://application:,,,/Paway.Test;component/Resources/script.sql"));
         }
         protected override void Created()
         {

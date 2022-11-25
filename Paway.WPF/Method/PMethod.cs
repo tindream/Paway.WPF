@@ -33,39 +33,31 @@ namespace Paway.WPF
     /// </summary>
     public partial class PMethod : TMethod
     {
-        #region Image
+        #region Resources
         /// <summary>
-        /// 文件转图片资源(不占用文件)
+        /// 从Resource文件读取文本
         /// </summary>
-        public static ImageSource Image(string file)
+        public static string ResourceText(Uri uri)
         {
-            using (var binaryReader = new BinaryReader(File.Open(file, FileMode.Open)))
+            var info = Application.GetResourceStream(uri);
+            using (var reader = new StreamReader(info.Stream, Encoding.UTF8))
             {
-                var fileInfo = new FileInfo(file);
-                var buffer = binaryReader.ReadBytes((int)fileInfo.Length);
-                return Image(buffer);
+                var txt = reader.ReadToEnd();
+                return txt;
             }
         }
         /// <summary>
-        /// 内存流转图片资源
+        /// 从Resource文件读取byte[]
         /// </summary>
-        public static ImageSource Image(byte[] buffer)
+        public static byte[] ResourceBuffer(Uri uri)
         {
-            var image = new BitmapImage();
-            image.BeginInit();
-            image.StreamSource = new MemoryStream(buffer);
-            image.EndInit();
-            return image;
-        }
-        /// <summary>
-        /// 图像转图片资源
-        /// </summary>
-        public static ImageSource Image(System.Drawing.Bitmap bitmap)
-        {
-            var intPtr = bitmap.GetHbitmap();
-            var image = Imaging.CreateBitmapSourceFromHBitmap(intPtr, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-            NativeMethods.DeleteObject(intPtr);
-            return image;
+            var info = Application.GetResourceStream(uri);
+            using (info.Stream)
+            {
+                var buffer = new byte[info.Stream.Length];
+                info.Stream.Read(buffer, 0, buffer.Length);
+                return buffer;
+            }
         }
 
         #endregion
