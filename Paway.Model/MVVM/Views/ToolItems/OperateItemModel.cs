@@ -41,6 +41,14 @@ namespace Paway.Model
         #endregion
 
         #region 菜单
+        /// <summary>
+        /// 发送状态并执行
+        /// </summary>
+        internal void ActionInternalMsg(string item)
+        {
+            Messenger.Default.Send(new StatuMessage(item, false));
+            ActionInternal(item);
+        }
         internal virtual void ActionInternal(string item)
         {
             try
@@ -118,32 +126,46 @@ namespace Paway.Model
             if (Config.Menu != this.Menu) return;
             switch (msg.Key)
             {
-                case Key.F5: ActionInternal("刷新"); break;
-                case Key.Delete: ActionInternal("删除"); break;
+                case Key.F5: ActionInternalMsg("刷新"); break;
+                case Key.Delete: ActionInternalMsg("删除"); break;
                 case Key.Escape:
-                    if (iExit && DateTime.Now.Subtract(exitTime).TotalMilliseconds < Config.DoubleInterval)
+                    if (Method.Find(DockPanel, out TextBoxEXT tbSearch, "tbSearch"))
                     {
-                        if (Method.Find(DockPanel, out TextBoxEXT tbSearch, "tbSearch")) tbSearch.Text = null;
-                        return;
+                        if (tbSearch.Text.IsEmpty()) break;
+                        if (iExit && DateTime.Now.Subtract(exitTime).TotalMilliseconds < Config.DoubleInterval)
+                        {
+                            Messenger.Default.Send(new StatuMessage("取消查询", false));
+                            tbSearch.Text = null;
+                        }
+                        else
+                        {
+                            iExit = true;
+                            exitTime = DateTime.Now;
+                            Messenger.Default.Send(new StatuMessage("再按一次取消查询", false));
+                        }
                     }
-                    iExit = true;
-                    exitTime = DateTime.Now;
                     break;
             }
             if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {
-                if (KeyCmdDic.ContainsKey(msg.Key)) ActionInternal(KeyCmdDic[msg.Key]);
+                if (KeyCmdDic.ContainsKey(msg.Key)) ActionInternalMsg(KeyCmdDic[msg.Key]);
                 else
                 {
                     switch (msg.Key)
                     {
-                        case Key.A: ActionInternal("添加"); break;
-                        case Key.E: ActionInternal("编辑"); break;
-                        case Key.D: ActionInternal("删除"); break;
-                        case Key.I: ActionInternal("导入"); break;
-                        case Key.O: ActionInternal("导出"); break;
-                        case Key.S: ActionInternal("保存"); break;
-                        case Key.F: if (Method.Find(DockPanel, out TextBoxEXT tbSearch, "tbSearch")) tbSearch.Focus(); break;
+                        case Key.A: ActionInternalMsg("添加"); break;
+                        case Key.E: ActionInternalMsg("编辑"); break;
+                        case Key.D: ActionInternalMsg("删除"); break;
+                        case Key.I: ActionInternalMsg("导入"); break;
+                        case Key.O: ActionInternalMsg("导出"); break;
+                        case Key.S: ActionInternalMsg("保存"); break;
+                        case Key.F:
+                            if (Method.Find(DockPanel, out TextBoxEXT tbSearch, "tbSearch") && !tbSearch.IsKeyboardFocusWithin)
+                            {
+                                Messenger.Default.Send(new StatuMessage("查询", false));
+                                tbSearch.Focus();
+                            }
+                            break;
                     }
                 }
             }

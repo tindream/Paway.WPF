@@ -190,7 +190,7 @@ namespace Paway.Model
         #region 操作命令
         public ICommand RowDoubleCommand => new RelayCommand<SelectItemEventArgs>(e =>
         {
-            ActionInternal("编辑");
+            ActionInternalMsg("编辑");
         });
         public ICommand SelectionCommand => new RelayCommand<ListViewEXT>(listView1 =>
         {
@@ -320,6 +320,8 @@ namespace Paway.Model
                     }
                 }
                 server.Update(updateList, null, nameof(IIndex.Index));
+                Method.Update(updateList);
+                Method.Sorted(List);
             }
         });
 
