@@ -497,7 +497,9 @@ namespace Paway.WPF
                 {
                     var progressBar = new ProgressBarEXT
                     {
-                        IText = false
+                        IText = false,
+                        Margin = new Thickness(0),
+                        Radius = new CornerRadius(0),
                     };
                     dp.Children.Add(progressBar);
                     DockPanel.SetDock(progressBar, Dock.Bottom);

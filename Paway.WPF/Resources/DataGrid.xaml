@@ -123,6 +123,7 @@
 
     <Style TargetType="{x:Type local:DataGridEXT}" BasedOn="{StaticResource Config}">
         <Setter Property="ICustomColumnHeader" Value="True"/>
+        <Setter Property="UseLayoutRounding" Value="True"/>
         <!--使其平滑滚动，默认是整行滚动-->
         <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
         <!--标题样式-->

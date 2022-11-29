@@ -86,11 +86,11 @@ namespace Paway.Model
         /// <summary>
         /// 导出列表
         /// </summary>
-        protected virtual void Export<T>(DependencyObject obj, List<T> list, string file) where T : class
+        protected virtual void Export<T>(DependencyObject obj, List<T> list, string file, bool iOpem = true) where T : class
         {
             ExcelHelper.ToExcel(list, null, file);
             Messenger.Default.Send(new StatuMessage("导出成功", obj));
-            if (Method.Ask(obj, "导出成功,是否打开文件?"))
+            if (iOpem && Method.Ask(obj, "导出成功,是否打开文件?"))
             {
                 Process.Start(file);
             }

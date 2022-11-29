@@ -173,16 +173,16 @@ namespace Paway.Model
             Method.Sorted(List);
             this.Reload();
         }
-        protected virtual void Export(string file)
+        protected virtual void Export(string file, bool iOpem = true)
         {
-            Export(DataGrid, this.FilterList(), file);
+            Export(DataGrid, this.FilterList(), file, iOpem);
         }
         /// <summary>
         /// 导出列表
         /// </summary>
-        protected virtual void Export<O>(List<O> list, string file) where O : class
+        protected virtual void Export<O>(List<O> list, string file, bool iOpem = true) where O : class
         {
-            base.Export(DataGrid, list, file);
+            base.Export(DataGrid, list, file, iOpem);
         }
 
         #endregion
