@@ -19,8 +19,27 @@
                 </Binding>
             </TextBoxEXT>
             <ProgressBarEXT Value="20.4" Minimum="-20" Maximum="50" Name="progress" SmallChange="10" IText="False"/>
+            <RadioButtonEXT Content="A"  />
+            <CheckBoxEXT  Content="A" HorizontalContentAlignment="Center"  />
             <ButtonEXT IsLight="True" Click="ButtonEXT_Click" Command="{Binding ButtonCommand}"/>
-            <DataGridEXT ItemsSource="{Binding GridList}" Height="250" SelectionUnit="Cell" CanUserResizeColumns="False"/>
+            <DataGridEXT ItemsSource="{Binding GridList}" Height="250" SelectionUnit="Cell" CanUserResizeColumns="False" >
+                <DataGridEXT.Columns>
+                    <DataGridTextColumn Binding="{Binding Text}" Width="100"/>
+                    <DataGridTextColumn Header="Desc2" Width="100"/>
+                    <DataGridTemplateColumn Width="50">
+                        <DataGridTemplateColumn.Header>
+                            <CheckBox IsChecked="{Binding ISelected}" Name="Desc3" />
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DockPanel>
+                                    <CheckBox IsChecked="{Binding ISelected, UpdateSourceTrigger=PropertyChanged}" />
+                                </DockPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGridEXT.Columns>
+            </DataGridEXT>
         </StackPanel>
     </Grid>
 </WindowEXT>

@@ -11,35 +11,32 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:RadioButtonEXT">
-                    <Grid Background="Transparent" Name="templateRoot">
+                    <Grid Name="templateRoot"
+                          Margin="{TemplateBinding Padding}"
+                          Background="Transparent" >
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Border
-                            BorderThickness="{TemplateBinding Border.BorderThickness}"
-                            CornerRadius="100"
-                            BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"
-                            Background="{TemplateBinding Background}"
-                            Name="radioButtonBorder"
-                            Margin="3,6"
-                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                        <Border Name="radioButtonBorder" Grid.Column="1"
+                                BorderThickness="{TemplateBinding Border.BorderThickness}"
+                                CornerRadius="100"
+                                BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"
+                                Background="{TemplateBinding Background}"
+                                Margin="3,6">
                             <Grid Name="markGrid" Margin="2">
                                 <Ellipse Name="optionMark" Width="8" Height="8" Opacity="0"
                                          Fill="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" />
                             </Grid>
                         </Border>
-                        <ContentPresenter
-                            RecognizesAccessKey="True"
-                            Content="{TemplateBinding Content}"
-                            ContentTemplate="{TemplateBinding ContentTemplate}"
-                            ContentStringFormat="{TemplateBinding ContentStringFormat}"
-                            Name="contentPresenter"
-                            Margin="{TemplateBinding Padding}"
-                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                            Grid.Column="1" />
+                        <ContentPresenter Name="contentPresenter" Grid.Column="2"
+                                          RecognizesAccessKey="True"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                          VerticalAlignment="Center"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">

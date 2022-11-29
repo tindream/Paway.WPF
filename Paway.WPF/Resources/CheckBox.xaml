@@ -11,37 +11,36 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:CheckBoxEXT">
-                    <Grid Background="Transparent" Name="templateRoot">
+                    <Grid Name="templateRoot"
+                          Margin="{TemplateBinding Padding}"
+                          Background="Transparent" >
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Border
-                            BorderThickness="{TemplateBinding Border.BorderThickness}"
-                            BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"
-                            Background="{TemplateBinding Background}"
-                            CornerRadius="{TemplateBinding Radius}"
-                            Name="checkBoxBorder"
-                            Margin="3,6"
-                            HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
-                            VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}">
+                        <Border Name="checkBoxBorder" Grid.Column="1"
+                                Margin="3,6"
+                                BorderThickness="{TemplateBinding Border.BorderThickness}"
+                                BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="{TemplateBinding Radius}" >
                             <Grid Name="markGrid" >
                                 <Path x:Name="optionMark" Style="{StaticResource PathRight}" StrokeDashOffset="8"
                                       Stroke="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
-                                <Rectangle Fill="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}"
+                                <Rectangle Name="indeterminateMark"
+                                           Fill="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}"
                                            Width="8" Height="8"
-                                           Name="indeterminateMark"
                                            Opacity="0" />
                             </Grid>
                         </Border>
-                        <ContentPresenter Name="contentPresenter" Grid.Column="1"
-                                          Margin="{TemplateBinding Control.Padding}"
+                        <ContentPresenter Name="contentPresenter" Grid.Column="2"
                                           RecognizesAccessKey="True"
                                           Content="{TemplateBinding ContentControl.Content}"
                                           ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
                                           ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"
-                                          HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
-                                          VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}"/>
+                                          VerticalAlignment="Center"/>
                     </Grid>
                     <ControlTemplate.Resources>
                         <Storyboard x:Key="StoryboardCheckedTrue">

@@ -291,7 +291,9 @@ namespace Paway.WPF
             foreach (var property in properties)
             {
                 var iReady = false;
-                var column = columnsReady.Find(c => (c.ClipboardContentBinding is Binding binding && binding.Path.Path == property.Name) || c.Header.ToStrings() == property.Name || c.Header.ToStrings() == property.Text());
+                var column = columnsReady.Find(c => (c.ClipboardContentBinding is Binding binding && binding.Path.Path == property.Name) ||
+                                                    (c.Header is FrameworkElement obj && obj.Name == property.Name) ||
+                                                    (c.Header is string header && (header == property.Name || header == property.Text())));
                 if (column != null)
                 {
                     iReady = true;
