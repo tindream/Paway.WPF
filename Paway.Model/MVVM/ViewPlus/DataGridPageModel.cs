@@ -56,11 +56,13 @@ namespace Paway.Model
         /// </summary>
         private bool IPage;
         public PagedCollectionView PagedList { get; private set; }
+
+        protected virtual void SelectedChanged() { }
         private T _selectedItem;
         public virtual T SelectedItem
         {
             get { return _selectedItem; }
-            set { _selectedItem = value; RaisePropertyChanged(); }
+            set { if (_selectedItem != value) { _selectedItem = value; SelectedChanged(); RaisePropertyChanged(); } }
         }
 
         protected virtual AddWindowModel<T> ViewModel()

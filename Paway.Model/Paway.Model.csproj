@@ -152,6 +152,7 @@
     <Compile Include="Method\PlotHelper.cs" />
     <Compile Include="Model\Enum\ButtonAuthType.cs" />
     <Compile Include="Model\Interface\IDataGridServer.cs" />
+    <Compile Include="Model\Interface\ILoad.cs" />
     <Compile Include="Model\Interface\IPageReload.cs" />
     <Compile Include="Model\Interface\IIndex.cs" />
     <Compile Include="Model\Enum\PlotLineType.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="Model\Interface\ICompare.cs" />
     <Compile Include="MVVM\ViewMessage\ConnectMessage.cs" />
     <Compile Include="MVVM\ViewMessage\LoginMessage.cs" />
+    <Compile Include="MVVM\ViewPlus\ParentBasePageModel.cs" />
     <Compile Include="MVVM\Views\Login\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>

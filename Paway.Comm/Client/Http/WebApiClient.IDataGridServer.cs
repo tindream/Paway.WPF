@@ -40,6 +40,11 @@ namespace Paway.Comm
             Delete(t);
             return 0;
         }
+        public int Delete<T>(List<T> list, DbCommand cmd = null) where T : class
+        {
+            Delete(list);
+            return 0;
+        }
         public int Update<T>(T t, DbCommand cmd = null, params string[] args) where T : class
         {
             Update(t, args);
