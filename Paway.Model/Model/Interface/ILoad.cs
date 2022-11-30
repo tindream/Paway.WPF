@@ -11,9 +11,9 @@ namespace Paway.Model
     /// <summary>
     /// 加载子级接口
     /// </summary>
-    public interface ILoad<T>
+    public interface ILoad<Child>
     {
-        List<T> DetailList { get; }
+        List<Child> DetailList { get; }
         void Load();
     }
 }

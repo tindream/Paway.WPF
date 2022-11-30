@@ -16,15 +16,15 @@ namespace Paway.Model
     /// <summary>
     /// 带父级列表的控件
     /// </summary>
-    public abstract class ParentBasePageModel<P> : OperateItemModel where P : class, IId
+    public abstract class ParentBasePageModel<Parent> : OperateItemModel where Parent : class, IId
     {
         #region 属性
         /// <summary>
         /// 父级列表
         /// </summary>
-        public ObservableCollection<P> ParentList { get; private set; } = new ObservableCollection<P>();
-        private P _parentInfo;
-        public P ParentInfo
+        public ObservableCollection<Parent> ParentList { get; private set; } = new ObservableCollection<Parent>();
+        private Parent _parentInfo;
+        public Parent ParentInfo
         {
             get { return _parentInfo; }
             set { if (_parentInfo != value) { _parentInfo = value; ParentChanged(); RaisePropertyChanged(); } }
@@ -40,7 +40,7 @@ namespace Paway.Model
                 case "刷新":
                     break;
                 default:
-                    if (ParentInfo == null) throw new WarningException($"请选择 {typeof(P).Description()}");
+                    if (ParentInfo == null) throw new WarningException($"请选择 {typeof(Parent).Description()}");
                     break;
             }
             base.Action(item);
@@ -55,8 +55,8 @@ namespace Paway.Model
             base.PageReload();
             var last = ParentInfo;
             ParentList.Clear();
-            foreach (var item in Cache.List<P>()) ParentList.Add(item);
-            ParentInfo = Cache.List<P>().Find(c => c.Id == last?.Id);
+            foreach (var item in Cache.List<Parent>()) ParentList.Add(item);
+            ParentInfo = Cache.List<Parent>().Find(c => c.Id == last?.Id);
             if (ParentInfo == null && ParentList.Count > 0) ParentInfo = ParentList.First();
         }
 
@@ -67,16 +67,16 @@ namespace Paway.Model
     /// <summary>
     /// 带父级列表的控件
     /// </summary>
-    public abstract class ParentBasePageModel<P, T> : DataGridPageModel<T> where T : class, IBaseInfo, IParent, ICompare<T>, new()
-                                                                           where P : class, IId
+    public abstract class ParentBasePageModel<Parent, T> : DataGridPageModel<T> where T : class, IBaseInfo, IParent, ICompare<T>, new()
+                                                                           where Parent : class, IId
     {
         #region 属性
         /// <summary>
         /// 父级列表
         /// </summary>
-        public ObservableCollection<P> ParentList { get; private set; } = new ObservableCollection<P>();
-        private P _parentInfo;
-        public P ParentInfo
+        public ObservableCollection<Parent> ParentList { get; private set; } = new ObservableCollection<Parent>();
+        private Parent _parentInfo;
+        public Parent ParentInfo
         {
             get { return _parentInfo; }
             set { if (_parentInfo != value) { _parentInfo = value; ParentChanged(); RaisePropertyChanged(); } }
@@ -97,7 +97,7 @@ namespace Paway.Model
                 case "刷新":
                     break;
                 default:
-                    if (ParentInfo == null) throw new WarningException($"请选择 {typeof(P).Description()}");
+                    if (ParentInfo == null) throw new WarningException($"请选择 {typeof(Parent).Description()}");
                     break;
             }
             base.Action(item);
@@ -112,8 +112,8 @@ namespace Paway.Model
             base.PageReload();
             var last = ParentInfo;
             ParentList.Clear();
-            foreach (var item in Cache.List<P>()) ParentList.Add(item);
-            ParentInfo = Cache.List<P>().Find(c => c.Id == last?.Id);
+            foreach (var item in Cache.List<Parent>()) ParentList.Add(item);
+            ParentInfo = Cache.List<Parent>().Find(c => c.Id == last?.Id);
             if (ParentInfo == null && ParentList.Count > 0) ParentInfo = ParentList.First();
         }
         protected override Window AddWindow()
@@ -134,18 +134,28 @@ namespace Paway.Model
     /// <summary>
     /// 带子级列表的控件
     /// </summary>
-    public abstract class ChildBasePageModel<T, C> : DataGridPageModel<T> where T : class, ILoad<T>, IBaseInfo, ICompare<T>, new()
-                                                                          where C : class, IParent
+    public abstract class ChildBasePageModel<T, Child> : DataGridPageModel<T> where T : class, ILoad<Child>, IBaseInfo, ICompare<T>, new()
+                                                                              where Child : class, IParent
     {
         #region 属性
         /// <summary>
         /// 子级列表
         /// </summary>
-        public ObservableCollection<C> DetailList { get; private set; } = new ObservableCollection<C>();
+        public ObservableCollection<Child> DetailList { get; private set; } = new ObservableCollection<Child>();
         public PagedCollectionView DetailPagedList { get; private set; }
 
         #endregion
         #region 重载
+        protected override void SelectedChanged()
+        {
+            base.SelectedChanged();
+            DetailList.Clear();
+            if (SelectedItem != null)
+            {
+                SelectedItem.Load();
+                foreach (var item in SelectedItem.DetailList) DetailList.Add(item);
+            }
+        }
         protected override void Deleted(T info)
         {
             info.Load();
