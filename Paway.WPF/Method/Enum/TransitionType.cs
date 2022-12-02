@@ -97,5 +97,10 @@ namespace Paway.WPF
         /// </summary>
         [Description("Y轴缩放")]
         ScanY,
+        /// <summary>
+        /// 旋转
+        /// </summary>
+        [Description("旋转")]
+        Rotate,
     }
 }

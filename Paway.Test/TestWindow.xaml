@@ -18,6 +18,9 @@
                     </Binding.ValidationRules>
                 </Binding>
             </TextBoxEXT>
+            <SliderEXT Name="sx" Title="X" Margin="5" Maximum="360" Value="{Binding Angle}"/>
+            <SliderEXT Name="sx2" Margin="5" Maximum="360" AnimationValue="{Binding Angle}"/>
+            <ProgressBarEXT Margin="5" Maximum="360" AnimationValue="{Binding Angle}"/>
             <ProgressBarEXT Value="20.4" Minimum="-20" Maximum="50" Name="progress" SmallChange="10" IText="False"/>
             <RadioButtonEXT Content="A"  />
             <CheckBoxEXT  Content="A" HorizontalContentAlignment="Center"  />

@@ -80,7 +80,7 @@ namespace Paway.WPF
                 case TransitionType.FadeOut:
                     Start(element, UIElement.OpacityProperty, 1, 0, time, completed);
                     break;
-                #region TranslateTransform
+                #region TranslateTransform 平移
                 case TransitionType.Left:
                 case TransitionType.Right:
                 case TransitionType.Top:
@@ -142,7 +142,7 @@ namespace Paway.WPF
                     break;
 
                 #endregion
-                #region ScaleTransform
+                #region ScaleTransform 缩放
                 case TransitionType.ScanX:
                 case TransitionType.ScanY:
                     var scaleTransform = new ScaleTransform();
@@ -179,23 +179,54 @@ namespace Paway.WPF
                     }
                     break;
 
+                #endregion
+                #region RotateTransform 旋转
+                case TransitionType.Rotate:
+                    var rotateTransform = new RotateTransform();
+                    if (element.RenderTransform != null)
+                    {
+                        if (element.RenderTransform.GetType() == typeof(TransformGroup))
+                        {
+                            ((TransformGroup)element.RenderTransform).Children.Add(rotateTransform);
+                        }
+                        else if (element.RenderTransform.GetType() == typeof(RotateTransform))
+                        {
+                            var group = new TransformGroup();
+                            group.Children.Add(element.RenderTransform);
+                            group.Children.Add(rotateTransform);
+                            element.RenderTransform = group;
+                        }
+                        else
+                        {
+                            element.RenderTransform = rotateTransform;
+                        }
+                    }
+                    else
+                    {
+                        element.RenderTransform = rotateTransform;
+                    }
+                    Start(rotateTransform, element, RotateTransform.AngleProperty, fromValue ?? 0, toValue, time, completed);
+                    break;
+
                     #endregion
             }
         }
         /// <summary>
         /// 直接启动二维动画
+        /// <para>iClear:还原动画</para>
         /// </summary>
-        public static void Start(Transform transform, FrameworkElement element, DependencyProperty property, double fromValue, double toValue, int time = 0, Action completed = null)
+        public static void Start(Transform transform, FrameworkElement element, DependencyProperty property, double fromValue, double toValue, int time = 0, Action completed = null, bool iClear = true)
         {
-            transform.BeginAnimation(property, GetDoubleAnimation(fromValue, toValue, element, time, () => { transform.BeginAnimation(property, null); completed?.Invoke(); }));
+            transform.BeginAnimation(property, GetDoubleAnimation(fromValue, toValue, element, time, () => { if (iClear) transform.BeginAnimation(property, null); completed?.Invoke(); }));
         }
         /// <summary>
         /// 直接启动动画
+        /// <para>iClear:还原动画</para>
         /// </summary>
-        public static void Start(FrameworkElement element, DependencyProperty property, double fromValue, double toValue, int time = 0, Action completed = null)
+        public static void Start(FrameworkElement element, DependencyProperty property, double fromValue, double toValue, int time = 0, Action completed = null, bool iClear = true)
         {
             if (element == null) return;
-            element.BeginAnimation(property, GetDoubleAnimation(fromValue, toValue, element, time, () => { element.BeginAnimation(property, null); completed?.Invoke(); }));
+            element.BeginAnimation(property, GetDoubleAnimation(fromValue, toValue, element, time, () => { if (iClear) element.BeginAnimation(property, null); completed?.Invoke(); }));
         }
 
         #region Function

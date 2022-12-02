@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace Paway.WPF
 {
@@ -174,6 +175,38 @@ namespace Paway.WPF
         {
             get { return (double)GetValue(TitleMinWidthProperty); }
             set { SetValue(TitleMinWidthProperty, value); }
+        }
+
+        #endregion
+
+        #region 动画进度
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty AnimationValueProperty =
+            DependencyProperty.RegisterAttached(nameof(AnimationValue), typeof(double), typeof(SliderEXT), new FrameworkPropertyMetadata(0d, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnAnimationValueChanged));
+        /// <summary>
+        /// 动画进度值
+        /// </summary>
+        [Category("扩展")]
+        [Description("动画进度值")]
+        public double AnimationValue
+        {
+            get { return (double)GetValue(AnimationValueProperty); }
+            set { SetValue(AnimationValueProperty, value); }
+        }
+        private static void OnAnimationValueChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            if (obj is SliderEXT slider)
+            {
+                var animTime = PMethod.AnimTime((double)e.NewValue - slider.Value) * 1.5;
+                var animValue = new DoubleAnimation((double)e.NewValue, new Duration(TimeSpan.FromMilliseconds(animTime)))
+                {
+                    //AccelerationRatio = 0,
+                    //DecelerationRatio = 1,
+                    EasingFunction = new CubicEase() { EasingMode = EasingMode.EaseOut },
+                };
+                slider.BeginAnimation(SliderEXT.ValueProperty, animValue);
+            }
         }
 
         #endregion

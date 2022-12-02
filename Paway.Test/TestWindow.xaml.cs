@@ -15,6 +15,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -51,6 +52,9 @@ namespace Paway.Test
 
         private void ButtonEXT_Click(object sender, RoutedEventArgs e)
         {
+            var animValue = new DoubleAnimation(100, new Duration(TimeSpan.FromMilliseconds(500)));
+            sx.BeginAnimation(SliderEXT.ValueProperty, animValue);
+
             var errorList = Method.ValidationError(this);
             if (errorList.Count > 0)
             {
