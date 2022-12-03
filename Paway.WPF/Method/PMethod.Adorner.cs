@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -405,6 +406,7 @@ namespace Paway.WPF
             BeginInvoke(parent, () =>
             {
                 var progress = ProgressAdorner(parent, msg, iProgressBar, fontSize);
+                if (progress == null) throw new WarningException("指定控件上未找到装饰器");
                 Task.Run(() =>
                 {
                     try

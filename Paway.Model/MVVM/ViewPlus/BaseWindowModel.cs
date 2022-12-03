@@ -51,6 +51,10 @@ namespace Paway.Model
                 Messenger.Default.Send(new StatuMessage(ex, wd));
             }
         });
+        internal void EnterCommit(Window wd)
+        {
+            wd.DialogResult = OnCommit(wd);
+        }
         protected virtual bool? OnCommit(Window wd) { return true; }
 
         #endregion

@@ -15,7 +15,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Margin="0,50,0,0" HorizontalAlignment="Center">
-            <TextBoxEXT Title="名称:" Name="tbName" Width="240" Text="{Binding Name}" MaxLength="16" />
+            <TextBoxEXT Title="{Binding Label}" Name="tbName" Width="240" Text="{Binding Name}" MaxLength="16" />
         </StackPanel>
         <WrapPanel Grid.Row="1" Margin="0,40" HorizontalAlignment="Center">
             <ButtonEXT Width="80" Content="确认"

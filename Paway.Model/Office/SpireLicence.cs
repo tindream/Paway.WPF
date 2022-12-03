@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Paway.Model
 {
-    internal class SpireLicence
+    public class SpireLicence
     {
         static SpireLicence()
         {

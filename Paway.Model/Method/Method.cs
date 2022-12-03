@@ -19,38 +19,6 @@ namespace Paway.Model
 {
     public partial class Method : PMethod
     {
-        #region File
-        public static string ReadFile(string file, out int length)
-        {
-            var buffer = ReadFileBuffer(file, out length);
-            var str = Convert.ToBase64String(buffer);
-            return str;
-        }
-        public static byte[] ReadFileBuffer(string file, out int length)
-        {
-            using (var fs = File.OpenRead(file))
-            {
-                var buffer = new byte[fs.Length];
-                length = fs.Read(buffer, 0, buffer.Length);
-                return buffer;
-            }
-        }
-        public static void SaveFile(string file, string str)
-        {
-            var buffer = Convert.FromBase64String(str);
-            SaveFile(file, buffer);
-        }
-        public static void SaveFile(string file, byte[] buffer)
-        {
-            using (FileStream fs = new FileStream(file, FileMode.OpenOrCreate))
-            using (BinaryWriter bw = new BinaryWriter(fs))
-            {
-                bw.Write(buffer, 0, buffer.Length);
-            }
-        }
-
-        #endregion
-
         #region 导入导出
         /// <summary>
         /// 选择单个文件导入

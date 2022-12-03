@@ -13,6 +13,13 @@ namespace Paway.Model
     public class NameWindowModel : BaseWindowModel
     {
         #region 属性
+        private string _label = "名称:";
+        public string Label
+        {
+            get { return _label; }
+            set { _label = value; RaisePropertyChanged(); }
+        }
+
         private string _name;
         public string Name
         {
