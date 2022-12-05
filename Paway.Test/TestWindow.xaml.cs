@@ -52,9 +52,6 @@ namespace Paway.Test
 
         private void ButtonEXT_Click(object sender, RoutedEventArgs e)
         {
-            var animValue = new DoubleAnimation(100, new Duration(TimeSpan.FromMilliseconds(500)));
-            sx.BeginAnimation(SliderEXT.ValueProperty, animValue);
-
             var errorList = Method.ValidationError(this);
             if (errorList.Count > 0)
             {

@@ -189,14 +189,14 @@ namespace Paway.Model
         /// <summary>
         /// 添加竖线
         /// </summary>
-        protected void AddInterval(FrameworkElement parent, Action<Border> action = null)
+        protected void AddInterval(int index = -1, Action<Border> action = null)
         {
             var border = new Border
             {
-                Style = parent.FindResource("Interval") as Style
+                Style = DockPanel.FindResource("Interval") as Style
             };
             action?.Invoke(border);
-            DockPanel.Children.Insert(DockPanel.Children.Count - 1, border);
+            DockPanel.Children.Insert(index != -1 ? index : DockPanel.Children.Count - 1, border);
         }
         /// <summary>
         /// 添加按钮
@@ -204,7 +204,9 @@ namespace Paway.Model
         /// </summary>
         protected void AddButton(object cmd, ImageEXT imageEXT = null, Key key = Key.None, int index = -1, Action<ButtonEXT> action = null)
         {
-            AddButton(imageEXT, Dock.Top, cmd, cmd, key, index, cmd, action);
+            var content = cmd;
+            if (key != Key.None) content = $"{cmd}({key})";
+            AddButton(imageEXT, Dock.Top, content, cmd, key, index, cmd, action);
         }
         /// <summary>
         /// 添加按钮

@@ -118,7 +118,7 @@ namespace Paway.WPF
         /// 控件状态转换
         /// </summary>
         internal static ElementData<T, I> ElementStatu<T, I>(ITypeDescriptorContext context, CultureInfo culture, string str,
-            Func<string, I> func, Func<T, string, I?> funcValue)
+            Func<string, I> funcParse, Func<T, string, I?> funcOld)
             //where T : IElementStatu<I> 
             where T : class
             where I : struct
@@ -132,23 +132,22 @@ namespace Paway.WPF
             int? alpha = null;
             if (strs.Length > 0)
             {
-                if (!string.IsNullOrEmpty(strs[0])) normal = func(strs[0]);
-                else normal = funcValue(old, "Normal");
+                if (!string.IsNullOrEmpty(strs[0])) normal = funcParse(strs[0]);
+                else normal = funcOld(old, "Normal");
             }
-            if (strs.Length > 1)
+            if (strs.Length == 2 && byte.TryParse(strs[1], out byte alphaValue))
             {
-                if (!string.IsNullOrEmpty(strs[1])) mouse = func(strs[1]);
-                else mouse = funcValue(old, "Mouse");
+                alpha = alphaValue;
+            }
+            else if (strs.Length > 1)
+            {
+                if (!string.IsNullOrEmpty(strs[1])) mouse = funcParse(strs[1]);
+                else mouse = funcOld(old, "Mouse");
             }
             if (strs.Length > 2)
             {
-                if (!string.IsNullOrEmpty(strs[2])) pressed = func(strs[2]);
-                else pressed = funcValue(old, "Pressed");
-            }
-            if (strs.Length > 3)
-            {
-                if (!string.IsNullOrEmpty(strs[3])) alpha = Convert.ToInt32(strs[3], culture);
-                else if (old != null) alpha = (int)old.GetValue("Alpha");
+                if (!string.IsNullOrEmpty(strs[2])) pressed = funcParse(strs[2]);
+                else pressed = funcOld(old, "Pressed");
             }
             return new ElementData<T, I>(old, normal, mouse, pressed, alpha);
         }
