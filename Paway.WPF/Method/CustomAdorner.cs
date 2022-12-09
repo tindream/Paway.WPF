@@ -90,7 +90,7 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-Window进度条进度
         /// </summary>
-        public void Progress(double value, Action<ProgressBarEXT> action = null)
+        public void Progress(double value, Action<ProgressBar> action = null)
         {
             if (canvas != null)
             {
@@ -100,6 +100,11 @@ namespace Paway.WPF
                     {
                         if (action != null) action(progressBar);
                         else progressBar.AnimationValue = value;
+                    }
+                    else if (PMethod.Child(canvas, out ProgressRound progressRound, iParent: false))
+                    {
+                        if (action != null) action(progressRound);
+                        else progressRound.AnimationValue = value;
                     }
                 });
             }

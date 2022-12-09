@@ -77,7 +77,7 @@ namespace Paway.Test
                 adorner.Text("99");
                 adorner.Progress(99);
                 Thread.Sleep(500);
-            }, iProgressBar: true);
+            }, iProgressBar: false, iProgressRound: true);
         }
     }
 }

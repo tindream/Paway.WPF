@@ -387,25 +387,25 @@ namespace Paway.WPF
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
-        public static void Progress(DependencyObject parent, Action action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, int? fontSize = null)
+        public static void Progress(DependencyObject parent, Action action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
         {
-            Progress(parent, null, adorner => action?.Invoke(), success, error, completed, iProgressBar, fontSize);
+            Progress(parent, null, adorner => action?.Invoke(), success, error, completed, iProgressBar, iProgressRound, fontSize);
         }
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
-        public static void Progress(DependencyObject parent, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, int? fontSize = null)
+        public static void Progress(DependencyObject parent, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
         {
-            Progress(parent, null, action, success, error, completed, iProgressBar, fontSize);
+            Progress(parent, null, action, success, error, completed, iProgressBar, iProgressRound, fontSize);
         }
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
-        public static void Progress(DependencyObject parent, object msg, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, int? fontSize = null)
+        public static void Progress(DependencyObject parent, object msg, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
         {
             BeginInvoke(parent, () =>
             {
-                var progress = ProgressAdorner(parent, msg, iProgressBar, fontSize);
+                var progress = ProgressAdorner(parent, msg, iProgressBar, iProgressRound, fontSize);
                 if (progress == null) throw new WarningException("指定控件上未找到装饰器");
                 Task.Run(() =>
                 {
@@ -452,7 +452,7 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-同步显示Window进度条
         /// </summary>
-        public static CustomAdorner ProgressAdorner(DependencyObject parent, object msg = null, bool iProgressBar = false, int? fontSize = null)
+        public static CustomAdorner ProgressAdorner(DependencyObject parent, object msg = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
         {
             if (!Parent(parent, out Window window)) return null;
             if (window.Content is FrameworkElement element)
@@ -466,39 +466,58 @@ namespace Paway.WPF
                     BorderBrush = Colors.LightGray.ToBrush(),
                     BorderThickness = new Thickness(1),
                     Background = AlphaColor(PConfig.Alpha, Colors.White).ToBrush(),
-                    MinWidth = 200,
+                    MinWidth = 250,
                     MaxWidth = 350,
+                    MinHeight = 45,
                 };
-                var dp = new DockPanel();
-                border.Child = dp;
-                var tbProgress = new TextBlock()
+                Panel panel = new DockPanel();
+                if (!iProgressRound) panel = new Grid();
+                border.Child = panel;
                 {
-                    Text = msg == null ? PConfig.Loading : msg.ToStrings(),
-                    Foreground = Colors.Black.ToBrush(),
-                    Padding = new Thickness(10),
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    TextTrimming = TextTrimming.WordEllipsis,
-                };
-                if (fontSize != null) tbProgress.FontSize = fontSize.Value;
-                dp.Children.Add(tbProgress);
-                DockPanel.SetDock(tbProgress, Dock.Bottom);
-                if (iProgressBar)
+                    var tbProgress = new TextBlock()
+                    {
+                        Text = msg == null ? PConfig.Loading : msg.ToStrings(),
+                        Foreground = Colors.Black.ToBrush(),
+                        Padding = new Thickness(10),
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        TextTrimming = TextTrimming.WordEllipsis,
+                    };
+                    if (fontSize != null) tbProgress.FontSize = fontSize.Value;
+                    DockPanel.SetDock(tbProgress, Dock.Bottom);
+                    panel.Children.Add(tbProgress);
+                }
+                if (iProgressRound)
                 {
                     var progressBar = new ProgressBarEXT
                     {
                         IText = false,
                         Margin = new Thickness(0),
                         Radius = new CornerRadius(0),
+                        Height = 1,
                     };
-                    dp.Children.Add(progressBar);
                     DockPanel.SetDock(progressBar, Dock.Bottom);
+                    panel.Children.Add(progressBar);
                 }
-                dp.Children.Add(new Progress
+                else if (iProgressBar)
                 {
-                    Margin = new Thickness(20),
-                    Width = 80,
-                    Height = 80,
-                });
+                    border.MinWidth = 0;
+                    panel.Children.Add(new ProgressRound
+                    {
+                        IText = false,
+                        Margin = new Thickness(20),
+                        Width = 100,
+                        BorderThickness = new Thickness(1),
+                    });
+                }
+                if (iProgressRound)
+                {
+                    panel.Children.Add(new Progress
+                    {
+                        Margin = new Thickness(10),
+                        Width = 100,
+                        Height = 100,
+                    });
+                }
                 var progressAd = new CustomAdorner(element, border, AlphaColor(0, Colors.Black));
                 myAdornerLayer.Add(progressAd);
                 progressAd.Tag = myAdornerLayer;
