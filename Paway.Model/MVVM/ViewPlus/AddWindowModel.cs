@@ -4,6 +4,7 @@ using Paway.Helper;
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,7 +13,7 @@ using System.Windows.Media;
 
 namespace Paway.Model
 {
-    public class AddWindowModel<T> : BaseWindowModel where T : class, IId
+    public class AddWindowModel<T> : BaseWindowModel where T : class, ICompare<T>, IId
     {
         #region 属性
         private T info;
@@ -50,10 +51,8 @@ namespace Paway.Model
                 Method.Hit(wd, errorList.Join("\r\n"), ColorType.Error);
                 return null;
             }
-            if (info is IChecked @checked)
-            {
-                @checked.Checked();
-            }
+            if (info is IChecked @checked) @checked.Checked();
+            else if (Cache.List<T>().Find(c => c.Compare(info)) != null) throw new WarningException($"[{typeof(T).Description()}]{info} 已存在");
             if (info.Id == 0 && info is IIndex index)
             {
                 var tList = Cache.List<T>();

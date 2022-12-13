@@ -170,7 +170,7 @@ namespace Paway.WPF
         public static void Show(DependencyObject parent, string msg, LeveType level = LeveType.Debug)
         {
             if (!Parent(parent, out Window window)) return;
-            BeginInvoke(parent, obj =>
+            BeginInvoke(obj =>
             {
                 switch (level)
                 {
@@ -415,11 +415,11 @@ namespace Paway.WPF
         /// <summary>
         /// 同步调用
         /// </summary>
-        public static void Invoke(DependencyObject obj, Action action, Action<Exception> error = null)
+        public static void Invoke(Action action, Action<Exception> error = null)
         {
             try
             {
-                obj.Dispatcher.Invoke(() =>
+                Application.Current.Dispatcher.Invoke(() =>
                 {
                     action.Invoke();
                 });
@@ -433,11 +433,11 @@ namespace Paway.WPF
         /// <summary>
         /// 带参数同步调用
         /// </summary>
-        public static void Invoke<T>(DependencyObject obj, Action<T> action, T t, Action<Exception> error = null)
+        public static void Invoke<T>(Action<T> action, T t, Action<Exception> error = null)
         {
             try
             {
-                obj.Dispatcher.Invoke(() =>
+                Application.Current.Dispatcher.Invoke(() =>
                 {
                     action.Invoke(t);
                 });
@@ -451,11 +451,11 @@ namespace Paway.WPF
         /// <summary>
         /// 同步调用，并返回结果
         /// </summary>
-        public static T Invoke<T>(DependencyObject obj, Func<T> action, Action<Exception> error = null)
+        public static T Invoke<T>(Func<T> action, Action<Exception> error = null)
         {
             try
             {
-                return obj.Dispatcher.Invoke(() =>
+                return Application.Current.Dispatcher.Invoke(() =>
                 {
                     return action.Invoke();
                 });
@@ -470,11 +470,11 @@ namespace Paway.WPF
         /// <summary>
         /// 带参数同步调用，并返回结果
         /// </summary>
-        public static O Invoke<T, O>(DependencyObject obj, Func<T, O> action, T t, Action<Exception> error = null)
+        public static O Invoke<T, O>(Func<T, O> action, T t, Action<Exception> error = null)
         {
             try
             {
-                return obj.Dispatcher.Invoke(() =>
+                return Application.Current.Dispatcher.Invoke(() =>
                 {
                     return action.Invoke(t);
                 });
@@ -489,11 +489,11 @@ namespace Paway.WPF
         /// <summary>
         /// 异步调用
         /// </summary>
-        public static void BeginInvoke(DependencyObject obj, Action action, Action<Exception> error = null)
+        public static void BeginInvoke(Action action, Action<Exception> error = null)
         {
             try
             {
-                obj.Dispatcher.BeginInvoke(new Action(() =>
+                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     try
                     {
@@ -515,11 +515,11 @@ namespace Paway.WPF
         /// <summary>
         /// 带参数异步调用
         /// </summary>
-        public static void BeginInvoke<T>(DependencyObject obj, Action<T> action, T t, Action<Exception> error = null)
+        public static void BeginInvoke<T>(Action<T> action, T t, Action<Exception> error = null)
         {
             try
             {
-                obj.Dispatcher.BeginInvoke(new Action(() =>
+                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     try
                     {

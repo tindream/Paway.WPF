@@ -357,7 +357,7 @@ namespace Paway.Test
 
             PlotModel.ResetAllAxes();
             PlotModel.InvalidatePlot(true);
-            Method.BeginInvoke(App.Current.MainWindow, () =>
+            Method.BeginInvoke(() =>
             {
                 PlotHelper.AutoMaxMin(PlotModel, 10, 10);
                 PlotModel.InvalidatePlot(true);

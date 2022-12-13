@@ -34,7 +34,7 @@ namespace Paway.Model
         {
             base.OnApplyTemplate();
             Messenger.Default.Send(new LoginLoadMessage() { Obj = Root });
-            Method.BeginInvoke(this, () =>
+            Method.BeginInvoke(() =>
             {
                 if (this.DataContext is LoginPageModel login)
                 {

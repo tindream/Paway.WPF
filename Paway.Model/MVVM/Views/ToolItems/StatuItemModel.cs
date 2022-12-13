@@ -70,14 +70,14 @@ namespace Paway.Model
             Messenger.Default.Register<ConnectMessage>(this, msg =>
             {
                 Messenger.Default.Send(new StatuMessage(msg.Connectd ? $"连接成功" : $"连接断开", !msg.Connectd), msg.Connectd ? LeveType.Debug : LeveType.Error);
-                Method.BeginInvoke(Config.Window, () =>
+                Method.BeginInvoke(() =>
                 {
                     ConnectBrush = msg.Connectd ? ColorType.Success.Color().ToBrush() : ColorType.Error.Color().ToBrush();
                 });
             });
             Messenger.Default.Register<Connect2Message>(this, msg =>
             {
-                Method.BeginInvoke(Config.Window, () =>
+                Method.BeginInvoke(() =>
                 {
                     Connect2Brush = msg.Connectd ? ColorType.Success.Color().ToBrush() : ColorType.Error.Color().ToBrush();
                 });
@@ -109,7 +109,7 @@ namespace Paway.Model
         private void AddDesc(string msg, LeveType level = LeveType.Debug, bool iHit = true, DependencyObject ower = null)
         {
             this.Desc = msg;
-            Method.Invoke(Config.Window, () =>
+            Method.Invoke(() =>
             {
                 switch (level)
                 {

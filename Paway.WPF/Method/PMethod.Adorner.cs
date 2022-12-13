@@ -28,7 +28,7 @@ namespace Paway.WPF
         /// </summary>
         public static void SlowIn(FrameworkElement parent, object msg, int time = 500, double xMove = 0, double yMove = 0, double size = 36, Color? color = null)
         {
-            Invoke(parent, () =>
+            Invoke(() =>
             {
                 var myAdornerLayer = ReloadAdorner(parent);
                 if (myAdornerLayer == null) return;
@@ -217,7 +217,7 @@ namespace Paway.WPF
         /// </summary>
         public static void Toast(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color, int? fontSize = null)
         {
-            Invoke(parent, () =>
+            Invoke(() =>
             {
                 if (!Parent(parent, out Window window)) return;
                 if (window.Content is FrameworkElement element)
@@ -307,7 +307,7 @@ namespace Paway.WPF
         /// </summary>
         public static void Hit(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color, int? fontSize = null)
         {
-            Invoke(parent, () =>
+            Invoke(() =>
             {
                 if (!Parent(parent, out Window window)) return;
                 if (window.Content is FrameworkElement element)
@@ -403,7 +403,7 @@ namespace Paway.WPF
         /// </summary>
         public static void Progress(DependencyObject parent, object msg, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
         {
-            BeginInvoke(parent, () =>
+            BeginInvoke(() =>
             {
                 var progress = ProgressAdorner(parent, msg, iProgressBar, iProgressRound, fontSize);
                 if (progress == null) throw new WarningException("指定控件上未找到装饰器");
@@ -414,7 +414,7 @@ namespace Paway.WPF
                         action.Invoke(progress);
                         if (success != null)
                         {
-                            BeginInvoke(parent, () =>
+                            BeginInvoke(() =>
                             {
                                 success.Invoke();
                             });
@@ -424,7 +424,7 @@ namespace Paway.WPF
                     {
                         if (error != null)
                         {
-                            BeginInvoke(parent, () =>
+                            BeginInvoke(() =>
                             {
                                 error.Invoke(ex);
                             });
@@ -437,10 +437,10 @@ namespace Paway.WPF
                     }
                     finally
                     {
-                        ProgressClose(parent, progress);
+                        ProgressClose(progress);
                         if (completed != null)
                         {
-                            BeginInvoke(parent, () =>
+                            BeginInvoke(() =>
                             {
                                 completed.Invoke();
                             }, error);
@@ -528,10 +528,10 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-关闭Window进度条
         /// </summary>
-        public static void ProgressClose(DependencyObject parent, CustomAdorner progress)
+        public static void ProgressClose(CustomAdorner progress)
         {
             if (progress == null) return;
-            BeginInvoke(parent, () =>
+            BeginInvoke(() =>
             {
                 if (progress.Tag is AdornerLayer adorner)
                 {

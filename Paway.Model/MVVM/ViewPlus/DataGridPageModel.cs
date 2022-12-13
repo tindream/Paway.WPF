@@ -108,8 +108,8 @@ namespace Paway.Model
             Method.Update(info);
             Method.Sorted(List);
             var index = this.FilterList().FindIndex(c => c.Id == info.Id);
-            if (!this.SearchReset()) Method.Invoke(DataGrid, () => ObList.Insert(index, info));
-            Method.BeginInvoke(DataGrid, temp =>
+            if (!this.SearchReset()) Method.Invoke(() => ObList.Insert(index, info));
+            Method.BeginInvoke(temp =>
             {
                 if (IPage)
                 {
@@ -134,7 +134,7 @@ namespace Paway.Model
             {
                 server.Delete(info);
                 Method.Delete(info);
-                Method.Invoke(DataGrid, () => ObList.Remove(info));
+                Method.Invoke(() => ObList.Remove(info));
             }
             finally
             {
@@ -369,7 +369,7 @@ namespace Paway.Model
         }
         private void ReloadObList()
         {
-            Method.Invoke(DataGrid, () =>
+            Method.Invoke(() =>
             {
                 ObList.Clear();
                 var list = showList ?? this.FilterList();

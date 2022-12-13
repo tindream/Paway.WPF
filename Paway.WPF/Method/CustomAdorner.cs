@@ -77,7 +77,7 @@ namespace Paway.WPF
         {
             if (canvas != null)
             {
-                PMethod.BeginInvoke(canvas, () =>
+                PMethod.BeginInvoke(() =>
                 {
                     if (PMethod.Child(canvas, out TextBlock textBlock, iParent: false))
                     {
@@ -94,7 +94,7 @@ namespace Paway.WPF
         {
             if (canvas != null)
             {
-                PMethod.BeginInvoke(canvas, () =>
+                PMethod.BeginInvoke(() =>
                 {
                     if (PMethod.Child(canvas, out ProgressBarEXT progressBar, iParent: false))
                     {

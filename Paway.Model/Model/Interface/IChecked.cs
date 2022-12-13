@@ -13,6 +13,9 @@ namespace Paway.Model
     /// </summary>
     public interface IChecked
     {
+        /// <summary>
+        /// 保存前检查
+        /// </summary>
         void Checked();
     }
 }

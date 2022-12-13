@@ -210,7 +210,7 @@ namespace Paway.WPF
                     if (isInit && !this.IQuery)
                     {
                         this.SelectedValue = this.SelectedValuePath.IsEmpty() ? item : item.GetValue(this.SelectedValuePath);
-                        PMethod.BeginInvoke(this, () => { this.IsDropDownOpen = false; });
+                        PMethod.BeginInvoke(() => { this.IsDropDownOpen = false; });
                     }
                 }
                 else
@@ -260,7 +260,7 @@ namespace Paway.WPF
                     this.ItemsSource = list;
                     if (id > 0)
                     {
-                        PMethod.BeginInvoke(this, () =>
+                        PMethod.BeginInvoke(() =>
                         {
                             treeView.Selected(id);
                             textBox.Focus();
