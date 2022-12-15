@@ -35,6 +35,11 @@ namespace Paway.Comm
             Insert(obj);
             return 0;
         }
+        public int Insert<T>(List<T> list, DbCommand cmd = null) where T : class
+        {
+            Insert(list);
+            return 0;
+        }
         public int Delete<T>(T t, DbCommand cmd = null) where T : class
         {
             Delete(t);

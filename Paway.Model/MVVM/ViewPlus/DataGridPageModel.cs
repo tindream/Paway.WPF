@@ -109,17 +109,35 @@ namespace Paway.Model
             Method.Sorted(List);
             var index = this.FilterList().FindIndex(c => c.Id == info.Id);
             if (!this.SearchReset()) Method.Invoke(() => ObList.Insert(index, info));
-            Method.BeginInvoke(temp =>
+            MoveTo(index, info);
+        }
+        private void MoveTo(int index, T info)
+        {
+            Method.BeginInvoke(() =>
             {
                 if (IPage)
                 {
-                    PagedList.MoveToPage(temp / PagedList.PageSize);
-                    temp %= PagedList.PageSize;
+                    PagedList.MoveToPage(index / PagedList.PageSize);
+                    index %= PagedList.PageSize;
                 }
                 DataGrid.ScrollIntoView(info);
-                if (DataGrid.SelectionUnit != DataGridSelectionUnit.Cell) DataGrid.SelectedIndex = temp;
+                if (DataGrid.SelectionUnit != DataGridSelectionUnit.Cell) DataGrid.SelectedIndex = index;
                 else DataGrid.Select(info.Id, true);
-            }, index);
+            });
+        }
+        protected void Insert(List<T> list)
+        {
+            if (list.Count == 0) return;
+            server.Insert(list);
+            Method.Update(list);
+            Method.Sorted(List);
+            int index = 0;
+            foreach (var info in list)
+            {
+                index = this.FilterList().FindIndex(c => c.Id == info.Id);
+                if (!this.SearchReset()) Method.Invoke(() => ObList.Insert(index, info));
+            }
+            MoveTo(index, list.Last());
         }
         protected virtual void Updated(T info)
         {
@@ -140,7 +158,22 @@ namespace Paway.Model
             {
                 if (index >= DataGrid.Items.Count) index = DataGrid.Items.Count - 1;
                 if (DataGrid.SelectionUnit != DataGridSelectionUnit.Cell) DataGrid.SelectedIndex = index;
-                else DataGrid.Select(info.Id, true);
+            }
+        }
+        protected void Deleted(List<T> list)
+        {
+            if (list.Count == 0) return;
+            var index = DataGrid.SelectedIndex;
+            try
+            {
+                server.Delete(list);
+                Method.Delete(list);
+                Method.Invoke(() => { foreach (var info in list) ObList.Remove(info); });
+            }
+            finally
+            {
+                if (index >= DataGrid.Items.Count) index = DataGrid.Items.Count - 1;
+                if (DataGrid.SelectionUnit != DataGridSelectionUnit.Cell) DataGrid.SelectedIndex = index;
             }
         }
         protected override void Refresh()

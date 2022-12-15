@@ -15,6 +15,7 @@ namespace Paway.Model
     public interface IDataGridServer
     {
         int Insert<T>(T t, DbCommand cmd = null) where T : class;
+        int Insert<T>(List<T> list, DbCommand cmd = null) where T : class;
         int Delete<T>(T t, DbCommand cmd = null) where T : class;
         int Delete<T>(List<T> list, DbCommand cmd = null) where T : class;
         int Update<T>(T t, DbCommand cmd = null, params string[] args) where T : class;
