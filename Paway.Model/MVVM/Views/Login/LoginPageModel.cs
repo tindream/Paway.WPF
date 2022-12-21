@@ -100,7 +100,15 @@ namespace Paway.Model
         #endregion
 
         #region 命令
-        public abstract void Login();
+        public virtual void Login(bool checkPad = true)
+        {
+            if (checkPad && Password.IsEmpty())
+            {
+                Method.Hit(Root, "请输入密码");
+                if (Method.Find(Root, out PasswordBox tbPassword, "tbPassword")) tbPassword.Focus();
+                return;
+            }
+        }
         protected virtual Window SetWindow() { return null; }
         protected virtual void OnCommit(DependencyObject obj) { }
         protected virtual void OnClose(DependencyObject obj) { }
@@ -127,12 +135,6 @@ namespace Paway.Model
                                     {
                                         if (Method.Find(Root, out TextBoxEXT tbUserName, "tbUserName")) tbUserName.Focus();
                                     }
-                                    return;
-                                }
-                                if (Password.IsEmpty())
-                                {
-                                    Method.Hit(Root, "请输入密码");
-                                    if (Method.Find(Root, out PasswordBox tbPassword, "tbPassword")) tbPassword.Focus();
                                     return;
                                 }
                                 Login();

@@ -353,7 +353,7 @@ namespace Paway.WPF
         /// 验证模型中的指定名称控件值输入错误
         /// <para>输入控件限定为TextBoxEXT，控件名称为tb+name</para>
         /// </summary>
-        public static bool ValidationError<T>(FrameworkElement parent, T mode, string name, bool allEmpty = false) where T : class
+        public static bool ValidationError<T>(DependencyObject parent, T mode, string name, bool allEmpty = false) where T : class
         {
             if (Find(parent, out TextBoxEXT tbName, "tb" + name))
             {
