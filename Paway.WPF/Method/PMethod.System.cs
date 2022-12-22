@@ -22,33 +22,6 @@ namespace Paway.WPF
     /// </summary>
     public partial class PMethod
     {
-        #region 唯一实例 
-        /// <summary>
-        /// 必须将mutex声明为局部变量才有效，加入列表同理
-        /// </summary>
-        private static readonly Dictionary<string, Mutex> MutexForSingletonExeDic = new Dictionary<string, Mutex>();
-        /// <summary>
-        /// 检查实例是否存在
-        /// </summary>
-        public static bool IsAppInstanceExist()
-        {
-            return IsAppInstanceExist(Assembly.GetEntryAssembly().GetName().Name);
-        }
-        /// <summary>
-        /// 检查实例是否存在
-        /// </summary>
-        public static bool IsAppInstanceExist(string instanceName)
-        {
-            Mutex mutex = new Mutex(false, instanceName, out bool createdNew);
-            if (createdNew)
-            {
-                MutexForSingletonExeDic.Add(instanceName, mutex);
-            }
-            return !createdNew;
-        }
-
-        #endregion
-
         #region 让系统可以处理队列中的所有Windows消息
         /// <summary>
         /// 让系统可以处理队列中的所有Windows消息

@@ -24,6 +24,7 @@ namespace Paway.Test
     public class TestWindowModel : ViewModelBase
     {
         #region 属性
+        public string Text => Config.Text;
         private double angle = -27;
         public double Angle
         {
@@ -58,13 +59,13 @@ namespace Paway.Test
             set { _value3 = value; RaisePropertyChanged(); }
         }
 
-        private string _text;
-        public string Text
+        private string _label;
+        public string Label
         {
-            get { return _text; }
+            get { return _label; }
             set
             {
-                _text = value; RaisePropertyChanged();
+                _label = value; RaisePropertyChanged();
             }
         }
 

@@ -23,7 +23,14 @@ namespace Paway.Test
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            Config.Text = Config.Title;
             Method.InitApp(App.Current, Config.LogConfig);
+            if (Method.IsAppInstanceExist())
+            {//已经有实例在运行，则激活该实例的主窗体。 
+                var hWnd = Win32Helper.ActiveForm(Config.Text);
+                Shutdown();
+                return;
+            }
             {//Test
             }
             //System.Diagnostics.PresentationTraceSources.DataBindingSource.Switch.Level = System.Diagnostics.SourceLevels.Critical;
