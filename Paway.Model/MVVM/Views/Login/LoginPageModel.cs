@@ -43,13 +43,11 @@ namespace Paway.Model
             {
                 if (_userName != value)
                 {
+                    if (iFiltering) return;
                     try
                     {
-                        if (!iFiltering)
-                        {
-                            iFiltering = true;
-                            FilterUser(value);
-                        }
+                        iFiltering = true;
+                        FilterUser(value);
                     }
                     finally
                     {
@@ -119,26 +117,24 @@ namespace Paway.Model
                 switch (item)
                 {
                     case "登陆":
+                        if (iLogining) break;
                         try
                         {
-                            if (!iLogining)
+                            iLogining = true;
+                            if (UserName.IsEmpty())
                             {
-                                iLogining = true;
-                                if (UserName.IsEmpty())
+                                Method.Hit(Root, "请输入用户名");
+                                if (IUserList)
                                 {
-                                    Method.Hit(Root, "请输入用户名");
-                                    if (IUserList)
-                                    {
-                                        if (Method.Find(Root, out ComboBoxEXT cbxUserName, "cbxUserName")) cbxUserName.Focus();
-                                    }
-                                    else
-                                    {
-                                        if (Method.Find(Root, out TextBoxEXT tbUserName, "tbUserName")) tbUserName.Focus();
-                                    }
-                                    return;
+                                    if (Method.Find(Root, out ComboBoxEXT cbxUserName, "cbxUserName")) cbxUserName.Focus();
                                 }
-                                Login();
+                                else
+                                {
+                                    if (Method.Find(Root, out TextBoxEXT tbUserName, "tbUserName")) tbUserName.Focus();
+                                }
+                                return;
                             }
+                            Login();
                         }
                         finally
                         {

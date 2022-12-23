@@ -35,6 +35,7 @@ namespace Paway.Comm
             if (arg1)
             {
                 base.SubscribeAsync(Config.TopicAdmin, MqttQualityOfServiceLevel.AtLeastOnce);
+                base.SubscribeAsync(Config.TopicAll, MqttQualityOfServiceLevel.AtLeastOnce);
                 base.SubscribeAsync(this.Topic, MqttQualityOfServiceLevel.AtLeastOnce);
             }
         }
