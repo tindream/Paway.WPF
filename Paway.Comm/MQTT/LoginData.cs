@@ -24,6 +24,10 @@ namespace Paway.Comm
         /// 密码
         /// </summary>
         public string Password { get; set; }
+        /// <summary>
+        /// 用户自定义属性
+        /// </summary>
+        public Dictionary<string, string> Properties { get; set; }
 
         /// <summary>
         /// </summary>
@@ -31,11 +35,12 @@ namespace Paway.Comm
         /// <summary>
         /// 登陆数据
         /// </summary>
-        public LoginData(bool result, string userName, string password = null)
+        public LoginData(bool result, string userName, string password = null, Dictionary<string, string> properties = null)
         {
             this.Result = result;
             this.UserName = userName;
             this.Password = password;
+            this.Properties = properties;
         }
     }
 }

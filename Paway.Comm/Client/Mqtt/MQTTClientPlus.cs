@@ -24,6 +24,7 @@ namespace Paway.Comm
     public partial class MQTTClientPlus : MQTTClient
     {
         private IUser user;
+        private Dictionary<string, string> properties;
 
         public MQTTClientPlus() : base(Config.Topic)
         {
@@ -43,17 +44,18 @@ namespace Paway.Comm
         {
             if (auto)
             {
-                if (this.user.Id > 0) return new LoginData(true, this.user.Id.ToString());
+                if (this.user.Id > 0) return new LoginData(true, this.user.Id.ToString(), properties: this.properties);
                 return null;
             }
-            return new LoginData(true, this.user.UserName, this.user.Password);
+            return new LoginData(true, this.user.UserName, this.user.Password, this.properties);
         }
 
         #region 外部方法
         public void Connect(string host, int port, IUser user, Dictionary<string, string> properties = null)
         {
             this.user = user;
-            var result = base.Connect(host, port, properties).Result;
+            this.properties = properties;
+            var result = base.Connect(host, port).Result;
             var response = result.UserProperties.Find(c => c.Name == "user");
             if (response != null)
             {

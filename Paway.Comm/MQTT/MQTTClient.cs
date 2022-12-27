@@ -93,11 +93,11 @@ namespace Paway.Comm
         /// </summary>
         /// <param name="host">主机</param>
         /// <param name="port">端口</param>
-        public Task<MqttClientConnectResult> Connect(string host, int port, Dictionary<string, string> properties = null)
+        public Task<MqttClientConnectResult> Connect(string host, int port)
         {
-            return Connect(host, port, false, properties);
+            return Connect(host, port, false);
         }
-        private Task<MqttClientConnectResult> Connect(string host, int port, bool auto, Dictionary<string, string> properties = null)
+        private Task<MqttClientConnectResult> Connect(string host, int port, bool auto)
         {
             this.host = host;
             this.port = port;
@@ -111,10 +111,10 @@ namespace Paway.Comm
                 .WithKeepAlivePeriod(TimeSpan.FromSeconds(this.keepAlivePeriod))// 保活时长
                 .WithProtocolVersion(MQTTnet.Formatter.MqttProtocolVersion.V500)// 5.0版本，可指定用户属性
                 .Build();// 创建选项
-            if (properties != null)
+            if (data.Properties != null)
             {
                 options.UserProperties = new List<MqttUserProperty>();
-                foreach (var item in properties)
+                foreach (var item in data.Properties)
                 {
                     options.UserProperties.Add(new MqttUserProperty(item.Key, item.Value));
                 }
