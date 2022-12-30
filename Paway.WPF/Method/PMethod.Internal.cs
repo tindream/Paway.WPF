@@ -90,8 +90,8 @@ namespace Paway.WPF
                     if ((Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.Shift) direction = FocusNavigationDirection.Up;
                     var request = new TraversalRequest(direction);
                     elementWithFocus.MoveFocus(request);
+                    e.Handled = true;
                 }
-                //e.Handled = true;
             }
         }
 
