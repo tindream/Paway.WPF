@@ -11,7 +11,7 @@ namespace Paway.Model
     public class KeyMessage
     {
         public Key Key { get; }
-        public bool Cancel { get; }
+        public bool Handled { get; set; }
 
         public KeyMessage() { }
         public KeyMessage(Key key)
