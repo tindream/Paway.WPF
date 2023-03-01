@@ -387,12 +387,13 @@ namespace Paway.WPF
         #region 统一Invoke处理
         /// <summary>
         /// 同步调用
+        /// <para>任何与 Application 不在同一个线程的代码，都可能遭遇 Application.Current 为 null。如Shutdown关闭</para>
         /// </summary>
         public static void Invoke(Action action, Action<Exception> error = null)
         {
             try
             {
-                Application.Current.Dispatcher.Invoke(() =>
+                Application.Current?.Dispatcher.Invoke(() =>
                 {
                     action.Invoke();
                 });
@@ -410,7 +411,7 @@ namespace Paway.WPF
         {
             try
             {
-                Application.Current.Dispatcher.Invoke(() =>
+                Application.Current?.Dispatcher.Invoke(() =>
                 {
                     action.Invoke(t);
                 });
@@ -428,7 +429,7 @@ namespace Paway.WPF
         {
             try
             {
-                return Application.Current.Dispatcher.Invoke(() =>
+                return Application.Current == null ? default : Application.Current.Dispatcher.Invoke(() =>
                 {
                     return action.Invoke();
                 });
@@ -447,7 +448,7 @@ namespace Paway.WPF
         {
             try
             {
-                return Application.Current.Dispatcher.Invoke(() =>
+                return Application.Current == null ? default : Application.Current.Dispatcher.Invoke(() =>
                 {
                     return action.Invoke(t);
                 });
@@ -466,7 +467,7 @@ namespace Paway.WPF
         {
             try
             {
-                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                Application.Current?.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     try
                     {
@@ -492,7 +493,7 @@ namespace Paway.WPF
         {
             try
             {
-                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                Application.Current?.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     try
                     {
