@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paway.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -40,7 +41,7 @@ namespace Paway.WPF
         /// <returns>Return 96,144</returns>
         public static double GetDpi()
         {
-            var dpiXProperty = typeof(SystemParameters).GetProperty("DpiX", BindingFlags.NonPublic | BindingFlags.Static);
+            var dpiXProperty = typeof(SystemParameters).GetProperty("DpiX", TConfig.FlagsAll);
             var dpiX = (int)dpiXProperty.GetValue(null, null);
             return dpiX;
         }

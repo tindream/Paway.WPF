@@ -47,7 +47,7 @@ namespace Paway.WPF
         /// </summary>
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            var list = Type.GetFields(PConfig.Flags).ToList();
+            var list = Type.GetFields(PConfig.FlagsEnum).ToList();
             if (Count == 0 || Count > list.Count - Start) Count = list.Count - Start;
             if (Count < 0) Count += list.Count - Start;
             var result = new List<string>();

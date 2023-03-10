@@ -199,7 +199,7 @@ namespace Paway.Test
                 FontList.Add(info);
                 if (info.Name == Config.Window.FontFamily.Source) this.Font = info;
             }
-            var piList = typeof(Colors).Properties(Config.Flags);
+            var piList = typeof(Colors).Properties(Config.FlagsAll);
             for (var i = 0; i < piList.Count; i++)
             {
                 var color = (Color)ColorConverter.ConvertFromString(piList[i].Name);
