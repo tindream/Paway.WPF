@@ -11,7 +11,12 @@
            Title="{Binding Text}" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" >
-            <ButtonEXT IsLight="True" Click="ButtonEXT_Click" Command="{Binding ButtonCommand}"
+            <Label Content="{Binding Language.Test, Source={StaticResource L}}"/>
+            <ButtonEXT IsLight="True" Click="ButtonEXT_Click" Command="{Binding ButtonCommand}" 
+                       ItemBackground="#409EFF;0"/>
+            <ButtonEXT IsLight="True" Command="{Binding ButtonCommand2}" Content="存"
+                       ItemBackground="#409EFF;0"/>
+            <ButtonEXT IsLight="True" Command="{Binding ButtonCommand3}" Content="取"
                        ItemBackground="#409EFF;0"/>
         </StackPanel>
     </Grid>

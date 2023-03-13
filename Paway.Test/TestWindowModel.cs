@@ -126,6 +126,16 @@ namespace Paway.Test
             //var index = Method.Random(0, ViewList.Count);
             //ViewList[index].ItemTextForeground = new BrushEXT(Colors.Red);
             //if (view.ItemsSource == null) view.ItemsSource = ViewList;
+            Config.Language.Test = "H" + DateTime.Now.Millisecond;
+        });
+        public ICommand ButtonCommand2 => new RelayCommand<ListViewCustom>(view =>
+        {
+            XmlHelper.Save(Config.Language, "lan.xml");
+        });
+        public ICommand ButtonCommand3 => new RelayCommand<ListViewCustom>(view =>
+        {
+            var lan = XmlHelper.Load<LanguageInfo>("lan.xml");
+            lan.Clone(Config.Language);
         });
         public ICommand ItemCommand => new RelayCommand<string>(item =>
         {

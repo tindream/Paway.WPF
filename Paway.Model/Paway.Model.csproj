@@ -151,6 +151,7 @@
     <Compile Include="Method\Method.cs" />
     <Compile Include="Method\PlotHelper.cs" />
     <Compile Include="Model\Enum\ButtonAuthType.cs" />
+    <Compile Include="Model\Info\LanguageInfo.cs" />
     <Compile Include="Model\Interface\IDataGridServer.cs" />
     <Compile Include="Model\Interface\ILoad.cs" />
     <Compile Include="Model\Interface\IPageReload.cs" />

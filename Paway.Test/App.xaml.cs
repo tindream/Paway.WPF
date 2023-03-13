@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using Paway.Helper;
+using Paway.Model;
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,9 @@ namespace Paway.Test
             {//Test
             }
             //System.Diagnostics.PresentationTraceSources.DataBindingSource.Switch.Level = System.Diagnostics.SourceLevels.Critical;
+            Config.Language = Proxy.Create<LanguageInfo>(typeof(InterceptorNotify), nameof(InterceptorNotify.Invoke));
+            //加载语言包
+            Config.Language.Test = "Test";
         }
         protected override void OnExit(ExitEventArgs e)
         {

@@ -15,7 +15,7 @@ namespace Paway.WPF
     /// <summary>
     /// INotifyPropertyChanged接口基类
     /// </summary>
-    public class ModelBase : IId, INotifyPropertyChanged
+    public class ModelBase : IId, INotify
     {
         /// <summary>
         /// 唯一标识
@@ -36,9 +36,30 @@ namespace Paway.WPF
         /// <summary>
         /// 触发更新
         /// </summary>
-        public void OnPropertyChanged([CallerMemberName] string name = "")
+        public void OnPropertyChanged([CallerMemberName] string name = null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            OnPropertyChanged(new PropertyChangedEventArgs(name));
         }
+        /// <summary>
+        /// 触发更新
+        /// </summary>
+        public void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            PropertyChanged?.Invoke(this, e);
+        }
+    }
+    /// <summary>
+    /// INotifyPropertyChanged接口扩展
+    /// </summary>
+    public interface INotify : INotifyPropertyChanged
+    {
+        /// <summary>
+        /// 触发更新
+        /// </summary>
+        void OnPropertyChanged([CallerMemberName] string propertyName = null);
+        /// <summary>
+        /// 触发更新
+        /// </summary>
+        void OnPropertyChanged(PropertyChangedEventArgs e);
     }
 }

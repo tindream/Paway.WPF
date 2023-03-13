@@ -21,7 +21,7 @@ namespace Paway.WPF
         public event PropertyChangedEventHandler PropertyChanged;
         /// <summary>
         /// </summary>
-        public void OnPropertyChanged([CallerMemberName] string name = "")
+        public void OnPropertyChanged([CallerMemberName] string name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
