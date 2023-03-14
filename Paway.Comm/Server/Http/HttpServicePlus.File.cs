@@ -46,7 +46,7 @@ namespace Paway.Comm
                     case "GET":
                         if (!File.Exists(file))
                         {
-                            throw new WarningException("文件不存在: " + file);
+                            throw new WarningException($"文件不存在: {Path.GetFileName(fileName)}");
                         }
                         else
                         {

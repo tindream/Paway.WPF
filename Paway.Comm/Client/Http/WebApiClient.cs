@@ -180,7 +180,7 @@ namespace Paway.Comm
                     {
                         string response = client.DownFileAsync(httpUrl, fromFile, file, percentage, completed);
                         var result = JsonConvert.DeserializeObject<HttpResponseMessage>(response);
-                        if (result.Code != 200) Method.SaveFile(file, result.Msg);
+                        if (result.Code == 200) Method.SaveFile(file, result.Msg);
                         return result;
                     }
                 }

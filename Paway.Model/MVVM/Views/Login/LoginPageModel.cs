@@ -98,17 +98,19 @@ namespace Paway.Model
         #endregion
 
         #region 命令
-        public virtual void Login(bool checkPad = true)
+        protected bool CheckPad()
         {
-            if (checkPad && Password.IsEmpty())
+            if (Password.IsEmpty())
             {
                 Method.Hit(Root, "请输入密码");
                 if (Method.Find(Root, out PasswordBox tbPassword, "tbPassword")) tbPassword.Focus();
-                return;
+                return false;
             }
+            return true;
         }
+        public abstract void Login();
         protected virtual Window SetWindow() { return null; }
-        protected virtual void OnCommit(DependencyObject obj) { }
+        protected virtual void OnSet(DependencyObject obj) { }
         protected virtual void OnClose(DependencyObject obj) { }
         public ICommand MenuCommand => new RelayCommand<string>(item =>
         {
@@ -145,7 +147,7 @@ namespace Paway.Model
                         var window = SetWindow();
                         if (window != null && Method.Show(Root, window) == true)
                         {
-                            OnCommit(Root);
+                            OnSet(Root);
                         }
                         break;
                     case "关闭": OnClose(Root); break;
