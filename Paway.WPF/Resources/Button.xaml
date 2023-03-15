@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:local="clr-namespace:Paway.WPF">
 
     <ResourceDictionary.MergedDictionaries>
@@ -55,7 +55,7 @@
                             <Setter Property="BorderThickness" TargetName="border1" Value="{Binding Path=ItemBorder.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter Property="Background" TargetName="border1" Value="{Binding Path=ItemBackground.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter TargetName="image" Property="Source" Value="{Binding Path=Image.Mouse, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                            <Setter Property="Panel.ZIndex" Value="{x:Static system:Int32.MaxValue}" />
+                            <Setter Property="Panel.ZIndex" Value="{x:Static sys:Int32.MaxValue}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Foreground" TargetName="txt" Value="{Binding Path=ItemForeground.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>

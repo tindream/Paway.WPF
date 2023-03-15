@@ -388,6 +388,7 @@ namespace Paway.WPF
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
         {
             var actualWidth = ActualWidth - BorderThickness.Left - BorderThickness.Right - Padding.Left - Padding.Right;
+            var margin = ItemMargin.Left + ItemMargin.Right;
             switch (ItemWidthType)
             {
                 case ItemWidthType.OneColumn:
@@ -398,7 +399,7 @@ namespace Paway.WPF
                         else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is IListViewItem listViewItem) item = listViewItem;
                         if (item != null)
                         {
-                            item.ItemWidth = actualWidth;
+                            item.ItemWidth = actualWidth - margin;
                             if (IsLight)
                             {
                                 if (i == 0) item.ItemMargin = new Thickness(0);
@@ -414,7 +415,6 @@ namespace Paway.WPF
                     var width = (int)(actualWidth / columnCount);
                     if (actualWidth % columnCount > 0) width++;
                     var count = columnCount - (columnCount * width - actualWidth);
-                    var margin = ItemMargin.Left + ItemMargin.Right;
                     for (var i = 0; i < Items.Count;)
                     {
                         for (var j = 0; j < columnCount && i < Items.Count; j++, i++)
@@ -438,7 +438,6 @@ namespace Paway.WPF
                     break;
                 default:
                     if (!IsLight) break;
-                    margin = ItemMargin.Left + ItemMargin.Right;
                     var totalWidth = actualWidth;
                     var iFirst = true;
                     for (var i = 0; i < Items.Count; i++)

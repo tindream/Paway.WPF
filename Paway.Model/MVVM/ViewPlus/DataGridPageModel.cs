@@ -148,6 +148,13 @@ namespace Paway.Model
         protected virtual void Deleted(T info)
         {
             var index = DataGrid.SelectedIndex;
+            if (DataGrid.SelectionUnit != DataGridSelectionUnit.FullRow && DataGrid.SelectedCells.Count > 0)
+            {
+                if (DataGrid.ItemContainerGenerator.ContainerFromItem(DataGrid.SelectedCells[0].Item) is DataGridRow row)
+                {
+                    index = row.GetIndex();
+                }
+            }
             try
             {
                 server.Delete(info);
@@ -164,6 +171,13 @@ namespace Paway.Model
         {
             if (list.Count == 0) return;
             var index = DataGrid.SelectedIndex;
+            if (DataGrid.SelectionUnit != DataGridSelectionUnit.FullRow && DataGrid.SelectedCells.Count > 0)
+            {
+                if (DataGrid.ItemContainerGenerator.ContainerFromItem(DataGrid.SelectedCells[0].Item) is DataGridRow row)
+                {
+                    index = row.GetIndex();
+                }
+            }
             try
             {
                 server.Delete(list);
@@ -324,10 +338,17 @@ namespace Paway.Model
                     break;
             }
         }
+        /// <summary>
+        /// 初始化列表、数据库获取接口、分页
+        /// </summary>
         protected void Init(IDataGridServer server, List<T> list, DataGridEXT dataGrid, bool iPage = false)
         {
             this.Init(server, list, dataGrid, null, iPage);
         }
+        /// <summary>
+        /// 初始化列表、数据库获取接口、分页
+        /// <para>允许数据过滤</para>
+        /// </summary>
         protected void Init(IDataGridServer server, List<T> list, DataGridEXT dataGrid, string sqlFilter, bool iPage = false)
         {
             this.server = server;

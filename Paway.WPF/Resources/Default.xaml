@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:s="clr-namespace:System;assembly=mscorlib"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:local="clr-namespace:Paway.WPF">
 
     <ResourceDictionary.MergedDictionaries>
@@ -9,7 +9,7 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default\Path.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default\Theme.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    
+
     <!--#region 文本图标资源 -->
     <FontFamily x:Key="FontAwesome">/Paway.WPF;component/Resource/#fontawesome</FontFamily>
     <!--#endregion-->
