@@ -67,6 +67,11 @@
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
                                 <Grid>
+                                    <Grid.Style>
+                                        <Style TargetType="{x:Type Grid}">
+                                            <Setter Property="ToolTip" Value="{Binding Hit}"/>
+                                        </Style>
+                                    </Grid.Style>
                                     <Border x:Name="border">
                                         <Border.Width>
                                             <MultiBinding Converter="{StaticResource nullSelector}">
@@ -155,10 +160,12 @@
                                                        VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
                                                        Padding="{Binding ItemDescPadding, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
                                                        DockPanel.Dock="{Binding ItemDescDock, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
-                                                <TextBlock.ToolTip>
-                                                    <TextBlock Text="{Binding Desc}"/>
-                                                </TextBlock.ToolTip>
-                                                </TextBlock>
+                                                <TextBlock.Style>
+                                                    <Style TargetType="{x:Type TextBlock}">
+                                                        <Setter Property="ToolTip" Value="{Binding Desc}"/>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
                                             <TextBlock Name="text"
                                                        TextTrimming="WordEllipsis" 
                                                        FontFamily="{Binding FontFamily, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
@@ -179,17 +186,12 @@
                                                         <!--<Binding Path="Content" />-->
                                                     </MultiBinding>
                                                 </TextBlock.Text>
-                                                <TextBlock.ToolTip>
-                                                    <TextBlock>
-                                                        <TextBlock.Text>
-                                                            <MultiBinding Converter="{StaticResource nullSelector}">
-                                                                <Binding Path="Text" />
-                                                                <!--<Binding Path="Content" />-->
-                                                            </MultiBinding>
-                                                        </TextBlock.Text>
-                                                    </TextBlock>
-                                                </TextBlock.ToolTip>
-                                                </TextBlock>
+                                                <TextBlock.Style>
+                                                    <Style TargetType="{x:Type TextBlock}">
+                                                        <Setter Property="ToolTip" Value="{Binding Text}"/>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
                                         </DockPanel>
                                     </Border>
                                     <Grid Name="AnimationLine" VerticalAlignment="Bottom"
@@ -222,16 +224,6 @@
                                             </Line.Stroke>
                                         </Line>
                                     </Grid>
-                                    <Grid.ToolTip>
-                                        <TextBlock>
-                                            <TextBlock.Text>
-                                                <MultiBinding Converter="{StaticResource nullSelector}">
-                                                    <Binding Path="Hit" />
-                                                    <!--<Binding Path="Content" />-->
-                                                </MultiBinding>
-                                            </TextBlock.Text>
-                                        </TextBlock>
-                                    </Grid.ToolTip>
                                 </Grid>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True" >

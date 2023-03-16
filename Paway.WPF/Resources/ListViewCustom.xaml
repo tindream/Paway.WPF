@@ -67,6 +67,11 @@
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
                                 <Grid>
+                                    <Grid.Style>
+                                        <Style TargetType="{x:Type Grid}">
+                                            <Setter Property="ToolTip" Value="{Binding Hit}"/>
+                                        </Style>
+                                    </Grid.Style>
                                     <Border x:Name="border">
                                         <Border.Width>
                                             <MultiBinding Converter="{StaticResource nullSelector}">
@@ -148,16 +153,6 @@
                                             </TextBlock.Foreground>
                                         </ContentPresenter>
                                     </Border>
-                                    <Grid.ToolTip>
-                                        <TextBlock>
-                                            <TextBlock.Text>
-                                                <MultiBinding Converter="{StaticResource nullSelector}">
-                                                    <Binding Path="Hit" />
-                                                    <!--<Binding Path="Content" />-->
-                                                </MultiBinding>
-                                            </TextBlock.Text>
-                                        </TextBlock>
-                                    </Grid.ToolTip>
                                 </Grid>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True" >

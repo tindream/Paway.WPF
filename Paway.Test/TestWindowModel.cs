@@ -242,8 +242,10 @@ namespace Paway.Test
                 IsEnabled = false,
                 Image = new ImageEXT(null, @"pack://application:,,,/Paway.Test;component/Images/close_white.png")
             });
-            for (int i = 0; i < 10; i++) GridList.Add(new ListViewItemModel("A" + i, "D" + i)
+            for (int i = 0; i < 10; i++) GridList.Add(new ListViewItemModel()
             {
+                Text = i % 3 == 0 ? "A" + i : null,
+                Desc = i % 4 == 0 ? "D" + i : "",
                 IsEnabled = i != 5,
                 Image = new ImageEXT(@"pack://application:,,,/Paway.Test;component/Images/close.png")
             });
