@@ -150,6 +150,12 @@ namespace Paway.WPF
         [Description("普通项，不响应鼠标事件")]
         public bool INormal { get; set; }
         /// <summary>
+        /// 移动项，兼容移动
+        /// </summary>
+        [Category("扩展")]
+        [Description("移动项，兼容移动")]
+        public bool IMove { get; set; }
+        /// <summary>
         /// 指定何时应引发事件
         /// </summary>
         [Category("扩展")]
@@ -503,34 +509,55 @@ namespace Paway.WPF
             downItem = null;
             if (e.ButtonState == MouseButtonState.Pressed)
             {
+                var eventArg = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, e.ChangedButton)
+                {
+                    RoutedEvent = UIElement.MouseLeftButtonDownEvent,
+                    Source = this
+                };
                 if (PMethod.Parent(e.OriginalSource, out downItem))
                 {
-                    IsPressed(true);
-                    if (ClickMode == ClickMode.Press || SelectionMode != SelectionMode.Single)
+                    if (INormal)
                     {
-                        OnPreviewItemClick(e);
-                        this.ReleaseMouseCapture();
+                        downItem = null;
+                        e.Handled = true;
                     }
                     else
                     {
-                        e.Handled = true;
-                        return;
+                        IsPressed(true);
+                        if (ClickMode == ClickMode.Press || SelectionMode != SelectionMode.Single)
+                        {
+                            OnPreviewItemClick(e);
+                            this.ReleaseMouseCapture();
+                        }
+                        else
+                        {
+                            e.Handled = true;
+                        }
+                    }
+                    if (IMove)
+                    {
+                        PMethod.BeginInvoke(() =>
+                        {
+                            if (ScrollViewer != null && (ScrollViewer.ScrollableHeight > 0 || ScrollViewer.ScrollableWidth > 0))
+                            {
+                                ScrollViewer.RaiseEvent(eventArg);
+                            }
+                            else ToMove(eventArg);
+                        });
                     }
                 }
                 else if (ScrollViewer != null && (ScrollViewer.ScrollableHeight > 0 || ScrollViewer.ScrollableWidth > 0)) { }
-                else if (PMethod.Parent(this, out Window window))
-                {
-                    var eventArg = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, e.ChangedButton)
-                    {
-                        RoutedEvent = UIElement.MouseLeftButtonDownEvent,
-                        Source = this
-                    };
-                    OnPreviewMouseClick(eventArg);
-                    if (!eventArg.Handled && (bool)window.GetValue(WindowMonitor.IsDragMoveEnabledProperty)) window.DragMove();
-                }
+                else ToMove(eventArg);
             }
-            e.Handled = INormal;
             base.OnPreviewMouseDown(e);
+        }
+        private void ToMove(MouseButtonEventArgs eventArg)
+        {
+            if (PMethod.Parent(this, out Window window))
+            {
+                OnPreviewMouseClick(eventArg);
+                if (!eventArg.Handled && (bool)window.GetValue(WindowMonitor.IsDragMoveEnabledProperty)) window.DragMove();
+            }
         }
 
         private void IsPressed(bool value)
