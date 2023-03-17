@@ -73,6 +73,7 @@
     <Compile Include="Controls\Extended\ListViewCustom.cs" />
     <Compile Include="Controls\Extended\TextBoxNumeric.cs" />
     <Compile Include="Controls\Theme\RenderEXT.cs" />
+    <Compile Include="Method\Converter\IValueConverter\StringFormatConverter.cs" />
     <Compile Include="Method\Converter\IValueConverter\ColorConverter.cs" />
     <Compile Include="Method\Converter\IValueConverter\ThicknessConverter.cs" />
     <Compile Include="Method\Converter\IValueConverter\RadiusConverter.cs" />

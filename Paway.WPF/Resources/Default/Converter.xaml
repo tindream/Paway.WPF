@@ -13,6 +13,7 @@
     <local:DateConverter x:Key="dateConverter"/>
     <local:TimeConverter x:Key="timeConverter"/>
     <local:RingConverter x:Key="ringConverter"/>
+    <local:StringFormatConverter x:Key="stringFormat"/>
 
     <local:BrushAlphaConverter x:Key="brushAlphaConverter" />
     <local:BrushLightConverter x:Key="brushLightConverter" />
