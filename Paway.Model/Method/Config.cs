@@ -21,10 +21,5 @@ namespace Paway.Model
         public static string Menu { get; set; }
 
         #endregion
-
-        #region 多语言
-        public static LanguageInfo Language { get; set; }
-
-        #endregion
     }
 }

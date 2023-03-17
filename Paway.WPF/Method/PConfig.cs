@@ -32,6 +32,28 @@ namespace Paway.WPF
         /// 双击间隔
         /// </summary>
         public static int DoubleInterval;
+        private static LanguageBaseInfo languageBase;
+        /// <summary>
+        /// 多语言包
+        /// </summary>
+        public static LanguageBaseInfo LanguageBase
+        {
+            get
+            {
+                if (languageBase == null)
+                {
+                    languageBase = Proxy.Create<LanguageBaseInfo>(typeof(InterceptorNotify), nameof(InterceptorNotify.Invoke));
+                }
+                return languageBase;
+            }
+        }
+        /// <summary>
+        /// 库中语言包自动初始化，可在此处更新值
+        /// </summary>
+        public static void InitLanguageBase(LanguageBaseInfo language)
+        {
+            language.Clone(LanguageBase);
+        }
 
         #endregion
 

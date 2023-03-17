@@ -17,7 +17,7 @@
                     <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
-            <model:Config x:Key="L"  />
+            <local:Config x:Key="L"  />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

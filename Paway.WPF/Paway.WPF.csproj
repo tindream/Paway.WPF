@@ -79,6 +79,7 @@
     <Compile Include="Method\CustomAdorner.cs" />
     <Compile Include="Method\Converter\IValueConverter\RingConverter.cs" />
     <Compile Include="Method\Converter\IValueConverter\BrushConverter.cs" />
+    <Compile Include="Method\Data\LanguageBaseInfo.cs" />
     <Compile Include="Method\Enum\TimePickerType.cs" />
     <Compile Include="Method\Enum\SliderButtonType.cs" />
     <Compile Include="Method\Enum\ItemWidthType.cs" />

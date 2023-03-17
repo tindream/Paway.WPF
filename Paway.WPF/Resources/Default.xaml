@@ -46,6 +46,8 @@
     <!--#endregion-->
 
     <!--#region 通用模板 -->
+    <!--多语言-->
+    <local:PConfig x:Key="LB"  />
     <!--焦点样式动态边框-->
     <Thickness x:Key="FocusBorderThickness">1</Thickness>
     <Style x:Key="FocusVisualStyle">

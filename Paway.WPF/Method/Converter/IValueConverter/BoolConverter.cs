@@ -31,11 +31,11 @@ namespace Paway.WPF
                     var values = result.ToStrings().Split(',');
                     if (values.Length == 1) return new Thickness(result.ToDouble());
                     else if (values.Length == 4) return new Thickness(values[0].ToDouble(), values[1].ToDouble(), values[2].ToDouble(), values[3].ToDouble());
-                    else throw new WarningException("参数3值不是预期的");
+                    else throw new WarningException("Parameter error");
                 }
                 return result;
             }
-            throw new WarningException("参数错误");
+            throw new WarningException("Parameter error");
         }
         /// <summary>
         /// </summary>

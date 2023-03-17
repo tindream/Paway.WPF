@@ -151,12 +151,13 @@
     <Compile Include="Method\Cache.cs" />
     <Compile Include="Method\Method.cs" />
     <Compile Include="Method\Config.cs" />
+    <Compile Include="Model\Data\LanguageInfo.cs" />
     <Compile Include="Model\Enum\LogType.cs" />
     <Compile Include="Model\Enum\MealType.cs" />
     <Compile Include="Model\Enum\UserType.cs" />
     <Compile Include="Model\Info\AdminInfo.cs" />
     <Compile Include="Model\Info\LogInfo.cs" />
-    <Compile Include="Model\Info\TempInfo.cs" />
+    <Compile Include="Model\Data\TempInfo.cs" />
     <Compile Include="Model\Info\UserInfo.cs" />
     <Compile Include="TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>

@@ -135,7 +135,7 @@ namespace Paway.WPF
             if (str.Contains(","))
             {
                 var strs = str.Split(',');
-                if (strs.Length != 4) throw new WarningException("参数错误");
+                if (strs.Length != 4) throw new WarningException("Parameter error");
                 return new CornerRadius(Convert.ToDouble(strs[0]), Convert.ToDouble(strs[1]), Convert.ToDouble(strs[2]), Convert.ToDouble(strs[3]));
             }
             double.TryParse(str, out double result);

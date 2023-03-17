@@ -30,6 +30,7 @@ namespace Paway.Test
 
         #region 全局数据 
         public static AdminInfo Admin { get; set; }
+        public static LanguageInfo Language { get; set; }
 
         #endregion
     }

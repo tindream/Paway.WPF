@@ -47,7 +47,7 @@ namespace Paway.WPF
             if (text.Length == 0)
             {
                 if (this.MinLength == 0) return validResult;
-                else validResult = new ValidationResult(false, $"不可为空");
+                else validResult = new ValidationResult(false, PConfig.LanguageBase.CannotBeEmpty);
             }
             else if (!RegexChecked(text))
             {
@@ -56,11 +56,11 @@ namespace Paway.WPF
             }
             else if (this.MinLength != 0 && text.Length < this.MinLength)
             {
-                validResult = new ValidationResult(false, $"最小输入限制: {this.MinLength}位");
+                validResult = new ValidationResult(false, string.Format(PConfig.LanguageBase.MinimumInputLimit, this.MinLength));
             }
             else if (this.MaxLength != 0 && text.Length > this.MaxLength)
             {
-                validResult = new ValidationResult(false, $"最大输入限制: {this.MaxLength}位");
+                validResult = new ValidationResult(false, string.Format(PConfig.LanguageBase.MaximumInputLimit, this.MinLength));
             }
             return validResult;
         }

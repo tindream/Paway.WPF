@@ -42,7 +42,7 @@ namespace Paway.WPF
                 }
                 list.Add(name);
             }
-            return type.Predicate<dynamic>(list, value, action);
+            return type.Predicate(list, value, action);
         }
 
         #endregion

@@ -332,7 +332,7 @@ namespace Paway.WPF
             {
                 if (!allEmpty && mode.GetValue(name).ToStrings().IsEmpty())
                 {
-                    Hit(parent, "请输入" + mode.Property(name).Text(), ColorType.Warn);
+                    Hit(parent, $"{PConfig.LanguageBase.PleaseInput}{mode.Property(name).Text()}", ColorType.Warn);
                     tbName.Focus();
                     return false;
                 }

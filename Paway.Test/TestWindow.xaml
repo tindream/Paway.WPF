@@ -15,7 +15,6 @@
             <ListViewEXT x:Name="listView3" Margin="5,5,0,0" IsLight="True" ItemWidthType="CustomRow" Row="3"
                          ItemHeight="60" ItemWidth="100" ItemsSource="{Binding GridList}">
             </ListViewEXT>
-            <DataGridEXT ItemsSource="{Binding GridList}" Height="150"/>
             <ButtonEXT IsLight="True" Click="ButtonEXT_Click" Command="{Binding ButtonCommand}" 
                        ItemBackground="#409EFF;0"/>
         </StackPanel>

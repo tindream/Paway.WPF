@@ -406,7 +406,7 @@ namespace Paway.WPF
             BeginInvoke(() =>
             {
                 var progress = ProgressAdorner(parent, msg, iProgressBar, iProgressRound, fontSize);
-                if (progress == null) throw new WarningException("指定控件上未找到装饰器");
+                if (progress == null) throw new WarningException("Decorator not found on control");
                 Task.Run(() =>
                 {
                     try
