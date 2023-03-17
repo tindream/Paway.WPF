@@ -12,6 +12,8 @@
         </Border>
     </DataTemplate>
 
+    <!--多语言-->
+    <local:Config x:Key="L"  />
     <!--#region 取消焦点样式 -->
     <Thickness x:Key="FocusBorderThickness">0</Thickness>
 

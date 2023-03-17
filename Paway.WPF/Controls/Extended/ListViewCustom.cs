@@ -398,6 +398,7 @@ namespace Paway.WPF
             switch (ItemWidthType)
             {
                 case ItemWidthType.OneColumn:
+                    if (margin < 0) margin = 0;
                     for (var i = 0; i < Items.Count; i++)
                     {
                         IListViewItem item = null;

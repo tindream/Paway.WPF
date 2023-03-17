@@ -35,11 +35,7 @@ namespace Paway.Test
             {//Test
             }
             //System.Diagnostics.PresentationTraceSources.DataBindingSource.Switch.Level = System.Diagnostics.SourceLevels.Critical;
-            Config.Language = Proxy.Create<LanguageInfo>(typeof(InterceptorNotify), nameof(InterceptorNotify.Invoke), Config.Flags);
-            var lan = XmlHelper.Load<LanguageInfo>("lan.xml");
-            lan.Clone(Config.Language);
-            XmlHelper.Save(Config.Language, "lan.xml");
-            Config.InitLanguageBase(Config.Language);
+            Config.InitLanguage();
         }
         protected override void OnExit(ExitEventArgs e)
         {

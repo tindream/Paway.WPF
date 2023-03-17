@@ -12,9 +12,11 @@
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" >
             <Label Content="{Binding Language.Test, Source={StaticResource L}}"/>
-            <ListViewEXT x:Name="listView3" Margin="5,5,0,0" IsLight="True" ItemWidthType="CustomRow" Row="3"
-                         ItemHeight="60" ItemWidth="100" ItemsSource="{Binding GridList}">
-            </ListViewEXT>
+            <Border BorderBrush="Red" BorderThickness="1" Height="200">
+                <ListViewEXT x:Name="listView3" Margin="0,5,0,0" ItemBorder="1" ItemMargin="2" Row="15" ItemWidthType="OneColumn" IsLight="True"
+                         ItemHeight="60" ItemWidth="188" ItemsSource="{Binding GridList}">
+                </ListViewEXT>
+            </Border>
             <ButtonEXT IsLight="True" Click="ButtonEXT_Click" Command="{Binding ButtonCommand}" 
                        ItemBackground="#409EFF;0"/>
         </StackPanel>

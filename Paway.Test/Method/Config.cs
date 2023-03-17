@@ -30,7 +30,37 @@ namespace Paway.Test
 
         #region 全局数据 
         public static AdminInfo Admin { get; set; }
-        public static LanguageInfo Language { get; set; }
+        private static LanguageInfo _language;
+        public static LanguageInfo Language
+        {
+            get
+            {
+                if (_language == null) _language = Proxy.Create<LanguageInfo>(typeof(InterceptorNotify), nameof(InterceptorNotify.Invoke));
+                return _language;
+            }
+        }
+        public static void InitLanguage()
+        {
+            var file = Path.Combine(LanguagePath, $"{LanguageStr}.xml");
+            if (File.Exists(file))
+            {
+                var lan = XmlHelper.Load<LanguageInfo>(file);
+                lan.Clone(Config.Language);
+            }
+            XmlHelper.Save(Config.Language, file);
+            Config.InitLanguageBase(Config.Language);
+        }
+        public static string LanguageStr = "中文";
+        public static string LanguagePath
+        {
+            get
+            {
+                var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "languages");
+                if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+                return path;
+            }
+        }
+        public static List<string> LanguageList = new List<string>();
 
         #endregion
     }
