@@ -20,7 +20,7 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Border Name="radioButtonBorder" Grid.Column="1"
+                        <Border Name="radioButtonBorder" Grid.Column="1" Height="14"
                                 BorderThickness="{TemplateBinding Border.BorderThickness}"
                                 CornerRadius="100"
                                 BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"

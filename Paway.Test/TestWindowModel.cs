@@ -127,6 +127,8 @@ namespace Paway.Test
             //ViewList[index].ItemTextForeground = new BrushEXT(Colors.Red);
             //if (view.ItemsSource == null) view.ItemsSource = ViewList;
             Config.Language.Test = "H" + DateTime.Now.Millisecond;
+            Config.LanguageBase.PleaseInputWater = "H" + DateTime.Now.Millisecond;
+            Config.LanguageBase.PleaseInputPasswordWater = "H" + DateTime.Now.Millisecond;
         });
         public ICommand ButtonCommand2 => new RelayCommand<ListViewCustom>(view =>
         {

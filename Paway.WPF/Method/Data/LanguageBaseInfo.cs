@@ -20,10 +20,15 @@ namespace Paway.WPF
         [Description("请输入")]
         public virtual string PleaseInput { get; set; } = "请输入";
         /// <summary>
+        /// 请输入
+        /// </summary>
+        [Description("请输入(水印)")]
+        public virtual string PleaseInputWater { get; set; } = "请输入..";
+        /// <summary>
         /// 请输入密码
         /// </summary>
-        [Description("请输入密码")]
-        public virtual string PleaseInputPassword { get; set; } = "请输入密码";
+        [Description("请输入密码(水印)")]
+        public virtual string PleaseInputPasswordWater { get; set; } = "请输入密码";
         /// <summary>
         /// 今天
         /// </summary>

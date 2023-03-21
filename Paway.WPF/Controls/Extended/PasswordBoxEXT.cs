@@ -135,7 +135,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty WaterProperty =
-            DependencyProperty.RegisterAttached(nameof(Water), typeof(string), typeof(PasswordBoxEXT), new PropertyMetadata(PConfig.LanguageBase.PleaseInputPassword));
+            DependencyProperty.RegisterAttached(nameof(Water), typeof(string), typeof(PasswordBoxEXT), new PropertyMetadata(PConfig.LanguageBase.PleaseInputPasswordWater));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty WaterSizeProperty =

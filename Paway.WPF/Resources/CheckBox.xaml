@@ -20,7 +20,7 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Border Name="checkBoxBorder" Grid.Column="1"
+                        <Border Name="checkBoxBorder" Grid.Column="1" Height="14"
                                 Margin="3,6"
                                 BorderThickness="{TemplateBinding Border.BorderThickness}"
                                 BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"

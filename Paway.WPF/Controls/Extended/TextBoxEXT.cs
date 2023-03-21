@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -38,7 +39,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty WaterProperty =
-            DependencyProperty.RegisterAttached(nameof(Water), typeof(string), typeof(TextBoxEXT), new PropertyMetadata($"{PConfig.LanguageBase.PleaseInput}.."));
+            DependencyProperty.RegisterAttached(nameof(Water), typeof(string), typeof(TextBoxEXT), new PropertyMetadata(PConfig.LanguageBase.PleaseInputWater));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty WaterSizeProperty =
@@ -205,6 +206,21 @@ namespace Paway.WPF
         public TextBoxEXT()
         {
             DefaultStyleKey = typeof(TextBoxEXT);
+        }
+        /// <summary>
+        /// Water未自定义设置时绑定多语言
+        /// </summary>
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            if (this.Water != PConfig.LanguageBase.PleaseInputWater) return;
+            var waterBinding = new Binding
+            {
+                Source = PConfig.LanguageBase,//设置要绑定源-语言类
+                Path = new PropertyPath(nameof(PConfig.LanguageBase.PleaseInputWater)),//绑定绑定源下的属性。
+                Mode = BindingMode.OneWay//绑定模式单向
+            };
+            this.SetBinding(WaterProperty, waterBinding);//设置绑定到要绑定的控件
         }
         /// <summary>
         /// 回车时移动焦点到下一控件

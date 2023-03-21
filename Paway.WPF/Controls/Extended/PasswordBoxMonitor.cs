@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
@@ -31,6 +32,16 @@ namespace Paway.WPF
         {
             if (obj is PasswordBox pad)
             {
+                if (PasswordBoxEXT.GetWater(pad) == PConfig.LanguageBase.PleaseInputPasswordWater)
+                {
+                    var waterBinding = new Binding
+                    {
+                        Source = PConfig.LanguageBase,//设置要绑定源-语言类
+                        Path = new PropertyPath(nameof(PConfig.LanguageBase.PleaseInputPasswordWater)),//绑定绑定源下的属性。
+                        Mode = BindingMode.OneWay//绑定模式单向
+                    };
+                    pad.SetBinding(PasswordBoxEXT.WaterProperty, waterBinding);//设置绑定到要绑定的控件
+                }
                 pad.SetValue(PasswordLengthProperty, pad.Password.Length);
                 pad.PasswordChanged -= PasswordChanged;
                 pad.MouseEnter -= Pad_MouseEnter;
