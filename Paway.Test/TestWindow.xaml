@@ -11,12 +11,8 @@
            Title="{Binding Text}" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" >
-            <TextBoxEXT/>
-            <TextBoxEXT Water="呵1"/>
-            <PasswordBox />
-            <PasswordBox PasswordBoxEXT.Water="呵2"/>
-            <ComboQuery />
-            <ComboQuery Water="呵3"/>
+            <TextBoxEXT Water="{Binding Language.Test, Source={StaticResource L}}"/>
+            <ComboBoxEXT ItemsSource="{EnumList Type=local:LogType}" />
             <ButtonEXT IsLight="True" Command="{Binding ButtonCommand}" />
         </StackPanel>
     </Grid>

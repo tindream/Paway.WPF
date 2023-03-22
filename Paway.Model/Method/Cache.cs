@@ -32,14 +32,67 @@ namespace Paway.Model
             }
             Dic[typeof(T)] = dyList;
         }
+
+        #region 内部查询
+        public static dynamic List(Type type)
+        {
+            if (Dic.ContainsKey(type))
+            {
+                return Dic[type];
+            }
+            throw new WarningException($"{type.Description()}未配置缓存");
+        }
         public static List<T> List<T>()
         {
-            var type = typeof(T);
-            if (Cache.Dic.ContainsKey(type))
-            {
-                return Cache.Dic[type];
-            }
-            throw new WarningException($"类型({type.Name})未配置");
+            return List(typeof(T));
         }
+        public static ParallelQuery<T> Query<T>(Func<T, bool> action)
+        {
+            return List<T>().AsParallel().Where(c => c != null && action?.Invoke(c) != false);
+        }
+        public static int Count<T>(Func<T, bool> action)
+        {
+            return Query(action).Count();
+        }
+        public static T Find<T>(Func<T, bool> action)
+        {
+            return Query(action).FirstOrDefault();
+        }
+        public static T Find<T>(int id) where T : IId
+        {
+            return Find<T>(c => c.Id == id);
+        }
+        public static string Name<T>(int id) where T : IName
+        {
+            return Find<T>(id)?.Name ?? Config.None;
+        }
+        public static bool Any<T>(Func<T, bool> action)
+        {
+            return Query(action).Any();
+        }
+        public static List<int> FindIds<T>(Func<T, bool> action) where T : IId
+        {
+            return Query(action).Select(c => c.Id).ToList();
+        }
+        public static List<int> FindParentIds<T>(Func<T, bool> action) where T : IParent
+        {
+            return Query(action).Select(c => c.ParentId).ToList();
+        }
+        /// <summary>
+        /// 不使用并发查询，以保证排序问题
+        /// </summary>
+        public static List<string> FindNames<T>(Func<T, bool> action) where T : IName
+        {
+            return List<T>().FindAll(c => c != null && action?.Invoke(c) != false).Select(c => c.Name).Distinct().ToList();
+        }
+        /// <summary>
+        /// 查询列表
+        /// </summary>
+        public static List<T> QueryList<T>(Func<T, bool> action = null)
+        {
+            return Query(action).ToList();
+        }
+
+        #endregion
     }
 }

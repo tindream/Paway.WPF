@@ -14,6 +14,8 @@ namespace Paway.Test
     {
         [Description(Config.None)]
         None,
+        [Description("测试")]
+        Test,
         [Description("登陆")]
         Login,
         [Description("登陆失败")]

@@ -17,7 +17,7 @@ using System.Windows.Media;
 
 namespace Paway.Model
 {
-    public abstract partial class OperateItemModel : ViewModelBase, IPageReload
+    public partial class OperateItemModel : ViewModelBase, IPageReload
     {
         #region 属性
         private DockPanel DockPanel;
@@ -27,7 +27,7 @@ namespace Paway.Model
         #endregion
 
         #region 权限控制
-        public abstract string Menu { get; }
+        public virtual string Menu { get; }
         private MenuAuthType _auth;
         /// <summary>
         /// 默认按钮权限
@@ -251,6 +251,7 @@ namespace Paway.Model
 
         public OperateItemModel()
         {
+            this.Menu = this.GetType().Description();
             Messenger.Default.Register<KeyMessage>(this, msg => Action(msg));
             Messenger.Default.Register<OperateLoadMessage>(this, msg =>
             {
