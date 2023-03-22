@@ -67,16 +67,7 @@ namespace Paway.Model
 
         protected virtual AddWindowModel<T> ViewModel()
         {
-            return new AddWindowModel<T>();
-        }
-        private AddWindowModel<T> addViewModel;
-        protected AddWindowModel<T> AddViewModel
-        {
-            get
-            {
-                if (addViewModel == null) addViewModel = ViewModel();
-                return addViewModel;
-            }
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -284,17 +275,17 @@ namespace Paway.Model
                     base.Action(item);
                     break;
                 case "添加":
-                    AddViewModel.Info = new T();
+                    ViewModel().Info = new T();
                     var add = AddWindow();
                     if (add != null && Method.Show(DataGrid, add) == true)
                     {
-                        Insert(AddViewModel.Info);
+                        Insert(ViewModel().Info);
                     }
                     break;
                 case "编辑":
                     if (SelectedInfo() is T info)
                     {
-                        AddViewModel.Info = info;
+                        ViewModel().Info = info;
                         var edit = AddWindow();
                         if (edit != null && Method.Show(DataGrid, edit) == true)
                         {

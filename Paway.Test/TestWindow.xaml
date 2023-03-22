@@ -13,6 +13,7 @@
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" >
             <TextBoxEXT Water="{Binding Language.Test, Source={StaticResource L}}"/>
             <ComboBoxEXT ItemsSource="{EnumList Type=local:LogType}" />
+            <DataGridEXT ItemsSource="{Binding GridList}" Height="200"/>
             <ButtonEXT IsLight="True" Command="{Binding ButtonCommand}" />
         </StackPanel>
     </Grid>

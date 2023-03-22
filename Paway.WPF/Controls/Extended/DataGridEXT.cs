@@ -307,7 +307,7 @@ namespace Paway.WPF
                     columns.Add(column);
                 }
                 //column.MinWidth = 64; 
-                if (!(column.Header is FrameworkElement)) column.Header = property.Text();
+                if (column.Header == null) column.Header = property.Text(); //if (!(column.Header is FrameworkElement)) 
                 if (column is DataGridTextColumn text && text.ElementStyle.Setters.Count == 1 && (text.ElementStyle.Setters[0] as Setter).Property.Name == "Margin")
                 {
                     if (TryFindResource("Text" + this.HorizontalContentAlignment) is Style style)

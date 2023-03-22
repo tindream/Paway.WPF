@@ -32,8 +32,9 @@ namespace Paway.WPF
         {
             if (obj is PasswordBox pad)
             {
-                if (PasswordBoxEXT.GetWater(pad) == PConfig.LanguageBase.PleaseInputPasswordWater)
+                if (PasswordBoxEXT.GetWater(pad) == null)
                 {
+                    PasswordBoxEXT.SetWater(pad, PConfig.LanguageBase.PleaseInputPasswordWater);
                     var waterBinding = new Binding
                     {
                         Source = PConfig.LanguageBase,//设置要绑定源-语言类
