@@ -296,6 +296,7 @@ namespace Paway.WPF
                                                     (c.Header is string header && (header == property.Name || header == property.Text())));
                 if (column != null)
                 {
+                    if (columns.Any(c => c == column)) continue;
                     iReady = true;
                     columns.Add(column);
                 }
