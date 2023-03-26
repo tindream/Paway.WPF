@@ -387,25 +387,25 @@ namespace Paway.WPF
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
-        public static void Progress(DependencyObject parent, Action action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
+        public static void Progress(FrameworkElement element, Action action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
         {
-            Progress(parent, null, adorner => action?.Invoke(), success, error, completed, iProgressBar, iProgressRound, fontSize);
+            Progress(element, null, adorner => action?.Invoke(), success, error, completed, iProgressBar, iProgressRound, fontSize);
         }
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
-        public static void Progress(DependencyObject parent, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
+        public static void Progress(FrameworkElement element, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
         {
-            Progress(parent, null, action, success, error, completed, iProgressBar, iProgressRound, fontSize);
+            Progress(element, null, action, success, error, completed, iProgressBar, iProgressRound, fontSize);
         }
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
-        public static void Progress(DependencyObject parent, object msg, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
+        public static void Progress(FrameworkElement element, object msg, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
         {
             BeginInvoke(() =>
             {
-                var progress = ProgressAdorner(parent, msg, iProgressBar, iProgressRound, fontSize);
+                var progress = ProgressAdorner(element, msg, iProgressBar, iProgressRound, fontSize);
                 if (progress == null) throw new WarningException("Decorator not found on control");
                 Task.Run(() =>
                 {
@@ -432,7 +432,7 @@ namespace Paway.WPF
                         else
                         {
                             ex.Log();
-                            ShowError(parent, ex.Message());
+                            ShowError(element, ex.Message());
                         }
                     }
                     finally
@@ -452,11 +452,13 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-同步显示Window进度条
         /// </summary>
-        public static CustomAdorner ProgressAdorner(DependencyObject parent, object msg = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
+        public static CustomAdorner ProgressAdorner(FrameworkElement element, object msg = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
         {
-            if (!Parent(parent, out Window window)) return null;
-            if (window.Content is FrameworkElement element)
+            //if (!Parent(parent, out Window window)) return null;
+            //if (window.Content is FrameworkElement element)
+            if (element != null)
             {
+                if (element is Window window && window.Content is FrameworkElement temp) element = temp;
                 var myAdornerLayer = ReloadAdorner(element);
                 if (myAdornerLayer == null) return null;
 

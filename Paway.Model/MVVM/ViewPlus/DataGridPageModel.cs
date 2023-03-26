@@ -183,12 +183,15 @@ namespace Paway.Model
         }
         protected override void Refresh()
         {
-            Method.Progress(DataGrid, () =>
+            Method.BeginInvoke(() =>
             {
-                Init(Find());
-            }, null, ex =>
-            {
-                Messenger.Default.Send(new StatuMessage(ex));
+                Method.Progress(Method.Window(DataGrid), () =>
+                {
+                    Init(Find());
+                }, null, ex =>
+                {
+                    Messenger.Default.Send(new StatuMessage(ex));
+                });
             });
         }
         protected virtual void ImportChecked(List<T> list)
@@ -306,7 +309,7 @@ namespace Paway.Model
                     var title = typeof(T).Description();
                     if (Method.Import($"选择要导入的 {title} 表", out string file))
                     {
-                        Method.Progress(DataGrid, "正在导入..", adorner =>
+                        Method.Progress(Method.Window(DataGrid), "正在导入..", adorner =>
                         {
                             var list = Method.FromExcel<T>(file).Result;
                             ImportChecked(list);

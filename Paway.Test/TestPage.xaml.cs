@@ -36,7 +36,7 @@ namespace Paway.Test
                 Method.Hit(this, errorList.Join("\r\n"), ColorType.Error);
                 return;
             }
-            Method.Progress(this, adorner =>
+            Method.Progress(Method.Window(this), adorner =>
             {
                 adorner.Progress(1);
                 Thread.Sleep(500);
