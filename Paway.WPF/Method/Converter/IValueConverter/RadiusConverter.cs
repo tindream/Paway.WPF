@@ -45,4 +45,23 @@ namespace Paway.WPF
             return DependencyProperty.UnsetValue;
         }
     }
+    /// <summary>
+    /// 无左下边圆角
+    /// </summary>
+    internal class NoLeftBottomRadiusConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is CornerRadius radius)
+            {
+                return new CornerRadius(radius.TopLeft, radius.TopRight, radius.BottomRight, 0);
+            }
+            return value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return DependencyProperty.UnsetValue;
+        }
+    }
 }

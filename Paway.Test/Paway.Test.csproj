@@ -159,6 +159,9 @@
     <Compile Include="Model\Info\LogInfo.cs" />
     <Compile Include="Model\Data\TempInfo.cs" />
     <Compile Include="Model\Info\UserInfo.cs" />
+    <Compile Include="TestPage.xaml.cs">
+      <DependentUpon>TestPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
@@ -191,6 +194,10 @@
     <Page Include="Resources\Default.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TestPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TestWindow.xaml">
       <SubType>Designer</SubType>

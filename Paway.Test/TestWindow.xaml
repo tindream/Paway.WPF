@@ -4,17 +4,17 @@
            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
            xmlns:local="clr-namespace:Paway.Test"
+           xmlns:model="clr-namespace:Paway.Model;assembly=Paway.Model"
            xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
            xmlns:ip="http://www.galasoft.ch/mvvmlight"
            mc:Ignorable="d"
            DataContext="{Binding Test, Source={StaticResource Locator}}"
+           Background="#FFF"
            Title="{Binding Text}" Height="450" Width="800" WindowStartupLocation="CenterScreen">
-    <Grid>
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" >
-            <TextBoxEXT Water="{Binding Language.Test, Source={StaticResource L}}"/>
-            <ComboBoxEXT ItemsSource="{EnumList Type=local:LogType}" />
-            <DataGridEXT ItemsSource="{Binding GridList}" Height="200"/>
-            <ButtonEXT IsLight="True" Command="{Binding ButtonCommand}" />
+    <DockPanel>
+        <StackPanel Width="200">
+            <ButtonEXT Content="A" Click="Button_Click"/>
         </StackPanel>
-    </Grid>
+        <Frame Name="frame" NavigationUIVisibility="Hidden"/>
+    </DockPanel>
 </WindowEXT>

@@ -7,6 +7,7 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
+    <local:NoLeftBottomRadiusConverter x:Key="noLeftBottomRadiusConverter"/>
 
     <Style TargetType="{x:Type local:ComboDate}" BasedOn="{StaticResource ComboConfig}">
         <Setter Property="Padding" Value="5"/>
@@ -54,9 +55,9 @@
                                PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" 
                                Placement="Bottom"
                                PlacementTarget="{Binding ElementName=border}">
-                            <Border x:Name="DropDownBorder" BorderBrush="LightGray" BorderThickness="1">
+                            <Border x:Name="DropDownBorder" BorderBrush="LightGray" BorderThickness="0">
                                 <local:CalendarEXT x:Name="PART_Calendar"
-                                                   HasButton="True" HorizontalAlignment="Left" Margin="0,-2,0,-3"/>
+                                                   HasButton="True" HorizontalAlignment="Left" Margin="0,-3,0,-3"/>
                             </Border>
                         </Popup>
                     </Grid>
@@ -72,6 +73,8 @@
                         <Trigger Property="IsDropDownOpen" Value="True">
                             <Setter TargetName="border" Property="BorderBrush" 
                                     Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter TargetName="border" Property="CornerRadius" 
+                                    Value="{Binding Radius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource noLeftBottomRadiusConverter}}" />
                             <Setter Property="Panel.ZIndex" Value="{x:Static sys:Int32.MaxValue}" />
                         </Trigger>
                         <MultiTrigger>
