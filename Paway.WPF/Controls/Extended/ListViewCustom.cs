@@ -1,5 +1,6 @@
 ﻿using Paway.Helper;
 using System;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
@@ -61,7 +62,7 @@ namespace Paway.WPF
                 }
                 if (view.IsLight)
                 {
-                    if (view.ItemBorder == null || view.ItemBorder.ToString() == new ThicknessEXT(0).ToString()) view.ItemBorder = new ThicknessEXT(1);
+                    if (view.ItemBorder == null || view.ItemBorder.Equals(new ThicknessEXT(0))) view.ItemBorder = new ThicknessEXT(1);
                     if (view.ItemBorder != null) view.ItemMargin = new Thickness(-view.ItemBorder.Normal.Left, -view.ItemBorder.Normal.Top, 0, 0);
                 }
                 view.UpdateDefaultStyle();
@@ -393,6 +394,19 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
         {
+            ResetItemWidth();
+            base.OnRenderSizeChanged(sizeInfo);
+        }
+        /// <summary>
+        /// 等宽处理
+        /// </summary>
+        protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
+        {
+            ResetItemWidth();
+            base.OnItemsChanged(e);
+        }
+        private void ResetItemWidth()
+        {
             var actualWidth = ActualWidth - BorderThickness.Left - BorderThickness.Right - Padding.Left - Padding.Right;
             var margin = ItemMargin.Left + ItemMargin.Right;
             switch (ItemWidthType)
@@ -485,7 +499,6 @@ namespace Paway.WPF
                     }
                     break;
             }
-            base.OnRenderSizeChanged(sizeInfo);
         }
 
         #region 按下状态
