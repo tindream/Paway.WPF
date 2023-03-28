@@ -22,6 +22,22 @@ namespace Paway.WPF
     /// </summary>
     public partial class PMethod
     {
+        #region 代码移除全局焦点样式
+        /// <summary>
+        /// 代码移除全局焦点样式
+        /// <para>在主窗体构造或更早之前调用</para>
+        /// </summary>
+        public static void RemoveFocusVisualStyle()
+        {
+            EventManager.RegisterClassHandler(typeof(FrameworkElement), FrameworkElement.GotFocusEvent, new RoutedEventHandler(RemoveFocusVisualStyle), true);
+        }
+        private static void RemoveFocusVisualStyle(object sender, RoutedEventArgs e)
+        {
+            (sender as FrameworkElement).FocusVisualStyle = null;
+        }
+
+        #endregion
+
         #region 让系统可以处理队列中的所有Windows消息
         /// <summary>
         /// 让系统可以处理队列中的所有Windows消息
