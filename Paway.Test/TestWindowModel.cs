@@ -129,6 +129,19 @@ namespace Paway.Test
             Config.Language.Test = "H" + DateTime.Now.Millisecond;
             Config.LanguageBase.PleaseInputWater = "H" + DateTime.Now.Millisecond;
             Config.LanguageBase.PleaseInputPasswordWater = "H" + DateTime.Now.Millisecond;
+            var msg = Config.Language.Test;
+            if (DateTime.Now.Millisecond % 2 == 0)
+            {
+                msg += "\n" + DateTime.Now.Millisecond;
+            }
+            if (DateTime.Now.Millisecond % 3 == 0)
+            {
+                msg += "，" + DateTime.Now.Millisecond + "，" + DateTime.Now.Millisecond + "，" + DateTime.Now.Millisecond +
+                "，" + DateTime.Now.Millisecond + "，" + DateTime.Now.Millisecond + "，" + DateTime.Now.Millisecond + "，" + DateTime.Now.Millisecond;
+            }
+            Method.Notice(Config.Window, msg, (WPF.ColorType)(DateTime.Now.Millisecond % 6), "123", obj => { Method.Hit(Config.Window, obj); });
+            Method.Hit(Config.Window, msg);
+            Method.Toast(Config.Window, msg);
         });
         public ICommand ButtonCommand2 => new RelayCommand<ListViewCustom>(view =>
         {

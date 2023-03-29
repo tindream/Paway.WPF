@@ -21,7 +21,7 @@ namespace Paway.WPF
         /// <summary>
         /// 构造要将绑定到的装饰器的元素
         /// </summary>
-        public CustomAdorner(FrameworkElement adornedElement, FrameworkElement element, Color? color = null, Func<double> xFunc = null, Func<double> yFunc = null, Func<Storyboard> storyboardFunc = null, bool? hitTest = null) : base(adornedElement)
+        public CustomAdorner(FrameworkElement adornedElement, FrameworkElement element, Color? color = null, Func<double> xFunc = null, Func<double> yFunc = null, Func<Storyboard> storyboardFunc = null, Action completedFunc = null, bool? hitTest = null) : base(adornedElement)
         {
             //true:不路由事件（不穿透）
             //false:路由事件（穿透）
@@ -52,13 +52,14 @@ namespace Paway.WPF
                 };
                 storyboard.Completed += (sender2, e2) =>
                 {
+                    completedFunc?.Invoke();
                     var myAdornerLayer = AdornerLayer.GetAdornerLayer(adornedElement);
                     if (myAdornerLayer != null)
                     {
                         myAdornerLayer.Remove(this);
                     }
                 };
-                storyboard.Begin(element);
+                storyboard.Begin(element, true);
             };
         }
 

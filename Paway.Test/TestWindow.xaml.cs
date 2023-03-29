@@ -4,6 +4,7 @@ using Paway.Model;
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -52,6 +53,8 @@ namespace Paway.Test
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            //var xml = Method.GetTemplateXaml(paragraph1);
+            //Debug.WriteLine(xml);
             frame.Content = ViewlLocator.GetInstance<TestPage>();
         }
     }

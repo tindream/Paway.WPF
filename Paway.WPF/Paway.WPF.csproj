@@ -374,6 +374,5 @@
     <None Include="packages.config" />
     <Resource Include="Resource\fontawesome.ttf" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

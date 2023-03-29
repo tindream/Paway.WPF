@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,6 +23,152 @@ namespace Paway.WPF
         private static FrameworkElement Element;
         private static readonly string NameWater = $"{nameof(PMethod)}_{nameof(WaterAdornerFixed)}";
         private static readonly string NameHit = $"{nameof(PMethod)}_{nameof(Hit)}";
+
+        #region 装饰器-通知消息
+        /// <summary>
+        /// 装饰器-通知消息
+        /// </summary>
+        public static void Notice(DependencyObject parent, object msg, ColorType type = ColorType.Color, object tag = null, Action<object> hitAction = null)
+        {
+            Notice(parent, msg, 0, type, tag, hitAction);
+        }
+        /// <summary>
+        /// 装饰器-通知消息
+        /// </summary>
+        public static void Notice(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color, object tag = null, Action<object> hitAction = null)
+        {
+            Invoke(() =>
+            {
+                if (!Parent(parent, out Window window)) return;
+                if (window.Content is FrameworkElement element)
+                {
+                    var myAdornerLayer = ReloadAdorner(element);
+                    if (myAdornerLayer == null) return;
+
+                    var border = new Border
+                    {
+                        CornerRadius = new CornerRadius(5),
+                    };
+                    if (hitAction != null)
+                    {
+                        var block = new ButtonEXT()
+                        {
+                            Content = msg.ToStrings(),
+                            HorizontalContentAlignment = HorizontalAlignment.Left,
+                            Padding = new Thickness(10),
+                            Margin = new Thickness(0),
+                            Type = type,
+                            MinWidth = 200,
+                            MaxWidth = 600
+                        };
+                        block.Click += (sender, e) =>
+                        {
+                            hitAction.Invoke(tag);
+                            AnimationHelper.Start(border, TransitionType.ToRight, completed: () =>
+                            {
+                                if (border.Tag is Storyboard storyboard1)
+                                {
+                                    storyboard1.Remove(border);
+                                }
+                            });
+                        };
+                        border.Child = block;
+                    }
+                    else
+                    {
+                        border.Background = AlphaColor(PConfig.Alpha, type.Color()).ToBrush();
+                        var block = new TextBlock()
+                        {
+                            Text = msg.ToStrings(),
+                            Padding = new Thickness(10),
+                            TextWrapping = TextWrapping.Wrap,
+                            Foreground = Colors.White.ToBrush(),
+                            MinWidth = 200,
+                            MaxWidth = 600
+                        };
+                        border.Child = block;
+                    }
+                    if (time == 0) time = 3000;
+                    myAdornerLayer.Add(new CustomAdorner(element, border, xFunc: () => window.ActualWidth - border.ActualWidth - 2,
+                        yFunc: () =>
+                        {
+                            var id = border.GetHashCode();
+                            var location = 0d;
+                            lock (adornerNoticeLock)
+                            {
+                                var temp = adornerNoticeList.Find(c => c.Id == id);
+                                if (temp == null)
+                                {
+                                    temp = new AdornerNoticeInfo(id, border.ActualHeight);
+                                    adornerNoticeList.Add(temp);
+                                }
+                                location = adornerNoticeList.Where(c => c.CreateOn < temp.CreateOn).Sum(c => c.Height);
+                            }
+                            return window.ActualHeight - border.ActualHeight - 50 - location;
+                        },
+                        completedFunc: () =>
+                        {
+                            var id = border.GetHashCode();
+                            lock (adornerNoticeLock)
+                            {
+                                var temp = adornerNoticeList.Find(c => c.Id == id);
+                                if (temp != null) adornerNoticeList.Remove(temp);
+                            }
+                        },
+                        storyboardFunc: () =>
+                        {
+                            var storyboard = new Storyboard();
+                            border.Tag = storyboard;
+
+                            var tt = new TranslateTransform();
+                            border.RenderTransform = tt;
+                            var animIn = new DoubleAnimation(border.ActualWidth, -2, new Duration(TimeSpan.FromMilliseconds(125)));
+                            var propertyX = new DependencyProperty[] { UIElement.RenderTransformProperty, TranslateTransform.XProperty };
+                            Storyboard.SetTargetProperty(animIn, new PropertyPath("(0).(1)", propertyX));
+                            storyboard.Children.Add(animIn);
+
+                            var animOut = new DoubleAnimation(0, border.ActualHeight, new Duration(TimeSpan.FromMilliseconds(125)))
+                            {
+                                BeginTime = TimeSpan.FromMilliseconds(time + 125)
+                            };
+                            var propertyY2 = new DependencyProperty[] { UIElement.RenderTransformProperty, TranslateTransform.YProperty };
+                            Storyboard.SetTargetProperty(animOut, new PropertyPath("(0).(1)", propertyY2));
+                            storyboard.Children.Add(animOut);
+
+                            return storyboard;
+                        }, hitTest: hitAction != null));
+                }
+            });
+        }
+        private static readonly object adornerNoticeLock = new object();
+        private static readonly List<AdornerNoticeInfo> adornerNoticeList = new List<AdornerNoticeInfo>();
+        /// <summary>
+        /// 通知消息数据
+        /// </summary>
+        private class AdornerNoticeInfo
+        {
+            /// <summary>
+            /// 唯一标识
+            /// </summary>
+            public int Id { get; set; }
+            /// <summary>
+            /// 记录实际高度
+            /// </summary>
+            public double Height { get; set; }
+            /// <summary>
+            /// 记录创建时间
+            /// </summary>
+            public long CreateOn { get; set; }
+
+            public AdornerNoticeInfo(int id, double height)
+            {
+                this.Id = id;
+                this.Height = height + 1;
+                this.CreateOn = DateTime.Now.Ticks;
+            }
+        }
+
+        #endregion
 
         #region 装饰器-特效
         /// <summary>
@@ -234,8 +382,7 @@ namespace Paway.WPF
                     var block = new TextBlock()
                     {
                         Text = msg.ToStrings(),
-                        Margin = new Thickness(8, 0, 8, 0),
-                        Padding = new Thickness(20, 10, 20, 10),
+                        Padding = new Thickness(10),
                         TextWrapping = TextWrapping.Wrap,
                         TextAlignment = TextAlignment.Center,
                         Foreground = Colors.White.ToBrush(),
@@ -324,8 +471,7 @@ namespace Paway.WPF
                     var block = new TextBlock()
                     {
                         Text = msg.ToStrings(),
-                        Margin = new Thickness(8, 0, 8, 0),
-                        Padding = new Thickness(20, 10, 20, 10),
+                        Padding = new Thickness(10),
                         TextWrapping = TextWrapping.Wrap,
                         TextAlignment = TextAlignment.Center,
                         Foreground = Colors.White.ToBrush(),

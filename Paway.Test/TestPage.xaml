@@ -12,11 +12,15 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TestPage">
     <Grid>
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" >
-            <ComboBoxEXT ItemsSource="{EnumList Type=local:LogType}" />
-            <ComboDate  />
-            <ComboBoxEXT ItemsSource="{EnumList Type=model:MenuAuthType}" />
-            <ButtonEXT Content="Hello Kitty" IsLight="True" Command="{Binding ButtonCommand}" />
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="700" >
+            <Border CornerRadius="5" HorizontalAlignment="Center" Margin="0,5,0,0" >
+                <ButtonEXT Content="Hello Kitty Baby" MinWidth="200" MaxWidth="600"  Type="Color" Margin="0" Padding="10" Command="{Binding ButtonCommand}" HorizontalContentAlignment="Left" />
+            </Border>
+            <!--<Border CornerRadius="5" Padding="20" BorderThickness="1" BorderBrush="LightGray" Background="{StaticResource Color}" HorizontalAlignment="Right">
+                    <TextBlock Text="Hello" Foreground="White" FontSize="15" Padding="8,10,8,10" 
+                               TextWrapping="Wrap" TextTrimming="WordEllipsis" Width="260"
+                               VerticalAlignment="Center"/>
+            </Border>-->
         </StackPanel>
     </Grid>
 </Page>
