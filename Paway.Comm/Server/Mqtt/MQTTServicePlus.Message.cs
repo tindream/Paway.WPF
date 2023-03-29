@@ -17,6 +17,11 @@ namespace Paway.Comm
     public partial class MQTTServicePlus
     {
         #region 消息处理
+        /// <summary>
+        /// 默认不处理，会直接转发
+        /// <para>中止：e.ApplicationMessage.Topic = string.Empty;</para>
+        /// <para>手动处理转发：Publish(e.ApplicationMessage.Topic, e.ApplicationMessage.Payload);</para>
+        /// </summary>
         protected virtual void MessageReceivedAsync(InterceptingPublishEventArgs e, string data, IMessage msg, ref string logMsg) { }
         protected override Task MessageReceivedAsync(InterceptingPublishEventArgs e)
         {
@@ -64,10 +69,6 @@ namespace Paway.Comm
                 {
                     Publish(e.ApplicationMessage.Topic, new ErrorMessage(type, error));
                 }
-            }
-            finally
-            {// 当前消息处理进程中止
-                e.ApplicationMessage.Topic = string.Empty;
             }
             return CompletedTask.Instance;
 

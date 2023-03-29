@@ -49,7 +49,7 @@ namespace Paway.Test
         private void AutoUpdate()
         {
             if (Config.Admin.Version >= 0) return;
-            base.ExecuteCommand(cmd =>
+            base.ExecuteTransaction(cmd =>
             {
                 if (Config.Admin.Version == 0)
                 {

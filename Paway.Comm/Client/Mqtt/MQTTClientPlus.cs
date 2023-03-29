@@ -33,13 +33,20 @@ namespace Paway.Comm
         private void TestClient_ConnectEvent(bool arg1, Exception arg2)
         {
             Messenger.Default.Send(new ConnectMessage(arg1));
-            if (arg1)
-            {
-                base.SubscribeAsync(Config.TopicAdmin, MqttQualityOfServiceLevel.AtLeastOnce);
-                base.SubscribeAsync(Config.TopicAll, MqttQualityOfServiceLevel.AtLeastOnce);
-                base.SubscribeAsync(this.Topic, MqttQualityOfServiceLevel.AtLeastOnce);
-            }
+            if (arg1) Subscribes();
         }
+        /// <summary>
+        /// 连接成功后订阅
+        /// </summary>
+        protected virtual void Subscribes()
+        {
+            base.SubscribeAsync(Config.TopicAdmin, MqttQualityOfServiceLevel.AtLeastOnce);
+            base.SubscribeAsync(Config.TopicAll, MqttQualityOfServiceLevel.AtLeastOnce);
+            base.SubscribeAsync(this.Topic, MqttQualityOfServiceLevel.AtLeastOnce);
+        }
+        /// <summary>
+        /// 注册参数
+        /// </summary>
         protected override LoginData Login(bool auto)
         {
             if (auto)
@@ -49,6 +56,10 @@ namespace Paway.Comm
             }
             return new LoginData(true, this.user.UserName, this.user.Password, this.properties);
         }
+        /// <summary>
+        /// 注册完成
+        /// </summary>
+        protected virtual void Logined() { }
 
         #region 外部方法
         public void Connect(string host, int port, IUser user, Dictionary<string, string> properties = null)
@@ -60,16 +71,17 @@ namespace Paway.Comm
             if (response != null)
             {
                 JsonConvert.DeserializeObject(response.Value, user.GetType()).Clone(this.user);
+                Logined();
             }
         }
         /// <summary>
         /// 发送消息
         /// </summary>
-        public Task Send(IMessage msg)
+        public Task Send(IMessage msg, string topic = null)
         {
             if (!IConnected) throw new WarningException("正在连接，请稍候...");
             var buffer = JsonConvert.SerializeObject(msg).Compress();
-            return Send(buffer, msg.Level);
+            return Send(buffer, msg.Level, topic);
         }
 
         #endregion

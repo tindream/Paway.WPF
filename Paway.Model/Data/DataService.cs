@@ -68,7 +68,7 @@ namespace Paway.Model
         public void UpdateAdmin<T>(T admin, string name, DbCommand arg = null) where T : class
         {
             var value = admin.GetValue(name);
-            base.ExecuteCommand(cmd =>
+            base.ExecuteTransaction(cmd =>
             {
                 var list = Find<AdminBaseInfo>(c => c.Name == name, cmd);
                 if (list.Count == 0)
