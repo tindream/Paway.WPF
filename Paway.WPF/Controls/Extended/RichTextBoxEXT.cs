@@ -191,7 +191,10 @@ namespace Paway.WPF
             if (line) Document.Blocks.Add(new Paragraph());
             AutoShow(isLast);
         }
-        private void AutoShow(bool isLast)
+        /// <summary>
+        /// 滚动到最后或显示
+        /// </summary>
+        public void AutoShow(bool isLast = true)
         {
             if (isLast)
             {

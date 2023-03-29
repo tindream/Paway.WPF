@@ -42,14 +42,19 @@ namespace Paway.WPF
     /// <summary>
     /// 值乘数转换(默认*0.85)
     /// </summary>
-    internal class ValueMultiConverter : IValueConverter
+    public class ValueMultiConverter : IValueConverter
     {
+        /// <summary>
+        /// 值乘数转换(默认*0.85)
+        /// </summary>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var temp = value.ToDouble();
             var param = parameter == null ? 0.85 : parameter.ToDouble();
             return temp * param;
         }
+        /// <summary>
+        /// </summary>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var temp = value.ToDouble();

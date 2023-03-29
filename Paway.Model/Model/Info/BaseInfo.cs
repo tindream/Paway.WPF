@@ -62,6 +62,6 @@ namespace Paway.Model
     public class ParentBaseOnce : ParentBase
     {
         [NoShow, NoExcel, NoSelect, JsonIgnore]
-        public override DateTime UpdateOn { get; set; }
+        public override DateTime UpdateOn { get { return CreateOn; } }
     }
 }
