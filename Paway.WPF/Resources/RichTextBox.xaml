@@ -32,14 +32,14 @@
                                 BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 CornerRadius="{TemplateBinding Radius}"/>
-                        <ScrollViewer x:Name="Part_ScrollViewer" Margin="{TemplateBinding BorderThickness}" Focusable="False" 
+                        <local:ScrollViewerEXT x:Name="Part_ScrollViewer" Margin="{TemplateBinding BorderThickness}" Focusable="False" 
                                                HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                                VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
                             <ScrollViewer x:Name="PART_ContentHost" 
                                           Margin="{TemplateBinding Padding}" 
                                           Focusable="False" 
                                           HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
-                        </ScrollViewer>
+                        </local:ScrollViewerEXT>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">

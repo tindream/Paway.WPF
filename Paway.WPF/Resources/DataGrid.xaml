@@ -172,7 +172,7 @@
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
                             Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
                         <local:ScrollViewerEXT x:Name="Part_ScrollViewer" Focusable="false">
-                            <ScrollViewer.Template>
+                            <local:ScrollViewerEXT.Template>
                                 <ControlTemplate TargetType="ScrollViewer">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
@@ -214,7 +214,7 @@
                                         </EventTrigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
-                            </ScrollViewer.Template>
+                            </local:ScrollViewerEXT.Template>
                             <ItemsPresenter Margin="0,0,0,-1"/>
                         </local:ScrollViewerEXT>
                     </Border>
