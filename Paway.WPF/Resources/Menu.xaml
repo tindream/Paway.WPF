@@ -19,14 +19,12 @@
                 <Rectangle x:Name="ButtonBackground"
                            Fill="Transparent"
                            Grid.ColumnSpan="2" />
-                <ContentPresenter x:Name="Icon"
-                                  Content="{TemplateBinding Icon}"
-                                  ContentSource="Icon"
-                                  TextBlock.FontSize="{TemplateBinding FontSize, Converter={StaticResource valueMultiConverter}}"
-                                  HorizontalAlignment="Center"
-                                  Width="12" 
-                                  Margin="4,4,-5,4"
-                                  VerticalAlignment="Center"/>
+                <Image x:Name="Icon"
+                       Source="{Binding Icon, RelativeSource={RelativeSource Mode=TemplatedParent}}"  
+                       HorizontalAlignment="Center"
+                       Width="18" 
+                       Margin="4,4,-5,4"
+                       VerticalAlignment="Center" />
                 <Path x:Name="GlyphPanel"
                       Style="{StaticResource PathRight}" Width="12"
                       Stroke="{TemplateBinding Foreground}"
@@ -79,14 +77,12 @@
                            Grid.ColumnSpan="2"
                            Visibility="Collapsed" 
                            VerticalAlignment="Bottom"/>
-                <ContentPresenter x:Name="Icon"
-                                  Content="{TemplateBinding Icon}"
-                                  ContentSource="Icon"
-                                  TextBlock.FontSize="{TemplateBinding FontSize, Converter={StaticResource valueMultiConverter}}"
-                                  HorizontalAlignment="Center"
-                                  Width="12"
-                                  Margin="4,4,-5,4"
-                                  VerticalAlignment="Center"/>
+                <Image x:Name="Icon"
+                       Source="{Binding Icon, RelativeSource={RelativeSource Mode=TemplatedParent}}" 
+                       HorizontalAlignment="Center"
+                       Width="18" 
+                       Margin="4,4,-5,4"
+                       VerticalAlignment="Center" />
                 <Path x:Name="GlyphPanel"
                       Style="{StaticResource PathRight}" Width="12"
                       Stroke="{TemplateBinding Foreground}"
@@ -205,18 +201,17 @@
                     <ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemIGTColumnGroup" />
                     <ColumnDefinition Width="20" />
                 </Grid.ColumnDefinitions>
-                <ContentPresenter x:Name="Icon"
-                                  Content="{TemplateBinding Icon}"
-                                  ContentSource="Icon"
-                                  TextBlock.FontSize="{TemplateBinding FontSize, Converter={StaticResource valueMultiConverter}}"
-                                  HorizontalAlignment="Center"
-                                  Width="12"
-                                  VerticalAlignment="Center"/>
+                <Image x:Name="Icon"
+                       Source="{Binding Icon, RelativeSource={RelativeSource Mode=TemplatedParent}}" 
+                       HorizontalAlignment="Center"
+                       Width="18" 
+                       Margin="4,4,-5,4"
+                       VerticalAlignment="Center" />
                 <Border x:Name="GlyphPanel"
                         Visibility="Hidden"
                         BorderThickness="0" 
                         Background="Transparent"
-                        Padding="0,9,0,9" 
+                        Padding="10,9,0,9" 
                         ClipToBounds="False"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
@@ -285,18 +280,17 @@
                     <ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemIGTColumnGroup" />
                     <ColumnDefinition Width="20" />
                 </Grid.ColumnDefinitions>
-                <ContentPresenter x:Name="Icon"
-                                  Content="{TemplateBinding Icon}"
-                                  ContentSource="Icon"
-                                  TextBlock.FontSize="{TemplateBinding FontSize, Converter={StaticResource valueMultiConverter}}"
-                                  HorizontalAlignment="Center"
-                                  Width="12"
-                                  VerticalAlignment="Center"/>
+                <Image x:Name="Icon"
+                       Source="{Binding Icon, RelativeSource={RelativeSource Mode=TemplatedParent}}" 
+                       HorizontalAlignment="Center"
+                       Width="18" 
+                       Margin="4,4,-5,4"
+                       VerticalAlignment="Center" />
                 <Border x:Name="GlyphPanel"
                         Visibility="Hidden"
                         BorderThickness="0"
                         Background="Transparent"
-                        Padding="0,9,0,9" 
+                        Padding="10,9,0,9" 
                         VerticalAlignment="Center"
                         Width="22">
                     <Path x:Name="Glyph"

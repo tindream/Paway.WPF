@@ -11,6 +11,15 @@
            Background="#FFF"
            Title="{Binding Text}" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="发送反馈2" IsCheckable="True" />
+            <MenuItem Header="发送反馈3" Icon="pack://application:,,,/Paway.Test;component/Images/close.png">
+                <MenuItem Header="报告问题" Icon="pack://application:,,,/Paway.Test;component/Images/left.png"/>
+                <MenuItem Header="提供反馈" IsCheckable="True" />
+                <Separator />
+                <MenuItem Header="设置..." />
+            </MenuItem>
+        </Menu>
         <StackPanel Width="200">
             <ButtonEXT Content="A" Click="Button_Click"/>
         </StackPanel>
