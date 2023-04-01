@@ -22,7 +22,7 @@
                 <Image x:Name="Icon"
                        Source="{Binding Icon, RelativeSource={RelativeSource Mode=TemplatedParent}}"  
                        HorizontalAlignment="Center"
-                       Width="18" 
+                       Width="{DynamicResource MenuIconWidth}" 
                        Margin="4,4,-5,4"
                        VerticalAlignment="Center" />
                 <Path x:Name="GlyphPanel"
@@ -80,7 +80,7 @@
                 <Image x:Name="Icon"
                        Source="{Binding Icon, RelativeSource={RelativeSource Mode=TemplatedParent}}" 
                        HorizontalAlignment="Center"
-                       Width="18" 
+                       Width="{DynamicResource MenuIconWidth}"  
                        Margin="4,4,-5,4"
                        VerticalAlignment="Center" />
                 <Path x:Name="GlyphPanel"
@@ -204,7 +204,7 @@
                 <Image x:Name="Icon"
                        Source="{Binding Icon, RelativeSource={RelativeSource Mode=TemplatedParent}}" 
                        HorizontalAlignment="Center"
-                       Width="18" 
+                       Width="{DynamicResource MenuIconWidth}"  
                        Margin="4,4,-5,4"
                        VerticalAlignment="Center" />
                 <Border x:Name="GlyphPanel"
@@ -283,7 +283,7 @@
                 <Image x:Name="Icon"
                        Source="{Binding Icon, RelativeSource={RelativeSource Mode=TemplatedParent}}" 
                        HorizontalAlignment="Center"
-                       Width="18" 
+                       Width="{DynamicResource MenuIconWidth}"  
                        Margin="4,4,-5,4"
                        VerticalAlignment="Center" />
                 <Border x:Name="GlyphPanel"
