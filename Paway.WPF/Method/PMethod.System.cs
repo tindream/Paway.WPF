@@ -344,7 +344,7 @@ namespace Paway.WPF
         /// </summary>
         public static bool ValidationError<T>(DependencyObject parent, T mode, string name, bool allEmpty = false) where T : class
         {
-            if (Find(parent, out TextBoxEXT tbName, "tb" + name))
+            if (Find(parent, out TextBoxEXT tbName, "tb" + name) && tbName.Visibility == Visibility.Visible)
             {
                 if (!allEmpty && mode.GetValue(name).ToStrings().IsEmpty())
                 {

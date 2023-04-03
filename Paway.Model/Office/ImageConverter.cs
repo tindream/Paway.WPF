@@ -37,7 +37,7 @@ namespace Paway.Model
         {
             try
             {
-                var filePath = Path.GetFileNameWithoutExtension(file) + Path.GetExtension(file).Replace(".", "_");
+                var filePath = Path.GetFileName(file).Replace(".", "_");
                 if (toPath == null)
                 {
                     toPath = Path.Combine(Path.GetDirectoryName(file), filePath);

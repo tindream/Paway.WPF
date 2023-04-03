@@ -37,7 +37,7 @@ namespace Paway.Comm
         /// <summary>
         /// 上传文件路径
         /// </summary>
-        public const string UploadPath = "UploadFile";
+        public static string UploadPath = "UploadFile";
         public static string Upload
         {
             get
