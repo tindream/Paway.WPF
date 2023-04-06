@@ -568,7 +568,7 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Padding="{TemplateBinding Padding}"
-                                VerticalAlignment="Bottom"                               >
+                                VerticalAlignment="Bottom" >
                             <StackPanel Orientation="Horizontal"
                                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                         VerticalAlignment="Stretch">

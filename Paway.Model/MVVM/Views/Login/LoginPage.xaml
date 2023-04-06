@@ -30,7 +30,7 @@
                      IAnimation="2" BorderThickness="0,0,0,1" Width="450" FontSize="30" WaterSize="0.7"
                      Icon="/Paway.Model;component/Images/login/user.png" IconWidth="36" IconStretch="Uniform"
                      Visibility="{Binding IUserList, Converter={StaticResource boolToCollapsed}}"/>
-            <ComboBoxEXT Name="cbxUserName" Text="{Binding UserName}" Water="请输入用户名" ItemsSource="{Binding ObList}" SelectedValuePath="Id" DisplayMemberPath="Desc"
+            <ComboBoxEXT Name="cbxUserName" Text="{Binding UserName}" Water="请输入用户名" ItemsSource="{Binding ObList}" SelectedValuePath="Id" DisplayMemberPath="CustomName"
                      IAnimation="2" BorderThickness="0,0,0,1" Width="450" FontSize="30" WaterSize="0.7"
                      IsEditable="True" Icon="/Paway.Model;component/Images/login/user.png" IconWidth="36" IconStretch="Uniform"
                      Visibility="{Binding IUserList, Converter={StaticResource boolToVisible}}"/>

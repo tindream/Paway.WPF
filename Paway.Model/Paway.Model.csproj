@@ -152,6 +152,7 @@
     <Compile Include="Method\PlotHelper.cs" />
     <Compile Include="Model\Enum\ButtonAuthType.cs" />
     <Compile Include="Model\Interface\IDataGridServer.cs" />
+    <Compile Include="Model\Interface\ICustomName.cs" />
     <Compile Include="Model\Interface\ILoad.cs" />
     <Compile Include="Model\Interface\IPageReload.cs" />
     <Compile Include="Model\Interface\IIndex.cs" />

@@ -38,7 +38,7 @@ namespace Paway.Test
         /// 显示名
         /// </summary>
         [NoShow, NoExcel, NoSelect]
-        public string Desc
+        public string CustomName
         {
             get
             {
@@ -110,7 +110,7 @@ namespace Paway.Test
         }
         public override string ToString()
         {
-            return Desc;
+            return CustomName;
         }
     }
 }

@@ -66,6 +66,10 @@ namespace Paway.Model
         {
             return Find<T>(id)?.Name ?? Config.None;
         }
+        public static string CustomName<T>(int id) where T : ICustomName
+        {
+            return Find<T>(id)?.CustomName ?? Config.None;
+        }
         public static bool Any<T>(Func<T, bool> action)
         {
             return Query(action).Any();
@@ -84,6 +88,13 @@ namespace Paway.Model
         public static List<string> FindNames<T>(Func<T, bool> action) where T : IName
         {
             return List<T>().FindAll(c => c != null && action?.Invoke(c) != false).Select(c => c.Name).Distinct().ToList();
+        }
+        /// <summary>
+        /// 不使用并发查询，以保证排序问题
+        /// </summary>
+        public static List<string> FindCustomNames<T>(Func<T, bool> action) where T : ICustomName
+        {
+            return List<T>().FindAll(c => c != null && action?.Invoke(c) != false).Select(c => c.CustomName).Distinct().ToList();
         }
         /// <summary>
         /// 查询列表

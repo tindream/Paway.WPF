@@ -11,7 +11,7 @@ namespace Paway.Model
     /// <summary>
     /// 用户定义
     /// </summary>
-    public interface IUser : IId
+    public interface IUser : ICustomName, IId
     {
         /// <summary>
         /// 用户
@@ -21,10 +21,6 @@ namespace Paway.Model
         /// 昵称
         /// </summary>
         string Display { get; set; }
-        /// <summary>
-        /// 综合描述
-        /// </summary>
-        string Desc { get; }
         /// <summary>
         /// 密码
         /// </summary>
