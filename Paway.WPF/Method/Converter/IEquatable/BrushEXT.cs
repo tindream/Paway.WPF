@@ -49,10 +49,15 @@ namespace Paway.WPF
         public Brush Pressed { get { return pressed; } set { pressed = value; OnPressedMouse(); OnPropertyChanged(); } }
         private void OnPressedMouse()
         {
-            var mouse = Mouse as SolidColorBrush;
-            var pressed = Pressed as SolidColorBrush;
-            var a = (pressed.Color.A - mouse.Color.A) / 2;
-            this.PressedMouse = PMethod.AlphaColor(Math.Abs(pressed.Color.A - a), pressed.Color).ToBrush();
+            if (Mouse is SolidColorBrush mouse && Pressed is SolidColorBrush pressed)
+            {
+                var a = (pressed.Color.A - mouse.Color.A) / 2;
+                this.PressedMouse = PMethod.AlphaColor(Math.Abs(pressed.Color.A - a), pressed.Color).ToBrush();
+            }
+            else
+            {
+                this.PressedMouse = null;
+            }
         }
         /// <summary>
         /// 鼠标划过选中项时的颜色
