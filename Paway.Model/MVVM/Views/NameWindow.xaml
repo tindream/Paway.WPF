@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:Paway.Model"
         mc:Ignorable="d"
         DataContext="{Binding Name, Source={StaticResource Locator}}"
-        Name="wd"
         UseLayoutRounding="True"
         Title="{Binding Title}" Height="250" Width="350" ResizeMode="NoResize">
     <Grid FocusManager.FocusedElement="{Binding ElementName=tbName}">
@@ -19,9 +18,9 @@
         </StackPanel>
         <WrapPanel Grid.Row="1" Margin="0,40" HorizontalAlignment="Center">
             <ButtonEXT Width="80" Content="确认"
-                       Command="{Binding Commit}" CommandParameter="{Binding ElementName=wd}"/>
+                       Command="{Binding Commit}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
             <ButtonEXT Width="80" Content="取消" Type="Warn" IsLight="True"
-                       Command="{Binding Cancel}" CommandParameter="{Binding ElementName=wd}" Margin="10,2,2,2"/>
+                       Command="{Binding Cancel}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" Margin="10,2,2,2"/>
         </WrapPanel>
     </Grid>
 </Window>
