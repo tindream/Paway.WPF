@@ -20,7 +20,7 @@ namespace Paway.WPF
         /// <summary>
         /// 文件转图片资源(不占用文件)
         /// </summary>
-        public static BitmapImage ToImage(string file)
+        public static BitmapSource ToImage(string file)
         {
             using (var binaryReader = new BinaryReader(File.Open(file, FileMode.Open)))
             {
@@ -32,7 +32,7 @@ namespace Paway.WPF
         /// <summary>
         /// 内存流转图片资源
         /// </summary>
-        public static BitmapImage ToImage(byte[] buffer)
+        public static BitmapSource ToImage(byte[] buffer)
         {
             var image = new BitmapImage();
             image.BeginInit();
@@ -43,7 +43,7 @@ namespace Paway.WPF
         /// <summary>
         /// 图像转图片资源
         /// </summary>
-        public static BitmapSource ToSource(System.Drawing.Bitmap bitmap)
+        public static BitmapSource ToSource(Bitmap bitmap)
         {
             var intPtr = bitmap.GetHbitmap();
             var image = Imaging.CreateBitmapSourceFromHBitmap(intPtr, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());

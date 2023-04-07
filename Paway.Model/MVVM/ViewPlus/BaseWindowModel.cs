@@ -28,6 +28,7 @@ namespace Paway.Model
         #endregion
 
         #region 命令
+        protected virtual bool? OnCancel() { return false; }
         public ICommand Cancel => new RelayCommand<Window>(wd =>
         {
             try
@@ -39,7 +40,8 @@ namespace Paway.Model
                 Messenger.Default.Send(new StatuMessage(ex, wd));
             }
         });
-        protected virtual bool? OnCancel() { return false; }
+
+        protected virtual bool? OnCommit(Window wd) { return true; }
         public ICommand Commit => new RelayCommand<Window>(wd =>
         {
             try
@@ -55,7 +57,19 @@ namespace Paway.Model
         {
             wd.DialogResult = OnCommit(wd);
         }
-        protected virtual bool? OnCommit(Window wd) { return true; }
+
+        protected virtual void Action(ButtonEXT btn) { }
+        public ICommand ButtonClickCommand => new RelayCommand<ButtonEXT>(btn =>
+        {
+            try
+            {
+                Action(btn);
+            }
+            catch (Exception ex)
+            {
+                Messenger.Default.Send(new StatuMessage(ex, btn));
+            }
+        });
 
         #endregion
     }

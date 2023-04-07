@@ -74,6 +74,12 @@ namespace Paway.Model
             set { _iUserList = value; RaisePropertyChanged(); }
         }
 
+        private string welcome = "欢迎使用";
+        public string Welcome
+        {
+            get { return welcome; }
+            set { welcome = value; RaisePropertyChanged(); }
+        }
         private ImageSource _logoImage;
         public ImageSource LogoImage
         {

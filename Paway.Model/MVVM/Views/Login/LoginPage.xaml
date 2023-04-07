@@ -23,15 +23,15 @@
                        Visibility="{Binding IClose, Converter={StaticResource boolToVisible}}"
                        Command="{Binding MenuCommand}" CommandParameter="关闭" ImageWidth="48" ImageStretch="Uniform" Padding="7" />
         </WrapPanel>
-        <StackPanel x:Name="Root" Margin="0,-32,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel x:Name="Root" Margin="0,-32,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="450">
             <Image Source="{Binding LogoImage}" Stretch="None" />
-            <TextBlock Text="欢迎使用" Foreground="White" Margin="2,40" FontSize="36"  />
+            <TextBlock Text="{Binding Welcome}" Foreground="White" Margin="2,40" FontSize="36"  />
             <TextBoxEXT  Name="tbUserName" Text="{Binding UserName}" Water="请输入用户名" 
-                     IAnimation="2" BorderThickness="0,0,0,1" Width="450" FontSize="30" WaterSize="0.7"
+                     IAnimation="2" BorderThickness="0,0,0,1" FontSize="30" WaterSize="0.7"
                      Icon="/Paway.Model;component/Images/login/user.png" IconWidth="36" IconStretch="Uniform"
-                     Visibility="{Binding IUserList, Converter={StaticResource boolToCollapsed}}"/>
+                     Visibility="{Binding IUserList, Converter={StaticResource boolToCollapsed}, FallbackValue=Visible}"/>
             <ComboBoxEXT Name="cbxUserName" Text="{Binding UserName}" Water="请输入用户名" ItemsSource="{Binding ObList}" SelectedValuePath="Id" DisplayMemberPath="CustomName"
-                     IAnimation="2" BorderThickness="0,0,0,1" Width="450" FontSize="30" WaterSize="0.7"
+                     IAnimation="2" BorderThickness="0,0,0,1" FontSize="30" WaterSize="0.7"
                      IsEditable="True" Icon="/Paway.Model;component/Images/login/user.png" IconWidth="36" IconStretch="Uniform"
                      Visibility="{Binding IUserList, Converter={StaticResource boolToVisible}}"/>
             <PasswordBox Name="tbPassword" MaxLength="16" 
