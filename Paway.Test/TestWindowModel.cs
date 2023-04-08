@@ -139,7 +139,8 @@ namespace Paway.Test
                 msg += "，" + DateTime.Now.Millisecond + "，" + DateTime.Now.Millisecond + "，" + DateTime.Now.Millisecond +
                 "，" + DateTime.Now.Millisecond + "，" + DateTime.Now.Millisecond + "，" + DateTime.Now.Millisecond + "，" + DateTime.Now.Millisecond;
             }
-            Method.Notice(Config.Window, msg, (WPF.ColorType)(DateTime.Now.Millisecond % 6), "123", obj => { Method.Hit(Config.Window, obj); });
+            Method.Notice(Config.Window, msg, (WPF.ColorType)(DateTime.Now.Millisecond % 6),
+                tag: "123", hitAction: obj => { Method.Hit(Config.Window, obj); });
             Method.Hit(Config.Window, msg);
             Method.Toast(Config.Window, msg);
         });

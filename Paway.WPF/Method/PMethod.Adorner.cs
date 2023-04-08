@@ -28,14 +28,14 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-通知消息
         /// </summary>
-        public static void Notice(DependencyObject parent, object msg, ColorType type = ColorType.Color, int bottom = 35, object tag = null, Action<object> hitAction = null)
+        public static void Notice(DependencyObject parent, object msg, ColorType type = ColorType.Color, double? fontSize = null, int bottom = 35, object tag = null, Action<object> hitAction = null)
         {
-            Notice(parent, msg, 0, type, bottom, tag, hitAction);
+            Notice(parent, msg, 0, type, fontSize, bottom, tag, hitAction);
         }
         /// <summary>
         /// 装饰器-通知消息
         /// </summary>
-        public static void Notice(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color, int bottom = 35, object tag = null, Action<object> hitAction = null)
+        public static void Notice(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color, double? fontSize = null, int bottom = 35, object tag = null, Action<object> hitAction = null)
         {
             Invoke(() =>
             {
@@ -61,6 +61,7 @@ namespace Paway.WPF
                             MinWidth = 200,
                             MaxWidth = 600
                         };
+                        if (fontSize != null) block.FontSize = fontSize.Value;
                         block.Click += (sender, e) =>
                         {
                             hitAction.Invoke(tag);
@@ -86,11 +87,17 @@ namespace Paway.WPF
                             MinWidth = 200,
                             MaxWidth = 600
                         };
+                        if (fontSize != null) block.FontSize = fontSize.Value;
                         border.Child = block;
                     }
                     if (time == 0) time = 3000;
                     else if (time < 0) time = int.MaxValue - 125;
-                    myAdornerLayer.Add(new CustomAdorner(element, border, xFunc: () => window.ActualWidth - border.ActualWidth - 2,
+                    myAdornerLayer.Add(new CustomAdorner(element, border,
+                        xFunc: () =>
+                        {
+                            var right = window is WindowEXT ? 2 : 16;
+                            return window.ActualWidth - border.ActualWidth - right;
+                        },
                         yFunc: () =>
                         {
                             var id = border.GetHashCode();
@@ -105,8 +112,9 @@ namespace Paway.WPF
                                 }
                                 location = adornerNoticeList.Where(c => c.CreateOn < temp.CreateOn).Sum(c => c.Height);
                             }
-                            var height = window.WindowStyle != System.Windows.WindowStyle.None ? (window is WindowEXT windowEXT) ? windowEXT.HeaderHeight : 30 : 0;
-                            return window.ActualHeight - border.ActualHeight - bottom - height - location - 3;
+                            var top = window.WindowStyle != System.Windows.WindowStyle.None ? (window is WindowEXT windowEXT) ? windowEXT.HeaderHeight : 30 : 0;
+                            var bottom2 = window is WindowEXT ? 4 : 11;
+                            return window.ActualHeight - border.ActualHeight - bottom - top - bottom2 - location;
                         },
                         completedFunc: () =>
                         {
@@ -149,14 +157,16 @@ namespace Paway.WPF
         {
             lock (adornerNoticeLock)
             {
-                adornerNoticeList.ForEach(c =>
+                adornerNoticeList.FindAll(c => c.Tag.Equals(tag)).ForEach(c =>
                 {
-                    if (c.Border.Tag is Storyboard storyboard1)
+                    AnimationHelper.Start(c.Border, TransitionType.ToRight, completed: () =>
                     {
-                        storyboard1.Remove(c.Border);
-                    }
+                        if (c.Border.Tag is Storyboard storyboard1)
+                        {
+                            storyboard1.Remove(c.Border);
+                        }
+                    });
                 });
-                adornerNoticeList.RemoveAll(c => c.Tag.Equals(tag));
             }
         }
         private static readonly object adornerNoticeLock = new object();
@@ -194,7 +204,7 @@ namespace Paway.WPF
             {
                 this.Id = id;
                 this.Border = border;
-                this.Height = border.ActualHeight + 1;
+                this.Height = border.ActualHeight + 2;
                 this.CreateOn = DateTime.Now.Ticks;
                 this.Tag = tag;
             }
