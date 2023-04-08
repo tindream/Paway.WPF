@@ -51,7 +51,7 @@ namespace Paway.Comm
         {
             if (auto)
             {
-                if (this.user.Id > 0) return new LoginData(true, this.user.Id.ToString(), properties: this.properties);
+                if (this.user.Id != 0) return new LoginData(true, this.user.Id.ToString(), properties: this.properties);
                 return null;
             }
             return new LoginData(true, this.user.UserName, this.user.Password, this.properties);

@@ -74,6 +74,13 @@ namespace Paway.Model
             set { _iUserList = value; RaisePropertyChanged(); }
         }
 
+        private bool _iAuto;
+        public bool IAuto
+        {
+            get { return _iAuto; }
+            set { _iAuto = value; RaisePropertyChanged(); }
+        }
+
         private string welcome = "欢迎使用";
         public string Welcome
         {

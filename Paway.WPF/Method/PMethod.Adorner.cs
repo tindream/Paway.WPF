@@ -28,14 +28,14 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-通知消息
         /// </summary>
-        public static void Notice(DependencyObject parent, object msg, ColorType type = ColorType.Color, object tag = null, Action<object> hitAction = null)
+        public static void Notice(DependencyObject parent, object msg, ColorType type = ColorType.Color, int bottom = 35, object tag = null, Action<object> hitAction = null)
         {
-            Notice(parent, msg, 0, type, tag, hitAction);
+            Notice(parent, msg, 0, type, bottom, tag, hitAction);
         }
         /// <summary>
         /// 装饰器-通知消息
         /// </summary>
-        public static void Notice(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color, object tag = null, Action<object> hitAction = null)
+        public static void Notice(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color, int bottom = 35, object tag = null, Action<object> hitAction = null)
         {
             Invoke(() =>
             {
@@ -89,6 +89,7 @@ namespace Paway.WPF
                         border.Child = block;
                     }
                     if (time == 0) time = 3000;
+                    else if (time < 0) time = int.MaxValue - 125;
                     myAdornerLayer.Add(new CustomAdorner(element, border, xFunc: () => window.ActualWidth - border.ActualWidth - 2,
                         yFunc: () =>
                         {
@@ -99,12 +100,13 @@ namespace Paway.WPF
                                 var temp = adornerNoticeList.Find(c => c.Id == id);
                                 if (temp == null)
                                 {
-                                    temp = new AdornerNoticeInfo(id, border.ActualHeight);
+                                    temp = new AdornerNoticeInfo(id, border, tag);
                                     adornerNoticeList.Add(temp);
                                 }
                                 location = adornerNoticeList.Where(c => c.CreateOn < temp.CreateOn).Sum(c => c.Height);
                             }
-                            return window.ActualHeight - border.ActualHeight - 50 - location;
+                            var height = window.WindowStyle != System.Windows.WindowStyle.None ? (window is WindowEXT windowEXT) ? windowEXT.HeaderHeight : 30 : 0;
+                            return window.ActualHeight - border.ActualHeight - bottom - height - location - 3;
                         },
                         completedFunc: () =>
                         {
@@ -140,12 +142,29 @@ namespace Paway.WPF
                 }
             });
         }
+        /// <summary>
+        /// 消息列表操作
+        /// </summary>
+        public static void NoticeClear(object tag)
+        {
+            lock (adornerNoticeLock)
+            {
+                adornerNoticeList.ForEach(c =>
+                {
+                    if (c.Border.Tag is Storyboard storyboard1)
+                    {
+                        storyboard1.Remove(c.Border);
+                    }
+                });
+                adornerNoticeList.RemoveAll(c => c.Tag.Equals(tag));
+            }
+        }
         private static readonly object adornerNoticeLock = new object();
-        private static readonly List<AdornerNoticeInfo> adornerNoticeList = new List<AdornerNoticeInfo>();
+        private static volatile List<AdornerNoticeInfo> adornerNoticeList = new List<AdornerNoticeInfo>();
         /// <summary>
         /// 通知消息数据
         /// </summary>
-        private class AdornerNoticeInfo
+        public class AdornerNoticeInfo
         {
             /// <summary>
             /// 唯一标识
@@ -160,11 +179,24 @@ namespace Paway.WPF
             /// </summary>
             public long CreateOn { get; set; }
 
-            public AdornerNoticeInfo(int id, double height)
+            /// <summary>
+            /// 当前消息控件
+            /// </summary>
+            public Border Border { get; set; }
+            /// <summary>
+            /// 标记
+            /// </summary>
+            public object Tag { get; set; }
+
+            /// <summary>
+            /// </summary>
+            public AdornerNoticeInfo(int id, Border border, object tag)
             {
                 this.Id = id;
-                this.Height = height + 1;
+                this.Border = border;
+                this.Height = border.ActualHeight + 1;
                 this.CreateOn = DateTime.Now.Ticks;
+                this.Tag = tag;
             }
         }
 
