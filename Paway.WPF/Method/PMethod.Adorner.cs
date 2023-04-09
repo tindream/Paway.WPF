@@ -95,7 +95,7 @@ namespace Paway.WPF
                     myAdornerLayer.Add(new CustomAdorner(element, border,
                         xFunc: () =>
                         {
-                            var right = window is WindowEXT ? 2 : 16;
+                            var right = window is WindowEXT || (window.WindowStyle == System.Windows.WindowStyle.None && window.ResizeMode == ResizeMode.NoResize) ? 2 : 16;
                             return window.ActualWidth - border.ActualWidth - right;
                         },
                         yFunc: () =>
@@ -113,7 +113,7 @@ namespace Paway.WPF
                                 location = adornerNoticeList.Where(c => c.CreateOn < temp.CreateOn).Sum(c => c.Height);
                             }
                             var top = window.WindowStyle != System.Windows.WindowStyle.None ? (window is WindowEXT windowEXT) ? windowEXT.HeaderHeight : 30 : 0;
-                            var bottom2 = window is WindowEXT ? 4 : 11;
+                            var bottom2 = window is WindowEXT || (window.WindowStyle == System.Windows.WindowStyle.None && window.ResizeMode == ResizeMode.NoResize) ? 4 : 11;
                             return window.ActualHeight - border.ActualHeight - bottom - top - bottom2 - location;
                         },
                         completedFunc: () =>
