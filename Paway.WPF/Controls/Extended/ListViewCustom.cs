@@ -405,7 +405,10 @@ namespace Paway.WPF
             ResetItemWidth();
             base.OnItemsChanged(e);
         }
-        private void ResetItemWidth()
+        /// <summary>
+        /// 重置大小
+        /// </summary>
+        public void ResetItemWidth()
         {
             var actualWidth = ActualWidth - BorderThickness.Left - BorderThickness.Right - Padding.Left - Padding.Right;
             var margin = ItemMargin.Left + ItemMargin.Right;
@@ -466,7 +469,7 @@ namespace Paway.WPF
                         IListViewItem item = null;
                         if (Items[i] is IListViewItem temp) item = temp;
                         else if (this.ItemContainerGenerator.ContainerFromItem(Items[i]) is IListViewItem listViewItem) item = listViewItem;
-                        if (item != null)
+                        if (item != null && item.Visibility != Visibility.Collapsed)
                         {
                             var itemWidth = item.ItemWidth;
                             if (itemWidth.Equals(double.NaN)) itemWidth = this.ItemWidth;
