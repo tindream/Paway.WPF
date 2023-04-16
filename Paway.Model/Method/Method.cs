@@ -131,16 +131,24 @@ namespace Paway.Model
         /// <summary>
         /// 同步更新
         /// </summary>
-        public static void Update<T>(T info) where T : class, IId
+        public static T Update<T>(T info) where T : class, IId
         {
             Update(new List<T> { info });
+            return Cache.List<T>().Find(c => c.Id == info.Id);
         }
         /// <summary>
         /// 同步更新
         /// </summary>
         public static void Update<T>(List<T> fList) where T : class, IId
         {
-            var tList = Cache.List<T>();
+            Update(typeof(T), fList);
+        }
+        /// <summary>
+        /// 同步更新
+        /// </summary>
+        public static void Update(Type type, IList fList)
+        {
+            var tList = Cache.List(type);
             Method.Update(OperType.Update, tList, fList);
         }
         /// <summary>
@@ -156,7 +164,14 @@ namespace Paway.Model
         /// </summary>
         public static void Delete<T>(List<T> fList) where T : class, IId
         {
-            var tList = Cache.List<T>();
+            Delete(typeof(T), fList);
+        }
+        /// <summary>
+        /// 同步删除项
+        /// </summary>
+        public static void Delete(Type type, IList fList)
+        {
+            var tList = Cache.List(type);
             Method.Update(OperType.Delete, tList, fList);
         }
 

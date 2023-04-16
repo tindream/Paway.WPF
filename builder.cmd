@@ -5,10 +5,10 @@
 @devenv Paway.WPF.sln /Rebuild release
 @echo ---------------------------------------------------------------------------
 @echo ---------------reactor-----------------------------------------------------
-@dotNET_Reactor -project Paway.WPF.nrproj
+@dotNET_Reactor -project builder\Paway.WPF.nrproj
 @copy bin\Release\Paway.WPF.xml bin\Release\Paway.WPF_Secure\Paway.WPF.xml
 @echo ---------------------------------------------------------------------------
 @echo ---------------nugut------------------------------------------------------
-@nuget pack Paway.WPF.nuspec
+@nuget pack builder\Paway.WPF.nuspec
 @echo --------------------------------------------------------------------------- 
 @IF "%1" == "" @PAUSE

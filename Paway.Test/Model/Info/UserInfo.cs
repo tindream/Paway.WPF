@@ -28,7 +28,7 @@ namespace Paway.Test
         /// <summary>
         /// 昵称
         /// </summary>
-        [Text("姓名")]
+        [NoShow, Text("姓名")]
         public string Display
         {
             get => _display;
@@ -94,13 +94,10 @@ namespace Paway.Test
         public void Checked()
         {
             if (Cache.UserList.Any(c => c.Id != this.Id && c.UserName == this.UserName)) throw new WarningException($"[{this.GetType().Description()}]{this.UserName} 已存在");
-            if (!this.Display.IsEmpty() && Cache.UserList.Any(c => c.Id != this.Id && c.Display == this.Display)) throw new WarningException($"[{this.GetType().Description()}]{this.Display} 已存在");
         }
         public bool Compare(UserInfo item)
         {
-            if (this.UserName == item.UserName) return true;
-            if (!this.Display.IsEmpty() && !item.Display.IsEmpty()) return this.Display == item.Display;
-            return false;
+            return this.UserName == item.UserName;
         }
 
         public UserInfo() { }

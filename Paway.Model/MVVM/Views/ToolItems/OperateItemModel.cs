@@ -124,10 +124,11 @@ namespace Paway.Model
         protected virtual void Action(KeyMessage msg)
         {
             if (Config.Menu != this.Menu) return;
+            if (DockPanel?.Visibility != Visibility.Visible) return;
             switch (msg.Key)
             {
-                case Key.F5: ActionInternalMsg("刷新"); break;
-                case Key.Delete: ActionInternalMsg("删除"); break;
+                case Key.F5: if ((Auth & MenuAuthType.Refresh) == MenuAuthType.Refresh) ActionInternalMsg("刷新"); break;
+                case Key.Delete: if ((Auth & MenuAuthType.Delete) == MenuAuthType.Delete) ActionInternalMsg("删除"); break;
                 case Key.Escape:
                     if (Method.Find(DockPanel, out TextBoxEXT tbSearch, "tbSearch"))
                     {
@@ -153,12 +154,12 @@ namespace Paway.Model
                 {
                     switch (msg.Key)
                     {
-                        case Key.A: ActionInternalMsg("添加"); break;
-                        case Key.E: ActionInternalMsg("编辑"); break;
-                        case Key.D: ActionInternalMsg("删除"); break;
-                        case Key.I: ActionInternalMsg("导入"); break;
-                        case Key.O: ActionInternalMsg("导出"); break;
-                        case Key.S: ActionInternalMsg("保存"); break;
+                        case Key.A: if ((Auth & MenuAuthType.Add) == MenuAuthType.Add) ActionInternalMsg("添加"); break;
+                        case Key.E: if ((Auth & MenuAuthType.Edit) == MenuAuthType.Edit) ActionInternalMsg("编辑"); break;
+                        case Key.D: if ((Auth & MenuAuthType.Delete) == MenuAuthType.Delete) ActionInternalMsg("删除"); break;
+                        case Key.I: if ((Auth & MenuAuthType.Import) == MenuAuthType.Import) ActionInternalMsg("导入"); break;
+                        case Key.O: if ((Auth & MenuAuthType.Export) == MenuAuthType.Export) ActionInternalMsg("导出"); break;
+                        case Key.S: if ((Auth & MenuAuthType.Save) == MenuAuthType.Save) ActionInternalMsg("保存"); break;
                         case Key.F:
                             if (Method.Find(DockPanel, out TextBoxEXT tbSearch, "tbSearch") && !tbSearch.IsKeyboardFocusWithin)
                             {

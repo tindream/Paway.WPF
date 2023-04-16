@@ -153,11 +153,12 @@ namespace Paway.WPF
         /// <summary>
         /// 消息列表操作
         /// </summary>
-        public static void NoticeClear(object tag)
+        public static bool NoticeClear(object tag)
         {
             lock (adornerNoticeLock)
             {
-                adornerNoticeList.FindAll(c => c.Tag.Equals(tag)).ForEach(c =>
+                var list = adornerNoticeList.FindAll(c => c.Tag != null && c.Tag.Equals(tag));
+                list.ForEach(c =>
                 {
                     AnimationHelper.Start(c.Border, TransitionType.ToRight, completed: () =>
                     {
@@ -167,6 +168,7 @@ namespace Paway.WPF
                         }
                     });
                 });
+                return list.Count > 0;
             }
         }
         private static readonly object adornerNoticeLock = new object();
