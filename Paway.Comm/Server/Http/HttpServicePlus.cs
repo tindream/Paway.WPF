@@ -28,8 +28,9 @@ namespace Paway.Comm
     public partial class HttpServicePlus : HttpService
     {
         private readonly IDataService server;
-        public event Action<SyncMessage> SyncEvent;
-        public event Func<int, MClientInfo> ClientEvent;
+        public event Action<HttpListenerContext, SyncMessage> SyncEvent;
+        public event Func<HttpListenerContext, MClientInfo> ClientEvent;
+        public event Action<HttpListenerContext> FileEvent;
 
         public HttpServicePlus(IDataService server, int port) : base(port)
         {
@@ -38,9 +39,7 @@ namespace Paway.Comm
 
         private MClientInfo Client(HttpListenerContext context)
         {
-            var id = context.Request.QueryString["id"].ToInt();
-            var client = ClientEvent?.Invoke(id);
-            return client;
+            return ClientEvent?.Invoke(context);
         }
         protected override void MessageHandle(HttpListenerContext context, string data, ref string logMsg)
         {
@@ -130,7 +129,7 @@ namespace Paway.Comm
                     break;
             }
             logMsg += $">{typeName}";
-            if (syncList != null) SyncEvent?.Invoke(new SyncMessage(syncList, syncBsae.OperType) { ClientId = syncBsae.ClientId });
+            if (syncList != null) SyncEvent?.Invoke(context, new SyncMessage(syncList, syncBsae.OperType) { ClientId = syncBsae.ClientId });
         }
     }
 }

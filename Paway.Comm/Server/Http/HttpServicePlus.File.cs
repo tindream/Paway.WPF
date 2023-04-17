@@ -42,6 +42,7 @@ namespace Paway.Comm
                     case "POST":
                         Method.SaveFile(file, data);
                         base.Response(context, "上传成功");
+                        FileEvent?.Invoke(context);
                         break;
                     case "GET":
                         if (!File.Exists(file))
@@ -51,6 +52,7 @@ namespace Paway.Comm
                         else
                         {
                             base.Response(context, Method.ReadFile(file, out _));
+                            FileEvent?.Invoke(context);
                         }
                         break;
                 }

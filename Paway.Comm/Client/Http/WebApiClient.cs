@@ -130,9 +130,9 @@ namespace Paway.Comm
             {
                 try
                 {
-                    var url = $"{httpUrl}/sync?id={Config.User?.Id}";
+                    var url = $"{httpUrl}/sync";
                     var json = JsonConvert.SerializeObject(sync).CompressBase64();
-                    using (var client = new WebClientPro(timeout))
+                    using (var client = new WebClientPro(Config.User?.Id, timeout))
                     {
                         string response = client.UploadString(url, "POST", json).Decompress();
                         return JsonConvert.DeserializeObject<HttpResponseMessage>(response);
@@ -156,7 +156,7 @@ namespace Paway.Comm
             {
                 try
                 {
-                    using (var client = new WebClientPro(2 * 60))
+                    using (var client = new WebClientPro(Config.User?.Id, 2 * 60))
                     {
                         string response = client.UpFileAsync(httpUrl, toFile, file, max, percentage, completed);
                         return JsonConvert.DeserializeObject<HttpResponseMessage>(response);
@@ -176,7 +176,7 @@ namespace Paway.Comm
             {
                 try
                 {
-                    using (var client = new WebClientPro(2 * 60))
+                    using (var client = new WebClientPro(Config.User?.Id, 2 * 60))
                     {
                         string response = client.DownFileAsync(httpUrl, fromFile, file, percentage, completed);
                         var result = JsonConvert.DeserializeObject<HttpResponseMessage>(response);

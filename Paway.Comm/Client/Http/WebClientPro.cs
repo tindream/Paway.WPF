@@ -43,6 +43,10 @@ namespace Paway.Comm
             var result = Convert.ToBase64String(buffer);
             Headers[HttpRequestHeader.Authorization] = $"Basic {result}";
         }
+        public WebClientPro(int? userId, int timeout = 30) : this(timeout)
+        {
+            if (userId != null) Headers[HttpRequestHeader.Authorization] = $"{userId.Value}";
+        }
 
         /// <summary>
         /// 重写GetWebRequest,添加WebRequest对象超时时间

@@ -112,7 +112,7 @@ namespace Paway.Model
                     index %= PagedList.PageSize;
                 }
                 DataGrid.ScrollIntoView(info);
-                if (DataGrid.SelectionUnit != DataGridSelectionUnit.Cell) DataGrid.SelectedIndex = index;
+                if (DataGrid.SelectionUnit == DataGridSelectionUnit.FullRow) DataGrid.SelectedIndex = index;
                 else DataGrid.Select(info.Id, true);
             });
         }
@@ -155,7 +155,7 @@ namespace Paway.Model
             finally
             {
                 if (index >= DataGrid.Items.Count) index = DataGrid.Items.Count - 1;
-                if (DataGrid.SelectionUnit != DataGridSelectionUnit.Cell) DataGrid.SelectedIndex = index;
+                if (DataGrid.SelectionUnit == DataGridSelectionUnit.FullRow) DataGrid.SelectedIndex = index;
             }
         }
         protected void Deleted(List<T> list)
@@ -178,7 +178,7 @@ namespace Paway.Model
             finally
             {
                 if (index >= DataGrid.Items.Count) index = DataGrid.Items.Count - 1;
-                if (DataGrid.SelectionUnit != DataGridSelectionUnit.Cell) DataGrid.SelectedIndex = index;
+                if (DataGrid.SelectionUnit == DataGridSelectionUnit.FullRow) DataGrid.SelectedIndex = index;
             }
         }
         protected override void Refresh()

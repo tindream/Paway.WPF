@@ -94,9 +94,9 @@
     <Compile Include="Method\Config.cs" />
     <Compile Include="Model\Enum\CommType.cs" />
     <Compile Include="Model\Interface\IMessage.cs" />
-    <Compile Include="MQTT\LoginData.cs" />
-    <Compile Include="MQTT\MQTTClient.cs" />
-    <Compile Include="MQTT\MQTTService.cs" />
+    <Compile Include="Client\Mqtt\LoginData.cs" />
+    <Compile Include="Client\Mqtt\MQTTClient.cs" />
+    <Compile Include="Server\Mqtt\MQTTService.cs" />
     <Compile Include="MVVM\MQCountMessage.cs" />
     <Compile Include="Server\Http\HttpService.cs" />
     <Compile Include="Server\Http\HttpServicePlus.cs" />

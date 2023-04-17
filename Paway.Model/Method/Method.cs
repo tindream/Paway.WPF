@@ -83,8 +83,37 @@ namespace Paway.Model
         /// <summary>
         /// 导出到文件
         /// </summary>
-        public static bool Export(string fileName, out string outFile, string filter = "Excel 工作簿|*.xlsx|Excel 97-2003 工作簿|*.xls")
+        public static bool Export(string fileName, out string outFile, string filter = null)
         {
+            if (filter == null)
+            {
+                var extension = Path.GetExtension(fileName);
+                switch (extension)
+                {
+                    case ".xls":
+                    case ".xlsx": filter = $"Excel 工作簿|*{extension}|所有文件|*.*"; break;
+                    case ".doc":
+                    case ".docx": filter = $"Word 文档|*{extension}|所有文件|*.*"; break;
+                    case ".ppt":
+                    case ".pptx": filter = $"PPT 文稿|*{extension}|所有文件|*.*"; break;
+                    case ".pdf": filter = $"PDF 文件|*{extension}|所有文件|*.*"; break;
+                    case ".jpg":
+                    case ".jpeg":
+                    case ".png":
+                    case ".bmp": filter = $"图像文件|*{extension}|所有文件|*.*"; break;
+                    case ".avi":
+                    case ".wmv":
+                    case ".mp4":
+                    case ".mpg":
+                    case ".mpeg":
+                    case ".mov":
+                    case ".rm":
+                    case ".ram":
+                    case ".swf":
+                    case ".flv": filter = $"视频文件|*{extension}|所有文件|*.*"; break;
+                    default: filter = "Excel 工作簿|*.xlsx|Excel 97-2003 工作簿|*.xls"; break;
+                }
+            }
             outFile = null;
             var sfd = new SaveFileDialog()
             {

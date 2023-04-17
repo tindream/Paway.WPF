@@ -406,7 +406,7 @@ namespace Paway.WPF
             this.ScrollIntoView(item);
             if (this.ItemContainerGenerator.ContainerFromItem(item) is DataGridRow row)
             {
-                if (this.SelectionUnit != DataGridSelectionUnit.Cell) row.IsSelected = true;
+                if (this.SelectionUnit == DataGridSelectionUnit.FullRow) row.IsSelected = true;
                 row.Focus();
                 if (!iCell) return true;
                 if (PMethod.Child(row, out DataGridCellsPresenter presenter, iParent: false))
