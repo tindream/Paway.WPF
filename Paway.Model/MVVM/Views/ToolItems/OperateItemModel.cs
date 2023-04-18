@@ -78,7 +78,7 @@ namespace Paway.Model
         /// <summary>
         /// 刷新
         /// </summary>
-        protected virtual void Refresh() { }
+        protected virtual void Refresh(Action action = null) { }
         /// <summary>
         /// 保存
         /// </summary>

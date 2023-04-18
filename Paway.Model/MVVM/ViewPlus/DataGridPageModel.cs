@@ -181,13 +181,14 @@ namespace Paway.Model
                 if (DataGrid.SelectionUnit == DataGridSelectionUnit.FullRow) DataGrid.SelectedIndex = index;
             }
         }
-        protected override void Refresh()
+        protected override void Refresh(Action action = null)
         {
             Method.BeginInvoke(() =>
             {
                 Method.Progress(Method.Window(DataGrid), () =>
                 {
                     Init(Find());
+                    action?.Invoke();
                 }, null, ex =>
                 {
                     Messenger.Default.Send(new StatuMessage(ex));

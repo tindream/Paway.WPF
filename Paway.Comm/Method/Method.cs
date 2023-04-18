@@ -23,10 +23,10 @@ namespace Paway.Comm
         /// <summary>
         /// 接收数据，JSON转实体，更新数据
         /// </summary>
-        public static void Sync(SyncMessage msg)
+        public static IList Sync(SyncMessage msg)
         {
-            if (msg.IType == null || msg.List == null) return;
-            if (msg.List.Count == 0 && msg.OperType != OperType.Reset) return;
+            if (msg.IType == null || msg.List == null) return null;
+            if (msg.List.Count == 0 && msg.OperType != OperType.Reset) return null;
             bool isJson = msg.List.GenericType() == typeof(object) || msg.List.GenericType() == typeof(JObject);
             {
                 var list = !isJson ? msg.List.Clone(true) : JsonToIList(msg.List, msg.IType);
@@ -38,6 +38,7 @@ namespace Paway.Comm
                         Method.Sorted(Cache.Dic[msg.IType]);
                     }
                 }
+                return list;
             }
         }
         /// <summary>

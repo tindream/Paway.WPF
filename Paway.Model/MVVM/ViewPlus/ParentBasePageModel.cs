@@ -45,10 +45,9 @@ namespace Paway.Model
             }
             base.Action(item);
         }
-        protected override void Refresh()
+        protected override void Refresh(Action action = null)
         {
-            base.Refresh();
-            this.PageReload();
+            base.Refresh(() => Method.Invoke(() => this.PageReload()));
         }
         public override void PageReload()
         {
@@ -102,10 +101,9 @@ namespace Paway.Model
             }
             base.Action(item);
         }
-        protected override void Refresh()
+        protected override void Refresh(Action action = null)
         {
-            base.Refresh();
-            this.PageReload();
+            base.Refresh(() => Method.Invoke(() => this.PageReload()));
         }
         public override void PageReload()
         {
