@@ -28,14 +28,14 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-通知消息
         /// </summary>
-        public static void Notice(DependencyObject parent, object msg, ColorType type = ColorType.Color, double? fontSize = null, int bottom = 35, object tag = null, Action<object> hitAction = null)
+        public static void Notice(DependencyObject parent, object msg, ColorType type = ColorType.Color, double? fontSize = null, int bottom = 35, object tag = null, Action<object> hitAction = null, Action completed = null)
         {
-            Notice(parent, msg, 0, type, fontSize, bottom, tag, hitAction);
+            Notice(parent, msg, 0, type, fontSize, bottom, tag, hitAction, completed);
         }
         /// <summary>
         /// 装饰器-通知消息
         /// </summary>
-        public static void Notice(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color, double? fontSize = null, int bottom = 35, object tag = null, Action<object> hitAction = null)
+        public static void Notice(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color, double? fontSize = null, int bottom = 35, object tag = null, Action<object> hitAction = null, Action completed = null)
         {
             Invoke(() =>
             {
@@ -124,6 +124,7 @@ namespace Paway.WPF
                                 var temp = adornerNoticeList.Find(c => c.Id == id);
                                 if (temp != null) adornerNoticeList.Remove(temp);
                             }
+                            completed?.Invoke();
                         },
                         storyboardFunc: () =>
                         {
@@ -218,7 +219,7 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-收到消息装入列表
         /// </summary>
-        public static void SlowIn(FrameworkElement parent, object msg, int time = 500, double xMove = 0, double yMove = 0, double size = 36, Color? color = null)
+        public static void SlowIn(FrameworkElement parent, object msg, int time = 500, double xMove = 0, double yMove = 0, double size = 36, Color? color = null, Action completed = null)
         {
             Invoke(() =>
             {
@@ -275,7 +276,7 @@ namespace Paway.WPF
                     }
 
                     return storyboard;
-                }));
+                }, completedFunc: completed));
             });
         }
 
@@ -400,14 +401,14 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-自定义吐泡消息框-Toast
         /// </summary>
-        public static void Toast(DependencyObject parent, object msg, ColorType type = ColorType.Color, int? fontSize = null)
+        public static void Toast(DependencyObject parent, object msg, ColorType type = ColorType.Color, int? fontSize = null, Action completed = null)
         {
-            Toast(parent, msg, 0, type, fontSize);
+            Toast(parent, msg, 0, type, fontSize, completed);
         }
         /// <summary>
         /// 装饰器-自定义吐泡消息框-Toast
         /// </summary>
-        public static void Toast(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color, int? fontSize = null)
+        public static void Toast(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color, int? fontSize = null, Action completed = null)
         {
             Invoke(() =>
             {
@@ -470,7 +471,7 @@ namespace Paway.WPF
                         storyboard.Children.Add(animOut);
 
                         return storyboard;
-                    }));
+                    }, completedFunc: completed));
                 }
             });
             //Invoke(parent, () =>
@@ -489,14 +490,14 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-自定义提示框-Hit
         /// </summary>
-        public static void Hit(DependencyObject parent, object msg, ColorType type = ColorType.Color, int? fontSize = null)
+        public static void Hit(DependencyObject parent, object msg, ColorType type = ColorType.Color, int? fontSize = null, Action completed = null)
         {
-            Hit(parent, msg, 0, type, fontSize);
+            Hit(parent, msg, 0, type, fontSize, completed);
         }
         /// <summary>
         /// 装饰器-自定义提示框-Hit
         /// </summary>
-        public static void Hit(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color, int? fontSize = null)
+        public static void Hit(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color, int? fontSize = null, Action completed = null)
         {
             Invoke(() =>
             {
@@ -565,7 +566,7 @@ namespace Paway.WPF
                         storyboard.Children.Add(animColor);
 
                         return storyboard;
-                    })
+                    }, completedFunc: completed)
                     { Name = NameHit });
                 }
             });
