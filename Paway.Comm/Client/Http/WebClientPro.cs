@@ -17,6 +17,7 @@ using MQTTnet;
 using System.ComponentModel;
 using System.Net;
 using Newtonsoft.Json;
+using Paway.Model;
 
 namespace Paway.Comm
 {
@@ -43,9 +44,13 @@ namespace Paway.Comm
             var result = Convert.ToBase64String(buffer);
             Headers[HttpRequestHeader.Authorization] = $"Basic {result}";
         }
-        public WebClientPro(int? userId, int timeout = 30) : this(timeout)
+        public WebClientPro(IUser user, int timeout = 30) : this(timeout)
         {
-            if (userId != null) Headers[HttpRequestHeader.Authorization] = $"{userId.Value}";
+            if (user != null)
+            {
+                Headers[HttpRequestHeader.Authorization] = $"{user.Id}";
+                Headers["Tag"] = $"{user.Tag()}";
+            }
         }
 
         /// <summary>

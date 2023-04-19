@@ -109,5 +109,10 @@ namespace Paway.Test
         {
             return CustomName;
         }
+
+        public object Tag()
+        {
+            return UserType;
+        }
     }
 }

@@ -33,5 +33,10 @@ namespace Paway.Model
         /// 登陆时间
         /// </summary>
         DateTime LoginOn { get; set; }
+
+        /// <summary>
+        /// 标识
+        /// </summary>
+        object Tag();
     }
 }

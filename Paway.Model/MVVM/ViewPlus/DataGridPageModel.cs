@@ -38,7 +38,7 @@ namespace Paway.Model
         /// List为全局缓存，当前页可能需要过滤显示
         /// </summary>
         protected Func<T, bool> listFilter;
-        protected List<T> FilterList()
+        protected virtual List<T> FilterList()
         {
             if (listFilter == null) return List;
             return List.FindAll(c => listFilter(c));
@@ -156,6 +156,7 @@ namespace Paway.Model
             {
                 if (index >= DataGrid.Items.Count) index = DataGrid.Items.Count - 1;
                 if (DataGrid.SelectionUnit == DataGridSelectionUnit.FullRow) DataGrid.SelectedIndex = index;
+                else if (index >= 0) DataGrid.Select(this.FilterList()[index].Id, true);
             }
         }
         protected void Deleted(List<T> list)
@@ -179,6 +180,7 @@ namespace Paway.Model
             {
                 if (index >= DataGrid.Items.Count) index = DataGrid.Items.Count - 1;
                 if (DataGrid.SelectionUnit == DataGridSelectionUnit.FullRow) DataGrid.SelectedIndex = index;
+                else if (index >= 0) DataGrid.Select(this.FilterList()[index].Id, true);
             }
         }
         protected override void Refresh(Action action = null)

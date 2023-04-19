@@ -608,17 +608,14 @@ namespace Paway.WPF
                             BeginInvoke(() =>
                             {
                                 success.Invoke();
-                            });
+                            }, ex => InvokeError(error, ex));
                         }
                     }
                     catch (Exception ex)
                     {
                         if (error != null)
                         {
-                            BeginInvoke(() =>
-                            {
-                                error.Invoke(ex);
-                            });
+                            BeginInvoke(() => error.Invoke(ex));
                         }
                         else
                         {
@@ -631,14 +628,16 @@ namespace Paway.WPF
                         ProgressClose(progress);
                         if (completed != null)
                         {
-                            BeginInvoke(() =>
-                            {
-                                completed.Invoke();
-                            }, error);
+                            BeginInvoke(() => completed.Invoke(), ex => InvokeError(error, ex));
                         }
                     }
                 });
-            }, error);
+            }, ex => InvokeError(error, ex));
+        }
+        private static void InvokeError(Action<Exception> error, Exception ex)
+        {
+            if (error != null) BeginInvoke(() => error.Invoke(ex));
+            else ex.Log();
         }
         /// <summary>
         /// 装饰器-同步显示Window进度条
