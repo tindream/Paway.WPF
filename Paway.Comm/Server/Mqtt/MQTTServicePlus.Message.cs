@@ -52,7 +52,7 @@ namespace Paway.Comm
             catch (JsonReaderException)
             {
                 $"{logMsg}>未定义消息>{Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}".Log(LeveType.Error);
-                Publish(e.ApplicationMessage.Topic, new ErrorMessage(CommType.None, "未定义消息"));
+                Publish($"{_topic}/{e.ClientId}", new ErrorMessage(CommType.None, "未定义消息"));
             }
             catch (Exception ex)
             {
@@ -67,7 +67,7 @@ namespace Paway.Comm
                 }
                 if (type != CommType.None)
                 {
-                    Publish(e.ApplicationMessage.Topic, new ErrorMessage(type, error));
+                    Publish($"{_topic}/{e.ClientId}", new ErrorMessage(type, error));
                 }
             }
             return CompletedTask.Instance;

@@ -24,6 +24,10 @@ namespace Paway.Comm
     public partial class MQTTService
     {
         #region 变量
+        /// <summary>
+        /// 默认订阅根主题
+        /// </summary>
+        protected string _topic;
         private MqttServer mqttServer = null;
 
         #endregion
@@ -33,8 +37,10 @@ namespace Paway.Comm
         /// 启动，完成后引发StartEvent
         /// </summary>
         /// <param name="port">服务端口</param>
-        public virtual Task StartAsync(int port)
+        /// <param name="topic">默认订阅根主题</param>
+        public virtual Task StartAsync(int port, string topic)
         {
+            this._topic = topic;
             return CreateMQTTServer(port);
         }
         /// <summary>

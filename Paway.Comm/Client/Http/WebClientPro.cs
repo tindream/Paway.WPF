@@ -96,7 +96,7 @@ namespace Paway.Comm
         /// <summary>
         /// 异步上传文件
         /// </summary>
-        public string UpFileAsync(string httpUrl, string toFile, string file, double max, Action<double> percentage = null, Action completed = null)
+        public string UpFileAsync(string httpUrl, string toFile, string file, double max = 0, Action<double> percentage = null, Action completed = null)
         {
             if (percentage != null)
             {
@@ -106,7 +106,7 @@ namespace Paway.Comm
 
             var url = $"{httpUrl}/{Config.UploadPath}/{toFile}?id={Config.User?.Id}";
             var str = Method.ReadFile(file, out int length);
-            if (length > max * 1024 * 1024)
+            if (max != 0 && length > max * 1024 * 1024)
             {
                 var desc = max >= 1 ? $"{max:0.#}M" : $"{max * 1024:F0}K";
                 throw new WarningException($"上传附件不得大于{desc}");

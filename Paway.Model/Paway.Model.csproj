@@ -147,6 +147,7 @@
     </Compile>
     <Compile Include="Data\DataService.cs" />
     <Compile Include="Method\Cache.cs" />
+    <Compile Include="Method\StarAdorner.cs" />
     <Compile Include="Method\Config.cs" />
     <Compile Include="Method\Method.cs" />
     <Compile Include="Method\PlotHelper.cs" />

@@ -150,7 +150,7 @@ namespace Paway.Comm
         #endregion
 
         #region 文件上传下载
-        public static string UpFile(string toFile, string file, double max, Action<double> percentage = null, Action completed = null)
+        public static string UpFile(string toFile, string file, double max = 0, Action<double> percentage = null, Action completed = null)
         {
             var task = Task.Run(() =>
             {

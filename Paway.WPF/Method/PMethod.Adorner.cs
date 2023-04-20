@@ -24,6 +24,30 @@ namespace Paway.WPF
         private static readonly string NameWater = $"{nameof(PMethod)}_{nameof(WaterAdornerFixed)}";
         private static readonly string NameHit = $"{nameof(PMethod)}_{nameof(Hit)}";
 
+        #region 装饰器-空白
+        /// <summary>
+        /// 装饰器-空白画板
+        /// </summary>
+        public static Canvas CustomAdorner(DependencyObject parent)
+        {
+            return Invoke(() =>
+            {
+                if (!Parent(parent, out Window window)) return null;
+                if (window.Content is FrameworkElement element)
+                {
+                    var myAdornerLayer = ReloadAdorner(element);
+                    if (myAdornerLayer == null) return null;
+
+                    var customAdorner = new CustomAdorner(element);
+                    myAdornerLayer.Add(customAdorner);
+                    return customAdorner.GetCanvas();
+                }
+                return null;
+            });
+        }
+
+        #endregion
+
         #region 装饰器-通知消息
         /// <summary>
         /// 装饰器-通知消息

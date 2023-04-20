@@ -21,11 +21,11 @@ namespace Paway.WPF
         /// <summary>
         /// 构造要将绑定到的装饰器的元素
         /// </summary>
-        public CustomAdorner(FrameworkElement adornedElement, FrameworkElement element, Color? color = null, Func<double> xFunc = null, Func<double> yFunc = null, Func<Storyboard> storyboardFunc = null, Action completedFunc = null, bool? hitTest = null) : base(adornedElement)
+        public CustomAdorner(FrameworkElement adornedElement, FrameworkElement element = null, Color? color = null, Func<double> xFunc = null, Func<double> yFunc = null, Func<Storyboard> storyboardFunc = null, Action completedFunc = null, bool? hitTest = null) : base(adornedElement)
         {
             //true:不路由事件（不穿透）
             //false:路由事件（穿透）
-            if (hitTest == null) hitTest = storyboardFunc == null;
+            if (hitTest == null) hitTest = element != null && storyboardFunc == null;
             IsHitTestVisible = hitTest.Value;
             canvas = new Canvas() { ClipToBounds = true };
             if (color != null) canvas.Background = color.Value.ToBrush();
@@ -35,13 +35,13 @@ namespace Paway.WPF
                 canvas
             };
 
-            canvas.Children.Add(element);
+            if (element != null) canvas.Children.Add(element);
             this.Loaded += (sender, e) =>
             {
                 Canvas.SetLeft(element, xFunc != null ? xFunc() : (canvas.ActualWidth - element.ActualWidth) / 2);
                 Canvas.SetTop(element, yFunc != null ? yFunc() : (canvas.ActualHeight - element.ActualHeight) / 2);
             };
-            element.Loaded += (sender, e) =>
+            if (element != null) element.Loaded += (sender, e) =>
             {
                 if (storyboardFunc == null) return;
                 var storyboard = storyboardFunc();

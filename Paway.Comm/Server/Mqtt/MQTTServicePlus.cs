@@ -31,7 +31,7 @@ namespace Paway.Comm
         public void Start(int port)
         {
             gClient = new ClientHelper();
-            base.StartAsync(port).Wait();
+            base.StartAsync(port, Config.Topic).Wait();
             Messenger.Default.Send(new StatuMessage($"mq://+:{port} 已启动"));
         }
         public void Stop()
