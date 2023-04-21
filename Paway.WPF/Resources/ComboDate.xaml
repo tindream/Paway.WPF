@@ -7,7 +7,7 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    <local:NoLeftBottomRadiusConverter x:Key="noLeftBottomRadiusConverter"/>
+    <local:NoBottomLeftRadiusConverter x:Key="noBottomLeftRadiusConverter"/>
 
     <Style TargetType="{x:Type local:ComboDate}" BasedOn="{StaticResource ComboConfig}">
         <Setter Property="Padding" Value="5"/>
@@ -74,7 +74,7 @@
                             <Setter TargetName="border" Property="BorderBrush" 
                                     Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" />
                             <Setter TargetName="border" Property="CornerRadius" 
-                                    Value="{Binding Radius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource noLeftBottomRadiusConverter}}" />
+                                    Value="{Binding Radius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource noBottomLeftRadiusConverter}}" />
                             <Setter Property="Panel.ZIndex" Value="{x:Static sys:Int32.MaxValue}" />
                         </Trigger>
                         <MultiTrigger>

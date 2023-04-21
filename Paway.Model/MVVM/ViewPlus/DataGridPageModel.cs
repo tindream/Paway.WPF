@@ -238,14 +238,14 @@ namespace Paway.Model
         {
             ActionInternalMsg("编辑");
         });
-        public ICommand SelectionCommand => new RelayCommand<ListViewEXT>(listView1 =>
+        public ICommand SelectionCommand => new RelayCommand<ListViewCustom>(listView1 =>
         {
             if (listView1.SelectedItem is IListViewItem item)
             {
                 Selectioned(listView1, item);
             }
         });
-        protected virtual void Selectioned(ListViewEXT listView1, IListViewItem item)
+        protected virtual void Selectioned(ListViewCustom listView1, IListViewItem item)
         {
             ActionInternal(item.Text);
             listView1.SelectedIndex = -1;

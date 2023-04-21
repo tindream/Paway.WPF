@@ -6,6 +6,10 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\ScrollBar.xaml" />
     </ResourceDictionary.MergedDictionaries>
+    <local:TopLeftRadiusConverter x:Key="topLeftRadiusConverter"/>
+    <local:TopRightRadiusConverter x:Key="topRightRadiusConverter"/>
+    <local:TopRadiusConverter x:Key="topRadiusConverter"/>
+    <local:NoRadiusConverter x:Key="noRadiusConverter"/>
 
     <Style TargetType="{x:Type DataGridCell}">
         <!--<Setter Property="Background" Value="White" />-->
@@ -55,39 +59,34 @@
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
         <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="Padding" Value="5,10"/>
+        <Setter Property="Tag" Value="{Binding Path=Radius, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}, Converter={StaticResource topRadiusConverter}}"/>
         <Setter Property="Background" Value="{Binding Path=HeaderBrush.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}}"/>
         <Setter Property="Foreground" Value="{StaticResource Text}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Border BorderBrush="{TemplateBinding BorderBrush}"
-                                Padding="{TemplateBinding Padding}"
-                                Background="{TemplateBinding Background}">
-                            <Border.BorderThickness>
-                                <MultiBinding Converter="{StaticResource boolSelector}">
-                                    <Binding Path="CanUserResizeColumns" RelativeSource="{RelativeSource AncestorType={x:Type local:DataGridEXT}}"/>
-                                    <Binding Source="0,0,0,1" />
-                                    <Binding Path="BorderThickness" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
-                                </MultiBinding>
-                            </Border.BorderThickness>
-                            <DockPanel>
-                                <Path Name="sort" Style="{StaticResource PathTriangle}" Width="10" Height="10" Margin="2" DockPanel.Dock="Right" Visibility="Collapsed"/>
-                                <ContentPresenter Content="{TemplateBinding Content}"
-                                                  HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}}"/>
-                            </DockPanel>
-                        </Border>
-                        <Thumb Grid.Column="1" x:Name="PART_RightHeaderGripper" Width="6"
-                               Style="{StaticResource DataGridThumbDefault}"
-                               BorderThickness="{TemplateBinding BorderThickness}" 
-                               BorderBrush="{TemplateBinding BorderBrush}"
-                               Background="{TemplateBinding Background}"
-                               Cursor="SizeWE" />
-                    </Grid>
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            CornerRadius="{TemplateBinding Tag}"
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Border Padding="{TemplateBinding Padding}">
+                                <DockPanel>
+                                    <Path Name="sort" Style="{StaticResource PathTriangle}" Width="10" Height="10" Margin="2" DockPanel.Dock="Right" Visibility="Collapsed"/>
+                                    <ContentPresenter Content="{TemplateBinding Content}"
+                                                      HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}}"/>
+                                </DockPanel>
+                            </Border>
+                            <Thumb Grid.Column="1" x:Name="PART_RightHeaderGripper" Width="6"
+                                   Style="{StaticResource DataGridThumbDefault}"
+                                   Background="Transparent"
+                                   Cursor="SizeWE" />
+                        </Grid>
+                    </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="DataGridColumnHeader.SortDirection" Value="0">
                             <Setter Property="Style" TargetName="sort" Value="{StaticResource PathTriangle}"/>
@@ -116,15 +115,23 @@
     </Style>
     <Style x:Key="LastColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource ColumnHeaderStyle}">
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
-        <!--<Setter Property="Margin" Value="0,0,-1,0"/>-->
+        <Setter Property="Tag" Value="{Binding Path=Radius, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}, Converter={StaticResource topRightRadiusConverter}}"/>
+    </Style>
+    <Style x:Key="FirstColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource ColumnHeaderStyle}">
+        <Setter Property="BorderThickness" Value="0,0,1,1"/>
+        <Setter Property="Tag" Value="{Binding Path=Radius, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}, Converter={StaticResource topLeftRadiusConverter}}"/>
+    </Style>
+    <Style x:Key="Only1ColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource ColumnHeaderStyle}">
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="Tag" Value="{Binding Path=Radius, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}, Converter={StaticResource topRadiusConverter}}"/>
     </Style>
     <Style x:Key="NormalColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource ColumnHeaderStyle}">
         <Setter Property="BorderThickness" Value="0,0,1,1"/>
+        <Setter Property="Tag" Value="{Binding Path=Radius, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}, Converter={StaticResource noRadiusConverter}}"/>
     </Style>
 
     <Style TargetType="{x:Type local:DataGridEXT}" BasedOn="{StaticResource Config}">
         <Setter Property="ICustomColumnHeader" Value="True"/>
-        <Setter Property="UseLayoutRounding" Value="True"/>
         <!--使其平滑滚动，默认是整行滚动-->
         <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
         <!--标题样式-->
@@ -170,6 +177,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="DataGrid">
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
+                            CornerRadius="{Binding Radius, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}}"
                             Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
                         <local:ScrollViewerEXT x:Name="Part_ScrollViewer" Focusable="false">
                             <local:ScrollViewerEXT.Template>

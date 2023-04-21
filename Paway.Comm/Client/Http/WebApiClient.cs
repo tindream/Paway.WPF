@@ -158,7 +158,8 @@ namespace Paway.Comm
                 {
                     using (var client = new WebClientPro(Config.User, 2 * 60))
                     {
-                        string response = client.UpFileAsync(httpUrl, toFile, file, max, percentage, completed);
+                        string response = client.UpFileAsync(httpUrl, toFile, file, max, percentage);
+                        completed?.Invoke();
                         return JsonConvert.DeserializeObject<HttpResponseMessage>(response);
                     }
                 }

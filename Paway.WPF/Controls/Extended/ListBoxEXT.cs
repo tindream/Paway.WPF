@@ -19,7 +19,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty RadiusProperty =
-            DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(ListBoxEXT), new PropertyMetadata(new CornerRadius(0)));
+            DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(ListBoxEXT));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =

@@ -24,6 +24,10 @@ namespace Paway.WPF
         #region 扩展
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty RadiusProperty =
+                DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(DataGridEXT));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(DataGridEXT),
                 new PropertyMetadata(new BrushEXT(PConfig.Alpha - PConfig.Interval * 2)));
@@ -41,6 +45,16 @@ namespace Paway.WPF
         public static readonly DependencyProperty ICustomColumnHeaderProperty =
             DependencyProperty.RegisterAttached(nameof(ICustomColumnHeader), typeof(bool), typeof(DataGridEXT), new PropertyMetadata(false));
 
+        /// <summary>
+        /// 自定义边框圆角
+        /// </summary>
+        [Category("扩展")]
+        [Description("自定义边框圆角")]
+        public CornerRadius Radius
+        {
+            get { return (CornerRadius)GetValue(RadiusProperty); }
+            set { SetValue(RadiusProperty, value); }
+        }
         /// <summary>
         /// 自定义项背景色
         /// </summary>
@@ -318,24 +332,45 @@ namespace Paway.WPF
                 }
                 if (!iReady) column.Visibility = property.IShow() ? Visibility.Visible : Visibility.Collapsed;
             }
-            this.Columns.Clear();
-            RefreshEvent?.Invoke(this);
             if (ICustomColumnHeader)
             {
-                var lastColumn = columns.FindLast(c => c.Visibility == Visibility.Visible);
-                if (lastColumn != null && TryFindResource("LastColumnHeaderStyle") is Style lastHeaderStyle)
+                var fill = this.ColumnWidth.UnitType == DataGridLengthUnitType.Star || columns.Any(c => c.Width.UnitType == DataGridLengthUnitType.Star);
+                if (fill)
                 {
-                    lastColumn.HeaderStyle = lastHeaderStyle;
-                }
-                if (TryFindResource("NormalColumnHeaderStyle") is Style noLastStyle)
-                {
-                    var fill = this.ColumnWidth.UnitType == DataGridLengthUnitType.Star || columns.Any(c => c.Width.UnitType == DataGridLengthUnitType.Star);
-                    foreach (var column in columns)
+                    var firstColumn = columns.Find(c => c.Visibility == Visibility.Visible);
+                    var lastColumn = columns.FindLast(c => c.Visibility == Visibility.Visible);
+                    if (firstColumn.Equals(lastColumn))
                     {
-                        if (!fill || column != lastColumn) column.HeaderStyle = noLastStyle;
+                        lastColumn.HeaderStyle = (Style)TryFindResource("Only1ColumnHeaderStyle");
+                    }
+                    else
+                    {
+                        firstColumn.HeaderStyle = (Style)TryFindResource("FirstColumnHeaderStyle");
+                        lastColumn.HeaderStyle = (Style)TryFindResource("LastColumnHeaderStyle");
+                    }
+                    if (TryFindResource("NormalColumnHeaderStyle") is Style normalColumnHeaderStyle)
+                    {
+                        foreach (var column in columns)
+                        {
+                            if (!column.Equals(firstColumn) && !column.Equals(lastColumn)) column.HeaderStyle = normalColumnHeaderStyle;
+                        }
+                    }
+                }
+                else
+                {
+                    var firstColumn = columns.Find(c => c.Visibility == Visibility.Visible);
+                    firstColumn.HeaderStyle = (Style)TryFindResource("FirstColumnHeaderStyle");
+                    if (TryFindResource("NormalColumnHeaderStyle") is Style normalColumnHeaderStyle)
+                    {
+                        foreach (var column in columns)
+                        {
+                            if (!column.Equals(firstColumn)) column.HeaderStyle = normalColumnHeaderStyle;
+                        }
                     }
                 }
             }
+            this.Columns.Clear();
+            RefreshEvent?.Invoke(this);
             foreach (var column in columns)
             {
                 this.Columns.Add(column);

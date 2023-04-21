@@ -59,6 +59,18 @@ namespace Paway.WPF
         /// 自定义项宽度
         /// </summary>
         double ItemWidth { get; set; }
+        /// <summary>
+        /// 自定义项高度
+        /// </summary>
+        double ItemHeight { get; set; }
+        /// <summary>
+        /// 自定义项圆角
+        /// </summary>
+        RadiusEXT ItemRadius { get; set; }
+        /// <summary>
+        /// 自定义项文本内边距
+        /// </summary>
+        ThicknessEXT ItemPadding { get; set; }
 
         /// <summary>
         /// 自定义项文本字体颜色
@@ -206,6 +218,36 @@ namespace Paway.WPF
         {
             get { return itemWidth; }
             set { itemWidth = value; OnPropertyChanged(); }
+        }
+        private double itemHeight = double.NaN;
+        /// <summary>
+        /// 自定义项高度
+        /// </summary>
+        [NoShow]
+        public double ItemHeight
+        {
+            get { return itemHeight; }
+            set { itemHeight = value; OnPropertyChanged(); }
+        }
+        private RadiusEXT itemRadius;
+        /// <summary>
+        /// 自定义项圆角
+        /// </summary>
+        [NoShow]
+        public RadiusEXT ItemRadius
+        {
+            get { return itemRadius; }
+            set { itemRadius = value; OnPropertyChanged(); }
+        }
+        private ThicknessEXT itemPadding = new ThicknessEXT(double.NaN);
+        /// <summary>
+        /// 自定义项文本内边距
+        /// </summary>
+        [NoShow]
+        public ThicknessEXT ItemPadding
+        {
+            get { return itemPadding; }
+            set { itemPadding = value; OnPropertyChanged(); }
         }
 
         private BrushEXT itemTextForeground;

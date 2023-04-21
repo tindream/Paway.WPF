@@ -71,7 +71,7 @@ namespace Paway.WPF
 
                     var border = new Border
                     {
-                        CornerRadius = new CornerRadius(5),
+                        CornerRadius = new CornerRadius(3),
                     };
                     if (hitAction != null)
                     {
@@ -445,7 +445,7 @@ namespace Paway.WPF
                     var color = AlphaColor(PConfig.Alpha, type.Color());
                     var border = new Border
                     {
-                        CornerRadius = new CornerRadius(5),
+                        CornerRadius = new CornerRadius(3),
                         Background = color.ToBrush(),
                     };
                     var block = new TextBlock()
@@ -534,7 +534,7 @@ namespace Paway.WPF
                     var color = AlphaColor(PConfig.Alpha, type.Color());
                     var border = new Border
                     {
-                        CornerRadius = new CornerRadius(5),
+                        CornerRadius = new CornerRadius(3),
                         Background = color.ToBrush(),
                     };
                     var block = new TextBlock()

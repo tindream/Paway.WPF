@@ -175,7 +175,7 @@ namespace Paway.Test
                 }
             }
         });
-        public ICommand SelectionCommand => new RelayCommand<ListViewEXT>(listView1 =>
+        public ICommand SelectionCommand => new RelayCommand<ListViewCustom>(listView1 =>
         {
             if (listView1.SelectedItem is IListViewItem info)
             {
