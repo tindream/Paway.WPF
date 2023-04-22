@@ -40,9 +40,10 @@ namespace Paway.WPF
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
             var service = (IProvideValueTarget)serviceProvider.GetService(typeof(IProvideValueTarget));
-            if (service != null && service.TargetObject is Control obj)
+            if (service != null)
             {
-                obj.FontFamily = PConfig.FontAwesome;
+                if (service.TargetObject is Control obj) obj.FontFamily = PConfig.FontAwesome;
+                else if (service.TargetObject is TextBlock textBlock) textBlock.FontFamily = PConfig.FontAwesome;
             }
             return Type.Description();
         }

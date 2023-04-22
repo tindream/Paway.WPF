@@ -88,8 +88,11 @@ namespace Paway.WPF
     /// <summary>
     /// 值转True
     /// </summary>
-    internal class ValueToTrue : IValueConverter
+    public class ValueToTrue : IValueConverter
     {
+        /// <summary>
+        /// 值转True
+        /// </summary>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             bool result;
@@ -103,6 +106,8 @@ namespace Paway.WPF
             else result = value.ToString() == parameter.ToStrings();
             return result;
         }
+        /// <summary>
+        /// </summary>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (!value.ToBool()) return null;//重复绑定且枚举值超出范围时绑定报错
@@ -134,8 +139,11 @@ namespace Paway.WPF
     /// <summary>
     /// 值转True(多原始枚举值)
     /// </summary>
-    internal class ValueMoreToTrue : IValueConverter
+    public class ValueMoreToTrue : IValueConverter
     {
+        /// <summary>
+        /// 值转True(多原始枚举值)
+        /// </summary>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             bool result;
@@ -146,20 +154,28 @@ namespace Paway.WPF
                 var valueReg = parameter.ToInt();
                 result = (valueNormal & valueReg) == valueReg;
             }
-            else result = value.ToString() == parameter.ToStrings();
+            else result = value.ToString().Contains(parameter.ToStrings());
             return result;
         }
+        /// <summary>
+        /// </summary>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var result = value.ToBool() ? 1 : -1;
-            return (result * parameter.ToInt()).ToString();//需返回字符串格式
+            var pStr = parameter.ToString();
+            var pInt = parameter.ToInt();
+            if (pStr == pInt.ToString()) return (result * pInt).ToString();//需返回字符串格式
+            else return (result * pStr.GetHashCode()).ToString();
         }
     }
     /// <summary>
     /// 值转True(多目标枚举值)
     /// </summary>
-    internal class ValueToMoreTrue : IValueConverter
+    public class ValueToMoreTrue : IValueConverter
     {
+        /// <summary>
+        /// 值转True(多目标枚举值)
+        /// </summary>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             bool result;
@@ -170,9 +186,11 @@ namespace Paway.WPF
                 var valueReg = parameter.ToInt();
                 result = (valueNormal & valueReg) == valueNormal;
             }
-            else result = value.ToString() == parameter.ToStrings();
+            else result = parameter.ToStrings().Contains(value.ToString());
             return result;
         }
+        /// <summary>
+        /// </summary>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();

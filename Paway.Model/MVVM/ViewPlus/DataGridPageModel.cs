@@ -116,7 +116,7 @@ namespace Paway.Model
                 else DataGrid.Select(info.Id, true);
             });
         }
-        protected void Insert(List<T> list)
+        protected virtual void Insert(List<T> list)
         {
             if (list.Count == 0) return;
             server.Insert(list);
@@ -159,7 +159,7 @@ namespace Paway.Model
                 else if (index >= 0) DataGrid.Select(this.FilterList()[index].Id, true);
             }
         }
-        protected void Deleted(List<T> list)
+        protected virtual void Deleted(List<T> list)
         {
             if (list.Count == 0) return;
             var index = DataGrid.SelectedIndex;

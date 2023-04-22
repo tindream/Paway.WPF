@@ -51,11 +51,13 @@ namespace Paway.Comm
             #region catch
             catch (JsonReaderException)
             {
+                e.ApplicationMessage.Topic = string.Empty;
                 $"{logMsg}>未定义消息>{Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}".Log(LeveType.Error);
                 Publish($"{_topic}/{e.ClientId}", new ErrorMessage(CommType.None, "未定义消息"));
             }
             catch (Exception ex)
             {
+                e.ApplicationMessage.Topic = string.Empty;
                 string error = ex.Message();
                 if (ex.InnerException() is DbException || ex.InnerException() is WarningException)
                 {

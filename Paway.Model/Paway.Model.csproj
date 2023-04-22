@@ -169,6 +169,7 @@
     <Compile Include="Model\Interface\ICompare.cs" />
     <Compile Include="MVVM\ViewMessage\ConnectMessage.cs" />
     <Compile Include="MVVM\ViewMessage\LoginMessage.cs" />
+    <Compile Include="MVVM\ViewPlus\ViewModelBasePlus.cs" />
     <Compile Include="MVVM\ViewPlus\ParentBasePageModel.cs" />
     <Compile Include="MVVM\Views\Login\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
