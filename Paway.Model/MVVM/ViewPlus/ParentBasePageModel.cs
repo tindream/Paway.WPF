@@ -27,7 +27,7 @@ namespace Paway.Model
         public Parent ParentInfo
         {
             get { return _parentInfo; }
-            set { if (_parentInfo != value) { _parentInfo = value; ParentChanged(); RaisePropertyChanged(); } }
+            set { if (_parentInfo != value) { _parentInfo = value; ParentChanged(); OnPropertyChanged(); } }
         }
         protected virtual void ParentChanged() { }
 
@@ -78,7 +78,7 @@ namespace Paway.Model
         public Parent ParentInfo
         {
             get { return _parentInfo; }
-            set { if (_parentInfo != value) { _parentInfo = value; ParentChanged(); RaisePropertyChanged(); } }
+            set { if (_parentInfo != value) { _parentInfo = value; ParentChanged(); OnPropertyChanged(); } }
         }
         protected virtual void ParentChanged()
         {

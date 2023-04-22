@@ -17,14 +17,14 @@ namespace Paway.Model
         public string Label
         {
             get { return _label; }
-            set { _label = value; RaisePropertyChanged(); }
+            set { _label = value; OnPropertyChanged(); }
         }
 
         private string _name;
         public string Name
         {
             get { return _name; }
-            set { _name = value; RaisePropertyChanged(); }
+            set { _name = value; OnPropertyChanged(); }
         }
 
         #endregion

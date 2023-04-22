@@ -133,7 +133,7 @@ namespace Paway.Model
         /// <summary>
         /// 星星漫游动画
         /// </summary>
-        private void StarRoamAnimation()
+        public void StarRoamAnimation()
         {
             if (_stars == null) return;
 

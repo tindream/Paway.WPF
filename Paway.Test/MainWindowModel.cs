@@ -29,7 +29,7 @@ namespace Paway.Test
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class MainWindowModel : ViewModelBase
+    public class MainWindowModel : ViewModelBasePlus
     {
         #region 属性
         public string Text => Config.Text;
@@ -48,7 +48,7 @@ namespace Paway.Test
                 {
                     selectedItem = value;
                     if (value != null) Id = value.Id;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -63,7 +63,7 @@ namespace Paway.Test
                     id = value;
                     SelectedItem = GridList.Find(c => c.Id == value);
                     //Pad = value.ToString();
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -76,7 +76,7 @@ namespace Paway.Test
                 if (treeId != value)
                 {
                     treeId = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -88,7 +88,7 @@ namespace Paway.Test
         public PlotModel PlotModel
         {
             get { return plotModel; }
-            set { plotModel = value; RaisePropertyChanged(); }
+            set { plotModel = value; OnPropertyChanged(); }
         }
 
         public ObservableCollection<IComboBoxItem> MultiList { get; } = new ObservableCollection<IComboBoxItem>();
@@ -97,161 +97,104 @@ namespace Paway.Test
         public DateTime DatePickerTime
         {
             get { return datePickerTime; }
-            set { datePickerTime = value; RaisePropertyChanged(); }
+            set { datePickerTime = value; OnPropertyChanged(); }
         }
 
         private int _value = 11;
         public int Value
         {
             get { return _value; }
-            set { _value = value; RaisePropertyChanged(); }
+            set { _value = value; OnPropertyChanged(); }
         }
         private string pad = "1";
         public string Pad
         {
             get { return pad; }
-            set { pad = value; RaisePropertyChanged(); }
+            set { pad = value; OnPropertyChanged(); }
         }
 
         private string desc = "准备就绪";
         public string Desc
         {
             get { return desc; }
-            set { desc = value; RaisePropertyChanged(); }
+            set { desc = value; OnPropertyChanged(); }
         }
 
         private PlotLineType monitorType = PlotLineType.RightToeAngle;
         public PlotLineType MonitorType
         {
             get { return monitorType; }
-            set { monitorType = value; RaisePropertyChanged(); }
+            set { monitorType = value; OnPropertyChanged(); }
         }
 
         #endregion
 
         #region 命令
-        private ICommand rowDoubleCommand;
-        public ICommand RowDoubleCommand
+        public ICommand RowDoubleCommand => new RelayCommand<SelectItemEventArgs>(e =>
         {
-            get
+            if (e.Source is DataGridEXT datagrid1)
             {
-                return rowDoubleCommand ?? (rowDoubleCommand = new RelayCommand<SelectItemEventArgs>(e =>
+                if (e.Item is ListViewItemModel info)
                 {
-                    if (e.Source is DataGridEXT datagrid1)
-                    {
-                        if (e.Item is ListViewItemModel info)
-                        {
-                        }
-                    }
-                }));
+                }
             }
-        }
+        });
 
-        private ICommand selectedItemChanged;
-        public ICommand SelectedItemChanged
+        public ICommand SelectedItemChanged => new RelayCommand<TreeViewEXT>(treeView =>
         {
-            get
+            if (treeView.SelectedItem is ITreeViewItem item)
             {
-                return selectedItemChanged ?? (selectedItemChanged = new RelayCommand<TreeViewEXT>(treeView =>
-                {
-                    if (treeView.SelectedItem is ITreeViewItem item)
-                    {
-                        this.TreeId = item.Id;
-                    }
-                }));
+                this.TreeId = item.Id;
             }
-        }
-        private ICommand sizeChanged;
-        public ICommand SizeChanged
+        });
+        public ICommand SizeChanged => new RelayCommand<SliderEXT>(slider =>
         {
-            get
-            {
-                return sizeChanged ?? (sizeChanged = new RelayCommand<SliderEXT>(slider =>
-                {
-                    Config.FontSize = slider.Value;
-                }));
-            }
-        }
-        private ICommand colorChanged;
-        public ICommand ColorChanged
+            Config.FontSize = slider.Value;
+        });
+        public ICommand ColorChanged => new RelayCommand<SliderEXT>(slider =>
         {
-            get
-            {
-                return colorChanged ?? (colorChanged = new RelayCommand<SliderEXT>(slider =>
-                {
-                    var color = Method.ColorSelector(slider.Value / 7);
-                    Config.Color = color;
-                    Config.Background = Method.ColorSelector((slider.Value + 0.4) / 7).AddLight(0.93);
-                    //Method.DoStyles();
-                }));
-            }
-        }
+            var color = Method.ColorSelector(slider.Value / 7);
+            Config.Color = color;
+            Config.Background = Method.ColorSelector((slider.Value + 0.4) / 7).AddLight(0.93);
+            //Method.DoStyles();
+        });
 
-        private ICommand cbxFilterCmd;
-        public ICommand CbxFilterCmd
+        public ICommand CbxFilterCmd => new RelayCommand<CustomFilterEventArgs>(e =>
         {
-            get
+            if (e.Source is DataGridEXT dataGrid)
             {
-                return cbxFilterCmd ?? (cbxFilterCmd = new RelayCommand<CustomFilterEventArgs>(e =>
-                {
-                    if (e.Source is DataGridEXT dataGrid)
-                    {
-                        var p = dataGrid.Columns.Predicate<ListViewItemModel>(e.Filter);
-                        e.List = this.list.AsParallel().Where(p).ToList();
-                    }
-                }));
+                var p = dataGrid.Columns.Predicate<ListViewItemModel>(e.Filter);
+                e.List = this.list.AsParallel().Where(p).ToList();
             }
-        }
+        });
 
-        private ICommand selectionCommand;
-        public ICommand SelectionCommand
+        protected override void Action(ListViewCustom listView1)
         {
-            get
+            base.Action(listView1);
+            if (listView1.SelectedItem is IListViewItem info)
             {
-                return selectionCommand ?? (selectionCommand = new RelayCommand<ListViewEXT>(listView1 =>
-                {
-                    if (listView1.SelectedItem is IListViewItem info)
-                    {
-                        Method.Toast(listView1, info.Text);
-                    }
-                    //if (listView1.SelectedItem is IListViewInfo info) Method.Show(listView1, info.Content);
-                    //listView1.SelectedIndex = -1;
-                }));
+                Method.Toast(listView1, info.Text);
             }
         }
-        private ICommand rectDoubleCommand;
-        public ICommand RectDoubleCommand
+        public ICommand RectDoubleCommand => new RelayCommand<MouseButtonEventArgs>(e =>
         {
-            get
+            if (e.Source is ListViewCustom listView)
             {
-                return rectDoubleCommand ?? (rectDoubleCommand = new RelayCommand<MouseButtonEventArgs>(e =>
+                var point = e.GetPosition(listView);
+                var obj = listView.InputHitTest(point);
+                if (PMethod.Parent(obj, out ListViewItem temp) && temp.Content is IListViewItem item)
                 {
-                    if (e.Source is ListView listvew)
-                    {
-                        var point = e.GetPosition(listvew);
-                        var obj = listvew.InputHitTest(point);
-                        if (PMethod.Parent(obj, out ListViewItem temp) && temp.Content is IListViewItem item)
-                        {
-                            Method.Hit(listvew, item.Text);
-                        }
-                    }
-                }));
+                    Method.Hit(listView, item.Text);
+                }
             }
-        }
+        });
 
-        private ICommand teach;
-        public ICommand Teach
+        public ICommand Teach => new RelayCommand<Button>(btn =>
         {
-            get
-            {
-                return teach ?? (teach = new RelayCommand<Button>(btn =>
-                {
-                    MultiList[0].IsChecked = !MultiList[0].IsChecked;
-                    var desc = string.Join(",", MultiList.ToList().FindAll(c => c.IsChecked).Select(c => c.Text));
-                    Method.Toast(btn, desc, 5000);
-                }));
-            }
-        }
+            MultiList[0].IsChecked = !MultiList[0].IsChecked;
+            var desc = string.Join(",", MultiList.ToList().FindAll(c => c.IsChecked).Select(c => c.Text));
+            Method.Toast(btn, desc, 5000);
+        });
 
         #endregion
 

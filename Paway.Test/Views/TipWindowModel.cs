@@ -2,6 +2,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Paway.Helper;
+using Paway.Model;
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ using System.Windows.Media.Animation;
 
 namespace Paway.Test
 {
-    public class TipWindowModel : ViewModelBase
+    public class TipWindowModel : ViewModelBasePlus
     {
         #region 属性
         private TipWindow tipWindow;
@@ -23,7 +24,7 @@ namespace Paway.Test
         public double TipWidth
         {
             get { return tipWidth; }
-            set { tipWidth = value; RaisePropertyChanged(); }
+            set { tipWidth = value; OnPropertyChanged(); }
         }
         private bool _iAll;
         public bool IAll
@@ -34,7 +35,7 @@ namespace Paway.Test
                 _iAll = value;
                 if (value) TipWidth = 248;
                 else TipWidth = 80;
-                RaisePropertyChanged();
+                OnPropertyChanged();
                 TipAnimation();
             }
         }
@@ -82,8 +83,9 @@ namespace Paway.Test
                 }
             }
         });
-        public ICommand SelectionCommand => new RelayCommand<ListViewEXT>(listView1 =>
+        protected override void Action(ListViewCustom listView1)
         {
+            base.Action(listView1);
             if (listView1.SelectedItem is IListViewItem info)
             {
                 switch (info.Text)
@@ -98,10 +100,10 @@ namespace Paway.Test
                 }
             }
             listView1.SelectedIndex = -1;
-        });
-        public ICommand MenuCommand => new RelayCommand<string>(item => Action(item));
-        public void Action(string item)
+        }
+        protected override void Action(string item)
         {
+            base.Action(item);
             switch (item)
             {
                 case "展开": this.IAll = true; break;

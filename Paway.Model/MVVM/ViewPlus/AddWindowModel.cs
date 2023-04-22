@@ -26,7 +26,7 @@ namespace Paway.Model
                 normal = value;
                 info = value.Clone();
                 Title = info.Id == 0 ? $"新加 - {info.GetType().Description()}" : $"{info.GetType().Description()} - {info}";
-                RaisePropertyChanged();
+                OnPropertyChanged();
                 ReLoad();
             }
         }

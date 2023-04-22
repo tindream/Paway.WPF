@@ -17,39 +17,39 @@ namespace Paway.Model
     /// <summary>
     /// 需优先初始化Init()，以接收消息
     /// </summary>
-    public partial class StatuItemModel : ViewModelBase
+    public partial class StatuItemModel : ViewModelBasePlus
     {
         #region 属性
         private string _userName;
         public string UserName
         {
             get { return _userName; }
-            set { _userName = value; RaisePropertyChanged(); }
+            set { _userName = value; OnPropertyChanged(); }
         }
         private string _desc;
         public string Desc
         {
             get { return _desc; }
-            set { _desc = value; RaisePropertyChanged(); }
+            set { _desc = value; OnPropertyChanged(); }
         }
         private string _timeNow;
         public string TimeNow
         {
             get { return _timeNow; }
-            set { if (_timeNow != value) { _timeNow = value; RaisePropertyChanged(); } }
+            set { if (_timeNow != value) { _timeNow = value; OnPropertyChanged(); } }
         }
 
         private Brush descBrush = ColorType.High.Color().ToBrush();
         public Brush DescBrush
         {
             get { return descBrush; }
-            set { if (descBrush != value) { descBrush = value; RaisePropertyChanged(); } }
+            set { if (descBrush != value) { descBrush = value; OnPropertyChanged(); } }
         }
         private Brush _connectBrush = ColorType.Warn.Color().ToBrush();
         public Brush ConnectBrush
         {
             get { return _connectBrush; }
-            set { if (_connectBrush != value) { _connectBrush = value; RaisePropertyChanged(); } }
+            set { if (_connectBrush != value) { _connectBrush = value; OnPropertyChanged(); } }
         }
         private Brush _connect2Brush = ColorType.Warn.Color().ToBrush();
         /// <summary>
@@ -58,7 +58,7 @@ namespace Paway.Model
         public Brush Connect2Brush
         {
             get { return _connect2Brush; }
-            set { if (_connect2Brush != value) { _connect2Brush = value; RaisePropertyChanged(); } }
+            set { if (_connect2Brush != value) { _connect2Brush = value; OnPropertyChanged(); } }
         }
 
         #endregion

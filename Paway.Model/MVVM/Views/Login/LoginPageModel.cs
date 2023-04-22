@@ -22,7 +22,7 @@ namespace Paway.Model
     /// <summary>
     /// 登陆基类，必须实现登陆方法
     /// </summary>
-    public abstract class LoginPageModel : ViewModelBase
+    public abstract class LoginPageModel : ViewModelBasePlus
     {
         #region 属性
         protected DependencyObject Root;
@@ -54,7 +54,7 @@ namespace Paway.Model
                         iFiltering = false;
                     }
                     _userName = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -64,48 +64,48 @@ namespace Paway.Model
         public string Password
         {
             get { return _password; }
-            set { _password = value; RaisePropertyChanged(); }
+            set { _password = value; OnPropertyChanged(); }
         }
 
         private bool _iUserList;
         public bool IUserList
         {
             get { return _iUserList; }
-            set { _iUserList = value; RaisePropertyChanged(); }
+            set { _iUserList = value; OnPropertyChanged(); }
         }
 
         private bool _iAuto;
         public bool IAuto
         {
             get { return _iAuto; }
-            set { _iAuto = value; RaisePropertyChanged(); }
+            set { _iAuto = value; OnPropertyChanged(); }
         }
 
         private string welcome = "欢迎使用";
         public string Welcome
         {
             get { return welcome; }
-            set { welcome = value; RaisePropertyChanged(); }
+            set { welcome = value; OnPropertyChanged(); }
         }
         private ImageSource _logoImage;
         public ImageSource LogoImage
         {
             get { return _logoImage; }
-            set { _logoImage = value; RaisePropertyChanged(); }
+            set { _logoImage = value; OnPropertyChanged(); }
         }
 
         private bool _iSetting;
         public bool ISetting
         {
             get { return _iSetting; }
-            set { _iSetting = value; RaisePropertyChanged(); }
+            set { _iSetting = value; OnPropertyChanged(); }
         }
 
         private bool _iClose;
         public bool IClose
         {
             get { return _iClose; }
-            set { _iClose = value; RaisePropertyChanged(); }
+            set { _iClose = value; OnPropertyChanged(); }
         }
 
         #endregion
@@ -125,52 +125,46 @@ namespace Paway.Model
         protected virtual Window SetWindow() { return null; }
         protected virtual void OnSet(DependencyObject obj) { }
         protected virtual void OnClose(DependencyObject obj) { }
-        public ICommand MenuCommand => new RelayCommand<string>(item =>
+        protected override void Action(string item)
         {
-            try
+            base.Action(item);
+            switch (item)
             {
-                switch (item)
-                {
-                    case "登陆":
-                        if (iLogining) break;
-                        try
+                case "登陆":
+                    if (iLogining) break;
+                    try
+                    {
+                        iLogining = true;
+                        if (UserName.IsEmpty())
                         {
-                            iLogining = true;
-                            if (UserName.IsEmpty())
+                            Method.Hit(Root, "请输入用户名");
+                            if (IUserList)
                             {
-                                Method.Hit(Root, "请输入用户名");
-                                if (IUserList)
-                                {
-                                    if (Method.Find(Root, out ComboBoxEXT cbxUserName, "cbxUserName")) cbxUserName.Focus();
-                                }
-                                else
-                                {
-                                    if (Method.Find(Root, out TextBoxEXT tbUserName, "tbUserName")) tbUserName.Focus();
-                                }
-                                return;
+                                if (Method.Find(Root, out ComboBoxEXT cbxUserName, "cbxUserName")) cbxUserName.Focus();
                             }
-                            Login();
+                            else
+                            {
+                                if (Method.Find(Root, out TextBoxEXT tbUserName, "tbUserName")) tbUserName.Focus();
+                            }
+                            return;
                         }
-                        finally
-                        {
-                            iLogining = false;
-                        }
-                        break;
-                    case "设置":
-                        var window = SetWindow();
-                        if (window != null && Method.Show(Root, window) == true)
-                        {
-                            OnSet(Root);
-                        }
-                        break;
-                    case "关闭": OnClose(Root); break;
-                }
+                        Login();
+                    }
+                    finally
+                    {
+                        iLogining = false;
+                    }
+                    break;
+                case "设置":
+                    var window = SetWindow();
+                    if (window != null && Method.Show(Root, window) == true)
+                    {
+                        OnSet(Root);
+                    }
+                    break;
+                case "关闭": OnClose(Root); break;
             }
-            catch (Exception ex)
-            {
-                Messenger.Default.Send(new StatuMessage(ex));
-            }
-        });
+        }
 
         #endregion
 

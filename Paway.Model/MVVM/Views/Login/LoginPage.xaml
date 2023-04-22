@@ -17,11 +17,11 @@
             <ButtonEXT Radius="0" IsLight="True" ItemBorder="0" Margin="0" ToolTip="设置"
                        Image="pack://application:,,,/Paway.Model;component/Images/login/setting.png|pack://application:,,,/Paway.Model;component/Images/login/setting.png"
                        Visibility="{Binding ISetting, Converter={StaticResource boolToVisible}}"
-                       Command="{Binding MenuCommand}" CommandParameter="设置" ImageWidth="48" ImageStretch="Uniform" Padding="7" />
+                       Command="{Binding ItemClickCommand}" CommandParameter="设置" ImageWidth="48" ImageStretch="Uniform" Padding="7" />
             <ButtonEXT Radius="0" Type="Error" IsLight="True" ItemBorder="0" Margin="0" ToolTip="关闭"
                        Image="pack://application:,,,/Paway.Model;component/Images/operate/close_white.png|pack://application:,,,/Paway.Model;component/Images/operate/close_white.png"
                        Visibility="{Binding IClose, Converter={StaticResource boolToVisible}}"
-                       Command="{Binding MenuCommand}" CommandParameter="关闭" ImageWidth="48" ImageStretch="Uniform" Padding="7" />
+                       Command="{Binding ItemClickCommand}" CommandParameter="关闭" ImageWidth="48" ImageStretch="Uniform" Padding="7" />
         </WrapPanel>
         <StackPanel x:Name="Root" Margin="0,-32,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="450">
             <Image Source="{Binding LogoImage}" Stretch="Uniform" Height="64"/>
@@ -41,7 +41,7 @@
                              PasswordBoxEXT.Password="{Binding Password}"
                              PasswordBoxEXT.IAnimation="2" 
                              PasswordBoxEXT.Icon="/Paway.Model;component/Images/login/password.png" PasswordBoxEXT.IconWidth="36" PasswordBoxEXT.IconStretch="Uniform"/>
-                <ButtonEXT Content="登陆" Command="{Binding MenuCommand}" CommandParameter="登陆" FontSize="30" IsLight="True" Margin="2,40,2,2" BorderBrush="White" ItemForeground="White;;" Padding="12,9"/>
+                <ButtonEXT Content="登陆" Command="{Binding ItemClickCommand}" CommandParameter="登陆" FontSize="30" IsLight="True" Margin="2,40,2,2" BorderBrush="White" ItemForeground="White;;" Padding="12,9"/>
             </StackPanel>
         </StackPanel>
     </DockPanel>

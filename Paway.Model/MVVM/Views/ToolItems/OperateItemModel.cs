@@ -17,7 +17,7 @@ using System.Windows.Media;
 
 namespace Paway.Model
 {
-    public partial class OperateItemModel : ViewModelBase, IPageReload
+    public partial class OperateItemModel : ViewModelBasePlus, IPageReload
     {
         #region 属性
         private DockPanel DockPanel;
@@ -35,7 +35,7 @@ namespace Paway.Model
         public MenuAuthType Auth
         {
             get { return _auth; }
-            set { _auth = value; RaisePropertyChanged(); }
+            set { _auth = value; OnPropertyChanged(); }
         }
 
         #endregion
@@ -47,10 +47,6 @@ namespace Paway.Model
         internal void ActionInternalMsg(string item)
         {
             Messenger.Default.Send(new StatuMessage(item, false));
-            ActionInternal(item);
-        }
-        internal virtual void ActionInternal(string item)
-        {
             try
             {
                 Action(item);
@@ -63,8 +59,9 @@ namespace Paway.Model
         /// <summary>
         /// 按钮按键操作
         /// </summary>
-        protected virtual void Action(string item)
+        protected override void Action(string item)
         {
+            base.Action(item);
             switch (item)
             {
                 case "刷新":
@@ -95,7 +92,6 @@ namespace Paway.Model
                 Process.Start(file);
             }
         }
-        public ICommand ItemClickCommand => new RelayCommand<string>(item => ActionInternal(item));
 
         #endregion
 
@@ -108,12 +104,12 @@ namespace Paway.Model
         public string SearchText
         {
             get { return _searchText; }
-            set { _searchText = value; RaisePropertyChanged(); Search(); }
+            set { _searchText = value; OnPropertyChanged(); Search(); }
         }
         /// <summary>
         /// 清空搜索框，不引发搜索事件
         /// </summary>
-        protected void ClearSearch() { this._searchText = null; RaisePropertyChanged(nameof(SearchText)); }
+        protected void ClearSearch() { this._searchText = null; OnPropertyChanged(nameof(SearchText)); }
 
         #endregion
 

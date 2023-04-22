@@ -10,14 +10,14 @@ using System.Windows.Input;
 
 namespace Paway.Model
 {
-    public class WelcomePageModel : ViewModelBase
+    public class WelcomePageModel : ViewModelBasePlus
     {
         #region 属性
         private string _desc = "欢迎使用";
         public string Desc
         {
             get { return _desc; }
-            set { _desc = value; RaisePropertyChanged(); }
+            set { _desc = value; OnPropertyChanged(); }
         }
 
         #endregion

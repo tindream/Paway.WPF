@@ -17,7 +17,7 @@
             <Border.RenderTransform>
                 <ScaleTransform CenterX="94" CenterY="94"/>
             </Border.RenderTransform>
-            <ButtonEXT Content="O" Width="52" Height="52" Margin="-1,-1,0,0" Radius="30" FontSize="21" Command="{Binding MenuCommand}" CommandParameter="展开"/>
+            <ButtonEXT Content="O" Width="52" Height="52" Margin="-1,-1,0,0" Radius="30" FontSize="21" Command="{Binding ItemClickCommand}" CommandParameter="展开"/>
         </Border>
         <Border Name="borderAll" Width="{Binding TipWidth}" Height="{Binding TipWidth}" BorderBrush="#C8D3D3F3" BorderThickness="5" CornerRadius="20" Visibility="{Binding IAll, Converter={StaticResource boolToVisible}}" RenderTransformOrigin="0.5,0.5">
             <Border.RenderTransform>

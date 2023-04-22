@@ -14,7 +14,7 @@ using System.Windows.Media;
 
 namespace Paway.Model
 {
-    public class BaseWindowModel : ViewModelBase
+    public class BaseWindowModel : ViewModelBasePlus
     {
         #region 属性
         public bool ILoad { get; set; }
@@ -22,7 +22,7 @@ namespace Paway.Model
         public string Title
         {
             get { return title; }
-            set { title = value; RaisePropertyChanged(); }
+            set { title = value; OnPropertyChanged(); }
         }
 
         #endregion
@@ -57,19 +57,6 @@ namespace Paway.Model
         {
             wd.DialogResult = OnCommit(wd);
         }
-
-        protected virtual void Action(ButtonEXT btn) { }
-        public ICommand ButtonClickCommand => new RelayCommand<ButtonEXT>(btn =>
-        {
-            try
-            {
-                Action(btn);
-            }
-            catch (Exception ex)
-            {
-                Messenger.Default.Send(new StatuMessage(ex, btn));
-            }
-        });
 
         #endregion
     }

@@ -21,7 +21,7 @@ using System.Windows.Media;
 
 namespace Paway.Test
 {
-    public class TestWindowModel : ViewModelBase
+    public class TestWindowModel : ViewModelBasePlus
     {
         #region 属性
         public string Text => Config.Text;
@@ -29,7 +29,7 @@ namespace Paway.Test
         public double Angle
         {
             get { return angle; }
-            set { angle = value; RaisePropertyChanged(); }
+            set { angle = value; OnPropertyChanged(); }
         }
 
         private double _value;
@@ -41,7 +41,7 @@ namespace Paway.Test
                 var angleMin = -27;
                 var angleMax = 207;
                 Angle = angleMin + (angleMax - angleMin) * value / 100.0;
-                _value = value; RaisePropertyChanged();
+                _value = value; OnPropertyChanged();
             }
         }
 
@@ -49,14 +49,14 @@ namespace Paway.Test
         public double Value2
         {
             get { return _value2; }
-            set { _value2 = value; RaisePropertyChanged(); }
+            set { _value2 = value; OnPropertyChanged(); }
         }
 
         private int _value3 = 10;
         public int Value3
         {
             get { return _value3; }
-            set { _value3 = value; RaisePropertyChanged(); }
+            set { _value3 = value; OnPropertyChanged(); }
         }
 
         private string _label;
@@ -65,7 +65,7 @@ namespace Paway.Test
             get { return _label; }
             set
             {
-                _label = value; RaisePropertyChanged();
+                _label = value; OnPropertyChanged();
             }
         }
 
@@ -76,7 +76,7 @@ namespace Paway.Test
             set
             {
                 userType ^= (MenuAuthType)Math.Abs((int)value);
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -84,13 +84,13 @@ namespace Paway.Test
         public DateTime Time
         {
             get { return time; }
-            set { time = value; RaisePropertyChanged(); }
+            set { time = value; OnPropertyChanged(); }
         }
         private FontInfo font;
         public FontInfo Font
         {
             get { return font; }
-            set { font = value; RaisePropertyChanged(); }
+            set { font = value; OnPropertyChanged(); }
         }
         private ColorInfo color;
         public ColorInfo Color
@@ -98,8 +98,8 @@ namespace Paway.Test
             get { return color; }
             set
             {
-                color = value; RaisePropertyChanged();
-                if (value != null) ColorBrush = value.Color.ToBrush(); RaisePropertyChanged(nameof(ColorBrush));
+                color = value; OnPropertyChanged();
+                if (value != null) ColorBrush = value.Color.ToBrush(); OnPropertyChanged(nameof(ColorBrush));
             }
         }
         public DoubleEXT FontSizes { get; set; } = new DoubleEXT(20);
@@ -108,14 +108,14 @@ namespace Paway.Test
         public MenuAuthType MenuType
         {
             get { return _menuType; }
-            set { if (_menuType != value) { _menuType = value; RaisePropertyChanged(); } }
+            set { if (_menuType != value) { _menuType = value; OnPropertyChanged(); } }
         }
 
         private bool _statu;
         public bool Statu
         {
             get { return _statu; }
-            set { if (_statu != value) { _statu = value; RaisePropertyChanged(); } }
+            set { if (_statu != value) { _statu = value; OnPropertyChanged(); } }
         }
 
         #endregion
@@ -175,8 +175,9 @@ namespace Paway.Test
                 }
             }
         });
-        public ICommand SelectionCommand => new RelayCommand<ListViewCustom>(listView1 =>
+        protected override void Action(ListViewCustom listView1)
         {
+            base.Action(listView1);
             if (listView1.SelectedItem is IListViewItem info)
             {
                 switch (info.Text)
@@ -204,7 +205,7 @@ namespace Paway.Test
                         break;
                 }
             }
-        });
+        }
 
         #endregion
 

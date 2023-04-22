@@ -62,7 +62,7 @@ namespace Paway.Model
         public virtual T SelectedItem
         {
             get { return _selectedItem; }
-            set { if (_selectedItem != value) { _selectedItem = value; SelectedChanged(); RaisePropertyChanged(); } }
+            set { if (_selectedItem != value) { _selectedItem = value; SelectedChanged(); OnPropertyChanged(); } }
         }
 
         protected virtual AddWindowModel<T> ViewModel()
@@ -238,28 +238,18 @@ namespace Paway.Model
         {
             ActionInternalMsg("编辑");
         });
-        public ICommand SelectionCommand => new RelayCommand<ListViewCustom>(listView1 =>
+        protected override void Action(ListViewCustom listView1)
         {
+            base.Action(listView1);
             if (listView1.SelectedItem is IListViewItem item)
             {
                 Selectioned(listView1, item);
             }
-        });
+        }
         protected virtual void Selectioned(ListViewCustom listView1, IListViewItem item)
         {
-            ActionInternal(item.Text);
+            Action(item.Text);
             listView1.SelectedIndex = -1;
-        }
-        internal override void ActionInternal(string item)
-        {
-            try
-            {
-                Action(item);
-            }
-            catch (Exception ex)
-            {
-                Messenger.Default.Send(new StatuMessage(ex));
-            }
         }
         protected override void Action(KeyMessage msg)
         {
