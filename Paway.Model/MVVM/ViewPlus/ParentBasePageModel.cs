@@ -84,7 +84,7 @@ namespace Paway.Model
         {
             if (ParentInfo == null) base.listFilter = c => false;
             else base.listFilter = c => c.ParentId == ParentInfo.Id;
-            if (DataGrid != null) base.Reload();
+            if (DataGrid != null) this.Reload();
         }
 
         #endregion

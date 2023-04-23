@@ -123,7 +123,7 @@ namespace Paway.Model
                         break;
                     default:
                         DescBrush = ColorType.High.Color().ToBrush();
-                        if (iHit) Method.Hit(ower ?? Config.Window, msg);
+                        if (iHit) Method.Toast(ower ?? Config.Window, msg);
                         break;
                 }
             });

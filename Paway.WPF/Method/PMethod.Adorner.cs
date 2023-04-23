@@ -197,7 +197,7 @@ namespace Paway.WPF
             }
         }
         private static readonly object adornerNoticeLock = new object();
-        private static volatile List<AdornerNoticeInfo> adornerNoticeList = new List<AdornerNoticeInfo>();
+        private static readonly List<AdornerNoticeInfo> adornerNoticeList = new List<AdornerNoticeInfo>();
         /// <summary>
         /// 通知消息数据
         /// </summary>

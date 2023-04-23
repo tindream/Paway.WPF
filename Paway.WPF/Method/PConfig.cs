@@ -26,6 +26,13 @@ namespace Paway.WPF
             DoubleInterval = NativeMethods.GetDoubleClickTime();
             FontAwesome = new FontFamily(new Uri(@"pack://application:,,,/Paway.WPF;component/Resource/"), "./#fontawesome");
         }
+        #region 常量
+        /// <summary>
+        /// NoFound
+        /// </summary>
+        public const string NoFound = "--";
+
+        #endregion
 
         #region 全局
         /// <summary>

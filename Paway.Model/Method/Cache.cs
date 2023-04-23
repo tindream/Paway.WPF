@@ -64,11 +64,11 @@ namespace Paway.Model
         }
         public static string Name<T>(int id) where T : IName
         {
-            return Find<T>(id)?.Name ?? Config.None;
+            return Find<T>(id)?.Name ?? Config.NoFound;
         }
         public static string CustomName<T>(int id) where T : ICustomName
         {
-            return Find<T>(id)?.CustomName ?? Config.None;
+            return Find<T>(id)?.CustomName ?? Config.NoFound;
         }
         public static bool Any<T>(Func<T, bool> action)
         {

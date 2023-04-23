@@ -363,7 +363,6 @@ namespace Paway.Model
                     }
                 }
                 server.Update(updateList, null, nameof(IIndex.Index));
-                Method.Update(updateList);
                 Method.Sorted(List);
             }
         });
@@ -393,7 +392,7 @@ namespace Paway.Model
             }
             this.ReloadObList();
         }
-        protected void Reload()
+        protected virtual void Reload()
         {
             if (!SearchReset()) ReloadObList();
         }
@@ -408,7 +407,7 @@ namespace Paway.Model
             }
             return false;
         }
-        private void ReloadObList()
+        protected virtual void ReloadObList()
         {
             Method.Invoke(() =>
             {

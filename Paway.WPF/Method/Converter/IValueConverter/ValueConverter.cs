@@ -96,7 +96,7 @@ namespace Paway.WPF
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             bool result;
-            if (value == null || value == DBNull.Value) result = true;
+            if (value == null || value == DBNull.Value) result = false;
             else if (value is Enum)
             {
                 var valueNormal = value.GetHashCode();
@@ -122,7 +122,7 @@ namespace Paway.WPF
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             bool result = false;
-            if (value == null || value == DBNull.Value) result = true;
+            if (value == null || value == DBNull.Value) result = false;
             else if (value is Enum)
             {
                 var valueNormal = value.GetHashCode();
@@ -147,7 +147,7 @@ namespace Paway.WPF
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             bool result;
-            if (value == null || value == DBNull.Value) result = true;
+            if (value == null || value == DBNull.Value) result = false;
             else if (value is Enum)
             {
                 var valueNormal = value.GetHashCode();
@@ -179,7 +179,7 @@ namespace Paway.WPF
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             bool result;
-            if (value == null || value == DBNull.Value) result = true;
+            if (value == null || value == DBNull.Value) result = false;
             else if (value is Enum)
             {
                 var valueNormal = value.GetHashCode();
