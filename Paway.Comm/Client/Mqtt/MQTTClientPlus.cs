@@ -51,7 +51,7 @@ namespace Paway.Comm
         {
             if (auto)
             {
-                if (this.user.Id != 0) return new LoginData(true, this.user.Id.ToString(), properties: this.properties);
+                if (this.user != null && this.user.Id != 0) return new LoginData(true, this.user.Id.ToString(), properties: this.properties);
                 return null;
             }
             return new LoginData(true, this.user.UserName, this.user.Password, this.properties);
@@ -62,6 +62,11 @@ namespace Paway.Comm
         protected virtual void Logined() { }
 
         #region 外部方法
+        public override Task Disconnect()
+        {
+            if (this.user != null) this.user.Id = 0;
+            return base.Disconnect();
+        }
         public void Connect(string host, int port, IUser user, Dictionary<string, string> properties = null)
         {
             this.user = user;

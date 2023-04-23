@@ -84,7 +84,7 @@ namespace Paway.Comm
         /// <summary>
         /// 断开
         /// </summary>
-        public Task Disconnect()
+        public virtual Task Disconnect()
         {
             return mqttClient.DisconnectAsync();
         }
