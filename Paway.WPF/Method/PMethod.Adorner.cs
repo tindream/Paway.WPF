@@ -30,7 +30,7 @@ namespace Paway.WPF
         /// 装饰器-空白画板
         /// <para>当前控件</para>
         /// </summary>
-        public static CustomAdorner CustomAdorner(FrameworkElement element)
+        public static CustomAdorner CustomAdorner(FrameworkElement element, bool hitTest = false, FrameworkElement content = null)
         {
             return Invoke(() =>
             {
@@ -41,8 +41,25 @@ namespace Paway.WPF
                     var myAdornerLayer = ReloadAdorner(element);
                     if (myAdornerLayer == null) return null;
 
-                    var customAdorner = new CustomAdorner(element);
+                    var customAdorner = new CustomAdorner(element, hitTest: hitTest);
                     myAdornerLayer.Add(customAdorner);
+                    if (content != null)
+                    {
+                        var canvas = customAdorner.GetCanvas();
+                        canvas.Children.Add(content);
+                        var widthBinding = new Binding
+                        {
+                            Source = canvas,
+                            Path = new PropertyPath(nameof(canvas.ActualWidth)),
+                        };
+                        var heightBinding = new Binding
+                        {
+                            Source = canvas,
+                            Path = new PropertyPath(nameof(canvas.ActualHeight)),
+                        };
+                        content.SetBinding(FrameworkElement.WidthProperty, widthBinding);
+                        content.SetBinding(FrameworkElement.HeightProperty, heightBinding);
+                    }
                     return customAdorner;
                 }
             });
@@ -662,15 +679,18 @@ namespace Paway.WPF
                     }
                     catch (Exception ex)
                     {
-                        if (error != null)
+                        BeginInvoke(() =>
                         {
-                            BeginInvoke(() => error.Invoke(ex));
-                        }
-                        else
-                        {
-                            ex.Log();
-                            ShowError(element, ex.Message());
-                        }
+                            if (error != null)
+                            {
+                                error.Invoke(ex);
+                            }
+                            else
+                            {
+                                ex.Log();
+                                ShowError(element, ex.Message());
+                            }
+                        });
                     }
                     finally
                     {

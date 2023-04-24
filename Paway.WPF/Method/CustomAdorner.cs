@@ -20,6 +20,8 @@ namespace Paway.WPF
         private readonly Canvas canvas;
         /// <summary>
         /// 构造要将绑定到的装饰器的元素
+        /// <para>hitTest=true 不路由事件（不穿透）</para>
+        /// <para>hitTest=false 路由事件（穿透）</para>
         /// </summary>
         public CustomAdorner(FrameworkElement adornedElement, FrameworkElement element = null, Color? color = null, Func<double> xFunc = null, Func<double> yFunc = null, Func<Storyboard> storyboardFunc = null, Action completedFunc = null, bool? hitTest = null) : base(adornedElement)
         {
