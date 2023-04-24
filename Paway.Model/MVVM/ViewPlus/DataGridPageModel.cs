@@ -82,6 +82,27 @@ namespace Paway.Model
             }
             return default;
         }
+        /// <summary>
+        /// 多选行
+        /// <para>选择单元格时，SelectedItems为空</para>
+        /// </summary>
+        protected List<T> SelectedInfos()
+        {
+            var list = new List<T>();
+            foreach (T item in DataGrid.SelectedItems)
+            {
+                list.Add(item);
+            }
+            if (list.Count > 0) return list;
+            if (DataGrid.SelectionUnit != DataGridSelectionUnit.FullRow && DataGrid.SelectedCells.Count > 0)
+            {
+                for (var i = 0; i < DataGrid.SelectedCells.Count; i++)
+                {
+                    if (DataGrid.SelectedCells[i].Item is T item) list.Add(item);
+                }
+            }
+            return list.Distinct().ToList();
+        }
 
         #endregion
 
