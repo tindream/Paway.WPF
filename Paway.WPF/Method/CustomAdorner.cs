@@ -35,13 +35,14 @@ namespace Paway.WPF
                 canvas
             };
 
-            if (element != null) canvas.Children.Add(element);
+            if (element == null) return;
+            canvas.Children.Add(element);
             this.Loaded += (sender, e) =>
             {
                 Canvas.SetLeft(element, xFunc != null ? xFunc() : (canvas.ActualWidth - element.ActualWidth) / 2);
                 Canvas.SetTop(element, yFunc != null ? yFunc() : (canvas.ActualHeight - element.ActualHeight) / 2);
             };
-            if (element != null) element.Loaded += (sender, e) =>
+            element.Loaded += (sender, e) =>
             {
                 if (storyboardFunc == null) return;
                 var storyboard = storyboardFunc();

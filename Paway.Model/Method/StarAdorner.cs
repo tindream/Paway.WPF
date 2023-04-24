@@ -51,7 +51,7 @@ namespace Paway.Model
         /// <summary>
         /// 初始化星星
         /// </summary>
-        public void InitStar(Canvas container, int count = 60, int minSize = 5, int maxSize = 15)
+        public StarAdorner InitStar(Canvas container, int count = 60, int minSize = 5, int maxSize = 15)
         {
             this.starContainer = container;
             //清空星星容器
@@ -88,6 +88,7 @@ namespace Paway.Model
                 _stars[i] = starInfo;
                 starContainer.Children.Add(star);
             }
+            return this;
         }
         /// <summary>
         /// 获取随机颜色画刷(偏亮)

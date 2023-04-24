@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -27,22 +28,39 @@ namespace Paway.WPF
         #region 装饰器-空白
         /// <summary>
         /// 装饰器-空白画板
+        /// <para>当前控件</para>
         /// </summary>
-        public static Canvas CustomAdorner(DependencyObject parent)
+        public static CustomAdorner CustomAdorner(FrameworkElement element)
         {
             return Invoke(() =>
             {
-                if (!Parent(parent, out Window window)) return null;
-                if (window.Content is FrameworkElement element)
+                //if (!Parent(parent, out Window window)) return null;
+                //if (window.Content is FrameworkElement element)
+                if (element is Window window && window.Content is FrameworkElement temp) element = temp;
                 {
                     var myAdornerLayer = ReloadAdorner(element);
                     if (myAdornerLayer == null) return null;
 
                     var customAdorner = new CustomAdorner(element);
                     myAdornerLayer.Add(customAdorner);
-                    return customAdorner.GetCanvas();
+                    return customAdorner;
                 }
-                return null;
+            });
+        }
+        /// <summary>
+        /// 清除指定装饰器
+        /// </summary>
+        public static void ClearAdorner(FrameworkElement element, CustomAdorner adorner)
+        {
+            Invoke(() =>
+            {
+                if (element is Window window && window.Content is FrameworkElement temp) element = temp;
+                {
+                    var myAdornerLayer = ReloadAdorner(element);
+                    if (myAdornerLayer == null) return;
+
+                    myAdornerLayer.Remove(adorner);
+                }
             });
         }
 
@@ -51,6 +69,7 @@ namespace Paway.WPF
         #region 装饰器-通知消息
         /// <summary>
         /// 装饰器-通知消息
+        /// <para>取父窗体</para>
         /// </summary>
         public static void Notice(DependencyObject parent, object msg, ColorType type = ColorType.Color, double? fontSize = null, int bottom = 35, object tag = null, Action<object> hitAction = null, Action completed = null)
         {
@@ -58,6 +77,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 装饰器-通知消息
+        /// <para>取父窗体</para>
         /// </summary>
         public static void Notice(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color, double? fontSize = null, int bottom = 35, object tag = null, Action<object> hitAction = null, Action completed = null)
         {
@@ -242,6 +262,7 @@ namespace Paway.WPF
         #region 装饰器-特效
         /// <summary>
         /// 装饰器-收到消息装入列表
+        /// <para>当前控件</para>
         /// </summary>
         public static void SlowIn(FrameworkElement parent, object msg, int time = 500, double xMove = 0, double yMove = 0, double size = 36, Color? color = null, Action completed = null)
         {
@@ -424,6 +445,7 @@ namespace Paway.WPF
         #region 装饰器-提示信息
         /// <summary>
         /// 装饰器-自定义吐泡消息框-Toast
+        /// <para>取父窗体</para>
         /// </summary>
         public static void Toast(DependencyObject parent, object msg, ColorType type = ColorType.Color, int? fontSize = null, Action completed = null)
         {
@@ -431,6 +453,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 装饰器-自定义吐泡消息框-Toast
+        /// <para>取父窗体</para>
         /// </summary>
         public static void Toast(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color, int? fontSize = null, Action completed = null)
         {
@@ -513,6 +536,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 装饰器-自定义提示框-Hit
+        /// <para>取父窗体</para>
         /// </summary>
         public static void Hit(DependencyObject parent, object msg, ColorType type = ColorType.Color, int? fontSize = null, Action completed = null)
         {
@@ -520,6 +544,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 装饰器-自定义提示框-Hit
+        /// <para>取父窗体</para>
         /// </summary>
         public static void Hit(DependencyObject parent, object msg, int time, ColorType type = ColorType.Color, int? fontSize = null, Action completed = null)
         {
@@ -665,6 +690,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 装饰器-同步显示Window进度条
+        /// <para>当前控件</para>
         /// </summary>
         public static CustomAdorner ProgressAdorner(FrameworkElement element, object msg = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
         {
