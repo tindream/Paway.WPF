@@ -14,8 +14,9 @@ namespace Paway.Model
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
         }
 
+        public SelectColorWindowModel SelectColor => GetModelInstance<SelectColorWindowModel>();
+        public NameWindowModel NameWindow => GetModelInstance<NameWindowModel>();
         public StatuItemModel StatuItem => GetModelInstance<StatuItemModel>();
-        public NameWindowModel Name => GetModelInstance<NameWindowModel>();
         public WelcomePageModel Welcome => GetModelInstance<WelcomePageModel>();
 
         /// <summary>

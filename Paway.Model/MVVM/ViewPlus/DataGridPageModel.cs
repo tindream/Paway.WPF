@@ -120,7 +120,7 @@ namespace Paway.Model
             Method.Update(info);
             Method.Sorted(List);
             var index = this.FilterList().FindIndex(c => c.Id == info.Id);
-            if (!this.SearchReset()) Method.Invoke(() => ObList.Insert(index, info));
+            if (!this.SearchReset() && index != -1) Method.Invoke(() => ObList.Insert(index, info));
             MoveTo(index, info);
         }
         private void MoveTo(int index, T info)

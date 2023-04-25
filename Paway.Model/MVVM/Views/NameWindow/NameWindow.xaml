@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Paway.Model"
         mc:Ignorable="d"
-        DataContext="{Binding Name, Source={StaticResource Locator}}"
+        DataContext="{Binding NameWindow, Source={StaticResource Locator}}"
         UseLayoutRounding="True"
         Title="{Binding Title}" Height="250" Width="350" ResizeMode="NoResize">
     <Grid FocusManager.FocusedElement="{Binding ElementName=tbName}">

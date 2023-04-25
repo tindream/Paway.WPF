@@ -171,15 +171,19 @@
     <Compile Include="MVVM\ViewMessage\LoginMessage.cs" />
     <Compile Include="MVVM\ViewPlus\ViewModelBasePlus.cs" />
     <Compile Include="MVVM\ViewPlus\ParentBasePageModel.cs" />
-    <Compile Include="MVVM\Views\Login\LoginPage.xaml.cs">
+    <Compile Include="MVVM\Views\LoginPage\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\Views\Login\LoginPageModel.cs" />
+    <Compile Include="MVVM\Views\LoginPage\LoginPageModel.cs" />
+    <Compile Include="MVVM\Views\SelectColor\SelectColorWindow.xaml.cs">
+      <DependentUpon>SelectColorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\SelectColor\SelectColorWindowModel.cs" />
     <Compile Include="MVVM\Views\ToolItems\StatuItem.xaml.cs">
       <DependentUpon>StatuItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\Views\ToolItems\StatuItemModel.cs" />
-    <Compile Include="MVVM\Views\WelcomePageModel.cs" />
+    <Compile Include="MVVM\Views\WelcomePage\WelcomePageModel.cs" />
     <Compile Include="Office\TextConverter.cs" />
     <Compile Include="Office\ImageConverter.cs" />
     <Compile Include="Office\SpireLicence.cs" />
@@ -192,15 +196,15 @@
     <Compile Include="MVVM\ViewPlus\AddWindowModel.cs" />
     <Compile Include="MVVM\ViewPlus\BaseWindowModel.cs" />
     <Compile Include="MVVM\ViewPlus\DataGridPageModel.cs" />
-    <Compile Include="MVVM\Views\NameWindow.xaml.cs">
+    <Compile Include="MVVM\Views\NameWindow\NameWindow.xaml.cs">
       <DependentUpon>NameWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\Views\NameWindowModel.cs" />
+    <Compile Include="MVVM\Views\NameWindow\NameWindowModel.cs" />
     <Compile Include="MVVM\Views\ToolItems\OperateItem.xaml.cs">
       <DependentUpon>OperateItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\Views\ToolItems\OperateItemModel.cs" />
-    <Compile Include="MVVM\Views\WelcomePage.xaml.cs">
+    <Compile Include="MVVM\Views\WelcomePage\WelcomePage.xaml.cs">
       <DependentUpon>WelcomePage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -208,11 +212,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="MVVM\Views\Login\LoginPage.xaml">
+    <Page Include="MVVM\Views\LoginPage\LoginPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MVVM\Views\NameWindow.xaml">
+    <Page Include="MVVM\Views\NameWindow\NameWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\Views\SelectColor\SelectColorWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -224,7 +232,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MVVM\Views\WelcomePage.xaml">
+    <Page Include="MVVM\Views\WelcomePage\WelcomePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
