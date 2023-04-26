@@ -168,12 +168,13 @@ namespace Paway.WPF
                             lock (adornerNoticeLock)
                             {
                                 var temp = adornerNoticeList.Find(c => c.Id == id);
-                                if (temp == null)
+                                if (temp == null && border.ActualHeight > 0)
                                 {
-                                    temp = new AdornerNoticeInfo(id, border, tag);
+                                    adornerIndex++;
+                                    temp = new AdornerNoticeInfo(adornerIndex, id, border, tag);
                                     adornerNoticeList.Add(temp);
                                 }
-                                location = adornerNoticeList.Where(c => c.CycleBy < temp.CycleBy).Sum(c => c.Height);
+                                location = adornerNoticeList.Where(c => c.Index < temp?.Index).Sum(c => c.Height);
                             }
                             var top = window.WindowStyle != System.Windows.WindowStyle.None ? (window is WindowEXT windowEXT) ? windowEXT.HeaderHeight : 30 : 0;
                             var bottom2 = window is WindowEXT || (window.WindowStyle == System.Windows.WindowStyle.None && window.ResizeMode == ResizeMode.NoResize) ? 4 : 11;
@@ -235,6 +236,10 @@ namespace Paway.WPF
             }
         }
         private static readonly object adornerNoticeLock = new object();
+        /// <summary>
+        /// 通知消息计数器，作为唯一顺序标识
+        /// </summary>
+        private static int adornerIndex;
         private static readonly List<AdornerNoticeInfo> adornerNoticeList = new List<AdornerNoticeInfo>();
         /// <summary>
         /// 通知消息数据
@@ -250,10 +255,10 @@ namespace Paway.WPF
             /// </summary>
             public double Height { get; set; }
             /// <summary>
-            /// 记录创建时的线程周期数
+            /// 记录创建时的顺序计数，作为唯一标识
             /// <para>批量弹出时，时间戳可能会重复</para>
             /// </summary>
-            public ulong CycleBy { get; set; }
+            public int Index { get; set; }
 
             /// <summary>
             /// 当前消息控件
@@ -266,24 +271,14 @@ namespace Paway.WPF
 
             /// <summary>
             /// </summary>
-            public AdornerNoticeInfo(int id, Border border, object tag)
+            public AdornerNoticeInfo(int adornerIndex, int id, Border border, object tag)
             {
                 this.Id = id;
                 this.Border = border;
                 this.Height = border.ActualHeight + 2;
-                this.CycleBy = GetCycleCount();
+                this.Index = adornerIndex;
                 this.Tag = tag;
             }
-        }
-
-        /// <summary>
-        /// 获取线程执行的周期个数。
-        /// </summary>
-        private static ulong GetCycleCount()
-        {
-            ulong cycleCount = 0;
-            NativeMethods.QueryThreadCycleTime(NativeMethods.GetCurrentThread(), ref cycleCount);
-            return cycleCount;
         }
 
         #endregion
