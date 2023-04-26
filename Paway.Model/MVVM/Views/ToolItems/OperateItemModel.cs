@@ -20,7 +20,7 @@ namespace Paway.Model
     public partial class OperateItemModel : ViewModelBasePlus, IPageReload
     {
         #region 属性
-        private DockPanel DockPanel;
+        private Panel Panel;
         private bool iExit = false;
         private DateTime exitTime = DateTime.MinValue;
 
@@ -120,13 +120,13 @@ namespace Paway.Model
         protected virtual void Action(KeyMessage msg)
         {
             if (Config.Menu != this.Menu) return;
-            if (DockPanel?.Visibility != Visibility.Visible) return;
             switch (msg.Key)
             {
                 case Key.F5: if ((Auth & MenuAuthType.Refresh) == MenuAuthType.Refresh) ActionInternalMsg("刷新"); break;
                 case Key.Delete: if ((Auth & MenuAuthType.Delete) == MenuAuthType.Delete) ActionInternalMsg("删除"); break;
                 case Key.Escape:
-                    if (Method.Find(DockPanel, out TextBoxEXT tbSearch, "tbSearch"))
+                    if ((Auth & MenuAuthType.Search) != MenuAuthType.Search) break;
+                    if (Method.Find(Panel, out TextBoxEXT tbSearch, "tbSearch"))
                     {
                         if (tbSearch.Text.IsEmpty()) break;
                         if (iExit && DateTime.Now.Subtract(exitTime).TotalMilliseconds < Config.DoubleInterval)
@@ -157,7 +157,8 @@ namespace Paway.Model
                         case Key.O: if ((Auth & MenuAuthType.Export) == MenuAuthType.Export) ActionInternalMsg("导出"); break;
                         case Key.S: if ((Auth & MenuAuthType.Save) == MenuAuthType.Save) ActionInternalMsg("保存"); break;
                         case Key.F:
-                            if (Method.Find(DockPanel, out TextBoxEXT tbSearch, "tbSearch") && !tbSearch.IsKeyboardFocusWithin)
+                            if ((Auth & MenuAuthType.Search) != MenuAuthType.Search) break;
+                            if (Method.Find(Panel, out TextBoxEXT tbSearch, "tbSearch") && !tbSearch.IsKeyboardFocusWithin)
                             {
                                 Messenger.Default.Send(new StatuMessage("查询", false));
                                 tbSearch.Focus();
@@ -190,10 +191,10 @@ namespace Paway.Model
         {
             var border = new Border
             {
-                Style = DockPanel.FindResource("Interval") as Style
+                Style = Panel.FindResource("Interval") as Style
             };
             action?.Invoke(border);
-            DockPanel.Children.Insert(index != -1 ? index : DockPanel.Children.Count - 1, border);
+            Panel.Children.Insert(index != -1 ? index : Panel.Children.Count - 1, border);
         }
         /// <summary>
         /// 添加按钮
@@ -213,7 +214,7 @@ namespace Paway.Model
         {
             var btn = new ButtonEXT
             {
-                Style = DockPanel.FindResource("MenuButton") as Style,
+                Style = Panel.FindResource("MenuButton") as Style,
                 ItemBorder = new ThicknessEXT(0),
                 Content = content,
                 ToolTip = toolTip ?? content,
@@ -228,7 +229,7 @@ namespace Paway.Model
                 KeyCmdDic.Add(key, (cmd ?? content).ToStrings());
             }
             action?.Invoke(btn);
-            DockPanel.Children.Insert(index != -1 ? index : DockPanel.Children.Count - 1, btn);
+            Panel.Children.Insert(index != -1 ? index : Panel.Children.Count - 1, btn);
         }
         /// <summary>
         /// 添加自定义控件
@@ -236,7 +237,7 @@ namespace Paway.Model
         protected void AddUIElement(Func<UIElement> func, int index = -1)
         {
             var element = func();
-            DockPanel.Children.Insert(index != -1 ? index : DockPanel.Children.Count - 1, element);
+            Panel.Children.Insert(index != -1 ? index : Panel.Children.Count - 1, element);
         }
         #endregion
 
@@ -252,10 +253,11 @@ namespace Paway.Model
             Messenger.Default.Register<KeyMessage>(this, msg => Action(msg));
             Messenger.Default.Register<OperateLoadMessage>(this, msg =>
             {
-                if (this.DockPanel == null && msg.Obj is DockPanel dockPanel)
+                //基类通知，如自定义菜单栏，此事件未触发，会被后续控件触发初始化
+                if (this.Panel == null && msg.Obj is Panel panel)
                 {
-                    this.DockPanel = dockPanel;
-                    AuthNormal();
+                    this.Panel = panel;
+                    if (Auth == MenuAuthType.None) AuthNormal();
                 }
             });
         }

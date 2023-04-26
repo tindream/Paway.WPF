@@ -10,6 +10,19 @@ namespace Paway.WPF
     internal static class NativeMethods
     {
         /// <summary>
+        /// 获取当前线程的一个伪句柄
+        /// </summary>
+        /// <returns></returns>
+        [DllImport("kernel32.dll")]
+        internal static extern IntPtr GetCurrentThread();
+
+        /// <summary>
+        /// 获取线程执行的周期个数。
+        /// </summary>
+        [DllImport("kernel32.dll")]
+        internal static extern bool QueryThreadCycleTime(IntPtr threadHandle, ref ulong cycleTime);
+
+        /// <summary>
         /// 该函数删除一个逻辑笔、画笔、字体、位图、区域或者调色板，释放所有与该对象有关的系统资源，在对象被删除之后，指定的句柄也就失效了。
         /// </summary>
         [DllImport("gdi32.dll", SetLastError = true)]

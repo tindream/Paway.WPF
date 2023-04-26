@@ -11,6 +11,7 @@ namespace Paway.Comm
 {
     public class ClientHelper
     {
+        #region 原子锁
         private object _syncRoot;
         private object SyncRoot
         {
@@ -23,6 +24,9 @@ namespace Paway.Comm
                 return this._syncRoot;
             }
         }
+
+        #endregion
+
         private readonly List<MClientInfo> clientList = new List<MClientInfo>();
 
         public List<MClientInfo> Client()

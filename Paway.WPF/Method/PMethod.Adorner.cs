@@ -87,6 +87,7 @@ namespace Paway.WPF
         /// <summary>
         /// 装饰器-通知消息
         /// <para>取父窗体</para>
+        /// <para>tag为hitAction点击参数，且具体排它性，会移除上一条tag</para>
         /// </summary>
         public static void Notice(DependencyObject parent, object msg, ColorType type = ColorType.Color, double? fontSize = null, int bottom = 35, object tag = null, Action<object> hitAction = null, Action completed = null)
         {
@@ -153,6 +154,7 @@ namespace Paway.WPF
                     }
                     if (time == 0) time = 3000;
                     else if (time < 0) time = int.MaxValue - 125;
+                    if (tag != null) NoticeClear(tag);
                     myAdornerLayer.Add(new CustomAdorner(element, border,
                         xFunc: () =>
                         {
@@ -171,7 +173,7 @@ namespace Paway.WPF
                                     temp = new AdornerNoticeInfo(id, border, tag);
                                     adornerNoticeList.Add(temp);
                                 }
-                                location = adornerNoticeList.Where(c => c.CreateOn < temp.CreateOn).Sum(c => c.Height);
+                                location = adornerNoticeList.Where(c => c.CycleBy < temp.CycleBy).Sum(c => c.Height);
                             }
                             var top = window.WindowStyle != System.Windows.WindowStyle.None ? (window is WindowEXT windowEXT) ? windowEXT.HeaderHeight : 30 : 0;
                             var bottom2 = window is WindowEXT || (window.WindowStyle == System.Windows.WindowStyle.None && window.ResizeMode == ResizeMode.NoResize) ? 4 : 11;
@@ -215,22 +217,21 @@ namespace Paway.WPF
         /// <summary>
         /// 消息列表操作
         /// </summary>
-        public static bool NoticeClear(object tag)
+        public static bool NoticeClear(object tag, Action completed = null)
         {
             lock (adornerNoticeLock)
             {
-                var list = adornerNoticeList.FindAll(c => c.Tag != null && c.Tag.Equals(tag));
-                list.ForEach(c =>
+                var adornerNotice = adornerNoticeList.FirstOrDefault(c => c.Tag != null && c.Tag.Equals(tag));
+                if (adornerNotice == null) return false;
+                AnimationHelper.Start(adornerNotice.Border, TransitionType.ToRight, completed: () =>
                 {
-                    AnimationHelper.Start(c.Border, TransitionType.ToRight, completed: () =>
+                    if (adornerNotice.Border.Tag is Storyboard storyboard1)
                     {
-                        if (c.Border.Tag is Storyboard storyboard1)
-                        {
-                            storyboard1.Remove(c.Border);
-                        }
-                    });
+                        storyboard1.Remove(adornerNotice.Border);
+                    }
+                    completed?.Invoke();
                 });
-                return list.Count > 0;
+                return true;
             }
         }
         private static readonly object adornerNoticeLock = new object();
@@ -249,9 +250,10 @@ namespace Paway.WPF
             /// </summary>
             public double Height { get; set; }
             /// <summary>
-            /// 记录创建时间
+            /// 记录创建时的线程周期数
+            /// <para>批量弹出时，时间戳可能会重复</para>
             /// </summary>
-            public long CreateOn { get; set; }
+            public ulong CycleBy { get; set; }
 
             /// <summary>
             /// 当前消息控件
@@ -269,9 +271,19 @@ namespace Paway.WPF
                 this.Id = id;
                 this.Border = border;
                 this.Height = border.ActualHeight + 2;
-                this.CreateOn = DateTime.Now.Ticks;
+                this.CycleBy = GetCycleCount();
                 this.Tag = tag;
             }
+        }
+
+        /// <summary>
+        /// 获取线程执行的周期个数。
+        /// </summary>
+        private static ulong GetCycleCount()
+        {
+            ulong cycleCount = 0;
+            NativeMethods.QueryThreadCycleTime(NativeMethods.GetCurrentThread(), ref cycleCount);
+            return cycleCount;
         }
 
         #endregion
