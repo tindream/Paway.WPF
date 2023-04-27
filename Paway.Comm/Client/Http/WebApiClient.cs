@@ -72,20 +72,32 @@ namespace Paway.Comm
             Send(sync);
         }
 
+        /// <summary>
+        /// 查询后自动排序
+        /// </summary>
         public static List<T> Find<T>(Expression<Func<T, bool>> predicate, params string[] args) where T : class, new()
         {
-            return Find<T>(predicate, 0, args);
+            return Find(predicate, 0, args);
         }
+        /// <summary>
+        /// 查询后自动排序
+        /// </summary>
         public static List<T> Find<T>(Expression<Func<T, bool>> predicate, int count, params string[] args) where T : class, new()
         {
             var sql = predicate.SQL();
             Trace.WriteLine(sql);
             return Find<T>(sql, count, args);
         }
+        /// <summary>
+        /// 查询后自动排序
+        /// </summary>
         public static List<T> Find<T>(string find = null, params string[] args) where T : class, new()
         {
             return Find<T>(find, 0, args);
         }
+        /// <summary>
+        /// 查询后自动排序
+        /// </summary>
         public static List<T> Find<T>(string find, int count, params string[] args) where T : class, new()
         {
             Type type = typeof(T);

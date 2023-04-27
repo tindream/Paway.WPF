@@ -40,8 +40,7 @@ namespace Paway.Model
         protected Func<T, bool> listFilter;
         protected virtual List<T> FilterList()
         {
-            if (listFilter == null) return List;
-            return List.FindAll(c => listFilter(c));
+            return List.FindAll(c => c != null && listFilter?.Invoke(c) != false);
         }
         /// <summary>
         /// 当前显示数据列表
@@ -110,15 +109,12 @@ namespace Paway.Model
         protected virtual Window AddWindow() { return null; }
         protected virtual List<T> Find()
         {
-            var list = server.Find<T>(this.sqlFilter);
-            Method.Sorted(list);
+            var list = server.Find<T>(this.sqlFilter); Method.Sorted(list);
             return list;
         }
         protected virtual void Insert(T info)
         {
-            server.Insert(info);
-            Method.Update(info);
-            Method.Sorted(List);
+            server.Insert(info); Method.Update(info);
             var index = this.FilterList().FindIndex(c => c.Id == info.Id);
             if (!this.SearchReset() && index != -1) Method.Invoke(() => ObList.Insert(index, info));
             MoveTo(index, info);
@@ -140,9 +136,7 @@ namespace Paway.Model
         protected virtual void Insert(List<T> list)
         {
             if (list.Count == 0) return;
-            server.Insert(list);
-            Method.Update(list);
-            Method.Sorted(List);
+            server.Insert(list); Method.Update(list);
             int index = 0;
             foreach (var info in list)
             {
@@ -155,7 +149,6 @@ namespace Paway.Model
         {
             info.UpdateOn = DateTime.Now;
             server.Update(info);
-            Method.Sorted(List);
         }
         protected virtual void Deleted(T info)
         {
@@ -169,8 +162,7 @@ namespace Paway.Model
             }
             try
             {
-                server.Delete(info);
-                Method.Delete(info);
+                server.Delete(info); Method.Delete(info);
                 Method.Invoke(() => ObList.Remove(info));
             }
             finally
@@ -193,8 +185,7 @@ namespace Paway.Model
             }
             try
             {
-                server.Delete(list);
-                Method.Delete(list);
+                server.Delete(list); Method.Delete(list);
                 Method.Invoke(() => { foreach (var info in list) ObList.Remove(info); });
             }
             finally
@@ -222,7 +213,7 @@ namespace Paway.Model
         {
             if (typeof(IIndex).IsAssignableFrom(typeof(T)))
             {
-                var tList = Cache.List<T>();
+                var tList = Cache.FindAll<T>();
                 var index = tList.Count == 0 ? 0 : tList.Max(c => ((IIndex)c).Index) + 1;
                 for (var i = 0; i < list.Count; i++)
                 {
@@ -235,9 +226,7 @@ namespace Paway.Model
             var updateList = Method.Import(this.FilterList(), list);
             var timeNow = DateTime.Now;
             updateList.ForEach(c => c.UpdateOn = timeNow);
-            server.Replace(updateList);
-            Method.Update(updateList);
-            Method.Sorted(List);
+            server.Replace(updateList); Method.Update(updateList);
             this.Reload();
         }
         protected virtual void Export(string file, bool iOpen = true)
@@ -376,15 +365,14 @@ namespace Paway.Model
                 var updateList = new List<T>();
                 for (var i = 0; i < ObList.Count; i++)
                 {
-                    var item = List.Find(c => c.Id == ObList[i].Id);
+                    var item = List.Find(c => c != null && c.Id == ObList[i].Id);
                     if (item is IIndex index)
                     {
                         index.Index = i;
                         updateList.Add(item);
                     }
                 }
-                server.Update(updateList, null, nameof(IIndex.Index));
-                Method.Sorted(List);
+                server.Update(updateList, null, nameof(IIndex.Index)); Method.Sorted(List);
             }
         });
 
@@ -396,8 +384,7 @@ namespace Paway.Model
             if (this.List == null) this.List = list;
             else
             {
-                this.List.Clear();
-                this.List.AddRange(list);
+                Method.Update(OperType.Reset, List, list);
             }
             if (iReload) this.Reload();
         }

@@ -57,7 +57,7 @@ namespace Paway.Model
         }
         public T Login<T>(int userId) where T : IUser
         {
-            var info = Cache.List<T>().Find(c => c.Id == userId);
+            var info = Cache.Find<T>(userId);
             if (info == null) throw new WarningException("用户不存在");
             return UserChecked(info);
         }

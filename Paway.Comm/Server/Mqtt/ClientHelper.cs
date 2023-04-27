@@ -11,41 +11,30 @@ namespace Paway.Comm
 {
     public class ClientHelper
     {
-        #region 原子锁
-        private object _syncRoot;
-        private object SyncRoot
-        {
-            get
-            {
-                if (this._syncRoot == null)
-                {
-                    Interlocked.CompareExchange(ref this._syncRoot, new object(), null);
-                }
-                return this._syncRoot;
-            }
-        }
-
-        #endregion
+        /// <summary>
+        /// 同步锁
+        /// </summary>
+        private readonly object syncRoot = new object();
 
         private readonly List<MClientInfo> clientList = new List<MClientInfo>();
 
         public List<MClientInfo> Client()
         {
-            lock (SyncRoot)
+            lock (syncRoot)
             {
                 return clientList.FindAll(c => c.Connected);
             }
         }
         public int Count()
         {
-            lock (SyncRoot)
+            lock (syncRoot)
             {
                 return clientList.FindAll(c => c.Connected).Count;
             }
         }
         public void Add(MClientInfo info)
         {
-            lock (SyncRoot)
+            lock (syncRoot)
             {
                 var client = clientList.Find(c => c.ClientId == info.ClientId);
                 if (client == null) clientList.Add(info);
@@ -55,7 +44,7 @@ namespace Paway.Comm
         }
         public MClientInfo Connect(string clientId)
         {
-            lock (SyncRoot)
+            lock (syncRoot)
             {
                 var client = clientList.Find(c => c.ClientId == clientId);
                 if (client != null)
@@ -72,7 +61,7 @@ namespace Paway.Comm
         }
         public MClientInfo DisConnect(string clientId)
         {
-            lock (SyncRoot)
+            lock (syncRoot)
             {
                 var client = clientList.Find(c => c.ClientId == clientId);
                 if (client != null)
@@ -86,14 +75,14 @@ namespace Paway.Comm
         }
         public MClientInfo Client(string clientId)
         {
-            lock (SyncRoot)
+            lock (syncRoot)
             {
                 return clientList.Find(c => c.ClientId == clientId);
             }
         }
         public MClientInfo Client(int userId)
         {
-            lock (SyncRoot)
+            lock (syncRoot)
             {
                 return clientList.Find(c => c.User?.Id == userId);
             }

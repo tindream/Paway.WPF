@@ -54,8 +54,8 @@ namespace Paway.Model
             base.PageReload();
             var last = ParentInfo;
             ParentList.Clear();
-            foreach (var item in Cache.List<Parent>()) ParentList.Add(item);
-            ParentInfo = Cache.List<Parent>().Find(c => c.Id == last?.Id);
+            foreach (var item in Cache.FindAll<Parent>()) ParentList.Add(item);
+            ParentInfo = Cache.Find<Parent>(last?.Id ?? 0);
             if (ParentInfo == null && ParentList.Count > 0) ParentInfo = ParentList.First();
         }
 
@@ -103,15 +103,16 @@ namespace Paway.Model
         }
         protected override void Refresh(Action action = null)
         {
-            base.Refresh(() => Method.Invoke(() => this.PageReload()));
+            base.Refresh(action);
+            this.PageReload();
         }
         public override void PageReload()
         {
             base.PageReload();
             var last = ParentInfo;
             ParentList.Clear();
-            foreach (var item in Cache.List<Parent>()) ParentList.Add(item);
-            ParentInfo = Cache.List<Parent>().Find(c => c.Id == last?.Id);
+            foreach (var item in Cache.FindAll<Parent>()) ParentList.Add(item);
+            ParentInfo = Cache.Find<Parent>(last?.Id ?? 0);
             if (ParentInfo == null && ParentList.Count > 0) ParentInfo = ParentList.First();
         }
         protected override Window AddWindow()
@@ -158,8 +159,7 @@ namespace Paway.Model
         {
             info.Load();
             base.Deleted(info);
-            base.server.Delete(info.DetailList);
-            Method.Delete(info.DetailList);
+            base.server.Delete(info.DetailList); Method.Delete(info.DetailList);
         }
 
         #endregion

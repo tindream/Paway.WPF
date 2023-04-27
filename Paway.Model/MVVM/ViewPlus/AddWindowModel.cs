@@ -52,10 +52,10 @@ namespace Paway.Model
                 return null;
             }
             if (info is IChecked @checked) @checked.Checked();
-            else if (Cache.List<T>().Find(c => c.Compare(info)) != null) throw new WarningException($"[{typeof(T).Description()}]{info} 已存在");
+            else if (Cache.Any<T>(c => c.Compare(info))) throw new WarningException($"[{typeof(T).Description()}]{info} 已存在");
             if (info.Id == 0 && info is IIndex index)
             {
-                var tList = Cache.List<T>();
+                var tList = Cache.FindAll<T>();
                 index.Index = tList.Count == 0 ? 0 : tList.Max(c => ((IIndex)c).Index) + 1;
             }
             return true;

@@ -34,7 +34,7 @@ namespace Paway.Model
         }
 
         #region 内部查询
-        public static dynamic List(Type type)
+        internal static dynamic List(Type type)
         {
             if (Dic.ContainsKey(type))
             {
@@ -42,6 +42,9 @@ namespace Paway.Model
             }
             throw new WarningException($"{type.Description()}未配置缓存");
         }
+        /// <summary>
+        /// 非线程安全队列，可能存在空值
+        /// </summary>
         public static List<T> List<T>()
         {
             return List(typeof(T));
@@ -74,34 +77,51 @@ namespace Paway.Model
         {
             return Query(action).Any();
         }
+        public static int FindId<T>(Func<T, bool> action) where T : IId
+        {
+            return Query(action).FirstOrDefault()?.Id ?? 0;
+        }
+        /// <summary>
+        /// Id列表(并发，乱序)
+        /// </summary>
         public static List<int> FindIds<T>(Func<T, bool> action) where T : IId
         {
             return Query(action).Select(c => c.Id).ToList();
         }
+        /// <summary>
+        /// 父级Id列表(并发，乱序)
+        /// </summary>
         public static List<int> FindParentIds<T>(Func<T, bool> action) where T : IParent
         {
             return Query(action).Select(c => c.ParentId).ToList();
         }
         /// <summary>
-        /// 不使用并发查询，以保证排序问题
-        /// </summary>
-        public static List<string> FindNames<T>(Func<T, bool> action) where T : IName
-        {
-            return List<T>().FindAll(c => c != null && action?.Invoke(c) != false).Select(c => c.Name).Distinct().ToList();
-        }
-        /// <summary>
-        /// 不使用并发查询，以保证排序问题
-        /// </summary>
-        public static List<string> FindCustomNames<T>(Func<T, bool> action) where T : ICustomName
-        {
-            return List<T>().FindAll(c => c != null && action?.Invoke(c) != false).Select(c => c.CustomName).Distinct().ToList();
-        }
-        /// <summary>
-        /// 查询列表
+        /// 查询列表(并发，乱序)
         /// </summary>
         public static List<T> QueryList<T>(Func<T, bool> action = null)
         {
             return Query(action).ToList();
+        }
+        /// <summary>
+        /// 查询列表(同步，顺序)
+        /// </summary>
+        public static List<T> FindAll<T>(Func<T, bool> action = null)
+        {
+            return List<T>().FindAll(c => c != null && action?.Invoke(c) != false);
+        }
+        /// <summary>
+        /// 名称列表(同步，以保证排序问题)
+        /// </summary>
+        public static List<string> FindNames<T>(Func<T, bool> action) where T : IName
+        {
+            return FindAll<T>(c => action?.Invoke(c) != false).Select(c => c.Name).Distinct().ToList();
+        }
+        /// <summary>
+        /// 名称列表(同步，以保证排序问题)
+        /// </summary>
+        public static List<string> FindCustomNames<T>(Func<T, bool> action) where T : ICustomName
+        {
+            return FindAll<T>(c => action?.Invoke(c) != false).Select(c => c.CustomName).Distinct().ToList();
         }
 
         #endregion

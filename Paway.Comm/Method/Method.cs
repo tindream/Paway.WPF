@@ -32,11 +32,7 @@ namespace Paway.Comm
                 var list = !isJson ? msg.List.Clone(true) : JsonToIList(msg.List, msg.IType);
                 if (Cache.Dic.ContainsKey(msg.IType))
                 {
-                    lock (Cache.Dic[msg.IType])
-                    {
-                        Method.Update(msg.OperType, Cache.Dic[msg.IType], list);
-                        Method.Sorted(Cache.Dic[msg.IType]);
-                    }
+                    Method.Update(msg.OperType, Cache.Dic[msg.IType], list);
                 }
                 return list;
             }
