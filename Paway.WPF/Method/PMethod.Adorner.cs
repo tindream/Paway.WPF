@@ -216,24 +216,30 @@ namespace Paway.WPF
             });
         }
         /// <summary>
-        /// 消息列表操作
+        /// 清空指定tag消息列表
         /// </summary>
         public static bool NoticeClear(object tag, Action completed = null)
         {
             lock (adornerNoticeLock)
             {
-                var adornerNotice = adornerNoticeList.FirstOrDefault(c => c.Tag != null && c.Tag.Equals(tag));
-                if (adornerNotice == null) return false;
-                AnimationHelper.Start(adornerNotice.Border, TransitionType.ToRight, completed: () =>
+                var list = adornerNoticeList.FindAll(c => c.Tag != null && c.Tag.Equals(tag));
+                for (var i = 0; i < list.Count; i++)
                 {
-                    if (adornerNotice.Border.Tag is Storyboard storyboard1)
-                    {
-                        storyboard1.Remove(adornerNotice.Border);
-                    }
-                    completed?.Invoke();
-                });
-                return true;
+                    NoticeClear(list[i], i == list.Count - 1 ? completed : null);
+                }
+                return list.Count > 0;
             }
+        }
+        private static void NoticeClear(AdornerNoticeInfo adornerNotice, Action completed)
+        {
+            AnimationHelper.Start(adornerNotice.Border, TransitionType.ToRight, completed: () =>
+            {
+                if (adornerNotice.Border.Tag is Storyboard storyboard1)
+                {
+                    storyboard1.Remove(adornerNotice.Border);
+                }
+                completed?.Invoke();
+            });
         }
         private static readonly object adornerNoticeLock = new object();
         /// <summary>
