@@ -67,10 +67,14 @@ namespace Paway.Model
         {
             var doc = new Document();
             doc.LoadFromFile(file);
-            for (var i = 0; i < doc.PageCount; i++)
+
+            var toPdf = new ToPdfParameterList();
+            toPdf.PdfConformanceLevel = PdfConformanceLevel.Pdf_A1B;
+            var pdfFile = Path.Combine(toPath, $"temp.pdf");
+            doc.SaveToFile(pdfFile, toPdf);
             {
-                ProgressChanged?.Invoke(i, doc.PageCount);
-                doc.SaveToImages(i, Spire.Doc.Documents.ImageType.Bitmap).Save(Path.Combine(toPath, $"{i}.jpg"), ImageFormat.Jpeg);
+                PDFToImage(pdfFile, toPath);
+                File.Delete(pdfFile);
             }
             doc.Dispose();
         }
@@ -83,16 +87,9 @@ namespace Paway.Model
                 var pdfFile = Path.Combine(toPath, $"{i}.pdf");
                 excel.Worksheets[i].SaveToPdf(pdfFile);
                 {
-                    var pdf = new PdfDocument();
-                    pdf.LoadFromFile(pdfFile);
-                    for (var j = 0; j < pdf.Pages.Count; j++)
-                    {
-                        ProgressChanged?.Invoke(j, pdf.Pages.Count);
-                        pdf.SaveAsImage(j).Save(Path.Combine(toPath, $"{i}_{j}.jpg"), ImageFormat.Jpeg);
-                    }
-                    pdf.Dispose();
+                    PDFToImage(pdfFile, toPath);
+                    File.Delete(pdfFile);
                 }
-                File.Delete(pdfFile);
             }
             excel.Dispose();
         }
@@ -103,7 +100,20 @@ namespace Paway.Model
             for (var i = 0; i < ppt.Slides.Count; i++)
             {
                 ProgressChanged?.Invoke(i, ppt.Slides.Count);
-                ppt.Slides[i].SaveAsImage().Save(Path.Combine(toPath, $"{i}.jpg"), ImageFormat.Jpeg);
+                ppt.Slides[i].SaveAsImage().SaveTo(Path.Combine(toPath, $"{i}.jpg"), ImageFormat.Jpeg);
+            }
+            ppt.Dispose();
+        }
+        public void PPTToImage2(string file, string toPath)
+        {
+            var ppt = new Presentation();
+            ppt.LoadFromFile(file);
+            ppt.SaveToPdfOption.PdfConformanceLevel = PdfConformanceLevel.Pdf_A1B;
+            var pdfFile = Path.Combine(toPath, $"temp.pdf");
+            ppt.SaveToFile(pdfFile, Spire.Presentation.FileFormat.PDF);
+            {
+                PDFToImage(pdfFile, toPath);
+                File.Delete(pdfFile);
             }
             ppt.Dispose();
         }
@@ -114,7 +124,7 @@ namespace Paway.Model
             for (var i = 0; i < pdf.Pages.Count; i++)
             {
                 ProgressChanged?.Invoke(i, pdf.Pages.Count);
-                pdf.SaveAsImage(i).Save(Path.Combine(toPath, $"{i}.jpg"), ImageFormat.Jpeg);
+                pdf.SaveAsImage(i, 96 * 2, 96 * 2).SaveTo(Path.Combine(toPath, $"{i}.jpg"), ImageFormat.Jpeg);
             }
             pdf.Dispose();
         }
