@@ -31,8 +31,9 @@ namespace Paway.Model
         /// Word、Excel、PPT、PDF文件转换为图片
         /// <para>file：文件</para>
         /// <para>toPath:指定目录，为空时在文件同目录下，创建文件同名目录，文件中的.以_代替</para>
+        /// <para>PPT：不支持zoom缩放</para>
         /// </summary>
-        public void ToImageFile(string file, string toPath = null)
+        public void ToImageFile(string file, string toPath = null, double zoom = 1)
         {
             if (toPath == null)
             {
@@ -44,12 +45,12 @@ namespace Paway.Model
             switch (type.ToLower())
             {
                 case ".doc":
-                case ".docx": WordToImage(file, toPath); break;
+                case ".docx": WordToImage(file, toPath, zoom); break;
                 case ".xls":
-                case ".xlsx": ExcelToImage(file, toPath); break;
+                case ".xlsx": ExcelToImage(file, toPath, zoom); break;
                 case ".ppt":
                 case ".pptx": PPTToImage(file, toPath); break;
-                case ".pdf": PDFToImage(file, toPath); break;
+                case ".pdf": PDFToImage(file, toPath, zoom); break;
                 default: throw new WarningException($"不支持的格式文件: {type}");
             }
         }
@@ -58,41 +59,51 @@ namespace Paway.Model
         /// <para>file：文件</para>
         /// <para>toPath:指定目录，为空时在文件同目录下，创建文件同名目录，文件中的.以_代替</para>
         /// </summary>
-        public List<Image> ToImages(string file)
+        public List<Image> ToImages(string file, double zoom = 1)
         {
             var imageList = new List<Image>();
             var type = Path.GetExtension(file);
             switch (type.ToLower())
             {
                 case ".doc":
-                case ".docx": WordToImage(file, imageList); break;
+                case ".docx": WordToImage(file, imageList, zoom); break;
                 case ".xls":
-                case ".xlsx": ExcelToImage(file, imageList); break;
+                case ".xlsx": ExcelToImage(file, imageList, zoom); break;
                 case ".ppt":
                 case ".pptx": PPTToImage(file, imageList); break;
-                case ".pdf": PDFToImage(file, imageList); break;
+                case ".pdf": PDFToImage(file, imageList, zoom); break;
                 default: throw new WarningException($"不支持的格式文件: {type}");
             }
             return imageList;
         }
 
-        public void WordToImage(string file, string toPath)
+        private void WordToImage(string file, string toPath, double zoom)
         {
-            WordToImage(file, (index, total, image) =>
+            if (zoom == 1) WordToImage(file, (index, total, image) =>
             {
                 ProgressChanged?.Invoke(index, total);
-                image.Save(Path.Combine(toPath, $"{index}.jpg"), ImageFormat.Jpeg);
+                image.SaveTo(Path.Combine(toPath, $"{index}.jpg"), ImageFormat.Jpeg, 60);
+            });
+            else WordToImage(file, zoom, (index, total, image) =>
+            {
+                ProgressChanged?.Invoke(index, total);
+                image.SaveTo(Path.Combine(toPath, $"{index}.jpg"), ImageFormat.Jpeg, 60);
             });
         }
-        public void WordToImage(string file, List<Image> imageList)
+        private void WordToImage(string file, List<Image> imageList, double zoom)
         {
-            WordToImage(file, (index, total, image) =>
+            if (zoom == 1) WordToImage(file, (index, total, image) =>
+            {
+                ProgressChanged?.Invoke(index, total);
+                imageList.Add(image);
+            });
+            else WordToImage(file, zoom, (index, total, image) =>
             {
                 ProgressChanged?.Invoke(index, total);
                 imageList.Add(image);
             });
         }
-        public void WordToImage(string file, Action<int, int, Image> action)
+        private void WordToImage(string file, Action<int, int, Image> action)
         {
             using (var doc = new Document())
             {
@@ -103,8 +114,22 @@ namespace Paway.Model
                 }
             }
         }
+        private void WordToImage(string file, double zoom, Action<int, int, Image> action)
+        {
+            using (var doc = new Document())
+            {
+                doc.LoadFromFile(file);
+                var toPdf = new ToPdfParameterList();
+                toPdf.PdfConformanceLevel = PdfConformanceLevel.Pdf_A1B;
+                var toPath = Path.Combine(Path.GetDirectoryName(file), Path.GetFileName(file).Replace(".", "_"));
+                var pdfFile = Path.Combine(toPath, $"temp.pdf");
+                doc.SaveToFile(pdfFile, toPdf);
+                PDFToImage(pdfFile, zoom, action);
+                File.Delete(pdfFile);
+            }
+        }
 
-        public void ExcelToImage(string file, string toPath)
+        private void ExcelToImage(string file, string toPath, double zoom)
         {
             using (var excel = new Workbook())
             {
@@ -113,24 +138,24 @@ namespace Paway.Model
                 {
                     var pdfFile = Path.Combine(toPath, $"{i}.pdf");
                     excel.Worksheets[i].SaveToPdf(pdfFile);
-                    PDFToImage(pdfFile, (index, total, image) =>
+                    PDFToImage(pdfFile, zoom, (index, total, image) =>
                     {
                         ProgressChanged?.Invoke(index + i * total, total * excel.Worksheets.Count);
-                        image.Save(Path.Combine(toPath, $"{i}_{index}.jpg"), ImageFormat.Jpeg);
+                        image.SaveTo(Path.Combine(toPath, $"{i}_{index}.jpg"), ImageFormat.Jpeg, 60);
                     });
                     File.Delete(pdfFile);
                 }
             }
         }
-        public void ExcelToImage(string file, List<Image> imageList)
+        private void ExcelToImage(string file, List<Image> imageList, double zoom)
         {
-            ExcelToImage(file, (index, total, image) =>
+            ExcelToImage(file, zoom, (index, total, image) =>
             {
                 ProgressChanged?.Invoke(index, total);
                 imageList.Add(image);
             });
         }
-        public void ExcelToImage(string file, Action<int, int, Image> action)
+        private void ExcelToImage(string file, double zoom, Action<int, int, Image> action)
         {
             using (var excel = new Workbook())
             {
@@ -140,21 +165,21 @@ namespace Paway.Model
                 {
                     var pdfFile = Path.Combine(toPath, $"{i}.pdf");
                     excel.Worksheets[i].SaveToPdf(pdfFile);
-                    PDFToImage(pdfFile, (index, total, image) => action.Invoke(index + i * total, total * excel.Worksheets.Count, image));
+                    PDFToImage(pdfFile, zoom, (index, total, image) => action.Invoke(index + i * total, total * excel.Worksheets.Count, image));
                     File.Delete(pdfFile);
                 }
             }
         }
 
-        public void PPTToImage(string file, string toPath)
+        private void PPTToImage(string file, string toPath)
         {
             PPTToImage(file, (index, total, image) =>
             {
                 ProgressChanged?.Invoke(index, total);
-                image.Save(Path.Combine(toPath, $"{index}.jpg"), ImageFormat.Jpeg);
+                image.SaveTo(Path.Combine(toPath, $"{index}.jpg"), ImageFormat.Jpeg, 60);
             });
         }
-        public void PPTToImage(string file, List<Image> imageList)
+        private void PPTToImage(string file, List<Image> imageList)
         {
             PPTToImage(file, (index, total, image) =>
             {
@@ -162,7 +187,7 @@ namespace Paway.Model
                 imageList.Add(image);
             });
         }
-        public void PPTToImage(string file, Action<int, int, Image> action)
+        private void PPTToImage(string file, Action<int, int, Image> action)
         {
             using (var ppt = new Presentation())
             {
@@ -174,30 +199,30 @@ namespace Paway.Model
             }
         }
 
-        public void PDFToImage(string file, string toPath)
+        private void PDFToImage(string file, string toPath, double zoom)
         {
-            PDFToImage(file, (index, total, image) =>
+            PDFToImage(file, zoom, (index, total, image) =>
             {
                 ProgressChanged?.Invoke(index, total);
-                image.Save(Path.Combine(toPath, $"{index}.jpg"), ImageFormat.Jpeg);
+                image.SaveTo(Path.Combine(toPath, $"{index}.jpg"), ImageFormat.Jpeg, 60);
             });
         }
-        public void PDFToImage(string file, List<Image> imageList)
+        private void PDFToImage(string file, List<Image> imageList, double zoom)
         {
-            PDFToImage(file, (index, total, image) =>
+            PDFToImage(file, zoom, (index, total, image) =>
             {
                 ProgressChanged?.Invoke(index, total);
                 imageList.Add(image);
             });
         }
-        public void PDFToImage(string file, Action<int, int, Image> action)
+        private void PDFToImage(string file, double zoom, Action<int, int, Image> action)
         {
             using (var pdf = new PdfDocument())
             {
                 pdf.LoadFromFile(file);
                 for (var i = 0; i < pdf.Pages.Count; i++)
                 {
-                    action.Invoke(i, pdf.Pages.Count, pdf.SaveAsImage(i));
+                    action.Invoke(i, pdf.Pages.Count, pdf.SaveAsImage(i, (int)(96 * zoom), (int)(96 * zoom)));
                 }
             }
         }

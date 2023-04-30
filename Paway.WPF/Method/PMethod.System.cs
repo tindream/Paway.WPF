@@ -132,7 +132,18 @@ namespace Paway.WPF
             }
             return window.ShowDialog();
         }
-
+        /// <summary>
+        /// 再次加载空窗体，达到释放资源的目的？
+        /// CleanWindow
+        /// </summary>
+        public static void CleanWindow(Window window)
+        {
+            window.ShowInTaskbar = false;
+            window.WindowState = WindowState.Normal;
+            window.Left = SystemParameters.PrimaryScreenWidth;
+            window.Show();
+            window.Close();
+        }
         #endregion
 
         #region Window系统消息框
