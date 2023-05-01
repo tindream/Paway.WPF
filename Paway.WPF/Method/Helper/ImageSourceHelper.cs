@@ -43,7 +43,7 @@ namespace Paway.WPF
         /// <summary>
         /// 图像转图片资源
         /// </summary>
-        public static BitmapSource ToSource(Bitmap bitmap)
+        public static BitmapSource ToImage(Bitmap bitmap)
         {
             var intPtr = bitmap.GetHbitmap();
             var image = Imaging.CreateBitmapSourceFromHBitmap(intPtr, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
