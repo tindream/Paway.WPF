@@ -32,7 +32,7 @@ namespace Paway.Model
         /// </summary>
         protected void Create(Uri uri)
         {
-            var sql = Method.ResourceText(uri);
+            var sql = uri.ToText();
             if (base.InitCreate(sql))
             {
                 Created();

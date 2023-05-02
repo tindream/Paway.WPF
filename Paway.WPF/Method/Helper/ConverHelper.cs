@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -14,9 +15,9 @@ using System.Windows.Media;
 namespace Paway.WPF
 {
     /// <summary>
-    /// 扩展方法
+    /// 扩展方法(转换器)
     /// </summary>
-    public static class ConverHelper
+    public static partial class ConverHelper
     {
         #region Labbda表达式
         /// <summary>
@@ -47,7 +48,36 @@ namespace Paway.WPF
 
         #endregion
 
-        #region Color
+        #region Resources
+        /// <summary>
+        /// 从Resource文件读取文本
+        /// </summary>
+        public static string ToText(this Uri uri)
+        {
+            var info = Application.GetResourceStream(uri);
+            using (var reader = new StreamReader(info.Stream, Encoding.UTF8))
+            {
+                var txt = reader.ReadToEnd();
+                return txt;
+            }
+        }
+        /// <summary>
+        /// 从Resource文件读取byte[]
+        /// </summary>
+        public static byte[] Buffer(this Uri uri)
+        {
+            var info = Application.GetResourceStream(uri);
+            using (info.Stream)
+            {
+                var buffer = new byte[info.Stream.Length];
+                info.Stream.Read(buffer, 0, buffer.Length);
+                return buffer;
+            }
+        }
+
+        #endregion
+
+        #region Color转换
         /// <summary>
         /// 颜色转换(Add)
         /// </summary>
@@ -177,7 +207,7 @@ namespace Paway.WPF
 
         #endregion
 
-        #region 特性
+        #region Color特性
         /// <summary>
         /// 特性-枚举颜色
         /// </summary>

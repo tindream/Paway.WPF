@@ -13,35 +13,6 @@ namespace Paway.WPF
     /// </summary>
     public partial class PMethod : TMethod
     {
-        #region Resources
-        /// <summary>
-        /// 从Resource文件读取文本
-        /// </summary>
-        public static string ResourceText(Uri uri)
-        {
-            var info = Application.GetResourceStream(uri);
-            using (var reader = new StreamReader(info.Stream, Encoding.UTF8))
-            {
-                var txt = reader.ReadToEnd();
-                return txt;
-            }
-        }
-        /// <summary>
-        /// 从Resource文件读取byte[]
-        /// </summary>
-        public static byte[] ResourceBuffer(Uri uri)
-        {
-            var info = Application.GetResourceStream(uri);
-            using (info.Stream)
-            {
-                var buffer = new byte[info.Stream.Length];
-                info.Stream.Read(buffer, 0, buffer.Length);
-                return buffer;
-            }
-        }
-
-        #endregion
-
         #region 颜色
         /// <summary>
         /// 取颜色拾取器中的颜色值

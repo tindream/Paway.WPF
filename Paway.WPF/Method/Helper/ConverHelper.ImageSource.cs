@@ -12,27 +12,27 @@ using System.Windows.Media.Imaging;
 namespace Paway.WPF
 {
     /// <summary>
-    /// 图像处理类
+    /// 转换器 - 图像处理
     /// </summary>
-    public abstract class ImageSourceHelper
+    public static partial class ConverHelper
     {
         #region 转换
         /// <summary>
         /// 文件转图片资源(不占用文件)
         /// </summary>
-        public static BitmapSource ToImage(string file)
+        public static BitmapSource ToSource(this string file)
         {
             using (var binaryReader = new BinaryReader(File.Open(file, FileMode.Open)))
             {
                 var fileInfo = new FileInfo(file);
                 var buffer = binaryReader.ReadBytes((int)fileInfo.Length);
-                return ToImage(buffer);
+                return ToSource(buffer);
             }
         }
         /// <summary>
         /// 内存流转图片资源
         /// </summary>
-        public static BitmapSource ToImage(byte[] buffer)
+        public static BitmapSource ToSource(this byte[] buffer)
         {
             var image = new BitmapImage();
             image.BeginInit();
@@ -43,7 +43,7 @@ namespace Paway.WPF
         /// <summary>
         /// 图像转图片资源
         /// </summary>
-        public static BitmapSource ToImage(Bitmap bitmap)
+        public static BitmapSource ToSource(this Bitmap bitmap)
         {
             var intPtr = bitmap.GetHbitmap();
             var image = Imaging.CreateBitmapSourceFromHBitmap(intPtr, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
