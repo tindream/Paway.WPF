@@ -22,23 +22,30 @@ namespace Paway.WPF
         /// </summary>
         public static BitmapSource ToSource(this string file)
         {
-            using (var binaryReader = new BinaryReader(File.Open(file, FileMode.Open)))
+            var source = new BitmapImage();
+            using (var fs = File.OpenRead(file))
             {
-                var fileInfo = new FileInfo(file);
-                var buffer = binaryReader.ReadBytes((int)fileInfo.Length);
-                return ToSource(buffer);
+                source.BeginInit();
+                source.CacheOption = BitmapCacheOption.OnLoad;//图像缓存到内存中，不会占用文件，没有被引用时会被自动回收。
+                source.StreamSource = fs;
+                source.EndInit();
             }
+            return source;
         }
         /// <summary>
         /// 内存流转图片资源
         /// </summary>
         public static BitmapSource ToSource(this byte[] buffer)
         {
-            var image = new BitmapImage();
-            image.BeginInit();
-            image.StreamSource = new MemoryStream(buffer);
-            image.EndInit();
-            return image;
+            var source = new BitmapImage();
+            using (var ms = new MemoryStream(buffer))
+            {
+                source.BeginInit();
+                source.CacheOption = BitmapCacheOption.OnLoad;
+                source.StreamSource = ms;
+                source.EndInit();
+            }
+            return source;
         }
         /// <summary>
         /// 图像转图片资源
@@ -46,9 +53,9 @@ namespace Paway.WPF
         public static BitmapSource ToSource(this Bitmap bitmap)
         {
             var intPtr = bitmap.GetHbitmap();
-            var image = Imaging.CreateBitmapSourceFromHBitmap(intPtr, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+            var source = Imaging.CreateBitmapSourceFromHBitmap(intPtr, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
             NativeMethods.DeleteObject(intPtr);
-            return image;
+            return source;
         }
 
         #endregion

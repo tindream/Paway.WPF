@@ -64,7 +64,7 @@ namespace Paway.WPF
         /// <summary>
         /// 从Resource文件读取byte[]
         /// </summary>
-        public static byte[] Buffer(this Uri uri)
+        public static byte[] ToBuffer(this Uri uri)
         {
             var info = Application.GetResourceStream(uri);
             using (info.Stream)
