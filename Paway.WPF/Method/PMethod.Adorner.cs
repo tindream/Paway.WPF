@@ -29,9 +29,11 @@ namespace Paway.WPF
         #region 装饰器-空白
         /// <summary>
         /// 装饰器-空白画板
-        /// <para>当前控件</para>
+        /// <para>element:当前控件</para>
+        /// <para>hitTest=true 不路由事件（不穿透）</para>
+        /// <para>hitTest=false 路由事件（穿透）</para>
         /// </summary>
-        public static CustomAdorner CustomAdorner(FrameworkElement element, bool hitTest = false, FrameworkElement content = null)
+        public static CustomAdorner CustomAdorner(FrameworkElement element, bool hitTest = false, FrameworkElement content = null, bool atBottom = false)
         {
             return Invoke(() =>
             {
@@ -41,7 +43,22 @@ namespace Paway.WPF
                     if (myAdornerLayer == null) return null;
 
                     var customAdorner = new CustomAdorner(element, hitTest: hitTest);
-                    myAdornerLayer.Add(customAdorner);
+                    if (atBottom)
+                    {
+                        lock (myAdornerLayer)
+                        {
+                            var list = myAdornerLayer.GetAdorners(element);
+                            for (var i = 0; i < list.Length; i++)
+                                myAdornerLayer.Remove(list[i]);
+                            myAdornerLayer.Add(customAdorner);
+                            for (var i = 0; i < list.Length; i++)
+                                myAdornerLayer.Add(list[i]);
+                        }
+                    }
+                    else
+                    {
+                        lock (myAdornerLayer) myAdornerLayer.Add(customAdorner);
+                    }
                     if (content != null)
                     {
                         var canvas = customAdorner.GetCanvas();
@@ -75,7 +92,7 @@ namespace Paway.WPF
                     var myAdornerLayer = ReloadAdorner(element);
                     if (myAdornerLayer == null) return;
 
-                    myAdornerLayer.Remove(adorner);
+                    lock (myAdornerLayer) myAdornerLayer.Remove(adorner);
                 }
             });
         }
@@ -154,7 +171,7 @@ namespace Paway.WPF
                     if (time == 0) time = 3000;
                     else if (time < 0) time = int.MaxValue - 125;
                     if (tag != null) NoticeClear(tag);
-                    myAdornerLayer.Add(new CustomAdorner(element, border,
+                    var noticeAdorner = new CustomAdorner(element, border,
                         xFunc: () =>
                         {
                             var right = window is WindowEXT || (window.WindowStyle == System.Windows.WindowStyle.None && window.ResizeMode == ResizeMode.NoResize) ? 2 : 16;
@@ -210,12 +227,13 @@ namespace Paway.WPF
                             storyboard.Children.Add(animOut);
 
                             return storyboard;
-                        }, hitTest: hitAction != null));
+                        }, hitTest: hitAction != null);
+                    lock (myAdornerLayer) myAdornerLayer.Add(noticeAdorner);
                 }
             });
         }
         /// <summary>
-        /// 清空指定tag消息列表
+        /// 清空指定tag消息列表装饰器
         /// </summary>
         public static bool NoticeClear(object tag, Action completed = null)
         {
@@ -306,7 +324,7 @@ namespace Paway.WPF
                     FontSize = size
                 };
                 if (color != null) block.Foreground = color.Value.ToBrush();
-                myAdornerLayer.Add(new CustomAdorner(parent, block, storyboardFunc: () =>
+                var slowInAdorner = new CustomAdorner(parent, block, storyboardFunc: () =>
                 {
                     var storyboard = new Storyboard();
 
@@ -350,17 +368,18 @@ namespace Paway.WPF
                     }
 
                     return storyboard;
-                }, completedFunc: completed));
+                }, completedFunc: completed);
+                lock (myAdornerLayer) myAdornerLayer.Add(slowInAdorner);
             });
         }
 
         /// <summary>
         /// 装饰器-移动触发水波纹底色
         /// </summary>
-        public static AdornerLayer WaterAdornerFixed(FrameworkElement element, MouseEventArgs e, double width = 100)
+        public static void WaterAdornerFixed(FrameworkElement element, MouseEventArgs e, double width = 100)
         {
-            var myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
-            if (myAdornerLayer == null) return null;
+            var myAdornerLayer = ReloadAdorner(element);
+            if (myAdornerLayer == null) return;
 
             var point = e.GetPosition(element);
             var x = Math.Max(element.ActualWidth - point.X, point.X);
@@ -369,11 +388,10 @@ namespace Paway.WPF
             if (width == 0 || width > autoWidth) width = autoWidth;
 
             var ellipse = new Ellipse() { Width = width, Height = width, Fill = AlphaColor(20, Colors.Black).ToBrush() };
-            if (LastWaterElement != null) ClearAdorner(AdornerLayer.GetAdornerLayer(LastWaterElement), LastWaterElement, NameWater);
+            if (LastWaterElement != null) ClearAdorner(ReloadAdorner(LastWaterElement), LastWaterElement, NameWater);
             var waterAdornerFixed = new CustomAdorner(element, ellipse, null, () => point.X - ellipse.ActualWidth / 2, () => point.Y - ellipse.ActualHeight / 2, hitTest: false) { Name = NameWater };
-            myAdornerLayer.Add(waterAdornerFixed);
+            lock (myAdornerLayer) myAdornerLayer.Add(waterAdornerFixed);
             LastWaterElement = element;
-            return myAdornerLayer;
         }
         /// <summary>
         /// 装饰器-点击触发水波纹特效
@@ -418,7 +436,7 @@ namespace Paway.WPF
         /// </summary>
         private static AdornerLayer WaterAdorner(FrameworkElement element, MouseEventArgs e, Color? color = null, double width = 0, double maxWidth = 300)
         {
-            var myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
+            var myAdornerLayer = ReloadAdorner(element);
             if (myAdornerLayer == null) return null;
 
             var point = e.GetPosition(element);
@@ -430,7 +448,7 @@ namespace Paway.WPF
 
             if (color == null) color = PConfig.Color;
             var ellipse = new Ellipse() { Width = 10, Height = 10, Fill = color.Value.ToBrush() };
-            myAdornerLayer.Add(new CustomAdorner(element, ellipse, null, () => point.X - ellipse.ActualWidth / 2, () => point.Y - ellipse.ActualHeight / 2, () =>
+            var waterAdorner = new CustomAdorner(element, ellipse, null, () => point.X - ellipse.ActualWidth / 2, () => point.Y - ellipse.ActualHeight / 2, () =>
             {
                 var storyboard = new Storyboard();
                 var animTime = AnimTime(width) * 1.3;
@@ -450,7 +468,8 @@ namespace Paway.WPF
                 storyboard.Children.Add(animColor);
 
                 return storyboard;
-            }));
+            });
+            lock (myAdornerLayer) myAdornerLayer.Add(waterAdorner);
             return myAdornerLayer;
         }
         /// <summary>
@@ -459,13 +478,16 @@ namespace Paway.WPF
         private static void ClearAdorner(AdornerLayer myAdornerLayer, FrameworkElement element, string name)
         {
             if (myAdornerLayer == null) return;
-            var list = myAdornerLayer.GetAdorners(element);
-            while (list != null)
+            lock (myAdornerLayer)
             {
-                var last = list.FirstOrDefault(c => c.Name == name);
-                if (last == null) break;
-                myAdornerLayer.Remove(last);
-                list = myAdornerLayer.GetAdorners(element);
+                var list = myAdornerLayer.GetAdorners(element);
+                while (list != null)
+                {
+                    var last = list.FirstOrDefault(c => c.Name == name);
+                    if (last == null) break;
+                    myAdornerLayer.Remove(last);
+                    list = myAdornerLayer.GetAdorners(element);
+                }
             }
         }
 
@@ -515,7 +537,7 @@ namespace Paway.WPF
                     if (time == 0) time = 3000;
 
                     ToastClear(myAdornerLayer, element, NameToast);
-                    myAdornerLayer.Add(new CustomAdorner(element, border, yFunc: () =>
+                    var toastAdorner = new CustomAdorner(element, border, yFunc: () =>
                     {
                         var top = window.ActualHeight - border.ActualHeight;
                         top = top * 17 / 20;
@@ -551,13 +573,15 @@ namespace Paway.WPF
 
                         return storyboard;
                     }, completedFunc: completed)
-                    { Name = NameToast });
+                    { Name = NameToast };
+                    lock (myAdornerLayer) myAdornerLayer.Add(toastAdorner);
                 }
             });
         }
         private static void ToastClear(AdornerLayer myAdornerLayer, FrameworkElement element, string name)
         {
-            var list = myAdornerLayer.GetAdorners(element);
+            Adorner[] list = null;
+            lock (myAdornerLayer) myAdornerLayer.GetAdorners(element);
             if (list == null) return;
             for (var i = 0; i < list.Length; i++)
             {
@@ -617,7 +641,7 @@ namespace Paway.WPF
                     if (time == 0) time = 3000;
 
                     ClearAdorner(myAdornerLayer, element, NameHit);
-                    myAdornerLayer.Add(new CustomAdorner(element, border, storyboardFunc: () =>
+                    var hitAdorner = new CustomAdorner(element, border, storyboardFunc: () =>
                     {
                         var storyboard = new Storyboard();
 
@@ -656,7 +680,8 @@ namespace Paway.WPF
 
                         return storyboard;
                     }, completedFunc: completed)
-                    { Name = NameHit });
+                    { Name = NameHit };
+                    lock (myAdornerLayer) myAdornerLayer.Add(hitAdorner);
                 }
             });
         }
@@ -801,10 +826,10 @@ namespace Paway.WPF
                         Height = 100,
                     });
                 }
-                var progressAd = new CustomAdorner(element, border, AlphaColor(0, Colors.Black));
-                myAdornerLayer.Add(progressAd);
-                progressAd.Tag = myAdornerLayer;
-                return progressAd;
+                var progressAdorner = new CustomAdorner(element, border, AlphaColor(0, Colors.Black));
+                lock (myAdornerLayer) myAdornerLayer.Add(progressAdorner);
+                progressAdorner.Tag = myAdornerLayer;
+                return progressAdorner;
             }
             return null;
         }

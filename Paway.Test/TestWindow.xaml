@@ -22,6 +22,7 @@
         </Menu>
         <StackPanel Width="200">
             <ButtonEXT Content="A" Click="Button_Click"/>
+            <ButtonEXT Content="B" Click="Button_Click2"/>
         </StackPanel>
         <Frame Name="frame" NavigationUIVisibility="Hidden"/>
     </DockPanel>

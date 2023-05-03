@@ -71,5 +71,11 @@ namespace Paway.Test
             }
             base.OnPreviewMouseMove(e);
         }
+        private void Button_Click2(object sender, RoutedEventArgs e)
+        {
+            var border = new Border();
+            border.Background = Color.FromArgb(150, 200, 200, 200).ToBrush();
+            Method.CustomAdorner(Config.Window, true, border, true);
+        }
     }
 }
