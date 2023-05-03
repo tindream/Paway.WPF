@@ -21,9 +21,10 @@ namespace Paway.WPF
     /// </summary>
     public partial class PMethod
     {
-        private static FrameworkElement Element;
+        private static FrameworkElement LastWaterElement;
         private static readonly string NameWater = $"{nameof(PMethod)}_{nameof(WaterAdornerFixed)}";
         private static readonly string NameHit = $"{nameof(PMethod)}_{nameof(Hit)}";
+        private static readonly string NameToast = $"{nameof(PMethod)}_{nameof(Toast)}";
 
         #region 装饰器-空白
         /// <summary>
@@ -34,8 +35,6 @@ namespace Paway.WPF
         {
             return Invoke(() =>
             {
-                //if (!Parent(parent, out Window window)) return null;
-                //if (window.Content is FrameworkElement element)
                 if (element is Window window && window.Content is FrameworkElement temp) element = temp;
                 {
                     var myAdornerLayer = ReloadAdorner(element);
@@ -163,15 +162,15 @@ namespace Paway.WPF
                         },
                         yFunc: () =>
                         {
-                            var id = border.GetHashCode();
+                            var code = border.GetHashCode();
                             var location = 0d;
                             lock (adornerNoticeLock)
                             {
-                                var temp = adornerNoticeList.Find(c => c.Id == id);
+                                var temp = adornerNoticeList.Find(c => c.Code == code);
                                 if (temp == null && border.ActualHeight > 0)
                                 {
                                     adornerIndex++;
-                                    temp = new AdornerNoticeInfo(adornerIndex, id, border, tag);
+                                    temp = new AdornerNoticeInfo(adornerIndex, code, border, tag);
                                     adornerNoticeList.Add(temp);
                                 }
                                 location = adornerNoticeList.Where(c => c.Index < temp?.Index).Sum(c => c.Height);
@@ -182,10 +181,10 @@ namespace Paway.WPF
                         },
                         completedFunc: () =>
                         {
-                            var id = border.GetHashCode();
+                            var code = border.GetHashCode();
                             lock (adornerNoticeLock)
                             {
-                                var temp = adornerNoticeList.Find(c => c.Id == id);
+                                var temp = adornerNoticeList.Find(c => c.Code == code);
                                 if (temp != null) adornerNoticeList.Remove(temp);
                             }
                             completed?.Invoke();
@@ -253,18 +252,18 @@ namespace Paway.WPF
         public class AdornerNoticeInfo
         {
             /// <summary>
-            /// 唯一标识
-            /// </summary>
-            public int Id { get; set; }
-            /// <summary>
-            /// 记录实际高度
-            /// </summary>
-            public double Height { get; set; }
-            /// <summary>
             /// 记录创建时的顺序计数，作为唯一标识
             /// <para>批量弹出时，时间戳可能会重复</para>
             /// </summary>
             public int Index { get; set; }
+            /// <summary>
+            /// 控件Code
+            /// </summary>
+            public int Code { get; set; }
+            /// <summary>
+            /// 记录实际高度
+            /// </summary>
+            public double Height { get; set; }
 
             /// <summary>
             /// 当前消息控件
@@ -277,12 +276,12 @@ namespace Paway.WPF
 
             /// <summary>
             /// </summary>
-            public AdornerNoticeInfo(int adornerIndex, int id, Border border, object tag)
+            public AdornerNoticeInfo(int adornerIndex, int code, Border border, object tag)
             {
-                this.Id = id;
+                this.Index = adornerIndex;
+                this.Code = code;
                 this.Border = border;
                 this.Height = border.ActualHeight + 2;
-                this.Index = adornerIndex;
                 this.Tag = tag;
             }
         }
@@ -363,7 +362,6 @@ namespace Paway.WPF
             var myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
             if (myAdornerLayer == null) return null;
 
-            if (Element != null) ClearAdorner(AdornerLayer.GetAdornerLayer(Element), Element, NameWater);
             var point = e.GetPosition(element);
             var x = Math.Max(element.ActualWidth - point.X, point.X);
             var y = Math.Max(element.ActualHeight - point.Y, point.Y);
@@ -371,25 +369,11 @@ namespace Paway.WPF
             if (width == 0 || width > autoWidth) width = autoWidth;
 
             var ellipse = new Ellipse() { Width = width, Height = width, Fill = AlphaColor(20, Colors.Black).ToBrush() };
+            if (LastWaterElement != null) ClearAdorner(AdornerLayer.GetAdornerLayer(LastWaterElement), LastWaterElement, NameWater);
             var waterAdornerFixed = new CustomAdorner(element, ellipse, null, () => point.X - ellipse.ActualWidth / 2, () => point.Y - ellipse.ActualHeight / 2, hitTest: false) { Name = NameWater };
             myAdornerLayer.Add(waterAdornerFixed);
-            Element = element;
+            LastWaterElement = element;
             return myAdornerLayer;
-        }
-        /// <summary>
-        /// 清除装饰器上指定名称装饰
-        /// </summary>
-        private static void ClearAdorner(AdornerLayer myAdornerLayer, FrameworkElement element, string name)
-        {
-            if (myAdornerLayer == null) return;
-            var list = myAdornerLayer.GetAdorners(element);
-            while (list != null)
-            {
-                var last = list.FirstOrDefault(c => c.Name == name);
-                if (last == null) break;
-                myAdornerLayer.Remove(last);
-                list = myAdornerLayer.GetAdorners(element);
-            }
         }
         /// <summary>
         /// 装饰器-点击触发水波纹特效
@@ -469,6 +453,21 @@ namespace Paway.WPF
             }));
             return myAdornerLayer;
         }
+        /// <summary>
+        /// 清除装饰器上指定名称装饰
+        /// </summary>
+        private static void ClearAdorner(AdornerLayer myAdornerLayer, FrameworkElement element, string name)
+        {
+            if (myAdornerLayer == null) return;
+            var list = myAdornerLayer.GetAdorners(element);
+            while (list != null)
+            {
+                var last = list.FirstOrDefault(c => c.Name == name);
+                if (last == null) break;
+                myAdornerLayer.Remove(last);
+                list = myAdornerLayer.GetAdorners(element);
+            }
+        }
 
         #endregion
 
@@ -514,6 +513,8 @@ namespace Paway.WPF
                     if (fontSize != null) block.FontSize = fontSize.Value;
                     border.Child = block;
                     if (time == 0) time = 3000;
+
+                    ToastClear(myAdornerLayer, element, NameToast);
                     myAdornerLayer.Add(new CustomAdorner(element, border, yFunc: () =>
                     {
                         var top = window.ActualHeight - border.ActualHeight;
@@ -522,6 +523,7 @@ namespace Paway.WPF
                     }, storyboardFunc: () =>
                     {
                         var storyboard = new Storyboard();
+                        border.Tag = storyboard;
 
                         var tt = new TranslateTransform();
                         border.RenderTransform = tt;
@@ -548,21 +550,29 @@ namespace Paway.WPF
                         storyboard.Children.Add(animOut);
 
                         return storyboard;
-                    }, completedFunc: completed));
+                    }, completedFunc: completed)
+                    { Name = NameToast });
                 }
             });
-            //Invoke(parent, () =>
-            //{
-            //    var toast = new WindowToast();
-            //    if (Parent(parent, out Window owner))
-            //    {
-            //        var window = Window(parent);
-            //        {
-            //            toast.Owner = owner;
-            //        }
-            //        toast.Show(msg, time, iError);
-            //    }
-            //});
+        }
+        private static void ToastClear(AdornerLayer myAdornerLayer, FrameworkElement element, string name)
+        {
+            var list = myAdornerLayer.GetAdorners(element);
+            if (list == null) return;
+            for (var i = 0; i < list.Length; i++)
+            {
+                if (list[i].Name == name && list[i] is CustomAdorner customAdorner)
+                {
+                    var element2 = customAdorner.GetElement();
+                    AnimationHelper.Start(element2, TransitionType.ToBottom, completed: () =>
+                    {
+                        if (element2.Tag is Storyboard storyboard1)
+                        {
+                            storyboard1.Remove(element2);
+                        }
+                    });
+                }
+            }
         }
         /// <summary>
         /// 装饰器-自定义提示框-Hit
@@ -727,8 +737,6 @@ namespace Paway.WPF
         /// </summary>
         public static CustomAdorner ProgressAdorner(FrameworkElement element, object msg = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
         {
-            //if (!Parent(parent, out Window window)) return null;
-            //if (window.Content is FrameworkElement element)
             if (element != null)
             {
                 if (element is Window window && window.Content is FrameworkElement temp) element = temp;
@@ -818,7 +826,7 @@ namespace Paway.WPF
         /// <summary>
         /// 重复一次获取装饰器
         /// </summary>
-        private static AdornerLayer ReloadAdorner(UIElement element, int count = 1)
+        internal static AdornerLayer ReloadAdorner(UIElement element, int count = 1)
         {
             var myAdornerLayer = AdornerLayer.GetAdornerLayer(element);
             while (myAdornerLayer == null && count > 0)

@@ -57,5 +57,19 @@ namespace Paway.Test
             //Debug.WriteLine(xml);
             frame.Content = ViewlLocator.GetInstance<TestPage>();
         }
+        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
+        {
+            Method.WaterAdorner(e);
+            base.OnPreviewMouseDown(e);
+        }
+        protected override void OnPreviewMouseMove(MouseEventArgs e)
+        {
+            if (this.Content is Panel panel)
+            {
+                //Method.WaterAdorner(e, maxWidth: 100);
+                //Method.WaterAdornerFixed(panel, e);
+            }
+            base.OnPreviewMouseMove(e);
+        }
     }
 }

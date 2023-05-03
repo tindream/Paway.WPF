@@ -56,7 +56,7 @@ namespace Paway.WPF
                 storyboard.Completed += (sender2, e2) =>
                 {
                     completedFunc?.Invoke();
-                    var myAdornerLayer = AdornerLayer.GetAdornerLayer(adornedElement);
+                    var myAdornerLayer = PMethod.ReloadAdorner(adornedElement);
                     if (myAdornerLayer != null)
                     {
                         myAdornerLayer.Remove(this);
@@ -73,6 +73,14 @@ namespace Paway.WPF
         public Canvas GetCanvas()
         {
             return canvas;
+        }
+        /// <summary>
+        /// 获取画板下的第一个控件(主控件)
+        /// </summary>
+        public FrameworkElement GetElement()
+        {
+            if (canvas.Children.Count > 0 && canvas.Children[0] is FrameworkElement element) return element;
+            return null;
         }
         /// <summary>
         /// 装饰器-Window进度条提示信息
