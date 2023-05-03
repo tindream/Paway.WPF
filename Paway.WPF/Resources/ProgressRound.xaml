@@ -37,7 +37,7 @@
                         </Path>
                         <Label Name="txt" Visibility="{TemplateBinding IText, Converter={StaticResource boolToVisible}}"
                                FontSize="{TemplateBinding FontSize,Converter={StaticResource valueMultiConverter}}"
-                               Opacity="0.9" 
+                               Opacity="0.8" 
                                Padding="5,5"
                                Foreground="{StaticResource Text}"
                                Content="{TemplateBinding ProgressValue}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>

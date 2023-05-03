@@ -48,6 +48,14 @@
     <!--#region 通用模板 -->
     <!--多语言-->
     <local:PConfig x:Key="LB"  />
+    <!--输入框标题样式-->
+    <Style x:Key="TitleBlock" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Opacity" Value="0.8"/>
+        <Setter Property="TextAlignment" Value="Right"/>
+        <Setter Property="Padding" Value="2,0,4,0"/>
+        <Setter Property="Margin" Value="0,2"/>
+    </Style>
     <!--Menu.Icon图标宽度-->
     <sys:Double x:Key="MenuIconWidth">18</sys:Double>
     <!--焦点样式动态边框-->

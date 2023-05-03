@@ -32,8 +32,9 @@ namespace Paway.WPF
         /// <para>element:当前控件</para>
         /// <para>hitTest=true 不路由事件（不穿透）</para>
         /// <para>hitTest=false 路由事件（穿透）</para>
+        /// <para>iBottom:置于最底层</para>
         /// </summary>
-        public static CustomAdorner CustomAdorner(FrameworkElement element, bool hitTest = false, FrameworkElement content = null, bool atBottom = false)
+        public static CustomAdorner CustomAdorner(FrameworkElement element, FrameworkElement content = null, bool hitTest = false, bool iBottom = false)
         {
             return Invoke(() =>
             {
@@ -43,16 +44,14 @@ namespace Paway.WPF
                     if (myAdornerLayer == null) return null;
 
                     var customAdorner = new CustomAdorner(element, hitTest: hitTest);
-                    if (atBottom)
+                    if (iBottom)
                     {
                         lock (myAdornerLayer)
                         {
                             var list = myAdornerLayer.GetAdorners(element);
-                            for (var i = 0; i < list.Length; i++)
-                                myAdornerLayer.Remove(list[i]);
+                            if (list != null) for (var i = 0; i < list.Length; i++) myAdornerLayer.Remove(list[i]);
                             myAdornerLayer.Add(customAdorner);
-                            for (var i = 0; i < list.Length; i++)
-                                myAdornerLayer.Add(list[i]);
+                            if (list != null) for (var i = 0; i < list.Length; i++) myAdornerLayer.Add(list[i]);
                         }
                     }
                     else

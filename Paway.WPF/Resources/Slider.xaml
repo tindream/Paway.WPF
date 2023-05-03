@@ -231,7 +231,7 @@
                            TextAlignment="Right"
                            Padding="0,0,6,0"
                            FontSize="{TemplateBinding FontSize}"
-                           Opacity="0.9"
+                           Opacity="0.8"
                            Text="{TemplateBinding Title}"/>
                 <Grid>
                     <Grid.RowDefinitions>
