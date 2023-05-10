@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -42,6 +43,15 @@ namespace Paway.Model
                     else tbUserName.Focus();
                 }
             });
+        }
+        protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            base.OnPreviewMouseLeftButtonDown(e);
+            if (e.ClickCount == 2)
+            {
+                var version = $"V{Assembly.GetEntryAssembly().GetName().Version}";
+                Messenger.Default.Send(new StatuMessage(version));
+            }
         }
     }
 }

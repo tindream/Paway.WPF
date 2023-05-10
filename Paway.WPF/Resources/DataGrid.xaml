@@ -83,7 +83,7 @@
                             </Border>
                             <Thumb Grid.Column="1" x:Name="PART_RightHeaderGripper" Width="6"
                                    Style="{StaticResource DataGridThumbDefault}"
-                                   Background="Transparent"
+                                   Background="Transparent" BorderThickness="0"
                                    Cursor="SizeWE" />
                         </Grid>
                     </Border>
