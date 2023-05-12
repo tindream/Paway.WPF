@@ -171,8 +171,9 @@ namespace Paway.Comm
                     using (var client = new WebClientPro(Config.User, 2 * 60))
                     {
                         string response = client.UpFileAsync(httpUrl, toFile, file, max, percentage);
+                        var result = JsonConvert.DeserializeObject<HttpResponseMessage>(response);
                         completed?.Invoke();
-                        return JsonConvert.DeserializeObject<HttpResponseMessage>(response);
+                        return result;
                     }
                 }
                 catch (WebException ex)
@@ -191,9 +192,10 @@ namespace Paway.Comm
                 {
                     using (var client = new WebClientPro(Config.User, 2 * 60))
                     {
-                        string response = client.DownFileAsync(httpUrl, fromFile, file, percentage, completed);
+                        string response = client.DownFileAsync(httpUrl, fromFile, file, percentage);
                         var result = JsonConvert.DeserializeObject<HttpResponseMessage>(response);
                         if (result.Code == 200) Method.SaveFile(file, result.Msg);
+                        completed?.Invoke();
                         return result;
                     }
                 }

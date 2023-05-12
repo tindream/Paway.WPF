@@ -21,6 +21,7 @@ using Paway.Model;
 
 namespace Paway.Comm
 {
+    [ToolboxItem(false)]
     public class WebClientPro : WebClient
     {
         /// <summary>
@@ -69,7 +70,7 @@ namespace Paway.Comm
         /// <summary>
         /// 下载文件
         /// </summary>
-        public string DownFileAsync(string httpUrl, string toFile, string file, Action<double> percentage = null, Action completed = null)
+        public string DownFileAsync(string httpUrl, string toFile, string file, Action<double> percentage = null)
         {
             if (percentage != null)
             {
@@ -80,9 +81,7 @@ namespace Paway.Comm
             var url = $"{httpUrl}/{Config.UploadPath}/{toFile}?id={Config.User?.Id}";
             var path = Path.GetDirectoryName(file);
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
-            string result = this.DownloadStringTaskAsync(url).Result.Decompress();
-            completed();
-            return result;
+            return this.DownloadStringTaskAsync(url).Result.Decompress();
         }
         private void WebClientPro_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
