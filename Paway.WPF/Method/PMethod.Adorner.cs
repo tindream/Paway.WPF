@@ -580,7 +580,7 @@ namespace Paway.WPF
         private static void ToastClear(AdornerLayer myAdornerLayer, FrameworkElement element, string name)
         {
             Adorner[] list = null;
-            lock (myAdornerLayer) myAdornerLayer.GetAdorners(element);
+            lock (myAdornerLayer) list = myAdornerLayer.GetAdorners(element);
             if (list == null) return;
             for (var i = 0; i < list.Length; i++)
             {

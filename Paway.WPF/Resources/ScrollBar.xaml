@@ -268,7 +268,8 @@
                 <ControlTemplate TargetType="{x:Type local:ScrollViewerEXT}">
                     <Border BorderBrush="{TemplateBinding BorderBrush}" Name="PART_ScrollBar" BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid Background="{TemplateBinding Background}">
-                            <ScrollContentPresenter  Cursor="{TemplateBinding Cursor}" Margin="{TemplateBinding Padding}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                            <ScrollContentPresenter  Cursor="{TemplateBinding Cursor}" Margin="{TemplateBinding Padding}" 
+                                                     ContentTemplate="{TemplateBinding ContentTemplate}"/>
                             <ScrollBar x:Name="PART_VerticalScrollBar"
                                        HorizontalAlignment="Right"
                                        Maximum="{TemplateBinding ScrollableHeight}"
