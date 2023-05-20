@@ -18,7 +18,7 @@ namespace Paway.Comm
 
         private readonly List<MClientInfo> clientList = new List<MClientInfo>();
 
-        public List<MClientInfo> Client()
+        public List<MClientInfo> Clients()
         {
             lock (syncRoot)
             {

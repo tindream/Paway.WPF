@@ -43,6 +43,10 @@ namespace Paway.Comm
         {
             return gClient.Client(userId);
         }
+        public List<MClientInfo> Clients()
+        {
+            return gClient.Clients();
+        }
 
         #region 内部事件
         protected override Task ClientConnectedAsync(ClientConnectedEventArgs args)

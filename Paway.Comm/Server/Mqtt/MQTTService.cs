@@ -54,7 +54,7 @@ namespace Paway.Comm
         /// <summary>
         /// 获取客户端连接列表
         /// </summary>
-        public IList<MqttClientStatus> Clients()
+        public IList<MqttClientStatus> ClientStatus()
         {
             return mqttServer.GetClientsAsync().Result;
         }
