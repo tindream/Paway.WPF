@@ -127,13 +127,13 @@
                                         Height="1" Width="{Binding ActualWidth, ElementName=border, Converter={StaticResource valueAddConverter}}"
                                         Margin="1,0,0,0"
                                         Background="White"/>
-                                <local:ScrollViewerEXT CanContentScroll="True"
-                                                       HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
-                                                       VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+                                <ScrollViewer CanContentScroll="True"
+                                              HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                              VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
                                     <!--StackPanel 用于显示子级，方法是将 IsItemsHost 设置为 True-->
                                     <StackPanel IsItemsHost="True"
                                                 KeyboardNavigation.DirectionalNavigation="Contained" />
-                                </local:ScrollViewerEXT>
+                                </ScrollViewer>
                             </Grid>
                         </Popup>
                     </Grid>

@@ -9,6 +9,7 @@
            xmlns:ip="http://www.galasoft.ch/mvvmlight"
            mc:Ignorable="d"
            Background="#FFF"
+           DataContext="{Binding Test, Source={StaticResource Locator}}"
            Title="{Binding Text}" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
@@ -20,10 +21,15 @@
                 <MenuItem Header="设置..." />
             </MenuItem>
         </Menu>
-        <StackPanel Width="200">
-            <ButtonEXT Content="A" Click="Button_Click"/>
-            <ButtonEXT Content="B" Click="Button_Click2"/>
-        </StackPanel>
+        <ScrollViewerEXT>
+            <DockPanel Width="250">
+                <ComboQuery ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" DockPanel.Dock="Top"/>
+                <ComboBoxEXT ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" DockPanel.Dock="Top"/>
+                <DataGridEXT ItemsSource="{Binding GridList}" Height="300" Radius="5,5,0,0" DockPanel.Dock="Top"/>
+                <ButtonEXT Content="A" Click="Button_Click"/>
+                <ButtonEXT Content="B" Click="Button_Click2"/>
+            </DockPanel>
+        </ScrollViewerEXT>
         <Frame Name="frame" NavigationUIVisibility="Hidden"/>
     </DockPanel>
 </WindowEXT>

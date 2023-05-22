@@ -489,15 +489,27 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            if (e.ButtonState == MouseButtonState.Pressed && this.AllowDrop && e.ClickCount == 1)
+            if (e.ButtonState == MouseButtonState.Pressed && e.ClickCount == 1)
             {
-                _lastMouseDown = e.GetPosition(this);
-                if (PMethod.Parent(e.OriginalSource, out DataGridRow row))
+                if (this.AllowDrop)
                 {
-                    if (this.SelectedItem != null && this.SelectedItem.Equals(row.Item))
+                    _lastMouseDown = e.GetPosition(this);
+                    if (PMethod.Parent(e.OriginalSource, out DataGridRow row))
                     {
-                        e.Handled = true;
+                        if (this.SelectedItem != null && this.SelectedItem.Equals(row.Item))
+                        {
+                            e.Handled = true;
+                        }
                     }
+                }
+                else if (this.SelectionMode == DataGridSelectionMode.Single)
+                {//直接拖动控件滚动条
+                    var eventArg = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, e.ChangedButton)
+                    {
+                        RoutedEvent = UIElement.MouseLeftButtonDownEvent,
+                        Source = this
+                    };
+                    PMethod.BeginInvoke(() => ScrollViewer.RaiseEvent(eventArg));
                 }
             }
             base.OnPreviewMouseLeftButtonDown(e);

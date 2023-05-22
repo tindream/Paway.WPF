@@ -59,7 +59,7 @@ namespace Paway.Test
         }
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
-            Method.WaterAdorner(e);
+            //Method.WaterAdorner(e);
             base.OnPreviewMouseDown(e);
         }
         protected override void OnPreviewMouseMove(MouseEventArgs e)

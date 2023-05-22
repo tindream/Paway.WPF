@@ -10,10 +10,6 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default\Theme.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <!--#region 文本图标资源 -->
-    <FontFamily x:Key="FontAwesome">/Paway.WPF;component/Resource/#fontawesome</FontFamily>
-    <!--#endregion-->
-
     <!--#region 默认全局样式 -->
     <!--ToolTip没有数据时，自动不显示-->
     <Style TargetType="ToolTip">
@@ -27,8 +23,6 @@
     <Style TargetType="{x:Type Image}">
         <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality"/>
     </Style>
-    <!--取消右键动画，防止连续右键菜单闪烁-->
-    <PopupAnimation x:Key="{x:Static SystemParameters.MenuPopupAnimationKey}">None</PopupAnimation>
     <Style TargetType="{x:Type Label}">
         <Setter Property="HorizontalContentAlignment" Value="Right" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -45,9 +39,21 @@
     </Style>
     <!--#endregion-->
 
-    <!--#region 通用模板 -->
+    <!--#region 可配置的样式参数 -->
+    <!--Menu.Icon图标宽度-->
+    <sys:Double x:Key="MenuIconWidth">18</sys:Double>
+    <!--取消右键动画，防止连续右键菜单闪烁-->
+    <PopupAnimation x:Key="{x:Static SystemParameters.MenuPopupAnimationKey}">None</PopupAnimation>
+    <!--#endregion-->
+
+    <!--#region 资源 -->
     <!--多语言-->
     <local:PConfig x:Key="LB"  />
+    <!--文本图标-->
+    <FontFamily x:Key="FontAwesome">/Paway.WPF;component/Resource/#fontawesome</FontFamily>
+    <!--#endregion-->
+
+    <!--#region 通用模板 -->
     <!--输入框标题样式-->
     <Style x:Key="TitleBlock" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
         <Setter Property="FontSize" Value="15"/>
@@ -56,8 +62,10 @@
         <Setter Property="Padding" Value="2,0,4,0"/>
         <Setter Property="Margin" Value="0,2"/>
     </Style>
-    <!--Menu.Icon图标宽度-->
-    <sys:Double x:Key="MenuIconWidth">18</sys:Double>
+    <!--ListViewCustom默认项模板-->
+    <DataTemplate x:Key="ViewItem">
+        <TextBlock Text="{Binding Text}"/>
+    </DataTemplate>
     <!--焦点样式动态边框-->
     <Thickness x:Key="FocusBorderThickness">0</Thickness>
     <Style x:Key="FocusVisualStyle">
@@ -105,9 +113,6 @@
         <Setter Property="MaxDropDownHeight" Value="151"/>
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
     </Style>
-    <DataTemplate x:Key="ViewItem">
-        <TextBlock Text="{Binding Text}"/>
-    </DataTemplate>
     <Style x:Key="TextLeft" TargetType="{x:Type TextBlock}" >
         <Setter Property="Margin" Value="2,0" />
         <Setter Property="Padding" Value="3,6" />
