@@ -40,6 +40,8 @@
     <!--#endregion-->
 
     <!--#region 可配置的样式参数 -->
+    <!--Scroll滚动条初始透明度-->
+    <sys:Double x:Key="ScrollOpacity">0</sys:Double>
     <!--Scroll滚动条宽度-->
     <sys:Double x:Key="ScrollWidth">2</sys:Double>
     <!--Scroll滚动条圆角-->

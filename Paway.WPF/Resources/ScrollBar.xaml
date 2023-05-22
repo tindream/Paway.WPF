@@ -273,6 +273,7 @@
                             <ScrollContentPresenter  Cursor="{TemplateBinding Cursor}" Margin="{TemplateBinding Padding}" 
                                                      ContentTemplate="{TemplateBinding ContentTemplate}"/>
                             <ScrollBar x:Name="PART_VerticalScrollBar"
+                                       Opacity="{DynamicResource ScrollOpacity}" 
                                        HorizontalAlignment="Right"
                                        Maximum="{TemplateBinding ScrollableHeight}"
                                        Orientation="Vertical"
@@ -282,6 +283,7 @@
                                        Value="{TemplateBinding VerticalOffset}"
                                        Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
                             <ScrollBar x:Name="PART_HorizontalScrollBar"
+                                       Opacity="{DynamicResource ScrollOpacity}" 
                                        VerticalAlignment="Bottom"
                                        Maximum="{TemplateBinding ScrollableWidth}"
                                        Orientation="Horizontal"

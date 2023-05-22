@@ -21,6 +21,8 @@
     <!--Menu.Icom宽度-->
     <sys:Double x:Key="MenuIconWidth">24</sys:Double>
     <!--#region 滚动条 -->
+    <!--Scroll滚动条初始透明度-->
+    <sys:Double x:Key="ScrollOpacity">0.6</sys:Double>
     <!--Scroll滚动条宽度-->
     <sys:Double x:Key="ScrollWidth">8</sys:Double>
     <!--Scroll滚动条圆角-->
@@ -28,6 +30,8 @@
     <!--Scroll滚动条平移中心点-->
     <sys:Double x:Key="ScrollTransform">0</sys:Double>
     <!--Scroll滚动条取消所有动画-->
+    <Storyboard x:Key="ScrollEnter"></Storyboard>
+    <Storyboard x:Key="ScrollLeave"></Storyboard>
     <Storyboard x:Key="ThumbVerticalStoryboard1"></Storyboard>
     <Storyboard x:Key="ThumbVerticalStoryboard2"></Storyboard>
     <!--#endregion-->
