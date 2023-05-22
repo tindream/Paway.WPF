@@ -40,6 +40,12 @@
     <!--#endregion-->
 
     <!--#region 可配置的样式参数 -->
+    <!--Scroll滚动条宽度-->
+    <sys:Double x:Key="ScrollWidth">2</sys:Double>
+    <!--Scroll滚动条圆角-->
+    <sys:Double x:Key="ScrollRadius">0</sys:Double>
+    <!--Scroll滚动条平移中心点-->
+    <sys:Double x:Key="ScrollTransform">-2</sys:Double>
     <!--Menu.Icon图标宽度-->
     <sys:Double x:Key="MenuIconWidth">18</sys:Double>
     <!--取消右键动画，防止连续右键菜单闪烁-->

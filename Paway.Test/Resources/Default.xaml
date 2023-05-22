@@ -13,10 +13,24 @@
         </Border>
     </DataTemplate>
 
+    <!--#region 样式参数 -->
     <!--多语言-->
     <local:Config x:Key="L"  />
-    <!--#region 取消焦点样式 -->
+    <!--取消焦点样式-->
     <Thickness x:Key="FocusBorderThickness">0</Thickness>
+    <!--Menu.Icom宽度-->
     <sys:Double x:Key="MenuIconWidth">24</sys:Double>
+    <!--#region 滚动条 -->
+    <!--Scroll滚动条宽度-->
+    <sys:Double x:Key="ScrollWidth">8</sys:Double>
+    <!--Scroll滚动条圆角-->
+    <sys:Double x:Key="ScrollRadius">4</sys:Double>
+    <!--Scroll滚动条平移中心点-->
+    <sys:Double x:Key="ScrollTransform">0</sys:Double>
+    <!--Scroll滚动条取消所有动画-->
+    <Storyboard x:Key="ThumbVerticalStoryboard1"></Storyboard>
+    <Storyboard x:Key="ThumbVerticalStoryboard2"></Storyboard>
+    <!--#endregion-->
+    <!--#endregion-->
 
 </ResourceDictionary>

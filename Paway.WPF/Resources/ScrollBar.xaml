@@ -2,20 +2,76 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Paway.WPF">
 
-    <Storyboard x:Key="sbEnter">
+    <Storyboard x:Key="ScrollEnter">
         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PART_VerticalScrollBar">
-            <EasingDoubleKeyFrame KeyTime="0:0:.2" Value=".8"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:.2" Value=".6"/>
         </DoubleAnimationUsingKeyFrames>
         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PART_HorizontalScrollBar">
-            <EasingDoubleKeyFrame KeyTime="0:0:.2" Value=".8"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:.2" Value=".6"/>
         </DoubleAnimationUsingKeyFrames>
     </Storyboard>
-    <Storyboard x:Key="sbLeave">
+    <Storyboard x:Key="ScrollLeave">
         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PART_VerticalScrollBar">
             <EasingDoubleKeyFrame KeyTime="0:0:.3" Value="0"/>
         </DoubleAnimationUsingKeyFrames>
         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PART_HorizontalScrollBar">
             <EasingDoubleKeyFrame KeyTime="0:0:.3" Value="0"/>
+        </DoubleAnimationUsingKeyFrames>
+    </Storyboard>
+    <Storyboard x:Key="ThumbVerticalStoryboard1">
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Width" Storyboard.TargetName="rectangle">
+            <EasingDoubleKeyFrame KeyTime="0:0:.1" Value="8" />
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Rectangle.RadiusX)" Storyboard.TargetName="rectangle">
+            <EasingDoubleKeyFrame KeyTime="0:0:.1" Value="4" />
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Rectangle.RadiusY)" Storyboard.TargetName="rectangle">
+            <EasingDoubleKeyFrame KeyTime="0:0:.1" Value="4" />
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)" Storyboard.TargetName="rectangle">
+            <EasingDoubleKeyFrame KeyTime="0:0:.1" Value="0" />
+        </DoubleAnimationUsingKeyFrames>
+    </Storyboard>
+    <Storyboard x:Key="ThumbVerticalStoryboard2">
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Width" Storyboard.TargetName="rectangle">
+            <EasingDoubleKeyFrame KeyTime="0:0:.2" Value="2" />
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Rectangle.RadiusX)" Storyboard.TargetName="rectangle">
+            <EasingDoubleKeyFrame KeyTime="0:0:.2" Value="0" />
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Rectangle.RadiusY)" Storyboard.TargetName="rectangle">
+            <EasingDoubleKeyFrame KeyTime="0:0:.2" Value="0" />
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)" Storyboard.TargetName="rectangle">
+            <EasingDoubleKeyFrame KeyTime="0:0:.2" Value="-2" />
+        </DoubleAnimationUsingKeyFrames>
+    </Storyboard>
+    <Storyboard x:Key="ThumbHorizontalStoryboard1">
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Height" Storyboard.TargetName="rectangle">
+            <EasingDoubleKeyFrame KeyTime="0:0:.1" Value="8" />
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Rectangle.RadiusX)" Storyboard.TargetName="rectangle">
+            <EasingDoubleKeyFrame KeyTime="0:0:.1" Value="4" />
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Rectangle.RadiusY)" Storyboard.TargetName="rectangle">
+            <EasingDoubleKeyFrame KeyTime="0:0:.1" Value="4" />
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.Y)" Storyboard.TargetName="rectangle">
+            <EasingDoubleKeyFrame KeyTime="0:0:.1" Value="0" />
+        </DoubleAnimationUsingKeyFrames>
+    </Storyboard>
+    <Storyboard x:Key="ThumbHorizontalStoryboard2">
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Height" Storyboard.TargetName="rectangle">
+            <EasingDoubleKeyFrame KeyTime="0:0:.2" Value="2" />
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Rectangle.RadiusX)" Storyboard.TargetName="rectangle">
+            <EasingDoubleKeyFrame KeyTime="0:0:.2" Value="0" />
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Rectangle.RadiusY)" Storyboard.TargetName="rectangle">
+            <EasingDoubleKeyFrame KeyTime="0:0:.2" Value="0" />
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.Y)" Storyboard.TargetName="rectangle">
+            <EasingDoubleKeyFrame KeyTime="0:0:.2" Value="-2" />
         </DoubleAnimationUsingKeyFrames>
     </Storyboard>
 
@@ -26,42 +82,15 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Thumb">
-                    <ControlTemplate.Resources>
-                        <Storyboard x:Key="Storyboard1">
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Width" Storyboard.TargetName="rectangle">
-                                <EasingDoubleKeyFrame KeyTime="0:0:.1" Value="8" />
-                            </DoubleAnimationUsingKeyFrames>
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Rectangle.RadiusX)" Storyboard.TargetName="rectangle">
-                                <EasingDoubleKeyFrame KeyTime="0:0:.1" Value="4" />
-                            </DoubleAnimationUsingKeyFrames>
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Rectangle.RadiusY)" Storyboard.TargetName="rectangle">
-                                <EasingDoubleKeyFrame KeyTime="0:0:.1" Value="4" />
-                            </DoubleAnimationUsingKeyFrames>
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)" Storyboard.TargetName="rectangle">
-                                <EasingDoubleKeyFrame KeyTime="0:0:.1" Value="0" />
-                            </DoubleAnimationUsingKeyFrames>
-                        </Storyboard>
-                        <Storyboard x:Key="Storyboard2">
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Width" Storyboard.TargetName="rectangle">
-                                <EasingDoubleKeyFrame KeyTime="0:0:.2" Value="2" />
-                            </DoubleAnimationUsingKeyFrames>
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Rectangle.RadiusX)" Storyboard.TargetName="rectangle">
-                                <EasingDoubleKeyFrame KeyTime="0:0:.2" Value="0" />
-                            </DoubleAnimationUsingKeyFrames>
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Rectangle.RadiusY)" Storyboard.TargetName="rectangle">
-                                <EasingDoubleKeyFrame KeyTime="0:0:.2" Value="0" />
-                            </DoubleAnimationUsingKeyFrames>
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)" Storyboard.TargetName="rectangle">
-                                <EasingDoubleKeyFrame KeyTime="0:0:.2" Value="-2" />
-                            </DoubleAnimationUsingKeyFrames>
-                        </Storyboard>
-                    </ControlTemplate.Resources>
                     <Border Width="{TemplateBinding Width}" Background="Transparent">
                         <Rectangle x:Name="rectangle"
-                                   HorizontalAlignment="Right" Height="{TemplateBinding Height}" SnapsToDevicePixels="True" Width="2" Fill="DimGray">
+                                   HorizontalAlignment="Right" Height="{TemplateBinding Height}" SnapsToDevicePixels="True" Fill="DimGray"
+                                   Width="{DynamicResource ScrollWidth}" 
+                                   RadiusX="{DynamicResource ScrollRadius}"
+                                   RadiusY="{DynamicResource ScrollRadius}">
                             <Rectangle.RenderTransform>
                                 <TransformGroup>
-                                    <TranslateTransform X="-2" />
+                                    <TranslateTransform X="{DynamicResource ScrollTransform}" />
                                 </TransformGroup>
                             </Rectangle.RenderTransform>
                         </Rectangle>
@@ -75,10 +104,10 @@
                             <Setter Property="Fill" TargetName="rectangle" Value="#333" />
                         </Trigger>
                         <EventTrigger RoutedEvent="MouseEnter">
-                            <BeginStoryboard Storyboard="{StaticResource Storyboard1}" />
+                            <BeginStoryboard Storyboard="{DynamicResource ThumbVerticalStoryboard1}" />
                         </EventTrigger>
                         <EventTrigger RoutedEvent="MouseLeave">
-                            <BeginStoryboard Storyboard="{StaticResource Storyboard2}" />
+                            <BeginStoryboard Storyboard="{DynamicResource ThumbVerticalStoryboard2}" />
                         </EventTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -92,42 +121,15 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Thumb">
-                    <ControlTemplate.Resources>
-                        <Storyboard x:Key="Storyboard1">
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Height" Storyboard.TargetName="rectangle">
-                                <EasingDoubleKeyFrame KeyTime="0:0:.1" Value="8" />
-                            </DoubleAnimationUsingKeyFrames>
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Rectangle.RadiusX)" Storyboard.TargetName="rectangle">
-                                <EasingDoubleKeyFrame KeyTime="0:0:.1" Value="4" />
-                            </DoubleAnimationUsingKeyFrames>
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Rectangle.RadiusY)" Storyboard.TargetName="rectangle">
-                                <EasingDoubleKeyFrame KeyTime="0:0:.1" Value="4" />
-                            </DoubleAnimationUsingKeyFrames>
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.Y)" Storyboard.TargetName="rectangle">
-                                <EasingDoubleKeyFrame KeyTime="0:0:.1" Value="0" />
-                            </DoubleAnimationUsingKeyFrames>
-                        </Storyboard>
-                        <Storyboard x:Key="Storyboard2">
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Height" Storyboard.TargetName="rectangle">
-                                <EasingDoubleKeyFrame KeyTime="0:0:.2" Value="2" />
-                            </DoubleAnimationUsingKeyFrames>
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Rectangle.RadiusX)" Storyboard.TargetName="rectangle">
-                                <EasingDoubleKeyFrame KeyTime="0:0:.2" Value="0" />
-                            </DoubleAnimationUsingKeyFrames>
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Rectangle.RadiusY)" Storyboard.TargetName="rectangle">
-                                <EasingDoubleKeyFrame KeyTime="0:0:.2" Value="0" />
-                            </DoubleAnimationUsingKeyFrames>
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.Y)" Storyboard.TargetName="rectangle">
-                                <EasingDoubleKeyFrame KeyTime="0:0:.2" Value="-2" />
-                            </DoubleAnimationUsingKeyFrames>
-                        </Storyboard>
-                    </ControlTemplate.Resources>
                     <Border Height="{TemplateBinding Height}" Background="Transparent">
                         <Rectangle x:Name="rectangle"
-                                   VerticalAlignment="Bottom" Height="2" SnapsToDevicePixels="True" Width="{TemplateBinding Width}" Fill="DimGray">
+                                   VerticalAlignment="Bottom" SnapsToDevicePixels="True" Width="{TemplateBinding Width}" Fill="DimGray"
+                                   Height="{DynamicResource ScrollWidth}"
+                                   RadiusX="{DynamicResource ScrollRadius}"
+                                   RadiusY="{DynamicResource ScrollRadius}">
                             <Rectangle.RenderTransform>
                                 <TransformGroup>
-                                    <TranslateTransform Y="-2" />
+                                    <TranslateTransform Y="{DynamicResource ScrollTransform}" />
                                 </TransformGroup>
                             </Rectangle.RenderTransform>
                         </Rectangle>
@@ -141,10 +143,10 @@
                             <Setter Property="Fill" TargetName="rectangle" Value="#333" />
                         </Trigger>
                         <EventTrigger RoutedEvent="MouseEnter">
-                            <BeginStoryboard Storyboard="{StaticResource Storyboard1}" />
+                            <BeginStoryboard Storyboard="{DynamicResource ThumbHorizontalStoryboard1}" />
                         </EventTrigger>
                         <EventTrigger RoutedEvent="MouseLeave">
-                            <BeginStoryboard Storyboard="{StaticResource Storyboard2}" />
+                            <BeginStoryboard Storyboard="{DynamicResource ThumbHorizontalStoryboard2}" />
                         </EventTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -244,7 +246,7 @@
         <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="false"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Opacity" Value="0.5"/>
+        <Setter Property="Opacity" Value="0.6"/>
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Horizontal">
                 <Setter Property="Margin" Value="0"/>
@@ -278,7 +280,6 @@
                                        Width="{TemplateBinding ScrollBarWidth}"
                                        ViewportSize="{TemplateBinding ViewportHeight}"
                                        Value="{TemplateBinding VerticalOffset}"
-                                       Opacity="0"
                                        Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
                             <ScrollBar x:Name="PART_HorizontalScrollBar"
                                        VerticalAlignment="Bottom"
@@ -288,16 +289,15 @@
                                        Height="{TemplateBinding ScrollBarWidth}"
                                        ViewportSize="{TemplateBinding ViewportWidth}"
                                        Value="{TemplateBinding HorizontalOffset}"
-                                       Opacity="0"
                                        Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"/>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <EventTrigger RoutedEvent="MouseEnter">
-                            <BeginStoryboard Storyboard="{StaticResource sbEnter}"/>
+                            <BeginStoryboard Storyboard="{DynamicResource ScrollEnter}"/>
                         </EventTrigger>
                         <EventTrigger RoutedEvent="MouseLeave">
-                            <BeginStoryboard Storyboard="{StaticResource sbLeave}"/>
+                            <BeginStoryboard Storyboard="{DynamicResource ScrollLeave}"/>
                         </EventTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

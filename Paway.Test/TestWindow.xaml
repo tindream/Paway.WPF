@@ -10,7 +10,7 @@
            mc:Ignorable="d"
            Background="#FFF"
            DataContext="{Binding Test, Source={StaticResource Locator}}"
-           Title="{Binding Text}" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+           Title="{Binding Text}" Height="470" Width="800" WindowStartupLocation="CenterScreen">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="发送反馈2" IsCheckable="True" />

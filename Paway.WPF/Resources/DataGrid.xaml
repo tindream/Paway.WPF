@@ -216,10 +216,10 @@
                                     </Grid>
                                     <ControlTemplate.Triggers>
                                         <EventTrigger RoutedEvent="MouseEnter">
-                                            <BeginStoryboard Storyboard="{StaticResource sbEnter}"/>
+                                            <BeginStoryboard Storyboard="{DynamicResource ScrollEnter}"/>
                                         </EventTrigger>
                                         <EventTrigger RoutedEvent="MouseLeave">
-                                            <BeginStoryboard Storyboard="{StaticResource sbLeave}"/>
+                                            <BeginStoryboard Storyboard="{DynamicResource ScrollLeave}"/>
                                         </EventTrigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
