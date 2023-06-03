@@ -18,6 +18,7 @@ using Paway.Comm;
 using Newtonsoft.Json;
 using GalaSoft.MvvmLight.Messaging;
 using Paway.Model;
+using MQTTnet.Packets;
 
 namespace Paway.Comm
 {
@@ -59,7 +60,7 @@ namespace Paway.Comm
         /// <summary>
         /// 注册完成
         /// </summary>
-        protected virtual void Logined() { }
+        protected virtual void Logined(List<MqttUserProperty> properties) { }
 
         #region 外部方法
         public override Task Disconnect()
@@ -76,7 +77,7 @@ namespace Paway.Comm
             if (response != null)
             {
                 JsonConvert.DeserializeObject(response.Value, user.GetType()).Clone(this.user);
-                Logined();
+                Logined(result.UserProperties);
             }
         }
         /// <summary>

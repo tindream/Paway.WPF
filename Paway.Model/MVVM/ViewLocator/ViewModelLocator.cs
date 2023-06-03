@@ -23,7 +23,7 @@ namespace Paway.Model
         /// 单实例模型已注册列表
         /// </summary>
         private static readonly List<string> viewModelList = new List<string>();
-        protected T GetModelInstance<T>(string key = null) where T : class
+        public static T GetModelInstance<T>(string key = null) where T : class
         {
             var name = typeof(T).FullName;
             if (!viewModelList.Contains(name))
