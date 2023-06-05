@@ -8,16 +8,23 @@
            UseLayoutRounding="True"
            Height="66" d:DesignWidth="800" VerticalAlignment="Bottom" >
     <DockPanel.Resources>
-        <Style x:Key="MenuButton" TargetType="{x:Type ButtonEXT}" BasedOn="{StaticResource {x:Type ButtonEXT}}">
-            <Setter Property="IsLight" Value="True"/>
-            <Setter Property="Padding" Value="7,5"/>
-        </Style>
-        <Style x:Key="Interval" TargetType="{x:Type Border}">
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="BorderBrush" Value="LightGray"/>
-            <Setter Property="Width" Value="1"/>
-            <Setter Property="Margin" Value="2,7"/>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Paway.WPF;component/Resources/ScrollBar.xaml"/>
+                <ResourceDictionary>
+                    <Style x:Key="MenuButton" TargetType="{x:Type ButtonEXT}" BasedOn="{StaticResource {x:Type ButtonEXT}}">
+                        <Setter Property="IsLight" Value="True"/>
+                        <Setter Property="Padding" Value="7,5"/>
+                    </Style>
+                    <Style x:Key="Interval" TargetType="{x:Type Border}">
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <Setter Property="BorderBrush" Value="LightGray"/>
+                        <Setter Property="Width" Value="1"/>
+                        <Setter Property="Margin" Value="2,7"/>
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </DockPanel.Resources>
     <TextBoxEXT Name="tbSearch" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Water="搜索" MaxLength="32" DockPanel.Dock="Right" Width="200" VerticalAlignment="Bottom"
                 Icon="/Paway.Model;component/Images/operate/search_gray.png"  IconHeight="20" IconStretch="Uniform"
