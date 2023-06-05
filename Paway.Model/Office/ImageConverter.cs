@@ -1,10 +1,12 @@
 ﻿using Paway.Helper;
 using Spire.Doc;
 using Spire.Pdf;
+using Spire.Pdf.Graphics;
 using Spire.Pdf.Print;
 using Spire.Presentation;
 using Spire.Xls;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -225,6 +227,45 @@ namespace Paway.Model
                     action.Invoke(i, pdf.Pages.Count, pdf.SaveAsImage(i, (int)(96 * zoom), (int)(96 * zoom)));
                 }
             }
+        }
+
+        /// <summary>
+        /// 图像列表转PDF文件
+        /// </summary>
+        public static void ImageToPdf(List<Image> fileList, string toFile)
+        {
+            ImageToPdf(fileList, toFile, index => PdfImage.FromImage(fileList[index]));
+        }
+        /// <summary>
+        /// 图片文件列表转PDF文件
+        /// </summary>
+        public static void ImageToPdf(List<string> fileList, string toFile)
+        {
+            ImageToPdf(fileList, toFile, index => PdfImage.FromFile(fileList[index]));
+        }
+        /// <summary>
+        /// 图像或文件列表转PDF文件
+        /// </summary>
+        private static void ImageToPdf(IList list, string toFile, Func<int, PdfImage> toImage)
+        {
+            // Create a pdf document with a section and page added.
+            PdfDocument doc = new PdfDocument();
+            for (var i = 0; i < list.Count; i++)
+            {
+                PdfPageBase page = doc.Pages.Add();
+                //Load a tiff image from system
+                PdfImage image = toImage(i);
+                //Set image display location and size in PDF
+                float widthFitRate = image.PhysicalDimension.Width / page.Canvas.ClientSize.Width;
+                float heightFitRate = image.PhysicalDimension.Height / page.Canvas.ClientSize.Height;
+                float fitRate = Math.Max(widthFitRate, heightFitRate);
+                float fitWidth = image.PhysicalDimension.Width / fitRate;
+                float fitHeight = image.PhysicalDimension.Height / fitRate;
+                page.Canvas.DrawImage(image, 0, 0, fitWidth, fitHeight);
+            }
+            //save and launch the file
+            doc.SaveToFile(toFile);
+            doc.Close();
         }
     }
 }

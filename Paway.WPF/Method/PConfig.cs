@@ -30,7 +30,7 @@ namespace Paway.WPF
         /// <summary>
         /// NoFound
         /// </summary>
-        public const string NoFound = "--";
+        public const string NotFound = "--";
 
         #endregion
 

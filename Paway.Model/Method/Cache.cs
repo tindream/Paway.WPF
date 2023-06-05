@@ -65,13 +65,13 @@ namespace Paway.Model
         {
             return Find<T>(c => c.Id == id);
         }
-        public static string Name<T>(int id) where T : IName
+        public static string Name<T>(int id, string notFound = null) where T : IName
         {
-            return Find<T>(id)?.Name ?? Config.NoFound;
+            return Find<T>(id)?.Name ?? notFound ?? Config.NotFound;
         }
-        public static string CustomName<T>(int id) where T : ICustomName
+        public static string CustomName<T>(int id, string notFound = null) where T : ICustomName
         {
-            return Find<T>(id)?.CustomName ?? Config.NoFound;
+            return Find<T>(id)?.CustomName ?? notFound ?? Config.NotFound;
         }
         public static bool Any<T>(Func<T, bool> action)
         {
