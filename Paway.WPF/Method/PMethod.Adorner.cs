@@ -691,27 +691,27 @@ namespace Paway.WPF
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
-        public static void Progress(FrameworkElement element, Action action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
+        public static Task Progress(FrameworkElement element, Action action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
         {
-            Progress(element, null, adorner => action?.Invoke(), success, error, completed, iProgressBar, iProgressRound, fontSize);
+            return Progress(element, null, adorner => action?.Invoke(), success, error, completed, iProgressBar, iProgressRound, fontSize);
         }
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
-        public static void Progress(FrameworkElement element, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
+        public static Task Progress(FrameworkElement element, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
         {
-            Progress(element, null, action, success, error, completed, iProgressBar, iProgressRound, fontSize);
+            return Progress(element, null, action, success, error, completed, iProgressBar, iProgressRound, fontSize);
         }
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
-        public static void Progress(FrameworkElement element, object msg, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
+        public static Task Progress(FrameworkElement element, object msg, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
         {
-            BeginInvoke(() =>
+            return Invoke(() =>
             {
                 var progress = ProgressAdorner(element, msg, iProgressBar, iProgressRound, fontSize);
                 if (progress == null) throw new WarningException("Decorator not found on control");
-                Task.Run(() =>
+                return Task.Run(() =>
                 {
                     try
                     {

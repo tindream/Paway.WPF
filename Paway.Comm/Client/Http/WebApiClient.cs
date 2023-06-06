@@ -136,9 +136,15 @@ namespace Paway.Comm
             return result.Data;
         }
 
-        private static HttpResponseMessage Send(CommMessage sync, int timeout = 30)
+        public static HttpResponseMessage Send(CommMessage sync, int timeout = 30)
         {
-            var task = Task.Run(() =>
+            var task = SendAsync(sync, timeout);
+            if (task.Result.Code != 200) throw new Exception(task.Result.Msg);
+            return task.Result;
+        }
+        private static Task<HttpResponseMessage> SendAsync(CommMessage sync, int timeout = 30)
+        {
+            return Task.Run(() =>
             {
                 try
                 {
@@ -155,8 +161,6 @@ namespace Paway.Comm
                     throw Method.HttpError(ex);
                 }
             });
-            if (task.Result.Code != 200) throw new Exception(task.Result.Msg);
-            return task.Result;
         }
 
         #endregion
@@ -164,7 +168,13 @@ namespace Paway.Comm
         #region 文件上传下载
         public static string UpFile(string toFile, string file, double max = 0, Action<double> percentage = null, Action completed = null)
         {
-            var task = Task.Run(() =>
+            var task = UpFileAsync(toFile, file, max, percentage, completed);
+            if (task.Result.Code != 200) throw new Exception(task.Result.Msg);
+            return task.Result.Msg;
+        }
+        public static Task<HttpResponseMessage> UpFileAsync(string toFile, string file, double max = 0, Action<double> percentage = null, Action completed = null)
+        {
+            return Task.Run(() =>
             {
                 try
                 {
@@ -181,12 +191,15 @@ namespace Paway.Comm
                     throw Method.HttpError(ex);
                 }
             });
-            if (task.Result.Code != 200) throw new Exception(task.Result.Msg);
-            return task.Result.Msg;
         }
         public static void DownFile(string fromFile, string file, Action<double> percentage = null, Action completed = null)
         {
-            var task = Task.Run(() =>
+            var task = DownFileAsync(fromFile, file, percentage, completed);
+            if (task.Result.Code != 200) throw new Exception(task.Result.Msg);
+        }
+        public static Task<HttpResponseMessage> DownFileAsync(string fromFile, string file, Action<double> percentage = null, Action completed = null)
+        {
+            return Task.Run(() =>
             {
                 try
                 {
@@ -204,7 +217,6 @@ namespace Paway.Comm
                     throw Method.HttpError(ex);
                 }
             });
-            if (task.Result.Code != 200) throw new Exception(task.Result.Msg);
         }
 
         #endregion
