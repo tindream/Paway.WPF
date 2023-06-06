@@ -232,26 +232,27 @@ namespace Paway.Model
         /// <summary>
         /// 图像列表转PDF文件
         /// </summary>
-        public static void ImageToPdf(List<Image> fileList, string toFile)
+        public void ImageToPdf(List<Image> fileList, string toFile)
         {
             ImageToPdf(fileList, toFile, index => PdfImage.FromImage(fileList[index]));
         }
         /// <summary>
         /// 图片文件列表转PDF文件
         /// </summary>
-        public static void ImageToPdf(List<string> fileList, string toFile)
+        public void ImageToPdf(List<string> fileList, string toFile)
         {
             ImageToPdf(fileList, toFile, index => PdfImage.FromFile(fileList[index]));
         }
         /// <summary>
         /// 图像或文件列表转PDF文件
         /// </summary>
-        private static void ImageToPdf(IList list, string toFile, Func<int, PdfImage> toImage)
+        private void ImageToPdf(IList list, string toFile, Func<int, PdfImage> toImage)
         {
             // Create a pdf document with a section and page added.
             PdfDocument doc = new PdfDocument();
             for (var i = 0; i < list.Count; i++)
             {
+                ProgressChanged?.Invoke(i, list.Count);
                 PdfPageBase page = doc.Pages.Add();
                 //Load a tiff image from system
                 PdfImage image = toImage(i);
