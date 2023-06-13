@@ -64,6 +64,10 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty UnitProperty =
             DependencyProperty.RegisterAttached(nameof(Unit), typeof(string), typeof(TextBoxNumeric));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty InterceptProperty =
+            DependencyProperty.RegisterAttached(nameof(Intercept), typeof(bool), typeof(TextBoxNumeric), new PropertyMetadata(true));
 
         #endregion
 
@@ -178,6 +182,16 @@ namespace Paway.WPF
             get { return (string)GetValue(UnitProperty); }
             set { SetValue(UnitProperty, value); }
         }
+        /// <summary>
+        /// 拦截Tab与回车跳转
+        /// </summary>
+        [Category("扩展")]
+        [Description("拦截Tab与回车跳转")]
+        public bool Intercept
+        {
+            get { return (bool)GetValue(InterceptProperty); }
+            set { SetValue(InterceptProperty, value); }
+        }
 
         #endregion
 
@@ -193,7 +207,7 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            PMethod.OnKeyDown(e);
+            if (Intercept) PMethod.OnKeyDown(e);
             base.OnKeyDown(e);
         }
 

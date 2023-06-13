@@ -72,6 +72,10 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty IAnimationProperty =
             DependencyProperty.RegisterAttached(nameof(IAnimation), typeof(double), typeof(ComboBoxEXT));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty InterceptProperty =
+            DependencyProperty.RegisterAttached(nameof(Intercept), typeof(bool), typeof(ComboBoxEXT), new PropertyMetadata(true));
 
         #endregion
 
@@ -208,6 +212,16 @@ namespace Paway.WPF
             get { return (double)GetValue(IAnimationProperty); }
             set { SetValue(IAnimationProperty, value); }
         }
+        /// <summary>
+        /// 拦截Tab与回车跳转
+        /// </summary>
+        [Category("扩展")]
+        [Description("拦截Tab与回车跳转")]
+        public bool Intercept
+        {
+            get { return (bool)GetValue(InterceptProperty); }
+            set { SetValue(InterceptProperty, value); }
+        }
 
         #endregion
 
@@ -240,7 +254,7 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            PMethod.OnKeyDown(e);
+            if (Intercept) PMethod.OnKeyDown(e);
             base.OnKeyDown(e);
         }
 
