@@ -147,10 +147,16 @@
     </Compile>
     <Compile Include="Data\DataService.cs" />
     <Compile Include="Method\Cache.cs" />
+    <Compile Include="Method\ConvertHelper.cs" />
+    <Compile Include="Method\Method.WebBrowser.cs" />
     <Compile Include="Method\StarAdorner.cs" />
     <Compile Include="Method\Config.cs" />
     <Compile Include="Method\Method.cs" />
     <Compile Include="Method\PlotHelper.cs" />
+    <Compile Include="Method\WPFWebBrowserHelper\DWebBrowserEvent2.cs" />
+    <Compile Include="Method\WPFWebBrowserHelper\ReflectionService.cs" />
+    <Compile Include="Method\WPFWebBrowserHelper\WebBrowserHelper.cs" />
+    <Compile Include="Method\WPFWebBrowserHelper\WebBrowserHelper.WebBrowserEvent.cs" />
     <Compile Include="Model\Enum\ButtonAuthType.cs" />
     <Compile Include="Model\Interface\IDataGridServer.cs" />
     <Compile Include="Model\Interface\ICustomName.cs" />

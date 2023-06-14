@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,6 +23,35 @@ namespace Paway.WPF
     /// </summary>
     public partial class PMethod
     {
+        #region 对一个Handle控件进行截图
+        [DllImport("user32.dll")]
+        private static extern bool PrintWindow(IntPtr hwnd, IntPtr hdcBlt, uint nFlags);
+        /// <summary>
+        /// 对一个Handle控件进行截图
+        /// </summary>
+        public static System.Drawing.Bitmap PrintWindow(FrameworkElement framework, IntPtr intptr)
+        {
+            // 获取宽高
+            int screenWidth = (int)framework.ActualWidth;
+            int screenHeight = (int)framework.ActualHeight;
+
+            //创建图形
+            var bitmap = new System.Drawing.Bitmap(screenWidth, screenHeight, System.Drawing.Imaging.PixelFormat.Format16bppRgb555);
+            using (var g = System.Drawing.Graphics.FromImage(bitmap))
+            {
+                var hdc = g.GetHdc();
+
+                //调用api 把hwnd的内容用图形绘制到hdc 如果你有代码洁癖 可以不使用api 使用g.CopyFromScreen，请自行研究
+                var result = PrintWindow(intptr, hdc, 0);
+                g.ReleaseHdc(hdc);
+                g.Flush();
+                if (result) return bitmap;
+            }
+            return null;
+        }
+
+        #endregion
+
         #region 代码移除全局焦点样式
         /// <summary>
         /// 代码移除全局焦点样式

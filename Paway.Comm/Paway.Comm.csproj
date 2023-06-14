@@ -97,9 +97,7 @@
     <Compile Include="Client\Mqtt\MQTTClientPlus.cs" />
     <Compile Include="Client\Http\WebApiClient.IDataGridServer.cs" />
     <Compile Include="Client\Http\WebApiClient.cs" />
-    <Compile Include="Client\Http\WebClientPro.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Client\Http\WebClientPro.cs" />
     <Compile Include="Message\ErrorMessage.cs" />
     <Compile Include="Message\CommMessage.cs" />
     <Compile Include="Message\ResponseMessage.cs" />

@@ -84,12 +84,12 @@ namespace Paway.Model
             if (zoom == 1) WordToImage(file, (index, total, image) =>
             {
                 ProgressChanged?.Invoke(index, total);
-                image.SaveTo(Path.Combine(toPath, $"{index}.jpg"), ImageFormat.Jpeg, 60);
+                image.SaveTo(Path.Combine(toPath, $"{index}.jpg"), ImageFormat.Jpeg);
             });
             else WordToImage(file, zoom, (index, total, image) =>
             {
                 ProgressChanged?.Invoke(index, total);
-                image.SaveTo(Path.Combine(toPath, $"{index}.jpg"), ImageFormat.Jpeg, 60);
+                image.SaveTo(Path.Combine(toPath, $"{index}.jpg"), ImageFormat.Jpeg);
             });
         }
         private void WordToImage(string file, List<Image> imageList, double zoom)
@@ -143,7 +143,7 @@ namespace Paway.Model
                     PDFToImage(pdfFile, zoom, (index, total, image) =>
                     {
                         ProgressChanged?.Invoke(index + i * total, total * excel.Worksheets.Count);
-                        image.SaveTo(Path.Combine(toPath, $"{i}_{index}.jpg"), ImageFormat.Jpeg, 60);
+                        image.SaveTo(Path.Combine(toPath, $"{i}_{index}.jpg"), ImageFormat.Jpeg);
                     });
                     File.Delete(pdfFile);
                 }
@@ -178,7 +178,7 @@ namespace Paway.Model
             PPTToImage(file, (index, total, image) =>
             {
                 ProgressChanged?.Invoke(index, total);
-                image.SaveTo(Path.Combine(toPath, $"{index}.jpg"), ImageFormat.Jpeg, 60);
+                image.SaveTo(Path.Combine(toPath, $"{index}.jpg"), ImageFormat.Jpeg);
             });
         }
         private void PPTToImage(string file, List<Image> imageList)
@@ -206,7 +206,7 @@ namespace Paway.Model
             PDFToImage(file, zoom, (index, total, image) =>
             {
                 ProgressChanged?.Invoke(index, total);
-                image.SaveTo(Path.Combine(toPath, $"{index}.jpg"), ImageFormat.Jpeg, 60);
+                image.SaveTo(Path.Combine(toPath, $"{index}.jpg"), ImageFormat.Jpeg);
             });
         }
         private void PDFToImage(string file, List<Image> imageList, double zoom)
