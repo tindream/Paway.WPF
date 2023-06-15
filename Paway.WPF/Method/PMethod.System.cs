@@ -578,7 +578,8 @@ namespace Paway.WPF
         /// </summary>
         public static void InitApp(Application app, string fileName = "Log.xml")
         {
-            log4net.Config.XmlConfigurator.Configure(new FileInfo(fileName));
+            var file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+            log4net.Config.XmlConfigurator.Configure(new FileInfo(file));
             var version = Assembly.GetEntryAssembly().GetName().Version;
             $"v{version} ({Environment.MachineName})".Log(LeveType.Error);
 
