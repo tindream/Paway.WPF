@@ -65,7 +65,7 @@ namespace Paway.Comm
                 }
                 else
                 {
-                    $"{logMsg}>{ex}".Log(LeveType.Error);
+                    $"{logMsg}>{ex.NullReferenceMessage()}{ex}".Log(LeveType.Error);
                 }
                 if (type != CommType.None)
                 {

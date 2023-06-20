@@ -135,7 +135,7 @@ namespace Paway.Comm
                 }
                 else
                 {
-                    error = $"{ex}";
+                    error = $"{ex.NullReferenceMessage()}{ex}";
                     if (!data.IsEmpty()) error = $"[data]{data}\n{error}";
                     Messenger.Default.Send(new StatuMessage(error, LeveType.Error));
                 }
