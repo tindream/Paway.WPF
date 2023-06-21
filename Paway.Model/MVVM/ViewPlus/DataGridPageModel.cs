@@ -283,7 +283,7 @@ namespace Paway.Model
                 case "添加":
                     ViewModel().Info = new T();
                     var add = AddWindow();
-                    if (add != null && Method.Show(DataGrid, add) == true)
+                    if (add != null && Method.ShowWindow(DataGrid, add) == true)
                     {
                         Insert(ViewModel().Info);
                     }
@@ -293,7 +293,7 @@ namespace Paway.Model
                     {
                         ViewModel().Info = info;
                         var edit = AddWindow();
-                        if (edit != null && Method.Show(DataGrid, edit) == true)
+                        if (edit != null && Method.ShowWindow(DataGrid, edit) == true)
                         {
                             Updated(info);
                         }

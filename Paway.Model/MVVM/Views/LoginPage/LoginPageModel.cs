@@ -157,7 +157,7 @@ namespace Paway.Model
                     break;
                 case "设置":
                     var window = SetWindow();
-                    if (window != null && Method.Show(Root, window) == true)
+                    if (window != null && Method.ShowWindow(Root, window) == true)
                     {
                         OnSet(Root);
                     }

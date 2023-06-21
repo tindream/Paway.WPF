@@ -99,9 +99,9 @@ namespace Paway.WPF
 
         #region Window弹框
         /// <summary>
-        /// Window弹框
+        /// Window模式弹框（带灰层背景）
         /// </summary>
-        public static bool? Show(DependencyObject parent, Window window, int alpha = 100, bool iFocus = true, bool iEscExit = true)
+        public static bool? ShowWindow(DependencyObject parent, Window window, int alpha = 100, bool iFocus = true, bool iEscExit = true)
         {
             if (!Parent(parent, out Window owner)) return null;
             window.ShowInTaskbar = false;
@@ -173,6 +173,42 @@ namespace Paway.WPF
             window.Left = SystemParameters.PrimaryScreenWidth;
             window.Show();
             window.Close();
+        }
+        /// <summary>
+        /// Window全屏模式弹框
+        /// </summary>
+        public static void FullscreenWindow(UIElement element)
+        {
+            var parent = VisualTreeHelper.GetParent(element);
+            ContentPresenter content = null;
+            Panel panel = null;
+            if (parent is ContentPresenter content2)
+            {
+                content = content2;
+                content.Content = null;
+            }
+            else if (parent is Panel panel2)
+            {
+                panel = panel2;
+                panel.Children.Remove(element);
+            }
+            var fullScreenWindow = new Window
+            {
+                WindowStyle = System.Windows.WindowStyle.None,
+                WindowState = WindowState.Maximized,
+                ResizeMode = ResizeMode.NoResize,
+                ShowInTaskbar = false,
+                Content = element
+            };
+            fullScreenWindow.Closed += (sender, e) =>
+            {
+                fullScreenWindow.Content = null;
+                if (content != null) content.Content = element;
+                else if (panel != null) panel.Children.Add(element);
+                parent = null;
+            };
+
+            fullScreenWindow.ShowDialog();
         }
         #endregion
 

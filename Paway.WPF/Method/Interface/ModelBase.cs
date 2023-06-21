@@ -36,9 +36,17 @@ namespace Paway.WPF
         /// <summary>
         /// 触发更新
         /// </summary>
-        public void OnPropertyChanged([CallerMemberName] string name = null)
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            OnPropertyChanged(new PropertyChangedEventArgs(name));
+            OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
+        }
+        /// <summary>
+        /// 触发更新
+        /// </summary>
+        public void OnPropertyChanged<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            field = value;
+            OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
         }
         /// <summary>
         /// 触发更新

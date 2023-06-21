@@ -160,7 +160,7 @@ namespace Paway.Test
         public ICommand SelectionDeviceCommand => new RelayCommand<ListViewCustom>(listView =>
         {
             if (!(listView.SelectedItem is IListViewItem item)) return;
-            Method.Show(listView, new Window());
+            Method.ShowWindow(listView, new Window());
             listView.SelectedIndex = -1;
         });
         public ICommand ListViewMouseDown => new RelayCommand<MouseButtonEventArgs>(e =>
