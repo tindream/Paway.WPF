@@ -25,9 +25,8 @@ namespace Paway.Comm
         {
             get
             {
-                var desc = User.UserName;
+                var desc = User.CustomName;
                 if (Heard != null) desc = $"({Heard}){desc}";
-                if (!User.Display.IsEmpty()) desc += $"({User.Display})";
                 return desc;
             }
         }

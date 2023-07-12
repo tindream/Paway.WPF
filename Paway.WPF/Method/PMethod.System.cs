@@ -648,7 +648,6 @@ namespace Paway.WPF
                 var desc = $"不可恢复的未经处理线程异常";
                 ex.Log(desc);
             }
-
         }
         private static void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
