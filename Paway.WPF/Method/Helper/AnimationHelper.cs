@@ -53,32 +53,32 @@ namespace Paway.WPF
         /// <summary>
         /// 启动动画
         /// </summary>
-        public static void Start(FrameworkElement element, TransitionType type, double toValue, int time, Action completed = null)
+        public static void Start(FrameworkElement element, TransitionType type, double toValue, int time, Action completed = null, bool iReset = true)
         {
-            Start(element, type, toValue, null, time, completed);
+            Start(element, type, toValue, null, time, completed, iReset);
         }
         /// <summary>
         /// 启动动画
         /// </summary>
-        public static void Start(FrameworkElement element, TransitionType type, double toValue = 0, double? fromValue = null, int time = 0, Action completed = null)
+        public static void Start(FrameworkElement element, TransitionType type, double toValue = 0, double? fromValue = null, int time = 0, Action completed = null, bool iReset = true)
         {
             if (element == null) return;
             switch (type)
             {
                 case TransitionType.Width:
-                    Start(element, FrameworkElement.WidthProperty, fromValue ?? element.ActualWidth, toValue, time, completed);
+                    Start(element, FrameworkElement.WidthProperty, fromValue ?? element.ActualWidth, toValue, time, completed, iReset);
                     break;
                 case TransitionType.Height:
-                    Start(element, FrameworkElement.HeightProperty, fromValue ?? element.ActualHeight, toValue, time, completed);
+                    Start(element, FrameworkElement.HeightProperty, fromValue ?? element.ActualHeight, toValue, time, completed, iReset);
                     break;
                 case TransitionType.Opacity:
-                    Start(element, UIElement.OpacityProperty, fromValue ?? element.Opacity, toValue, time, completed);
+                    Start(element, UIElement.OpacityProperty, fromValue ?? element.Opacity, toValue, time, completed, iReset);
                     break;
                 case TransitionType.FadeIn:
-                    Start(element, UIElement.OpacityProperty, 0, 1, time, completed);
+                    Start(element, UIElement.OpacityProperty, 0, 1, time, completed, iReset);
                     break;
                 case TransitionType.FadeOut:
-                    Start(element, UIElement.OpacityProperty, 1, 0, time, completed);
+                    Start(element, UIElement.OpacityProperty, 1, 0, time, completed, iReset);
                     break;
                 #region TranslateTransform 平移
                 case TransitionType.Left:
@@ -115,28 +115,28 @@ namespace Paway.WPF
                     switch (type)
                     {
                         case TransitionType.Left:
-                            Start(translateTransform, element, TranslateTransform.XProperty, fromValue ?? -element.ActualWidth, toValue, time, completed);
+                            Start(translateTransform, element, TranslateTransform.XProperty, fromValue ?? -element.ActualWidth, toValue, time, completed, iReset);
                             break;
                         case TransitionType.Right:
-                            Start(translateTransform, element, TranslateTransform.XProperty, fromValue ?? element.ActualWidth, toValue, time, completed);
+                            Start(translateTransform, element, TranslateTransform.XProperty, fromValue ?? element.ActualWidth, toValue, time, completed, iReset);
                             break;
                         case TransitionType.Top:
-                            Start(translateTransform, element, TranslateTransform.YProperty, fromValue ?? -element.ActualHeight, toValue, time, completed);
+                            Start(translateTransform, element, TranslateTransform.YProperty, fromValue ?? -element.ActualHeight, toValue, time, completed, iReset);
                             break;
                         case TransitionType.Bottom:
-                            Start(translateTransform, element, TranslateTransform.YProperty, fromValue ?? element.ActualHeight, toValue, time, completed);
+                            Start(translateTransform, element, TranslateTransform.YProperty, fromValue ?? element.ActualHeight, toValue, time, completed, iReset);
                             break;
                         case TransitionType.ToLeft:
-                            Start(translateTransform, element, TranslateTransform.XProperty, toValue, fromValue ?? -element.ActualWidth, time, completed);
+                            Start(translateTransform, element, TranslateTransform.XProperty, toValue, fromValue ?? -element.ActualWidth, time, completed, iReset);
                             break;
                         case TransitionType.ToRight:
-                            Start(translateTransform, element, TranslateTransform.XProperty, toValue, fromValue ?? element.ActualWidth, time, completed);
+                            Start(translateTransform, element, TranslateTransform.XProperty, toValue, fromValue ?? element.ActualWidth, time, completed, iReset);
                             break;
                         case TransitionType.ToTop:
-                            Start(translateTransform, element, TranslateTransform.YProperty, toValue, fromValue ?? -element.ActualHeight, time, completed);
+                            Start(translateTransform, element, TranslateTransform.YProperty, toValue, fromValue ?? -element.ActualHeight, time, completed, iReset);
                             break;
                         case TransitionType.ToBottom:
-                            Start(translateTransform, element, TranslateTransform.YProperty, toValue, fromValue ?? element.ActualHeight, time, completed);
+                            Start(translateTransform, element, TranslateTransform.YProperty, toValue, fromValue ?? element.ActualHeight, time, completed, iReset);
                             break;
                     }
                     break;
@@ -213,20 +213,20 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 直接启动二维动画
-        /// <para>iClear:还原动画</para>
+        /// <para>iReset:还原动画</para>
         /// </summary>
-        public static void Start(Transform transform, FrameworkElement element, DependencyProperty property, double fromValue, double toValue, int time = 0, Action completed = null, bool iClear = true)
+        public static void Start(Transform transform, FrameworkElement element, DependencyProperty property, double fromValue, double toValue, int time = 0, Action completed = null, bool iReset = true)
         {
-            transform.BeginAnimation(property, GetDoubleAnimation(fromValue, toValue, element, time, () => { if (iClear) transform.BeginAnimation(property, null); completed?.Invoke(); }));
+            transform.BeginAnimation(property, GetDoubleAnimation(fromValue, toValue, element, time, () => { if (iReset) transform.BeginAnimation(property, null); completed?.Invoke(); }));
         }
         /// <summary>
         /// 直接启动动画
-        /// <para>iClear:还原动画</para>
+        /// <para>iReset:还原动画</para>
         /// </summary>
-        public static void Start(FrameworkElement element, DependencyProperty property, double fromValue, double toValue, int time = 0, Action completed = null, bool iClear = true)
+        public static void Start(FrameworkElement element, DependencyProperty property, double fromValue, double toValue, int time = 0, Action completed = null, bool iReset = true)
         {
             if (element == null) return;
-            element.BeginAnimation(property, GetDoubleAnimation(fromValue, toValue, element, time, () => { if (iClear) element.BeginAnimation(property, null); completed?.Invoke(); }));
+            element.BeginAnimation(property, GetDoubleAnimation(fromValue, toValue, element, time, () => { if (iReset) element.BeginAnimation(property, null); completed?.Invoke(); }));
         }
 
         #region Function

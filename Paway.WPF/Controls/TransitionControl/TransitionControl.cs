@@ -192,6 +192,7 @@ namespace Paway.WPF
         /// </summary>
         public void StartTransition()
         {
+            PreviousContentPresentationSite.RenderTransform = null;
             switch (TransitionType)
             {
                 case TransitionType.None:
