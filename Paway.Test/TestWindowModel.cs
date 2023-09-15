@@ -118,9 +118,27 @@ namespace Paway.Test
             set { if (_statu != value) { _statu = value; OnPropertyChanged(); } }
         }
 
+        public string Language
+        {
+            get { return Config.LanguageStr; }
+            set { Config.LanguageStr = value; Config.InitLanguage(); RaisePropertyChanged(); }
+        }
+
         #endregion
 
         #region 命令
+        public ICommand MenuItemClickCommand => new RelayCommand<string>(item =>
+        {
+            switch (item)
+            {
+                default:
+                    if (Config.LanguageList.Any(c => c == item))
+                    {
+                        this.Language = item;
+                    }
+                    break;
+            }
+        });
         public ICommand ButtonCommand => new RelayCommand<ListViewCustom>(view =>
         {
             //var index = Method.Random(0, ViewList.Count);

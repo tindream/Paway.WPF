@@ -13,7 +13,7 @@ namespace Paway.Test
     /// 语言包定义
     /// </summary>
     [Serializable]
-    public class LanguageInfo : WPF.LanguageBaseInfo
+    public class LanguageInfo : LanguageBaseInfo
     {
         public virtual string Test { get; set; }
         public string TestB { get; set; }

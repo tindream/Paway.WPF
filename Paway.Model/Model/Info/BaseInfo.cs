@@ -52,7 +52,7 @@ namespace Paway.Model
     public class ParentBase : BaseInfo, IParent
     {
         [NoShow, NoExcel]
-        public int ParentId { get; set; }
+        public virtual int ParentId { get; set; }
     }
     /// <summary>
     /// 父子结构

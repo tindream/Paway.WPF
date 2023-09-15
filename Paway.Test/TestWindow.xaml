@@ -11,6 +11,18 @@
            Background="#FFF"
            DataContext="{Binding Test, Source={StaticResource Locator}}"
            Title="{Binding Text}" Height="470" Width="800" WindowStartupLocation="CenterScreen">
+    <WindowEXT.FunctionBarRight>
+        <WindowFunctionBar>
+            <Menu>
+                <MenuItem Header="{Binding Language}" Padding="12,0" Name="menu">
+                    <MenuItem Header="中文" IsChecked="{Binding Language, Converter={StaticResource valueToTrue}, ConverterParameter=中文}" Command="{Binding MenuItemClickCommand}" CommandParameter="中文"/>
+                    <MenuItem Header="English" IsChecked="{Binding Language, Converter={StaticResource valueToTrue}, ConverterParameter=English}" Command="{Binding MenuItemClickCommand}" CommandParameter="English"/>
+                </MenuItem>
+            </Menu>
+            <ButtonEXT Content="{Binding Language.Clear, Source={StaticResource L}}" Margin="0" IsLight="True" ItemBorder="0" Radius="0"
+                       Command="{Binding MenuItemClickCommand}" CommandParameter="关于"/>
+        </WindowFunctionBar>
+    </WindowEXT.FunctionBarRight>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="发送反馈2" IsCheckable="True" />

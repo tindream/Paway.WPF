@@ -41,14 +41,8 @@ namespace Paway.Test
         }
         public static void InitLanguage()
         {
-            var file = Path.Combine(LanguagePath, $"{LanguageStr}.xml");
-            if (File.Exists(file))
-            {
-                var lan = XmlHelper.Load<LanguageInfo>(file);
-                lan.Clone(Config.Language);
-            }
-            XmlHelper.Save(Config.Language, file);
-            Config.InitLanguageBase(Config.Language);
+            var file = Path.Combine(LanguagePath, $"{Config.LanguageStr}.xml");
+            LanguageHelper.Reset(file, Language, Config.LanguageStr);
         }
         public static string LanguageStr = "中文";
         public static string LanguagePath
