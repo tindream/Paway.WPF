@@ -38,8 +38,8 @@
                 <ComboQuery ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" DockPanel.Dock="Top"/>
                 <ComboBoxEXT ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" DockPanel.Dock="Top"/>
                 <DataGridEXT ItemsSource="{Binding GridList}" Height="300" Radius="5,5,0,0" DockPanel.Dock="Top"/>
-                <ButtonEXT Content="A" Click="Button_Click"/>
-                <ButtonEXT Content="B" Click="Button_Click2"/>
+                <ButtonEXT Content="3D" Click="Button_Click"/>
+                <ButtonEXT Content="空" Click="Button_Click2"/>
             </DockPanel>
         </ScrollViewerEXT>
         <Frame Name="frame" NavigationUIVisibility="Hidden"/>

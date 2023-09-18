@@ -82,7 +82,7 @@ namespace Paway.Test
         {
             //var xml = Method.GetTemplateXaml(paragraph1);
             //Debug.WriteLine(xml);
-            frame.Content = ViewlLocator.GetInstance<TestPage>();
+            frame.Content = ViewlLocator.GetInstance<Test3DPage>();
         }
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
