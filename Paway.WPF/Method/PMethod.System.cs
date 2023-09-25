@@ -617,7 +617,7 @@ namespace Paway.WPF
             var file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
             log4net.Config.XmlConfigurator.Configure(new FileInfo(file));
             var version = Assembly.GetEntryAssembly().GetName().Version;
-            $"v{version} ({Environment.MachineName})".Log(LeveType.Error);
+            $"{AppDomain.CurrentDomain.FriendlyName} v{version} ({Environment.MachineName})".Log(LeveType.Error);
 
             //禁用Backspace退格导航返回Page页
             NavigationCommands.BrowseBack.InputGestures.Clear();
@@ -627,25 +627,25 @@ namespace Paway.WPF
         }
         private static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
-            // 设置该异常已察觉（这样处理后就不会引起程序崩溃）
-            e.SetObserved();
-            var desc = $"未经处理的Task异常";
-            e.Exception.Log(desc);
-        }
-        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
             try
             {
-                if (e.ExceptionObject is Exception ex)
-                {
-                    var desc = $"未经处理的线程异常";
-                    if (e.IsTerminating) desc += $"(致命错误)";
-                    ex.Log(desc);
-                }
+                // 设置该异常已察觉（这样处理后就不会引起程序崩溃）
+                e.SetObserved();
+                var desc = $"未经处理的Task异常";
+                e.Exception.Log(desc);
             }
             catch (Exception ex)
             {
-                var desc = $"不可恢复的未经处理线程异常";
+                var desc = $"不可恢复的未经处理Task异常";
+                ex.Log(desc);
+            }
+        }
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            if (e.ExceptionObject is Exception ex)
+            {
+                var desc = $"未经处理的线程异常";
+                if (e.IsTerminating) desc += $"(致命错误)";
                 ex.Log(desc);
             }
         }

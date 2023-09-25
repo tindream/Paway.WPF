@@ -47,19 +47,5 @@ namespace Paway.WPF
         }
 
         #endregion
-
-        #region 位移动画
-        /// <summary>
-        /// 计算动画时间
-        /// </summary>
-        public static double AnimTime(double value, int minTime = 250)
-        {
-            var animTime = (int)(Math.Pow(Math.Abs(value), 1.0 / 4) * 100);
-            if (animTime < minTime) animTime = minTime;
-            if (animTime > 1000) animTime = 1000;
-            return animTime;
-        }
-
-        #endregion
     }
 }

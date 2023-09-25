@@ -26,6 +26,17 @@ namespace Paway.WPF
         private static readonly string NameHit = $"{nameof(PMethod)}_{nameof(Hit)}";
         private static readonly string NameToast = $"{nameof(PMethod)}_{nameof(Toast)}";
 
+        /// <summary>
+        /// 计算动画时间
+        /// </summary>
+        public static double AnimTime(double value, int minTime = 250)
+        {
+            var animTime = (int)(Math.Pow(Math.Abs(value), 1.0 / 4) * 100);
+            if (animTime < minTime) animTime = minTime;
+            if (animTime > 1000) animTime = 1000;
+            return animTime;
+        }
+
         #region 装饰器-空白
         /// <summary>
         /// 装饰器-空白画板
