@@ -119,9 +119,8 @@ namespace Paway.Comm
             catch (HttpListenerException ex)
             {
                 var error = ex.Message();
-                if (!data.IsEmpty()) error = $"[data]{data}\n{error}";
-                if (!logMsg.IsEmpty()) error = $"{logMsg}>{error}";
-                Messenger.Default.Send(new StatuMessage($"网络异常-{ex.ErrorCode}>{error}", LeveType.Warn));
+                if (!data.IsEmpty()) error = $"{error}\n[data]{data}";
+                Messenger.Default.Send(new StatuMessage($"网络异常-{ex.ErrorCode}>{logMsg}>{error}", LeveType.Warn));
             }
             catch (Exception ex)
             {
@@ -129,21 +128,21 @@ namespace Paway.Comm
                 string error = ex.Message();
                 if (ex.InnerException() is DbException || ex.InnerException() is WarningException)
                 {
-                    if (!data.IsEmpty()) error = $"[data]{data}\n{error}";
-                    if (!logMsg.IsEmpty()) error = $"{logMsg}>{error}";
-                    Messenger.Default.Send(new StatuMessage(error, LeveType.Warn));
+                    if (!data.IsEmpty()) error = $"{error}\n[data]{data}";
+                    Messenger.Default.Send(new StatuMessage($"{logMsg}>{error}", LeveType.Warn));
                 }
                 else
                 {
                     error = $"{ex.NullReferenceMessage()}{ex}";
-                    if (!data.IsEmpty()) error = $"[data]{data}\n{error}";
-                    Messenger.Default.Send(new StatuMessage(error, LeveType.Error));
+                    if (!data.IsEmpty()) error = $"{error}\n[data]{data}";
+                    Messenger.Default.Send(new StatuMessage($"{logMsg}>{error}", LeveType.Error));
                 }
                 try
                 {
                     error = ex.Message();
                     Response(context, error, false);
                 }
+                catch (ProtocolViolationException) { }
                 catch (HttpListenerException) { }
                 catch (Exception e)
                 {
