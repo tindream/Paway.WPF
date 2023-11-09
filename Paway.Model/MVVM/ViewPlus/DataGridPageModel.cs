@@ -70,7 +70,8 @@ namespace Paway.Model
         }
 
         /// <summary>
-        /// 选择单元格时，SelectedItem为空
+        /// 获取主DataGrid选中项
+        /// <para>选择单元格时，SelectedItem为空</para>
         /// </summary>
         protected T SelectedInfo()
         {

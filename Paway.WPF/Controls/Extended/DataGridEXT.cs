@@ -502,7 +502,7 @@ namespace Paway.WPF
                         }
                     }
                 }
-                else if (this.SelectionMode == DataGridSelectionMode.Single && PMethod.Parent(e.OriginalSource, out DataGridRow row))
+                else if (SelectionUnit == DataGridSelectionUnit.FullRow && this.SelectionMode == DataGridSelectionMode.Single && PMethod.Parent(e.OriginalSource, out DataGridRow row))
                 {//直接拖动控件滚动条
                     var eventArg = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, e.ChangedButton)
                     {

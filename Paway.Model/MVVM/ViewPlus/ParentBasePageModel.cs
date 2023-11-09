@@ -142,6 +142,26 @@ namespace Paway.Model
         /// </summary>
         public ObservableCollection<Child> DetailList { get; private set; } = new ObservableCollection<Child>();
         public PagedCollectionView DetailPagedList { get; private set; }
+        private Child _childItem;
+        public Child ChildItem
+        {
+            get { return _childItem; }
+            set { if (_childItem != value) { _childItem = value; ChildChanged(); OnPropertyChanged(); } }
+        }
+        /// <summary>
+        /// 获取副DataGrid选中项
+        /// <para>选择单元格时，ChildItem为空</para>
+        /// </summary>
+        protected Child ChildInfo(DataGrid dataGrid)
+        {
+            if (ChildItem != null) return ChildItem;
+            if (dataGrid.SelectionUnit != DataGridSelectionUnit.FullRow && dataGrid.SelectedCells.Count > 0)
+            {
+                if (dataGrid.SelectedCells.First().Item is Child t) return t;
+            }
+            return default;
+        }
+        protected virtual void ChildChanged() { }
 
         #endregion
         #region 重载
