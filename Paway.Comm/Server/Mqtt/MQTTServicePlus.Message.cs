@@ -33,6 +33,7 @@ namespace Paway.Comm
             }
             string logMsg = null;
             var type = CommType.None;
+            string data = null;
             try
             {
                 var client = gClient.Client(e.ClientId);
@@ -42,7 +43,7 @@ namespace Paway.Comm
                     return CompletedTask.Instance;
                 }
                 logMsg = $"{client.Desc}";
-                var data = e.ApplicationMessage.Payload.Decompress();
+                data = e.ApplicationMessage.Payload.Decompress();
                 var msg = JsonConvert.DeserializeObject<CommMessage>(data);
                 type = msg.Type;
                 MessageReceivedAsync(e, data, msg, ref logMsg);
@@ -58,18 +59,25 @@ namespace Paway.Comm
             catch (Exception ex)
             {
                 e.ApplicationMessage.Topic = string.Empty;
-                string error = ex.Message();
-                if (ex.InnerException() is DbException || ex.InnerException() is WarningException)
+                var error = ex.Message();
+                if (!data.IsEmpty()) error = $"{error}\n[data]{data}";
+                if (ex.IExist(typeof(WarningException)))
                 {
                     $"{logMsg}>{error}".Log(LeveType.Warn);
                 }
+                else if (ex.IExist(typeof(DbException)))
+                {
+                    $"{logMsg}>{error}".Log(LeveType.Error);
+                }
                 else
                 {
-                    $"{logMsg}>{ex.NullReferenceMessage()}{ex}".Log(LeveType.Error);
+                    error = $"{ex.NullReferenceMessage()}{ex}";
+                    if (!data.IsEmpty()) error = $"{error}\n[data]{data}";
+                    $"{logMsg}>{error}".Log(LeveType.Error);
                 }
                 if (type != CommType.None)
                 {
-                    Publish($"{_topic}/{e.ClientId}", new ErrorMessage(type, error));
+                    Publish($"{_topic}/{e.ClientId}", new ErrorMessage(type, ex.Message()));
                 }
             }
             return CompletedTask.Instance;

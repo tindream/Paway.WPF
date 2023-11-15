@@ -125,11 +125,15 @@ namespace Paway.Comm
             catch (Exception ex)
             {
                 if (context == null) return;
-                string error = ex.Message();
-                if (ex.InnerException() is DbException || ex.InnerException() is WarningException)
+                var error = ex.Message();
+                if (!data.IsEmpty()) error = $"{error}\n[data]{data}";
+                if (ex.IExist(typeof(WarningException)))
                 {
-                    if (!data.IsEmpty()) error = $"{error}\n[data]{data}";
                     Messenger.Default.Send(new StatuMessage($"{logMsg}>{error}", LeveType.Warn));
+                }
+                else if (ex.IExist(typeof(DbException)))
+                {
+                    Messenger.Default.Send(new StatuMessage($"{logMsg}>{error}", LeveType.Error));
                 }
                 else
                 {
@@ -139,8 +143,7 @@ namespace Paway.Comm
                 }
                 try
                 {
-                    error = ex.Message();
-                    Response(context, error, false);
+                    Response(context, ex.Message(), false);
                 }
                 catch (ProtocolViolationException) { }
                 catch (HttpListenerException) { }

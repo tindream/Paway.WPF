@@ -52,7 +52,7 @@ namespace Paway.Model
             var msg = $"{ex.Message().Replace("\r\n", "。")}";
             if (!title.IsEmpty()) msg = $"{title}: {msg}";
             this.Msg = msg;
-            this.Level = ex.InnerException() is WarningException ? LeveType.Warn : LeveType.Error;
+            this.Level = ex.IExist(typeof(WarningException)) ? LeveType.Warn : LeveType.Error;
             this.Ower = ower;
         }
     }
