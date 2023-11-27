@@ -49,9 +49,26 @@
 		<ProjectReference Include="..\Paway.WPF\Paway.WPF.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <None Update="Log.xml">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
+		<Resource Include="Images\clear.png" />
+		<Resource Include="Images\clear_color.png" />
+		<Resource Include="Images\close.png" />
+		<Resource Include="Images\close_white.png" />
+		<Resource Include="Images\down.png" />
+		<Resource Include="Images\down_white.png" />
+		<Resource Include="Images\left.png" />
+		<Resource Include="Images\left_white.png" />
+		<Resource Include="Images\refresh.png" />
+		<Resource Include="Images\refresh_white.png" />
+		<Resource Include="Images\right.png" />
+		<Resource Include="Images\right_white.png" />
+		<Resource Include="Images\up.png" />
+		<Resource Include="Images\up_white.png" />
+		<Resource Include="Resources\script.sql" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="Log.xml">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 
 </Project>

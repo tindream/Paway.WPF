@@ -9,23 +9,23 @@
     <ButtonEXT Content="Dino.C" IsLight="True" Margin="0" Radius="0" ToolTip="当前档案"/>
     <Separator />
     <Menu>
-        <MenuItem Header="发送反馈2" Icon="Q" IsCheckable="True"/>
+        <MenuItem Header="发送反馈2" IsCheckable="True"/>
         <MenuItem Header="发送反馈3" >
             <MenuItem Header="报告问题"
-                              IsCheckable="True"  Icon="Q"/>
+                              IsCheckable="True" />
             <MenuItem Header="提供反馈"
                               IsCheckable="True" />
             <Separator />
             <MenuItem Header="设置..." />
         </MenuItem>
-        <MenuItem Header="发送反馈" Icon="A">
+        <MenuItem Header="发送反馈">
             <MenuItem Header="报告问题"
-                              IsCheckable="True"  Icon="A"/>
+                              IsCheckable="True" />
             <MenuItem Header="提供反馈"
                               IsCheckable="True" />
             <Separator />
             <MenuItem Header="设置..." />
-            <MenuItem Header="发送反馈C" Icon="A">
+            <MenuItem Header="发送反馈C">
                 <MenuItem Header="报告问题"
                               IsCheckable="True"/>
                 <MenuItem Header="提供反馈"
