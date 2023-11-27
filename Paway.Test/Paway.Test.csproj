@@ -9,7 +9,7 @@
 		<AssemblyName>Paway.Test</AssemblyName>
 		<RootNamespace>Paway.Test</RootNamespace>
 	</PropertyGroup>
-	<PropertyGroup >
+	<PropertyGroup>
 		<!--取消warning NETSDK1049警告-->
 		<DependsOnNETStandard>false</DependsOnNETStandard>
 	</PropertyGroup>
@@ -47,6 +47,11 @@
 		</Reference>
 		<ProjectReference Include="..\Paway.Model\Paway.Model.csproj" />
 		<ProjectReference Include="..\Paway.WPF\Paway.WPF.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Update="Log.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 </Project>
