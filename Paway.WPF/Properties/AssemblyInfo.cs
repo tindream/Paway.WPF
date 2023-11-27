@@ -12,7 +12,7 @@ using System.Windows.Markup;
 [assembly: AssemblyCopyright("Copyright ©  2020-2023")]
 [assembly: AssemblyDescription("WPF View Extension and Helper")]
 [assembly: AssemblyTrademark("Paway")]
-[assembly: AssemblyTitle("WPF Extension and Helper")]
+[assembly: AssemblyTitle("WPF View Extension and Helper")]
 [assembly: AssemblyProduct("Paway.WPF")]
 [assembly: AssemblyCulture("")]
 

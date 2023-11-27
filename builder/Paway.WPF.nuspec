@@ -14,14 +14,13 @@
 		<tags>WPF Extension Adorner Animation Helper</tags>
 		<dependencies>
 			<group targetFramework="net45">
-				<dependency id="log4net" version="2.0.10" />
 				<dependency id="Paway.Helper" version="2.5.0" />
 			</group>
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="..\bin\release\Paway.WPF_Secure\Paway.WPF.dll" target="lib\net45" />
-		<file src="..\bin\release\Paway.WPF_Secure\Paway.WPF.pdb" target="lib\net45" />
-		<file src="..\bin\release\Paway.WPF.xml" target="lib\net45" />
+		<file src="..\bin\release\net45\Paway.WPF_Secure\Paway.WPF.dll"	target="lib\net45" />
+		<file src="..\bin\release\net45\Paway.WPF_Secure\Paway.WPF.pdb"	target="lib\net45" />
+		<file src="..\bin\release\net45\Paway.WPF.xml"			target="lib\net45" />
 	</files>
 </package>

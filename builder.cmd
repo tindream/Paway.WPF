@@ -6,7 +6,7 @@
 @echo ---------------------------------------------------------------------------
 @echo ---------------reactor-----------------------------------------------------
 @dotNET_Reactor -project builder\Paway.WPF.nrproj
-@copy bin\Release\Paway.WPF.xml bin\Release\Paway.WPF_Secure\Paway.WPF.xml
+@copy bin\Release\net45\Paway.WPF.xml bin\Release\net45\Paway.WPF_Secure\Paway.WPF.xml
 @echo ---------------------------------------------------------------------------
 @echo ---------------nugut------------------------------------------------------
 @nuget pack builder\Paway.WPF.nuspec
