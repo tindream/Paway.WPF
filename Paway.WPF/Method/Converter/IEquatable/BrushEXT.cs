@@ -211,7 +211,7 @@ namespace Paway.WPF
             }
             if (value is string str)
             {
-                var result = PMethod.ElementStatu<BrushEXT, Color>(context, culture, str, Parse, ParseValue);
+                var result = PMethod.ElementStatu<BrushEXT, Color>(context, str, Parse, ParseValue);
                 return new BrushEXT(result.Normal, result.Mouse, result.Pressed, result.Alpha, result.Old);
             }
             return base.ConvertFrom(context, culture, value);

@@ -10,7 +10,7 @@ namespace WpfWebBrowser
     {
         private class WebBrowserEvent : StandardOleMarshalObject, DWebBrowserEvents2
         {
-            private WebBrowserHelper _helperInstance = null;
+            private readonly WebBrowserHelper _helperInstance = null;
 
             public WebBrowserEvent(WebBrowserHelper helperInstance)
             {

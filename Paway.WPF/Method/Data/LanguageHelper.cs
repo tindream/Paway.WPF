@@ -20,7 +20,7 @@ namespace Paway.WPF
     /// </summary>
     public static class LanguageHelper
     {
-        private static object languageLock = new object();
+        private static readonly object languageLock = new object();
         /// <summary>
         /// 重置(选择)语言
         /// </summary>

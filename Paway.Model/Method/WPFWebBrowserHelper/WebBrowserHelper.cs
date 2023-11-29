@@ -12,16 +12,14 @@ namespace WpfWebBrowser
 {
     public partial class WebBrowserHelper
     {
-        private WebBrowser _webBrowser;
+        private readonly WebBrowser _webBrowser;
         private object _cookie;
 
         public event CancelEventHandler NewWindow;
 
         public WebBrowserHelper(WebBrowser webBrowser)
         {
-            if (webBrowser == null)
-                throw new ArgumentNullException("webBrowser");
-            _webBrowser = webBrowser;
+            _webBrowser = webBrowser ?? throw new ArgumentNullException("webBrowser");
             _webBrowser.Dispatcher.BeginInvoke(new Action(Attach), DispatcherPriority.Loaded);
         }
 

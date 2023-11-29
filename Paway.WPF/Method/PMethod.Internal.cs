@@ -117,8 +117,7 @@ namespace Paway.WPF
         /// <summary>
         /// 控件状态转换
         /// </summary>
-        internal static ElementData<T, I> ElementStatu<T, I>(ITypeDescriptorContext context, CultureInfo culture, string str,
-            Func<string, I> funcParse, Func<T, string, I?> funcOld)
+        internal static ElementData<T, I> ElementStatu<T, I>(ITypeDescriptorContext context, string str, Func<string, I> funcParse, Func<T, string, I?> funcOld)
             //where T : IElementStatu<I> 
             where T : class
             where I : struct

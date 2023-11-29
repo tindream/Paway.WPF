@@ -121,8 +121,10 @@ namespace Paway.Model
             using (var doc = new Document())
             {
                 doc.LoadFromFile(file);
-                var toPdf = new ToPdfParameterList();
-                toPdf.PdfConformanceLevel = PdfConformanceLevel.Pdf_A1B;
+                var toPdf = new ToPdfParameterList
+                {
+                    PdfConformanceLevel = PdfConformanceLevel.Pdf_A1B
+                };
                 var toPath = Path.Combine(Path.GetDirectoryName(file), Path.GetFileName(file).Replace(".", "_"));
                 var pdfFile = Path.Combine(toPath, $"temp.pdf");
                 doc.SaveToFile(pdfFile, toPdf);
