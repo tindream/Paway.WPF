@@ -204,7 +204,7 @@ namespace Paway.WPF
             {
                 fullScreenWindow.Content = null;
                 if (content != null) content.Content = element;
-                else if (panel != null) panel.Children.Add(element);
+                else panel?.Children.Add(element);
                 parent = null;
             };
 

@@ -54,8 +54,7 @@ namespace Paway.WPF
         {
             if (d is ComboTree tree)
             {
-                IEnumerable list = tree.List;
-                if (list == null) list = tree.ItemsSource;
+                IEnumerable list = tree.List ?? tree.ItemsSource;
                 if (list != null)
                 {
                     var id = tree.SelectedValue.ToInt();

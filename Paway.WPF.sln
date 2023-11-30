@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29512.175
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paway.WPF", "Paway.WPF\Paway.WPF.csproj", "{839BD7C8-68CF-4D25-8326-F241DC785967}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Paway.WPF", "Paway.WPF\Paway.WPF.csproj", "{839BD7C8-68CF-4D25-8326-F241DC785967}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paway.Test", "Paway.Test\Paway.Test.csproj", "{71028011-C6B2-4F4D-A0E2-47D14B67123B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Paway.Test", "Paway.Test\Paway.Test.csproj", "{71028011-C6B2-4F4D-A0E2-47D14B67123B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paway.Model", "Paway.Model\Paway.Model.csproj", "{CB59594F-A05D-4D21-A59F-FF333B6B9A30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Paway.Model", "Paway.Model\Paway.Model.csproj", "{CB59594F-A05D-4D21-A59F-FF333B6B9A30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paway.Comm", "Paway.Comm\Paway.Comm.csproj", "{6573C69D-C0B5-46CF-A986-1352217BA143}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Paway.Comm", "Paway.Comm\Paway.Comm.csproj", "{6573C69D-C0B5-46CF-A986-1352217BA143}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

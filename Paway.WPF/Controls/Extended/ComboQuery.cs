@@ -78,8 +78,7 @@ namespace Paway.WPF
         {
             if (d is ComboQuery view)
             {
-                IEnumerable list = view.List;
-                if (list == null) list = view.ItemsSource;
+                IEnumerable list = view.List ?? view.ItemsSource;
                 if (list != null)
                 {
                     var id = view.SelectedValue.ToInt();

@@ -825,10 +825,7 @@ namespace Paway.WPF
             }
 
             // remove previous panel + buttons.
-            if (this._numericButtonPanel != null)
-            {
-                this._numericButtonPanel.Children.Clear();
-            }
+            this._numericButtonPanel?.Children.Clear();
 
             this._numericButtonPanel = GetTemplateChild(DATAPAGER_elementNumericButtonPanel) as Panel;
 

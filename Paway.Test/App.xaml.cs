@@ -27,7 +27,7 @@ namespace Paway.Test
             Config.Text = Config.Title;
             if (Method.IsAppInstanceExist())
             {//已经有实例在运行，则激活该实例的主窗体。 
-                var hWnd = Win32Helper.ActiveForm(Config.Text);
+                Win32Helper.ActiveForm(Config.Text);
                 Shutdown();
                 return;
             }

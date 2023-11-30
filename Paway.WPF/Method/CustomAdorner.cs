@@ -57,10 +57,7 @@ namespace Paway.WPF
                 {
                     completedFunc?.Invoke();
                     var myAdornerLayer = PMethod.ReloadAdorner(adornedElement);
-                    if (myAdornerLayer != null)
-                    {
-                        myAdornerLayer.Remove(this);
-                    }
+                    myAdornerLayer?.Remove(this);
                 };
                 storyboard.Begin(element, true);
             };
@@ -140,7 +137,7 @@ namespace Paway.WPF
         /// </summary>
         protected override Size ArrangeOverride(Size finalSize)
         {
-            if (canvas != null) canvas.Arrange(new Rect(finalSize));
+            canvas?.Arrange(new Rect(finalSize));
             return base.ArrangeOverride(finalSize);
         }
     }

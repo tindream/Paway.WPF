@@ -25,9 +25,9 @@
 	<ItemGroup>
 		<PackageReference Include="Paway.Helper" Version="2.5.1" />
 		<PackageReference Include="Paway.Utils" Version="2.5.1" />
-		<PackageReference Include="MQTTnet" Version="4.1.2.350" />
 		<PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="MQTTnet" Version="4.1.2.350" />
 	</ItemGroup>
 
 	<ItemGroup>

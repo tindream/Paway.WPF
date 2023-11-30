@@ -25,7 +25,6 @@
 	<ItemGroup>
 		<PackageReference Include="Paway.Helper" Version="2.5.1" />
 		<PackageReference Include="Paway.Utils" Version="2.5.1" />
-		<PackageReference Include="NPOI" Version="2.5.6" />
 		<PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="Spire.Office" Version="7.9.0" />
@@ -41,26 +40,8 @@
 		<Reference Include="System.Windows.Forms" />
 	</ItemGroup>
 	<ItemGroup>
-		<Resource Include="Images\login\password.png" />
-		<Resource Include="Images\login\setting.png" />
-		<Resource Include="Images\login\user.png" />
-		<Resource Include="Images\operate\add.png" />
-		<Resource Include="Images\operate\add_white.png" />
-		<Resource Include="Images\operate\close.png" />
-		<Resource Include="Images\operate\close_red.png" />
-		<Resource Include="Images\operate\close_white.png" />
-		<Resource Include="Images\operate\edit.png" />
-		<Resource Include="Images\operate\edit_white.png" />
-		<Resource Include="Images\operate\export.png" />
-		<Resource Include="Images\operate\export_white.png" />
-		<Resource Include="Images\operate\import.png" />
-		<Resource Include="Images\operate\import_white.png" />
-		<Resource Include="Images\operate\refresh.png" />
-		<Resource Include="Images\operate\refresh_white.png" />
-		<Resource Include="Images\operate\save.png" />
-		<Resource Include="Images\operate\save_white.png" />
-		<Resource Include="Images\operate\search.png" />
-		<Resource Include="Images\operate\search_gray.png" />
+		<Resource Include="Images\login\*.png" />
+		<Resource Include="Images\operate\*.png" />
 	</ItemGroup>
 
 </Project>

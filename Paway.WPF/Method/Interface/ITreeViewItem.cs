@@ -151,7 +151,7 @@ namespace Paway.WPF
                 this.Texts = Text;
             }
             OnPropertyChanged(nameof(Texts));
-            if (Parent != null) Parent.OnTexts();
+            Parent?.OnTexts();
         }
         private void LoadCount(ObservableCollection<ITreeViewItem> children, ref int count)
         {

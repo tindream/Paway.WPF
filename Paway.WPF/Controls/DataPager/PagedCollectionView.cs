@@ -1239,10 +1239,7 @@ namespace System.Windows.Data
                 // doesn't get applied yet
                 SetFlag(CollectionViewFlags.ShouldProcessCollectionChanged, false);
 
-                if (SourceList != null)
-                {
-                    SourceList.Add(newItem);
-                }
+                SourceList?.Add(newItem);
             }
             finally
             {
@@ -1396,10 +1393,7 @@ namespace System.Windows.Data
                 // doesn't get applied yet
                 SetFlag(CollectionViewFlags.ShouldProcessCollectionChanged, false);
 
-                if (SourceList != null)
-                {
-                    SourceList.Remove(CurrentAddItem);
-                }
+                SourceList?.Remove(CurrentAddItem);
             }
             finally
             {
@@ -2414,10 +2408,7 @@ namespace System.Windows.Data
                 // doesn't get applied yet
                 SetFlag(CollectionViewFlags.ShouldProcessCollectionChanged, false);
 
-                if (SourceList != null)
-                {
-                    SourceList.Remove(item);
-                }
+                SourceList?.Remove(item);
             }
             finally
             {
