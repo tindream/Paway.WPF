@@ -11,7 +11,7 @@ using System.Windows;
 
 namespace Paway.Test
 {
-    public class Config : Paway.Model.Config
+    public class Config : Model.Config
     {
         #region 常量
         public const string Title = "测试系统";

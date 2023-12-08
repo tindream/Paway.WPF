@@ -16,8 +16,6 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using Paway.Comm;
 using Newtonsoft.Json;
-using GalaSoft.MvvmLight.Messaging;
-using Paway.Model;
 using MQTTnet.Packets;
 
 namespace Paway.Comm
@@ -27,13 +25,12 @@ namespace Paway.Comm
         private IUser user;
         private Dictionary<string, string> properties;
 
-        public MQTTClientPlus() : base(Config.Topic)
+        public MQTTClientPlus() : base(CConfig.Topic)
         {
             this.ConnectEvent += TestClient_ConnectEvent;
         }
         private void TestClient_ConnectEvent(bool arg1, Exception arg2)
         {
-            Messenger.Default.Send(new ConnectMessage(arg1));
             if (arg1) Subscribes();
         }
         /// <summary>
@@ -41,8 +38,8 @@ namespace Paway.Comm
         /// </summary>
         protected virtual void Subscribes()
         {
-            base.SubscribeAsync(Config.TopicAdmin, MqttQualityOfServiceLevel.AtLeastOnce);
-            base.SubscribeAsync(Config.TopicAll, MqttQualityOfServiceLevel.AtLeastOnce);
+            base.SubscribeAsync(CConfig.TopicAdmin, MqttQualityOfServiceLevel.AtLeastOnce);
+            base.SubscribeAsync(CConfig.TopicAll, MqttQualityOfServiceLevel.AtLeastOnce);
             base.SubscribeAsync(this.Topic, MqttQualityOfServiceLevel.AtLeastOnce);
         }
         /// <summary>

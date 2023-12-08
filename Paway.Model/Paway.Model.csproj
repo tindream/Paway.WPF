@@ -1,10 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<UseWPF>true</UseWPF>
-		<TargetFrameworks>net45</TargetFrameworks>
+		<TargetFrameworks>net452</TargetFrameworks>
+		<!--用于指示编译器是否生成文档文件的值-->
+		<!--<GenerateDocumentationFile>True</GenerateDocumentationFile>-->
 		<!--不自动生成程序集信息(版本号)-->
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<Tags>WPF Model</Tags>
 		<AssemblyName>Paway.Model</AssemblyName>
 		<RootNamespace>Paway.Model</RootNamespace>
 	</PropertyGroup>
@@ -30,6 +32,7 @@
 		<PackageReference Include="Spire.Office" Version="7.9.0" />
 	</ItemGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\Paway.Comm\Paway.Comm.csproj" />
 		<ProjectReference Include="..\Paway.WPF\Paway.WPF.csproj" />
 	</ItemGroup>
 	<ItemGroup>

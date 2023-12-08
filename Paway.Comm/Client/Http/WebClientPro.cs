@@ -17,7 +17,6 @@ using MQTTnet;
 using System.ComponentModel;
 using System.Net;
 using Newtonsoft.Json;
-using Paway.Model;
 
 namespace Paway.Comm
 {
@@ -78,7 +77,7 @@ namespace Paway.Comm
                 this.DownloadProgressChanged += WebClientPro_DownloadProgressChanged;
             }
 
-            var url = $"{httpUrl}/{Config.UploadPath}/{toFile}?id={Config.User?.Id}";
+            var url = $"{httpUrl}/{CConfig.UploadPath}/{toFile}?id={CConfig.User?.Id}";
             var path = Path.GetDirectoryName(file);
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
             return this.DownloadStringTaskAsync(url).Result.Decompress();
@@ -103,8 +102,8 @@ namespace Paway.Comm
                 this.UploadProgressChanged += WebClientPro_UploadProgressChanged;
             }
 
-            var url = $"{httpUrl}/{Config.UploadPath}/{toFile}?id={Config.User?.Id}";
-            var str = Method.ReadFile(file, out int length);
+            var url = $"{httpUrl}/{CConfig.UploadPath}/{toFile}?id={CConfig.User?.Id}";
+            var str = CMethod.ReadFile(file, out int length);
             if (max != 0 && length > max * 1024 * 1024)
             {
                 var desc = max >= 1 ? $"{max:0.#}M" : $"{max * 1024:F0}K";

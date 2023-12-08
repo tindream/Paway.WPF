@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using Paway.Helper;
 using Paway.WPF;
+using Paway.Comm;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

@@ -1,6 +1,4 @@
 ﻿using Paway.Helper;
-using Paway.Model;
-using Paway.WPF;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,21 +9,9 @@ using System.Windows;
 
 namespace Paway.Comm
 {
-    public class Config : Paway.Model.Config
+    public class CConfig : TConfig
     {
         #region 常量
-        /// <summary>
-        /// 根主题
-        /// </summary>
-        public const string Topic = "Tinn";
-        /// <summary>
-        /// 所有人信息
-        /// </summary>
-        public const string TopicAll = "All";
-        /// <summary>
-        /// 管理信息
-        /// </summary>
-        public const string TopicAdmin = "Admin";
         /// <summary>
         /// MQTT端口
         /// </summary>
@@ -49,11 +35,38 @@ namespace Paway.Comm
         }
 
         #endregion
+        #region MQTT通讯常量
+        /// <summary>
+        /// 根主题
+        /// </summary>
+        public const string Topic = Name;
+        /// <summary>
+        /// 所有人信息
+        /// </summary>
+        public const string TopicAll = All;
+        /// <summary>
+        /// 管理信息
+        /// </summary>
+        public const string TopicAdmin = "Admin";
+
+        #endregion
 
         public static MQTTClientPlus MQClient { get; set; }
         /// <summary>
         /// 当前用户
         /// </summary>
         public static IUser User { get; set; }
+
+        #region 状态日志
+        /// <summary>
+        /// 状态日志事件
+        /// </summary>
+        public static event Action<string, LeveType> StatuLogEvent;
+        public static void AddStatuLog(string msg, LeveType level = LeveType.Debug)
+        {
+            StatuLogEvent?.Invoke(msg, level);
+        }
+
+        #endregion
     }
 }

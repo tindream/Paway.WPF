@@ -1,6 +1,5 @@
 ﻿using Paway.Helper;
 using Paway.Utils;
-using Paway.WPF;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,14 +12,13 @@ using System.Text;
 using System.Threading;
 using System.Windows;
 
-namespace Paway.Model
+namespace Paway.Comm
 {
-    public partial class DataService : SQLiteHelper, IDataGridServer
+    public partial class SQLiteBaseService : SQLiteHelper, IDataGridServer
     {
-        public DataService(string dbName = "test.db", string createSql = null)
+        public SQLiteBaseService(string dbName = "test.db", string createSql = null)
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory;
-            string file = Path.Combine(path, dbName);
+            string file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dbName);
             base.InitConnect(file);
             if (!createSql.IsEmpty() && base.InitCreate(createSql))
             {
@@ -30,9 +28,8 @@ namespace Paway.Model
         /// <summary>
         /// 从资源文件创建数据库文件
         /// </summary>
-        protected void Create(Uri uri)
+        protected void Create(string sql)
         {
-            var sql = uri.ToText();
             if (base.InitCreate(sql))
             {
                 Created();
@@ -60,44 +57,6 @@ namespace Paway.Model
             var info = Cache.Find<T>(userId);
             if (info == null) throw new WarningException("用户不存在");
             return UserChecked(info);
-        }
-
-        #endregion
-
-        #region Admin.Update
-        public void UpdateAdmin<T>(T admin, string name, DbCommand arg = null) where T : class
-        {
-            var value = admin.GetValue(name);
-            base.ExecuteTransaction(cmd =>
-            {
-                var list = Find<AdminBaseInfo>(c => c.Name == name, cmd);
-                if (list.Count == 0)
-                {
-                    AdminBaseInfo info = new AdminBaseInfo() { Name = name, Value = value.ToStrings() };
-                    Insert(info, cmd);
-                }
-                else
-                {
-                    list[0].Value = value.ToStrings();
-                    list[0].UpdateOn = DateTime.Now;
-                    Update(list[0], cmd);
-                }
-            }, arg);
-        }
-
-        #endregion
-
-        #region 初始化
-        public void Init()
-        {
-            new Action(() =>
-            {
-                ExecuteCommand(cmd => { });
-            }).BeginInvoke(null, null);
-        }
-        public T LoadAdmin<T>() where T : class
-        {
-            return Method.Conversion<T, AdminBaseInfo>(Find<AdminBaseInfo>());
         }
 
         #endregion

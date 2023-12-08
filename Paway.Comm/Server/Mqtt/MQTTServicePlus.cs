@@ -17,8 +17,6 @@ using Newtonsoft.Json;
 using MQTTnet;
 using MQTTnet.Server;
 using MQTTnet.Protocol;
-using GalaSoft.MvvmLight.Messaging;
-using Paway.Model;
 using MQTTnet.Internal;
 
 namespace Paway.Comm
@@ -31,13 +29,13 @@ namespace Paway.Comm
         public void Start(int port)
         {
             gClient = new ClientHelper();
-            base.StartAsync(port, Config.Topic).Wait();
-            Messenger.Default.Send(new StatuMessage($"mq://+:{port} 已启动"));
+            base.StartAsync(port, CConfig.Topic).Wait();
+            CConfig.AddStatuLog($"mq://+:{port} 已启动");
         }
         public void Stop()
         {
             base.StopAsync().Wait();
-            Messenger.Default.Send(new StatuMessage($"mqtt 已关闭"));
+            CConfig.AddStatuLog($"mqtt 已关闭");
         }
         public MClientInfo Client(int userId)
         {
@@ -52,7 +50,7 @@ namespace Paway.Comm
         protected override Task ClientConnectedAsync(ClientConnectedEventArgs args)
         {
             var client = gClient.Connect(args.ClientId);
-            Messenger.Default.Send(new StatuMessage($"{client?.Desc}上线"));
+            CConfig.AddStatuLog($"{client?.Desc}上线");
             return base.ClientConnectedAsync(args);
         }
         protected override Task ClientDisConnectedAsync(ClientDisconnectedEventArgs args)
@@ -60,7 +58,7 @@ namespace Paway.Comm
             var client = gClient.DisConnect(args.ClientId);
             if (client != null)
             {
-                Messenger.Default.Send(new StatuMessage($"{client?.Desc}下线"));
+                CConfig.AddStatuLog($"{client?.Desc}下线");
             }
             return base.ClientDisConnectedAsync(args);
         }

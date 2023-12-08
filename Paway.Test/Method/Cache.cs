@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Paway.Test
 {
-    public partial class Cache: Paway.Model.Cache
+    public partial class Cache : Comm.Cache
     {
         #region 系统
         /// <summary>

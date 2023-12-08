@@ -11,7 +11,7 @@ using System.Windows;
 
 namespace Paway.Model
 {
-    public class Config : WPF.PConfig
+    public class Config : PConfig
     {
         #region 全局数据
         public static Window Window { get; set; }

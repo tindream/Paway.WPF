@@ -45,6 +45,7 @@
 		<Reference Include="OxyPlot.Wpf.Shared">
 			<HintPath>..\Root\OxyPlot1.1\OxyPlot.Wpf.Shared.dll</HintPath>
 		</Reference>
+		<ProjectReference Include="..\Paway.Comm\Paway.Comm.csproj" />
 		<ProjectReference Include="..\Paway.Model\Paway.Model.csproj" />
 		<ProjectReference Include="..\Paway.WPF\Paway.WPF.csproj" />
 	</ItemGroup>

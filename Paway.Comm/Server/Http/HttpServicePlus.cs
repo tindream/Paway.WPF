@@ -18,7 +18,6 @@ using System.ComponentModel;
 using System.Net;
 using Newtonsoft.Json;
 using System.Web;
-using Paway.Model;
 
 namespace Paway.Comm
 {
@@ -89,10 +88,10 @@ namespace Paway.Comm
                 case OperType.Insert:
                     var syncInsert = JsonConvert.DeserializeObject<SyncInsertMessage>(data);
                     typeName = syncInsert.IType.Description();
-                    syncList = Method.JsonToIList(syncInsert.List, syncInsert.IType);
-                    if (typeof(IBaseInfo).IsAssignableFrom(syncInsert.IType))
+                    syncList = CMethod.JsonToIList(syncInsert.List, syncInsert.IType);
+                    if (typeof(IOperateInfo).IsAssignableFrom(syncInsert.IType))
                     {
-                        foreach (IBaseInfo item in syncList)
+                        foreach (IOperateInfo item in syncList)
                         {
                             item.CreateOn = timeNow;
                         }
@@ -103,10 +102,10 @@ namespace Paway.Comm
                 case OperType.Update:
                     var syncUpdate = JsonConvert.DeserializeObject<SyncUpdateMessage>(data);
                     typeName = syncUpdate.IType.Description();
-                    syncList = Method.JsonToIList(syncUpdate.List, syncUpdate.IType);
-                    if (typeof(IBaseInfo).IsAssignableFrom(syncUpdate.IType))
+                    syncList = CMethod.JsonToIList(syncUpdate.List, syncUpdate.IType);
+                    if (typeof(IOperateInfo).IsAssignableFrom(syncUpdate.IType))
                     {
-                        foreach (IBaseInfo item in syncList)
+                        foreach (IOperateInfo item in syncList)
                         {
                             item.UpdateOn = timeNow;
                         }
@@ -117,7 +116,7 @@ namespace Paway.Comm
                 case OperType.Delete:
                     var syncDelete = JsonConvert.DeserializeObject<SyncDeleteMessage>(data);
                     typeName = syncDelete.IType.Description();
-                    syncList = Method.JsonToIList(syncDelete.List, syncDelete.IType);
+                    syncList = CMethod.JsonToIList(syncDelete.List, syncDelete.IType);
                     server.Delete(syncList);
                     Response(context);
                     break;

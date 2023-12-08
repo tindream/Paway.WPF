@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Paway.Comm;
 using Paway.Helper;
 using Paway.Utils;
 using Paway.WPF;
@@ -115,7 +116,7 @@ namespace Paway.Model
         }
         protected virtual void Insert(T info)
         {
-            server.Insert(info); Method.Update(info);
+            server.Insert(info); CMethod.Update(info);
             var index = this.FilterList().FindIndex(c => c.Id == info.Id);
             if (!this.SearchReset() && index != -1) Method.Invoke(() => ObList.Insert(index, info));
             MoveTo(index, info);
@@ -137,7 +138,7 @@ namespace Paway.Model
         protected virtual void Insert(List<T> list)
         {
             if (list.Count == 0) return;
-            server.Insert(list); Method.Update(list);
+            server.Insert(list); CMethod.Update(list);
             int index = 0;
             foreach (var info in list)
             {
@@ -163,7 +164,7 @@ namespace Paway.Model
             }
             try
             {
-                server.Delete(info); Method.Delete(info);
+                server.Delete(info); CMethod.Delete(info);
                 Method.Invoke(() => ObList.Remove(info));
             }
             finally
@@ -186,7 +187,7 @@ namespace Paway.Model
             }
             try
             {
-                server.Delete(list); Method.Delete(list);
+                server.Delete(list); CMethod.Delete(list);
                 Method.Invoke(() => { foreach (var info in list) ObList.Remove(info); });
             }
             finally
@@ -227,7 +228,7 @@ namespace Paway.Model
             var updateList = Method.Import(this.FilterList(), list);
             var timeNow = DateTime.Now;
             updateList.ForEach(c => c.UpdateOn = timeNow);
-            server.Replace(updateList); Method.Update(updateList);
+            server.Replace(updateList); CMethod.Update(updateList);
             this.Reload();
         }
         protected virtual void Export(string file, bool iOpen = true)

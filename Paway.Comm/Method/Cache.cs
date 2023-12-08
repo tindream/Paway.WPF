@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Paway.Model
+namespace Paway.Comm
 {
     public partial class Cache
     {
@@ -27,7 +27,7 @@ namespace Paway.Model
             if (server != null)
             {
                 var tempList = server.Find(action);
-                Method.Sorted(tempList);
+                CMethod.Sorted(tempList);
                 dyList.AddRange(tempList);
             }
             Dic[typeof(T)] = dyList;
@@ -67,11 +67,11 @@ namespace Paway.Model
         }
         public static string Name<T>(int id, string notFound = null) where T : IName
         {
-            return Find<T>(id)?.Name ?? notFound ?? Config.NotFound;
+            return Find<T>(id)?.Name ?? notFound ?? CConfig.NotFound;
         }
         public static string CustomName<T>(int id, string notFound = null) where T : ICustomName
         {
-            return Find<T>(id)?.CustomName ?? notFound ?? Config.NotFound;
+            return Find<T>(id)?.CustomName ?? notFound ?? CConfig.NotFound;
         }
         public static bool Any<T>(Func<T, bool> action)
         {

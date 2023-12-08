@@ -1,6 +1,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Paway.Comm;
 using Paway.Helper;
 using Paway.Model;
 using Paway.WPF;
@@ -66,7 +67,9 @@ namespace Paway.Model
         public StatuItemModel()
         {
             Config.OperateLogEvent += msg => AddDesc(msg.Text, iHit: false);
+
             Messenger.Default.Register<StatuMessage>(this, msg => AddDesc(msg.Msg, msg.Level, msg.IHit, msg.Ower));
+            CConfig.StatuLogEvent += (msg, level) => AddDesc(msg, level);
             Messenger.Default.Register<ConnectMessage>(this, msg =>
             {
                 Messenger.Default.Send(new StatuMessage(msg.Connectd ? $"连接成功" : $"连接断开", !msg.Connectd), msg.Connectd ? LeveType.Debug : LeveType.Error);

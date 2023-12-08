@@ -7,7 +7,6 @@ using System.ComponentModel;
 using Newtonsoft.Json;
 using System.Data.Common;
 using System.Text;
-using GalaSoft.MvvmLight.Messaging;
 using MQTTnet.Server;
 using System.Threading.Tasks;
 using MQTTnet.Internal;

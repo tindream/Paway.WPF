@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Media;
 
-namespace Paway.Model
+namespace Paway.Comm
 {
     /// <summary>
     /// 用户定义

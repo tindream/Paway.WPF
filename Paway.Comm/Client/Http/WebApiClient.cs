@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Paway.Helper;
-using Paway.Model;
 using Paway.Utils;
 using System;
 using System.Collections;
@@ -104,7 +103,7 @@ namespace Paway.Comm
             var sync = new SyncFindMessage(type, find, count, args);
             var result = Send(sync);
             var list = JsonConvert.DeserializeObject<List<T>>(result.Data.ToString());
-            Method.Sorted(list);
+            CMethod.Sorted(list);
             return list;
         }
 
@@ -150,7 +149,7 @@ namespace Paway.Comm
                 {
                     var url = $"{httpUrl}/sync";
                     var json = JsonConvert.SerializeObject(sync).CompressBase64();
-                    using (var client = new WebClientPro(Config.User, timeout))
+                    using (var client = new WebClientPro(CConfig.User, timeout))
                     {
                         string response = client.UploadString(url, "POST", json).Decompress();
                         return JsonConvert.DeserializeObject<HttpResponseMessage>(response);
@@ -158,7 +157,7 @@ namespace Paway.Comm
                 }
                 catch (WebException ex)
                 {
-                    throw Method.HttpError(ex);
+                    throw CMethod.HttpError(ex);
                 }
             });
         }
@@ -178,7 +177,7 @@ namespace Paway.Comm
             {
                 try
                 {
-                    using (var client = new WebClientPro(Config.User, 2 * 60))
+                    using (var client = new WebClientPro(CConfig.User, 2 * 60))
                     {
                         string response = client.UpFileAsync(httpUrl, toFile, file, max, percentage);
                         var result = JsonConvert.DeserializeObject<HttpResponseMessage>(response);
@@ -188,7 +187,7 @@ namespace Paway.Comm
                 }
                 catch (WebException ex)
                 {
-                    throw Method.HttpError(ex);
+                    throw CMethod.HttpError(ex);
                 }
             });
         }
@@ -203,18 +202,18 @@ namespace Paway.Comm
             {
                 try
                 {
-                    using (var client = new WebClientPro(Config.User, 2 * 60))
+                    using (var client = new WebClientPro(CConfig.User, 2 * 60))
                     {
                         string response = client.DownFileAsync(httpUrl, fromFile, file, percentage);
                         var result = JsonConvert.DeserializeObject<HttpResponseMessage>(response);
-                        if (result.Code == 200) Method.SaveFile(file, result.Msg);
+                        if (result.Code == 200) CMethod.SaveFile(file, result.Msg);
                         completed?.Invoke();
                         return result;
                     }
                 }
                 catch (WebException ex)
                 {
-                    throw Method.HttpError(ex);
+                    throw CMethod.HttpError(ex);
                 }
             });
         }

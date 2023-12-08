@@ -29,18 +29,18 @@ namespace Paway.Comm
     {
         private bool MessageHandleFile(HttpListenerContext context, string data, ref string logMsg)
         {
-            if (context.Request.RawUrl.StartsWith("/" + Config.UploadPath, StringComparison.OrdinalIgnoreCase))
+            if (context.Request.RawUrl.StartsWith("/" + CConfig.UploadPath, StringComparison.OrdinalIgnoreCase))
             {
                 var url = HttpUtility.UrlDecode(context.Request.Url.LocalPath);
-                var fileName = url.Substring(Config.UploadPath.Length + 2);
-                var file = Path.Combine(Config.Upload, fileName);
+                var fileName = url.Substring(CConfig.UploadPath.Length + 2);
+                var file = Path.Combine(CConfig.Upload, fileName);
                 var path = Path.GetDirectoryName(file);
                 if (!Directory.Exists(path)) Directory.CreateDirectory(path);
                 logMsg += $">{context.Request.HttpMethod}>{Path.GetFileName(fileName)}";
                 switch (context.Request.HttpMethod)
                 {
                     case "POST":
-                        Method.SaveFile(file, data);
+                        CMethod.SaveFile(file, data);
                         base.Response(context, "上传成功");
                         FileEvent?.Invoke(context);
                         break;
@@ -51,7 +51,7 @@ namespace Paway.Comm
                         }
                         else
                         {
-                            base.Response(context, Method.ReadFile(file, out _));
+                            base.Response(context, CMethod.ReadFile(file, out _));
                             FileEvent?.Invoke(context);
                         }
                         break;

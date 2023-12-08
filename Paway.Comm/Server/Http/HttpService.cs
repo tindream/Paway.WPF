@@ -18,9 +18,7 @@ using System.ComponentModel;
 using System.Net;
 using Newtonsoft.Json;
 using System.Data.SqlClient;
-using GalaSoft.MvvmLight.Messaging;
 using System.Data.Common;
-using Paway.Model;
 
 namespace Paway.Comm
 {
@@ -43,7 +41,7 @@ namespace Paway.Comm
             _listener.Prefixes.Add(host);
             _listener.Start();
             _listener.BeginGetContext(ProcessRequest, null);
-            Messenger.Default.Send(new StatuMessage($"{host} 已启动"));
+            CConfig.AddStatuLog($"{host} 已启动");
         }
         public void Stop()
         {
@@ -120,7 +118,7 @@ namespace Paway.Comm
             {
                 var error = ex.Message();
                 if (!data.IsEmpty()) error = $"{error}\n[data]{data}";
-                Messenger.Default.Send(new StatuMessage($"网络异常-{ex.ErrorCode}>{logMsg}>{error}", LeveType.Warn));
+                CConfig.AddStatuLog($"网络异常-{ex.ErrorCode}>{logMsg}>{error}", LeveType.Warn);
             }
             catch (Exception ex)
             {
@@ -129,17 +127,17 @@ namespace Paway.Comm
                 if (!data.IsEmpty()) error = $"{error}\n[data]{data}";
                 if (ex.IExist(typeof(WarningException)))
                 {
-                    Messenger.Default.Send(new StatuMessage($"{logMsg}>{error}", LeveType.Warn));
+                    CConfig.AddStatuLog($"{logMsg}>{error}", LeveType.Warn);
                 }
                 else if (ex.IExist(typeof(DbException)))
                 {
-                    Messenger.Default.Send(new StatuMessage($"{logMsg}>{error}", LeveType.Error));
+                    CConfig.AddStatuLog($"{logMsg}>{error}", LeveType.Error);
                 }
                 else
                 {
                     error = $"{ex.NullReferenceMessage()}{ex}";
                     if (!data.IsEmpty()) error = $"{error}\n[data]{data}";
-                    Messenger.Default.Send(new StatuMessage($"{logMsg}>{error}", LeveType.Error));
+                    CConfig.AddStatuLog($"{logMsg}>{error}", LeveType.Error);
                 }
                 try
                 {

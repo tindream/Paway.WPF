@@ -11,7 +11,7 @@ using System.Windows;
 
 namespace Paway.Test
 {
-    public class Method : Paway.Model.Method
+    public class Method : Model.Method
     {
     }
 }

@@ -2,8 +2,6 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Paway.Helper;
-using Paway.Model;
-using Paway.WPF;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +15,7 @@ using System.Windows;
 
 namespace Paway.Comm
 {
-    public partial class Method : Model.Method
+    public partial class CMethod : TMethod
     {
         #region HTTP同步
         /// <summary>
@@ -32,7 +30,7 @@ namespace Paway.Comm
                 var list = !isJson ? msg.List.Clone(true) : JsonToIList(msg.List, msg.IType);
                 if (Cache.Dic.ContainsKey(msg.IType))
                 {
-                    Method.Update(msg.OperType, Cache.Dic[msg.IType], list);
+                    CMethod.Update(msg.OperType, Cache.Dic[msg.IType], list);
                 }
                 return list;
             }
@@ -65,6 +63,56 @@ namespace Paway.Comm
             }
             $"WebApi错误：{str}".Log(LeveType.Error);
             return new Exception(str);
+        }
+
+        #endregion
+
+        #region 缓存同步
+        /// <summary>
+        /// 同步更新
+        /// <para>插入、更新操作后会自动排序</para>
+        /// </summary>
+        public static T Update<T>(T info) where T : class, IId
+        {
+            Update(new List<T> { info });
+            return Cache.Find<T>(info.Id);
+        }
+        /// <summary>
+        /// 同步更新
+        /// <para>插入、更新操作后会自动排序</para>
+        /// </summary>
+        public static void Update<T>(List<T> fList) where T : class, IId
+        {
+            Update(typeof(T), fList);
+        }
+        /// <summary>
+        /// 同步更新
+        /// <para>插入、更新操作后会自动排序</para>
+        /// </summary>
+        public static void Update(Type type, IList fList)
+        {
+            CMethod.Update(OperType.Update, Cache.List(type), fList);
+        }
+        /// <summary>
+        /// 同步删除项
+        /// </summary>
+        public static void Delete<T>(T info) where T : class, IId
+        {
+            CMethod.Update(OperType.Delete, Cache.List<T>(), info);
+        }
+        /// <summary>
+        /// 同步删除项
+        /// </summary>
+        public static void Delete<T>(List<T> fList) where T : class, IId
+        {
+            Delete(typeof(T), fList);
+        }
+        /// <summary>
+        /// 同步删除项
+        /// </summary>
+        public static void Delete(Type type, IList fList)
+        {
+            CMethod.Update(OperType.Delete, Cache.List(type), fList);
         }
 
         #endregion

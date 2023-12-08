@@ -1,4 +1,5 @@
-﻿using Paway.Helper;
+﻿using Paway.Comm;
+using Paway.Helper;
 using Paway.Model;
 using Paway.Utils;
 using Paway.WPF;
@@ -15,7 +16,7 @@ using System.Threading;
 
 namespace Paway.Test
 {
-    public partial class DataService : Paway.Model.DataService
+    public partial class DataService : SQLiteBaseService
     {
         private static DataService intance;
         public static DataService Default
@@ -28,7 +29,7 @@ namespace Paway.Test
         }
         public DataService() : base()
         {
-            base.Create(new Uri(@"pack://application:,,,/Paway.Test;component/Resources/script.sql"));
+            base.Create(new Uri(@"pack://application:,,,/Paway.Test;component/Resources/script.sql").ToText());
         }
         protected override void Created()
         {
@@ -43,7 +44,7 @@ namespace Paway.Test
         #region 自动升级
         public void Load()
         {
-            Config.Admin = LoadAdmin<AdminInfo>();
+            Config.Admin = Method.Conversion<AdminInfo, AdminBaseInfo>(Find<AdminBaseInfo>());
             AutoUpdate();
         }
         private void AutoUpdate()

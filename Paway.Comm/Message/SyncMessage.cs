@@ -19,9 +19,9 @@ namespace Paway.Comm
         public ClientMessage() { }
         public ClientMessage(CommType type) : base(type)
         {
-            if (Config.MQClient != null)
+            if (CConfig.MQClient != null)
             {
-                this.ClientId = Config.MQClient.ClientId;
+                this.ClientId = CConfig.MQClient.ClientId;
             }
         }
     }

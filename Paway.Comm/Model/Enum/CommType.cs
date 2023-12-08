@@ -6,7 +6,6 @@ using System.Reflection;
 using System.Text;
 using System.Windows.Media;
 using Paway.Helper;
-using Paway.WPF;
 
 namespace Paway.Comm
 {

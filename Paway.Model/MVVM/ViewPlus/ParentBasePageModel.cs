@@ -1,5 +1,6 @@
 using Paway.Helper;
 using Paway.WPF;
+using Paway.Comm;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -179,7 +180,7 @@ namespace Paway.Model
         {
             info.Load();
             base.Deleted(info);
-            base.server.Delete(info.DetailList); Method.Delete(info.DetailList);
+            base.server.Delete(info.DetailList); CMethod.Delete(info.DetailList);
         }
 
         #endregion
