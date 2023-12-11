@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -45,24 +46,30 @@ namespace Paway.Comm
             foreach (var item in json) list.Add(JsonConvert.DeserializeObject(item.ToString(), type));
             return list;
         }
-        public static Exception HttpError(WebException ex, bool iDecompress = true)
+
+        public static Exception HttpError(WebException ex, bool iDecompress = false, [CallerMemberName] string memberName = null)
         {
-            string str;
+            var msg = HttpErrorMessage(ex, iDecompress, memberName);
+            return new WebException($"{memberName}失败：{msg}");
+        }
+        public static string HttpErrorMessage(WebException ex, bool iDecompress, string memberName)
+        {
+            string msg;
             if (ex.Response == null)
             {
-                str = ex.Message();
+                msg = ex.Message();
             }
             else
             {
                 var stream = ex.Response.GetResponseStream();
                 using (var reader = new StreamReader(stream, Encoding.UTF8))
                 {
-                    str = reader.ReadToEnd();
-                    if (iDecompress) str = str.Decompress();
+                    msg = reader.ReadToEnd();
+                    if (iDecompress) msg = msg.Decompress();
                 }
             }
-            $"WebApi错误：{str}".Log(LeveType.Error);
-            return new Exception(str);
+            $"[{memberName}]WebApi错误：{msg}".Log(LeveType.Error);
+            return msg;
         }
 
         #endregion
@@ -91,14 +98,14 @@ namespace Paway.Comm
         /// </summary>
         public static void Update(Type type, IList fList)
         {
-            CMethod.Update(OperType.Update, Cache.List(type), fList);
+            CMethod.Update(OperType.Update, Cache.AllList(type), fList);
         }
         /// <summary>
         /// 同步删除项
         /// </summary>
         public static void Delete<T>(T info) where T : class, IId
         {
-            CMethod.Update(OperType.Delete, Cache.List<T>(), info);
+            CMethod.Update(OperType.Delete, Cache.AllList<T>(), info);
         }
         /// <summary>
         /// 同步删除项
@@ -112,7 +119,7 @@ namespace Paway.Comm
         /// </summary>
         public static void Delete(Type type, IList fList)
         {
-            CMethod.Update(OperType.Delete, Cache.List(type), fList);
+            CMethod.Update(OperType.Delete, Cache.AllList(type), fList);
         }
 
         #endregion
@@ -140,8 +147,8 @@ namespace Paway.Comm
         }
         public static void SaveFile(string file, byte[] buffer)
         {
-            using (FileStream fs = new FileStream(file, FileMode.OpenOrCreate))
-            using (BinaryWriter bw = new BinaryWriter(fs))
+            using (var fs = new FileStream(file, FileMode.OpenOrCreate))
+            using (var bw = new BinaryWriter(fs))
             {
                 bw.Write(buffer, 0, buffer.Length);
             }

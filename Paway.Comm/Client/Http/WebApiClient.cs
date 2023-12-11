@@ -156,7 +156,7 @@ namespace Paway.Comm
                 }
                 catch (WebException ex)
                 {
-                    throw CMethod.HttpError(ex);
+                    throw CMethod.HttpError(ex, true);
                 }
             });
         }
@@ -186,7 +186,7 @@ namespace Paway.Comm
                 }
                 catch (WebException ex)
                 {
-                    throw CMethod.HttpError(ex);
+                    throw CMethod.HttpError(ex, true);
                 }
             });
         }
@@ -212,7 +212,7 @@ namespace Paway.Comm
                 }
                 catch (WebException ex)
                 {
-                    throw CMethod.HttpError(ex);
+                    throw CMethod.HttpError(ex, true);
                 }
             });
         }

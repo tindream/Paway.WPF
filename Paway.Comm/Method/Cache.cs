@@ -20,20 +20,43 @@ namespace Paway.Comm
         /// </summary>
         public static Dictionary<Type, dynamic> Dic { get; private set; } = new Dictionary<Type, dynamic>();
 
-        public static void Init<T>(IDataService server, List<T> list = null, Expression<Func<T, bool>> action = null) where T : class, new()
+        /// <summary>
+        /// 初始化缓存，不排序
+        /// </summary>
+        public static void Init<T>(IDataService server, Expression<Func<T, bool>> action = null) where T : class, new()
         {
-            var dyList = list ?? new List<T>();
+            var list = action == null ? server.Find<T>() : server.Find(action);
+            //CMethod.Sorted(list);
+            Dic[typeof(T)] = list;
+        }
+        /// <summary>
+        /// 初始化缓存，不排序
+        /// </summary>
+        public static void Init<T>(IDataService server, List<T> list, Expression<Func<T, bool>> action = null) where T : class, new()
+        {
+            var dyList = list;
             if (server != null)
             {
-                var tempList = server.Find(action);
-                CMethod.Sorted(tempList);
+                var tempList = action == null ? server.Find<T>() : server.Find(action);
+                //CMethod.Sorted(tempList);
                 dyList.AddRange(tempList);
             }
             Dic[typeof(T)] = dyList;
         }
+        /// <summary>
+        /// 缓存排序
+        /// </summary>
+        public static void Sorted()
+        {
+            foreach (var item in Dic) CMethod.Sorted(item.Value);
+        }
 
         #region 内部查询
-        internal static dynamic List(Type type)
+        /// <summary>
+        /// 缓存原始列表
+        /// <para>非线程安全队列，可能存在空值</para>
+        /// </summary>
+        public static dynamic AllList(Type type)
         {
             if (Dic.ContainsKey(type))
             {
@@ -42,27 +65,105 @@ namespace Paway.Comm
             throw new WarningException($"{type.Description()}未配置缓存");
         }
         /// <summary>
-        /// 非线程安全队列，可能存在空值
+        /// 缓存原始列表
+        /// <para>非线程安全队列，可能存在空值</para>
         /// </summary>
-        public static List<T> List<T>()
+        public static List<T> AllList<T>()
         {
-            return List(typeof(T));
+            return AllList(typeof(T));
         }
-        public static ParallelQuery<T> Query<T>(Func<T, bool> action)
+        public static ParallelQuery<T> Query<T>(Func<T, bool> action, bool all = false)
         {
-            return List<T>().AsParallel().Where(c => c != null && action?.Invoke(c) != false);
+            Func<T, bool> enableFilter = null;
+            if (!all && typeof(IEnable).IsAssignableFrom(typeof(T)))
+            {
+                enableFilter = c => ((IEnable)c).Enable == EnableType.None;
+            }
+            return AllList<T>().AsParallel().Where(c => c != null && enableFilter?.Invoke(c) != false && action?.Invoke(c) != false);
         }
         public static int Count<T>(Func<T, bool> action)
         {
-            return Query(action).Count();
+            lock (AllList<T>()) return Query(action).Count();
         }
-        public static T Find<T>(Func<T, bool> action)
+        public static int DistinctCount<T>(Func<T, bool> action, Func<T, T, bool> distinct)
         {
-            return Query(action).FirstOrDefault();
+            lock (AllList<T>()) return Query(action).Distinct(distinct).Count();
         }
-        public static T Find<T>(int id) where T : IId
+        public static int GroupCount<T, TKey>(Func<T, bool> action, Func<T, TKey> group)
         {
-            return Find<T>(c => c.Id == id);
+            lock (AllList<T>()) return Query(action).GroupBy(group).Count();
+        }
+        public static int Sum<T>(Func<T, bool> action, Func<T, int> sum)
+        {
+            lock (AllList<T>()) return Query(action).Sum(sum);
+        }
+        public static bool Any<T>(Func<T, bool> action)
+        {
+            lock (AllList<T>()) return Query(action).Any();
+        }
+
+        public static T Find<T>(Func<T, bool> action, bool all = false)
+        {
+            lock (AllList<T>()) return Query(action, all).FirstOrDefault();
+        }
+        public static T Find<T>(int id, bool all = false) where T : IId
+        {
+            return Find<T>(c => c.Id == id, all);
+        }
+        public static int FindId<T>(Func<T, bool> action) where T : IId
+        {
+            lock (AllList<T>()) return Query(action).FirstOrDefault()?.Id ?? 0;
+        }
+        /// <summary>
+        /// 全列表查询指定类名下指定Id数据
+        /// </summary>
+        public static IOperateInfo Find(string name, int id)
+        {
+            foreach (var item in Dic)
+            {
+                if (item.Key.Name == name) return FindById(item.Value, id);
+            }
+            return default;
+        }
+        private static T FindById<T>(List<T> list, int id) where T : IOperateInfo
+        {
+            return list.Find(c => c.Id == id);
+        }
+        /// <summary>
+        /// Id列表(并发，乱序)
+        /// </summary>
+        public static List<int> FindIds<T>(Func<T, bool> action) where T : IId
+        {
+            lock (AllList<T>()) return Query(action).Select(c => c.Id).ToList();
+        }
+        /// <summary>
+        /// 父级Id列表(并发，乱序)
+        /// </summary>
+        public static List<int> FindParentIds<T>(Func<T, bool> action) where T : IParent
+        {
+            lock (AllList<T>()) return Query(action).Select(c => c.ParentId).ToList();
+        }
+        /// <summary>
+        /// 查询列表(并发，乱序)
+        /// </summary>
+        public static List<T> QueryList<T>(Func<T, bool> action = null, bool all = false)
+        {
+            lock (AllList<T>()) return Query(action, all).ToList();
+        }
+        /// <summary>
+        /// 查询列表
+        /// <para>按Id倒序</para>
+        /// </summary>
+        public static List<T> QueryOrderByIdDesc<T>(Func<T, bool> action) where T : IId
+        {
+            lock (AllList<T>()) return Query(action).OrderByDescending(c => c.Id).ToList();
+        }
+        /// <summary>
+        /// 查询列表(同步，顺序)
+        /// </summary>
+        public static List<T> FindAll<T>(Func<T, bool> action = null)
+        {
+            lock (AllList<T>()) return AllList<T>().FindAll(c => c != null && action?.Invoke(c) != false);
         }
         public static string Name<T>(int id, string notFound = null) where T : IName
         {
@@ -72,55 +173,19 @@ namespace Paway.Comm
         {
             return Find<T>(id)?.CustomName ?? notFound ?? CConfig.NotFound;
         }
-        public static bool Any<T>(Func<T, bool> action)
-        {
-            return Query(action).Any();
-        }
-        public static int FindId<T>(Func<T, bool> action) where T : IId
-        {
-            return Query(action).FirstOrDefault()?.Id ?? 0;
-        }
-        /// <summary>
-        /// Id列表(并发，乱序)
-        /// </summary>
-        public static List<int> FindIds<T>(Func<T, bool> action) where T : IId
-        {
-            return Query(action).Select(c => c.Id).ToList();
-        }
-        /// <summary>
-        /// 父级Id列表(并发，乱序)
-        /// </summary>
-        public static List<int> FindParentIds<T>(Func<T, bool> action) where T : IParent
-        {
-            return Query(action).Select(c => c.ParentId).ToList();
-        }
-        /// <summary>
-        /// 查询列表(并发，乱序)
-        /// </summary>
-        public static List<T> QueryList<T>(Func<T, bool> action = null)
-        {
-            return Query(action).ToList();
-        }
-        /// <summary>
-        /// 查询列表(同步，顺序)
-        /// </summary>
-        public static List<T> FindAll<T>(Func<T, bool> action = null)
-        {
-            return List<T>().FindAll(c => c != null && action?.Invoke(c) != false);
-        }
         /// <summary>
         /// 名称列表(同步，以保证排序问题)
         /// </summary>
         public static List<string> FindNames<T>(Func<T, bool> action) where T : IName
         {
-            return FindAll<T>(c => action?.Invoke(c) != false).Select(c => c.Name).Distinct().ToList();
+            lock (AllList<T>()) return AllList<T>().FindAll(c => c != null && action?.Invoke(c) != false).Select(c => c.Name).Distinct().ToList();
         }
         /// <summary>
         /// 名称列表(同步，以保证排序问题)
         /// </summary>
         public static List<string> FindCustomNames<T>(Func<T, bool> action) where T : ICustomName
         {
-            return FindAll<T>(c => action?.Invoke(c) != false).Select(c => c.CustomName).Distinct().ToList();
+            lock (AllList<T>()) return AllList<T>().FindAll(c => c != null && action?.Invoke(c) != false).Select(c => c.CustomName).Distinct().ToList();
         }
 
         #endregion
