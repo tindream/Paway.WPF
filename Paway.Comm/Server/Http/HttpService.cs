@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 using System.Net.Sockets;
-using Paway.Utils;
 using Paway.Helper;
 using System.Threading;
 using System.IO;
@@ -19,6 +18,7 @@ using System.Net;
 using Newtonsoft.Json;
 using System.Data.SqlClient;
 using System.Data.Common;
+using System.Web;
 
 namespace Paway.Comm
 {
@@ -50,7 +50,7 @@ namespace Paway.Comm
         /// <summary>
         /// 消息处理
         /// </summary>
-        protected virtual void MessageHandle(HttpListenerContext context, string data, ref string logMsg)
+        protected virtual void MessageHandle(HttpListenerContext context, string url, ref string data, ref string logMsg)
         {
             Response(context, "Hello,World");
         }
@@ -75,7 +75,8 @@ namespace Paway.Comm
         {
             var zip = JsonConvert.SerializeObject(data).CompressBase64();
             var buffer = Encoding.UTF8.GetBytes(zip);
-            Response(context, buffer);
+            if (context.Response.ContentLength64 == -1) CConfig.AddStatuLog($"连接已关闭：{data.msg}", LeveType.Error);
+            else Response(context, buffer);
         }
         /// <summary>
         /// Http回复
@@ -108,17 +109,21 @@ namespace Paway.Comm
             {
                 _listener.BeginGetContext(ProcessRequest, null);
                 context = _listener.EndGetContext(result);
-
+                if (context.Request.HttpMethod == "OPTIONS")
+                {
+                    Response(context, "ok");
+                    return;
+                }
+                logMsg = HttpUtility.UrlDecode(context.Request.Url.PathAndQuery);
                 // 获取请求内容
-                data = new StreamReader(context.Request.InputStream, Encoding.UTF8).ReadToEnd().Decompress();
-                MessageHandle(context, data, ref logMsg);
-                if (logMsg != null) Console.WriteLine(logMsg);
+                data = new StreamReader(context.Request.InputStream, Encoding.UTF8).ReadToEnd();
+                MessageHandle(context, logMsg, ref data, ref logMsg);
             }
             catch (HttpListenerException ex)
             {
                 var error = ex.Message();
                 if (!data.IsEmpty()) error = $"{error}\n[data]{data}";
-                CConfig.AddStatuLog($"网络异常-{ex.ErrorCode}>{logMsg}>{error}", LeveType.Warn);
+                CConfig.AddStatuLog($"[HTTP]网络异常-{ex.ErrorCode}>{logMsg}>{error}", LeveType.Warn);
             }
             catch (Exception ex)
             {
@@ -127,17 +132,17 @@ namespace Paway.Comm
                 if (!data.IsEmpty()) error = $"{error}\n[data]{data}";
                 if (ex.IExist(typeof(WarningException)))
                 {
-                    CConfig.AddStatuLog($"{logMsg}>{error}", LeveType.Warn);
+                    CConfig.AddStatuLog($"[HTTP]{logMsg}>{error}", LeveType.Warn);
                 }
                 else if (ex.IExist(typeof(DbException)))
                 {
-                    CConfig.AddStatuLog($"{logMsg}>{error}", LeveType.Error);
+                    CConfig.AddStatuLog($"[HTTP]{logMsg}>{error}", LeveType.Error);
                 }
                 else
                 {
                     error = $"{ex.NullReferenceMessage()}{ex}";
                     if (!data.IsEmpty()) error = $"{error}\n[data]{data}";
-                    CConfig.AddStatuLog($"{logMsg}>{error}", LeveType.Error);
+                    CConfig.AddStatuLog($"[HTTP]{logMsg}>{error}", LeveType.Error);
                 }
                 try
                 {
@@ -152,15 +157,22 @@ namespace Paway.Comm
             }
             finally
             {
-                try
-                {
-                    context?.Response.Close();
-                }
-                catch (HttpListenerException) { }
-                catch (Exception e)
-                {
-                    e.Log();
-                }
+                Close(context);
+            }
+        }
+        /// <summary>
+        /// 关闭连接
+        /// </summary>
+        protected void Close(HttpListenerContext context)
+        {
+            try
+            {
+                context?.Response.Close();
+            }
+            catch (HttpListenerException) { }
+            catch (Exception e)
+            {
+                e.Log();
             }
         }
     }

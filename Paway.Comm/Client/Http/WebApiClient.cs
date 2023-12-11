@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Paway.Helper;
-using Paway.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -38,7 +37,7 @@ namespace Paway.Comm
             if (list.Count == 0) return list;
             var sync = new SyncInsertMessage(list);
             var result = Send(sync);
-            var resultList = JsonConvert.DeserializeObject<List<T>>(result.Data.ToString());
+            var resultList = JsonConvert.DeserializeObject<List<T>>(result.data.ToString());
             for (int i = 0; i < list.Count; i++) resultList[i].Clone(list[i], true);
             return list;
         }
@@ -55,7 +54,7 @@ namespace Paway.Comm
             if (list.Count == 0) return 0;
             var sync = new SyncUpdateMessage(list, args);
             var result = Send(sync);
-            var resultList = JsonConvert.DeserializeObject<List<T>>(result.Data.ToString());
+            var resultList = JsonConvert.DeserializeObject<List<T>>(result.data.ToString());
             resultList.Clone(list, true);
             return 0;
         }
@@ -102,7 +101,7 @@ namespace Paway.Comm
             Type type = typeof(T);
             var sync = new SyncFindMessage(type, find, count, args);
             var result = Send(sync);
-            var list = JsonConvert.DeserializeObject<List<T>>(result.Data.ToString());
+            var list = JsonConvert.DeserializeObject<List<T>>(result.data.ToString());
             CMethod.Sorted(list);
             return list;
         }
@@ -118,7 +117,7 @@ namespace Paway.Comm
             Type type = typeof(T);
             var sync = new SyncExecuteListMessage(type, sql);
             var result = Send(sync);
-            var list = JsonConvert.DeserializeObject<List<T>>(result.Data.ToString());
+            var list = JsonConvert.DeserializeObject<List<T>>(result.data.ToString());
             return list;
         }
         public static object ExecuteScalar<T>(Expression<Func<T, bool>> predicate) where T : class
@@ -132,13 +131,13 @@ namespace Paway.Comm
             Type type = typeof(T);
             var sync = new SyncExecuteScalarMessage($"select Count(0) from ({type.Select()} where {sql ?? "1=1"}) A");
             var result = Send(sync);
-            return result.Data;
+            return result.data;
         }
 
         public static HttpResponseMessage Send(CommMessage sync, int timeout = 30)
         {
             var task = SendAsync(sync, timeout);
-            if (task.Result.Code != 200) throw new Exception(task.Result.Msg);
+            if (task.Result.code != 200) throw new Exception(task.Result.msg);
             return task.Result;
         }
         private static Task<HttpResponseMessage> SendAsync(CommMessage sync, int timeout = 30)
@@ -168,8 +167,8 @@ namespace Paway.Comm
         public static string UpFile(string toFile, string file, double max = 0, Action<double> percentage = null, Action completed = null)
         {
             var task = UpFileAsync(toFile, file, max, percentage, completed);
-            if (task.Result.Code != 200) throw new Exception(task.Result.Msg);
-            return task.Result.Msg;
+            if (task.Result.code != 200) throw new Exception(task.Result.msg);
+            return task.Result.msg;
         }
         public static Task<HttpResponseMessage> UpFileAsync(string toFile, string file, double max = 0, Action<double> percentage = null, Action completed = null)
         {
@@ -194,7 +193,7 @@ namespace Paway.Comm
         public static void DownFile(string fromFile, string file, Action<double> percentage = null, Action completed = null)
         {
             var task = DownFileAsync(fromFile, file, percentage, completed);
-            if (task.Result.Code != 200) throw new Exception(task.Result.Msg);
+            if (task.Result.code != 200) throw new Exception(task.Result.msg);
         }
         public static Task<HttpResponseMessage> DownFileAsync(string fromFile, string file, Action<double> percentage = null, Action completed = null)
         {
@@ -206,7 +205,7 @@ namespace Paway.Comm
                     {
                         string response = client.DownFileAsync(httpUrl, fromFile, file, percentage);
                         var result = JsonConvert.DeserializeObject<HttpResponseMessage>(response);
-                        if (result.Code == 200) CMethod.SaveFile(file, result.Msg);
+                        if (result.code == 200) CMethod.SaveFile(file, result.msg);
                         completed?.Invoke();
                         return result;
                     }

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 using System.Net.Sockets;
-using Paway.Utils;
 using Paway.Helper;
 using System.Threading;
 using System.IO;
@@ -29,21 +28,27 @@ namespace Paway.Comm
         public int Timeout { get; set; }
 
         /// <summary>
-        /// 默认60s
+        /// 默认15s
         /// </summary>
-        public WebClientPro(int timeout = 30)
+        public WebClientPro(int timeout = 15)
         {
             Timeout = timeout * 1000;
             Encoding = Encoding.UTF8;
             Headers[HttpRequestHeader.ContentType] = "application/json";
-            //this.Proxy = WebRequest.DefaultWebProxy;
+            //this.Proxy = WebRequest.DefaultWebProxy;//代理
         }
-        public WebClientPro(string user, string pad, int timeout = 30) : this(timeout)
+        /// <summary>
+        /// 指定用户密码
+        /// </summary>
+        public WebClientPro(string user, string pad, int timeout = 15) : this(timeout)
         {
             var buffer = Encoding.UTF8.GetBytes($"{user}:{pad}");
             var result = Convert.ToBase64String(buffer);
             Headers[HttpRequestHeader.Authorization] = $"Basic {result}";
         }
+        /// <summary>
+        /// 指定用户Id和自定义Tag
+        /// </summary>
         public WebClientPro(IUser user, int timeout = 30) : this(timeout)
         {
             if (user != null)

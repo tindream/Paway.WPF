@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<UseWPF>true</UseWPF>
-		<TargetFrameworks>net452</TargetFrameworks>
+		<TargetFrameworks>net452;netcoreapp3.1</TargetFrameworks>
 		<!--用于指示编译器是否生成文档文件的值-->
 		<!--<GenerateDocumentationFile>True</GenerateDocumentationFile>-->
 		<!--不自动生成程序集信息(版本号)-->
@@ -26,12 +25,11 @@
 
 	<ItemGroup>
 		<PackageReference Include="Paway.Helper" Version="2.5.1" />
-		<PackageReference Include="Paway.Utils" Version="2.5.1" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="MQTTnet" Version="4.1.2.350" />
 	</ItemGroup>
 
-	<ItemGroup>
+	<ItemGroup Condition="$(TargetFramework) == 'net452'">
 		<Reference Include="Microsoft.CSharp" />
 	</ItemGroup>
 

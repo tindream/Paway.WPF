@@ -16,7 +16,7 @@ using System.Threading;
 
 namespace Paway.Test
 {
-    public partial class DataService : SQLiteBaseService
+    public partial class DataService : SQLiteHelper
     {
         private static DataService intance;
         public static DataService Default

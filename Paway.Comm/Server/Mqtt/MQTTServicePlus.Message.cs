@@ -52,7 +52,7 @@ namespace Paway.Comm
             catch (JsonReaderException)
             {
                 e.ApplicationMessage.Topic = string.Empty;
-                $"{logMsg}>未定义消息>{Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}".Log(LeveType.Error);
+                $"[MQTT]{logMsg}>未定义消息>{Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}".Log(LeveType.Error);
                 Publish($"{_topic}/{e.ClientId}", new ErrorMessage(CommType.None, "未定义消息"));
             }
             catch (Exception ex)
@@ -62,17 +62,17 @@ namespace Paway.Comm
                 if (!data.IsEmpty()) error = $"{error}\n[data]{data}";
                 if (ex.IExist(typeof(WarningException)))
                 {
-                    $"{logMsg}>{error}".Log(LeveType.Warn);
+                    $"[MQTT]{logMsg}>{error}".Log(LeveType.Warn);
                 }
                 else if (ex.IExist(typeof(DbException)))
                 {
-                    $"{logMsg}>{error}".Log(LeveType.Error);
+                    $"[MQTT]{logMsg}>{error}".Log(LeveType.Error);
                 }
                 else
                 {
                     error = $"{ex.NullReferenceMessage()}{ex}";
                     if (!data.IsEmpty()) error = $"{error}\n[data]{data}";
-                    $"{logMsg}>{error}".Log(LeveType.Error);
+                    $"[MQTT]{logMsg}>{error}".Log(LeveType.Error);
                 }
                 if (type != CommType.None)
                 {

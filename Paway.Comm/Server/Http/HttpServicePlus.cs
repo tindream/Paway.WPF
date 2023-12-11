@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 using System.Net.Sockets;
-using Paway.Utils;
 using Paway.Helper;
 using System.Threading;
 using System.IO;
@@ -40,40 +39,48 @@ namespace Paway.Comm
         {
             return ClientEvent?.Invoke(context);
         }
-        protected override void MessageHandle(HttpListenerContext context, string data, ref string logMsg)
+        protected override void MessageHandle(HttpListenerContext context, string url, ref string data, ref string logMsg)
         {
-            var client = Client(context);
-            logMsg = client?.Desc;
-            if (MessageHandleFile(context, data, ref logMsg)) return;
+            try
+            {
+                data = data.Decompress();
+                var client = Client(context);
+                logMsg = $"[{client?.Desc}] {logMsg}";
+                if (MessageHandleFile(context, data, ref logMsg)) return;
 
-            var msg = JsonConvert.DeserializeObject<CommMessage>(data);
-            if (msg == null)
-            {
-                base.MessageHandle(context, data, ref logMsg);
-                return;
+                var msg = JsonConvert.DeserializeObject<CommMessage>(data);
+                if (msg == null)
+                {
+                    base.MessageHandle(context, url, ref data, ref logMsg);
+                    return;
+                }
+                switch (msg.Type)
+                {
+                    case CommType.Sync:
+                        MessageHandleSync(context, data, ref logMsg);
+                        break;
+                    default:
+                        logMsg += $">{msg.Type.Description()}";
+                        break;
+                }
+                switch (msg.Type)
+                {
+                    case CommType.Sync: break;
+                    case CommType.SyncExecuteList:
+                        var sql = JsonConvert.DeserializeObject<SyncExecuteListMessage>(data);
+                        var sqlList = server.ExecuteList(sql.ObjType, sql.Sql);
+                        Response(context, sqlList);
+                        break;
+                    case CommType.SyncExecuteScalar:
+                        sql = JsonConvert.DeserializeObject<SyncExecuteListMessage>(data);
+                        var obj = server.ExecuteScalar(sql.Sql);
+                        Response(context, obj);
+                        break;
+                }
             }
-            switch (msg.Type)
+            finally
             {
-                case CommType.Sync:
-                    MessageHandleSync(context, data, ref logMsg);
-                    break;
-                default:
-                    logMsg += $">{msg.Type.Description()}";
-                    break;
-            }
-            switch (msg.Type)
-            {
-                case CommType.Sync: break;
-                case CommType.SyncExecuteList:
-                    var sql = JsonConvert.DeserializeObject<SyncExecuteListMessage>(data);
-                    var sqlList = server.ExecuteList(sql.ObjType, sql.Sql);
-                    Response(context, sqlList);
-                    break;
-                case CommType.SyncExecuteScalar:
-                    sql = JsonConvert.DeserializeObject<SyncExecuteListMessage>(data);
-                    var obj = server.ExecuteScalar(sql.Sql);
-                    Response(context, obj);
-                    break;
+                Console.WriteLine(logMsg);
             }
         }
         private void MessageHandleSync(HttpListenerContext context, string data, ref string logMsg)
