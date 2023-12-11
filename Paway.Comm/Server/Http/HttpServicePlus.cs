@@ -39,7 +39,7 @@ namespace Paway.Comm
         {
             return ClientEvent?.Invoke(context);
         }
-        protected override void MessageHandle(HttpListenerContext context, string url, ref string data, ref string logMsg)
+        protected override void MessageHandle(HttpListenerContext context, ref string data, ref string logMsg)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace Paway.Comm
                 var msg = JsonConvert.DeserializeObject<CommMessage>(data);
                 if (msg == null)
                 {
-                    base.MessageHandle(context, url, ref data, ref logMsg);
+                    base.MessageHandle(context, ref data, ref logMsg);
                     return;
                 }
                 switch (msg.Type)

@@ -77,7 +77,7 @@ namespace Paway.Comm
             Func<T, bool> enableFilter = null;
             if (!all && typeof(IEnable).IsAssignableFrom(typeof(T)))
             {
-                enableFilter = c => ((IEnable)c).Enable == EnableType.None;
+                enableFilter = c => ((IEnable)c).Enable == EnableType.Enable;
             }
             return AllList<T>().AsParallel().Where(c => c != null && enableFilter?.Invoke(c) != false && action?.Invoke(c) != false);
         }

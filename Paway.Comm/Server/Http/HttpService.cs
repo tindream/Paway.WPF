@@ -50,7 +50,7 @@ namespace Paway.Comm
         /// <summary>
         /// 消息处理
         /// </summary>
-        protected virtual void MessageHandle(HttpListenerContext context, string url, ref string data, ref string logMsg)
+        protected virtual void MessageHandle(HttpListenerContext context, ref string data, ref string logMsg)
         {
             Response(context, "Hello,World");
         }
@@ -117,7 +117,7 @@ namespace Paway.Comm
                 logMsg = HttpUtility.UrlDecode(context.Request.Url.PathAndQuery);
                 // 获取请求内容
                 data = new StreamReader(context.Request.InputStream, Encoding.UTF8).ReadToEnd();
-                MessageHandle(context, logMsg, ref data, ref logMsg);
+                MessageHandle(context, ref data, ref logMsg);
             }
             catch (HttpListenerException ex)
             {
