@@ -3,7 +3,6 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Paway.Comm;
 using Paway.Helper;
-using Paway.Utils;
 using Paway.WPF;
 using System;
 using System.Collections.Generic;

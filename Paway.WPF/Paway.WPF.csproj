@@ -23,13 +23,12 @@
 			<Link>Properties\AssemblyVersion.cs</Link>
 		</Compile>
 	</ItemGroup>
-
 	<ItemGroup>
-		<PackageReference Include="Paway.Helper" Version="2.5.1" />
+		<Resource Include="Resource\fontawesome.ttf" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Resource Include="Resource\fontawesome.ttf" />
+		<PackageReference Include="Paway.Helper" Version="2.5.1" />
 	</ItemGroup>
 
 </Project>

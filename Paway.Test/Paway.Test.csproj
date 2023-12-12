@@ -25,16 +25,15 @@
 		<Compile Include="..\AssemblyVersion.cs">
 			<Link>Properties\AssemblyVersion.cs</Link>
 		</Compile>
+		<None Update="Log.xml">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<Resource Include="Images\*.png" />
+		<Resource Include="Resources\script.sql" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Paway.Helper" Version="2.5.1" />
-		<PackageReference Include="Paway.Utils" Version="2.5.1" />
-		<PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
-		<PackageReference Include="HelixToolkit.Wpf" Version="2.24.0" />
-		<PackageReference Include="MSTest.TestAdapter" Version="2.1.1" />
-		<PackageReference Include="MSTest.TestFramework" Version="2.1.1" />
-	</ItemGroup>
 	<ItemGroup>
 		<Reference Include="OxyPlot">
 			<HintPath>..\Root\OxyPlot1.1\OxyPlot.dll</HintPath>
@@ -45,17 +44,18 @@
 		<Reference Include="OxyPlot.Wpf.Shared">
 			<HintPath>..\Root\OxyPlot1.1\OxyPlot.Wpf.Shared.dll</HintPath>
 		</Reference>
+	</ItemGroup>
+	<ItemGroup>
 		<ProjectReference Include="..\Paway.Model\Paway.Model.csproj" />
 		<ProjectReference Include="..\Paway.WPF\Paway.WPF.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<Resource Include="Images\*.png" />
-		<Resource Include="Resources\script.sql" />
-	</ItemGroup>
-	<ItemGroup>
-		<None Update="Log.xml">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
+		<PackageReference Include="Paway.Helper" Version="2.5.1" />
+		<PackageReference Include="Paway.Utils" Version="2.5.1" />
+		<PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+		<PackageReference Include="HelixToolkit.Wpf" Version="2.24.0" />
+		<PackageReference Include="MSTest.TestAdapter" Version="2.1.1" />
+		<PackageReference Include="MSTest.TestFramework" Version="2.1.1" />
 	</ItemGroup>
 
 </Project>

@@ -9,10 +9,10 @@ using System.Windows.Markup;
 // 与程序集关联的信息。
 
 [assembly: AssemblyCompany("Tinn")]
-[assembly: AssemblyCopyright("Copyright ©  2020-2023")]
-[assembly: AssemblyDescription("WPF View Extension and Helper")]
+[assembly: AssemblyCopyright("Copyright ©  2020-2024")]
+[assembly: AssemblyDescription("WPF Extension Adorner Animation Helper")]
 [assembly: AssemblyTrademark("Paway")]
-[assembly: AssemblyTitle("WPF View Extension and Helper")]
+[assembly: AssemblyTitle("WPF Extension Adorner Animation Helper")]
 [assembly: AssemblyProduct("Paway.WPF")]
 [assembly: AssemblyCulture("")]
 

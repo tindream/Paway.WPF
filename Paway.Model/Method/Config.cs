@@ -11,9 +11,15 @@ using System.Windows;
 
 namespace Paway.Model
 {
+    /// <summary>
+    /// 模型相关的一些常量
+    /// </summary>
     public class Config : PConfig
     {
         #region 全局数据
+        /// <summary>
+        /// 主窗体
+        /// </summary>
         public static Window Window { get; set; }
         /// <summary>
         /// 当前菜单

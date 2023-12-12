@@ -7,10 +7,10 @@ using System.Runtime.InteropServices;
 // 与程序集关联的信息。
 
 [assembly: AssemblyCompany("Tinn")]
-[assembly: AssemblyCopyright("Copyright ©  2020-2023")]
-[assembly: AssemblyDescription("MVVM ModelBase")]
+[assembly: AssemblyCopyright("Copyright ©  2020-2024")]
+[assembly: AssemblyDescription("WPF Model")]
 [assembly: AssemblyTrademark("Paway")]
-[assembly: AssemblyTitle("MVVM ModelBase")]
+[assembly: AssemblyTitle("WPF Model")]
 [assembly: AssemblyProduct("Paway.Model")]
 [assembly: AssemblyCulture("")]
 

@@ -10,7 +10,7 @@
 		<license type="expression">MIT</license>
 		<projectUrl>https://github.com/tindream/Paway.WPF.git</projectUrl>
 		<description>WPF Extent</description>
-		<copyright>Copyright 2020-2022</copyright>
+		<copyright>Copyright 2020-2024</copyright>
 		<tags>WPF Extension Adorner Animation Helper</tags>
 		<dependencies>
 			<group targetFramework="net45">
