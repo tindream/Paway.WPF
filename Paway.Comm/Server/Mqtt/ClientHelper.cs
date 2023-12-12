@@ -14,11 +14,6 @@ namespace Paway.Comm
     /// </summary>
     public class ClientHelper
     {
-        /// <summary>
-        /// 同步锁
-        /// </summary>
-        private readonly object syncRoot = new object();
-
         private readonly List<MClientInfo> clientList = new List<MClientInfo>();
 
         /// <summary>
@@ -26,7 +21,7 @@ namespace Paway.Comm
         /// </summary>
         public List<MClientInfo> Clients()
         {
-            lock (syncRoot)
+            lock (clientList)
             {
                 return clientList.FindAll(c => c.Connected);
             }
@@ -36,17 +31,38 @@ namespace Paway.Comm
         /// </summary>
         public int Count()
         {
-            lock (syncRoot)
+            lock (clientList)
             {
                 return clientList.FindAll(c => c.Connected).Count;
             }
         }
         /// <summary>
+        /// 查询客户端
+        /// </summary>
+        public MClientInfo Client(string clientId)
+        {
+            lock (clientList)
+            {
+                return clientList.Find(c => c.ClientId == clientId);
+            }
+        }
+        /// <summary>
+        /// 查询客户端
+        /// </summary>
+        public MClientInfo Client(int userId)
+        {
+            lock (clientList)
+            {
+                return clientList.Find(c => c.User?.Id == userId);
+            }
+        }
+
+        /// <summary>
         /// 尝试添加客户端，已存在时，重置时间和在线状态
         /// </summary>
         public void Add(MClientInfo info)
         {
-            lock (syncRoot)
+            lock (clientList)
             {
                 var client = clientList.Find(c => c.ClientId == info.ClientId);
                 if (client == null) clientList.Add(info);
@@ -55,17 +71,33 @@ namespace Paway.Comm
             }
         }
         /// <summary>
+        /// 按用户、设备 添加客户端
+        /// </summary>
+        public MClientInfo Add(string ip, IUser user)
+        {
+            lock (clientList)
+            {
+                var client = clientList.Find(c => c.ClientId == user.ClientId && c.User.DeviceType == user.DeviceType);
+                if (client == null)
+                {
+                    client = new MClientInfo(user.ClientId, ip, user);
+                    clientList.Add(client);
+                }
+                return client;
+            }
+        }
+        /// <summary>
         /// 客户端上线
         /// </summary>
         public MClientInfo Connect(string clientId)
         {
-            lock (syncRoot)
+            lock (clientList)
             {
                 var client = clientList.Find(c => c.ClientId == clientId);
                 if (client != null)
                 {
                     client.Connected = true;
-                    client.DateTime = DateTime.Now;
+                    client.ConnectTime = DateTime.Now;
                 }
                 else
                 {
@@ -79,36 +111,26 @@ namespace Paway.Comm
         /// </summary>
         public MClientInfo DisConnect(string clientId)
         {
-            lock (syncRoot)
+            lock (clientList)
             {
                 var client = clientList.Find(c => c.ClientId == clientId);
                 if (client != null)
                 {
                     //断开重连时可能不再验证连接
                     client.Connected = false;
-                    client.DateTime = DateTime.Now;
+                    client.ConnectTime = DateTime.Now;
                 }
                 return client;
             }
         }
         /// <summary>
-        /// 查询客户端
+        /// 移除客户端
         /// </summary>
-        public MClientInfo Client(string clientId)
+        public void Remove(string clientId)
         {
-            lock (syncRoot)
+            lock (clientList)
             {
-                return clientList.Find(c => c.ClientId == clientId);
-            }
-        }
-        /// <summary>
-        /// 查询客户端
-        /// </summary>
-        public MClientInfo Client(int userId)
-        {
-            lock (syncRoot)
-            {
-                return clientList.Find(c => c.User?.Id == userId);
+                clientList.RemoveAll(c => c.ClientId == clientId);
             }
         }
     }

@@ -57,7 +57,7 @@ namespace Paway.Comm
             if (user != null)
             {
                 Headers[HttpRequestHeader.Authorization] = $"{user.Id}";
-                Headers["Tag"] = $"{user.Tag()}";
+                Headers["Tag"] = $"{user.Tag}";
             }
         }
 
@@ -77,7 +77,7 @@ namespace Paway.Comm
         /// <summary>
         /// 下载文件
         /// </summary>
-        public string DownFileAsync(string httpUrl, string toFile, string file, Action<double> percentage = null)
+        public string DownFileAsync(string httpUrl, string remoteFile, Action<double> percentage = null)
         {
             if (percentage != null)
             {
@@ -85,9 +85,7 @@ namespace Paway.Comm
                 this.DownloadProgressChanged += WebClientPro_DownloadProgressChanged;
             }
 
-            var url = $"{httpUrl}/{CConfig.UploadPath}/{toFile}?id={CConfig.User?.Id}";
-            var path = Path.GetDirectoryName(file);
-            if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+            var url = $"{httpUrl}/{remoteFile}?id={CConfig.User?.Id}";
             return this.DownloadStringTaskAsync(url).Result.Decompress();
         }
         private void WebClientPro_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
@@ -102,7 +100,7 @@ namespace Paway.Comm
         /// <summary>
         /// 异步上传文件
         /// </summary>
-        public string UpFileAsync(string httpUrl, string toFile, string file, double max = 0, Action<double> percentage = null)
+        public string UpFileAsync(string httpUrl, string remoteFile, string localFile, double max = 0, Action<double> percentage = null)
         {
             if (percentage != null)
             {
@@ -110,8 +108,8 @@ namespace Paway.Comm
                 this.UploadProgressChanged += WebClientPro_UploadProgressChanged;
             }
 
-            var url = $"{httpUrl}/{CConfig.UploadPath}/{toFile}?id={CConfig.User?.Id}";
-            var str = CMethod.ReadFile(file, out int length);
+            var url = $"{httpUrl}/{remoteFile}?id={CConfig.User?.Id}";
+            var str = CMethod.ReadFile(localFile, out int length);
             if (max != 0 && length > max * 1024 * 1024)
             {
                 var desc = max >= 1 ? $"{max:0.#}M" : $"{max * 1024:F0}K";

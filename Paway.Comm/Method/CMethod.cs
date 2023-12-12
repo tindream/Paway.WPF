@@ -11,6 +11,7 @@ using System.Net;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -169,6 +170,66 @@ namespace Paway.Comm
             {
                 bw.Write(buffer, 0, buffer.Length);
             }
+        }
+
+        #endregion
+
+        #region 去除HTML标记
+        private static string[] AryReg ={
+                @"<style[^>]*?>.*?</style>",
+                @"<script[^>]*?>.*?</script>",
+                @"<(\/\s*)?!?((\w+:)?\w+)(\w+[-]?\w+(\s*=?\s*(([""'])(\\[""'tbnr]|[^\7])*?\7|\w+)|.{0})|\s)*?(\/\s*)?>",
+                @"([\r\n])[\s]+",
+                @"&(ldquo|rdquo|quot|#34);",
+                @"&(amp|#38);",
+                @"&(lt|#60);",
+                @"&(gt|#62);",
+                @"&(nbsp|#160);",
+                @"&(iexcl|#161);",
+                @"&(cent|#162);",
+                @"&(pound|#163);",
+                @"&(copy|#169);",
+                @"&#(\d+);",
+                @"-->",
+                @"<!--.*\n"
+            };
+        private static string[] AryRep = {
+                "",
+                "",
+                "",
+                "",
+                "\"",
+                "&",
+                "<",
+                ">",
+                " ",
+                "\xa1",//chr(161),
+                "\xa2",//chr(162),
+                "\xa3",//chr(163),
+                "\xa9",//chr(169),
+                "",
+                "\r\n",
+                ""
+            };
+        /// <summary>
+        /// 去除HTML标记
+        /// </summary>
+        /// <param name="html">包括HTML的源码</param>
+        /// <returns>已经去除后的文字</returns>
+        public static string HTMLString(string html)
+        {
+            if (html.IsEmpty()) return html;
+            string strOutput = html;
+            for (int i = 0; i < AryReg.Length; i++)
+            {
+                var regex = new Regex(AryReg[i], RegexOptions.IgnoreCase);
+                strOutput = regex.Replace(strOutput, AryRep[i]);
+            }
+            strOutput.Replace("<", "");
+            strOutput.Replace(">", "");
+            strOutput.Replace("\r\n", "");
+
+            return strOutput;
         }
 
         #endregion

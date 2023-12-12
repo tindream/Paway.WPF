@@ -57,7 +57,7 @@ namespace Paway.Comm
                 if (this.user != null && this.user.Id != 0) return new LoginData(true, this.user.Id.ToString(), properties: this.properties);
                 return null;
             }
-            return new LoginData(true, this.user.UserName, this.user.Password, this.properties);
+            return new LoginData(true, this.user.Name, this.user.Password, this.properties);
         }
         /// <summary>
         /// 注册完成

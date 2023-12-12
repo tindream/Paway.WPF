@@ -39,7 +39,6 @@ namespace Paway.Comm
         private string _partContentType;
         private int _partDataLength = -1;
         private int _partDataStart = -1;
-        private string _partFilename;
         private string _partName;
         private readonly Encoding _encoding;
 
@@ -193,7 +192,7 @@ namespace Paway.Comm
             if (i2 == i1)
                 return String.Empty;
 
-            return l.Substring(i1, i2);
+            return l.Substring(i1, i2 - i1);
         }
 
         /// <summary>
@@ -202,13 +201,12 @@ namespace Paway.Comm
         private void ParsePartHeaders()
         {
             _partName = null;
-            _partFilename = null;
             _partContentType = null;
 
             while (GetNextLine())
             {
                 if (_lineLength == 0)
-                    break;  // empty line signals end of headers ->\r\n
+                    break;  // empty line signals end of headers ->\n
 
                 // get line as String 
                 byte[] lineBytes = new byte[_lineLength];
@@ -229,7 +227,6 @@ namespace Paway.Comm
                 {
                     // parse name and filename
                     _partName = ExtractValueFromContentDispositionHeader(line, ic + 1, "name");
-                    _partFilename = ExtractValueFromContentDispositionHeader(line, ic + 1, "filename");
                 }
                 else if (header.Equals("Content-Type"))
                 {
@@ -307,6 +304,11 @@ namespace Paway.Comm
 
                     item.ContentType = _partContentType;
 
+                    if (item.ContentType != null)
+                    {
+                        item.ItemType = "File";
+                    }
+
                     itemList.Add(item);
                 }
             }
@@ -329,5 +331,8 @@ namespace Paway.Comm
         /// <summary>
         /// </summary>
         public string ContentType { get; set; }
+        /// <summary>
+        /// </summary>
+        public string ItemType { get; set; }
     }
 }

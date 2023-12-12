@@ -1,4 +1,5 @@
-﻿using Paway.Comm;
+﻿using Newtonsoft.Json;
+using Paway.Comm;
 using Paway.Helper;
 using Paway.Model;
 using Paway.WPF;
@@ -20,7 +21,7 @@ namespace Paway.Test
         /// 用户名
         /// </summary>
         [Text("用户名")]
-        public string UserName
+        public string Name
         {
             get => _userName;
             set { _userName = value; OnPropertyChanged(); }
@@ -44,7 +45,7 @@ namespace Paway.Test
             get
             {
                 if (!Display.IsEmpty()) return Display;
-                return UserName;
+                return Name;
             }
         }
         [NoShow]
@@ -59,22 +60,22 @@ namespace Paway.Test
             set { _sex = value; OnPropertyChanged(); }
         }
 
-        private bool _iStatu = true;
+        private EnableType _enable = EnableType.Enable;
         /// <summary>
         /// 启用状态
         /// </summary>
         [NoShow, NoExcel]
-        public bool IStatu
+        public EnableType Enable
         {
-            get => _iStatu;
-            set { _iStatu = value; OnPropertyChanged(); OnPropertyChanged(nameof(Status)); }
+            get => _enable;
+            set { _enable = value; OnPropertyChanged(); OnPropertyChanged(nameof(Status)); }
         }
         [Text("状态")]
         [NoSelect]
         public string Status
         {
-            get => IStatu ? "启用" : "停用";
-            set { IStatu = value == "启用"; }
+            get => Enable.Description();
+            set { Enable = value.Parse<EnableType>(); }
         }
 
         private UserType _userType;
@@ -92,28 +93,37 @@ namespace Paway.Test
         [Text("登陆时间")]
         public DateTime LoginOn { get; set; }
 
+        [NoShow, NoSelect, JsonIgnore]
+        public DeviceType DeviceType { get; set; }
+        [NoShow, NoSelect, JsonIgnore]
+        public object Tag { get { return UserType; } set { } }
+        private string _clientId;
+        public string ClientId
+        {
+            get
+            {
+                if (_clientId == null) _clientId = EncryptHelper.MD5($"{Id}_{Config.Suffix}");
+                return _clientId;
+            }
+        }
+
         public void Checked()
         {
-            if (Cache.UserList.Any(c => c.Id != this.Id && c.UserName == this.UserName)) throw new WarningException($"[{this.GetType().Description()}]{this.UserName} 已存在");
+            if (Cache.UserList.Any(c => c.Id != this.Id && c.Name == this.Name)) throw new WarningException($"[{this.GetType().Description()}]{this.Name} 已存在");
         }
         public bool Compare(UserInfo item)
         {
-            return this.UserName == item.UserName;
+            return this.Name == item.Name;
         }
 
         public UserInfo() { }
         public UserInfo(string name)
         {
-            this.UserName = name;
+            this.Name = name;
         }
         public override string ToString()
         {
             return CustomName;
-        }
-
-        public object Tag()
-        {
-            return UserType;
         }
     }
 }

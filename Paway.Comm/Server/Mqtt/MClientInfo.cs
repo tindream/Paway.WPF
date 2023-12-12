@@ -26,7 +26,12 @@ namespace Paway.Comm
         /// <summary>
         /// 连接时间
         /// </summary>
-        public DateTime DateTime { get; set; }
+        public DateTime ConnectTime { get; set; }
+        /// <summary>
+        /// 心跳时间
+        /// </summary>
+        public DateTime HeartTime { get; set; }
+
         /// <summary>
         /// 连接用户
         /// </summary>
@@ -43,7 +48,7 @@ namespace Paway.Comm
             get
             {
                 var desc = User.CustomName;
-                if (Heard != null) desc = $"({Heard}){desc}";
+                if (Heard != null) desc = $"[{Heard}]{desc}";
                 return desc;
             }
         }
@@ -53,6 +58,14 @@ namespace Paway.Comm
         /// </summary>
         public bool Connected { get; set; }
 
+        /// <summary>
+        /// MQTT客户端属性
+        /// </summary>
+        public MClientInfo(IUser user)
+        {
+            this.User = user;
+            this.ClientId = user.ClientId;
+        }
         /// <summary>
         /// MQTT客户端属性
         /// </summary>

@@ -212,16 +212,16 @@ namespace Paway.Comm
         /// <summary>
         /// 文件上传
         /// </summary>
-        public static string UpFile(string toFile, string file, double max = 0, Action<double> percentage = null, Action completed = null)
+        public static string UpFile(string remoteFile, string localFile, double max = 0, Action<double> percentage = null, Action completed = null)
         {
-            var task = UpFileAsync(toFile, file, max, percentage, completed);
+            var task = UpFileAsync(remoteFile, localFile, max, percentage, completed);
             if (task.Result.code != 200) throw new Exception(task.Result.msg);
             return task.Result.msg;
         }
         /// <summary>
         /// 异步文件上传
         /// </summary>
-        public static Task<HttpResponseMessage> UpFileAsync(string toFile, string file, double max = 0, Action<double> percentage = null, Action completed = null)
+        public static Task<HttpResponseMessage> UpFileAsync(string remoteFile, string localFile, double max = 0, Action<double> percentage = null, Action completed = null)
         {
             return Task.Run(() =>
             {
@@ -229,7 +229,7 @@ namespace Paway.Comm
                 {
                     using (var client = new WebClientPro(CConfig.User, 2 * 60))
                     {
-                        string response = client.UpFileAsync(httpUrl, toFile, file, max, percentage);
+                        string response = client.UpFileAsync($"{httpUrl}/{CConfig.UploadPath}", remoteFile, localFile, max, percentage);
                         var result = JsonConvert.DeserializeObject<HttpResponseMessage>(response);
                         completed?.Invoke();
                         return result;
@@ -244,15 +244,15 @@ namespace Paway.Comm
         /// <summary>
         /// 文件下载
         /// </summary>
-        public static void DownFile(string fromFile, string file, Action<double> percentage = null, Action completed = null)
+        public static void DownFile(string remoteFile, string localFile, Action<double> percentage = null, Action completed = null)
         {
-            var task = DownFileAsync(fromFile, file, percentage, completed);
+            var task = DownFileAsync(remoteFile, localFile, percentage, completed);
             if (task.Result.code != 200) throw new Exception(task.Result.msg);
         }
         /// <summary>
         /// 异步文件下载
         /// </summary>
-        public static Task<HttpResponseMessage> DownFileAsync(string fromFile, string file, Action<double> percentage = null, Action completed = null)
+        public static Task<HttpResponseMessage> DownFileAsync(string remoteFile, string localFile, Action<double> percentage = null, Action completed = null)
         {
             return Task.Run(() =>
             {
@@ -260,9 +260,14 @@ namespace Paway.Comm
                 {
                     using (var client = new WebClientPro(CConfig.User, 2 * 60))
                     {
-                        string response = client.DownFileAsync(httpUrl, fromFile, file, percentage);
+                        string response = client.DownFileAsync($"{httpUrl}/{CConfig.UploadPath}", remoteFile, percentage);
                         var result = JsonConvert.DeserializeObject<HttpResponseMessage>(response);
-                        if (result.code == 200) CMethod.SaveFile(file, result.msg);
+                        if (result.code == 200)
+                        {
+                            var toPath = Path.GetDirectoryName(localFile);
+                            if (!Directory.Exists(toPath)) Directory.CreateDirectory(toPath);
+                            CMethod.SaveFile(localFile, result.msg);
+                        }
                         completed?.Invoke();
                         return result;
                     }

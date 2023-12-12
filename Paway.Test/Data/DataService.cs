@@ -30,7 +30,7 @@ namespace Paway.Test
         public DataService() : base(createSql: new Uri(@"pack://application:,,,/Paway.Test;component/Resources/script.sql").ToText()) { }
         protected override void Created()
         {
-            var user = new UserInfo { UserType = UserType.Admin, UserName = "admin", Password = EncryptHelper.MD5("admin" + Config.Suffix) };
+            var user = new UserInfo { UserType = UserType.Admin, Name = "admin", Password = EncryptHelper.MD5("admin" + Config.Suffix) };
             this.Insert(user);
             var auth = new AuthInfo(user.Id);
             auth.SetValue(nameof(auth.MenuType), Method.Sum<MenuAuthType>());
