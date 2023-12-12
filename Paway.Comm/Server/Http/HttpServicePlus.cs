@@ -21,15 +21,27 @@ using System.Web;
 namespace Paway.Comm
 {
     /// <summary>
-    /// Http服务(数据库标准操作)
+    /// Http服务扩展(数据库标准操作)
     /// </summary>
     public partial class HttpServicePlus : HttpService
     {
         private readonly IDataService server;
+        /// <summary>
+        /// 数据执行后同步事件
+        /// </summary>
         public event Action<HttpListenerContext, SyncMessage> SyncEvent;
-        public event Func<HttpListenerContext, MClientInfo> ClientEvent;
+        /// <summary>
+        /// 通过事件返回客户端
+        /// </summary>
+        public event Func<HttpListenerContext, MClientInfo> GetClientEvent;
+        /// <summary>
+        /// 文件上传、下载后事件
+        /// </summary>
         public event Action<HttpListenerContext> FileEvent;
 
+        /// <summary>
+        /// 初始化数据库接口、通讯端口
+        /// </summary>
         public HttpServicePlus(IDataService server, int port) : base(port)
         {
             this.server = server;
@@ -37,8 +49,11 @@ namespace Paway.Comm
 
         private MClientInfo Client(HttpListenerContext context)
         {
-            return ClientEvent?.Invoke(context);
+            return GetClientEvent?.Invoke(context);
         }
+        /// <summary>
+        /// 消息处理
+        /// </summary>
         protected override void MessageHandle(HttpListenerContext context, ref string data, ref string logMsg)
         {
             try

@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace Paway.Comm
 {
+    /// <summary>
+    /// 通讯相关的一些帮助方法
+    /// </summary>
     public static class ConvertHelper
     {
         /// <summary>

@@ -12,6 +12,9 @@ namespace Paway.Comm
     /// </summary>
     public enum EnableType
     {
+        /// <summary>
+        /// 停用
+        /// </summary>
         [Description("停用")]
         None,
         /// <summary>

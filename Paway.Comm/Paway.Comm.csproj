@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<TargetFrameworks>net452;netcoreapp3.1</TargetFrameworks>
 		<!--用于指示编译器是否生成文档文件的值-->
-		<!--<GenerateDocumentationFile>True</GenerateDocumentationFile>-->
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<!--不自动生成程序集信息(版本号)-->
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 		<Tags>Communicate Cache</Tags>

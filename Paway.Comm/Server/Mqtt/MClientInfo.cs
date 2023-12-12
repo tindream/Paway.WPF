@@ -15,11 +15,29 @@ namespace Paway.Comm
     [Serializable]
     public class MClientInfo
     {
+        /// <summary>
+        /// 客户端Id
+        /// </summary>
         public string ClientId { get; set; }
+        /// <summary>
+        /// 远程连接口
+        /// </summary>
         public string Endpoint { get; set; }
+        /// <summary>
+        /// 连接时间
+        /// </summary>
         public DateTime DateTime { get; set; }
+        /// <summary>
+        /// 连接用户
+        /// </summary>
         public IUser User { get; set; }
+        /// <summary>
+        /// 状况标识
+        /// </summary>
         public string Heard { get; set; }
+        /// <summary>
+        /// 描述
+        /// </summary>
         public string Desc
         {
             get
@@ -30,8 +48,14 @@ namespace Paway.Comm
             }
         }
 
+        /// <summary>
+        /// 连接状态
+        /// </summary>
         public bool Connected { get; set; }
 
+        /// <summary>
+        /// MQTT客户端属性
+        /// </summary>
         public MClientInfo(string clientId, string endpoint, IUser user)
         {
             this.ClientId = clientId;

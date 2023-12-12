@@ -16,6 +16,9 @@ using System.Windows;
 
 namespace Paway.Comm
 {
+    /// <summary>
+    /// 通讯相关的一些常用方法
+    /// </summary>
     public partial class CMethod : TMethod
     {
         #region HTTP同步
@@ -46,13 +49,15 @@ namespace Paway.Comm
             foreach (var item in json) list.Add(JsonConvert.DeserializeObject(item.ToString(), type));
             return list;
         }
-
+        /// <summary>
+        /// HTTP通讯错误解析
+        /// </summary>
         public static Exception HttpError(WebException ex, bool iDecompress = false, [CallerMemberName] string memberName = null)
         {
             var msg = HttpErrorMessage(ex, iDecompress, memberName);
             return new WebException($"{memberName}失败：{msg}");
         }
-        public static string HttpErrorMessage(WebException ex, bool iDecompress, string memberName)
+        private static string HttpErrorMessage(WebException ex, bool iDecompress, string memberName)
         {
             string msg;
             if (ex.Response == null)
@@ -125,12 +130,18 @@ namespace Paway.Comm
         #endregion
 
         #region File
+        /// <summary>
+        /// 读取文件，返回 Base64 数字编码的等效字符串表示形式。
+        /// </summary>
         public static string ReadFile(string file, out int length)
         {
             var buffer = ReadFileBuffer(file, out length);
             var str = Convert.ToBase64String(buffer);
             return str;
         }
+        /// <summary>
+        /// 读取文件，返回流字节列表
+        /// </summary>
         public static byte[] ReadFileBuffer(string file, out int length)
         {
             using (var fs = File.OpenRead(file))
@@ -140,11 +151,17 @@ namespace Paway.Comm
                 return buffer;
             }
         }
+        /// <summary>
+        /// 将 Base64 字符串 保存到文件。
+        /// </summary>
         public static void SaveFile(string file, string str)
         {
             var buffer = Convert.FromBase64String(str);
             SaveFile(file, buffer);
         }
+        /// <summary>
+        /// 将 byte[] 字节流 保存到文件。
+        /// </summary>
         public static void SaveFile(string file, byte[] buffer)
         {
             using (var fs = new FileStream(file, FileMode.OpenOrCreate))

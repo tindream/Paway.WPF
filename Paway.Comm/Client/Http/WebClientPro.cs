@@ -19,6 +19,9 @@ using Newtonsoft.Json;
 
 namespace Paway.Comm
 {
+    /// <summary>
+    /// HTTP通讯基础方法
+    /// </summary>
     [ToolboxItem(false)]
     public class WebClientPro : WebClient
     {

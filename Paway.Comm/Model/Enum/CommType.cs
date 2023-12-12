@@ -14,6 +14,9 @@ namespace Paway.Comm
     /// </summary>
     public enum CommType
     {
+        /// <summary>
+        /// 默认
+        /// </summary>
         None,
         /// <summary>
         /// 错误

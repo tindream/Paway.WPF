@@ -20,7 +20,13 @@ namespace Paway.Comm
         /// </summary>
         public string Msg { get; set; }
 
+        /// <summary>
+        /// 消息
+        /// </summary>
         public ResponseMessage(CommType type) : base(type) { }
+        /// <summary>
+        /// 消息
+        /// </summary>
         public ResponseMessage(CommType type, string msg) : base(type)
         {
             this.Msg = msg;
@@ -37,6 +43,9 @@ namespace Paway.Comm
         /// </summary>
         public object Info { get; set; }
 
+        /// <summary>
+        /// 查询结果
+        /// </summary>
         public ResponseInfoMessage(CommType type, object info) : base(type)
         {
             this.Info = info;
@@ -49,10 +58,13 @@ namespace Paway.Comm
     public class ResponseListMessage : ResponseMessage
     {
         /// <summary>
-        /// 查询结果
+        /// 查询结果列表
         /// </summary>
         public IList List { get; set; }
 
+        /// <summary>
+        /// 查询结果列表
+        /// </summary>
         public ResponseListMessage(CommType type, IList list) : base(type)
         {
             this.List = list;

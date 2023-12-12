@@ -18,16 +18,16 @@
 				<dependency id="Newtonsoft.Json" version="13.0.1" />
 				<dependency id="MQTTnet" version="4.1.2.350" />
 			</group>
-			<group targetFramework="net452">
-			</group>
-			<group targetFramework="netcoreapp3.1">
-			</group>
+			<group targetFramework="net452" />
+			<group targetFramework="netcoreapp3.1" />
 		</dependencies>
 	</metadata>
 	<files>
 		<file src="..\bin\release\net452\Paway.Comm_Secure\Paway.Comm.dll"		target="lib\net452" />
 		<file src="..\bin\release\net452\Paway.Comm_Secure\Paway.Comm.pdb"		target="lib\net452" />
+		<file src="..\bin\release\net452\Paway.Comm.xml"				target="lib\net452" />
 		<file src="..\bin\release\netcoreapp3.1\Paway.Comm_Secure\Paway.Comm.dll"	target="lib\netcoreapp3.1" />
 		<file src="..\bin\release\netcoreapp3.1\Paway.Comm_Secure\Paway.Comm.pdb"	target="lib\netcoreapp3.1" />
+		<file src="..\bin\release\netcoreapp3.1\Paway.Comm.xml"			target="lib\netcoreapp3.1" />
 	</files>
 </package>

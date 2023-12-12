@@ -22,6 +22,9 @@ namespace Paway.Comm
         /// <para>手动处理转发：Publish(e.ApplicationMessage.Topic, e.ApplicationMessage.Payload);</para>
         /// </summary>
         protected virtual void MessageReceivedAsync(InterceptingPublishEventArgs e, string data, IMessage msg, ref string logMsg) { }
+        /// <summary>
+        /// 消息处理
+        /// </summary>
         protected override Task MessageReceivedAsync(InterceptingPublishEventArgs e)
         {
             if (e.ClientId == "SenderClientId") return CompletedTask.Instance;

@@ -43,6 +43,9 @@ namespace Paway.Comm
         private string _partName;
         private readonly Encoding _encoding;
 
+        /// <summary>
+        /// 解析RFC1867协议
+        /// </summary>
         public HttpMultipartFormParser(HttpListenerRequest request, Encoding encoding)
         {
             this._encoding = encoding;
@@ -313,13 +316,18 @@ namespace Paway.Comm
         }
     }
 
+    /// <summary>
+    /// </summary>
     public class MultipartFormItem
     {
-        public MultipartFormItem()
-        {
-        }
+        /// <summary>
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// </summary>
         public byte[] Data { get; set; }
+        /// <summary>
+        /// </summary>
         public string ContentType { get; set; }
     }
 }

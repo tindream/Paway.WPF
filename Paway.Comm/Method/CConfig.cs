@@ -9,6 +9,9 @@ using System.Windows;
 
 namespace Paway.Comm
 {
+    /// <summary>
+    /// 通讯相关的一些常量，与状态日志事件
+    /// </summary>
     public class CConfig : TConfig
     {
         #region 常量
@@ -24,6 +27,9 @@ namespace Paway.Comm
         /// 上传文件路径
         /// </summary>
         public static string UploadPath = "UploadFile";
+        /// <summary>
+        /// 上传文件完整路径
+        /// </summary>
         public static string Upload
         {
             get
@@ -51,6 +57,9 @@ namespace Paway.Comm
 
         #endregion
 
+        /// <summary>
+        /// MQTT全局客户端
+        /// </summary>
         public static MQTTClientPlus MQClient { get; set; }
         /// <summary>
         /// 当前用户
@@ -62,6 +71,9 @@ namespace Paway.Comm
         /// 状态日志事件
         /// </summary>
         public static event Action<string, LeveType> StatuLogEvent;
+        /// <summary>
+        /// 添加状态日志
+        /// </summary>
         public static void AddStatuLog(string msg, LeveType level = LeveType.Debug)
         {
             StatuLogEvent?.Invoke(msg, level);

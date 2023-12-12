@@ -28,21 +28,36 @@ namespace Paway.Comm
     public partial class HttpService
     {
         private HttpListener _listener;
-        public int _port;
+        /// <summary>
+        /// 通讯端口
+        /// </summary>
+        public int Port { get; private set; }
 
+        /// <summary>
+        /// 初始化端口
+        /// </summary>
         public HttpService(int port)
         {
-            _port = port;
+            Port = port;
         }
+        /// <summary>
+        /// 启动服务
+        /// <para>windows系统下需添加端口</para>
+        /// <para>netsh http delete urlacl url=http://+:8088/</para>
+        /// <para>netsh http add urlacl url=http://+:8088/ user=Everyone</para>
+        /// </summary>
         public void Start()
         {
             _listener = new HttpListener();
-            string host = $"http://+:{_port}/";
+            string host = $"http://+:{Port}/";
             _listener.Prefixes.Add(host);
             _listener.Start();
             _listener.BeginGetContext(ProcessRequest, null);
             CConfig.AddStatuLog($"{host} 已启动");
         }
+        /// <summary>
+        /// 停止服务
+        /// </summary>
         public void Stop()
         {
             _listener.Stop();

@@ -19,7 +19,7 @@ using MQTTnet.Internal;
 namespace Paway.Comm
 {
     /// <summary>
-    /// 封装MQTT服务端
+    /// MQTT标准服务
     /// </summary>
     public partial class MQTTService
     {

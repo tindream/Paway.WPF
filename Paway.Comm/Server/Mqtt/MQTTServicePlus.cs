@@ -20,38 +20,64 @@ using MQTTnet.Internal;
 
 namespace Paway.Comm
 {
+    /// <summary>
+    /// MQTT服务扩展
+    /// </summary>
     public partial class MQTTServicePlus : MQTTService
     {
+        /// <summary>
+        /// 客户端处理
+        /// </summary>
         protected ClientHelper gClient;
 
+        /// <summary>
+        /// </summary>
         public MQTTServicePlus() { }
+        /// <summary>
+        /// 启动服务
+        /// </summary>
         public void Start(int port)
         {
             gClient = new ClientHelper();
             base.StartAsync(port, CConfig.Topic).Wait();
             CConfig.AddStatuLog($"mq://+:{port} 已启动");
         }
+        /// <summary>
+        /// 停止服务
+        /// </summary>
         public void Stop()
         {
             base.StopAsync().Wait();
             CConfig.AddStatuLog($"mqtt 已关闭");
         }
+        /// <summary>
+        /// 查询指定客户端
+        /// </summary>
         public MClientInfo Client(int userId)
         {
             return gClient.Client(userId);
         }
+        /// <summary>
+        /// 查询客户端在线列表
+        /// </summary>
         public List<MClientInfo> Clients()
         {
             return gClient.Clients();
         }
 
         #region 内部事件
+        /// <summary>
+        /// 客户端连接后处理
+        /// </summary>
         protected override Task ClientConnectedAsync(ClientConnectedEventArgs args)
         {
             var client = gClient.Connect(args.ClientId);
             CConfig.AddStatuLog($"{client?.Desc}上线");
             return base.ClientConnectedAsync(args);
         }
+        /// <summary>
+        /// 客户端断开后处理
+        /// </summary>
         protected override Task ClientDisConnectedAsync(ClientDisconnectedEventArgs args)
         {
             var client = gClient.DisConnect(args.ClientId);

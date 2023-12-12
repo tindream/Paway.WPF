@@ -19,11 +19,17 @@ using MQTTnet.Packets;
 
 namespace Paway.Comm
 {
+    /// <summary>
+    /// MQTT客户端扩展
+    /// </summary>
     public partial class MQTTClientPlus : MQTTClient
     {
         private IUser user;
         private Dictionary<string, string> properties;
 
+        /// <summary>
+        /// 初始化根主题
+        /// </summary>
         public MQTTClientPlus() : base(CConfig.Topic)
         {
             this.ConnectEvent += TestClient_ConnectEvent;
@@ -59,11 +65,18 @@ namespace Paway.Comm
         protected virtual void Logined(List<MqttUserProperty> properties) { }
 
         #region 外部方法
+        /// <summary>
+        /// 断开连接，并清理自动连接
+        /// </summary>
+        /// <returns></returns>
         public override Task Disconnect()
         {
             if (this.user != null) this.user.Id = 0;
             return base.Disconnect();
         }
+        /// <summary>
+        /// 连接主机
+        /// </summary>
         public void Connect(string host, int port, IUser user, Dictionary<string, string> properties = null)
         {
             this.user = user;
