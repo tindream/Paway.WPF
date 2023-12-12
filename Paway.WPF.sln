@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Paway.Test", "Paway.Test\Pa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Paway.Model", "Paway.Model\Paway.Model.csproj", "{CB59594F-A05D-4D21-A59F-FF333B6B9A30}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Paway.Comm", "Paway.Comm\Paway.Comm.csproj", "{6573C69D-C0B5-46CF-A986-1352217BA143}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{CB59594F-A05D-4D21-A59F-FF333B6B9A30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB59594F-A05D-4D21-A59F-FF333B6B9A30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB59594F-A05D-4D21-A59F-FF333B6B9A30}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6573C69D-C0B5-46CF-A986-1352217BA143}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6573C69D-C0B5-46CF-A986-1352217BA143}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6573C69D-C0B5-46CF-A986-1352217BA143}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6573C69D-C0B5-46CF-A986-1352217BA143}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
