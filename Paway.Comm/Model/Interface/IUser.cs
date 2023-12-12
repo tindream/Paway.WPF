@@ -10,12 +10,8 @@ namespace Paway.Comm
     /// <summary>
     /// 用户定义
     /// </summary>
-    public interface IUser : ICustomName, IName, IId
+    public interface IUser : ICustomName, IName, ITag, IId
     {
-        /// <summary>
-        /// 唯一标记
-        /// </summary>
-        string ClientId { get; }
         /// <summary>
         /// 昵称
         /// </summary>
@@ -34,12 +30,9 @@ namespace Paway.Comm
         DateTime LoginOn { get; set; }
 
         /// <summary>
-        /// 当前用户登陆的设备类型
+        /// 唯一标记
+        /// <para>授权标记</para>
         /// </summary>
-        DeviceType DeviceType { get; set; }
-        /// <summary>
-        /// 标识
-        /// </summary>
-        object Tag { get; set; }
+        string VerCode { get; }
     }
 }

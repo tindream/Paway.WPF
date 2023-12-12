@@ -77,10 +77,10 @@ namespace Paway.Comm
         {
             lock (clientList)
             {
-                var client = clientList.Find(c => c.ClientId == user.ClientId && c.User.DeviceType == user.DeviceType);
+                var client = clientList.Find(c => c.ClientId == user.VerCode);
                 if (client == null)
                 {
-                    client = new MClientInfo(user.ClientId, ip, user);
+                    client = new MClientInfo(user.VerCode, ip, user);
                     clientList.Add(client);
                 }
                 return client;

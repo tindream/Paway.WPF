@@ -64,7 +64,7 @@ namespace Paway.Comm
         public MClientInfo(IUser user)
         {
             this.User = user;
-            this.ClientId = user.ClientId;
+            this.ClientId = user.VerCode;
         }
         /// <summary>
         /// MQTT客户端属性
