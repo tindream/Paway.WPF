@@ -15,6 +15,9 @@ namespace Paway.Model
         /// </summary>
         private static readonly Dictionary<string, dynamic> instanceDic = new Dictionary<string, dynamic>();
 
+        /// <summary>
+        /// 创建单实例，如存存时从缓存列表获取
+        /// </summary>
         public static T GetInstance<T>()
         {
             var name = typeof(T).FullName;

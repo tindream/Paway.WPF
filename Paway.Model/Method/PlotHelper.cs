@@ -18,6 +18,9 @@ namespace Paway.Model
     public class PlotHelper
     {
         #region CategoryAxis
+        /// <summary>
+        /// 饼状图
+        /// </summary>
         public static PlotModel LoadCategoryAxis(List<double> valueList, List<string> labelList, Func<object, string, string, object, string, object, string> action = null)
         {
             var model = new PlotModel
@@ -68,6 +71,9 @@ namespace Paway.Model
 
             return model;
         }
+        /// <summary>
+        /// 更新值
+        /// </summary>
         public static void UpdateLine(PlotModel model, List<double> valueList, bool Invalidate = true)
         {
             var series = model.Series[0] as BarSeries;
@@ -79,6 +85,9 @@ namespace Paway.Model
         #endregion
 
         #region LinearAxis
+        /// <summary>
+        /// 线状图
+        /// </summary>
         public static PlotModel LoadLinearAxis(int count, double maxValue, Func<object, string> xAction = null, bool yZoom = false, bool xZoom = true)
         {
             var model = new PlotModel
@@ -141,6 +150,9 @@ namespace Paway.Model
 
             return model;
         }
+        /// <summary>
+        /// 添加坐标系
+        /// </summary>
         public static void AddXY(PlotModel plotModel, bool yZoom = false, bool xZoom = true)
         {
             //定义y轴
@@ -174,6 +186,9 @@ namespace Paway.Model
             };
             plotModel.Axes.Add(bottomAxis);
         }
+        /// <summary>
+        /// 添加曲线
+        /// </summary>
         public static LineSeries AddLine(PlotModel plotModel, PlotLineType type, bool first = true)
         {
             var line = new LineSeries()
@@ -192,6 +207,9 @@ namespace Paway.Model
             plotModel.Series.Add(line);
             return line;
         }
+        /// <summary>
+        /// 添加曲线
+        /// </summary>
         public static void AddLine(PlotModel model, int index, string title, OxyColor color, List<double> valueList, Func<object, string, string, object, string, object, string> action = null, string stringFormat = "{2}: {4:#,0.#}")
         {
             var line = new LinearBarSeries()
@@ -210,6 +228,9 @@ namespace Paway.Model
             for (var i = 0; i < valueList.Count; i++) line.Points.Add(new DataPoint(i * 7 + index, valueList[i]));
             model.Series.Add(line);
         }
+        /// <summary>
+        /// 自动曲线最大最小值到坐标系
+        /// </summary>
         public static void AutoMaxMin(PlotModel plotModel, double max = double.NaN, double min = double.NaN)
         {
             //根据报单笔数判断是否需要更新y轴刻度     

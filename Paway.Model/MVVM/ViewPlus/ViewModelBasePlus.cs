@@ -17,6 +17,9 @@ using System.Windows.Media;
 
 namespace Paway.Model
 {
+    /// <summary>
+    /// 模型基础处理
+    /// </summary>
     public class ViewModelBasePlus : ViewModelBase
     {
         #region 属性
@@ -27,6 +30,9 @@ namespace Paway.Model
         {
             RaisePropertyChanged(propertyName);
         }
+        /// <summary>
+        /// 触发更新
+        /// </summary>
         public void OnPropertyChanged<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
             field = value;
@@ -36,7 +42,13 @@ namespace Paway.Model
         #endregion
 
         #region 命令
+        /// <summary>
+        /// 按钮通用动作命令
+        /// </summary>
         protected virtual void Action(ButtonEXT btn) { }
+        /// <summary>
+        /// 点击按钮
+        /// </summary>
         public ICommand ButtonClickCommand => new RelayCommand<ButtonEXT>(btn =>
         {
             try
@@ -49,7 +61,13 @@ namespace Paway.Model
             }
         });
 
+        /// <summary>
+        /// 列表通用动作命令
+        /// </summary>
         protected virtual void Action(ListViewCustom listView1) { }
+        /// <summary>
+        /// 选中列表项
+        /// </summary>
         public ICommand SelectionCommand => new RelayCommand<ListViewCustom>(listView1 =>
         {
             try
@@ -62,7 +80,13 @@ namespace Paway.Model
             }
         });
 
+        /// <summary>
+        /// 通用动作命令
+        /// </summary>
         protected virtual void Action(string item) { }
+        /// <summary>
+        /// 点击列表项
+        /// </summary>
         public ICommand ItemClickCommand => new RelayCommand<string>(item =>
         {
             try

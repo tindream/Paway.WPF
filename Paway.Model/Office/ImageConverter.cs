@@ -23,6 +23,9 @@ namespace Paway.Model
     /// </summary>
     public class ImageConverter
     {
+        /// <summary>
+        /// 转换进度事件
+        /// </summary>
         public event Action<int, int> ProgressChanged;
         static ImageConverter()
         {

@@ -13,7 +13,13 @@ namespace Paway.Model
     /// </summary>
     public interface ILoad<Child>
     {
+        /// <summary>
+        /// 子级列表
+        /// </summary>
         List<Child> DetailList { get; }
+        /// <summary>
+        /// 选中后、删除前加载
+        /// </summary>
         void Load();
     }
 }

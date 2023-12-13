@@ -22,6 +22,9 @@ namespace Paway.Model
     /// </summary>
     public partial class LoginPage : Page
     {
+        /// <summary>
+        /// 登陆页
+        /// </summary>
         public LoginPage()
         {
             InitializeComponent();
@@ -31,6 +34,8 @@ namespace Paway.Model
         {
             if (e.Key == Key.Enter && this.DataContext is LoginPageModel login) login.Login();
         }
+        /// <summary>
+        /// </summary>
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -44,6 +49,8 @@ namespace Paway.Model
                 }
             });
         }
+        /// <summary>
+        /// </summary>
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             base.OnPreviewMouseLeftButtonDown(e);

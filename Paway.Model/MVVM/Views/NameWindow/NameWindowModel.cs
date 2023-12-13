@@ -10,10 +10,16 @@ using System.Windows.Input;
 
 namespace Paway.Model
 {
+    /// <summary>
+    /// 单输入框通用窗体模型
+    /// </summary>
     public class NameWindowModel : BaseWindowModel
     {
         #region 属性
         private string _label = "名称:";
+        /// <summary>
+        /// 输入框Label
+        /// </summary>
         public string Label
         {
             get { return _label; }
@@ -21,6 +27,9 @@ namespace Paway.Model
         }
 
         private string _name;
+        /// <summary>
+        /// 输入框绑定值
+        /// </summary>
         public string Name
         {
             get { return _name; }
@@ -29,6 +38,9 @@ namespace Paway.Model
 
         #endregion
 
+        /// <summary>
+        /// 单输入框通用窗体模型
+        /// </summary>
         public NameWindowModel() { }
     }
 }

@@ -16,24 +16,33 @@ using System.Windows.Media;
 namespace Paway.Model
 {
     /// <summary>
-    /// 需优先初始化Init()，以接收消息
+    /// 状态栏模型-需优先初始化Init()，以接收消息
     /// </summary>
     public partial class StatuItemModel : ViewModelBasePlus
     {
         #region 属性
         private string _userName;
+        /// <summary>
+        /// 用户
+        /// </summary>
         public string UserName
         {
             get { return _userName; }
             set { _userName = value; OnPropertyChanged(); }
         }
         private string _desc;
+        /// <summary>
+        /// 当前状态描述
+        /// </summary>
         public string Desc
         {
             get { return _desc; }
             set { _desc = value; OnPropertyChanged(); }
         }
         private string _timeNow;
+        /// <summary>
+        /// 当前时间
+        /// </summary>
         public string TimeNow
         {
             get { return _timeNow; }
@@ -41,12 +50,18 @@ namespace Paway.Model
         }
 
         private Brush descBrush = ColorType.High.Color().ToBrush();
+        /// <summary>
+        /// 描述颜色
+        /// </summary>
         public Brush DescBrush
         {
             get { return descBrush; }
             set { if (descBrush != value) { descBrush = value; OnPropertyChanged(); } }
         }
         private Brush _connectBrush = ColorType.Warn.Color().ToBrush();
+        /// <summary>
+        /// 连接状态
+        /// </summary>
         public Brush ConnectBrush
         {
             get { return _connectBrush; }
@@ -64,6 +79,9 @@ namespace Paway.Model
 
         #endregion
 
+        /// <summary>
+        /// 状态栏模型-需优先初始化Init()，以接收消息
+        /// </summary>
         public StatuItemModel()
         {
             Config.OperateLogEvent += msg => AddDesc(msg.Text, iHit: false);
@@ -103,6 +121,9 @@ namespace Paway.Model
                 }
             });
         }
+        /// <summary>
+        /// 提前初始化
+        /// </summary>
         public void Init() { }
 
         #region 系统消息

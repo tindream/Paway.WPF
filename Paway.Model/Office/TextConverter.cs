@@ -16,12 +16,18 @@ namespace Paway.Model
     /// </summary>
     public class TextConverter
     {
+        /// <summary>
+        /// 转换进度事件
+        /// </summary>
         public event Action<int, int> ProgressChanged;
         static TextConverter()
         {
             SpireLicence.Init();
         }
 
+        /// <summary>
+        /// PDF文件转换为文本
+        /// </summary>
         public List<string> PDFToText(string file)
         {
             var pdf = new PdfDocument();

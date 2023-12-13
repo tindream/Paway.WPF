@@ -68,6 +68,9 @@ namespace Paway.Model
 
         #endregion
 
+        /// <summary>
+        /// 状态栏
+        /// </summary>
         public StatuItem()
         {
             DefaultStyleKey = typeof(StatuItem);

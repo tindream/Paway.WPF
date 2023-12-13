@@ -19,6 +19,9 @@ namespace Paway.Model
     /// </summary>
     public partial class NameWindow : Window
     {
+        /// <summary>
+        /// 单输入框通用窗体
+        /// </summary>
         public NameWindow()
         {
             InitializeComponent();

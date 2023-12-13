@@ -16,6 +16,9 @@ namespace Paway.Model
     [Serializable]
     public class BaseInfo : ModelBase, IBaseInfo
     {
+        /// <summary>
+        /// 唯一标识
+        /// </summary>
         [NoShow, NoExcel]
         public override int Id { get => base.Id; set => base.Id = value; }
 
@@ -30,6 +33,9 @@ namespace Paway.Model
         [NoShow, NoExcel]
         public virtual DateTime UpdateOn { get; set; }
 
+        /// <summary>
+        /// Info基类
+        /// </summary>
         public BaseInfo()
         {
             this.CreateOn = DateTime.Now;
@@ -42,6 +48,9 @@ namespace Paway.Model
     [Serializable]
     public class BaseOnce : BaseInfo
     {
+        /// <summary>
+        /// 不保存更新时间
+        /// </summary>
         [NoShow, NoExcel, NoSelect, JsonIgnore]
         public override DateTime UpdateOn { get; set; }
     }
@@ -51,6 +60,9 @@ namespace Paway.Model
     [Serializable]
     public class ParentBase : BaseInfo, IParent
     {
+        /// <summary>
+        /// 父级Id
+        /// </summary>
         [NoShow, NoExcel]
         public virtual int ParentId { get; set; }
     }
@@ -61,6 +73,9 @@ namespace Paway.Model
     [Serializable]
     public class ParentBaseOnce : ParentBase
     {
+        /// <summary>
+        /// 不保存更新时间
+        /// </summary>
         [NoShow, NoExcel, NoSelect, JsonIgnore]
         public override DateTime UpdateOn { get { return CreateOn; } }
     }

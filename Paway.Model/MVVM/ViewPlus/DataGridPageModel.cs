@@ -24,7 +24,13 @@ namespace Paway.Model
     public abstract class DataGridPageModel<T> : OperateItemModel where T : class, IBaseInfo, ICompare<T>, new()
     {
         #region 属性
+        /// <summary>
+        /// 数据处理接口
+        /// </summary>
         protected IDataGridServer server;
+        /// <summary>
+        /// 数据控件
+        /// </summary>
         protected DataGridEXT DataGrid;
         /// <summary>
         /// 刷新时数据库过滤条件
@@ -38,6 +44,9 @@ namespace Paway.Model
         /// List为全局缓存，当前页可能需要过滤显示
         /// </summary>
         protected Func<T, bool> listFilter;
+        /// <summary>
+        /// 重载-自定义过滤列表
+        /// </summary>
         protected virtual List<T> FilterList()
         {
             return List.FindAll(c => c != null && listFilter?.Invoke(c) != false);
@@ -54,15 +63,27 @@ namespace Paway.Model
         /// 分页标记
         /// </summary>
         private bool IPage;
+        /// <summary>
+        /// 分页列表
+        /// </summary>
         public PagedCollectionView PagedList { get; private set; }
 
+        /// <summary>
+        /// 选中项后处理
+        /// </summary>
         protected virtual void SelectedChanged() { }
         private T _selectedItem;
+        /// <summary>
+        /// 当前选中项
+        /// </summary>
         public virtual T SelectedItem
         {
             get { return _selectedItem; }
             set { if (_selectedItem != value) { _selectedItem = value; SelectedChanged(); OnPropertyChanged(); } }
         }
+        /// <summary>
+        /// 设置添加模型
+        /// </summary>
 
         protected virtual AddWindowModel<T> ViewModel()
         {
@@ -107,12 +128,21 @@ namespace Paway.Model
         #endregion
 
         #region 命令
+        /// <summary>
+        /// 设置添加窗体
+        /// </summary>
         protected virtual Window AddWindow() { return null; }
+        /// <summary>
+        /// 重载-自定义查询列表
+        /// </summary>
         protected virtual List<T> Find()
         {
             var list = server.Find<T>(this.sqlFilter); Method.Sorted(list);
             return list;
         }
+        /// <summary>
+        /// 重载-自定义插入实体
+        /// </summary>
         protected virtual void Insert(T info)
         {
             server.Insert(info); CMethod.Update(info);
@@ -134,6 +164,9 @@ namespace Paway.Model
                 else DataGrid.Select(info.Id, true);
             });
         }
+        /// <summary>
+        /// 重载-自定义插入列表
+        /// </summary>
         protected virtual void Insert(List<T> list)
         {
             if (list.Count == 0) return;
@@ -146,11 +179,17 @@ namespace Paway.Model
             }
             MoveTo(index, list.Last());
         }
+        /// <summary>
+        /// 重载-自定义更新实体
+        /// </summary>
         protected virtual void Updated(T info)
         {
             info.UpdateOn = DateTime.Now;
             server.Update(info);
         }
+        /// <summary>
+        /// 重载-自定义删除实体
+        /// </summary>
         protected virtual void Deleted(T info)
         {
             var index = DataGrid.SelectedIndex;
@@ -173,6 +212,9 @@ namespace Paway.Model
                 else if (index >= 0) DataGrid.Select(this.FilterList()[index].Id, true);
             }
         }
+        /// <summary>
+        /// 重载-自定义删除列表
+        /// </summary>
         protected virtual void Deleted(List<T> list)
         {
             if (list.Count == 0) return;
@@ -196,6 +238,9 @@ namespace Paway.Model
                 else if (index >= 0) DataGrid.Select(this.FilterList()[index].Id, true);
             }
         }
+        /// <summary>
+        /// 重载-自定义刷新操作
+        /// </summary>
         protected override void Refresh(Action action = null)
         {
             Method.BeginInvoke(() =>
@@ -210,6 +255,9 @@ namespace Paway.Model
                 });
             });
         }
+        /// <summary>
+        /// 重载-自定义导入列表前检查
+        /// </summary>
         protected virtual void ImportChecked(List<T> list)
         {
             if (typeof(IIndex).IsAssignableFrom(typeof(T)))
@@ -222,6 +270,9 @@ namespace Paway.Model
                 }
             }
         }
+        /// <summary>
+        /// 重载-自定义导入列表
+        /// </summary>
         protected virtual void Import(List<T> list)
         {
             var updateList = Method.Import(this.FilterList(), list);
@@ -230,12 +281,15 @@ namespace Paway.Model
             server.Replace(updateList); CMethod.Update(updateList);
             this.Reload();
         }
+        /// <summary>
+        /// 重载-自定义导出到文件
+        /// </summary>
         protected virtual void Export(string file, bool iOpen = true)
         {
             Export(DataGrid, this.FilterList(), file, iOpen);
         }
         /// <summary>
-        /// 导出列表
+        /// 重载-导出指定列表到文件
         /// </summary>
         protected virtual void Export<O>(List<O> list, string file, bool iOpen = true) where O : class
         {
@@ -245,10 +299,16 @@ namespace Paway.Model
         #endregion
 
         #region 操作命令
+        /// <summary>
+        /// 双击命令
+        /// </summary>
         public ICommand RowDoubleCommand => new RelayCommand<SelectItemEventArgs>(e =>
         {
             ActionInternalMsg("编辑");
         });
+        /// <summary>
+        /// 按钮列表-点击命令处理
+        /// </summary>
         protected override void Action(ListViewCustom listView1)
         {
             base.Action(listView1);
@@ -257,11 +317,17 @@ namespace Paway.Model
                 Selectioned(listView1, item);
             }
         }
+        /// <summary>
+        /// 按钮列表-选中
+        /// </summary>
         protected virtual void Selectioned(ListViewCustom listView1, IListViewItem item)
         {
             Action(item.Text);
             listView1.SelectedIndex = -1;
         }
+        /// <summary>
+        /// 键盘按键事件
+        /// </summary>
         protected override void Action(KeyMessage msg)
         {
             if (Config.Menu != this.Menu) return;
@@ -274,6 +340,9 @@ namespace Paway.Model
             }
             base.Action(msg);
         }
+        /// <summary>
+        /// 通用动作命令
+        /// </summary>
         protected override void Action(string item)
         {
             switch (item)
@@ -359,6 +428,9 @@ namespace Paway.Model
 
         #endregion
         #region 拖拽排序
+        /// <summary>
+        /// 拖拽排序
+        /// </summary>
         public ICommand DragCompletedCmd => new RelayCommand<DataGridDragEventArgs>(e =>
         {
             if (typeof(IIndex).IsAssignableFrom(typeof(T)))
@@ -380,6 +452,9 @@ namespace Paway.Model
         #endregion
 
         #region 加载列表
+        /// <summary>
+        /// 加载列表
+        /// </summary>
         protected void Init(List<T> list, bool iReload = true)
         {
             if (this.List == null) this.List = list;
@@ -389,6 +464,9 @@ namespace Paway.Model
             }
             if (iReload) this.Reload();
         }
+        /// <summary>
+        /// 搜索列表
+        /// </summary>
         protected override void Search()
         {
             if (SearchText.IsEmpty())
@@ -401,6 +479,9 @@ namespace Paway.Model
             }
             this.ReloadObList();
         }
+        /// <summary>
+        /// 重加载
+        /// </summary>
         protected virtual void Reload()
         {
             if (!SearchReset()) ReloadObList();
@@ -416,6 +497,9 @@ namespace Paway.Model
             }
             return false;
         }
+        /// <summary>
+        /// 重加载列表
+        /// </summary>
         protected virtual void ReloadObList()
         {
             Method.Invoke(() =>
@@ -454,6 +538,9 @@ namespace Paway.Model
 
         #endregion
 
+        /// <summary>
+        /// 数据管理基类，必须指定当前菜单、及初始化
+        /// </summary>
         public DataGridPageModel()
         {
             this.PagedList = new PagedCollectionView(ObList) { PageSize = 20 };

@@ -13,8 +13,14 @@ namespace Paway.Model
     [Table("Sys_Admins")]
     public class AdminBaseInfo : BaseInfo, IInfo
     {
+        /// <summary>
+        /// 名称
+        /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// 值
+        /// </summary>
         public string Value { get; set; }
     }
 }

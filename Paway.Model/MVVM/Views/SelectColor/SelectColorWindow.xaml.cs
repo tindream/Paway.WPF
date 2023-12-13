@@ -19,6 +19,9 @@ namespace Paway.Model
     /// </summary>
     public partial class SelectColorWindow : Window
     {
+        /// <summary>
+        /// 颜色搭取器
+        /// </summary>
         public SelectColorWindow()
         {
             InitializeComponent();

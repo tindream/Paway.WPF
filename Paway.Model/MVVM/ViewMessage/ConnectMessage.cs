@@ -8,26 +8,44 @@ using System.Windows.Input;
 
 namespace Paway.Model
 {
+    /// <summary>
+    /// 连接消息
+    /// </summary>
     public class ConnectMessage
     {
+        /// <summary>
+        /// 连接状态
+        /// </summary>
         public bool Connectd { get; set; }
 
+        /// <summary>
+        /// 连接消息
+        /// </summary>
         public ConnectMessage() { }
+        /// <summary>
+        /// 连接消息
+        /// </summary>
         public ConnectMessage(bool connectd)
         {
             this.Connectd = connectd;
         }
     }
     /// <summary>
-    /// 连接状态2
+    /// 连接消息2
     /// </summary>
     public class Connect2Message
     {
+        /// <summary>
+        /// 连接状态
+        /// </summary>
         public bool Connectd { get; set; }
 
+        /// <summary>
+        /// 连接消息2
+        /// </summary>
         public Connect2Message() { }
         /// <summary>
-        /// 连接状态2
+        /// 连接消息2
         /// </summary>
         public Connect2Message(bool connectd)
         {

@@ -13,6 +13,9 @@ namespace Paway.Model
     [Flags]
     public enum ButtonAuthType
     {
+        /// <summary>
+        /// 默认
+        /// </summary>
         None,
         /// <summary>
         /// 新增

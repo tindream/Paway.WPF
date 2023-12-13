@@ -25,15 +25,24 @@ namespace Paway.Model
         /// </summary>
         public ObservableCollection<Parent> ParentList { get; private set; } = new ObservableCollection<Parent>();
         private Parent _parentInfo;
+        /// <summary>
+        /// 父级实体
+        /// </summary>
         public Parent ParentInfo
         {
             get { return _parentInfo; }
             set { if (_parentInfo != value) { _parentInfo = value; ParentChanged(); OnPropertyChanged(); } }
         }
+        /// <summary>
+        /// 父级实体切换
+        /// </summary>
         protected virtual void ParentChanged() { }
 
         #endregion
         #region 重载
+        /// <summary>
+        /// 通用动作命令
+        /// </summary>
         protected override void Action(string item)
         {
             switch (item)
@@ -46,10 +55,16 @@ namespace Paway.Model
             }
             base.Action(item);
         }
+        /// <summary>
+        /// 刷榜
+        /// </summary>
         protected override void Refresh(Action action = null)
         {
             base.Refresh(() => Method.Invoke(() => this.PageReload()));
         }
+        /// <summary>
+        /// 在Loaded第一次触发或重加载时调用
+        /// </summary>
         public override void PageReload()
         {
             base.PageReload();
@@ -62,6 +77,9 @@ namespace Paway.Model
 
         #endregion
 
+        /// <summary>
+        /// 带父级列表的控件
+        /// </summary>
         public ParentBasePageModel() { }
     }
     /// <summary>
@@ -76,11 +94,17 @@ namespace Paway.Model
         /// </summary>
         public ObservableCollection<Parent> ParentList { get; private set; } = new ObservableCollection<Parent>();
         private Parent _parentInfo;
+        /// <summary>
+        /// 父级实体
+        /// </summary>
         public Parent ParentInfo
         {
             get { return _parentInfo; }
             set { if (_parentInfo != value) { _parentInfo = value; ParentChanged(); OnPropertyChanged(); } }
         }
+        /// <summary>
+        /// 父级实体切换
+        /// </summary>
         protected virtual void ParentChanged()
         {
             if (ParentInfo == null) base.listFilter = c => false;
@@ -90,6 +114,9 @@ namespace Paway.Model
 
         #endregion
         #region 重载
+        /// <summary>
+        /// 通用动作命令
+        /// </summary>
         protected override void Action(string item)
         {
             switch (item)
@@ -102,11 +129,17 @@ namespace Paway.Model
             }
             base.Action(item);
         }
+        /// <summary>
+        /// 重载-自定义刷新操作
+        /// </summary>
         protected override void Refresh(Action action = null)
         {
             base.Refresh(action);
             this.PageReload();
         }
+        /// <summary>
+        /// 在Loaded第一次触发或重加载时调用
+        /// </summary>
         public override void PageReload()
         {
             base.PageReload();
@@ -116,11 +149,17 @@ namespace Paway.Model
             ParentInfo = Cache.Find<Parent>(last?.Id ?? 0);
             if (ParentInfo == null && ParentList.Count > 0) ParentInfo = ParentList.First();
         }
+        /// <summary>
+        /// 设置添加窗体
+        /// </summary>
         protected override Window AddWindow()
         {
             if (ViewModel().Info.Id == 0) ViewModel().Info.ParentId = ParentInfo.Id;
             return base.AddWindow();
         }
+        /// <summary>
+        /// 重载-自定义导入列表前检查
+        /// </summary>
         protected override void ImportChecked(List<T> list)
         {
             base.ImportChecked(list);
@@ -129,6 +168,9 @@ namespace Paway.Model
 
         #endregion
 
+        /// <summary>
+        /// 带父级列表的控件
+        /// </summary>
         public ParentBasePageModel() { }
     }
     /// <summary>
@@ -142,8 +184,14 @@ namespace Paway.Model
         /// 子级列表
         /// </summary>
         public ObservableCollection<Child> DetailList { get; private set; } = new ObservableCollection<Child>();
+        /// <summary>
+        /// 子级分页列表
+        /// </summary>
         public PagedCollectionView DetailPagedList { get; private set; }
         private Child _childItem;
+        /// <summary>
+        /// 子级实体
+        /// </summary>
         public Child ChildItem
         {
             get { return _childItem; }
@@ -162,10 +210,16 @@ namespace Paway.Model
             }
             return default;
         }
+        /// <summary>
+        /// 子级实体切换
+        /// </summary>
         protected virtual void ChildChanged() { }
 
         #endregion
         #region 重载
+        /// <summary>
+        /// 选中项后处理
+        /// </summary>
         protected override void SelectedChanged()
         {
             base.SelectedChanged();
@@ -176,6 +230,9 @@ namespace Paway.Model
                 foreach (var item in SelectedItem.DetailList) DetailList.Add(item);
             }
         }
+        /// <summary>
+        /// 重载-自定义删除实体
+        /// </summary>
         protected override void Deleted(T info)
         {
             info.Load();
@@ -185,6 +242,9 @@ namespace Paway.Model
 
         #endregion
 
+        /// <summary>
+        /// 带子级列表的控件
+        /// </summary>
         public ChildBasePageModel()
         {
             this.DetailPagedList = new PagedCollectionView(DetailList) { PageSize = 20 };

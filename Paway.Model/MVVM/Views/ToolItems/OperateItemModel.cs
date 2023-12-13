@@ -17,6 +17,9 @@ using System.Windows.Media;
 
 namespace Paway.Model
 {
+    /// <summary>
+    /// 通用工具栏模型
+    /// </summary>
     public partial class OperateItemModel : ViewModelBasePlus, IPageReload
     {
         #region 属性
@@ -27,6 +30,9 @@ namespace Paway.Model
         #endregion
 
         #region 权限控制
+        /// <summary>
+        /// 所属菜单
+        /// </summary>
         public virtual string Menu { get; }
         private MenuAuthType _auth;
         /// <summary>
@@ -57,7 +63,7 @@ namespace Paway.Model
             }
         }
         /// <summary>
-        /// 按钮按键操作
+        /// 通用动作命令-按钮按键操作
         /// </summary>
         protected override void Action(string item)
         {
@@ -101,6 +107,9 @@ namespace Paway.Model
         /// </summary>
         protected virtual void Search() { }
         private string _searchText;
+        /// <summary>
+        /// 当前搜索框绑定
+        /// </summary>
         public string SearchText
         {
             get { return _searchText; }
@@ -242,11 +251,20 @@ namespace Paway.Model
         #endregion
 
         #region 页重加载
+        /// <summary>
+        /// 加载状态
+        /// </summary>
         public bool ILoad { get; set; }
+        /// <summary>
+        /// 在Loaded第一次触发或重加载时调用
+        /// </summary>
         public virtual void PageReload() { }
 
         #endregion
 
+        /// <summary>
+        /// 通用工具栏模型
+        /// </summary>
         public OperateItemModel()
         {
             this.Menu = this.GetType().Description();

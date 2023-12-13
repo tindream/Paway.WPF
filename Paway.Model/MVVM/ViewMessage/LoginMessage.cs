@@ -8,10 +8,22 @@ using System.Windows.Input;
 
 namespace Paway.Model
 {
+    /// <summary>
+    /// 登陆消息
+    /// </summary>
     public class LoginMessage
     {
+        /// <summary>
+        /// 用户名
+        /// </summary>
         public string UserName { get; set; }
+        /// <summary>
+        /// 登陆消息
+        /// </summary>
         public LoginMessage() { }
+        /// <summary>
+        /// 登陆消息
+        /// </summary>
         public LoginMessage(string userName)
         {
             this.UserName = userName;

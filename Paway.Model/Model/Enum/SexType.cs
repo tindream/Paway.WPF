@@ -15,6 +15,9 @@ namespace Paway.Model
     /// </summary>
     public enum SexType
     {
+        /// <summary>
+        /// 无
+        /// </summary>
         None,
         /// <summary>
         /// 男

@@ -6,6 +6,9 @@ using System.Runtime.InteropServices;
 
 namespace WpfWebBrowser
 {
+    /// <summary>
+    /// WebBrowser浏览器处理
+    /// </summary>
     public partial class WebBrowserHelper
     {
         private class WebBrowserEvent : StandardOleMarshalObject, DWebBrowserEvents2

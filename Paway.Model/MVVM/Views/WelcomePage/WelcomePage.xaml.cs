@@ -21,6 +21,9 @@ namespace Paway.Model
     /// </summary>
     public partial class WelcomePage : Page
     {
+        /// <summary>
+        /// 欢迎页
+        /// </summary>
         public WelcomePage()
         {
             InitializeComponent();

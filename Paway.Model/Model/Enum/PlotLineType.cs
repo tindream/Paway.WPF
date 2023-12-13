@@ -14,11 +14,13 @@ namespace Paway.Model
     [Flags]
     public enum PlotLineType
     {
+        /// <summary>
+        /// </summary>
         None,
         /// <summary>
         /// 左束角
         /// </summary>
-        [Tag(new byte[] { 250, 232, 2 })]///FAE802
+        [Tag(new byte[] { 250, 232, 2 })]//FAE802
         [Description("左束角")]
         LeftToeAngle = 1 << 0,
         /// <summary>

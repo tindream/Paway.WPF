@@ -17,6 +17,9 @@ using System.Threading.Tasks;
 
 namespace Paway.Model
 {
+    /// <summary>
+    /// 模型的一些常用方法
+    /// </summary>
     public partial class Method : PMethod
     {
         #region 导入导出
@@ -147,6 +150,9 @@ namespace Paway.Model
             }
             return false;
         }
+        /// <summary>
+        /// 从Excel导入
+        /// </summary>
         public static Task<List<T>> FromExcel<T>(string fileName, int start = 0, int end = 0) where T : class, new()
         {
             var dt = ExcelHelper.ToDataTable(fileName);

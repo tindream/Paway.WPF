@@ -14,11 +14,18 @@ using System.Windows.Media;
 
 namespace Paway.Model
 {
+    /// <summary>
+    /// 模型-添加窗口
+    /// </summary>
     public class AddWindowModel<T> : BaseWindowModel where T : class, ICompare<T>, IId
     {
         #region 属性
         private T info;
         private T normal;
+        /// <summary>
+        /// 模型
+        /// <para>复制体，修改不影响原实体</para>
+        /// </summary>
         public T Info
         {
             get { return info; }
@@ -35,6 +42,9 @@ namespace Paway.Model
         #endregion
 
         #region 命令
+        /// <summary>
+        /// 模型加载后
+        /// </summary>
         protected virtual void ReLoad() { }
         /// <summary>
         /// 检查模型中的值
@@ -44,6 +54,9 @@ namespace Paway.Model
         {
             return Method.ValidationError(wd, info, name, allEmpty);
         }
+        /// <summary>
+        /// 确认保存方法
+        /// </summary>
         protected virtual bool? OnSave(Window wd, T info)
         {
             var errorList = Method.ValidationError(wd);
@@ -61,6 +74,9 @@ namespace Paway.Model
             }
             return true;
         }
+        /// <summary>
+        /// 点击确认
+        /// </summary>
         protected override bool? OnCommit(Window wd)
         {
             var result = OnSave(wd, info);
@@ -71,6 +87,9 @@ namespace Paway.Model
 
         #endregion
 
+        /// <summary>
+        /// 模型添加窗口
+        /// </summary>
         public AddWindowModel() { }
     }
 }

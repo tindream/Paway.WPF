@@ -25,7 +25,13 @@ namespace Paway.Model
     public abstract class LoginPageModel : ViewModelBasePlus
     {
         #region 属性
+        /// <summary>
+        /// 根控件
+        /// </summary>
         protected DependencyObject Root;
+        /// <summary>
+        /// 数据绑定列表
+        /// </summary>
         public ObservableCollection<object> ObList { get; private set; } = new ObservableCollection<object>();
         /// <summary>
         /// 登陆锁
@@ -36,6 +42,9 @@ namespace Paway.Model
         /// </summary>
         private volatile bool iFiltering;
         private string _userName;
+        /// <summary>
+        /// 用户名
+        /// </summary>
         public string UserName
         {
             get { return _userName; }
@@ -58,9 +67,15 @@ namespace Paway.Model
                 }
             }
         }
+        /// <summary>
+        /// 用户列表过滤
+        /// </summary>
         protected virtual void FilterUser(string userName) { }
 
         private string _password = string.Empty;
+        /// <summary>
+        /// 密码
+        /// </summary>
         public string Password
         {
             get { return _password; }
@@ -68,6 +83,9 @@ namespace Paway.Model
         }
 
         private bool _iUserList;
+        /// <summary>
+        /// 显示用户列表标记
+        /// </summary>
         public bool IUserList
         {
             get { return _iUserList; }
@@ -75,6 +93,9 @@ namespace Paway.Model
         }
 
         private bool _iAuto;
+        /// <summary>
+        /// 自动登陆标记
+        /// </summary>
         public bool IAuto
         {
             get { return _iAuto; }
@@ -82,12 +103,18 @@ namespace Paway.Model
         }
 
         private string welcome = "欢迎使用";
+        /// <summary>
+        /// 欢迎谗
+        /// </summary>
         public string Welcome
         {
             get { return welcome; }
             set { welcome = value; OnPropertyChanged(); }
         }
         private ImageSource _logoImage;
+        /// <summary>
+        /// Logo
+        /// </summary>
         public ImageSource LogoImage
         {
             get { return _logoImage; }
@@ -95,6 +122,9 @@ namespace Paway.Model
         }
 
         private bool _iSetting;
+        /// <summary>
+        /// 显示设置按钮标记
+        /// </summary>
         public bool ISetting
         {
             get { return _iSetting; }
@@ -102,6 +132,9 @@ namespace Paway.Model
         }
 
         private bool _iClose;
+        /// <summary>
+        /// 显示关闭按钮标记
+        /// </summary>
         public bool IClose
         {
             get { return _iClose; }
@@ -111,6 +144,9 @@ namespace Paway.Model
         #endregion
 
         #region 命令
+        /// <summary>
+        /// 密码检查
+        /// </summary>
         protected bool CheckPad()
         {
             if (Password.IsEmpty())
@@ -121,10 +157,25 @@ namespace Paway.Model
             }
             return true;
         }
+        /// <summary>
+        /// 登陆命令
+        /// </summary>
         public abstract void Login();
+        /// <summary>
+        /// 显示设置页
+        /// </summary>
         protected virtual Window SetWindow() { return null; }
+        /// <summary>
+        /// 设置操作
+        /// </summary>
         protected virtual void OnSet(DependencyObject obj) { }
+        /// <summary>
+        /// 关闭操作
+        /// </summary>
         protected virtual void OnClose(DependencyObject obj) { }
+        /// <summary>
+        /// 通用动作命令
+        /// </summary>
         protected override void Action(string item)
         {
             base.Action(item);
@@ -168,6 +219,9 @@ namespace Paway.Model
 
         #endregion
 
+        /// <summary>
+        /// 登陆页模型
+        /// </summary>
         public LoginPageModel()
         {
             Messenger.Default.Register<LoginLoadMessage>(this, msg => this.Root = msg.Obj);

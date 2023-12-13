@@ -15,14 +15,20 @@ namespace WpfWebBrowser
         private readonly WebBrowser _webBrowser;
         private object _cookie;
 
+        /// <summary>
+        /// </summary>
         public event CancelEventHandler NewWindow;
 
+        /// <summary>
+        /// </summary>
         public WebBrowserHelper(WebBrowser webBrowser)
         {
             _webBrowser = webBrowser ?? throw new ArgumentNullException("webBrowser");
             _webBrowser.Dispatcher.BeginInvoke(new Action(Attach), DispatcherPriority.Loaded);
         }
 
+        /// <summary>
+        /// </summary>
         public void Disconnect()
         {
             if (_cookie != null)

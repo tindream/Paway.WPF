@@ -21,6 +21,9 @@ namespace Paway.Model
     /// </summary>
     public partial class OperateItem
     {
+        /// <summary>
+        /// 通用工具栏
+        /// </summary>
         public OperateItem()
         {
             InitializeComponent();

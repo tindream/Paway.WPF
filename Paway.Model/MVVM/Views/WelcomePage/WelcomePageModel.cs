@@ -10,10 +10,16 @@ using System.Windows.Input;
 
 namespace Paway.Model
 {
+    /// <summary>
+    /// 欢迎页模型
+    /// </summary>
     public class WelcomePageModel : ViewModelBasePlus
     {
         #region 属性
         private string _desc = "欢迎使用";
+        /// <summary>
+        /// 欢迎语
+        /// </summary>
         public string Desc
         {
             get { return _desc; }
@@ -22,6 +28,9 @@ namespace Paway.Model
 
         #endregion
 
+        /// <summary>
+        /// 欢迎页模型
+        /// </summary>
         public WelcomePageModel() { }
     }
 }

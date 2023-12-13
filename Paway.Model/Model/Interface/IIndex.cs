@@ -13,6 +13,9 @@ namespace Paway.Model
     /// </summary>
     public interface IIndex
     {
+        /// <summary>
+        /// 序号
+        /// </summary>
         int Index { get; set; }
     }
 }

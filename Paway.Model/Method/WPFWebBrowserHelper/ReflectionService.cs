@@ -6,8 +6,12 @@ using System.Reflection;
 
 namespace WpfWebBrowser
 {
+    /// <summary>
+    /// </summary>
     public static class ReflectionService
     {
+        /// <summary>
+        /// </summary>
         public readonly static BindingFlags BindingFlags =
             BindingFlags.Instance |
             BindingFlags.Public |
@@ -15,6 +19,8 @@ namespace WpfWebBrowser
             BindingFlags.FlattenHierarchy |
             BindingFlags.CreateInstance;
 
+        /// <summary>
+        /// </summary>
         public static object ReflectGetProperty(this object target, string propertyName)
         {
             if (target == null)
@@ -28,6 +34,8 @@ namespace WpfWebBrowser
             return propertyInfo.GetValue(target, null);
         }
 
+        /// <summary>
+        /// </summary>
         public static object ReflectInvokeMethod(this object target, string methodName, Type[] argTypes, object[] parameters)
         {
             if (target == null)
