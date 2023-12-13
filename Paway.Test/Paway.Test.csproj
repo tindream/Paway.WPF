@@ -8,6 +8,7 @@
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<AssemblyName>Paway.Test</AssemblyName>
 		<RootNamespace>Paway.Test</RootNamespace>
+		<PlatformTarget>AnyCPU</PlatformTarget>
 	</PropertyGroup>
 	<PropertyGroup>
 		<!--取消warning NETSDK1049警告-->

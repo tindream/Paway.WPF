@@ -27,7 +27,10 @@ namespace Paway.Test
                 return intance;
             }
         }
-        public DataService() : base(createSql: new Uri(@"pack://application:,,,/Paway.Test;component/Resources/script.sql").ToText()) { }
+        public DataService() : base()
+        {
+            base.Create(new Uri(@"pack://application:,,,/Paway.Test;component/Resources/script.sql").ToText());
+        }
         protected override void Created()
         {
             var user = new UserInfo { UserType = UserType.Admin, Name = "admin", Password = EncryptHelper.MD5("admin" + Config.Suffix) };

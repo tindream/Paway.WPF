@@ -93,8 +93,7 @@ namespace Paway.Test
         [Text("登陆时间")]
         public DateTime LoginOn { get; set; }
 
-        [NoShow, NoSelect, JsonIgnore]
-        public DeviceType DeviceType { get; set; }
+        #region 接口
         [NoShow, NoSelect, JsonIgnore]
         public object Tag { get { return UserType; } set { } }
         private string _clientId;
@@ -106,6 +105,8 @@ namespace Paway.Test
                 return _clientId;
             }
         }
+
+        #endregion
 
         public void Checked()
         {
