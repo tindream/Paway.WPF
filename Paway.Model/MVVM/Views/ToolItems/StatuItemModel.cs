@@ -84,21 +84,21 @@ namespace Paway.Model
         /// </summary>
         public StatuItemModel()
         {
-            Config.OperateLogEvent += msg => AddDesc(msg.Text, iHit: false);
+            MConfig.OperateLogEvent += msg => AddDesc(msg.Text, iHit: false);
 
             Messenger.Default.Register<StatuMessage>(this, msg => AddDesc(msg.Msg, msg.Level, msg.IHit, msg.Ower));
-            CConfig.StatuLogEvent += (msg, level) => AddDesc(msg, level);
+            MConfig.StatuLogEvent += (msg, level) => AddDesc(msg, level);
             Messenger.Default.Register<ConnectMessage>(this, msg =>
             {
                 Messenger.Default.Send(new StatuMessage(msg.Connectd ? $"连接成功" : $"连接断开", !msg.Connectd), msg.Connectd ? LeveType.Debug : LeveType.Error);
-                Method.BeginInvoke(() =>
+                PMethod.BeginInvoke(() =>
                 {
                     ConnectBrush = msg.Connectd ? ColorType.Success.Color().ToBrush() : ColorType.Error.Color().ToBrush();
                 });
             });
             Messenger.Default.Register<Connect2Message>(this, msg =>
             {
-                Method.BeginInvoke(() =>
+                PMethod.BeginInvoke(() =>
                 {
                     Connect2Brush = msg.Connectd ? ColorType.Success.Color().ToBrush() : ColorType.Error.Color().ToBrush();
                 });
@@ -133,21 +133,21 @@ namespace Paway.Model
         private void AddDesc(string msg, LeveType level = LeveType.Debug, bool iHit = true, DependencyObject ower = null)
         {
             this.Desc = msg;
-            Method.Invoke(() =>
+            PMethod.Invoke(() =>
             {
                 switch (level)
                 {
                     case LeveType.Warn:
-                        DescBrush = Config.Warn.ToBrush();
-                        if (iHit) Method.Hit(ower ?? Config.Window, msg, ColorType.Warn);
+                        DescBrush = PConfig.Warn.ToBrush();
+                        if (iHit) PMethod.Hit(ower ?? MConfig.Window, msg, ColorType.Warn);
                         break;
                     case LeveType.Error:
-                        DescBrush = Config.Error.ToBrush();
-                        if (iHit) Method.Hit(ower ?? Config.Window, msg, ColorType.Error);
+                        DescBrush = PConfig.Error.ToBrush();
+                        if (iHit) PMethod.Hit(ower ?? MConfig.Window, msg, ColorType.Error);
                         break;
                     default:
                         DescBrush = ColorType.High.Color().ToBrush();
-                        if (iHit) Method.Toast(ower ?? Config.Window, msg);
+                        if (iHit) PMethod.Toast(ower ?? MConfig.Window, msg);
                         break;
                 }
             });

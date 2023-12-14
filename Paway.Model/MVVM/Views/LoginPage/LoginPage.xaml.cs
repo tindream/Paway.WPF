@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
+using Paway.WPF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +41,7 @@ namespace Paway.Model
         {
             base.OnApplyTemplate();
             Messenger.Default.Send(new LoginLoadMessage() { Obj = Root });
-            Method.BeginInvoke(() =>
+            PMethod.BeginInvoke(() =>
             {
                 if (this.DataContext is LoginPageModel login)
                 {

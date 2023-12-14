@@ -60,7 +60,7 @@ namespace Paway.Model
         /// </summary>
         protected override void Refresh(Action action = null)
         {
-            base.Refresh(() => Method.Invoke(() => this.PageReload()));
+            base.Refresh(() => PMethod.Invoke(() => this.PageReload()));
         }
         /// <summary>
         /// 在Loaded第一次触发或重加载时调用
@@ -237,7 +237,7 @@ namespace Paway.Model
         {
             info.Load();
             base.Deleted(info);
-            base.server.Delete(info.DetailList); CMethod.Delete(info.DetailList);
+            base.server.Delete(info.DetailList); MMethod.Delete(info.DetailList);
         }
 
         #endregion

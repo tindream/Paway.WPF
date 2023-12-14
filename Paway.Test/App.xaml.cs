@@ -31,7 +31,7 @@ namespace Paway.Test
                 Shutdown();
                 return;
             }
-            Method.InitApp(App.Current, Config.LogConfig);
+            PMethod.InitApp(App.Current, Config.LogConfig);
 
             {//Test
             }

@@ -145,12 +145,11 @@ namespace Paway.WPF
             {
                 var iExit = false;
                 var exitTime = DateTime.MinValue;
-                var interval = NativeMethods.GetDoubleClickTime();
                 window.KeyDown += delegate (object sender, System.Windows.Input.KeyEventArgs e)
                 {
                     if (e.Key == System.Windows.Input.Key.Escape)
                     {
-                        if (iExit && DateTime.Now.Subtract(exitTime).TotalMilliseconds < interval)
+                        if (iExit && DateTime.Now.Subtract(exitTime).TotalMilliseconds < PConfig.DoubleInterval)
                         {
                             window.Close();
                             return;

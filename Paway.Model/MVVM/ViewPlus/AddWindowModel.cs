@@ -52,17 +52,17 @@ namespace Paway.Model
         /// </summary>
         protected bool ValidationError(Window wd, string name, bool allEmpty = false)
         {
-            return Method.ValidationError(wd, info, name, allEmpty);
+            return PMethod.ValidationError(wd, info, name, allEmpty);
         }
         /// <summary>
         /// 确认保存方法
         /// </summary>
         protected virtual bool? OnSave(Window wd, T info)
         {
-            var errorList = Method.ValidationError(wd);
+            var errorList = PMethod.ValidationError(wd);
             if (errorList.Count > 0)
             {
-                Method.Hit(wd, errorList.Join("\r\n"), ColorType.Error);
+                PMethod.Hit(wd, errorList.Join("\r\n"), ColorType.Error);
                 return null;
             }
             if (info is IChecked @checked) @checked.Checked();

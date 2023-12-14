@@ -102,7 +102,7 @@ namespace Paway.Test
         {
             var border = new Border();
             border.Background = Color.FromArgb(150, 200, 200, 200).ToBrush();
-            Method.CustomAdorner(Config.Window, border, true, true);
+            PMethod.CustomAdorner(Config.Window, border, true, true);
         }
     }
 }

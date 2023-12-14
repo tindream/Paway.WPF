@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Paway.Comm;
 using Paway.Helper;
 using Paway.Utils;
 using Paway.WPF;
@@ -20,7 +21,7 @@ namespace Paway.Model
     /// <summary>
     /// 模型的一些常用方法
     /// </summary>
-    public partial class Method : PMethod
+    public partial class MMethod : CMethod
     {
         #region 导入导出
         /// <summary>

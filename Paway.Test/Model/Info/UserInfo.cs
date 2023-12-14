@@ -97,6 +97,7 @@ namespace Paway.Test
         [NoShow, NoSelect, JsonIgnore]
         public object Tag { get { return UserType; } set { } }
         private string _clientId;
+        [NoShow, NoSelect, JsonIgnore]
         public string VerCode
         {
             get

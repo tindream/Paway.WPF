@@ -62,12 +62,12 @@ namespace Paway.Test
             //});
 
             storyboard.Stop(this);
-            Method.DoEvents();
+            PMethod.DoEvents();
             storyboard.Begin(this, true);
 
             var r = Validation.GetHasError(tb);
-            Method.Hit(this, r);
-            var xml = Method.GetTemplateXaml(tb);
+            PMethod.Hit(this, r);
+            var xml = PMethod.GetTemplateXaml(tb);
             Debug.WriteLine(xml);
             //Method.Toast(this, xml);
 
@@ -85,7 +85,7 @@ namespace Paway.Test
         {
             base.OnRender(drawingContext);
             if (IsLoaded) return;
-            Method.Progress(this, () =>
+            PMethod.Progress(this, () =>
             {
                 DataService.Default.Load();
             }, () =>
@@ -96,7 +96,7 @@ namespace Paway.Test
             {
                 ex.Log();
                 Messenger.Default.Send(new StatuMessage(ex.Message()));
-                Method.ShowError(this, ex.Message());
+                PMethod.ShowError(this, ex.Message());
             });
         }
         public override void OnApplyTemplate()
@@ -114,16 +114,16 @@ namespace Paway.Test
         }
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
-            //WPF.TMethod.WaterAdorner(e);
+            //PMethod.WaterAdorner(e);
             base.OnPreviewMouseDown(e);
         }
         protected override void OnPreviewMouseMove(MouseEventArgs e)
         {
-            if (Method.Parent(listView3, out Window window))
+            if (PMethod.Parent(listView3, out Window window))
             {
                 if (window.Content is Panel panel)
                 {
-                    Method.WaterAdornerFixed(panel, e, 10);
+                    PMethod.WaterAdornerFixed(panel, e, 10);
                 }
             }
             base.OnPreviewMouseMove(e);

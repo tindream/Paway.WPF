@@ -79,7 +79,7 @@ namespace Paway.Test
                 var obj = listView1.InputHitTest(point);
                 if (PMethod.Parent(obj, out ListViewItem viewItem))
                 {
-                    Method.WaterAdorner(e, viewItem, 0, 0);
+                    PMethod.WaterAdorner(e, viewItem, 0, 0);
                 }
             }
         });

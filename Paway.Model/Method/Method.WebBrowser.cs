@@ -5,7 +5,7 @@ using System.Windows.Controls;
 
 namespace Paway.Model
 {
-    public partial class Method
+    public partial class MMethod
     {
         /// <summary>
         /// 过滤WebBrowser javascript错误提示

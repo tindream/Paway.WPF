@@ -250,7 +250,7 @@ namespace Paway.WPF
         {
             if (e == null) return Colors.Transparent;
             var value = e.ToString();
-            foreach (var field in e.GetType().GetFields(TConfig.FlagsEnum))
+            foreach (var field in e.GetType().GetFields(PConfig.FlagsEnum))
             {
                 if (value == field.Name)
                 {

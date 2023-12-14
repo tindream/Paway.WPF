@@ -1,4 +1,5 @@
 ﻿using log4net;
+using Paway.Comm;
 using Paway.Helper;
 using Paway.WPF;
 using System;
@@ -14,7 +15,7 @@ namespace Paway.Model
     /// <summary>
     /// 模型相关的一些常量
     /// </summary>
-    public class Config : PConfig
+    public class MConfig : CConfig
     {
         #region 全局数据
         /// <summary>

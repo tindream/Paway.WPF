@@ -1,5 +1,6 @@
 ﻿using log4net;
 using Paway.Helper;
+using Paway.Model;
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,5 @@ using System.Windows;
 
 namespace Paway.Test
 {
-    public class Method : Model.Method
-    {
-    }
+    public class Method : MMethod { }
 }
