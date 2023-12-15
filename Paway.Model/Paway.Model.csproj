@@ -40,9 +40,9 @@
 		<Reference Include="System.Windows.Forms" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Paway.Helper" Version="2.5.1" />
-		<PackageReference Include="Paway.Utils" Version="2.5.1" />
-		<PackageReference Include="Paway.Comm" Version="2.5.1" />
+		<PackageReference Include="Paway.Helper" Version="2.5.2" />
+		<PackageReference Include="Paway.Utils" Version="2.5.2" />
+		<PackageReference Include="Paway.Comm" Version="2.5.2" />
 		<PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
 		<PackageReference Include="Spire.Office" Version="7.9.0" />
 	</ItemGroup>

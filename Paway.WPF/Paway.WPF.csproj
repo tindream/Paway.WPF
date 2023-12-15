@@ -28,14 +28,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Paway.Helper" Version="2.5.1" />
+		<PackageReference Include="Paway.Helper" Version="2.5.2" />
 	</ItemGroup>
 	<ItemGroup Condition="$(TargetFramework) == 'net45'">
 		<Compile Remove="Method\Net452\**" />
 	</ItemGroup>
 	<ItemGroup Condition="$(TargetFramework) == 'net452'">
 		<Compile Remove="Method\Net45\**" />
-		<PackageReference Include="Paway.Comm" Version="2.5.1" />
+		<PackageReference Include="Paway.Comm" Version="2.5.2" />
 	</ItemGroup>
 
 </Project>
