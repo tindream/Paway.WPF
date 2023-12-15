@@ -21,7 +21,7 @@ namespace Paway.Model
     /// <summary>
     /// 模型的一些常用方法
     /// </summary>
-    public partial class MMethod : CMethod
+    public abstract partial class MMethod : PMethod
     {
         #region 导入导出
         /// <summary>

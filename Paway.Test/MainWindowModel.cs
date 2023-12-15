@@ -149,13 +149,13 @@ namespace Paway.Test
         });
         public ICommand SizeChanged => new RelayCommand<SliderEXT>(slider =>
         {
-            PConfig.FontSize = slider.Value;
+            Config.FontSize = slider.Value;
         });
         public ICommand ColorChanged => new RelayCommand<SliderEXT>(slider =>
         {
-            var color = PMethod.ColorSelector(slider.Value / 7);
-            PConfig.Color = color;
-            PConfig.Background = PMethod.ColorSelector((slider.Value + 0.4) / 7).AddLight(0.93);
+            var color = Method.ColorSelector(slider.Value / 7);
+            Config.Color = color;
+            Config.Background = Method.ColorSelector((slider.Value + 0.4) / 7).AddLight(0.93);
             //Method.DoStyles();
         });
 
@@ -173,7 +173,7 @@ namespace Paway.Test
             base.Action(listView1);
             if (listView1.SelectedItem is IListViewItem info)
             {
-                PMethod.Toast(listView1, info.Text);
+                Method.Toast(listView1, info.Text);
             }
         }
         public ICommand RectDoubleCommand => new RelayCommand<MouseButtonEventArgs>(e =>
@@ -182,9 +182,9 @@ namespace Paway.Test
             {
                 var point = e.GetPosition(listView);
                 var obj = listView.InputHitTest(point);
-                if (PMethod.Parent(obj, out ListViewItem temp) && temp.Content is IListViewItem item)
+                if (Method.Parent(obj, out ListViewItem temp) && temp.Content is IListViewItem item)
                 {
-                    PMethod.Hit(listView, item.Text);
+                    Method.Hit(listView, item.Text);
                 }
             }
         });
@@ -193,7 +193,7 @@ namespace Paway.Test
         {
             MultiList[0].IsChecked = !MultiList[0].IsChecked;
             var desc = string.Join(",", MultiList.ToList().FindAll(c => c.IsChecked).Select(c => c.Text));
-            PMethod.Toast(btn, desc, 5000);
+            Method.Toast(btn, desc, 5000);
         });
 
         #endregion
@@ -301,7 +301,7 @@ namespace Paway.Test
 
             PlotModel.ResetAllAxes();
             PlotModel.InvalidatePlot(true);
-            PMethod.BeginInvoke(() =>
+            Method.BeginInvoke(() =>
             {
                 PlotHelper.AutoMaxMin(PlotModel, 10, 10);
                 PlotModel.InvalidatePlot(true);

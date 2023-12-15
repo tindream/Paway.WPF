@@ -10,8 +10,10 @@ namespace Paway.WPF
 {
     /// <summary>
     /// 一些帮助方法
+    /// <para>net45时自动适配到Paway.Helper.TMethod</para>
+    /// <para>net452时自动适配到Paway.Comm.CMethod</para>
     /// </summary>
-    public partial class PMethod : TMethod
+    public partial class PMethod
     {
         #region 颜色
         /// <summary>

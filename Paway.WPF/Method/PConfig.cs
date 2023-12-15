@@ -18,8 +18,10 @@ namespace Paway.WPF
 {
     /// <summary>
     /// 配置
+    /// <para>net45时自动适配到Paway.Helper.TConfig</para>
+    /// <para>net452时自动适配到Paway.Comm.CConfig</para>
     /// </summary>
-    public class PConfig : TConfig
+    public partial class PConfig
     {
         static PConfig()
         {

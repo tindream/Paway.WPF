@@ -15,7 +15,7 @@ namespace Paway.Model
     /// <summary>
     /// 模型相关的一些常量
     /// </summary>
-    public class MConfig : CConfig
+    public abstract class MConfig : PConfig
     {
         #region 全局数据
         /// <summary>

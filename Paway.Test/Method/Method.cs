@@ -12,5 +12,5 @@ using System.Windows;
 
 namespace Paway.Test
 {
-    public class Method : MMethod { }
+    public abstract partial class Method : MMethod { }
 }

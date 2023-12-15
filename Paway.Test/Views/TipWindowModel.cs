@@ -77,9 +77,9 @@ namespace Paway.Test
             {
                 var point = Mouse.GetPosition(listView1);
                 var obj = listView1.InputHitTest(point);
-                if (PMethod.Parent(obj, out ListViewItem viewItem))
+                if (Method.Parent(obj, out ListViewItem viewItem))
                 {
-                    PMethod.WaterAdorner(e, viewItem, 0, 0);
+                    Method.WaterAdorner(e, viewItem, 0, 0);
                 }
             }
         });

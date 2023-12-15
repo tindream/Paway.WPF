@@ -145,8 +145,8 @@ namespace Paway.Test
             //ViewList[index].ItemTextForeground = new BrushEXT(Colors.Red);
             //if (view.ItemsSource == null) view.ItemsSource = ViewList;
             Config.Language.Test = "H" + DateTime.Now.Millisecond;
-            PConfig.LanguageBase.PleaseInputWater = "H" + DateTime.Now.Millisecond;
-            PConfig.LanguageBase.PleaseInputPasswordWater = "H" + DateTime.Now.Millisecond;
+            Config.LanguageBase.PleaseInputWater = "H" + DateTime.Now.Millisecond;
+            Config.LanguageBase.PleaseInputPasswordWater = "H" + DateTime.Now.Millisecond;
             var msg = Config.Language.Test;
             if (DateTime.Now.Millisecond % 2 == 0)
             {
@@ -157,10 +157,10 @@ namespace Paway.Test
                 msg += "，" + DateTime.Now.Millisecond + "，" + DateTime.Now.Millisecond + "，" + DateTime.Now.Millisecond +
                 "，" + DateTime.Now.Millisecond + "，" + DateTime.Now.Millisecond + "，" + DateTime.Now.Millisecond + "，" + DateTime.Now.Millisecond;
             }
-            PMethod.Notice(Config.Window, msg, -1, (WPF.ColorType)(DateTime.Now.Millisecond % 6),
-                tag: "123", hitAction: obj => { PMethod.Hit(Config.Window, obj); });
-            PMethod.Hit(Config.Window, msg);
-            PMethod.Toast(Config.Window, msg);
+            Method.Notice(Config.Window, msg, -1, (WPF.ColorType)(DateTime.Now.Millisecond % 6),
+                tag: "123", hitAction: obj => { Method.Hit(Config.Window, obj); });
+            Method.Hit(Config.Window, msg);
+            Method.Toast(Config.Window, msg);
         });
         public ICommand ButtonCommand2 => new RelayCommand<ListViewCustom>(view =>
         {
@@ -173,12 +173,12 @@ namespace Paway.Test
         });
         public ICommand ItemCommand => new RelayCommand<string>(item =>
         {
-            PMethod.Hit(Config.Window, item);
+            Method.Hit(Config.Window, item);
         });
         public ICommand SelectionDeviceCommand => new RelayCommand<ListViewCustom>(listView =>
         {
             if (!(listView.SelectedItem is IListViewItem item)) return;
-            PMethod.ShowWindow(listView, new Window());
+            Method.ShowWindow(listView, new Window());
             listView.SelectedIndex = -1;
         });
         public ICommand ListViewMouseDown => new RelayCommand<MouseButtonEventArgs>(e =>
@@ -187,9 +187,9 @@ namespace Paway.Test
             {
                 var point = Mouse.GetPosition(listView1);
                 var obj = listView1.InputHitTest(point);
-                if (PMethod.Parent(obj, out ListViewItem viewItem))
+                if (Method.Parent(obj, out ListViewItem viewItem))
                 {
-                    PMethod.WaterAdorner(e, viewItem, 0, 0);
+                    Method.WaterAdorner(e, viewItem, 0, 0);
                 }
             }
         });

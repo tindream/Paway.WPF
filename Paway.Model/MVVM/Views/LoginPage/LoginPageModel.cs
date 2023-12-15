@@ -151,8 +151,8 @@ namespace Paway.Model
         {
             if (Password.IsEmpty())
             {
-                PMethod.Hit(Root, "请输入密码");
-                if (PMethod.Find(Root, out PasswordBox tbPassword, "tbPassword")) tbPassword.Focus();
+                MMethod.Hit(Root, "请输入密码");
+                if (MMethod.Find(Root, out PasswordBox tbPassword, "tbPassword")) tbPassword.Focus();
                 return false;
             }
             return true;
@@ -188,14 +188,14 @@ namespace Paway.Model
                         iLogining = true;
                         if (UserName.IsEmpty())
                         {
-                            PMethod.Hit(Root, "请输入用户名");
+                            MMethod.Hit(Root, "请输入用户名");
                             if (IUserList)
                             {
-                                if (PMethod.Find(Root, out ComboBoxEXT cbxUserName, "cbxUserName")) cbxUserName.Focus();
+                                if (MMethod.Find(Root, out ComboBoxEXT cbxUserName, "cbxUserName")) cbxUserName.Focus();
                             }
                             else
                             {
-                                if (PMethod.Find(Root, out TextBoxEXT tbUserName, "tbUserName")) tbUserName.Focus();
+                                if (MMethod.Find(Root, out TextBoxEXT tbUserName, "tbUserName")) tbUserName.Focus();
                             }
                             return;
                         }
@@ -208,7 +208,7 @@ namespace Paway.Model
                     break;
                 case "设置":
                     var window = SetWindow();
-                    if (window != null && PMethod.ShowWindow(Root, window) == true)
+                    if (window != null && MMethod.ShowWindow(Root, window) == true)
                     {
                         OnSet(Root);
                     }
