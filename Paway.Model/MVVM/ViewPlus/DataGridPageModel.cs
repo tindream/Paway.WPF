@@ -385,7 +385,7 @@ namespace Paway.Model
                     {
                         PMethod.Progress(PMethod.Window(DataGrid), "正在导入..", adorner =>
                         {
-                            var list = ExcelHelper.ToList<T>(file).Result;
+                            var list = ExcelBuilder.Create(file).ToList<T>();
                             ImportChecked(list);
                             Import(list);
                         }, () =>
