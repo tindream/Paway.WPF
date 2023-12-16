@@ -28,12 +28,12 @@ namespace Paway.WPF
         /// <summary>
         /// 选择单个文件导入
         /// </summary>
-        public static bool Import(string title, out string file, string filter = "Excel 工作簿|*.xls;*.xlsx")
+        public new static bool Import(string titleName, out string file, string filter = "Excel 工作簿|*.xls;*.xlsx")
         {
             file = null;
             var ofd = new OpenFileDialog
             {
-                Title = title,
+                Title = $"选择要导入的 {titleName}",
                 Filter = filter,
             };
             if (ofd.ShowDialog() == true)
@@ -46,7 +46,7 @@ namespace Paway.WPF
         /// <summary>
         /// 选择多个文件导入
         /// </summary>
-        public static bool Imports(string title, out string[] file, string filter = "Excel 工作簿|*.xls;*.xlsx")
+        public new static bool Imports(string title, out string[] file, string filter = "Excel 工作簿|*.xls;*.xlsx")
         {
             file = null;
             var ofd = new OpenFileDialog
@@ -65,7 +65,7 @@ namespace Paway.WPF
         /// <summary>
         /// 导出到文件
         /// </summary>
-        public static bool Export(string fileName, out string outFile, string filter = null)
+        public new static bool Export(string fileName, out string outFile, string filter = null)
         {
             if (filter == null)
             {

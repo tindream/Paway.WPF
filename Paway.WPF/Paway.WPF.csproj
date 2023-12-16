@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<UseWPF>true</UseWPF>
-		<TargetFrameworks>net45;net452</TargetFrameworks>
+		<TargetFrameworks>net45</TargetFrameworks>
 		<!--用于指示编译器是否生成文档文件的值-->
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<!--不自动生成程序集信息(版本号)-->
@@ -29,13 +29,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="Paway.Helper" Version="2.5.2" />
-	</ItemGroup>
-	<ItemGroup Condition="$(TargetFramework) == 'net45'">
-		<Compile Remove="Method\Net452\**" />
-	</ItemGroup>
-	<ItemGroup Condition="$(TargetFramework) == 'net452'">
-		<Compile Remove="Method\Net45\**" />
-		<PackageReference Include="Paway.Comm" Version="2.5.2" />
 	</ItemGroup>
 
 </Project>

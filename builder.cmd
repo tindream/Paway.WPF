@@ -7,8 +7,6 @@
 @echo ---------------reactor-----------------------------------------------------
 @dotNET_Reactor -project builder\Paway.WPF_45.nrproj
 @copy bin\Release\net45\Paway.WPF.xml		bin\Release\net45\Paway.WPF_Secure\Paway.WPF.xml
-@dotNET_Reactor -project builder\Paway.WPF_452.nrproj
-@copy bin\Release\net452\Paway.WPF.xml		bin\Release\net452\Paway.WPF_Secure\Paway.WPF.xml
 @dotNET_Reactor -project builder\Paway.Model_452.nrproj
 @copy bin\Release\net452\Paway.Model.xml		bin\Release\net452\Paway.Model_Secure\Paway.Model.xml
 
@@ -20,9 +18,6 @@
 @copy bin\Release\net45\Paway.WPF_Secure\Paway.WPF.dll		builder\Paway.WPF.1.3.7_net45\Paway.WPF.dll
 @copy bin\Release\net45\Paway.WPF_Secure\Paway.WPF.pdb		builder\Paway.WPF.1.3.7_net45\Paway.WPF.pdb
 @copy bin\Release\net45\Paway.WPF_Secure\Paway.WPF.xml		builder\Paway.WPF.1.3.7_net45\Paway.WPF.xml
-@copy bin\Release\net452\Paway.WPF_Secure\Paway.WPF.dll		builder\Paway.WPF.1.3.7_net452\Paway.WPF.dll
-@copy bin\Release\net452\Paway.WPF_Secure\Paway.WPF.pdb	builder\Paway.WPF.1.3.7_net452\Paway.WPF.pdb
-@copy bin\Release\net452\Paway.WPF_Secure\Paway.WPF.xml	builder\Paway.WPF.1.3.7_net452\Paway.WPF.xml
 
 @copy bin\Release\net452\Paway.Model_Secure\Paway.Model.dll	builder\Paway.Model.1.3.7_net452\Paway.Model.dll
 @copy bin\Release\net452\Paway.Model_Secure\Paway.Model.xml	builder\Paway.Model.1.3.7_net452\Paway.Model.xml

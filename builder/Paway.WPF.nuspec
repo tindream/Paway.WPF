@@ -16,18 +16,11 @@
 			<group targetFramework="net45">
 				<dependency id="Paway.Helper" version="2.5.2" />
 			</group>
-			<group targetFramework="net452">
-				<dependency id="Paway.Helper" version="2.5.2" />
-				<dependency id="Paway.Comm" version="2.5.2" />
-			</group>
 		</dependencies>
 	</metadata>
 	<files>
 		<file src="..\bin\release\net45\Paway.WPF_Secure\Paway.WPF.dll"	target="lib\net45" />
 		<file src="..\bin\release\net45\Paway.WPF_Secure\Paway.WPF.pdb"	target="lib\net45" />
 		<file src="..\bin\release\net45\Paway.WPF.xml"			target="lib\net45" />
-		<file src="..\bin\release\net452\Paway.WPF_Secure\Paway.WPF.dll"	target="lib\net452" />
-		<file src="..\bin\release\net452\Paway.WPF_Secure\Paway.WPF.pdb"	target="lib\net452" />
-		<file src="..\bin\release\net452\Paway.WPF.xml"			target="lib\net452" />
 	</files>
 </package>

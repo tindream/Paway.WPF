@@ -146,7 +146,7 @@ namespace Paway.Model
         /// </summary>
         protected virtual void Insert(T info)
         {
-            server.Insert(info); PMethod.Update(info);
+            server.Insert(info); Cache.Update(info);
             var index = this.FilterList().FindIndex(c => c.Id == info.Id);
             if (!this.SearchReset() && index != -1) PMethod.Invoke(() => ObList.Insert(index, info));
             MoveTo(index, info);
@@ -171,7 +171,7 @@ namespace Paway.Model
         protected virtual void Insert(List<T> list)
         {
             if (list.Count == 0) return;
-            server.Insert(list); PMethod.Update(list);
+            server.Insert(list); Cache.Update(list);
             int index = 0;
             foreach (var info in list)
             {
@@ -203,7 +203,7 @@ namespace Paway.Model
             }
             try
             {
-                server.Delete(info); PMethod.Delete(info);
+                server.Delete(info); Cache.Delete(info);
                 PMethod.Invoke(() => ObList.Remove(info));
             }
             finally
@@ -229,7 +229,7 @@ namespace Paway.Model
             }
             try
             {
-                server.Delete(list); PMethod.Delete(list);
+                server.Delete(list); Cache.Delete(list);
                 PMethod.Invoke(() => { foreach (var info in list) ObList.Remove(info); });
             }
             finally
@@ -279,7 +279,7 @@ namespace Paway.Model
             var updateList = PMethod.Import(this.FilterList(), list);
             var timeNow = DateTime.Now;
             updateList.ForEach(c => c.UpdateOn = timeNow);
-            server.Replace(updateList); PMethod.Update(updateList);
+            server.Replace(updateList); Cache.Update(updateList);
             this.Reload();
         }
         /// <summary>
@@ -381,7 +381,7 @@ namespace Paway.Model
                     break;
                 case "导入":
                     var title = typeof(T).Description();
-                    if (PMethod.Import($"选择要导入的 {title} 表", out string file))
+                    if (PMethod.Import($"{title} 表", out string file))
                     {
                         PMethod.Progress(PMethod.Window(DataGrid), "正在导入..", adorner =>
                         {

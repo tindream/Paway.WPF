@@ -237,7 +237,7 @@ namespace Paway.Model
         {
             info.Load();
             base.Deleted(info);
-            base.server.Delete(info.DetailList); PMethod.Delete(info.DetailList);
+            base.server.Delete(info.DetailList); Cache.Delete(info.DetailList);
         }
 
         #endregion
