@@ -43,7 +43,7 @@ namespace Paway.Model
         public double Value
         {
             get { return _value; }
-            set { _value = value; OnPropertyChanged(); this.Color = MMethod.ColorSelector(value / 7); }
+            set { _value = value; OnPropertyChanged(); this.Color = PMethod.ColorSelector(value / 7); }
         }
 
         #endregion

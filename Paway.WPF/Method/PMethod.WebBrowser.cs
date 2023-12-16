@@ -3,9 +3,12 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Controls;
 
-namespace Paway.Model
+namespace Paway.WPF
 {
-    public partial class MMethod
+    /// <summary>
+    /// 一些帮助方法 - WebBrowser
+    /// </summary>
+    public partial class PMethod
     {
         /// <summary>
         /// 过滤WebBrowser javascript错误提示

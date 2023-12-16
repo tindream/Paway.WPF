@@ -36,3 +36,5 @@ AssemblyVersion.cs
 /Root/Spire.Office7.9.0/*
 /Document/3D_IronMan.zip
 /Root/OxyPlot*/*
+/builder/Paway.*/*
+/builder/Spire.Pdf.*

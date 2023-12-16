@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 
-namespace WpfWebBrowser
+namespace Paway.WPF
 {
     /// <summary>
     /// </summary>

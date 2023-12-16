@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Paway.Comm;
 using Paway.Helper;
+using Paway.Utils;
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
@@ -145,14 +146,14 @@ namespace Paway.Model
         /// </summary>
         protected virtual void Insert(T info)
         {
-            server.Insert(info); MMethod.Update(info);
+            server.Insert(info); PMethod.Update(info);
             var index = this.FilterList().FindIndex(c => c.Id == info.Id);
-            if (!this.SearchReset() && index != -1) MMethod.Invoke(() => ObList.Insert(index, info));
+            if (!this.SearchReset() && index != -1) PMethod.Invoke(() => ObList.Insert(index, info));
             MoveTo(index, info);
         }
         private void MoveTo(int index, T info)
         {
-            MMethod.BeginInvoke(() =>
+            PMethod.BeginInvoke(() =>
             {
                 if (IPage)
                 {
@@ -170,12 +171,12 @@ namespace Paway.Model
         protected virtual void Insert(List<T> list)
         {
             if (list.Count == 0) return;
-            server.Insert(list); MMethod.Update(list);
+            server.Insert(list); PMethod.Update(list);
             int index = 0;
             foreach (var info in list)
             {
                 index = this.FilterList().FindIndex(c => c.Id == info.Id);
-                if (!this.SearchReset()) MMethod.Invoke(() => ObList.Insert(index, info));
+                if (!this.SearchReset()) PMethod.Invoke(() => ObList.Insert(index, info));
             }
             MoveTo(index, list.Last());
         }
@@ -202,8 +203,8 @@ namespace Paway.Model
             }
             try
             {
-                server.Delete(info); MMethod.Delete(info);
-                MMethod.Invoke(() => ObList.Remove(info));
+                server.Delete(info); PMethod.Delete(info);
+                PMethod.Invoke(() => ObList.Remove(info));
             }
             finally
             {
@@ -228,8 +229,8 @@ namespace Paway.Model
             }
             try
             {
-                server.Delete(list); MMethod.Delete(list);
-                MMethod.Invoke(() => { foreach (var info in list) ObList.Remove(info); });
+                server.Delete(list); PMethod.Delete(list);
+                PMethod.Invoke(() => { foreach (var info in list) ObList.Remove(info); });
             }
             finally
             {
@@ -243,9 +244,9 @@ namespace Paway.Model
         /// </summary>
         protected override void Refresh(Action action = null)
         {
-            MMethod.BeginInvoke(() =>
+            PMethod.BeginInvoke(() =>
             {
-                MMethod.Progress(MMethod.Window(DataGrid), () =>
+                PMethod.Progress(PMethod.Window(DataGrid), () =>
                 {
                     Init(Find());
                     action?.Invoke();
@@ -275,10 +276,10 @@ namespace Paway.Model
         /// </summary>
         protected virtual void Import(List<T> list)
         {
-            var updateList = MMethod.Import(this.FilterList(), list);
+            var updateList = PMethod.Import(this.FilterList(), list);
             var timeNow = DateTime.Now;
             updateList.ForEach(c => c.UpdateOn = timeNow);
-            server.Replace(updateList); MMethod.Update(updateList);
+            server.Replace(updateList); PMethod.Update(updateList);
             this.Reload();
         }
         /// <summary>
@@ -330,10 +331,10 @@ namespace Paway.Model
         /// </summary>
         protected override void Action(KeyMessage msg)
         {
-            if (MConfig.Menu != this.Menu) return;
+            if (PConfig.Menu != this.Menu) return;
             if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {
-                if (MMethod.Find(DataGrid, out TextBoxEXT tbSearch, "tbSearch"))
+                if (PMethod.Find(DataGrid, out TextBoxEXT tbSearch, "tbSearch"))
                 {
                     if (tbSearch.IsKeyboardFocusWithin) return;
                 }
@@ -353,7 +354,7 @@ namespace Paway.Model
                 case "添加":
                     ViewModel().Info = new T();
                     var add = AddWindow();
-                    if (add != null && MMethod.ShowWindow(DataGrid, add) == true)
+                    if (add != null && PMethod.ShowWindow(DataGrid, add) == true)
                     {
                         Insert(ViewModel().Info);
                     }
@@ -363,7 +364,7 @@ namespace Paway.Model
                     {
                         ViewModel().Info = info;
                         var edit = AddWindow();
-                        if (edit != null && MMethod.ShowWindow(DataGrid, edit) == true)
+                        if (edit != null && PMethod.ShowWindow(DataGrid, edit) == true)
                         {
                             Updated(info);
                         }
@@ -372,7 +373,7 @@ namespace Paway.Model
                 case "删除":
                     if (SelectedInfo() is T infoDel)
                     {
-                        if (MMethod.Ask(DataGrid, $"确认删除：[{infoDel.GetType().Description()}]" + infoDel))
+                        if (PMethod.Ask(DataGrid, $"确认删除：[{infoDel.GetType().Description()}]" + infoDel))
                         {
                             Deleted(infoDel);
                         }
@@ -380,11 +381,11 @@ namespace Paway.Model
                     break;
                 case "导入":
                     var title = typeof(T).Description();
-                    if (MMethod.Import($"选择要导入的 {title} 表", out string file))
+                    if (PMethod.Import($"选择要导入的 {title} 表", out string file))
                     {
-                        MMethod.Progress(MMethod.Window(DataGrid), "正在导入..", adorner =>
+                        PMethod.Progress(PMethod.Window(DataGrid), "正在导入..", adorner =>
                         {
-                            var list = MMethod.FromExcel<T>(file).Result;
+                            var list = ExcelHelper.ToList<T>(file).Result;
                             ImportChecked(list);
                             Import(list);
                         }, () =>
@@ -398,7 +399,7 @@ namespace Paway.Model
                     break;
                 case "导出":
                     title = $"{typeof(T).Description()}{DateTime.Now:yyyy-MM-dd}";
-                    if (MMethod.Export(title, out file))
+                    if (PMethod.Export(title, out file))
                     {
                         Export(file);
                     }
@@ -460,7 +461,7 @@ namespace Paway.Model
             if (this.List == null) this.List = list;
             else
             {
-                MMethod.Update(OperType.Reset, List, list);
+                PMethod.UpdateList(OperType.Reset, List, list);
             }
             if (iReload) this.Reload();
         }
@@ -502,7 +503,7 @@ namespace Paway.Model
         /// </summary>
         protected virtual void ReloadObList()
         {
-            MMethod.Invoke(() =>
+            PMethod.Invoke(() =>
             {
                 ObList.Clear();
                 var list = showList ?? this.FilterList();

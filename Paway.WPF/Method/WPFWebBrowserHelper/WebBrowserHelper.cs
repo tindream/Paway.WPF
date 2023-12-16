@@ -8,7 +8,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Threading;
 
-namespace WpfWebBrowser
+namespace Paway.WPF
 {
     public partial class WebBrowserHelper
     {

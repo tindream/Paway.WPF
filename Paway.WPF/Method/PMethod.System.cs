@@ -14,6 +14,7 @@ using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Threading;
 using System.Xml;
+using Microsoft.Win32;
 using Paway.Helper;
 
 namespace Paway.WPF
@@ -23,6 +24,95 @@ namespace Paway.WPF
     /// </summary>
     public partial class PMethod
     {
+        #region 导入导出框
+        /// <summary>
+        /// 选择单个文件导入
+        /// </summary>
+        public static bool Import(string title, out string file, string filter = "Excel 工作簿|*.xls;*.xlsx")
+        {
+            file = null;
+            var ofd = new OpenFileDialog
+            {
+                Title = title,
+                Filter = filter,
+            };
+            if (ofd.ShowDialog() == true)
+            {
+                file = ofd.FileName;
+                return true;
+            }
+            return false;
+        }
+        /// <summary>
+        /// 选择多个文件导入
+        /// </summary>
+        public static bool Imports(string title, out string[] file, string filter = "Excel 工作簿|*.xls;*.xlsx")
+        {
+            file = null;
+            var ofd = new OpenFileDialog
+            {
+                Title = title,
+                Filter = filter,
+                Multiselect = true,
+            };
+            if (ofd.ShowDialog() == true)
+            {
+                file = ofd.FileNames;
+                return true;
+            }
+            return false;
+        }
+        /// <summary>
+        /// 导出到文件
+        /// </summary>
+        public static bool Export(string fileName, out string outFile, string filter = null)
+        {
+            if (filter == null)
+            {
+                var extension = Path.GetExtension(fileName);
+                switch (extension)
+                {
+                    case ".xls":
+                    case ".xlsx": filter = $"Excel 工作簿|*{extension}|所有文件|*.*"; break;
+                    case ".doc":
+                    case ".docx": filter = $"Word 文档|*{extension}|所有文件|*.*"; break;
+                    case ".ppt":
+                    case ".pptx": filter = $"PPT 文稿|*{extension}|所有文件|*.*"; break;
+                    case ".pdf": filter = $"PDF 文件|*{extension}|所有文件|*.*"; break;
+                    case ".jpg":
+                    case ".jpeg":
+                    case ".png":
+                    case ".bmp": filter = $"图像文件|*{extension}|所有文件|*.*"; break;
+                    case ".avi":
+                    case ".wmv":
+                    case ".mp4":
+                    case ".mpg":
+                    case ".mpeg":
+                    case ".mov":
+                    case ".rm":
+                    case ".ram":
+                    case ".swf":
+                    case ".flv": filter = $"视频文件|*{extension}|所有文件|*.*"; break;
+                    default: filter = "Excel 工作簿|*.xlsx|Excel 97-2003 工作簿|*.xls"; break;
+                }
+            }
+            outFile = null;
+            var sfd = new SaveFileDialog()
+            {
+                Title = $"选择要导出的文件位置",
+                Filter = filter,
+                FileName = fileName,
+            };
+            if (sfd.ShowDialog() == true)
+            {
+                outFile = sfd.FileName;
+                return true;
+            }
+            return false;
+        }
+
+        #endregion
+
         #region 对一个Handle控件进行截图
         [DllImport("user32.dll")]
         private static extern bool PrintWindow(IntPtr hwnd, IntPtr hdcBlt, uint nFlags);

@@ -93,7 +93,7 @@ namespace Paway.Model
         {
             ExcelHelper.ToExcel(list, null, file);
             Messenger.Default.Send(new StatuMessage("导出成功", obj));
-            if (iOpen && MMethod.Ask(obj, "导出成功,是否打开文件?"))
+            if (iOpen && PMethod.Ask(obj, "导出成功,是否打开文件?"))
             {
                 Process.Start(file);
             }
@@ -128,17 +128,17 @@ namespace Paway.Model
         /// </summary>
         protected virtual void Action(KeyMessage msg)
         {
-            if (MConfig.Menu != this.Menu) return;
+            if (PConfig.Menu != this.Menu) return;
             switch (msg.Key)
             {
                 case Key.F5: if ((Auth & MenuAuthType.Refresh) == MenuAuthType.Refresh) ActionInternalMsg("刷新"); break;
                 case Key.Delete: if ((Auth & MenuAuthType.Delete) == MenuAuthType.Delete) ActionInternalMsg("删除"); break;
                 case Key.Escape:
                     if ((Auth & MenuAuthType.Search) != MenuAuthType.Search) break;
-                    if (MMethod.Find(Panel, out TextBoxEXT tbSearch, "tbSearch"))
+                    if (PMethod.Find(Panel, out TextBoxEXT tbSearch, "tbSearch"))
                     {
                         if (tbSearch.Text.IsEmpty()) break;
-                        if (iExit && DateTime.Now.Subtract(exitTime).TotalMilliseconds < MConfig.DoubleInterval)
+                        if (iExit && DateTime.Now.Subtract(exitTime).TotalMilliseconds < PConfig.DoubleInterval)
                         {
                             Messenger.Default.Send(new StatuMessage("取消查询", false));
                             tbSearch.Text = null;
@@ -167,7 +167,7 @@ namespace Paway.Model
                         case Key.S: if ((Auth & MenuAuthType.Save) == MenuAuthType.Save) ActionInternalMsg("保存"); break;
                         case Key.F:
                             if ((Auth & MenuAuthType.Search) != MenuAuthType.Search) break;
-                            if (MMethod.Find(Panel, out TextBoxEXT tbSearch, "tbSearch") && !tbSearch.IsKeyboardFocusWithin)
+                            if (PMethod.Find(Panel, out TextBoxEXT tbSearch, "tbSearch") && !tbSearch.IsKeyboardFocusWithin)
                             {
                                 Messenger.Default.Send(new StatuMessage("查询", false));
                                 tbSearch.Focus();

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace WpfWebBrowser
+namespace Paway.WPF
 {
     /// <summary>
     /// WebBrowser浏览器处理

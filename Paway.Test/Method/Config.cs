@@ -12,7 +12,7 @@ using System.Windows;
 
 namespace Paway.Test
 {
-    public abstract class Config : MConfig
+    public abstract class Config : PConfig
     {
         #region 常量
         public const string Title = "测试系统";
