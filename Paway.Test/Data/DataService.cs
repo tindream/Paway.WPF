@@ -27,28 +27,28 @@ namespace Paway.Test
                 return _default;
             }
         }
-        private ISQLiteServer _server;
-        public ISQLiteServer Server
+        private ISQLiteService _service;
+        public ISQLiteService Service
         {
             get
             {
-                if (_server == null)
+                if (_service == null)
                 {
-                    _server = DataServiceBuilder.CreateSQLite();
+                    _service = DataServiceBuilder.CreateSQLite();
                     var sql = new Uri(@"pack://application:,,,/Paway.Test;component/Resources/script.sql").ToText();
-                    _server.Create(sql, () =>
+                    _service.Create(sql, () =>
                     {
                         UserInfo info = new UserInfo()
                         {
                             Name = "admin0"
                         };
-                        _server.Insert(info);
+                        _service.Insert(info);
                         info.Id = 19;
                         info.Name = "admin001";
-                        _server.Insert(info);
+                        _service.Insert(info);
                     });
                 }
-                return _server;
+                return _service;
             }
         }
         public DataService() : base() { }
@@ -56,19 +56,19 @@ namespace Paway.Test
         #region 自动升级
         public void Load()
         {
-            Config.Admin = Method.Conversion<AdminInfo, AdminBaseInfo>(Server.Find<AdminBaseInfo>());
+            Config.Admin = Method.Conversion<AdminInfo, AdminBaseInfo>(Service.Find<AdminBaseInfo>());
             AutoUpdate();
         }
         private void AutoUpdate()
         {
             if (Config.Admin.Version >= 0) return;
-            Server.ExecuteTransaction(cmd =>
+            Service.ExecuteTransaction(cmd =>
             {
                 if (Config.Admin.Version == 0)
                 {
                     //base.Execute($"alter table [MeetScreens] add column [{nameof(MeetScreenInfo.BackImage)}] nvarchar(256);", cmd);
                     Config.Admin.Version = 1;
-                    Server.Update(nameof(Config.Admin.Version), cmd);
+                    Service.Update(nameof(Config.Admin.Version), cmd);
                 }
             });
         }

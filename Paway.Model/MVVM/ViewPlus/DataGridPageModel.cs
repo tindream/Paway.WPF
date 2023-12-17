@@ -28,7 +28,7 @@ namespace Paway.Model
         /// <summary>
         /// 数据处理接口
         /// </summary>
-        protected IDataGridServer server;
+        protected IDataGridService server;
         /// <summary>
         /// 数据控件
         /// </summary>
@@ -409,7 +409,7 @@ namespace Paway.Model
         /// <summary>
         /// 初始化列表、数据库获取接口、分页
         /// </summary>
-        protected void Init(IDataGridServer server, List<T> list, DataGridEXT dataGrid, bool iPage = false)
+        protected void Init(IDataGridService server, List<T> list, DataGridEXT dataGrid, bool iPage = false)
         {
             this.Init(server, list, dataGrid, null, iPage);
         }
@@ -417,7 +417,7 @@ namespace Paway.Model
         /// 初始化列表、数据库获取接口、分页
         /// <para>允许数据过滤</para>
         /// </summary>
-        protected void Init(IDataGridServer server, List<T> list, DataGridEXT dataGrid, string sqlFilter, bool iPage = false)
+        protected void Init(IDataGridService server, List<T> list, DataGridEXT dataGrid, string sqlFilter, bool iPage = false)
         {
             this.server = server;
             this.sqlFilter = sqlFilter;
