@@ -16,47 +16,59 @@ using System.Threading;
 
 namespace Paway.Test
 {
-    public partial class DataService : SQLiteHelper
+    public partial class DataService
     {
-        private static DataService intance;
+        private static DataService _default;
         public static DataService Default
         {
             get
             {
-                if (intance == null) intance = new DataService();
-                return intance;
+                if (_default == null) _default = new DataService();
+                return _default;
             }
         }
-        public DataService() : base()
+        private ISQLiteServer _server;
+        public ISQLiteServer Server
         {
-            base.Create(new Uri(@"pack://application:,,,/Paway.Test;component/Resources/script.sql").ToText());
+            get
+            {
+                if (_server == null)
+                {
+                    _server = DataServiceBuilder.CreateSQLite();
+                    var sql = new Uri(@"pack://application:,,,/Paway.Test;component/Resources/script.sql").ToText();
+                    _server.Create(sql, () =>
+                    {
+                        UserInfo info = new UserInfo()
+                        {
+                            Name = "admin0"
+                        };
+                        _server.Insert(info);
+                        info.Id = 19;
+                        info.Name = "admin001";
+                        _server.Insert(info);
+                    });
+                }
+                return _server;
+            }
         }
-        protected override void Created()
-        {
-            var user = new UserInfo { UserType = UserType.Admin, Name = "admin", Password = EncryptHelper.MD5("admin" + Config.Suffix) };
-            this.Insert(user);
-            var auth = new AuthInfo(user.Id);
-            auth.SetValue(nameof(auth.MenuType), Method.Sum<MenuAuthType>());
-            auth.SetValue(nameof(auth.ButtonType), Method.Sum<MenuAuthType>());
-            this.Insert(auth);
-        }
+        public DataService() : base() { }
 
         #region 自动升级
         public void Load()
         {
-            Config.Admin = Method.Conversion<AdminInfo, AdminBaseInfo>(Find<AdminBaseInfo>());
+            Config.Admin = Method.Conversion<AdminInfo, AdminBaseInfo>(Server.Find<AdminBaseInfo>());
             AutoUpdate();
         }
         private void AutoUpdate()
         {
             if (Config.Admin.Version >= 0) return;
-            base.ExecuteTransaction(cmd =>
+            Server.ExecuteTransaction(cmd =>
             {
                 if (Config.Admin.Version == 0)
                 {
                     //base.Execute($"alter table [MeetScreens] add column [{nameof(MeetScreenInfo.BackImage)}] nvarchar(256);", cmd);
                     Config.Admin.Version = 1;
-                    Update(nameof(Config.Admin.Version), cmd);
+                    Server.Update(nameof(Config.Admin.Version), cmd);
                 }
             });
         }

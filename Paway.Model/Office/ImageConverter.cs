@@ -24,9 +24,9 @@ namespace Paway.Model
     public class ImageConverter
     {
         /// <summary>
-        /// 转换进度事件
+        /// 图片转换进度事件
         /// </summary>
-        public event Action<int, int> ProgressChanged;
+        public event Action<ProgressEventArgs> ProgressChanged;
         static ImageConverter()
         {
             SpireLicence.Init();
@@ -86,25 +86,25 @@ namespace Paway.Model
         {
             if (zoom == 1) WordToImage(file, (index, total, image) =>
             {
-                ProgressChanged?.Invoke(index, total);
-                image.SaveTo(Path.Combine(toPath, $"{index}.jpg"), ImageFormat.Jpeg);
+                ProgressChanged?.Invoke(new ProgressEventArgs(index, total));
+                SaveTo(image, Path.Combine(toPath, $"{index}.jpg"), ImageFormat.Jpeg);
             });
             else WordToImage(file, zoom, (index, total, image) =>
             {
-                ProgressChanged?.Invoke(index, total);
-                image.SaveTo(Path.Combine(toPath, $"{index}.jpg"), ImageFormat.Jpeg);
+                ProgressChanged?.Invoke(new ProgressEventArgs(index, total));
+                SaveTo(image, Path.Combine(toPath, $"{index}.jpg"), ImageFormat.Jpeg);
             });
         }
         private void WordToImage(string file, List<Image> imageList, double zoom)
         {
             if (zoom == 1) WordToImage(file, (index, total, image) =>
             {
-                ProgressChanged?.Invoke(index, total);
+                ProgressChanged?.Invoke(new ProgressEventArgs(index, total));
                 imageList.Add(image);
             });
             else WordToImage(file, zoom, (index, total, image) =>
             {
-                ProgressChanged?.Invoke(index, total);
+                ProgressChanged?.Invoke(new ProgressEventArgs(index, total));
                 imageList.Add(image);
             });
         }
@@ -147,8 +147,8 @@ namespace Paway.Model
                     excel.Worksheets[i].SaveToPdf(pdfFile);
                     PDFToImage(pdfFile, zoom, (index, total, image) =>
                     {
-                        ProgressChanged?.Invoke(index + i * total, total * excel.Worksheets.Count);
-                        image.SaveTo(Path.Combine(toPath, $"{i}_{index}.jpg"), ImageFormat.Jpeg);
+                        ProgressChanged?.Invoke(new ProgressEventArgs(index + i * total, total * excel.Worksheets.Count));
+                        SaveTo(image, Path.Combine(toPath, $"{i}_{index}.jpg"), ImageFormat.Jpeg);
                     });
                     File.Delete(pdfFile);
                 }
@@ -158,7 +158,7 @@ namespace Paway.Model
         {
             ExcelToImage(file, zoom, (index, total, image) =>
             {
-                ProgressChanged?.Invoke(index, total);
+                ProgressChanged?.Invoke(new ProgressEventArgs(index, total));
                 imageList.Add(image);
             });
         }
@@ -182,15 +182,15 @@ namespace Paway.Model
         {
             PPTToImage(file, (index, total, image) =>
             {
-                ProgressChanged?.Invoke(index, total);
-                image.SaveTo(Path.Combine(toPath, $"{index}.jpg"), ImageFormat.Jpeg);
+                ProgressChanged?.Invoke(new ProgressEventArgs(index, total));
+                SaveTo(image, Path.Combine(toPath, $"{index}.jpg"), ImageFormat.Jpeg);
             });
         }
         private void PPTToImage(string file, List<Image> imageList)
         {
             PPTToImage(file, (index, total, image) =>
             {
-                ProgressChanged?.Invoke(index, total);
+                ProgressChanged?.Invoke(new ProgressEventArgs(index, total));
                 imageList.Add(image);
             });
         }
@@ -210,15 +210,15 @@ namespace Paway.Model
         {
             PDFToImage(file, zoom, (index, total, image) =>
             {
-                ProgressChanged?.Invoke(index, total);
-                image.SaveTo(Path.Combine(toPath, $"{index}.jpg"), ImageFormat.Jpeg);
+                ProgressChanged?.Invoke(new ProgressEventArgs(index, total));
+                SaveTo(image, Path.Combine(toPath, $"{index}.jpg"), ImageFormat.Jpeg);
             });
         }
         private void PDFToImage(string file, List<Image> imageList, double zoom)
         {
             PDFToImage(file, zoom, (index, total, image) =>
             {
-                ProgressChanged?.Invoke(index, total);
+                ProgressChanged?.Invoke(new ProgressEventArgs(index, total));
                 imageList.Add(image);
             });
         }
@@ -231,6 +231,22 @@ namespace Paway.Model
                 {
                     action.Invoke(i, pdf.Pages.Count, pdf.SaveAsImage(i, (int)(96 * zoom), (int)(96 * zoom)));
                 }
+            }
+        }
+
+        /// <summary>
+        /// 指定格式质量保存图片
+        /// <para>默认质量70</para>
+        /// </summary>
+        public static void SaveTo(Image image, string fileName, ImageFormat format, long quality = 70)
+        {
+            var codecs = ImageCodecInfo.GetImageDecoders();
+            var codecInfo = codecs.FirstOrDefault(codec => codec.FormatID == format.Guid);
+            using (var encoderParameters = new EncoderParameters(1))
+            using (var myEncoderParameter = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, quality))
+            {
+                encoderParameters.Param[0] = myEncoderParameter;
+                image.Save(fileName, codecInfo, encoderParameters);
             }
         }
 
@@ -257,7 +273,7 @@ namespace Paway.Model
             PdfDocument doc = new PdfDocument();
             for (var i = 0; i < list.Count; i++)
             {
-                ProgressChanged?.Invoke(i, list.Count);
+                ProgressChanged?.Invoke(new ProgressEventArgs(i, list.Count));
                 PdfPageBase page = doc.Pages.Add();
                 //Load a tiff image from system
                 PdfImage image = toImage(i);

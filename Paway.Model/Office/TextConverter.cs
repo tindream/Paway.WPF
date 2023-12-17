@@ -19,7 +19,7 @@ namespace Paway.Model
         /// <summary>
         /// 转换进度事件
         /// </summary>
-        public event Action<int, int> ProgressChanged;
+        public event Action<ProgressEventArgs> ProgressChanged;
         static TextConverter()
         {
             SpireLicence.Init();
@@ -39,7 +39,7 @@ namespace Paway.Model
             var list = new List<string>();
             for (var i = 0; i < pdf.Pages.Count; i++)
             {
-                ProgressChanged?.Invoke(i, pdf.Pages.Count);
+                ProgressChanged?.Invoke(new ProgressEventArgs(i, pdf.Pages.Count));
                 var text = new PdfTextExtractor(pdf.Pages[i]).ExtractText(option);
                 list.Add(text);
             }
