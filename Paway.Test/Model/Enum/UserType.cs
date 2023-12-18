@@ -9,7 +9,6 @@ namespace Paway.Test
 {
     public enum UserType
     {
-        [Description(Config.None)]
         None = 0,
         User = 10,
         Admin = 100,

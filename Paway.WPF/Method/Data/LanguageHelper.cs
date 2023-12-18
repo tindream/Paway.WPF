@@ -65,7 +65,7 @@ namespace Paway.WPF
             Helper.ConverHelper.TextAttrEvent -= ConverHelper_DescriptionAttrEvent;
             Helper.ConverHelper.TextAttrEvent += ConverHelper_DescriptionAttrEvent;
         }
-        private static void ConverHelper_DescriptionAttrEvent(DescriptionData obj)
+        private static void ConverHelper_DescriptionAttrEvent(DescriptionEventArgs obj)
         {
             var key = $"{obj.Name}_{languageName}";
             if (!LanguageCache.ContainsKey(key))

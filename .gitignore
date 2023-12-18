@@ -38,3 +38,4 @@ AssemblyVersion.cs
 /Root/OxyPlot*/*
 /builder/Paway.*/*
 /builder/Spire.Pdf.*
+/builder/OxyPlot.*

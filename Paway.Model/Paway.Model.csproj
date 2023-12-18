@@ -28,11 +28,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Reference Include="OxyPlot">
-			<HintPath>..\Root\OxyPlot1.1\OxyPlot.dll</HintPath>
-		</Reference>
-	</ItemGroup>
-	<ItemGroup>
 		<ProjectReference Include="..\Paway.WPF\Paway.WPF.csproj" />
 	</ItemGroup>
 	<ItemGroup>
@@ -40,6 +35,7 @@
 		<Reference Include="System.Windows.Forms" />
 	</ItemGroup>
 	<ItemGroup>
+		<PackageReference Include="OxyPlot.Core" Version="2.1.0" />
 		<PackageReference Include="Paway.Helper" Version="2.5.2" />
 		<PackageReference Include="Paway.Utils" Version="2.5.2" />
 		<PackageReference Include="Paway.Comm" Version="2.5.2" />

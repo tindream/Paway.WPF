@@ -15,7 +15,6 @@ namespace Paway.WPF
         /// <summary>
         /// Default
         /// </summary>
-        [Description(PConfig.None)]
         None,
         /// <summary>
         /// 渐入

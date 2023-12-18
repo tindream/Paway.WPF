@@ -36,21 +36,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Reference Include="OxyPlot">
-			<HintPath>..\Root\OxyPlot1.1\OxyPlot.dll</HintPath>
-		</Reference>
-		<Reference Include="OxyPlot.Wpf">
-			<HintPath>..\Root\OxyPlot1.1\OxyPlot.Wpf.dll</HintPath>
-		</Reference>
-		<Reference Include="OxyPlot.Wpf.Shared">
-			<HintPath>..\Root\OxyPlot1.1\OxyPlot.Wpf.Shared.dll</HintPath>
-		</Reference>
-	</ItemGroup>
-	<ItemGroup>
 		<ProjectReference Include="..\Paway.Model\Paway.Model.csproj" />
 		<ProjectReference Include="..\Paway.WPF\Paway.WPF.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+		<PackageReference Include="OxyPlot.WPF" Version="2.1.0" />
+		<PackageReference Include="OxyPlot.WPF.Shared" Version="2.1.0" />
 		<PackageReference Include="Paway.Helper" Version="2.5.2" />
 		<PackageReference Include="Paway.Utils" Version="2.5.2" />
 		<PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />

@@ -12,7 +12,6 @@ namespace Paway.Test
     /// </summary>
     public enum LogType
     {
-        [Description(Config.None)]
         None,
         [Description("测试")]
         Test,
