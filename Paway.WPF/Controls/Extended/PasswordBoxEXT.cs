@@ -37,6 +37,7 @@ namespace Paway.WPF
 
         /// <summary>
         /// 密码
+        /// <para>默认值：string.Empty</para>
         /// </summary>
         [Category("扩展")]
         [Description("密码")]
@@ -84,6 +85,7 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(IAnimation), typeof(double), typeof(PasswordBoxEXT));
         /// <summary>
         /// 动画
+        /// <para>默认值：false</para>
         /// </summary>
         [Category("扩展")]
         [Description("动画")]
@@ -154,6 +156,7 @@ namespace Paway.WPF
         #region 扩展
         /// <summary>
         /// 自定义边框圆角
+        /// <para>默认值：3</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义边框圆角")]
@@ -175,6 +178,7 @@ namespace Paway.WPF
 
         /// <summary>
         /// 文本框的边框颜色
+        /// <para>默认值：默认</para>
         /// </summary>
         [Category("扩展")]
         [Description("文本框的边框颜色")]
@@ -196,6 +200,7 @@ namespace Paway.WPF
 
         /// <summary>
         /// 图标
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展")]
         [Description("图标")]
@@ -217,6 +222,7 @@ namespace Paway.WPF
 
         /// <summary>
         /// 图标宽度
+        /// <para>默认值：double.NaN</para>
         /// </summary>
         [Category("扩展")]
         [Description("图标宽度")]
@@ -239,6 +245,7 @@ namespace Paway.WPF
 
         /// <summary>
         /// 图标高度
+        /// <para>默认值：double.NaN</para>
         /// </summary>
         [Category("扩展")]
         [Description("图标高度")]
@@ -261,6 +268,7 @@ namespace Paway.WPF
 
         /// <summary>
         /// 图标的内容如何拉伸才适合其磁贴
+        /// <para>默认值：None</para>
         /// </summary>
         [Category("扩展")]
         [Description("图标的内容如何拉伸才适合其磁贴")]
@@ -282,6 +290,7 @@ namespace Paway.WPF
 
         /// <summary>
         /// 水印内容
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展")]
         [Description("水印内容")]
@@ -303,6 +312,7 @@ namespace Paway.WPF
 
         /// <summary>
         /// 水印字体大小系数
+        /// <para>默认值：0.85</para>
         /// </summary>
         [Category("扩展")]
         [Description("水印字体大小系数")]
@@ -324,6 +334,7 @@ namespace Paway.WPF
 
         /// <summary>
         /// 标题
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展")]
         [Description("标题")]
@@ -343,10 +354,11 @@ namespace Paway.WPF
             obj.SetValue(TitleProperty, value);
         }
         /// <summary>
-        /// 标题长度
+        /// 标题最小长度
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展")]
-        [Description("标题长度")]
+        [Description("标题最小长度")]
         public double TitleMinWidth { get; set; }
         /// <summary>
         /// get标题

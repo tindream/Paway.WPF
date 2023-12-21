@@ -75,6 +75,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 项颜色
+        /// <para>默认值：默认</para>
         /// </summary>
         [Category("扩展")]
         [Description("项颜色")]

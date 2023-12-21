@@ -33,6 +33,7 @@ namespace Paway.WPF
 
         /// <summary>
         /// 启用扩展按钮
+        /// <para>默认值：false</para>
         /// </summary>
         [Category("扩展")]
         [Description("启用扩展按钮")]
@@ -43,6 +44,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项背景色
+        /// <para>默认值：默认</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义项背景色")]
@@ -53,6 +55,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// '今天'按钮颜色
+        /// <para>默认值：Transparent, 160, 200</para>
         /// </summary>
         [Category("扩展")]
         [Description("'今天'按钮颜色")]

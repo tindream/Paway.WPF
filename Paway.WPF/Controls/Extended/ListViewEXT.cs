@@ -86,6 +86,7 @@ namespace Paway.WPF
         #region 扩展
         /// <summary>
         /// 动画
+        /// <para>默认值：false</para>
         /// </summary>
         [Category("扩展")]
         [Description("动画")]
@@ -99,6 +100,7 @@ namespace Paway.WPF
         #region 扩展.项图片
         /// <summary>
         /// 自定义项图片宽度
+        /// <para>默认值：double.NaN</para>
         /// </summary>
         [Category("扩展.项图片")]
         [Description("自定义项图片宽度")]
@@ -110,6 +112,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项图片高度
+        /// <para>默认值：double.NaN</para>
         /// </summary>
         [Category("扩展.项图片")]
         [Description("自定义项图片高度")]
@@ -121,6 +124,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项图片位置
+        /// <para>默认值：Top</para>
         /// </summary>
         [Category("扩展.项图片")]
         [Description("自定义项图片位置")]
@@ -131,6 +135,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项图片外边距
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展.项图片")]
         [Description("自定义项图片外边距")]
@@ -141,6 +146,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 背景图片的内容如何拉伸才适合其磁贴
+        /// <para>默认值：None</para>
         /// </summary>
         [Category("扩展.项图片")]
         [Description("自定义项图片的内容如何拉伸才适合其磁贴")]
@@ -154,6 +160,7 @@ namespace Paway.WPF
         #region 扩展.项文本
         /// <summary>
         /// 自定义项文本内边距
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展.项文本")]
         [Description("自定义项文本内边距")]
@@ -164,6 +171,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项文本背景颜色
+        /// <para>默认值：Transparent</para>
         /// </summary>
         [Category("扩展.项文本")]
         [Description("自定义项文本背景颜色")]
@@ -177,6 +185,7 @@ namespace Paway.WPF
         #region 扩展.项描述
         /// <summary>
         /// 自定义项描述位置
+        /// <para>默认值：Right</para>
         /// </summary>
         [Category("扩展.项描述")]
         [Description("自定义项描述位置")]
@@ -187,6 +196,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项描述内边距
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展.项描述")]
         [Description("自定义项描述内边距")]
@@ -197,6 +207,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项描述字体颜色
+        /// <para>默认值：TextSub, White</para>
         /// </summary>
         [Category("扩展.项描述")]
         [Description("自定义项描述字体颜色")]
@@ -207,6 +218,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项描述字体颜色
+        /// <para>默认值：Transparent</para>
         /// </summary>
         [Category("扩展.项描述")]
         [Description("自定义项描述字体颜色")]
@@ -217,6 +229,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项描述字体大小
+        /// <para>默认值：主题字体大小</para>
         /// </summary>
         [Category("扩展.项描述")]
         [Description("自定义项描述字体大小")]

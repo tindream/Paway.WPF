@@ -110,6 +110,7 @@ namespace Paway.WPF
 
         /// <summary>
         /// 自定义项文本字体颜色
+        /// <para>默认值：Transparent</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义项文本字体颜色")]
@@ -120,6 +121,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项背景颜色
+        /// <para>默认值：Transparent</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义项背景颜色")]
@@ -130,6 +132,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项外边框颜色
+        /// <para>默认值：Transparent</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义项外边框颜色")]
@@ -140,6 +143,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项外边框
+        /// <para>默认值：double.NaN</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义项外边框")]
@@ -150,6 +154,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项外边距
+        /// <para>默认值：double.NaN</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义项外边距")]
@@ -160,6 +165,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项宽度
+        /// <para>默认值：double.NaN</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义项宽度")]
@@ -170,6 +176,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项高度
+        /// <para>默认值：double.NaN</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义项高度")]
@@ -180,6 +187,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项圆角
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义项圆角")]
@@ -190,6 +198,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项文本内边距
+        /// <para>默认值：double.NaN</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义项文本内边距")]
@@ -212,6 +221,7 @@ namespace Paway.WPF
 
         /// <summary>
         /// 占位标记
+        /// <para>默认值：false</para>
         /// </summary>
         [Category("扩展")]
         [Description("占位标记")]

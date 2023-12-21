@@ -96,6 +96,7 @@ namespace Paway.WPF
         #region 扩展
         /// <summary>
         /// 自定义边框圆角
+        /// <para>默认值：4</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义边框圆角")]
@@ -106,6 +107,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义边框线
+        /// <para>默认值：0</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义边框线")]
@@ -116,6 +118,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义文本颜色
+        /// <para>默认值：White, White, White</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义文本颜色")]
@@ -127,6 +130,7 @@ namespace Paway.WPF
 
         /// <summary>
         /// 自定义背景颜色
+        /// <para>默认值：200</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义背景颜色")]
@@ -138,6 +142,7 @@ namespace Paway.WPF
 
         /// <summary>
         /// 背景图片宽度
+        /// <para>默认值：double.NaN</para>
         /// </summary>
         [Category("扩展")]
         [Description("背景图片宽度")]
@@ -149,6 +154,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 背景图片高度
+        /// <para>默认值：double.NaN</para>
         /// </summary>
         [Category("扩展")]
         [Description("背景图片高度")]
@@ -160,6 +166,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 背景图片位置
+        /// <para>默认值：Left</para>
         /// </summary>
         [Category("扩展")]
         [Description("背景图片位置")]
@@ -170,6 +177,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 背景图片外边距
+        /// <para>默认值：0, 0, 2, 0</para>
         /// </summary>
         [Category("扩展")]
         [Description("背景图片外边距")]
@@ -180,6 +188,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 背景图片的内容如何拉伸才适合其磁贴
+        /// <para>默认值：None</para>
         /// </summary>
         [Category("扩展")]
         [Description("背景图片的内容如何拉伸才适合其磁贴")]
@@ -190,6 +199,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 背景图片
+        /// <para>默认值：无</para>
         /// </summary>
         [Category("扩展")]
         [Description("背景图片")]
@@ -201,6 +211,7 @@ namespace Paway.WPF
 
         /// <summary>
         /// 轻颜色样式
+        /// <para>默认值：false</para>
         /// </summary>
         [Category("扩展")]
         [Description("轻颜色样式")]
@@ -211,6 +222,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 颜色样式
+        /// <para>默认值：Color</para>
         /// </summary>
         [Category("扩展")]
         [Description("颜色样式")]

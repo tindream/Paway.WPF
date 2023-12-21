@@ -31,6 +31,7 @@ namespace Paway.WPF
         #region 扩展
         /// <summary>
         /// 自定义边框圆角
+        /// <para>默认值：3</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义边框圆角")]
@@ -41,6 +42,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 边框颜色
+        /// <para>默认值：默认</para>
         /// </summary>
         [Category("扩展")]
         [Description("边框颜色")]

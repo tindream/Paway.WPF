@@ -82,6 +82,7 @@ namespace Paway.WPF
         #region 扩展
         /// <summary>
         /// 自定义边框圆角
+        /// <para>默认值：3</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义边框圆角")]
@@ -92,6 +93,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 项字体颜色
+        /// <para>默认值：TextColor, TextColor, White</para>
         /// </summary>
         [Category("扩展")]
         [Description("项字体颜色")]
@@ -102,6 +104,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 项背景颜色
+        /// <para>默认值：null, 120, 200</para>
         /// </summary>
         [Category("扩展")]
         [Description("项背景颜色")]
@@ -112,6 +115,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 外边框颜色
+        /// <para>默认值：默认</para>
         /// </summary>
         [Category("扩展")]
         [Description("外边框颜色")]
@@ -122,6 +126,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 图片
+        /// <para>默认值：无</para>
         /// </summary>
         [Category("扩展")]
         [Description("图片")]
@@ -132,6 +137,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 图标宽度
+        /// <para>默认值：double.NaN</para>
         /// </summary>
         [Category("扩展")]
         [Description("图标宽度")]
@@ -143,6 +149,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 图标高度
+        /// <para>默认值：double.NaN</para>
         /// </summary>
         [Category("扩展")]
         [Description("图标高度")]
@@ -154,6 +161,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 图片的内容如何拉伸才适合其磁贴
+        /// <para>默认值：None</para>
         /// </summary>
         [Category("扩展")]
         [Description("图片的内容如何拉伸才适合其磁贴")]
@@ -164,6 +172,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 输入框水印内容
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展")]
         [Description("输入框水印内容")]
@@ -174,6 +183,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 水印字体大小系数
+        /// <para>默认值：0.85</para>
         /// </summary>
         [Category("扩展")]
         [Description("水印字体大小系数")]
@@ -184,6 +194,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 标题
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展")]
         [Description("标题")]
@@ -193,17 +204,19 @@ namespace Paway.WPF
             set { SetValue(TitleProperty, value); }
         }
         /// <summary>
-        /// 标题长度
+        /// 标题最小长度
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展")]
-        [Description("标题长度")]
+        [Description("标题最小长度")]
         public double TitleMinWidth
         {
             get { return (double)GetValue(TitleMinWidthProperty); }
             set { SetValue(TitleMinWidthProperty, value); }
         }
         /// <summary>
-        /// 动画
+        /// IsEditable为true时，输入框的动画标记
+        /// <para>默认值：false</para>
         /// </summary>
         [Category("扩展")]
         [Description("IsEditable为true时，输入框的动画标记")]
@@ -214,6 +227,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 拦截Tab与回车跳转
+        /// <para>默认值：true</para>
         /// </summary>
         [Category("扩展")]
         [Description("拦截Tab与回车跳转")]

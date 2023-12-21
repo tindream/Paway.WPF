@@ -25,6 +25,7 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(AnimationValue), typeof(double), typeof(ProgressBoard), new FrameworkPropertyMetadata(0d, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnAnimationValueChanged));
         /// <summary>
         /// 动画进度值
+        /// <para>默认值：0</para>
         /// </summary>
         [Category("扩展")]
         [Description("动画进度值")]

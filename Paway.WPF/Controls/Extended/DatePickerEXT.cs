@@ -44,6 +44,7 @@ namespace Paway.WPF
         #region 扩展
         /// <summary>
         /// 自定义边框圆角
+        /// <para>默认值：3</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义边框圆角")]
@@ -54,6 +55,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 只读属性
+        /// <para>默认值：true</para>
         /// </summary>
         [Category("扩展")]
         [Description("只读属性")]
@@ -64,6 +66,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 启用扩展按钮
+        /// <para>默认值：true</para>
         /// </summary>
         [Category("扩展")]
         [Description("启用扩展按钮")]
@@ -74,6 +77,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项背景色
+        /// <para>默认值：默认</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义项背景色")]
@@ -84,6 +88,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// '今天'按钮颜色
+        /// <para>默认值：Transparent, 160 ,200</para>
         /// </summary>
         [Category("扩展")]
         [Description("'今天'按钮颜色")]

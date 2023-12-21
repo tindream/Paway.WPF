@@ -78,6 +78,7 @@ namespace Paway.WPF
         #region 扩展
         /// <summary>
         /// 选择样式
+        /// <para>默认值：HourMinute</para>
         /// </summary>
         [Category("扩展")]
         [Description("选择样式")]
@@ -88,6 +89,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 时
+        /// <para>默认值：0</para>
         /// </summary>
         [Category("扩展")]
         [Description("时")]
@@ -98,6 +100,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 分
+        /// <para>默认值：0</para>
         /// </summary>
         [Category("扩展")]
         [Description("分")]
@@ -108,6 +111,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 秒
+        /// <para>默认值：0</para>
         /// </summary>
         [Category("扩展")]
         [Description("秒")]
@@ -118,6 +122,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 时间
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展")]
         [Description("时间")]

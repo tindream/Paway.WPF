@@ -21,7 +21,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBorderProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBorder), typeof(ThicknessEXT), typeof(CheckButton), new PropertyMetadata(new ThicknessEXT(1, 0)));
+            DependencyProperty.RegisterAttached(nameof(ItemBorder), typeof(ThicknessEXT), typeof(CheckButton), new PropertyMetadata(new ThicknessEXT(1, 0, 0)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
@@ -66,6 +66,7 @@ namespace Paway.WPF
         #region 扩展
         /// <summary>
         /// 自定义边框圆角
+        /// <para>默认值：3</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义边框圆角")]
@@ -76,6 +77,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义边框线
+        /// <para>默认值：1, 0, 0</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义边框线")]
@@ -86,6 +88,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义文本颜色
+        /// <para>默认值：TextColor, White, White</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义文本颜色")]
@@ -96,6 +99,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 边框颜色
+        /// <para>默认值：默认</para>
         /// </summary>
         [Category("扩展")]
         [Description("边框颜色")]
@@ -106,6 +110,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 颜色样式
+        /// <para>默认值：Color</para>
         /// </summary>
         [Category("扩展")]
         [Description("颜色样式")]
@@ -116,6 +121,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 标题
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展")]
         [Description("标题")]
@@ -125,10 +131,11 @@ namespace Paway.WPF
             set { SetValue(TitleProperty, value); }
         }
         /// <summary>
-        /// 标题长度
+        /// 标题最小长度
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展")]
-        [Description("标题长度")]
+        [Description("标题最小长度")]
         public double TitleMinWidth
         {
             get { return (double)GetValue(TitleMinWidthProperty); }

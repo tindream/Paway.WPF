@@ -31,6 +31,7 @@ namespace Paway.WPF
         #region 扩展
         /// <summary>
         /// 自定义项背景色
+        /// <para>默认值：默认</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义项背景色")]
@@ -41,6 +42,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 菜单模式
+        /// <para>默认值：true</para>
         /// </summary>
         [Category("扩展")]
         [Description("菜单模式")]

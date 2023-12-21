@@ -85,7 +85,8 @@ namespace Paway.WPF
             return false;
         }
         /// <summary>
-        /// 下拉列表是否显示列
+        /// 启用搜索框
+        /// <para>默认值：false</para>
         /// </summary>
         [Category("扩展")]
         [Description("启用搜索框")]

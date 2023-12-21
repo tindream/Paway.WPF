@@ -136,6 +136,7 @@ namespace Paway.WPF
         #region 扩展
         /// <summary>
         /// 项显示方向
+        /// <para>默认值：Horizontal</para>
         /// </summary>
         [Category("扩展")]
         [Description("项显示方向")]
@@ -146,24 +147,28 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 普通项，不响应鼠标事件
+        /// <para>默认值：false</para>
         /// </summary>
         [Category("扩展")]
         [Description("普通项，不响应鼠标事件")]
         public bool INormal { get; set; }
         /// <summary>
         /// 移动项，兼容移动
+        /// <para>默认值：false</para>
         /// </summary>
         [Category("扩展")]
         [Description("移动项，兼容移动")]
         public bool IMove { get; set; }
         /// <summary>
         /// 指定何时应引发事件
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展")]
         [Description("指定何时应引发事件")]
         public ClickMode ClickMode { get; set; }
         /// <summary>
         /// 自定义项宽度
+        /// <para>默认值：90</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义项宽度")]
@@ -175,6 +180,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 宽度样式
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展")]
         [Description("宽度样式")]
@@ -185,6 +191,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 行数
+        /// <para>默认值：1</para>
         /// </summary>
         [Category("扩展")]
         [Description("行数")]
@@ -195,6 +202,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项高度
+        /// <para>默认值：42</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义项高度")]
@@ -206,6 +214,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 颜色样式
+        /// <para>默认值：None</para>
         /// </summary>
         [Category("扩展")]
         [Description("颜色样式")]
@@ -216,6 +225,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 轻颜色样式
+        /// <para>默认值：false</para>
         /// </summary>
         [Category("扩展")]
         [Description("轻颜色样式")]
@@ -226,6 +236,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项圆角
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义项圆角")]
@@ -236,6 +247,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项外边框颜色
+        /// <para>默认值：null, 200, 240</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义项外边框颜色")]
@@ -246,6 +258,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项背景颜色
+        /// <para>默认值：Transparent, 160, 200</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义项背景颜色")]
@@ -256,6 +269,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项外边框
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义项外边框")]
@@ -266,6 +280,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项外边距
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义项外边距")]
@@ -276,6 +291,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项内边距
+        /// <para>默认值：5</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义项内边距")]
@@ -286,6 +302,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项文本字体大小
+        /// <para>默认值：主题字体大小</para>
         /// </summary>
         [Category("扩展.项文本")]
         [Description("自定义项文本字体大小")]
@@ -296,6 +313,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项文本字体颜色
+        /// <para>默认值：TextColor, White</para>
         /// </summary>
         [Category("扩展.项文本")]
         [Description("自定义项文本字体颜色")]

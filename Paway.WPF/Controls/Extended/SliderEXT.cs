@@ -88,6 +88,7 @@ namespace Paway.WPF
         #region 扩展
         /// <summary>
         /// 自定义边框圆角
+        /// <para>默认值：2</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义边框圆角")]
@@ -98,6 +99,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 轨道高度
+        /// <para>默认值：3</para>
         /// </summary>
         [Category("扩展")]
         [Description("轨道高度")]
@@ -108,6 +110,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 轨道按钮宽度度
+        /// <para>默认值：18</para>
         /// </summary>
         [Category("扩展")]
         [Description("轨道按钮宽度度")]
@@ -118,6 +121,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 轨道线性颜色
+        /// <para>默认值：默认</para>
         /// </summary>
         [Category("扩展")]
         [Description("轨道线性颜色")]
@@ -128,6 +132,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 轨道背景颜色
+        /// <para>默认值：LightGray</para>
         /// </summary>
         [Category("扩展")]
         [Description("轨道背景颜色")]
@@ -138,6 +143,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 按钮类型
+        /// <para>默认值：Round</para>
         /// </summary>
         [Category("扩展")]
         [Description("按钮类型")]
@@ -148,6 +154,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 显示刻度值
+        /// <para>默认值：false</para>
         /// </summary>
         [Category("扩展")]
         [Description("显示刻度值")]
@@ -158,6 +165,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 标题
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展")]
         [Description("标题")]
@@ -167,10 +175,11 @@ namespace Paway.WPF
             set { SetValue(TitleProperty, value); }
         }
         /// <summary>
-        /// 标题长度
+        /// 标题最小长度
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展")]
-        [Description("标题长度")]
+        [Description("标题最小长度")]
         public double TitleMinWidth
         {
             get { return (double)GetValue(TitleMinWidthProperty); }
@@ -186,6 +195,7 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(AnimationValue), typeof(double), typeof(SliderEXT), new FrameworkPropertyMetadata(0d, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnAnimationValueChanged));
         /// <summary>
         /// 动画进度值
+        /// <para>默认值：0</para>
         /// </summary>
         [Category("扩展")]
         [Description("动画进度值")]

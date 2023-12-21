@@ -74,6 +74,7 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(AnimationValue), typeof(double), typeof(ProgressBarEXT), new FrameworkPropertyMetadata(0d, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnAnimationValueChanged));
         /// <summary>
         /// 动画进度值
+        /// <para>默认值：0</para>
         /// </summary>
         [Category("扩展")]
         [Description("动画进度值")]
@@ -123,6 +124,7 @@ namespace Paway.WPF
         #region 扩展
         /// <summary>
         /// 自定义边框圆角
+        /// <para>默认值：3</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义边框圆角")]
@@ -133,6 +135,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 进度条线性颜色
+        /// <para>默认值：默认</para>
         /// </summary>
         [Category("扩展")]
         [Description("进度条线性颜色")]
@@ -143,6 +146,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 进度条显示文本
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展")]
         [Description("进度条显示文本")]
@@ -153,6 +157,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 显示进度值
+        /// <para>默认值：true</para>
         /// </summary>
         [Category("扩展")]
         [Description("显示进度值")]

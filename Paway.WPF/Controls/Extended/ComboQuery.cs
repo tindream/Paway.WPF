@@ -40,6 +40,7 @@ namespace Paway.WPF
 
         /// <summary>
         /// 下拉列表是否显示列
+        /// <para>默认值：false</para>
         /// </summary>
         [Category("扩展")]
         [Description("下拉列表是否显示列标题")]
@@ -50,6 +51,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 下拉列表列宽度
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展")]
         [Description("下拉列表列宽度")]

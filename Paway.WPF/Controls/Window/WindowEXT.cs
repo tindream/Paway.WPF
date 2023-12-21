@@ -78,6 +78,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 标题栏高度
+        /// <para>默认值：30</para>
         /// </summary>
         [Category("扩展")]
         [Description("标题栏高度")]
@@ -88,6 +89,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 按钮最大高度
+        /// <para>默认值：45</para>
         /// </summary>
         [Category("扩展")]
         [Description("按钮最大高度")]
@@ -98,6 +100,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 按钮位置
+        /// <para>默认值：Stretch</para>
         /// </summary>
         [Category("扩展")]
         [Description("按钮位置")]
@@ -108,6 +111,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 标题内边距
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展")]
         [Description("标题内边距")]

@@ -50,6 +50,7 @@ namespace Paway.WPF
         #region 扩展
         /// <summary>
         /// 选择框
+        /// <para>默认值：Collapsed</para>
         /// </summary>
         [Category("扩展")]
         [Description("选择框")]
@@ -60,6 +61,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 项边框颜色
+        /// <para>默认值：默认</para>
         /// </summary>
         [Category("扩展")]
         [Description("项边框颜色")]
@@ -70,6 +72,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 项背景颜色
+        /// <para>默认值：null, 120, 200</para>
         /// </summary>
         [Category("扩展")]
         [Description("项背景颜色")]
@@ -80,6 +83,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 项字体颜色
+        /// <para>默认值：TextColor, TextColor, White</para>
         /// </summary>
         [Category("扩展")]
         [Description("项字体颜色")]
@@ -90,6 +94,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 用户模式
+        /// <para>默认值：false</para>
         /// </summary>
         [Category("扩展")]
         [Description("用户模式")]

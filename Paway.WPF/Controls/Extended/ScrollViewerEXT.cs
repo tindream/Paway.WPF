@@ -36,6 +36,7 @@ namespace Paway.WPF
         #region 扩展
         /// <summary>
         /// 自定义边框圆角
+        /// <para>默认值：4</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义边框圆角")]
@@ -46,6 +47,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 滚动条颜色
+        /// <para>默认值：(200, DarkGray)</para>
         /// </summary>
         [Category("扩展")]
         [Description("滚动条颜色")]
@@ -56,6 +58,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 滚动条高度(宽度)
+        /// <para>默认值：8</para>
         /// </summary>
         [Category("扩展")]
         [Description("滚动条高度(宽度)")]
@@ -66,6 +69,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 滚动间隔
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展")]
         [Description("滚动间隔")]

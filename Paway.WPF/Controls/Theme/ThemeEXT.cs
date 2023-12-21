@@ -41,6 +41,8 @@ namespace Paway.WPF
         #region 扩展
         /// <summary>
         /// 字体大小
+        /// <para>默认值：主题字体大小</para>
+        /// </summary>
         /// </summary>
         private ThemeFontSize FontSize { get; set; }
         /// <summary>

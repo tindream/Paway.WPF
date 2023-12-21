@@ -47,6 +47,7 @@ namespace Paway.WPF
 
         /// <summary>
         /// 自定义边框圆角
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义边框圆角")]
@@ -57,6 +58,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项背景色
+        /// <para>默认值：120</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义项背景色")]
@@ -67,6 +69,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 标题列背景颜色
+        /// <para>默认值：(200, PConfig.Light), 默认, 默认</para>
         /// </summary>
         [Category("扩展")]
         [Description("标题列背景颜色")]
@@ -77,6 +80,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 滚动条高度(宽度)
+        /// <para>默认值：8</para>
         /// </summary>
         [Category("扩展")]
         [Description("滚动条高度(宽度)")]
@@ -87,6 +91,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义列头
+        /// <para>默认值：false</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义列头")]

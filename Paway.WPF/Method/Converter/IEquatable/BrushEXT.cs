@@ -23,15 +23,18 @@ namespace Paway.WPF
         private Brush normal = Colors.LightGray.ToBrush();
         /// <summary>
         /// 默认的颜色
+        /// <para>默认值：LightGray</para>
         /// </summary>
         public Brush Normal { get { return normal; } set { normal = value; OnPropertyChanged(); } }
         private Brush mouse = PMethod.ThemeColor(PConfig.Alpha - PConfig.Interval).ToBrush();
         /// <summary>
         /// 鼠标划过时的颜色
+        /// <para>默认值：160</para>
         /// </summary>
         public Brush Mouse { get { return mouse; } set { mouse = value; OnPressedMouse(); OnPropertyChanged(); } }
         /// <summary>
         /// 鼠标划过时的未选中颜色
+        /// <para>默认值：180</para>
         /// </summary>
         public Brush MousePressed
         {
@@ -45,6 +48,7 @@ namespace Paway.WPF
         private Brush pressed = PMethod.ThemeColor(PConfig.Alpha + PConfig.Interval).ToBrush();
         /// <summary>
         /// 鼠标点击时的颜色
+        /// <para>默认值：240</para>
         /// </summary>
         public Brush Pressed { get { return pressed; } set { pressed = value; OnPressedMouse(); OnPropertyChanged(); } }
         private void OnPressedMouse()
@@ -61,6 +65,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 鼠标划过选中项时的颜色
+        /// <para>默认值：200</para>
         /// </summary>
         public Brush PressedMouse { get; private set; }
         /// <summary>

@@ -71,6 +71,7 @@ namespace Paway.WPF
 
         /// <summary>
         /// 过渡值
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展")]
         [Description("过渡值")]
@@ -81,6 +82,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 过渡时间
+        /// <para>默认值：未设置</para>
         /// </summary>
         [Category("扩展")]
         [Description("过渡时间")]
@@ -90,11 +92,11 @@ namespace Paway.WPF
             set { SetValue(TimeProperty, value); }
         }
         /// <summary>
-        /// Gets or sets the name of the transition to use. These correspond
-        /// directly to the TransitionControl inside the PresentationStates group.
+        /// 过渡动画类型
+        /// <para>默认值：None</para>
         /// </summary>
         [Category("扩展")]
-        [Description("过渡类型")]
+        [Description("过渡动画类型")]
         public TransitionType TransitionType
         {
             get { return (TransitionType)GetValue(TransitionTypeProperty); }
