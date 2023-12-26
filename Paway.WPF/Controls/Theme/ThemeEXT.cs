@@ -43,7 +43,6 @@ namespace Paway.WPF
         /// 字体大小
         /// <para>默认值：主题字体大小</para>
         /// </summary>
-        /// </summary>
         private ThemeFontSize FontSize { get; set; }
         /// <summary>
         /// get字体大小

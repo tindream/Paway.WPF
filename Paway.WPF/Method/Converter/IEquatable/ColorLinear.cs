@@ -22,11 +22,13 @@ namespace Paway.WPF
         private Color start = PMethod.ThemeColor(PConfig.Alpha - PConfig.Interval * 3);
         /// <summary>
         /// 起始颜色
+        /// <para>默认值：80</para>
         /// </summary>
         public Color Start { get { return start; } set { start = value; OnPropertyChanged(); } }
         private Color end = PMethod.ThemeColor();
         /// <summary>
         /// 终点颜色
+        /// <para>默认值：200</para>
         /// </summary>
         public Color End { get { return end; } set { end = value; OnPropertyChanged(); } }
         /// <summary>

@@ -9,13 +9,7 @@
 		<Tags>WPF Extension Adorner Animation Helper</Tags>
 		<AssemblyName>Paway.WPF</AssemblyName>
 		<RootNamespace>Paway.WPF</RootNamespace>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<OutputPath>..\bin\Debug</OutputPath>
-	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<OutputPath>..\bin\Release</OutputPath>
+		<OutputPath>..\bin\$(Configuration)</OutputPath>
 	</PropertyGroup>
 
 	<ItemGroup>

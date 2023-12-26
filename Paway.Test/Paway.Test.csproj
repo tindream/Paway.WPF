@@ -9,17 +9,12 @@
 		<AssemblyName>Paway.Test</AssemblyName>
 		<RootNamespace>Paway.Test</RootNamespace>
 		<PlatformTarget>AnyCPU</PlatformTarget>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<OutputPath>..\bin\$(Configuration)\Test</OutputPath>
 	</PropertyGroup>
 	<PropertyGroup>
 		<!--取消warning NETSDK1049警告-->
 		<DependsOnNETStandard>false</DependsOnNETStandard>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<OutputPath>..\bin\Debug</OutputPath>
-	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<OutputPath>..\bin\Release</OutputPath>
 	</PropertyGroup>
 
 	<ItemGroup>
