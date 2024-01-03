@@ -87,10 +87,10 @@ namespace Paway.Test
         }
 
         /// <summary>
-        /// 登陆时间
+        /// 登录时间
         /// </summary>
         [NoExcel]
-        [Text("登陆时间")]
+        [Text("登录时间")]
         public DateTime LoginOn { get; set; }
 
         #region 接口

@@ -20,7 +20,7 @@ using System.Windows.Media;
 namespace Paway.Model
 {
     /// <summary>
-    /// 登陆基类，必须实现登陆方法
+    /// 登录基类，必须实现登录方法
     /// </summary>
     public abstract class LoginPageModel : ViewModelBasePlus
     {
@@ -34,7 +34,7 @@ namespace Paway.Model
         /// </summary>
         public ObservableCollection<object> ObList { get; private set; } = new ObservableCollection<object>();
         /// <summary>
-        /// 登陆锁
+        /// 登录锁
         /// </summary>
         private volatile bool iLogining;
         /// <summary>
@@ -94,7 +94,7 @@ namespace Paway.Model
 
         private bool _iAuto;
         /// <summary>
-        /// 自动登陆标记
+        /// 自动登录标记
         /// </summary>
         public bool IAuto
         {
@@ -158,7 +158,7 @@ namespace Paway.Model
             return true;
         }
         /// <summary>
-        /// 登陆命令
+        /// 登录命令
         /// </summary>
         public abstract void Login();
         /// <summary>
@@ -181,7 +181,7 @@ namespace Paway.Model
             base.Action(item);
             switch (item)
             {
-                case "登陆":
+                case "登录":
                     if (iLogining) break;
                     try
                     {
@@ -220,7 +220,7 @@ namespace Paway.Model
         #endregion
 
         /// <summary>
-        /// 登陆页模型
+        /// 登录页模型
         /// </summary>
         public LoginPageModel()
         {

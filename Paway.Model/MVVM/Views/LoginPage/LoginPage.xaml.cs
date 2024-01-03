@@ -24,7 +24,7 @@ namespace Paway.Model
     public partial class LoginPage : Page
     {
         /// <summary>
-        /// 登陆页
+        /// 登录页
         /// </summary>
         public LoginPage()
         {

@@ -41,7 +41,7 @@
                              PasswordBoxEXT.Password="{Binding Password}"
                              PasswordBoxEXT.IAnimation="2" 
                              PasswordBoxEXT.Icon="/Paway.Model;component/Images/login/password.png" PasswordBoxEXT.IconWidth="36" PasswordBoxEXT.IconStretch="Uniform"/>
-                <ButtonEXT Content="登陆" Command="{Binding ItemClickCommand}" CommandParameter="登陆" FontSize="30" IsLight="True" Margin="2,40,2,2" BorderBrush="White" ItemForeground="White;;" Padding="12,9"/>
+                <ButtonEXT Content="登录" Command="{Binding ItemClickCommand}" CommandParameter="登录" FontSize="30" IsLight="True" Margin="2,40,2,2" BorderBrush="White" ItemForeground="White;;" Padding="12,9"/>
             </StackPanel>
         </StackPanel>
     </DockPanel>

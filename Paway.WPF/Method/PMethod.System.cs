@@ -593,10 +593,10 @@ namespace Paway.WPF
         {
             try
             {
-                Application.Current?.Dispatcher.Invoke(() =>
+                Application.Current?.Dispatcher.Invoke(new Action<T>(arg =>
                 {
-                    action.Invoke(t);
-                });
+                    action.Invoke(arg);
+                }), t);
             }
             catch (Exception ex)
             {
@@ -630,10 +630,10 @@ namespace Paway.WPF
         {
             try
             {
-                return Application.Current == null ? default : Application.Current.Dispatcher.Invoke(() =>
+                return Application.Current == null ? default : (O)Application.Current.Dispatcher.Invoke(new Func<T, O>(arg =>
                 {
-                    return action.Invoke(t);
-                });
+                    return action.Invoke(arg);
+                }), t);
             }
             catch (Exception ex)
             {
@@ -675,18 +675,18 @@ namespace Paway.WPF
         {
             try
             {
-                Application.Current?.Dispatcher.BeginInvoke(new Action(() =>
+                Application.Current?.Dispatcher.BeginInvoke(new Action<T>(arg =>
                 {
                     try
                     {
-                        action.Invoke(t);
+                        action.Invoke(arg);
                     }
                     catch (Exception ex)
                     {
                         if (error == null) ex.Log();
                         else error.Invoke(ex);
                     }
-                }));
+                }), t);
             }
             catch (Exception ex)
             {

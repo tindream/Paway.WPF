@@ -15,9 +15,9 @@ namespace Paway.Test
         None,
         [Description("测试")]
         Test,
-        [Description("登陆")]
+        [Description("登录")]
         Login,
-        [Description("登陆失败")]
+        [Description("登录失败")]
         LoginError,
     }
 }

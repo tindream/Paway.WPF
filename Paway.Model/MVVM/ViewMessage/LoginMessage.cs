@@ -9,7 +9,7 @@ using System.Windows.Input;
 namespace Paway.Model
 {
     /// <summary>
-    /// 登陆消息
+    /// 登录消息
     /// </summary>
     public class LoginMessage
     {
@@ -18,11 +18,11 @@ namespace Paway.Model
         /// </summary>
         public string UserName { get; set; }
         /// <summary>
-        /// 登陆消息
+        /// 登录消息
         /// </summary>
         public LoginMessage() { }
         /// <summary>
-        /// 登陆消息
+        /// 登录消息
         /// </summary>
         public LoginMessage(string userName)
         {
