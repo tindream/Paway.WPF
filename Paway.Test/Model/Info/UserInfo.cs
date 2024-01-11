@@ -96,16 +96,18 @@ namespace Paway.Test
         #region 接口
         [NoShow, NoSelect, JsonIgnore]
         public object Tag { get { return UserType; } set { } }
-        private string _clientId;
+        private string _token;
         [NoShow, NoSelect, JsonIgnore]
-        public string VerCode
+        public string Token
         {
             get
             {
-                if (_clientId == null) _clientId = EncryptHelper.MD5($"{Id}_{Config.Suffix}");
-                return _clientId;
+                if (_token == null) _token = EncryptHelper.MD5($"{Id}_{Config.Suffix}");
+                return _token;
             }
         }
+        [NoShow, NoSelect, JsonIgnore]
+        public string ClientId { get { return Token; } }
 
         #endregion
 
