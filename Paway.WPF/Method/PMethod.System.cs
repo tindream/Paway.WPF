@@ -194,18 +194,17 @@ namespace Paway.WPF
         public static bool? ShowWindow(DependencyObject parent, Window window, int alpha = 100, bool iFocus = true, bool iEscExit = true)
         {
             if (!Parent(parent, out Window owner)) return null;
+            //蒙板
+            var layer = new Grid() { Background = AlphaColor(alpha, Colors.Black).ToBrush() };
+            //使用装饰器装载
+            var desktopAdorner = CustomAdorner(owner, layer);
+
             window.ShowInTaskbar = false;
             window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             window.Closed += delegate
             {
-                //容器Grid
-                Grid grid = owner.Content as Grid;
-                //父级窗体原来的内容
-                var originalOld = VisualTreeHelper.GetChild(grid, 0) as UIElement;
-                //将父级窗体原来的内容在容器Grid中移除
-                grid.Children.Remove(originalOld);
-                //赋给父级窗体
-                owner.Content = originalOld;
+                //移除装饰器
+                ClearAdorner(owner, desktopAdorner);
             };
             if (iFocus) window.LostKeyboardFocus += delegate
             {
@@ -215,29 +214,15 @@ namespace Paway.WPF
             {
                 //window.Loaded += delegate { window.Activate(); };
             }
-            //父级窗体原来的内容
-            var original = owner.Content as UIElement;
-            //将父级窗体原来的内容在容器Grid中移除
-            owner.Content = null;
-            //容器Grid
-            var container = new Grid();
-            //放入原来的内容
-            container.Children.Add(original);
-            //蒙板
-            var layer = new Grid() { Background = AlphaColor(alpha, Colors.Black).ToBrush() };
-            //在上面放一层蒙板
-            container.Children.Add(layer);
-            //将装有原来内容和蒙板的容器赋给父级窗体
-            owner.Content = container;
             //弹出消息框 
             window.Owner = owner;
             if (iEscExit)
             {
                 var iExit = false;
                 var exitTime = DateTime.MinValue;
-                window.KeyDown += delegate (object sender, System.Windows.Input.KeyEventArgs e)
+                window.KeyDown += delegate (object sender, KeyEventArgs e)
                 {
-                    if (e.Key == System.Windows.Input.Key.Escape)
+                    if (e.Key == Key.Escape)
                     {
                         if (iExit && DateTime.Now.Subtract(exitTime).TotalMilliseconds < PConfig.DoubleInterval)
                         {
