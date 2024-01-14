@@ -100,9 +100,7 @@ namespace Paway.Test
         }
         private void Button_Click2(object sender, RoutedEventArgs e)
         {
-            var border = new Border();
-            border.Background = Color.FromArgb(150, 200, 200, 200).ToBrush();
-            Method.CustomAdorner(Config.Window, border, true, true);
+            Method.ShowWindow(this, new ThemeWindow());
         }
     }
 }

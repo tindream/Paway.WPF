@@ -21,7 +21,10 @@
 		<Resource Include="Resource\fontawesome.ttf" />
 	</ItemGroup>
 
-	<ItemGroup>
+	<ItemGroup Condition="'$(Configuration)'=='Debug'">
+		<ProjectReference Include="..\..\Paway.Forms\Paway.Helper\Paway.Helper.csproj" />
+	</ItemGroup>
+	<ItemGroup Condition="'$(Configuration)'=='Release'">
 		<PackageReference Include="Paway.Helper" Version="2.5.2" />
 	</ItemGroup>
 

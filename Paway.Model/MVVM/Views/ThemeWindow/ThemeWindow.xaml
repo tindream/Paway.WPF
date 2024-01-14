@@ -1,0 +1,57 @@
+﻿<Window x:Class="Paway.Model.ThemeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Paway.Model"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+        xmlns:ip="http://www.galasoft.ch/mvvmlight"
+        mc:Ignorable="d"
+        DataContext="{Binding ThemeWindow, Source={StaticResource Locator}}"
+        UseLayoutRounding="True"
+        Title="主题设置" Height="450" Width="590" ResizeMode="NoResize">
+    <Grid Name="root">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel HorizontalAlignment="Center" Margin="0,10" VerticalAlignment="Center" Width="394">
+            <DockPanel>
+                <TextBlock Style="{StaticResource TitleBlock}" Text="主题颜色："/>
+                <ListViewEXT x:Name="listView1" ItemBorder="4" ItemBrush="Transparent;;" ItemMargin="2" ItemHeight="75" ItemWidth="100" 
+                             ItemTextForeground="White" ItemDescDock="Bottom" ItemDescFontSize="10" ItemDescPadding="3" ItemDescForeground="#F9F9F9">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectionCommand}" CommandParameter="{Binding ElementName=listView1}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ListBoxItemEXT Text="Element" ItemBackground="#409EFE" Tag="#409EFF" Desc="默认"/>
+
+                    <ListBoxItemEXT Text="克莱因蓝" ItemBackground="#002FA6" Tag="#002FA7" Desc="希望/自由/纯洁"/>
+                    <ListBoxItemEXT Text="马尔斯绿" ItemBackground="#008C8B" Tag="#008C8C" Desc="力量/神秘/财富"/>
+                    <ListBoxItemEXT Text="爱马仕橙" ItemBackground="#E85826" Tag="#E85827" Desc="温暖/活力/时尚"/>
+                    <ListBoxItemEXT Text="普鲁士蓝" ItemBackground="#003152" Tag="#003153" Desc="绅士/优雅/内敛"/>
+
+                    <ListBoxItemEXT Text="蒂芙妮蓝" ItemBackground="#81D8D1" Tag="#81D8D0" Desc="清澈/自由/浪漫"/>
+                    <ListBoxItemEXT Text="勃良第红" ItemBackground="#800021" Tag="#800020" Desc="性感/热情/自由"/>
+                    <ListBoxItemEXT Text="木乃伊棕" ItemBackground="#8F4B27" Tag="#8F4B28" Desc="权利/永恒/尊贵"/>
+                    <ListBoxItemEXT Text="波尔多红" ItemBackground="#4C0008" Tag="#4C0009" Desc="高贵/豪华/品质"/>
+                </ListViewEXT>
+            </DockPanel>
+            <SliderEXT x:Name="sliderSize" Title="字体大小：" Minimum="9" Maximum="36" Value="{Binding SizeValue}" AutoToolTipPrecision="2"  TickFrequency="0.01">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="ValueChanged">
+                        <i:InvokeCommandAction Command="{Binding SizeChanged}" CommandParameter="{Binding ElementName=sliderSize}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </SliderEXT>
+            <ComboBoxEXT Title="文本字体：" ItemsSource="{Binding FontList}" DisplayMemberPath="Name" SelectedValuePath="Name" SelectedValue="{Binding FontFamily}"/>
+        </StackPanel>
+        <WrapPanel Grid.Row="1" Margin="0,20" HorizontalAlignment="Center">
+            <ButtonEXT Content="确认" Width="80"
+                       Command="{Binding Commit}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
+            <ButtonEXT Content="取消" Width="80" Type="Warn" IsLight="True"
+                       Command="{Binding Cancel}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" Margin="10,2,2,2"/>
+        </WrapPanel>
+    </Grid>
+</Window>

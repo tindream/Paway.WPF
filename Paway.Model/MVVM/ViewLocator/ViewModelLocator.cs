@@ -21,6 +21,10 @@ namespace Paway.Model
         }
 
         /// <summary>
+        /// 模型-主题设置
+        /// </summary>
+        public ThemeWindowModel ThemeWindow => GetModelInstance<ThemeWindowModel>();
+        /// <summary>
         /// 模型-颜色搭取器
         /// </summary>
         public SelectColorWindowModel SelectColor => GetModelInstance<SelectColorWindowModel>();

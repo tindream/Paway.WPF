@@ -18,11 +18,15 @@ namespace Paway.Model
         public DependencyObject Obj { get; set; }
     }
     /// <summary>
-    /// 已加载消息
+    /// 已加载消息 - 通用工具栏
     /// </summary>
     public class OperateLoadMessage : LoadMessage { }
     /// <summary>
-    /// 已加载消息
+    /// 已加载消息 - 登录页
     /// </summary>
     public class LoginLoadMessage : LoadMessage { }
+    /// <summary>
+    /// 已加载消息 - 主题窗体
+    /// </summary>
+    public class ThemeLoadMessage : LoadMessage { }
 }
