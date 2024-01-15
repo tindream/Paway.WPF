@@ -26,7 +26,7 @@ namespace Paway.Model
     /// </summary>
     public class LoginLoadMessage : LoadMessage { }
     /// <summary>
-    /// 已加载消息 - 主题窗体
+    /// 已加载消息 - 主题设置
     /// </summary>
     public class ThemeLoadMessage : LoadMessage { }
 }

@@ -20,9 +20,9 @@ using System.Windows.Media;
 namespace Paway.Model
 {
     /// <summary>
-    /// 主题设置窗体模型
+    /// 主题设置模型
     /// </summary>
-    public class ThemeWindowModel : BaseWindowModel
+    public class ThemeViewModel : BaseWindowModel
     {
         private DependencyObject Root;
 
@@ -86,16 +86,23 @@ namespace Paway.Model
         /// </summary>
         protected override bool? OnCancel()
         {
+            this.Restore();
+            return base.OnCancel();
+        }
+        /// <summary>
+        /// 取消还原主题设置
+        /// </summary>
+        public void Restore()
+        {
             PConfig.Color = this.themeColor;
             PConfig.FontSize = this.themeFontSize;
             PConfig.FontFamily = this.themeFontFamily;
-            return base.OnCancel();
         }
 
         /// <summary>
         /// 主题设置窗体模型
         /// </summary>
-        public ThemeWindowModel()
+        public ThemeViewModel()
         {
             base.Title = "本地设置";
             var index = 0;

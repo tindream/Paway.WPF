@@ -19,11 +19,12 @@ namespace Paway.Model
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
         }
+        internal static ViewModelLocator Default => new ViewModelLocator();
 
         /// <summary>
         /// 模型-主题设置
         /// </summary>
-        public ThemeWindowModel ThemeWindow => GetModelInstance<ThemeWindowModel>();
+        public ThemeViewModel ThemeView => GetModelInstance<ThemeViewModel>();
         /// <summary>
         /// 模型-颜色搭取器
         /// </summary>

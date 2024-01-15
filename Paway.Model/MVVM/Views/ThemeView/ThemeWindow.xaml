@@ -7,7 +7,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
         xmlns:ip="http://www.galasoft.ch/mvvmlight"
         mc:Ignorable="d"
-        DataContext="{Binding ThemeWindow, Source={StaticResource Locator}}"
+        DataContext="{Binding ThemeView, Source={StaticResource Locator}}"
         UseLayoutRounding="True"
         Title="主题设置" Height="450" Width="590" ResizeMode="NoResize">
     <Grid Name="root">

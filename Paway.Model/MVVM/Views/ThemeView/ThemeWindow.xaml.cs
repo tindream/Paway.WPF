@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,14 @@ namespace Paway.Model
         {
             base.OnApplyTemplate();
             Messenger.Default.Send(new ThemeLoadMessage() { Obj = root });
+        }
+        /// <summary>
+        /// 关闭时还原主题
+        /// </summary>
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            ViewModelLocator.Default.ThemeView.Restore();
+            base.OnClosing(e);
         }
     }
 }

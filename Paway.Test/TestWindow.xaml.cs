@@ -100,7 +100,7 @@ namespace Paway.Test
         }
         private void Button_Click2(object sender, RoutedEventArgs e)
         {
-            Method.ShowWindow(this, new ThemeWindow());
+            frame.Content = ViewlLocator.GetInstance<ThemePage>();
         }
     }
 }
