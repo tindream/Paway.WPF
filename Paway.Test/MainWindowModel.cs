@@ -127,6 +127,38 @@ namespace Paway.Test
             set { monitorType = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// 字体列表
+        /// </summary>
+        public List<FontInfo> FontList { get; } = new List<FontInfo>();
+        private int _fontFamilyCount;
+        public int FontFamilyCount
+        {
+            get { return _fontFamilyCount; }
+            set { _fontFamilyCount = value; OnPropertyChanged(); }
+        }
+        private int _fontFamilyIndex;
+        public int FontFamilyIndex
+        {
+            get { return _fontFamilyIndex; }
+            set
+            {
+                if (FontList.Count <= value) return;
+                if (_fontFamilyIndex != value)
+                {
+                    _fontFamilyIndex = value;
+                    PConfig.FontFamily = FontList[value].Name;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private string _colors;
+        public string Colors
+        {
+            get { return _colors; }
+            set { _colors = value; OnPropertyChanged(); }
+        }
+
         #endregion
 
         #region 命令
@@ -155,7 +187,8 @@ namespace Paway.Test
         {
             var color = Method.ColorSelector(slider.Value / 7);
             Config.Color = color;
-            Config.Background = Method.ColorSelector((slider.Value + 0.4) / 7).AddLight(0.93);
+            Config.Background = color.AddLight(0.93);
+            this.Colors = color.ToString();
             //Method.DoStyles();
         });
 
@@ -211,6 +244,14 @@ namespace Paway.Test
         /// </summary>
         public MainWindowModel()
         {
+            this.FontFamilyCount = 0;
+            foreach (var font in Fonts.SystemFontFamilies)
+            {
+                if (font.Source == PConfig.FontFamily) this._fontFamilyIndex = this.FontFamilyCount;
+                var info = new FontInfo { Id = this.FontFamilyCount++, Name = font.Source, FontFamily = font };
+                FontList.Add(info);
+            }
+
             this.MessengerInstance.Register<StatuMessage>(this, msg => Statu(msg.Msg));
 
             list.Add(new ListViewItemModel("Hello"));

@@ -67,7 +67,6 @@ namespace Paway.Model
         /// <summary>
         /// 主题文本字体
         /// </summary>
-        [Text("字体")]
         public string FontFamily
         {
             get { return fontFamily; }

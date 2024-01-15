@@ -34,15 +34,9 @@
 		<ProjectReference Include="..\Paway.Model\Paway.Model.csproj" />
 		<ProjectReference Include="..\Paway.WPF\Paway.WPF.csproj" />
 	</ItemGroup>
-	<ItemGroup Condition="'$(Configuration)'=='Debug'">
-		<ProjectReference Include="..\..\Paway.Forms\Paway.Helper\Paway.Helper.csproj" />
-		<ProjectReference Include="..\..\Paway.Forms\Paway.Utils\Paway.Utils.csproj" />
-	</ItemGroup>
-	<ItemGroup Condition="'$(Configuration)'=='Release'">
+	<ItemGroup>
 		<PackageReference Include="Paway.Helper" Version="2.5.2" />
 		<PackageReference Include="Paway.Utils" Version="2.5.2" />
-	</ItemGroup>
-	<ItemGroup>
 		<PackageReference Include="OxyPlot.WPF" Version="2.1.0" />
 		<PackageReference Include="OxyPlot.WPF.Shared" Version="2.1.0" />
 		<PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />

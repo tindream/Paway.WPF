@@ -51,6 +51,7 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </SliderEXT>
+            <SliderEXT Minimum="0" Maximum="{Binding FontFamilyCount}" Value="{Binding FontFamilyIndex}" TickFrequency="1"/>
             <Grid>
                 <Border Background="{StaticResource ColorSelector}" Height="3" CornerRadius="2" Margin="2"/>
                 <SliderEXT x:Name="sliderTheme" Maximum="7" Value="2.62" AutoToolTipPrecision="2" TickFrequency="0.01"
@@ -63,7 +64,7 @@
                 </SliderEXT>
             </Grid>
             <StackPanel Orientation="Horizontal">
-                <Button Background="{StaticResource Success}" BorderThickness="0" Content="成功" Height="32" Width="100" Foreground="White"/>
+                <Button Background="{StaticResource Success}" BorderThickness="0" Content="{Binding Colors}" Height="32" Width="100" Foreground="White"/>
                 <Button Background="{StaticResource Warn}" BorderThickness="0" Content="警告" Height="32" Width="100" Foreground="White"/>
                 <Button Background="{StaticResource Error}" BorderThickness="0" Content="错误" Height="32" Width="100" Foreground="White"/>
                 <Button Background="{StaticResource Light}" BorderThickness="0" Content="浅色" Height="32" Width="100"/>

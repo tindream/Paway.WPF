@@ -22,8 +22,7 @@ namespace Paway.WPF
         {
             if (!(Application.Current.FindResource("ColorSelector") is LinearGradientBrush linearGradientBrush)) return Colors.Transparent;
 
-            var collection = linearGradientBrush.GradientStops;
-            var stops = collection.OrderBy(x => x.Offset).ToArray();
+            var stops = linearGradientBrush.GradientStops.ToArray();
             if (offset <= 0) return stops[0].Color;
             if (offset >= 1) return stops[stops.Length - 1].Color;
             var left = stops.Where(s => s.Offset <= offset).Last();
