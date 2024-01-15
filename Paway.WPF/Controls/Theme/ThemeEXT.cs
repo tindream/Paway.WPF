@@ -22,6 +22,10 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(FontSize), typeof(ThemeFontSize), typeof(ThemeEXT), new PropertyMetadata(new ThemeFontSize(PConfig.FontSize)));
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty FontFamilyProperty =
+            DependencyProperty.RegisterAttached(nameof(FontFamily), typeof(ThemeFontFamily), typeof(ThemeEXT), new PropertyMetadata(new ThemeFontFamily(PConfig.FontFamily)));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ThemeEXT),
                 new PropertyMetadata(new BrushEXT(PConfig.Alpha)));
@@ -57,6 +61,26 @@ namespace Paway.WPF
         public static void SetFontSize(DependencyObject obj, ThemeFontSize value)
         {
             obj.SetValue(FontSizeProperty, value);
+        }
+
+        /// <summary>
+        /// 文本字体
+        /// <para>默认值：主题文本字体</para>
+        /// </summary>
+        private ThemeFontFamily FontFamily { get; set; }
+        /// <summary>
+        /// get文本字体
+        /// </summary>
+        public static ThemeFontFamily GetFontFamily(DependencyObject obj)
+        {
+            return (ThemeFontFamily)obj.GetValue(FontFamilyProperty);
+        }
+        /// <summary>
+        /// set文本字体
+        /// </summary>
+        public static void SetFontFamily(DependencyObject obj, ThemeFontFamily value)
+        {
+            obj.SetValue(FontFamilyProperty, value);
         }
 
         /// <summary>

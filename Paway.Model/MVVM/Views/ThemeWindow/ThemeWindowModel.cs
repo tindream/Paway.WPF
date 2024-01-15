@@ -13,6 +13,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -26,7 +27,9 @@ namespace Paway.Model
         private DependencyObject Root;
 
         private Color themeColor;
-        private double themeSize;
+        private double themeFontSize;
+        private string themeFontFamily;
+
         /// <summary>
         /// 主题颜色
         /// </summary>
@@ -39,22 +42,22 @@ namespace Paway.Model
             }
         }
 
-        private double _sizeValue;
+        private double _fontSize;
         /// <summary>
         /// 字体大小
         /// </summary>
-        public double SizeValue
+        public double FontSize
         {
-            get { return _sizeValue; }
-            set { _sizeValue = value; OnPropertyChanged(); }
+            get { return _fontSize; }
+            set
+            {
+                if (_fontSize != value)
+                {
+                    _fontSize = value; OnPropertyChanged();
+                    PConfig.FontSize = _fontSize;
+                }
+            }
         }
-        /// <summary>
-        /// 字体大小事件
-        /// </summary>
-        public ICommand SizeChanged => new RelayCommand<SliderEXT>(slider =>
-        {
-            PConfig.FontSize = slider.Value;
-        });
 
         /// <summary>
         /// 字体列表
@@ -62,13 +65,20 @@ namespace Paway.Model
         public List<FontInfo> FontList { get; } = new List<FontInfo>();
         private string fontFamily = "Microsoft YaHei";
         /// <summary>
-        /// 文本字体
+        /// 主题文本字体
         /// </summary>
         [Text("字体")]
         public string FontFamily
         {
             get { return fontFamily; }
-            set { fontFamily = value; OnPropertyChanged(); }
+            set
+            {
+                if (fontFamily != value)
+                {
+                    fontFamily = value; OnPropertyChanged();
+                    PConfig.FontFamily = fontFamily;
+                }
+            }
         }
 
         /// <summary>
@@ -76,8 +86,9 @@ namespace Paway.Model
         /// </summary>
         protected override bool? OnCancel()
         {
-            PConfig.FontSize = this.themeSize;
             PConfig.Color = this.themeColor;
+            PConfig.FontSize = this.themeFontSize;
+            PConfig.FontFamily = this.themeFontFamily;
             return base.OnCancel();
         }
 
@@ -87,19 +98,21 @@ namespace Paway.Model
         public ThemeWindowModel()
         {
             base.Title = "本地设置";
+            var index = 0;
+            foreach (var font in Fonts.SystemFontFamilies)
+            {
+                var info = new FontInfo { Id = index++, Name = font.Source, FontFamily = font };
+                FontList.Add(info);
+            }
             Messenger.Default.Register<ThemeLoadMessage>(this, msg =>
             {
                 this.Root = msg.Obj;
-                this.themeSize = PConfig.FontSize;
                 this.themeColor = PConfig.Color;
+                this.themeFontSize = PConfig.FontSize;
+                this.themeFontFamily = PConfig.FontFamily;
 
-                this.SizeValue = PConfig.FontSize;
-                var index = 0;
-                foreach (var font in Fonts.SystemFontFamilies)
-                {
-                    var info = new FontInfo { Id = index++, Name = font.Source, FontFamily = font };
-                    FontList.Add(info);
-                }
+                this.FontSize = PConfig.FontSize;
+                this.FontFamily = PConfig.FontFamily;
             });
         }
     }

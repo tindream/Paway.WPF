@@ -93,6 +93,28 @@ namespace Paway.WPF
         }
 
         /// <summary>
+        /// 主题文本字体变化事件
+        /// </summary>
+        public static event Action<string> FontFamilyChanged;
+        private static string fontFamily = "Microsoft YaHei";
+        /// <summary>
+        /// 主题文本字体
+        /// </summary>
+        public static string FontFamily
+        {
+            get { return fontFamily; }
+            set
+            {
+                if (fontFamily != value)
+                {
+                    var old = fontFamily;
+                    fontFamily = value;
+                    FontFamilyChanged?.Invoke(old);
+                }
+            }
+        }
+
+        /// <summary>
         /// 主题颜色变化事件
         /// </summary>
         public static event Action<Color> ColorChanged;

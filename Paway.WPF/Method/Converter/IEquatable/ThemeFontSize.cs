@@ -15,7 +15,7 @@ using System.Windows.Media;
 namespace Paway.WPF
 {
     /// <summary>
-    /// 自定义默认、鼠标划过时、鼠标点击时的大小
+    /// 主题字体大小
     /// </summary>
     [TypeConverter(typeof(ThemeFontSizeConverter))]
     public class ThemeFontSize : ModelBase, IEquatable<ThemeFontSize>

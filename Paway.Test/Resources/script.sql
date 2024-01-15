@@ -24,11 +24,11 @@ GO
 -- ----------------------------
 CREATE TABLE [Sys_Users](
 "Id"  integer Primary Key AutoIncrement not null,
-"UserName"  nvarchar(32),
+"Name"  nvarchar(32),
 "Display"  nvarchar(32),
 "Password"  nvarchar(32),
 "Sex" int,
-"IStatu"  bit,
+"Enable"  int,
 "UserType"  int,
 "LoginOn"  datetime,
 "CreateOn"  datetime,

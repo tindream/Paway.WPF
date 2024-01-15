@@ -99,6 +99,7 @@
                 <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
+                <Setter Property="Foreground" Value="White" />
                 <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeColorMouse}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
@@ -120,6 +121,7 @@
                     <Condition Property="IsHighlighted" Value="True" />
                     <Condition Property="IsSubmenuOpen" Value="True" />
                 </MultiTrigger.Conditions>
+                <Setter Property="Foreground" Value="Black" />
                 <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeLight}" />
                 <Setter Property="Stroke" TargetName="ButtonBackground" Value="LightGray" />
                 <Setter Property="Visibility" TargetName="Line" Value="Visible" />
@@ -177,6 +179,7 @@
                 <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Foreground" Value="White" />
                 <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeColorMouse}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
@@ -242,11 +245,11 @@
                 <Popup x:Name="PART_Popup"
                        AllowsTransparency="True"
                        Focusable="False"
-                       HorizontalOffset="-2"
+                       HorizontalOffset="-1"
                        IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
                        PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
                        Placement="Right"
-                       VerticalOffset="1">
+                       VerticalOffset="-3">
                     <Border x:Name="SubMenuBorder"
                             BorderBrush="LightGray"
                             BorderThickness="1"
@@ -290,6 +293,8 @@
                 <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ThemeColorMouse}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
+                <!--会影响下级字体颜色-->
+                <!--<Setter Property="Foreground" Value="White" />-->
                 <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ThemeColorNormal}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
@@ -364,6 +369,7 @@
                 <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
+                <Setter Property="Foreground" Value="White" />
                 <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ThemeColorMouse}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
@@ -393,19 +399,23 @@
         <Setter Property="Control.BorderThickness" Value="0" />
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
-        <Setter Property="Control.Template" Value="{StaticResource SubmenuItemTemplate}" />
+        <Setter Property="Control.Padding" Value="9,0" />
+        <Setter Property="Control.Template" Value="{StaticResource TopLevelItemTemplate}" />
         <Style.Triggers>
-            <Trigger Property="MenuItem.Role" Value="TopLevelHeader">
-                <Setter Property="Margin" Value="0" />
-                <Setter Property="Control.Template" Value="{StaticResource TopLevelHeaderTemplate}" />
+            <!--<Trigger Property="MenuItem.Role" Value="TopLevelItem">
                 <Setter Property="Control.Padding" Value="9,0" />
-            </Trigger>
-            <Trigger Property="MenuItem.Role" Value="TopLevelItem">
-                <Setter Property="Margin" Value="0" />
                 <Setter Property="Control.Template" Value="{StaticResource TopLevelItemTemplate}" />
+            </Trigger>-->
+            <Trigger Property="MenuItem.Role" Value="TopLevelHeader">
                 <Setter Property="Control.Padding" Value="9,0" />
+                <Setter Property="Control.Template" Value="{StaticResource TopLevelHeaderTemplate}" />
+            </Trigger>
+            <Trigger Property="MenuItem.Role" Value="SubmenuItem">
+                <Setter Property="Control.Padding" Value="0" />
+                <Setter Property="Control.Template" Value="{StaticResource SubmenuItemTemplate}" />
             </Trigger>
             <Trigger Property="MenuItem.Role" Value="SubmenuHeader">
+                <Setter Property="Control.Padding" Value="0" />
                 <Setter Property="Control.Template" Value="{StaticResource SubmenuHeaderTemplate}" />
             </Trigger>
         </Style.Triggers>

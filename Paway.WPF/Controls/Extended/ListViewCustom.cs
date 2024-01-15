@@ -398,7 +398,7 @@ namespace Paway.WPF
             this.ReleaseMouseCapture();
         }
         /// <summary>
-        /// 更新字体大小
+        /// 更新主题字体大小
         /// </summary>
         protected virtual void Config_FontSizeChanged(double old)
         {

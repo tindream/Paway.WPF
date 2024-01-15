@@ -54,6 +54,17 @@ namespace Paway.WPF
         /// </summary>
         [Description("最大输入限制: {0}位")]
         public virtual string MaximumInputLimit { get; set; } = "最大输入限制: {0}位";
+
+        /// <summary>
+        /// 关于
+        /// </summary>
+        [Description("关于")]
+        public virtual string About { get; set; } = "关于";
+        /// <summary>
+        /// 主题
+        /// </summary>
+        [Description("主题")]
+        public virtual string Theme { get; set; } = "主题";
     }
     /// <summary>
     /// 注入拦截器类-触发更新事件

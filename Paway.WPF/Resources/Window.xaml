@@ -130,7 +130,6 @@
         <!--未知，此参数会导致文本放大缩小动画抖动-->
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
         <Setter Property="WindowStyle" Value="SingleBorderWindow" />
-        <!--<Setter Property="FontFamily" Value="Microsoft YaHei"/>-->
         <!--解决Chrome窗体下元素边缘模糊的问题，此参数会导致放大缩小动画抖动-->
         <Setter Property="UseLayoutRounding" Value="True"/>
         <Setter Property="SnapsToDevicePixels" Value="True" />

@@ -1,5 +1,6 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using OxyPlot;
 using OxyPlot.Annotations;
 using OxyPlot.Axes;
@@ -11,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -131,6 +133,14 @@ namespace Paway.Test
         {
             switch (item)
             {
+                case "关于":
+                    var version = $"V{Assembly.GetEntryAssembly().GetName().Version}";
+                    Method.Hit(Config.Window, version);
+                    Messenger.Default.Send(new StatuMessage(version));
+                    break;
+                case "主题":
+                    Method.ShowWindow(Config.Window, new ThemeWindow());
+                    break;
                 default:
                     if (Config.LanguageList.Any(c => c == item))
                     {

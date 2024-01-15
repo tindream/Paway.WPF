@@ -13,13 +13,15 @@
            Title="{Binding Text}" Height="470" Width="800" WindowStartupLocation="CenterScreen">
     <WindowEXT.FunctionBarRight>
         <WindowFunctionBar>
+            <ButtonEXT Content="{Binding Language.Theme, Source={StaticResource L}}" Margin="0" IsLight="True" ItemBorder="0" Radius="0"
+                       Command="{Binding MenuItemClickCommand}" CommandParameter="主题"/>
             <Menu>
                 <MenuItem Header="{Binding Language}" Padding="12,0" Name="menu">
                     <MenuItem Header="中文" IsChecked="{Binding Language, Converter={StaticResource valueToTrue}, ConverterParameter=中文}" Command="{Binding MenuItemClickCommand}" CommandParameter="中文"/>
                     <MenuItem Header="English" IsChecked="{Binding Language, Converter={StaticResource valueToTrue}, ConverterParameter=English}" Command="{Binding MenuItemClickCommand}" CommandParameter="English"/>
                 </MenuItem>
             </Menu>
-            <ButtonEXT Content="{Binding Language.Clear, Source={StaticResource L}}" Margin="0" IsLight="True" ItemBorder="0" Radius="0"
+            <ButtonEXT Content="{Binding Language.About, Source={StaticResource L}}" Margin="0" IsLight="True" ItemBorder="0" Radius="0"
                        Command="{Binding MenuItemClickCommand}" CommandParameter="关于"/>
         </WindowFunctionBar>
     </WindowEXT.FunctionBarRight>
@@ -30,14 +32,19 @@
                 <MenuItem Header="报告问题" Icon="pack://application:,,,/Paway.Test;component/Images/left.png"/>
                 <MenuItem Header="提供反馈" IsCheckable="True" />
                 <Separator />
-                <MenuItem Header="设置..." />
+                <MenuItem Header="设置...">
+                    <MenuItem Header="A" IsCheckable="True" />
+                    <MenuItem Header="B"  />
+                </MenuItem>
             </MenuItem>
         </Menu>
         <ScrollViewerEXT>
             <DockPanel Width="250">
                 <ComboQuery ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" DockPanel.Dock="Top"/>
                 <ComboBoxEXT ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" DockPanel.Dock="Top"/>
-                <DataGridEXT ItemsSource="{Binding GridList}" Height="300" Radius="5,5,0,0" DockPanel.Dock="Top"/>
+                <DataGridEXT ItemsSource="{Binding GridList}" Height="255" Radius="5,5,0,0" DockPanel.Dock="Top"/>
+                <Label Content="你好Hello123" DockPanel.Dock="Top"/>
+                <TextBlock Text="你好Hello123" DockPanel.Dock="Top"/>
                 <ButtonEXT Content="3D" Click="Button_Click"/>
                 <ButtonEXT Content="空" Click="Button_Click2"/>
             </DockPanel>

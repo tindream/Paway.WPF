@@ -16,6 +16,5 @@ namespace Paway.Test
     public class LanguageInfo : LanguageBaseInfo
     {
         public virtual string Test { get; set; }
-        public string TestB { get; set; }
     }
 }
