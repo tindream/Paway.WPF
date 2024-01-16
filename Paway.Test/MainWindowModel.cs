@@ -152,7 +152,7 @@ namespace Paway.Test
                 }
             }
         }
-        private string _colors;
+        private string _colors = "成功";
         public string Colors
         {
             get { return _colors; }
@@ -187,7 +187,7 @@ namespace Paway.Test
         {
             var color = Method.ColorSelector(slider.Value / 7);
             Config.Color = color;
-            Config.Background = color.AddLight(0.93);
+            Config.Background = color.AddLight(0.96);
             this.Colors = color.ToString();
             //Method.DoStyles();
         });

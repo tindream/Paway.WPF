@@ -140,7 +140,7 @@ namespace Paway.WPF
         /// 主题窗体背景色事件
         /// </summary>
         public static event Action<Color> BackgroundChanged;
-        private static Color background = Color.FromArgb(255, 204, 213, 240);
+        private static Color background = color.AddLight(0.96);
         /// <summary>
         /// 窗体背景色
         /// </summary>

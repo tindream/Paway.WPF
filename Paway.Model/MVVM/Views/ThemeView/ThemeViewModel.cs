@@ -39,6 +39,7 @@ namespace Paway.Model
             {
                 var color = (Color)ColorConverter.ConvertFromString(selectedItem.Tag.ToStrings());
                 PConfig.Color = color;
+                PConfig.Background = color.AddLight(0.96);
             }
         }
 
