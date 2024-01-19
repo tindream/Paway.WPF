@@ -18,7 +18,7 @@ namespace Paway.WPF
     /// 主题背景颜色
     /// </summary>
     [TypeConverter(typeof(ThemeBackgroundConverter))]
-    public class ThemeBackground : ModelBase, IEquatable<ThemeBackground>
+    public class ThemeBackground : BaseModelInfo, IEquatable<ThemeBackground>
     {
         private Brush _value;
         /// <summary>

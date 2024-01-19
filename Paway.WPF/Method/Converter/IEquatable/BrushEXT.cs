@@ -18,7 +18,7 @@ namespace Paway.WPF
     /// <para>需要反射实体对象，获取默认值，故注意无限循环，不可引用自身</para>
     /// </summary>
     [TypeConverter(typeof(BrushEXTConverter))]
-    public class BrushEXT : ModelBase, IEquatable<BrushEXT>, IElementStatu<Brush>
+    public class BrushEXT : BaseModelInfo, IEquatable<BrushEXT>, IElementStatu<Brush>
     {
         private Brush normal = Colors.LightGray.ToBrush();
         /// <summary>

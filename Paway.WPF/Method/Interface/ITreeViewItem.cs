@@ -94,7 +94,7 @@ namespace Paway.WPF
     /// <summary>
     /// ITreeView数据模型
     /// </summary>
-    public class TreeViewItemModel : ModelBase, ITreeViewItem
+    public class TreeViewItemModel : BaseModelInfo, ITreeViewItem
     {
         /// <summary>
         /// 数据

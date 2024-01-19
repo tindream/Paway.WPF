@@ -15,7 +15,7 @@ namespace Paway.Model
     [Serializable]
     [Table("Organ_Auths")]
     [Description("权限")]
-    public class AuthInfo : ParentBase
+    public class AuthInfo : ParentBaseOperateInfo
     {
         /// <summary>
         /// 菜单权限
@@ -63,7 +63,7 @@ namespace Paway.Model
     /// </summary>
     [Serializable]
     [Description("权限")]
-    public class AuthReportInfo : ParentBase
+    public class AuthReportInfo : ParentBaseOperateInfo
     {
         private bool iMenuType;
         /// <summary>

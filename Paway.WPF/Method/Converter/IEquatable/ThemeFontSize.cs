@@ -18,7 +18,7 @@ namespace Paway.WPF
     /// 主题字体大小
     /// </summary>
     [TypeConverter(typeof(ThemeFontSizeConverter))]
-    public class ThemeFontSize : ModelBase, IEquatable<ThemeFontSize>
+    public class ThemeFontSize : BaseModelInfo, IEquatable<ThemeFontSize>
     {
         private double _value;
         /// <summary>

@@ -17,7 +17,7 @@ namespace Paway.WPF
     /// 自定义默认、鼠标划过时、鼠标点击时的大小
     /// </summary>
     [TypeConverter(typeof(DoubleEXTConverter))]
-    public class DoubleEXT : ModelBase, IEquatable<DoubleEXT>
+    public class DoubleEXT : BaseModelInfo, IEquatable<DoubleEXT>
     {
         private double normal;
         /// <summary>

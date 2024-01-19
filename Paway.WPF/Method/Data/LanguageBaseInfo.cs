@@ -12,7 +12,7 @@ namespace Paway.WPF
     /// 语言包定义
     /// </summary>
     [Serializable]
-    public class LanguageBaseInfo : ModelBase
+    public class LanguageBaseInfo : BaseModelInfo
     {
         /// <summary>
         /// 请输入
@@ -79,7 +79,7 @@ namespace Paway.WPF
             var retobj = @object.GetType().GetMethod(@method + "_Base").Invoke(@object, parameters);
             if (@method.StartsWith("set_"))
             {
-                if (@object is INotify notify) notify.OnPropertyChanged(@method.Substring(4));
+                if (@object is IPropertyChanged notify) notify.OnPropertyChanged(@method.Substring(4));
             }
             return retobj;
         }

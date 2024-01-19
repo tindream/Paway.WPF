@@ -17,7 +17,7 @@ namespace Paway.WPF
     /// 自定义线性渐变的Color颜色
     /// </summary>
     [TypeConverter(typeof(ColorLinearConverter))]
-    public class ColorLinear : ModelBase, IEquatable<ColorLinear>
+    public class ColorLinear : BaseModelInfo, IEquatable<ColorLinear>
     {
         private Color start = PMethod.ThemeColor(PConfig.Alpha - PConfig.Interval * 3);
         /// <summary>

@@ -22,7 +22,7 @@ namespace Paway.Model
     /// <summary>
     /// 数据管理基类，必须指定当前菜单、及初始化
     /// </summary>
-    public abstract class DataGridPageModel<T> : OperateItemModel where T : class, IBaseInfo, ICompare<T>, new()
+    public abstract class DataGridPageModel<T> : OperateItemModel where T : class, IOperateInfo, ICompare<T>, new()
     {
         #region 属性
         /// <summary>

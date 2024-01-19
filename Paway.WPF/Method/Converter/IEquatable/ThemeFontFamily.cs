@@ -17,7 +17,7 @@ namespace Paway.WPF
     /// <summary>
     /// 主题文本字体
     /// </summary>
-    public class ThemeFontFamily : ModelBase, IEquatable<ThemeFontFamily>
+    public class ThemeFontFamily : BaseModelInfo, IEquatable<ThemeFontFamily>
     {
         private string _value;
         /// <summary>

@@ -96,7 +96,7 @@ namespace Paway.WPF
     /// <summary>
     /// IListView数据模型
     /// </summary>
-    public class ListViewItemModel : ModelBase, IListViewItem
+    public class ListViewItemModel : BaseModelInfo, IListViewItem
     {
         /// <summary>
         /// 数据

@@ -123,7 +123,7 @@ namespace Paway.Test
         public string Language
         {
             get { return Config.LanguageStr; }
-            set { Config.LanguageStr = value; Config.InitLanguage(); RaisePropertyChanged(); }
+            set { Config.LanguageStr = value; Config.InitLanguage(); OnPropertyChanged(); }
         }
 
         #endregion
@@ -296,14 +296,14 @@ namespace Paway.Test
             });
         }
     }
-    public class FontInfo : ModelBase
+    public class FontInfo : ParentBaseOperateInfo
     {
         [FillSize]
         public string Name { get; set; }
         [NoShow]
         public FontFamily FontFamily { get; set; }
     }
-    public class ColorInfo : ModelBase
+    public class ColorInfo : ParentBaseOperateInfo
     {
         [FillSize]
         public string Name { get; set; }

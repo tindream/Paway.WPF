@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Paway.Test
 {
-    public class TempInfo : ModelBase
+    public class TempInfo : ParentBaseOperateInfo
     {
         public DateTime DateTime { get; set; }
         private double _value;

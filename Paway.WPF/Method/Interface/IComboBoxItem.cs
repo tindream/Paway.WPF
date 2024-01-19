@@ -27,7 +27,7 @@ namespace Paway.WPF
     /// <summary>
     /// IComboMulti数据模型
     /// </summary>
-    public class ComboBoxItemModel : ModelBase, IComboBoxItem
+    public class ComboBoxItemModel : BaseModelInfo, IComboBoxItem
     {
         private string text;
         /// <summary>

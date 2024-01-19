@@ -17,7 +17,7 @@ namespace Paway.WPF
     /// 自定义默认、鼠标划过时、鼠标点击时的Thickness宽度
     /// </summary>
     [TypeConverter(typeof(ThicknessEXTConverter))]
-    public class ThicknessEXT : ModelBase, IEquatable<ThicknessEXT>
+    public class ThicknessEXT : BaseModelInfo, IEquatable<ThicknessEXT>
     {
         private Thickness normal = new Thickness(1);
         /// <summary>

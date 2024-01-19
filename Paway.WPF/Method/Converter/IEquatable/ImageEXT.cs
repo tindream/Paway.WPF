@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paway.Helper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -16,7 +17,7 @@ namespace Paway.WPF
     /// 自定义默认、鼠标划过时、鼠标点击时的图片
     /// </summary>
     [TypeConverter(typeof(ImageEXTConverter))]
-    public class ImageEXT : ModelBase, IEquatable<ImageEXT>
+    public class ImageEXT : BaseModelInfo, IEquatable<ImageEXT>
     {
         private ImageSource normal;
         /// <summary>

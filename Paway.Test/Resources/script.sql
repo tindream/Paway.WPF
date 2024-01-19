@@ -27,12 +27,13 @@ CREATE TABLE [Sys_Users](
 "Name"  nvarchar(32),
 "Display"  nvarchar(32),
 "Password"  nvarchar(32),
-"Sex" int,
 "Enable"  int,
-"UserType"  int,
 "LoginOn"  datetime,
 "CreateOn"  datetime,
 "UpdateOn"  datetime,
+
+"Sex" int,
+"UserType"  int,
  unique(Id asc)
 );
 GO
