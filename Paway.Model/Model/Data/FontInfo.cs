@@ -13,7 +13,7 @@ namespace Paway.Model
     /// <summary>
     /// 系统字体
     /// </summary>
-    public class FontInfo : BaseOperateInfo
+    public class FontInfo : BaseModelInfo
     {
         /// <summary>
         /// 字体名称

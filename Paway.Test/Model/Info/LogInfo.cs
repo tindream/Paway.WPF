@@ -1,4 +1,6 @@
-﻿using Paway.Helper;
+﻿using Newtonsoft.Json;
+using Paway.Comm;
+using Paway.Helper;
 using Paway.Model;
 using Paway.WPF;
 using System;
@@ -17,7 +19,7 @@ namespace Paway.Test
     [Serializable]
     [Description("日志")]
     [Table("Logs")]
-    public class LogInfo : ParentBaseOnce
+    public class LogInfo : ParentBaseOperateOnceInfo
     {
         [Text("时间")]
         public override DateTime CreateOn { get => base.CreateOn; set => base.CreateOn = value; }

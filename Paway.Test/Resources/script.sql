@@ -24,6 +24,7 @@ GO
 -- ----------------------------
 CREATE TABLE [Sys_Users](
 "Id"  integer Primary Key AutoIncrement not null,
+"ParentId"  int,
 "Name"  nvarchar(32),
 "Display"  nvarchar(32),
 "Password"  nvarchar(32),
