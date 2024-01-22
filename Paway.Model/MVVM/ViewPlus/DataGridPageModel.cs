@@ -22,7 +22,7 @@ namespace Paway.Model
     /// <summary>
     /// 数据管理基类，必须指定当前菜单、及初始化
     /// </summary>
-    public abstract class DataGridPageModel<T> : OperateItemModel where T : class, IOperateInfo, ICompare<T>, new()
+    public abstract class DataGridPageModel<T> : OperateItemModel where T : class, IOperateOnceInfo, ICompare<T>, new()
     {
         #region 属性
         /// <summary>
@@ -185,7 +185,10 @@ namespace Paway.Model
         /// </summary>
         protected virtual void Updated(T info)
         {
-            info.UpdateOn = DateTime.Now;
+            if (info is IOperateInfo operateUser)
+            {
+                operateUser.UpdateOn = DateTime.Now;
+            }
             server.Update(info);
         }
         /// <summary>
@@ -278,7 +281,10 @@ namespace Paway.Model
         {
             var updateList = PMethod.Import(this.FilterList(), list);
             var timeNow = DateTime.Now;
-            updateList.ForEach(c => c.UpdateOn = timeNow);
+            if (typeof(IOperateInfo).IsAssignableFrom(list.GenericType()))
+            {
+                updateList.ForEach(c => ((IOperateInfo)c).UpdateOn = timeNow);
+            }
             server.Replace(updateList); Cache.Update(updateList);
             this.Reload();
         }

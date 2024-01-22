@@ -85,7 +85,7 @@ namespace Paway.Model
     /// <summary>
     /// 带父级列表的控件
     /// </summary>
-    public abstract class ParentBasePageModel<Parent, T> : DataGridPageModel<T> where T : class, IOperateInfo, IParent, ICompare<T>, new()
+    public abstract class ParentBasePageModel<Parent, T> : DataGridPageModel<T> where T : class, IOperateOnceInfo, IParent, ICompare<T>, new()
                                                                            where Parent : class, IId
     {
         #region 属性
@@ -176,7 +176,7 @@ namespace Paway.Model
     /// <summary>
     /// 带子级列表的控件
     /// </summary>
-    public abstract class ChildBasePageModel<T, Child> : DataGridPageModel<T> where T : class, ILoad<Child>, IOperateInfo, ICompare<T>, new()
+    public abstract class ChildBasePageModel<T, Child> : DataGridPageModel<T> where T : class, ILoad<Child>, IOperateOnceInfo, ICompare<T>, new()
                                                                               where Child : class, IParent
     {
         #region 属性
