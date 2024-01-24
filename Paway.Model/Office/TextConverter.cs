@@ -20,10 +20,6 @@ namespace Paway.Model
         /// 转换进度事件
         /// </summary>
         public event Action<ProgressEventArgs> ProgressChanged;
-        static TextConverter()
-        {
-            SpireLicence.Init();
-        }
 
         /// <summary>
         /// PDF文件转换为文本

@@ -27,10 +27,6 @@ namespace Paway.Model
         /// 图片转换进度事件
         /// </summary>
         public event Action<ProgressEventArgs> ProgressChanged;
-        static ImageConverter()
-        {
-            SpireLicence.Init();
-        }
 
         /// <summary>
         /// Word、Excel、PPT、PDF文件转换为图片
@@ -126,7 +122,7 @@ namespace Paway.Model
                 doc.LoadFromFile(file);
                 var toPdf = new ToPdfParameterList
                 {
-                    PdfConformanceLevel = PdfConformanceLevel.Pdf_A1B
+                    PdfConformanceLevel = Spire.Doc.PdfConformanceLevel.Pdf_A1B
                 };
                 var toPath = Path.Combine(Path.GetDirectoryName(file), Path.GetFileName(file).Replace(".", "_"));
                 var pdfFile = Path.Combine(toPath, $"temp.pdf");
@@ -143,6 +139,7 @@ namespace Paway.Model
                 excel.LoadFromFile(file);
                 for (var i = 0; i < excel.Worksheets.Count; i++)
                 {
+                    if (excel.Worksheets[i].Rows.Length == 0) continue;
                     var pdfFile = Path.Combine(toPath, $"{i}.pdf");
                     excel.Worksheets[i].SaveToPdf(pdfFile);
                     PDFToImage(pdfFile, zoom, (index, total, image) =>
@@ -170,6 +167,7 @@ namespace Paway.Model
                 var toPath = Path.Combine(Path.GetDirectoryName(file), Path.GetFileName(file).Replace(".", "_"));
                 for (var i = 0; i < excel.Worksheets.Count; i++)
                 {
+                    if (excel.Worksheets[i].Rows.Length == 0) continue;
                     var pdfFile = Path.Combine(toPath, $"{i}.pdf");
                     excel.Worksheets[i].SaveToPdf(pdfFile);
                     PDFToImage(pdfFile, zoom, (index, total, image) => action.Invoke(index + i * total, total * excel.Worksheets.Count, image));
