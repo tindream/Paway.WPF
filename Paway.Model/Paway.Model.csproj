@@ -33,7 +33,7 @@
 	<ItemGroup>
 		<PackageReference Include="Paway.Helper" Version="2.5.3" />
 		<PackageReference Include="Paway.Utils" Version="2.5.3" />
-		<PackageReference Include="Paway.Comm" Version="2.5.3" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="OxyPlot.Core" Version="2.1.0" />
 		<PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
 		<PackageReference Include="Spire.Office" Version="8.11.0" />

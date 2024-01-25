@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Paway.Comm;
 using Paway.Helper;
 using Paway.Model;
 using Paway.WPF;
