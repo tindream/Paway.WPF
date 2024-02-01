@@ -139,7 +139,7 @@ namespace Paway.Model
                 excel.LoadFromFile(file);
                 for (var i = 0; i < excel.Worksheets.Count; i++)
                 {
-                    if (excel.Worksheets[i].Rows.Length == 0) continue;
+                    if (excel.Worksheets[i].Rows.Length == 0 || excel.Worksheets[i].Visibility != WorksheetVisibility.Visible) continue;
                     var pdfFile = Path.Combine(toPath, $"{i}.pdf");
                     excel.Worksheets[i].SaveToPdf(pdfFile);
                     PDFToImage(pdfFile, zoom, (index, total, image) =>
@@ -167,7 +167,7 @@ namespace Paway.Model
                 var toPath = Path.Combine(Path.GetDirectoryName(file), Path.GetFileName(file).Replace(".", "_"));
                 for (var i = 0; i < excel.Worksheets.Count; i++)
                 {
-                    if (excel.Worksheets[i].Rows.Length == 0) continue;
+                    if (excel.Worksheets[i].Rows.Length == 0 || excel.Worksheets[i].Visibility != WorksheetVisibility.Visible) continue;
                     var pdfFile = Path.Combine(toPath, $"{i}.pdf");
                     excel.Worksheets[i].SaveToPdf(pdfFile);
                     PDFToImage(pdfFile, zoom, (index, total, image) => action.Invoke(index + i * total, total * excel.Worksheets.Count, image));
