@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
+using Paway.WPF;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +20,7 @@ namespace Paway.Model
     /// <summary>
     /// ThemeWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class ThemeWindow : Window
+    public partial class ThemeWindow : WindowEXT
     {
         /// <summary>
         /// 主题设置窗体
@@ -33,7 +34,7 @@ namespace Paway.Model
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            Messenger.Default.Send(new ThemeLoadMessage() { Obj = root });
+            Messenger.Default.Send(new ThemeLoadMessage());
         }
         /// <summary>
         /// 关闭时还原主题

@@ -51,7 +51,7 @@ namespace Paway.Model
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            Messenger.Default.Send(new ThemeLoadMessage() { Obj = root });
+            Messenger.Default.Send(new ThemeLoadMessage());
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Paway.Model
     /// </summary>
     public class ThemeViewModel : BaseWindowModel
     {
-        private DependencyObject Root;
+        private bool iSave;
 
         private Color themeColor;
         private double themeFontSize;
@@ -33,13 +33,16 @@ namespace Paway.Model
         /// <summary>
         /// 主题颜色
         /// </summary>
+        public Color Color { get; set; }
+        /// <summary>
+        /// 主题颜色
+        /// </summary>
         protected override void Action(ListViewCustom listView1)
         {
             if (listView1.SelectedItem is ListBoxItemEXT selectedItem)
             {
-                var color = (Color)ColorConverter.ConvertFromString(selectedItem.Tag.ToStrings());
-                PConfig.Color = color;
-                PConfig.Background = color.AddLight(0.96);
+                this.Color = (Color)ColorConverter.ConvertFromString(selectedItem.Tag.ToStrings());
+                PConfig.Color = this.Color;
             }
         }
 
@@ -82,11 +85,26 @@ namespace Paway.Model
         }
 
         /// <summary>
+        /// 确认修改
+        /// </summary>
+        protected override bool? OnCommit(Window wd)
+        {
+            this.Saved();
+            return base.OnCommit(wd);
+        }
+        /// <summary>
+        /// 确认修改
+        /// </summary>
+        public void Saved()
+        {
+            this.iSave = true;
+        }
+        /// <summary>
         /// 取消修改
         /// </summary>
         protected override bool? OnCancel()
         {
-            this.Restore();
+            this.iSave = false;
             return base.OnCancel();
         }
         /// <summary>
@@ -94,9 +112,12 @@ namespace Paway.Model
         /// </summary>
         public void Restore()
         {
-            PConfig.Color = this.themeColor;
-            PConfig.FontSize = this.themeFontSize;
-            PConfig.FontFamily = this.themeFontFamily;
+            if (!this.iSave)
+            {
+                PConfig.Color = this.themeColor;
+                PConfig.FontSize = this.themeFontSize;
+                PConfig.FontFamily = this.themeFontFamily;
+            }
         }
 
         /// <summary>
@@ -113,11 +134,11 @@ namespace Paway.Model
             }
             Messenger.Default.Register<ThemeLoadMessage>(this, msg =>
             {
-                this.Root = msg.Obj;
                 this.themeColor = PConfig.Color;
                 this.themeFontSize = PConfig.FontSize;
                 this.themeFontFamily = PConfig.FontFamily;
 
+                this.Color = PConfig.Color;
                 this.FontSize = PConfig.FontSize;
                 this.FontFamily = PConfig.FontFamily;
             });

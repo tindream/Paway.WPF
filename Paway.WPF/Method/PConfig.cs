@@ -131,6 +131,7 @@ namespace Paway.WPF
                 {
                     var old = color;
                     color = value;
+                    Background = color.AddLight(0.96);
                     ColorChanged?.Invoke(old);
                 }
             }
