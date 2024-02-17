@@ -65,6 +65,11 @@ namespace Paway.WPF
         /// </summary>
         [Description("主题")]
         public virtual string Theme { get; set; } = "主题";
+        /// <summary>
+        /// 颜色
+        /// </summary>
+        [Description("颜色")]
+        public virtual string Color { get; set; } = "颜色";
     }
     /// <summary>
     /// 注入拦截器类-触发更新事件

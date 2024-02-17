@@ -44,18 +44,18 @@
             </MenuItem>
         </Menu>
         <StackPanel DockPanel.Dock="Top">
-            <SliderEXT x:Name="sliderSize" Minimum="12" Maximum="21" Value="15" AutoToolTipPrecision="2"  TickFrequency="0.01">
+            <SliderEXT x:Name="sliderSize" Minimum="12" Maximum="21" Value="15" AutoToolTipPrecision="1" TickFrequency="0.1" >
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="ValueChanged">
                         <i:InvokeCommandAction Command="{Binding SizeChanged}" CommandParameter="{Binding ElementName=sliderSize}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </SliderEXT>
-            <SliderEXT Minimum="0" Maximum="{Binding FontFamilyCount}" Value="{Binding FontFamilyIndex}" TickFrequency="1"/>
+            <SliderEXT Minimum="0" Maximum="{Binding FontFamilyCount}" Value="{Binding FontFamilyIndex}"/>
             <Grid>
                 <Border Background="{StaticResource ColorSelector}" Height="3" CornerRadius="2" Margin="2"/>
                 <SliderEXT x:Name="sliderTheme" Maximum="7" Value="2.62" AutoToolTipPrecision="2" TickFrequency="0.01"
-                                 TrackColorLinear="Transparent;Transparent" TrackBackground="Transparent" IsSnapToTickEnabled="True" SmallChange="0.01">
+                                 TrackColorLinear="Transparent;Transparent" TrackBackground="Transparent" >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="ValueChanged">
                             <i:InvokeCommandAction Command="{Binding ColorChanged}" CommandParameter="{Binding ElementName=sliderTheme}"/>

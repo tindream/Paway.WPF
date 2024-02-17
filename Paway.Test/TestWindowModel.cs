@@ -141,6 +141,9 @@ namespace Paway.Test
                 case "主题":
                     Method.ShowWindow(Config.Window, new ThemeWindow());
                     break;
+                case "颜色":
+                    Method.ShowWindow(Config.Window, new SelectColorWindow());
+                    break;
                 default:
                     if (Config.LanguageList.Any(c => c == item))
                     {

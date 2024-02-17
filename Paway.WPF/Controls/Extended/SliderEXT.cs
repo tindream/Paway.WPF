@@ -257,6 +257,7 @@ namespace Paway.WPF
         public SliderEXT()
         {
             DefaultStyleKey = typeof(SliderEXT);
+            this.IsSnapToTickEnabled = true;
             this.ValueChanged += SliderEXT_ValueChanged;
         }
 
