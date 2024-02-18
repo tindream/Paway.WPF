@@ -11,6 +11,12 @@
            Background="#FFF"
            DataContext="{Binding Test, Source={StaticResource Locator}}"
            Title="{Binding Text}" Height="470" Width="800" WindowStartupLocation="CenterScreen">
+    <WindowEXT.FunctionBar>
+        <WindowFunctionBar>
+            <local:TitleContent/>
+            <!--<Button Content="Sign in" />-->
+        </WindowFunctionBar>
+    </WindowEXT.FunctionBar>
     <WindowEXT.FunctionBarRight>
         <WindowFunctionBar>
             <ButtonEXT Content="{Binding Language.Theme, Source={StaticResource L}}" Margin="0" IsLight="True" ItemBorder="0" Radius="0"
@@ -28,18 +34,6 @@
         </WindowFunctionBar>
     </WindowEXT.FunctionBarRight>
     <DockPanel>
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="发送反馈2" IsCheckable="True" />
-            <MenuItem Header="发送反馈3" Icon="pack://application:,,,/Paway.Test;component/Images/close.png">
-                <MenuItem Header="报告问题" Icon="pack://application:,,,/Paway.Test;component/Images/left.png"/>
-                <MenuItem Header="提供反馈" IsCheckable="True" />
-                <Separator />
-                <MenuItem Header="设置...">
-                    <MenuItem Header="A" IsCheckable="True" />
-                    <MenuItem Header="B"  />
-                </MenuItem>
-            </MenuItem>
-        </Menu>
         <ScrollViewerEXT>
             <DockPanel Width="250">
                 <ComboQuery ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" DockPanel.Dock="Top"/>

@@ -64,7 +64,7 @@
     <!--#region 通用模板 -->
     <!--输入框标题样式-->
     <Style x:Key="TitleBlock" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
-        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="Opacity" Value="0.8"/>
         <Setter Property="TextAlignment" Value="Right"/>
         <Setter Property="Padding" Value="2,0,4,0"/>

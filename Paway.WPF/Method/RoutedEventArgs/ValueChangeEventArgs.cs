@@ -37,4 +37,30 @@ namespace Paway.WPF
             this.Value = value;
         }
     }
+    /// <summary>
+    /// 值更新显示路由事件参数
+    /// </summary>
+    public class ValuesChangeEventArgs : ValueChangeEventArgs
+    {
+        /// <summary>
+        /// 显示值
+        /// </summary>
+        public string Values { get; set; }
+        /// <summary>
+        /// 小数位
+        /// </summary>
+        public int AutoToolTipPrecision { get; set; }
+
+        /// <summary>
+        /// 值更新显示路由事件参数
+        /// </summary>
+        public ValuesChangeEventArgs() { }
+        /// <summary>
+        /// 值更新显示路由事件参数
+        /// </summary>
+        public ValuesChangeEventArgs(double value, int precision, RoutedEvent routedEvent, object source) : base(value, routedEvent, source)
+        {
+            this.AutoToolTipPrecision = precision;
+        }
+    }
 }

@@ -9,13 +9,13 @@
            mc:Ignorable="d"
            DataContext="{Binding ThemeView, Source={StaticResource Locator}}"
            UseLayoutRounding="True"
-           Title="主题设置" Height="450" Width="590" ResizeMode="NoResize" >
+           Title="主题设置" Height="450" Width="650" ResizeMode="NoResize" >
     <Grid Name="root">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <StackPanel HorizontalAlignment="Center" Margin="0,10" VerticalAlignment="Center" Width="395">
+        <StackPanel HorizontalAlignment="Center" Margin="0,10" VerticalAlignment="Center" Width="500">
             <DockPanel>
                 <TextBlock Style="{StaticResource TitleBlock}" Text="主题颜色："/>
                 <ListViewEXT x:Name="listView1" ItemBorder="4" ItemBrush="Transparent;;" ItemMargin="2" ItemHeight="75" ItemWidth="100" 
@@ -38,7 +38,7 @@
                     <ListBoxItemEXT Text="波尔多红" ItemBackground="#4C0008" Tag="#4C0009" Desc="高贵/豪华/品质"/>
                 </ListViewEXT>
             </DockPanel>
-            <SliderEXT x:Name="sliderSize" Title="字体大小：" Minimum="9" Maximum="36" Value="{Binding FontSize}" AutoToolTipPrecision="1" TickFrequency="0.1"/>
+            <SliderEXT x:Name="sliderSize" Title="字体大小：" Minimum="9" Maximum="21" Value="{Binding FontSize}" AutoToolTipPrecision="1" TickFrequency="0.1"/>
             <ComboBoxEXT Title="文本字体：" ItemsSource="{Binding FontList}" DisplayMemberPath="Name" SelectedValuePath="Name" SelectedValue="{Binding FontFamily}"/>
         </StackPanel>
         <WrapPanel Grid.Row="1" Margin="0,20" HorizontalAlignment="Center">

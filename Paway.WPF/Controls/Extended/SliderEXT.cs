@@ -235,6 +235,27 @@ namespace Paway.WPF
             TipValueChanged?.Invoke(this, args);
             return args.Value;
         }
+        /// <summary>
+        /// ToolTip值更新显示路由事件
+        /// </summary>
+        public event EventHandler<ValueChangeEventArgs> TipValuesChanged;
+        /// <summary>
+        /// ToolTip值更新显示路由事件
+        /// </summary>
+        private void OnTipValuesChanged(double value, RoutedEvent routedEvent)
+        {
+            if (TipValuesChanged != null)
+            {
+                var args = new ValuesChangeEventArgs(value, this.AutoToolTipPrecision, routedEvent, this);
+                TipValuesChanged.Invoke(this, args);
+                this.ToolTip = args.Values;
+            }
+            else
+            {
+                this.ToolTip = value.Rounds(this.AutoToolTipPrecision, this.AutoToolTipPrecision);
+            }
+            if (toolTip != null) toolTip.Content = this.ToolTip;
+        }
 
         #endregion
         #region 刻度值重写路由事件
@@ -290,6 +311,7 @@ namespace Paway.WPF
             base.OnPreviewMouseLeftButtonDown(e);
             var value = OnToolTipValueChanged(e.RoutedEvent);
             if (this.AutoToolTipPlacement == AutoToolTipPlacement.None) return;
+            again:
             if (toolTip == null)
             {
                 if (PMethod.Child(this, out Thumb thumb, iParent: false))
@@ -303,12 +325,13 @@ namespace Paway.WPF
                     thumb.ToolTip = toolTip;
                 }
             }
-            toolTip.Content = value.Rounds(this.AutoToolTipPrecision, this.AutoToolTipPrecision);
+            OnTipValuesChanged(value, e.RoutedEvent);
             if (toolTip.IsOpen)
             {
                 toolTip.IsOpen = false;
-                //会自动更新位置，再次=True位置不更新
-                return;
+                //再次=True时位置不更新，需重置
+                toolTip = null;
+                goto again;
             }
             toolTip.IsOpen = true;
             PMethod.ExecuteMethod(toolTip.Parent, "Reposition");
@@ -362,8 +385,7 @@ namespace Paway.WPF
         {
             if (this.AutoToolTipPlacement == AutoToolTipPlacement.None) return this.Value;
             var value = OnTipValueChanged(this.Value, routedEvent);
-            this.ToolTip = value.Rounds(this.AutoToolTipPrecision, this.AutoToolTipPrecision);
-            if (toolTip != null) toolTip.Content = this.ToolTip;
+            OnTipValuesChanged(value, routedEvent);
             return value;
         }
 

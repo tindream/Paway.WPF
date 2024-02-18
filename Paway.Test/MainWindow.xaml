@@ -10,48 +10,27 @@
            xmlns:oxy="http://oxyplot.org/wpf"
            DataContext="{Binding Main, Source={StaticResource Locator}}"
            mc:Ignorable="d"
-           HeaderHeight="72" ButtonAlignment="Top"
+           HeaderHeight="40" ButtonAlignment="Top"
            Title="{Binding Text}" Height="800" Width="850" WindowStartupLocation="CenterScreen">
     <DockPanel Name="panel">
         <StatusBar DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Foreground="White" Height="30" Background="{StaticResource ThemeHigh}">
             <TextBlock Text="{Binding Desc}" Padding="10,6" FontSize="14" Margin="-3"></TextBlock>
         </StatusBar>
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="发送反馈2" IsCheckable="True"/>
-            <MenuItem Header="发送反馈3" >
-                <MenuItem Header="报告问题"
-                              IsCheckable="True"  />
-                <MenuItem Header="提供反馈"
-                              IsCheckable="True" />
-                <Separator />
-                <MenuItem Header="设置..." />
-            </MenuItem>
-            <MenuItem Header="发送反馈" >
-                <MenuItem Header="报告问题"
-                              IsCheckable="True"  />
-                <MenuItem Header="提供反馈"
-                              IsCheckable="True" />
-                <Separator />
-                <MenuItem Header="设置..." />
-                <MenuItem Header="发送反馈C" >
-                    <MenuItem Header="报告问题"
-                              IsCheckable="True"  />
-                    <MenuItem Header="提供反馈"
-                              IsCheckable="True" />
-                    <Separator />
-                    <MenuItem Header="设置..." />
-                </MenuItem>
-            </MenuItem>
-        </Menu>
         <StackPanel DockPanel.Dock="Top">
-            <SliderEXT x:Name="sliderSize" Minimum="12" Maximum="21" Value="15" AutoToolTipPrecision="1" TickFrequency="0.1" >
+            <SliderEXT x:Name="sliderSize" Minimum="9" Maximum="21" Value="15" AutoToolTipPrecision="1" TickFrequency="0.1" >
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="ValueChanged">
                         <i:InvokeCommandAction Command="{Binding SizeChanged}" CommandParameter="{Binding ElementName=sliderSize}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </SliderEXT>
-            <SliderEXT Minimum="0" Maximum="{Binding FontFamilyCount}" Value="{Binding FontFamilyIndex}"/>
+            <SliderEXT Minimum="0" Maximum="{Binding FontFamilyCount}" Value="{Binding FontFamilyIndex}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TipValuesChanged">
+                        <ip:EventToCommand Command="{Binding FontFamilyChanged}" PassEventArgsToCommand="True"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </SliderEXT>
             <Grid>
                 <Border Background="{StaticResource ColorSelector}" Height="3" CornerRadius="2" Margin="2"/>
                 <SliderEXT x:Name="sliderTheme" Maximum="7" Value="2.62" AutoToolTipPrecision="2" TickFrequency="0.01"
@@ -281,10 +260,8 @@
     <WindowEXT.FunctionBar>
         <WindowFunctionBar>
             <Separator />
-            <ButtonEXT Content="Dino.C" IsLight="True" Margin="0" Radius="0" ToolTip="当前档案"/>
-            <ListViewEXT Name="listView1" Margin="5,5,0,0" IAnimation="True"
-                           ItemHeight="67" ItemWidth="101"
-                           ItemBorder="1,1,0,1;1,1,1,4">
+            <ListViewEXT Name="listView1" IAnimation="True" ItemHeight="67" ItemWidth="101"
+                         IsLight="True" ItemBorder="1;1,1,1,4">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding SelectionCommand}" CommandParameter="{Binding ElementName=listView1}"/>
@@ -294,15 +271,9 @@
                                   Image="pack://application:,,,/Paway.Test;component/Images/close.png"/>
                 <ListBoxItemEXT Text="World" Desc="1" ItemBackground=";#78FF4633" ItemTextForeground="#FF4633;;"/>
                 <ListBoxItemEXT Text="A" ItemBackground=";#7802E8FA" ItemTextForeground="#02E8FA;;"/>
-                <ListBoxItemEXT Text="C" ItemBackground=";#78024AFA" ItemTextForeground="#024AFA;;" ItemBorder="1"/>
-                <ListBoxItemEXT Text="D" ItemBackground=";#78024AFA" ItemTextForeground="#024AFA;;" ItemBorder="1"/>
+                <ListBoxItemEXT Text="C" ItemBackground=";#78024AFA" ItemTextForeground="#024AFA;;"/>
+                <ListBoxItemEXT Text="D" ItemBackground=";#78024AFA" ItemTextForeground="#024AFA;;"/>
             </ListViewEXT>
         </WindowFunctionBar>
     </WindowEXT.FunctionBar>
-    <WindowEXT.FunctionBarRight>
-        <WindowFunctionBar>
-            <local:TitleContent/>
-            <!--<Button Content="Sign in" />-->
-        </WindowFunctionBar>
-    </WindowEXT.FunctionBarRight>
 </WindowEXT>

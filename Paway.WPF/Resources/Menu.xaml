@@ -399,7 +399,7 @@
         <Setter Property="Control.BorderThickness" Value="0" />
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
-        <Setter Property="Control.Padding" Value="9,0" />
+        <Setter Property="Control.Padding" Value="9,4" />
         <Setter Property="Control.Template" Value="{StaticResource TopLevelItemTemplate}" />
         <Style.Triggers>
             <!--<Trigger Property="MenuItem.Role" Value="TopLevelItem">
@@ -407,15 +407,15 @@
                 <Setter Property="Control.Template" Value="{StaticResource TopLevelItemTemplate}" />
             </Trigger>-->
             <Trigger Property="MenuItem.Role" Value="TopLevelHeader">
-                <Setter Property="Control.Padding" Value="9,0" />
+                <Setter Property="Control.Padding" Value="9,4" />
                 <Setter Property="Control.Template" Value="{StaticResource TopLevelHeaderTemplate}" />
             </Trigger>
             <Trigger Property="MenuItem.Role" Value="SubmenuItem">
-                <Setter Property="Control.Padding" Value="0" />
+                <Setter Property="Control.Padding" Value="0,4" />
                 <Setter Property="Control.Template" Value="{StaticResource SubmenuItemTemplate}" />
             </Trigger>
             <Trigger Property="MenuItem.Role" Value="SubmenuHeader">
-                <Setter Property="Control.Padding" Value="0" />
+                <Setter Property="Control.Padding" Value="0,4" />
                 <Setter Property="Control.Template" Value="{StaticResource SubmenuHeaderTemplate}" />
             </Trigger>
         </Style.Triggers>
