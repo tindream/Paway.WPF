@@ -167,7 +167,7 @@
 
         <ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="PlotView">
             <StackPanel>
-                <oxy:PlotView Model="{Binding Path= PlotModel}" Height="200">
+                <oxy:PlotView Model="{Binding PlotModel}" Height="200">
                     <oxy:PlotView.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="重置" Padding="5" FontSize="15" Command="{Binding Reset}"/>

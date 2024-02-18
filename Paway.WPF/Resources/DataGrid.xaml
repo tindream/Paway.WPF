@@ -89,12 +89,12 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="DataGridColumnHeader.SortDirection" Value="0">
+                        <Trigger Property="DataGridColumnHeader.SortDirection" Value="Ascending">
                             <Setter Property="Style" TargetName="sort" Value="{StaticResource PathTriangle}"/>
                             <Setter Property="Margin" TargetName="sort" Value="2,0,0,7"/>
                             <Setter Property="Visibility" TargetName="sort" Value="Visible"/>
                         </Trigger>
-                        <Trigger Property="DataGridColumnHeader.SortDirection" Value="1">
+                        <Trigger Property="DataGridColumnHeader.SortDirection" Value="Descending">
                             <Setter Property="Style" TargetName="sort" Value="{StaticResource PathTriangleDown}"/>
                             <Setter Property="Margin" TargetName="sort" Value="2,8,0,0"/>
                             <Setter Property="Visibility" TargetName="sort" Value="Visible"/>
@@ -218,10 +218,24 @@
                                     </Grid>
                                     <ControlTemplate.Triggers>
                                         <EventTrigger RoutedEvent="MouseEnter">
-                                            <BeginStoryboard Storyboard="{DynamicResource ScrollEnter}"/>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetName="PART_VerticalScrollBar" Storyboard.TargetProperty="Opacity"
+                                                     To="0.6" Duration="0:0:0.2" />
+                                                    <DoubleAnimation Storyboard.TargetName="PART_HorizontalScrollBar" Storyboard.TargetProperty="Opacity"
+                                                     To="0.6" Duration="0:0:0.2" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
                                         </EventTrigger>
                                         <EventTrigger RoutedEvent="MouseLeave">
-                                            <BeginStoryboard Storyboard="{DynamicResource ScrollLeave}"/>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetName="PART_VerticalScrollBar" Storyboard.TargetProperty="Opacity"
+                                                     To="0.0" Duration="0:0:0.3" />
+                                                    <DoubleAnimation Storyboard.TargetName="PART_HorizontalScrollBar" Storyboard.TargetProperty="Opacity"
+                                                     To="0.0" Duration="0:0:0.3" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
                                         </EventTrigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>

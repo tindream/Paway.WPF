@@ -29,12 +29,6 @@
     <sys:Double x:Key="ScrollRadius">4</sys:Double>
     <!--Scroll滚动条平移中心点-->
     <sys:Double x:Key="ScrollTransform">0</sys:Double>
-    <!--Scroll滚动条取消所有动画-->
-    <Storyboard x:Key="ScrollEnter"></Storyboard>
-    <Storyboard x:Key="ScrollLeave"></Storyboard>
-    <Storyboard x:Key="ThumbVerticalStoryboard1"></Storyboard>
-    <Storyboard x:Key="ThumbVerticalStoryboard2"></Storyboard>
-    <!--#endregion-->
     <!--#endregion-->
 
 </ResourceDictionary>
