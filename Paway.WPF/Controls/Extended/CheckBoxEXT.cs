@@ -9,7 +9,7 @@ using System.Windows.Media;
 namespace Paway.WPF
 {
     /// <summary>
-    /// CheckBox扩展-多选
+    /// CheckBox扩展-盒子样式
     /// </summary>
     public partial class CheckBoxEXT : CheckBox
     {

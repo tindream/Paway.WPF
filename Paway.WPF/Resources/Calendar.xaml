@@ -11,9 +11,9 @@
     <Style x:Key="CalendarButtonStyle" TargetType="{x:Type CalendarButton}">
         <Setter Property="local:CalendarMonitor.IsMonitoring" Value="True"/>
         <Setter Property="Background" Value="{Binding Path=(local:CalendarMonitor.ItemBrush).Mouse, RelativeSource={RelativeSource Self}}"/>
-        <Setter Property="Width" Value="40"/>
-        <Setter Property="Height" Value="40"/>
-        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}, Converter={StaticResource valueMultiConverter}, ConverterParameter=0.8}"/>
+        <!--<Setter Property="Width" Value="40"/>-->
+        <!--<Setter Property="Height" Value="40"/>-->
+        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}, Converter={StaticResource valueMultiConverter}}"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
@@ -87,19 +87,19 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Border x:Name="SelectedBackground" Opacity="0" CornerRadius="20"
+                        <Border x:Name="SelectedBackground" Opacity="0" CornerRadius="80"
                                 Background="{TemplateBinding Background}" />
-                        <Border x:Name="Background" Opacity="0" CornerRadius="20"
+                        <Border x:Name="Background" Opacity="0" CornerRadius="80"
                                 Background="{TemplateBinding Background}" />
                         <ContentPresenter x:Name="NormalText" 
-                                          Margin="1,0,1,1" 
+                                          Margin="7" 
                                           Content="{TemplateBinding Content}" 
                                           ContentTemplate="{TemplateBinding ContentTemplate}" 
                                           ContentStringFormat="{TemplateBinding ContentStringFormat}" 
                                           TextElement.Foreground="{StaticResource TextSub}" 
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        <Border x:Name="CalendarButtonFocusVisual" IsHitTestVisible="False" CornerRadius="20" 
+                        <Border x:Name="CalendarButtonFocusVisual" IsHitTestVisible="False" CornerRadius="80" 
                                 BorderThickness="0" Visibility="Collapsed"
                                 BorderBrush="{Binding Path=(local:CalendarMonitor.ItemBrush).Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
                     </Grid>
@@ -115,9 +115,9 @@
     <!--选择日按钮-->
     <Style x:Key="CalendarDayButtonStyle" TargetType="{x:Type CalendarDayButton}">
         <Setter Property="local:CalendarMonitor.IsMonitoring" Value="True"/>
-        <Setter Property="Width" Value="28"/>
-        <Setter Property="Height" Value="22"/>
-        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}, Converter={StaticResource valueMultiConverter}, ConverterParameter=0.8}"/>
+        <!--<Setter Property="Width" Value="28"/>-->
+        <!--<Setter Property="Height" Value="22"/>-->
+        <Setter Property="FontSize" Value="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}, Converter={StaticResource valueMultiConverter}}"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
@@ -220,15 +220,15 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Border x:Name="TodayBackground" Opacity="0" CornerRadius="22"
+                        <Border x:Name="TodayBackground" Opacity="0" CornerRadius="40"
                                 Background="{Binding Path=(local:CalendarMonitor.ItemBrush).Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
-                        <Border x:Name="SelectedBackground" Opacity="0" CornerRadius="22"
+                        <Border x:Name="SelectedBackground" Opacity="0" CornerRadius="40"
                                 Background="{Binding Path=(local:CalendarMonitor.ItemBrush).Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
                         <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"/>
-                        <Border x:Name="HighlightBackground" Opacity="0" CornerRadius="22"
+                        <Border x:Name="HighlightBackground" Opacity="0" CornerRadius="40"
                                 Background="{Binding Path=(local:CalendarMonitor.ItemBrush).Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
                         <ContentPresenter x:Name="NormalText" 
-                                          Margin="5,1" 
+                                          Margin="5,3,6,3" 
                                           Content="{TemplateBinding Content}" 
                                           ContentTemplate="{TemplateBinding ContentTemplate}" 
                                           ContentStringFormat="{TemplateBinding ContentStringFormat}" 
@@ -258,7 +258,7 @@
                         <!--星期样式-->
                         <DataTemplate x:Key="{ComponentResourceKey ResourceId=DayTitleTemplate, TypeInTargetAssembly={x:Type CalendarItem}}">
                             <TextBlock x:Name="TxtDayTitle" Foreground="{StaticResource TextSub}"
-                                       FontSize="10" 
+                                       FontSize="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}, Converter={StaticResource valueMultiConverter}, ConverterParameter=0.6}"  
                                        HorizontalAlignment="Center" Margin="0,6" Text="{Binding}"/>
                         </DataTemplate>
                     </ControlTemplate.Resources>

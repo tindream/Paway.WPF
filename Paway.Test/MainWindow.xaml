@@ -17,7 +17,7 @@
             <TextBlock Text="{Binding Desc}" Padding="10,6" FontSize="14" Margin="-3"></TextBlock>
         </StatusBar>
         <StackPanel DockPanel.Dock="Top">
-            <SliderEXT x:Name="sliderSize" Minimum="9" Maximum="21" Value="15" AutoToolTipPrecision="1" TickFrequency="0.1" >
+            <SliderEXT x:Name="sliderSize" Minimum="9" Maximum="36" Value="15" AutoToolTipPrecision="1" TickFrequency="0.1">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="ValueChanged">
                         <i:InvokeCommandAction Command="{Binding SizeChanged}" CommandParameter="{Binding ElementName=sliderSize}"/>
@@ -109,20 +109,20 @@
             </StackPanel>
         </ExpanderEXT>
         <ExpanderEXT ExpandDirection="Right" DockPanel.Dock="Right" Header="显示">
-            <StackPanel Width="250" MaxWidth="300">
+            <StackPanel Width="250" MaxWidth="500">
                 <ProgressBarEXT Value="20.4" Minimum="-20" Maximum="50" Name="progress" SmallChange="0.2"/>
                 <WrapPanel>
                     <CheckBoxEXT x:Name="cbx" Content="Hello" IsChecked="True"/>
                     <CheckBoxEXT Content="World" IsChecked="{x:Null}"/>
+                    <CheckButton Content="Hello" IsChecked="True" Radius="3,0,0,3" />
+                    <CheckButton Content="World" Radius="0,3,3,0" Margin="-3,2,2,2"/>
                 </WrapPanel>
                 <WrapPanel>
-                    <CheckButton Content="Hello" IsChecked="True"/>
-                    <CheckButton Content="World"/>
-                </WrapPanel>
-                <WrapPanel>
-                    <RadioButtonEXT Name="rb" Content="Hello" IsChecked="True"/>
-                    <RadioButtonEXT Content="World" IsChecked="True" />
-                    <RadioButtonEXT Content="Watch" IsChecked="{x:Null}" IsEnabled="False"/>
+                    <RadioBox Name="rb" Content="Hello" IsChecked="True"/>
+                    <RadioBox Content="World" IsChecked="True" />
+                    <RadioBox Content="Watch" IsChecked="{x:Null}" IsEnabled="False"/>
+                    <RadioButtonEXT Content="Hello" IsChecked="True" Radius="3,0,0,3"/>
+                    <RadioButtonEXT Content="World" IsChecked="True" Radius="0,3,3,0" Margin="-3,2,2,2"/>
                 </WrapPanel>
                 <StackPanel Orientation="Horizontal">
                     <Path Style="{StaticResource PathRound}"/>
