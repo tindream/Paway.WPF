@@ -2,8 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Paway.WPF">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
     <!-- ScrollViewer 滚动条 -->
     <Style x:Key="ScrollBarBaseThumbVertical" TargetType="Thumb">
+        <Setter Property="local:ScrollViewerMonitor.IsMonitoring" Value="True"/>
         <Setter Property="OverridesDefaultStyle" Value="true" />
         <Setter Property="IsTabStop" Value="false" />
         <Setter Property="Template">
@@ -11,24 +16,25 @@
                 <ControlTemplate TargetType="Thumb">
                     <Border Width="{TemplateBinding Width}" Background="Transparent">
                         <Rectangle x:Name="rectangle"
-                                   HorizontalAlignment="Right" Height="{TemplateBinding Height}" SnapsToDevicePixels="True" Fill="DimGray"
-                                   Width="{DynamicResource ScrollWidth}" 
-                                   RadiusX="{DynamicResource ScrollRadius}"
-                                   RadiusY="{DynamicResource ScrollRadius}">
+                                   HorizontalAlignment="Right" Height="{TemplateBinding Height}" SnapsToDevicePixels="True" 
+                                   Fill="{Binding Path=(local:ScrollViewerMonitor.ScrollBarColor), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource brushAlphaConverter}, ConverterParameter=100}"
+                                   Width="8" RadiusX="4" RadiusY="4">
                             <Rectangle.RenderTransform>
                                 <TransformGroup>
-                                    <TranslateTransform X="{DynamicResource ScrollTransform}" />
+                                    <TranslateTransform X="0" />
                                 </TransformGroup>
                             </Rectangle.RenderTransform>
                         </Rectangle>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Fill" TargetName="rectangle" Value="DarkGray" />
+                            <Setter Property="Fill" TargetName="rectangle" 
+                                    Value="{Binding Path=(local:ScrollViewerMonitor.ScrollBarColor), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource brushAlphaConverter}, ConverterParameter=100}" />
                             <Setter Property="Cursor" TargetName="rectangle" Value="Hand" />
                         </Trigger>
                         <Trigger Property="IsDragging" Value="true">
-                            <Setter Property="Fill" TargetName="rectangle" Value="#333" />
+                            <Setter Property="Fill" TargetName="rectangle" 
+                                    Value="{Binding Path=(local:ScrollViewerMonitor.ScrollBarColor), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource brushAlphaConverter}}" />
                         </Trigger>
                         <EventTrigger RoutedEvent="MouseEnter">
                             <BeginStoryboard>
@@ -64,6 +70,7 @@
         </Setter>
     </Style>
     <Style x:Key="ScrollBarBaseThumbHorizontal" TargetType="Thumb">
+        <Setter Property="local:ScrollViewerMonitor.IsMonitoring" Value="True"/>
         <Setter Property="OverridesDefaultStyle" Value="true" />
         <Setter Property="IsTabStop" Value="false" />
         <Setter Property="Template">
@@ -71,24 +78,25 @@
                 <ControlTemplate TargetType="Thumb">
                     <Border Height="{TemplateBinding Height}" Background="Transparent">
                         <Rectangle x:Name="rectangle"
-                                   VerticalAlignment="Bottom" SnapsToDevicePixels="True" Width="{TemplateBinding Width}" Fill="DimGray"
-                                   Height="{DynamicResource ScrollWidth}"
-                                   RadiusX="{DynamicResource ScrollRadius}"
-                                   RadiusY="{DynamicResource ScrollRadius}">
+                                   VerticalAlignment="Bottom" SnapsToDevicePixels="True" Width="{TemplateBinding Width}" 
+                                   Fill="{Binding Path=(local:ScrollViewerMonitor.ScrollBarColor), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource brushAlphaConverter}, ConverterParameter=100}"
+                                   Height="8" RadiusX="4" RadiusY="4">
                             <Rectangle.RenderTransform>
                                 <TransformGroup>
-                                    <TranslateTransform Y="{DynamicResource ScrollTransform}" />
+                                    <TranslateTransform Y="0" />
                                 </TransformGroup>
                             </Rectangle.RenderTransform>
                         </Rectangle>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Fill" TargetName="rectangle" Value="DarkGray" />
+                            <Setter Property="Fill" TargetName="rectangle" 
+                                    Value="{Binding Path=(local:ScrollViewerMonitor.ScrollBarColor), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource brushAlphaConverter}, ConverterParameter=100}" />
                             <Setter Property="Cursor" TargetName="rectangle" Value="Hand" />
                         </Trigger>
                         <Trigger Property="IsDragging" Value="true">
-                            <Setter Property="Fill" TargetName="rectangle" Value="#333" />
+                            <Setter Property="Fill" TargetName="rectangle" 
+                                    Value="{Binding Path=(local:ScrollViewerMonitor.ScrollBarColor), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource brushAlphaConverter}}" />
                         </Trigger>
                         <EventTrigger RoutedEvent="MouseEnter">
                             <BeginStoryboard>

@@ -55,12 +55,13 @@
     </Style>
 
     <Style x:Key="ColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
+        <Setter Property="local:DataGridMonitor.IsMonitoring" Value="True"/>
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
         <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="Padding" Value="5,10"/>
-        <Setter Property="Tag" Value="{Binding Path=Radius, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}, Converter={StaticResource topRadiusConverter}}"/>
-        <Setter Property="Background" Value="{Binding Path=HeaderBrush.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}}"/>
+        <Setter Property="Tag" Value="{Binding Path=(local:DataGridMonitor.Radius), RelativeSource={RelativeSource Self}, Converter={StaticResource topRadiusConverter}}"/>
+        <Setter Property="Background" Value="{Binding Path=(local:DataGridMonitor.HeaderBrush).Normal, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="Foreground" Value="{StaticResource Text}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -115,20 +116,24 @@
         </Style.Triggers>
     </Style>
     <Style x:Key="LastColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource ColumnHeaderStyle}">
+        <Setter Property="local:DataGridMonitor.IsMonitoring" Value="True"/>
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
-        <Setter Property="Tag" Value="{Binding Path=Radius, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}, Converter={StaticResource topRightRadiusConverter}}"/>
+        <Setter Property="Tag" Value="{Binding Path=(local:DataGridMonitor.Radius), RelativeSource={RelativeSource Self}, Converter={StaticResource topRightRadiusConverter}}"/>
     </Style>
     <Style x:Key="FirstColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource ColumnHeaderStyle}">
+        <Setter Property="local:DataGridMonitor.IsMonitoring" Value="True"/>
         <Setter Property="BorderThickness" Value="0,0,1,1"/>
-        <Setter Property="Tag" Value="{Binding Path=Radius, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}, Converter={StaticResource topLeftRadiusConverter}}"/>
+        <Setter Property="Tag" Value="{Binding Path=(local:DataGridMonitor.Radius), RelativeSource={RelativeSource Self}, Converter={StaticResource topLeftRadiusConverter}}"/>
     </Style>
     <Style x:Key="Only1ColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource ColumnHeaderStyle}">
+        <Setter Property="local:DataGridMonitor.IsMonitoring" Value="True"/>
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
-        <Setter Property="Tag" Value="{Binding Path=Radius, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}, Converter={StaticResource topRadiusConverter}}"/>
+        <Setter Property="Tag" Value="{Binding Path=(local:DataGridMonitor.Radius), RelativeSource={RelativeSource Self}, Converter={StaticResource topRadiusConverter}}"/>
     </Style>
     <Style x:Key="NormalColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource ColumnHeaderStyle}">
+        <Setter Property="local:DataGridMonitor.IsMonitoring" Value="True"/>
         <Setter Property="BorderThickness" Value="0,0,1,1"/>
-        <Setter Property="Tag" Value="{Binding Path=Radius, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}, Converter={StaticResource noRadiusConverter}}"/>
+        <Setter Property="Tag" Value="{Binding Path=(local:DataGridMonitor.Radius), RelativeSource={RelativeSource Self}, Converter={StaticResource noRadiusConverter}}"/>
     </Style>
 
     <Style TargetType="{x:Type local:DataGridEXT}" BasedOn="{StaticResource Config}">

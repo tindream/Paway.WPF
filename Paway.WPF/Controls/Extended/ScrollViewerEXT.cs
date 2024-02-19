@@ -17,37 +17,28 @@ namespace Paway.WPF
         #region 依赖属性
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty ScrollBarRadiusProperty =
-            DependencyProperty.RegisterAttached(nameof(ScrollBarRadius), typeof(CornerRadius), typeof(ScrollViewerEXT), new PropertyMetadata(new CornerRadius(4)));
-        /// <summary>
-        /// </summary>
         public static readonly DependencyProperty ScrollBarColorProperty =
-            DependencyProperty.RegisterAttached(nameof(ScrollBarColor), typeof(Brush), typeof(ScrollViewerEXT), new PropertyMetadata(PMethod.AlphaColor(PConfig.Alpha, Colors.DarkGray).ToBrush()));
-        /// <summary>
-        /// </summary>
-        public static readonly DependencyProperty ScrollBarWidthProperty =
-            DependencyProperty.RegisterAttached(nameof(ScrollBarWidth), typeof(double), typeof(ScrollViewerEXT), new PropertyMetadata(8d));
+            DependencyProperty.RegisterAttached(nameof(ScrollBarColor), typeof(Brush), typeof(ScrollViewerEXT), new PropertyMetadata(Colors.Black.ToBrush()));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ScrollIntervalProperty =
             DependencyProperty.RegisterAttached(nameof(ScrollInterval), typeof(double), typeof(ScrollViewerEXT));
+        /// <summary>
+        /// 未应用：动画不可设置参数
+        /// </summary>
+        public static readonly DependencyProperty ScrollBarWidthProperty =
+            DependencyProperty.RegisterAttached(nameof(ScrollBarWidth), typeof(double), typeof(ScrollViewerEXT), new PropertyMetadata(8d));
+        /// <summary>
+        /// 未应用：动画不可设置参数
+        /// </summary>
+        public static readonly DependencyProperty ScrollBarRadiusProperty =
+            DependencyProperty.RegisterAttached(nameof(ScrollBarRadius), typeof(CornerRadius), typeof(ScrollViewerEXT), new PropertyMetadata(new CornerRadius(4)));
         #endregion
 
         #region 扩展
         /// <summary>
-        /// 自定义边框圆角
-        /// <para>默认值：4</para>
-        /// </summary>
-        [Category("扩展")]
-        [Description("自定义边框圆角")]
-        public CornerRadius ScrollBarRadius
-        {
-            get { return (CornerRadius)GetValue(ScrollBarRadiusProperty); }
-            set { SetValue(ScrollBarRadiusProperty, value); }
-        }
-        /// <summary>
         /// 滚动条颜色
-        /// <para>默认值：(200, DarkGray)</para>
+        /// <para>默认值：Black</para>
         /// </summary>
         [Category("扩展")]
         [Description("滚动条颜色")]
@@ -55,17 +46,6 @@ namespace Paway.WPF
         {
             get { return (Brush)GetValue(ScrollBarColorProperty); }
             set { SetValue(ScrollBarColorProperty, value); }
-        }
-        /// <summary>
-        /// 滚动条高度(宽度)
-        /// <para>默认值：8</para>
-        /// </summary>
-        [Category("扩展")]
-        [Description("滚动条高度(宽度)")]
-        public double ScrollBarWidth
-        {
-            get { return (double)GetValue(ScrollBarWidthProperty); }
-            set { SetValue(ScrollBarWidthProperty, value); }
         }
         /// <summary>
         /// 滚动间隔
@@ -77,6 +57,30 @@ namespace Paway.WPF
         {
             get { return (double)GetValue(ScrollIntervalProperty); }
             set { SetValue(ScrollIntervalProperty, value); }
+        }
+        /// <summary>
+        /// 滚动条高度(宽度)
+        /// <para>未应用：动画不可设置参数</para>
+        /// <para>默认值：8</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("滚动条高度(宽度)(未应用：动画不可设置参数)")]
+        public double ScrollBarWidth
+        {
+            get { return (double)GetValue(ScrollBarWidthProperty); }
+            set { SetValue(ScrollBarWidthProperty, value); }
+        }
+        /// <summary>
+        /// 自定义边框圆角
+        /// <para>未应用：动画不可设置参数</para>
+        /// <para>默认值：4</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("自定义边框圆角(未应用：动画不可设置参数)")]
+        public CornerRadius ScrollBarRadius
+        {
+            get { return (CornerRadius)GetValue(ScrollBarRadiusProperty); }
+            set { SetValue(ScrollBarRadiusProperty, value); }
         }
 
         #endregion

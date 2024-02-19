@@ -31,7 +31,14 @@ namespace Paway.WPF
                     if (scrollBar.TemplatedParent is ScrollViewerEXT scrollViewerEXT)
                     {
                         thumb.SetValue(ScrollBarRadiusProperty, scrollViewerEXT.ScrollBarRadius);
-                        thumb.SetValue(ScrollBarColorProperty, scrollViewerEXT.ScrollBarColor);
+                        if (scrollViewerEXT.TemplatedParent is DataGridEXT dataGrid)
+                        {
+                            thumb.SetValue(ScrollBarColorProperty, dataGrid.ScrollBarColor);
+                        }
+                        else
+                        {
+                            thumb.SetValue(ScrollBarColorProperty, scrollViewerEXT.ScrollBarColor);
+                        }
                     }
                 }
             }
@@ -50,11 +57,13 @@ namespace Paway.WPF
         #region 依赖属性
         /// <summary>
         /// 滚动条圆角
+        /// <para>未应用：动画不可设置参数</para>
         /// </summary>
         public static readonly DependencyProperty ScrollBarRadiusProperty =
             DependencyProperty.RegisterAttached(nameof(ScrollBarRadius), typeof(CornerRadius), typeof(ScrollViewerMonitor), new PropertyMetadata(new CornerRadius(4)));
         /// <summary>
         /// 滚动条圆角
+        /// <para>未应用：动画不可设置参数</para>
         /// <para>默认值：4</para>
         /// </summary>
         public CornerRadius ScrollBarRadius
@@ -67,13 +76,11 @@ namespace Paway.WPF
         /// 滚动条颜色
         /// </summary>
         public static readonly DependencyProperty ScrollBarColorProperty =
-            DependencyProperty.RegisterAttached(nameof(ScrollBarColor), typeof(Brush), typeof(ScrollViewerMonitor), new PropertyMetadata(PMethod.AlphaColor(PConfig.Alpha, Colors.DarkGray).ToBrush()));
+            DependencyProperty.RegisterAttached(nameof(ScrollBarColor), typeof(Brush), typeof(ScrollViewerMonitor), new PropertyMetadata(Colors.Black.ToBrush()));
         /// <summary>
         /// 滚动条颜色
-        /// <para>默认值：(200, DarkGray)</para>
+        /// <para>默认值：Black</para>
         /// </summary>
-        [Category("扩展")]
-        [Description("滚动条颜色")]
         public Brush ScrollBarColor
         {
             get { return (Brush)GetValue(ScrollBarColorProperty); }

@@ -91,6 +91,20 @@ namespace Paway.Test
             set { plotModel = value; OnPropertyChanged(); }
         }
 
+        private bool _isSelected;
+        public bool IsSelected
+        {
+            get { return _isSelected; }
+            set { _isSelected = value; OnPropertyChanged(); }
+        }
+
+        private MenuAuthType _menuAuthType;
+        public MenuAuthType MenuAuthType
+        {
+            get { return _menuAuthType; }
+            set { _menuAuthType = value; OnPropertyChanged(); }
+        }
+
         public ObservableCollection<IComboBoxItem> MultiList { get; } = new ObservableCollection<IComboBoxItem>();
 
         private DateTime datePickerTime = DateTime.Now;

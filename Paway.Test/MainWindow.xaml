@@ -12,7 +12,12 @@
            mc:Ignorable="d"
            HeaderHeight="40" ButtonAlignment="Top"
            Title="{Binding Text}" Height="800" Width="850" WindowStartupLocation="CenterScreen">
+    <WindowEXT.Resources>
+        <FrameworkElement x:Key="ProxyElement" DataContext="{Binding}"/>
+    </WindowEXT.Resources>
     <DockPanel Name="panel">
+        <!--只是将ProxyElement添加到树-->
+        <ContentControl Content="{StaticResource ProxyElement}" Visibility="Collapsed"/>
         <StatusBar DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Foreground="White" Height="30" Background="{StaticResource ThemeHigh}">
             <TextBlock Text="{Binding Desc}" Padding="10,6" FontSize="14" Margin="-3"></TextBlock>
         </StatusBar>
@@ -179,8 +184,8 @@
         <ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="DataGrid">
             <StackPanel Width="250">
                 <DataGridEXT Name="datagrid1" ItemsSource="{Binding PagedList}" SelectedItem="{Binding SelectedItem}"
-                             SelectionUnit="CellOrRowHeader"
-                             Height="250" VerticalAlignment="Top">
+                             SelectionUnit="CellOrRowHeader" Radius="5,5,0,0"
+                             Height="250" VerticalAlignment="Top" ScrollBarColor="Red">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="RowDoubleEvent">
                             <ip:EventToCommand Command="{Binding RowDoubleCommand}" PassEventArgsToCommand="True"/>
@@ -199,7 +204,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="IsSelected">
+                        <DataGridTemplateColumn Header="IsSelected" Visibility="{Binding DataContext.IsSelected, Source={StaticResource ProxyElement}, Converter={StaticResource boolToVisible}}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <DockPanel>

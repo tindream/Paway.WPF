@@ -71,23 +71,6 @@ namespace Paway.WPF
 
         #endregion
 
-        #region 属性
-        /// <summary>
-        /// 自动获取当前密码框文本长度
-        /// </summary>
-        public static readonly DependencyProperty PasswordLengthProperty =
-            DependencyProperty.RegisterAttached(nameof(PasswordLength), typeof(int), typeof(PasswordBoxMonitor));
-        /// <summary>
-        /// 自动获取当前密码框文本长度
-        /// </summary>
-        public int PasswordLength
-        {
-            get { return (int)GetValue(PasswordLengthProperty); }
-            set { SetValue(PasswordLengthProperty, value); }
-        }
-
-        #endregion
-
         #region 动画
         /// <summary>
         /// 鼠标进入时启动
@@ -110,6 +93,23 @@ namespace Paway.WPF
                 var iAnimation = (double)pad.GetValue(PasswordBoxEXT.IAnimationProperty);
                 if (iAnimation > 0) PMethod.Animation(pad, false);
             }
+        }
+
+        #endregion
+
+        #region 依赖属性
+        /// <summary>
+        /// 自动获取当前密码框文本长度
+        /// </summary>
+        public static readonly DependencyProperty PasswordLengthProperty =
+            DependencyProperty.RegisterAttached(nameof(PasswordLength), typeof(int), typeof(PasswordBoxMonitor));
+        /// <summary>
+        /// 自动获取当前密码框文本长度
+        /// </summary>
+        public int PasswordLength
+        {
+            get { return (int)GetValue(PasswordLengthProperty); }
+            set { SetValue(PasswordLengthProperty, value); }
         }
 
         #endregion

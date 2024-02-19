@@ -30,8 +30,6 @@ namespace Paway.WPF
                 {
                     thumb.SetValue(ButtonTypeProperty, sliderEXT.ButtonType);
                     thumb.SetValue(TrackColorLinearProperty, sliderEXT.TrackColorLinear);
-                    thumb.SetValue(RadiusLeftProperty, sliderEXT.GetValue(RadiusLeftProperty));
-                    thumb.SetValue(RadiusBottomProperty, sliderEXT.GetValue(RadiusBottomProperty));
                 }
             }
         }
@@ -77,36 +75,6 @@ namespace Paway.WPF
         {
             get { return (ColorLinear)GetValue(TrackColorLinearProperty); }
             set { SetValue(TrackColorLinearProperty, value); }
-        }
-
-        /// <summary>
-        /// 左圆角
-        /// </summary>
-        public static readonly DependencyProperty RadiusLeftProperty =
-            DependencyProperty.RegisterAttached(nameof(RadiusLeft), typeof(CornerRadius), typeof(SliderMonitor), new PropertyMetadata(new CornerRadius(2, 0, 0, 2)));
-        /// <summary>
-        /// 左圆角
-        /// <para>默认值：2, 0, 0, 2</para>
-        /// </summary>
-        public CornerRadius RadiusLeft
-        {
-            get { return (CornerRadius)GetValue(RadiusLeftProperty); }
-            set { SetValue(RadiusLeftProperty, value); }
-        }
-
-        /// <summary>
-        /// 下圆角
-        /// </summary>
-        public static readonly DependencyProperty RadiusBottomProperty =
-            DependencyProperty.RegisterAttached(nameof(RadiusBottom), typeof(CornerRadius), typeof(SliderMonitor), new PropertyMetadata(new CornerRadius(0, 0, 2, 2)));
-        /// <summary>
-        /// 下圆角
-        /// <para>默认值：0, 0, 2, 2</para>
-        /// </summary>
-        public CornerRadius RadiusBottom
-        {
-            get { return (CornerRadius)GetValue(RadiusBottomProperty); }
-            set { SetValue(RadiusBottomProperty, value); }
         }
 
         #endregion

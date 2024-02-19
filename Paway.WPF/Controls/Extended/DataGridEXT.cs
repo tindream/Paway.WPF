@@ -12,6 +12,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using Paway.Helper;
 
 namespace Paway.WPF
@@ -38,12 +39,17 @@ namespace Paway.WPF
                 new PropertyMetadata(new BrushEXT() { Normal = PMethod.AlphaColor(200, PConfig.Light).ToBrush() }));
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty ICustomColumnHeaderProperty =
+            DependencyProperty.RegisterAttached(nameof(ICustomColumnHeader), typeof(bool), typeof(DataGridEXT), new PropertyMetadata(false));
+
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty ScrollBarWidthProperty =
             DependencyProperty.RegisterAttached(nameof(ScrollBarWidth), typeof(double), typeof(DataGridEXT), new PropertyMetadata(8d));
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty ICustomColumnHeaderProperty =
-            DependencyProperty.RegisterAttached(nameof(ICustomColumnHeader), typeof(bool), typeof(DataGridEXT), new PropertyMetadata(false));
+        public static readonly DependencyProperty ScrollBarColorProperty =
+            DependencyProperty.RegisterAttached(nameof(ScrollBarColor), typeof(Brush), typeof(DataGridEXT), new PropertyMetadata(Colors.Black.ToBrush()));
 
         /// <summary>
         /// 自定义边框圆角
@@ -79,17 +85,6 @@ namespace Paway.WPF
             set { SetValue(HeaderBrushProperty, value); }
         }
         /// <summary>
-        /// 滚动条高度(宽度)
-        /// <para>默认值：8</para>
-        /// </summary>
-        [Category("扩展")]
-        [Description("滚动条高度(宽度)")]
-        public double ScrollBarWidth
-        {
-            get { return (double)GetValue(ScrollBarWidthProperty); }
-            set { SetValue(ScrollBarWidthProperty, value); }
-        }
-        /// <summary>
         /// 自定义列头
         /// <para>默认值：false</para>
         /// </summary>
@@ -100,6 +95,29 @@ namespace Paway.WPF
         {
             get { return (bool)GetValue(ICustomColumnHeaderProperty); }
             set { SetValue(ICustomColumnHeaderProperty, value); }
+        }
+
+        /// <summary>
+        /// 滚动条高度(宽度)
+        /// <para>默认值：8</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("滚动条高度(宽度)(未应用：动画不可设置参数)")]
+        public double ScrollBarWidth
+        {
+            get { return (double)GetValue(ScrollBarWidthProperty); }
+            set { SetValue(ScrollBarWidthProperty, value); }
+        }
+        /// <summary>
+        /// 滚动条颜色
+        /// <para>默认值：Black</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("滚动条颜色")]
+        public Brush ScrollBarColor
+        {
+            get { return (Brush)GetValue(ScrollBarColorProperty); }
+            set { SetValue(ScrollBarColorProperty, value); }
         }
 
         #endregion
