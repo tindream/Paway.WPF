@@ -11,30 +11,22 @@ namespace Paway.WPF
     /// <summary>
     /// for custom window
     /// </summary>
-    public partial class WindowMonitor
+    public partial class WindowMonitor : DependencyObject
     {
         #region 依赖属性
         /// <summary>
+        /// 绑定命令
         /// </summary>
         public static readonly DependencyProperty IsBindingToSystemCommandsProperty =
-            DependencyProperty.RegisterAttached("IsBindingToSystemCommands", typeof(bool), typeof(WindowMonitor), new PropertyMetadata(default(bool), OnIsBindingToSystemCommandsChanged));
-        /// <summary>
-        /// </summary>
-        public static readonly DependencyProperty IsDragMoveEnabledProperty =
-            DependencyProperty.RegisterAttached("IsDragMoveEnabled", typeof(bool), typeof(WindowMonitor), new PropertyMetadata(default(bool), OnIsDragMoveEnabledChanged));
-
-        #endregion
-
+            DependencyProperty.RegisterAttached(nameof(IsBindingToSystemCommands), typeof(bool), typeof(WindowMonitor), new PropertyMetadata(default(bool), OnIsBindingToSystemCommandsChanged));
         /// <summary>
         /// 绑定命令
         /// </summary>
-        public static void SetIsBindingToSystemCommands(DependencyObject obj, bool value) => obj.SetValue(IsBindingToSystemCommandsProperty, value);
-
-        /// <summary>
-        /// 移动Window
-        /// </summary>
-        public static void SetIsDragMoveEnabled(DependencyObject obj, bool value) => obj.SetValue(IsDragMoveEnabledProperty, value);
-
+        public bool IsBindingToSystemCommands
+        {
+            get { return (bool)GetValue(IsBindingToSystemCommandsProperty); }
+            set { SetValue(IsBindingToSystemCommandsProperty, value); }
+        }
         private static void OnIsBindingToSystemCommandsChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
             if ((bool)args.NewValue && obj is Window window)
@@ -42,6 +34,21 @@ namespace Paway.WPF
                 var service = new WindowCommandHelper(window);
                 service.ActiveCommands();
             }
+        }
+
+        /// <summary>
+        /// 允许移动
+        /// </summary>
+        public static readonly DependencyProperty IsDragMoveEnabledProperty =
+            DependencyProperty.RegisterAttached(nameof(IsDragMoveEnabled), typeof(bool), typeof(WindowMonitor), new PropertyMetadata(default(bool), OnIsDragMoveEnabledChanged));
+        /// <summary>
+        /// 允许移动
+        /// <para>默认值：false</para>
+        /// </summary>
+        public bool IsDragMoveEnabled
+        {
+            get { return (bool)GetValue(IsDragMoveEnabledProperty); }
+            set { SetValue(IsDragMoveEnabledProperty, value); }
         }
         private static void OnIsDragMoveEnabledChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
@@ -62,5 +69,7 @@ namespace Paway.WPF
                 target.DragMove();
             }
         }
+
+        #endregion
     }
 }

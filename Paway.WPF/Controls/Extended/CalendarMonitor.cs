@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -88,24 +89,30 @@ namespace Paway.WPF
 
         #region 依赖属性
         /// <summary>
+        /// 启用扩展按钮
+        /// <para>默认值：false</para>
         /// </summary>
         public static readonly DependencyProperty HasButtonProperty =
             DependencyProperty.RegisterAttached(nameof(HasButton), typeof(bool), typeof(CalendarMonitor));
         /// <summary>
         /// 启用扩展按钮
+        /// <para>默认值：true</para>
         /// </summary>
         public bool HasButton
         {
             get { return (bool)GetValue(HasButtonProperty); }
             set { SetValue(HasButtonProperty, value); }
         }
+
         /// <summary>
+        /// 自定义项背景色
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(CalendarMonitor),
                 new PropertyMetadata(new BrushEXT()));
         /// <summary>
         /// 自定义项背景色
+        /// <para>默认值：默认</para>
         /// </summary>
         public BrushEXT ItemBrush
         {

@@ -64,7 +64,6 @@
         </Setter>
     </Style>
     <Style x:Key="ScrollBarBaseThumbHorizontal" TargetType="Thumb">
-        <Setter Property="local:ScrollViewerMonitor.IsMonitoring" Value="True"/>
         <Setter Property="OverridesDefaultStyle" Value="true" />
         <Setter Property="IsTabStop" Value="false" />
         <Setter Property="Template">

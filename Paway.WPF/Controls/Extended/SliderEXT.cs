@@ -25,10 +25,14 @@ namespace Paway.WPF
         public static readonly DependencyProperty RadiusProperty =
             DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(SliderEXT), new PropertyMetadata(new CornerRadius(2), OnRadiusChanged));
         /// <summary>
+        /// 左圆角
+        /// <para>默认值：2, 0, 0, 2</para>
         /// </summary>
         public static readonly DependencyProperty RadiusLeftProperty =
             DependencyProperty.RegisterAttached("RadiusLeft", typeof(CornerRadius), typeof(SliderEXT), new PropertyMetadata(new CornerRadius(2, 0, 0, 2)));
         /// <summary>
+        /// 下圆角
+        /// <para>默认值：0, 0, 2, 2</para>
         /// </summary>
         public static readonly DependencyProperty RadiusBottomProperty =
             DependencyProperty.RegisterAttached("RadiusBottom", typeof(CornerRadius), typeof(SliderEXT), new PropertyMetadata(new CornerRadius(0, 0, 2, 2)));
@@ -78,7 +82,7 @@ namespace Paway.WPF
                     if (((CornerRadius)slider.GetValue(RadiusLeftProperty)).TopLeft != slider.Radius.TopLeft)
                         slider.SetValue(RadiusLeftProperty, new CornerRadius(slider.Radius.TopLeft, 0, 0, slider.Radius.BottomLeft));
                     if (((CornerRadius)slider.GetValue(RadiusBottomProperty)).BottomLeft != slider.Radius.BottomLeft)
-                        slider.SetValue(RadiusBottomProperty, new CornerRadius(0, 0, slider.Radius.BottomLeft, slider.Radius.BottomRight));
+                        slider.SetValue(RadiusBottomProperty, new CornerRadius(0, 0, slider.Radius.BottomRight, slider.Radius.BottomLeft));
                 };
             }
         }

@@ -8,7 +8,7 @@
         DataContext="{Binding SelectColor, Source={StaticResource Locator}}"
         UseLayoutRounding="True"
         Title="{Binding Title}" Height="450" Width="650" ResizeMode="NoResize">
-    <Grid FocusManager.FocusedElement="{Binding ElementName=tbName}">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>

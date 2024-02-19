@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,17 +52,33 @@ namespace Paway.WPF
         /// 滚动条圆角
         /// </summary>
         public static readonly DependencyProperty ScrollBarRadiusProperty =
-            DependencyProperty.RegisterAttached("ScrollBarRadius", typeof(CornerRadius), typeof(ScrollViewerMonitor), new PropertyMetadata(new CornerRadius(4)));
+            DependencyProperty.RegisterAttached(nameof(ScrollBarRadius), typeof(CornerRadius), typeof(ScrollViewerMonitor), new PropertyMetadata(new CornerRadius(4)));
+        /// <summary>
+        /// 滚动条圆角
+        /// <para>默认值：4</para>
+        /// </summary>
+        public CornerRadius ScrollBarRadius
+        {
+            get { return (CornerRadius)GetValue(ScrollBarRadiusProperty); }
+            set { SetValue(ScrollBarRadiusProperty, value); }
+        }
+
         /// <summary>
         /// 滚动条颜色
         /// </summary>
         public static readonly DependencyProperty ScrollBarColorProperty =
-            DependencyProperty.RegisterAttached("ScrollBarColor", typeof(Brush), typeof(ScrollViewerMonitor), new PropertyMetadata(PMethod.AlphaColor(PConfig.Alpha, Colors.DarkGray).ToBrush()));
+            DependencyProperty.RegisterAttached(nameof(ScrollBarColor), typeof(Brush), typeof(ScrollViewerMonitor), new PropertyMetadata(PMethod.AlphaColor(PConfig.Alpha, Colors.DarkGray).ToBrush()));
         /// <summary>
-        /// 垂直滚动条外边距
+        /// 滚动条颜色
+        /// <para>默认值：(200, DarkGray)</para>
         /// </summary>
-        public static readonly DependencyProperty VerticalScrollBarMarginProperty =
-            DependencyProperty.RegisterAttached("VerticalScrollBarMargin", typeof(Thickness), typeof(ScrollViewerMonitor));
+        [Category("扩展")]
+        [Description("滚动条颜色")]
+        public Brush ScrollBarColor
+        {
+            get { return (Brush)GetValue(ScrollBarColorProperty); }
+            set { SetValue(ScrollBarColorProperty, value); }
+        }
 
         #endregion
     }

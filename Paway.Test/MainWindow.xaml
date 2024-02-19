@@ -178,10 +178,9 @@
         </ExpanderEXT>
         <ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="DataGrid">
             <StackPanel Width="250">
-                <DataGridEXT Name="datagrid1"
-                               ItemsSource="{Binding PagedList}"
-                               SelectedItem="{Binding SelectedItem}"
-                               Height="250" VerticalAlignment="Top">
+                <DataGridEXT Name="datagrid1" ItemsSource="{Binding PagedList}" SelectedItem="{Binding SelectedItem}"
+                             SelectionUnit="CellOrRowHeader"
+                             Height="250" VerticalAlignment="Top">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="RowDoubleEvent">
                             <ip:EventToCommand Command="{Binding RowDoubleCommand}" PassEventArgsToCommand="True"/>
@@ -195,7 +194,7 @@
                                     <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                                         <TextBlock Text="{Binding Desc}" Foreground="Red" Style="{StaticResource TextLeft}"/>
                                         <ButtonEXT Content="{Binding Desc}" IsLight="True" 
-                                           Command="{Binding ElementName=dataGrid, Path=DataContext.ItemCommand}" CommandParameter="{Binding Desc}" />
+                                                   Command="{Binding ElementName=datagrid1, Path=DataContext.ItemClickCommand}" CommandParameter="{Binding Desc}" />
                                     </WrapPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

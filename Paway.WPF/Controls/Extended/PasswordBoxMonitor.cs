@@ -19,11 +19,6 @@ namespace Paway.WPF
     {
         #region 启用监听，设置水印大小，获取密码长度
         /// <summary>
-        /// 自动获取当前密码框文本长度
-        /// </summary>
-        public static readonly DependencyProperty PasswordLengthProperty =
-            DependencyProperty.RegisterAttached(nameof(PasswordLength), typeof(int), typeof(PasswordBoxMonitor));
-        /// <summary>
         /// 启用监听，设置水印大小，获取密码长度
         /// </summary>
         public static readonly DependencyProperty IsMonitoringProperty =
@@ -73,6 +68,15 @@ namespace Paway.WPF
             get { return (bool)GetValue(IsMonitoringProperty); }
             set { SetValue(IsMonitoringProperty, value); }
         }
+
+        #endregion
+
+        #region 属性
+        /// <summary>
+        /// 自动获取当前密码框文本长度
+        /// </summary>
+        public static readonly DependencyProperty PasswordLengthProperty =
+            DependencyProperty.RegisterAttached(nameof(PasswordLength), typeof(int), typeof(PasswordBoxMonitor));
         /// <summary>
         /// 自动获取当前密码框文本长度
         /// </summary>

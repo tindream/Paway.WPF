@@ -15,7 +15,7 @@
         <!--<Setter Property="Background" Value="White" />-->
         <Setter Property="BorderThickness" Value="0" />
         <!--<Setter Property="Opacity" Value="1" />-->
-        <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=Content.Text}"/>
+        <Setter Property="ToolTip" Value="{Binding Path=DataContext, RelativeSource={RelativeSource Mode=Self}}"/>
         <Style.Triggers >
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="{Binding ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}}" />
