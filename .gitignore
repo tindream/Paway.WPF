@@ -39,4 +39,5 @@ AssemblyVersion.cs
 /builder/Paway.*/*
 /builder/Spire.Pdf.*
 /builder/OxyPlot.*
-/Root/Spire.Office8.11.0/*
+/Root/Spire.Office8.11.0.zip
+/Root/Spire.Office8.11.0/*/*.dll

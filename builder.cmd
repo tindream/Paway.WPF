@@ -7,7 +7,11 @@
 @copy Root\OxyPlot1.1\OxyPlot.Wpf.Shared.dll			builder\OxyPlot.Wpf.Shared.1.1.0_net45\OxyPlot.Wpf.Shared.dll
 
 @copy Root\Spire.Office8.11.0\net40\Spire.Pdf.dll			builder\Spire.Pdf.8.11.0_net40\Spire.Pdf.dll
+@copy Root\Spire.Office8.11.0\net40\Spire.XLS.dll			builder\Spire.Pdf.8.11.0_net40\Spire.XLS.dll
+@copy Root\Spire.Office8.11.0\net40\Spire.Doc.dll			builder\Spire.Pdf.8.11.0_doc11.11_net40\Spire.Doc.dll
 @copy Root\Spire.Office8.11.0\netcoreapp2.0\Spire.Pdf.dll		builder\Spire.Pdf.8.11.0_netcoreapp2.0\Spire.Pdf.dll
+@copy Root\Spire.Office8.11.0\netcoreapp2.0\Spire.XLS.dll		builder\Spire.Pdf.8.11.0_netcoreapp2.0\Spire.XLS.dll
+@copy Root\Spire.Office8.11.0\netcoreapp2.0\Spire.Doc.dll		builder\Spire.Pdf.8.11.0_doc11.11_netcoreapp2.0\Spire.Doc.dll
 
 @echo ---------------build-------------------------------------------------------
 @devenv Paway.WPF.sln /Rebuild release
