@@ -515,7 +515,7 @@ namespace Paway.WPF
 
         #endregion
 
-        #region 获取控件模板的XAML代码
+        #region 获取控件的XAML代码
         /// <summary>
         /// 获取控件模板的XAML代码
         /// </summary>
@@ -546,6 +546,17 @@ namespace Paway.WPF
             {
                 xaml = "no template";
             }
+            return xaml;
+        }
+        /// <summary>
+        /// 获取组件界面XAML代码
+        /// <para>从相对路径URI</para>
+        /// </summary>
+        public static string GetComponentXmal(string uriStr, string toFlile)
+        {
+            var uri = new Uri(uriStr, UriKind.Relative);
+            var obj = Application.LoadComponent(uri);
+            var xaml = XamlWriter.Save(obj);
             return xaml;
         }
 
