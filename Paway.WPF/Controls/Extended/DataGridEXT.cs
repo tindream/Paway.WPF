@@ -340,8 +340,13 @@ namespace Paway.WPF
                 else
                 {
                     column = new DataGridTextColumn { Binding = new Binding(property.Name) };
+                    if (property.DataGridColumn(out DataGridColumnAttribute mode))
+                    {
+                        if (mode.Width > 1) column.Width = mode.Width;
+                        if (mode.MinWidth > 1) column.MinWidth = mode.MinWidth;
+                        if (mode.MaxWidth > 1) column.MaxWidth = mode.MaxWidth;
+                    }
                     if (property.AllCells()) column.Width = DataGridLength.Auto;
-                    else if (property.FillSize()) column.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
                     columns.Add(column);
                 }
                 //column.MinWidth = 64; 
