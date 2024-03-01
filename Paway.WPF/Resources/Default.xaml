@@ -68,6 +68,35 @@
     <DataTemplate x:Key="ViewItem">
         <TextBlock Text="{Binding Text}"/>
     </DataTemplate>
+    <!--Keyboard默认模板-->
+    <DataTemplate x:Key="KeyboardOne">
+        <Border x:Name="border" Background="Transparent" CornerRadius="3">
+            <Border.Width>
+                <MultiBinding Converter="{StaticResource nullSelector}">
+                    <Binding Path="ItemWidth" />
+                    <Binding Path="ItemWidth" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewCustom}}" />
+                </MultiBinding>
+            </Border.Width>
+            <Border.Height>
+                <MultiBinding Converter="{StaticResource nullSelector}">
+                    <Binding Path="ItemHeight" />
+                    <Binding Path="ItemHeight" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewCustom}}" />
+                </MultiBinding>
+            </Border.Height>
+            <DockPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Image Source="{Binding Image.Normal}" Stretch="None" Visibility="{Binding Image.Normal, Converter={StaticResource nullToCollapsed}}" />
+                <TextBlock Text="{Binding Text}" FontSize="{Binding FontSize}" Visibility="{Binding Text, Converter={StaticResource nullToCollapsed}}"/>
+            </DockPanel>
+        </Border>
+        <DataTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True" >
+                <Setter TargetName="border" Property="Background" Value="{Binding Source={StaticResource ThemeColor}, Converter={StaticResource brushAlphaConverter}, ConverterParameter=160}"/>
+            </Trigger>
+            <DataTrigger Binding="{Binding IsPressed}" Value="True">
+                <Setter TargetName="border" Property="Background" Value="{Binding Source={StaticResource ThemeColor}, Converter={StaticResource brushAlphaConverter}, ConverterParameter=240}"/>
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
     <!--焦点样式动态边框-->
     <Thickness x:Key="FocusBorderThickness">0</Thickness>
     <Style x:Key="FocusVisualStyle">

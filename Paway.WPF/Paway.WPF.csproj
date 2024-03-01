@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<UseWPF>true</UseWPF>
+		<UseWindowsForms>true</UseWindowsForms>
 		<TargetFrameworks>net45</TargetFrameworks>
 		<!--用于指示编译器是否生成文档文件的值-->
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
@@ -19,6 +20,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Resource Include="Resource\fontawesome.ttf" />
+		<Resource Include="Images\*\*.png" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -36,13 +36,14 @@
     <DockPanel>
         <ScrollViewerEXT>
             <DockPanel Width="250">
-                <ComboQuery ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" DockPanel.Dock="Top"/>
-                <ComboBoxEXT ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" DockPanel.Dock="Top"/>
-                <DataGridEXT ItemsSource="{Binding GridList}" Height="255" Radius="5,5,0,0" DockPanel.Dock="Top"/>
-                <Label Content="你好Hello123" DockPanel.Dock="Top"/>
-                <TextBlock Text="你好Hello123" DockPanel.Dock="Top"/>
-                <ButtonEXT Content="3D" Click="Button_Click"/>
-                <ButtonEXT Content="空" Click="Button_Click2"/>
+                <StackPanel DockPanel.Dock="Top">
+                    <TextBoxEXT Text="Hello"/>
+                </StackPanel>
+                <WrapPanel DockPanel.Dock="Bottom">
+                    <ButtonEXT Content="3D" Click="Button_Click"/>
+                    <ButtonEXT Content="空" Click="Button_Click2"/>
+                </WrapPanel>
+                <DataGridEXT ItemsSource="{Binding GridList}" Height="255" Radius="5,5,0,0" />
             </DockPanel>
         </ScrollViewerEXT>
         <Frame Name="frame" NavigationUIVisibility="Hidden"/>

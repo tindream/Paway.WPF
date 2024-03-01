@@ -39,6 +39,10 @@ namespace Paway.WPF
         #region 依赖属性
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty KeyboardProperty =
+                DependencyProperty.RegisterAttached(nameof(Keyboard), typeof(KeyboardType), typeof(TextBoxEXT), new PropertyMetadata(KeyboardType.All));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty WaterProperty =
             DependencyProperty.RegisterAttached(nameof(Water), typeof(string), typeof(TextBoxEXT), new PropertyMetadata());
         /// <summary>
@@ -91,6 +95,17 @@ namespace Paway.WPF
         #endregion
 
         #region 扩展
+        /// <summary>
+        /// 软键盘类型
+        /// <para>默认值：全键盘</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("软键盘类型")]
+        public KeyboardType Keyboard
+        {
+            get { return (KeyboardType)GetValue(KeyboardProperty); }
+            set { SetValue(KeyboardProperty, value); }
+        }
         /// <summary>
         /// 水印内容
         /// <para>默认值：未设置</para>
@@ -277,6 +292,65 @@ namespace Paway.WPF
         {
             base.OnMouseLeave(e);
             if (IAnimation > 0) PMethod.Animation(this, false);
+        }
+
+        #endregion
+
+        #region 自定义软键盘
+        private CustomAdorner desktopAdorner;
+        /// <summary>
+        /// 获取焦点时自动打开软键盘
+        /// </summary>
+        protected override void OnGotFocus(RoutedEventArgs e)
+        {
+            if (Keyboard != KeyboardType.None && desktopAdorner == null && this.IsLoaded && PMethod.Parent(this, out Window owner) && owner.Content is FrameworkElement content)
+            {
+                FrameworkElement keyboard;
+                switch (Keyboard)
+                {
+                    case KeyboardType.Num: var keyboardNum = new KeyboardNum(); keyboard = keyboardNum; keyboardNum.CloseEvent += CloseKeyboard; break;
+                    case KeyboardType.All: var keyboardAll = new KeyboardAll(); keyboard = keyboardAll; keyboardAll.CloseEvent += CloseKeyboard; break;
+                    default: return;
+                }
+                var point = this.TransformToAncestor(content).Transform(new Point(0, 0));
+                desktopAdorner = PMethod.CustomAdorner(owner, keyboard, true, iBingParentSize: false);
+                if (desktopAdorner != null)
+                {
+                    var x = point.X;
+                    if (content.ActualWidth < keyboard.Width + x)
+                    {
+                        x = content.ActualWidth - keyboard.Width;
+                    }
+                    var y = point.Y + this.ActualHeight;
+                    if (content.ActualHeight < keyboard.Height + y)
+                    {
+                        y = point.Y - content.ActualHeight;
+                    }
+                    Canvas.SetLeft(keyboard, x);
+                    Canvas.SetTop(keyboard, y);
+                }
+            }
+            base.OnGotFocus(e);
+        }
+        /// <summary>
+        /// 失去焦点时自动关闭软键盘
+        /// </summary>
+        protected override void OnLostFocus(RoutedEventArgs e)
+        {
+            base.OnLostFocus(e);
+            this.CloseKeyboard();
+        }
+        private void CloseKeyboard()
+        {
+            if (desktopAdorner != null && PMethod.Parent(this, out Window owner) && owner.Content is FrameworkElement content)
+            {
+                var myAdornerLayer = PMethod.ReloadAdorner(content);
+                if (myAdornerLayer == null) return;
+
+                lock (myAdornerLayer) myAdornerLayer.Remove(desktopAdorner);
+                desktopAdorner = null;
+                NativeMethodXs.StopHook();
+            }
         }
 
         #endregion

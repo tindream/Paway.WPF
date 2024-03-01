@@ -44,8 +44,9 @@ namespace Paway.WPF
         /// <para>hitTest=true 不路由事件（不穿透）</para>
         /// <para>hitTest=false 路由事件（穿透）</para>
         /// <para>iBottom:置于最底层</para>
+        /// <para>iBingAllSize:绑定到父窗体大小</para>
         /// </summary>
-        public static CustomAdorner CustomAdorner(FrameworkElement element, FrameworkElement content = null, bool hitTest = false, bool iBottom = false)
+        public static CustomAdorner CustomAdorner(FrameworkElement element, FrameworkElement content = null, bool hitTest = false, bool iBottom = false, bool iBingParentSize = true)
         {
             return Invoke(() =>
             {
@@ -73,18 +74,21 @@ namespace Paway.WPF
                     {
                         var canvas = customAdorner.GetCanvas();
                         canvas.Children.Add(content);
-                        var widthBinding = new Binding
+                        if (iBingParentSize)
                         {
-                            Source = canvas,
-                            Path = new PropertyPath(nameof(canvas.ActualWidth)),
-                        };
-                        var heightBinding = new Binding
-                        {
-                            Source = canvas,
-                            Path = new PropertyPath(nameof(canvas.ActualHeight)),
-                        };
-                        content.SetBinding(FrameworkElement.WidthProperty, widthBinding);
-                        content.SetBinding(FrameworkElement.HeightProperty, heightBinding);
+                            var widthBinding = new Binding
+                            {
+                                Source = canvas,
+                                Path = new PropertyPath(nameof(canvas.ActualWidth)),
+                            };
+                            var heightBinding = new Binding
+                            {
+                                Source = canvas,
+                                Path = new PropertyPath(nameof(canvas.ActualHeight)),
+                            };
+                            content.SetBinding(FrameworkElement.WidthProperty, widthBinding);
+                            content.SetBinding(FrameworkElement.HeightProperty, heightBinding);
+                        }
                     }
                     return customAdorner;
                 }
