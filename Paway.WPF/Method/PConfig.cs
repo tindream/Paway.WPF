@@ -160,6 +160,11 @@ namespace Paway.WPF
         }
 
         /// <summary>
+        /// 软键盘状态
+        /// </summary>
+        public static EnableType Keyboard { get; set; }
+
+        /// <summary>
         /// 颜色的 Alpha 通道默认值
         /// </summary>
         internal const int Alpha = 200;

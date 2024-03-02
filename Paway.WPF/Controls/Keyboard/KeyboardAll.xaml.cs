@@ -91,7 +91,7 @@ namespace Paway.WPF
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            NativeMethodXs.StartHook(new Action<int, bool>(this.KeyPressed));
+            KeyboardHelper.StartHook(new Action<int, bool>(this.KeyPressed));
             this.iChina = InputMethod.Current.ImeState == InputMethodState.On && InputMethod.Current.ImeConversionMode != ImeConversionModeValues.Alphanumeric;
             this.iCapsLock = Keyboard.GetKeyStates(Key.CapsLock) == KeyStates.Toggled;
             if (this.iCapsLock) this.ChangeCapsLock();
@@ -99,14 +99,11 @@ namespace Paway.WPF
         }
         private void KeyPressed(int virtualKey, bool keyUp)
         {
-            if (!keyUp)
+            switch (virtualKey)
             {
-                switch (virtualKey)
-                {
-                    case (int)Keys.CapsLock: this.iCapsLock = Keyboard.GetKeyStates(Key.CapsLock) == KeyStates.Toggled; this.ChangeCapsLock(); break;
-                    case (int)Keys.LShiftKey:
-                    case (int)Keys.RShiftKey: this.ChangeChina(); break;
-                }
+                case (int)Keys.CapsLock: if (!keyUp) this.iCapsLock = KeyboardHelper.GetKeyState((int)Keys.CapsLock) == 0; this.ChangeCapsLock(); break;
+                case (int)Keys.LShiftKey:
+                case (int)Keys.RShiftKey: if (keyUp) { PMethod.DoEvents(); this.ChangeChina(); } break;
             }
         }
 
@@ -125,9 +122,10 @@ namespace Paway.WPF
                         }
                         else
                         {
-                            NativeMethodXs.Send(Keys.CapsLock);
-                            this.iCapsLock = !this.iCapsLock;
-                            PMethod.BeginInvoke(this.ChangeCapsLock);
+                            var lastCapsLock = this.iCapsLock;
+                            KeyboardHelper.Send(Keys.CapsLock);
+                            this.iCapsLock = !lastCapsLock;
+                            this.ChangeCapsLock();
                         }
                         break;
                     case "键盘": this.iKeyboardNum = !this.iKeyboardNum; this.ChangeKeyboardNum(); break;
@@ -136,9 +134,9 @@ namespace Paway.WPF
                         InputMethod.Current.ImeConversionMode = this.iChina ? ImeConversionModeValues.Alphanumeric : (ImeConversionModeValues.Native | ImeConversionModeValues.Symbol);
                         ChangeChina();
                         break;
-                    case "backspace": NativeMethodXs.Send(Keys.Back); break;
-                    case "space": NativeMethodXs.Send(Keys.Space); break;
-                    case "enter": NativeMethodXs.Send(Keys.Enter); break;
+                    case "backspace": KeyboardHelper.Send(Keys.Back); break;
+                    case "space": KeyboardHelper.Send(Keys.Space); break;
+                    case "enter": KeyboardHelper.Send(Keys.Enter); break;
                     default: SendKey(key); break;
                     case "关闭": this.OnCloseEvent(); break;
                 }
@@ -151,7 +149,7 @@ namespace Paway.WPF
             var iModifierKey = this.iKeyboardNum ? (this.iChina ? KeyList[key].INumCnShift : KeyList[key].INumEnShift) : false;
             var modifierKeys = new List<int>();
             if (iModifierKey) modifierKeys.Add((int)Keys.ShiftKey);
-            NativeMethodXs.Send(modifierKeys, value, (this.iKeyboardNum && this.iChina) ? KeyList[key].IUnicode : false);
+            KeyboardHelper.Send(modifierKeys, value, (this.iKeyboardNum && this.iChina) ? KeyList[key].IUnicode : false);
         }
         /// <summary>
         /// 切换中英文键盘
@@ -187,7 +185,7 @@ namespace Paway.WPF
                         }
                         break;
                     case "backspace": break;
-                    case "键盘": viewItem.Text = this.iKeyboardNum ? "abc." : "?!23"; break;
+                    case "键盘": viewItem.Text = this.iKeyboardNum ? "abc." : "?123"; break;
                     case "space":
                     case "关闭":
                     case "enter": break;

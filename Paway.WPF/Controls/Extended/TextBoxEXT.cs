@@ -303,7 +303,7 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnGotFocus(RoutedEventArgs e)
         {
-            if (Keyboard != KeyboardType.None && desktopAdorner == null && this.IsLoaded && PMethod.Parent(this, out Window owner) && owner.Content is FrameworkElement content)
+            if (PConfig.Keyboard == Helper.EnableType.Enable && Keyboard != KeyboardType.None && desktopAdorner == null && this.IsLoaded && PMethod.Parent(this, out Window owner) && owner.Content is FrameworkElement content)
             {
                 FrameworkElement keyboard;
                 switch (Keyboard)
@@ -349,7 +349,7 @@ namespace Paway.WPF
 
                 lock (myAdornerLayer) myAdornerLayer.Remove(desktopAdorner);
                 desktopAdorner = null;
-                NativeMethodXs.StopHook();
+                KeyboardHelper.StopHook();
             }
         }
 

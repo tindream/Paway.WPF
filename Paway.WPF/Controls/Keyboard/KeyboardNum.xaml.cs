@@ -43,14 +43,14 @@ namespace Paway.WPF
                 var tag = viewItem.Tag.ToString();
                 switch (tag)
                 {
-                    case "backspace": NativeMethodXs.Send(Keys.Back); break;
+                    case "backspace": KeyboardHelper.Send(Keys.Back); break;
                     case "enter":
-                        NativeMethodXs.Send(Keys.Enter);
+                        KeyboardHelper.Send(Keys.Enter);
                         this.OnCloseEvent();
                         break;
-                    case ".": NativeMethodXs.Send(Keys.Decimal); break;
-                    case "-": NativeMethodXs.Send(Keys.Subtract); break;
-                    default: NativeMethodXs.Send((Keys)(Convert.ToInt32(tag) + 48)); break;
+                    case ".": KeyboardHelper.Send(Keys.Decimal); break;
+                    case "-": KeyboardHelper.Send(Keys.Subtract); break;
+                    default: KeyboardHelper.Send((Keys)(Convert.ToInt32(tag) + 48)); break;
                 }
                 listView.SelectedIndex = -1;
             }

@@ -23,14 +23,17 @@ namespace Paway.WPF
         /// <summary>
         /// 无
         /// </summary>
+        [Description("无")]
         None = 0,
         /// <summary>
         /// 数字键盘
         /// </summary>
+        [Description("数字键盘")]
         Num,
         /// <summary>
         /// 全键盘
         /// </summary>
+        [Description("全键盘")]
         All,
     }
 }

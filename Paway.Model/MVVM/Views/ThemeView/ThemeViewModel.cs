@@ -26,9 +26,27 @@ namespace Paway.Model
     {
         private bool iSave;
 
+        private EnableType themeKeyboard;
         private Color themeColor;
         private double themeFontSize;
         private string themeFontFamily;
+
+        private EnableType _keyboard;
+        /// <summary>
+        /// 软键盘
+        /// </summary>
+        public EnableType Keyboard
+        {
+            get { return _keyboard; }
+            set
+            {
+                if (_keyboard != value)
+                {
+                    _keyboard = value; OnPropertyChanged();
+                    PConfig.Keyboard = _keyboard;
+                }
+            }
+        }
 
         /// <summary>
         /// 主题颜色
@@ -114,6 +132,7 @@ namespace Paway.Model
         {
             if (!this.iSave)
             {
+                PConfig.Keyboard = this.themeKeyboard;
                 PConfig.Color = this.themeColor;
                 PConfig.FontSize = this.themeFontSize;
                 PConfig.FontFamily = this.themeFontFamily;
@@ -134,10 +153,12 @@ namespace Paway.Model
             }
             Messenger.Default.Register<ThemeLoadMessage>(this, msg =>
             {
+                this.themeKeyboard = PConfig.Keyboard;
                 this.themeColor = PConfig.Color;
                 this.themeFontSize = PConfig.FontSize;
                 this.themeFontFamily = PConfig.FontFamily;
 
+                this.Keyboard = PConfig.Keyboard;
                 this.Color = PConfig.Color;
                 this.FontSize = PConfig.FontSize;
                 this.FontFamily = PConfig.FontFamily;
