@@ -92,6 +92,10 @@ namespace Paway.WPF
         /// 自定义项外边框颜色
         /// </summary>
         BrushEXT ItemBrush { get; set; }
+        /// <summary>
+        /// 文本字体
+        /// </summary>
+        FontFamily FontFamily { get; set; }
     }
     /// <summary>
     /// IListView数据模型
@@ -299,6 +303,16 @@ namespace Paway.WPF
         {
             get { return itemBrush; }
             set { itemBrush = value; OnPropertyChanged(); }
+        }
+        private FontFamily fontFamily;
+        /// <summary>
+        /// 文本字体
+        /// </summary>
+        [NoShow]
+        public FontFamily FontFamily
+        {
+            get { return fontFamily; }
+            set { fontFamily = value; OnPropertyChanged(); }
         }
 
         /// <summary>

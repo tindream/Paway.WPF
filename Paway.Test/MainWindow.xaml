@@ -274,7 +274,7 @@
                 <ListBoxItemEXT Text="Hello" IsSelected="True"
                                   Image="pack://application:,,,/Paway.Test;component/Images/close.png"/>
                 <ListBoxItemEXT Text="World" Desc="1" ItemBackground=";#78FF4633" ItemTextForeground="#FF4633;;"/>
-                <ListBoxItemEXT Text="A" ItemBackground=";#7802E8FA" ItemTextForeground="#02E8FA;;"/>
+                <ListBoxItemEXT Text="A" Desc="{FontImage Type=CaretDown}" ItemBackground=";#7802E8FA" ItemTextForeground="#02E8FA;;"/>
                 <ListBoxItemEXT Text="C" ItemBackground=";#78024AFA" ItemTextForeground="#024AFA;;"/>
                 <ListBoxItemEXT Text="D" ItemBackground=";#78024AFA" ItemTextForeground="#024AFA;;"/>
             </ListViewEXT>

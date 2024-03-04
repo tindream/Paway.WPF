@@ -131,7 +131,6 @@
                                                Stretch="{Binding Path=ItemImageStretch, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                             <TextBlock Name="desc" Text="{Binding Desc}"
                                                        TextTrimming="WordEllipsis" 
-                                                       FontFamily="{Binding FontFamily, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        Foreground="{Binding Path=ItemDescForeground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        Background="{Binding Path=ItemDescBackground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        FontSize="{Binding Path=ItemDescFontSize.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
@@ -139,6 +138,12 @@
                                                        VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
                                                        Padding="{Binding ItemDescPadding, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
                                                        DockPanel.Dock="{Binding ItemDescDock, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
+                                                <TextBlock.FontFamily>
+                                                    <MultiBinding Converter="{StaticResource nullSelector}">
+                                                        <Binding Path="FontFamily" />
+                                                        <Binding Path="FontFamily" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
+                                                    </MultiBinding>
+                                                </TextBlock.FontFamily>
                                                 <TextBlock.Style>
                                                     <Style TargetType="{x:Type TextBlock}">
                                                         <Setter Property="ToolTip" Value="{Binding Desc}"/>
@@ -147,12 +152,17 @@
                                             </TextBlock>
                                             <TextBlock Name="text"
                                                        TextTrimming="WordEllipsis" 
-                                                       FontFamily="{Binding FontFamily, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        Background="{Binding Path=ItemTextBackground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        FontSize="{Binding Path=ItemTextFontSize.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        Padding="{Binding ItemTextPadding, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}">
+                                                <TextBlock.FontFamily>
+                                                    <MultiBinding Converter="{StaticResource nullSelector}">
+                                                        <Binding Path="FontFamily" />
+                                                        <Binding Path="FontFamily" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
+                                                    </MultiBinding>
+                                                </TextBlock.FontFamily>
                                                 <TextBlock.Foreground>
                                                     <MultiBinding Converter="{StaticResource nullSelector}">
                                                         <Binding Path="ItemTextForeground.Normal" />
