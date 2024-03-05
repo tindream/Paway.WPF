@@ -26,7 +26,7 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
-		<Resource Include="Images\*.png" />
+		<Resource Include="Images\**" />
 		<Resource Include="Resources\script.sql" />
 	</ItemGroup>
 

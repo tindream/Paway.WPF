@@ -30,10 +30,6 @@ namespace Paway.Model
         /// </summary>
         protected DependencyObject Root;
         /// <summary>
-        /// 数据绑定列表
-        /// </summary>
-        public ObservableCollection<object> ObList { get; private set; } = new ObservableCollection<object>();
-        /// <summary>
         /// 登录锁
         /// </summary>
         private volatile bool iLogining;
@@ -41,6 +37,62 @@ namespace Paway.Model
         /// 过滤锁
         /// </summary>
         private volatile bool iFiltering;
+
+        private string _password = string.Empty;
+        /// <summary>
+        /// 密码
+        /// </summary>
+        public string Password
+        {
+            get { return _password; }
+            set { _password = value; OnPropertyChanged(); }
+        }
+        private bool _iAuto;
+        /// <summary>
+        /// 自动登录标记
+        /// </summary>
+        public bool IAuto
+        {
+            get { return _iAuto; }
+            set { _iAuto = value; OnPropertyChanged(); }
+        }
+
+        #endregion
+        #region 属性-欢迎
+        private string welcome = PConfig.LanguageBase.Welcome;
+        /// <summary>
+        /// 欢迎谗
+        /// </summary>
+        public string Welcome
+        {
+            get { return welcome; }
+            set { welcome = value; OnPropertyChanged(); }
+        }
+        private ImageSource _logoImage;
+        /// <summary>
+        /// Logo
+        /// </summary>
+        public ImageSource LogoImage
+        {
+            get { return _logoImage; }
+            set { _logoImage = value; OnPropertyChanged(); }
+        }
+
+        #endregion
+        #region 属性-用户
+        /// <summary>
+        /// 用户列表
+        /// </summary>
+        public ObservableCollection<object> ObList { get; private set; } = new ObservableCollection<object>();
+        private bool _iUserList;
+        /// <summary>
+        /// 显示用户列表标记
+        /// </summary>
+        public bool IUserList
+        {
+            get { return _iUserList; }
+            set { _iUserList = value; OnPropertyChanged(); }
+        }
         private string _userName;
         /// <summary>
         /// 用户名
@@ -72,55 +124,37 @@ namespace Paway.Model
         /// </summary>
         protected virtual void FilterUser(string userName) { }
 
-        private string _password = string.Empty;
+        #endregion
+        #region 属性-多语言
         /// <summary>
-        /// 密码
+        /// 当前语言列表
         /// </summary>
-        public string Password
+        public ObservableCollection<string> LanguageObList { get; private set; } = new ObservableCollection<string>();
+        private bool _iLanguage;
+        /// <summary>
+        /// 多语言选择
+        /// </summary>
+        public bool ILanguage
         {
-            get { return _password; }
-            set { _password = value; OnPropertyChanged(); }
+            get { return _iLanguage; }
+            set { _iLanguage = value; OnPropertyChanged(); }
         }
+        private string _language = "中文";
+        /// <summary>
+        /// 当前语言
+        /// </summary>
+        public string Language
+        {
+            get { return _language; }
+            set { _language = value; OnPropertyChanged(); OnLanguage(value); }
+        }
+        /// <summary>
+        /// 当前语言切换
+        /// </summary>
+        protected virtual void OnLanguage(string language) { }
 
-        private bool _iUserList;
-        /// <summary>
-        /// 显示用户列表标记
-        /// </summary>
-        public bool IUserList
-        {
-            get { return _iUserList; }
-            set { _iUserList = value; OnPropertyChanged(); }
-        }
-
-        private bool _iAuto;
-        /// <summary>
-        /// 自动登录标记
-        /// </summary>
-        public bool IAuto
-        {
-            get { return _iAuto; }
-            set { _iAuto = value; OnPropertyChanged(); }
-        }
-
-        private string welcome = "欢迎使用";
-        /// <summary>
-        /// 欢迎谗
-        /// </summary>
-        public string Welcome
-        {
-            get { return welcome; }
-            set { welcome = value; OnPropertyChanged(); }
-        }
-        private ImageSource _logoImage;
-        /// <summary>
-        /// Logo
-        /// </summary>
-        public ImageSource LogoImage
-        {
-            get { return _logoImage; }
-            set { _logoImage = value; OnPropertyChanged(); }
-        }
-
+        #endregion
+        #region 属性-其它按钮
         private bool _iSetting;
         /// <summary>
         /// 显示设置按钮标记
@@ -151,7 +185,7 @@ namespace Paway.Model
         {
             if (Password.IsEmpty())
             {
-                PMethod.Hit(Root, "请输入密码");
+                PMethod.Hit(Root, PConfig.LanguageBase.PleaseInputPasswordWater);
                 if (PMethod.Find(Root, out PasswordBox tbPassword, "tbPassword")) tbPassword.Focus();
                 return false;
             }
@@ -188,7 +222,7 @@ namespace Paway.Model
                         iLogining = true;
                         if (UserName.IsEmpty())
                         {
-                            PMethod.Hit(Root, "请输入用户名");
+                            PMethod.Hit(Root, PConfig.LanguageBase.PleaseInputUserNameWater);
                             if (IUserList)
                             {
                                 if (PMethod.Find(Root, out ComboBoxEXT cbxUserName, "cbxUserName")) cbxUserName.Focus();

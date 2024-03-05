@@ -38,6 +38,10 @@
             <DockPanel Width="250">
                 <StackPanel DockPanel.Dock="Top">
                     <TextBoxEXT Text="Hello"/>
+                    <ComboBoxEXT ItemsSource="{Binding LanguageObList}" 
+                                 Text="{Binding Language}" SelectedValuePath="Name" DisplayMemberPath="Name"
+                                 IAnimation="2" BorderThickness="0,0,0,1" 
+                                 Icon="/Paway.Model;component/Images/login/language.png" IconWidth="24" IconStretch="Uniform"/>
                 </StackPanel>
                 <WrapPanel DockPanel.Dock="Bottom">
                     <ButtonEXT Content="3D" Click="Button_Click"/>

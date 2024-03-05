@@ -125,6 +125,7 @@ namespace Paway.Test
             get { return Config.LanguageStr; }
             set { Config.LanguageStr = value; Config.InitLanguage(); OnPropertyChanged(); }
         }
+        public ObservableCollection<NameInfo> LanguageObList { get; private set; } = new ObservableCollection<NameInfo>();
 
         #endregion
 
@@ -249,6 +250,9 @@ namespace Paway.Test
 
         public TestWindowModel()
         {
+            LanguageObList.Add(new NameInfo("中文"));
+            LanguageObList.Add(new NameInfo("A"));
+            LanguageObList.Add(new NameInfo("B"));
             //this.Text = "111\r\n222\r\n333";
             var index = 0;
             foreach (var font in Fonts.SystemFontFamilies)

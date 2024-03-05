@@ -20,7 +20,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Resource Include="Resource\fontawesome.ttf" />
-		<Resource Include="Images\*\*.png" />
+		<Resource Include="Images\**" />
 	</ItemGroup>
 
 	<ItemGroup>

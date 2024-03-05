@@ -18,7 +18,7 @@
 		</Compile>
 	</ItemGroup>
 	<ItemGroup>
-		<Resource Include="Images\*\*.png" />
+		<Resource Include="Images\**" />
 		<EmbeddedResource Include="Office\license.elic.xml" />
 	</ItemGroup>
 

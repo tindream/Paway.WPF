@@ -15,6 +15,7 @@ namespace Paway.Test
     [Serializable]
     public class LanguageInfo : LanguageBaseInfo
     {
-        public virtual string Test { get; set; }
+        [Description("测试")]
+        public virtual string Test { get; set; } = "测试";
     }
 }

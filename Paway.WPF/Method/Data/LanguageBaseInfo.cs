@@ -14,6 +14,7 @@ namespace Paway.WPF
     [Serializable]
     public class LanguageBaseInfo : BaseModelInfo
     {
+        #region 输入
         /// <summary>
         /// 请输入
         /// </summary>
@@ -25,20 +26,26 @@ namespace Paway.WPF
         [Description("请输入(水印)")]
         public virtual string PleaseInputWater { get; set; } = "请输入..";
         /// <summary>
+        /// 请输入用户名
+        /// </summary>
+        [Description("请输入用户名")]
+        public virtual string PleaseInputUserNameWater { get; set; } = "请输入用户名";
+        /// <summary>
         /// 请输入密码
         /// </summary>
-        [Description("请输入密码(水印)")]
+        [Description("请输入密码")]
         public virtual string PleaseInputPasswordWater { get; set; } = "请输入密码";
         /// <summary>
-        /// 今天
+        /// 登录
         /// </summary>
-        [Description("今天")]
-        public virtual string Today { get; set; } = "今天";
+        [Description("登录")]
+        public virtual string Login { get; set; } = "登录";
         /// <summary>
-        /// 清空
+        /// 欢迎使用
         /// </summary>
-        [Description("清空")]
-        public virtual string Clear { get; set; } = "清空";
+        [Description("欢迎使用")]
+        public virtual string Welcome { get; set; } = "欢迎使用";
+
         /// <summary>
         /// 不可为空
         /// </summary>
@@ -55,6 +62,23 @@ namespace Paway.WPF
         [Description("最大输入限制: {0}位")]
         public virtual string MaximumInputLimit { get; set; } = "最大输入限制: {0}位";
 
+        #endregion
+
+        #region 日历
+        /// <summary>
+        /// 今天
+        /// </summary>
+        [Description("今天")]
+        public virtual string Today { get; set; } = "今天";
+        /// <summary>
+        /// 清空
+        /// </summary>
+        [Description("清空")]
+        public virtual string Clear { get; set; } = "清空";
+
+        #endregion
+
+        #region 系统
         /// <summary>
         /// 关于
         /// </summary>
@@ -70,6 +94,8 @@ namespace Paway.WPF
         /// </summary>
         [Description("颜色")]
         public virtual string Color { get; set; } = "颜色";
+
+        #endregion
     }
     /// <summary>
     /// 注入拦截器类-触发更新事件
