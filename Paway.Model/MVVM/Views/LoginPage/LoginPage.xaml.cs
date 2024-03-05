@@ -40,7 +40,7 @@ namespace Paway.Model
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            Messenger.Default.Send(new LoginLoadMessage() { Obj = Root });
+            Messenger.Default.Send(new LoginLoadMessage() { Obj = Root, MenuItem = menu });
             PMethod.BeginInvoke(() =>
             {
                 if (this.DataContext is LoginPageModel login)

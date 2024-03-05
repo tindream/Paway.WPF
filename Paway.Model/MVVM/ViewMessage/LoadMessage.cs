@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Paway.Model
 {
@@ -24,7 +25,13 @@ namespace Paway.Model
     /// <summary>
     /// 已加载消息 - 登录页
     /// </summary>
-    public class LoginLoadMessage : LoadMessage { }
+    public class LoginLoadMessage : LoadMessage
+    {
+        /// <summary>
+        /// 多语言菜单
+        /// </summary>
+        public MenuItem MenuItem { get; set; }
+    }
     /// <summary>
     /// 已加载消息 - 主题设置
     /// </summary>

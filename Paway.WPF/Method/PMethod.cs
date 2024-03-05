@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Media;
 using Paway.Helper;
 
@@ -13,6 +17,33 @@ namespace Paway.WPF
     /// </summary>
     public partial class PMethod : TMethod
     {
+        #region Menu
+        /// <summary>
+        /// Menu菜单绑定多语言
+        /// </summary>
+        public static void LanguageMenuBinding(MenuItem menu, List<string> languageList, object model, ICommand command, string languageName)
+        {
+            menu.Items.Clear();
+            foreach (var language in languageList)
+            {
+                var menuItem = new MenuItem() { Header = language };
+                menuItem.Command = command;
+                menuItem.CommandParameter = language;
+                {  //实例化绑定对象
+                    var isCheckedBinding = new Binding();
+                    //设置要绑定源
+                    isCheckedBinding.Source = model;//绑定ViewModel类
+                    isCheckedBinding.Path = new PropertyPath(languageName);//绑定MainWindow类下的Language属性。
+                    isCheckedBinding.Mode = BindingMode.TwoWay;//绑定模式双向绑定
+                    isCheckedBinding.Converter = PConfig.Window.FindResource("valueToTrue") as IValueConverter;
+                    isCheckedBinding.ConverterParameter = language;
+                    menuItem.SetBinding(MenuItem.IsCheckedProperty, isCheckedBinding);//设置绑定到要绑定的控件
+                }
+                menu.Items.Add(menuItem);
+            }
+        }
+        #endregion
+
         #region 颜色
         /// <summary>
         /// 取颜色拾取器中的颜色值

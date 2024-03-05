@@ -14,6 +14,7 @@ using System.Net.Sockets;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -126,18 +127,28 @@ namespace Paway.Model
 
         #endregion
         #region 属性-多语言
+        private MenuItem menuItem;
         /// <summary>
         /// 当前语言列表
         /// </summary>
         public ObservableCollection<string> LanguageObList { get; private set; } = new ObservableCollection<string>();
-        private bool _iLanguage;
+        private bool _iLanguageBox;
         /// <summary>
-        /// 多语言选择
+        /// 多语言选择-下拉框
         /// </summary>
-        public bool ILanguage
+        public bool ILanguageBox
         {
-            get { return _iLanguage; }
-            set { _iLanguage = value; OnPropertyChanged(); }
+            get { return _iLanguageBox; }
+            set { _iLanguageBox = value; OnPropertyChanged(); }
+        }
+        private bool _iLanguageMenu;
+        /// <summary>
+        /// 多语言选择-菜单
+        /// </summary>
+        public bool ILanguageMenu
+        {
+            get { return _iLanguageMenu; }
+            set { _iLanguageMenu = value; OnPropertyChanged(); }
         }
         private string _language = "中文";
         /// <summary>
@@ -248,6 +259,12 @@ namespace Paway.Model
                     }
                     break;
                 case "关闭": OnClose(Root); break;
+                default:
+                    if (LanguageObList.Any(c => c == item))
+                    {
+                        this.Language = item;
+                    }
+                    break;
             }
         }
 
@@ -258,7 +275,12 @@ namespace Paway.Model
         /// </summary>
         public LoginPageModel()
         {
-            Messenger.Default.Register<LoginLoadMessage>(this, msg => this.Root = msg.Obj);
+            Messenger.Default.Register<LoginLoadMessage>(this, msg =>
+            {
+                this.Root = msg.Obj;
+                this.menuItem = msg.MenuItem;
+                PMethod.LanguageMenuBinding(menuItem, LanguageObList.ToList(), this, ItemClickCommand, nameof(Language));
+            });
         }
     }
 }

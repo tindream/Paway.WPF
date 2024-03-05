@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Paway.Test
 {
-    public class ViewModelLocator : Paway.Model.ViewModelLocator
+    public class ViewModelLocator : Model.ViewModelLocator
     {
         public static ViewModelLocator Default => new ViewModelLocator();
 
