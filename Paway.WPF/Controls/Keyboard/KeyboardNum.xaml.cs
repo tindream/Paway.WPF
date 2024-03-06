@@ -28,7 +28,7 @@ namespace Paway.WPF
         public event Action CloseEvent;
 
         /// <summary>
-        /// 软键盘-数字键盘
+        /// 虚拟键盘-数字键盘
         /// </summary>
         public KeyboardNum()
         {

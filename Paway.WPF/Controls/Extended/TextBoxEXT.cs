@@ -299,11 +299,26 @@ namespace Paway.WPF
         #region 自定义软键盘
         private CustomAdorner desktopAdorner;
         /// <summary>
+        /// 鼠标点击时自动打开软键盘
+        /// </summary>
+        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
+        {
+            base.OnPreviewMouseDown(e);
+            this.OpenKeyboard();
+        }
+        /// <summary>
         /// 获取焦点时自动打开软键盘
         /// </summary>
         protected override void OnGotFocus(RoutedEventArgs e)
         {
-            if (PConfig.Keyboard == Helper.EnableType.Enable && Keyboard != KeyboardType.None && desktopAdorner == null && this.IsLoaded && PMethod.Parent(this, out Window owner) && owner.Content is FrameworkElement content)
+            base.OnGotFocus(e);
+            this.OpenKeyboard();
+        }
+        private void OpenKeyboard()
+        {
+            if (!this.IsLoaded || !this.IsEnabled || this.IsReadOnly) return;
+            if (PConfig.Keyboard == Helper.EnableType.None || Keyboard == KeyboardType.None) return;
+            if (desktopAdorner == null && PMethod.Parent(this, out Window owner) && owner.Content is FrameworkElement content)
             {
                 FrameworkElement keyboard;
                 switch (Keyboard)
@@ -324,14 +339,14 @@ namespace Paway.WPF
                     var y = point.Y + this.ActualHeight;
                     if (content.ActualHeight < keyboard.Height + y)
                     {
-                        y = point.Y - content.ActualHeight;
+                        y = point.Y - keyboard.Height;
                     }
                     Canvas.SetLeft(keyboard, x);
                     Canvas.SetTop(keyboard, y);
                 }
             }
-            base.OnGotFocus(e);
         }
+
         /// <summary>
         /// 失去焦点时自动关闭软键盘
         /// </summary>

@@ -33,7 +33,7 @@ namespace Paway.Model
 
         private EnableType _keyboard;
         /// <summary>
-        /// 软键盘
+        /// 虚拟键盘
         /// </summary>
         public EnableType Keyboard
         {

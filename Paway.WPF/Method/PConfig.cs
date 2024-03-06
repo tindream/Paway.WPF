@@ -160,7 +160,7 @@ namespace Paway.WPF
         }
 
         /// <summary>
-        /// 软键盘状态
+        /// 虚拟键盘状态
         /// </summary>
         public static EnableType Keyboard { get; set; }
 

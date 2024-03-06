@@ -16,7 +16,7 @@ using System.Windows.Media;
 namespace Paway.WPF
 {
     /// <summary>
-    /// 软键盘类别
+    /// 虚拟键盘类别
     /// </summary>
     public enum KeyboardType
     {

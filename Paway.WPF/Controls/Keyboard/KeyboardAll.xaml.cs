@@ -78,7 +78,7 @@ namespace Paway.WPF
         }
 
         /// <summary>
-        /// 软键盘-全键盘
+        /// 虚拟键盘-全键盘
         /// </summary>
         public KeyboardAll()
         {
