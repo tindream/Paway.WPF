@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paway.Helper;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -96,11 +97,11 @@ namespace Paway.WPF
 
         #region 扩展
         /// <summary>
-        /// 软键盘类型
+        /// 虚拟键盘类型
         /// <para>默认值：全键盘</para>
         /// </summary>
         [Category("扩展")]
-        [Description("软键盘类型")]
+        [Description("虚拟键盘类型")]
         public KeyboardType Keyboard
         {
             get { return (KeyboardType)GetValue(KeyboardProperty); }
@@ -248,6 +249,11 @@ namespace Paway.WPF
         public TextBoxEXT()
         {
             DefaultStyleKey = typeof(TextBoxEXT);
+            if (!iMouseEvent)
+            {
+                iMouseEvent = true;
+                AppDomain.CurrentDomain.ProcessExit += CurrentDomain_ProcessExit;
+            }
         }
         /// <summary>
         /// Water未自定义设置时绑定多语言
@@ -296,10 +302,10 @@ namespace Paway.WPF
 
         #endregion
 
-        #region 自定义软键盘
+        #region 自定义虚拟键盘
         private CustomAdorner desktopAdorner;
         /// <summary>
-        /// 鼠标点击时自动打开软键盘
+        /// 鼠标点击时自动打开虚拟键盘
         /// </summary>
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
@@ -307,7 +313,7 @@ namespace Paway.WPF
             this.OpenKeyboard();
         }
         /// <summary>
-        /// 获取焦点时自动打开软键盘
+        /// 获取焦点时自动打开虚拟键盘
         /// </summary>
         protected override void OnGotFocus(RoutedEventArgs e)
         {
@@ -317,7 +323,7 @@ namespace Paway.WPF
         private void OpenKeyboard()
         {
             if (!this.IsLoaded || !this.IsEnabled || this.IsReadOnly) return;
-            if (PConfig.Keyboard == Helper.EnableType.None || Keyboard == KeyboardType.None) return;
+            if (PConfig.Keyboard == EnableType.None || Keyboard == KeyboardType.None) return;
             if (desktopAdorner == null && PMethod.Parent(this, out Window owner) && owner.Content is FrameworkElement content)
             {
                 FrameworkElement keyboard;
@@ -328,6 +334,9 @@ namespace Paway.WPF
                     default: return;
                 }
                 var point = this.TransformToAncestor(content).Transform(new Point(0, 0));
+                var screenPoint1 = this.PointToScreen(new Point(0, 0));
+                var screenPoint2 = this.PointToScreen(new Point(this.ActualWidth, this.ActualHeight));
+                this.boxRect = new Rect(screenPoint1.X, screenPoint1.Y, screenPoint2.X - screenPoint1.X, screenPoint2.Y - screenPoint1.Y);
                 desktopAdorner = PMethod.CustomAdorner(owner, keyboard, true, iBingParentSize: false);
                 if (desktopAdorner != null)
                 {
@@ -343,12 +352,22 @@ namespace Paway.WPF
                     }
                     Canvas.SetLeft(keyboard, x);
                     Canvas.SetTop(keyboard, y);
+                    screenPoint1 = content.PointToScreen(new Point(x, y));
+                    screenPoint2 = content.PointToScreen(new Point(x + keyboard.Width, y + keyboard.Height));
+                    this.keyboardRect = new Rect(screenPoint1.X, screenPoint1.Y, screenPoint2.X - screenPoint1.X, screenPoint2.Y - screenPoint1.Y);
+                }
+                iMouseHook = true;
+                if (mouseHook == null && PConfig.KeyboardAutoClose == EnableType.Enable)
+                {
+                    mouseHook = new MouseHook();
+                    mouseHook.MouseDownEvent += MouseHook_MouseDownEvent;
+                    mouseHook.Start();
                 }
             }
         }
 
         /// <summary>
-        /// 失去焦点时自动关闭软键盘
+        /// 失去焦点时自动关闭虚拟键盘
         /// </summary>
         protected override void OnLostFocus(RoutedEventArgs e)
         {
@@ -359,6 +378,7 @@ namespace Paway.WPF
         {
             if (desktopAdorner != null && PMethod.Parent(this, out Window owner) && owner.Content is FrameworkElement content)
             {
+                iMouseHook = false;
                 var myAdornerLayer = PMethod.ReloadAdorner(content);
                 if (myAdornerLayer == null) return;
 
@@ -367,6 +387,26 @@ namespace Paway.WPF
                 KeyboardHelper.StopHook();
             }
         }
+
+        #region 鼠标钩子
+        private static MouseHook mouseHook;
+        private static bool iMouseHook;
+        private static bool iMouseEvent;
+        private Rect boxRect;
+        private Rect keyboardRect;
+        private void MouseHook_MouseDownEvent(object sender, MouseEventExtArgs e)
+        {
+            if (iMouseHook && desktopAdorner != null && !boxRect.Contains(new Point(e.X, e.Y)) && !keyboardRect.Contains(new Point(e.X, e.Y)))
+            {
+                this.CloseKeyboard();
+            }
+        }
+        private void CurrentDomain_ProcessExit(object sender, EventArgs e)
+        {
+            mouseHook?.Stop();
+        }
+
+        #endregion
 
         #endregion
     }

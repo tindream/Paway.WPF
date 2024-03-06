@@ -27,6 +27,7 @@ namespace Paway.Model
         private bool iSave;
 
         private EnableType themeKeyboard;
+        private EnableType themeKeyboardAuto;
         private Color themeColor;
         private double themeFontSize;
         private string themeFontFamily;
@@ -44,6 +45,22 @@ namespace Paway.Model
                 {
                     _keyboard = value; OnPropertyChanged();
                     PConfig.Keyboard = _keyboard;
+                }
+            }
+        }
+        private EnableType _keyboardAuto;
+        /// <summary>
+        /// 虚拟键盘
+        /// </summary>
+        public EnableType KeyboardAuto
+        {
+            get { return _keyboardAuto; }
+            set
+            {
+                if (_keyboardAuto != value)
+                {
+                    _keyboardAuto = value; OnPropertyChanged();
+                    PConfig.KeyboardAutoClose = _keyboardAuto;
                 }
             }
         }
@@ -133,6 +150,7 @@ namespace Paway.Model
             if (!this.iSave)
             {
                 PConfig.Keyboard = this.themeKeyboard;
+                PConfig.KeyboardAutoClose = this.themeKeyboardAuto;
                 PConfig.Color = this.themeColor;
                 PConfig.FontSize = this.themeFontSize;
                 PConfig.FontFamily = this.themeFontFamily;
@@ -154,11 +172,13 @@ namespace Paway.Model
             Messenger.Default.Register<ThemeLoadMessage>(this, msg =>
             {
                 this.themeKeyboard = PConfig.Keyboard;
+                this.themeKeyboardAuto = PConfig.KeyboardAutoClose;
                 this.themeColor = PConfig.Color;
                 this.themeFontSize = PConfig.FontSize;
                 this.themeFontFamily = PConfig.FontFamily;
 
                 this.Keyboard = PConfig.Keyboard;
+                this.KeyboardAuto = PConfig.KeyboardAutoClose;
                 this.Color = PConfig.Color;
                 this.FontSize = PConfig.FontSize;
                 this.FontFamily = PConfig.FontFamily;
