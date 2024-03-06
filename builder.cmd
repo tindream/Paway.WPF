@@ -28,12 +28,12 @@
 @nuget pack builder\Paway.WPF.nuspec
 @nuget pack builder\Paway.Model.nuspec
 @echo ---------------copy2-------------------------------------------------------
-@copy bin\Release\net45\Paway.WPF_Secure\Paway.WPF.dll		builder\Paway.WPF.1.3.8_net45\Paway.WPF.dll
-@copy bin\Release\net45\Paway.WPF_Secure\Paway.WPF.pdb		builder\Paway.WPF.1.3.8_net45\Paway.WPF.pdb
-@copy bin\Release\net45\Paway.WPF_Secure\Paway.WPF.xml		builder\Paway.WPF.1.3.8_net45\Paway.WPF.xml
+@copy bin\Release\net45\Paway.WPF_Secure\Paway.WPF.dll		builder\Paway.WPF.1.3.9_net45\Paway.WPF.dll
+@copy bin\Release\net45\Paway.WPF_Secure\Paway.WPF.pdb		builder\Paway.WPF.1.3.9_net45\Paway.WPF.pdb
+@copy bin\Release\net45\Paway.WPF_Secure\Paway.WPF.xml		builder\Paway.WPF.1.3.9_net45\Paway.WPF.xml
 
-@copy bin\Release\net452\Paway.Model_Secure\Paway.Model.dll		builder\Paway.Model.1.3.8_net452\Paway.Model.dll
-@copy bin\Release\net452\Paway.Model_Secure\Paway.Model.xml		builder\Paway.Model.1.3.8_net452\Paway.Model.xml
+@copy bin\Release\net452\Paway.Model_Secure\Paway.Model.dll		builder\Paway.Model.1.3.9_net452\Paway.Model.dll
+@copy bin\Release\net452\Paway.Model_Secure\Paway.Model.xml		builder\Paway.Model.1.3.9_net452\Paway.Model.xml
 
 @echo --------------------------------------------------------------------------- 
 @IF "%1" == "" @PAUSE
