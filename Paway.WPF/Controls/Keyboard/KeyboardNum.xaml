@@ -16,7 +16,7 @@
             <local:ListViewCustom x:Name="listview1" Width="70" DockPanel.Dock="Right" ItemTemplate="{StaticResource KeyboardOne}" ItemRadius="3" ItemMargin="2" ItemPadding="0"
                                   ItemWidth="56" ItemHeight="56"
                                   ItemTextForeground="#333;#fff;#fff" ItemBackground="#C8D2D2D2;Transparent" FontSize="21">
-                <local:ListBoxItemEXT Image="pack://application:,,,/Paway.WPF;component/Images/keyboard/backspace.png" ItemWidth="66" ItemHeight="116" Tag="backspace" />
+                <local:ListBoxItemEXT Image="pack://application:,,,/Paway.WPF;component/Images/keyboard/backspace.png|pack://application:,,,/Paway.WPF;component/Images/keyboard/backspace_white.png" ItemWidth="66" ItemHeight="116" Tag="backspace" />
                 <local:ListBoxItemEXT Text="Enter" ItemWidth="66" ItemHeight="116" Tag="enter" />
             </local:ListViewCustom>
             <local:ListViewCustom x:Name="listview2" ItemTemplate="{StaticResource KeyboardOne}" ItemRadius="3" ItemMargin="2" ItemPadding="0"

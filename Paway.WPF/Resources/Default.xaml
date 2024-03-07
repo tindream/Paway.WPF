@@ -84,16 +84,18 @@
                 </MultiBinding>
             </Border.Height>
             <DockPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Image Source="{Binding Image.Normal}" Stretch="None" Visibility="{Binding Image.Normal, Converter={StaticResource nullToCollapsed}}" />
+                <Image Name="image" Source="{Binding Image.Normal}" Stretch="None" Visibility="{Binding Image.Normal, Converter={StaticResource nullToCollapsed}}" />
                 <TextBlock Text="{Binding Text}" FontSize="{Binding FontSize}" Visibility="{Binding Text, Converter={StaticResource nullToCollapsed}}"/>
             </DockPanel>
         </Border>
         <DataTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True" >
                 <Setter TargetName="border" Property="Background" Value="{Binding Source={StaticResource ThemeColor}, Converter={StaticResource brushAlphaConverter}, ConverterParameter=160}"/>
+                <Setter TargetName="image" Property="Source" Value="{Binding Image.Mouse}"/>
             </Trigger>
             <DataTrigger Binding="{Binding IsPressed}" Value="True">
                 <Setter TargetName="border" Property="Background" Value="{Binding Source={StaticResource ThemeColor}, Converter={StaticResource brushAlphaConverter}, ConverterParameter=240}"/>
+                <Setter TargetName="image" Property="Source" Value="{Binding Image.Mouse}"/>
             </DataTrigger>
         </DataTemplate.Triggers>
     </DataTemplate>

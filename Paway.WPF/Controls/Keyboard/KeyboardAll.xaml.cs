@@ -180,8 +180,8 @@ namespace Paway.WPF
                         else
                         {
                             viewItem.Text = null;
-                            var imageName = this.iCapsLock ? "caps_lock_2.png" : "caps_lock.png";
-                            viewItem.Image = new ImageEXT("pack://application:,,,/Paway.WPF;component/Images/keyboard/" + imageName);
+                            var imageName = this.iCapsLock ? "caps_lock_2" : "caps_lock";
+                            viewItem.Image = new ImageEXT($"pack://application:,,,/Paway.WPF;component/Images/keyboard/{imageName}.png", $"pack://application:,,,/Paway.WPF;component/Images/keyboard/{imageName}_white.png");
                         }
                         break;
                     case "backspace": break;
@@ -205,8 +205,8 @@ namespace Paway.WPF
                 {
                     case "中英": viewItem.Text = this.iChina ? "中" : "英"; break;
                     case "caps lock":
-                        var imageName = this.iCapsLock ? "caps_lock_2.png" : "caps_lock.png";
-                        viewItem.Image = new ImageEXT("pack://application:,,,/Paway.WPF;component/Images/keyboard/" + imageName);
+                        var imageName = this.iCapsLock ? "caps_lock_2" : "caps_lock";
+                        viewItem.Image = new ImageEXT($"pack://application:,,,/Paway.WPF;component/Images/keyboard/{imageName}.png", $"pack://application:,,,/Paway.WPF;component/Images/keyboard/{imageName}_white.png");
                         break;
                     case "backspace":
                     case "键盘":

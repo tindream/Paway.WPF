@@ -37,7 +37,7 @@
             <local:ListBoxItemEXT Text="l" Tag="l" />
             <local:ListBoxItemEXT Text="英" FontSize="15" Tag="中英" />
 
-            <local:ListBoxItemEXT Image="pack://application:,,,/Paway.WPF;component/Images/keyboard/caps_lock.png" Tag="caps lock" />
+            <local:ListBoxItemEXT Image="pack://application:,,,/Paway.WPF;component/Images/keyboard/caps_lock.png|pack://application:,,,/Paway.WPF;component/Images/keyboard/caps_lock_white.png" Tag="caps lock" />
             <local:ListBoxItemEXT Text="z" Tag="z" />
             <local:ListBoxItemEXT Text="x" Tag="x" />
             <local:ListBoxItemEXT Text="c" Tag="c" />
@@ -45,12 +45,12 @@
             <local:ListBoxItemEXT Text="b" Tag="b" />
             <local:ListBoxItemEXT Text="n" Tag="n" />
             <local:ListBoxItemEXT Text="m" Tag="m" />
-            <local:ListBoxItemEXT Image="pack://application:,,,/Paway.WPF;component/Images/keyboard/backspace.png" ItemWidth="116" ItemHeight="56" Tag="backspace" />
+            <local:ListBoxItemEXT Image="pack://application:,,,/Paway.WPF;component/Images/keyboard/backspace.png|pack://application:,,,/Paway.WPF;component/Images/keyboard/backspace_white.png" ItemWidth="116" ItemHeight="56" Tag="backspace" />
 
             <local:ListBoxItemEXT Text="?123" FontSize="15" Tag="键盘" />
             <local:ListBoxItemEXT Text="." Tag="." />
             <local:ListBoxItemEXT Text="space" ItemWidth="296" ItemHeight="56" Tag="space" />
-            <local:ListBoxItemEXT Image="pack://application:,,,/Paway.WPF;component/Images/keyboard/down.png" Tag="关闭" />
+            <local:ListBoxItemEXT Image="pack://application:,,,/Paway.WPF;component/Images/keyboard/down.png|pack://application:,,,/Paway.WPF;component/Images/keyboard/down_white.png" Tag="关闭" />
             <local:ListBoxItemEXT Text="Enter" ItemWidth="116" ItemHeight="56" Tag="enter" />
         </local:ListViewCustom>
     </Border>
