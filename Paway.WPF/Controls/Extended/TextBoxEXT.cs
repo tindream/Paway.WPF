@@ -249,11 +249,6 @@ namespace Paway.WPF
         public TextBoxEXT()
         {
             DefaultStyleKey = typeof(TextBoxEXT);
-            if (!iMouseEvent)
-            {
-                iMouseEvent = true;
-                AppDomain.CurrentDomain.ProcessExit += CurrentDomain_ProcessExit;
-            }
         }
         /// <summary>
         /// Water未自定义设置时绑定多语言
@@ -304,6 +299,8 @@ namespace Paway.WPF
 
         #region 自定义虚拟键盘
         private CustomAdorner desktopAdorner;
+        private Rect boxRect;
+        private Rect keyboardRect;
         /// <summary>
         /// 鼠标点击时自动打开虚拟键盘
         /// </summary>
@@ -326,6 +323,7 @@ namespace Paway.WPF
             if (PConfig.Keyboard == EnableType.None || Keyboard == KeyboardType.None) return;
             if (desktopAdorner == null && PMethod.Parent(this, out Window owner) && owner.Content is FrameworkElement content)
             {
+                owner.PreviewMouseLeftButtonDown += Owner_PreviewMouseLeftButtonDown;
                 FrameworkElement keyboard;
                 switch (Keyboard)
                 {
@@ -334,9 +332,8 @@ namespace Paway.WPF
                     default: return;
                 }
                 var point = this.TransformToAncestor(content).Transform(new Point(0, 0));
-                var screenPoint1 = this.PointToScreen(new Point(0, 0));
-                var screenPoint2 = this.PointToScreen(new Point(this.ActualWidth, this.ActualHeight));
-                this.boxRect = new Rect(screenPoint1.X, screenPoint1.Y, screenPoint2.X - screenPoint1.X, screenPoint2.Y - screenPoint1.Y);
+                var ownerPoint = this.TransformToAncestor(owner).Transform(new Point(0, 0));
+                this.boxRect = new Rect(ownerPoint.X, ownerPoint.Y, this.ActualWidth, this.ActualHeight);
                 desktopAdorner = PMethod.CustomAdorner(owner, keyboard, true, iBingParentSize: false);
                 if (desktopAdorner != null)
                 {
@@ -352,16 +349,8 @@ namespace Paway.WPF
                     }
                     Canvas.SetLeft(keyboard, x);
                     Canvas.SetTop(keyboard, y);
-                    screenPoint1 = content.PointToScreen(new Point(x, y));
-                    screenPoint2 = content.PointToScreen(new Point(x + keyboard.Width, y + keyboard.Height));
-                    this.keyboardRect = new Rect(screenPoint1.X, screenPoint1.Y, screenPoint2.X - screenPoint1.X, screenPoint2.Y - screenPoint1.Y);
-                }
-                iMouseHook = true;
-                if (mouseHook == null && PConfig.KeyboardAutoClose == EnableType.Enable)
-                {
-                    mouseHook = new MouseHook();
-                    mouseHook.MouseDownEvent += MouseHook_MouseDownEvent;
-                    mouseHook.Start();
+                    var ownerPoint2 = content.TransformToAncestor(owner).Transform(new Point(x, y));
+                    this.keyboardRect = new Rect(ownerPoint2.X, ownerPoint2.Y, keyboard.Width, keyboard.Height);
                 }
             }
         }
@@ -374,11 +363,22 @@ namespace Paway.WPF
             base.OnLostFocus(e);
             this.CloseKeyboard();
         }
+        private void Owner_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is IInputElement element)
+            {
+                var point = e.GetPosition(element);
+                if (desktopAdorner != null && !boxRect.Contains(point) && !keyboardRect.Contains(point))
+                {
+                    this.CloseKeyboard();
+                }
+            }
+        }
         private void CloseKeyboard()
         {
             if (desktopAdorner != null && PMethod.Parent(this, out Window owner) && owner.Content is FrameworkElement content)
             {
-                iMouseHook = false;
+                owner.PreviewMouseLeftButtonDown -= Owner_PreviewMouseLeftButtonDown;
                 var myAdornerLayer = PMethod.ReloadAdorner(content);
                 if (myAdornerLayer == null) return;
 
@@ -387,26 +387,6 @@ namespace Paway.WPF
                 KeyboardHelper.StopHook();
             }
         }
-
-        #region 鼠标钩子
-        private static MouseHook mouseHook;
-        private static bool iMouseHook;
-        private static bool iMouseEvent;
-        private Rect boxRect;
-        private Rect keyboardRect;
-        private void MouseHook_MouseDownEvent(object sender, MouseEventExtArgs e)
-        {
-            if (iMouseHook && desktopAdorner != null && !boxRect.Contains(new Point(e.X, e.Y)) && !keyboardRect.Contains(new Point(e.X, e.Y)))
-            {
-                this.CloseKeyboard();
-            }
-        }
-        private void CurrentDomain_ProcessExit(object sender, EventArgs e)
-        {
-            mouseHook?.Stop();
-        }
-
-        #endregion
 
         #endregion
     }

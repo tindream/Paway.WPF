@@ -34,9 +34,6 @@
         </DockPanel>
         <SliderEXT x:Name="sliderSize" Title="字体大小：" Minimum="9" Maximum="21" Value="{Binding FontSize}" AutoToolTipPrecision="1" TickFrequency="0.1"/>
         <ComboBoxEXT Title="文本字体：" ItemsSource="{Binding FontList}" DisplayMemberPath="Name" SelectedValuePath="Name" SelectedValue="{Binding FontFamily}"/>
-        <WrapPanel>
-            <ComboBoxEXT Title="虚拟键盘：" ItemsSource="{EnumList Type=helper:EnableType}" SelectedValue="{Binding Path=Keyboard, Converter={StaticResource enumConverter}}"/>
-            <ComboBoxEXT Title="自动关闭：" ItemsSource="{EnumList Type=helper:EnableType}" SelectedValue="{Binding Path=KeyboardAuto, Converter={StaticResource enumConverter}}"/>
-        </WrapPanel>
+        <ComboBoxEXT Title="虚拟键盘：" ItemsSource="{EnumList Type=helper:EnableType}" SelectedValue="{Binding Path=Keyboard, Converter={StaticResource enumConverter}}"/>
     </StackPanel>
 </Page>

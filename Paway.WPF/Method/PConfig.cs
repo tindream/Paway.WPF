@@ -163,10 +163,6 @@ namespace Paway.WPF
         /// 虚拟键盘状态
         /// </summary>
         public static EnableType Keyboard { get; set; }
-        /// <summary>
-        /// 虚拟键盘自动关闭
-        /// </summary>
-        public static EnableType KeyboardAutoClose { get; set; }
 
         /// <summary>
         /// 颜色的 Alpha 通道默认值
