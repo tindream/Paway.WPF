@@ -44,8 +44,8 @@
                                  Icon="/Paway.Model;component/Images/login/language.png" IconWidth="24" IconStretch="Uniform"/>
                 </StackPanel>
                 <WrapPanel DockPanel.Dock="Bottom">
-                    <ButtonEXT Content="3D" Click="Button_Click"/>
-                    <ButtonEXT Content="空" Click="Button_Click2"/>
+                    <ButtonEXT Content="3D" Click="Button_Click" Command="{Binding ItemCommand}" CommandParameter="3D"/>
+                    <ButtonEXT Content="空" Click="Button_Click2" Command="{Binding ItemCommand}" CommandParameter="空"/>
                 </WrapPanel>
                 <DataGridEXT ItemsSource="{Binding GridList}" Height="255" Radius="5,5,0,0" />
             </DockPanel>

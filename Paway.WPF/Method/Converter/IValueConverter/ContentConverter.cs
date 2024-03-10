@@ -18,17 +18,27 @@ namespace Paway.WPF
         {
             if (value is DataGridCell gridCell)
             {
+                if (gridCell.DataContext == null || gridCell.DataContext.GetType() == DependencyProperty.UnsetValue.GetType())
+                {
+                    return null;
+                }
+                string proName = null;
                 if (gridCell.Column.ClipboardContentBinding is Binding binding)
                 {
-                    return gridCell.DataContext.GetValue(binding.Path.Path);
+                    proName = binding.Path.Path;
                 }
-                if (gridCell.Column.Header is FrameworkElement obj)
+                else if (gridCell.Column.Header is FrameworkElement obj)
                 {
-                    return gridCell.DataContext.GetValue(obj.Name);
+                    proName = obj.Name;
                 }
-                if (gridCell.Column.Header is string header)
+                else if (gridCell.Column.Header is string header)
                 {
-                    return gridCell.DataContext.GetValue(header);
+                    proName = header;
+                }
+                if (proName != null)
+                {
+                    var pro = gridCell.DataContext.Property(proName);
+                    return pro?.GetValue(gridCell.DataContext);
                 }
             }
             return null;

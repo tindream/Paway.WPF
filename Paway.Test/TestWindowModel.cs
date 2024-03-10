@@ -187,6 +187,7 @@ namespace Paway.Test
         });
         public ICommand ItemCommand => new RelayCommand<string>(item =>
         {
+            GridList.Clear();
             Method.Hit(Config.Window, item);
         });
         public ICommand SelectionDeviceCommand => new RelayCommand<ListViewCustom>(listView =>
