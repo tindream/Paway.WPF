@@ -11,10 +11,10 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </UserControl.Resources>
 
-    <Border BorderBrush="#E6E6E6" BorderThickness="2" CornerRadius="3" Padding="2">
+    <Border BorderBrush="#DCD2D2D2" BorderThickness="2" CornerRadius="3" Padding="2">
         <local:ListViewCustom x:Name="listview1" ItemTemplate="{StaticResource KeyboardOne}" ItemRadius="3" ItemMargin="2" ItemPadding="0"
                               ItemWidth="56" ItemHeight="56"
-                              ItemTextForeground="#333;#fff;#fff" ItemBackground="#C8D2D2D2;Transparent" FontSize="21">
+                              ItemTextForeground="#333;#fff;#fff" ItemBackground="#DCD2D2D2;Transparent" FontSize="21">
             <local:ListBoxItemEXT Text="q" Tag="q" />
             <local:ListBoxItemEXT Text="w" Tag="w" />
             <local:ListBoxItemEXT Text="e" Tag="e" />

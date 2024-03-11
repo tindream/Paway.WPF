@@ -4,6 +4,7 @@ using Paway.Helper;
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -36,8 +37,12 @@ namespace Paway.Test
             base.OnApplyTemplate();
 
             ////导入mtl，obj 和纹理图片
-            Model3DGroup model1 = new ObjReader().Read(@"F:\IronMan.obj");
-            model.Content = model1;
+            var objFile = @"F:\IronMan.obj";
+            if (File.Exists(objFile))
+            {
+                Model3DGroup model1 = new ObjReader().Read(objFile);
+                model.Content = model1;
+            }
 
             ////导入3ds格式模型
             //Model3DGroup model2 = new ModelImporter().Load(@"C:\Users\Administrator\Desktop\test\file.3ds");

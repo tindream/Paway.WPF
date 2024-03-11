@@ -15,7 +15,13 @@
 	<PropertyGroup>
 		<!--取消warning NETSDK1049警告-->
 		<DependsOnNETStandard>false</DependsOnNETStandard>
+		<!--禁止自动生成绑定重定向-->
+		<AutoGenerateBindingRedirects>False</AutoGenerateBindingRedirects>
 	</PropertyGroup>
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<!--删除.config文件-->
+		<Exec Command="del $(TargetDir)$(AssemblyName).exe.config" />
+	</Target>
 
 	<ItemGroup>
 		<Compile Include="..\AssemblyVersion.cs">
