@@ -184,7 +184,7 @@
         <ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="DataGrid">
             <StackPanel Width="250">
                 <DataGridEXT Name="datagrid1" ItemsSource="{Binding PagedList}" SelectedItem="{Binding SelectedItem}"
-                             SelectionUnit="CellOrRowHeader" Radius="5,5,0,0"
+                             SelectionUnit="CellOrRowHeader" Radius="5,5,0,0" HorizontalContentAlignment="Center"
                              Height="250" VerticalAlignment="Top" ScrollBarColor="Red">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="RowDoubleEvent">
@@ -205,10 +205,17 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn Header="IsSelected" Visibility="{Binding DataContext.IsSelected, Source={StaticResource ProxyElement}, Converter={StaticResource boolToVisible}}">
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <DockPanel>
+                                        <CheckBoxEXT IsChecked="{Binding DataContext.IsSelected, RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}" Padding="10,6,4,6" Margin="-8,-10,-2,-10"/>
+                                    </DockPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <DockPanel>
-                                        <CheckBoxEXT IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <CheckBoxEXT IsChecked="{Binding IsPressed, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DockPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

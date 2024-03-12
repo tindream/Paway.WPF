@@ -10,7 +10,7 @@
            Background="Transparent"
            DataContext="{Binding Tip, Source={StaticResource Locator}}"
            Title="TipWindow" 
-           Width="248" Height="248"
+           Width="248" Height="248" HeaderHeight="0"
            WindowStyle="None" Topmost="True" ResizeMode="NoResize" AllowsTransparency="True" ShowInTaskbar="False">
     <Grid>
         <Border Name="borderOne" Width="{Binding TipWidth}" Height="{Binding TipWidth}" BorderBrush="{StaticResource ThemeColor}" BorderThickness="15" CornerRadius="40" Visibility="{Binding IAll, Converter={StaticResource boolToCollapsed}}" RenderTransformOrigin="0.5,0.5">

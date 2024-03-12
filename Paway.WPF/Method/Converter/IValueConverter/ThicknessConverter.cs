@@ -46,4 +46,26 @@ namespace Paway.WPF
             return DependencyProperty.UnsetValue;
         }
     }
+
+    /// <summary>
+    /// 无右边线
+    /// </summary>
+    internal class NoRightThicknessConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is Thickness thickness)
+            {
+                var arg = new Thickness();
+                if (parameter != null) arg = (Thickness)new ThicknessConverter().ConvertFrom(parameter);
+                return new Thickness(arg.Left + thickness.Left, arg.Top + thickness.Top, arg.Right, arg.Bottom + thickness.Bottom);
+            }
+            return value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return DependencyProperty.UnsetValue;
+        }
+    }
 }

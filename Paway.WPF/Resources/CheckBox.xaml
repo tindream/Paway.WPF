@@ -5,14 +5,15 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
+    <local:NoLeftThicknessConverter x:Key="noLeftThicknessConverter"/>
+    <local:NoRightThicknessConverter x:Key="noRightThicknessConverter"/>
 
     <Style TargetType="{x:Type local:CheckBoxEXT}" BasedOn="{StaticResource FocusConfig}">
-        <Setter Property="Padding" Value="0,0,3,0"/>
+        <Setter Property="Padding" Value="5,6"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:CheckBoxEXT">
                     <Grid Name="templateRoot"
-                          Margin="{TemplateBinding Padding}"
                           Background="Transparent" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -23,7 +24,7 @@
                         <Border Name="checkBoxBorder" Grid.Column="1" 
                                 Width="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}, Converter={StaticResource valueMultiConverter}, ConverterParameter=0.9}"
                                 Height="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}, Converter={StaticResource valueMultiConverter}, ConverterParameter=0.9}"
-                                Margin="3,6"
+                                Margin="{TemplateBinding Padding, Converter={StaticResource noRightThicknessConverter}, ConverterParameter='0,0,3,0'}"
                                 BorderThickness="{TemplateBinding Border.BorderThickness}"
                                 BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"
                                 Background="{TemplateBinding Background}"
@@ -40,6 +41,7 @@
                             </Grid>
                         </Border>
                         <ContentPresenter Name="contentPresenter" Grid.Column="2"
+                                          Margin="{TemplateBinding Padding, Converter={StaticResource noLeftThicknessConverter}}"
                                           RecognizesAccessKey="True"
                                           Content="{TemplateBinding ContentControl.Content}"
                                           ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"

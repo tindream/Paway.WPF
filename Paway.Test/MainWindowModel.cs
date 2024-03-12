@@ -91,7 +91,7 @@ namespace Paway.Test
             set { plotModel = value; OnPropertyChanged(); }
         }
 
-        private bool _isSelected;
+        private bool _isSelected = true;
         public bool IsSelected
         {
             get { return _isSelected; }

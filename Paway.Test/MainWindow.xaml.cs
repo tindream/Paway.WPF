@@ -45,6 +45,7 @@ namespace Paway.Test
 
         private void Commit_Click(object sender, RoutedEventArgs e)
         {
+            ViewModelLocator.Default.Main.IsSelected = !ViewModelLocator.Default.Main.IsSelected;
             badge.Text = DateTime.Now.Second.ToString();
 
             rt.AddLine(DateTime.Now.ToString());
