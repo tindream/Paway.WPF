@@ -62,7 +62,8 @@ namespace Paway.Model
                 FillColor = OxyColor.FromArgb(255, 40, 255, 252),
                 TextColor = OxyColors.White,//文本颜色
                 BarWidth = 24,
-                //LabelFormatString = "{0:#,0.#}",
+                LabelMargin = 5,
+                //LabelFormatString = "  {0:#,0.#}",
                 TrackerFormatString = "{1}：{2:#,0.#}",
                 TrackerFormatStringAction = action
             };

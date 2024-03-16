@@ -146,26 +146,23 @@
         <Setter Property="MaxDropDownHeight" Value="151"/>
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}"/>
     </Style>
-    <Style x:Key="TextLeft" TargetType="{x:Type TextBlock}" >
+    <Style x:Key="DataGridText" TargetType="{x:Type TextBlock}" >
         <Setter Property="Margin" Value="2,0" />
         <Setter Property="Padding" Value="3,6" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
     </Style>
-    <Style x:Key="TextCenter" TargetType="{x:Type TextBlock}">
-        <Setter Property="Margin" Value="2,0" />
-        <Setter Property="Padding" Value="3,6" />
+    <Style x:Key="TextLeft" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource DataGridText}"/>
+    <Style x:Key="TextCenter" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource DataGridText}">
         <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="TextTrimming" Value="WordEllipsis"/>
     </Style>
-    <Style x:Key="TextRight" TargetType="{x:Type TextBlock}">
-        <Setter Property="Margin" Value="2,0" />
-        <Setter Property="Padding" Value="3,6" />
+    <Style x:Key="TextRight" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource DataGridText}">
         <Setter Property="HorizontalAlignment" Value="Right" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+    </Style>
+    <Style x:Key="TextWrap" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource DataGridText}">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextTrimming" Value="None"/>
     </Style>
     <!--马赛克背景-->
     <DrawingBrush x:Key="MosaicBrush" RenderOptions.CachingHint="Cache" Viewport="0,0,16,16" ViewportUnits="Absolute" TileMode="Tile">
