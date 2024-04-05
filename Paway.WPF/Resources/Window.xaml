@@ -126,7 +126,7 @@
         <Setter Property="Foreground" Value="{StaticResource Text}" />
         <Setter Property="Background" Value="{StaticResource Light}" />
         <Setter Property="BorderBrush" Value="{StaticResource ThemeHigh}" />
-        <Setter Property="BorderThickness" Value="0.5" />
+        <Setter Property="BorderThickness" Value="0.8" />
         <Setter Property="IsTabStop" Value="False" />
         <!--未知，此参数会导致文本放大缩小动画抖动-->
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
