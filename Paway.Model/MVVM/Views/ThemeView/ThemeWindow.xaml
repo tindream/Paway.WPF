@@ -41,7 +41,13 @@
             </DockPanel>
             <SliderEXT x:Name="sliderSize" Title="字体大小：" Minimum="9" Maximum="21" Value="{Binding FontSize}" AutoToolTipPrecision="1" TickFrequency="0.1"/>
             <ComboBoxEXT Title="文本字体：" ItemsSource="{Binding FontList}" DisplayMemberPath="Name" SelectedValuePath="Name" SelectedValue="{Binding FontFamily}"/>
-            <ComboBoxEXT Title="虚拟键盘：" ItemsSource="{EnumList Type=helper:EnableType}" SelectedValue="{Binding Path=Keyboard, Converter={StaticResource enumConverter}}"/>
+            <!--<ComboBoxEXT Title="虚拟键盘：" ItemsSource="{EnumList Type=helper:EnableType}" SelectedValue="{Binding Path=Keyboard, Converter={StaticResource enumConverter}}"/>-->
+            <WrapPanel>
+                <RadioButtonEXT Title="虚拟键盘：" Content="启用" GroupName="Keyboard" Radius="3,0,0,3" Margin="2,2,0,2" Padding="15,5"
+                                IsChecked="{Binding Keyboard, Converter={StaticResource valueToTrue}, ConverterParameter=1}" />
+                <RadioButtonEXT Content="停用" GroupName="Keyboard" Radius="0,3,3,0" Margin="-1,2,2,2" Padding="15,5"
+                                IsChecked="{Binding Keyboard, Converter={StaticResource valueToTrue}, ConverterParameter=0}" />
+            </WrapPanel>
         </StackPanel>
         <WrapPanel Grid.Row="1" Margin="0,20" HorizontalAlignment="Center">
             <ButtonEXT Content="确认" Width="80"
