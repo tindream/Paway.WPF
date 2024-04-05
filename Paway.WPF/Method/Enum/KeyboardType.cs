@@ -26,6 +26,12 @@ namespace Paway.WPF
         [Description("无")]
         None = 0,
         /// <summary>
+        /// 自动
+        /// <para>按绑定数据类型</para>
+        /// </summary>
+        [Description("自动")]
+        Auto,
+        /// <summary>
         /// 数字键盘
         /// </summary>
         [Description("数字键盘")]

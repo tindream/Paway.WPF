@@ -37,7 +37,7 @@
         <ScrollViewerEXT>
             <DockPanel Width="250">
                 <StackPanel DockPanel.Dock="Top">
-                    <TextBoxEXT Text="Hello" Keyboard="All"/>
+                    <TextBoxEXT Text="{Binding Label}" />
                     <ComboBoxEXT ItemsSource="{Binding LanguageObList}" 
                                  Text="{Binding Language}" SelectedValuePath="Name" DisplayMemberPath="Name"
                                  IAnimation="2" BorderThickness="0,0,0,1" 

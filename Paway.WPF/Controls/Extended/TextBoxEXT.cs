@@ -41,7 +41,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty KeyboardProperty =
-                DependencyProperty.RegisterAttached(nameof(Keyboard), typeof(KeyboardType), typeof(TextBoxEXT), new PropertyMetadata(KeyboardType.All));
+                DependencyProperty.RegisterAttached(nameof(Keyboard), typeof(KeyboardType), typeof(TextBoxEXT), new PropertyMetadata(KeyboardType.Auto));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty WaterProperty =
@@ -323,9 +323,21 @@ namespace Paway.WPF
             if (PConfig.Keyboard == EnableType.None || Keyboard == KeyboardType.None) return;
             if (desktopAdorner == null && PMethod.Parent(this, out Window owner) && owner.Content is FrameworkElement content)
             {
+                var keyboardType = Keyboard;
+                if (keyboardType == KeyboardType.Auto)
+                {
+                    Binding binding = BindingOperations.GetBinding(this, TextBox.TextProperty);
+                    if (binding != null)
+                    {
+                        var property = this.DataContext.Property(binding.Path.Path);
+                        if (property != null && property.PropertyType == typeof(string)) keyboardType = KeyboardType.All;
+                        else keyboardType = KeyboardType.Num;
+                    }
+                    else keyboardType = KeyboardType.All;
+                }
                 owner.PreviewMouseLeftButtonDown += Owner_PreviewMouseLeftButtonDown;
                 FrameworkElement keyboard;
-                switch (Keyboard)
+                switch (keyboardType)
                 {
                     case KeyboardType.Num: var keyboardNum = new KeyboardNum(); keyboard = keyboardNum; keyboardNum.CloseEvent += CloseKeyboard; break;
                     case KeyboardType.All: var keyboardAll = new KeyboardAll(); keyboard = keyboardAll; keyboardAll.CloseEvent += CloseKeyboard; break;
