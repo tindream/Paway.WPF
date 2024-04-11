@@ -41,6 +41,7 @@
     <Style TargetType="{x:Type local:ComboBoxEXT}" BasedOn="{StaticResource ComboConfig}">
         <Setter Property="Padding" Value="5"/>
         <Setter Property="Background" Value="{StaticResource backLine}"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ComboBoxEXT}">
@@ -123,10 +124,12 @@
                                   Background="White">
                                 <Border x:Name="DropDownBorder" BorderBrush="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" 
                                         BorderThickness="1" Padding="0"/>
-                                <Border VerticalAlignment="Top" HorizontalAlignment="Left"
-                                        Height="1" Width="{Binding ActualWidth, ElementName=border, Converter={StaticResource valueAddConverter}}"
-                                        Margin="1,0,0,0"
-                                        Background="White"/>
+                                <!--<Border VerticalAlignment="Top" HorizontalAlignment="Left"
+                                        Height="1" Width="{Binding ActualWidth, ElementName=border, Converter={StaticResource valueAddConverter}, ConverterParameter=-2.5}"
+                                        Margin="1,0,1.5,0"
+                                        Background="White"/>-->
+                                <Line X1="1.5" X2="{Binding ActualWidth, ElementName=border, Converter={StaticResource valueAddConverter}, ConverterParameter=-1.5}" 
+                                      Y1="1" Y2="1" StrokeThickness="2" Stroke="White" RenderOptions.EdgeMode="Aliased" />
                                 <ScrollViewer CanContentScroll="True"
                                               HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                               VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
