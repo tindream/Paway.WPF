@@ -530,7 +530,6 @@
         </Setter>
     </Style>
     <Style x:Key="CalendarStyle" TargetType="{x:Type Calendar}" BasedOn="{StaticResource Config}">
-        <Setter Property="Foreground" Value="{StaticResource TextSub}"/>
         <Setter Property="Background" Value="White"/>
         <Setter Property="FirstDayOfWeek" Value="Sunday"/>
         <Setter Property="BorderBrush" Value="LightGray"/>

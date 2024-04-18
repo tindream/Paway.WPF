@@ -39,6 +39,11 @@ namespace Paway.WPF
         public static readonly DependencyProperty BackgroundProperty =
             DependencyProperty.RegisterAttached(nameof(Background), typeof(ThemeBackground), typeof(ThemeEXT),
                 new PropertyMetadata(new ThemeBackground(PConfig.Background)));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ForegroundProperty =
+            DependencyProperty.RegisterAttached(nameof(Foreground), typeof(ThemeForeground), typeof(ThemeEXT),
+                new PropertyMetadata(new ThemeForeground(PConfig.Foreground)));
 
         #endregion
 
@@ -94,22 +99,41 @@ namespace Paway.WPF
         public BrushEXT HighBrush { get; set; }
 
         /// <summary>
-        /// 窗体背景颜色
+        /// 背景颜色
         /// </summary>
         private ThemeBackground Background { get; set; }
         /// <summary>
-        /// get窗体背景颜色
+        /// get背景颜色
         /// </summary>
         public static ThemeBackground GetBackground(DependencyObject obj)
         {
             return (ThemeBackground)obj.GetValue(BackgroundProperty);
         }
         /// <summary>
-        /// set窗体背景颜色
+        /// set背景颜色
         /// </summary>
         public static void SetBackground(DependencyObject obj, ThemeBackground value)
         {
             obj.SetValue(BackgroundProperty, value);
+        }
+
+        /// <summary>
+        /// 前景颜色
+        /// </summary>
+        private ThemeForeground Foreground { get; set; }
+        /// <summary>
+        /// get前景颜色
+        /// </summary>
+        public static ThemeForeground GetForeground(DependencyObject obj)
+        {
+            return (ThemeForeground)obj.GetValue(ForegroundProperty);
+        }
+        /// <summary>
+        /// set前景颜色
+        /// </summary>
+        public static void SetForeground(DependencyObject obj, ThemeForeground value)
+        {
+            obj.SetValue(ForegroundProperty, value);
         }
 
         #endregion

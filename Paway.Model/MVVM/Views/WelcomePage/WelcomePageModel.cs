@@ -16,14 +16,23 @@ namespace Paway.Model
     public class WelcomePageModel : ViewModelBasePlus
     {
         #region 属性
-        private string _desc = "欢迎使用";
+        private string _title = "欢迎使用";
         /// <summary>
-        /// 欢迎语
+        /// 标题
         /// </summary>
-        public string Desc
+        public string Title
         {
-            get { return _desc; }
-            set { _desc = value; OnPropertyChanged(); }
+            get { return _title; }
+            set { _title = value; OnPropertyChanged(); }
+        }
+        private string _subject;
+        /// <summary>
+        /// 副标题
+        /// </summary>
+        public string Subject
+        {
+            get { return _subject; }
+            set { _subject = value; OnPropertyChanged(); }
         }
 
         #endregion

@@ -73,20 +73,20 @@ namespace Paway.WPF
         /// 主题字体大小变化事件
         /// </summary>
         public static event Action<double> FontSizeChanged;
-        private static double fontSize = 15d;
+        private static double _fontSize = 15d;
         /// <summary>
         /// 主题字体大小
         /// </summary>
         public static double FontSize
         {
-            get { return fontSize; }
+            get { return _fontSize; }
             set
             {
                 if (value < 1) return;
-                if (fontSize != value)
+                if (_fontSize != value)
                 {
-                    var old = fontSize;
-                    fontSize = value;
+                    var old = _fontSize;
+                    _fontSize = value;
                     FontSizeChanged?.Invoke(old);
                 }
             }
@@ -96,19 +96,19 @@ namespace Paway.WPF
         /// 主题文本字体变化事件
         /// </summary>
         public static event Action<string> FontFamilyChanged;
-        private static string fontFamily = "Microsoft YaHei";
+        private static string _fontFamily = "Microsoft YaHei";
         /// <summary>
         /// 主题文本字体
         /// </summary>
         public static string FontFamily
         {
-            get { return fontFamily; }
+            get { return _fontFamily; }
             set
             {
-                if (fontFamily != value)
+                if (_fontFamily != value)
                 {
-                    var old = fontFamily;
-                    fontFamily = value;
+                    var old = _fontFamily;
+                    _fontFamily = value;
                     FontFamilyChanged?.Invoke(old);
                 }
             }
@@ -118,32 +118,32 @@ namespace Paway.WPF
         /// 主题颜色变化事件
         /// </summary>
         public static event Action<Color> ColorChanged;
-        private static Color color = Color.FromArgb(255, 64, 158, 255);
+        private static Color _color = Color.FromArgb(255, 64, 158, 255);
         /// <summary>
         /// 主题颜色
         /// </summary>
         public static Color Color
         {
-            get { return color; }
+            get { return _color; }
             set
             {
-                if (color != value)
+                if (_color != value)
                 {
-                    var old = color;
-                    color = value;
-                    Background = color.AddLight(0.96);
+                    var old = _color;
+                    _color = value;
+                    Background = _color.AddLight(0.96);
                     ColorChanged?.Invoke(old);
                 }
             }
         }
 
         /// <summary>
-        /// 主题窗体背景色事件
+        /// 主题背景色事件
         /// </summary>
         public static event Action<Color> BackgroundChanged;
-        private static Color background = color.AddLight(0.96);
+        private static Color background = _color.AddLight(0.96);
         /// <summary>
-        /// 窗体背景色
+        /// 背景色
         /// </summary>
         public static Color Background
         {
@@ -227,6 +227,28 @@ namespace Paway.WPF
         /// <para>242</para>
         /// </summary>
         public static Color Light { get; private set; } = Color.FromArgb(255, 242, 246, 252);
+
+        /// <summary>
+        /// 主题前景色事件
+        /// </summary>
+        public static event Action<Color> ForegroundChanged;
+        private static Color _foreground = TextColor;
+        /// <summary>
+        /// 前景色
+        /// </summary>
+        public static Color Foreground
+        {
+            get { return _foreground; }
+            set
+            {
+                if (_foreground != value)
+                {
+                    var old = _foreground;
+                    _foreground = value;
+                    ForegroundChanged?.Invoke(old);
+                }
+            }
+        }
 
         #endregion
     }

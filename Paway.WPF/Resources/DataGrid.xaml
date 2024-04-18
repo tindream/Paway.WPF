@@ -55,7 +55,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
+    <Style x:Key="ColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource Config}">
         <Setter Property="local:DataGridMonitor.IsMonitoring" Value="True"/>
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
@@ -63,7 +63,6 @@
         <Setter Property="Padding" Value="8,10,2,10"/>
         <Setter Property="Tag" Value="{Binding Path=(local:DataGridMonitor.Radius), RelativeSource={RelativeSource Self}, Converter={StaticResource topRadiusConverter}}"/>
         <Setter Property="Background" Value="{Binding Path=(local:DataGridMonitor.HeaderBrush).Normal, RelativeSource={RelativeSource Self}}"/>
-        <Setter Property="Foreground" Value="{StaticResource Text}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
