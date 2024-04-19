@@ -204,6 +204,11 @@ namespace Paway.Test
             this.Colors = color.ToString();
             //Method.DoStyles();
         });
+        public ICommand ForegroundChanged => new RelayCommand<SliderEXT>(slider =>
+        {
+            var color = Method.ColorSelector(slider.Value / 7);
+            Config.Foreground = color;
+        });
         public ICommand FontFamilyChanged => new RelayCommand<ValuesChangeEventArgs>(e =>
         {
             e.Values = $"{this.FontFamilyIndex}：{this.FontList[this.FontFamilyIndex].Name}";

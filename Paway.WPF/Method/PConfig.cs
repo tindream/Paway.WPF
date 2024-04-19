@@ -236,6 +236,10 @@ namespace Paway.WPF
         /// <summary>
         /// 前景色
         /// </summary>
+        public static Brush ForegroundBrush = TextColor.ToBrush();
+        /// <summary>
+        /// 前景色
+        /// </summary>
         public static Color Foreground
         {
             get { return _foreground; }
@@ -245,6 +249,7 @@ namespace Paway.WPF
                 {
                     var old = _foreground;
                     _foreground = value;
+                    ForegroundBrush = value.ToBrush();
                     ForegroundChanged?.Invoke(old);
                 }
             }

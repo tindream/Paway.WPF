@@ -29,7 +29,6 @@ namespace Paway.WPF
                 if (thumb.TemplatedParent is SliderEXT sliderEXT)
                 {
                     thumb.SetValue(ButtonTypeProperty, sliderEXT.ButtonType);
-                    thumb.SetValue(TrackColorLinearProperty, sliderEXT.TrackColorLinear);
                 }
             }
         }
@@ -59,22 +58,6 @@ namespace Paway.WPF
         {
             get { return (SliderButtonType)GetValue(ButtonTypeProperty); }
             set { SetValue(ButtonTypeProperty, value); }
-        }
-
-        /// <summary>
-        /// 轨道线性颜色
-        /// </summary>
-        public static readonly DependencyProperty TrackColorLinearProperty =
-            DependencyProperty.RegisterAttached(nameof(TrackColorLinear), typeof(ColorLinear), typeof(SliderMonitor),
-                new PropertyMetadata(new ColorLinear()));
-        /// <summary>
-        /// 轨道线性颜色
-        /// <para>默认值：默认</para>
-        /// </summary>
-        public ColorLinear TrackColorLinear
-        {
-            get { return (ColorLinear)GetValue(TrackColorLinearProperty); }
-            set { SetValue(TrackColorLinearProperty, value); }
         }
 
         #endregion

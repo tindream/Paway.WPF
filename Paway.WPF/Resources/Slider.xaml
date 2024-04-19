@@ -7,20 +7,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="DecreaseRepeatButtonLeft" TargetType="{x:Type RepeatButton}">
-        <Setter Property="local:SliderMonitor.IsMonitoring" Value="True"/>
         <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True"/>
-        <Setter Property="Panel.Background" >
-            <Setter.Value>
-                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
-                    <GradientStop 
-                        Offset="0"
-                        Color="{Binding Path=(local:SliderMonitor.TrackColorLinear).Start, RelativeSource={RelativeSource Self}}" />
-                    <GradientStop
-                        Offset="1"
-                        Color="{Binding Path=(local:SliderMonitor.TrackColorLinear).End, RelativeSource={RelativeSource Self}}" />
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
         <Setter Property="UIElement.Focusable" Value="False"/>
         <Setter Property="KeyboardNavigation.IsTabStop" Value="False"/>
         <Setter Property="Control.Template">
@@ -30,28 +17,26 @@
                             Height="{TemplateBinding FrameworkElement.Height}"
                             Background="Transparent">
                         <Border CornerRadius="{Binding Path=RadiusLeft, RelativeSource={RelativeSource AncestorType={x:Type local:SliderEXT}}}"
-                            Background="{TemplateBinding Panel.Background}"
-                            Height="{Binding Path=TrackHeight, RelativeSource={RelativeSource AncestorType={x:Type local:SliderEXT}}}" />
+                            Height="{Binding Path=TrackHeight, RelativeSource={RelativeSource AncestorType={x:Type local:SliderEXT}}}" >
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                                    <GradientStop 
+                                        Offset="0"
+                                        Color="{Binding Path=TrackColorLinear.Start, RelativeSource={RelativeSource AncestorType={x:Type local:SliderEXT}}}" />
+                                    <GradientStop
+                                        Offset="1"
+                                        Color="{Binding Path=TrackColorLinear.End, RelativeSource={RelativeSource AncestorType={x:Type local:SliderEXT}}}" />
+                                </LinearGradientBrush>
+
+                            </Border.Background>
+                        </Border>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
     <Style x:Key="DecreaseRepeatButtonBottom" TargetType="{x:Type RepeatButton}">
-        <Setter Property="local:SliderMonitor.IsMonitoring" Value="True"/>
         <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True"/>
-        <Setter Property="Panel.Background" >
-            <Setter.Value>
-                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                    <GradientStop 
-                        Offset="1"
-                        Color="{Binding Path=(local:SliderMonitor.TrackColorLinear).Start, RelativeSource={RelativeSource Self}}" />
-                    <GradientStop
-                        Offset="0"
-                        Color="{Binding Path=(local:SliderMonitor.TrackColorLinear).End, RelativeSource={RelativeSource Self}}" />
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
         <Setter Property="UIElement.Focusable" Value="False"/>
         <Setter Property="KeyboardNavigation.IsTabStop" Value="False"/>
         <Setter Property="Control.Template">
@@ -61,8 +46,18 @@
                             Height="{TemplateBinding FrameworkElement.Height}"
                             Background="Transparent">
                         <Border CornerRadius="{Binding Path=RadiusBottom, RelativeSource={RelativeSource AncestorType={x:Type local:SliderEXT}}}"
-                            Background="{TemplateBinding Panel.Background}"
-                            Width="{Binding Path=TrackHeight, RelativeSource={RelativeSource AncestorType={x:Type local:SliderEXT}}}" />
+                            Width="{Binding Path=TrackHeight, RelativeSource={RelativeSource AncestorType={x:Type local:SliderEXT}}}" >
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                                    <GradientStop 
+                                        Offset="0"
+                                        Color="{Binding Path=TrackColorLinear.Start, RelativeSource={RelativeSource AncestorType={x:Type local:SliderEXT}}}" />
+                                    <GradientStop
+                                        Offset="1"
+                                        Color="{Binding Path=TrackColorLinear.End, RelativeSource={RelativeSource AncestorType={x:Type local:SliderEXT}}}" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

@@ -37,12 +37,23 @@
                 </i:Interaction.Triggers>
             </SliderEXT>
             <Grid>
-                <Border Background="{StaticResource ColorSelector}" Height="3" CornerRadius="2" Margin="2"/>
-                <SliderEXT x:Name="sliderTheme" Maximum="7" Value="2.62" AutoToolTipPrecision="2" TickFrequency="0.01"
+                <Border Background="{StaticResource ColorSelector}" Height="3" CornerRadius="2" Margin="50,1,2,2"/>
+                <SliderEXT Title="主题色" x:Name="sliderTheme" Maximum="7" Value="2.62" AutoToolTipPrecision="2" TickFrequency="0.01"
                                  TrackColorLinear="Transparent;Transparent" TrackBackground="Transparent" >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="ValueChanged">
                             <i:InvokeCommandAction Command="{Binding ColorChanged}" CommandParameter="{Binding ElementName=sliderTheme}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </SliderEXT>
+            </Grid>
+            <Grid>
+                <Border Background="{StaticResource ColorSelector}" Height="3" CornerRadius="2" Margin="50,1,2,2"/>
+                <SliderEXT Title="前景色" x:Name="sliderTheme2" Maximum="7" Value="2.62" AutoToolTipPrecision="2" TickFrequency="0.01"
+                                 TrackColorLinear="Transparent;Transparent" TrackBackground="Transparent" >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="ValueChanged">
+                            <i:InvokeCommandAction Command="{Binding ForegroundChanged}" CommandParameter="{Binding ElementName=sliderTheme2}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </SliderEXT>
