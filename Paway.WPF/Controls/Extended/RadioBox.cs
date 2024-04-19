@@ -18,7 +18,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(RadioBox),
-                new PropertyMetadata(new BrushEXT() { Normal = Colors.DarkGray.ToBrush() }));
+                new PropertyMetadata(new BrushEXT() { Normal = new ThemeForeground(Colors.DarkGray) }));
 
         #endregion
 

@@ -32,7 +32,7 @@
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 CornerRadius="{TemplateBinding Radius}"
                                 Background="{TemplateBinding Background}"
-                                BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}" />
+                                BorderBrush="{Binding Path=ItemBrush.Normal.Value, RelativeSource={RelativeSource TemplatedParent}}" />
                         <ContentPresenter x:Name="ContentSite" 
                                           Margin="{TemplateBinding Padding}" 
                                           Grid.Column="1"

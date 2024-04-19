@@ -72,14 +72,14 @@
                                         </Border.CornerRadius>
                                         <Border.Background>
                                             <MultiBinding Converter="{StaticResource nullSelector}">
-                                                <Binding Path="ItemBackground.Normal" />
-                                                <Binding Path="ItemBackground.Normal" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
+                                                <Binding Path="ItemBackground.Normal.Value" />
+                                                <Binding Path="ItemBackground.Normal.Value" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                             </MultiBinding>
                                         </Border.Background>
                                         <Border.BorderBrush>
                                             <MultiBinding Converter="{StaticResource nullSelector}">
-                                                <Binding Path="ItemBrush.Normal" />
-                                                <Binding Path="ItemBrush.Normal" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
+                                                <Binding Path="ItemBrush.Normal.Value" />
+                                                <Binding Path="ItemBrush.Normal.Value" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                             </MultiBinding>
                                         </Border.BorderBrush>
                                         <Border.BorderThickness>
@@ -131,8 +131,8 @@
                                                Stretch="{Binding Path=ItemImageStretch, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"/>
                                             <TextBlock Name="desc" Text="{Binding Desc}"
                                                        TextTrimming="WordEllipsis" 
-                                                       Foreground="{Binding Path=ItemDescForeground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
-                                                       Background="{Binding Path=ItemDescBackground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
+                                                       Foreground="{Binding Path=ItemDescForeground.Normal.Value, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
+                                                       Background="{Binding Path=ItemDescBackground.Normal.Value, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        FontSize="{Binding Path=ItemDescFontSize.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}"
@@ -152,7 +152,7 @@
                                             </TextBlock>
                                             <TextBlock Name="text"
                                                        TextTrimming="WordEllipsis" 
-                                                       Background="{Binding Path=ItemTextBackground.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
+                                                       Background="{Binding Path=ItemTextBackground.Normal.Value, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        FontSize="{Binding Path=ItemTextFontSize.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
                                                        VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" 
@@ -165,8 +165,8 @@
                                                 </TextBlock.FontFamily>
                                                 <TextBlock.Foreground>
                                                     <MultiBinding Converter="{StaticResource nullSelector}">
-                                                        <Binding Path="ItemTextForeground.Normal" />
-                                                        <Binding Path="ItemTextForeground.Normal" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
+                                                        <Binding Path="ItemTextForeground.Normal.Value" />
+                                                        <Binding Path="ItemTextForeground.Normal.Value" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewEXT}}" />
                                                     </MultiBinding>
                                                 </TextBlock.Foreground>
                                                 <TextBlock.Text>

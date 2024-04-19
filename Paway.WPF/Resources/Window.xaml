@@ -66,7 +66,7 @@
                                 <Setter.Value>
                                     <MultiBinding Converter="{StaticResource nullSelector}">
                                         <Binding Path="Background" RelativeSource="{RelativeSource TemplatedParent}"/>
-                                        <Binding Path="(local:ThemeEXT.ItemBrush).Normal" RelativeSource="{RelativeSource Self}" />
+                                        <Binding Path="(local:ThemeEXT.ItemBrush).Normal.Value" RelativeSource="{RelativeSource Self}" />
                                     </MultiBinding>
                                 </Setter.Value>
                             </Setter>

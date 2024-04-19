@@ -18,14 +18,14 @@ namespace Paway.WPF
     /// <para>需要反射实体对象，获取默认值，故注意无限循环，不可引用自身</para>
     /// </summary>
     [TypeConverter(typeof(BrushEXTConverter))]
-    public class BrushEXT : BaseModelInfo, IEquatable<BrushEXT>, IElementStatu<Brush>
+    public class BrushEXT : BaseModelInfo, IEquatable<BrushEXT>
     {
-        private Brush normal = Colors.LightGray.ToBrush();
+        private ThemeForeground normal;
         /// <summary>
-        /// 默认的颜色
+        /// 默认的颜色No
         /// <para>默认值：LightGray</para>
         /// </summary>
-        public Brush Normal { get { return normal; } set { normal = value; OnPropertyChanged(); } }
+        public ThemeForeground Normal { get { return normal ?? PConfig.ForegroundBrush; } set { normal = value; OnPropertyChanged(); } }
         private Brush mouse = PMethod.ThemeColor(PConfig.Alpha - PConfig.Interval).ToBrush();
         /// <summary>
         /// 鼠标划过时的颜色
@@ -78,24 +78,25 @@ namespace Paway.WPF
         /// </summary>
         public override string ToString()
         {
-            if (Mouse.ToColor() != Normal.ToColor() || Pressed.ToColor() != Normal.ToColor()) return $"{Normal};{Mouse};{Pressed};{Alpha}";
+            if (Mouse.ToColor() != Normal.Value.ToColor() || Pressed.ToColor() != Normal.Value.ToColor()) return $"{Normal.Value};{Mouse};{Pressed};{Alpha}";
             return $"{Normal}";
         }
         /// <summary>
         /// </summary>
         public BrushEXT()
         {
+            this.normal = new ThemeForeground(Colors.LightGray);
             OnPressedMouse();
             PConfig.ColorChanged += Config_ColorChanged;
         }
         private void Config_ColorChanged(Color obj)
         {
-            if (this.Normal is SolidColorBrush normal && normal.Color.R == obj.R && normal.Color.G == obj.G && normal.Color.B == obj.B)
+            if (this.Normal.Value is SolidColorBrush normal && normal.Color.R == obj.R && normal.Color.G == obj.G && normal.Color.B == obj.B)
             {
                 if (normal.Color != Colors.Transparent && normal.Color != Colors.LightGray && normal.Color != Colors.DarkGray &&
                     normal.Color != Colors.White && normal.Color != PConfig.TextColor && normal.Color != PConfig.TextSub)
                 {
-                    this.Normal = PMethod.ThemeColor(normal.Color.A).ToBrush();
+                    this.Normal = new ThemeForeground(PMethod.ThemeColor(normal.Color.A));
                 }
             }
             if (this.Mouse is SolidColorBrush mouse && mouse.Color.R == obj.R && mouse.Color.G == obj.G && mouse.Color.B == obj.B)
@@ -121,7 +122,7 @@ namespace Paway.WPF
         {
             if (IHigh)
             {
-                this.Normal = PConfig.Background.AddLight(-30).ToBrush();
+                this.Normal = new ThemeForeground(PConfig.Background.AddLight(-30));
                 this.Mouse = PConfig.Color.AddLight(0.96).ToBrush();
                 this.Pressed = PConfig.Color.AddLight(-90).ToBrush();
             }
@@ -149,8 +150,9 @@ namespace Paway.WPF
             if (alpha != null) Alpha = alpha.Value;
             else if (value != null) Alpha = value.Alpha;
 
-            if (normal != null) Normal = normal.Value.ToBrush();
+            if (normal != null) Normal = new ThemeForeground(normal.Value);
             else if (value != null) Normal = value.Normal;
+            else Normal = null;
 
             if (mouse != null) Mouse = mouse.Value.ToBrush();
             else if (normal != null) Reset(normal.Value, Alpha);
@@ -165,7 +167,7 @@ namespace Paway.WPF
         /// </summary>
         private BrushEXT Reset(Color color, int alpha)
         {
-            Normal = color.ToBrush();
+            Normal = new ThemeForeground(color);
             Mouse = PMethod.AlphaColor(color.A - alpha, color).ToBrush();
             Pressed = PMethod.AlphaColor(color.A + alpha, color).ToBrush();
             return this;
@@ -183,7 +185,7 @@ namespace Paway.WPF
         /// </summary>
         public bool Equals(BrushEXT other)
         {
-            return Normal.Equals(other.Normal) && Mouse.Equals(other.Mouse) && Pressed.Equals(other.Pressed) && Alpha.Equals(other.Alpha);
+            return Normal.Value.Equals(other.Normal.Value) && Mouse.Equals(other.Mouse) && Pressed.Equals(other.Pressed) && Alpha.Equals(other.Alpha);
         }
     }
     /// <summary>
@@ -224,7 +226,10 @@ namespace Paway.WPF
         private Color? ParseValue(BrushEXT old, string name)
         {
             if (old == null) return null;
-            return (old.GetValue(name) as SolidColorBrush)?.Color;
+            var obj = old.GetValue(name);
+            if (obj is SolidColorBrush solid) return solid.Color;
+            if (obj is ThemeForeground theme && theme.Value is SolidColorBrush solid2) return solid2.Color;
+            return null;
         }
         private Color Parse(string str)
         {

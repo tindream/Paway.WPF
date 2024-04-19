@@ -18,6 +18,8 @@
     <local:BrushAlphaConverter x:Key="brushAlphaConverter" />
     <local:BrushLightConverter x:Key="brushLightConverter" />
     <local:BrushToColorConverter x:Key="brushToColorConverter" />
+    <local:ColorAlphaConverter x:Key="colorAlphaConverter" />
+    <local:ColorLightConverter x:Key="colorLightConverter" />
     <local:ColorToBrushConverter x:Key="colorToBrushConverter" />
 
     <local:MoreValueMultiConverter x:Key="moreValueMultiConverter"/>

@@ -39,7 +39,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemForegroundProperty =
             DependencyProperty.RegisterAttached(nameof(ItemForeground), typeof(BrushEXT), typeof(TreeViewEXT),
-            new PropertyMetadata(new BrushEXT(PConfig.TextColor, PConfig.TextColor, Colors.White)));
+            new PropertyMetadata(new BrushEXT(null, PConfig.TextColor, Colors.White)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty UserModeProperty =

@@ -79,6 +79,7 @@
                                     </ToggleButton>
                                     <ContentPresenter x:Name="PART_Header" Grid.Column="1" 
                                                       ContentSource="Header"
+                                                      TextElement.Foreground="{Binding Path=ItemForeground.Normal.Value,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}" 
                                                       HorizontalAlignment="Stretch"/>
                                 </Grid>
                             </Grid>
@@ -120,7 +121,7 @@
                                     Value="{Binding Path=ItemBackground.PressedMouse,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            <Setter Property="Opacity" Value="0.6"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -199,7 +200,7 @@
                 <ControlTemplate TargetType="local:TreeViewEXT" >
                     <Border Name="border"
                             BorderThickness="{TemplateBinding Border.BorderThickness}"
-                            BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}">
+                            BorderBrush="{Binding Path=ItemBrush.Normal.Value, RelativeSource={RelativeSource TemplatedParent}}">
                         <local:ScrollViewerEXT x:Name="Part_ScrollViewer"
                                       HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                       VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"

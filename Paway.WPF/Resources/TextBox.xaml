@@ -38,7 +38,7 @@
                                    Text="{TemplateBinding Title}"/>
                         <Border Name="border" Grid.Column="1"
                                 Background="{TemplateBinding Background}"
-                                BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"
+                                BorderBrush="{Binding Path=ItemBrush.Normal.Value, RelativeSource={RelativeSource TemplatedParent}}"
                                 CornerRadius="{TemplateBinding Radius}"
                                 BorderThickness="{TemplateBinding BorderThickness}">
                             <Grid>
@@ -75,7 +75,7 @@
                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                            Padding="3,0"
                                            FontSize="{TemplateBinding FontSize, Converter={StaticResource valueMultiConverter}}"
-                                           Foreground="{StaticResource TextLight}"
+                                           Foreground="{Binding Path=(local:ThemeEXT.Foreground).Value, RelativeSource={RelativeSource Self}, Converter={StaticResource brushLightConverter}}"
                                            Text="{TemplateBinding Unit}"/>
                             </Grid>
                         </Border>

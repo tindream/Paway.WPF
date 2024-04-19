@@ -31,7 +31,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemForegroundProperty =
             DependencyProperty.RegisterAttached(nameof(ItemForeground), typeof(BrushEXT), typeof(CheckButton),
-            new PropertyMetadata(new BrushEXT(PConfig.TextColor, Colors.White, Colors.White)));
+            new PropertyMetadata(new BrushEXT(null, Colors.White, Colors.White)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty TypeProperty =
@@ -46,7 +46,7 @@ namespace Paway.WPF
                     var color = view.Type.Color();
                     view.ItemBrush = new BrushEXT(PMethod.AlphaColor(PConfig.Alpha, color))
                     {
-                        Normal = Colors.LightGray.ToBrush()
+                        Normal = new ThemeForeground(Colors.LightGray)
                     };
                 }
                 view.UpdateDefaultStyle();

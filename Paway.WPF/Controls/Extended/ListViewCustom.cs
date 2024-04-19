@@ -125,7 +125,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemTextForegroundProperty =
             DependencyProperty.RegisterAttached(nameof(ItemTextForeground), typeof(BrushEXT), typeof(ListViewCustom),
-                new PropertyMetadata(new BrushEXT(PConfig.TextColor, Colors.White)));
+                new PropertyMetadata(new BrushEXT(null, Colors.White)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemTextFontSizeProperty =

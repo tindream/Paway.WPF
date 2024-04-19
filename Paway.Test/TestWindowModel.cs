@@ -208,6 +208,11 @@ namespace Paway.Test
                 }
             }
         });
+        public ICommand ForegroundChanged => new RelayCommand<SliderEXT>(slider =>
+        {
+            var color = Method.ColorSelector(slider.Value / 7);
+            Config.Foreground = color;
+        });
         protected override void Action(ListViewCustom listView1)
         {
             base.Action(listView1);

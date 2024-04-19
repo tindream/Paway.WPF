@@ -13,7 +13,6 @@
         <Setter Property="Margin" Value="2"/>
         <Setter Property="VerticalScrollBarVisibility" Value="Visible"/>
 
-        <Setter Property="Foreground" Value="#BF000000"/>
         <Setter Property="Padding" Value="1,3"/>
         <Setter Property="SelectionOpacity" Value="0.2"/>
         <Setter Property="IsDocumentEnabled" Value="True"/>
@@ -29,7 +28,7 @@
                     <Grid>
                         <Border x:Name="border" 
                                 Background="{TemplateBinding Background}" 
-                                BorderBrush="{Binding Path=ItemBrush.Normal, RelativeSource={RelativeSource TemplatedParent}}"
+                                BorderBrush="{Binding Path=ItemBrush.Normal.Value, RelativeSource={RelativeSource TemplatedParent}}"
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 CornerRadius="{TemplateBinding Radius}"/>
                         <local:ScrollViewerEXT x:Name="Part_ScrollViewer" Margin="{TemplateBinding BorderThickness}" Focusable="False" 

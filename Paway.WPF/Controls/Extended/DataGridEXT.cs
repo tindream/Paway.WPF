@@ -36,7 +36,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty HeaderBrushProperty =
             DependencyProperty.RegisterAttached(nameof(HeaderBrush), typeof(BrushEXT), typeof(DataGridEXT),
-                new PropertyMetadata(new BrushEXT() { Normal = PMethod.AlphaColor(200, PConfig.Light).ToBrush() }));
+                new PropertyMetadata(new BrushEXT() { Normal = new ThemeForeground(PMethod.AlphaColor(200, PConfig.Light)) }));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ICustomColumnHeaderProperty =
@@ -387,7 +387,7 @@ namespace Paway.WPF
                 else
                 {
                     var firstColumn = columns.Find(c => c.Visibility == Visibility.Visible);
-                    firstColumn.HeaderStyle = (Style)TryFindResource("FirstColumnHeaderStyle");
+                    if (firstColumn != null) firstColumn.HeaderStyle = (Style)TryFindResource("FirstColumnHeaderStyle");
                     if (TryFindResource("NormalColumnHeaderStyle") is Style normalColumnHeaderStyle)
                     {
                         foreach (var column in columns)

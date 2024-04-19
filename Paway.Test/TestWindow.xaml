@@ -37,7 +37,18 @@
         <ScrollViewerEXT>
             <DockPanel Width="250">
                 <StackPanel DockPanel.Dock="Top">
-                    <TextBoxEXT Text="{Binding Label}" />
+                    <Grid>
+                        <Border Background="{StaticResource ColorSelector}" Height="3" CornerRadius="2" Margin="50,1,2,2"/>
+                        <SliderEXT Title="前景色" x:Name="sliderTheme2" Maximum="7" Value="2.62" AutoToolTipPrecision="2" TickFrequency="0.01"
+                                 TrackColorLinear="Transparent;Transparent" TrackBackground="Transparent" >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="ValueChanged">
+                                    <i:InvokeCommandAction Command="{Binding ForegroundChanged}" CommandParameter="{Binding ElementName=sliderTheme2}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </SliderEXT>
+                    </Grid>
+                    <TextBoxEXT Text="{Binding Label}" Unit="ms"/>
                     <ComboBoxEXT ItemsSource="{Binding LanguageObList}" 
                                  Text="{Binding Language}" SelectedValuePath="Name" DisplayMemberPath="Name"
                                  IAnimation="2" BorderThickness="0,0,0,1" 

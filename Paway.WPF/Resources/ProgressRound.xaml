@@ -39,7 +39,7 @@
                                FontSize="{TemplateBinding FontSize,Converter={StaticResource valueMultiConverter}}"
                                Opacity="0.8" 
                                Padding="5,5"
-                               Foreground="{StaticResource Text}"
+                               Foreground="{StaticResource ThemeForeground}"
                                Content="{TemplateBinding ProgressValue}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                     </Grid>
                     <ControlTemplate.Triggers>
