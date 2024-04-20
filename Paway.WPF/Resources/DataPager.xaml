@@ -209,8 +209,7 @@
                                         Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
                                 <Setter Property="BorderBrush"
                                         Value="{StaticResource TextBox.Static.Border}" />
-                                <Setter Property="Foreground"
-                                        Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
                                 <Setter Property="BorderThickness"
                                         Value="1" />
                                 <Setter Property="KeyboardNavigation.TabNavigation"

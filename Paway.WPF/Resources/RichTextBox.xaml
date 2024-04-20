@@ -28,7 +28,7 @@
                     <Grid>
                         <Border x:Name="border" 
                                 Background="{TemplateBinding Background}" 
-                                BorderBrush="{Binding Path=ItemBrush.Normal.Value, RelativeSource={RelativeSource TemplatedParent}}"
+                                BorderBrush="{Binding Path=ItemBrush.Normal.Result, RelativeSource={RelativeSource TemplatedParent}}"
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 CornerRadius="{TemplateBinding Radius}"/>
                         <local:ScrollViewerEXT x:Name="Part_ScrollViewer" Margin="{TemplateBinding BorderThickness}" Focusable="False" 

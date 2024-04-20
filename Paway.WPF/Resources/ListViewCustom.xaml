@@ -72,14 +72,14 @@
                                         </Border.CornerRadius>
                                         <Border.Background>
                                             <MultiBinding Converter="{StaticResource nullSelector}">
-                                                <Binding Path="ItemBackground.Normal.Value" />
-                                                <Binding Path="ItemBackground.Normal.Value" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewCustom}}" />
+                                                <Binding Path="ItemBackground.Normal.Result" />
+                                                <Binding Path="ItemBackground.Normal.Result" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewCustom}}" />
                                             </MultiBinding>
                                         </Border.Background>
                                         <Border.BorderBrush>
                                             <MultiBinding Converter="{StaticResource nullSelector}">
-                                                <Binding Path="ItemBrush.Normal.Value" />
-                                                <Binding Path="ItemBrush.Normal.Value" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewCustom}}" />
+                                                <Binding Path="ItemBrush.Normal.Result" />
+                                                <Binding Path="ItemBrush.Normal.Result" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewCustom}}" />
                                             </MultiBinding>
                                         </Border.BorderBrush>
                                         <Border.BorderThickness>
@@ -126,8 +126,8 @@
                                                           VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}" >
                                             <TextBlock.Foreground>
                                                 <MultiBinding Converter="{StaticResource nullSelector}">
-                                                    <Binding Path="ItemTextForeground.Normal.Value" />
-                                                    <Binding Path="ItemTextForeground.Normal.Value" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewCustom}}" />
+                                                    <Binding Path="ItemTextForeground.Normal.Result" />
+                                                    <Binding Path="ItemTextForeground.Normal.Result" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewCustom}}" />
                                                 </MultiBinding>
                                             </TextBlock.Foreground>
                                         </ContentPresenter>

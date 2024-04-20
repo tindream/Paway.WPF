@@ -24,7 +24,7 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{Binding Path=ItemBorder.Normal, RelativeSource={RelativeSource TemplatedParent}}"
                                 CornerRadius="{TemplateBinding Radius}"
-                                Background="{Binding Path=ItemBackground.Normal.Value, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                Background="{Binding Path=ItemBackground.Normal.Result, RelativeSource={RelativeSource TemplatedParent}}"/>
                         <Border x:Name="border2" 
                                 Padding="{TemplateBinding Padding}"
                                 CornerRadius="{TemplateBinding Radius}">
@@ -40,7 +40,7 @@
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                                 <TextBlock x:Name="txt" Text="{TemplateBinding Content}" Style="{x:Null}"
-                                       Foreground="{Binding Path=ItemForeground.Normal.Value, RelativeSource={RelativeSource TemplatedParent}}" 
+                                       Foreground="{Binding Path=ItemForeground.Normal.Result, RelativeSource={RelativeSource TemplatedParent}}" 
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                             </DockPanel>

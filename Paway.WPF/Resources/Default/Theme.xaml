@@ -6,12 +6,12 @@
     <!--主题背景色-->
     <SolidColorBrush x:Key="ThemeBackground" Color="{Binding Path=(local:ThemeEXT.Background).Value.Color, RelativeSource={RelativeSource Self}}"/>
     <!--主题背景深色-->
-    <SolidColorBrush x:Key="ThemeBackgroundHigh" Color="{Binding Path=(local:ThemeEXT.HighBrush).Normal.Value.Color, RelativeSource={RelativeSource Self}}"/>
+    <SolidColorBrush x:Key="ThemeBackgroundHigh" Color="{Binding Path=(local:ThemeEXT.HighBrush).Normal.Result.Color, RelativeSource={RelativeSource Self}}"/>
     <!--主题前景色-->
-    <SolidColorBrush x:Key="ThemeForeground" Color="{Binding Path=(local:ThemeEXT.Foreground).Value.Color, RelativeSource={RelativeSource Self}}"/>
+    <SolidColorBrush x:Key="ThemeForeground" Color="{Binding Path=(local:ThemeEXT.Foreground).Result.Color, RelativeSource={RelativeSource Self}}"/>
     <!--主题-->
     <SolidColorBrush x:Key="ThemeColor" Color="{Binding Path=(local:ThemeEXT.ItemBrush).Pressed.Color, RelativeSource={RelativeSource Self}}"/>
-    <SolidColorBrush x:Key="ThemeColorNormal" Color="{Binding Path=(local:ThemeEXT.ItemBrush).Normal.Value.Color, RelativeSource={RelativeSource Self}}"/>
+    <SolidColorBrush x:Key="ThemeColorNormal" Color="{Binding Path=(local:ThemeEXT.ItemBrush).Normal.Result.Color, RelativeSource={RelativeSource Self}}"/>
     <SolidColorBrush x:Key="ThemeColorMouse" Color="{Binding Path=(local:ThemeEXT.ItemBrush).Mouse.Color, RelativeSource={RelativeSource Self}}"/>
     <!--主题深色-->
     <SolidColorBrush x:Key="ThemeHigh" Color="{Binding Path=(local:ThemeEXT.HighBrush).Pressed.Color, RelativeSource={RelativeSource Self}}"/>

@@ -20,12 +20,12 @@ namespace Paway.WPF
     [TypeConverter(typeof(BrushEXTConverter))]
     public class BrushEXT : BaseModelInfo, IEquatable<BrushEXT>
     {
-        private ThemeForeground normal;
+        private ThemeForeground normal = PConfig.ForegroundBrush;
         /// <summary>
         /// 默认的颜色No
         /// <para>默认值：LightGray</para>
         /// </summary>
-        public ThemeForeground Normal { get { return normal ?? PConfig.ForegroundBrush; } set { normal = value; OnPropertyChanged(); } }
+        public ThemeForeground Normal { get { return normal; } set { normal = value; OnPropertyChanged(); } }
         private Brush mouse = PMethod.ThemeColor(PConfig.Alpha - PConfig.Interval).ToBrush();
         /// <summary>
         /// 鼠标划过时的颜色
@@ -142,17 +142,18 @@ namespace Paway.WPF
         /// <summary>
         /// 主题色：普通、鼠标移过、按下
         /// </summary>
-        public BrushEXT(Color? normal, byte mouse, byte pressed) : this(normal, PMethod.ThemeColor(mouse), PMethod.ThemeColor(pressed)) { }
+        public BrushEXT(Color? normal, byte mouse, byte pressed, int light = 0) : this(normal, PMethod.ThemeColor(mouse), PMethod.ThemeColor(pressed), light: light) { }
         /// <summary>
         /// </summary>
-        public BrushEXT(Color? normal, Color? mouse = null, Color? pressed = null, int? alpha = null, BrushEXT value = null) : this()
+        public BrushEXT(Color? normal, Color? mouse = null, Color? pressed = null, int? alpha = null, BrushEXT value = null, int light = 0) : this()
         {
             if (alpha != null) Alpha = alpha.Value;
             else if (value != null) Alpha = value.Alpha;
 
             if (normal != null) Normal = new ThemeForeground(normal.Value);
             else if (value != null) Normal = value.Normal;
-            else Normal = null;
+            else Normal = new ThemeForeground(PConfig.TextColor);
+            if (light != 0) Normal.Light = light;
 
             if (mouse != null) Mouse = mouse.Value.ToBrush();
             else if (normal != null) Reset(normal.Value, Alpha);
@@ -185,7 +186,7 @@ namespace Paway.WPF
         /// </summary>
         public bool Equals(BrushEXT other)
         {
-            return Normal.Value.Equals(other.Normal.Value) && Mouse.Equals(other.Mouse) && Pressed.Equals(other.Pressed) && Alpha.Equals(other.Alpha);
+            return Normal.Result.Equals(other.Normal.Result) && Mouse.Equals(other.Mouse) && Pressed.Equals(other.Pressed) && Alpha.Equals(other.Alpha);
         }
     }
     /// <summary>

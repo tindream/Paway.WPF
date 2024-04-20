@@ -6,9 +6,8 @@
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="MenuTabItem" TargetType="{x:Type TabItem}">
+    <Style x:Key="MenuTabItem" TargetType="{x:Type TabItem}" BasedOn="{StaticResource Config}">
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
-        <Setter Property="Foreground" Value="{StaticResource Text}"/>
         <Setter Property="Padding" Value="6"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -33,13 +32,11 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="Panel.ZIndex" Value="1"/>
-                            <Setter Property="Foreground" TargetName="txt" 
-                                    Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
+                            <Setter Property="Foreground" TargetName="txt" Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="true">
                             <Setter Property="Panel.ZIndex" Value="1"/>
-                            <Setter Property="Foreground" TargetName="txt" 
-                                    Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
+                            <Setter Property="Foreground" TargetName="txt" Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
                         </Trigger>
 
                         <MultiDataTrigger>
@@ -75,9 +72,8 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="DefaultTabItem" TargetType="{x:Type TabItem}">
+    <Style x:Key="DefaultTabItem" TargetType="{x:Type TabItem}" BasedOn="{StaticResource Config}">
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
-        <Setter Property="Foreground" Value="{StaticResource Text}"/>
         <Setter Property="Padding" Value="6"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Background" Value="White"/>
@@ -104,17 +100,13 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="Panel.ZIndex" Value="1"/>
-                            <Setter Property="Foreground" TargetName="txt"  
-                                    Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
-                            <Setter Property="Background" TargetName="_underline2" 
-                                    Value="{Binding Background, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                            <Setter Property="Foreground" TargetName="txt" Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
+                            <Setter Property="Background" TargetName="_underline2" Value="{Binding Background, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="true">
                             <Setter Property="Panel.ZIndex" Value="1"/>
-                            <Setter Property="Foreground" TargetName="txt"  
-                                    Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
-                            <Setter Property="Background" TargetName="_underline2" 
-                                    Value="{Binding Background, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                            <Setter Property="Foreground" TargetName="txt" Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:TabControlEXT}}}"/>
+                            <Setter Property="Background" TargetName="_underline2" Value="{Binding Background, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                         </Trigger>
 
                         <MultiDataTrigger>
@@ -167,7 +159,6 @@
         <Setter Property="Background" Value="White"/>
         <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:TabControlEXT}">

@@ -183,12 +183,10 @@
                             </Setter>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding ElementName=PART_TextBox, Path=IsKeyboardFocused}" Value="True">
-                            <Setter Property="Foreground" TargetName="PART_Button" 
-                                    Value="{Binding ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:DatePickerEXT}}}"/>
+                            <Setter Property="Foreground" TargetName="PART_Button" Value="{Binding ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:DatePickerEXT}}}"/>
                         </DataTrigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Foreground" TargetName="PART_Button" 
-                                    Value="{Binding ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:DatePickerEXT}}}"/>
+                            <Setter Property="Foreground" TargetName="PART_Button" Value="{Binding ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:DatePickerEXT}}}"/>
                         </Trigger>
                         <Trigger Property="IsDropDownOpen" Value="true">
                             <Setter Property="Foreground" TargetName="PART_Button" Value="White"/>

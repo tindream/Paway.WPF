@@ -57,26 +57,20 @@
                                 </Grid>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
-                                        <Setter TargetName="_borderbg" Property="Background" 
-                                                Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListBoxEXT}}}" />
-                                        <Setter Property="Foreground" 
-                                                Value="{Binding Path=ItemForeground.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListBoxEXT}}}" />
+                                        <Setter TargetName="_borderbg" Property="Background" Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListBoxEXT}}}" />
+                                        <Setter Property="Foreground" Value="{Binding Path=ItemForeground.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListBoxEXT}}}" />
                                     </Trigger>
                                     <Trigger Property="IsMouseOver" Value="true">
-                                        <Setter TargetName="_borderbg" Property="Background" 
-                                                Value="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListBoxEXT}}}" />
-                                        <Setter Property="Foreground" 
-                                                Value="{Binding Path=ItemForeground.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListBoxEXT}}}"/>
+                                        <Setter TargetName="_borderbg" Property="Background" Value="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListBoxEXT}}}" />
+                                        <Setter Property="Foreground" Value="{Binding Path=ItemForeground.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListBoxEXT}}}"/>
                                     </Trigger>
                                     <MultiTrigger>
                                         <MultiTrigger.Conditions>
                                             <Condition Property="IsSelected" Value="true"/>
                                             <Condition Property="IsMouseOver" Value="true"/>
                                         </MultiTrigger.Conditions>
-                                        <Setter TargetName="_borderbg" Property="Background" 
-                                                Value="{Binding Path=ItemBrush.PressedMouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListBoxEXT}}}" />
-                                        <Setter Property="Foreground" 
-                                                Value="{Binding Path=ItemForeground.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListBoxEXT}}}"/>
+                                        <Setter TargetName="_borderbg" Property="Background" Value="{Binding Path=ItemBrush.PressedMouse, RelativeSource={RelativeSource AncestorType={x:Type local:ListBoxEXT}}}" />
+                                        <Setter Property="Foreground" Value="{Binding Path=ItemForeground.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ListBoxEXT}}}"/>
                                     </MultiTrigger>
                                     <Trigger Property="IsEnabled" Value="False">
                                         <Setter Property="Opacity" Value="0.6"/>

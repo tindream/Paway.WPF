@@ -38,7 +38,7 @@
                                    Text="{TemplateBinding Title}"/>
                         <Border Name="border" Grid.Column="1"
                                 Background="{TemplateBinding Background}"
-                                BorderBrush="{Binding Path=ItemBrush.Normal.Value, RelativeSource={RelativeSource TemplatedParent}}"
+                                BorderBrush="{Binding Path=ItemBrush.Normal.Result, RelativeSource={RelativeSource TemplatedParent}}"
                                 CornerRadius="{TemplateBinding Radius}"
                                 BorderThickness="{TemplateBinding BorderThickness}">
                             <Grid>

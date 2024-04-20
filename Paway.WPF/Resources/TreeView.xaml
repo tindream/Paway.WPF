@@ -79,7 +79,7 @@
                                     </ToggleButton>
                                     <ContentPresenter x:Name="PART_Header" Grid.Column="1" 
                                                       ContentSource="Header"
-                                                      TextElement.Foreground="{Binding Path=ItemForeground.Normal.Value,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}" 
+                                                      TextElement.Foreground="{Binding Path=ItemForeground.Normal.Result,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}" 
                                                       HorizontalAlignment="Stretch"/>
                                 </Grid>
                             </Grid>
@@ -200,7 +200,7 @@
                 <ControlTemplate TargetType="local:TreeViewEXT" >
                     <Border Name="border"
                             BorderThickness="{TemplateBinding Border.BorderThickness}"
-                            BorderBrush="{Binding Path=ItemBrush.Normal.Value, RelativeSource={RelativeSource TemplatedParent}}">
+                            BorderBrush="{Binding Path=ItemBrush.Normal.Result, RelativeSource={RelativeSource TemplatedParent}}">
                         <local:ScrollViewerEXT x:Name="Part_ScrollViewer"
                                       HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                       VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"

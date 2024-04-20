@@ -64,7 +64,7 @@
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 CornerRadius="{TemplateBinding Radius}"
                                 Background="{TemplateBinding Background}"
-                                BorderBrush="{Binding Path=ItemBrush.Normal.Value, RelativeSource={RelativeSource TemplatedParent}}" />
+                                BorderBrush="{Binding Path=ItemBrush.Normal.Result, RelativeSource={RelativeSource TemplatedParent}}" />
                         <Image x:Name="icon" Grid.Column="1" Visibility="Collapsed" Margin="1,0"
                                        Source="{TemplateBinding Icon}"
                                        Width="{TemplateBinding IconWidth}" 

@@ -162,7 +162,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ExpanderEXT}">
                     <Border Name="border" 
-                            BorderBrush="{Binding Path=ItemBrush.Normal.Value, RelativeSource={RelativeSource TemplatedParent}}"
+                            BorderBrush="{Binding Path=ItemBrush.Normal.Result, RelativeSource={RelativeSource TemplatedParent}}"
                             CornerRadius="{TemplateBinding Radius}"
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid>

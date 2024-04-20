@@ -32,11 +32,11 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemWidthTypeProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemWidthType), typeof(ItemWidthType), typeof(ListViewCustom));
+            DependencyProperty.RegisterAttached(nameof(ItemWidthType), typeof(ItemWidthType), typeof(ListViewCustom), new PropertyMetadata(ItemWidthType.None, OnSizeTypeChanged));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty RowProperty =
-            DependencyProperty.RegisterAttached(nameof(Row), typeof(int), typeof(ListViewCustom), new PropertyMetadata(1));
+            DependencyProperty.RegisterAttached(nameof(Row), typeof(int), typeof(ListViewCustom), new PropertyMetadata(1, OnSizeTypeChanged));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemHeightProperty =
@@ -67,6 +67,10 @@ namespace Paway.WPF
                 }
                 view.UpdateDefaultStyle();
             }
+        }
+        private static void OnSizeTypeChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            if (obj is ListViewCustom view) view.ResetItemWidth();
         }
 
         /// <summary>
@@ -99,7 +103,7 @@ namespace Paway.WPF
                 }
                 if (mouseColor != null || pressedColor != null)
                 {
-                    listView.ItemBrush = new BrushEXT(null, mouseColor, pressedColor);
+                    listView.ItemBrush = new BrushEXT(Colors.LightGray, mouseColor, pressedColor);
                 }
             }
         }
@@ -108,7 +112,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemBrushProperty =
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ListViewCustom),
-                new PropertyMetadata(new BrushEXT(null, PConfig.Alpha, PConfig.Alpha + PConfig.Interval)));
+                new PropertyMetadata(new BrushEXT(Colors.LightGray, PConfig.Alpha, PConfig.Alpha + PConfig.Interval)));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemBorderProperty =
@@ -116,7 +120,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemMarginProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemMargin), typeof(Thickness), typeof(ListViewCustom));
+            DependencyProperty.RegisterAttached(nameof(ItemMargin), typeof(Thickness), typeof(ListViewCustom), new PropertyMetadata(new Thickness(), OnSizeTypeChanged));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ItemPaddingProperty =
@@ -472,6 +476,7 @@ namespace Paway.WPF
                                     if (i == 0 && j == 0) item.ItemMargin = new Thickness(0);
                                     else if (i < columnCount) item.ItemMargin = new Thickness(ItemMargin.Left, 0, 0, 0);
                                     else if (j == 0) item.ItemMargin = new Thickness(0, ItemMargin.Top, 0, 0);
+                                    else item.ItemMargin = new Thickness(ItemMargin.Left, ItemMargin.Top, 0, 0);
                                     if (j == 0) item.ItemWidth += margin;
                                 }
                             }

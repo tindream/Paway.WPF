@@ -26,7 +26,7 @@
                                 Height="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}, Converter={StaticResource valueMultiConverter}, ConverterParameter=0.9}"
                                 Margin="{TemplateBinding Padding, Converter={StaticResource noRightThicknessConverter}, ConverterParameter='0,0,3,0'}"
                                 BorderThickness="{TemplateBinding Border.BorderThickness}"
-                                BorderBrush="{Binding Path=ItemBrush.Normal.Value, RelativeSource={RelativeSource TemplatedParent}}"
+                                BorderBrush="{Binding Path=ItemBrush.Normal.Result, RelativeSource={RelativeSource TemplatedParent}}"
                                 Background="{TemplateBinding Background}"
                                 CornerRadius="{TemplateBinding Radius}" >
                             <Grid Name="markGrid" >
