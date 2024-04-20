@@ -226,6 +226,8 @@ namespace Paway.WPF
                 case ColorType.TextSub: return PConfig.TextSub;
                 case ColorType.TextLight: return PConfig.TextLight;
 
+                case ColorType.Border: return PConfig.Border;
+                case ColorType.BorderSub: return PConfig.BorderSub;
                 case ColorType.Light: return PConfig.Light;
 
                 default: return Colors.Transparent;

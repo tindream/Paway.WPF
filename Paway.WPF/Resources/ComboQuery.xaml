@@ -80,7 +80,7 @@
                             <Setter Property="Opacity" Value="0.6"/>
                         </Trigger>
                         <Trigger Property="IsReadOnly" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource BorderLight}"/>
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource Light}"/>
                         </Trigger>
                         <DataTrigger Binding="{Binding ElementName=PART_EditableTextBox, Path=IsKeyboardFocused}" Value="True">
                             <Setter Property="BorderBrush" TargetName="border" 

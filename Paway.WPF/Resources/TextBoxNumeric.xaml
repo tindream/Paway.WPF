@@ -85,7 +85,7 @@
                             <Setter TargetName="tbUnit" Property="Visibility" Value="Visible" />
                         </DataTrigger>
                         <Trigger Property="IsReadOnly" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource BorderLight}"/>
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource Light}"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="BorderBrush" TargetName="border" 

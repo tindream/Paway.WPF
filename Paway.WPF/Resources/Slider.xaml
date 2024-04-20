@@ -106,7 +106,7 @@
                             <Setter Property="Shape.Stroke" TargetName="grip" Value="#FF569DE5"/>
                         </Trigger>
                         <Trigger Property="UIElement.IsEnabled" Value="False">
-                            <Setter Property="Shape.Fill" TargetName="grip" Value="{StaticResource BorderLight}"/>
+                            <Setter Property="Shape.Fill" TargetName="grip" Value="{StaticResource Light}"/>
                             <Setter Property="Shape.Stroke" TargetName="grip" Value="LightGray"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -134,7 +134,7 @@
                 <Setter Property="Shape.Stroke" TargetName="grip" Value="#FF569DE5"/>
             </Trigger>
             <Trigger Property="UIElement.IsEnabled" Value="False">
-                <Setter Property="Shape.Fill" TargetName="grip" Value="{StaticResource BorderLight}"/>
+                <Setter Property="Shape.Fill" TargetName="grip" Value="{StaticResource Light}"/>
                 <Setter Property="Shape.Stroke" TargetName="grip" Value="LightGray"/>
             </Trigger>
         </ControlTemplate.Triggers>
@@ -159,7 +159,7 @@
                 <Setter Property="Shape.Stroke" TargetName="grip" Value="#FF569DE5"/>
             </Trigger>
             <Trigger Property="UIElement.IsEnabled" Value="False">
-                <Setter Property="Shape.Fill" TargetName="grip" Value="{StaticResource BorderLight}"/>
+                <Setter Property="Shape.Fill" TargetName="grip" Value="{StaticResource Light}"/>
                 <Setter Property="Shape.Stroke" TargetName="grip" Value="LightGray"/>
             </Trigger>
         </ControlTemplate.Triggers>
@@ -184,7 +184,7 @@
                 <Setter Property="Shape.Stroke" TargetName="grip" Value="#FF569DE5"/>
             </Trigger>
             <Trigger Property="UIElement.IsEnabled" Value="False">
-                <Setter Property="Shape.Fill" TargetName="grip" Value="{StaticResource BorderLight}"/>
+                <Setter Property="Shape.Fill" TargetName="grip" Value="{StaticResource Light}"/>
                 <Setter Property="Shape.Stroke" TargetName="grip" Value="LightGray"/>
             </Trigger>
         </ControlTemplate.Triggers>
@@ -209,7 +209,7 @@
                 <Setter Property="Shape.Stroke" TargetName="grip" Value="#FF569DE5"/>
             </Trigger>
             <Trigger Property="UIElement.IsEnabled" Value="False">
-                <Setter Property="Shape.Fill" TargetName="grip" Value="{StaticResource BorderLight}"/>
+                <Setter Property="Opacity" TargetName="grip" Value="{StaticResource Light}"/>
                 <Setter Property="Shape.Stroke" TargetName="grip" Value="LightGray"/>
             </Trigger>
         </ControlTemplate.Triggers>

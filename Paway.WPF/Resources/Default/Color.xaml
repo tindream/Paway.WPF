@@ -16,18 +16,16 @@
     <Color x:Key="ErrorColor">#F8331E</Color>
 
     <!--34-->
-    <SolidColorBrush x:Key="Text" Color="#222" />
+    <SolidColorBrush x:Key="Text" Color="#1F2123" />
     <!--68-->
-    <SolidColorBrush x:Key="TextSub" Color="#444" />
+    <SolidColorBrush x:Key="TextSub" Color="#3D4145" />
     <!--119-->
-    <SolidColorBrush x:Key="TextLight" Color="#777" />
+    <SolidColorBrush x:Key="TextLight" Color="#6F767D" />
 
     <!--220-->
     <SolidColorBrush x:Key="Border" Color="#DCDFE6" />
     <!--228-->
     <SolidColorBrush x:Key="BorderSub" Color="#E4E7ED" />
-    <!--235-->
-    <SolidColorBrush x:Key="BorderLight" Color="#EBEEF5" />
     <!--242-->
     <SolidColorBrush x:Key="Light" Color="#F2F6FC" />
 

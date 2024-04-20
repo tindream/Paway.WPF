@@ -94,7 +94,7 @@ namespace Paway.WPF
             if (this.Normal.Value is SolidColorBrush normal && normal.Color.R == obj.R && normal.Color.G == obj.G && normal.Color.B == obj.B)
             {
                 if (normal.Color != Colors.Transparent && normal.Color != Colors.LightGray && normal.Color != Colors.DarkGray &&
-                    normal.Color != Colors.White && normal.Color != PConfig.TextColor && normal.Color != PConfig.TextSub)
+                    normal.Color != Colors.White && normal.Color != PConfig.TextColor)
                 {
                     this.Normal = new ThemeForeground(PMethod.ThemeColor(normal.Color.A));
                 }
