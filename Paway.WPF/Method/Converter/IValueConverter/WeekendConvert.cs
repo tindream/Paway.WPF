@@ -24,7 +24,7 @@ namespace Paway.WPF
                 if (!calendarDayButton.IsMouseOver && !calendarDayButton.IsSelected && !calendarDayButton.IsBlackedOut && (dateTime.DayOfWeek == DayOfWeek.Saturday || dateTime.DayOfWeek == DayOfWeek.Sunday))
                     return PConfig.Error.ToBrush();
             }
-            return PConfig.TextSub.ToBrush();
+            return PConfig.Foreground.AddLight(30).ToBrush();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

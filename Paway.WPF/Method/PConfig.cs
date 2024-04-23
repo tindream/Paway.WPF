@@ -68,29 +68,23 @@ namespace Paway.WPF
 
         #endregion
 
+        #region 虚拟键盘
+        /// <summary>
+        /// 虚拟键盘状态
+        /// </summary>
+        public static EnableType Keyboard { get; set; }
+
+        #endregion
+
         #region 主题
         /// <summary>
-        /// 主题字体大小变化事件
+        /// 颜色的 Alpha 通道默认值
         /// </summary>
-        public static event Action<double> FontSizeChanged;
-        private static double _fontSize = 15d;
+        internal const int Alpha = 200;
         /// <summary>
-        /// 主题字体大小
+        /// 颜色差量
         /// </summary>
-        public static double FontSize
-        {
-            get { return _fontSize; }
-            set
-            {
-                if (value < 1) return;
-                if (_fontSize != value)
-                {
-                    var old = _fontSize;
-                    _fontSize = value;
-                    FontSizeChanged?.Invoke(old);
-                }
-            }
-        }
+        internal const int Interval = 40;
 
         /// <summary>
         /// 主题文本字体变化事件
@@ -110,6 +104,29 @@ namespace Paway.WPF
                     var old = _fontFamily;
                     _fontFamily = value;
                     FontFamilyChanged?.Invoke(old);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 主题字体大小变化事件
+        /// </summary>
+        public static event Action<double> FontSizeChanged;
+        private static double _fontSize = 15d;
+        /// <summary>
+        /// 主题字体大小
+        /// </summary>
+        public static double FontSize
+        {
+            get { return _fontSize; }
+            set
+            {
+                if (value < 1) return;
+                if (_fontSize != value)
+                {
+                    var old = _fontSize;
+                    _fontSize = value;
+                    FontSizeChanged?.Invoke(old);
                 }
             }
         }
@@ -137,83 +154,10 @@ namespace Paway.WPF
         }
 
         /// <summary>
-        /// 虚拟键盘状态
-        /// </summary>
-        public static EnableType Keyboard { get; set; }
-
-        /// <summary>
-        /// 颜色的 Alpha 通道默认值
-        /// </summary>
-        internal const int Alpha = 200;
-        /// <summary>
-        /// 颜色差量
-        /// </summary>
-        internal const int Interval = 40;
-
-        /// <summary>
-        /// 主题深色
-        /// </summary>
-        public static Color High { get; private set; } = Color.AddLight(-90);
-
-        /// <summary>
-        /// 成功色
-        /// </summary>
-        public static Color Success { get; set; } = Color.FromArgb(255, 45, 184, 77);
-        /// <summary>
-        /// 警告色
-        /// </summary>
-        public static Color Warn { get; set; } = Color.FromArgb(255, 255, 153, 0);
-        /// <summary>
-        /// 错误色
-        /// </summary>
-        public static Color Error { get; set; } = Color.FromArgb(255, 248, 51, 30);
-
-        /// <summary>
-        /// 文本
-        /// <para>34</para>
-        /// </summary>
-        public static Color TextColor { get; private set; } = Color.FromArgb(255, 35, 32, 25);
-        /// <summary>
-        /// 文本(二级浅色)
-        /// <para>68</para>
-        /// <para>Light:30</para>
-        /// </summary>
-        public static Color TextSub { get; private set; } = Color.FromArgb(255, 61, 65, 69);
-        /// <summary>
-        /// 文本(三级浅色)
-        /// <para>119</para>
-        /// <para>Light:80</para>
-        /// </summary>
-        public static Color TextLight { get; private set; } = Color.FromArgb(255, 111, 118, 125);
-
-        /// <summary>
-        /// 浅色(一级)
-        /// <para>220</para>
-        /// <para>Light:180</para>
-        /// </summary>
-        public static Color Border { get; private set; } = Color.FromArgb(255, 220, 223, 230);
-        /// <summary>
-        /// 浅色(二级)
-        /// <para>228</para>
-        /// <para>Light:190</para>
-        /// </summary>
-        public static Color BorderSub { get; private set; } = Color.FromArgb(255, 228, 231, 237);
-        /// <summary>
-        /// 浅色
-        /// <para>242</para>
-        /// <para>Light:200</para>
-        /// </summary>
-        public static Color Light { get; private set; } = Color.FromArgb(255, 242, 246, 252);
-
-        /// <summary>
         /// 主题前景色事件
         /// </summary>
         public static event Action<Color> ForegroundChanged;
-        private static Color _foreground = TextColor;
-        /// <summary>
-        /// 前景色
-        /// </summary>
-        public static ThemeForeground ForegroundBrush = new ThemeForeground(TextColor);
+        private static Color _foreground = Color.FromArgb(255, 35, 32, 25);
         /// <summary>
         /// 前景色
         /// </summary>
@@ -226,7 +170,6 @@ namespace Paway.WPF
                 {
                     var old = _foreground;
                     _foreground = value;
-                    ForegroundBrush.Value = value.ToBrush();
                     ForegroundChanged?.Invoke(old);
                 }
             }
@@ -236,7 +179,7 @@ namespace Paway.WPF
         /// 主题背景色事件
         /// </summary>
         public static event Action<Color> BackgroundChanged;
-        private static Color background = Color.FromRgb((byte)(255 - TextColor.R), (byte)(255 - TextColor.G), (byte)(255 - TextColor.B));
+        private static Color background = Color.FromRgb((byte)(255 - _foreground.R), (byte)(255 - _foreground.G), (byte)(255 - _foreground.B));
         /// <summary>
         /// 背景色
         /// </summary>
@@ -253,6 +196,19 @@ namespace Paway.WPF
                 }
             }
         }
+
+        /// <summary>
+        /// 成功色
+        /// </summary>
+        public static Color Success { get; set; } = Color.FromArgb(255, 45, 184, 77);
+        /// <summary>
+        /// 警告色
+        /// </summary>
+        public static Color Warn { get; set; } = Color.FromArgb(255, 255, 153, 0);
+        /// <summary>
+        /// 错误色
+        /// </summary>
+        public static Color Error { get; set; } = Color.FromArgb(255, 248, 51, 30);
 
         #endregion
     }

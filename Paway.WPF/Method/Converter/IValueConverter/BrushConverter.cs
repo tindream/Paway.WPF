@@ -39,9 +39,11 @@ namespace Paway.WPF
         {
             if (value is SolidColorBrush brush)
             {
-                var light = parameter.ToInt();
-                if (light == 0) light = 30;
-                return brush.Color.AddLight(light).ToBrush();
+                var dLight = parameter.ToDouble();
+                if (dLight > 0 && dLight < 1) return brush.Color.AddLight(dLight).ToBrush();
+                var iLight = parameter.ToInt();
+                if (iLight == 0) iLight = 30;
+                return brush.Color.AddLight(iLight).ToBrush();
             }
             return value;
         }

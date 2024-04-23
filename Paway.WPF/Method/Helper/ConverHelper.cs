@@ -216,19 +216,13 @@ namespace Paway.WPF
             switch (type)
             {
                 case ColorType.Color: return PConfig.Color;
-                case ColorType.High: return PConfig.High;
+                case ColorType.High: return PConfig.Color.AddLight(-90);
+                case ColorType.Foreground: return PConfig.Foreground;
+                case ColorType.Background: return PConfig.Background;
 
                 case ColorType.Success: return PConfig.Success;
                 case ColorType.Warn: return PConfig.Warn;
                 case ColorType.Error: return PConfig.Error;
-
-                case ColorType.Text: return PConfig.TextColor;
-                case ColorType.TextSub: return PConfig.TextSub;
-                case ColorType.TextLight: return PConfig.TextLight;
-
-                case ColorType.Border: return PConfig.Border;
-                case ColorType.BorderSub: return PConfig.BorderSub;
-                case ColorType.Light: return PConfig.Light;
 
                 default: return Colors.Transparent;
             }

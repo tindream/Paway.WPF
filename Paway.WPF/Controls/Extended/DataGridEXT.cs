@@ -36,7 +36,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty HeaderBrushProperty =
             DependencyProperty.RegisterAttached(nameof(HeaderBrush), typeof(BrushEXT), typeof(DataGridEXT),
-                new PropertyMetadata(new BrushEXT() { Normal = new ThemeForeground(PMethod.AlphaColor(200, PConfig.Light)) }));
+                new PropertyMetadata(new BrushEXT() { Normal = new ThemeForeground(PMethod.AlphaColor(200, PConfig.Background), 15) }));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ICustomColumnHeaderProperty =

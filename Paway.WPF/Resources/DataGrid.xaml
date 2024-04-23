@@ -13,9 +13,7 @@
     <local:ContentTextConverter x:Key="contentTextConverter" />
 
     <Style TargetType="{x:Type DataGridCell}">
-        <!--<Setter Property="Background" Value="White" />-->
         <Setter Property="BorderThickness" Value="0" />
-        <!--<Setter Property="Opacity" Value="1" />-->
         <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content.Parent, Converter={StaticResource contentTextConverter}}"/>
         <Style.Triggers >
             <Trigger Property="IsSelected" Value="True">
@@ -147,7 +145,7 @@
         <!--标题-->
         <Setter Property="RowHeaderWidth" Value="0"/>
         <!--外观-->
-        <Setter Property="Background" Value="#FCFCFC"/>
+        <Setter Property="Background" Value="Transparent"/>
         <!--由ElementStyle样式转换-->
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <!--网格线-->
@@ -170,9 +168,9 @@
         <!--自动列宽-->
         <!--<Setter Property="ColumnWidth" Value="*"/>-->
         <!--行-->
+        <Setter Property="RowBackground" Value="Transparent"/>
         <!--隔行换色-->
-        <!--<Setter Property="RowBackground" Value="Red"/>-->
-        <Setter Property="AlternatingRowBackground" Value="#F5F5F5"/>
+        <Setter Property="AlternatingRowBackground" Value="{StaticResource ThemeBackgroundLight}"/>
         <Setter Property="AlternationCount" Value="2"/>
         <!--单行选择-->
         <Setter Property="SelectionMode" Value="Single"/>

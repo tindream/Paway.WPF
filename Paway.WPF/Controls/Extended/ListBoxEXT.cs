@@ -29,7 +29,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemForegroundProperty =
             DependencyProperty.RegisterAttached(nameof(ItemForeground), typeof(BrushEXT), typeof(ListBoxEXT),
-            new PropertyMetadata(new BrushEXT(null, PConfig.TextColor, Colors.White)));
+            new PropertyMetadata(new BrushEXT(null, PConfig.Foreground, Colors.White)));
 
         #endregion
 

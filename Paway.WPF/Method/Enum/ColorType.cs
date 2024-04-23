@@ -20,6 +20,14 @@ namespace Paway.WPF
         /// 主题深色
         /// </summary>
         High,
+        /// <summary>
+        /// 前景色
+        /// </summary>
+        Foreground,
+        /// <summary>
+        /// 背景色
+        /// </summary>
+        Background,
 
         /// <summary>
         /// 成功
@@ -33,42 +41,5 @@ namespace Paway.WPF
         /// 错误
         /// </summary>
         Error,
-
-        /// <summary>
-        /// 文本
-        /// <para>34</para>
-        /// </summary>
-        Text,
-        /// <summary>
-        /// 文本(二级浅色)
-        /// <para>68</para>
-        /// <para>Light:30</para>
-        /// </summary>
-        TextSub,
-        /// <summary>
-        /// 文本(三级浅色)
-        /// <para>119</para>
-        /// <para>Light:80</para>
-        /// </summary>
-        TextLight,
-
-        /// <summary>
-        /// 浅色(一级)
-        /// <para>220</para>
-        /// <para>Light:180</para>
-        /// </summary>
-        Border,
-        /// <summary>
-        /// 浅色(二级)
-        /// <para>228</para>
-        /// <para>Light:190</para>
-        /// </summary>
-        BorderSub,
-        /// <summary>
-        /// 浅色
-        /// <para>242</para>
-        /// <para>Light:200</para>
-        /// </summary>
-        Light,
     }
 }

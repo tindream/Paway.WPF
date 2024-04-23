@@ -76,7 +76,6 @@
 
                 <Button Background="{StaticResource ThemeColor}" BorderThickness="0" Content="主题颜色" Height="32" Width="100" Foreground="White"/>
                 <Button Background="{StaticResource ThemeColorMouse}" BorderThickness="0" Content="主题颜色(浅)" Height="32" Width="100" Foreground="White"/>
-
                 <Button Background="{StaticResource ThemeLight}" BorderThickness="0" Content="主题浅色" Height="32" Width="100" Foreground="{StaticResource ThemeForeground}"/>
                 <Button Background="{StaticResource ThemeHigh}" BorderThickness="0" Content="主题深色" Height="32" Width="100" Foreground="White"/>
 
@@ -106,7 +105,7 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ComboQuery>
-                <ComboTime Background="White"/>
+                <ComboTime/>
                 <TextBoxEXT Name="tb" Icon="Images/close.png" IAnimation="2" BorderThickness="0,0,0,1" Radius="0" MaxLength="4"
                             HorizontalContentAlignment="Center">
                     <Binding Path="Value">
@@ -133,7 +132,7 @@
                     <ButtonEXT Name="btn" Grid.Column="1"
                              Content="{FontImage Type=Adjust}" Click="Commit_Click" 
                              CommandParameter="{Binding ElementName=btn}"/>
-                    <Badge Name="badge" Grid.Column="1" IsWaving="True" HorizontalAlignment="Right" Text="1" Background="Red" VerticalAlignment="Top" Height="20" Margin="-6"/>
+                    <Badge Name="badge" Grid.Column="1" IsWaving="True" HorizontalAlignment="Right" Text="1" Background="{StaticResource Error}" VerticalAlignment="Top" Height="20" Margin="-6"/>
                 </Grid>
 
             </StackPanel>

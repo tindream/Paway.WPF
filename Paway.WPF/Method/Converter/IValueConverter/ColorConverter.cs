@@ -38,9 +38,11 @@ namespace Paway.WPF
         {
             if (value is Color color)
             {
-                var light = parameter.ToInt();
-                if (light == 0) light = 30;
-                return color.AddLight(light);
+                var dLight = parameter.ToDouble();
+                if (dLight > 0 && dLight < 1) return color.AddLight(dLight);
+                var iLight = parameter.ToInt();
+                if (iLight == 0) iLight = 30;
+                return color.AddLight(iLight);
             }
             return value;
         }

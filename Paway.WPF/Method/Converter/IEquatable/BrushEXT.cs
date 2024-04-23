@@ -20,7 +20,7 @@ namespace Paway.WPF
     [TypeConverter(typeof(BrushEXTConverter))]
     public class BrushEXT : BaseModelInfo, IEquatable<BrushEXT>
     {
-        private ThemeForeground normal = PConfig.ForegroundBrush;
+        private ThemeForeground normal = new ThemeForeground(PConfig.Foreground);
         /// <summary>
         /// 默认的颜色No
         /// <para>默认值：LightGray</para>
@@ -72,7 +72,6 @@ namespace Paway.WPF
         /// 颜色Alpha值变量
         /// </summary>
         public int Alpha { get; set; } = PConfig.Interval;
-        internal bool IHigh { get; set; }
 
         /// <summary>
         /// </summary>
@@ -94,14 +93,14 @@ namespace Paway.WPF
             if (this.Normal.Value is SolidColorBrush normal && normal.Color.R == obj.R && normal.Color.G == obj.G && normal.Color.B == obj.B)
             {
                 if (normal.Color != Colors.Transparent && normal.Color != Colors.LightGray && normal.Color != Colors.DarkGray &&
-                    normal.Color != Colors.White && normal.Color != PConfig.TextColor)
+                    normal.Color != Colors.White && normal.Color != PConfig.Foreground)
                 {
                     this.Normal = new ThemeForeground(PMethod.ThemeColor(normal.Color.A));
                 }
             }
             if (this.Mouse is SolidColorBrush mouse && mouse.Color.R == obj.R && mouse.Color.G == obj.G && mouse.Color.B == obj.B)
             {
-                if (mouse.Color != Colors.Transparent && mouse.Color != Colors.White && mouse.Color != PConfig.TextColor)
+                if (mouse.Color != Colors.Transparent && mouse.Color != Colors.White && mouse.Color != PConfig.Foreground)
                 {
                     this.Mouse = PMethod.ThemeColor(mouse.Color.A).ToBrush();
                 }
@@ -113,27 +112,6 @@ namespace Paway.WPF
                     this.Pressed = PMethod.ThemeColor(pressed.Color.A).ToBrush();
                 }
             }
-            High();
-        }
-        /// <summary>
-        /// 主题深色
-        /// </summary>
-        private void High()
-        {
-            if (IHigh)
-            {
-                this.Normal = new ThemeForeground(PConfig.Background.AddLight(-30));
-                this.Mouse = PConfig.Color.AddLight(0.96).ToBrush();
-                this.Pressed = PConfig.Color.AddLight(-90).ToBrush();
-            }
-        }
-        /// <summary>
-        /// 主题背景
-        /// </summary>
-        public BrushEXT(bool iHigh) : this()
-        {
-            this.IHigh = iHigh;
-            High();
         }
         /// <summary>
         /// 主题色：设置所有颜色，根据Alpha自动设置
@@ -152,7 +130,7 @@ namespace Paway.WPF
 
             if (normal != null) Normal = new ThemeForeground(normal.Value);
             else if (value != null) Normal = value.Normal;
-            else Normal = new ThemeForeground(PConfig.TextColor);
+            else Normal = new ThemeForeground(PConfig.Foreground);
             if (light != 0) Normal.Light = light;
 
             if (mouse != null) Mouse = mouse.Value.ToBrush();

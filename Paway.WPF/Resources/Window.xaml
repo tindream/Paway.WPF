@@ -122,7 +122,7 @@
     </Style>
 
     <Style TargetType="{x:Type local:WindowEXT}" BasedOn="{StaticResource Config}">
-        <Setter Property="Background" Value="{StaticResource ThemeBackgroundLight}" />
+        <Setter Property="Background" Value="{Binding Source={StaticResource ThemeBackgroundLight}, Converter={StaticResource brushLightConverter}, ConverterParameter=5}" />
         <Setter Property="BorderBrush" Value="{StaticResource ThemeHigh}" />
         <Setter Property="BorderThickness" Value="0.8" />
         <Setter Property="IsTabStop" Value="False" />

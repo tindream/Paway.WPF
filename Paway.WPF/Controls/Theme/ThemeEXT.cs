@@ -130,20 +130,9 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ThemeEXT),
                 new PropertyMetadata(new BrushEXT(PConfig.Alpha)));
         /// <summary>
-        /// </summary>
-        public static readonly DependencyProperty HighBrushProperty =
-            DependencyProperty.RegisterAttached(nameof(HighBrush), typeof(BrushEXT), typeof(ThemeEXT),
-                new PropertyMetadata(new BrushEXT(true)));
-
-        /// <summary>
         /// 项颜色(禁止个性设置，通过主题色更新)
         /// </summary>
         public BrushEXT ItemBrush { get; set; }
-
-        /// <summary>
-        /// 主题深色(禁止个性设置，通过主题色更新)
-        /// </summary>
-        public BrushEXT HighBrush { get; set; }
 
         #endregion
     }
