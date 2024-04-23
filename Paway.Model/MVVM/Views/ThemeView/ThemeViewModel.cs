@@ -59,7 +59,7 @@ namespace Paway.Model
         {
             if (listView1.SelectedItem is ListBoxItemEXT selectedItem)
             {
-                this.Color = (Color)ColorConverter.ConvertFromString(selectedItem.Tag.ToStrings());
+                this.Color = selectedItem.Tag.ToStrings().ToColor();
                 PConfig.Color = this.Color;
             }
         }

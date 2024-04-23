@@ -238,7 +238,7 @@ namespace Paway.WPF
             {
                 return PMethod.ThemeColor(alpha);
             }
-            return (Color)ColorConverter.ConvertFromString(str);
+            return str.ToColor();
         }
         /// <summary>
         /// </summary>

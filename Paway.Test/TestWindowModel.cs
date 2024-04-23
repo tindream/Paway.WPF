@@ -270,7 +270,7 @@ namespace Paway.Test
             var piList = typeof(Colors).Properties(Config.FlagsAll);
             for (var i = 0; i < piList.Count; i++)
             {
-                var color = (Color)ColorConverter.ConvertFromString(piList[i].Name);
+                var color = piList[i].Name.ToColor();
                 var info = new ColorInfo { Id = i, Name = piList[i].Name, Color = color };
                 ColorList.Add(info);
                 if (piList[i].Name == nameof(Colors.White)) this.Color = info;

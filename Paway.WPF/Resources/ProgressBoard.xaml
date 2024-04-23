@@ -16,7 +16,7 @@
                 <!--控件模板-->
                 <ControlTemplate TargetType="{x:Type local:ProgressBoard}" >
                     <Grid>
-                        <Ellipse Stroke="{StaticResource Light}" StrokeThickness="10" Margin="6"  Fill="{TemplateBinding Background}"/>
+                        <Ellipse Stroke="{StaticResource ThemeBackgroundLight}" StrokeThickness="10" Margin="6"  Fill="{TemplateBinding Background}"/>
                         <Path Margin="6"
                               StrokeThickness="10"
                               StrokeStartLineCap="Round"
@@ -24,7 +24,7 @@
                               RenderTransformOrigin="0.5,0.5">
                             <Path.Stroke>
                                 <LinearGradientBrush EndPoint="1,0" StartPoint="0,0.4">
-                                    <GradientStop Offset="0" Color="{Binding Source={StaticResource Light}, Converter={StaticResource brushToColorConverter}}" />
+                                    <GradientStop Offset="0" Color="{Binding Source={StaticResource ThemeBackgroundLight}, Converter={StaticResource brushToColorConverter}}" />
                                     <GradientStop Offset="1" Color="Gray" />
                                 </LinearGradientBrush>
                             </Path.Stroke>

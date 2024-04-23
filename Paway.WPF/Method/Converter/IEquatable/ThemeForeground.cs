@@ -46,6 +46,7 @@ namespace Paway.WPF
         /// </summary>
         public ThemeForeground()
         {
+            PConfig.BackgroundChanged += Config_BackgroundChanged;
             PConfig.ForegroundChanged += Config_ForegroundChanged;
         }
         private void Config_ForegroundChanged(Color obj)
@@ -53,6 +54,13 @@ namespace Paway.WPF
             if (this.Value is SolidColorBrush value && value.Color.R == obj.R && value.Color.G == obj.G && value.Color.B == obj.B)
             {
                 this.Value = PConfig.Foreground.ToBrush();
+            }
+        }
+        private void Config_BackgroundChanged(Color obj)
+        {
+            if (this.Value is SolidColorBrush value && value.Color.R == obj.R && value.Color.G == obj.G && value.Color.B == obj.B)
+            {
+                this.Value = PConfig.Background.ToBrush();
             }
         }
         /// <summary>

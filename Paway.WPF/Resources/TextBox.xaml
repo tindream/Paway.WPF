@@ -115,7 +115,7 @@
                             <Setter Property="Visibility" TargetName="tbWater" Value="Visible"/>
                         </Trigger>
                         <Trigger Property="IsReadOnly" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource Light}"/>
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource ThemeBackgroundLight}"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="BorderBrush" TargetName="border" 

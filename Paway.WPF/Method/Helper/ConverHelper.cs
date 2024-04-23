@@ -85,7 +85,7 @@ namespace Paway.WPF
         {
             var result = RGBToHSL(color.R / 255.0, color.G / 255.0, color.B / 255.0);
             var l = result[2] + value * 1.0 / 240;
-            return HSLToRGB(result[0], result[1], l);
+            return HSLToRGB(color.A, result[0], result[1], l);
         }
         /// <summary>
         /// 颜色转换(Mult)
@@ -93,13 +93,13 @@ namespace Paway.WPF
         public static Color AddLight(this Color color, double value)
         {
             var result = RGBToHSL(color.R / 255.0, color.G / 255.0, color.B / 255.0);
-            return HSLToRGB(result[0], result[1], value);
+            return HSLToRGB(color.A, result[0], result[1], value);
         }
         /// <summary>
         /// RGB空间到HSL空间的转换
         /// 色调-饱和度-亮度(HSB) 转 Color
         /// </summary>
-        private static Color HSLToRGB(double h, double s, double l)
+        private static Color HSLToRGB(byte alpha, double h, double s, double l)
         {
             if (l < 0) l = 0;
             if (l > 1) l = 1;
@@ -126,7 +126,7 @@ namespace Paway.WPF
             var r = (byte)R.ToInt();
             var g = (byte)G.ToInt();
             var b = (byte)B.ToInt();
-            return System.Windows.Media.Color.FromArgb(255, r, g, b);
+            return System.Windows.Media.Color.FromArgb(alpha, r, g, b);
         }
         private static double Hue2RGB(double v1, double v2, double vH)
         {

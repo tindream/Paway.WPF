@@ -14,7 +14,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Border BorderThickness="{TemplateBinding BorderThickness}"
-                            BorderBrush="{StaticResource Light}"
+                            BorderBrush="{StaticResource ThemeBackgroundLight}"
                             Padding="0,4"
                             CornerRadius="{Binding Radius, RelativeSource={RelativeSource AncestorType={x:Type local:ExpanderEXT}}, Converter={StaticResource lessRadiusConverter}}">
                         <Grid Background="{TemplateBinding Background}">
@@ -90,7 +90,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Border BorderThickness="{TemplateBinding BorderThickness}"
-                            BorderBrush="{StaticResource Light}"
+                            BorderBrush="{StaticResource ThemeBackgroundLight}"
                             Padding="0,4"
                             CornerRadius="{Binding Radius, RelativeSource={RelativeSource AncestorType={x:Type local:ExpanderEXT}}, Converter={StaticResource lessRadiusConverter}}">
                         <Grid Background="{TemplateBinding Background}">
@@ -169,7 +169,7 @@
                             <DockPanel x:Name="PART_Root">
                                 <ToggleButton
                                 x:Name="HeaderSite"
-                                Background="{StaticResource Light}"
+                                Background="{StaticResource ThemeBackgroundLight}"
                                 MinWidth="0"
                                 MinHeight="0"
                                 FocusVisualStyle="{x:Null}"
@@ -321,7 +321,7 @@
                             <DockPanel Width="30" Name="dpAngle" Visibility="Collapsed">
                                 <ToggleButton
                                 x:Name="HeaderSiteAngle"
-                                Background="{StaticResource Light}"
+                                Background="{StaticResource ThemeBackgroundLight}"
                                 MinWidth="0"
                                 MinHeight="0"
                                 FocusVisualStyle="{x:Null}"

@@ -55,7 +55,7 @@
                                 <VisualState x:Name="Active"/>
                                 <VisualState x:Name="Inactive">
                                     <Storyboard>
-                                        <ColorAnimation Duration="0" To="{Binding Source={StaticResource TextLight}, Converter={StaticResource brushToColorConverter}}" Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="NormalText"/>
+                                        <ColorAnimation Duration="0" To="{Binding Source={StaticResource ThemeForegroundLight}, Converter={StaticResource brushToColorConverter}}" Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="NormalText"/>
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
@@ -96,7 +96,7 @@
                                           Content="{TemplateBinding Content}" 
                                           ContentTemplate="{TemplateBinding ContentTemplate}" 
                                           ContentStringFormat="{TemplateBinding ContentStringFormat}" 
-                                          TextElement.Foreground="{StaticResource TextSub}" 
+                                          TextElement.Foreground="{StaticResource ThemeForegroundSub}" 
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         <Border x:Name="CalendarButtonFocusVisual" IsHitTestVisible="False" CornerRadius="80" 
@@ -192,7 +192,7 @@
                                 <VisualState x:Name="Active"/>
                                 <VisualState x:Name="Inactive">
                                     <Storyboard>
-                                        <ColorAnimation Duration="0" To="{Binding Source={StaticResource TextLight}, Converter={StaticResource brushToColorConverter}}" Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="NormalText"/>
+                                        <ColorAnimation Duration="0" To="{Binding Source={StaticResource ThemeForegroundLight}, Converter={StaticResource brushToColorConverter}}" Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="NormalText"/>
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
@@ -241,7 +241,7 @@
                         </ContentPresenter>
                         <Path x:Name="Blackout" 
                               Data="M8.1772461,11.029181L10.433105,11.029181 11.700684,12.801641 12.973633,11.029181 15.191895,11.029181 12.844727,13.999395 15.21875,17.060919 12.962891,17.060919 11.673828,15.256231 10.352539,17.060919 8.1396484,17.060919 10.519043,14.042364z" 
-                              Fill="{StaticResource Text}" HorizontalAlignment="Stretch" Margin="3" Opacity="0" RenderTransformOrigin="0.5,0.5" Stretch="Fill" VerticalAlignment="Stretch"/>
+                              Fill="{StaticResource ThemeForeground}" HorizontalAlignment="Stretch" Margin="3" Opacity="0" RenderTransformOrigin="0.5,0.5" Stretch="Fill" VerticalAlignment="Stretch"/>
                         <Border x:Name="DayButtonFocusVisual" IsHitTestVisible="False" CornerRadius="22"  BorderThickness="0" Visibility="Collapsed"/>
                     </Grid>
                 </ControlTemplate>
@@ -257,7 +257,7 @@
                     <ControlTemplate.Resources>
                         <!--星期样式-->
                         <DataTemplate x:Key="{ComponentResourceKey ResourceId=DayTitleTemplate, TypeInTargetAssembly={x:Type CalendarItem}}">
-                            <TextBlock x:Name="TxtDayTitle" Foreground="{StaticResource TextSub}"
+                            <TextBlock x:Name="TxtDayTitle" Foreground="{StaticResource ThemeForegroundSub}"
                                        FontSize="{Binding Path=(local:ThemeEXT.FontSize).Value, RelativeSource={RelativeSource Self}, Converter={StaticResource valueMultiConverter}, ConverterParameter=0.6}"  
                                        HorizontalAlignment="Center" Margin="0,6" Text="{Binding}"/>
                         </DataTemplate>
@@ -300,7 +300,7 @@
                                                 <Rectangle Fill="#11E5EBF1" Opacity="1" Stretch="Fill"/>
                                                 <Grid>
                                                     <Path x:Name="path" Data="M288.75,232.25L288.75,240.625 283,236.625z" 
-                                                          Fill="{StaticResource TextSub}" HorizontalAlignment="Left" Height="10" Margin="14,-6,0,0" Stretch="Fill" VerticalAlignment="Center" Width="6"/>
+                                                          Fill="{StaticResource ThemeForegroundSub}" HorizontalAlignment="Left" Height="10" Margin="14,-6,0,0" Stretch="Fill" VerticalAlignment="Center" Width="6"/>
                                                 </Grid>
                                             </Grid>
                                         </ControlTemplate>
@@ -325,7 +325,7 @@
                                                 <Rectangle Fill="#11E5EBF1" Opacity="1" Stretch="Fill"/>
                                                 <Grid>
                                                     <Path x:Name="path" Data="M282.875,231.875L282.875,240.375 288.625,236z" 
-                                                          Fill="{StaticResource TextSub}" 
+                                                          Fill="{StaticResource ThemeForegroundSub}" 
                                                           HorizontalAlignment="Right" Height="10" Margin="0,-6,14,0" Stretch="Fill" VerticalAlignment="Center" Width="6"/>
                                                 </Grid>
                                             </Grid>
@@ -352,7 +352,7 @@
                                                                   Margin="1,4,1,9" 
                                                                   Content="{TemplateBinding Content}" 
                                                                   ContentTemplate="{TemplateBinding ContentTemplate}" 
-                                                                  TextElement.Foreground="{StaticResource TextSub}" 
+                                                                  TextElement.Foreground="{StaticResource ThemeForegroundSub}" 
                                                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                             </Grid>
@@ -392,7 +392,7 @@
                                                     <Rectangle Fill="#11E5EBF1" Opacity="1" Stretch="Fill"/>
                                                     <Grid>
                                                         <Path x:Name="path" Data="M288.75,232.25L288.75,240.625 283,236.625z" 
-                                                              Fill="{StaticResource TextSub}" HorizontalAlignment="Left" Height="10" Margin="14,-6,0,0" Stretch="Fill" 
+                                                              Fill="{StaticResource ThemeForegroundSub}" HorizontalAlignment="Left" Height="10" Margin="14,-6,0,0" Stretch="Fill" 
                                                               VerticalAlignment="Center" Width="6"/>
                                                     </Grid>
                                                 </Grid>
@@ -424,7 +424,7 @@
                                                                       Margin="1,4,1,9" 
                                                                       Content="{TemplateBinding Content}" 
                                                                       ContentTemplate="{TemplateBinding ContentTemplate}" 
-                                                                      TextElement.Foreground="{StaticResource TextSub}" 
+                                                                      TextElement.Foreground="{StaticResource ThemeForegroundSub}" 
                                                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                                 </Border>
@@ -455,7 +455,7 @@
                                                     <Rectangle Fill="#11E5EBF1" Opacity="1" Stretch="Fill"/>
                                                     <Grid>
                                                         <Path x:Name="path" Data="M282.875,231.875L282.875,240.375 288.625,236z" 
-                                                              Fill="{StaticResource TextSub}" HorizontalAlignment="Right" Height="10" Margin="0,-6,14,0" Stretch="Fill" 
+                                                              Fill="{StaticResource ThemeForegroundSub}" HorizontalAlignment="Right" Height="10" Margin="0,-6,14,0" Stretch="Fill" 
                                                               VerticalAlignment="Center" Width="6"/>
                                                     </Grid>
                                                 </Grid>

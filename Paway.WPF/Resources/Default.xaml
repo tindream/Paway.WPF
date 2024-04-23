@@ -4,7 +4,6 @@
                     xmlns:local="clr-namespace:Paway.WPF">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\Default\Color.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default\Converter.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default\Path.xaml" />
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default\Theme.xaml" />

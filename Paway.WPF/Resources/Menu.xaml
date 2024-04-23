@@ -183,7 +183,7 @@
                 <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeColorMouse}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeColorNormal}" />
+                <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeColor}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value="0.6"/>
@@ -220,7 +220,7 @@
                     <Path x:Name="Glyph"
                           Style="{StaticResource PathRight}" Width="12"
                           Margin="0"
-                          Stroke="{StaticResource Text}"/>
+                          Stroke="{StaticResource ThemeForeground}"/>
                 </Border>
                 <ContentPresenter ContentTemplate="{TemplateBinding HeaderTemplate}"
                                   Content="{TemplateBinding Header}"
@@ -239,7 +239,7 @@
                 <Path x:Name="RightArrow"
                       Style="{StaticResource PathTriangleRight}" StrokeThickness="0" Stretch="Fill" Width="4" Height="7"
                       Grid.Column="5"
-                      Fill="{StaticResource Text}"
+                      Fill="{StaticResource ThemeForeground}"
                       HorizontalAlignment="Left"
                       Margin="10,0,0,0" />
                 <Popup x:Name="PART_Popup"
@@ -295,7 +295,7 @@
             <Trigger Property="IsPressed" Value="True">
                 <!--会影响下级字体颜色-->
                 <!--<Setter Property="Foreground" Value="White" />-->
-                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ThemeColorNormal}" />
+                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ThemeColor}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value="0.6"/>
@@ -340,7 +340,7 @@
                     <Path x:Name="Glyph"
                           Style="{StaticResource PathRight}" Width="12"
                           Margin="0"
-                          Stroke="{StaticResource Text}" />
+                          Stroke="{StaticResource ThemeForeground}" />
                 </Border>
                 <ContentPresenter x:Name="menuHeaderContainer"
                                   ContentTemplate="{TemplateBinding HeaderTemplate}"
@@ -373,7 +373,7 @@
                 <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ThemeColorMouse}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ThemeColorNormal}" />
+                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ThemeColor}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value="0.6"/>
@@ -468,7 +468,7 @@
     </Style>
 
     <Style TargetType="{x:Type Separator}">
-        <Setter Property="Background" Value="{StaticResource ThemeBackgroundHigh}" />
+        <Setter Property="Background" Value="{StaticResource ThemeForegroundLight}" />
         <Setter Property="Margin" Value="5,6" />
         <Setter Property="Focusable" Value="false" />
         <Setter Property="Template">

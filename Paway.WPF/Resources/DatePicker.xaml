@@ -45,7 +45,7 @@
                             </Grid.ColumnDefinitions>
                             <Button Name="PART_Button"
                                     Grid.Column="1"
-                                    Foreground="{StaticResource Text}"
+                                    Foreground="{StaticResource ThemeForeground}"
                                     Background="White" 
                                     Width="20"
                                     Margin="5,0,2,0"

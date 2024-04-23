@@ -15,59 +15,11 @@ namespace Paway.WPF
     /// </summary>
     public class ThemeEXT
     {
-        #region 依赖属性
-        /// <summary>
-        /// </summary>
-        public static readonly DependencyProperty FontSizeProperty =
-            DependencyProperty.RegisterAttached(nameof(FontSize), typeof(ThemeFontSize), typeof(ThemeEXT), new PropertyMetadata(new ThemeFontSize(PConfig.FontSize)));
+        #region 主题字体
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty FontFamilyProperty =
             DependencyProperty.RegisterAttached(nameof(FontFamily), typeof(ThemeFontFamily), typeof(ThemeEXT), new PropertyMetadata(new ThemeFontFamily(PConfig.FontFamily)));
-        /// <summary>
-        /// </summary>
-        public static readonly DependencyProperty ItemBrushProperty =
-            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ThemeEXT),
-                new PropertyMetadata(new BrushEXT(PConfig.Alpha)));
-        /// <summary>
-        /// </summary>
-        public static readonly DependencyProperty HighBrushProperty =
-            DependencyProperty.RegisterAttached(nameof(HighBrush), typeof(BrushEXT), typeof(ThemeEXT),
-                new PropertyMetadata(new BrushEXT(true)));
-        /// <summary>
-        /// </summary>
-        public static readonly DependencyProperty BackgroundProperty =
-            DependencyProperty.RegisterAttached(nameof(Background), typeof(ThemeBackground), typeof(ThemeEXT),
-                new PropertyMetadata(new ThemeBackground(PConfig.Background)));
-        /// <summary>
-        /// </summary>
-        public static readonly DependencyProperty ForegroundProperty =
-            DependencyProperty.RegisterAttached(nameof(Foreground), typeof(ThemeForeground), typeof(ThemeEXT),
-                new PropertyMetadata(new ThemeForeground(PConfig.Foreground)));
-
-        #endregion
-
-        #region 扩展
-        /// <summary>
-        /// 字体大小
-        /// <para>默认值：主题字体大小</para>
-        /// </summary>
-        private ThemeFontSize FontSize { get; set; }
-        /// <summary>
-        /// get字体大小
-        /// </summary>
-        public static ThemeFontSize GetFontSize(DependencyObject obj)
-        {
-            return (ThemeFontSize)obj.GetValue(FontSizeProperty);
-        }
-        /// <summary>
-        /// set字体大小
-        /// </summary>
-        public static void SetFontSize(DependencyObject obj, ThemeFontSize value)
-        {
-            obj.SetValue(FontSizeProperty, value);
-        }
-
         /// <summary>
         /// 文本字体
         /// <para>默认值：主题文本字体</para>
@@ -88,35 +40,41 @@ namespace Paway.WPF
             obj.SetValue(FontFamilyProperty, value);
         }
 
-        /// <summary>
-        /// 项颜色(禁止个性设置，通过主题色更新)
-        /// </summary>
-        public BrushEXT ItemBrush { get; set; }
+        #endregion
 
+        #region 主题字体大小
         /// <summary>
-        /// 主题深色(禁止个性设置，通过主题色更新)
         /// </summary>
-        public BrushEXT HighBrush { get; set; }
-
+        public static readonly DependencyProperty FontSizeProperty =
+            DependencyProperty.RegisterAttached(nameof(FontSize), typeof(ThemeFontSize), typeof(ThemeEXT), new PropertyMetadata(new ThemeFontSize(PConfig.FontSize)));
         /// <summary>
-        /// 背景颜色
+        /// 字体大小
+        /// <para>默认值：主题字体大小</para>
         /// </summary>
-        private ThemeBackground Background { get; set; }
+        private ThemeFontSize FontSize { get; set; }
         /// <summary>
-        /// get背景颜色
+        /// get字体大小
         /// </summary>
-        public static ThemeBackground GetBackground(DependencyObject obj)
+        public static ThemeFontSize GetFontSize(DependencyObject obj)
         {
-            return (ThemeBackground)obj.GetValue(BackgroundProperty);
+            return (ThemeFontSize)obj.GetValue(FontSizeProperty);
         }
         /// <summary>
-        /// set背景颜色
+        /// set字体大小
         /// </summary>
-        public static void SetBackground(DependencyObject obj, ThemeBackground value)
+        public static void SetFontSize(DependencyObject obj, ThemeFontSize value)
         {
-            obj.SetValue(BackgroundProperty, value);
+            obj.SetValue(FontSizeProperty, value);
         }
 
+        #endregion
+
+        #region 主题前景色
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ForegroundProperty =
+            DependencyProperty.RegisterAttached(nameof(Foreground), typeof(ThemeForeground), typeof(ThemeEXT),
+                new PropertyMetadata(new ThemeForeground(PConfig.Foreground)));
         /// <summary>
         /// 前景颜色
         /// </summary>
@@ -135,6 +93,57 @@ namespace Paway.WPF
         {
             obj.SetValue(ForegroundProperty, value);
         }
+
+        #endregion
+
+        #region 主题背景色
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty BackgroundProperty =
+            DependencyProperty.RegisterAttached(nameof(Background), typeof(ThemeForeground), typeof(ThemeEXT),
+                new PropertyMetadata(new ThemeForeground(PConfig.Background)));
+        /// <summary>
+        /// 背景颜色
+        /// </summary>
+        private ThemeForeground Background { get; set; }
+        /// <summary>
+        /// get背景颜色
+        /// </summary>
+        public static ThemeForeground GetBackground(DependencyObject obj)
+        {
+            return (ThemeForeground)obj.GetValue(BackgroundProperty);
+        }
+        /// <summary>
+        /// set背景颜色
+        /// </summary>
+        public static void SetBackground(DependencyObject obj, ThemeForeground value)
+        {
+            obj.SetValue(BackgroundProperty, value);
+        }
+
+        #endregion
+
+        #region 主题颜色
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ItemBrushProperty =
+            DependencyProperty.RegisterAttached(nameof(ItemBrush), typeof(BrushEXT), typeof(ThemeEXT),
+                new PropertyMetadata(new BrushEXT(PConfig.Alpha)));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty HighBrushProperty =
+            DependencyProperty.RegisterAttached(nameof(HighBrush), typeof(BrushEXT), typeof(ThemeEXT),
+                new PropertyMetadata(new BrushEXT(true)));
+
+        /// <summary>
+        /// 项颜色(禁止个性设置，通过主题色更新)
+        /// </summary>
+        public BrushEXT ItemBrush { get; set; }
+
+        /// <summary>
+        /// 主题深色(禁止个性设置，通过主题色更新)
+        /// </summary>
+        public BrushEXT HighBrush { get; set; }
 
         #endregion
     }

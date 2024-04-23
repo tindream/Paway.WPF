@@ -131,30 +131,7 @@ namespace Paway.WPF
                 {
                     var old = _color;
                     _color = value;
-                    Background = _color.AddLight(0.96);
                     ColorChanged?.Invoke(old);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 主题背景色事件
-        /// </summary>
-        public static event Action<Color> BackgroundChanged;
-        private static Color background = _color.AddLight(0.96);
-        /// <summary>
-        /// 背景色
-        /// </summary>
-        public static Color Background
-        {
-            get { return background; }
-            set
-            {
-                if (background != value)
-                {
-                    var old = background;
-                    background = value;
-                    BackgroundChanged?.Invoke(old);
                 }
             }
         }
@@ -195,7 +172,7 @@ namespace Paway.WPF
         /// 文本
         /// <para>34</para>
         /// </summary>
-        public static Color TextColor { get; private set; } = Color.FromArgb(255, 31, 33, 35);
+        public static Color TextColor { get; private set; } = Color.FromArgb(255, 35, 32, 25);
         /// <summary>
         /// 文本(二级浅色)
         /// <para>68</para>
@@ -214,7 +191,7 @@ namespace Paway.WPF
         /// <para>220</para>
         /// <para>Light:180</para>
         /// </summary>
-        public static Color Border { get; private set; } = Color.FromArgb(255, 222, 224, 226);
+        public static Color Border { get; private set; } = Color.FromArgb(255, 220, 223, 230);
         /// <summary>
         /// 浅色(二级)
         /// <para>228</para>
@@ -251,6 +228,28 @@ namespace Paway.WPF
                     _foreground = value;
                     ForegroundBrush.Value = value.ToBrush();
                     ForegroundChanged?.Invoke(old);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 主题背景色事件
+        /// </summary>
+        public static event Action<Color> BackgroundChanged;
+        private static Color background = Color.FromRgb((byte)(255 - TextColor.R), (byte)(255 - TextColor.G), (byte)(255 - TextColor.B));
+        /// <summary>
+        /// 背景色
+        /// </summary>
+        public static Color Background
+        {
+            get { return background; }
+            set
+            {
+                if (background != value)
+                {
+                    var old = background;
+                    background = value;
+                    BackgroundChanged?.Invoke(old);
                 }
             }
         }

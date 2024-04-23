@@ -12,7 +12,7 @@
                   Height="12"
                   VerticalAlignment="Center"
                   HorizontalAlignment="Center"
-                  Fill="{StaticResource ThemeHigh}" />
+                  Fill="{StaticResource ThemeForeground}" />
     </DataTemplate>
     <DataTemplate x:Key="MaximizeBlack">
         <Path Data="M1,1  L1 ,11 L11,11 L11,1 z M0,0 L12,0 L12,12 L0,12 z"
@@ -20,7 +20,7 @@
               Height="12"
               VerticalAlignment="Center"
               HorizontalAlignment="Center"
-              Fill="{StaticResource ThemeHigh}"/>
+              Fill="{StaticResource ThemeForeground}"/>
     </DataTemplate>
     <DataTemplate x:Key="RestoreBlack">
         <Path Data="M1,3 L1,11 L9,11 L9,3 z M3,1 L3,2 L10,2 L10,9 L11,9 L11,1 z M2 ,0 L12,0 L12,10 L10,10 L10,12 L0,12 L0,2 L2 ,2 z"
@@ -28,11 +28,11 @@
               Height="12"
               VerticalAlignment="Center"
               HorizontalAlignment="Center"
-              Fill="{StaticResource ThemeHigh}"/>
+              Fill="{StaticResource ThemeForeground}"/>
     </DataTemplate>
     <DataTemplate x:Key="CloseBlack">
         <Path Style="{StaticResource PathClose}"
-              Fill="{StaticResource ThemeHigh}" />
+              Fill="{StaticResource ThemeForeground}" />
     </DataTemplate>
     <DataTemplate x:Key="CloseWhite">
         <Path Style="{StaticResource PathClose}" Fill="White" />
@@ -66,7 +66,7 @@
                                 <Setter.Value>
                                     <MultiBinding Converter="{StaticResource nullSelector}">
                                         <Binding Path="Background" RelativeSource="{RelativeSource TemplatedParent}"/>
-                                        <Binding Path="(local:ThemeEXT.ItemBrush).Normal.Result" RelativeSource="{RelativeSource Self}" />
+                                        <Binding Path="(local:ThemeEXT.ItemBrush).Mouse" RelativeSource="{RelativeSource Self}" />
                                     </MultiBinding>
                                 </Setter.Value>
                             </Setter>
@@ -76,7 +76,7 @@
                                 <Setter.Value>
                                     <MultiBinding Converter="{StaticResource nullSelector}">
                                         <Binding Path="Background" RelativeSource="{RelativeSource TemplatedParent}"/>
-                                        <Binding Path="(local:ThemeEXT.ItemBrush).Mouse" RelativeSource="{RelativeSource Self}" />
+                                        <Binding Path="(local:ThemeEXT.ItemBrush).Pressed" RelativeSource="{RelativeSource Self}" />
                                     </MultiBinding>
                                 </Setter.Value>
                             </Setter>
@@ -122,7 +122,7 @@
     </Style>
 
     <Style TargetType="{x:Type local:WindowEXT}" BasedOn="{StaticResource Config}">
-        <Setter Property="Background" Value="{StaticResource Light}" />
+        <Setter Property="Background" Value="{StaticResource ThemeBackgroundLight}" />
         <Setter Property="BorderBrush" Value="{StaticResource ThemeHigh}" />
         <Setter Property="BorderThickness" Value="0.8" />
         <Setter Property="IsTabStop" Value="False" />
@@ -156,13 +156,6 @@
                             <Grid x:Name="WindowTitlePanel"
                                   MinHeight="{Binding HeaderHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
                                   Margin="0,0,0,0">
-                                <Grid.Background>
-                                    <!--允许用户修改-->
-                                    <MultiBinding Converter="{StaticResource nullSelector}">
-                                        <Binding Path="(local:ThemeEXT.Background).Value" RelativeSource="{RelativeSource AncestorType={x:Type local:WindowEXT}}" />
-                                        <Binding Path="(local:ThemeEXT.Background).Value" RelativeSource="{RelativeSource Self}" />
-                                    </MultiBinding>
-                                </Grid.Background>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />

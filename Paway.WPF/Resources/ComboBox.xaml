@@ -10,7 +10,7 @@
     <local:NoLeftThicknessConverter x:Key="noLeftThicknessConverter"/>
 
     <LinearGradientBrush x:Key="backLine" EndPoint="0,1" StartPoint="0,0">
-        <GradientStop Color="{Binding Source={StaticResource Light}, Converter={StaticResource brushToColorConverter}}" Offset="0"/>
+        <GradientStop Color="{Binding Source={StaticResource ThemeBackgroundLight}, Converter={StaticResource brushToColorConverter}}" Offset="0"/>
         <GradientStop Color="#FFE5E5E5" Offset="1"/>
     </LinearGradientBrush>
     <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
