@@ -55,7 +55,8 @@
                                PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" 
                                Placement="Bottom"
                                PlacementTarget="{Binding ElementName=border}">
-                            <Border x:Name="DropDownBorder" BorderBrush="LightGray" BorderThickness="0">
+                            <Border x:Name="DropDownBorder" BorderBrush="LightGray" BorderThickness="0"
+                                    Background="{StaticResource ThemeBackgroundLight}">
                                 <local:CalendarEXT x:Name="PART_Calendar"
                                                    HasButton="True" HorizontalAlignment="Left" Margin="0,-3,0,-3"/>
                             </Border>

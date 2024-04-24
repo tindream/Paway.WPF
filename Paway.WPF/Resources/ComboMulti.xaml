@@ -90,10 +90,10 @@
                                Placement="Bottom"
                                PlacementTarget="{Binding ElementName=border}">
                             <Grid Width="{Binding ActualWidth, ElementName=border}" 
+                                  Background="{StaticResource ThemeBackgroundLight}"
                                   MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}" >
                                 <local:ListBoxEXT x:Name="PART_ListBox"
                                                   ItemBrush="{Binding ItemBrush, RelativeSource={RelativeSource TemplatedParent}}"
-                                                  Background="White"
                                          SelectionMode="Multiple" 
                                          BorderThickness="0"
                                          Margin="0,-1,0,0"

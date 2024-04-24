@@ -53,7 +53,7 @@
                                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                     </Border>
-                                    <Border Background="White" Opacity="0"/>
+                                    <Border Background="Transparent" Opacity="0"/>
                                 </Grid>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsSelected" Value="True">

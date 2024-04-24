@@ -63,9 +63,10 @@
                                PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" 
                                Placement="Bottom"
                                PlacementTarget="{Binding ElementName=border}">
-                            <Border x:Name="DropDownBorder" BorderBrush="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" 
+                            <Border x:Name="DropDownBorder" BorderBrush="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}"
+                                    Background="{StaticResource ThemeBackgroundLight}"
                                     BorderThickness="1,0,1,1" Padding="0">
-                                <local:DataGridEXT x:Name="PART_DataGrid" Background="White" 
+                                <local:DataGridEXT x:Name="PART_DataGrid" 
                                                    FontSize="{TemplateBinding FontSize}"
                                                    ColumnWidth="{Binding ColumnWidth, RelativeSource={RelativeSource TemplatedParent}}"
                                                    BorderThickness="0"

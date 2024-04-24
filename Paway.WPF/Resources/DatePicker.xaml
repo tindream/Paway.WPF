@@ -22,7 +22,6 @@
     <Style TargetType="{x:Type local:DatePickerEXT}" BasedOn="{StaticResource Config}">
         <Setter Property="FirstDayOfWeek" Value="Sunday"/>
         <Setter Property="CalendarStyle" Value="{StaticResource CalendarStyle}"/>
-        <Setter Property="Background" Value="White"/>
         <Setter Property="Margin" Value="2"/>
         <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="Template">

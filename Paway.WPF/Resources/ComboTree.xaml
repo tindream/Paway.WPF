@@ -70,8 +70,9 @@
                                Placement="Bottom"
                                PlacementTarget="{Binding ElementName=border}">
                             <Border x:Name="DropDownBorder" BorderBrush="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" 
+                                    Background="{StaticResource ThemeBackgroundLight}"
                                     BorderThickness="1,0,1,1" Padding="0">
-                                <local:TreeViewEXT x:Name="PART_TreeView" Background="White" 
+                                <local:TreeViewEXT x:Name="PART_TreeView"
                                                    FontSize="{TemplateBinding FontSize}"
                                                    Padding="{TemplateBinding Padding}"
                                                    BorderThickness="0"
@@ -88,7 +89,7 @@
                         <Trigger Property="IQuery" Value="true">
                             <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible" />
                             <Setter TargetName="ContentSite" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="border" Property="Background" Value="White" />
+                            <Setter TargetName="border" Property="Background" Value="Transparent" />
                             <Setter Property="IsTabStop" Value="False" />
                         </Trigger>
                         <DataTrigger Binding="{Binding ElementName=PART_EditableTextBox, Path=IsKeyboardFocused}" Value="True">

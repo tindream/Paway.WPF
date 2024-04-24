@@ -9,7 +9,6 @@
                 d:DesignWidth="800"
                 MinWidth="{Binding ActualHeight,ElementName=badge}"
                 x:Name="badge"
-                Foreground="White"
                 Focusable="False"
                 RenderTransformOrigin="0.5,0.5">
     <ContentControl.Resources>

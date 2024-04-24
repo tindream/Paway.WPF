@@ -8,7 +8,6 @@
            xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
            xmlns:ip="http://www.galasoft.ch/mvvmlight"
            mc:Ignorable="d"
-           Background="#FFF"
            DataContext="{Binding Test, Source={StaticResource Locator}}"
            Title="{Binding Text}" Height="470" Width="800" WindowStartupLocation="CenterScreen">
     <WindowEXT.FunctionBar>

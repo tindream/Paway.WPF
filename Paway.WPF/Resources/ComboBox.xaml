@@ -15,7 +15,7 @@
     </LinearGradientBrush>
     <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
         <Grid>
-            <Border Background="White" Opacity="0" Cursor="Hand"/>
+            <Border Background="Transparent" Opacity="0" Cursor="Hand"/>
             <Path x:Name="Arrow" Margin="9,0"
                   Style="{StaticResource PathTriangleDown}" Width="12" Height="6"
                   HorizontalAlignment="Right" StrokeThickness="0"
@@ -34,7 +34,7 @@
     </ControlTemplate>
     <ControlTemplate x:Key="ComboBoxToggleNone" TargetType="{x:Type ToggleButton}">
         <Grid>
-            <Border Background="White" Opacity="0" Cursor="Hand"/>
+            <Border Background="Transparent" Opacity="0" Cursor="Hand"/>
         </Grid>
     </ControlTemplate>
 
@@ -121,15 +121,11 @@
                                PopupAnimation="Slide">
                             <Grid MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}" 
                                   MinWidth="{Binding ActualWidth, ElementName=border}" x:Name="DropDown" 
-                                  Background="White">
+                                  Background="{StaticResource ThemeBackgroundLight}">
                                 <Border x:Name="DropDownBorder" BorderBrush="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" 
                                         BorderThickness="1" Padding="0"/>
-                                <!--<Border VerticalAlignment="Top" HorizontalAlignment="Left"
-                                        Height="1" Width="{Binding ActualWidth, ElementName=border, Converter={StaticResource valueAddConverter}, ConverterParameter=-2.5}"
-                                        Margin="1,0,1.5,0"
-                                        Background="White"/>-->
                                 <Line X1="1.5" X2="{Binding ActualWidth, ElementName=border, Converter={StaticResource valueAddConverter}, ConverterParameter=-1.5}" 
-                                      Y1="1" Y2="1" StrokeThickness="2" Stroke="White" RenderOptions.EdgeMode="Aliased" />
+                                      Y1="1" Y2="1" StrokeThickness="2" Stroke="Transparent" RenderOptions.EdgeMode="Aliased" />
                                 <ScrollViewer CanContentScroll="True"
                                               HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                               VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
@@ -147,7 +143,7 @@
                         </Trigger>
                         <Trigger Property="IsEditable" Value="true">
                             <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="border" Property="Background" Value="White" />
+                            <Setter TargetName="border" Property="Background" Value="Transparent" />
                         </Trigger>
                         <DataTrigger Binding="{Binding Icon, Converter={StaticResource isNotNull}, RelativeSource={RelativeSource Self}}" Value="True">
                             <Setter TargetName="icon" Property="Visibility" Value="Visible" />

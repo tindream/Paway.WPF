@@ -172,7 +172,7 @@
                     <ProgressBoard Value="35" Width="70"/>
                 </StackPanel>
                 <CalendarEXT/>
-                <RichTextBoxEXT x:Name="rt" IsReadOnly="True" Height="50" BorderThickness="0">
+                <RichTextBoxEXT x:Name="rt" IsReadOnly="True" Height="50" >
                     <FlowDocument>
                         <Paragraph>
                             <Run Text="追加内容" />

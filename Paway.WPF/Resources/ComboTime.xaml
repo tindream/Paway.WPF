@@ -54,6 +54,7 @@
                                Placement="Bottom"
                                PlacementTarget="{Binding ElementName=border}">
                             <Grid Width="{Binding ActualWidth, ElementName=border}" 
+                                  Background="{StaticResource ThemeBackgroundLight}"
                                   MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}" >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
@@ -65,7 +66,6 @@
                                                   ItemBrush="{Binding ItemBrush, RelativeSource={RelativeSource TemplatedParent}}"
                                                   Padding="{TemplateBinding Padding}"
                                                   BorderThickness="0,1,0,0"
-                                                  Background="White"
                                                   SelectedValue="{Binding Hour, RelativeSource={RelativeSource TemplatedParent}}"
                                                   ItemsSource="{local:IntList Count=24, Start=0}"
                                                   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
@@ -77,7 +77,6 @@
                                                   ItemBrush="{Binding ItemBrush, RelativeSource={RelativeSource TemplatedParent}}"
                                                   Padding="{TemplateBinding Padding}"
                                                   BorderThickness="1,1,1,0" Grid.Column="1"
-                                                  Background="White"
                                                   SelectedValue="{Binding Minute, RelativeSource={RelativeSource TemplatedParent}}"
                                                   ItemsSource="{local:IntList Count=60, Start=0}"
                                                   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
@@ -89,7 +88,6 @@
                                                   ItemBrush="{Binding ItemBrush, RelativeSource={RelativeSource TemplatedParent}}"
                                                   Padding="{TemplateBinding Padding}"
                                                   BorderThickness="0,1,0,0" Grid.Column="2"
-                                                  Background="White"
                                                   SelectedValue="{Binding Second, RelativeSource={RelativeSource TemplatedParent}}"
                                                   ItemsSource="{local:IntList Count=60, Start=0}"
                                                   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 

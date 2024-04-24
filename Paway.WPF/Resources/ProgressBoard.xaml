@@ -9,7 +9,6 @@
     <Style TargetType="{x:Type local:ProgressBoard}" BasedOn="{StaticResource Config}">
         <Setter Property="Margin" Value="2"/>
         <Setter Property="Maximum" Value="100"/>
-        <Setter Property="Background" Value="White"/>
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="Template">
             <Setter.Value>
