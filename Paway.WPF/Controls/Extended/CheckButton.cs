@@ -88,7 +88,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义文本颜色
-        /// <para>默认值：TextColor, White, White</para>
+        /// <para>默认值：主题前景, White, White</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义文本颜色")]

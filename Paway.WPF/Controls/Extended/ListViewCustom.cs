@@ -251,7 +251,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项外边框颜色
-        /// <para>默认值：null, 200, 240</para>
+        /// <para>默认值：LightGray, 200, 240</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义项外边框颜色")]
@@ -317,7 +317,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项文本字体颜色
-        /// <para>默认值：TextColor, White</para>
+        /// <para>默认值：主题前景, White</para>
         /// </summary>
         [Category("扩展.项文本")]
         [Description("自定义项文本字体颜色")]

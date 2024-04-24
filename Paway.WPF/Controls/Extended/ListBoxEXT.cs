@@ -58,7 +58,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 项字体颜色
-        /// <para>默认值：TextColor, TextColor, Cols.White</para>
+        /// <para>默认值：主题前景, 主题前景, Cols.White</para>
         /// </summary>
         [Category("扩展")]
         [Description("项字体颜色")]

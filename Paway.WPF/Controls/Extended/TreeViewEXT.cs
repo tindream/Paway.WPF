@@ -72,7 +72,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 项背景颜色
-        /// <para>默认值：null, 120, 200</para>
+        /// <para>默认值：主题前景, 120, 200</para>
         /// </summary>
         [Category("扩展")]
         [Description("项背景颜色")]
@@ -83,7 +83,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 项字体颜色
-        /// <para>默认值：TextColor, TextColor, White</para>
+        /// <para>默认值：主题前景, 主题前景, White</para>
         /// </summary>
         [Category("扩展")]
         [Description("项字体颜色")]

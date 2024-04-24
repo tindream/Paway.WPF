@@ -101,7 +101,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty BackgroundProperty =
             DependencyProperty.RegisterAttached(nameof(Background), typeof(ThemeForeground), typeof(ThemeEXT),
-                new PropertyMetadata(new ThemeForeground(PConfig.Background)));
+                new PropertyMetadata(new ThemeForeground(PConfig.Background, 0, true)));
         /// <summary>
         /// 背景颜色
         /// </summary>

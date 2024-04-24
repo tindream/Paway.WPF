@@ -16,7 +16,8 @@ namespace Paway.WPF
 {
     /// <summary>
     /// 主题前景色
-    /// </summary>
+    /// </summary> 
+    [TypeConverter(typeof(ThemeForegroundConverter))]
     public class ThemeForeground : BaseModelInfo, IEquatable<ThemeForeground>
     {
         private Brush _result;
@@ -46,8 +47,6 @@ namespace Paway.WPF
         /// </summary>
         public ThemeForeground()
         {
-            PConfig.BackgroundChanged += Config_BackgroundChanged;
-            PConfig.ForegroundChanged += Config_ForegroundChanged;
         }
         private void Config_ForegroundChanged(Color obj)
         {
@@ -65,16 +64,71 @@ namespace Paway.WPF
         }
         /// <summary>
         /// </summary>
-        public ThemeForeground(Color value, int light = 0) : this()
+        public ThemeForeground(Color value, int light = 0, bool iBack = false) : this()
         {
             this._light = light;
             this.Value = value.ToBrush();
+            if (iBack)
+            {
+                PConfig.BackgroundChanged += Config_BackgroundChanged;
+            }
+            else
+            {
+                PConfig.ForegroundChanged += Config_ForegroundChanged;
+            }
         }
         /// <summary>
         /// </summary>
         public bool Equals(ThemeForeground other)
         {
             return Result.Equals(other.Result);
+        }
+    }
+    /// <summary>
+    /// 字符串转ThemeBackground
+    /// </summary>
+    internal class ThemeForegroundConverter : TypeConverter
+    {
+        /// <summary>
+        /// </summary>
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+        {
+            if (sourceType == typeof(string)) return true;
+            return base.CanConvertFrom(context, sourceType);
+        }
+        /// <summary>
+        /// </summary>
+        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+        {
+            if (destinationType == typeof(string)) return true;
+            return base.CanConvertTo(context, destinationType);
+        }
+        /// <summary>
+        /// 自定义字符串转换，以分号(;)隔开
+        /// </summary>
+        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        {
+            if (value == null)
+            {
+                throw base.GetConvertFromException(value);
+            }
+            if (value is string str)
+            {
+                if (byte.TryParse(str, out byte alpha))
+                {
+                    return new ThemeForeground(PMethod.ThemeColor(alpha));
+                }
+                return new ThemeForeground(str.ToColor());
+            }
+            return base.ConvertFrom(context, culture, value);
+        }
+        /// <summary>
+        /// </summary>
+        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        {
+            if (destinationType == typeof(string))
+                return base.ConvertTo(context, culture, value, destinationType);
+            return value.ToString();
         }
     }
 }

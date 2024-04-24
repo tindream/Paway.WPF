@@ -66,10 +66,10 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty HeaderBrushProperty =
             DependencyProperty.RegisterAttached(nameof(HeaderBrush), typeof(BrushEXT), typeof(DataGridMonitor),
-                new PropertyMetadata(new BrushEXT() { Normal = new ThemeForeground(PMethod.AlphaColor(200, PConfig.Background), 15) }));
+                new PropertyMetadata(new BrushEXT() { Normal = new ThemeForeground(PConfig.Background, 15, true) }));
         /// <summary>
         /// 标题列背景颜色
-        /// <para>默认值：(200, PConfig.Light), 默认, 默认</para>
+        /// <para>默认值：主题背景, 默认, 默认</para>
         /// </summary>
         public BrushEXT HeaderBrush
         {

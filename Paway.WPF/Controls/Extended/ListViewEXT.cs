@@ -207,7 +207,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 自定义项描述字体颜色
-        /// <para>默认值：TextSub, White</para>
+        /// <para>默认值：主题前景次色, White</para>
         /// </summary>
         [Category("扩展.项描述")]
         [Description("自定义项描述字体颜色")]
