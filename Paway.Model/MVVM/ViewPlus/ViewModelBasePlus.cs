@@ -83,7 +83,7 @@ namespace Paway.Model
         /// <summary>
         /// 通用动作命令
         /// </summary>
-        protected virtual void Action(string item) { }
+        public virtual void Action(string item) { }
         /// <summary>
         /// 点击列表项
         /// </summary>

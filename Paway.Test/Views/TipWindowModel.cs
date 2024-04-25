@@ -101,7 +101,7 @@ namespace Paway.Test
             }
             listView1.SelectedIndex = -1;
         }
-        protected override void Action(string item)
+        public override void Action(string item)
         {
             base.Action(item);
             switch (item)

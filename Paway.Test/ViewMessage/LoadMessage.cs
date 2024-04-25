@@ -8,6 +8,5 @@ using System.Windows;
 
 namespace Paway.Test
 {
-    public class LoginLoadMessage : LoadMessage { }
     public class TipLoadMessage : LoadMessage { }
 }

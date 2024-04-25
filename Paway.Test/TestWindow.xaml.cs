@@ -41,7 +41,7 @@ namespace Paway.Test
             var fileInfos = directoryInfo.GetFiles("*.xml");
             foreach (var fileInfo in fileInfos) Config.LanguageList.Add(System.IO.Path.GetFileNameWithoutExtension(fileInfo.Name));
 
-            PMethod.LanguageMenuBinding(menu, Config.LanguageList, ViewModelLocator.Default.Test, ViewModelLocator.Default.Test.MenuItemClickCommand, nameof(ViewModelLocator.Default.Test.Language));
+            PMethod.LanguageMenuBinding(menu, Config.LanguageList, ViewModelLocator.Default.Test, ViewModelLocator.Default.Test.ItemClickCommand, nameof(ViewModelLocator.Default.Test.Language));
         }
         protected override void OnRender(DrawingContext drawingContext)
         {

@@ -349,7 +349,7 @@ namespace Paway.Model
         /// <summary>
         /// 通用动作命令
         /// </summary>
-        protected override void Action(string item)
+        public override void Action(string item)
         {
             switch (item)
             {

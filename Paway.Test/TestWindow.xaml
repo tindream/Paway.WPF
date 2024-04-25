@@ -19,17 +19,17 @@
     <WindowEXT.FunctionBarRight>
         <WindowFunctionBar>
             <ButtonEXT Content="{Binding Language.Theme, Source={StaticResource L}}" Margin="0" IsLight="True" ItemBorder="0" Radius="0"
-                       Command="{Binding MenuItemClickCommand}" CommandParameter="主题"/>
+                       Command="{Binding ItemClickCommand}" CommandParameter="主题"/>
             <ButtonEXT Content="{Binding Language.Color, Source={StaticResource L}}" Margin="0" IsLight="True" ItemBorder="0" Radius="0"
-                       Command="{Binding MenuItemClickCommand}" CommandParameter="颜色"/>
+                       Command="{Binding ItemClickCommand}" CommandParameter="颜色"/>
             <Menu>
                 <MenuItem Header="{Binding Language}" Padding="12,0" Name="menu">
-                    <MenuItem Header="中文" IsChecked="{Binding Language, Converter={StaticResource valueToTrue}, ConverterParameter=中文}" Command="{Binding MenuItemClickCommand}" CommandParameter="中文"/>
-                    <MenuItem Header="English" IsChecked="{Binding Language, Converter={StaticResource valueToTrue}, ConverterParameter=English}" Command="{Binding MenuItemClickCommand}" CommandParameter="English"/>
+                    <MenuItem Header="中文" IsChecked="{Binding Language, Converter={StaticResource valueToTrue}, ConverterParameter=中文}" Command="{Binding ItemClickCommand}" CommandParameter="中文"/>
+                    <MenuItem Header="English" IsChecked="{Binding Language, Converter={StaticResource valueToTrue}, ConverterParameter=English}" Command="{Binding ItemClickCommand}" CommandParameter="English"/>
                 </MenuItem>
             </Menu>
             <ButtonEXT Content="{Binding Language.About, Source={StaticResource L}}" Margin="0" IsLight="True" ItemBorder="0" Radius="0"
-                       Command="{Binding MenuItemClickCommand}" CommandParameter="关于"/>
+                       Command="{Binding ItemClickCommand}" CommandParameter="关于"/>
         </WindowFunctionBar>
     </WindowEXT.FunctionBarRight>
     <DockPanel>
@@ -65,8 +65,8 @@
                                  Icon="/Paway.Model;component/Images/login/language.png" IconWidth="24" IconStretch="Uniform"/>
                 </StackPanel>
                 <WrapPanel DockPanel.Dock="Bottom">
-                    <ButtonEXT Content="3D" Click="Button_Click" Command="{Binding ItemCommand}" CommandParameter="3D"/>
-                    <ButtonEXT Content="空" Click="Button_Click2" Command="{Binding ItemCommand}" CommandParameter="空"/>
+                    <ButtonEXT Content="3D" Click="Button_Click" Command="{Binding ItemClickCommand}" CommandParameter="3D"/>
+                    <ButtonEXT Content="空" Click="Button_Click2" Command="{Binding ItemClickCommand}" CommandParameter="空"/>
                 </WrapPanel>
                 <DataGridEXT ItemsSource="{Binding GridList}" Height="255" Radius="5,5,0,0" />
             </DockPanel>

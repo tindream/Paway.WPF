@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Command;
 using OxyPlot;
 using OxyPlot.Annotations;
 using OxyPlot.Axes;
+using Paway.Helper;
 using Paway.Model;
 using Paway.WPF;
 using System;
@@ -375,5 +376,12 @@ namespace Paway.Test
                 PlotModel.InvalidatePlot(true);
             });
         }
+    }
+    public class FontInfo : ParentBaseOperateInfo
+    {
+        [FillSize]
+        public string Name { get; set; }
+        [NoShow]
+        public FontFamily FontFamily { get; set; }
     }
 }

@@ -65,7 +65,7 @@ namespace Paway.Model
         /// <summary>
         /// 通用动作命令-按钮按键操作
         /// </summary>
-        protected override void Action(string item)
+        public override void Action(string item)
         {
             base.Action(item);
             switch (item)
