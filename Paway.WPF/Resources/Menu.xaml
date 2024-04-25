@@ -22,7 +22,7 @@
                 <TextBlock x:Name="Line"
                            Height="1"
                            Margin="0,0,0,-1"
-                           Background="{StaticResource ThemeLight}"
+                           Background="{StaticResource ThemeBackgroundLight}"
                            Grid.ColumnSpan="2"
                            Visibility="Collapsed" 
                            VerticalAlignment="Bottom"/>
@@ -57,7 +57,7 @@
                     <Border x:Name="SubMenuBorder"
                             BorderBrush="LightGray"
                             BorderThickness="1"
-                            Background="{StaticResource ThemeLight}"
+                            Background="{StaticResource ThemeBackgroundLight}"
                             CornerRadius="0,0,2,2"
                             Padding="0,3">
                         <StackPanel>
@@ -65,7 +65,7 @@
                                        Height="1"
                                        Width="{Binding ActualWidth, ElementName=Line}"
                                        Margin="0,-4,1,0"
-                                       Background="{StaticResource ThemeLight}"
+                                       Background="{StaticResource ThemeBackgroundLight}"
                                        VerticalAlignment="Top" 
                                        HorizontalAlignment="Left"/>
                             <ScrollViewer x:Name="SubMenuScrollViewer"
@@ -108,8 +108,8 @@
                 <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource ThemeColorMouse}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeLight}" />
-                <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource ThemeLight}" />
+                <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeBackgroundLight}" />
+                <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource ThemeBackgroundLight}" />
                 <Setter Property="Visibility" TargetName="Line" Value="Visible" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
@@ -126,8 +126,8 @@
                     <Condition Property="IsHighlighted" Value="True" />
                     <Condition Property="IsSubmenuOpen" Value="True" />
                 </MultiTrigger.Conditions>
-                <Setter Property="Foreground" Value="Black" />
-                <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeLight}" />
+                <Setter Property="Foreground" Value="{StaticResource ThemeForeground}" />
+                <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeBackgroundLight}" />
                 <Setter Property="BorderBrush" TargetName="templateRoot" Value="LightGray" />
                 <Setter Property="Visibility" TargetName="Line" Value="Visible" />
             </MultiTrigger>
@@ -259,7 +259,7 @@
                             BorderBrush="LightGray"
                             BorderThickness="1"
                             CornerRadius="2"
-                            Background="{StaticResource ThemeLight}"
+                            Background="{StaticResource ThemeBackgroundLight}"
                             Padding="0,3">
                         <ScrollViewer x:Name="SubMenuScrollViewer"
                                       Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
@@ -317,7 +317,7 @@
         <Border x:Name="templateRoot"
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}"
-                Background="{StaticResource ThemeLight}">
+                Background="{StaticResource ThemeBackgroundLight}">
             <Grid Margin="-1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" MinWidth="22" SharedSizeGroup="MenuItemIconColumnGroup" />
@@ -453,7 +453,7 @@
     </Style>
 
     <Style TargetType="ContextMenu">
-        <Setter Property="Background" Value="{Binding Source={StaticResource ThemeLight}, Converter={StaticResource brushAlphaConverter}, ConverterParameter=255}" />
+        <Setter Property="Background" Value="{Binding Source={StaticResource ThemeBackgroundLight}, Converter={StaticResource brushAlphaConverter}, ConverterParameter=255}" />
         <Setter Property="BorderBrush" Value="LightGray" />
         <Setter Property="Padding" Value="0,3" />
         <Setter Property="Template">

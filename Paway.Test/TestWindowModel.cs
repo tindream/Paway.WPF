@@ -213,6 +213,11 @@ namespace Paway.Test
             var color = Method.ColorSelector(slider.Value / 7);
             Config.Foreground = color;
         });
+        public ICommand BackgroundChanged => new RelayCommand<SliderEXT>(slider =>
+        {
+            var color = Method.ColorSelector(slider.Value / 7);
+            Config.Background = color;
+        });
         protected override void Action(ListViewCustom listView1)
         {
             base.Action(listView1);

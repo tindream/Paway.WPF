@@ -75,8 +75,7 @@
                 <Button Background="{StaticResource Error}" BorderThickness="0" Content="错误" Height="32" Width="100" Foreground="White"/>
 
                 <Button Background="{StaticResource ThemeColor}" BorderThickness="0" Content="主题颜色" Height="32" Width="100" Foreground="White"/>
-                <Button Background="{StaticResource ThemeColorMouse}" BorderThickness="0" Content="主题颜色(浅)" Height="32" Width="100" Foreground="White"/>
-                <Button Background="{StaticResource ThemeLight}" BorderThickness="0" Content="主题浅色" Height="32" Width="100" Foreground="{StaticResource ThemeForeground}"/>
+                <Button Background="{StaticResource ThemeColorMouse}" BorderThickness="0" Content="主题浅色" Height="32" Width="100" Foreground="White"/>
                 <Button Background="{StaticResource ThemeHigh}" BorderThickness="0" Content="主题深色" Height="32" Width="100" Foreground="White"/>
 
                 <Button Background="{StaticResource ThemeBackground}" Foreground="{StaticResource ThemeForeground}" BorderThickness="0" Content="背景色" Height="32" Width="100" />

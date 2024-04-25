@@ -47,6 +47,17 @@
                             </i:Interaction.Triggers>
                         </SliderEXT>
                     </Grid>
+                    <Grid>
+                        <Border Background="{StaticResource ColorSelector}" Height="3" CornerRadius="2" Margin="50,1,2,2"/>
+                        <SliderEXT Title="背景色" x:Name="sliderTheme3" Maximum="7" Value="2.62" AutoToolTipPrecision="2" TickFrequency="0.01"
+                                 TrackColorLinear="Transparent;Transparent" TrackBackground="Transparent" >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="ValueChanged">
+                                    <i:InvokeCommandAction Command="{Binding BackgroundChanged}" CommandParameter="{Binding ElementName=sliderTheme3}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </SliderEXT>
+                    </Grid>
                     <TextBoxEXT Text="{Binding Label}" Unit="ms"/>
                     <ComboBoxEXT ItemsSource="{Binding LanguageObList}" 
                                  Text="{Binding Language}" SelectedValuePath="Name" DisplayMemberPath="Name"
