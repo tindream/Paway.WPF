@@ -349,7 +349,7 @@ namespace Paway.Model
         /// <summary>
         /// 通用动作命令
         /// </summary>
-        public override void Action(string item)
+        public override bool Action(string item)
         {
             switch (item)
             {
@@ -410,6 +410,7 @@ namespace Paway.Model
                     }
                     break;
             }
+            return base.Action(item);
         }
         /// <summary>
         /// 初始化列表、数据库获取接口、分页

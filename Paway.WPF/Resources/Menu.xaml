@@ -453,7 +453,7 @@
     </Style>
 
     <Style TargetType="ContextMenu">
-        <Setter Property="Background" Value="{Binding Source={StaticResource ThemeBackgroundLight}, Converter={StaticResource brushAlphaConverter}, ConverterParameter=255}" />
+        <Setter Property="Background" Value="{Binding Source={StaticResource ThemeBackgroundLight}}" />
         <Setter Property="BorderBrush" Value="LightGray" />
         <Setter Property="Padding" Value="0,3" />
         <Setter Property="Template">

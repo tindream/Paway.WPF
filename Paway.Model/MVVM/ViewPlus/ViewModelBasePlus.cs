@@ -82,8 +82,9 @@ namespace Paway.Model
 
         /// <summary>
         /// 通用动作命令
+        /// <para>默认返回值 true</para>
         /// </summary>
-        public virtual void Action(string item) { }
+        public virtual bool Action(string item) { return true; }
         /// <summary>
         /// 点击列表项
         /// </summary>

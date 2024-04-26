@@ -101,14 +101,14 @@ namespace Paway.Test
             }
             listView1.SelectedIndex = -1;
         }
-        public override void Action(string item)
+        public override bool Action(string item)
         {
-            base.Action(item);
             switch (item)
             {
                 case "展开": this.IAll = true; break;
                 case "收缩": this.IAll = false; break;
             }
+            return base.Action(item);
         }
 
         #endregion

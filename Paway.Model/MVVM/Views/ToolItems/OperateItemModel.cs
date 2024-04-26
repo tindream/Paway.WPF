@@ -65,9 +65,8 @@ namespace Paway.Model
         /// <summary>
         /// 通用动作命令-按钮按键操作
         /// </summary>
-        public override void Action(string item)
+        public override bool Action(string item)
         {
-            base.Action(item);
             switch (item)
             {
                 case "刷新":
@@ -77,6 +76,7 @@ namespace Paway.Model
                     Save();
                     break;
             }
+            return base.Action(item);
         }
         /// <summary>
         /// 刷新

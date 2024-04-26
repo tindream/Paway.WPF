@@ -179,7 +179,7 @@ namespace Paway.WPF
         /// 主题背景色事件
         /// </summary>
         public static event Action<Color> BackgroundChanged;
-        private static Color background = Color.FromRgb((byte)(255 - _foreground.R), (byte)(255 - _foreground.G), (byte)(255 - _foreground.B));
+        private static Color background = Color.FromRgb(247, 249, 251);
         /// <summary>
         /// 背景色
         /// </summary>

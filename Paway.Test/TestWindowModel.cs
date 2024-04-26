@@ -74,9 +74,8 @@ namespace Paway.Test
         #endregion
 
         #region 命令
-        public override void Action(string item)
+        public override bool Action(string item)
         {
-            base.Action(item);
             switch (item)
             {
                 case "关于":
@@ -101,6 +100,7 @@ namespace Paway.Test
                     }
                     break;
             }
+            return base.Action(item);
         }
         protected override void Action(ListViewCustom listView1)
         {

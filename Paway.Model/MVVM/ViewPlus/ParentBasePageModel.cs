@@ -43,7 +43,7 @@ namespace Paway.Model
         /// <summary>
         /// 通用动作命令
         /// </summary>
-        public override void Action(string item)
+        public override bool Action(string item)
         {
             switch (item)
             {
@@ -53,7 +53,7 @@ namespace Paway.Model
                     if (ParentInfo == null) throw new WarningException($"请选择 {typeof(Parent).Description()}");
                     break;
             }
-            base.Action(item);
+            return base.Action(item);
         }
         /// <summary>
         /// 刷榜
@@ -117,7 +117,7 @@ namespace Paway.Model
         /// <summary>
         /// 通用动作命令
         /// </summary>
-        public override void Action(string item)
+        public override bool Action(string item)
         {
             switch (item)
             {
@@ -127,7 +127,7 @@ namespace Paway.Model
                     if (ParentInfo == null) throw new WarningException($"请选择 {typeof(Parent).Description()}");
                     break;
             }
-            base.Action(item);
+            return base.Action(item);
         }
         /// <summary>
         /// 重载-自定义刷新操作

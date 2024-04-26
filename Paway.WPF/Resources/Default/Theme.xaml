@@ -6,10 +6,10 @@
     <!--#region 主题 -->
     <!--主题背景色-->
     <SolidColorBrush x:Key="ThemeBackground" Color="{Binding Path=(local:ThemeEXT.Background).Result.Color, RelativeSource={RelativeSource Self}}"/>
-    <!--主题背景 (次色)-->
-    <SolidColorBrush x:Key="ThemeBackgroundSub" Color="{Binding Path=(local:ThemeEXT.Background).Result.Color, RelativeSource={RelativeSource Self}, Converter={StaticResource colorLightConverter}, ConverterParameter=7}"/>
     <!--主题背景 (浅色)-->
-    <SolidColorBrush x:Key="ThemeBackgroundLight" Color="{Binding Path=(local:ThemeEXT.Background).Result.Color, RelativeSource={RelativeSource Self}, Converter={StaticResource colorLightConverter}, ConverterParameter=18}"/>
+    <SolidColorBrush x:Key="ThemeBackgroundLight" Color="{Binding Path=(local:ThemeEXT.Background).Result.Color, RelativeSource={RelativeSource Self}, Converter={StaticResource colorLightConverter}, ConverterParameter=-6}"/>
+    <!--主题背景 (深色)-->
+    <SolidColorBrush x:Key="ThemeBackgroundHigh" Color="{Binding Path=(local:ThemeEXT.Background).Result.Color, RelativeSource={RelativeSource Self}, Converter={StaticResource colorLightConverter}, ConverterParameter=-15}"/>
 
     <!--主题前景色-->
     <SolidColorBrush x:Key="ThemeForeground" Color="{Binding Path=(local:ThemeEXT.Foreground).Result.Color, RelativeSource={RelativeSource Self}}"/>
@@ -25,7 +25,7 @@
     <!--主题深色-->
     <SolidColorBrush x:Key="ThemeHigh" Color="{Binding Path=(local:ThemeEXT.ItemBrush).Pressed.Color, RelativeSource={RelativeSource Self}, Converter={StaticResource colorLightConverter}, ConverterParameter=-90}"/>
     <!--#endregion-->
-    
+
     <!--#region 其它配色 -->
     <!--成功-->
     <SolidColorBrush x:Key="Success" Color="#2DB84D" />
@@ -36,7 +36,7 @@
     <!--错误-->
     <SolidColorBrush x:Key="Error" Color="#F8331E" />
     <Color x:Key="ErrorKey">#F8331E</Color>
-    
+
     <!--颜色选择器-->
     <LinearGradientBrush x:Key="ColorSelector">
         <GradientStop Color="#ff0000" />

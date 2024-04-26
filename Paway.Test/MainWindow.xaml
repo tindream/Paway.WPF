@@ -79,8 +79,8 @@
                 <Button Background="{StaticResource ThemeHigh}" BorderThickness="0" Content="主题深色" Height="32" Width="100" Foreground="White"/>
 
                 <Button Background="{StaticResource ThemeBackground}" Foreground="{StaticResource ThemeForeground}" BorderThickness="0" Content="背景色" Height="32" Width="100" />
-                <Button Background="{StaticResource ThemeBackgroundSub}" Foreground="{StaticResource ThemeForeground}" BorderThickness="0" Content="背景次色" Height="32" Width="100" />
                 <Button Background="{StaticResource ThemeBackgroundLight}" Foreground="{StaticResource ThemeForeground}" BorderThickness="0" Content="背景浅色" Height="32" Width="100" />
+                <Button Background="{StaticResource ThemeBackgroundHigh}" Foreground="{StaticResource ThemeForeground}" BorderThickness="0" Content="背景深色" Height="32" Width="100" />
                 
                 <Button Background="Transparent" Foreground="{StaticResource ThemeForeground}" BorderThickness="0" Content="前景色" Height="32" Width="100" />
                 <Button Background="Transparent" Foreground="{StaticResource ThemeForegroundSub}" BorderThickness="0" Content="前景次色" Height="32" Width="100" />

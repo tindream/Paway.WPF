@@ -221,9 +221,8 @@ namespace Paway.Model
         /// <summary>
         /// 通用动作命令
         /// </summary>
-        public override void Action(string item)
+        public override bool Action(string item)
         {
-            base.Action(item);
             switch (item)
             {
                 case "登录":
@@ -242,7 +241,7 @@ namespace Paway.Model
                             {
                                 if (PMethod.Find(Root, out TextBoxEXT tbUserName, "tbUserName")) tbUserName.Focus();
                             }
-                            return;
+                            return true;
                         }
                         Login();
                     }
@@ -266,6 +265,7 @@ namespace Paway.Model
                     }
                     break;
             }
+            return base.Action(item);
         }
 
         #endregion
