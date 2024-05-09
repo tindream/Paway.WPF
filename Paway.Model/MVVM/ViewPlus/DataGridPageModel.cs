@@ -386,7 +386,7 @@ namespace Paway.Model
                     break;
                 case "导入":
                     var title = typeof(T).Description();
-                    if (PMethod.Import($"{title} 表", out string file))
+                    if (PMethod.OpenFile($"{title} 表", out string file))
                     {
                         PMethod.Progress(PMethod.Window(DataGrid), "正在导入..", adorner =>
                         {
@@ -404,7 +404,7 @@ namespace Paway.Model
                     break;
                 case "导出":
                     title = $"{typeof(T).Description()}{DateTime.Now:yyyy-MM-dd}";
-                    if (PMethod.Export(title, out file))
+                    if (PMethod.SaveFile(title, out file))
                     {
                         Export(file);
                     }
