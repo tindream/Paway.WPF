@@ -1,14 +1,6 @@
 @title builder
 @echo ---------------version-----------------------------------------------------
 @GitVersion.exe
-@echo ---------------copy1-------------------------------------------------------
-@copy Root\Spire.Office8.11.0\net40\Spire.Pdf.dll			builder\Spire.Pdf.8.11.0_net40\Spire.Pdf.dll
-@copy Root\Spire.Office8.11.0\net40\Spire.XLS.dll			builder\Spire.Pdf.8.11.0_net40\Spire.XLS.dll
-@copy Root\Spire.Office8.11.0\net40\Spire.Doc.dll			builder\Spire.Pdf.8.11.0_doc11.11_net40\Spire.Doc.dll
-@copy Root\Spire.Office8.11.0\netcoreapp2.0\Spire.Pdf.dll	builder\Spire.Pdf.8.11.0_netcoreapp2.0\Spire.Pdf.dll
-@copy Root\Spire.Office8.11.0\netcoreapp2.0\Spire.XLS.dll	builder\Spire.Pdf.8.11.0_netcoreapp2.0\Spire.XLS.dll
-@copy Root\Spire.Office8.11.0\netcoreapp2.0\Spire.Doc.dll	builder\Spire.Pdf.8.11.0_doc11.11_netcoreapp2.0\Spire.Doc.dll
-
 @echo ---------------build-------------------------------------------------------
 @devenv Paway.WPF.sln /Rebuild release
 @echo ---------------------------------------------------------------------------
@@ -23,7 +15,7 @@
 @echo ---------------nugut------------------------------------------------------
 @nuget pack builder\Paway.WPF.nuspec
 @nuget pack builder\Paway.Model.nuspec
-@echo ---------------copy2-------------------------------------------------------
+@echo ---------------copy-------------------------------------------------------
 @copy bin\Release\net45\Paway.WPF_Secure\Paway.WPF.dll		builder\Paway.WPF.1.4.0_net45\Paway.WPF.dll
 @copy bin\Release\net45\Paway.WPF_Secure\Paway.WPF.pdb		builder\Paway.WPF.1.4.0_net45\Paway.WPF.pdb
 @copy bin\Release\net45\Paway.WPF_Secure\Paway.WPF.xml		builder\Paway.WPF.1.4.0_net45\Paway.WPF.xml

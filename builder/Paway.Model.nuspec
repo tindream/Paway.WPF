@@ -14,13 +14,13 @@
 		<tags>WPF Model</tags>
 		<dependencies>
 			<group targetFramework="net452">
-				<dependency id="Paway.Helper"		version="2.5.5" />
-				<dependency id="Paway.Utils"		version="2.5.5" />
-				<dependency id="Paway.WPF"			version="1.4.0" />
-				<dependency id="Paway.OxyPlot.WPF"	version="1.1.0" />
-				<dependency id="Newtonsoft.Json"	version="13.0.1" />
-				<dependency id="MvvmLightLibs"		version="5.4.1.1" />
-				<dependency id="Spire.Office"		version="8.11.0" />
+				<dependency id="Paway.Helper"			version="2.5.5" />
+				<dependency id="Paway.Utils"			version="2.5.5" />
+				<dependency id="Paway.WPF"				version="1.4.0" />
+				<dependency id="Paway.Runtime.Plot"		version="1.1.0" />
+				<dependency id="Paway.Runtime.Office"	version="8.11.0" />
+				<dependency id="Newtonsoft.Json"		version="13.0.1" />
+				<dependency id="MvvmLightLibs"			version="5.4.1.1" />
 			</group>
 		</dependencies>
 	</metadata>

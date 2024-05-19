@@ -56,9 +56,8 @@ namespace Paway.Model
             }
         }
         /// <summary>
-        /// Word、Excel、PPT、PDF文件转换为图片
+        /// Word、Excel、PPT、PDF文件转换为图片对象
         /// <para>file：文件</para>
-        /// <para>toPath:指定目录，为空时在文件同目录下，创建文件同名目录，文件中的.以_代替</para>
         /// </summary>
         public List<Image> ToImages(string file, double zoom = 1)
         {
@@ -139,7 +138,8 @@ namespace Paway.Model
                 excel.LoadFromFile(file);
                 for (var i = 0; i < excel.Worksheets.Count; i++)
                 {
-                    if (excel.Worksheets[i].Rows.Length == 0 || excel.Worksheets[i].Visibility != WorksheetVisibility.Visible) continue;
+                    //Rows可能报错()
+                    if (excel.Worksheets[i].LastRow == 0 || excel.Worksheets[i].Visibility != WorksheetVisibility.Visible) continue;
                     var pdfFile = Path.Combine(toPath, $"{i}.pdf");
                     excel.Worksheets[i].SaveToPdf(pdfFile);
                     PDFToImage(pdfFile, zoom, (index, total, image) =>
