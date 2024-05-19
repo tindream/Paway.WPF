@@ -19,8 +19,8 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="..\bin\release\net45\Paway.WPF_Secure\Paway.WPF.dll"	target="lib\net45" />
-		<file src="..\bin\release\net45\Paway.WPF_Secure\Paway.WPF.pdb"	target="lib\net45" />
-		<file src="..\bin\release\net45\Paway.WPF.xml"			target="lib\net45" />
+		<file src="..\bin\release\net45\Paway.WPF_Secure\Paway.WPF.dll"		target="lib\net45" />
+		<file src="..\bin\release\net45\Paway.WPF_Secure\Paway.WPF.pdb"		target="lib\net45" />
+		<file src="..\bin\release\net45\Paway.WPF.xml"						target="lib\net45" />
 	</files>
 </package>

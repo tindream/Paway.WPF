@@ -44,8 +44,6 @@
 	<ItemGroup>
 		<PackageReference Include="Paway.Helper" Version="2.5.5" />
 		<PackageReference Include="Paway.Utils" Version="2.5.5" />
-		<PackageReference Include="OxyPlot.WPF" Version="2.1.0" />
-		<PackageReference Include="OxyPlot.WPF.Shared" Version="2.1.0" />
 		<PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
 		<PackageReference Include="HelixToolkit.Wpf" Version="2.24.0" />
 		<PackageReference Include="MSTest.TestAdapter" Version="2.1.1" />
