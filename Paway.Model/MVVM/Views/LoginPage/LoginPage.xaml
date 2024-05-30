@@ -34,10 +34,12 @@
             <TextBlock Text="{Binding Welcome}" Foreground="White" Margin="-150,40" FontSize="36" TextTrimming="WordEllipsis" HorizontalAlignment="Center"  />
             <StackPanel Visibility="{Binding IAuto, Converter={StaticResource boolToCollapsed}}">
                 <TextBoxEXT  Name="tbUserName" Text="{Binding UserName}" Water="{Binding LanguageBase.PleaseInputUserNameWater, Source={StaticResource LB}}" 
+                             Background="White"
                              IAnimation="2" BorderThickness="0,0,0,1" FontSize="30" WaterSize="0.7"
                              Icon="/Paway.Model;component/Images/login/user.png" IconWidth="36" IconStretch="Uniform"
                              Visibility="{Binding IUserList, Converter={StaticResource boolToCollapsed}, FallbackValue=Visible}"/>
                 <ComboBoxEXT Name="cbxUserName" Text="{Binding UserName}" Water="{Binding LanguageBase.PleaseInputUserNameWater, Source={StaticResource LB}}" 
+                             Background="White"
                              ItemsSource="{Binding ObList}" SelectedValuePath="Id" DisplayMemberPath="CustomName"
                              IAnimation="2" BorderThickness="0,0,0,1" FontSize="30" WaterSize="0.7" IsEditable="True"
                              Icon="/Paway.Model;component/Images/login/user.png" IconWidth="36" IconStretch="Uniform"
