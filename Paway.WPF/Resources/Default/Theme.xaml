@@ -27,6 +27,9 @@
     <!--#endregion-->
 
     <!--#region 其它配色 -->
+    <!--默认主题颜色-->
+    <SolidColorBrush x:Key="Color" Color="#409EFF" />
+    <Color x:Key="ColorKey">#409EFF</Color>
     <!--成功-->
     <SolidColorBrush x:Key="Success" Color="#2DB84D" />
     <Color x:Key="SuccessKey">#2DB84D</Color>
