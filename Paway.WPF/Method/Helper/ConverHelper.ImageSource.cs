@@ -58,6 +58,19 @@ namespace Paway.WPF
             NativeMethods.DeleteObject(intPtr);
             return source;
         }
+        /// <summary>
+        /// BitmapSource转Bitmap
+        /// </summary>
+        public static Bitmap ToBitmap(this BitmapSource bitmapSource)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                BmpBitmapEncoder encoder = new BmpBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+                encoder.Save(ms);
+                return new Bitmap(ms);
+            }
+        }
 
         #endregion
     }

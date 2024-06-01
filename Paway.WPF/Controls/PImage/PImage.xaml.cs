@@ -21,7 +21,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty SourceProperty =
-            DependencyProperty.Register(nameof(Source), typeof(ImageSource), typeof(PImage), new PropertyMetadata(null, OnSourceChanged));
+            DependencyProperty.Register(nameof(Source), typeof(BitmapSource), typeof(PImage), new PropertyMetadata(null, OnSourceChanged));
         private static void OnSourceChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             if (obj is PImage view)
@@ -35,9 +35,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展")]
         [Description("获取或设置图像")]
-        public ImageSource Source
+        public BitmapSource Source
         {
-            get { return (ImageSource)GetValue(SourceProperty); }
+            get { return (BitmapSource)GetValue(SourceProperty); }
             set { SetValue(SourceProperty, value); }
         }
 
