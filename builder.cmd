@@ -22,8 +22,6 @@
 
 @copy bin\Release\net452\Paway.Model_Secure\Paway.Model.dll		builder\Paway.Model.1.4.1_net452\Paway.Model.dll
 @copy bin\Release\net452\Paway.Model_Secure\Paway.Model.xml		builder\Paway.Model.1.4.1_net452\Paway.Model.xml
-@copy bin\Release\net452\Paway.Model_Secure\Paway.Model.dll		builder\Paway.Model.1.4.1.1_net452\Paway.Model.dll
-@copy bin\Release\net452\Paway.Model_Secure\Paway.Model.xml		builder\Paway.Model.1.4.1.1_net452\Paway.Model.xml
 
 @echo --------------------------------------------------------------------------- 
 @IF "%1" == "" @PAUSE

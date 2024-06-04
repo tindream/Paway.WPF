@@ -815,6 +815,7 @@ namespace Paway.WPF
                         IText = false,
                         Margin = new Thickness(0),
                         Radius = new CornerRadius(0),
+                        ForegroundColorLinear = new ColorLinear(PConfig.Color, PConfig.Color),
                         Height = 1,
                     };
                     DockPanel.SetDock(progressBar, Dock.Bottom);
