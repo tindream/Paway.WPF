@@ -21,6 +21,22 @@ namespace Paway.WPF
         public static readonly DependencyProperty ForegroundColorLinearProperty =
             DependencyProperty.RegisterAttached(nameof(ForegroundColorLinear), typeof(ColorLinear), typeof(ProgressRound),
                 new PropertyMetadata(new ColorLinear(Colors.LightGray, PMethod.ThemeColor())));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty BackgroundAngleProperty =
+            DependencyProperty.RegisterAttached(nameof(BackgroundAngle), typeof(int), typeof(ProgressRound), new UIPropertyMetadata(360, OnBackgroundAngleChanged));
+        /// <summary>
+        /// </summary>
+        internal static readonly DependencyProperty BackgroundValueProperty =
+            DependencyProperty.RegisterAttached(nameof(BackgroundValue), typeof(double), typeof(ProgressRound));
+        private static void OnBackgroundAngleChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            if (obj is ProgressRound view)
+            {
+                view.BackgroundValue = -view.BackgroundAngle / 2.0;
+                view.UpdateDefaultStyle();
+            }
+        }
 
         #endregion
 
@@ -35,6 +51,28 @@ namespace Paway.WPF
         {
             get { return (ColorLinear)GetValue(ForegroundColorLinearProperty); }
             set { SetValue(ForegroundColorLinearProperty, value); }
+        }
+        /// <summary>
+        /// 背景圆环度
+        /// <para>默认值：360</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("背景圆环度")]
+        public int BackgroundAngle
+        {
+            get { return (int)GetValue(BackgroundAngleProperty); }
+            set { SetValue(BackgroundAngleProperty, value); }
+        }
+        /// <summary>
+        /// 背景圆环旋转角度(自动)
+        /// <para>默认值：0</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("背景角度")]
+        internal double BackgroundValue
+        {
+            get { return (double)GetValue(BackgroundValueProperty); }
+            set { SetValue(BackgroundValueProperty, value); }
         }
 
         #endregion

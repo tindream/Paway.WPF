@@ -13,12 +13,30 @@
         <Setter Property="Template">
             <Setter.Value>
                 <!--控件模板-->
-                <ControlTemplate TargetType="{x:Type local:ProgressRound}" >
-                    <Grid Name="TemplateRoot">
-                        <Ellipse x:Name="Ellipse_Track"
-                                 Stroke="{Binding ForegroundColorLinear.Start, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource colorToBrushConverter}}"
-                                 Fill="{TemplateBinding Background}"
-                                 StrokeThickness="{Binding BorderThickness.Left, RelativeSource={RelativeSource TemplatedParent}}" />
+                <ControlTemplate TargetType="{x:Type local:ProgressRound}">
+                    <Grid Name="TemplateRoot" Background="{TemplateBinding Background}">
+                        <Path x:Name="Ellipse_Track"
+                              Stroke="{Binding ForegroundColorLinear.Start, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource colorToBrushConverter}}"
+                              StrokeThickness="{Binding BorderThickness.Left, RelativeSource={RelativeSource TemplatedParent}}"
+                              StrokeStartLineCap="Round"
+                              StrokeEndLineCap="Round"
+                              RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="{Binding BackgroundValue, RelativeSource={RelativeSource AncestorType={x:Type local:ProgressRound}}}"/>
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                            <Path.Data>
+                                <MultiBinding Converter="{StaticResource ringConverter}">
+                                    <Binding Path="ActualWidth" RelativeSource="{RelativeSource AncestorType={x:Type local:ProgressRound}}"></Binding>
+                                    <Binding Path="ActualHeight" RelativeSource="{RelativeSource AncestorType={x:Type local:ProgressRound}}"></Binding>
+                                    <Binding Path="BorderThickness" RelativeSource="{RelativeSource TemplatedParent}"></Binding>
+                                    <Binding Source="0"></Binding>
+                                    <Binding Source="360"></Binding>
+                                    <Binding Path="BackgroundAngle" RelativeSource="{RelativeSource TemplatedParent}"></Binding>
+                                </MultiBinding>
+                            </Path.Data>
+                        </Path>
                         <Path x:Name="Path_Indicator"
                               Stroke="{Binding ForegroundColorLinear.End, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource colorToBrushConverter}}"
                               StrokeThickness="{Binding BorderThickness.Left, RelativeSource={RelativeSource TemplatedParent}}"

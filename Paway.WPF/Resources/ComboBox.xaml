@@ -20,7 +20,7 @@
                   Style="{StaticResource PathTriangleDown}" Width="12" Height="6"
                   HorizontalAlignment="Right" StrokeThickness="0"
                   Opacity="0.35"
-                  Stretch="Fill" Fill="{TemplateBinding Foreground}" />
+                  Stretch="Fill" Fill="{StaticResource ThemeForeground}" />
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsChecked" Value="true">
@@ -40,7 +40,7 @@
 
     <Style TargetType="{x:Type local:ComboBoxEXT}" BasedOn="{StaticResource ComboConfig}">
         <Setter Property="Padding" Value="5"/>
-        <Setter Property="Background" Value="{StaticResource backLine}"/>
+        <!--<Setter Property="Background" Value="{StaticResource backLine}"/>-->
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="Template">
             <Setter.Value>
