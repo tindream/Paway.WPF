@@ -20,20 +20,21 @@ namespace Paway.WPF
         {
             var width = values[0].ToDouble(); if (width < 0) width = 0;
             var height = values[1].ToDouble(); if (height < 0) height = 0;
+            var iForward = values[2].ToBool() ? 1 : 0;
 
             double radius;
-            if (values[2] is Thickness thickness) radius = thickness.Left;
-            else radius = values[2].ToDouble();
+            if (values[3] is Thickness thickness) radius = thickness.Left;
+            else radius = values[3].ToDouble();
             if (width < radius) width = radius;
             if (height < radius) height = radius;
 
             var percent = 0.33;
-            if (values.Length >= 6)
+            if (values.Length >= 7)
             {
-                var min = values[3].ToDouble();
-                var max = values[4].ToDouble();
-                var value = values[5].ToDouble();
-                var rate = values.Length >= 7 ? values[6].ToDouble() : 1;
+                var min = values[4].ToDouble();
+                var max = values[5].ToDouble();
+                var value = values[6].ToDouble();
+                var rate = values.Length >= 8 ? values[7].ToDouble() : 1;
                 value = min + (value - min) * rate;
                 value = value > max ? max : value;
                 value = value < min ? min : value;
@@ -41,6 +42,7 @@ namespace Paway.WPF
             }
 
             var point2X = (height - radius) / 2 * Math.Cos((2 * percent - 0.5) * Math.PI) + height / 2;
+            if (iForward == 0) point2X = height / 2 - (height - radius) / 2 * Math.Cos((2 * percent - 0.5) * Math.PI);
             var point2Y = height / 2 - (height - radius) / 2 * Math.Sin((2 * percent + 0.5) * Math.PI);
 
             string path;
@@ -50,16 +52,16 @@ namespace Paway.WPF
             }
             else if (percent < 0.5)
             {
-                path = "M " + width / 2 + "," + radius / 2 + " A " + (width - radius) / 2 + "," + (width - radius) / 2 + " 0 0 1 " + point2X + "," + point2Y + "";
+                path = "M " + width / 2 + "," + radius / 2 + " A " + (width - radius) / 2 + "," + (width - radius) / 2 + $" 0 0 {iForward} " + point2X + "," + point2Y + "";
             }
             else if (percent == 0.5)
             {
-                path = "M " + width / 2 + "," + radius / 2 + " A " + (width - radius) / 2 + "," + (width - radius) / 2 + " 0 0 1 " + width / 2 + "," + (height - radius / 2);
+                path = "M " + width / 2 + "," + radius / 2 + " A " + (width - radius) / 2 + "," + (width - radius) / 2 + $" 0 0 {iForward} " + width / 2 + "," + (height - radius / 2);
             }
             else
             {
-                path = "M " + width / 2 + "," + radius / 2 + " A " + (width - radius) / 2 + "," + (width - radius) / 2 + " 0 0 1 " + width / 2 + "," + (height - radius / 2) +
-                    " A " + (width - radius) / 2 + "," + (width - radius) / 2 + " 0 0 1 " + point2X + "," + point2Y + "";
+                path = "M " + width / 2 + "," + radius / 2 + " A " + (width - radius) / 2 + "," + (width - radius) / 2 + $" 0 0 {iForward} " + width / 2 + "," + (height - radius / 2) +
+                    " A " + (width - radius) / 2 + "," + (width - radius) / 2 + $" 0 0 {iForward} " + point2X + "," + point2Y + "";
             }
             return PathGeometry.Parse(path);
         }

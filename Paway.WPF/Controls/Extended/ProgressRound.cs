@@ -24,6 +24,10 @@ namespace Paway.WPF
                 new PropertyMetadata(new ColorLinear(Colors.LightGray, PMethod.ThemeColor())));
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty IForwardProperty =
+            DependencyProperty.RegisterAttached(nameof(IForward), typeof(bool), typeof(ProgressRound), new PropertyMetadata(true));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty IDragProperty =
             DependencyProperty.RegisterAttached(nameof(IDrag), typeof(bool), typeof(ProgressRound));
         /// <summary>
@@ -42,7 +46,8 @@ namespace Paway.WPF
         {
             if (obj is ProgressRound view)
             {
-                view.AngleTransform = -view.Angle / 2;
+                var iForward = view.IForward ? 1 : -1;
+                view.AngleTransform = iForward * -view.Angle / 2;
                 view.AngleRate = view.Angle / 360;
             }
         }
@@ -60,6 +65,17 @@ namespace Paway.WPF
         {
             get { return (ColorLinear)GetValue(ForegroundColorLinearProperty); }
             set { SetValue(ForegroundColorLinearProperty, value); }
+        }
+        /// <summary>
+        /// 圆环的方向
+        /// <para>默认值：True（正向，顺时针）</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("圆环的方向")]
+        public bool IForward
+        {
+            get { return (bool)GetValue(IForwardProperty); }
+            set { SetValue(IForwardProperty, value); }
         }
         /// <summary>
         /// 允许鼠标拖动设置值

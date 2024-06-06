@@ -37,6 +37,7 @@
                                 <MultiBinding Converter="{StaticResource ringConverter}">
                                     <Binding Path="ActualWidth" RelativeSource="{RelativeSource AncestorType={x:Type local:ProgressBoard}}" Converter="{StaticResource valueAddConverter}" ConverterParameter="-12"></Binding>
                                     <Binding Path="ActualHeight" RelativeSource="{RelativeSource AncestorType={x:Type local:ProgressBoard}}" Converter="{StaticResource valueAddConverter}" ConverterParameter="-12"></Binding>
+                                    <Binding Source="True"></Binding>
                                     <Binding Source="10"></Binding>
                                     <Binding Source="0"></Binding>
                                     <Binding Source="100"></Binding>

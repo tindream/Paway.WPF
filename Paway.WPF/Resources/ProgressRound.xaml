@@ -30,6 +30,7 @@
                                 <MultiBinding Converter="{StaticResource ringConverter}">
                                     <Binding Path="ActualWidth" RelativeSource="{RelativeSource AncestorType={x:Type local:ProgressRound}}"></Binding>
                                     <Binding Path="ActualHeight" RelativeSource="{RelativeSource AncestorType={x:Type local:ProgressRound}}"></Binding>
+                                    <Binding Path="IForward" RelativeSource="{RelativeSource AncestorType={x:Type local:ProgressRound}}"></Binding>
                                     <Binding Path="BorderThickness" RelativeSource="{RelativeSource TemplatedParent}"></Binding>
                                     <Binding Source="0"></Binding>
                                     <Binding Source="360"></Binding>
@@ -52,6 +53,7 @@
                                 <MultiBinding Converter="{StaticResource ringConverter}">
                                     <Binding Path="ActualWidth" RelativeSource="{RelativeSource AncestorType={x:Type local:ProgressRound}}"></Binding>
                                     <Binding Path="ActualHeight" RelativeSource="{RelativeSource AncestorType={x:Type local:ProgressRound}}"></Binding>
+                                    <Binding Path="IForward" RelativeSource="{RelativeSource AncestorType={x:Type local:ProgressRound}}"></Binding>
                                     <Binding Path="BorderThickness" RelativeSource="{RelativeSource TemplatedParent}"></Binding>
                                     <Binding Path="Minimum" RelativeSource="{RelativeSource TemplatedParent}"></Binding>
                                     <Binding Path="Maximum" RelativeSource="{RelativeSource TemplatedParent}"></Binding>
