@@ -65,12 +65,12 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty IsLightProperty =
             DependencyProperty.RegisterAttached(nameof(IsLight), typeof(bool), typeof(ButtonEXT),
-            new UIPropertyMetadata(false, OnColorTypeChanged));
+            new PropertyMetadata(false, OnColorTypeChanged));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty TypeProperty =
             DependencyProperty.RegisterAttached(nameof(Type), typeof(ColorType), typeof(ButtonEXT),
-            new UIPropertyMetadata(ColorType.Color, OnColorTypeChanged));
+            new PropertyMetadata(ColorType.Color, OnColorTypeChanged));
         private static void OnColorTypeChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             if (obj is ButtonEXT view)
@@ -87,7 +87,6 @@ namespace Paway.WPF
                     view.ItemForeground = new BrushEXT(null, Colors.White, Colors.White);
                     view.ItemBackground.Normal = new ThemeForeground(Colors.Transparent);
                 }
-                view.UpdateDefaultStyle();
             }
         }
 

@@ -98,7 +98,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty IsNormalProperty =
             DependencyProperty.RegisterAttached(nameof(IsNormal), typeof(bool), typeof(ListViewCustom),
-            new UIPropertyMetadata(false, OnNormalChanged));
+            new PropertyMetadata(false, OnNormalChanged));
         private static void OnNormalChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             if (obj is ListBoxItemEXT listBoxItem)

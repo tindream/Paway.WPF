@@ -21,7 +21,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty TimeTypeProperty =
-            DependencyProperty.RegisterAttached(nameof(TimeType), typeof(TimePickerType), typeof(ComboTime), new UIPropertyMetadata(TimePickerType.HourMinute, OnValueChanged));
+            DependencyProperty.RegisterAttached(nameof(TimeType), typeof(TimePickerType), typeof(ComboTime), new PropertyMetadata(TimePickerType.HourMinute, OnValueChanged));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty HourProperty =

@@ -36,7 +36,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty TypeProperty =
             DependencyProperty.RegisterAttached(nameof(Type), typeof(ColorType), typeof(RadioButtonEXT),
-            new UIPropertyMetadata(ColorType.Color, OnColorTypeChanged));
+            new PropertyMetadata(ColorType.Color, OnColorTypeChanged));
         private static void OnColorTypeChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             if (obj is RadioButtonEXT view)
@@ -49,7 +49,6 @@ namespace Paway.WPF
                         Normal = new ThemeForeground(Colors.LightGray)
                     };
                 }
-                view.UpdateDefaultStyle();
             }
         }
         /// <summary>

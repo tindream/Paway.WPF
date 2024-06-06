@@ -21,7 +21,7 @@ namespace Paway.WPF
         /// 启用监听，获取CalendarItem、CalendarButton属性并设置
         /// </summary>
         public static readonly DependencyProperty IsMonitoringProperty =
-            DependencyProperty.RegisterAttached(nameof(IsMonitoring), typeof(bool), typeof(CalendarMonitor), new UIPropertyMetadata(false, OnIsMonitoringChanged));
+            DependencyProperty.RegisterAttached(nameof(IsMonitoring), typeof(bool), typeof(CalendarMonitor), new PropertyMetadata(false, OnIsMonitoringChanged));
         private static void OnIsMonitoringChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             if (obj is CalendarItem calendarItem)

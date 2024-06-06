@@ -21,7 +21,7 @@ namespace Paway.WPF
         /// 启用监听，获取ScrollViewer属性并设置到Thumb
         /// </summary>
         public static readonly DependencyProperty IsMonitoringProperty =
-            DependencyProperty.RegisterAttached(nameof(IsMonitoring), typeof(bool), typeof(ScrollViewerMonitor), new UIPropertyMetadata(false, OnIsMonitoringChanged));
+            DependencyProperty.RegisterAttached(nameof(IsMonitoring), typeof(bool), typeof(ScrollViewerMonitor), new PropertyMetadata(false, OnIsMonitoringChanged));
         private static void OnIsMonitoringChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             if (obj is Thumb thumb)

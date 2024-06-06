@@ -24,7 +24,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty BackgroundAngleProperty =
-            DependencyProperty.RegisterAttached(nameof(BackgroundAngle), typeof(int), typeof(ProgressRound), new UIPropertyMetadata(360, OnBackgroundAngleChanged));
+            DependencyProperty.RegisterAttached(nameof(BackgroundAngle), typeof(int), typeof(ProgressRound), new PropertyMetadata(360, OnBackgroundAngleChanged));
         /// <summary>
         /// </summary>
         internal static readonly DependencyProperty BackgroundValueProperty =
@@ -34,7 +34,6 @@ namespace Paway.WPF
             if (obj is ProgressRound view)
             {
                 view.BackgroundValue = -view.BackgroundAngle / 2.0;
-                view.UpdateDefaultStyle();
             }
         }
 

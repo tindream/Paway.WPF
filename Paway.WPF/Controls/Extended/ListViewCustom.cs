@@ -45,12 +45,12 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty IsLightProperty =
             DependencyProperty.RegisterAttached(nameof(IsLight), typeof(bool), typeof(ListViewCustom),
-            new UIPropertyMetadata(false, OnColorTypeChanged));
+            new PropertyMetadata(false, OnColorTypeChanged));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty TypeProperty =
             DependencyProperty.RegisterAttached(nameof(Type), typeof(ColorType), typeof(ListViewCustom),
-            new UIPropertyMetadata(ColorType.None, OnColorTypeChanged));
+            new PropertyMetadata(ColorType.None, OnColorTypeChanged));
         private static void OnColorTypeChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             if (obj is ListViewCustom view)
@@ -65,7 +65,6 @@ namespace Paway.WPF
                     if (view.ItemBorder == null || view.ItemBorder.Equals(new ThicknessEXT(0))) view.ItemBorder = new ThicknessEXT(1);
                     if (view.ItemBorder != null) view.ItemMargin = new Thickness(-view.ItemBorder.Normal.Left, -view.ItemBorder.Normal.Top, 0, 0);
                 }
-                view.UpdateDefaultStyle();
             }
         }
         private static void OnSizeTypeChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)

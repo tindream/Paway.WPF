@@ -25,7 +25,7 @@ namespace Paway.WPF
         /// 水平偏移量
         /// </summary>
         public static readonly DependencyProperty HorizontalOffsetProperty =
-            DependencyProperty.RegisterAttached(nameof(HorizontalOffset), typeof(double), typeof(ScrollViewerBehavior), new UIPropertyMetadata(0d, OnHorizontalOffsetChanged));
+            DependencyProperty.RegisterAttached(nameof(HorizontalOffset), typeof(double), typeof(ScrollViewerBehavior), new PropertyMetadata(0d, OnHorizontalOffsetChanged));
         /// <summary>
         /// </summary>
         private double HorizontalOffset { get; set; }
@@ -47,7 +47,7 @@ namespace Paway.WPF
         /// 垂直偏移量
         /// </summary>
         public static readonly DependencyProperty VerticalOffsetProperty =
-            DependencyProperty.RegisterAttached(nameof(VerticalOffset), typeof(double), typeof(ScrollViewerBehavior), new UIPropertyMetadata(0d, OnVerticalOffsetChanged));
+            DependencyProperty.RegisterAttached(nameof(VerticalOffset), typeof(double), typeof(ScrollViewerBehavior), new PropertyMetadata(0d, OnVerticalOffsetChanged));
         /// <summary>
         /// </summary>
         private double VerticalOffset { get; set; }
