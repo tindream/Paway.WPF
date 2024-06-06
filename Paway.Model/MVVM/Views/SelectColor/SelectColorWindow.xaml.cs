@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paway.WPF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace Paway.Model
     /// <summary>
     /// SelectColorWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class SelectColorWindow : Window
+    public partial class SelectColorWindow : WindowEXT
     {
         /// <summary>
         /// 颜色搭取器

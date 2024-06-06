@@ -23,7 +23,7 @@
                               RenderTransformOrigin="0.5,0.5">
                             <Path.RenderTransform>
                                 <TransformGroup>
-                                    <RotateTransform Angle="{Binding BackgroundValue, RelativeSource={RelativeSource AncestorType={x:Type local:ProgressRound}}}"/>
+                                    <RotateTransform Angle="{Binding AngleTransform, RelativeSource={RelativeSource AncestorType={x:Type local:ProgressRound}}}"/>
                                 </TransformGroup>
                             </Path.RenderTransform>
                             <Path.Data>
@@ -33,7 +33,7 @@
                                     <Binding Path="BorderThickness" RelativeSource="{RelativeSource TemplatedParent}"></Binding>
                                     <Binding Source="0"></Binding>
                                     <Binding Source="360"></Binding>
-                                    <Binding Path="BackgroundAngle" RelativeSource="{RelativeSource TemplatedParent}"></Binding>
+                                    <Binding Path="Angle" RelativeSource="{RelativeSource TemplatedParent}"></Binding>
                                 </MultiBinding>
                             </Path.Data>
                         </Path>
@@ -41,7 +41,13 @@
                               Stroke="{Binding ForegroundColorLinear.End, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource colorToBrushConverter}}"
                               StrokeThickness="{Binding BorderThickness.Left, RelativeSource={RelativeSource TemplatedParent}}"
                               StrokeStartLineCap="Round"
-                              StrokeEndLineCap="Round">
+                              StrokeEndLineCap="Round"
+                              RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="{Binding AngleTransform, RelativeSource={RelativeSource AncestorType={x:Type local:ProgressRound}}}"/>
+                                </TransformGroup>
+                            </Path.RenderTransform>
                             <Path.Data>
                                 <MultiBinding Converter="{StaticResource ringConverter}">
                                     <Binding Path="ActualWidth" RelativeSource="{RelativeSource AncestorType={x:Type local:ProgressRound}}"></Binding>
@@ -50,6 +56,7 @@
                                     <Binding Path="Minimum" RelativeSource="{RelativeSource TemplatedParent}"></Binding>
                                     <Binding Path="Maximum" RelativeSource="{RelativeSource TemplatedParent}"></Binding>
                                     <Binding Path="Value" RelativeSource="{RelativeSource TemplatedParent}"></Binding>
+                                    <Binding Path="AngleRate" RelativeSource="{RelativeSource TemplatedParent}"></Binding>
                                 </MultiBinding>
                             </Path.Data>
                         </Path>

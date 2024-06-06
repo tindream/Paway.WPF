@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paway.WPF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace Paway.Model
     /// <summary>
     /// NameWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class NameWindow : Window
+    public partial class NameWindow : WindowEXT
     {
         /// <summary>
         /// 单输入框通用窗体
