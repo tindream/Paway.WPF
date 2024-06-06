@@ -21,18 +21,18 @@ namespace Paway.WPF
         #region 动画
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty IAnimationProperty =
-            DependencyProperty.RegisterAttached(nameof(IAnimation), typeof(double), typeof(TextBoxEXT));
+        public static readonly DependencyProperty AnimationProperty =
+            DependencyProperty.RegisterAttached(nameof(Animation), typeof(double), typeof(TextBoxEXT));
         /// <summary>
-        /// 动画
-        /// <para>默认值：false</para>
+        /// 动画高度
+        /// <para>默认值：0</para>
         /// </summary>
         [Category("扩展")]
-        [Description("动画")]
-        public double IAnimation
+        [Description("动画高度")]
+        public double Animation
         {
-            get { return (double)GetValue(IAnimationProperty); }
-            set { SetValue(IAnimationProperty, value); }
+            get { return (double)GetValue(AnimationProperty); }
+            set { SetValue(AnimationProperty, value); }
         }
 
         #endregion
@@ -284,7 +284,7 @@ namespace Paway.WPF
         protected override void OnMouseEnter(MouseEventArgs e)
         {
             base.OnMouseEnter(e);
-            if (IAnimation > 0) PMethod.Animation(this, true);
+            if (Animation > 0) PMethod.Animation(this, true);
         }
         /// <summary>
         /// 鼠标离开时关闭
@@ -292,7 +292,7 @@ namespace Paway.WPF
         protected override void OnMouseLeave(MouseEventArgs e)
         {
             base.OnMouseLeave(e);
-            if (IAnimation > 0) PMethod.Animation(this, false);
+            if (Animation > 0) PMethod.Animation(this, false);
         }
 
         #endregion

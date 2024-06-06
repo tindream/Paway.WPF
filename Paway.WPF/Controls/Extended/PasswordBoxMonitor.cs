@@ -79,8 +79,8 @@ namespace Paway.WPF
         {
             if (sender is PasswordBox pad)
             {
-                var iAnimation = (double)pad.GetValue(PasswordBoxEXT.IAnimationProperty);
-                if (iAnimation > 0) PMethod.Animation(pad, true);
+                var animation = (double)pad.GetValue(PasswordBoxEXT.AnimationProperty);
+                if (animation > 0) PMethod.Animation(pad, true);
             }
         }
         /// <summary>
@@ -90,8 +90,8 @@ namespace Paway.WPF
         {
             if (sender is PasswordBox pad)
             {
-                var iAnimation = (double)pad.GetValue(PasswordBoxEXT.IAnimationProperty);
-                if (iAnimation > 0) PMethod.Animation(pad, false);
+                var animation = (double)pad.GetValue(PasswordBoxEXT.AnimationProperty);
+                if (animation > 0) PMethod.Animation(pad, false);
             }
         }
 

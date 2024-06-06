@@ -104,11 +104,11 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Line x:Name="line11" 
-                                  StrokeThickness="{Binding IAnimation, RelativeSource={RelativeSource TemplatedParent}}" 
+                                  StrokeThickness="{Binding Animation, RelativeSource={RelativeSource TemplatedParent}}" 
                                   Stroke="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" FlowDirection="RightToLeft">
                             </Line>
                             <Line x:Name="line12" Grid.Column="1"
-                                  StrokeThickness="{Binding IAnimation, RelativeSource={RelativeSource TemplatedParent}}"
+                                  StrokeThickness="{Binding Animation, RelativeSource={RelativeSource TemplatedParent}}"
                                   Stroke="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}">
                             </Line>
                         </Grid>
@@ -167,7 +167,7 @@
                                     Value="{Binding Radius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource noBottomRadiusConverter}}" />
                             <Setter Property="Panel.ZIndex" Value="{x:Static sys:Int32.MaxValue}" />
                         </Trigger>
-                        <DataTrigger Binding="{Binding IAnimation, Converter={StaticResource isNotNull}, RelativeSource={RelativeSource Self}}" Value="True">
+                        <DataTrigger Binding="{Binding Animation, Converter={StaticResource isNotNull}, RelativeSource={RelativeSource Self}}" Value="True">
                             <Setter TargetName="grid" Property="Visibility" Value="Visible" />
                         </DataTrigger>
                         <MultiTrigger>

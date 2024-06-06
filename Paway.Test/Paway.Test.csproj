@@ -42,9 +42,9 @@
 		<ProjectReference Include="..\Paway.WPF\Paway.WPF.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="HelixToolkit.Wpf"		Version="2.24.0" />
-		<PackageReference Include="MSTest.TestAdapter"		Version="2.1.1" />
-		<PackageReference Include="MSTest.TestFramework"	Version="2.1.1" />
+		<PackageReference Include="HelixToolkit.Wpf" Version="2.24.0" />
+		<PackageReference Include="MSTest.TestAdapter" Version="2.1.1" />
+		<PackageReference Include="MSTest.TestFramework" Version="2.1.1" />
 	</ItemGroup>
 
 </Project>

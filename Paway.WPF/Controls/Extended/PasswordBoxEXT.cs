@@ -81,28 +81,28 @@ namespace Paway.WPF
         #region 动画
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty IAnimationProperty =
-            DependencyProperty.RegisterAttached(nameof(IAnimation), typeof(double), typeof(PasswordBoxEXT));
+        public static readonly DependencyProperty AnimationProperty =
+            DependencyProperty.RegisterAttached(nameof(Animation), typeof(double), typeof(PasswordBoxEXT));
         /// <summary>
-        /// 动画
-        /// <para>默认值：false</para>
+        /// 动画高度
+        /// <para>默认值：0</para>
         /// </summary>
         [Category("扩展")]
-        [Description("动画")]
-        public double IAnimation { get; set; }
+        [Description("动画高度")]
+        public double Animation { get; set; }
         /// <summary>
         /// get动画
         /// </summary>
-        public static double GetIAnimation(DependencyObject obj)
+        public static double GetAnimation(DependencyObject obj)
         {
-            return (double)obj.GetValue(IAnimationProperty);
+            return (double)obj.GetValue(AnimationProperty);
         }
         /// <summary>
         /// set动画
         /// </summary>
-        public static void SetIAnimation(DependencyObject obj, double value)
+        public static void SetAnimation(DependencyObject obj, double value)
         {
-            obj.SetValue(IAnimationProperty, value);
+            obj.SetValue(AnimationProperty, value);
         }
 
         #endregion

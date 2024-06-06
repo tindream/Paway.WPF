@@ -105,7 +105,7 @@
                     </i:Interaction.Triggers>
                 </ComboQuery>
                 <ComboTime/>
-                <TextBoxEXT Name="tb" Icon="Images/close.png" IAnimation="2" BorderThickness="0,0,0,1" Radius="0" MaxLength="4"
+                <TextBoxEXT Name="tb" Icon="Images/close.png" Animation="2" BorderThickness="0,0,0,1" Radius="0" MaxLength="4"
                             HorizontalContentAlignment="Center">
                     <Binding Path="Value">
                         <Binding.ValidationRules>
@@ -117,7 +117,7 @@
                              HorizontalContentAlignment="Center"
                              PasswordBoxEXT.Password="{Binding Pad}"
                              PasswordBoxEXT.Radius="0"
-                             PasswordBoxEXT.IAnimation="2" BorderThickness="0,0,0,1"/>
+                             PasswordBoxEXT.Animation="2" BorderThickness="0,0,0,1"/>
                 <Grid>
                     <Grid.ColumnDefinitions >
                         <ColumnDefinition Width="*"/>

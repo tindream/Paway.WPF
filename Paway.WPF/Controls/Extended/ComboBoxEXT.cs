@@ -70,8 +70,8 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(TitleMinWidth), typeof(double), typeof(ComboBoxEXT));
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty IAnimationProperty =
-            DependencyProperty.RegisterAttached(nameof(IAnimation), typeof(double), typeof(ComboBoxEXT));
+        public static readonly DependencyProperty AnimationProperty =
+            DependencyProperty.RegisterAttached(nameof(Animation), typeof(double), typeof(ComboBoxEXT));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty InterceptProperty =
@@ -215,15 +215,15 @@ namespace Paway.WPF
             set { SetValue(TitleMinWidthProperty, value); }
         }
         /// <summary>
-        /// IsEditable为true时，输入框的动画标记
-        /// <para>默认值：false</para>
+        /// IsEditable为true时，输入框的动画高度
+        /// <para>默认值：0</para>
         /// </summary>
         [Category("扩展")]
-        [Description("IsEditable为true时，输入框的动画标记")]
-        public double IAnimation
+        [Description("IsEditable为true时，输入框的动画高度")]
+        public double Animation
         {
-            get { return (double)GetValue(IAnimationProperty); }
-            set { SetValue(IAnimationProperty, value); }
+            get { return (double)GetValue(AnimationProperty); }
+            set { SetValue(AnimationProperty, value); }
         }
         /// <summary>
         /// 拦截Tab与回车跳转
@@ -279,7 +279,7 @@ namespace Paway.WPF
         protected override void OnMouseEnter(MouseEventArgs e)
         {
             base.OnMouseEnter(e);
-            if (IAnimation > 0) PMethod.Animation(this, true, "line11", "line12");
+            if (Animation > 0) PMethod.Animation(this, true, "line11", "line12");
         }
         /// <summary>
         /// 鼠标离开时关闭
@@ -287,7 +287,7 @@ namespace Paway.WPF
         protected override void OnMouseLeave(MouseEventArgs e)
         {
             base.OnMouseLeave(e);
-            if (IAnimation > 0) PMethod.Animation(this, false, "line11", "line12");
+            if (Animation > 0) PMethod.Animation(this, false, "line11", "line12");
         }
 
         #endregion

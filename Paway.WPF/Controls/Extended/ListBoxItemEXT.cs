@@ -169,6 +169,7 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展")]
         [Description("自定义项宽度")]
+        [TypeConverter(typeof(LengthConverter))]
         public double ItemWidth
         {
             get { return (double)GetValue(ItemWidthProperty); }
@@ -180,6 +181,7 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展")]
         [Description("自定义项高度")]
+        [TypeConverter(typeof(LengthConverter))]
         public double ItemHeight
         {
             get { return (double)GetValue(ItemHeightProperty); }

@@ -35,25 +35,25 @@
             <StackPanel Visibility="{Binding IAuto, Converter={StaticResource boolToCollapsed}}">
                 <TextBoxEXT  Name="tbUserName" Text="{Binding UserName}" Water="{Binding LanguageBase.PleaseInputUserNameWater, Source={StaticResource LB}}" 
                              Background="White"
-                             IAnimation="2" BorderThickness="0,0,0,1" FontSize="30" WaterSize="0.7"
+                             Animation="2" BorderThickness="0,0,0,1" FontSize="30" WaterSize="0.7"
                              Icon="/Paway.Model;component/Images/login/user.png" IconWidth="36" IconStretch="Uniform"
                              Visibility="{Binding IUserList, Converter={StaticResource boolToCollapsed}, FallbackValue=Visible}"/>
                 <ComboBoxEXT Name="cbxUserName" Text="{Binding UserName}" Water="{Binding LanguageBase.PleaseInputUserNameWater, Source={StaticResource LB}}" 
                              Background="White"
                              ItemsSource="{Binding ObList}" SelectedValuePath="Id" DisplayMemberPath="CustomName"
-                             IAnimation="2" BorderThickness="0,0,0,1" FontSize="30" WaterSize="0.7" IsEditable="True"
+                             Animation="2" BorderThickness="0,0,0,1" FontSize="30" WaterSize="0.7" IsEditable="True"
                              Icon="/Paway.Model;component/Images/login/user.png" IconWidth="36" IconStretch="Uniform"
                              Visibility="{Binding IUserList, Converter={StaticResource boolToVisible}, FallbackValue=Collapsed}"/>
                 <PasswordBox Name="tbPassword" MaxLength="16" 
                              BorderThickness="0,1" FontSize="30" PasswordBoxEXT.WaterSize="0.7" Margin="2,35,2,2"
                              PasswordBoxEXT.Water="{Binding LanguageBase.PleaseInputPasswordWater, Source={StaticResource LB}}"
                              PasswordBoxEXT.Password="{Binding Password}"
-                             PasswordBoxEXT.IAnimation="2" 
+                             PasswordBoxEXT.Animation="2" 
                              PasswordBoxEXT.Icon="/Paway.Model;component/Images/login/password.png" PasswordBoxEXT.IconWidth="36" PasswordBoxEXT.IconStretch="Uniform"/>
 
                 <ComboBoxEXT ItemsSource="{Binding LanguageObList}"
                              Text="{Binding Language}" Margin="2,35,2,2" Foreground="#666"
-                             IAnimation="2" BorderThickness="0,0,0,1" FontSize="30" WaterSize="0.7" 
+                             Animation="2" BorderThickness="0,0,0,1" FontSize="30" WaterSize="0.7" 
                              Icon="/Paway.Model;component/Images/login/language.png" IconWidth="36" IconStretch="Uniform"
                              Visibility="{Binding ILanguageBox, Converter={StaticResource boolToVisible}}"/>
 
