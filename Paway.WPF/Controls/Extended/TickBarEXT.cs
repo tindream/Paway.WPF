@@ -54,11 +54,11 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnRender(DrawingContext dc)
         {
-            var trackWidth = 0.0;
+            var trackButtonWidth = 0.0;
             var showTrackText = false;
             if (PMethod.Parent(this, out SliderEXT slider))
             {
-                trackWidth = slider.TrackWidth;
+                trackButtonWidth = slider.TrackButtonWidth;
                 showTrackText = slider.ShowTrackText;
             }
             var showTrackTextLength = showTrackText ? 2 : 0;
@@ -94,12 +94,12 @@ namespace Paway.WPF
             if (horizontal)
             {
                 this.Height = this.normalHeight + maxHeight + showTrackTextLength;
-                this.Margin = new Thickness(trackWidth / 2, 0, trackWidth / 2, 0);
+                this.Margin = new Thickness(trackButtonWidth / 2, 0, trackButtonWidth / 2, 0);
             }
             else
             {
                 this.Width = this.normalWidth + maxWidth + showTrackTextLength;
-                this.Margin = new Thickness(0, trackWidth / 2, 0, trackWidth / 2);
+                this.Margin = new Thickness(0, trackButtonWidth / 2, 0, trackButtonWidth / 2);
             }
             for (var i = 0; i <= tickCount; i++)
             {

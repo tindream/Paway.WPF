@@ -28,7 +28,13 @@ namespace Paway.WPF
             {
                 if (thumb.TemplatedParent is SliderEXT sliderEXT)
                 {
+                    sliderEXT.OnButtonTypeEvent += () =>
+                    {
+                        thumb.SetValue(ButtonTypeProperty, sliderEXT.ButtonType);
+                        thumb.SetValue(ButtonImageProperty, sliderEXT.ButtonImage);
+                    };
                     thumb.SetValue(ButtonTypeProperty, sliderEXT.ButtonType);
+                    thumb.SetValue(ButtonImageProperty, sliderEXT.ButtonImage);
                 }
             }
         }
@@ -58,6 +64,19 @@ namespace Paway.WPF
         {
             get { return (SliderButtonType)GetValue(ButtonTypeProperty); }
             set { SetValue(ButtonTypeProperty, value); }
+        }
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ButtonImageProperty =
+            DependencyProperty.RegisterAttached(nameof(ButtonImage), typeof(ImageSource), typeof(SliderMonitor));
+        /// <summary>
+        /// 按钮图标
+        /// <para>默认值：无</para>
+        /// </summary>
+        public ImageSource ButtonImage
+        {
+            get { return (ImageSource)GetValue(ButtonImageProperty); }
+            set { SetValue(ButtonImageProperty, value); }
         }
 
         #endregion

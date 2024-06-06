@@ -16,5 +16,9 @@ namespace Paway.WPF
         /// 方形
         /// </summary>
         Rect,
+        /// <summary>
+        /// 图标
+        /// </summary>
+        Image,
     }
 }

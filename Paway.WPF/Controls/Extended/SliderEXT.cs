@@ -42,8 +42,12 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(TrackHeight), typeof(double), typeof(SliderEXT), new PropertyMetadata(3d));
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty TrackWidthProperty =
-            DependencyProperty.RegisterAttached(nameof(TrackWidth), typeof(double), typeof(SliderEXT), new PropertyMetadata(18d));
+        public static readonly DependencyProperty TrackButtonWidthProperty =
+            DependencyProperty.RegisterAttached(nameof(TrackButtonWidth), typeof(double), typeof(SliderEXT), new PropertyMetadata(18d));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty TrackButtonHeightProperty =
+            DependencyProperty.RegisterAttached(nameof(TrackButtonHeight), typeof(double), typeof(SliderEXT), new PropertyMetadata(18d));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty TrackColorLinearProperty =
@@ -58,12 +62,12 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ButtonTypeProperty =
             DependencyProperty.RegisterAttached(nameof(ButtonType), typeof(SliderButtonType), typeof(SliderEXT),
-                new PropertyMetadata(SliderButtonType.Round));
+                new PropertyMetadata(SliderButtonType.Round, OnButtonTypeChanged));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ShowTrackTextProperty =
             DependencyProperty.RegisterAttached(nameof(ShowTrackText), typeof(bool), typeof(SliderEXT),
-                new PropertyMetadata(false));
+                new PropertyMetadata(false, OnShowTrackTextChanged));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty TitleProperty =
@@ -72,7 +76,32 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty TitleMinWidthProperty =
             DependencyProperty.RegisterAttached(nameof(TitleMinWidth), typeof(double), typeof(SliderEXT));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ButtonImageProperty =
+            DependencyProperty.RegisterAttached(nameof(ButtonImage), typeof(ImageSource), typeof(SliderEXT),
+                new PropertyMetadata(null, OnButtonTypeChanged));
 
+        /// <summary>
+        /// 按钮样式事件
+        /// </summary>
+        internal event Action OnButtonTypeEvent;
+        private static void OnButtonTypeChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            if (obj is SliderEXT slider)
+            {
+                slider.OnButtonTypeEvent?.Invoke();
+            }
+        }
+        private static void OnShowTrackTextChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            if (obj is SliderEXT slider)
+            {//刷新 显示刻度值
+                var tickPlacement = slider.TickPlacement;
+                slider.TickPlacement = TickPlacement.None;
+                slider.TickPlacement = tickPlacement;
+            }
+        }
         private static void OnRadiusChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             if (obj is SliderEXT slider)
@@ -113,15 +142,28 @@ namespace Paway.WPF
             set { SetValue(TrackHeightProperty, value); }
         }
         /// <summary>
-        /// 轨道按钮宽度度
+        /// 轨道按钮宽度
         /// <para>默认值：18</para>
         /// </summary>
         [Category("扩展")]
-        [Description("轨道按钮宽度度")]
-        public double TrackWidth
+        [Description("轨道按钮宽度")]
+        [TypeConverter(typeof(LengthConverter))]
+        public double TrackButtonWidth
         {
-            get { return (double)GetValue(TrackWidthProperty); }
-            set { SetValue(TrackWidthProperty, value); }
+            get { return (double)GetValue(TrackButtonWidthProperty); }
+            set { SetValue(TrackButtonWidthProperty, value); }
+        }
+        /// <summary>
+        /// 轨道按钮高度
+        /// <para>默认值：18</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("轨道按钮高度")]
+        [TypeConverter(typeof(LengthConverter))]
+        public double TrackButtonHeight
+        {
+            get { return (double)GetValue(TrackButtonHeightProperty); }
+            set { SetValue(TrackButtonHeightProperty, value); }
         }
         /// <summary>
         /// 轨道线性颜色
@@ -188,6 +230,17 @@ namespace Paway.WPF
         {
             get { return (double)GetValue(TitleMinWidthProperty); }
             set { SetValue(TitleMinWidthProperty, value); }
+        }
+        /// <summary>
+        /// 按钮图标
+        /// <para>默认值：无</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("按钮图标")]
+        public ImageSource ButtonImage
+        {
+            get { return (ImageSource)GetValue(ButtonImageProperty); }
+            set { SetValue(ButtonImageProperty, value); }
         }
 
         #endregion
