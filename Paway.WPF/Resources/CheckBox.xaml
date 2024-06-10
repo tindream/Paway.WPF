@@ -10,11 +10,12 @@
 
     <Style TargetType="{x:Type local:CheckBoxEXT}" BasedOn="{StaticResource FocusConfig}">
         <Setter Property="Padding" Value="5,6"/>
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:CheckBoxEXT">
                     <Grid Name="templateRoot"
-                          Background="Transparent" >
+                          Background="{TemplateBinding Background}" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
@@ -67,9 +68,7 @@
                                     Value="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" TargetName="checkBoxBorder" Value="#FFE6E6E6"/>
-                            <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="#FFBCBCBC"/>
-                            <Setter Property="Stroke" TargetName="optionMark" Value="Gray"/>
+                            <Setter Property="Opacity" Value="0.6"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" TargetName="checkBoxBorder" Value="#FFD9ECFF"/>

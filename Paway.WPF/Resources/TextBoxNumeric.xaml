@@ -76,6 +76,9 @@
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="0.6"/>
                         </Trigger>
+                        <Trigger Property="IsReadOnly" Value="True">
+                            <Setter Property="Opacity" Value="0.6"/>
+                        </Trigger>
                         <DataTrigger Binding="{Binding Icon, Converter={StaticResource isNotNull}, RelativeSource={RelativeSource Self}}" Value="True">
                             <Setter TargetName="icon" Property="Visibility" Value="Visible" />
                             <Setter Property="Padding" Value="{Binding Padding, RelativeSource={RelativeSource Self}, Converter={StaticResource noLeftThicknessConverter}}" />
@@ -83,9 +86,6 @@
                         <DataTrigger Binding="{Binding Unit, Converter={StaticResource isNotNull}, RelativeSource={RelativeSource Self}}" Value="True">
                             <Setter TargetName="tbUnit" Property="Visibility" Value="Visible" />
                         </DataTrigger>
-                        <Trigger Property="IsReadOnly" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource ThemeBackgroundLight}"/>
-                        </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="BorderBrush" TargetName="border" 
                                     Value="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>

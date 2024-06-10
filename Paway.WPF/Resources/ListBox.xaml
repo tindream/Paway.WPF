@@ -28,8 +28,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Panel.Background" TargetName="Bd" Value="White"/>
-                            <Setter Property="Border.BorderBrush" TargetName="Bd" Value="LightGray"/>
+                            <Setter Property="Opacity" Value="0.6"/>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>

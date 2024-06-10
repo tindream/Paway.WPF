@@ -8,12 +8,13 @@
 
     <Style TargetType="{x:Type local:RadioBox}" BasedOn="{StaticResource FocusConfig}">
         <Setter Property="Padding" Value="0,0,3,0"/>
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:RadioBox">
                     <Grid Name="templateRoot"
                           Margin="{TemplateBinding Padding}"
-                          Background="Transparent" >
+                          Background="{TemplateBinding Background}" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
@@ -49,9 +50,7 @@
                                     Value="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" TargetName="radioButtonBorder" Value="#FFE6E6E6"/>
-                            <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="#FFBCBCBC"/>
-                            <Setter Property="Fill" TargetName="optionMark" Value="Gray"/>
+                            <Setter Property="Opacity" Value="0.6"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" TargetName="radioButtonBorder" Value="#FFD9ECFF"/>

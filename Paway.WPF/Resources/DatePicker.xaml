@@ -192,10 +192,8 @@
                             <Setter Property="Background" TargetName="PART_Button" Value="{StaticResource backLinear}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.6"/>
                             <Setter Property="IsEnabled" TargetName="PART_TextBox" Value="False"/>
-                            <Setter Property="Background" TargetName="PART_TextBox" Value="LightGray"/>
-                            <Setter Property="BorderBrush" TargetName="tbBordor" Value="#FFE6E6E6"/>
-                            <Setter Property="Background" Value="#FFE6E6E6"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

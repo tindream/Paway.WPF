@@ -77,6 +77,7 @@
                                     Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>-->
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.6"/>
                             <Setter TargetName="arrow" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -370,7 +371,7 @@
                             <Setter TargetName="HeaderSite" Property="DockPanel.Dock" Value="Bottom" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            <Setter Property="Opacity" Value="0.6"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="BorderBrush" TargetName="border" 

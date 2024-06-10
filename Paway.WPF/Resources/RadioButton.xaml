@@ -10,6 +10,7 @@
     <Style TargetType="{x:Type local:RadioButtonEXT}" BasedOn="{StaticResource FocusConfig}">
         <Setter Property="Margin" Value="2"/>
         <Setter Property="Padding" Value="8,5"/>
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -28,7 +29,7 @@
                                    Opacity="0.8"
                                    Text="{TemplateBinding Title}"/>
                         <Border x:Name="border1" Grid.Column="1"
-                                Background="Transparent"
+                                Background="{TemplateBinding Background}"
                                 BorderBrush="{Binding Path=ItemBrush.Normal.Result, RelativeSource={RelativeSource TemplatedParent}}"
                                 BorderThickness="{Binding Path=ItemBorder.Normal, RelativeSource={RelativeSource TemplatedParent}}"
                                 CornerRadius="{TemplateBinding Radius}">
@@ -49,7 +50,6 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="0.6"/>
-                            <Setter Property="Background" TargetName="border1" Value="{StaticResource ThemeBackgroundLight}"/>
                         </Trigger>
                         <Trigger Property="UIElement.IsMouseOver" Value="True">
                             <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{Binding Path=ItemForeground.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
