@@ -31,8 +31,8 @@
 		<ProjectReference Include="..\Paway.WPF\Paway.WPF.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Paway.Helper"			Version="2.5.6" />
-		<PackageReference Include="Paway.Utils"				Version="2.5.6" />
+		<PackageReference Include="Paway.Helper"			Version="2.5.7" />
+		<PackageReference Include="Paway.Utils"				Version="2.5.7" />
 		<PackageReference Include="Paway.Runtime.Plot"		Version="1.1.0" />
 		<PackageReference Include="Paway.Runtime.Office"	Version="8.11.0" />
 		<PackageReference Include="Newtonsoft.Json"			Version="13.0.1" />
