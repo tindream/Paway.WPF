@@ -118,6 +118,15 @@ namespace Paway.WPF
         /// </summary>
         private double zoomRatioX, zoomRatioY;
 
+        /// <summary>
+        /// 双击重置判断 - 位置
+        /// </summary>
+        private Point clickPoint;
+        /// <summary>
+        /// 双击重置判断 - 时间
+        /// </summary>
+        private DateTime clickTime;
+
         #endregion
 
         /// <summary>
@@ -126,6 +135,32 @@ namespace Paway.WPF
         {
             DefaultStyleKey = typeof(PImage);
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// 双击重置
+        /// </summary>
+        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
+        {
+            if (DateTime.Now.Subtract(clickTime).TotalMilliseconds < PConfig.DoubleInterval)
+            {
+                var point = e.GetPosition(this);
+                if (clickPoint.X == point.X && clickPoint.Y == point.Y)
+                {
+                    this.Reset();
+                }
+                else
+                {
+                    clickPoint = point;
+                    clickTime = DateTime.Now;
+                }
+            }
+            else
+            {
+                clickPoint = e.GetPosition(this);
+                clickTime = DateTime.Now;
+            }
+            base.OnPreviewMouseDown(e);
         }
 
         #region Method

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Interop;
 using System.Windows.Media;
 
 namespace Paway.WPF
@@ -19,6 +20,28 @@ namespace Paway.WPF
     /// </summary>
     public static partial class ConverHelper
     {
+        #region System
+        /// <summary>
+        /// 获取控件窗体句柄
+        /// </summary>
+        public static IntPtr Handle(this DependencyObject obj)
+        {
+            if (PMethod.Parent(obj, out Window window))
+            {
+                return new WindowInteropHelper(window).Handle;
+            }
+            return IntPtr.Zero;
+        }
+        /// <summary>
+        /// 获取窗体句柄
+        /// </summary>
+        public static IntPtr Handle(this Window window)
+        {
+            return new WindowInteropHelper(window).Handle;
+        }
+
+        #endregion
+
         #region Labbda表达式
         /// <summary>
         /// 自动生成泛型谓词条件
