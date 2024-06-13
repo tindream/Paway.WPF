@@ -28,12 +28,12 @@ namespace Paway.WPF
         /// <summary>
         /// 打开单个文件
         /// </summary>
-        public new static bool OpenFile(string titleName, out string file, string filter = "Excel 工作簿|*.xls;*.xlsx")
+        public new static bool OpenFile(string title, out string file, string filter = "Excel 工作簿|*.xls;*.xlsx")
         {
             file = null;
             var ofd = new OpenFileDialog
             {
-                Title = $"选择要导入的 {titleName}",
+                Title = title,
                 Filter = filter,
             };
             if (ofd.ShowDialog() == true)
@@ -46,9 +46,9 @@ namespace Paway.WPF
         /// <summary>
         /// 打开多个文件
         /// </summary>
-        public new static bool OpenFiles(string title, out string[] file, string filter = "Excel 工作簿|*.xls;*.xlsx")
+        public new static bool OpenFiles(string title, out string[] files, string filter = "Excel 工作簿|*.xls;*.xlsx")
         {
-            file = null;
+            files = new string[0];
             var ofd = new OpenFileDialog
             {
                 Title = title,
@@ -57,15 +57,22 @@ namespace Paway.WPF
             };
             if (ofd.ShowDialog() == true)
             {
-                file = ofd.FileNames;
+                files = ofd.FileNames;
                 return true;
             }
             return false;
         }
         /// <summary>
-        /// 导出到文件
+        /// 保存到文件
         /// </summary>
-        public new static bool SaveFile(string fileName, out string outFile, string filter = null)
+        public new static bool SaveFile(out string outFile, string filter = null, string title = null)
+        {
+            return SaveFile(null, out outFile, filter, title);
+        }
+        /// <summary>
+        /// 保存到文件
+        /// </summary>
+        public new static bool SaveFile(string fileName, out string outFile, string filter = null, string title = null)
         {
             if (filter == null)
             {
@@ -93,13 +100,14 @@ namespace Paway.WPF
                     case ".ram":
                     case ".swf":
                     case ".flv": filter = $"视频文件|*{extension}|所有文件|*.*"; break;
-                    default: filter = "Excel 工作簿|*.xlsx|Excel 97-2003 工作簿|*.xls"; break;
+                    case ".txt": filter = $"文本文件|*{extension}|所有文件|*.*"; break;
+                    default: filter = $"文件|*{extension}|所有文件|*.*"; break;
                 }
             }
             outFile = null;
             var sfd = new SaveFileDialog()
             {
-                Title = $"选择要导出的文件位置",
+                Title = title ?? "选择要保存的文件位置",
                 Filter = filter,
                 FileName = fileName,
             };

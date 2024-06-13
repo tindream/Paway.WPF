@@ -386,7 +386,7 @@ namespace Paway.Model
                     break;
                 case "导入":
                     var title = typeof(T).Description();
-                    if (PMethod.OpenFile($"{title} 表", out string file))
+                    if (PMethod.OpenFile($"选择要导入的 {title} 表", out string file))
                     {
                         PMethod.Progress(PMethod.Window(DataGrid), "正在导入..", adorner =>
                         {

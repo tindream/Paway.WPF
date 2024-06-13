@@ -9,7 +9,7 @@
     <DockPanel.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Paway.WPF;component/Resources/ScrollBar.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component/Resources/ScrollBar.xaml"/>
                 <ResourceDictionary>
                     <Style x:Key="MenuButton" TargetType="{x:Type ButtonEXT}" BasedOn="{StaticResource {x:Type ButtonEXT}}">
                         <Setter Property="IsLight" Value="True"/>
@@ -26,7 +26,7 @@
         </ResourceDictionary>
     </DockPanel.Resources>
     <TextBoxEXT Name="tbSearch" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Water="搜索" MaxLength="32" DockPanel.Dock="Right" Width="200" VerticalAlignment="Bottom"
-                Icon="/Paway.Model;component/Images/operate/search_gray.png"  IconHeight="20" IconStretch="Uniform"
+                Icon="pack://application:,,,/Paway.Model;component/Images/operate/search_gray.png"  IconHeight="20" IconStretch="Uniform"
                 Visibility="{Binding Auth, Converter={StaticResource valueMoreToVisible}, ConverterParameter=1024}"/>
     <ScrollViewerEXT HorizontalScrollBarVisibility="Auto" VerticalAlignment="{Binding VerticalAlignment, ElementName=dpOperateItem}">
         <DockPanel Name="dpOperateItem" >
