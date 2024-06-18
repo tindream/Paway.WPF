@@ -110,6 +110,64 @@ namespace Paway.WPF
                 }
             });
         }
+        /// <summary>
+        /// 移动装饰器内控件
+        /// </summary>
+        public static void MoveAdorner(CustomAdorner adorner, int backAlpha = 100)
+        {
+            var canvas = adorner.GetCanvas();
+            var element = adorner.GetElement();
+            canvas.Background = PMethod.AlphaColor(backAlpha, Colors.Black).ToBrush();
+            //正在拖动标记
+            bool iMoving = false;
+            //拖拽起点
+            Point moveStart = new Point(0, 0);
+            var imagePoint = new Point();
+            adorner.Loaded += (sender, e) =>
+            {
+                var a = adorner.GetCanvas().ActualHeight;
+                imagePoint.X = canvas.ActualWidth / 2 - element.ActualWidth / 2;
+                imagePoint.Y = canvas.ActualHeight / 2 - element.ActualHeight / 2;
+                Canvas.SetLeft(element, imagePoint.X);
+                Canvas.SetTop(element, imagePoint.Y);
+            };
+            element.MouseDown += (sender, e) =>
+            {
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    iMoving = true;
+                    moveStart = e.GetPosition(canvas);
+                    e.Handled = true;
+                }
+            };
+            element.PreviewMouseUp += (sender, e) =>
+            {
+                iMoving = false;
+            };
+            element.MouseMove += (sender, e) =>
+            {
+                var point = e.GetPosition(canvas);
+                if (iMoving)
+                {
+                    var x = imagePoint.X + point.X - moveStart.X;
+                    {
+                        if (x > canvas.ActualWidth) x = canvas.ActualWidth;
+                        if (x < -element.Width) x = -element.Width;
+                    }
+                    var y = imagePoint.Y + point.Y - moveStart.Y;
+                    {
+                        if (y > canvas.ActualHeight) y = canvas.ActualHeight;
+                        if (y < -element.Height) y = -element.Height;
+                    }
+                    imagePoint.X = x;
+                    imagePoint.Y = y;
+                    Canvas.SetLeft(element, imagePoint.X);
+                    Canvas.SetTop(element, imagePoint.Y);
+
+                    moveStart = point;
+                }
+            };
+        }
 
         #endregion
 

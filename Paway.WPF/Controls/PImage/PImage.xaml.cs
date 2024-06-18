@@ -20,6 +20,17 @@ namespace Paway.WPF
         #region 扩展参数
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty TitleProperty =
+            DependencyProperty.Register(nameof(Title), typeof(string), typeof(PImage), new PropertyMetadata(null, OnTitleChanged));
+        private static void OnTitleChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            if (obj is PImage view)
+            {
+                view.tbTitle.Text = view.Title;
+            }
+        }
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty SourceProperty =
             DependencyProperty.Register(nameof(Source), typeof(BitmapSource), typeof(PImage), new PropertyMetadata(null, OnSourceChanged));
         private static void OnSourceChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
@@ -29,6 +40,16 @@ namespace Paway.WPF
                 view.image.Source = view.Source;
                 view.Init();
             }
+        }
+        /// <summary>
+        /// 获取或设置标题
+        /// </summary>
+        [Category("扩展")]
+        [Description("获取或设置标题")]
+        public string Title
+        {
+            get { return (string)GetValue(TitleProperty); }
+            set { SetValue(TitleProperty, value); }
         }
         /// <summary>
         /// 获取或设置图像
@@ -135,6 +156,13 @@ namespace Paway.WPF
         {
             DefaultStyleKey = typeof(PImage);
             InitializeComponent();
+        }
+        /// <summary>
+        /// </summary>
+        public PImage(BitmapSource source, string title = null) : this()
+        {
+            this.Source = source;
+            this.Title = title;
         }
 
         /// <summary>
