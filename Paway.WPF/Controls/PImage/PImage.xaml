@@ -6,17 +6,22 @@
         xmlns:local="clr-namespace:Paway.WPF"
         mc:Ignorable="d" 
         Name="canvas" ClipToBounds="True"
+        Background="Transparent"
         d:DesignHeight="400" d:DesignWidth="400">
     <Canvas.Resources>
         <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
     </Canvas.Resources>
     <Image Name="image"/>
-    <DockPanel HorizontalAlignment="Right" Name="wpDesc" Visibility="Collapsed">
-        <local:ButtonEXT DockPanel.Dock="Right" IsLight="True" ItemBorder="0" Radius="30" Padding="7" ItemBackground="Transparent" ToolTip="重置"
+    <DockPanel Name="dpDesc" Width="{Binding ElementName=canvas, Path=ActualWidth}" Visibility="Collapsed">
+        <local:ButtonEXT DockPanel.Dock="Right" IsLight="True" ItemBorder="0" Radius="30" Padding="7" ItemBackground="Transparent" ToolTip="关闭"
+                         Image="pack://application:,,,/Paway.WPF;component/Images/pImage/close_white.png|pack://application:,,,/Paway.WPF;component/Images/pImage/close_red.png" 
+                         Click="BtnCloset_Click"
+                         Visibility="{Binding IClose, RelativeSource={RelativeSource AncestorType={x:Type local:PImage}}, Converter={StaticResource boolToVisible}}" />
+        <local:ButtonEXT x:Name="btnReset" DockPanel.Dock="Right" IsLight="True" ItemBorder="0" Radius="30" Padding="7" ItemBackground="Transparent" ToolTip="重置"
                          Image="pack://application:,,,/Paway.WPF;component/Images/pImage/refresh_gray.png|pack://application:,,,/Paway.WPF;component/Images/pImage/refresh_white.png" 
                          Click="BtnReset_Click"
-                         Visibility="{Binding IReset, RelativeSource={RelativeSource AncestorType={x:Type local:PImage}}, Converter={StaticResource boolToVisible}}" />
-        <local:ButtonEXT DockPanel.Dock="Right" IsLight="True" ItemBorder="0" Radius="30" Padding="7" ItemBackground="Transparent" ToolTip="保存"
+                         Visibility="{Binding IReset, RelativeSource={RelativeSource AncestorType={x:Type local:PImage}}, Converter={StaticResource boolToVisible}}" Cursor="Hand" />
+        <local:ButtonEXT x:Name="btnSave" DockPanel.Dock="Right" IsLight="True" ItemBorder="0" Radius="30" Padding="7" ItemBackground="Transparent" ToolTip="保存"
                          Image="pack://application:,,,/Paway.WPF;component/Images/pImage/save_gray.png|pack://application:,,,/Paway.WPF;component/Images/pImage/save_white.png"    
                          Click="BtnSave_Click"
                          Visibility="{Binding ISave, RelativeSource={RelativeSource AncestorType={x:Type local:PImage}}, Converter={StaticResource boolToVisible}}"  />

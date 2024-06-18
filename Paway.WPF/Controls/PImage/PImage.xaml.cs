@@ -20,6 +20,10 @@ namespace Paway.WPF
         #region 扩展参数
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty ICloseProperty =
+            DependencyProperty.Register(nameof(IClose), typeof(bool), typeof(PImage));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty TitleProperty =
             DependencyProperty.Register(nameof(Title), typeof(string), typeof(PImage), new PropertyMetadata(null, OnTitleChanged));
         private static void OnTitleChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
@@ -40,6 +44,16 @@ namespace Paway.WPF
                 view.image.Source = view.Source;
                 view.Init();
             }
+        }
+        /// <summary>
+        /// 显示关闭按钮
+        /// </summary>
+        [Category("扩展")]
+        [Description("显示关闭按钮")]
+        public bool IClose
+        {
+            get { return (bool)GetValue(ICloseProperty); }
+            set { SetValue(ICloseProperty, value); }
         }
         /// <summary>
         /// 获取或设置标题
@@ -104,6 +118,11 @@ namespace Paway.WPF
             get { return (bool)GetValue(ISaveProperty); }
             set { SetValue(ISaveProperty, value); }
         }
+
+        /// <summary>
+        /// 关闭路由事件
+        /// </summary>
+        public event EventHandler<RoutedEventArgs> CloseEvent;
 
         #endregion
 
@@ -313,7 +332,6 @@ namespace Paway.WPF
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
         {
             base.OnRenderSizeChanged(sizeInfo);
-            Canvas.SetRight(wpDesc, 0);
             this.Reset();
         }
         /// <summary>
@@ -357,7 +375,7 @@ namespace Paway.WPF
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
-            wpDesc.Visibility = Visibility.Visible;
+            dpDesc.Visibility = Visibility.Visible;
             if (Source != null)
             {
                 var point = e.GetPosition(this);
@@ -376,7 +394,7 @@ namespace Paway.WPF
         protected override void OnMouseLeave(MouseEventArgs e)
         {
             base.OnMouseLeave(e);
-            wpDesc.Visibility = Visibility.Collapsed;
+            dpDesc.Visibility = Visibility.Collapsed;
         }
 
         #endregion
@@ -457,6 +475,10 @@ namespace Paway.WPF
                     }
                 }
             }
+        }
+        private void BtnCloset_Click(object sender, RoutedEventArgs e)
+        {
+            CloseEvent?.Invoke(sender, e);
         }
 
         #endregion
