@@ -146,9 +146,9 @@ namespace Paway.WPF
             };
             element.MouseMove += (sender, e) =>
             {
-                var point = e.GetPosition(canvas);
                 if (iMoving)
                 {
+                    var point = e.GetPosition(canvas);
                     var x = imagePoint.X + point.X - moveStart.X;
                     {
                         if (x > canvas.ActualWidth) x = canvas.ActualWidth;

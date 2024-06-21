@@ -42,6 +42,7 @@ namespace Paway.WPF
             if (obj is PImage view)
             {
                 view.image.Source = view.Source;
+                view.bitmap = view.Source.ToBitmap();
                 view.Init();
             }
         }
@@ -166,6 +167,8 @@ namespace Paway.WPF
         /// 双击重置判断 - 时间
         /// </summary>
         private DateTime clickTime;
+
+        private System.Drawing.Bitmap bitmap;
 
         #endregion
 
@@ -380,7 +383,15 @@ namespace Paway.WPF
             {
                 var point = e.GetPosition(this);
                 var normal = GetPoint(point, out bool exist);
-                tbPoint.Text = exist ? $"{(int)normal.X}, {(int)normal.Y}" : null;
+                if (exist)
+                {
+                    var color = bitmap.GetPixel((int)normal.X, (int)normal.Y);
+                    tbPoint.Text = $"{(int)normal.X,3}, {(int)normal.Y,3} [{color.R,3},{color.G,3},{color.B,3}]";
+                }
+                else
+                {
+                    tbPoint.Text = null;
+                }
                 if (iMoving)
                 {
                     Move(point);
