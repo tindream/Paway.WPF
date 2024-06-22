@@ -25,7 +25,8 @@
                          Image="pack://application:,,,/Paway.WPF;component/Images/pImage/save_gray.png|pack://application:,,,/Paway.WPF;component/Images/pImage/save_white.png"    
                          Click="BtnSave_Click"
                          Visibility="{Binding ISave, RelativeSource={RelativeSource AncestorType={x:Type local:PImage}}, Converter={StaticResource boolToVisible}}"  />
-        <TextBlock DockPanel.Dock="Right" Name="tbPoint" Margin="5"/>
+        <TextBlock DockPanel.Dock="Right" Name="tbColor" Width="80" />
+        <TextBlock DockPanel.Dock="Right" Name="tbPoint" Margin="5" />
         <TextBlock Name="tbTitle" Margin="5"/>
     </DockPanel>
 </Canvas>

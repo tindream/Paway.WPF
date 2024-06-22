@@ -386,11 +386,13 @@ namespace Paway.WPF
                 if (exist)
                 {
                     var color = bitmap.GetPixel((int)normal.X, (int)normal.Y);
-                    tbPoint.Text = $"{(int)normal.X,3}, {(int)normal.Y,3} [{color.R,3},{color.G,3},{color.B,3}]";
+                    tbPoint.Text = $"{(int)normal.X}, {(int)normal.Y}";
+                    tbColor.Text = $"[{color.R},{color.G},{color.B}]";
                 }
                 else
                 {
                     tbPoint.Text = null;
+                    tbColor.Text = null;
                 }
                 if (iMoving)
                 {

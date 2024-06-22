@@ -403,7 +403,7 @@ namespace Paway.Model
                     }
                     break;
                 case "导出":
-                    title = $"{typeof(T).Description()}{DateTime.Now:yyyy-MM-dd}";
+                    title = $"{typeof(T).Description()}{DateTime.Now:yyyy-MM-dd}.xlsx";
                     if (PMethod.SaveFile(title, out file))
                     {
                         Export(file);
