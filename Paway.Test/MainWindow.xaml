@@ -167,8 +167,8 @@
                     <Progress Width="40" Height="40" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <ProgressRound Value="35.2" Width="70"/>
-                    <ProgressBoard Value="35" Width="70"/>
+                    <ProgressRound Value="35.2" Width="70" IDrag="True" Angle="280"/>
+                    <ProgressBoard Value="35" Width="70" />
                 </StackPanel>
                 <CalendarEXT/>
                 <RichTextBoxEXT x:Name="rt" IsReadOnly="True" Height="50" >

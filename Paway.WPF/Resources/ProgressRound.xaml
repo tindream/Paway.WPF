@@ -10,6 +10,7 @@
         <Setter Property="local:ProgressRound.IsMonitoring" Value="True"/>
         <Setter Property="Margin" Value="2"/>
         <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Template">
             <Setter.Value>
                 <!--控件模板-->

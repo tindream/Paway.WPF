@@ -47,7 +47,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = value == null || value == DBNull.Value;
+            var result = value == null || value.Equals(string.Empty) || value == DBNull.Value;
             if (parameter != null || (parameter is bool p && !p)) result = !result;
             return result ? Visibility.Collapsed : Visibility.Visible;
         }
@@ -63,7 +63,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = value == null || value == DBNull.Value;
+            var result = value == null || value.Equals(string.Empty) || value == DBNull.Value;
             if (parameter != null || (parameter is bool p && !p)) result = !result;
             return result ? Visibility.Visible : Visibility.Collapsed;
         }
