@@ -346,7 +346,7 @@ namespace Paway.WPF
                 var point = this.TransformToAncestor(content).Transform(new Point(0, 0));
                 var ownerPoint = this.TransformToAncestor(owner).Transform(new Point(0, 0));
                 this.boxRect = new Rect(ownerPoint.X, ownerPoint.Y, this.ActualWidth, this.ActualHeight);
-                desktopAdorner = PMethod.CustomAdorner(owner, keyboard, true, iBingParentSize: false);
+                desktopAdorner = PMethod.CustomAdorner(owner, keyboard, true, false);
                 if (desktopAdorner != null)
                 {
                     var x = point.X;

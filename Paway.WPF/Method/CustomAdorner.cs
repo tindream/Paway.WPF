@@ -65,6 +65,10 @@ namespace Paway.WPF
 
         #region 对外提供接口
         /// <summary>
+        /// 置顶
+        /// </summary>
+        public bool ITop { get; set; }
+        /// <summary>
         /// 获取画板
         /// </summary>
         public Canvas GetCanvas()

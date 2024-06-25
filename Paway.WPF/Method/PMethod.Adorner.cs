@@ -43,10 +43,10 @@ namespace Paway.WPF
         /// <para>element:当前控件</para>
         /// <para>hitTest=true 不路由事件（不穿透）</para>
         /// <para>hitTest=false 路由事件（穿透）</para>
-        /// <para>iBottom:置于最底层</para>
         /// <para>iBingAllSize:绑定到父窗体大小</para>
+        /// <para>iTop:置于项层</para>
         /// </summary>
-        public static CustomAdorner CustomAdorner(FrameworkElement element, FrameworkElement content = null, bool hitTest = false, bool iBottom = false, bool iBingParentSize = true)
+        public static CustomAdorner CustomAdorner(FrameworkElement element, FrameworkElement content = null, bool hitTest = false, bool iBingParentSize = true, bool iTop = false)
         {
             return Invoke(() =>
             {
@@ -56,19 +56,28 @@ namespace Paway.WPF
                     if (myAdornerLayer == null) return null;
 
                     var customAdorner = new CustomAdorner(element, hitTest: hitTest);
-                    if (iBottom)
+                    customAdorner.ITop = iTop;
+                    lock (myAdornerLayer)
                     {
-                        lock (myAdornerLayer)
+                        myAdornerLayer.Add(customAdorner);
+                        var list = myAdornerLayer.GetAdorners(element);
+                        if (list != null)
                         {
-                            var list = myAdornerLayer.GetAdorners(element);
-                            if (list != null) for (var i = 0; i < list.Length; i++) myAdornerLayer.Remove(list[i]);
-                            myAdornerLayer.Add(customAdorner);
-                            if (list != null) for (var i = 0; i < list.Length; i++) myAdornerLayer.Add(list[i]);
+                            var adornerList = list.ToList().ConvertAll(c => (CustomAdorner)c);
+                            if (adornerList.Any(c => c != null && c.ITop))
+                            {
+                                var topList = new List<Adorner>();
+                                var normalList = new List<Adorner>();
+                                for (var i = 0; i < list.Length; i++)
+                                {
+                                    if (list[i] is CustomAdorner adorner && adorner.ITop) topList.Add(list[i]);
+                                    else normalList.Add(list[i]);
+                                    myAdornerLayer.Remove(list[i]);
+                                }
+                                for (var i = 0; i < normalList.Count; i++) myAdornerLayer.Add(normalList[i]);
+                                for (var i = 0; i < topList.Count; i++) myAdornerLayer.Add(topList[i]);
+                            }
                         }
-                    }
-                    else
-                    {
-                        lock (myAdornerLayer) myAdornerLayer.Add(customAdorner);
                     }
                     if (content != null)
                     {
@@ -111,9 +120,19 @@ namespace Paway.WPF
             });
         }
         /// <summary>
+        /// 装饰器窗体
+        /// <para>支持移动</para>
+        /// </summary>
+        public static CustomAdorner AdornerWindow(FrameworkElement element, FrameworkElement content, int backAlpha = 100, bool iTop = false)
+        {
+            var adorner = CustomAdorner(element, content, true, false, iTop);
+            MoveAdorner(adorner, backAlpha);
+            return adorner;
+        }
+        /// <summary>
         /// 移动装饰器内控件
         /// </summary>
-        public static void MoveAdorner(CustomAdorner adorner, int backAlpha = 100)
+        private static void MoveAdorner(CustomAdorner adorner, int backAlpha = 100)
         {
             var canvas = adorner.GetCanvas();
             var element = adorner.GetElement();
@@ -300,6 +319,7 @@ namespace Paway.WPF
 
                             return storyboard;
                         }, hitTest: hitAction != null);
+                    noticeAdorner.ITop = true;
                     lock (myAdornerLayer) myAdornerLayer.Add(noticeAdorner);
                 }
             });
