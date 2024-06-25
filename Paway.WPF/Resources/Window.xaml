@@ -230,10 +230,10 @@
                             <Setter Property="Visibility" TargetName="MaximizeButton" Value="Collapsed"/>
                             <Setter Property="Visibility" TargetName="RestoreButton" Value="Visible" />
                             <Setter Property="BorderThickness" TargetName="WindowBorder" Value="0" />
-                            <!--<Setter Property="Padding" TargetName="WindowBorder" 
+                            <Setter Property="Padding" TargetName="WindowBorder" 
                                     Value="{x:Static SystemParameters.WindowResizeBorderThickness}" />
                             <Setter TargetName="LayoutRoot" Property="Margin"
-                                    Value="{x:Static local:WindowParameters.PaddedBorderThickness}" />-->
+                                    Value="{x:Static local:WindowParameters.PaddedBorderThickness}" />
                         </Trigger>
                         <Trigger Property="WindowState" Value="Normal">
                             <Setter Property="Visibility" TargetName="MaximizeButton" Value="Visible" />
@@ -242,6 +242,9 @@
                         <Trigger Property="WindowStyle" Value="None">
                             <Setter Property="Height" TargetName="WindowTitlePanel" Value="0" />
                             <Setter Property="MinHeight" TargetName="WindowTitlePanel" Value="0" />
+                            <Setter Property="BorderThickness" TargetName="WindowBorder" Value="0" />
+                            <Setter Property="Padding" TargetName="WindowBorder" Value="0" />
+                            <Setter TargetName="LayoutRoot" Property="Margin" Value="0" />
                             <Setter Property="WindowChrome.WindowChrome">
                                 <Setter.Value>
                                     <WindowChrome UseAeroCaptionButtons="False" CaptionHeight="0" />
