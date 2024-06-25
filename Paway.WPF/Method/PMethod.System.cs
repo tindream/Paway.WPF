@@ -203,7 +203,7 @@ namespace Paway.WPF
         {
             if (!Parent(parent, out Window owner)) return null;
             //蒙板
-            var layer = new Grid() { Background = AlphaColor(alpha, Colors.Black).ToBrush() };
+            var layer = new Grid() { Background = Colors.Black.ToAlpha(alpha).ToBrush() };
             //使用装饰器装载
             var desktopAdorner = CustomAdorner(owner, layer);
 

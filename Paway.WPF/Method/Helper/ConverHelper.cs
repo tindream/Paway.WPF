@@ -102,6 +102,16 @@ namespace Paway.WPF
 
         #region Color转换
         /// <summary>
+        /// 指定颜色透明度(Alpha)
+        /// </summary>
+        public static Color ToAlpha(this Color color, int alpha)
+        {
+            if (color == Colors.Transparent) alpha = 0;
+            if (alpha < 0) alpha = 0;
+            else if (alpha > 255) alpha = 255;
+            return System.Windows.Media.Color.FromArgb((byte)alpha, color.R, color.G, color.B);
+        }
+        /// <summary>
         /// 颜色转换(Add)
         /// </summary>
         public static Color AddLight(this Color color, int value)

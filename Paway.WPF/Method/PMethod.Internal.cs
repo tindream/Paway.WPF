@@ -22,7 +22,7 @@ namespace Paway.WPF
         /// </summary>
         internal static Color ThemeColor(int alpha = PConfig.Alpha)
         {
-            return AlphaColor(alpha, PConfig.Color);
+            return PConfig.Color.ToAlpha(alpha);
         }
 
         /// <summary>

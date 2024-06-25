@@ -65,16 +65,6 @@ namespace Paway.WPF
             var b = (byte)((right.Color.B - left.Color.B) * offset + left.Color.B);
             return Color.FromArgb(a, r, g, b);
         }
-        /// <summary>
-        /// 指定Alpha颜色
-        /// </summary>
-        public static Color AlphaColor(int alpha, Color color)
-        {
-            if (color == Colors.Transparent) alpha = 0;
-            if (alpha < 0) alpha = 0;
-            else if (alpha > 255) alpha = 255;
-            return Color.FromArgb((byte)alpha, color.R, color.G, color.B);
-        }
 
         #endregion
     }

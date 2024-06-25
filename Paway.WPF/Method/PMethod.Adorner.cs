@@ -136,7 +136,7 @@ namespace Paway.WPF
         {
             var canvas = adorner.GetCanvas();
             var element = adorner.GetElement();
-            canvas.Background = PMethod.AlphaColor(backAlpha, Colors.Black).ToBrush();
+            canvas.Background = Colors.Black.ToAlpha(backAlpha).ToBrush();
             //正在拖动标记
             bool iMoving = false;
             //拖拽起点
@@ -246,7 +246,7 @@ namespace Paway.WPF
                     }
                     else
                     {
-                        border.Background = AlphaColor(PConfig.Alpha, type.Color()).ToBrush();
+                        border.Background = type.Color().ToAlpha(PConfig.Alpha).ToBrush();
                         var block = new TextBlock()
                         {
                             Text = msg.ToStrings(),
@@ -479,7 +479,7 @@ namespace Paway.WPF
             var autoWidth = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2)) * 2;
             if (width == 0 || width > autoWidth) width = autoWidth;
 
-            var ellipse = new Ellipse() { Width = width, Height = width, Fill = AlphaColor(20, Colors.Black).ToBrush() };
+            var ellipse = new Ellipse() { Width = width, Height = width, Fill = Colors.Black.ToAlpha(20).ToBrush() };
             if (LastWaterElement != null) ClearAdorner(ReloadAdorner(LastWaterElement), LastWaterElement, NameWater);
             var waterAdornerFixed = new CustomAdorner(element, ellipse, null, () => point.X - ellipse.ActualWidth / 2, () => point.Y - ellipse.ActualHeight / 2, hitTest: false) { Name = NameWater };
             lock (myAdornerLayer) myAdornerLayer.Add(waterAdornerFixed);
@@ -553,7 +553,7 @@ namespace Paway.WPF
                 Storyboard.SetTargetProperty(animHeight, new PropertyPath(FrameworkElement.HeightProperty));
                 storyboard.Children.Add(animHeight);
 
-                var animColor = new ColorAnimation(color.Value, AlphaColor(10, color.Value), new Duration(TimeSpan.FromMilliseconds(300)));
+                var animColor = new ColorAnimation(color.Value, color.Value.ToAlpha(10), new Duration(TimeSpan.FromMilliseconds(300)));
                 //ellipse.Fill.BeginAnimation(SolidColorBrush.ColorProperty, animColor);
                 var propertyChain = new DependencyProperty[] { Ellipse.FillProperty, SolidColorBrush.ColorProperty };
                 Storyboard.SetTargetProperty(animColor, new PropertyPath("(0).(1)", propertyChain));
@@ -608,7 +608,7 @@ namespace Paway.WPF
                     var myAdornerLayer = ReloadAdorner(element);
                     if (myAdornerLayer == null) return;
 
-                    var color = AlphaColor(PConfig.Alpha, type.Color());
+                    var color = type.Color().ToAlpha(PConfig.Alpha);
                     var border = new Border
                     {
                         CornerRadius = new CornerRadius(3),
@@ -647,7 +647,7 @@ namespace Paway.WPF
                         storyboard.Children.Add(animIn);
 
                         var animTime = AnimTime(border.ActualHeight);
-                        var animColor = new ColorAnimation(color, AlphaColor(0, color), new Duration(TimeSpan.FromMilliseconds(animTime)))
+                        var animColor = new ColorAnimation(color, color.ToAlpha(0), new Duration(TimeSpan.FromMilliseconds(animTime)))
                         {
                             BeginTime = TimeSpan.FromMilliseconds(time + 125)
                         };
@@ -712,7 +712,7 @@ namespace Paway.WPF
                     var myAdornerLayer = ReloadAdorner(element);
                     if (myAdornerLayer == null) return;
 
-                    var color = AlphaColor(PConfig.Alpha, type.Color());
+                    var color = type.Color().ToAlpha(PConfig.Alpha);
                     var border = new Border
                     {
                         CornerRadius = new CornerRadius(3),
@@ -737,7 +737,7 @@ namespace Paway.WPF
                     {
                         var storyboard = new Storyboard();
 
-                        var animInColor = new ColorAnimation(AlphaColor(0, color), color, new Duration(TimeSpan.FromMilliseconds(125)));
+                        var animInColor = new ColorAnimation(color.ToAlpha(0), color, new Duration(TimeSpan.FromMilliseconds(125)));
                         var propertyChain = new DependencyProperty[] { Border.BackgroundProperty, SolidColorBrush.ColorProperty };
                         Storyboard.SetTargetProperty(animInColor, new PropertyPath("(0).(1)", propertyChain));
                         storyboard.Children.Add(animInColor);
@@ -763,7 +763,7 @@ namespace Paway.WPF
                         //storyboard.Children.Add(animInY);
 
                         var animTime = AnimTime(Math.Max(border.ActualWidth, border.ActualHeight));
-                        var animColor = new ColorAnimation(color, AlphaColor(0, color), new Duration(TimeSpan.FromMilliseconds(animTime)))
+                        var animColor = new ColorAnimation(color, color.ToAlpha(0), new Duration(TimeSpan.FromMilliseconds(animTime)))
                         {
                             BeginTime = TimeSpan.FromMilliseconds(time + 125)
                         };
@@ -865,7 +865,7 @@ namespace Paway.WPF
                     CornerRadius = new CornerRadius(3),
                     BorderBrush = Colors.LightGray.ToBrush(),
                     BorderThickness = new Thickness(1),
-                    Background = AlphaColor(PConfig.Alpha, Colors.White).ToBrush(),
+                    Background = Colors.White.ToAlpha(PConfig.Alpha).ToBrush(),
                     MinWidth = 250,
                     MaxWidth = 350,
                     MinHeight = 45,
@@ -919,7 +919,7 @@ namespace Paway.WPF
                         Height = 100,
                     });
                 }
-                var progressAdorner = new CustomAdorner(element, border, AlphaColor(0, Colors.Black));
+                var progressAdorner = new CustomAdorner(element, border, Colors.Black.ToAlpha(0));
                 lock (myAdornerLayer) myAdornerLayer.Add(progressAdorner);
                 progressAdorner.Tag = myAdornerLayer;
                 return progressAdorner;

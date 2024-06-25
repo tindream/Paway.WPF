@@ -44,7 +44,7 @@ namespace Paway.WPF
                 if (view.Type != ColorType.None)
                 {
                     var color = view.Type.Color();
-                    view.ItemBrush = new BrushEXT(PMethod.AlphaColor(PConfig.Alpha, color))
+                    view.ItemBrush = new BrushEXT(color.ToAlpha(PConfig.Alpha))
                     {
                         Normal = new ThemeForeground(Colors.LightGray)
                     };

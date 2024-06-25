@@ -84,7 +84,7 @@ namespace Paway.WPF
         private ColorLinear Reset(Color color, int alpha = 165)
         {
             Start = color;
-            End = PMethod.AlphaColor(color.A + alpha, color);
+            End = color.ToAlpha(color.A + alpha);
             return this;
         }
         /// <summary>

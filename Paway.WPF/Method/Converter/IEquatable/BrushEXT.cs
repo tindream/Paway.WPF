@@ -41,7 +41,7 @@ namespace Paway.WPF
             get
             {
                 var mouse = Mouse as SolidColorBrush;
-                return PMethod.AlphaColor(mouse.Color.A + Alpha / 2, mouse.Color).ToBrush();
+                return mouse.Color.ToAlpha(mouse.Color.A + Alpha / 2).ToBrush();
             }
         }
 
@@ -56,7 +56,7 @@ namespace Paway.WPF
             if (Mouse is SolidColorBrush mouse && Pressed is SolidColorBrush pressed)
             {
                 var a = (pressed.Color.A - mouse.Color.A) / 2;
-                this.PressedMouse = PMethod.AlphaColor(Math.Abs(pressed.Color.A - a), pressed.Color).ToBrush();
+                this.PressedMouse = pressed.Color.ToAlpha(Math.Abs(pressed.Color.A - a)).ToBrush();
             }
             else
             {
@@ -147,8 +147,8 @@ namespace Paway.WPF
         private BrushEXT Reset(Color color, int alpha)
         {
             Normal = new ThemeForeground(color);
-            Mouse = PMethod.AlphaColor(color.A - alpha, color).ToBrush();
-            Pressed = PMethod.AlphaColor(color.A + alpha, color).ToBrush();
+            Mouse = color.ToAlpha(color.A - alpha).ToBrush();
+            Pressed = color.ToAlpha(color.A + alpha).ToBrush();
             return this;
         }
         /// <summary>
@@ -157,7 +157,7 @@ namespace Paway.WPF
         private BrushEXT Focused(Color color, int alpha)
         {
             Mouse = color.ToBrush();
-            Pressed = PMethod.AlphaColor(color.A + alpha * 2, color).ToBrush();
+            Pressed = color.ToAlpha(color.A + alpha * 2).ToBrush();
             return this;
         }
         /// <summary>

@@ -58,7 +58,7 @@ namespace Paway.WPF
                 if (view.Type != ColorType.None)
                 {
                     var color = view.Type.Color();
-                    view.ItemBackground = new BrushEXT(Colors.Transparent, PMethod.AlphaColor(PConfig.Alpha - PConfig.Interval, color), PMethod.AlphaColor(PConfig.Alpha, color));
+                    view.ItemBackground = new BrushEXT(Colors.Transparent, color.ToAlpha(PConfig.Alpha - PConfig.Interval), color.ToAlpha(PConfig.Alpha));
                 }
                 if (view.IsLight)
                 {
@@ -86,18 +86,18 @@ namespace Paway.WPF
             if (d is ListViewCustom listView)
             {
                 Color? mouseColor = null, pressedColor = null;
-                if (listView.ItemBackground.Mouse is SolidColorBrush mouse && mouse.Color != PMethod.AlphaColor(PConfig.Alpha - PConfig.Interval, PConfig.Color))
+                if (listView.ItemBackground.Mouse is SolidColorBrush mouse && mouse.Color != PConfig.Color.ToAlpha(PConfig.Alpha - PConfig.Interval))
                 {
-                    if (listView.ItemBrush.Mouse.ToColor() == PMethod.AlphaColor(PConfig.Alpha, PConfig.Color))
+                    if (listView.ItemBrush.Mouse.ToColor() == PConfig.Color.ToAlpha(PConfig.Alpha))
                     {
-                        mouseColor = PMethod.AlphaColor(mouse.Color.A, mouse.Color);
+                        mouseColor = mouse.Color.ToAlpha(mouse.Color.A);
                     }
                 }
-                if (listView.ItemBackground.Pressed is SolidColorBrush pressed && pressed.Color != PMethod.AlphaColor(PConfig.Alpha, PConfig.Color))
+                if (listView.ItemBackground.Pressed is SolidColorBrush pressed && pressed.Color != PConfig.Color.ToAlpha(PConfig.Alpha))
                 {
-                    if (listView.ItemBrush.Pressed.ToColor() == PMethod.AlphaColor(PConfig.Alpha + PConfig.Interval, PConfig.Color))
+                    if (listView.ItemBrush.Pressed.ToColor() == PConfig.Color.ToAlpha(PConfig.Alpha + PConfig.Interval))
                     {
-                        pressedColor = PMethod.AlphaColor(pressed.Color.A + PConfig.Interval, pressed.Color);
+                        pressedColor = pressed.Color.ToAlpha(pressed.Color.A + PConfig.Interval);
                     }
                 }
                 if (mouseColor != null || pressedColor != null)

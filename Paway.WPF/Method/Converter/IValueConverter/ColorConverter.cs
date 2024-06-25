@@ -18,7 +18,7 @@ namespace Paway.WPF
             {
                 var alpha = parameter.ToInt();
                 if (alpha == 0) alpha = PConfig.Alpha;
-                return PMethod.AlphaColor(alpha, color);
+                return color.ToAlpha(alpha);
             }
             return value;
         }
