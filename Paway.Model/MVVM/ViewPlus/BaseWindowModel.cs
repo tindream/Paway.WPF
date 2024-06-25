@@ -48,7 +48,8 @@ namespace Paway.Model
         {
             try
             {
-                wd.DialogResult = OnCancel();
+                var result = OnCancel();
+                if (wd != null) wd.DialogResult = result;
             }
             catch (Exception ex)
             {
@@ -67,7 +68,8 @@ namespace Paway.Model
         {
             try
             {
-                wd.DialogResult = OnCommit(wd);
+                var result = OnCommit(wd);
+                if (wd != null) wd.DialogResult = result;
             }
             catch (Exception ex)
             {

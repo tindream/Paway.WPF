@@ -30,7 +30,7 @@ namespace Paway.Model
         }
         private void TbName_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter && this.DataContext is NameWindowModel name) name.EnterCommit(this);
+            if (e.Key == Key.Enter && this.DataContext is NameWindowModel window) window.EnterCommit(this);
         }
     }
 }
