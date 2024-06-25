@@ -94,6 +94,20 @@ namespace Paway.Model
             get { return _iUserList; }
             set { _iUserList = value; OnPropertyChanged(); }
         }
+        private bool _isDropDownOpen;
+        /// <summary>
+        /// 获取或设置一个值，该值指示是否当前打开组合框下拉列表。
+        /// </summary>
+        public bool IsDropDownOpen
+        {
+            get { return _isDropDownOpen; }
+            set
+            {
+                _isDropDownOpen = value; OnPropertyChanged();
+                if (value) FilterUser(null);
+            }
+        }
+
         private string _userName;
         /// <summary>
         /// 用户名
