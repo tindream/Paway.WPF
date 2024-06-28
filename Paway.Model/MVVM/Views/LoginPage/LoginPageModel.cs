@@ -104,7 +104,16 @@ namespace Paway.Model
             set
             {
                 _isDropDownOpen = value; OnPropertyChanged();
-                if (value) FilterUser(null);
+                var _userTemp = UserName;
+                try
+                {
+                    if (value) FilterUser(null);
+                }
+                finally
+                {
+                    _userName = _userTemp;
+                    OnPropertyChanged(nameof(UserName));
+                }
             }
         }
 
