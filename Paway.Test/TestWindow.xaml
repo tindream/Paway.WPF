@@ -59,6 +59,7 @@
                     </Grid>
                 </StackPanel>
                 <WrapPanel DockPanel.Dock="Bottom">
+                    <TextBoxEXT Keyboard="All"/>
                     <ButtonEXT Content="3D" Click="Button_Click" Command="{Binding ItemClickCommand}" CommandParameter="3D"/>
                     <ButtonEXT Content="空" Click="Button_Click2" Command="{Binding ItemClickCommand}" CommandParameter="空"/>
                 </WrapPanel>

@@ -327,7 +327,7 @@ namespace Paway.WPF
                 if (keyboardType == KeyboardType.Auto)
                 {
                     Binding binding = BindingOperations.GetBinding(this, TextBox.TextProperty);
-                    if (binding != null)
+                    if (binding != null && this.DataContext != null)
                     {
                         var property = this.DataContext.Property(binding.Path.Path);
                         if (property != null && property.PropertyType == typeof(string)) keyboardType = KeyboardType.All;

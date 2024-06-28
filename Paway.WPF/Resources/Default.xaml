@@ -89,12 +89,12 @@
         </Border>
         <DataTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True" >
-                <Setter TargetName="border" Property="Background" Value="{Binding Source={StaticResource ThemeColor}, Converter={StaticResource brushAlphaConverter}, ConverterParameter=180}"/>
+                <Setter TargetName="border" Property="Background" Value="#E5E5E5"/>
                 <Setter TargetName="image" Property="Source" Value="{Binding Image.Mouse}"/>
             </Trigger>
             <DataTrigger Binding="{Binding IsPressed}" Value="True">
                 <Setter TargetName="border" Property="Background" Value="{Binding Source={StaticResource ThemeColor}, Converter={StaticResource brushAlphaConverter}, ConverterParameter=240}"/>
-                <Setter TargetName="image" Property="Source" Value="{Binding Image.Mouse}"/>
+                <Setter TargetName="image" Property="Source" Value="{Binding Image.Pressed}"/>
             </DataTrigger>
         </DataTemplate.Triggers>
     </DataTemplate>
