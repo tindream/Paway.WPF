@@ -21,6 +21,7 @@
 @copy bin\Release\net45\Paway.WPF_Secure\Paway.WPF.xml			builder\Paway.WPF.1.5.0_net45\Paway.WPF.xml
 
 @copy bin\Release\net452\Paway.Model_Secure\Paway.Model.dll		builder\Paway.Model.1.5.0_net452\Paway.Model.dll
+@copy bin\Release\net452\Paway.Model_Secure\Paway.Model.pdb		builder\Paway.Model.1.5.0_net452\Paway.Model.pdb
 @copy bin\Release\net452\Paway.Model_Secure\Paway.Model.xml		builder\Paway.Model.1.5.0_net452\Paway.Model.xml
 
 @echo --------------------------------------------------------------------------- 

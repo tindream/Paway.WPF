@@ -7,7 +7,7 @@
       FontSize="20"
       DataContext="{Binding Welcome, Source={StaticResource Locator}}"
       d:DesignHeight="160" d:DesignWidth="455" >
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,30,0,0">
+    <StackPanel Name="root" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,30,0,0">
         <TextBlock Text="{Binding Title, FallbackValue=欢迎使用}" TextAlignment="Center"/>
         <TextBlock Text="{Binding Subject}" TextAlignment="Center"/>
     </StackPanel>

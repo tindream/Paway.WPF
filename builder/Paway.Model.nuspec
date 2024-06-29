@@ -24,6 +24,7 @@
 	</metadata>
 	<files>
 		<file src="..\bin\release\net452\Paway.Model_Secure\Paway.Model.dll"	target="lib\net452" />
+		<file src="..\bin\release\net452\Paway.Model_Secure\Paway.Model.pdb"	target="lib\net452" />
 		<file src="..\bin\release\net452\Paway.Model.xml"						target="lib\net452" />
 	</files>
 </package>

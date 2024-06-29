@@ -34,7 +34,7 @@
 		<PackageReference Include="Paway.Helper" Version="2.5.7" />
 		<PackageReference Include="Paway.Utils" Version="2.5.7" />
 		<PackageReference Include="Paway.Runtime.Plot" Version="1.0.4" />
-		<PackageReference Include="Paway.Runtime.Office" Version="8.11.2" />
+		<PackageReference Include="Paway.Runtime.Office" Version="8.11.3" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
 	</ItemGroup>
