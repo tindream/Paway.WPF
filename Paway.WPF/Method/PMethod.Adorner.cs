@@ -156,12 +156,16 @@ namespace Paway.WPF
                 {
                     iMoving = true;
                     moveStart = e.GetPosition(canvas);
+                    //尝试将鼠标强制捕获到控件
+                    element.CaptureMouse();
                     e.Handled = true;
                 }
             };
             element.PreviewMouseUp += (sender, e) =>
             {
                 iMoving = false;
+                //当控件具有鼠标捕获的话，则释放该捕获。
+                element.ReleaseMouseCapture();
             };
             element.MouseMove += (sender, e) =>
             {
