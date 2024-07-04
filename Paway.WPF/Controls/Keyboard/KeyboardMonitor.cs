@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace Paway.WPF
@@ -77,7 +78,15 @@ namespace Paway.WPF
                     default:
                     case KeyboardType.All: var keyboardAll = new KeyboardAll(); keyboard = keyboardAll; keyboardAll.CloseEvent += CloseKeyboard; break;
                 }
-                var point = element.TransformToAncestor(content).Transform(new Point(0, 0));
+                Point point;
+                if (PMethod.Parent(element, out Adorner adorner))
+                {
+                    point = element.TransformToAncestor(adorner).Transform(new Point(0, 0));
+                }
+                else
+                {
+                    point = element.TransformToAncestor(content).Transform(new Point(0, 0));
+                }
                 var ownerPoint = element.TransformToAncestor(owner).Transform(new Point(0, 0));
                 this.boxRect = new Rect(ownerPoint.X, ownerPoint.Y, element.ActualWidth, element.ActualHeight);
                 desktopAdorner = PMethod.CustomAdorner(owner, keyboard, true, false);

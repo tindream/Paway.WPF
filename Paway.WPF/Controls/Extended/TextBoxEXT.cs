@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -343,7 +344,15 @@ namespace Paway.WPF
                     case KeyboardType.All: var keyboardAll = new KeyboardAll(); keyboard = keyboardAll; keyboardAll.CloseEvent += CloseKeyboard; break;
                     default: return;
                 }
-                var point = this.TransformToAncestor(content).Transform(new Point(0, 0));
+                Point point;
+                if (PMethod.Parent(this, out Adorner adorner))
+                {
+                    point = this.TransformToAncestor(adorner).Transform(new Point(0, 0));
+                }
+                else
+                {
+                    point = this.TransformToAncestor(content).Transform(new Point(0, 0));
+                }
                 var ownerPoint = this.TransformToAncestor(owner).Transform(new Point(0, 0));
                 this.boxRect = new Rect(ownerPoint.X, ownerPoint.Y, this.ActualWidth, this.ActualHeight);
                 desktopAdorner = PMethod.CustomAdorner(owner, keyboard, true, false);

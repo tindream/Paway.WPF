@@ -119,9 +119,11 @@ namespace Paway.WPF
             var interval = Math.Sqrt(Math.Abs(x + y));
             if (x + y < 0) interval *= -1;
             var percent = interval * 0.35 / this.ActualWidth;
+            if ((Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.Shift) percent /= 3;
+            else if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control) percent *= 3;
             var temp = this.Value + (this.Maximum - this.Minimum) * percent;
             var count = (temp / this.SmallChange).ToInt();
-            temp = count * this.SmallChange;
+            temp = (count * this.SmallChange).Clear();
             if (temp > this.Maximum) temp = this.Maximum;
             else if (temp < this.Minimum) temp = this.Minimum;
             if (this.Value != temp) this.Value = temp;
@@ -176,7 +178,7 @@ namespace Paway.WPF
             else if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control) interval *= 3;
             var temp = this.Value + interval;
             var count = (temp / this.SmallChange).ToInt();
-            temp = count * this.SmallChange;
+            temp = (count * this.SmallChange).Clear();
             if (temp > this.Maximum) temp = this.Maximum;
             else if (temp < this.Minimum) temp = this.Minimum;
             if (this.Value != temp) this.Value = temp;
