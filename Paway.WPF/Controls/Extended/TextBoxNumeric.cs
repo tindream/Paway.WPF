@@ -20,6 +20,10 @@ namespace Paway.WPF
         #region 依赖属性
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty KeyboardProperty =
+                DependencyProperty.RegisterAttached(nameof(Keyboard), typeof(KeyboardType), typeof(TextBoxNumeric), new PropertyMetadata(KeyboardType.Num));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty RadiusProperty =
             DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(TextBoxNumeric), new PropertyMetadata(new CornerRadius(3)));
         /// <summary>
@@ -72,6 +76,17 @@ namespace Paway.WPF
         #endregion
 
         #region 扩展
+        /// <summary>
+        /// 虚拟键盘类型
+        /// <para>默认值：数字键盘</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("虚拟键盘类型")]
+        public KeyboardType Keyboard
+        {
+            get { return (KeyboardType)GetValue(KeyboardProperty); }
+            set { SetValue(KeyboardProperty, value); }
+        }
         /// <summary>
         /// 自定义边框圆角
         /// <para>默认值：3</para>
@@ -212,6 +227,7 @@ namespace Paway.WPF
         public TextBoxNumeric()
         {
             DefaultStyleKey = typeof(TextBoxNumeric);
+            new KeyboardMonitor(this);
             OnLostFocus(null);
         }
         /// <summary>
@@ -317,8 +333,8 @@ namespace Paway.WPF
             if (/*this.IsFocused &&*/ !IsReadOnly)
             {
                 var interval = (e.Delta > 0 ? 1 : -1) * Interval;
-                if ((Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.Shift) interval /= 5;
-                else if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control) interval *= 5;
+                if ((System.Windows.Input.Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.Shift) interval /= 5;
+                else if ((System.Windows.Input.Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control) interval *= 5;
                 AddValue(interval);
                 e.Handled = true;
             }

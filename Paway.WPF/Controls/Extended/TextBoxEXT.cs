@@ -250,6 +250,7 @@ namespace Paway.WPF
         public TextBoxEXT()
         {
             DefaultStyleKey = typeof(TextBoxEXT);
+            new KeyboardMonitor(this);
         }
         /// <summary>
         /// Water未自定义设置时绑定多语言
@@ -294,119 +295,6 @@ namespace Paway.WPF
         {
             base.OnMouseLeave(e);
             if (Animation > 0) PMethod.Animation(this, false);
-        }
-
-        #endregion
-
-        #region 自定义虚拟键盘
-        private CustomAdorner desktopAdorner;
-        private Rect boxRect;
-        private Rect keyboardRect;
-        /// <summary>
-        /// 鼠标点击时自动打开虚拟键盘
-        /// </summary>
-        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
-        {
-            base.OnPreviewMouseDown(e);
-            this.OpenKeyboard();
-        }
-        /// <summary>
-        /// 获取焦点时自动打开虚拟键盘
-        /// </summary>
-        protected override void OnGotFocus(RoutedEventArgs e)
-        {
-            base.OnGotFocus(e);
-            this.OpenKeyboard();
-        }
-        private void OpenKeyboard()
-        {
-            if (!this.IsLoaded || !this.IsEnabled || this.IsReadOnly) return;
-            if (PConfig.Keyboard == EnableType.None || Keyboard == KeyboardType.None) return;
-            if (desktopAdorner == null && PMethod.Parent(this, out Window owner) && owner.Content is FrameworkElement content)
-            {
-                var keyboardType = Keyboard;
-                if (keyboardType == KeyboardType.Auto)
-                {
-                    Binding binding = BindingOperations.GetBinding(this, TextBox.TextProperty);
-                    if (binding != null && this.DataContext != null)
-                    {
-                        var property = this.DataContext.Property(binding.Path.Path);
-                        if (property != null && property.PropertyType == typeof(string)) keyboardType = KeyboardType.All;
-                        else keyboardType = KeyboardType.Num;
-                    }
-                    else keyboardType = KeyboardType.All;
-                }
-                owner.PreviewMouseLeftButtonDown += Owner_PreviewMouseLeftButtonDown;
-                FrameworkElement keyboard;
-                switch (keyboardType)
-                {
-                    case KeyboardType.Num: var keyboardNum = new KeyboardNum(); keyboard = keyboardNum; keyboardNum.CloseEvent += CloseKeyboard; break;
-                    case KeyboardType.All: var keyboardAll = new KeyboardAll(); keyboard = keyboardAll; keyboardAll.CloseEvent += CloseKeyboard; break;
-                    default: return;
-                }
-                Point point;
-                if (PMethod.Parent(this, out Adorner adorner))
-                {
-                    point = this.TransformToAncestor(adorner).Transform(new Point(0, 0));
-                }
-                else
-                {
-                    point = this.TransformToAncestor(content).Transform(new Point(0, 0));
-                }
-                var ownerPoint = this.TransformToAncestor(owner).Transform(new Point(0, 0));
-                this.boxRect = new Rect(ownerPoint.X, ownerPoint.Y, this.ActualWidth, this.ActualHeight);
-                desktopAdorner = PMethod.CustomAdorner(owner, keyboard, true, false);
-                if (desktopAdorner != null)
-                {
-                    var x = point.X;
-                    if (content.ActualWidth < keyboard.Width + x)
-                    {
-                        x = content.ActualWidth - keyboard.Width;
-                    }
-                    var y = point.Y + this.ActualHeight;
-                    if (content.ActualHeight < keyboard.Height + y)
-                    {
-                        y = point.Y - keyboard.Height;
-                    }
-                    Canvas.SetLeft(keyboard, x);
-                    Canvas.SetTop(keyboard, y);
-                    var ownerPoint2 = content.TransformToAncestor(owner).Transform(new Point(x, y));
-                    this.keyboardRect = new Rect(ownerPoint2.X, ownerPoint2.Y, keyboard.Width, keyboard.Height);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 失去焦点时自动关闭虚拟键盘
-        /// </summary>
-        protected override void OnLostFocus(RoutedEventArgs e)
-        {
-            base.OnLostFocus(e);
-            this.CloseKeyboard();
-        }
-        private void Owner_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is IInputElement element)
-            {
-                var point = e.GetPosition(element);
-                if (desktopAdorner != null && !boxRect.Contains(point) && !keyboardRect.Contains(point))
-                {
-                    this.CloseKeyboard();
-                }
-            }
-        }
-        private void CloseKeyboard()
-        {
-            if (desktopAdorner != null && PMethod.Parent(this, out Window owner) && owner.Content is FrameworkElement content)
-            {
-                owner.PreviewMouseLeftButtonDown -= Owner_PreviewMouseLeftButtonDown;
-                var myAdornerLayer = PMethod.ReloadAdorner(content);
-                if (myAdornerLayer == null) return;
-
-                lock (myAdornerLayer) myAdornerLayer.Remove(desktopAdorner);
-                desktopAdorner = null;
-                KeyboardHelper.StopHook();
-            }
         }
 
         #endregion

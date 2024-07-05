@@ -28,7 +28,7 @@ namespace Paway.WPF
         {
             if (obj is PasswordBox pad)
             {
-                if (PConfig.Keyboard != EnableType.None) new KeyboardMonitor(pad);
+                new KeyboardMonitor(pad);
                 if (PasswordBoxEXT.GetWater(pad) == null)
                 {
                     PasswordBoxEXT.SetWater(pad, PConfig.LanguageBase.PleaseInputPasswordWater);

@@ -54,11 +54,23 @@ namespace Paway.WPF
         }
         private void OpenKeyboard()
         {
-            if (!element.IsLoaded || !element.IsEnabled) return;
-            if (element is TextBoxBase textBox && textBox.IsReadOnly) return;
-            if (desktopAdorner == null && PMethod.Parent(element, out Window owner) && owner.Content is FrameworkElement content)
+            if (!element.IsLoaded || !element.IsEnabled || desktopAdorner != null) return;
+            if (PConfig.Keyboard == EnableType.None) return;
+            var keyboardType = Keyboard;
+            if (element is TextBoxEXT textBoxEXT)
             {
-                var keyboardType = Keyboard;
+                keyboardType = textBoxEXT.Keyboard;
+                if (textBoxEXT.IsReadOnly) return;
+            }
+            if (element is TextBoxNumeric textBoxNumeric)
+            {
+                keyboardType = textBoxNumeric.Keyboard;
+                if (textBoxNumeric.IsReadOnly) return;
+            }
+            if (keyboardType == KeyboardType.None) return;
+
+            if (PMethod.Parent(element, out Window owner) && owner.Content is FrameworkElement content)
+            {
                 if (keyboardType == KeyboardType.Auto && element is TextBoxBase)
                 {
                     Binding binding = BindingOperations.GetBinding(element, TextBox.TextProperty);
