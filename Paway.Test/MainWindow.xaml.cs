@@ -112,6 +112,7 @@ namespace Paway.Test
                     Style = this.FindResource("PathRound") as Style
                 };
             }
+            Messenger.Default.Send(new MainLoadMessage());
         }
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {

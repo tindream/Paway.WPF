@@ -281,6 +281,10 @@ namespace Paway.Test
             }
 
             this.MessengerInstance.Register<StatuMessage>(this, msg => Statu(msg.Msg));
+            this.MessengerInstance.Register<MainLoadMessage>(this, msg =>
+            {
+                AddPlot();
+            });
 
             list.Add(new ListViewItemModel("Hello"));
             list.Add(new ListViewItemModel("你好123")
@@ -297,7 +301,6 @@ namespace Paway.Test
 
             AddComboMulti();
             AddTree();
-            AddPlot();
         }
         private void AddComboMulti()
         {
