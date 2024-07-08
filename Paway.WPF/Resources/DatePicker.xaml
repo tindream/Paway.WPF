@@ -3,7 +3,7 @@
                     xmlns:local="clr-namespace:Paway.WPF">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\Calendar.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Calendar.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <LinearGradientBrush x:Key="backLinear"  StartPoint="0.46,1.6" EndPoint="0.3,-1.1">

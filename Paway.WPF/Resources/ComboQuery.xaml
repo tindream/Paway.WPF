@@ -3,8 +3,8 @@
                     xmlns:local="clr-namespace:Paway.WPF">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\ComboBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Default.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\ComboBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type local:ComboQuery}" BasedOn="{StaticResource ComboConfig}">

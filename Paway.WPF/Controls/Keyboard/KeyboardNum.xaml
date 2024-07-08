@@ -8,7 +8,7 @@
              Background="#E5000000" UseLayoutRounding="True"
              Height="248" Width="258">
     <UserControl.Resources>
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\Default.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Default.xaml" />
     </UserControl.Resources>
 
     <Border BorderBrush="#3D3D3D" BorderThickness="2" CornerRadius="3" Padding="2">

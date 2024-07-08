@@ -4,9 +4,9 @@
                     xmlns:local="clr-namespace:Paway.WPF">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\Default\Converter.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\Default\Path.xaml" />
-        <ResourceDictionary Source="/Paway.WPF;component\Resources\Default\Theme.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Default\Converter.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Default\Path.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Default\Theme.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <!--#region 默认全局样式 -->
