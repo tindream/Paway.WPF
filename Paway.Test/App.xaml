@@ -12,7 +12,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Paway.WPF;component\Themes\Paway.xaml"/>
-                <ResourceDictionary Source="Resources/Default.xaml" />
+                <ResourceDictionary Source="Resources\Default.xaml" />
                 <ResourceDictionary>
                     <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
                 </ResourceDictionary>
