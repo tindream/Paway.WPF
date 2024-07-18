@@ -379,7 +379,7 @@ namespace Paway.Model
                 case "删除":
                     if (SelectedInfo() is T infoDel)
                     {
-                        if (PMethod.Ask(DataGrid, $"确认删除：[{infoDel.GetType().Description()}]" + infoDel))
+                        if (PMethod.Ask(DataGrid, $"{PConfig.LanguageBase.ConfirmDelete}：[{infoDel.GetType().Description()}]" + infoDel))
                         {
                             Deleted(infoDel);
                         }
@@ -387,19 +387,19 @@ namespace Paway.Model
                     break;
                 case "导入":
                     var title = typeof(T).Description();
-                    if (PMethod.OpenFile($"选择要导入的 {title} 表", out string file))
+                    if (PMethod.OpenFile(PConfig.LanguageBase.SelectImportFile, out string file))
                     {
-                        PMethod.Progress(PMethod.Window(DataGrid), "正在导入..", adorner =>
+                        PMethod.Progress(PMethod.Window(DataGrid), PConfig.LanguageBase.Importing, adorner =>
                         {
                             var list = ExcelBuilder.Create(file).ToList<T>();
                             ImportChecked(list);
                             Import(list);
                         }, () =>
                         {
-                            Messenger.Default.Send(new StatuMessage($"{title} 导入完成", DataGrid));
+                            Messenger.Default.Send(new StatuMessage($"{title} {PConfig.LanguageBase.ImportSuccess}", DataGrid));
                         }, error: ex =>
                         {
-                            Messenger.Default.Send(new StatuMessage("导入失败", ex, DataGrid));
+                            Messenger.Default.Send(new StatuMessage(PConfig.LanguageBase.ImportError, ex, DataGrid));
                         });
                     }
                     break;

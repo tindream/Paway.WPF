@@ -50,7 +50,7 @@ namespace Paway.Model
                 case "刷新":
                     break;
                 default:
-                    if (ParentInfo == null) throw new WarningException($"请选择 {typeof(Parent).Description()}");
+                    if (ParentInfo == null) throw new WarningException($"{PConfig.LanguageBase.PleaseSelect} {typeof(Parent).Description()}");
                     break;
             }
             return base.Action(item);
@@ -124,7 +124,7 @@ namespace Paway.Model
                 case "刷新":
                     break;
                 default:
-                    if (ParentInfo == null) throw new WarningException($"请选择 {typeof(Parent).Description()}");
+                    if (ParentInfo == null) throw new WarningException($"{PConfig.LanguageBase.PleaseSelect} {typeof(Parent).Description()}");
                     break;
             }
             return base.Action(item);

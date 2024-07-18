@@ -92,8 +92,8 @@ namespace Paway.Model
         protected virtual void Export<T>(DependencyObject obj, List<T> list, string file, bool iOpen = true) where T : class
         {
             ExcelBuilder.Create(file, list).Build();
-            Messenger.Default.Send(new StatuMessage("导出成功", obj));
-            if (iOpen && PMethod.Ask(obj, "导出成功,是否打开文件?"))
+            Messenger.Default.Send(new StatuMessage(PConfig.LanguageBase.ExportSuccess, obj));
+            if (iOpen && PMethod.Ask(obj, PConfig.LanguageBase.ExportSuccessAndOpen))
             {
                 Process.Start(file);
             }
@@ -140,14 +140,14 @@ namespace Paway.Model
                         if (tbSearch.Text.IsEmpty()) break;
                         if (iExit && DateTime.Now.Subtract(exitTime).TotalMilliseconds < PConfig.DoubleInterval)
                         {
-                            Messenger.Default.Send(new StatuMessage("取消查询", false));
+                            Messenger.Default.Send(new StatuMessage(PConfig.LanguageBase.QueryCancel, false));
                             tbSearch.Text = null;
                         }
                         else
                         {
                             iExit = true;
                             exitTime = DateTime.Now;
-                            Messenger.Default.Send(new StatuMessage("再按一次取消查询", false));
+                            Messenger.Default.Send(new StatuMessage(PConfig.LanguageBase.QueryCancelAgain, false));
                         }
                     }
                     break;
@@ -169,7 +169,7 @@ namespace Paway.Model
                             if ((Auth & MenuAuthType.Search) != MenuAuthType.Search) break;
                             if (PMethod.Find(Panel, out TextBoxEXT tbSearch, "tbSearch") && !tbSearch.IsKeyboardFocusWithin)
                             {
-                                Messenger.Default.Send(new StatuMessage("查询", false));
+                                Messenger.Default.Send(new StatuMessage(PConfig.LanguageBase.Query, false));
                                 tbSearch.Focus();
                             }
                             break;

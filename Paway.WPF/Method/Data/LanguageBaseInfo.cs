@@ -96,6 +96,86 @@ namespace Paway.WPF
         public virtual string Color { get; set; } = "颜色";
 
         #endregion
+
+        #region 其它
+        /// <summary>
+        /// 添加
+        /// </summary>
+        [Description("添加")]
+        public virtual string Add { get; set; } = "添加";
+        /// <summary>
+        /// 已存在
+        /// </summary>
+        [Description("已存在")]
+        public virtual string Exist { get; set; } = "已存在";
+        /// <summary>
+        /// 已存在
+        /// </summary>
+        [Description("请选择")]
+        public virtual string PleaseSelect { get; set; } = "请选择";
+        /// <summary>
+        /// 确认删除
+        /// </summary>
+        [Description("确认删除")]
+        public virtual string ConfirmDelete { get; set; } = "确认删除";
+        /// <summary>
+        /// 查询
+        /// </summary>
+        [Description("查询")]
+        public virtual string Query { get; set; } = "查询";
+        /// <summary>
+        /// 取消查询
+        /// </summary>
+        [Description("取消查询")]
+        public virtual string QueryCancel { get; set; } = "取消查询";
+        /// <summary>
+        /// 再按一次取消查询
+        /// </summary>
+        [Description("再按一次取消查询")]
+        public virtual string QueryCancelAgain { get; set; } = "再按一次取消查询";
+        /// <summary>
+        /// 选择要导入的文件
+        /// </summary>
+        [Description("选择要导入的文件")]
+        public virtual string SelectImportFile { get; set; } = "选择要导入的文件";
+        /// <summary>
+        /// 正在导入..
+        /// </summary>
+        [Description("正在导入..")]
+        public virtual string Importing { get; set; } = "正在导入..";
+        /// <summary>
+        /// 导入失败
+        /// </summary>
+        [Description("导入失败")]
+        public virtual string ImportError { get; set; } = "导入失败";
+        /// <summary>
+        /// 导入成功
+        /// </summary>
+        [Description("导入成功")]
+        public virtual string ImportSuccess { get; set; } = "导入成功";
+
+        /// <summary>
+        /// /选择要保存的文件位置
+        /// </summary>
+        [Description("选择要保存的文件位置")]
+        public virtual string SelectFileLocation { get; set; } = "选择要保存的文件位置";
+        /// <summary>
+        /// 正在导出..
+        /// </summary>
+        [Description("正在导出..")]
+        public virtual string Exporting { get; set; } = "正在导出..";
+        /// <summary>
+        /// 导出成功
+        /// </summary>
+        [Description("导出成功")]
+        public virtual string ExportSuccess { get; set; } = "导出成功";
+        /// <summary>
+        /// 导出成功, 是否打开文件?
+        /// </summary>
+        [Description("导出成功, 是否打开文件?")]
+        public virtual string ExportSuccessAndOpen { get; set; } = "导出成功, 是否打开文件?";
+
+        #endregion
     }
     /// <summary>
     /// 注入拦截器类-触发更新事件

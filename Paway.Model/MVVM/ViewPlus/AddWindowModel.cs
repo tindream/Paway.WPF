@@ -33,7 +33,7 @@ namespace Paway.Model
             {
                 normal = value;
                 info = value.Clone();
-                Title = info.Id == 0 ? $"新加 - {info.GetType().Description()}" : $"{info.GetType().Description()} - {info}";
+                Title = info.Id == 0 ? $"{PConfig.LanguageBase.Add} - {info.GetType().Description()}" : $"{info.GetType().Description()} - {info}";
                 OnPropertyChanged();
                 ReLoad();
             }
@@ -66,7 +66,7 @@ namespace Paway.Model
                 return null;
             }
             if (info is IChecked @checked) @checked.Checked();
-            else if (Cache.Any<T>(c => c.Compare(info))) throw new WarningException($"[{typeof(T).Description()}]{info} 已存在");
+            else if (Cache.Any<T>(c => c.Compare(info))) throw new WarningException($"[{typeof(T).Description()}]{info} {PConfig.LanguageBase.Exist}");
             if (info.Id == 0 && info is IIndex index)
             {
                 var tList = Cache.FindAll<T>();

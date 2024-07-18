@@ -107,7 +107,7 @@ namespace Paway.WPF
             outFile = null;
             var sfd = new SaveFileDialog()
             {
-                Title = title ?? "选择要保存的文件位置",
+                Title = title ?? PConfig.LanguageBase.SelectFileLocation,
                 Filter = filter,
                 FileName = fileName,
             };
