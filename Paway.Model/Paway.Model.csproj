@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<UseWPF>true</UseWPF>
+		<UseWindowsForms>true</UseWindowsForms>
 		<TargetFrameworks>net452</TargetFrameworks>
 		<!--用于指示编译器是否生成文档文件的值-->
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
@@ -23,12 +24,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Reference Include="Microsoft.CSharp" />
-		<Reference Include="System.Windows.Forms" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="..\Paway.WPF\Paway.WPF.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<Reference Include="Microsoft.CSharp" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Paway.Helper" Version="2.5.7" />

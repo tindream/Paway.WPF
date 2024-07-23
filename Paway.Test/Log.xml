@@ -14,7 +14,7 @@
 		</appender>
 		<appender name="RollingFileAppender" type="log4net.Appender.RollingFileAppender">
 			<threshold value="Error" />
-			<!--<param name="Encoding" value="utf-8" />-->
+			<param name="Encoding" value="utf-8" />
 			<param name="File" value=".\logs\Test.Error.log" />
 			<rollingStyle value="Size" />
 			<maxSizeRollBackups value="20" />
@@ -27,7 +27,7 @@
 		</appender>
 		<appender name="RollingFileAppender.All" type="log4net.Appender.RollingFileAppender">
 			<threshold value="All" />
-			<!--<param name="Encoding" value="utf-8" />-->
+			<param name="Encoding" value="utf-8" />
 			<param name="File" value=".\logs\Test.log" />
 			<rollingStyle value="Size" />
 			<maxSizeRollBackups value="20" />

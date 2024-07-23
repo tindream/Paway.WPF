@@ -83,6 +83,7 @@ namespace Paway.WPF
                 {
                     var value = (this.Minimum + this.TickFrequency * (horizontal ? i : tickCount - i)).ToDouble();
                     value = OnTrackValueChanged(value);
+                    //var pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
                     var formattedText = new FormattedText(value.ToString(), CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana"), 8, color);
                     if (this.Name == "TopTick")
                     {
@@ -105,6 +106,7 @@ namespace Paway.WPF
             {
                 var value = (this.Minimum + this.TickFrequency * (horizontal ? i : tickCount - i)).ToDouble();
                 value = OnTrackValueChanged(value);
+                //var pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
                 var formattedText = new FormattedText(value.ToString(), CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana"), 8, color);
 
                 var x = tickFrequencySize * i;

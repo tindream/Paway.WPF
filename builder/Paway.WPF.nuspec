@@ -16,11 +16,19 @@
 			<group targetFramework="net45">
 				<dependency id="Paway.Helper" version="2.5.7" />
 			</group>
+			<group targetFramework="netcoreapp3.1">
+				<dependency id="Paway.Helper" version="2.5.7" />
+			</group>
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="..\bin\release\net45\Paway.WPF_Secure\Paway.WPF.dll"		target="lib\net45" />
-		<file src="..\bin\release\net45\Paway.WPF_Secure\Paway.WPF.pdb"		target="lib\net45" />
-		<file src="..\bin\release\net45\Paway.WPF.xml"						target="lib\net45" />
+		<file src="..\bin\release\net45\Paway.WPF_Secure\Paway.WPF.dll"				target="lib\net45" />
+		<file src="..\bin\release\net45\Paway.WPF_Secure\Paway.WPF.pdb"				target="lib\net45" />
+		<file src="..\bin\release\net45\Paway.WPF.xml"								target="lib\net45" />
+
+		<file src="..\bin\release\netcoreapp3.1\Paway.WPF_Secure\Paway.WPF.dll"		target="lib\net45" />
+		<file src="..\bin\release\netcoreapp3.1\Paway.WPF_Secure\Paway.WPF.pdb"		target="lib\net45" />
+		<file src="..\bin\release\netcoreapp3.1\Paway.WPF.xml"						target="lib\net45" />
+		<file src="..\bin\release\netcoreapp3.1\Paway.WPF.deps.json"				target="lib\net45" />
 	</files>
 </package>
