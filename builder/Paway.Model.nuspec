@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>Paway.Model</id>
-		<version>1.5.0</version>
+		<version>1.5.1</version>
 		<title>Paway.Model</title>
 		<authors>Tinn</authors>
 		<owners>Tinna</owners>
@@ -14,9 +14,9 @@
 		<tags>WPF Model</tags>
 		<dependencies>
 			<group targetFramework="net452">
-				<dependency id="Paway.Helper"			version="2.5.7" />
-				<dependency id="Paway.Utils"			version="2.5.7" />
-				<dependency id="Paway.WPF"				version="1.5.0" />
+				<dependency id="Paway.Helper"			version="2.5.8" />
+				<dependency id="Paway.Utils"			version="2.5.8" />
+				<dependency id="Paway.WPF"				version="1.5.1" />
 				<dependency id="Newtonsoft.Json"		version="13.0.1" />
 				<dependency id="MvvmLightLibs"			version="5.4.1.1" />
 			</group>
