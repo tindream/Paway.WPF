@@ -1,5 +1,5 @@
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using OxyPlot;
 using OxyPlot.Annotations;
 using OxyPlot.Axes;
@@ -25,9 +25,6 @@ namespace Paway.Test
     /// </para>
     /// <para>
     /// You can also use Blend to data bind with the tool's support.
-    /// </para>
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
     public class MainWindowModel : ViewModelBasePlus
@@ -280,8 +277,8 @@ namespace Paway.Test
                 FontList.Add(info);
             }
 
-            this.MessengerInstance.Register<StatuMessage>(this, msg => Statu(msg.Msg));
-            this.MessengerInstance.Register<MainLoadMessage>(this, msg =>
+            WeakReferenceMessenger.Default.Register<StatuMessage>(this, (r, msg) => Statu(msg.Msg));
+            WeakReferenceMessenger.Default.Register<MainLoadMessage>(this, (r, msg) =>
             {
                 AddPlot();
             });

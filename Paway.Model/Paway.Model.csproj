@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<UseWPF>true</UseWPF>
 		<UseWindowsForms>true</UseWindowsForms>
-		<TargetFrameworks>net452</TargetFrameworks>
+		<TargetFrameworks>net462;netcoreapp3.1</TargetFrameworks>
 		<!--用于指示编译器是否生成文档文件的值-->
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<!--不自动生成程序集信息(版本号)-->
@@ -27,15 +27,16 @@
 		<ProjectReference Include="..\Paway.WPF\Paway.WPF.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<Reference Include="Microsoft.CSharp" />
-	</ItemGroup>
-	<ItemGroup>
 		<PackageReference Include="Paway.Helper" Version="2.5.7" />
 		<PackageReference Include="Paway.Utils" Version="2.5.7" />
 		<PackageReference Include="Paway.Runtime.Plot" Version="1.0.4" />
 		<PackageReference Include="Paway.Runtime.Office" Version="8.11.3" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-		<PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+	</ItemGroup>
+	<ItemGroup Condition="$(TargetFramework) == 'net462'">
+		<Reference Include="Microsoft.CSharp" />
 	</ItemGroup>
 
 </Project>

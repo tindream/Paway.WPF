@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight.Messaging;
+﻿using CommunityToolkit.Mvvm.Messaging;
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
@@ -29,7 +29,7 @@ namespace Paway.Test
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
-            Messenger.Default.Send(new TipLoadMessage() { Obj = this });
+            WeakReferenceMessenger.Default.Send(new TipLoadMessage() { Obj = this });
             var desktopWorkingArea = SystemParameters.WorkArea;
             this.Left = desktopWorkingArea.Width - this.ActualWidth - 50;
             this.Top = 100;

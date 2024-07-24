@@ -1,5 +1,4 @@
-﻿using GalaSoft.MvvmLight.Messaging;
-using HelixToolkit.Wpf;
+﻿using HelixToolkit.Wpf;
 using Paway.Helper;
 using Paway.WPF;
 using System;

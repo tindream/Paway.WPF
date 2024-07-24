@@ -4,9 +4,8 @@
            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
            xmlns:local="clr-namespace:Paway.Test"
-           xmlns:model="clr-namespace:Paway.Model;assembly=Paway.Model"
-           xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
-           xmlns:ip="http://www.galasoft.ch/mvvmlight"
+           xmlns:model="clr-namespace:Paway.Model;assembly=Paway.Model" 
+           xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
            mc:Ignorable="d"
            DataContext="{Binding Test, Source={StaticResource Locator}}"
            Title="{Binding Text}" Height="470" Width="800" WindowStartupLocation="CenterScreen">

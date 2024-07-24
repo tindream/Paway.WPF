@@ -1,5 +1,4 @@
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Paway.Helper;
 using Paway.Model;
 using Paway.WPF;

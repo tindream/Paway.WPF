@@ -4,9 +4,8 @@
            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
            xmlns:local="clr-namespace:Paway.Test"
-           mc:Ignorable="d"
-           xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
-           xmlns:ip="http://www.galasoft.ch/mvvmlight"
+           mc:Ignorable="d" 
+           xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
            Background="Transparent"
            DataContext="{Binding Tip, Source={StaticResource Locator}}"
            Title="TipWindow" 
@@ -31,7 +30,7 @@
                         <i:InvokeCommandAction Command="{Binding SelectionCommand}" CommandParameter="{Binding ElementName=listView3}"/>
                     </i:EventTrigger>
                     <i:EventTrigger EventName="PreviewMouseDown">
-                        <ip:EventToCommand Command="{Binding ListViewMouseDown}" PassEventArgsToCommand="True"/>
+                        <i:InvokeCommandAction Command="{Binding ListViewMouseDown}" PassEventArgsToCommand="True"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <ListBoxItemEXT Text="呼叫" ItemRadius="16,0,0,0" />

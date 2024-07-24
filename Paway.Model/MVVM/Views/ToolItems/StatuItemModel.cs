@@ -1,6 +1,5 @@
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using Paway.Helper;
 using Paway.Model;
 using Paway.WPF;
@@ -85,24 +84,24 @@ namespace Paway.Model
         {
             PConfig.OperateLogEvent += msg => AddDesc(msg.Text, iHit: false);
 
-            Messenger.Default.Register<StatuMessage>(this, msg => AddDesc(msg.Msg, msg.Level, msg.IHit, msg.Ower));
+            WeakReferenceMessenger.Default.Register<StatuMessage>(this, (r, msg) => AddDesc(msg.Msg, msg.Level, msg.IHit, msg.Ower));
             PConfig.StatuLogEvent += (msg, level) => AddDesc(msg, level);
-            Messenger.Default.Register<ConnectMessage>(this, msg =>
+            WeakReferenceMessenger.Default.Register<ConnectMessage>(this, (r, msg) =>
             {
-                Messenger.Default.Send(new StatuMessage(msg.Connectd ? $"连接成功" : $"连接断开", !msg.Connectd), msg.Connectd ? LeveType.Debug : LeveType.Error);
+                WeakReferenceMessenger.Default.Send(new StatuMessage(msg.Connectd ? $"连接成功" : $"连接断开", !msg.Connectd, msg.Connectd ? LeveType.Debug : LeveType.Error));
                 PMethod.BeginInvoke(() =>
                 {
                     ConnectBrush = msg.Connectd ? ColorType.Success.Color().ToBrush() : ColorType.Error.Color().ToBrush();
                 });
             });
-            Messenger.Default.Register<Connect2Message>(this, msg =>
+            WeakReferenceMessenger.Default.Register<Connect2Message>(this, (r, msg) =>
             {
                 PMethod.BeginInvoke(() =>
                 {
                     Connect2Brush = msg.Connectd ? ColorType.Success.Color().ToBrush() : ColorType.Error.Color().ToBrush();
                 });
             });
-            Messenger.Default.Register<LoginMessage>(this, msg =>
+            WeakReferenceMessenger.Default.Register<LoginMessage>(this, (r, msg) =>
             {
                 var hour = DateTime.Now.Hour;
                 var hello = hour < 8 ? "早上好" : hour <= 11 ? "上午好" :

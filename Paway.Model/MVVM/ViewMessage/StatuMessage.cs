@@ -60,7 +60,7 @@ namespace Paway.Model
         /// <summary>
         /// 状态消息，指定消息、弹出标记
         /// </summary>
-        public StatuMessage(string msg, bool iHit = true) : base(msg)
+        public StatuMessage(string msg, bool iHit = true, LeveType level = LeveType.Debug) : base(msg, level)
         {
             this.IHit = iHit;
         }

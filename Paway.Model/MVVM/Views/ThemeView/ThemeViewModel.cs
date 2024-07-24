@@ -1,6 +1,5 @@
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Win32;
 using Paway.Helper;
 using Paway.Model;
@@ -144,14 +143,14 @@ namespace Paway.Model
         /// </summary>
         public ThemeViewModel()
         {
-            base.Title = "本地设置";
+            base.Title = "主题设置";
             var index = 0;
             foreach (var font in Fonts.SystemFontFamilies)
             {
                 var info = new FontInfo { Id = index++, Name = font.Source, FontFamily = font };
                 FontList.Add(info);
             }
-            Messenger.Default.Register<ThemeLoadMessage>(this, msg =>
+            WeakReferenceMessenger.Default.Register<ThemeLoadMessage>(this, (r, msg) =>
             {
                 this.themeKeyboard = PConfig.Keyboard;
                 this.themeColor = PConfig.Color;

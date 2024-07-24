@@ -4,9 +4,8 @@
            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
            xmlns:local="clr-namespace:Paway.Test"
-           xmlns:model="clr-namespace:Paway.Model;assembly=Paway.Model"
-           xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
-           xmlns:ip="http://www.galasoft.ch/mvvmlight"
+           xmlns:model="clr-namespace:Paway.Model;assembly=Paway.Model" 
+           xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
            xmlns:oxy="http://oxyplot.org/wpf"
            DataContext="{Binding Main, Source={StaticResource Locator}}"
            mc:Ignorable="d"
@@ -25,7 +24,7 @@
             <SliderEXT Title="字体" Minimum="0" Maximum="{Binding FontFamilyCount}" Value="{Binding FontFamilyIndex}"> 
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="TipValuesChanged">
-                        <ip:EventToCommand Command="{Binding FontFamilyChanged}" PassEventArgsToCommand="True"/>
+                        <i:InvokeCommandAction Command="{Binding FontFamilyChanged}" PassEventArgsToCommand="True"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </SliderEXT>
@@ -100,7 +99,7 @@
                 <ComboQuery ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}" Water="输入搜索..." HorizontalContentAlignment="Center">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="FilterEvent">
-                            <ip:EventToCommand Command="{Binding CbxFilterCmd}" PassEventArgsToCommand="True"/>
+                            <i:InvokeCommandAction Command="{Binding CbxFilterCmd}" PassEventArgsToCommand="True"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ComboQuery>
@@ -211,7 +210,7 @@
                              Height="250" VerticalAlignment="Top" ScrollBarColor="Red">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="RowDoubleEvent">
-                            <ip:EventToCommand Command="{Binding RowDoubleCommand}" PassEventArgsToCommand="True"/>
+                            <i:InvokeCommandAction Command="{Binding RowDoubleCommand}" PassEventArgsToCommand="True"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <DataGrid.Columns>
@@ -276,7 +275,7 @@
                         <i:InvokeCommandAction Command="{Binding SelectionCommand}" CommandParameter="{Binding ElementName=listView3}"/>
                     </i:EventTrigger>
                     <i:EventTrigger EventName="MouseDoubleClick">
-                        <ip:EventToCommand Command="{Binding RectDoubleCommand}" PassEventArgsToCommand="True"/>
+                        <i:InvokeCommandAction Command="{Binding RectDoubleCommand}" PassEventArgsToCommand="True"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <!--<ListBoxItemEXT Text="World"/>

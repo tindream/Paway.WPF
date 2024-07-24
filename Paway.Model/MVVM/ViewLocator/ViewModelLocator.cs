@@ -1,6 +1,3 @@
-using CommonServiceLocator;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Ioc;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -17,7 +14,7 @@ namespace Paway.Model
         /// </summary>
         public ViewModelLocator()
         {
-            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+            //ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
         }
         internal static ViewModelLocator Default => new ViewModelLocator();
 
@@ -51,13 +48,14 @@ namespace Paway.Model
         /// </summary>
         public static T GetModelInstance<T>(string key = null) where T : class
         {
-            var name = typeof(T).FullName;
-            if (!viewModelList.Contains(name))
-            {
-                SimpleIoc.Default.Register<T>();
-                viewModelList.Add(name);
-            }
-            return ServiceLocator.Current.GetInstance<T>(key);
+            return ViewlLocator.GetInstance<T>(key);
+            //var name = typeof(T).FullName;
+            //if (!viewModelList.Contains(name))
+            //{
+            //    SimpleIoc.Default.Register<T>();
+            //    viewModelList.Add(name);
+            //}
+            //return ServiceLocator.Current.GetInstance<T>(key);
         }
 
         /// <summary>

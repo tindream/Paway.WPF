@@ -1,6 +1,5 @@
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Paway.Helper;
 using Paway.Model;
 using Paway.WPF;
@@ -115,7 +114,7 @@ namespace Paway.Test
 
         public TipWindowModel()
         {
-            Messenger.Default.Register<TipLoadMessage>(this, msg =>
+            WeakReferenceMessenger.Default.Register<TipLoadMessage>(this, (r, msg) =>
             {
                 if (msg.Obj is TipWindow window) this.tipWindow = window;
             });

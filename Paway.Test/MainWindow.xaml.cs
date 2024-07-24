@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight.Messaging;
+﻿using CommunityToolkit.Mvvm.Messaging;
 using Paway.Helper;
 using Paway.Model;
 using Paway.WPF;
@@ -91,19 +91,19 @@ namespace Paway.Test
                 DataService.Default.Load();
             }, () =>
             {
-                Messenger.Default.Send(new StatuMessage("加载完成"));
+                WeakReferenceMessenger.Default.Send(new StatuMessage("加载完成"));
             },
             ex =>
             {
                 ex.Log();
-                Messenger.Default.Send(new StatuMessage(ex.Message()));
+                WeakReferenceMessenger.Default.Send(new StatuMessage(ex.Message()));
                 Method.ShowError(this, ex.Message());
             });
         }
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            Messenger.Default.Send(new StatuMessage(Config.Loading));
+            WeakReferenceMessenger.Default.Send(new StatuMessage(Config.Loading));
             if (this.pathCurrent == null)
             {
                 this.pathCurrent = transition.Content;
@@ -112,7 +112,7 @@ namespace Paway.Test
                     Style = this.FindResource("PathRound") as Style
                 };
             }
-            Messenger.Default.Send(new MainLoadMessage());
+            WeakReferenceMessenger.Default.Send(new MainLoadMessage());
         }
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {

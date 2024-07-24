@@ -1,6 +1,5 @@
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using Paway.Helper;
 using Paway.Utils;
 using Paway.WPF;
@@ -52,14 +51,14 @@ namespace Paway.Model
         /// </summary>
         internal void ActionInternalMsg(string item)
         {
-            Messenger.Default.Send(new StatuMessage(item, false));
+            WeakReferenceMessenger.Default.Send(new StatuMessage(item, false));
             try
             {
                 Action(item);
             }
             catch (Exception ex)
             {
-                Messenger.Default.Send(new StatuMessage(ex));
+                WeakReferenceMessenger.Default.Send(new StatuMessage(ex));
             }
         }
         /// <summary>
@@ -92,7 +91,7 @@ namespace Paway.Model
         protected virtual void Export<T>(DependencyObject obj, List<T> list, string file, bool iOpen = true) where T : class
         {
             ExcelBuilder.Create(file, list).Build();
-            Messenger.Default.Send(new StatuMessage(PConfig.LanguageBase.ExportSuccess, obj));
+            WeakReferenceMessenger.Default.Send(new StatuMessage(PConfig.LanguageBase.ExportSuccess, obj));
             if (iOpen && PMethod.Ask(obj, PConfig.LanguageBase.ExportSuccessAndOpen))
             {
                 Process.Start(file);
@@ -140,14 +139,14 @@ namespace Paway.Model
                         if (tbSearch.Text.IsEmpty()) break;
                         if (iExit && DateTime.Now.Subtract(exitTime).TotalMilliseconds < PConfig.DoubleInterval)
                         {
-                            Messenger.Default.Send(new StatuMessage(PConfig.LanguageBase.QueryCancel, false));
+                            WeakReferenceMessenger.Default.Send(new StatuMessage(PConfig.LanguageBase.QueryCancel, false));
                             tbSearch.Text = null;
                         }
                         else
                         {
                             iExit = true;
                             exitTime = DateTime.Now;
-                            Messenger.Default.Send(new StatuMessage(PConfig.LanguageBase.QueryCancelAgain, false));
+                            WeakReferenceMessenger.Default.Send(new StatuMessage(PConfig.LanguageBase.QueryCancelAgain, false));
                         }
                     }
                     break;
@@ -169,7 +168,7 @@ namespace Paway.Model
                             if ((Auth & MenuAuthType.Search) != MenuAuthType.Search) break;
                             if (PMethod.Find(Panel, out TextBoxEXT tbSearch, "tbSearch") && !tbSearch.IsKeyboardFocusWithin)
                             {
-                                Messenger.Default.Send(new StatuMessage(PConfig.LanguageBase.Query, false));
+                                WeakReferenceMessenger.Default.Send(new StatuMessage(PConfig.LanguageBase.Query, false));
                                 tbSearch.Focus();
                             }
                             break;
@@ -268,8 +267,8 @@ namespace Paway.Model
         public OperateItemModel()
         {
             this.Menu = this.GetType().Description();
-            Messenger.Default.Register<KeyMessage>(this, msg => Action(msg));
-            Messenger.Default.Register<OperateLoadMessage>(this, msg =>
+            WeakReferenceMessenger.Default.Register<KeyMessage>(this, (r, msg) => Action(msg));
+            WeakReferenceMessenger.Default.Register<OperateLoadMessage>(this, (r, msg) =>
             {
                 //基类通知，如自定义菜单栏，此事件未触发，会被后续控件触发初始化
                 if (this.Panel == null && msg.Obj is Panel panel)

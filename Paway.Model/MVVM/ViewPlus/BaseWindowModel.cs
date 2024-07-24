@@ -1,6 +1,6 @@
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Paway.Helper;
 using Paway.WPF;
 using System;
@@ -53,7 +53,7 @@ namespace Paway.Model
             }
             catch (Exception ex)
             {
-                Messenger.Default.Send(new StatuMessage(ex, wd));
+                WeakReferenceMessenger.Default.Send(new StatuMessage(ex, wd));
             }
         });
 
@@ -73,7 +73,7 @@ namespace Paway.Model
             }
             catch (Exception ex)
             {
-                Messenger.Default.Send(new StatuMessage(ex, wd));
+                WeakReferenceMessenger.Default.Send(new StatuMessage(ex, wd));
             }
         });
         internal void EnterCommit(Window wd)

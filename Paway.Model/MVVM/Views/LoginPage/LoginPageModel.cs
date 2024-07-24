@@ -1,6 +1,5 @@
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using Paway.Helper;
 using Paway.Model;
 using Paway.WPF;
@@ -298,7 +297,7 @@ namespace Paway.Model
         /// </summary>
         public LoginPageModel()
         {
-            Messenger.Default.Register<LoginLoadMessage>(this, msg =>
+            WeakReferenceMessenger.Default.Register<LoginLoadMessage>(this, (r, msg) =>
             {
                 this.Root = msg.Obj;
                 this.menuItem = msg.MenuItem;

@@ -1,6 +1,5 @@
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using OxyPlot;
 using OxyPlot.Annotations;
 using OxyPlot.Axes;
@@ -81,7 +80,7 @@ namespace Paway.Test
                 case "关于":
                     var version = $"V{Assembly.GetEntryAssembly().GetName().Version}";
                     Method.Hit(Config.Window, version);
-                    Messenger.Default.Send(new StatuMessage(version));
+                    WeakReferenceMessenger.Default.Send(new StatuMessage(version));
                     break;
                 case "主题":
                     Method.ShowWindow(Config.Window, new ThemeWindow());

@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight.Messaging;
+﻿using CommunityToolkit.Mvvm.Messaging;
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
@@ -40,7 +40,7 @@ namespace Paway.Model
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            Messenger.Default.Send(new LoginLoadMessage() { Obj = Root, MenuItem = menu });
+            WeakReferenceMessenger.Default.Send(new LoginLoadMessage() { Obj = Root, MenuItem = menu });
             PMethod.BeginInvoke(() =>
             {
                 if (this.DataContext is LoginPageModel login)
@@ -58,7 +58,7 @@ namespace Paway.Model
             if (e.ClickCount == 2)
             {
                 var version = $"V{Assembly.GetEntryAssembly().GetName().Version}";
-                Messenger.Default.Send(new StatuMessage(version));
+                WeakReferenceMessenger.Default.Send(new StatuMessage(version));
             }
         }
     }

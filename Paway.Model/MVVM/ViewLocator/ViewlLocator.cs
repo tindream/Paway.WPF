@@ -18,9 +18,9 @@ namespace Paway.Model
         /// <summary>
         /// 创建单实例，如存存时从缓存列表获取
         /// </summary>
-        public static T GetInstance<T>()
+        public static T GetInstance<T>(string key = null)
         {
-            var name = typeof(T).FullName;
+            var name = $"{typeof(T).FullName}_{key}";
             if (!instanceDic.ContainsKey(name))
             {
                 var obj = Activator.CreateInstance<T>();

@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight.Messaging;
+﻿using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +27,7 @@ namespace Paway.Model
         public OperateItem()
         {
             InitializeComponent();
-            Messenger.Default.Send(new OperateLoadMessage() { Obj = dpOperateItem });
+            WeakReferenceMessenger.Default.Send(new OperateLoadMessage() { Obj = dpOperateItem });
         }
     }
 }
