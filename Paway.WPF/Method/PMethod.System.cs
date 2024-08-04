@@ -560,7 +560,7 @@ namespace Paway.WPF
         /// 获取组件界面XAML代码
         /// <para>从相对路径URI</para>
         /// </summary>
-        public static string GetComponentXmal(string uriStr, string toFlile)
+        public static string GetComponentXmal(string uriStr)
         {
             var uri = new Uri(uriStr, UriKind.Relative);
             var obj = Application.LoadComponent(uri);
