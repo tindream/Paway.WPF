@@ -29,6 +29,10 @@ namespace Paway.WPF
         /// </summary>
         public DataGridRow ToItem { get; set; }
         /// <summary>
+        /// 拖拽状态
+        /// </summary>
+        public DragType DragType { get; set; }
+        /// <summary>
         /// 比较结果
         /// </summary>
         public bool Result { get; set; }
@@ -40,10 +44,11 @@ namespace Paway.WPF
         /// <summary>
         /// DataGrid节点拖拽路由事件参数
         /// </summary>
-        public DataGridDragEventArgs(DataGridRow fromItem, DataGridRow toItem, RoutedEvent routedEvent, object source) : base(routedEvent, source)
+        public DataGridDragEventArgs(DataGridRow fromItem, DataGridRow toItem, DragType type, RoutedEvent routedEvent, object source) : base(routedEvent, source)
         {
             this.FromItem = fromItem;
             this.ToItem = toItem;
+            this.DragType = type;
         }
     }
 }

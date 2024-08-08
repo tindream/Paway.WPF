@@ -139,9 +139,9 @@ namespace Paway.WPF
         /// <summary>
         /// 节点拖动检查过滤路由事件
         /// </summary>
-        private bool? OnDragFilter(DataGridRow fromRow, DataGridRow toRow, RoutedEvent routed)
+        private bool? OnDragFilter(DataGridRow fromItem, DataGridRow toItem, DragType type, RoutedEvent routed)
         {
-            var args = new DataGridDragEventArgs(fromRow, toRow, routed, this);
+            var args = new DataGridDragEventArgs(fromItem, toItem, type, routed, this);
             if (DragFilter != null)
             {
                 DragFilter.Invoke(this, args);
@@ -159,9 +159,9 @@ namespace Paway.WPF
         /// <summary>
         /// 节点拖动完成路由事件
         /// </summary>
-        private void OnDragCompleted(DataGridRow fromRow, DataGridRow toRow, RoutedEvent routed)
+        private void OnDragCompleted(DataGridRow fromItem, DataGridRow toItem, RoutedEvent routed)
         {
-            var args = new DataGridDragEventArgs(fromRow, toRow, routed, this);
+            var args = new DataGridDragEventArgs(fromItem, toItem, DragType.Completed, routed, this);
             DragCompleted?.Invoke(this, args);
         }
 
@@ -511,7 +511,10 @@ namespace Paway.WPF
         /// 拖拽起点
         /// </summary>
         private Point? _lastMouseDown;
-        private DataGridRow fromRow;
+        /// <summary>
+        /// 拖拽起始行
+        /// </summary>
+        private DataGridRow fromItem;
         /// <summary>
         /// 按下记录位置
         /// </summary>
@@ -530,7 +533,7 @@ namespace Paway.WPF
                         }
                     }
                 }
-                else if (SelectionUnit == DataGridSelectionUnit.FullRow && this.SelectionMode == DataGridSelectionMode.Single && PMethod.Parent(e.OriginalSource, out DataGridRow row))
+                else if (this.SelectionMode == DataGridSelectionMode.Single && PMethod.Parent(e.OriginalSource, out DataGridRow row))
                 {//直接拖动控件滚动条
                     var eventArg = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, e.ChangedButton)
                     {
@@ -566,14 +569,14 @@ namespace Paway.WPF
                 {
                     try
                     {
-                        if (PMethod.Parent(e.OriginalSource, out fromRow))
+                        if (PMethod.Parent(e.OriginalSource, out fromItem))
                         {
-                            DragDrop.DoDragDrop(this, fromRow, DragDropEffects.Move);
+                            DragDrop.DoDragDrop(this, fromItem, DragDropEffects.Move);
                         }
                     }
                     finally
                     {
-                        fromRow = null;
+                        fromItem = null;
                     }
                 }
             }
@@ -584,42 +587,47 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnDragEnter(DragEventArgs e)
         {
-            DragCheck(e);
+            DragCheck(e, DragType.Enter);
             base.OnDragEnter(e);
-        }
-        /// <summary>
-        /// 拖动离开时检查状态
-        /// </summary>
-        protected override void OnDragLeave(DragEventArgs e)
-        {
-            DragCheck(e);
-            base.OnDragLeave(e);
         }
         /// <summary>
         /// 拖动过程中检查状态
         /// </summary>
         protected override void OnDragOver(DragEventArgs e)
         {
-            DragCheck(e);
+            DragCheck(e, DragType.Over);
             base.OnDragOver(e);
         }
-        private void DragCheck(DragEventArgs e)
+        /// <summary>
+        /// 拖动离开时检查状态
+        /// </summary>
+        protected override void OnDragLeave(DragEventArgs e)
         {
-            if (this.fromRow != null)
+            DragCheck(e, DragType.Leave);
+            base.OnDragLeave(e);
+        }
+        private void DragCheck(DragEventArgs e, DragType type)
+        {
+            if (this.fromItem != null)
             {
-                PMethod.Parent(e.OriginalSource, out DataGridRow toRow);
-                if (IsFilter(fromRow, toRow, e.RoutedEvent))
+                PMethod.Parent(e.OriginalSource, out DataGridRow toItem);
+                if (IsFilter(fromItem, toItem, type, e.RoutedEvent))
+                {
+                    e.Effects = DragDropEffects.None;
+                    e.Handled = true;
+                }
+                else if (IsFilter(fromItem, null, type, e.RoutedEvent))
                 {
                     e.Effects = DragDropEffects.None;
                     e.Handled = true;
                 }
             }
         }
-        private bool IsFilter(DataGridRow fromRow, DataGridRow toRow, RoutedEvent routed)
+        private bool IsFilter(DataGridRow fromItem, DataGridRow toItem, DragType type, RoutedEvent routed)
         {
-            var result = OnDragFilter(fromRow, toRow, routed);
+            var result = OnDragFilter(fromItem, toItem, type, routed);
             if (result != null) return result.Value;
-            if (fromRow.Equals(toRow)) return true;
+            if (fromItem.Equals(toItem)) return true;
             return false;
         }
         /// <summary>
@@ -627,16 +635,16 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnDrop(DragEventArgs e)
         {
-            if (this.fromRow != null)
+            if (this.fromItem != null)
             {
                 var source = CollectionViewSource.GetDefaultView(this.ItemsSource);
                 if (source is ListCollectionView list)
                 {
-                    var fromInfo = fromRow.Item;
-                    list.Remove(fromRow.Item);
-                    if (PMethod.Parent(e.OriginalSource, out DataGridRow toRow))
+                    var fromInfo = fromItem.Item;
+                    list.Remove(fromItem.Item);
+                    if (PMethod.Parent(e.OriginalSource, out DataGridRow toItem))
                     {
-                        var toIndex = list.IndexOf(toRow.Item);
+                        var toIndex = list.IndexOf(toItem.Item);
                         var moveList = this.type.GenericList();
                         while (list.Count > toIndex)
                         {
@@ -650,13 +658,13 @@ namespace Paway.WPF
                         }
                         list.CommitNew();
                         moveList.Clear();
-                        OnDragCompleted(fromRow, toRow, e.RoutedEvent);
+                        OnDragCompleted(fromItem, toItem, e.RoutedEvent);
                     }
                     else
                     {
                         list.AddNewItem(fromInfo);
                         list.CommitNew();
-                        OnDragCompleted(fromRow, null, e.RoutedEvent);
+                        OnDragCompleted(fromItem, null, e.RoutedEvent);
                     }
                 }
             }

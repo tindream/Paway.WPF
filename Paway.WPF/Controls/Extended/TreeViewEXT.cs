@@ -119,9 +119,9 @@ namespace Paway.WPF
         /// <summary>
         /// 节点拖动检查过滤路由事件
         /// </summary>
-        private bool? OnDragFilter(ITreeViewItem fromItem, ITreeViewItem toItem, RoutedEvent routed)
+        private bool? OnDragFilter(ITreeViewItem fromItem, ITreeViewItem toItem, DragType type, RoutedEvent routed)
         {
-            var args = new TreeDragEventArgs(fromItem, toItem, routed, this);
+            var args = new TreeDragEventArgs(fromItem, toItem, type, routed, this);
             if (DragFilter != null)
             {
                 DragFilter.Invoke(this, args);
@@ -141,7 +141,7 @@ namespace Paway.WPF
         /// </summary>
         private void OnDragCompleted(ITreeViewItem fromItem, ITreeViewItem toItem, RoutedEvent routed)
         {
-            var args = new TreeDragEventArgs(fromItem, toItem, routed, this);
+            var args = new TreeDragEventArgs(fromItem, toItem, DragType.Completed, routed, this);
             DragCompleted?.Invoke(this, args);
         }
 
@@ -317,53 +317,53 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnDragEnter(DragEventArgs e)
         {
-            DragCheck(e);
+            DragCheck(e, DragType.Enter);
             base.OnDragEnter(e);
-        }
-        /// <summary>
-        /// 拖动离开时检查状态
-        /// </summary>
-        protected override void OnDragLeave(DragEventArgs e)
-        {
-            DragCheck(e);
-            base.OnDragLeave(e);
         }
         /// <summary>
         /// 拖动过程中检查状态
         /// </summary>
         protected override void OnDragOver(DragEventArgs e)
         {
-            DragCheck(e);
+            DragCheck(e, DragType.Over);
             base.OnDragOver(e);
         }
-        private void DragCheck(DragEventArgs e)
+        /// <summary>
+        /// 拖动离开时检查状态
+        /// </summary>
+        protected override void OnDragLeave(DragEventArgs e)
+        {
+            DragCheck(e, DragType.Leave);
+            base.OnDragLeave(e);
+        }
+        private void DragCheck(DragEventArgs e, DragType type)
         {
             if (this.fromItem != null)
             {
                 if (PMethod.Parent(e.OriginalSource, out TreeViewItem item) && item.DataContext is ITreeViewItem toItem)
                 {
-                    if (IsFilter(fromItem, toItem, e.RoutedEvent))
+                    if (IsFilter(fromItem, toItem, type, e.RoutedEvent))
                     {
                         e.Effects = DragDropEffects.None;
                         e.Handled = true;
                     }
                 }
-                else if (IsFilter(fromItem, null, e.RoutedEvent))
+                else if (IsFilter(fromItem, null, type, e.RoutedEvent))
                 {
                     e.Effects = DragDropEffects.None;
                     e.Handled = true;
                 }
             }
         }
-        private bool IsFilter(ITreeViewItem fromItem, ITreeViewItem toItem, RoutedEvent routed)
+        private bool IsFilter(ITreeViewItem fromItem, ITreeViewItem toItem, DragType type, RoutedEvent routed)
         {
-            var result = OnDragFilter(fromItem, toItem, routed);
+            var result = OnDragFilter(fromItem, toItem, type, routed);
             if (result != null) return result.Value;
             if (toItem == null) return IsGroup && !fromItem.IsGroup;
             if (fromItem.IsGroup == toItem.IsGroup && fromItem.Id == toItem.Id) return true;
             foreach (var item in fromItem.Children.ToList())
             {
-                if (IsFilter(item, toItem, routed)) return true;
+                if (IsFilter(item, toItem, type, routed)) return true;
             }
             return false;
         }

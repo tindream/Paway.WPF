@@ -16,18 +16,18 @@ using System.Windows.Media.TextFormatting;
 namespace Paway.WPF
 {
     /// <summary>
-    /// 树节点拖拽路由事件参数
+    /// ListView节点拖拽路由事件参数
     /// </summary>
-    public class TreeDragEventArgs : RoutedEventArgs
+    public class ListViewDragEventArgs : RoutedEventArgs
     {
         /// <summary>
         /// 从某节点
         /// </summary>
-        public ITreeViewItem FromItem { get; set; }
+        public ListViewItem FromItem { get; set; }
         /// <summary>
         /// 到某节点
         /// </summary>
-        public ITreeViewItem ToItem { get; set; }
+        public ListViewItem ToItem { get; set; }
         /// <summary>
         /// 拖拽状态
         /// </summary>
@@ -38,13 +38,13 @@ namespace Paway.WPF
         public bool Result { get; set; }
 
         /// <summary>
-        /// 树节点拖拽路由事件参数
+        /// DataGrid节点拖拽路由事件参数
         /// </summary>
-        public TreeDragEventArgs() { }
+        public ListViewDragEventArgs() { }
         /// <summary>
-        /// 树节点拖拽路由事件参数
+        /// DataGrid节点拖拽路由事件参数
         /// </summary>
-        public TreeDragEventArgs(ITreeViewItem fromItem, ITreeViewItem toItem, DragType type, RoutedEvent routedEvent, object source) : base(routedEvent, source)
+        public ListViewDragEventArgs(ListViewItem fromItem, ListViewItem toItem, DragType type, RoutedEvent routedEvent, object source) : base(routedEvent, source)
         {
             this.FromItem = fromItem;
             this.ToItem = toItem;

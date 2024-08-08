@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Net.NetworkInformation;
@@ -356,6 +357,26 @@ namespace Paway.WPF
         }
 
         #endregion
+        #region 节点拖动检查过滤路由事件
+        /// <summary>
+        /// 节点拖动检查过滤路由事件
+        /// </summary>
+        public event EventHandler<ListViewDragEventArgs> DragFilter;
+        /// <summary>
+        /// 节点拖动检查过滤路由事件
+        /// </summary>
+        private bool? OnDragFilter(ListViewItem fromItem, ListViewItem toItem, DragType type, RoutedEvent routed)
+        {
+            var args = new ListViewDragEventArgs(fromItem, toItem, type, routed, this);
+            if (DragFilter != null)
+            {
+                DragFilter.Invoke(this, args);
+                return args.Result;
+            }
+            return null;
+        }
+
+        #endregion
 
         /// <summary>
         /// </summary>
@@ -536,6 +557,10 @@ namespace Paway.WPF
         /// </summary>
         private ListViewItem downItem;
         /// <summary>
+        /// 拖拽起始项
+        /// </summary>
+        private ListViewItem fromItem;
+        /// <summary>
         /// 鼠标按下前判断触发
         /// </summary>
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
@@ -562,6 +587,7 @@ namespace Paway.WPF
                     }
                     else
                     {
+                        if (this.AllowDrop) _lastMouseDown = e.GetPosition(this);
                         IsPressed(true);
                         if (ClickMode == ClickMode.Press || SelectionMode != SelectionMode.Single)
                         {
@@ -628,6 +654,25 @@ namespace Paway.WPF
             {
                 IsPressed(false);
             }
+            if (this.AllowDrop && e.LeftButton == MouseButtonState.Pressed && _lastMouseDown != null)
+            {
+                Point currentPosition = e.GetPosition(this);
+                if ((Math.Abs(currentPosition.X - _lastMouseDown.Value.X) > SystemParameters.MinimumHorizontalDragDistance) ||
+                    (Math.Abs(currentPosition.Y - _lastMouseDown.Value.Y) > SystemParameters.MinimumVerticalDragDistance))
+                {
+                    try
+                    {
+                        if (PMethod.Parent(e.OriginalSource, out fromItem))
+                        {
+                            DragDrop.DoDragDrop(this, fromItem, DragDropEffects.Move);
+                        }
+                    }
+                    finally
+                    {
+                        fromItem = null;
+                    }
+                }
+            }
             base.OnPreviewMouseMove(e);
         }
         /// <summary>
@@ -646,6 +691,10 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnPreviewMouseUp(MouseButtonEventArgs e)
         {
+            if (_lastMouseDown != null)
+            {
+                _lastMouseDown = null;
+            }
             if (downItem != null)
             {
                 IsPressed(false);
@@ -681,6 +730,64 @@ namespace Paway.WPF
                 this.RaiseEvent(eventArg);
             }
             base.OnPreviewMouseWheel(e);
+        }
+
+        #endregion
+
+        #region 拖拽节点
+        /// <summary>
+        /// 拖拽起点
+        /// </summary>
+        private Point? _lastMouseDown;
+        /// <summary>
+        /// 拖动进入时检查状态
+        /// </summary>
+        protected override void OnDragEnter(DragEventArgs e)
+        {
+            DragCheck(e, DragType.Enter);
+            base.OnDragEnter(e);
+        }
+        /// <summary>
+        /// 拖动过程中检查状态
+        /// </summary>
+        protected override void OnDragOver(DragEventArgs e)
+        {
+            DragCheck(e, DragType.Over);
+            base.OnDragOver(e);
+        }
+        /// <summary>
+        /// 拖动离开时检查状态
+        /// </summary>
+        protected override void OnDragLeave(DragEventArgs e)
+        {
+            DragCheck(e, DragType.Leave);
+            base.OnDragLeave(e);
+        }
+        private void DragCheck(DragEventArgs e, DragType type)
+        {
+            if (this.fromItem != null)
+            {
+                PMethod.Parent(e.OriginalSource, out ListViewItem toItem);
+                if (IsFilter(fromItem, toItem, type, e.RoutedEvent))
+                {
+                    e.Effects = DragDropEffects.None;
+                    e.Handled = true;
+                }
+            }
+        }
+        private bool IsFilter(ListViewItem fromItem, ListViewItem toItem, DragType type, RoutedEvent routed)
+        {
+            var result = OnDragFilter(fromItem, toItem, type, routed);
+            if (result != null) return result.Value;
+            if (fromItem.Equals(toItem)) return true;
+            return false;
+        }
+        /// <summary>
+        /// 开始拖动-完成
+        /// </summary>
+        protected override void OnDrop(DragEventArgs e)
+        {
+            base.OnDrop(e);
         }
 
         #endregion
