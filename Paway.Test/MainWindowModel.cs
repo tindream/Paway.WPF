@@ -135,13 +135,6 @@ namespace Paway.Test
             set { desc = value; OnPropertyChanged(); }
         }
 
-        private PlotLineType monitorType = PlotLineType.RightToeAngle;
-        public PlotLineType MonitorType
-        {
-            get { return monitorType; }
-            set { monitorType = value; OnPropertyChanged(); }
-        }
-
         /// <summary>
         /// 字体列表
         /// </summary>
@@ -167,11 +160,11 @@ namespace Paway.Test
                 }
             }
         }
-        private string _colors = "成功";
-        public string Colors
+        private string _themeColor = "成功";
+        public string ThemeColor
         {
-            get { return _colors; }
-            set { _colors = value; OnPropertyChanged(); }
+            get { return _themeColor; }
+            set { _themeColor = value; OnPropertyChanged(); }
         }
 
         #endregion
@@ -202,7 +195,7 @@ namespace Paway.Test
         {
             var color = Method.ColorSelector(slider.Value / 7);
             Config.Color = color;
-            this.Colors = color.ToString();
+            this.ThemeColor = color.ToString();
             //Method.DoStyles();
         });
         public ICommand ForegroundChanged => new RelayCommand<SliderEXT>(slider =>
@@ -349,7 +342,7 @@ namespace Paway.Test
             this.PlotModel = new PlotModel();
             PlotHelper.AddXY(plotModel);
 
-            var line = PlotHelper.AddLine(plotModel, PlotLineType.LeftToeAngle);
+            var line = PlotHelper.AddLine(plotModel, "A", Colors.Red);
             line.Color = OxyColor.FromRgb(2, 232, 250);
             line.DataFieldX = "DateTime";
             line.DataFieldY = "Value";

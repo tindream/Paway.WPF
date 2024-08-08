@@ -190,20 +190,17 @@ namespace Paway.Model
         /// <summary>
         /// 添加曲线
         /// </summary>
-        public static LineSeries AddLine(PlotModel plotModel, PlotLineType type, bool first = true)
+        public static LineSeries AddLine(PlotModel plotModel, string title, Color? color = null, bool first = true)
         {
             var line = new LineSeries()
             {
-                Title = type.Description(),
+                Title = title,
                 //MarkerType = MarkerType.Circle,
                 //InterpolationAlgorithm = InterpolationAlgorithms.CatmullRomSpline,
                 //Smooth = true,
                 TrackerFormatString = "\n{0}: {4:0,0.00}"
             };
-            if (type.Tag() is byte[] colors)
-            {
-                line.Color = OxyColor.FromRgb(colors[0], colors[1], colors[2]);
-            }
+            if (color != null) line.Color = OxyColor.FromRgb(color.Value.R, color.Value.G, color.Value.B);
             if (first) line.TrackerFormatString = "时间: {2}\n{0}: {4:0,0.00}";
             plotModel.Series.Add(line);
             return line;

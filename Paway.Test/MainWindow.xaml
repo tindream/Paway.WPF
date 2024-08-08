@@ -70,7 +70,7 @@
                 </SliderEXT>
             </Grid>
             <StackPanel Orientation="Horizontal" Background="White">
-                <Button Background="{StaticResource Success}" BorderThickness="0" Content="{Binding Colors}" Height="32" Width="100" Foreground="White"/>
+                <Button Background="{StaticResource Success}" BorderThickness="0" Content="{Binding ThemeColor}" Height="32" Width="100" Foreground="White"/>
                 <Button Background="{StaticResource Warn}" BorderThickness="0" Content="警告" Height="32" Width="100" Foreground="White"/>
                 <Button Background="{StaticResource Error}" BorderThickness="0" Content="错误" Height="32" Width="100" Foreground="White"/>
 

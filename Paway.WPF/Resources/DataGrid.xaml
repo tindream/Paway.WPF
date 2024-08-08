@@ -58,7 +58,7 @@
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
         <Setter Property="BorderBrush" Value="LightGray"/>
-        <Setter Property="Padding" Value="8,10,2,10"/>
+        <Setter Property="Padding" Value="8,8,2,8"/>
         <Setter Property="Tag" Value="{Binding Path=(local:DataGridMonitor.Radius), RelativeSource={RelativeSource Self}, Converter={StaticResource topRadiusConverter}}"/>
         <Setter Property="Background" Value="{Binding Path=(local:DataGridMonitor.HeaderBrush).Normal.Result, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="Template">
