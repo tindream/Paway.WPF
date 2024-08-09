@@ -39,10 +39,18 @@
                                        Stretch="{Binding Path=ImageStretch, RelativeSource={RelativeSource TemplatedParent}}"
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                                <TextBlock x:Name="txt" Text="{TemplateBinding Content}" Style="{x:Null}"
-                                       Foreground="{Binding Path=ItemForeground.Normal.Result, RelativeSource={RelativeSource TemplatedParent}}" 
-                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                <DockPanel>
+                                    <TextBlock x:Name="key" Text="{Binding Keys, RelativeSource={RelativeSource TemplatedParent}}" Style="{x:Null}"
+                                               DockPanel.Dock="Right"
+                                               Visibility="{Binding Keys, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullToCollapsed}}"
+                                               Foreground="{Binding Path=ItemForeground.Normal.Result, RelativeSource={RelativeSource TemplatedParent}}" 
+                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                    <TextBlock x:Name="txt" Text="{TemplateBinding Content}" Style="{x:Null}"
+                                               Foreground="{Binding Path=ItemForeground.Normal.Result, RelativeSource={RelativeSource TemplatedParent}}" 
+                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                </DockPanel>
                             </DockPanel>
                         </Border>
                     </Grid>
@@ -52,6 +60,7 @@
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Foreground" TargetName="txt" Value="{Binding Path=ItemForeground.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter Property="Foreground" TargetName="key" Value="{Binding Path=ItemForeground.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter Property="BorderThickness" TargetName="border1" Value="{Binding Path=ItemBorder.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter Property="Background" TargetName="border1" Value="{Binding Path=ItemBackground.Mouse, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter TargetName="image" Property="Source" Value="{Binding Path=Image.Mouse, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
@@ -59,6 +68,7 @@
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Foreground" TargetName="txt" Value="{Binding Path=ItemForeground.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter Property="Foreground" TargetName="key" Value="{Binding Path=ItemForeground.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter Property="BorderThickness" TargetName="border1" Value="{Binding Path=ItemBorder.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter Property="Background" TargetName="border1" Value="{Binding Path=ItemBackground.Pressed, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter TargetName="image" Property="Source" Value="{Binding Path=Image.Pressed, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>

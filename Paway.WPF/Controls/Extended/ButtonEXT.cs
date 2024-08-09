@@ -61,6 +61,42 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ImageProperty =
             DependencyProperty.RegisterAttached(nameof(Image), typeof(ImageEXT), typeof(ButtonEXT));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty KeysProperty =
+            DependencyProperty.RegisterAttached(nameof(Keys), typeof(string), typeof(ButtonEXT));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ShortcutControlProperty =
+            DependencyProperty.RegisterAttached(nameof(ShortcutControl), typeof(ModifierKeys), typeof(ButtonEXT));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ShortcutKeyProperty =
+            DependencyProperty.RegisterAttached(nameof(ShortcutKey), typeof(Key), typeof(ButtonEXT), new PropertyMetadata(Key.None, OnKeyChanged));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty ShortKeyProperty =
+            DependencyProperty.RegisterAttached(nameof(ShortKey), typeof(Key), typeof(ButtonEXT), new PropertyMetadata(Key.None, OnKeyChanged));
+        private static void OnKeyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            if (obj is ButtonEXT view)
+            {
+                if (view.ShortcutKey != Key.None)
+                {
+                    view.Keys = $"({view.ShortcutKey})";
+                    if (view.Keys.Length > 5) view.Keys = $"({view.ShortcutKey.ToString().Substring(0, 3)})";
+                }
+                else if (view.ShortKey != Key.None)
+                {
+                    if (view.ShortKey != Key.None) view.Keys = $"({view.ShortKey})";
+                    if (view.Keys.Length > 5) view.Keys = $"({view.ShortKey.ToString().Substring(0, 3)})";
+                }
+                else if (view.Keys != null)
+                {
+                    view.Keys = null;
+                }
+            }
+        }
 
         /// <summary>
         /// </summary>
@@ -208,6 +244,50 @@ namespace Paway.WPF
             get { return (ImageEXT)GetValue(ImageProperty); }
             set { SetValue(ImageProperty, value); }
         }
+        /// <summary>
+        /// 控制键
+        /// <para>默认值：None</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("控制键")]
+        public ModifierKeys ShortcutControl
+        {
+            get { return (ModifierKeys)GetValue(ShortcutControlProperty); }
+            set { SetValue(ShortcutControlProperty, value); }
+        }
+        /// <summary>
+        /// 快捷键(与控制件键一起使用)
+        /// <para>默认值：None</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("快捷键(有控制键)")]
+        public Key ShortcutKey
+        {
+            get { return (Key)GetValue(ShortcutKeyProperty); }
+            set { SetValue(ShortcutKeyProperty, value); }
+        }
+        /// <summary>
+        /// 短键(独立，无控制键)
+        /// <para>默认值：None</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("短键(无控制键)")]
+        public Key ShortKey
+        {
+            get { return (Key)GetValue(ShortKeyProperty); }
+            set { SetValue(ShortKeyProperty, value); }
+        }
+        /// <summary>
+        /// 短键(独立，无控制键)
+        /// <para>默认值：None</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("短键(无控制键)"), Browsable(false)]
+        public string Keys
+        {
+            get { return (string)GetValue(KeysProperty); }
+            set { SetValue(KeysProperty, value); }
+        }
 
         /// <summary>
         /// 轻颜色样式
@@ -240,6 +320,33 @@ namespace Paway.WPF
         {
             DefaultStyleKey = typeof(ButtonEXT);
         }
+        /// <summary>
+        /// 监听顶层窗体按键
+        /// </summary>
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            if (Command != null && PMethod.Parent(this, out Window window))
+            {
+                window.PreviewKeyDown += Window_PreviewKeyDown;
+            }
+        }
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (!this.IsLoaded) return;
+            if (this.Command != null)
+            {
+                if (e.Key == ShortKey)
+                {
+                    Command.Execute(this.CommandParameter);
+                }
+                else if ((Keyboard.Modifiers & ModifierKeys.Control) == ShortcutControl && e.Key == ShortcutKey)
+                {
+                    Command.Execute(this.CommandParameter);
+                }
+            }
+        }
+
         /// <summary>
         /// 事件日志记录
         /// </summary>
