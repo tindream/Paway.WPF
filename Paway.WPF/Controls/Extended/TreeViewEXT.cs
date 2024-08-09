@@ -354,6 +354,11 @@ namespace Paway.WPF
                     e.Handled = true;
                 }
             }
+            else if (DragExternal == null)
+            {
+                e.Effects = DragDropEffects.None;
+                e.Handled = true;
+            }
         }
         private bool IsFilter(ITreeViewItem fromItem, ITreeViewItem toItem, DragType type, RoutedEvent routed)
         {

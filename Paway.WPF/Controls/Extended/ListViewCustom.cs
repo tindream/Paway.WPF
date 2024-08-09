@@ -774,6 +774,11 @@ namespace Paway.WPF
                     e.Handled = true;
                 }
             }
+            else
+            {
+                e.Effects = DragDropEffects.None;
+                e.Handled = true;
+            }
         }
         private bool IsFilter(ListViewItem fromItem, ListViewItem toItem, DragType type, RoutedEvent routed)
         {
@@ -781,13 +786,6 @@ namespace Paway.WPF
             if (result != null) return result.Value;
             if (fromItem.Equals(toItem)) return true;
             return false;
-        }
-        /// <summary>
-        /// 开始拖动-完成
-        /// </summary>
-        protected override void OnDrop(DragEventArgs e)
-        {
-            base.OnDrop(e);
         }
 
         #endregion

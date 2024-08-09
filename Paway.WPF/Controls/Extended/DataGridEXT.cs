@@ -616,11 +616,11 @@ namespace Paway.WPF
                     e.Effects = DragDropEffects.None;
                     e.Handled = true;
                 }
-                else if (IsFilter(fromItem, null, type, e.RoutedEvent))
-                {
-                    e.Effects = DragDropEffects.None;
-                    e.Handled = true;
-                }
+            }
+            else if (DragExternal == null)
+            {
+                e.Effects = DragDropEffects.None;
+                e.Handled = true;
             }
         }
         private bool IsFilter(DataGridRow fromItem, DataGridRow toItem, DragType type, RoutedEvent routed)

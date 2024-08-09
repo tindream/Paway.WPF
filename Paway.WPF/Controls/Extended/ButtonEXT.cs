@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Paway.WPF
@@ -249,5 +250,84 @@ namespace Paway.WPF
             PConfig.AddLog(this, desc);
             base.OnClick();
         }
+
+        #region 拖拽节点
+        /// <summary>
+        /// 拖拽起点
+        /// </summary>
+        private Point? _lastMouseDown;
+        /// <summary>
+        /// 按下记录位置
+        /// </summary>
+        protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            if (e.ButtonState == MouseButtonState.Pressed && e.ClickCount == 1)
+            {
+                if (this.AllowDrop)
+                {
+                    _lastMouseDown = e.GetPosition(this);
+                    //e.Handled = true;
+                }
+            }
+            base.OnPreviewMouseLeftButtonDown(e);
+        }
+        /// <summary>
+        /// 抬起停止拖动
+        /// </summary>
+        protected override void OnPreviewMouseLeftButtonUp(MouseButtonEventArgs e)
+        {
+            if (_lastMouseDown != null)
+            {
+                _lastMouseDown = null;
+            }
+            base.OnPreviewMouseLeftButtonUp(e);
+        }
+        /// <summary>
+        /// 启动拖动
+        /// </summary>
+        protected override void OnPreviewMouseMove(MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed && _lastMouseDown != null)
+            {
+                Point currentPosition = e.GetPosition(this);
+                if ((Math.Abs(currentPosition.X - _lastMouseDown.Value.X) > SystemParameters.MinimumHorizontalDragDistance) ||
+                    (Math.Abs(currentPosition.Y - _lastMouseDown.Value.Y) > SystemParameters.MinimumVerticalDragDistance))
+                {
+                    DragDrop.DoDragDrop(this, this, DragDropEffects.Move);
+                }
+            }
+            base.OnPreviewMouseMove(e);
+        }
+        /// <summary>
+        /// 拖动进入时检查状态
+        /// </summary>
+        protected override void OnDragEnter(DragEventArgs e)
+        {
+            DragCheck(e, DragType.Enter);
+            base.OnDragEnter(e);
+        }
+        /// <summary>
+        /// 拖动过程中检查状态
+        /// </summary>
+        protected override void OnDragOver(DragEventArgs e)
+        {
+            DragCheck(e, DragType.Over);
+            base.OnDragOver(e);
+        }
+        /// <summary>
+        /// 拖动离开时检查状态
+        /// </summary>
+        protected override void OnDragLeave(DragEventArgs e)
+        {
+            DragCheck(e, DragType.Leave);
+            base.OnDragLeave(e);
+        }
+        private void DragCheck(DragEventArgs e, DragType type)
+        {
+            e.Effects = DragDropEffects.None;
+            e.Handled = true;
+        }
+
+        #endregion
     }
 }
