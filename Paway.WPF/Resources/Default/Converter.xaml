@@ -25,19 +25,29 @@
     <local:MoreValueMultiConverter x:Key="moreValueMultiConverter"/>
     <local:ValueMultiConverter x:Key="valueMultiConverter"/>
     <local:ValueAddConverter x:Key="valueAddConverter"/>
+    
     <local:ValueToTrue x:Key="valueToTrue"/>
+    <local:ValueThanToTrue x:Key="valueThanToTrue"/>
+    <local:ValueLessToTrue x:Key="valueLessToTrue"/>
     <local:ValueUnionToTrue x:Key="valueUnionToTrue"/>
     <local:ValueMoreToTrue x:Key="valueMoreToTrue"/>
     <local:ValueToMoreTrue x:Key="valueToMoreTrue"/>
     <local:ValueToFalse x:Key="valueToFalse"/>
+    <local:ValueThanToFalse x:Key="valueThanToFalse"/>
+    <local:ValueLessToFalse x:Key="valueLessToFalse"/>
     <local:ValueUnionToFalse x:Key="valueUnionToFalse"/>
     <local:ValueMoreToFalse x:Key="valueMoreToFalse"/>
     <local:ValueToMoreFalse x:Key="valueToMoreFalse"/>
+
     <local:ValueToVisible x:Key="valueToVisible"/>
+    <local:ValueThanToVisible x:Key="valueThanToVisible"/>
+    <local:ValueLessToVisible x:Key="valueLessToVisible"/>
     <local:ValueUnionToVisible x:Key="valueUnionToVisible"/>
     <local:ValueMoreToVisible x:Key="valueMoreToVisible"/>
     <local:ValueToMoreVisible x:Key="valueToMoreVisible"/>
     <local:ValueToCollapsed x:Key="valueToCollapsed"/>
+    <local:ValueThanToCollapsed x:Key="valueThanToCollapsed"/>
+    <local:ValueLessToCollapsed x:Key="valueLessToCollapsed"/>
     <local:ValueUnionToCollapsed x:Key="valueUnionToCollapsed"/>
     <local:ValueMoreToCollapsed x:Key="valueMoreToCollapsed"/>
     <local:ValueToMoreCollapsed x:Key="valueToMoreCollapsed"/>

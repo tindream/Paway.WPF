@@ -373,7 +373,7 @@ namespace Paway.WPF
                 if (this.AllowDrop)
                 {
                     _lastMouseDown = e.GetPosition(this);
-                    //e.Handled = true;
+                    e.Handled = true;
                 }
             }
             base.OnPreviewMouseLeftButtonDown(e);
