@@ -89,14 +89,14 @@ namespace Paway.WPF
                 Color? mouseColor = null, pressedColor = null;
                 if (listView.ItemBackground.Mouse is SolidColorBrush mouse && mouse.Color != PConfig.Color.ToAlpha(PConfig.Alpha - PConfig.Interval))
                 {
-                    if (listView.ItemBrush.Mouse.ToColor() == PConfig.Color.ToAlpha(PConfig.Alpha))
+                    if (listView.ItemBrush != null && listView.ItemBrush.Mouse.ToColor() == PConfig.Color.ToAlpha(PConfig.Alpha))
                     {
                         mouseColor = mouse.Color.ToAlpha(mouse.Color.A);
                     }
                 }
                 if (listView.ItemBackground.Pressed is SolidColorBrush pressed && pressed.Color != PConfig.Color.ToAlpha(PConfig.Alpha))
                 {
-                    if (listView.ItemBrush.Pressed.ToColor() == PConfig.Color.ToAlpha(PConfig.Alpha + PConfig.Interval))
+                    if (listView.ItemBrush != null && listView.ItemBrush.Pressed.ToColor() == PConfig.Color.ToAlpha(PConfig.Alpha + PConfig.Interval))
                     {
                         pressedColor = pressed.Color.ToAlpha(pressed.Color.A + PConfig.Interval);
                     }

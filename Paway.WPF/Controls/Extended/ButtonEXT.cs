@@ -373,7 +373,7 @@ namespace Paway.WPF
                 if (this.AllowDrop)
                 {
                     _lastMouseDown = e.GetPosition(this);
-                    e.Handled = true;
+                    //e.Handled = true;
                 }
             }
             base.OnPreviewMouseLeftButtonDown(e);
@@ -400,6 +400,7 @@ namespace Paway.WPF
                 if ((Math.Abs(currentPosition.X - _lastMouseDown.Value.X) > SystemParameters.MinimumHorizontalDragDistance) ||
                     (Math.Abs(currentPosition.Y - _lastMouseDown.Value.Y) > SystemParameters.MinimumVerticalDragDistance))
                 {
+                    _lastMouseDown = null;
                     DragDrop.DoDragDrop(this, this, DragDropEffects.Move);
                 }
             }
