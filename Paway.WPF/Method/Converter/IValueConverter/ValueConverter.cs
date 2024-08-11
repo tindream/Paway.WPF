@@ -193,12 +193,12 @@ namespace Paway.WPF
         }
     }
     /// <summary>
-    /// 值转True(多原始枚举值)
+    /// 值转True(多枚举值)
     /// </summary>
     public class ValueMoreToTrue : IValueConverter
     {
         /// <summary>
-        /// 值转True(多原始枚举值)
+        /// 值转True(多枚举值)
         /// </summary>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -207,10 +207,16 @@ namespace Paway.WPF
             else if (value is Enum)
             {
                 var valueNormal = value.GetHashCode();
-                var valueReg = parameter.ToInt();
-                result = (valueNormal & valueReg) == valueReg;
+                var valueParameter = parameter.ToInt();
+                result = (valueNormal & valueParameter) == valueParameter;
             }
-            else result = value.ToString().Contains(parameter.ToStrings());
+            else
+            {
+                var valueParameters = parameter.ToStrings();
+                var valueList = value.ToString().Split(new char[] { '|', ',' }).ToList();
+                if (valueList.Count > 1) result = valueList.Contains(valueParameters);
+                else result = value.ToString().Contains(valueParameters);
+            }
             return result;
         }
         /// <summary>
@@ -225,24 +231,39 @@ namespace Paway.WPF
         }
     }
     /// <summary>
-    /// 值转True(多目标枚举值)
+    /// 值转True(多参数)
     /// </summary>
     public class ValueToMoreTrue : IValueConverter
     {
         /// <summary>
-        /// 值转True(多目标枚举值)
+        /// 值转True(多参数)
         /// </summary>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             bool result;
+            var valueParameter = parameter.ToInt();
             if (value == null || value == DBNull.Value) result = false;
             else if (value is Enum)
             {
                 var valueNormal = value.GetHashCode();
-                var valueReg = parameter.ToInt();
-                result = (valueNormal & valueReg) == valueNormal;
+                if (valueParameter.ToStrings() == parameter.ToStrings())
+                {
+                    result = (valueParameter & valueNormal) == valueNormal;
+                }
+                else
+                {
+                    var valueNormals = valueNormal.ToString();
+                    var parameterList = parameter.ToStrings().Split(new char[] { '|', ',' }).ToList();
+                    result = parameterList.Contains(valueNormals);
+                }
             }
-            else result = parameter.ToStrings().Contains(value.ToString());
+            else
+            {
+                var valueNormals = value.ToString();
+                var parameterList = parameter.ToStrings().Split(new char[] { '|', ',' }).ToList();
+                if (parameterList.Count > 1) result = parameterList.Contains(valueNormals);
+                else result = parameter.ToStrings().Contains(valueNormals);
+            }
             return result;
         }
         /// <summary>
@@ -317,7 +338,7 @@ namespace Paway.WPF
         }
     }
     /// <summary>
-    /// 值转False(多原始枚举值)
+    /// 值转False(多枚举值)
     /// </summary>
     internal class ValueMoreToFalse : IValueConverter
     {
@@ -333,7 +354,7 @@ namespace Paway.WPF
         }
     }
     /// <summary>
-    /// 值转False(多目标枚举值)
+    /// 值转False(多参数)
     /// </summary>
     internal class ValueToMoreFalse : IValueConverter
     {
@@ -409,7 +430,7 @@ namespace Paway.WPF
         }
     }
     /// <summary>
-    /// 值转Visibility(多原始枚举值)
+    /// 值转Visibility(多枚举值)
     /// </summary>
     internal class ValueMoreToVisible : IValueConverter
     {
@@ -424,7 +445,7 @@ namespace Paway.WPF
         }
     }
     /// <summary>
-    /// 值转Visibility(多目标枚举值)
+    /// 值转Visibility(多参数)
     /// </summary>
     internal class ValueToMoreVisible : IValueConverter
     {
@@ -500,7 +521,7 @@ namespace Paway.WPF
         }
     }
     /// <summary>
-    /// 值转Collapsed(多原始枚举值)
+    /// 值转Collapsed(多枚举值)
     /// </summary>
     internal class ValueMoreToCollapsed : IValueConverter
     {
@@ -515,7 +536,7 @@ namespace Paway.WPF
         }
     }
     /// <summary>
-    /// 值转Collapsed(多目标枚举值)
+    /// 值转Collapsed(多参数)
     /// </summary>
     internal class ValueToMoreCollapsed : IValueConverter
     {
