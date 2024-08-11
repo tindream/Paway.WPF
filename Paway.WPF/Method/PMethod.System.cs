@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -705,7 +706,7 @@ namespace Paway.WPF
         /// <summary>
         /// 初始化App
         /// </summary>
-        public static void InitApp(Application app, string fileName = "Log.xml")
+        public static void InitApp(Application app, string fileName = "Log.xml", bool logFirstChanceException = true)
         {
             var file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
             log4net.Config.XmlConfigurator.Configure(new FileInfo(file));
@@ -716,7 +717,12 @@ namespace Paway.WPF
             NavigationCommands.BrowseBack.InputGestures.Clear();
             TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            if (logFirstChanceException) AppDomain.CurrentDomain.FirstChanceException += CurrentDomain_FirstChanceException;
             app.DispatcherUnhandledException += App_DispatcherUnhandledException;
+        }
+        private static void CurrentDomain_FirstChanceException(object sender, System.Runtime.ExceptionServices.FirstChanceExceptionEventArgs e)
+        {
+            $"异常记录：{e.Exception.Message()}".Log(e.Exception.IExist(typeof(WarningException)) ? LeveType.Warn : LeveType.Error);
         }
         private static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {

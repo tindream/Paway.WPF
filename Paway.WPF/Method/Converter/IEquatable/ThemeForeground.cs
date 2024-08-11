@@ -47,6 +47,10 @@ namespace Paway.WPF
         /// </summary>
         public ThemeForeground()
         {
+            if (System.Threading.Thread.CurrentThread.ManagedThreadId != 1)
+            {
+                throw new WarningException("Resources cannot be called in threads");
+            }
         }
         private void Config_ForegroundChanged(Color obj)
         {
