@@ -50,6 +50,7 @@ namespace Paway.WPF
                     pad.MouseEnter += Pad_MouseEnter;
                     pad.MouseLeave += Pad_MouseLeave;
                 }
+                pad.KeyDown += (sender, ke) => PMethod.OnKeyDown(ke);
             }
         }
         private static void PasswordChanged(object sender, RoutedEventArgs e)

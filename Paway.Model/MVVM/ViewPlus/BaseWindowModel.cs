@@ -17,7 +17,7 @@ namespace Paway.Model
     /// <summary>
     /// Window基础模型
     /// </summary>
-    public class BaseWindowModel : ViewModelBasePlus
+    public class BaseWindowModel : ViewModelBasePlus, IWindowModel
     {
         #region 属性
         /// <summary>
@@ -40,7 +40,7 @@ namespace Paway.Model
         /// <summary>
         /// 关闭处理
         /// </summary>
-        protected virtual bool? OnCancel() { return false; }
+        public virtual bool? OnCancel(Window wd) { return false; }
         /// <summary>
         /// 点击关闭
         /// </summary>
@@ -48,7 +48,7 @@ namespace Paway.Model
         {
             try
             {
-                var result = OnCancel();
+                var result = OnCancel(wd);
                 if (wd != null) wd.DialogResult = result;
             }
             catch (Exception ex)
@@ -60,7 +60,7 @@ namespace Paway.Model
         /// <summary>
         /// 提交处理
         /// </summary>
-        protected virtual bool? OnCommit(Window wd) { return true; }
+        public virtual bool? OnCommit(Window wd) { return true; }
         /// <summary>
         /// 点击提交
         /// </summary>
@@ -76,10 +76,6 @@ namespace Paway.Model
                 Messenger.Default.Send(new StatuMessage(ex, wd));
             }
         });
-        internal void EnterCommit(Window wd)
-        {
-            wd.DialogResult = OnCommit(wd);
-        }
 
         #endregion
     }

@@ -165,5 +165,21 @@ namespace Paway.WPF
             base.OnDeactivated(e);
             IsNonClientActive = false;
         }
+
+        /// <summary>
+        /// 判断按钮执行提交命令
+        /// </summary>
+        protected override void OnPreviewKeyDown(KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                if (this.DataContext is IWindowModel windowModel)
+                {
+                    this.DialogResult = windowModel.OnCommit(this);
+                    e.Handled = true;
+                }
+            }
+            base.OnPreviewKeyDown(e);
+        }
     }
 }

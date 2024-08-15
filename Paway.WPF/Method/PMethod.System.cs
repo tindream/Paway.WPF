@@ -235,7 +235,14 @@ namespace Paway.WPF
                     {
                         if (iExit && DateTime.Now.Subtract(exitTime).TotalMilliseconds < PConfig.DoubleInterval)
                         {
-                            window.Close();
+                            if (window.DataContext is IWindowModel windowModel)
+                            {
+                                window.DialogResult = windowModel.OnCancel(window);
+                            }
+                            else
+                            {
+                                window.Close();
+                            }
                             return;
                         }
                         iExit = true;

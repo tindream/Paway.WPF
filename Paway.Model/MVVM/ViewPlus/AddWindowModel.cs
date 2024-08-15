@@ -77,7 +77,7 @@ namespace Paway.Model
         /// <summary>
         /// 点击确认
         /// </summary>
-        protected override bool? OnCommit(Window wd)
+        public override bool? OnCommit(Window wd)
         {
             var result = OnSave(wd, info);
             if (result != true) return result;

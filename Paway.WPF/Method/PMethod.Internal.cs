@@ -78,7 +78,7 @@ namespace Paway.WPF
         /// </summary>
         internal static void OnKeyDown(KeyEventArgs e)
         {
-            if (e.Key == Key.Enter || e.Key == Key.Tab)
+            if ((Keyboard.Modifiers & ModifierKeys.Control) != ModifierKeys.Control && (e.Key == Key.Enter || e.Key == Key.Tab))
             {
                 // Gets the element with keyboard focus.
                 // Change keyboard focus. 

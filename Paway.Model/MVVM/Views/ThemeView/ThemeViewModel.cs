@@ -105,7 +105,7 @@ namespace Paway.Model
         /// <summary>
         /// 确认修改
         /// </summary>
-        protected override bool? OnCommit(Window wd)
+        public override bool? OnCommit(Window wd)
         {
             this.Saved();
             return base.OnCommit(wd);
@@ -116,14 +116,6 @@ namespace Paway.Model
         public void Saved()
         {
             this.iSave = true;
-        }
-        /// <summary>
-        /// 取消修改
-        /// </summary>
-        protected override bool? OnCancel()
-        {
-            this.iSave = false;
-            return base.OnCancel();
         }
         /// <summary>
         /// 取消还原主题设置
