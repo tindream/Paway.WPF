@@ -412,11 +412,11 @@ namespace Paway.WPF
             {
                 if (temp is ListViewItem item && item.Content is IListViewItem info)
                 {
-                    PConfig.AddLog(this, info.Hit);
+                    PConfig.AddOperateLog(this, info.Hit);
                 }
                 else if (this.ItemContainerGenerator.ContainerFromItem(temp) is ListViewItem listViewItem && listViewItem.Content is IListViewItem info2)
                 {
-                    PConfig.AddLog(this, info2.Hit);
+                    PConfig.AddOperateLog(this, info2.Hit);
                 }
             }
             this.ReleaseMouseCapture();

@@ -354,7 +354,7 @@ namespace Paway.WPF
         {
             var desc = this.ToolTip.ToStrings();
             if (desc.IsEmpty()) desc = this.Content.ToStrings();
-            PConfig.AddLog(this, desc);
+            PConfig.AddOperateLog(this, desc);
             base.OnClick();
         }
 

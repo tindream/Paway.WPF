@@ -17,6 +17,80 @@ namespace Paway.WPF
     /// </summary>
     public partial class PMethod : TMethod
     {
+        #region 绘制 三次贝塞尔曲线，及箭头
+        /// <summary>
+        /// 计算路径： 三次贝塞尔曲线
+        /// </summary>
+        /// <param name="startPoint">起点</param>
+        /// <param name="endPoint">终点</param>
+        /// <param name="arrow">是否添加箭头</param>
+        /// <returns></returns>
+        public static PathGeometry CubicBezier(Point startPoint, Point endPoint, bool arrow = true)
+        {
+            PathGeometry geo = new PathGeometry();
+            PathFigure pathFigure = new PathFigure();
+            pathFigure.StartPoint = startPoint;
+            pathFigure.Segments.Add(new BezierSegment(CubicBezierControlPoint(startPoint, endPoint, true), CubicBezierControlPoint(startPoint, endPoint, false), endPoint, true));
+            geo.Figures.Add(pathFigure);
+            if (arrow)
+            {
+                pathFigure = new PathFigure();
+                if (endPoint.X > startPoint.X)
+                {
+                    pathFigure.StartPoint = new Point(endPoint.X - 7, endPoint.Y - 4);
+                    pathFigure.Segments.Add(new PolyLineSegment(new List<Point> { new Point(endPoint.X + 10 - 7, endPoint.Y), new Point(endPoint.X - 7, endPoint.Y + 4) }, true));
+                }
+                else
+                {
+                    pathFigure.StartPoint = new Point(endPoint.X + 7, endPoint.Y - 4);
+                    pathFigure.Segments.Add(new PolyLineSegment(new List<Point> { new Point(endPoint.X - 10 + 7, endPoint.Y), new Point(endPoint.X + 7, endPoint.Y + 4) }, true));
+                }
+                geo.Figures.Add(pathFigure);
+            }
+            return geo;
+        }
+        /// <summary>
+        /// 计算路径范围： 三次贝塞尔曲线上下区域
+        /// </summary>
+        /// <param name="startPoint">起点</param>
+        /// <param name="endPoint">终点</param>
+        /// <param name="interval">区域范围</param>
+        public static PathGeometry CubicBezierRect(Point startPoint, Point endPoint, double interval = 8)
+        {
+            PathGeometry geo = new PathGeometry();
+            var point1 = new Point(startPoint.X, startPoint.Y - interval);
+            var point2 = new Point(endPoint.X, endPoint.Y - interval);
+            var point3 = new Point(startPoint.X, startPoint.Y + interval);
+            var point4 = new Point(endPoint.X, endPoint.Y + interval);
+            PathFigure pathFigure = new PathFigure();
+            pathFigure.StartPoint = point1;
+            //pathFigure.IsClosed = true;
+            pathFigure.Segments.Add(new BezierSegment(CubicBezierControlPoint(point1, point2, true), CubicBezierControlPoint(point1, point2, false), point2, true));
+            pathFigure.Segments.Add(new PolyLineSegment(new List<Point> { point2, point4 }, true));
+
+            pathFigure.Segments.Add(new PolyLineSegment(new List<Point> { point4, point1 }, true));
+            pathFigure.Segments.Add(new PolyLineSegment(new List<Point> { point1, point3 }, true));
+            pathFigure.Segments.Add(new BezierSegment(CubicBezierControlPoint(point3, point4, true), CubicBezierControlPoint(point3, point4, false), point4, true));
+            geo.Figures.Add(pathFigure);
+
+            return geo;
+        }
+        /// <summary>
+        /// 三次贝塞尔曲线 控制点
+        /// </summary>
+        /// <param name="startPoint">起点</param>
+        /// <param name="endPoint">终点</param>
+        /// <param name="isFirstControlPoint">是否第一个控制点</param>
+        public static Point CubicBezierControlPoint(Point startPoint, Point endPoint, bool isFirstControlPoint)
+        {
+            double distanceX = Math.Abs(endPoint.X - startPoint.X);
+            double controlPointX = (startPoint.X + endPoint.X) / 2;
+            double controlPointY = isFirstControlPoint ? startPoint.Y - distanceX / 12 : endPoint.Y + distanceX / 12;
+            return new Point(controlPointX, controlPointY);
+        }
+
+        #endregion
+
         #region Menu
         /// <summary>
         /// Menu菜单绑定多语言
