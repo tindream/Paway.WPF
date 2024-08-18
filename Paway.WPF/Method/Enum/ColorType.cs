@@ -41,5 +41,9 @@ namespace Paway.WPF
         /// 错误
         /// </summary>
         Error,
+        /// <summary>
+        /// 禁用
+        /// </summary>
+        Disable,
     }
 }

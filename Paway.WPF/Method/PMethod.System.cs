@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Net.Sockets;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -729,7 +730,9 @@ namespace Paway.WPF
         }
         private static void CurrentDomain_FirstChanceException(object sender, System.Runtime.ExceptionServices.FirstChanceExceptionEventArgs e)
         {
-            $"异常记录：{e.Exception.Message()}".Log(e.Exception.IExist(typeof(WarningException)) ? LeveType.Warn : LeveType.Error);
+            var msg = $"异常记录：{e.Exception.Message()}";
+            if (e.Exception.IExist(typeof(WarningException)) || e.Exception.IExist(typeof(SocketException))) msg.Log(LeveType.Warn);
+            else msg.Log(LeveType.Error);
         }
         private static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {

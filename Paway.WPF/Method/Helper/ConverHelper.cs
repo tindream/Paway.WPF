@@ -256,6 +256,7 @@ namespace Paway.WPF
                 case ColorType.Success: return PConfig.Success;
                 case ColorType.Warn: return PConfig.Warn;
                 case ColorType.Error: return PConfig.Error;
+                case ColorType.Disable: return Colors.DarkGray;
 
                 default: return Colors.Transparent;
             }

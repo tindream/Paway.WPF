@@ -37,9 +37,9 @@
         <!--<ComboBoxEXT Title="虚拟键盘：" ItemsSource="{EnumList Type=helper:EnableType}" SelectedValue="{Binding Path=Keyboard, Converter={StaticResource enumConverter}}"/>-->
         <WrapPanel>
             <RadioButtonEXT Title="虚拟键盘：" Content="启用" GroupName="Keyboard" Radius="3,0,0,3" Margin="2,2,0,2" Padding="15,5"
-                            IsChecked="{Binding Keyboard, Converter={StaticResource valueToTrue}, ConverterParameter=1}" />
+                            IsChecked="{Binding Keyboard, Converter={StaticResource valueToTrue}, ConverterParameter=1}" Type="Success"/>
             <RadioButtonEXT Content="停用" GroupName="Keyboard" Radius="0,3,3,0" Margin="-1,2,2,2" Padding="15,5"
-                            IsChecked="{Binding Keyboard, Converter={StaticResource valueToTrue}, ConverterParameter=0}" />
+                            IsChecked="{Binding Keyboard, Converter={StaticResource valueToTrue}, ConverterParameter=0}" Type="Disable"/>
         </WrapPanel>
     </StackPanel>
 </Page>
