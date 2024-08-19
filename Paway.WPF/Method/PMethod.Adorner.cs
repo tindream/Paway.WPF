@@ -739,47 +739,55 @@ namespace Paway.WPF
                     ClearAdorner(myAdornerLayer, element, NameHit);
                     var hitAdorner = new CustomAdorner(element, border, storyboardFunc: () =>
                     {
-                        var storyboard = new Storyboard();
-
-                        var animInColor = new ColorAnimation(color.ToAlpha(0), color, new Duration(TimeSpan.FromMilliseconds(125)));
-                        var propertyChain = new DependencyProperty[] { Border.BackgroundProperty, SolidColorBrush.ColorProperty };
-                        Storyboard.SetTargetProperty(animInColor, new PropertyPath("(0).(1)", propertyChain));
-                        storyboard.Children.Add(animInColor);
-
-                        //放大
-                        var scale = new ScaleTransform
-                        {
-                            CenterX = border.ActualWidth / 2,
-                            CenterY = border.ActualHeight / 2
-                        };
-                        border.RenderTransform = scale;
-                        var animInX = new DoubleAnimation(0.1, 1, new Duration(TimeSpan.FromMilliseconds(125)))
-                        {
-                            AccelerationRatio = 0.1,
-                            DecelerationRatio = 0.9
-                        };
-                        var animInY = new DoubleAnimation(0.8, 1, new Duration(TimeSpan.FromMilliseconds(100)));
-                        var propertyX = new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, ScaleTransform.ScaleXProperty });
-                        var propertyY = new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, ScaleTransform.ScaleYProperty });
-                        Storyboard.SetTargetProperty(animInX, propertyX);
-                        //Storyboard.SetTargetProperty(animInY, propertyY);
-                        storyboard.Children.Add(animInX);
-                        //storyboard.Children.Add(animInY);
-
-                        var animTime = AnimTime(Math.Max(border.ActualWidth, border.ActualHeight));
-                        var animColor = new ColorAnimation(color, color.ToAlpha(0), new Duration(TimeSpan.FromMilliseconds(animTime)))
-                        {
-                            BeginTime = TimeSpan.FromMilliseconds(time + 125)
-                        };
-                        Storyboard.SetTargetProperty(animColor, new PropertyPath("(0).(1)", propertyChain));
-                        storyboard.Children.Add(animColor);
-
+                        var storyboard = HitStoryboard(border, color, time);
                         return storyboard;
                     }, completedFunc: completed)
                     { Name = NameHit };
                     lock (myAdornerLayer) myAdornerLayer.Add(hitAdorner);
                 }
             });
+        }
+        /// <summary>
+        /// 自定义提示框-Hit动画
+        /// </summary>
+        public static Storyboard HitStoryboard(FrameworkElement element, Color backColor, int time = 3000)
+        {
+            var storyboard = new Storyboard();
+
+            var animInColor = new ColorAnimation(backColor.ToAlpha(0), backColor, new Duration(TimeSpan.FromMilliseconds(125)));
+            var propertyChain = new DependencyProperty[] { Border.BackgroundProperty, SolidColorBrush.ColorProperty };
+            Storyboard.SetTargetProperty(animInColor, new PropertyPath("(0).(1)", propertyChain));
+            storyboard.Children.Add(animInColor);
+
+            //放大
+            var scale = new ScaleTransform
+            {
+                CenterX = element.ActualWidth / 2,
+                CenterY = element.ActualHeight / 2,
+            };
+            element.RenderTransform = scale;
+            var animInX = new DoubleAnimation(0.1, 1, new Duration(TimeSpan.FromMilliseconds(125)))
+            {
+                AccelerationRatio = 0.1,
+                DecelerationRatio = 0.9
+            };
+            var animInY = new DoubleAnimation(0.8, 1, new Duration(TimeSpan.FromMilliseconds(100)));
+            var propertyX = new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, ScaleTransform.ScaleXProperty });
+            var propertyY = new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, ScaleTransform.ScaleYProperty });
+            Storyboard.SetTargetProperty(animInX, propertyX);
+            //Storyboard.SetTargetProperty(animInY, propertyY);
+            storyboard.Children.Add(animInX);
+            //storyboard.Children.Add(animInY);
+
+            var animTime = AnimTime(Math.Max(element.ActualWidth, element.ActualHeight));
+            var animColor = new ColorAnimation(backColor, backColor.ToAlpha(0), new Duration(TimeSpan.FromMilliseconds(animTime)))
+            {
+                BeginTime = TimeSpan.FromMilliseconds(time + 125)
+            };
+            Storyboard.SetTargetProperty(animColor, new PropertyPath("(0).(1)", propertyChain));
+            storyboard.Children.Add(animColor);
+
+            return storyboard;
         }
 
         #endregion

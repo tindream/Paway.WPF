@@ -310,7 +310,7 @@ namespace Paway.WPF
         /// </summary>
         public static void ShowWarning(DependencyObject parent, string msg)
         {
-            Show(parent, msg, LeveType.Warn);
+            Show(parent, msg, LevelType.Warn);
         }
         /// <summary>
         /// Window系统消息框
@@ -318,27 +318,27 @@ namespace Paway.WPF
         /// </summary>
         public static void ShowError(DependencyObject parent, string msg)
         {
-            Show(parent, msg, LeveType.Error);
+            Show(parent, msg, LevelType.Error);
         }
         /// <summary>
         /// Window系统消息框
         /// <para>该消息框显示消息、 标题栏标题、 OK按钮和指定图标(默认Information)。</para>
         /// </summary>
-        public static void Show(DependencyObject parent, string msg, LeveType level = LeveType.Debug)
+        public static void Show(DependencyObject parent, string msg, LevelType level = LevelType.Debug)
         {
             if (!Parent(parent, out Window window)) return;
             BeginInvoke(obj =>
             {
                 switch (level)
                 {
-                    case LeveType.Debug:
                     default:
+                    case LevelType.Debug:
                         MessageBox.Show(window, obj, window.Title, MessageBoxButton.OK, MessageBoxImage.Information);
                         break;
-                    case LeveType.Warn:
+                    case LevelType.Warn:
                         MessageBox.Show(window, obj, window.Title, MessageBoxButton.OK, MessageBoxImage.Warning);
                         break;
-                    case LeveType.Error:
+                    case LevelType.Error:
                         MessageBox.Show(window, obj, window.Title, MessageBoxButton.OK, MessageBoxImage.Error);
                         break;
                 }
@@ -719,7 +719,7 @@ namespace Paway.WPF
             var file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
             log4net.Config.XmlConfigurator.Configure(new FileInfo(file));
             var version = Assembly.GetEntryAssembly().GetName().Version;
-            $"{AppDomain.CurrentDomain.FriendlyName} v{version} ({Environment.MachineName})".Log(LeveType.Error);
+            $"{AppDomain.CurrentDomain.FriendlyName} v{version} ({Environment.MachineName})".Log(LevelType.Error);
 
             //禁用Backspace退格导航返回Page页
             NavigationCommands.BrowseBack.InputGestures.Clear();
@@ -731,8 +731,8 @@ namespace Paway.WPF
         private static void CurrentDomain_FirstChanceException(object sender, System.Runtime.ExceptionServices.FirstChanceExceptionEventArgs e)
         {
             var msg = $"异常记录：{e.Exception.Message()}";
-            if (e.Exception.IExist(typeof(WarningException)) || e.Exception.IExist(typeof(SocketException))) msg.Log(LeveType.Warn);
-            else msg.Log(LeveType.Error);
+            if (e.Exception.IExist(typeof(WarningException)) || e.Exception.IExist(typeof(SocketException))) msg.Log(LevelType.Warn);
+            else msg.Log(LevelType.Error);
         }
         private static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {

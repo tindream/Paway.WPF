@@ -88,7 +88,7 @@ namespace Paway.Model
             Messenger.Default.Register<StatuMessage>(this, msg => AddDesc(msg.Msg, msg.Level, msg.IHit, msg.Ower));
             Messenger.Default.Register<ConnectMessage>(this, msg =>
             {
-                Messenger.Default.Send(new StatuMessage(msg.Connectd ? $"连接成功" : $"连接断开", !msg.Connectd), msg.Connectd ? LeveType.Debug : LeveType.Error);
+                Messenger.Default.Send(new StatuMessage(msg.Connectd ? $"连接成功" : $"连接断开", !msg.Connectd), msg.Connectd ? LevelType.Debug : LevelType.Error);
                 PMethod.BeginInvoke(() =>
                 {
                     ConnectBrush = msg.Connectd ? ColorType.Success.Color().ToBrush() : ColorType.Error.Color().ToBrush();
@@ -128,18 +128,18 @@ namespace Paway.Model
         /// <summary>
         /// 系统消息
         /// </summary>
-        private void AddDesc(string msg, LeveType level = LeveType.Debug, bool iHit = true, DependencyObject ower = null)
+        private void AddDesc(string msg, LevelType level = LevelType.Debug, bool iHit = true, DependencyObject ower = null)
         {
             this.Desc = msg;
             PMethod.Invoke(() =>
             {
                 switch (level)
                 {
-                    case LeveType.Warn:
+                    case LevelType.Warn:
                         DescBrush = PConfig.Warn.ToBrush();
                         if (iHit) PMethod.Hit(ower ?? PConfig.Window, msg, ColorType.Warn);
                         break;
-                    case LeveType.Error:
+                    case LevelType.Error:
                         DescBrush = PConfig.Error.ToBrush();
                         if (iHit) PMethod.Hit(ower ?? PConfig.Window, msg, ColorType.Error);
                         break;

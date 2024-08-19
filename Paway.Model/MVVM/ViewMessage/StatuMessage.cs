@@ -21,7 +21,7 @@ namespace Paway.Model
         /// <summary>
         /// 消息等级
         /// </summary>
-        public LeveType Level { get; set; }
+        public LevelType Level { get; set; }
 
         /// <summary>
         /// 状态基础消息
@@ -33,12 +33,12 @@ namespace Paway.Model
         public LevelMessage(string msg)
         {
             this.Msg = msg;
-            this.Level = LeveType.Debug;
+            this.Level = LevelType.Debug;
         }
         /// <summary>
         /// 状态基础消息
         /// </summary>
-        public LevelMessage(string msg, LeveType level)
+        public LevelMessage(string msg, LevelType level)
         {
             this.Msg = msg;
             this.Level = level;
@@ -74,7 +74,7 @@ namespace Paway.Model
         /// <summary>
         /// 状态消息，指定消息、消息等级、父级控件
         /// </summary>
-        public StatuMessage(string msg, LeveType level, DependencyObject ower = null) : base(msg, level)
+        public StatuMessage(string msg, LevelType level, DependencyObject ower = null) : base(msg, level)
         {
             this.Ower = ower;
         }
@@ -94,7 +94,7 @@ namespace Paway.Model
             var msg = $"{ex.Message().Replace("\r\n", "。")}";
             if (!title.IsEmpty()) msg = $"{title}: {msg}";
             this.Msg = msg;
-            this.Level = ex.IExist(typeof(WarningException)) ? LeveType.Warn : LeveType.Error;
+            this.Level = ex.IExist(typeof(WarningException)) ? LevelType.Warn : LevelType.Error;
             this.Ower = ower;
         }
     }
