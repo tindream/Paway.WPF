@@ -90,6 +90,8 @@ namespace Paway.Test
                     Method.ShowWindow(Config.Window, new SelectColorWindow());
                     break;
                 case "3D":
+                    MessageWindow.Hit(Config.Window, item);
+                    break;
                 case "空":
                     Method.Hit(Config.Window, item);
                     break;

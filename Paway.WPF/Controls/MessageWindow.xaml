@@ -1,10 +1,13 @@
 ﻿<Window x:Class="Paway.WPF.MessageWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         mc:Ignorable="d" 
-        Height="58" Width="300"
+        Height="300" Width="600"
         Background="Transparent" Topmost="True" ShowInTaskbar="False" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True">
-    <TextBlock Name="textBlock" FontSize="15" Text="Hello" TextAlignment="Center" TextWrapping="Wrap" Padding="8,12" Margin="0,-300,0,0"/>
+    <Border Name="border" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="3">
+        <TextBlock Name="textBlock" FontSize="15" Text="Hello" TextAlignment="Center" TextWrapping="Wrap" 
+                   Padding="10" Margin="0,-600,0,0" MinWidth="200" MaxWidth="600" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </Border>
 </Window>

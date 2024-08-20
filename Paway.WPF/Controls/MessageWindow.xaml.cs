@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,12 +24,24 @@ namespace Paway.WPF
     /// </summary>
     public partial class MessageWindow : Window
     {
+        [DllImport("user32.dll")]
+        private static extern int SetWindowLong(IntPtr hWnd, int nindex, IntPtr dwNewLong);
+
         /// <summary>
         /// 窗体消息
         /// </summary>
         public MessageWindow()
         {
             InitializeComponent();
+            this.SourceInitialized += MessageWindow_Initialized;
+        }
+        private void MessageWindow_Initialized(object sender, EventArgs e)
+        {
+            var hwnd = this.Handle();
+            int GWL_STYLE = -16;
+            int GWL_EXSTYLE = -20;
+            SetWindowLong(hwnd, GWL_STYLE, (IntPtr)unchecked((int)0x94000000));
+            SetWindowLong(hwnd, GWL_EXSTYLE, (IntPtr)0x08000088);
         }
 
         private static MessageWindow window;
@@ -37,8 +50,9 @@ namespace Paway.WPF
         private ManualResetEvent manualResetEvent = new ManualResetEvent(false);
         /// <summary>
         /// 动画显示消息
+        /// <para>同进程内点击窗体会获取焦点</para>
         /// </summary>
-        public static void Show(FrameworkElement element, string msg, LevelType level = LevelType.Debug, int timeout = 3, double fontSize = 15, Action<TextBlock> action = null)
+        public static void Hit(FrameworkElement element, string msg, LevelType level = LevelType.Debug, int timeout = 3, double fontSize = 15, Action<TextBlock> action = null)
         {
             if (window == null) window = new MessageWindow();
             else
@@ -57,18 +71,9 @@ namespace Paway.WPF
                 case LevelType.Warn: type = ColorType.Warn; break;
                 case LevelType.Error: type = ColorType.Error; break;
             }
-            if (type == ColorType.Color)
-            {
-                window.textBlock.Foreground = type.Color().ToBrush();
-                window.textBlock.Background = Colors.White.ToBrush();
-            }
-            else
-            {
-                window.textBlock.Foreground = Colors.White.ToBrush();
-                window.textBlock.Background = type.Color().ToBrush();
-            }
+            window.textBlock.Foreground = Colors.White.ToBrush();
+            window.border.Background = type.Color().ToAlpha(PConfig.Alpha).ToBrush();
             action?.Invoke(window.textBlock);
-            //window.manualResetEvent.Reset();
             window.LoadParent(element, timeout);
             window.Show();
             window.textBlock.Margin = new Thickness(0);
@@ -85,6 +90,7 @@ namespace Paway.WPF
             if (PMethod.Parent(element, out Window parentWindow))
             {
                 this.parentWindow = parentWindow;
+                this.textBlock.MouseDown += TextBlock_MouseDown;
                 parentWindow.Closing += ParentWindow_Closing;
                 parentWindow.LocationChanged += ParentWindow_LocationChanged;
                 parentWindow.SizeChanged += ParentWindow_LocationChanged;
@@ -95,6 +101,10 @@ namespace Paway.WPF
                 for (var i = 0; i < timeout; i++) result = manualResetEvent.WaitOne(1000);
                 PMethod.Invoke(() => { this.ToClose(); });
             });
+        }
+        private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            parentWindow.Focus();
         }
         private void ToClose()
         {
