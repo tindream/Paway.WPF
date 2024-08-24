@@ -209,6 +209,10 @@ namespace Paway.WPF
         /// 错误色
         /// </summary>
         public static Color Error { get; set; } = Color.FromArgb(255, 248, 51, 30);
+        /// <summary>
+        /// 禁用色
+        /// </summary>
+        public static Color Disable { get; set; } = Colors.DimGray;
 
         #endregion
     }

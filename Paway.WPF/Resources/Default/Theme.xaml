@@ -39,6 +39,9 @@
     <!--错误-->
     <SolidColorBrush x:Key="Error" Color="#F8331E" />
     <Color x:Key="ErrorKey">#F8331E</Color>
+    <!--错误-->
+    <SolidColorBrush x:Key="Disable" Color="DimGray" />
+    <Color x:Key="DisableKey">DimGray</Color>
 
     <!--颜色选择器-->
     <LinearGradientBrush x:Key="ColorSelector">
