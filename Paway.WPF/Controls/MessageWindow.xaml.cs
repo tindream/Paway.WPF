@@ -24,9 +24,6 @@ namespace Paway.WPF
     /// </summary>
     public partial class MessageWindow : Window
     {
-        [DllImport("user32.dll")]
-        private static extern int SetWindowLong(IntPtr hWnd, int nindex, IntPtr dwNewLong);
-
         /// <summary>
         /// 窗体消息
         /// </summary>
@@ -38,13 +35,12 @@ namespace Paway.WPF
         private void MessageWindow_Initialized(object sender, EventArgs e)
         {
             var hwnd = this.Handle();
-            int GWL_STYLE = -16;
-            int GWL_EXSTYLE = -20;
-            SetWindowLong(hwnd, GWL_STYLE, (IntPtr)unchecked((int)0x94000000));
-            SetWindowLong(hwnd, GWL_EXSTYLE, (IntPtr)0x08000088);
+            NativeMethods.SetWindowLong(hwnd, -16, unchecked((int)0x94000000));
+            NativeMethods.SetWindowLong(hwnd, -20, 0x08000088);
         }
 
         private static MessageWindow window;
+        private IntPtr Handle;
         private FrameworkElement parentElement;
         private Window parentWindow;
         private ManualResetEvent manualResetEvent = new ManualResetEvent(false);
@@ -52,7 +48,7 @@ namespace Paway.WPF
         /// 动画显示消息
         /// <para>同进程内点击窗体会获取焦点</para>
         /// </summary>
-        public static void Hit(FrameworkElement element, string msg, LevelType level = LevelType.Debug, int timeout = 3, double fontSize = 15, Action<TextBlock> action = null)
+        public static MessageWindow Hit(FrameworkElement element, string msg, LevelType level = LevelType.Debug, int timeout = 3, double fontSize = 15, Action<TextBlock> action = null)
         {
             if (window == null) window = new MessageWindow();
             else
@@ -81,9 +77,18 @@ namespace Paway.WPF
                 var storyboard = PMethod.HitStoryboard(window, Colors.Transparent, 3000);
                 storyboard.Begin(window, true);
             }
+            return window;
+        }
+        /// <summary>
+        /// 关闭提示窗体
+        /// </summary>
+        public static void HitClose()
+        {
+            window?.manualResetEvent.Set();
         }
         private void LoadParent(FrameworkElement element, int timeout)
         {
+            this.Handle = element.Handle();
             var point = element.PointToScreen(new Point(0, 0));
             this.Left = point.X + (element.ActualWidth - this.Width) / 2;
             this.Top = point.Y + (element.ActualHeight - this.Height) / 2;
@@ -97,16 +102,36 @@ namespace Paway.WPF
             }
             Task.Run(() =>
             {
-                var result = false;
-                for (var i = 0; i < timeout; i++) result = manualResetEvent.WaitOne(1000);
-                PMethod.Invoke(() => { this.ToClose(); });
+                var iShow = true;
+                for (var i = 0; timeout == 0 || i < timeout * 25; i++)
+                {
+                    IntPtr current = NativeMethods.GetForegroundWindow();
+                    if (current != this.Handle)
+                    {
+                        if (iShow)
+                        {
+                            iShow = false;
+                            PMethod.BeginInvoke(() => { AnimationHelper.Start(this, TransitionType.Opacity, 0, 125, iReset: false); });
+                        }
+                    }
+                    else
+                    {
+                        if (!iShow)
+                        {
+                            iShow = true;
+                            PMethod.BeginInvoke(() => { AnimationHelper.Start(this, TransitionType.Opacity, 1, 125, iReset: false); });
+                        }
+                    }
+                    if (manualResetEvent.WaitOne(40)) break;
+                }
+                PMethod.Invoke(() => { this.PrevoewClose(); });
             });
         }
         private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
         {
             parentWindow.Focus();
         }
-        private void ToClose()
+        private void PrevoewClose()
         {
             parentWindow.Closing -= ParentWindow_Closing;
             parentWindow.LocationChanged -= ParentWindow_LocationChanged;
@@ -115,7 +140,7 @@ namespace Paway.WPF
         }
         private void ParentWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            this.ToClose();
+            this.PrevoewClose();
         }
         private void ParentWindow_LocationChanged(object sender, EventArgs e)
         {
