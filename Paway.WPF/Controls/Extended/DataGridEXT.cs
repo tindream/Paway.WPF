@@ -346,7 +346,8 @@ namespace Paway.WPF
                         if (mode.MinWidth > 1) column.MinWidth = mode.MinWidth;
                         if (mode.MaxWidth > 1) column.MaxWidth = mode.MaxWidth;
                     }
-                    if (property.AllCells()) column.Width = DataGridLength.Auto;
+                    if (property.AllCells()) column.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+                    else if (property.FillSize()) column.Width = DataGridLength.Auto;
                     columns.Add(column);
                 }
                 //column.MinWidth = 64; 
@@ -367,14 +368,17 @@ namespace Paway.WPF
                 {
                     var firstColumn = columns.Find(c => c.Visibility == Visibility.Visible);
                     var lastColumn = columns.FindLast(c => c.Visibility == Visibility.Visible);
-                    if (firstColumn.Equals(lastColumn))
+                    if (firstColumn != null && lastColumn != null)
                     {
-                        lastColumn.HeaderStyle = (Style)TryFindResource("Only1ColumnHeaderStyle");
-                    }
-                    else
-                    {
-                        firstColumn.HeaderStyle = (Style)TryFindResource("FirstColumnHeaderStyle");
-                        lastColumn.HeaderStyle = (Style)TryFindResource("LastColumnHeaderStyle");
+                        if (firstColumn.Equals(lastColumn))
+                        {
+                            lastColumn.HeaderStyle = (Style)TryFindResource("Only1ColumnHeaderStyle");
+                        }
+                        else
+                        {
+                            firstColumn.HeaderStyle = (Style)TryFindResource("FirstColumnHeaderStyle");
+                            lastColumn.HeaderStyle = (Style)TryFindResource("LastColumnHeaderStyle");
+                        }
                     }
                     if (TryFindResource("NormalColumnHeaderStyle") is Style normalColumnHeaderStyle)
                     {

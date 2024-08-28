@@ -36,7 +36,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ColumnWidthProperty =
-            DependencyProperty.RegisterAttached(nameof(ColumnWidth), typeof(DataGridLength), typeof(ComboQuery));
+            DependencyProperty.RegisterAttached(nameof(ColumnWidth), typeof(DataGridLength), typeof(ComboQuery), new PropertyMetadata(new DataGridLength(1, DataGridLengthUnitType.Star)));
 
         /// <summary>
         /// 下拉列表是否显示列
@@ -128,14 +128,6 @@ namespace Paway.WPF
         {
             base.OnApplyTemplate();
             IsEditable = false;
-            if (this.ItemsSource != null)
-            {
-                var type = this.ItemsSource.GenericType();
-                {
-                    this.List = new List<dynamic>();
-                    foreach (var item in this.ItemsSource) this.List.Add(item);
-                }
-            }
             if (Template.FindName("PART_Popup", this) is Popup popup)
             {
                 popup.Opened -= Popup_Opened;
@@ -149,12 +141,6 @@ namespace Paway.WPF
                 gridView.RefreshEvent += GridView_RefreshEvent;
                 gridView.RowDoubleEvent -= GridView_RowDoubleEvent;
                 gridView.RowDoubleEvent += GridView_RowDoubleEvent;
-            }
-            if (Template.FindName("PART_EditableTextBox", this) is TextBoxEXT textBox)
-            {
-                this.textBox = textBox;
-                textBox.PreviewMouseLeftButtonDown -= TextBox_PreviewMouseLeftButtonDown;
-                textBox.PreviewMouseLeftButtonDown += TextBox_PreviewMouseLeftButtonDown;
             }
             if (PMethod.Parent(this, out Window window))
             {
@@ -196,7 +182,6 @@ namespace Paway.WPF
 
         #region 搜索
         private List<dynamic> List;
-        private TextBoxEXT textBox;
         private string last;
         private void ComboQuery_KeyUp(object sender, KeyEventArgs e)
         {
@@ -210,6 +195,11 @@ namespace Paway.WPF
             }
             else
             {
+                if (this.ItemsSource != null && this.List == null)
+                {
+                    this.List = new List<dynamic>();
+                    foreach (var item in this.ItemsSource) this.List.Add(item);
+                }
                 if (FilterEvent != null)
                 {
                     var args = new CustomFilterEventArgs(text, e.RoutedEvent, gridView);

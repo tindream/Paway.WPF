@@ -157,12 +157,6 @@ namespace Paway.WPF
                 treeView.SelectedItemChanged -= TreeView_SelectedItemChanged;
                 treeView.SelectedItemChanged += TreeView_SelectedItemChanged;
             }
-            if (Template.FindName("PART_EditableTextBox", this) is TextBoxEXT textBox)
-            {
-                this.textBox = textBox;
-                textBox.PreviewMouseLeftButtonDown -= TextBox_PreviewMouseLeftButtonDown;
-                textBox.PreviewMouseLeftButtonDown += TextBox_PreviewMouseLeftButtonDown;
-            }
             if (PMethod.Parent(this, out Window window))
             {
                 window.LocationChanged -= Window_LocationChanged;
@@ -230,7 +224,6 @@ namespace Paway.WPF
         #region 搜索
         private IList<ITreeViewItem> List;
         private readonly IList<ITreeViewItem> Childs = new List<ITreeViewItem>();
-        private TextBoxEXT textBox;
         private string last;
         private void ComboTree_KeyUp(object sender, KeyEventArgs e)
         {

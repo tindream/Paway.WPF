@@ -30,8 +30,8 @@ namespace Paway.WPF
         /// </summary>
         internal static void Animation(FrameworkElement obj, bool value, string line1Name = "line1", string line2Name = "line2")
         {
-            PMethod.Child(obj, out Line line1, line1Name, false);
-            PMethod.Child(obj, out Line line2, line2Name, false);
+            if (!PMethod.Child(obj, out Line line1, line1Name, false)) return;
+            if (!PMethod.Child(obj, out Line line2, line2Name, false)) return;
             var storyboard = new Storyboard();
             if (value)
             {

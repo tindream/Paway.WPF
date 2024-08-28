@@ -93,9 +93,9 @@
                 <ComboBoxEXT ItemsSource="{IntList Count=20}" SelectedValue="{Binding Value}" HorizontalContentAlignment="Center" />
                 <ComboBoxEXT ItemsSource="{EnumList Type=model:MenuAuthType}" SelectedValue="{Binding Path=MenuAuthType, Converter={StaticResource enumConverter}}"/>
                 <ComboBoxEXT ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
+                <ComboBoxEXT ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}" HorizontalContentAlignment="Center" IsEditable="True"/>
                 <ComboMulti ItemsSource="{Binding MultiList}" HorizontalContentAlignment="Center" />
                 <ComboDate SelectedValue="{Binding DatePickerTime}" HorizontalContentAlignment="Center"/>
-                <ComboTree ItemsSource="{Binding TreeList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding TreeId}" IQuery="True" HorizontalContentAlignment="Center"/>
                 <ComboView ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}" HorizontalContentAlignment="Center"/>
                 <ComboQuery ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}" Water="输入搜索..." HorizontalContentAlignment="Center">
                     <i:Interaction.Triggers>
@@ -104,6 +104,7 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ComboQuery>
+                <ComboTree ItemsSource="{Binding TreeList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding TreeId}" IQuery="True" HorizontalContentAlignment="Center"/>
                 <ComboTime/>
                 <TextBoxEXT Name="tb" Icon="Images/close.png" Animation="2" BorderThickness="0,0,0,1" Radius="0" MaxLength="4"
                             HorizontalContentAlignment="Center">

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -239,6 +241,8 @@ namespace Paway.WPF
 
         #endregion
 
+        internal TextBoxEXT textBox;
+        private DateTime CloseTime;
         /// <summary>
         /// </summary>
         public ComboBoxEXT()
@@ -262,7 +266,31 @@ namespace Paway.WPF
                 };
                 this.SetBinding(WaterProperty, waterBinding);//设置绑定到要绑定的控件
             }
+            if (Template.FindName("PART_EditableTextBox", this) is TextBoxEXT textBox)
+            {
+                this.textBox = textBox;
+                textBox.PreviewMouseLeftButtonDown -= TextBox_PreviewMouseLeftButtonDown;
+                textBox.PreviewMouseLeftButtonDown += TextBox_PreviewMouseLeftButtonDown;
+            }
+            if (Template.FindName("ToggleButton", this) is ToggleButton toggleButton)
+            {
+                toggleButton.Unchecked -= ToggleButton_Unchecked;
+                toggleButton.Unchecked += ToggleButton_Unchecked;
+            }
         }
+        private void ToggleButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            CloseTime = DateTime.Now;
+        }
+        private void TextBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!IsDropDownOpen && CloseTime != DateTime.MinValue)
+            {
+                if (DateTime.Now.Subtract(CloseTime).TotalMilliseconds < 1) return;
+            }
+            IsDropDownOpen = !IsDropDownOpen;
+        }
+
         /// <summary>
         /// 回车时移动焦点到下一控件
         /// </summary>
