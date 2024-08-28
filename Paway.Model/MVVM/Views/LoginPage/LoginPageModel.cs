@@ -84,7 +84,7 @@ namespace Paway.Model
         /// <summary>
         /// 用户列表
         /// </summary>
-        public ObservableCollection<object> ObList { get; private set; } = new ObservableCollection<object>();
+        public ObservableCollection<string> ObList { get; private set; } = new ObservableCollection<string>();
         private bool _iUserList;
         /// <summary>
         /// 显示用户列表标记
@@ -107,10 +107,12 @@ namespace Paway.Model
                 var _userTemp = UserName;
                 try
                 {
+                    iFiltering = true;
                     if (value) FilterUser(null);
                 }
                 finally
                 {
+                    iFiltering = false;
                     _userName = _userTemp;
                     OnPropertyChanged(nameof(UserName));
                 }

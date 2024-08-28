@@ -40,7 +40,7 @@
                              Visibility="{Binding IUserList, Converter={StaticResource boolToCollapsed}, FallbackValue=Visible}"/>
                 <ComboBoxEXT Name="cbxUserName" Text="{Binding UserName}" Water="{Binding LanguageBase.PleaseInputUserNameWater, Source={StaticResource LB}}" 
                              Background="White" IsDropDownOpen="{Binding IsDropDownOpen}"
-                             ItemsSource="{Binding ObList}" SelectedValuePath="Id" DisplayMemberPath="CustomName"
+                             ItemsSource="{Binding ObList}" SelectedValue="{Binding UserName}"
                              Animation="2" BorderThickness="0,0,0,1" FontSize="30" WaterSize="0.7" IsEditable="True"
                              Icon="pack://application:,,,/Paway.Model;component/Images/login/user.png" IconWidth="36" IconStretch="Uniform"
                              Visibility="{Binding IUserList, Converter={StaticResource boolToVisible}, FallbackValue=Collapsed}"/>

@@ -43,19 +43,24 @@ namespace Paway.WPF
         /// </summary>
         private void Element_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.OpenKeyboard();
+            this.OpenKeyboard(e.ClickCount);
         }
         /// <summary>
         /// 获取焦点时自动打开虚拟键盘
         /// </summary>
         private void Element_GotFocus(object sender, RoutedEventArgs e)
         {
-            this.OpenKeyboard();
+            this.OpenKeyboard(0);
         }
-        private void OpenKeyboard()
+        private void OpenKeyboard(int clickCount)
         {
-            if (!element.IsLoaded || !element.IsEnabled || desktopAdorner != null) return;
+            if (!element.IsLoaded || !element.IsEnabled) return;
             if (PConfig.Keyboard == EnableType.None) return;
+            if (desktopAdorner != null)
+            {
+                if (clickCount == 2) this.CloseKeyboard();
+                return;
+            }
             var keyboardType = Keyboard;
             if (element is TextBoxEXT textBoxEXT)
             {
@@ -134,7 +139,7 @@ namespace Paway.WPF
             if (sender is IInputElement element)
             {
                 var point = e.GetPosition(element);
-                if (desktopAdorner != null && !boxRect.Contains(point) && !keyboardRect.Contains(point))
+                if (!boxRect.Contains(point) && !keyboardRect.Contains(point))
                 {
                     this.CloseKeyboard();
                 }
