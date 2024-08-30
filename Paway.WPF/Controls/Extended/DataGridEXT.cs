@@ -346,8 +346,8 @@ namespace Paway.WPF
                         if (mode.MinWidth > 1) column.MinWidth = mode.MinWidth;
                         if (mode.MaxWidth > 1) column.MaxWidth = mode.MaxWidth;
                     }
-                    if (property.AllCells()) column.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
-                    else if (property.FillSize()) column.Width = DataGridLength.Auto;
+                    if (property.FillSize()) column.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+                    else if (property.AllCells()) column.Width = DataGridLength.Auto;
                     columns.Add(column);
                 }
                 //column.MinWidth = 64; 
