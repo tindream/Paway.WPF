@@ -730,8 +730,9 @@ namespace Paway.WPF
         }
         private static void CurrentDomain_FirstChanceException(object sender, System.Runtime.ExceptionServices.FirstChanceExceptionEventArgs e)
         {
+            if (e.Exception.IExist(typeof(SocketException))) return;
             var msg = $"异常记录：{e.Exception.Message()}";
-            if (e.Exception.IExist(typeof(WarningException)) || e.Exception.IExist(typeof(SocketException))) msg.Log(LevelType.Warn);
+            if (e.Exception.IExist(typeof(WarningException))) msg.Log(LevelType.Warn);
             else msg.Log(LevelType.Error);
         }
         private static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
