@@ -1,5 +1,4 @@
-﻿using log4net;
-using Paway.Helper;
+﻿using Paway.Helper;
 using Paway.Model;
 using Paway.WPF;
 using System;

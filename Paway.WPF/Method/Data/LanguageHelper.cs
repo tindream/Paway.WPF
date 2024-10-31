@@ -9,7 +9,6 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Media;
-using log4net;
 using Paway.Helper;
 using Paway.WPF;
 

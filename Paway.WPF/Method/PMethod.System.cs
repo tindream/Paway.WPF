@@ -719,7 +719,7 @@ namespace Paway.WPF
             var file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
             log4net.Config.XmlConfigurator.Configure(new FileInfo(file));
             var version = Assembly.GetEntryAssembly().GetName().Version;
-            $"{AppDomain.CurrentDomain.FriendlyName} v{version} ({Environment.MachineName})".Log(LevelType.Error);
+            $"{AppDomain.CurrentDomain.FriendlyName} v{version} ({Environment.MachineName})".Error();
 
             //禁用Backspace退格导航返回Page页
             NavigationCommands.BrowseBack.InputGestures.Clear();
@@ -731,9 +731,10 @@ namespace Paway.WPF
         private static void CurrentDomain_FirstChanceException(object sender, System.Runtime.ExceptionServices.FirstChanceExceptionEventArgs e)
         {
             if (e.Exception.IExist(typeof(SocketException))) return;
+            if (e.Exception.GetType().Name == "JsonSerializationException") return;
             var msg = $"异常记录：{e.Exception.Message()}";
-            if (e.Exception.IExist(typeof(WarningException))) msg.Log(LevelType.Warn);
-            else msg.Log(LevelType.Error);
+            if (e.Exception.IExist(typeof(WarningException))) msg.Warn();
+            else msg.Error();
         }
         private static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
