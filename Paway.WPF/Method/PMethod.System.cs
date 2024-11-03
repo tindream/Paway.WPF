@@ -324,7 +324,7 @@ namespace Paway.WPF
         /// Window系统消息框
         /// <para>该消息框显示消息、 标题栏标题、 OK按钮和指定图标(默认Information)。</para>
         /// </summary>
-        public static void Show(DependencyObject parent, string msg, LevelType level = LevelType.Debug)
+        public static void Show(DependencyObject parent, string msg, LevelType level = LevelType.Info)
         {
             if (!Parent(parent, out Window window)) return;
             BeginInvoke(obj =>
@@ -332,7 +332,7 @@ namespace Paway.WPF
                 switch (level)
                 {
                     default:
-                    case LevelType.Debug:
+                    case LevelType.Info:
                         MessageBox.Show(window, obj, window.Title, MessageBoxButton.OK, MessageBoxImage.Information);
                         break;
                     case LevelType.Warn:
@@ -731,10 +731,10 @@ namespace Paway.WPF
         private static void CurrentDomain_FirstChanceException(object sender, System.Runtime.ExceptionServices.FirstChanceExceptionEventArgs e)
         {
             if (e.Exception.IExist(typeof(SocketException))) return;
-            if (e.Exception.GetType().Name == "JsonSerializationException") return;
-            var msg = $"异常记录：{e.Exception.Message()}";
-            if (e.Exception.IExist(typeof(WarningException))) msg.Warn();
-            else msg.Error();
+            var type = e.Exception.GetType();
+            if (type.Name == "JsonSerializationException") return;
+            var msg = $"异常记录={e.Exception.Message()}";
+            msg.Warn();
         }
         private static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {

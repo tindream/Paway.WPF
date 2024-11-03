@@ -48,7 +48,7 @@ namespace Paway.WPF
         /// 动画显示消息
         /// <para>同进程内点击窗体会获取焦点</para>
         /// </summary>
-        public static MessageWindow Hit(FrameworkElement element, string msg, LevelType level = LevelType.Debug, int timeout = 3, double fontSize = 15, Action<TextBlock> action = null)
+        public static MessageWindow Hit(FrameworkElement element, string msg, LevelType level = LevelType.Info, int timeout = 3, double fontSize = 15, Action<TextBlock> action = null)
         {
             if (window == null) window = new MessageWindow();
             else
@@ -62,8 +62,6 @@ namespace Paway.WPF
             var type = ColorType.Color;
             switch (level)
             {
-                default:
-                case LevelType.Debug: break;
                 case LevelType.Warn: type = ColorType.Warn; break;
                 case LevelType.Error: type = ColorType.Error; break;
             }

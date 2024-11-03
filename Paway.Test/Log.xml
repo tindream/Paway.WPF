@@ -25,8 +25,24 @@
 				<param name="ConversionPattern" value="%d [%t] %-5p - %m%n" />
 			</layout>
 		</appender>
+		<appender name="RollingFileAppender.Debug" type="log4net.Appender.RollingFileAppender">
+			<filter type="log4net.Filter.LevelRangeFilter">
+				<levelMin value="DEBUG" />
+				<levelMax value="DEBUG" />
+			</filter>
+			<param name="Encoding" value="utf-8" />
+			<param name="File" value=".\logs\Paway.Debug.log"/>
+			<rollingStyle value="Size"/>
+			<maxSizeRollBackups value="20"/>
+			<maximumFileSize value="10240KB"/>
+			<staticLogFileName value="true"/>
+			<param name="AppendToFile" value="true"/>
+			<layout type="log4net.Layout.PatternLayout">
+				<param name="ConversionPattern" value="%d [%t] %-5p %c - %m%n"/>
+			</layout>
+		</appender>
 		<appender name="RollingFileAppender.All" type="log4net.Appender.RollingFileAppender">
-			<threshold value="All" />
+			<threshold value="Info" />
 			<param name="Encoding" value="utf-8" />
 			<param name="File" value=".\logs\Test.log" />
 			<rollingStyle value="Size" />
@@ -42,6 +58,7 @@
 			<level value="OFF" />
 			<appender-ref ref="ConsoleAppender" />
 			<appender-ref ref="RollingFileAppender" />
+			<appender-ref ref="RollingFileAppender.Debug"/>
 		</root>
 		<logger name="Paway">
 			<level value="ALL" />
