@@ -34,6 +34,10 @@ namespace Paway.WPF
             DependencyProperty.Register(nameof(HeaderHeight), typeof(int), typeof(WindowEXT), new FrameworkPropertyMetadata(30));
         /// <summary>
         /// </summary>
+        private static readonly DependencyProperty LogoSizeProperty =
+            DependencyProperty.Register(nameof(LogoSize), typeof(int), typeof(WindowEXT), new FrameworkPropertyMetadata(24));
+        /// <summary>
+        /// </summary>
         private static readonly DependencyProperty ButtonMaxHeightProperty =
             DependencyProperty.Register(nameof(ButtonMaxHeight), typeof(double), typeof(WindowEXT), new FrameworkPropertyMetadata(45d));
         /// <summary>
@@ -85,6 +89,17 @@ namespace Paway.WPF
         {
             get { return (int)GetValue(HeaderHeightProperty); }
             set { SetValue(HeaderHeightProperty, value); }
+        }
+        /// <summary>
+        /// Logo大小
+        /// <para>默认值：24</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("Logo大小")]
+        public int LogoSize
+        {
+            get { return (int)GetValue(LogoSizeProperty); }
+            set { SetValue(LogoSizeProperty, value); }
         }
         /// <summary>
         /// 按钮最大高度

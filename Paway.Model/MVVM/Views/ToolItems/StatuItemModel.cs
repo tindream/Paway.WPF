@@ -48,14 +48,14 @@ namespace Paway.Model
             set { if (_timeNow != value) { _timeNow = value; OnPropertyChanged(); } }
         }
 
-        private Brush descBrush = ColorType.High.Color().ToBrush();
+        private Brush _descBrush = ColorType.High.Color().ToBrush();
         /// <summary>
         /// 描述颜色
         /// </summary>
         public Brush DescBrush
         {
-            get { return descBrush; }
-            set { if (descBrush != value) { descBrush = value; OnPropertyChanged(); } }
+            get { return _descBrush; }
+            set { if (_descBrush != value) { _descBrush = value; OnPropertyChanged(); } }
         }
         private Brush _connectBrush = ColorType.Warn.Color().ToBrush();
         /// <summary>

@@ -512,18 +512,27 @@ namespace Paway.WPF
         /// </summary>
         public static bool ValidationError<T>(DependencyObject parent, T mode, string name, bool allEmpty = false) where T : class
         {
+            Control control = null;
             if (Find(parent, out TextBoxEXT tbName, "tb" + name) && tbName.Visibility == Visibility.Visible)
+            {
+                control = tbName;
+            }
+            else if (Find(parent, out PasswordBox tbPad, "tb" + name) && tbPad.Visibility == Visibility.Visible)
+            {
+                control = tbPad;
+            }
+            if (control != null)
             {
                 if (!allEmpty && mode.GetValue(name).ToStrings().IsEmpty())
                 {
-                    Hit(parent, $"{PConfig.LanguageBase.PleaseInput}{mode.Property(name).Text()}", ColorType.Warn);
-                    tbName.Focus();
+                    Hit(parent, $"{PConfig.LanguageBase.PleaseInput}{mode.Property(name).Description()}", ColorType.Warn);
+                    control.Focus();
                     return false;
                 }
-                if (Validation.GetHasError(tbName))
+                if (Validation.GetHasError(control))
                 {
-                    Hit(parent, Validation.GetErrors(tbName).First().ErrorContent, ColorType.Error);
-                    tbName.Focus();
+                    Hit(parent, Validation.GetErrors(control).First().ErrorContent, ColorType.Error);
+                    control.Focus();
                     return false;
                 }
             }

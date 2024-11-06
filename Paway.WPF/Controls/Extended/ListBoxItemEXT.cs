@@ -247,16 +247,16 @@ namespace Paway.WPF
             get { return base.Content.ToStrings(); }
             set { base.Content = value; OnPropertyChanged(); }
         }
-        private string desc;
+        private string _desc;
         /// <summary>
         /// 描述
         /// </summary>
         public string Desc
         {
-            get { return desc; }
-            set { desc = value; OnPropertyChanged(); }
+            get { return _desc; }
+            set { _desc = value; OnPropertyChanged(); }
         }
-        private string hit;
+        private string _hit;
         /// <summary>
         /// 提示
         /// </summary>
@@ -264,21 +264,21 @@ namespace Paway.WPF
         {
             get
             {
-                if (!hit.IsEmpty()) return hit;
+                if (!_hit.IsEmpty()) return _hit;
                 if (!Text.IsEmpty()) return Text;
-                if (!desc.IsEmpty()) return desc;
+                if (!_desc.IsEmpty()) return _desc;
                 return null;
             }
-            set { hit = value; OnPropertyChanged(); }
+            set { _hit = value; OnPropertyChanged(); }
         }
-        private ImageEXT image;
+        private ImageEXT _image;
         /// <summary>
         /// 图片
         /// </summary>
         public ImageEXT Image
         {
-            get { return image; }
-            set { image = value; OnPropertyChanged(); }
+            get { return _image; }
+            set { _image = value; OnPropertyChanged(); }
         }
 
         /// <summary>

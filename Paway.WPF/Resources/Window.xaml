@@ -146,6 +146,7 @@
                 <ControlTemplate TargetType="{x:Type local:WindowEXT}">
                     <Border BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="White"
                             x:Name="WindowBorder">
                         <Grid x:Name="LayoutRoot"
                               Background="{TemplateBinding Background}">
@@ -166,8 +167,8 @@
                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                            Margin="5,0,0,0"
                                            Visibility="{Binding Icon,RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource nullToCollapsed}}"
-                                           Height="{x:Static SystemParameters.SmallIconHeight}"
-                                           Width="{x:Static SystemParameters.SmallIconWidth}"
+                                           Height="{Binding LogoSize, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                                           Width="{Binding LogoSize, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
                                            WindowChrome.IsHitTestVisibleInChrome="True"/>
                                     <TextBlock Name="Text_Title" 
                                                Margin="5,0,0,0"
@@ -192,19 +193,19 @@
                                                       Content="{Binding FunctionBarRight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
                                     <Button x:Name="MinimizeButton" Style="{StaticResource MinimizeButtonStyle}"
                                             VerticalAlignment="{Binding ButtonAlignment, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
-                                            MaxHeight="{Binding ButtonMaxHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
-                                            MinHeight="{Binding HeaderHeight, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                            Height="{Binding HeaderHeight, RelativeSource={RelativeSource TemplatedParent}}"
+                                            MaxHeight="{Binding ButtonMaxHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"/>
                                     <Grid Margin="1,0"
                                           VerticalAlignment="{Binding ButtonAlignment, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
-                                          MaxHeight="{Binding ButtonMaxHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
-                                          MinHeight="{Binding HeaderHeight, RelativeSource={RelativeSource TemplatedParent}}">
+                                          Height="{Binding HeaderHeight, RelativeSource={RelativeSource TemplatedParent}}"
+                                          MaxHeight="{Binding ButtonMaxHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}">
                                         <Button x:Name="RestoreButton" Visibility="Collapsed" Style="{StaticResource RestoreButtonStyle}"/>
                                         <Button x:Name="MaximizeButton" Style="{StaticResource MaximizeButtonStyle}"/>
                                     </Grid>
                                     <Button x:Name="CloseButton" Style="{StaticResource CloseButtonStyle}"
                                             VerticalAlignment="{Binding ButtonAlignment, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
-                                            MaxHeight="{Binding ButtonMaxHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
-                                            MinHeight="{Binding HeaderHeight, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                            Height="{Binding HeaderHeight, RelativeSource={RelativeSource TemplatedParent}}"
+                                            MaxHeight="{Binding ButtonMaxHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"/>
                                 </StackPanel>
                             </Grid>
                             <AdornerDecorator Grid.Row="1" KeyboardNavigation.IsTabStop="False">

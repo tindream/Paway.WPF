@@ -121,18 +121,18 @@ namespace Paway.Test
             get { return _value; }
             set { _value = value; OnPropertyChanged(); }
         }
-        private string pad = "1";
+        private string _pad = "1";
         public string Pad
         {
-            get { return pad; }
-            set { pad = value; OnPropertyChanged(); }
+            get { return _pad; }
+            set { _pad = value; OnPropertyChanged(); }
         }
 
-        private string desc = "准备就绪";
+        private string _desc = "准备就绪";
         public string Desc
         {
-            get { return desc; }
-            set { desc = value; OnPropertyChanged(); }
+            get { return _desc; }
+            set { _desc = value; OnPropertyChanged(); }
         }
 
         /// <summary>
