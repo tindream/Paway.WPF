@@ -6,33 +6,41 @@
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <Style x:Key="PathMinimizeBlack" TargetType="{x:Type Path}" >
+        <Setter Property="Data" Value="M0,6 L12,6 L12,7 L0,7 z" />
+        <Setter Property="Height" Value="12" />
+        <Setter Property="Width" Value="12" />
+    </Style>
     <DataTemplate x:Key="MinimizeBlack">
-        <Path Data="M0,6 L12,6 L12,7 L0,7 z"
-                  Width="12"
-                  Height="12"
-                  VerticalAlignment="Center"
-                  HorizontalAlignment="Center"
-                  Fill="{StaticResource ThemeForeground}" />
+        <Path Style="{StaticResource PathMinimizeBlack}" Fill="{StaticResource ThemeForeground}" />
     </DataTemplate>
+    <DataTemplate x:Key="MinimizeWhite">
+        <Path Style="{StaticResource PathMinimizeBlack}" Fill="White" />
+    </DataTemplate>
+    <Style x:Key="PathMaximizeBlack" TargetType="{x:Type Path}" >
+        <Setter Property="Data" Value="M1,1 L1,11 L11,11 L11,1 z M0,0 L12,0 L12,12 L0,12 z" />
+        <Setter Property="Height" Value="12" />
+        <Setter Property="Width" Value="12" />
+    </Style>
     <DataTemplate x:Key="MaximizeBlack">
-        <Path Data="M1,1  L1 ,11 L11,11 L11,1 z M0,0 L12,0 L12,12 L0,12 z"
-              Width="12"
-              Height="12"
-              VerticalAlignment="Center"
-              HorizontalAlignment="Center"
-              Fill="{StaticResource ThemeForeground}"/>
+        <Path Style="{StaticResource PathMaximizeBlack}" Fill="{StaticResource ThemeForeground}"/>
     </DataTemplate>
+    <DataTemplate x:Key="MaximizeWhite">
+        <Path Style="{StaticResource PathMaximizeBlack}" Fill="White"/>
+    </DataTemplate>
+    <Style x:Key="PathRestoreBlack" TargetType="{x:Type Path}" >
+        <Setter Property="Data" Value="M1,3 L1,11 L9,11 L9,3 z M3,1 L3,2 L10,2 L10,9 L11,9 L11,1 z M2 ,0 L12,0 L12,10 L10,10 L10,12 L0,12 L0,2 L2 ,2 z" />
+        <Setter Property="Height" Value="12" />
+        <Setter Property="Width" Value="12" />
+    </Style>
     <DataTemplate x:Key="RestoreBlack">
-        <Path Data="M1,3 L1,11 L9,11 L9,3 z M3,1 L3,2 L10,2 L10,9 L11,9 L11,1 z M2 ,0 L12,0 L12,10 L10,10 L10,12 L0,12 L0,2 L2 ,2 z"
-              Width="12"
-              Height="12"
-              VerticalAlignment="Center"
-              HorizontalAlignment="Center"
-              Fill="{StaticResource ThemeForeground}"/>
+        <Path Style="{StaticResource PathRestoreBlack}" Fill="{StaticResource ThemeForeground}"/>
+    </DataTemplate>
+    <DataTemplate x:Key="RestoreWhite">
+        <Path Style="{StaticResource PathRestoreBlack}" Fill="White"/>
     </DataTemplate>
     <DataTemplate x:Key="CloseBlack">
-        <Path Style="{StaticResource PathClose}"
-              Fill="{StaticResource ThemeForeground}" />
+        <Path Style="{StaticResource PathClose}" Fill="{StaticResource ThemeForeground}" />
     </DataTemplate>
     <DataTemplate x:Key="CloseWhite">
         <Path Style="{StaticResource PathClose}" Fill="White" />
@@ -42,10 +50,14 @@
         <Setter Property="Focusable" Value="False" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Width" Value="45" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+        <Setter Property="VerticalAlignment" Value="{Binding ButtonAlignment, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
+        <Setter Property="Width" Value="{Binding HeaderHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
+        <Setter Property="MaxWidth" Value="{Binding ButtonMaxHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
+        <Setter Property="Height" Value="{Binding HeaderHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
+        <Setter Property="MaxHeight" Value="{Binding ButtonMaxHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -94,16 +106,40 @@
         <Setter Property="ToolTip" Value="Minimize" />
         <Setter Property="ContentTemplate" Value="{StaticResource MinimizeBlack}" />
         <Setter Property="Command" Value="{Binding Source={x:Static SystemCommands.MinimizeWindowCommand}}" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="ContentTemplate" Value="{StaticResource MinimizeWhite}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="ContentTemplate" Value="{StaticResource MinimizeWhite}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
     <Style x:Key="MaximizeButtonStyle" TargetType="Button" BasedOn="{StaticResource WindowTitleBarButtonStyle}">
         <Setter Property="ToolTip" Value="Maximize" />
         <Setter Property="ContentTemplate" Value="{StaticResource MaximizeBlack}" />
         <Setter Property="Command" Value="{Binding Source={x:Static SystemCommands.MaximizeWindowCommand}}" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="ContentTemplate" Value="{StaticResource MaximizeWhite}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="ContentTemplate" Value="{StaticResource MaximizeWhite}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
     <Style x:Key="RestoreButtonStyle" TargetType="Button" BasedOn="{StaticResource WindowTitleBarButtonStyle}">
         <Setter Property="ToolBar.ToolTip" Value="Restore" />
         <Setter Property="ContentTemplate" Value="{StaticResource RestoreBlack}" />
         <Setter Property="Command" Value="{Binding Source={x:Static SystemCommands.RestoreWindowCommand}}" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="ContentTemplate" Value="{StaticResource RestoreWhite}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="ContentTemplate" Value="{StaticResource RestoreWhite}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
     <Style x:Key="CloseButtonStyle" TargetType="Button" BasedOn="{StaticResource WindowTitleBarButtonStyle}">
         <Setter Property="ToolTip" Value="Close" />
@@ -123,7 +159,7 @@
 
     <Style TargetType="{x:Type local:WindowEXT}" BasedOn="{StaticResource Config}">
         <Setter Property="Background" Value="{Binding Source={StaticResource ThemeBackground}}" />
-        <Setter Property="BorderBrush" Value="{StaticResource ThemeHigh}" />
+        <Setter Property="BorderBrush" Value="{StaticResource ThemeColorHigh}" />
         <Setter Property="BorderThickness" Value="0.8" />
         <Setter Property="IsTabStop" Value="False" />
         <!--未知，此参数会导致文本放大缩小动画抖动-->
@@ -191,21 +227,10 @@
                                             Margin="0,0,-1,0">
                                     <ContentPresenter Focusable="False"
                                                       Content="{Binding FunctionBarRight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
-                                    <Button x:Name="MinimizeButton" Style="{StaticResource MinimizeButtonStyle}"
-                                            VerticalAlignment="{Binding ButtonAlignment, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
-                                            Height="{Binding HeaderHeight, RelativeSource={RelativeSource TemplatedParent}}"
-                                            MaxHeight="{Binding ButtonMaxHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"/>
-                                    <Grid Margin="1,0"
-                                          VerticalAlignment="{Binding ButtonAlignment, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
-                                          Height="{Binding HeaderHeight, RelativeSource={RelativeSource TemplatedParent}}"
-                                          MaxHeight="{Binding ButtonMaxHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}">
-                                        <Button x:Name="RestoreButton" Visibility="Collapsed" Style="{StaticResource RestoreButtonStyle}"/>
-                                        <Button x:Name="MaximizeButton" Style="{StaticResource MaximizeButtonStyle}"/>
-                                    </Grid>
-                                    <Button x:Name="CloseButton" Style="{StaticResource CloseButtonStyle}"
-                                            VerticalAlignment="{Binding ButtonAlignment, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
-                                            Height="{Binding HeaderHeight, RelativeSource={RelativeSource TemplatedParent}}"
-                                            MaxHeight="{Binding ButtonMaxHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"/>
+                                    <Button x:Name="MinimizeButton" Style="{StaticResource MinimizeButtonStyle}"/>
+                                    <Button x:Name="RestoreButton" Style="{StaticResource RestoreButtonStyle}" Visibility="Collapsed"/>
+                                    <Button x:Name="MaximizeButton" Style="{StaticResource MaximizeButtonStyle}" />
+                                    <Button x:Name="CloseButton" Style="{StaticResource CloseButtonStyle}"/>
                                 </StackPanel>
                             </Grid>
                             <AdornerDecorator Grid.Row="1" KeyboardNavigation.IsTabStop="False">

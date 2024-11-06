@@ -170,7 +170,7 @@
         <!--行-->
         <Setter Property="RowBackground" Value="Transparent"/>
         <!--隔行换色-->
-        <Setter Property="AlternatingRowBackground" Value="{StaticResource ThemeBackgroundLight}"/>
+        <Setter Property="AlternatingRowBackground" Value="{StaticResource ThemeBackgroundSub}"/>
         <Setter Property="AlternationCount" Value="2"/>
         <!--单行选择-->
         <Setter Property="SelectionMode" Value="Single"/>

@@ -54,7 +54,7 @@
                                Placement="Bottom"
                                PlacementTarget="{Binding ElementName=border}">
                             <Grid Width="{Binding ActualWidth, ElementName=border}" 
-                                  Background="{StaticResource ThemeBackgroundLight}"
+                                  Background="{StaticResource ThemeBackgroundSub}"
                                   MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}" >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>

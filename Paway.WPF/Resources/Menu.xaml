@@ -22,7 +22,7 @@
                 <TextBlock x:Name="Line"
                            Height="1"
                            Margin="0,0,0,-1"
-                           Background="{StaticResource ThemeBackgroundLight}"
+                           Background="{StaticResource ThemeBackgroundSub}"
                            Grid.ColumnSpan="2"
                            Visibility="Collapsed" 
                            VerticalAlignment="Bottom"/>
@@ -57,7 +57,7 @@
                     <Border x:Name="SubMenuBorder"
                             BorderBrush="LightGray"
                             BorderThickness="1"
-                            Background="{StaticResource ThemeBackgroundLight}"
+                            Background="{StaticResource ThemeBackgroundSub}"
                             CornerRadius="0,0,2,2"
                             Padding="0,3">
                         <StackPanel>
@@ -65,7 +65,7 @@
                                        Height="1"
                                        Width="{Binding ActualWidth, ElementName=Line}"
                                        Margin="0,-4,1,0"
-                                       Background="{StaticResource ThemeBackgroundLight}"
+                                       Background="{StaticResource ThemeBackgroundSub}"
                                        VerticalAlignment="Top" 
                                        HorizontalAlignment="Left"/>
                             <ScrollViewer x:Name="SubMenuScrollViewer"
@@ -104,12 +104,12 @@
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
                 <Setter Property="Foreground" Value="White" />
-                <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeColorMouse}" />
-                <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource ThemeColorMouse}" />
+                <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeColorLight}" />
+                <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource ThemeColorLight}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeBackgroundLight}" />
-                <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource ThemeBackgroundLight}" />
+                <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeBackgroundSub}" />
+                <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource ThemeBackgroundSub}" />
                 <Setter Property="Visibility" TargetName="Line" Value="Visible" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
@@ -127,7 +127,7 @@
                     <Condition Property="IsSubmenuOpen" Value="True" />
                 </MultiTrigger.Conditions>
                 <Setter Property="Foreground" Value="{StaticResource ThemeForeground}" />
-                <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeBackgroundLight}" />
+                <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeBackgroundSub}" />
                 <Setter Property="BorderBrush" TargetName="templateRoot" Value="LightGray" />
                 <Setter Property="Visibility" TargetName="Line" Value="Visible" />
             </MultiTrigger>
@@ -185,7 +185,7 @@
             </Trigger>
             <Trigger Property="IsMouseOver" Value="true">
                 <Setter Property="Foreground" Value="White" />
-                <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeColorMouse}" />
+                <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeColorLight}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Fill" TargetName="ButtonBackground" Value="{StaticResource ThemeColor}" />
@@ -259,7 +259,7 @@
                             BorderBrush="LightGray"
                             BorderThickness="1"
                             CornerRadius="2"
-                            Background="{StaticResource ThemeBackgroundLight}"
+                            Background="{StaticResource ThemeBackgroundSub}"
                             Padding="0,3">
                         <ScrollViewer x:Name="SubMenuScrollViewer"
                                       Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
@@ -295,7 +295,7 @@
                 <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ThemeColorMouse}" />
+                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ThemeColorLight}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <!--会影响下级字体颜色-->
@@ -317,7 +317,7 @@
         <Border x:Name="templateRoot"
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}"
-                Background="{StaticResource ThemeBackgroundLight}">
+                Background="{StaticResource ThemeBackgroundSub}">
             <Grid Margin="-1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" MinWidth="22" SharedSizeGroup="MenuItemIconColumnGroup" />
@@ -375,7 +375,7 @@
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
                 <Setter Property="Foreground" Value="White" />
-                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ThemeColorMouse}" />
+                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ThemeColorLight}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ThemeColor}" />
@@ -453,7 +453,7 @@
     </Style>
 
     <Style TargetType="ContextMenu">
-        <Setter Property="Background" Value="{Binding Source={StaticResource ThemeBackgroundLight}}" />
+        <Setter Property="Background" Value="{Binding Source={StaticResource ThemeBackgroundSub}}" />
         <Setter Property="BorderBrush" Value="LightGray" />
         <Setter Property="Padding" Value="0,3" />
         <Setter Property="Template">

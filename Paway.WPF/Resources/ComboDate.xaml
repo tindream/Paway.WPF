@@ -56,7 +56,7 @@
                                Placement="Bottom"
                                PlacementTarget="{Binding ElementName=border}">
                             <Border x:Name="DropDownBorder" BorderBrush="LightGray" BorderThickness="0"
-                                    Background="{StaticResource ThemeBackgroundLight}">
+                                    Background="{StaticResource ThemeBackgroundSub}">
                                 <local:CalendarEXT x:Name="PART_Calendar"
                                                    HasButton="True" HorizontalAlignment="Left" Margin="0,-3,0,-3"/>
                             </Border>

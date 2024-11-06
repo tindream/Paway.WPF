@@ -10,7 +10,7 @@
     <local:NoLeftThicknessConverter x:Key="noLeftThicknessConverter"/>
 
     <LinearGradientBrush x:Key="backLine" EndPoint="0,1" StartPoint="0,0">
-        <GradientStop Color="{Binding Source={StaticResource ThemeBackgroundLight}, Converter={StaticResource brushToColorConverter}}" Offset="0"/>
+        <GradientStop Color="{Binding Source={StaticResource ThemeBackgroundSub}, Converter={StaticResource brushToColorConverter}}" Offset="0"/>
         <GradientStop Color="#FFE5E5E5" Offset="1"/>
     </LinearGradientBrush>
     <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
@@ -121,7 +121,7 @@
                                PopupAnimation="Slide">
                             <Grid MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}" 
                                   MinWidth="{Binding ActualWidth, ElementName=border}" x:Name="DropDown" 
-                                  Background="{StaticResource ThemeBackgroundLight}">
+                                  Background="{StaticResource ThemeBackgroundSub}">
                                 <Border x:Name="DropDownBorder" BorderBrush="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" 
                                         BorderThickness="1" Padding="0"/>
                                 <Line X1="1.5" X2="{Binding ActualWidth, ElementName=border, Converter={StaticResource valueAddConverter}, ConverterParameter=-1.5}" 

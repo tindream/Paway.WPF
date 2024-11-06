@@ -70,7 +70,7 @@
                                Placement="Bottom"
                                PlacementTarget="{Binding ElementName=border}">
                             <Border x:Name="DropDownBorder" BorderBrush="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource TemplatedParent}}" 
-                                    Background="{StaticResource ThemeBackgroundLight}"
+                                    Background="{StaticResource ThemeBackgroundSub}"
                                     BorderThickness="1,0,1,1" Padding="0">
                                 <local:TreeViewEXT x:Name="PART_TreeView"
                                                    FontSize="{TemplateBinding FontSize}"

@@ -18,7 +18,7 @@
     <DockPanel Name="panel">
         <!--只是将ProxyElement添加到树-->
         <ContentControl Content="{StaticResource ProxyElement}" Visibility="Collapsed"/>
-        <StatusBar DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Foreground="White" Height="30" Background="{StaticResource ThemeHigh}">
+        <StatusBar DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Foreground="White" Height="30" Background="{StaticResource ThemeColorHigh}">
             <TextBlock Text="{Binding Desc}" Padding="10,6" FontSize="14" Margin="-3"></TextBlock>
         </StatusBar>
         <StackPanel DockPanel.Dock="Top">
@@ -75,11 +75,12 @@
                 <Button Background="{StaticResource Error}" BorderThickness="0" Content="错误" Height="32" Width="100" Foreground="White"/>
 
                 <Button Background="{StaticResource ThemeColor}" BorderThickness="0" Content="主题颜色" Height="32" Width="100" Foreground="White"/>
-                <Button Background="{StaticResource ThemeColorMouse}" BorderThickness="0" Content="主题浅色" Height="32" Width="100" Foreground="White"/>
-                <Button Background="{StaticResource ThemeHigh}" BorderThickness="0" Content="主题深色" Height="32" Width="100" Foreground="White"/>
+                <Button Background="{StaticResource ThemeColorSub}" BorderThickness="0" Content="主题次色" Height="32" Width="100" Foreground="White"/>
+                <Button Background="{StaticResource ThemeColorLight}" BorderThickness="0" Content="主题浅色" Height="32" Width="100" Foreground="White"/>
+                <Button Background="{StaticResource ThemeColorHigh}" BorderThickness="0" Content="主题深色" Height="32" Width="100" Foreground="White"/>
 
                 <Button Background="{StaticResource ThemeBackground}" Foreground="{StaticResource ThemeForeground}" BorderThickness="0" Content="背景色" Height="32" Width="100" />
-                <Button Background="{StaticResource ThemeBackgroundLight}" Foreground="{StaticResource ThemeForeground}" BorderThickness="0" Content="背景浅色" Height="32" Width="100" />
+                <Button Background="{StaticResource ThemeBackgroundSub}" Foreground="{StaticResource ThemeForeground}" BorderThickness="0" Content="背景次色" Height="32" Width="100" />
                 <Button Background="{StaticResource ThemeBackgroundHigh}" Foreground="{StaticResource ThemeForeground}" BorderThickness="0" Content="背景深色" Height="32" Width="100" />
                 
                 <Button Background="Transparent" Foreground="{StaticResource ThemeForeground}" BorderThickness="0" Content="前景色" Height="32" Width="100" />

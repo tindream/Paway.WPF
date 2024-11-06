@@ -7,7 +7,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type local:DataPager}" BasedOn="{StaticResource Config}">
-        <Setter Property="Background" Value="{StaticResource ThemeBackgroundLight}" />
+        <Setter Property="Background" Value="{StaticResource ThemeBackgroundSub}" />
         <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="BorderThickness" Value="1,0,1,1" />
         <Setter Property="Focusable" Value="False"/>
