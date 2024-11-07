@@ -796,21 +796,21 @@ namespace Paway.WPF
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
-        public static Task Progress(FrameworkElement element, Action action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
+        public static Task ProgressAsync(FrameworkElement element, Action action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
         {
-            return Progress(element, null, adorner => action?.Invoke(), success, error, completed, iProgressBar, iProgressRound, fontSize);
+            return ProgressAsync(element, null, adorner => action?.Invoke(), success, error, completed, iProgressBar, iProgressRound, fontSize);
         }
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
-        public static Task Progress(FrameworkElement element, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
+        public static Task ProgressAsync(FrameworkElement element, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
         {
-            return Progress(element, null, action, success, error, completed, iProgressBar, iProgressRound, fontSize);
+            return ProgressAsync(element, null, action, success, error, completed, iProgressBar, iProgressRound, fontSize);
         }
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
-        public static Task Progress(FrameworkElement element, object msg, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
+        public static Task ProgressAsync(FrameworkElement element, object msg, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
         {
             return Invoke(() =>
             {

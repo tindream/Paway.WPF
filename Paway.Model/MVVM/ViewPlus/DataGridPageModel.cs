@@ -249,7 +249,7 @@ namespace Paway.Model
         {
             PMethod.BeginInvoke(() =>
             {
-                PMethod.Progress(PMethod.Window(DataGrid), () =>
+                PMethod.ProgressAsync(PMethod.Window(DataGrid), () =>
                 {
                     Init(Find());
                     action?.Invoke();
@@ -389,7 +389,7 @@ namespace Paway.Model
                     var title = typeof(T).Description();
                     if (PMethod.OpenFile(PConfig.LanguageBase.SelectImportFile, out string file))
                     {
-                        PMethod.Progress(PMethod.Window(DataGrid), PConfig.LanguageBase.Importing, adorner =>
+                        PMethod.ProgressAsync(PMethod.Window(DataGrid), PConfig.LanguageBase.Importing, adorner =>
                         {
                             var list = ExcelBuilder.Create(file).ToList<T>();
                             ImportChecked(list);
