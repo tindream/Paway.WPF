@@ -26,6 +26,140 @@ namespace Paway.WPF
     /// </summary>
     public partial class PMethod
     {
+        #region 键盘事件转输入字符
+        /// <summary>
+        /// 键盘事件转输入字符
+        /// <para>System.Windows.Input.Key解析结构</para>
+        /// </summary>
+        public static bool KeyToChar(Key key, out char keycode)
+        {
+            var decodeInfo = KeyToChar(key);
+            keycode = '\0';
+            if (decodeInfo.Printable)
+            {
+                keycode = decodeInfo.Character;
+                return true;
+            }
+            return false;
+        }
+        /// <summary>
+        /// 键盘事件转输入字符
+        /// <para>System.Windows.Input.Key解析结构</para>
+        /// </summary>
+        public static KeyDecodeInfo KeyToChar(Key key)
+        {
+            bool iscap;
+            bool caplock;
+            bool shift;
+            var keyDecode = new KeyDecodeInfo();
+            keyDecode.Key = key;
+
+            keyDecode.Alt = Keyboard.IsKeyDown(Key.LeftAlt) ||
+                              Keyboard.IsKeyDown(Key.RightAlt);
+
+            keyDecode.Ctrl = Keyboard.IsKeyDown(Key.LeftCtrl) ||
+                              Keyboard.IsKeyDown(Key.RightCtrl);
+
+            keyDecode.Shift = Keyboard.IsKeyDown(Key.LeftShift) ||
+                              Keyboard.IsKeyDown(Key.RightShift);
+
+            if (keyDecode.Alt || keyDecode.Ctrl)
+            {
+                keyDecode.Printable = false;
+                keyDecode.Type = 1;
+            }
+            else
+            {
+                keyDecode.Printable = true;
+                keyDecode.Type = 0;
+            }
+
+            shift = keyDecode.Shift;
+            caplock = Console.CapsLock; //Keyboard.IsKeyToggled(Key.CapsLock);
+            iscap = (caplock && !shift) || (!caplock && shift);
+
+            switch (key)
+            {
+                case Key.Enter: keyDecode.Character = '\n'; break;
+                case Key.A: keyDecode.Character = (iscap ? 'A' : 'a'); break;
+                case Key.B: keyDecode.Character = (iscap ? 'B' : 'b'); break;
+                case Key.C: keyDecode.Character = (iscap ? 'C' : 'c'); break;
+                case Key.D: keyDecode.Character = (iscap ? 'D' : 'd'); break;
+                case Key.E: keyDecode.Character = (iscap ? 'E' : 'e'); break;
+                case Key.F: keyDecode.Character = (iscap ? 'F' : 'f'); break;
+                case Key.G: keyDecode.Character = (iscap ? 'G' : 'g'); break;
+                case Key.H: keyDecode.Character = (iscap ? 'H' : 'h'); break;
+                case Key.I: keyDecode.Character = (iscap ? 'I' : 'i'); break;
+                case Key.J: keyDecode.Character = (iscap ? 'J' : 'j'); break;
+                case Key.K: keyDecode.Character = (iscap ? 'K' : 'k'); break;
+                case Key.L: keyDecode.Character = (iscap ? 'L' : 'l'); break;
+                case Key.M: keyDecode.Character = (iscap ? 'M' : 'm'); break;
+                case Key.N: keyDecode.Character = (iscap ? 'N' : 'n'); break;
+                case Key.O: keyDecode.Character = (iscap ? 'O' : 'o'); break;
+                case Key.P: keyDecode.Character = (iscap ? 'P' : 'p'); break;
+                case Key.Q: keyDecode.Character = (iscap ? 'Q' : 'q'); break;
+                case Key.R: keyDecode.Character = (iscap ? 'R' : 'r'); break;
+                case Key.S: keyDecode.Character = (iscap ? 'S' : 's'); break;
+                case Key.T: keyDecode.Character = (iscap ? 'T' : 't'); break;
+                case Key.U: keyDecode.Character = (iscap ? 'U' : 'u'); break;
+                case Key.V: keyDecode.Character = (iscap ? 'V' : 'v'); break;
+                case Key.W: keyDecode.Character = (iscap ? 'W' : 'w'); break;
+                case Key.X: keyDecode.Character = (iscap ? 'X' : 'x'); break;
+                case Key.Y: keyDecode.Character = (iscap ? 'Y' : 'y'); break;
+                case Key.Z: keyDecode.Character = (iscap ? 'Z' : 'z'); break;
+                case Key.D0: keyDecode.Character = (shift ? ')' : '0'); break;
+                case Key.D1: keyDecode.Character = (shift ? '!' : '1'); break;
+                case Key.D2: keyDecode.Character = (shift ? '@' : '2'); break;
+                case Key.D3: keyDecode.Character = (shift ? '#' : '3'); break;
+                case Key.D4: keyDecode.Character = (shift ? '$' : '4'); break;
+                case Key.D5: keyDecode.Character = (shift ? '%' : '5'); break;
+                case Key.D6: keyDecode.Character = (shift ? '^' : '6'); break;
+                case Key.D7: keyDecode.Character = (shift ? '&' : '7'); break;
+                case Key.D8: keyDecode.Character = (shift ? '*' : '8'); break;
+                case Key.D9: keyDecode.Character = (shift ? '(' : '9'); break;
+                case Key.OemPlus: keyDecode.Character = (shift ? '+' : '='); break;
+                case Key.OemMinus: keyDecode.Character = (shift ? '_' : '-'); break;
+                case Key.OemQuestion: keyDecode.Character = (shift ? '?' : '/'); break;
+                case Key.OemComma: keyDecode.Character = (shift ? '<' : ','); break;
+                case Key.OemPeriod: keyDecode.Character = (shift ? '>' : '.'); break;
+                case Key.OemOpenBrackets: keyDecode.Character = (shift ? '{' : '['); break;
+                case Key.OemQuotes: keyDecode.Character = (shift ? '"' : '\''); break;
+                case Key.Oem1: keyDecode.Character = (shift ? ':' : ';'); break;
+                case Key.Oem3: keyDecode.Character = (shift ? '~' : '`'); break;
+                case Key.Oem5: keyDecode.Character = (shift ? '|' : '\\'); break;
+                case Key.Oem6: keyDecode.Character = (shift ? '}' : ']'); break;
+                case Key.Tab: keyDecode.Character = '\t'; break;
+                case Key.Space: keyDecode.Character = ' '; break;
+
+                // Number Pad
+                case Key.NumPad0: keyDecode.Character = '0'; break;
+                case Key.NumPad1: keyDecode.Character = '1'; break;
+                case Key.NumPad2: keyDecode.Character = '2'; break;
+                case Key.NumPad3: keyDecode.Character = '3'; break;
+                case Key.NumPad4: keyDecode.Character = '4'; break;
+                case Key.NumPad5: keyDecode.Character = '5'; break;
+                case Key.NumPad6: keyDecode.Character = '6'; break;
+                case Key.NumPad7: keyDecode.Character = '7'; break;
+                case Key.NumPad8: keyDecode.Character = '8'; break;
+                case Key.NumPad9: keyDecode.Character = '9'; break;
+                case Key.Subtract: keyDecode.Character = '-'; break;
+                case Key.Add: keyDecode.Character = '+'; break;
+                case Key.Decimal: keyDecode.Character = '.'; break;
+                case Key.Divide: keyDecode.Character = '/'; break;
+                case Key.Multiply: keyDecode.Character = '*'; break;
+
+                default:
+                    keyDecode.Type = 1;
+                    keyDecode.Printable = false;
+                    keyDecode.Character = '\x00';
+                    break;
+            }
+
+            return keyDecode;
+        }
+
+        #endregion
+
         #region 导入导出框
         /// <summary>
         /// 打开单个文件

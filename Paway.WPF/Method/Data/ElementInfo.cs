@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Paway.WPF
 {
-    internal class ElementData<T, I> where T : class where I : struct
+    internal class ElementInfo<T, I> where T : class where I : struct
     {
         public T Old { get; set; }
         public I? Normal { get; set; }
@@ -14,8 +14,8 @@ namespace Paway.WPF
         public I? Pressed { get; set; }
         public int? Alpha { get; set; }
 
-        public ElementData() { }
-        public ElementData(T old, I? normal, I? mouse, I? pressed, int? alpha)
+        public ElementInfo() { }
+        public ElementInfo(T old, I? normal, I? mouse, I? pressed, int? alpha)
         {
             this.Old = old;
             this.Normal = normal;

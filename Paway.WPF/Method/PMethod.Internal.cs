@@ -117,7 +117,7 @@ namespace Paway.WPF
         /// <summary>
         /// 控件状态转换
         /// </summary>
-        internal static ElementData<T, I> ElementStatu<T, I>(ITypeDescriptorContext context, string str, Func<string, I> funcParse, Func<T, string, I?> funcOld)
+        internal static ElementInfo<T, I> ElementStatu<T, I>(ITypeDescriptorContext context, string str, Func<string, I> funcParse, Func<T, string, I?> funcOld)
             //where T : IElementStatu<I> 
             where T : class
             where I : struct
@@ -148,7 +148,7 @@ namespace Paway.WPF
                 if (!string.IsNullOrEmpty(strs[2])) pressed = funcParse(strs[2]);
                 else pressed = funcOld(old, "Pressed");
             }
-            return new ElementData<T, I>(old, normal, mouse, pressed, alpha);
+            return new ElementInfo<T, I>(old, normal, mouse, pressed, alpha);
         }
 
         #endregion
