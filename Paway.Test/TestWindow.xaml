@@ -32,6 +32,7 @@
         </WindowFunctionBar>
     </WindowEXT.FunctionBarRight>
     <DockPanel>
+        <model:StatuItem IConnect="True" DockPanel.Dock="Bottom"/>
         <ScrollViewerEXT>
             <DockPanel Width="250">
                 <StackPanel DockPanel.Dock="Top">

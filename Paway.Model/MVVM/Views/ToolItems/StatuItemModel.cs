@@ -88,7 +88,7 @@ namespace Paway.Model
             Messenger.Default.Register<StatuMessage>(this, msg => AddDesc(msg.Msg, msg.Level, msg.IHit, msg.Ower));
             Messenger.Default.Register<ConnectMessage>(this, msg =>
             {
-                Messenger.Default.Send(new StatuMessage(msg.Connectd ? $"连接成功" : $"连接断开", !msg.Connectd), msg.Connectd ? LevelType.Debug : LevelType.Error);
+                Messenger.Default.Send(new StatuMessage(msg.Message ?? (msg.Connectd ? $"连接成功" : $"连接断开"), msg.Connectd ? LevelType.Debug : LevelType.Error));
                 PMethod.BeginInvoke(() =>
                 {
                     ConnectBrush = msg.Connectd ? ColorType.Success.Color().ToBrush() : ColorType.Error.Color().ToBrush();

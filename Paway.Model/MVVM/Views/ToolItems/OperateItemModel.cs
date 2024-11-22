@@ -52,7 +52,7 @@ namespace Paway.Model
         /// </summary>
         internal void ActionInternalMsg(string item)
         {
-            Messenger.Default.Send(new StatuMessage(item, false));
+            Messenger.Default.Send(new StatuMessage(item));
             try
             {
                 Action(item);
@@ -140,14 +140,14 @@ namespace Paway.Model
                         if (tbSearch.Text.IsEmpty()) break;
                         if (iExit && DateTime.Now.Subtract(exitTime).TotalMilliseconds < PConfig.DoubleInterval)
                         {
-                            Messenger.Default.Send(new StatuMessage(PConfig.LanguageBase.QueryCancel, false));
+                            Messenger.Default.Send(new StatuMessage(PConfig.LanguageBase.QueryCancel));
                             tbSearch.Text = null;
                         }
                         else
                         {
                             iExit = true;
                             exitTime = DateTime.Now;
-                            Messenger.Default.Send(new StatuMessage(PConfig.LanguageBase.QueryCancelAgain, false));
+                            Messenger.Default.Send(new StatuMessage(PConfig.LanguageBase.QueryCancelAgain));
                         }
                     }
                     break;
@@ -169,7 +169,7 @@ namespace Paway.Model
                             if ((Auth & MenuAuthType.Search) != MenuAuthType.Search) break;
                             if (PMethod.Find(Panel, out TextBoxEXT tbSearch, "tbSearch") && !tbSearch.IsKeyboardFocusWithin)
                             {
-                                Messenger.Default.Send(new StatuMessage(PConfig.LanguageBase.Query, false));
+                                Messenger.Default.Send(new StatuMessage(PConfig.LanguageBase.Query));
                                 tbSearch.Focus();
                             }
                             break;

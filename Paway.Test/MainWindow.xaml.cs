@@ -96,7 +96,7 @@ namespace Paway.Test
             ex =>
             {
                 ex.Log();
-                Messenger.Default.Send(new StatuMessage(ex.Message()));
+                Messenger.Default.Send(new StatuMessage(ex.Message(), LevelType.Error));
                 Method.ShowError(this, ex.Message());
             });
         }

@@ -636,7 +636,9 @@ namespace Paway.WPF
                     var toastAdorner = new CustomAdorner(element, border, yFunc: () =>
                     {
                         var top = window.ActualHeight - border.ActualHeight;
-                        top = top * 17 / 20;
+                        var bottom = top * 3 / 20;
+                        if (bottom < 68) bottom = 68;
+                        top -= bottom;
                         return top;
                     }, storyboardFunc: () =>
                     {

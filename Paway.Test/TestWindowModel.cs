@@ -81,7 +81,7 @@ namespace Paway.Test
                 case "关于":
                     var version = $"V{Assembly.GetEntryAssembly().GetName().Version}";
                     Method.Hit(Config.Window, version);
-                    Messenger.Default.Send(new StatuMessage(version));
+                    Messenger.Default.Send(new StatuMessage(version, true));
                     break;
                 case "主题":
                     Method.ShowWindow(Config.Window, new ThemeWindow());

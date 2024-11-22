@@ -51,8 +51,9 @@ namespace Paway.Model
     {
         /// <summary>
         /// 弹出提示
+        /// <para>默认不弹出</para>
         /// </summary>
-        public bool IHit { get; set; } = true;
+        public bool IHit { get; set; }
         /// <summary>
         /// 关联控件
         /// </summary>
@@ -60,7 +61,7 @@ namespace Paway.Model
         /// <summary>
         /// 状态消息，指定消息、弹出标记
         /// </summary>
-        public StatuMessage(string msg, bool iHit = true) : base(msg)
+        public StatuMessage(string msg, bool iHit = false) : base(msg)
         {
             this.IHit = iHit;
         }
@@ -70,6 +71,7 @@ namespace Paway.Model
         public StatuMessage(string msg, DependencyObject ower) : base(msg)
         {
             this.Ower = ower;
+            this.IHit = ower != null;
         }
         /// <summary>
         /// 状态消息，指定消息、消息等级、父级控件
@@ -77,6 +79,7 @@ namespace Paway.Model
         public StatuMessage(string msg, LevelType level, DependencyObject ower = null) : base(msg, level)
         {
             this.Ower = ower;
+            this.IHit = ower != null || level > LevelType.Debug;
         }
         /// <summary>
         /// 状态消息，指定异常消息、父级控件
@@ -90,6 +93,7 @@ namespace Paway.Model
         /// </summary>
         public StatuMessage(string title, Exception ex, DependencyObject ower = null)
         {
+            this.IHit = true;
             ex.Log();
             var msg = $"{ex.Message().Replace("\r\n", "。")}";
             if (!title.IsEmpty()) msg = $"{title}: {msg}";

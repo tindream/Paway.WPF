@@ -58,7 +58,7 @@ namespace Paway.Model
             if (e.ClickCount == 2)
             {
                 var version = $"V{Assembly.GetEntryAssembly().GetName().Version}";
-                Messenger.Default.Send(new StatuMessage(version));
+                Messenger.Default.Send(new StatuMessage(version, true));
             }
         }
     }

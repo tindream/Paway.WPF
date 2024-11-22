@@ -185,12 +185,12 @@ namespace Paway.WPF
         /// <summary>
         /// 注入拦截器类-触发更新事件
         /// </summary>
-        public object Invoke(object @object, string @method, object[] parameters)
+        public object Invoke(object obj, string method, object[] parameters)
         {
-            var retobj = @object.GetType().GetMethod(@method + "_Base").Invoke(@object, parameters);
-            if (@method.StartsWith("set_"))
+            var retobj = obj.GetType().GetMethod(method + "_Base").Invoke(obj, parameters);
+            if (method.StartsWith("set_"))
             {
-                if (@object is IPropertyChanged notify) notify.OnPropertyChanged(@method.Substring(4));
+                if (obj is IPropertyChanged notify) notify.OnPropertyChanged(method.Substring(4));
             }
             return retobj;
         }

@@ -279,7 +279,7 @@ namespace Paway.Model
         /// </summary>
         protected virtual void Import(List<T> list)
         {
-            var updateList = PMethod.Import(this.FilterList(), list);
+            var updateList = PMethod.UpdateChecked(this.FilterList(), list, out _);
             var timeNow = DateTime.Now;
             if (typeof(IOperateInfo).IsAssignableFrom(list.GenericType()))
             {
