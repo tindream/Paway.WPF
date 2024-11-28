@@ -24,10 +24,9 @@ namespace Paway.Test
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            Config.Text = Config.Title;
             if (Method.IsAppInstanceExist())
             {//已经有实例在运行，则激活该实例的主窗体。 
-                Win32Helper.ActiveForm(Config.Text);
+                Win32Helper.ActiveForm(Config.Title);
                 Shutdown();
                 return;
             }

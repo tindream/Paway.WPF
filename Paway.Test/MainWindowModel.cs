@@ -33,7 +33,7 @@ namespace Paway.Test
     public class MainWindowModel : ViewModelBasePlus
     {
         #region 属性
-        public string Text => Config.Text;
+        public string Title => Config.Title;
         private readonly List<ListViewItemModel> list = new List<ListViewItemModel>();
         public List<ListViewItemModel> GridList { get { return list; } }
         public PagedCollectionView PagedList { get; private set; }

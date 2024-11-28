@@ -177,7 +177,7 @@ namespace Paway.Model
     /// 带子级列表的控件
     /// </summary>
     public abstract class ChildBasePageModel<T, Child> : DataGridPageModel<T> where T : class, ILoad<Child>, IOperateOnceInfo, ICompare<T>, new()
-                                                                              where Child : class, IParent
+                                                                              where Child : class, IParent, new()
     {
         #region 属性
         /// <summary>

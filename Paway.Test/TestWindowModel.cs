@@ -26,7 +26,7 @@ namespace Paway.Test
     public class TestWindowModel : ViewModelBasePlus
     {
         #region 属性
-        public string Text => Config.Text;
+        public string Title => Config.Title;
 
         private double _dValue = 10;
         public double DValue

@@ -11,7 +11,7 @@
            DataContext="{Binding Main, Source={StaticResource Locator}}"
            mc:Ignorable="d"
            HeaderHeight="40" ButtonAlignment="Top"
-           Title="{Binding Text}" Height="800" Width="850" WindowStartupLocation="CenterScreen">
+           Title="{Binding Title}" Height="800" Width="850" WindowStartupLocation="CenterScreen">
     <WindowEXT.Resources>
         <FrameworkElement x:Key="ProxyElement" DataContext="{Binding}"/>
     </WindowEXT.Resources>

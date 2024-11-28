@@ -9,7 +9,7 @@
            xmlns:ip="http://www.galasoft.ch/mvvmlight"
            mc:Ignorable="d"
            DataContext="{Binding Test, Source={StaticResource Locator}}"
-           Title="{Binding Text}" Height="470" Width="800" WindowStartupLocation="CenterScreen">
+           Title="{Binding Title}" Height="470" Width="800" WindowStartupLocation="CenterScreen">
     <WindowEXT.FunctionBar>
         <WindowFunctionBar>
             <local:TitleContent/>
