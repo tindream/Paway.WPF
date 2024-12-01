@@ -30,7 +30,7 @@
 		<Reference Include="Microsoft.CSharp" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Paway.Utils" Version="2.6.0" />
+		<PackageReference Include="Paway.Utils" Version="2.7.0" />
 		<PackageReference Include="Paway.Runtime.Plot" Version="1.0.4" />
 		<PackageReference Include="Paway.Runtime.Office" Version="8.11.4" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
