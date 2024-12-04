@@ -26,7 +26,7 @@ namespace Paway.WPF
             FontAwesome = new FontFamily(new Uri(@"pack://application:,,,/Paway.WPF;component/Resource/"), "./#fontawesome");
         }
 
-        #region 全局
+        #region 全局配置
         /// <summary>
         /// 主窗体
         /// </summary>
@@ -57,18 +57,10 @@ namespace Paway.WPF
         {
             language.Clone(LanguageBase);
         }
-
-        #endregion
-
-        #region 字体
         /// <summary>
         /// QuartZ字体
         /// </summary>
         public static FontFamily FontAwesome { get; private set; }
-
-        #endregion
-
-        #region 虚拟键盘
         /// <summary>
         /// 虚拟键盘状态
         /// </summary>
@@ -76,7 +68,7 @@ namespace Paway.WPF
 
         #endregion
 
-        #region 主题
+        #region 主题配置
         /// <summary>
         /// 颜色的 Alpha 通道默认值
         /// </summary>

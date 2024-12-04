@@ -24,14 +24,7 @@ namespace Paway.Test
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            if (Method.IsAppInstanceExist())
-            {//已经有实例在运行，则激活该实例的主窗体。 
-                Win32Helper.ActiveForm(Config.Title);
-                Shutdown();
-                return;
-            }
-            Method.InitApp(App.Current, Config.LogConfig);
-
+            Method.InitApp(App.Current, Config.Log, Config.Title);
             {//Test
             }
             //System.Diagnostics.PresentationTraceSources.DataBindingSource.Switch.Level = System.Diagnostics.SourceLevels.Critical;
@@ -39,6 +32,7 @@ namespace Paway.Test
         }
         protected override void OnExit(ExitEventArgs e)
         {
+            $"软件关闭".Log();
             base.OnExit(e);
         }
     }

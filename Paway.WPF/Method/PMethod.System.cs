@@ -856,9 +856,27 @@ namespace Paway.WPF
         #region Init
         /// <summary>
         /// 初始化App
+        /// <para>existTitle：不为空时，检查实例，实例存在时激活指定标题的窗体，未找到实例时 关闭当前进程名称的其它所有进程</para>
+        /// <para>logFirstChanceException：记录异常，默认记录</para>
         /// </summary>
-        public static void InitApp(Application app, string fileName = "Log.xml", bool logFirstChanceException = true)
+        public static void InitApp(Application app, string fileName = "Log.xml", string existTitle = null, bool logFirstChanceException = true)
         {
+            if (!existTitle.IsEmpty())
+            {
+                if (IsAppInstanceExist())
+                {//已经有实例在运行，则激活该实例的主窗体。
+                    var hWnd = Win32Helper.ActiveForm(existTitle);
+                    if (hWnd != IntPtr.Zero)
+                    {
+                        app.Shutdown();
+                        return;
+                    }
+                    else
+                    {
+                        KillProcesses();
+                    }
+                }
+            }
             var file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
             log4net.Config.XmlConfigurator.Configure(new FileInfo(file));
             var version = Assembly.GetEntryAssembly().GetName().Version;

@@ -34,18 +34,18 @@ namespace Paway.Test
                 if (_service == null)
                 {
                     _service = DataServiceBuilder.CreateSQLite();
-                    var sql = new Uri(@"pack://application:,,,/Paway.Test;component/Resources/script.sql").ToText();
-                    _service.Create(sql, () =>
-                    {
-                        UserInfo info = new UserInfo()
+                    _service.Create(() => new Uri(@"pack://application:,,,/Paway.Test;component/Resources/script.sql").ToText(),
+                        () =>
                         {
-                            Name = "admin0"
-                        };
-                        _service.Insert(info);
-                        info.Id = 19;
-                        info.Name = "admin001";
-                        _service.Insert(info);
-                    });
+                            UserInfo info = new UserInfo()
+                            {
+                                Name = "admin0"
+                            };
+                            _service.Insert(info);
+                            info.Id = 19;
+                            info.Name = "admin001";
+                            _service.Insert(info);
+                        });
                 }
                 return _service;
             }

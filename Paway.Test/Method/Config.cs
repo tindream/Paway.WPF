@@ -15,7 +15,6 @@ namespace Paway.Test
     {
         #region 常量
         public static string Title = "测试系统";
-        public static string LogConfig = "Log.xml";
         /// <summary>
         /// 图表绽放率
         /// </summary>
