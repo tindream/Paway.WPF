@@ -83,7 +83,7 @@ namespace Paway.Model
         /// </summary>
         public StatuItemModel()
         {
-            PConfig.OperateLogEvent += msg => AddDesc(msg.Text, iHit: false);
+            PConfig.OperateLogEvent += msg => AddDesc(msg.Text);
             PConfig.StatuLogEvent += (msg, level) => AddDesc(msg, level);
             Messenger.Default.Register<StatuMessage>(this, msg => AddDesc(msg.Msg, msg.Level, msg.IHit, msg.Ower));
             Messenger.Default.Register<ConnectMessage>(this, msg =>
@@ -128,7 +128,7 @@ namespace Paway.Model
         /// <summary>
         /// 系统消息
         /// </summary>
-        private void AddDesc(string msg, LevelType level = LevelType.Debug, bool iHit = true, DependencyObject ower = null)
+        private void AddDesc(string msg, LevelType level = LevelType.Debug, bool iHit = false, DependencyObject ower = null)
         {
             this.Desc = msg;
             PMethod.BeginInvoke(() =>
