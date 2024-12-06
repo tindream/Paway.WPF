@@ -182,7 +182,7 @@
                 <ControlTemplate TargetType="{x:Type local:WindowEXT}">
                     <Border BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            Background="White"
+                            Background="Transparent"
                             x:Name="WindowBorder">
                         <Grid x:Name="LayoutRoot"
                               Background="{TemplateBinding Background}">

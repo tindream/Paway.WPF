@@ -108,6 +108,7 @@ namespace Paway.WPF
         /// </summary>
         public static void ClearAdorner(FrameworkElement element, CustomAdorner adorner)
         {
+            if (adorner == null) return;
             Invoke(() =>
             {
                 if (element is Window window && window.Content is FrameworkElement temp) element = temp;
