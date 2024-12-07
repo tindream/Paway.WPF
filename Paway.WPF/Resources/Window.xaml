@@ -229,7 +229,7 @@
                                                       Content="{Binding FunctionBarRight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
                                     <Button x:Name="MinimizeButton" Style="{StaticResource MinimizeButtonStyle}"/>
                                     <Button x:Name="RestoreButton" Style="{StaticResource RestoreButtonStyle}" Visibility="Collapsed"/>
-                                    <Button x:Name="MaximizeButton" Style="{StaticResource MaximizeButtonStyle}" />
+                                    <Button x:Name="MaximizeButton" Style="{StaticResource MaximizeButtonStyle}" Visibility="Collapsed"/>
                                     <Button x:Name="CloseButton" Style="{StaticResource CloseButtonStyle}"/>
                                 </StackPanel>
                             </Grid>
@@ -253,17 +253,11 @@
                             <Setter Property="Foreground" TargetName="Text_Title" Value="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource brushAlphaConverter}, ConverterParameter=160}"/>
                         </Trigger>
                         <Trigger Property="WindowState" Value="Maximized">
-                            <Setter Property="Visibility" TargetName="MaximizeButton" Value="Collapsed"/>
-                            <Setter Property="Visibility" TargetName="RestoreButton" Value="Visible" />
                             <Setter Property="BorderThickness" TargetName="WindowBorder" Value="0" />
                             <Setter Property="Padding" TargetName="WindowBorder" 
                                     Value="{x:Static SystemParameters.WindowResizeBorderThickness}" />
                             <Setter TargetName="LayoutRoot" Property="Margin"
                                     Value="{x:Static local:WindowParameters.PaddedBorderThickness}" />
-                        </Trigger>
-                        <Trigger Property="WindowState" Value="Normal">
-                            <Setter Property="Visibility" TargetName="MaximizeButton" Value="Visible" />
-                            <Setter Property="Visibility" TargetName="RestoreButton" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="WindowStyle" Value="None">
                             <Setter Property="Height" TargetName="WindowTitlePanel" Value="0" />
@@ -289,10 +283,28 @@
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
+                                <Condition Property="ResizeMode" Value="CanResize" />
+                                <Condition Property="WindowState" Value="Maximized" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Visibility" TargetName="MaximizeButton" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="RestoreButton" Value="Visible" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ResizeMode" Value="CanResize" />
+                                <Condition Property="WindowState" Value="Normal" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Visibility" TargetName="MaximizeButton" Value="Visible" />
+                            <Setter Property="Visibility" TargetName="RestoreButton" Value="Collapsed" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
                                 <Condition Property="ResizeMode" Value="CanResizeWithGrip" />
                                 <Condition Property="WindowState" Value="Normal" />
                             </MultiTrigger.Conditions>
                             <Setter Property="Visibility" TargetName="ResizeGrip" Value="Visible" />
+                            <Setter Property="Visibility" TargetName="MaximizeButton" Value="Visible" />
+                            <Setter Property="Visibility" TargetName="RestoreButton" Value="Collapsed" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
