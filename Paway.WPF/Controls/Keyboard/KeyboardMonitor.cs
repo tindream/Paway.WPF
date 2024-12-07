@@ -119,13 +119,13 @@ namespace Paway.WPF
                 {
                     point = element.TransformToAncestor(adorner).Transform(new Point(0, 0));
                 }
-                else
+                else if (!PConfig.IKeyboardWindow)
                 {
                     point = element.TransformToAncestor(content).Transform(new Point(0, 0));
                 }
-                if (PConfig.IKeyboardWindow)
+                else
                 {
-                    if (owner.WindowState != WindowState.Maximized) point = new Point(point.X + owner.Left, point.Y + owner.Top);
+                    point = element.TransformToAncestor(owner).Transform(new Point(0, 0));
                 }
                 var ownerPoint = element.TransformToAncestor(owner).Transform(new Point(0, 0));
                 this.boxRect = new Rect(ownerPoint.X, ownerPoint.Y, element.ActualWidth, element.ActualHeight);
@@ -151,9 +151,9 @@ namespace Paway.WPF
                 if (keyboardWindow != null)
                 {
                     keyboardWindow.Show();
+                    if (owner.WindowState != WindowState.Maximized) point = new Point(point.X + owner.Left, point.Y + owner.Top);
                     var hwnd = owner.Handle();
                     var current = System.Windows.Forms.Screen.FromHandle(hwnd);
-                    var top = owner.WindowStyle != System.Windows.WindowStyle.None ? (owner is WindowEXT windowEXT) ? windowEXT.HeaderHeight : 30 : 0;
 
                     var x = point.X + element.Margin.Left;
                     if (current.WorkingArea.Width < keyboardWindow.Width + x)
@@ -161,10 +161,10 @@ namespace Paway.WPF
                         x = current.WorkingArea.Width - keyboardWindow.Width;
                     }
                     if (x < 0) x = 0;
-                    var y = point.Y + element.ActualHeight + top + element.Margin.Top;
+                    var y = point.Y + element.ActualHeight + element.Margin.Top;
                     if (current.WorkingArea.Height < keyboardWindow.Height + y)
                     {
-                        y = point.Y + top - keyboardWindow.Height;
+                        y = point.Y - keyboardWindow.Height;
                     }
                     keyboardWindow.Left = x;
                     keyboardWindow.Top = y;
