@@ -39,6 +39,10 @@ namespace Paway.WPF
         /// 关闭事件
         /// </summary>
         public event Action CloseEvent;
+        /// <summary>
+        /// 点击空白处拖动窗体后事件
+        /// </summary>
+        public event EventHandler<MouseButtonEventArgs> DragMovedEvent;
         private static Dictionary<string, KeyboardKeyInfo> KeyList;
         static KeyboardAll()
         {
@@ -84,6 +88,11 @@ namespace Paway.WPF
         {
             InitializeComponent();
             listview1.SelectionChanged += Listview1_SelectionChanged;
+            listview1.DragMovedEvent += Listview1_DragMovedEvent;
+        }
+        private void Listview1_DragMovedEvent(object sender, MouseButtonEventArgs e)
+        {
+            DragMovedEvent?.Invoke(sender, e);
         }
         /// <summary>
         /// 监听键盘，切换中英文
@@ -181,8 +190,8 @@ namespace Paway.WPF
                         {
                             viewItem.Text = null;
                             var imageName = this.iCapsLock ? "caps_lock_2" : "caps_lock";
-                            viewItem.Image = new ImageEXT($"pack://application:,,,/Paway.WPF;component/Images/keyboard/{imageName}_white.png", 
-                                $"pack://application:,,,/Paway.WPF;component/Images/keyboard/{imageName}.png", 
+                            viewItem.Image = new ImageEXT($"pack://application:,,,/Paway.WPF;component/Images/keyboard/{imageName}_white.png",
+                                $"pack://application:,,,/Paway.WPF;component/Images/keyboard/{imageName}.png",
                                 $"pack://application:,,,/Paway.WPF;component/Images/keyboard/{imageName}_white.png");
                         }
                         break;
@@ -208,7 +217,7 @@ namespace Paway.WPF
                     case "中英": viewItem.Text = this.iChina ? "中" : "英"; break;
                     case "caps lock":
                         var imageName = this.iCapsLock ? "caps_lock_2" : "caps_lock";
-                        viewItem.Image = new ImageEXT($"pack://application:,,,/Paway.WPF;component/Images/keyboard/{imageName}_white.png", 
+                        viewItem.Image = new ImageEXT($"pack://application:,,,/Paway.WPF;component/Images/keyboard/{imageName}_white.png",
                             $"pack://application:,,,/Paway.WPF;component/Images/keyboard/{imageName}.png",
                             $"pack://application:,,,/Paway.WPF;component/Images/keyboard/{imageName}_white.png");
                         break;

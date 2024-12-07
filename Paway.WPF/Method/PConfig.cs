@@ -65,6 +65,10 @@ namespace Paway.WPF
         /// 虚拟键盘状态
         /// </summary>
         public static EnableType Keyboard { get; set; }
+        /// <summary>
+        /// 虚拟键盘_Window模式
+        /// </summary>
+        public static bool IKeyboardWindow { get; set; } = true;
 
         #endregion
 

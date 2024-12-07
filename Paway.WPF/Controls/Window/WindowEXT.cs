@@ -147,7 +147,7 @@ namespace Paway.WPF
         }
         private void WindowEXT_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Activate();
+            if (ShowActivated) this.Activate();
         }
         /// <summary>
         /// </summary>

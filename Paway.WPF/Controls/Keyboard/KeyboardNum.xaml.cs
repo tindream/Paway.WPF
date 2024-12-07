@@ -26,6 +26,10 @@ namespace Paway.WPF
         /// 关闭事件
         /// </summary>
         public event Action CloseEvent;
+        /// <summary>
+        /// 点击空白处拖动窗体后事件
+        /// </summary>
+        public event EventHandler<MouseButtonEventArgs> DragMovedEvent;
 
         /// <summary>
         /// 虚拟键盘-数字键盘
@@ -35,6 +39,12 @@ namespace Paway.WPF
             InitializeComponent();
             listview1.SelectionChanged += Listview_SelectionChanged;
             listview2.SelectionChanged += Listview_SelectionChanged;
+            listview1.DragMovedEvent += Listview_DragMovedEvent;
+            listview2.DragMovedEvent += Listview_DragMovedEvent;
+        }
+        private void Listview_DragMovedEvent(object sender, MouseButtonEventArgs e)
+        {
+            DragMovedEvent?.Invoke(sender, e);
         }
         private void Listview_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

@@ -18,7 +18,8 @@ namespace Paway.WPF
     /// </summary>
     public class KeyboardMonitor
     {
-        private CustomAdorner desktopAdorner;
+        private CustomAdorner keyboardAdorner;
+        private Window keyboardWindow;
         private Rect boxRect;
         private Rect keyboardRect;
         private FrameworkElement element;
@@ -56,7 +57,7 @@ namespace Paway.WPF
         {
             if (!element.IsLoaded || !element.IsEnabled) return;
             if (PConfig.Keyboard == EnableType.None) return;
-            if (desktopAdorner != null)
+            if (keyboardAdorner != null || keyboardWindow != null)
             {
                 if (clickCount == 2) this.CloseKeyboard();
                 return;
@@ -88,12 +89,30 @@ namespace Paway.WPF
                     else keyboardType = KeyboardType.All;
                 }
                 owner.PreviewMouseLeftButtonDown += Owner_PreviewMouseLeftButtonDown;
-                FrameworkElement keyboard;
+                FrameworkElement keyboardElement = null;
                 switch (keyboardType)
                 {
-                    case KeyboardType.Num: var keyboardNum = new KeyboardNum(); keyboard = keyboardNum; keyboardNum.CloseEvent += CloseKeyboard; break;
+                    case KeyboardType.Num:
+                        if (PConfig.IKeyboardWindow)
+                        {
+                            var keyboardNum = new KeyboardNumWindow(element); keyboardWindow = keyboardNum; keyboardNum.CloseEvent += CloseKeyboard;
+                        }
+                        else
+                        {
+                            var keyboardNum = new KeyboardNum(); keyboardElement = keyboardNum; keyboardNum.CloseEvent += CloseKeyboard;
+                        }
+                        break;
                     default:
-                    case KeyboardType.All: var keyboardAll = new KeyboardAll(); keyboard = keyboardAll; keyboardAll.CloseEvent += CloseKeyboard; break;
+                    case KeyboardType.All:
+                        if (PConfig.IKeyboardWindow)
+                        {
+                            var keyboardAll = new KeyboardAllWindow(element); keyboardWindow = keyboardAll; keyboardAll.CloseEvent += CloseKeyboard;
+                        }
+                        else
+                        {
+                            var keyboardAll = new KeyboardAll(); keyboardElement = keyboardAll; keyboardAll.CloseEvent += CloseKeyboard;
+                        }
+                        break;
                 }
                 Point point;
                 if (PMethod.Parent(element, out Adorner adorner))
@@ -104,25 +123,53 @@ namespace Paway.WPF
                 {
                     point = element.TransformToAncestor(content).Transform(new Point(0, 0));
                 }
+                if (PConfig.IKeyboardWindow)
+                {
+                    if (owner.WindowState != WindowState.Maximized) point = new Point(point.X + owner.Left, point.Y + owner.Top);
+                }
                 var ownerPoint = element.TransformToAncestor(owner).Transform(new Point(0, 0));
                 this.boxRect = new Rect(ownerPoint.X, ownerPoint.Y, element.ActualWidth, element.ActualHeight);
-                desktopAdorner = PMethod.CustomAdorner(owner, keyboard, true, false);
-                if (desktopAdorner != null)
+                if (keyboardElement != null) keyboardAdorner = PMethod.CustomAdorner(owner, keyboardElement, true, false);
+                if (keyboardAdorner != null)
                 {
                     var x = point.X;
-                    if (content.ActualWidth < keyboard.Width + x)
+                    if (content.ActualWidth < keyboardElement.Width + x)
                     {
-                        x = content.ActualWidth - keyboard.Width;
+                        x = content.ActualWidth - keyboardElement.Width;
                     }
+                    if (x < 0) x = 0;
                     var y = point.Y + element.ActualHeight;
-                    if (content.ActualHeight < keyboard.Height + y)
+                    if (content.ActualHeight < keyboardElement.Height + y)
                     {
-                        y = point.Y - keyboard.Height;
+                        y = point.Y - keyboardElement.Height;
                     }
-                    Canvas.SetLeft(keyboard, x);
-                    Canvas.SetTop(keyboard, y);
+                    Canvas.SetLeft(keyboardElement, x);
+                    Canvas.SetTop(keyboardElement, y);
                     var ownerPoint2 = content.TransformToAncestor(owner).Transform(new Point(x, y));
-                    this.keyboardRect = new Rect(ownerPoint2.X, ownerPoint2.Y, keyboard.Width, keyboard.Height);
+                    this.keyboardRect = new Rect(ownerPoint2.X, ownerPoint2.Y, keyboardElement.Width, keyboardElement.Height);
+                }
+                if (keyboardWindow != null)
+                {
+                    keyboardWindow.Show();
+                    var hwnd = owner.Handle();
+                    var current = System.Windows.Forms.Screen.FromHandle(hwnd);
+                    var top = owner.WindowStyle != System.Windows.WindowStyle.None ? (owner is WindowEXT windowEXT) ? windowEXT.HeaderHeight : 30 : 0;
+
+                    var x = point.X + element.Margin.Left;
+                    if (current.WorkingArea.Width < keyboardWindow.Width + x)
+                    {
+                        x = current.WorkingArea.Width - keyboardWindow.Width;
+                    }
+                    if (x < 0) x = 0;
+                    var y = point.Y + element.ActualHeight + top + element.Margin.Top;
+                    if (current.WorkingArea.Height < keyboardWindow.Height + y)
+                    {
+                        y = point.Y + top - keyboardWindow.Height;
+                    }
+                    keyboardWindow.Left = x;
+                    keyboardWindow.Top = y;
+                    var ownerPoint2 = content.TransformToAncestor(owner).Transform(new Point(x, y));
+                    this.keyboardRect = new Rect(ownerPoint2.X, ownerPoint2.Y, keyboardWindow.Width, keyboardWindow.Height);
                 }
             }
         }
@@ -147,14 +194,21 @@ namespace Paway.WPF
         }
         private void CloseKeyboard()
         {
-            if (desktopAdorner != null && PMethod.Parent(element, out Window owner) && owner.Content is FrameworkElement content)
+            if (keyboardAdorner != null && PMethod.Parent(element, out Window owner) && owner.Content is FrameworkElement content)
             {
                 owner.PreviewMouseLeftButtonDown -= Owner_PreviewMouseLeftButtonDown;
                 var myAdornerLayer = PMethod.ReloadAdorner(content);
                 if (myAdornerLayer == null) return;
 
-                lock (myAdornerLayer) myAdornerLayer.Remove(desktopAdorner);
-                desktopAdorner = null;
+                lock (myAdornerLayer) myAdornerLayer.Remove(keyboardAdorner);
+                keyboardAdorner = null;
+                KeyboardHelper.StopHook();
+            }
+            if (keyboardWindow != null && PMethod.Parent(element, out owner))
+            {
+                owner.PreviewMouseLeftButtonDown -= Owner_PreviewMouseLeftButtonDown;
+                keyboardWindow.Close();
+                keyboardWindow = null;
                 KeyboardHelper.StopHook();
             }
         }

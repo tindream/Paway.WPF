@@ -341,6 +341,17 @@ namespace Paway.WPF
         {
             PreviewMouseClick?.Invoke(this, e);
         }
+        /// <summary>
+        /// 点击空白处拖动窗体后事件
+        /// </summary>
+        public event EventHandler<MouseButtonEventArgs> DragMovedEvent;
+        /// <summary>
+        /// 点击空白处拖动窗体后事件
+        /// </summary>
+        private void OnDragMovedEvent(MouseButtonEventArgs e)
+        {
+            DragMovedEvent?.Invoke(this, e);
+        }
 
         #endregion
         #region 点击项抛出路由事件
@@ -621,7 +632,11 @@ namespace Paway.WPF
             if (PMethod.Parent(this, out Window window))
             {
                 OnPreviewMouseClick(eventArg);
-                if (!eventArg.Handled && (bool)window.GetValue(WindowMonitor.IsDragMoveEnabledProperty)) window.DragMove();
+                if (!eventArg.Handled && (bool)window.GetValue(WindowMonitor.IsDragMoveEnabledProperty))
+                {
+                    window.DragMove();
+                    OnDragMovedEvent(eventArg);
+                }
             }
         }
 
