@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
@@ -859,7 +860,7 @@ namespace Paway.WPF
         /// <para>existTitle：不为空时，检查实例，实例存在时激活指定标题的窗体，未找到实例时 关闭当前进程名称的其它所有进程</para>
         /// <para>logFirstChanceException：记录异常，默认记录</para>
         /// </summary>
-        public static void InitApp(Application app, string fileName = "Log.xml", string existTitle = null, bool logFirstChanceException = true)
+        public static void InitApp(Application app, string logFile = "Log.xml", string existTitle = null, bool logFirstChanceException = true)
         {
             if (!existTitle.IsEmpty())
             {
@@ -877,49 +878,10 @@ namespace Paway.WPF
                     }
                 }
             }
-            var file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
-            log4net.Config.XmlConfigurator.Configure(new FileInfo(file));
-            var version = Assembly.GetEntryAssembly().GetName().Version;
-            $"{AppDomain.CurrentDomain.FriendlyName} v{version} ({Environment.MachineName})".Error();
-
             //禁用Backspace退格导航返回Page页
             NavigationCommands.BrowseBack.InputGestures.Clear();
-            TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-            if (logFirstChanceException) AppDomain.CurrentDomain.FirstChanceException += CurrentDomain_FirstChanceException;
             app.DispatcherUnhandledException += App_DispatcherUnhandledException;
-        }
-        private static void CurrentDomain_FirstChanceException(object sender, System.Runtime.ExceptionServices.FirstChanceExceptionEventArgs e)
-        {
-            if (e.Exception.IExist(typeof(SocketException))) return;
-            var type = e.Exception.GetType();
-            if (type.Name == "JsonSerializationException") return;
-            var msg = $"异常记录={e.Exception.Message()}";
-            msg.Warn();
-        }
-        private static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
-        {
-            try
-            {
-                // 设置该异常已察觉（这样处理后就不会引起程序崩溃）
-                e.SetObserved();
-                var desc = $"未经处理的Task异常";
-                e.Exception.Log(desc);
-            }
-            catch (Exception ex)
-            {
-                var desc = $"不可恢复的未经处理Task异常";
-                ex.Log(desc);
-            }
-        }
-        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
-            if (e.ExceptionObject is Exception ex)
-            {
-                var desc = $"未经处理的线程异常";
-                if (e.IsTerminating) desc += $"(致命错误)";
-                ex.Log(desc);
-            }
+            InitAppError(logFile, logFirstChanceException);
         }
         private static void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {

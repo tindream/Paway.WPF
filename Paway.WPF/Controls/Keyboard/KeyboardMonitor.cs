@@ -154,6 +154,7 @@ namespace Paway.WPF
                     if (owner.WindowState != WindowState.Maximized) point = new Point(point.X + owner.Left, point.Y + owner.Top);
                     var hwnd = owner.Handle();
                     var current = System.Windows.Forms.Screen.FromHandle(hwnd);
+                    var top = !(owner is WindowEXT) && owner.WindowStyle != System.Windows.WindowStyle.None ? 30 : 0;
 
                     var x = point.X + element.Margin.Left;
                     if (current.WorkingArea.Width < keyboardWindow.Width + x)
@@ -161,10 +162,10 @@ namespace Paway.WPF
                         x = current.WorkingArea.Width - keyboardWindow.Width;
                     }
                     if (x < 0) x = 0;
-                    var y = point.Y + element.ActualHeight + element.Margin.Top;
+                    var y = point.Y + element.ActualHeight + element.Margin.Top + top;
                     if (current.WorkingArea.Height < keyboardWindow.Height + y)
                     {
-                        y = point.Y - keyboardWindow.Height;
+                        y = point.Y + top - keyboardWindow.Height;
                     }
                     keyboardWindow.Left = x;
                     keyboardWindow.Top = y;
