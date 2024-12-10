@@ -150,25 +150,25 @@ namespace Paway.WPF
                 }
                 if (keyboardWindow != null)
                 {
-                    keyboardWindow.Show();
                     if (owner.WindowState != WindowState.Maximized) point = new Point(point.X + owner.Left, point.Y + owner.Top);
                     var hwnd = owner.Handle();
                     var current = System.Windows.Forms.Screen.FromHandle(hwnd);
                     var top = !(owner is WindowEXT) && owner.WindowStyle != System.Windows.WindowStyle.None ? 30 : 0;
 
-                    var x = point.X + element.Margin.Left;
+                    var x = point.X;
                     if (current.WorkingArea.Width < keyboardWindow.Width + x)
                     {
                         x = current.WorkingArea.Width - keyboardWindow.Width;
                     }
                     if (x < 0) x = 0;
-                    var y = point.Y + element.ActualHeight + element.Margin.Top + top;
+                    var y = point.Y + element.ActualHeight + top + 1;
                     if (current.WorkingArea.Height < keyboardWindow.Height + y)
                     {
                         y = point.Y + top - keyboardWindow.Height;
                     }
                     keyboardWindow.Left = x;
                     keyboardWindow.Top = y;
+                    keyboardWindow.Show();
                     var ownerPoint2 = content.TransformToAncestor(owner).Transform(new Point(x, y));
                     this.keyboardRect = new Rect(ownerPoint2.X, ownerPoint2.Y, keyboardWindow.Width, keyboardWindow.Height);
                 }

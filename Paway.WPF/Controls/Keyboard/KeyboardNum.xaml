@@ -5,13 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Paway.WPF"
              mc:Ignorable="d" 
-             Background="#E5000000" UseLayoutRounding="True"
-             Height="248" Width="258">
+             UseLayoutRounding="True"
+             Height="246" Width="256">
     <UserControl.Resources>
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Default.xaml" />
     </UserControl.Resources>
 
-    <Border BorderBrush="#3D3D3D" BorderThickness="2" CornerRadius="3" Padding="2">
+    <Border Background="#E5000000" BorderBrush="#3D3D3D" BorderThickness="1" CornerRadius="0" Padding="2">
         <DockPanel>
             <local:ListViewCustom x:Name="listview1" Width="70" DockPanel.Dock="Right" ItemTemplate="{StaticResource KeyboardOne}" ItemRadius="3" ItemMargin="2" ItemPadding="0"
                                   ItemWidth="56" ItemHeight="56"

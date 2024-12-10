@@ -6,8 +6,17 @@
                  xmlns:local="clr-namespace:Paway.WPF"
                  mc:Ignorable="d"
                  Title="KeyboardNumWindow" 
-                 Height="248" Width="258"
+                 Height="280" Width="256"
+                 Background="Transparent"
                  Topmost="True" ShowInTaskbar="False" ShowActivated="False"
                  ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True">
-    <local:KeyboardNum x:Name="keyboardNum"/>
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top" Background="#3D3D3D" Name="dpTitle" Visibility="Collapsed">
+            <local:ButtonEXT x:Name="btnClose" Command="{Binding ItemClickCommand}" CommandParameter="关闭" 
+                           Image="pack://application:,,,/Paway.WPF;component/Images/pImage/close_white.png|pack://application:,,,/Paway.WPF;component/Images/pImage/close_red.png" 
+                           ImageWidth="24" ImageStretch="Uniform" ItemBackground="Transparent" ItemBorder="0" Margin="0" Padding="5" Radius="0" ImageMargin="0" DockPanel.Dock="Right" Cursor="Hand" />
+            <TextBlock Text="数字键盘" Margin="10,0" Foreground="White" />
+        </DockPanel>
+        <local:KeyboardNum x:Name="keyboardNum"/>
+    </DockPanel>
 </local:WindowEXT>

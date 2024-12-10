@@ -28,24 +28,32 @@ namespace Paway.WPF
         /// <summary>
         /// 虚拟键盘-全键盘
         /// </summary>
-        public KeyboardAllWindow(FrameworkElement element)
+        public KeyboardAllWindow(FrameworkElement element, bool iTitle = false)
         {
             InitializeComponent();
             this.element = element;
+            this.dpTitle.Visibility = iTitle ? Visibility.Visible : Visibility.Collapsed;
+            this.Height = iTitle ? 280 : 246;
             this.SourceInitialized += KeyboardAllWindow_SourceInitialized;
             keyboardAll.CloseEvent += KeyboardAll_CloseEvent;
             keyboardAll.DragMovedEvent += KeyboardAll_DragMovedEvent;
+            btnClose.Click += BtnClose_Click;
+        }
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            if (CloseEvent != null) CloseEvent.Invoke();
+            else this.Close();
         }
         /// <summary>
         /// 焦点问题
         /// </summary>
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
-            this.element.Focus();
+            this.element?.Focus();
         }
         private void KeyboardAll_DragMovedEvent(object sender, MouseButtonEventArgs e)
         {
-            this.element.Focus();
+            this.element?.Focus();
         }
         private void KeyboardAll_CloseEvent()
         {
@@ -54,7 +62,7 @@ namespace Paway.WPF
         private void KeyboardAllWindow_SourceInitialized(object sender, EventArgs e)
         {
             var hwnd = this.Handle();
-            NativeMethods.SetWindowLong(hwnd, -16, unchecked((int)0x94000000));
+            //NativeMethods.SetWindowLong(hwnd, -16, unchecked((int)0x94000000));
             NativeMethods.SetWindowLong(hwnd, -20, 0x08000088);
         }
     }
