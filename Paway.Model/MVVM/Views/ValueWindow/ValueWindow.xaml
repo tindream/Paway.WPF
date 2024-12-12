@@ -1,20 +1,21 @@
-﻿<WindowEXT x:Class="Paway.Model.NameWindow"
+﻿<WindowEXT x:Class="Paway.Model.ValueWindow"
            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
            xmlns:local="clr-namespace:Paway.Model"
            mc:Ignorable="d"
-           DataContext="{Binding NameWindow, Source={StaticResource Locator}}"
+           DataContext="{Binding ValueWindow, Source={StaticResource Locator}}"
            UseLayoutRounding="True"
            Title="{Binding Title}" Height="310" Width="460" ResizeMode="NoResize">
-    <Grid FocusManager.FocusedElement="{Binding ElementName=tbText}">
+    <Grid FocusManager.FocusedElement="{Binding ElementName=tbName}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBoxEXT Title="{Binding Label}" Name="tbText" Width="410" Text="{Binding Text}" 
+            <TextBoxEXT Title="{Binding LabelName}" TitleMinWidth="80" Name="tbName" Width="410" Text="{Binding Name}" MaxLength="32" />
+            <TextBoxEXT Title="{Binding LabelValue}" TitleMinWidth="80" Name="tbValue" Text="{Binding Value}" 
                         MaxLength="{Binding MaxLength}" TextWrapping="{Binding TextWrapping}"/>
         </StackPanel>
         <WrapPanel Grid.Row="1" Margin="0,40" HorizontalAlignment="Center">

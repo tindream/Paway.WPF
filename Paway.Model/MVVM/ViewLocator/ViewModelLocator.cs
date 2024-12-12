@@ -34,6 +34,10 @@ namespace Paway.Model
         /// </summary>
         public NameWindowModel NameWindow => GetModelInstance<NameWindowModel>();
         /// <summary>
+        /// 模型-双输入框通用窗体
+        /// </summary>
+        public ValueWindowModel ValueWindow => GetModelInstance<ValueWindowModel>();
+        /// <summary>
         /// 模型-状态栏
         /// </summary>
         public StatuItemModel StatuItem => GetModelInstance<StatuItemModel>();

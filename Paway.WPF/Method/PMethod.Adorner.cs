@@ -799,25 +799,31 @@ namespace Paway.WPF
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
-        public static Task ProgressAsync(FrameworkElement element, Action action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
+        public static Task ProgressAsync(FrameworkElement element, Action action, Action success = null,
+            Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null,
+            HorizontalAlignment? alignment = HorizontalAlignment.Center)
         {
-            return ProgressAsync(element, null, adorner => action?.Invoke(), success, error, completed, iProgressBar, iProgressRound, fontSize);
+            return ProgressAsync(element, null, adorner => action?.Invoke(), success, error, completed, iProgressBar, iProgressRound, fontSize, alignment);
         }
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
-        public static Task ProgressAsync(FrameworkElement element, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
+        public static Task ProgressAsync(FrameworkElement element, Action<CustomAdorner> action, Action success = null,
+            Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null,
+            HorizontalAlignment? alignment = HorizontalAlignment.Center)
         {
-            return ProgressAsync(element, null, action, success, error, completed, iProgressBar, iProgressRound, fontSize);
+            return ProgressAsync(element, null, action, success, error, completed, iProgressBar, iProgressRound, fontSize, alignment);
         }
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
-        public static Task ProgressAsync(FrameworkElement element, object msg, Action<CustomAdorner> action, Action success = null, Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
+        public static Task ProgressAsync(FrameworkElement element, object msg, Action<CustomAdorner> action, Action success = null,
+            Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null,
+            HorizontalAlignment? alignment = HorizontalAlignment.Center)
         {
             return Invoke(() =>
             {
-                var progress = ProgressAdorner(element, msg, iProgressBar, iProgressRound, fontSize);
+                var progress = ProgressAdorner(element, msg, iProgressBar, iProgressRound, fontSize, alignment);
                 if (progress == null) throw new WarningException("Decorator not found on control");
                 return Task.Run(() =>
                 {
@@ -867,7 +873,8 @@ namespace Paway.WPF
         /// 装饰器-同步显示Window进度条
         /// <para>当前控件</para>
         /// </summary>
-        public static CustomAdorner ProgressAdorner(FrameworkElement element, object msg = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null)
+        public static CustomAdorner ProgressAdorner(FrameworkElement element, object msg = null, bool iProgressBar = false,
+            bool iProgressRound = true, int? fontSize = null, HorizontalAlignment? alignment = HorizontalAlignment.Center)
         {
             if (element != null)
             {
@@ -894,7 +901,7 @@ namespace Paway.WPF
                         Text = msg == null ? PConfig.Loading : msg.ToStrings(),
                         Foreground = Colors.Black.ToBrush(),
                         Padding = new Thickness(10),
-                        HorizontalAlignment = HorizontalAlignment.Center,
+                        HorizontalAlignment = alignment ?? HorizontalAlignment.Center,
                         TextTrimming = TextTrimming.WordEllipsis,
                     };
                     if (fontSize != null) tbProgress.FontSize = fontSize.Value;
