@@ -15,7 +15,7 @@
             <local:ButtonEXT x:Name="btnClose" Command="{Binding ItemClickCommand}" CommandParameter="关闭" 
                            Image="pack://application:,,,/Paway.WPF;component/Images/pImage/close_white.png|pack://application:,,,/Paway.WPF;component/Images/pImage/close_red.png" 
                            ImageWidth="24" ImageStretch="Uniform" ItemBackground="Transparent" ItemBorder="0" Margin="0" Padding="5" Radius="0" ImageMargin="0" DockPanel.Dock="Right" Cursor="Hand" />
-            <TextBlock Text="虚拟键盘" Margin="10,0" Foreground="White" />
+            <TextBlock Text="{Binding LanguageBase.VvirtualKeyboard, Source={StaticResource LB}}" Margin="10,0" Foreground="White" />
         </DockPanel>
         <local:KeyboardAll x:Name="keyboardAll"/>
     </DockPanel>

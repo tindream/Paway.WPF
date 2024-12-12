@@ -14,9 +14,9 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel VerticalAlignment="Center" Margin="80,0">
-            <SliderEXT Title="透明度：" x:Name="sliderSize" Minimum="0" Maximum="255" Value="{Binding A}" />
+            <SliderEXT Title="{Binding LanguageBase.Transparency, Source={StaticResource LB}, StringFormat={}{0}:}" x:Name="sliderSize" Minimum="0" Maximum="255" Value="{Binding A}" />
             <DockPanel>
-                <TextBlock Style="{StaticResource TitleBlock}" Text="颜色值："/>
+                <TextBlock Style="{StaticResource TitleBlock}" Text="{Binding LanguageBase.ColorValue, Source={StaticResource LB}, StringFormat={}{0}:}"/>
                 <Grid>
                     <Border Background="{StaticResource ColorSelector}" Height="3" CornerRadius="2" Margin="2,2,3,2"/>
                     <SliderEXT x:Name="sliderTheme" Maximum="7" Value="{Binding Value}" AutoToolTipPrecision="2" TickFrequency="0.01"
@@ -26,9 +26,9 @@
             <Border Height="35" Margin="0,10,0,0" Background="{Binding Color, Converter={StaticResource colorToBrushConverter}}"/>
         </StackPanel>
         <WrapPanel Grid.Row="1" Margin="0,40" HorizontalAlignment="Center">
-            <ButtonEXT Width="80" Content="确认"
+            <ButtonEXT Width="80" Content="{Binding LanguageBase.Confirm, Source={StaticResource LB}}"
                        Command="{Binding Commit}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
-            <ButtonEXT Width="80" Content="取消" Type="Warn" IsLight="True"
+            <ButtonEXT Width="80" Content="{Binding LanguageBase.Cancel, Source={StaticResource LB}}" Type="Warn" IsLight="True"
                        Command="{Binding Cancel}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" Margin="10,2,2,2"/>
         </WrapPanel>
     </Grid>

@@ -20,11 +20,11 @@
                     <MenuItem Header="English" IsChecked="{Binding Language, Converter={StaticResource valueToTrue}, ConverterParameter=English}" FontSize="21"  Command="{Binding ItemClickCommand}" CommandParameter="English"/>
                 </MenuItem>
             </Menu>
-            <ButtonEXT Radius="0" IsLight="True" ItemBorder="0" Margin="0" ToolTip="设置"
+            <ButtonEXT Radius="0" IsLight="True" ItemBorder="0" Margin="0" ToolTip="{Binding LanguageBase.Set, Source={StaticResource LB}}"
                        Image="pack://application:,,,/Paway.Model;component/Images/login/setting.png|pack://application:,,,/Paway.Model;component/Images/login/setting.png"
                        Visibility="{Binding ISetting, Converter={StaticResource boolToVisible}}"
                        Command="{Binding ItemClickCommand}" CommandParameter="设置" ImageWidth="48" ImageStretch="Uniform" Padding="7" />
-            <ButtonEXT Radius="0" Type="Error" IsLight="True" ItemBorder="0" Margin="0" ToolTip="关闭"
+            <ButtonEXT Radius="0" Type="Error" IsLight="True" ItemBorder="0" Margin="0" ToolTip="{Binding LanguageBase.Close, Source={StaticResource LB}}"
                        Image="pack://application:,,,/Paway.Model;component/Images/operate/close_white.png|pack://application:,,,/Paway.Model;component/Images/operate/close_white.png"
                        Visibility="{Binding IClose, Converter={StaticResource boolToVisible}}"
                        Command="{Binding ItemClickCommand}" CommandParameter="关闭" ImageWidth="48" ImageStretch="Uniform" Padding="7" />

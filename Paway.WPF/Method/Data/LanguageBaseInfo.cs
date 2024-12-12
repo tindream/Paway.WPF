@@ -64,20 +64,6 @@ namespace Paway.WPF
 
         #endregion
 
-        #region 日历
-        /// <summary>
-        /// 今天
-        /// </summary>
-        [Description("今天")]
-        public virtual string Today { get; set; } = "今天";
-        /// <summary>
-        /// 清空
-        /// </summary>
-        [Description("清空")]
-        public virtual string Clear { get; set; } = "清空";
-
-        #endregion
-
         #region 系统
         /// <summary>
         /// 关于
@@ -94,30 +80,115 @@ namespace Paway.WPF
         /// </summary>
         [Description("颜色")]
         public virtual string Color { get; set; } = "颜色";
-
-        #endregion
-
-        #region 其它
-        /// <summary>
-        /// 添加
-        /// </summary>
-        [Description("添加")]
-        public virtual string Add { get; set; } = "添加";
         /// <summary>
         /// 已存在
         /// </summary>
         [Description("已存在")]
         public virtual string Exist { get; set; } = "已存在";
         /// <summary>
+        /// 今天
+        /// </summary>
+        [Description("今天")]
+        public virtual string Today { get; set; } = "今天";
+        /// <summary>
+        /// 合计
+        /// </summary>
+        [Description("合计")]
+        public virtual string Total { get; set; } = "合计";
+        /// <summary>
+        /// 设置
+        /// </summary>
+        [Description("设置")]
+        public virtual string Set { get; set; } = "设置";
+        /// <summary>
+        /// 透明度
+        /// </summary>
+        [Description("透明度")]
+        public virtual string Transparency { get; set; } = "透明度";
+        /// <summary>
+        /// 颜色值
+        /// </summary>
+        [Description("颜色值")]
+        public virtual string ColorValue { get; set; } = "颜色值";
+        /// <summary>
+        /// 虚拟键盘
+        /// </summary>
+        [Description("虚拟键盘")]
+        public virtual string VvirtualKeyboard { get; set; } = "虚拟键盘";
+        /// <summary>
+        /// 数字键盘
+        /// </summary>
+        [Description("数字键盘")]
+        public virtual string NumKeyboard { get; set; } = "数字键盘";
+        /// <summary>
+        /// 启用
+        /// </summary>
+        [Description("启用")]
+        public virtual string Enable { get; set; } = "启用";
+        /// <summary>
+        /// 停用
+        /// </summary>
+        [Description("停用")]
+        public virtual string UnEnabled { get; set; } = "停用";
+        /// <summary>
+        /// 字体大小
+        /// </summary>
+        [Description("字体大小")]
+        public virtual string FontSize { get; set; } = "字体大小";
+        /// <summary>
+        /// 文本字体
+        /// </summary>
+        [Description("文本字体")]
+        public virtual string TextFont { get; set; } = "文本字体";
+
+        #endregion
+
+        #region 窗体
+        /// <summary>
+        /// 刷新
+        /// </summary>
+        [Description("刷新")]
+        public virtual string Refresh { get; set; } = "刷新";
+        /// <summary>
+        /// 搜索
+        /// </summary>
+        [Description("搜索")]
+        public virtual string Search { get; set; } = "搜索";
+        /// <summary>
+        /// 添加
+        /// </summary>
+        [Description("添加")]
+        public virtual string Add { get; set; } = "添加";
+        /// <summary>
+        /// 编辑
+        /// </summary>
+        [Description("编辑")]
+        public virtual string Edit { get; set; } = "编辑";
+        /// <summary>
+        /// 保存
+        /// </summary>
+        [Description("保存")]
+        public virtual string Save { get; set; } = "保存";
+        /// <summary>
         /// 已存在
         /// </summary>
         [Description("请选择")]
         public virtual string PleaseSelect { get; set; } = "请选择";
         /// <summary>
+        /// 删除
+        /// </summary>
+        [Description("删除")]
+        public virtual string Delete { get; set; } = "删除";
+        /// <summary>
         /// 确认删除
         /// </summary>
         [Description("确认删除")]
         public virtual string ConfirmDelete { get; set; } = "确认删除";
+        /// <summary>
+        /// 清空
+        /// </summary>
+        [Description("清空")]
+        public virtual string Clear { get; set; } = "清空";
         /// <summary>
         /// 查询
         /// </summary>
@@ -133,6 +204,27 @@ namespace Paway.WPF
         /// </summary>
         [Description("再按一次取消查询")]
         public virtual string QueryCancelAgain { get; set; } = "再按一次取消查询";
+        /// <summary>
+        /// 确认
+        /// </summary>
+        [Description("确认")]
+        public virtual string Confirm { get; set; } = "确认";
+        /// <summary>
+        /// 取消
+        /// </summary>
+        [Description("取消")]
+        public virtual string Cancel { get; set; } = "取消";
+        /// <summary>
+        /// 关闭
+        /// </summary>
+        [Description("关闭")]
+        public virtual string Close { get; set; } = "关闭";
+
+        /// <summary>
+        /// 导入
+        /// </summary>
+        [Description("导入")]
+        public virtual string Import { get; set; } = "导入";
         /// <summary>
         /// 选择要导入的文件
         /// </summary>
@@ -154,6 +246,11 @@ namespace Paway.WPF
         [Description("导入成功")]
         public virtual string ImportSuccess { get; set; } = "导入成功";
 
+        /// <summary>
+        /// 导出
+        /// </summary>
+        [Description("导出")]
+        public virtual string Export { get; set; } = "导出";
         /// <summary>
         /// /选择要保存的文件位置
         /// </summary>
