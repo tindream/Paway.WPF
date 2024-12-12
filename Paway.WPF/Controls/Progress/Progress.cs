@@ -62,7 +62,7 @@ namespace Paway.WPF
         public bool IsActive
         {
             get { return (bool)GetValue(IsActiveProperty); }
-            set { SetValue(IsActiveProperty, value); }
+            private set { SetValue(IsActiveProperty, value); }
         }
         /// <summary>
         /// Using a DependencyProperty as the backing store for TemplateSettings.  This enables animation, styling, binding, etc...

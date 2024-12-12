@@ -286,7 +286,7 @@ namespace Paway.WPF
         public string Keys
         {
             get { return (string)GetValue(KeysProperty); }
-            set { SetValue(KeysProperty, value); }
+            private set { SetValue(KeysProperty, value); }
         }
 
         /// <summary>

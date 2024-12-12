@@ -87,10 +87,10 @@ namespace Paway.WPF
         /// <summary>
         /// 自定义列头
         /// <para>默认值：false</para>
+        /// <para>自带样式已设置为：true</para>
         /// </summary>
         [Category("扩展")]
         [Description("自定义列头")]
-        [Browsable(false)]
         public bool ICustomColumnHeader
         {
             get { return (bool)GetValue(ICustomColumnHeaderProperty); }

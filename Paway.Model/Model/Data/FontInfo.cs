@@ -21,7 +21,7 @@ namespace Paway.Model
         [FillSize]
         public string Name { get; set; }
         /// <summary>
-        /// 字体名称
+        /// 字体
         /// </summary>
         [NoShow]
         public FontFamily FontFamily { get; set; }

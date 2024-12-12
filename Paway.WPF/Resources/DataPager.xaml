@@ -135,6 +135,10 @@
             <Setter.Value>
                 <ControlTemplate TargetType="local:DataPager">
                     <Grid Name="Root" Background="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
                         <Grid.Resources>
                             <SolidColorBrush x:Key="BackgroundColor" Color="Transparent" />
                             <SolidColorBrush x:Key="ForegroundColor" Color="Black" />
@@ -561,6 +565,16 @@
 
                         </VisualStateManager.VisualStateGroups>
 
+                        <Border MinHeight="24"
+                                Background="{TemplateBinding Background}"
+                                Padding="5,0"
+                                Grid.Column="1">
+                            <WrapPanel VerticalAlignment="Center">
+                                <TextBlock Text="{Binding LanguageBase.Total, Source={StaticResource LB}, StringFormat={}{0}:}" />
+                                <TextBlock Text="{Binding Path=ItemCount, RelativeSource={RelativeSource AncestorType={x:Type local:DataPager}}}" 
+                                           Margin="5,0"/>
+                            </WrapPanel>
+                        </Border>
                         <!-- DataPager Control Parts -->
                         <Border MinHeight="24"
                                 Background="{TemplateBinding Background}"
