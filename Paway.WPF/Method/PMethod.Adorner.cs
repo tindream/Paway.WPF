@@ -888,9 +888,7 @@ namespace Paway.WPF
                     BorderBrush = Colors.LightGray.ToBrush(),
                     BorderThickness = new Thickness(1),
                     Background = Colors.White.ToAlpha(PConfig.Alpha).ToBrush(),
-                    MinWidth = 250,
-                    MaxWidth = 350,
-                    MinHeight = 45,
+                    Width = 350,
                 };
                 Panel panel = new DockPanel();
                 if (!iProgressRound) panel = new Grid();
@@ -900,7 +898,7 @@ namespace Paway.WPF
                     {
                         Text = msg == null ? PConfig.Loading : msg.ToStrings(),
                         Foreground = Colors.Black.ToBrush(),
-                        Padding = new Thickness(10),
+                        Padding = new Thickness(15),
                         HorizontalAlignment = alignment ?? HorizontalAlignment.Center,
                         TextTrimming = TextTrimming.WordEllipsis,
                     };
@@ -928,7 +926,7 @@ namespace Paway.WPF
                     {
                         IText = false,
                         Margin = new Thickness(20),
-                        Width = 100,
+                        Width = 150,
                         BorderThickness = new Thickness(1),
                     });
                 }
@@ -936,9 +934,9 @@ namespace Paway.WPF
                 {
                     panel.Children.Add(new Progress
                     {
-                        Margin = new Thickness(10),
-                        Width = 100,
-                        Height = 100,
+                        Margin = new Thickness(30),
+                        Width = 120,
+                        Height = 120,
                     });
                 }
                 var progressAdorner = new CustomAdorner(element, border, Colors.Black.ToAlpha(0));

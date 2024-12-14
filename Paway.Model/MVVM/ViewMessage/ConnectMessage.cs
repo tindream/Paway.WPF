@@ -59,26 +59,4 @@ namespace Paway.Model
         /// </summary>
         public Connect2Message(bool connectd, string msg) : base(connectd, msg) { }
     }
-    /// <summary>
-    /// 连接数量消息
-    /// </summary>
-    public class ConnectCountMessage
-    {
-        /// <summary>
-        /// 连接数量消息
-        /// </summary>
-        public int Count { get; set; }
-
-        /// <summary>
-        /// 连接数量消息
-        /// </summary>
-        public ConnectCountMessage() { }
-        /// <summary>
-        /// 连接数量消息
-        /// </summary>
-        public ConnectCountMessage(int count)
-        {
-            this.Count = count;
-        }
-    }
 }
