@@ -59,10 +59,10 @@ namespace Paway.WPF
         {
             LanguageHelper.languageObj = languageInfo;
             LanguageHelper.languageName = languageName;
-            Helper.ConverHelper.DescriptionAttrEvent -= ConverHelper_DescriptionAttrEvent;
-            Helper.ConverHelper.DescriptionAttrEvent += ConverHelper_DescriptionAttrEvent;
-            Helper.ConverHelper.TextAttrEvent -= ConverHelper_DescriptionAttrEvent;
-            Helper.ConverHelper.TextAttrEvent += ConverHelper_DescriptionAttrEvent;
+            EnumHelper.DescriptionAttrEvent -= ConverHelper_DescriptionAttrEvent;
+            EnumHelper.DescriptionAttrEvent += ConverHelper_DescriptionAttrEvent;
+            AttributeHelper.TextAttrEvent -= ConverHelper_DescriptionAttrEvent;
+            AttributeHelper.TextAttrEvent += ConverHelper_DescriptionAttrEvent;
         }
         private static void ConverHelper_DescriptionAttrEvent(DescriptionEventArgs obj)
         {

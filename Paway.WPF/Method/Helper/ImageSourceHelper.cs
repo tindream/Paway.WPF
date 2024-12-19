@@ -13,9 +13,9 @@ using System.Windows.Media.Imaging;
 namespace Paway.WPF
 {
     /// <summary>
-    /// 转换器 - 图像处理
+    /// WPF图像转换器
     /// </summary>
-    public static partial class ConverHelper
+    public static class ImageSourceHelper
     {
         #region 转换
         /// <summary>
