@@ -41,4 +41,26 @@ namespace Paway.WPF
         [Description("全键盘")]
         All,
     }
+    /// <summary>
+    /// 虚拟键盘模式
+    /// </summary>
+    public enum KeyboardMode
+    {
+        /// <summary>
+        /// 自动
+        /// <para>按绑定数据类型</para>
+        /// </summary>
+        [Description("自动")]
+        Auto = 0,
+        /// <summary>
+        /// 装饰器
+        /// </summary>
+        [Description("装饰器")]
+        Adorner,
+        /// <summary>
+        /// 窗体
+        /// </summary>
+        [Description("窗体")]
+        Window,
+    }
 }
