@@ -323,10 +323,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// </summary>
-        public ListViewItemModel()
-        {
-            this.Id = this.GetHashCode();
-        }
+        public ListViewItemModel() { }
         /// <summary>
         /// </summary>
         public ListViewItemModel(string text, string desc = null) : this()

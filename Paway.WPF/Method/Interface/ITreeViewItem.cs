@@ -219,7 +219,6 @@ namespace Paway.WPF
         /// </summary>
         public TreeViewItemModel()
         {
-            this.Id = this.GetHashCode();
             Children.CollectionChanged += Children_CollectionChanged;
         }
         private void Children_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)

@@ -57,10 +57,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// </summary>
-        public ComboBoxItemModel()
-        {
-            this.Id = this.GetHashCode();
-        }
+        public ComboBoxItemModel() { }
         /// <summary>
         /// </summary>
         public ComboBoxItemModel(string text) : this()

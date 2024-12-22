@@ -100,10 +100,7 @@ namespace Paway.Model
         /// <summary>
         /// 权限定义
         /// </summary>
-        public AuthReportInfo()
-        {
-            this.Id = this.GetHashCode();
-        }
+        public AuthReportInfo() { }
         /// <summary>
         /// 权限定义
         /// </summary>

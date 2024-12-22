@@ -492,6 +492,40 @@ namespace Paway.WPF
             return false;
         }
         /// <summary>
+        /// Window系统消息框
+        /// <para>该消息框显示消息、 标题栏标题、 是否按钮和Question图标;它也会返回一个结果。</para>
+        /// </summary>
+        public static bool AskYN(DependencyObject parent, string msg)
+        {
+            if (Parent(parent, out Window window))
+            {
+                return MessageBox.Show(window, msg, window.Title, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes;
+            }
+            return false;
+        }
+        /// <summary>
+        /// Window系统消息框
+        /// <para>该消息框显示消息、 标题栏标题、 是否与取消按钮和Question图标;它也会返回一个结果。</para>
+        /// <para>选择Yes，返回true</para>
+        /// <para>选择No，返回false</para>
+        /// <para>选择Cancel，返回null</para>
+        /// </summary>
+        public static bool? AskYNC(DependencyObject parent, string msg)
+        {
+            if (Parent(parent, out Window window))
+            {
+                var result = MessageBox.Show(window, msg, window.Title, MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes: return true;
+                    case MessageBoxResult.No: return false;
+                    default:
+                    case MessageBoxResult.Cancel: return null;
+                }
+            }
+            return null;
+        }
+        /// <summary>
         /// 返回控件的顶层Window
         /// </summary>
         public static Window Window(DependencyObject obj)
