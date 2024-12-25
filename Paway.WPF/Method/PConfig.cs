@@ -135,7 +135,7 @@ namespace Paway.WPF
         /// <summary>
         /// 主题颜色
         /// </summary>
-        public static Color Color
+        public new static Color Color
         {
             get { return _color; }
             set
@@ -196,19 +196,19 @@ namespace Paway.WPF
         /// <summary>
         /// 成功色
         /// </summary>
-        public static Color Success { get; set; } = Color.FromArgb(255, 45, 184, 77);
+        public new static Color Success { get; set; } = Color.FromArgb(255, 45, 184, 77);
         /// <summary>
         /// 警告色
         /// </summary>
-        public static Color Warn { get; set; } = Color.FromArgb(255, 255, 153, 0);
+        public new static Color Warn { get; set; } = Color.FromArgb(255, 255, 153, 0);
         /// <summary>
         /// 错误色
         /// </summary>
-        public static Color Error { get; set; } = Color.FromArgb(255, 248, 51, 30);
+        public new static Color Error { get; set; } = Color.FromArgb(255, 248, 51, 30);
         /// <summary>
         /// 禁用色
         /// </summary>
-        public static Color Disable { get; set; } = Colors.DimGray;
+        public new static Color Disable { get; set; } = Colors.DimGray;
 
         #endregion
     }
