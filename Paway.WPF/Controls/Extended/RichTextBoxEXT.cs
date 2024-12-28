@@ -170,7 +170,7 @@ namespace Paway.WPF
         public void AddLine(string content = null, Color? color = null, Action action = null, bool line = true)
         {
             var range = new TextRange(this.CaretPosition, this.Document.ContentEnd);
-            var isLast = range.Text.Replace("\r", "").Replace("\n", "").IsEmpty() && (range.Text.IndexOf('\n') == range.Text.LastIndexOf('\n'));
+            var isLast = range.Text.Replace(Environment.NewLine, string.Empty).IsEmpty() && (range.Text.IndexOf(Environment.NewLine) == range.Text.LastIndexOf(Environment.NewLine));
             if (Document.Blocks.Count <= 0)
             {
                 Document.Blocks.Add(new Paragraph());

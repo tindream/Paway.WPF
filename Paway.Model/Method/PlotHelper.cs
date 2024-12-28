@@ -198,10 +198,10 @@ namespace Paway.Model
                 //MarkerType = MarkerType.Circle,
                 //InterpolationAlgorithm = InterpolationAlgorithms.CatmullRomSpline,
                 //Smooth = true,
-                TrackerFormatString = "\n{0}: {4:0,0.00}"
+                TrackerFormatString = $"{Environment.NewLine}{0}: {4:0,0.00}"
             };
             if (color != null) line.Color = OxyColor.FromRgb(color.Value.R, color.Value.G, color.Value.B);
-            if (first) line.TrackerFormatString = "时间: {2}\n{0}: {4:0,0.00}";
+            if (first) line.TrackerFormatString = $"时间: {2}{Environment.NewLine}{0}: {4:0,0.00}";
             plotModel.Series.Add(line);
             return line;
         }

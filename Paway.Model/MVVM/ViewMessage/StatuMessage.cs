@@ -95,7 +95,7 @@ namespace Paway.Model
         {
             this.IHit = true;
             ex.Log();
-            var msg = $"{ex.Message().Replace("\r\n", "。")}";
+            var msg = $"{ex.Message().Replace(Environment.NewLine, "。")}";
             if (!title.IsEmpty()) msg = $"{title}: {msg}";
             this.Msg = msg;
             this.Level = ex.IExist(typeof(WarningException)) ? LevelType.Warn : LevelType.Error;

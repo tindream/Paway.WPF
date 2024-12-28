@@ -62,7 +62,7 @@ namespace Paway.Model
             var errorList = PMethod.ValidationError(wd);
             if (errorList.Count > 0)
             {
-                PMethod.Hit(wd, errorList.Join("\r\n"), ColorType.Error);
+                PMethod.Hit(wd, errorList.Join(Environment.NewLine), ColorType.Error);
                 return null;
             }
             if (info is IChecked @checked) @checked.Checked();
