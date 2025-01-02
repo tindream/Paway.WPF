@@ -15,8 +15,8 @@ namespace System.Windows.Data
 {
     /// <summary>
     /// PagedCollectionView view over an IEnumerable.
+    /// <para>绑定列表插入时，DataGrid绑定DataCell ToolTip异常</para>
     /// </summary>
-    /// <QualityBand>Preview</QualityBand>
     public sealed class PagedCollectionView : ICollectionView, IPagedCollectionView, IEditableCollectionView, INotifyPropertyChanged
     {
         private const string OperationNotAllowedDuringAddOrEdit = "'{0}' is not allowed during an AddNew or EditItem transaction.";

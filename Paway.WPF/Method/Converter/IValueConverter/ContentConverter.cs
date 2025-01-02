@@ -22,6 +22,7 @@ namespace Paway.WPF
                 {
                     return null;
                 }
+                if (gridCell.Column == null) return null;
                 string proName = null;
                 if (gridCell.Column.ClipboardContentBinding is Binding binding)
                 {

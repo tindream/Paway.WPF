@@ -213,7 +213,7 @@ namespace Paway.WPF
             else
             {
                 var valueParameters = parameter.ToStrings();
-                var valueList = value.ToString().Split(new char[] { '|', ',' }).ToList();
+                var valueList = value.ToString().Split(new[] { '|', ',' }).ToList();
                 if (valueList.Count > 1) result = valueList.Contains(valueParameters);
                 else result = value.ToString().Contains(valueParameters);
             }
@@ -253,14 +253,14 @@ namespace Paway.WPF
                 else
                 {
                     var valueNormals = valueNormal.ToString();
-                    var parameterList = parameter.ToStrings().Split(new char[] { '|', ',' }).ToList();
+                    var parameterList = parameter.ToStrings().Split(new[] { '|', ',' }).ToList();
                     result = parameterList.Contains(valueNormals);
                 }
             }
             else
             {
                 var valueNormals = value.ToString();
-                var parameterList = parameter.ToStrings().Split(new char[] { '|', ',' }).ToList();
+                var parameterList = parameter.ToStrings().Split(new[] { '|', ',' }).ToList();
                 if (parameterList.Count > 1) result = parameterList.Contains(valueNormals);
                 else result = parameter.ToStrings().Contains(valueNormals);
             }
