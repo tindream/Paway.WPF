@@ -141,7 +141,7 @@ namespace System.Windows.Data
                 if (this.ItemCount > 0 && (this.GroupBy == null || this.GroupBy.GroupNames.Count == 0))
                 {
                     // look for first item, child by child
-                    for (int k = 0, n = Items.Count; k < n; ++k)
+                    for (int k = 0, n = Items.Count; k < n; k++)
                     {
                         if (!(this.Items[k] is CollectionViewGroupInternal subgroup))
                         {
@@ -249,7 +249,7 @@ namespace System.Windows.Data
                     groupComparer.Reset();
                 }
 
-                for (index = low; index < high; ++index)
+                for (index = low; index < high; index++)
                 {
                     object seed1 = (this.ProtectedItems[index] is CollectionViewGroupInternal subgroup) ? subgroup.SeedItem : this.ProtectedItems[index];
                     if (seed1 == DependencyProperty.UnsetValue)
@@ -311,7 +311,7 @@ namespace System.Windows.Data
         /// <returns>Item at given index</returns>
         internal object LeafAt(int index)
         {
-            for (int k = 0, n = this.Items.Count; k < n; ++k)
+            for (int k = 0, n = this.Items.Count; k < n; k++)
             {
                 if (this.Items[k] is CollectionViewGroupInternal subgroup)
                 {
@@ -361,7 +361,7 @@ namespace System.Windows.Data
                     item = group, group = group.Parent, index = -1)
             {
                 // accumulate the number of predecessors at the level of item
-                for (int k = 0, n = group.Items.Count; k < n; ++k)
+                for (int k = 0, n = group.Items.Count; k < n; k++)
                 {
                     // if we've reached the item, move up to the next level
                     if ((index < 0 && object.Equals(item, group.Items[k])) ||
@@ -387,7 +387,7 @@ namespace System.Windows.Data
         internal int LeafIndexOf(object item)
         {
             int leaves = 0;         // number of leaves we've passed over so far
-            for (int k = 0, n = Items.Count; k < n; ++k)
+            for (int k = 0, n = Items.Count; k < n; k++)
             {
                 if (Items[k] is CollectionViewGroupInternal subgroup)
                 {
@@ -518,7 +518,7 @@ namespace System.Windows.Data
 
                 // advance the index until seeing one x or y
                 int n = (this._list != null) ? this._list.Count : 0;
-                for (; this._index < n; ++this._index)
+                for (; this._index < n; this._index++)
                 {
                     object z = this._list[this._index];
                     if (object.Equals(x, z))
@@ -596,7 +596,7 @@ namespace System.Windows.Data
 
                 // advance the index until seeing one x or y
                 int n = (this._group != null) ? this._group.ItemCount : 0;
-                for (; this._index < n; ++this._index)
+                for (; this._index < n; this._index++)
                 {
                     object z = this._group.LeafAt(this._index);
                     if (object.Equals(x, z))

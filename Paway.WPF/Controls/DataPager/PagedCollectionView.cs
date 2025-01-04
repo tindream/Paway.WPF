@@ -15,7 +15,6 @@ namespace System.Windows.Data
 {
     /// <summary>
     /// PagedCollectionView view over an IEnumerable.
-    /// <para>绑定列表插入时，DataGrid绑定DataCell ToolTip异常</para>
     /// </summary>
     public sealed class PagedCollectionView : ICollectionView, IPagedCollectionView, IEditableCollectionView, INotifyPropertyChanged
     {
@@ -2852,7 +2851,7 @@ namespace System.Windows.Data
             // this.  We loop through the interface list, rather than call
             // GetInterface(IEnumerableT), so that we handle an ambiguous match
             // (by using the first match) without an exception.
-            for (int i = 0; i < interfaces.Length; ++i)
+            for (int i = 0; i < interfaces.Length; i++)
             {
                 Type interfaceType = interfaces[i];
                 if (interfaceType.Name == typeof(IEnumerable<>).Name)
@@ -3158,7 +3157,7 @@ namespace System.Windows.Data
 
             if (_group.GroupDescriptions.Count > 0)
             {
-                for (int num = 0, count = _internalList.Count; num < count; ++num)
+                for (int num = 0, count = _internalList.Count; num < count; num++)
                 {
                     object item = _internalList[num];
                     if (item != null && (!IsAddingNew || !Equals(CurrentAddItem, item)))
@@ -3209,7 +3208,7 @@ namespace System.Windows.Data
 
             if (_temporaryGroup.GroupDescriptions.Count > 0)
             {
-                for (int num = 0, count = _internalList.Count; num < count; ++num)
+                for (int num = 0, count = _internalList.Count; num < count; num++)
                 {
                     object item = _internalList[num];
                     if (item != null && (!IsAddingNew || !Equals(CurrentAddItem, item)))
@@ -3250,7 +3249,7 @@ namespace System.Windows.Data
 
             if (GroupDescriptions.Count > 0)
             {
-                for (int num = 0, count = Count; num < count; ++num)
+                for (int num = 0, count = Count; num < count; num++)
                 {
                     object item = GetItemAt(num);
                     if (item != null && (!IsAddingNew || !Equals(CurrentAddItem, item)))
@@ -4371,7 +4370,7 @@ namespace System.Windows.Data
                 int result = 0;
 
                 // compare both objects by each of the properties until property values don't match
-                for (int k = 0; k < _fields.Length; ++k)
+                for (int k = 0; k < _fields.Length; k++)
                 {
                     // if the property type is not yet determined, try
                     // obtaining it from the objects
@@ -4471,7 +4470,7 @@ namespace System.Windows.Data
             private static SortPropertyInfo[] CreatePropertyInfo(SortDescriptionCollection sortFields)
             {
                 SortPropertyInfo[] fields = new SortPropertyInfo[sortFields.Count];
-                for (int k = 0; k < sortFields.Count; ++k)
+                for (int k = 0; k < sortFields.Count; k++)
                 {
                     // remember PropertyPath and Direction, used when actually sorting
                     fields[k].PropertyPath = sortFields[k].PropertyName;

@@ -328,7 +328,7 @@ namespace System.Windows.Data
             int index = (this._isDataInGroupOrder) ? group.LastIndex : 0;
 
             // find the desired subgroup
-            for (int n = group.Items.Count; index < n; ++index)
+            for (int n = group.Items.Count; index < n; index++)
             {
                 subgroup = group.Items[index] as CollectionViewGroupInternal;
                 if (subgroup == null)
@@ -466,7 +466,7 @@ namespace System.Windows.Data
             ObservableCollection<object> explicitNames = groupDescription?.GroupNames;
             if (explicitNames != null)
             {
-                for (int k = 0, n = explicitNames.Count; k < n; ++k)
+                for (int k = 0, n = explicitNames.Count; k < n; k++)
                 {
                     CollectionViewGroupInternal subgroup = new CollectionViewGroupInternal(explicitNames[k], group);
                     this.InitializeGroup(subgroup, level + 1, seedItem);
@@ -511,7 +511,7 @@ namespace System.Windows.Data
             CollectionViewGroupInternal subgroup;
 
             // find the desired subgroup
-            for (int index = 0, n = group.Items.Count; index < n; ++index)
+            for (int index = 0, n = group.Items.Count; index < n; index++)
             {
                 subgroup = group.Items[index] as CollectionViewGroupInternal;
                 if (subgroup == null)

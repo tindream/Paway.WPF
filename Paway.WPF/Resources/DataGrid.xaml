@@ -10,11 +10,10 @@
     <local:TopRightRadiusConverter x:Key="topRightRadiusConverter"/>
     <local:TopRadiusConverter x:Key="topRadiusConverter"/>
     <local:NoRadiusConverter x:Key="noRadiusConverter"/>
-    <local:ContentTextConverter x:Key="contentTextConverter" />
 
     <Style TargetType="{x:Type DataGridCell}">
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource contentTextConverter}}"/>
+        <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content.Text}"/>
         <Style.Triggers >
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="{Binding ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}}" />
