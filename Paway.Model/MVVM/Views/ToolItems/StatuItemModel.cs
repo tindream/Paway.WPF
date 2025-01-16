@@ -131,18 +131,7 @@ namespace Paway.Model
         private void AddDesc(string msg, LevelType level = LevelType.Debug, bool iHit = false, DependencyObject ower = null)
         {
             this.Desc = msg;
-            switch (level)
-            {
-                case LevelType.Warn:
-                    msg.Warn();
-                    break;
-                case LevelType.Error:
-                    msg.Error();
-                    break;
-                default:
-                    msg.Log(level);
-                    break;
-            }
+            msg.Log(level);
             PMethod.BeginInvoke(() =>
             {
                 switch (level)
@@ -152,6 +141,7 @@ namespace Paway.Model
                         if (iHit) PMethod.Hit(ower ?? PConfig.Window, msg, ColorType.Warn);
                         break;
                     case LevelType.Error:
+                    case LevelType.Fatal:
                         DescBrush = PConfig.Error.ToBrush();
                         if (iHit) PMethod.Hit(ower ?? PConfig.Window, msg, ColorType.Error);
                         break;

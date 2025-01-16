@@ -474,6 +474,7 @@ namespace Paway.WPF
                         MessageBox.Show(window, obj, window.Title, MessageBoxButton.OK, MessageBoxImage.Warning);
                         break;
                     case LevelType.Error:
+                    case LevelType.Fatal:
                         MessageBox.Show(window, obj, window.Title, MessageBoxButton.OK, MessageBoxImage.Error);
                         break;
                 }

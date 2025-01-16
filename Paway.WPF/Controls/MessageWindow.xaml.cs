@@ -63,7 +63,8 @@ namespace Paway.WPF
             switch (level)
             {
                 case LevelType.Warn: type = ColorType.Warn; break;
-                case LevelType.Error: type = ColorType.Error; break;
+                case LevelType.Error:
+                case LevelType.Fatal: type = ColorType.Error; break;
             }
             window.textBlock.Foreground = Colors.White.ToBrush();
             window.border.Background = type.Color().ToAlpha(PConfig.Alpha).ToBrush();
