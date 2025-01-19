@@ -54,10 +54,9 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
         <Setter Property="VerticalAlignment" Value="{Binding ButtonAlignment, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
-        <Setter Property="Width" Value="{Binding HeaderHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
-        <Setter Property="MaxWidth" Value="{Binding ButtonMaxHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
-        <Setter Property="Height" Value="{Binding HeaderHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
-        <Setter Property="MaxHeight" Value="{Binding ButtonMaxHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
+        <Setter Property="Width" Value="{Binding ButtonWidth, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
+        <Setter Property="Height" Value="{Binding ButtonHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
+        <Setter Property="MaxHeight" Value="{Binding HeaderHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">

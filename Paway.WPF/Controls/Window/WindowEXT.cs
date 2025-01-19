@@ -34,12 +34,16 @@ namespace Paway.WPF
             DependencyProperty.Register(nameof(HeaderHeight), typeof(int), typeof(WindowEXT), new FrameworkPropertyMetadata(30));
         /// <summary>
         /// </summary>
-        private static readonly DependencyProperty LogoSizeProperty =
-            DependencyProperty.Register(nameof(LogoSize), typeof(int), typeof(WindowEXT), new FrameworkPropertyMetadata(24));
+        private static readonly DependencyProperty ButtonWidthProperty =
+            DependencyProperty.Register(nameof(ButtonWidth), typeof(int), typeof(WindowEXT), new FrameworkPropertyMetadata(45));
         /// <summary>
         /// </summary>
-        private static readonly DependencyProperty ButtonMaxHeightProperty =
-            DependencyProperty.Register(nameof(ButtonMaxHeight), typeof(double), typeof(WindowEXT), new FrameworkPropertyMetadata(45d));
+        private static readonly DependencyProperty ButtonHeightProperty =
+            DependencyProperty.Register(nameof(ButtonHeight), typeof(int), typeof(WindowEXT), new FrameworkPropertyMetadata(30));
+        /// <summary>
+        /// </summary>
+        private static readonly DependencyProperty LogoSizeProperty =
+            DependencyProperty.Register(nameof(LogoSize), typeof(int), typeof(WindowEXT), new FrameworkPropertyMetadata(24));
         /// <summary>
         /// </summary>
         private static readonly DependencyProperty ButtonAlignmentProperty =
@@ -91,6 +95,28 @@ namespace Paway.WPF
             set { SetValue(HeaderHeightProperty, value); }
         }
         /// <summary>
+        /// 标题栏按钮宽度
+        /// <para>默认值：45</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("标题栏按钮宽度")]
+        public int ButtonWidth
+        {
+            get { return (int)GetValue(ButtonWidthProperty); }
+            set { SetValue(ButtonWidthProperty, value); }
+        }
+        /// <summary>
+        /// 标题栏按钮高度
+        /// <para>默认值：42</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("标题栏按钮高度")]
+        public int ButtonHeight
+        {
+            get { return (int)GetValue(ButtonHeightProperty); }
+            set { SetValue(ButtonHeightProperty, value); }
+        }
+        /// <summary>
         /// Logo大小
         /// <para>默认值：24</para>
         /// </summary>
@@ -100,17 +126,6 @@ namespace Paway.WPF
         {
             get { return (int)GetValue(LogoSizeProperty); }
             set { SetValue(LogoSizeProperty, value); }
-        }
-        /// <summary>
-        /// 按钮最大高度
-        /// <para>默认值：45</para>
-        /// </summary>
-        [Category("扩展")]
-        [Description("按钮最大高度")]
-        public double ButtonMaxHeight
-        {
-            get { return (double)GetValue(ButtonMaxHeightProperty); }
-            set { SetValue(ButtonMaxHeightProperty, value); }
         }
         /// <summary>
         /// 按钮位置
