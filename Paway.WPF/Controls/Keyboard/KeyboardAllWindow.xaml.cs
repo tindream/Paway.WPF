@@ -28,13 +28,14 @@ namespace Paway.WPF
         /// <summary>
         /// 虚拟键盘-全键盘
         /// </summary>
-        public KeyboardAllWindow(FrameworkElement element, bool iTitle = false)
+        public KeyboardAllWindow(FrameworkElement element, bool iTitle = false, bool iKeyboardNum = false)
         {
             InitializeComponent();
             this.element = element;
             this.dpTitle.Visibility = iTitle ? Visibility.Visible : Visibility.Collapsed;
             this.Height = iTitle ? 280 : 246;
             this.SourceInitialized += KeyboardAllWindow_SourceInitialized;
+            keyboardAll.IKeyboardNum(iKeyboardNum);
             keyboardAll.CloseEvent += KeyboardAll_CloseEvent;
             keyboardAll.DragMovedEvent += KeyboardAll_DragMovedEvent;
             btnClose.Click += BtnClose_Click;

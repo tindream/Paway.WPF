@@ -99,7 +99,7 @@ namespace Paway.WPF
         #region 扩展
         /// <summary>
         /// 虚拟键盘类型
-        /// <para>默认值：全键盘</para>
+        /// <para>默认值：自动</para>
         /// </summary>
         [Category("扩展")]
         [Description("虚拟键盘类型")]

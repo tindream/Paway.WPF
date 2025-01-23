@@ -110,6 +110,10 @@ namespace Paway.WPF
         #region 依赖属性
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty KeyboardProperty =
+                DependencyProperty.RegisterAttached(nameof(Keyboard), typeof(KeyboardType), typeof(PasswordBoxEXT), new PropertyMetadata(KeyboardType.All));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty RadiusProperty =
             DependencyProperty.RegisterAttached(nameof(Radius), typeof(CornerRadius), typeof(PasswordBoxEXT), new PropertyMetadata(new CornerRadius(3)));
         /// <summary>
@@ -154,6 +158,27 @@ namespace Paway.WPF
         #endregion
 
         #region 扩展
+        /// <summary>
+        /// 虚拟键盘类型
+        /// <para>默认值：全键盘</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("虚拟键盘类型")]
+        public KeyboardType Keyboard { get; set; }
+        /// <summary>
+        /// get 虚拟键盘类型
+        /// </summary>
+        public static KeyboardType GetKeyboard(DependencyObject obj)
+        {
+            return (KeyboardType)obj.GetValue(KeyboardProperty);
+        }
+        /// <summary>
+        /// set虚拟键盘类型
+        /// </summary>
+        public static void SetKeyboard(DependencyObject obj, KeyboardType value)
+        {
+            obj.SetValue(KeyboardProperty, value);
+        }
         /// <summary>
         /// 自定义边框圆角
         /// <para>默认值：3</para>

@@ -68,10 +68,14 @@ namespace Paway.WPF
                 keyboardType = textBoxEXT.Keyboard;
                 if (textBoxEXT.IsReadOnly) return;
             }
-            if (element is TextBoxNumeric textBoxNumeric)
+            else if (element is TextBoxNumeric textBoxNumeric)
             {
                 keyboardType = textBoxNumeric.Keyboard;
                 if (textBoxNumeric.IsReadOnly) return;
+            }
+            else if (element is PasswordBox passwordBox)
+            {
+                keyboardType = PasswordBoxEXT.GetKeyboard(passwordBox);
             }
             if (keyboardType == KeyboardType.None) return;
 
@@ -119,11 +123,11 @@ namespace Paway.WPF
                         }
                         if (iKeyboardWindow)
                         {
-                            var keyboardAll = new KeyboardAllWindow(element); keyboardWindow = keyboardAll; keyboardAll.CloseEvent += CloseKeyboard;
+                            var keyboardAll = new KeyboardAllWindow(element, false, keyboardType == KeyboardType.All_Num); keyboardWindow = keyboardAll; keyboardAll.CloseEvent += CloseKeyboard;
                         }
                         else
                         {
-                            var keyboardAll = new KeyboardAll(); keyboardElement = keyboardAll; keyboardAll.CloseEvent += CloseKeyboard;
+                            var keyboardAll = new KeyboardAll().IKeyboardNum(keyboardType == KeyboardType.All_Num); keyboardElement = keyboardAll; keyboardAll.CloseEvent += CloseKeyboard;
                         }
                         break;
                 }

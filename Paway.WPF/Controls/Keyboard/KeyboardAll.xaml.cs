@@ -90,6 +90,14 @@ namespace Paway.WPF
             listview1.SelectionChanged += Listview1_SelectionChanged;
             listview1.DragMovedEvent += Listview1_DragMovedEvent;
         }
+        /// <summary>
+        /// 默认显示数字页
+        /// </summary>
+        public KeyboardAll IKeyboardNum(bool iKeyboardNum)
+        {
+            this.iKeyboardNum = iKeyboardNum;
+            return this;
+        }
         private void Listview1_DragMovedEvent(object sender, MouseButtonEventArgs e)
         {
             DragMovedEvent?.Invoke(sender, e);
@@ -105,6 +113,7 @@ namespace Paway.WPF
             this.iCapsLock = Keyboard.GetKeyStates(Key.CapsLock) == KeyStates.Toggled;
             if (this.iCapsLock) this.ChangeCapsLock();
             if (this.iChina) this.ChangeChina();
+            this.ChangeKeyboardNum();
         }
         private void KeyPressed(int virtualKey, bool keyUp)
         {

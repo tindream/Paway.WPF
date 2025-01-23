@@ -40,6 +40,11 @@ namespace Paway.WPF
         /// </summary>
         [Description("全键盘")]
         All,
+        /// <summary>
+        /// 全键盘(默认显示数字页)
+        /// </summary>
+        [Description("全键盘_数字")]
+        All_Num,
     }
     /// <summary>
     /// 虚拟键盘模式
