@@ -9,7 +9,7 @@
         Background="Transparent"
         d:DesignHeight="400" d:DesignWidth="400">
     <Canvas.Resources>
-        <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Default.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Default\Default.xaml" />
     </Canvas.Resources>
     <Image Name="image"/>
     <DockPanel Name="dpDesc" Width="{Binding ElementName=canvas, Path=ActualWidth}" Visibility="Collapsed">

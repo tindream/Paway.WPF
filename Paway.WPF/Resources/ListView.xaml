@@ -4,7 +4,7 @@
                     xmlns:local="clr-namespace:Paway.WPF">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Default.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Default\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type local:ListViewEXT}" BasedOn="{StaticResource Config}">

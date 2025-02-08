@@ -5,7 +5,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\DataGrid.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\DatePicker.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Default.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Default\Default.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Menu.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\PasswordBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\ScrollBar.xaml" />

@@ -382,8 +382,7 @@ namespace Paway.WPF
             if (Source != null)
             {
                 var point = e.GetPosition(this);
-                var normal = GetPoint(point, out bool exist);
-                if (exist)
+                if (GetPoint(point, out Point normal))
                 {
                     var color = bitmap.GetPixel((int)normal.X, (int)normal.Y);
                     tbPoint.Text = $"{(int)normal.X}, {(int)normal.Y}";
@@ -416,37 +415,37 @@ namespace Paway.WPF
         /// <summary>
         /// 获取原图坐标点
         /// </summary>
-        public Point GetPoint(Point point, out bool exist)
+        public bool GetPoint(Point point, out Point result)
         {
-            exist = false;
-            var temp = new Point(0, 0);
+            result = new Point(0, 0);
             if (Source != null)
             {
-                exist = true;
-                temp.X = (point.X - imagePoint.X) * Source.Width / imageSize.Width;
-                temp.Y = (point.Y - imagePoint.Y) * Source.Width / imageSize.Width;
-                if (temp.X < 0)
+                var exist = true;
+                result.X = (point.X - imagePoint.X) * Source.Width / imageSize.Width;
+                result.Y = (point.Y - imagePoint.Y) * Source.Width / imageSize.Width;
+                if (result.X < 0)
                 {
-                    temp.X = 0;
+                    result.X = 0;
                     exist = false;
                 }
-                else if (temp.X > Source.Width - 1)
+                else if (result.X > Source.Width - 1)
                 {
-                    temp.X = Source.Width - 1;
+                    result.X = Source.Width - 1;
                     exist = false;
                 }
-                if (temp.Y < 0)
+                if (result.Y < 0)
                 {
-                    temp.Y = 0;
+                    result.Y = 0;
                     exist = false;
                 }
-                else if (temp.Y > Source.Height - 1)
+                else if (result.Y > Source.Height - 1)
                 {
-                    temp.Y = Source.Height - 1;
+                    result.Y = Source.Height - 1;
                     exist = false;
                 }
+                return exist;
             }
-            return temp;
+            return false;
         }
         /// <summary>
         /// 获取当前坐标点(原图)
