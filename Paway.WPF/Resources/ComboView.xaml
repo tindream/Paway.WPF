@@ -84,7 +84,9 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="0.6"/>
+                            <Setter TargetName="ToggleButton" Property="Opacity" Value="0.6"/>
+                            <Setter TargetName="ContentSite" Property="Opacity" Value="0.6"/>
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource ThemeBackgroundHigh}"/>
                         </Trigger>
                         <Trigger Property="IsEditable" Value="true">
                             <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible" />

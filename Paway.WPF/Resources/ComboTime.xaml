@@ -102,7 +102,8 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="0.6"/>
+                            <Setter TargetName="ContentSite" Property="Opacity" Value="0.6"/>
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource ThemeBackgroundHigh}"/>
                         </Trigger>
                         <DataTrigger Binding="{Binding TimeType, RelativeSource={RelativeSource Self}}" Value="Hour">
                             <Setter Property="Width" TargetName="columnMinute" Value="0"/>

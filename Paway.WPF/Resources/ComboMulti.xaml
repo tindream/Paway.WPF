@@ -115,7 +115,9 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="0.6"/>
+                            <Setter TargetName="PART_DropDownToggle" Property="Opacity" Value="0.6"/>
+                            <Setter TargetName="PART_ListBoxChk" Property="Opacity" Value="0.6"/>
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource ThemeBackgroundHigh}"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="border" Property="BorderBrush" 

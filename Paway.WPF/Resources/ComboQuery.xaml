@@ -78,10 +78,11 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="0.6"/>
+                            <Setter TargetName="ToggleButton" Property="Opacity" Value="0.6"/>
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource ThemeBackgroundHigh}"/>
                         </Trigger>
                         <Trigger Property="IsReadOnly" Value="True">
-                            <Setter Property="IsReadOnly" TargetName="PART_EditableTextBox" Value="True"/>
+                            <Setter TargetName="PART_EditableTextBox" Property="IsReadOnly" Value="True"/>
                         </Trigger>
                         <DataTrigger Binding="{Binding ElementName=PART_EditableTextBox, Path=IsKeyboardFocused}" Value="True">
                             <Setter Property="BorderBrush" TargetName="border" 

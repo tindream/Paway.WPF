@@ -74,11 +74,12 @@
                     </DockPanel>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="0.6"/>
+                            <Setter TargetName="PART_ContentHost" Property="Opacity" Value="0.6"/>
+                            <Setter Property="Background" Value="{StaticResource ThemeBackgroundHigh}"/>
                         </Trigger>
                         <Trigger Property="IsReadOnly" Value="True">
                             <Setter TargetName="PART_ContentHost" Property="Opacity" Value="0.6"/>
-                            <Setter TargetName="PART_ContentHost" Property="Background" Value="{StaticResource ThemeBackgroundHigh}"/>
+                            <Setter Property="Background" Value="{StaticResource ThemeBackgroundHigh}"/>
                         </Trigger>
                         <DataTrigger Binding="{Binding Icon, Converter={StaticResource isNotNull}, RelativeSource={RelativeSource Self}}" Value="True">
                             <Setter TargetName="icon" Property="Visibility" Value="Visible" />
