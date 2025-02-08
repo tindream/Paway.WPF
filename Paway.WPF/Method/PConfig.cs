@@ -31,10 +31,6 @@ namespace Paway.WPF
         /// 主窗体
         /// </summary>
         public static Window Window { get; set; }
-        /// <summary>
-        /// 当前菜单
-        /// </summary>
-        public static string Menu { get; set; }
         private static LanguageBaseInfo languageBase;
         /// <summary>
         /// 多语言包

@@ -204,7 +204,7 @@ namespace Paway.Model
         protected Child ChildInfo(DataGrid dataGrid)
         {
             if (ChildItem != null) return ChildItem;
-            if (dataGrid.CurrentItem is Child t) return t;
+            if (dataGrid.SelectedItem is Child t) return t;
             if (dataGrid.SelectionUnit != DataGridSelectionUnit.FullRow && dataGrid.SelectedCells.Count > 0)
             {
                 if (dataGrid.SelectedCells.First().Item is Child t2) return t2;

@@ -30,10 +30,6 @@ namespace Paway.Model
         #endregion
 
         #region 权限控制
-        /// <summary>
-        /// 所属菜单
-        /// </summary>
-        public virtual string Menu { get; }
         private MenuAuthType _auth;
         /// <summary>
         /// 默认按钮权限
@@ -128,7 +124,6 @@ namespace Paway.Model
         /// </summary>
         protected virtual void Action(KeyMessage msg)
         {
-            if (PConfig.Menu != this.Menu) return;
             switch (msg.Key)
             {
                 case Key.F5: if ((Auth & MenuAuthType.Refresh) == MenuAuthType.Refresh) ActionInternalMsg("刷新"); break;
@@ -267,14 +262,13 @@ namespace Paway.Model
         /// </summary>
         public OperateItemModel()
         {
-            this.Menu = this.GetType().Description();
-            Messenger.Default.Register<KeyMessage>(this, msg => Action(msg));
             Messenger.Default.Register<OperateLoadMessage>(this, msg =>
             {
                 //基类通知，如自定义菜单栏，此事件未触发，会被后续控件触发初始化
                 if (this.Panel == null && msg.Obj is Panel panel)
                 {
                     this.Panel = panel;
+                    Messenger.Default.Register<KeyMessage>(this, panel.GetHashCode(), keyMsg => Action(keyMsg));
                     if (Auth == MenuAuthType.None) AuthNormal();
                 }
             });

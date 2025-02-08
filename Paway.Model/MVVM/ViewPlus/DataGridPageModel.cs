@@ -97,7 +97,7 @@ namespace Paway.Model
         protected T SelectedInfo()
         {
             if (SelectedItem != null) return SelectedItem;
-            if (DataGrid.CurrentItem is T t) return t;
+            if (DataGrid.SelectedItem is T t) return t;
             if (DataGrid.SelectionUnit != DataGridSelectionUnit.FullRow && DataGrid.SelectedCells.Count > 0)
             {
                 if (DataGrid.SelectedCells.First().Item is T t2) return t2;
@@ -337,7 +337,6 @@ namespace Paway.Model
         /// </summary>
         protected override void Action(KeyMessage msg)
         {
-            if (PConfig.Menu != this.Menu) return;
             if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {
                 if (PMethod.Find(DataGrid, out TextBoxEXT tbSearch, "tbSearch"))
