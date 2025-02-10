@@ -146,7 +146,11 @@ namespace Paway.Model
         /// </summary>
         protected virtual void Insert(T info)
         {
-            server.Insert(info); Cache.Update(info);
+            if (info is IOperateInfo operateUser)
+            {
+                operateUser.CreateOn = DateTime.Now;
+            }
+            server.Insert(info); Cache.Update(info, true);
             var index = this.FilterList().FindIndex(c => c.Id == info.Id);
             if (!this.SearchReset() && index != -1) PMethod.Invoke(() => ObList.Insert(index, info));
             MoveTo(index, info);
@@ -171,7 +175,12 @@ namespace Paway.Model
         protected virtual void Insert(List<T> list)
         {
             if (list.Count == 0) return;
-            server.Insert(list); Cache.Update(list);
+            var timeNow = DateTime.Now;
+            list.ForEach(c =>
+            {
+                if (c is IOperateInfo operateUser) operateUser.CreateOn = timeNow;
+            });
+            server.Insert(list); Cache.Update(list, true);
             int index = 0;
             foreach (var info in list)
             {
@@ -283,9 +292,16 @@ namespace Paway.Model
             var timeNow = DateTime.Now;
             if (typeof(IOperateInfo).IsAssignableFrom(list.GenericType()))
             {
-                updateList.ForEach(c => ((IOperateInfo)c).UpdateOn = timeNow);
+                updateList.ForEach(c =>
+                {
+                    if (c is IOperateInfo operateUser)
+                    {
+                        if (operateUser.CreateOn == DateTime.MinValue) operateUser.CreateOn = timeNow;
+                        else operateUser.UpdateOn = timeNow;
+                    }
+                });
             }
-            server.Replace(updateList); Cache.Update(updateList);
+            server.Replace(updateList); Cache.Update(updateList, true);
             this.Reload();
         }
         /// <summary>
@@ -354,8 +370,7 @@ namespace Paway.Model
             switch (item)
             {
                 default:
-                    base.Action(item);
-                    break;
+                    return base.Action(item);
                 case "添加":
                     ViewModel().Info = new T();
                     var add = AddWindow();
@@ -440,6 +455,7 @@ namespace Paway.Model
         /// </summary>
         public ICommand DragCompletedCmd => new RelayCommand<DataGridDragEventArgs>(e =>
         {
+            var timeNow = DateTime.Now;
             if (typeof(IIndex).IsAssignableFrom(typeof(T)))
             {
                 var updateList = new List<T>();
@@ -449,6 +465,7 @@ namespace Paway.Model
                     if (item is IIndex index)
                     {
                         index.Index = i;
+                        if (item is IOperateInfo operateUser) operateUser.UpdateOn = timeNow;
                         updateList.Add(item);
                     }
                 }
