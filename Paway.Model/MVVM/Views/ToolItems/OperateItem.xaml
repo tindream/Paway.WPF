@@ -28,6 +28,7 @@
     <TextBoxEXT Name="tbSearch" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" 
                 Water="{Binding LanguageBase.Search, Source={StaticResource LB}}" 
                 MaxLength="32" DockPanel.Dock="Right" Width="200" VerticalAlignment="Bottom"
+                BorderThickness="0" Animation="1"
                 Icon="pack://application:,,,/Paway.Model;component/Images/operate/search_gray.png"  IconHeight="20" IconStretch="Uniform"
                 Visibility="{Binding Auth, Converter={StaticResource valueMoreToVisible}, ConverterParameter=1024}"/>
     <ScrollViewerEXT HorizontalScrollBarVisibility="Auto" VerticalAlignment="{Binding VerticalAlignment, ElementName=dpOperateItem}">

@@ -23,7 +23,7 @@ namespace Paway.Model
     public partial class OperateItemModel : ViewModelBasePlus, IPageReload
     {
         #region 属性
-        private Panel Panel;
+        private DockPanel Panel;
         private bool iExit = false;
         private DateTime exitTime = DateTime.MinValue;
 
@@ -43,21 +43,6 @@ namespace Paway.Model
         #endregion
 
         #region 菜单
-        /// <summary>
-        /// 发送状态并执行
-        /// </summary>
-        internal void ActionInternalMsg(string item)
-        {
-            Messenger.Default.Send(new StatuMessage(item));
-            try
-            {
-                Action(item);
-            }
-            catch (Exception ex)
-            {
-                Messenger.Default.Send(new StatuMessage(ex));
-            }
-        }
         /// <summary>
         /// 通用动作命令-按钮按键操作
         /// </summary>
@@ -126,8 +111,6 @@ namespace Paway.Model
         {
             switch (msg.Key)
             {
-                case Key.F5: if ((Auth & MenuAuthType.Refresh) == MenuAuthType.Refresh) ActionInternalMsg("刷新"); break;
-                case Key.Delete: if ((Auth & MenuAuthType.Delete) == MenuAuthType.Delete) ActionInternalMsg("删除"); break;
                 case Key.Escape:
                     if ((Auth & MenuAuthType.Search) != MenuAuthType.Search) break;
                     if (PMethod.Find(Panel, out TextBoxEXT tbSearch, "tbSearch"))
@@ -137,49 +120,33 @@ namespace Paway.Model
                         {
                             Messenger.Default.Send(new StatuMessage(PConfig.LanguageBase.QueryCancel));
                             tbSearch.Text = null;
+                            msg.Handled = true;
                         }
                         else
                         {
                             iExit = true;
                             exitTime = DateTime.Now;
                             Messenger.Default.Send(new StatuMessage(PConfig.LanguageBase.QueryCancelAgain));
+                            msg.Handled = true;
                         }
                     }
                     break;
-            }
-            if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
-            {
-                if (KeyCmdDic.ContainsKey(msg.Key)) ActionInternalMsg(KeyCmdDic[msg.Key]);
-                else
-                {
-                    switch (msg.Key)
+                case Key.F:
+                    if ((Auth & MenuAuthType.Search) != MenuAuthType.Search) break;
+                    if ((Keyboard.Modifiers & ModifierKeys.Control) != ModifierKeys.Control) break;
+                    if (PMethod.Find(Panel, out tbSearch, "tbSearch") && !tbSearch.IsKeyboardFocusWithin)
                     {
-                        case Key.A: if ((Auth & MenuAuthType.Add) == MenuAuthType.Add) ActionInternalMsg("添加"); break;
-                        case Key.E: if ((Auth & MenuAuthType.Edit) == MenuAuthType.Edit) ActionInternalMsg("编辑"); break;
-                        case Key.D: if ((Auth & MenuAuthType.Delete) == MenuAuthType.Delete) ActionInternalMsg("删除"); break;
-                        case Key.I: if ((Auth & MenuAuthType.Import) == MenuAuthType.Import) ActionInternalMsg("导入"); break;
-                        case Key.O: if ((Auth & MenuAuthType.Export) == MenuAuthType.Export) ActionInternalMsg("导出"); break;
-                        case Key.S: if ((Auth & MenuAuthType.Save) == MenuAuthType.Save) ActionInternalMsg("保存"); break;
-                        case Key.F:
-                            if ((Auth & MenuAuthType.Search) != MenuAuthType.Search) break;
-                            if (PMethod.Find(Panel, out TextBoxEXT tbSearch, "tbSearch") && !tbSearch.IsKeyboardFocusWithin)
-                            {
-                                Messenger.Default.Send(new StatuMessage(PConfig.LanguageBase.Query));
-                                tbSearch.Focus();
-                            }
-                            break;
+                        Messenger.Default.Send(new StatuMessage(PConfig.LanguageBase.Query));
+                        tbSearch.Focus();
+                        msg.Handled = true;
                     }
-                }
+                    break;
             }
         }
 
         #endregion
 
         #region 按钮
-        /// <summary>
-        /// 自定义按键快捷按键命令对应表
-        /// </summary>
-        private readonly Dictionary<Key, string> KeyCmdDic = new Dictionary<Key, string>();
         /// <summary>
         /// 默认权限
         /// <para>刷新、保存</para>
@@ -229,8 +196,8 @@ namespace Paway.Model
             };
             if (key != Key.None)
             {
-                if (KeyCmdDic.ContainsKey(key)) throw new WarningException($"按键{key}已存在");
-                KeyCmdDic.Add(key, (cmd ?? content).ToStrings());
+                btn.ShortcutKey = key;
+                btn.ShortcutControl = ModifierKeys.Control;
             }
             action?.Invoke(btn);
             Panel.Children.Insert(index != -1 ? index : Panel.Children.Count - 1, btn);
@@ -265,7 +232,7 @@ namespace Paway.Model
             Messenger.Default.Register<OperateLoadMessage>(this, msg =>
             {
                 //基类通知，如自定义菜单栏，此事件未触发，会被后续控件触发初始化
-                if (this.Panel == null && msg.Obj is Panel panel)
+                if (this.Panel == null && msg.Obj is DockPanel panel)
                 {
                     this.Panel = panel;
                     Messenger.Default.Register<KeyMessage>(this, panel.GetHashCode(), keyMsg => Action(keyMsg));

@@ -328,7 +328,7 @@ namespace Paway.WPF
             base.OnApplyTemplate();
             if (Command != null && PMethod.Parent(this, out Window window))
             {
-                window.PreviewKeyDown += Window_PreviewKeyDown;
+                window.KeyDown += Window_PreviewKeyDown;
             }
         }
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -339,10 +339,12 @@ namespace Paway.WPF
                 if (e.Key == ShortKey)
                 {
                     Command.Execute(this.CommandParameter);
+                    e.Handled = true;
                 }
                 else if ((Keyboard.Modifiers & ModifierKeys.Control) == ShortcutControl && e.Key == ShortcutKey)
                 {
                     Command.Execute(this.CommandParameter);
+                    e.Handled = true;
                 }
             }
         }

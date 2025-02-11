@@ -56,7 +56,8 @@ namespace Paway.Model
             return base.Action(item);
         }
         /// <summary>
-        /// 刷榜
+        /// 刷新
+        /// <para>刷新后调用PageReload</para>
         /// </summary>
         protected override void Refresh(Action action = null)
         {

@@ -327,7 +327,7 @@ namespace Paway.Model
         /// </summary>
         public ICommand RowDoubleCommand => new RelayCommand<SelectItemEventArgs>(e =>
         {
-            ActionInternalMsg("编辑");
+            ItemClickCommand.Execute("编辑");
         });
         /// <summary>
         /// 按钮列表-点击命令处理
@@ -545,7 +545,7 @@ namespace Paway.Model
         /// 只读权限
         /// <para>刷新、导出、搜索</para>
         /// </summary>
-        protected void AuthView()
+        protected void AuthReadonly()
         {
             this.Auth = MenuAuthType.Refresh | MenuAuthType.Export | MenuAuthType.Search;
         }
