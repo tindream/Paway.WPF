@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>Paway.WPF</id>
-		<version>1.5.7</version>
+		<version>1.5.8</version>
 		<title>Paway.WPF</title>
 		<authors>Tinn</authors>
 		<owners>Tinna</owners>
@@ -14,10 +14,10 @@
 		<tags>WPF Extension Adorner Animation Helper</tags>
 		<dependencies>
 			<group targetFramework="net45">
-				<dependency id="Paway.Helper" version="2.7.2" />
+				<dependency id="Paway.Helper" version="2.7.3" />
 			</group>
 			<group targetFramework="netcoreapp3.1">
-				<dependency id="Paway.Helper" version="2.7.2" />
+				<dependency id="Paway.Helper" version="2.7.3" />
 			</group>
 		</dependencies>
 	</metadata>
