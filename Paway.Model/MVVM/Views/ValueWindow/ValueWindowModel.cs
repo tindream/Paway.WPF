@@ -16,7 +16,7 @@ namespace Paway.Model
     public class ValueWindowModel : BaseWindowModel
     {
         #region 属性_名称输入框
-        private string _labelName = "名称:";
+        private string _labelName = "名称";
         /// <summary>
         /// 名称输入框Label
         /// </summary>
@@ -37,7 +37,7 @@ namespace Paway.Model
 
         #endregion
         #region 属性_值输入框
-        private string _labelValue = "值:";
+        private string _labelValue = "值";
         /// <summary>
         /// 值输入框1Label
         /// </summary>
@@ -82,8 +82,8 @@ namespace Paway.Model
         /// </summary>
         public override bool? OnCommit(Window wd)
         {
-            if (!PMethod.ValidationError(wd, this, nameof(Name))) return null;
-            if (!PMethod.ValidationError(wd, this, nameof(Value))) return null;
+            if (!PMethod.ValidationError(wd, this, nameof(Name), this.LabelName)) return null;
+            if (!PMethod.ValidationError(wd, this, nameof(Value), this.LabelValue)) return null;
             return base.OnCommit(wd);
         }
         /// <summary>

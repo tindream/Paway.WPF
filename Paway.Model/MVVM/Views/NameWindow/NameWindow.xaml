@@ -14,7 +14,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBoxEXT Title="{Binding Label}" Name="tbText" Width="410" Text="{Binding Text}" 
+            <TextBoxEXT Title="{Binding Label, StringFormat={}{0}:}" Name="tbText" Width="410" Text="{Binding Text}" 
                         MaxLength="{Binding MaxLength}" TextWrapping="{Binding TextWrapping}"/>
         </StackPanel>
         <WrapPanel Grid.Row="1" Margin="0,40" HorizontalAlignment="Center">

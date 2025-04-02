@@ -682,6 +682,14 @@ namespace Paway.WPF
         /// </summary>
         public static bool ValidationError<T>(DependencyObject parent, T mode, string name, bool allEmpty = false) where T : class
         {
+            return ValidationError(parent, mode, name, mode.Property(name).Description(), allEmpty);
+        }
+        /// <summary>
+        /// 验证模型中的指定名称控件值输入错误
+        /// <para>输入控件限定为TextBoxEXT，控件名称为tb+name</para>
+        /// </summary>
+        public static bool ValidationError<T>(DependencyObject parent, T mode, string name, string desc, bool allEmpty = false) where T : class
+        {
             Control control = null;
             if (Find(parent, out TextBoxEXT tbName, "tb" + name) && tbName.Visibility == Visibility.Visible)
             {
@@ -695,7 +703,7 @@ namespace Paway.WPF
             {
                 if (!allEmpty && mode.GetValue(name).ToStrings().IsEmpty())
                 {
-                    Hit(parent, $"{PConfig.LanguageBase.PleaseInput}{mode.Property(name).Description()}", ColorType.Warn);
+                    Hit(parent, $"{PConfig.LanguageBase.PleaseInput}{desc}", ColorType.Warn);
                     control.Focus();
                     return false;
                 }

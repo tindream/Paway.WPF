@@ -14,8 +14,8 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBoxEXT Title="{Binding LabelName}" TitleMinWidth="80" Name="tbName" Width="410" Text="{Binding Name}" MaxLength="32" />
-            <TextBoxEXT Title="{Binding LabelValue}" TitleMinWidth="80" Name="tbValue" Text="{Binding Value}" 
+            <TextBoxEXT Title="{Binding LabelName, StringFormat={}{0}:}" TitleMinWidth="80" Name="tbName" Width="410" Text="{Binding Name}" MaxLength="32" />
+            <TextBoxEXT Title="{Binding LabelValue, StringFormat={}{0}:}" TitleMinWidth="80" Name="tbValue" Text="{Binding Value}" 
                         MaxLength="{Binding MaxLength}" TextWrapping="{Binding TextWrapping}"/>
         </StackPanel>
         <WrapPanel Grid.Row="1" Margin="0,40" HorizontalAlignment="Center">

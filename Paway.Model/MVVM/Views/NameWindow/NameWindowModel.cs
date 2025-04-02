@@ -16,7 +16,7 @@ namespace Paway.Model
     public class NameWindowModel : BaseWindowModel
     {
         #region 属性
-        private string _label = "名称:";
+        private string _label = "名称";
         /// <summary>
         /// 输入框Label
         /// </summary>
@@ -61,7 +61,7 @@ namespace Paway.Model
         /// </summary>
         public override bool? OnCommit(Window wd)
         {
-            if (!PMethod.ValidationError(wd, this, nameof(Text))) return null;
+            if (!PMethod.ValidationError(wd, this, nameof(Text), this.Label)) return null;
             return base.OnCommit(wd);
         }
         /// <summary>
