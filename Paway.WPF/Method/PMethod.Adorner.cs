@@ -408,7 +408,7 @@ namespace Paway.WPF
         /// 装饰器-收到消息装入列表
         /// <para>当前控件</para>
         /// </summary>
-        public static void SlowIn(FrameworkElement parent, object msg, int time = 500, double xMove = 0, double yMove = 0, double size = 36, Color? color = null, Action completed = null)
+        public static void SlowIn(FrameworkElement parent, object msg, int time = 500, double xMove = 0, double yMove = 0, double size = 36, Color? color = null, Color? backColor = null, Action completed = null)
         {
             Invoke(() =>
             {
@@ -418,9 +418,12 @@ namespace Paway.WPF
                 var block = new TextBlock()
                 {
                     Text = msg.ToStrings(),
-                    FontSize = size
+                    FontSize = size,
+                    Padding = new Thickness(10, 2, 10, 2),
                 };
                 if (color != null) block.Foreground = color.Value.ToBrush();
+                if (backColor != null) block.Background = backColor.Value.ToBrush();
+                else block.Background = Colors.White.ToAlpha(100).ToBrush();
                 var slowInAdorner = new CustomAdorner(parent, block, storyboardFunc: () =>
                 {
                     var storyboard = new Storyboard();
