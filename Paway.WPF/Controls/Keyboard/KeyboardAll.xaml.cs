@@ -43,7 +43,7 @@ namespace Paway.WPF
         /// 点击空白处拖动窗体后事件
         /// </summary>
         public event EventHandler<MouseButtonEventArgs> DragMovedEvent;
-        private static Dictionary<string, KeyboardKeyInfo> KeyList;
+        private static readonly Dictionary<string, KeyboardKeyInfo> KeyList;
         static KeyboardAll()
         {
             if (KeyList == null) KeyList = new Dictionary<string, KeyboardKeyInfo>();
@@ -164,10 +164,10 @@ namespace Paway.WPF
         private void SendKey(string key)
         {
             var value = this.iKeyboardNum ? (this.iChina ? KeyList[key].NumCnV : KeyList[key].NumEnV) : KeyList[key].AllValue;
-            var iModifierKey = this.iKeyboardNum ? (this.iChina ? KeyList[key].INumCnShift : KeyList[key].INumEnShift) : false;
+            var iModifierKey = this.iKeyboardNum && (this.iChina ? KeyList[key].INumCnShift : KeyList[key].INumEnShift);
             var modifierKeys = new List<int>();
             if (iModifierKey) modifierKeys.Add((int)Keys.ShiftKey);
-            KeyboardHelper.Send(modifierKeys, value, (this.iKeyboardNum && this.iChina) ? KeyList[key].IUnicode : false);
+            KeyboardHelper.Send(modifierKeys, value, this.iKeyboardNum && this.iChina && KeyList[key].IUnicode);
         }
         /// <summary>
         /// 切换中英文键盘

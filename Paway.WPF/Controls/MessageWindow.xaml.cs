@@ -43,7 +43,7 @@ namespace Paway.WPF
         private IntPtr Handle;
         private FrameworkElement parentElement;
         private Window parentWindow;
-        private ManualResetEvent manualResetEvent = new ManualResetEvent(false);
+        private readonly ManualResetEvent manualResetEvent = new ManualResetEvent(false);
         /// <summary>
         /// 动画显示消息
         /// <para>同进程内点击窗体会获取焦点</para>

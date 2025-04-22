@@ -31,6 +31,7 @@ namespace Paway.WPF
                 source.StreamSource = fs;
                 source.EndInit();
             }
+            source.Freeze(); // 可选：使对象跨线程可用
             return source;
         }
         /// <summary>
@@ -46,6 +47,7 @@ namespace Paway.WPF
                 source.StreamSource = ms;
                 source.EndInit();
             }
+            source.Freeze(); // 可选：使对象跨线程可用
             return source;
         }
         /// <summary>
@@ -56,6 +58,7 @@ namespace Paway.WPF
             var intPtr = bitmap.GetHbitmap();
             var source = Imaging.CreateBitmapSourceFromHBitmap(intPtr, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
             NativeMethods.DeleteObject(intPtr);
+            source.Freeze(); // 可选：使对象跨线程可用
             return source;
         }
         /// <summary>
@@ -63,12 +66,71 @@ namespace Paway.WPF
         /// </summary>
         public static Bitmap ToBitmap(this BitmapSource bitmapSource)
         {
-            using (MemoryStream ms = new MemoryStream())
+            // 如果源图像不是32bpp格式，先转换为Pbgra32格式
+            if (bitmapSource.Format != PixelFormats.Pbgra32)
             {
-                BmpBitmapEncoder encoder = new BmpBitmapEncoder();
+                var formattedBitmapSource = new FormatConvertedBitmap();
+                formattedBitmapSource.BeginInit();
+                formattedBitmapSource.Source = bitmapSource;
+                formattedBitmapSource.DestinationFormat = PixelFormats.Pbgra32;
+                formattedBitmapSource.EndInit();
+                bitmapSource = formattedBitmapSource;
+            }
+
+            // 获取图像参数
+            int width = bitmapSource.PixelWidth;
+            int height = bitmapSource.PixelHeight;
+            int stride = width * ((bitmapSource.Format.BitsPerPixel + 7) / 8);
+
+            // 创建字节数组来存储像素数据
+            byte[] pixels = new byte[height * stride];
+
+            // 复制像素数据
+            bitmapSource.CopyPixels(pixels, stride, 0);
+
+            // 创建 Bitmap 对象
+            Bitmap bitmap = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
+            // 锁定 Bitmap 的位图数据
+            BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
+            try
+            {
+                // 将像素数据复制到 Bitmap
+                System.Runtime.InteropServices.Marshal.Copy(pixels, 0, bitmapData.Scan0, pixels.Length);
+            }
+            finally
+            {
+                // 解锁位图数据
+                bitmap.UnlockBits(bitmapData);
+            }
+
+            return bitmap;
+        }
+        /// <summary>
+        /// BitmapSource保存到文件
+        /// </summary>
+        public static void Save(this BitmapSource bitmapSource, string fileName)
+        {
+            using (var fileStream = new FileStream(fileName, FileMode.Create))
+            {
+                var extension = Path.GetExtension(fileName);
+                BitmapEncoder encoder = null;
+                switch (extension)
+                {
+                    case ".jpg":
+                    case ".jpeg":
+                    default:
+                        encoder = new JpegBitmapEncoder();
+                        break;
+                    case ".png":
+                        encoder = new PngBitmapEncoder();
+                        break;
+                    case ".bmp":
+                        encoder = new BmpBitmapEncoder();
+                        break;
+                }
                 encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
-                encoder.Save(ms);
-                return new Bitmap(ms);
+                encoder.Save(fileStream);
             }
         }
 

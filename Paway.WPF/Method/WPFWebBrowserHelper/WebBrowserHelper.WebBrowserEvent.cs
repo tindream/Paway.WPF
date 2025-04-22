@@ -11,7 +11,7 @@ namespace Paway.WPF
     /// </summary>
     public partial class WebBrowserHelper
     {
-        private class WebBrowserEvent : StandardOleMarshalObject, DWebBrowserEvents2
+        private class WebBrowserEvent : StandardOleMarshalObject, IDWebBrowserEvents2
         {
             private readonly WebBrowserHelper _helperInstance = null;
 

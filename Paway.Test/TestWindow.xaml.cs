@@ -74,11 +74,11 @@ namespace Paway.Test
         }
         protected override void OnPreviewMouseMove(MouseEventArgs e)
         {
-            if (this.Content is Panel panel)
-            {
-                //Method.WaterAdorner(e, maxWidth: 100);
-                //Method.WaterAdornerFixed(panel, e);
-            }
+            //if (this.Content is Panel panel)
+            //{
+            //    Method.WaterAdorner(e, maxWidth: 100);
+            //    Method.WaterAdornerFixed(panel, e);
+            //}
             base.OnPreviewMouseMove(e);
         }
         private void Button_Click2(object sender, RoutedEventArgs e)

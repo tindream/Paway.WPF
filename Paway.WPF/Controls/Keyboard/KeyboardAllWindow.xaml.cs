@@ -20,7 +20,7 @@ namespace Paway.WPF
     /// </summary>
     public partial class KeyboardAllWindow : WindowEXT
     {
-        private FrameworkElement element;
+        private readonly FrameworkElement element;
         /// <summary>
         /// 关闭事件
         /// </summary>

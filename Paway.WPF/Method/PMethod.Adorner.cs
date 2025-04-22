@@ -777,9 +777,9 @@ namespace Paway.WPF
                 AccelerationRatio = 0.1,
                 DecelerationRatio = 0.9
             };
-            var animInY = new DoubleAnimation(0.8, 1, new Duration(TimeSpan.FromMilliseconds(100)));
+            //var animInY = new DoubleAnimation(0.8, 1, new Duration(TimeSpan.FromMilliseconds(100)));
             var propertyX = new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, ScaleTransform.ScaleXProperty });
-            var propertyY = new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, ScaleTransform.ScaleYProperty });
+            //var propertyY = new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, ScaleTransform.ScaleYProperty });
             Storyboard.SetTargetProperty(animInX, propertyX);
             //Storyboard.SetTargetProperty(animInY, propertyY);
             storyboard.Children.Add(animInX);

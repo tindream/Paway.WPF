@@ -317,7 +317,7 @@ namespace Paway.WPF
 
         private static Input CreateKeyDownInput(int keyCode, bool iUnicode = false)
         {
-            Input result = default(Input);
+            Input result = default;
             result.Type = 1u;
             result.Data.Keyboard = new KeybdInput
             {
@@ -331,7 +331,7 @@ namespace Paway.WPF
         }
         private static Input CreateKeyUpInput(int keyCode, bool iUnicode = false)
         {
-            Input result = default(Input);
+            Input result = default;
             result.Type = 1u;
             result.Data.Keyboard = new KeybdInput
             {

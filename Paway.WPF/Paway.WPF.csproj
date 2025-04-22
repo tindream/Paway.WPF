@@ -11,6 +11,7 @@
 		<AssemblyName>Paway.WPF</AssemblyName>
 		<RootNamespace>Paway.WPF</RootNamespace>
 		<OutputPath>..\bin\$(Configuration)</OutputPath>
+		<NoWarn>0618,IDE0017,IDE0056,IDE0057,IDE0060,IDE0063,IDE0066</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -22,8 +22,8 @@ namespace Paway.WPF
         private Window keyboardWindow;
         private Rect boxRect;
         private Rect keyboardRect;
-        private FrameworkElement element;
-        private KeyboardType Keyboard;
+        private readonly FrameworkElement element;
+        private readonly KeyboardType Keyboard;
 
         /// <summary>
         /// 绑定自定义虚拟键盘

@@ -479,12 +479,7 @@ namespace Paway.WPF
             {
                 if (PMethod.SaveFile($"{DateTime.Now:yyMMddHHMMss}", out string file, "Jpeg|*.jpg;*.jpeg|Png|*.png|Bmp|*.bmp"))
                 {
-                    using (var fileStream = new FileStream(file, FileMode.Create))
-                    {
-                        BitmapEncoder encoder = new PngBitmapEncoder();
-                        encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
-                        encoder.Save(fileStream);
-                    }
+                    bitmapSource.Save(file);
                 }
             }
         }

@@ -47,7 +47,7 @@ namespace Paway.WPF
                 cookieType,
                 ReflectionService.BindingFlags,
                 null,
-                new[] { axIWebBrowser2, webBrowserEvent, typeof(DWebBrowserEvents2) },
+                new[] { axIWebBrowser2, webBrowserEvent, typeof(IDWebBrowserEvents2) },
                 CultureInfo.CurrentUICulture);
         }
 
