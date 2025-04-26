@@ -356,7 +356,14 @@ namespace Paway.WPF
                 {
                     if (TryFindResource("Text" + this.HorizontalContentAlignment) is Style style)
                     {
-                        text.ElementStyle = style;
+                        if (property.DataGridColumn(out DataGridColumnAttribute mode) && mode.WrapMode)
+                        {
+                            var newStyle = new Style(typeof(TextBlock), style); // 基于现有样式
+                            newStyle.Setters.Add(new Setter(TextBlock.TextWrappingProperty, TextWrapping.Wrap));
+                            newStyle.Setters.Add(new Setter(TextBlock.TextTrimmingProperty, TextTrimming.None));
+                            text.ElementStyle = newStyle; // 替换为新样式
+                        }
+                        else text.ElementStyle = style;
                     }
                 }
                 if (!iReady) column.Visibility = property.IShow() ? Visibility.Visible : Visibility.Collapsed;
