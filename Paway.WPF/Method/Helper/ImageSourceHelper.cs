@@ -55,6 +55,7 @@ namespace Paway.WPF
         /// </summary>
         public static BitmapSource ToSource(this Bitmap bitmap)
         {
+            if (bitmap == null) return null;
             var intPtr = bitmap.GetHbitmap();
             var source = Imaging.CreateBitmapSourceFromHBitmap(intPtr, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
             NativeMethods.DeleteObject(intPtr);
@@ -66,6 +67,7 @@ namespace Paway.WPF
         /// </summary>
         public static Bitmap ToBitmap(this BitmapSource bitmapSource)
         {
+            if (bitmapSource == null) return null;
             // 如果源图像不是32bpp格式，先转换为Pbgra32格式
             if (bitmapSource.Format != PixelFormats.Pbgra32)
             {

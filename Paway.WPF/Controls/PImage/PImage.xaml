@@ -27,6 +27,6 @@
                          Visibility="{Binding ISave, RelativeSource={RelativeSource AncestorType={x:Type local:PImage}}, Converter={StaticResource boolToVisible}}"  />
         <TextBlock DockPanel.Dock="Right" Name="tbColor" FontSize="12" Width="80" Visibility="{Binding IPoint, RelativeSource={RelativeSource AncestorType={x:Type local:PImage}}, Converter={StaticResource boolToVisible}}"/>
         <TextBlock DockPanel.Dock="Right" Name="tbPoint" FontSize="12" Margin="5" Visibility="{Binding IPoint, RelativeSource={RelativeSource AncestorType={x:Type local:PImage}}, Converter={StaticResource boolToVisible}}"/>
-        <TextBlock Name="tbTitle" Margin="5"/>
+        <TextBlock Name="tbTitle" Margin="5" IsHitTestVisible="False"/>
     </DockPanel>
 </Canvas>

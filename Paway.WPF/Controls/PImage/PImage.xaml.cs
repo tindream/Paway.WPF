@@ -24,6 +24,14 @@ namespace Paway.WPF
             DependencyProperty.Register(nameof(IClose), typeof(bool), typeof(PImage));
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty IMoveProperty =
+            DependencyProperty.Register(nameof(IMove), typeof(bool), typeof(PImage), new PropertyMetadata(true));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty IZoomProperty =
+            DependencyProperty.Register(nameof(IZoom), typeof(bool), typeof(PImage), new PropertyMetadata(true));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty TitleProperty =
             DependencyProperty.Register(nameof(Title), typeof(string), typeof(PImage), new PropertyMetadata(null, OnTitleChanged));
         private static void OnTitleChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
@@ -47,7 +55,30 @@ namespace Paway.WPF
             }
         }
         /// <summary>
+        /// 允许移动
+        /// <para>默认值：true</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("允许移动")]
+        public bool IMove
+        {
+            get { return (bool)GetValue(IMoveProperty); }
+            set { SetValue(IMoveProperty, value); }
+        }
+        /// <summary>
+        /// 支持缩放
+        /// <para>默认值：true</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("支持缩放")]
+        public bool IZoom
+        {
+            get { return (bool)GetValue(IZoomProperty); }
+            set { SetValue(IZoomProperty, value); }
+        }
+        /// <summary>
         /// 显示关闭按钮
+        /// <para>默认值：false</para>
         /// </summary>
         [Category("扩展")]
         [Description("显示关闭按钮")]
@@ -83,6 +114,7 @@ namespace Paway.WPF
             DependencyProperty.Register(nameof(IPoint), typeof(bool), typeof(PImage), new PropertyMetadata(true));
         /// <summary>
         /// 显示坐标
+        /// <para>默认值：true</para>
         /// </summary>
         [Category("扩展")]
         [Description("显示坐标")]
@@ -97,6 +129,7 @@ namespace Paway.WPF
             DependencyProperty.Register(nameof(IReset), typeof(bool), typeof(PImage), new PropertyMetadata(false));
         /// <summary>
         /// 显示重置按钮
+        /// <para>默认值：false</para>
         /// </summary>
         [Category("扩展")]
         [Description("显示重置按钮")]
@@ -111,6 +144,7 @@ namespace Paway.WPF
             DependencyProperty.Register(nameof(ISave), typeof(bool), typeof(PImage), new PropertyMetadata(false));
         /// <summary>
         /// 显示保存按钮
+        /// <para>默认值：false</para>
         /// </summary>
         [Category("扩展")]
         [Description("显示保存按钮")]
@@ -133,9 +167,17 @@ namespace Paway.WPF
         /// </summary>
         private Point imagePoint = new Point(0, 0);
         /// <summary>
+        /// 图片显示位置(默认)
+        /// </summary>
+        private Point imagePointNormal = new Point(0, 0);
+        /// <summary>
         /// 图片显示大小
         /// </summary>
         private Size imageSize = new Size(0, 0);
+        /// <summary>
+        /// 图片显示大小(默认)
+        /// </summary>
+        private Size imageSizeNomral = new Size(0, 0);
         /// <summary>
         /// 图片宽高比
         /// </summary>
@@ -173,6 +215,11 @@ namespace Paway.WPF
         #endregion
 
         /// <summary>
+        /// 行双击路由事件
+        /// </summary>
+        public event EventHandler<MouseButtonEventArgs> DoubleEvent;
+
+        /// <summary>
         /// </summary>
         public PImage()
         {
@@ -194,10 +241,16 @@ namespace Paway.WPF
         {
             if (DateTime.Now.Subtract(clickTime).TotalMilliseconds < PConfig.DoubleInterval)
             {
+                DoubleEvent?.Invoke(this, e);
+                if (e.Handled) return;
                 var point = e.GetPosition(this);
                 if (clickPoint.X == point.X && clickPoint.Y == point.Y)
                 {
-                    this.Reset();
+                    if (this.imagePoint != this.imagePointNormal || this.imageSize != this.imageSizeNomral)
+                    {
+                        this.Reset();
+                        e.Handled = true;
+                    }
                 }
                 else
                 {
@@ -240,6 +293,8 @@ namespace Paway.WPF
                     }
                 }
                 imagePoint = new Point((ActualWidth - imageSize.Width) / 2, (ActualHeight - imageSize.Height) / 2);
+                this.imagePointNormal = imagePoint;
+                this.imageSizeNomral = imageSize;
             }
             this.LoadImage();
         }
@@ -343,7 +398,7 @@ namespace Paway.WPF
         protected override void OnMouseWheel(MouseWheelEventArgs e)
         {
             base.OnMouseWheel(e);
-            if (Source != null)
+            if (Source != null && IZoom)
             {
                 zoomPoint = e.GetPosition(this);
                 zoomRatioX = (zoomPoint.X - imagePoint.X) * 1.0 / imageSize.Width;
@@ -365,7 +420,7 @@ namespace Paway.WPF
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
             base.OnMouseDown(e);
-            if (Source != null && e.LeftButton == MouseButtonState.Pressed)
+            if (IMove && Source != null && e.LeftButton == MouseButtonState.Pressed)
             {
                 iMoving = true;
                 moveStart = e.GetPosition(this);
@@ -379,7 +434,7 @@ namespace Paway.WPF
         {
             base.OnMouseMove(e);
             dpDesc.Visibility = Visibility.Visible;
-            if (Source != null)
+            if (Source != null && (IMove || IPoint))
             {
                 var point = e.GetPosition(this);
                 if (GetPoint(point, out Point normal))

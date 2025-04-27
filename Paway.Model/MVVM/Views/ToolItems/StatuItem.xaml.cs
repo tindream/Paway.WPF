@@ -37,6 +37,7 @@ namespace Paway.Model
             DependencyProperty.Register(nameof(IConnect2), typeof(bool), typeof(StatuItem), new PropertyMetadata(false));
         /// <summary>
         /// 消息变色应用到背景或文本，默认为背景
+        /// <para>默认值：true</para>
         /// </summary>
         [Category("扩展")]
         [Description("消息变色应用到背景或文本，默认为背景")]
@@ -47,6 +48,7 @@ namespace Paway.Model
         }
         /// <summary>
         /// 显示连接状态
+        /// <para>默认值：false</para>
         /// </summary>
         [Category("扩展")]
         [Description("显示连接状态")]
@@ -57,6 +59,7 @@ namespace Paway.Model
         }
         /// <summary>
         /// 显示连接状态2
+        /// <para>默认值：false</para>
         /// </summary>
         [Category("扩展")]
         [Description("显示连接状态2")]
