@@ -276,8 +276,8 @@ namespace Paway.WPF
             }
             else if (imagePoint == new Point(0, 0) && imageSize == new Size(0, 0))
             {
-                imageRatio = Source.Width * 1.0 / Source.Height;
-                imageSize = new Size(Source.Width, Source.Height);
+                imageRatio = Source.PixelWidth * 1.0 / Source.PixelHeight;
+                imageSize = new Size(Source.PixelWidth, Source.PixelHeight);
                 {
                     var w = ActualWidth * 1.0 / imageSize.Width;
                     var h = ActualHeight * 1.0 / imageSize.Height;
@@ -476,16 +476,16 @@ namespace Paway.WPF
             if (Source != null)
             {
                 var exist = true;
-                result.X = (point.X - imagePoint.X) * Source.Width / imageSize.Width;
-                result.Y = (point.Y - imagePoint.Y) * Source.Width / imageSize.Width;
+                result.X = (point.X - imagePoint.X) * Source.PixelWidth / imageSize.Width;
+                result.Y = (point.Y - imagePoint.Y) * Source.PixelWidth / imageSize.Width;
                 if (result.X < 0)
                 {
                     result.X = 0;
                     exist = false;
                 }
-                else if (result.X > Source.Width - 1)
+                else if (result.X > Source.PixelWidth - 1)
                 {
-                    result.X = Source.Width - 1;
+                    result.X = Source.PixelWidth - 1;
                     exist = false;
                 }
                 if (result.Y < 0)
@@ -493,9 +493,9 @@ namespace Paway.WPF
                     result.Y = 0;
                     exist = false;
                 }
-                else if (result.Y > Source.Height - 1)
+                else if (result.Y > Source.PixelHeight - 1)
                 {
-                    result.Y = Source.Height - 1;
+                    result.Y = Source.PixelHeight - 1;
                     exist = false;
                 }
                 return exist;
@@ -510,8 +510,8 @@ namespace Paway.WPF
             var temp = new Point(0, 0);
             if (Source != null)
             {
-                temp.X = point.X * imageSize.Width / Source.Width + imagePoint.X;
-                temp.Y = point.Y * imageSize.Width / Source.Width + imagePoint.Y;
+                temp.X = point.X * imageSize.Width / Source.PixelWidth + imagePoint.X;
+                temp.Y = point.Y * imageSize.Width / Source.PixelWidth + imagePoint.Y;
             }
             return temp;
         }

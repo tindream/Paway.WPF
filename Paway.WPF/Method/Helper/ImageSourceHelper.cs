@@ -21,18 +21,30 @@ namespace Paway.WPF
         /// <summary>
         /// 文件转图片资源(不占用文件)
         /// </summary>
-        public static BitmapSource ToSource(this string file)
+        public static BitmapSource ToSource(this string fileName)
         {
-            var source = new BitmapImage();
-            using (var fs = File.OpenRead(file))
+            try
             {
-                source.BeginInit();
-                source.CacheOption = BitmapCacheOption.OnLoad;//图像缓存到内存中，不会占用文件，没有被引用时会被自动回收。
-                source.StreamSource = fs;
-                source.EndInit();
+                var source = new BitmapImage();
+                using (var fs = File.OpenRead(fileName))
+                {
+                    source.BeginInit();
+                    source.CacheOption = BitmapCacheOption.OnLoad;//图像缓存到内存中，不会占用文件，没有被引用时会被自动回收。
+                    source.StreamSource = fs;
+                    source.EndInit();
+                }
+                source.Freeze(); // 可选：使对象跨线程可用
+                return source;
             }
-            source.Freeze(); // 可选：使对象跨线程可用
-            return source;
+            catch (OutOfMemoryException ex)
+            {
+                if (!TMethod.IsValidImageFile(fileName))
+                {
+                    throw new Exception("文件不是有效的图像格式！", ex);
+                }
+                // 如果文件头有效，可能是真的内存不足
+                throw new Exception("加载图像时内存不足！", ex);
+            }
         }
         /// <summary>
         /// 内存流转图片资源
