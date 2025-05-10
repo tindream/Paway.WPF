@@ -129,7 +129,7 @@ namespace Paway.WPF
             DependencyProperty.Register(nameof(IReset), typeof(bool), typeof(PImage), new PropertyMetadata(false));
         /// <summary>
         /// 显示重置按钮
-        /// <para>默认值：false</para>
+        /// <para>默认值：true</para>
         /// </summary>
         [Category("扩展")]
         [Description("显示重置按钮")]
@@ -321,10 +321,10 @@ namespace Paway.WPF
             {
                 var width = imageSize.Width * bit;
                 var height = imageSize.Height * bit;
-                if (width / imageSize.Width > 16.0)
+                if (width / Source.PixelWidth > 32.0)
                 {
-                    width = imageSize.Width * 16;
-                    height = imageSize.Height * 16;
+                    width = Source.PixelWidth * 32;
+                    height = Source.PixelHeight * 32;
                 }
                 if (imageSize.Width == width) return;
                 imageSize.Width = width;
@@ -334,19 +334,19 @@ namespace Paway.WPF
             {
                 var width = imageSize.Width / bit;
                 var height = imageSize.Height / bit;
-                if (imageSize.Width / width > 20.0)
+                if (Source.PixelWidth / width > 10.0)
                 {
-                    width = imageSize.Width / 20;
-                    height = imageSize.Height / 20;
+                    width = Source.PixelWidth / 10;
+                    height = Source.PixelHeight / 10;
                 }
                 if (imageSize.Width == width) return;
                 imageSize.Width = width;
                 imageSize.Height = height;
             }
-            if (imageSize.Width * 1.0 / imageSize.Width > 0.9 && imageSize.Width * 1.0 / imageSize.Width < 1.1)
+            if (Source.PixelWidth * 1.0 / imageSize.Width > 0.9 && Source.PixelWidth * 1.0 / imageSize.Width < 1.1)
             {
-                imageSize.Width = imageSize.Width;
-                imageSize.Height = imageSize.Height;
+                imageSize.Width = Source.PixelWidth;
+                imageSize.Height = Source.PixelHeight;
             }
             if (imageSize.Width < 3)
             {
@@ -503,7 +503,7 @@ namespace Paway.WPF
             return false;
         }
         /// <summary>
-        /// 获取当前坐标点(原图)
+        /// 获取当前坐标点(从原图坐标转换)
         /// </summary>
         public Point ParsePoint(Point point)
         {

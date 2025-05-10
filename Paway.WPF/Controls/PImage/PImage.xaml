@@ -11,7 +11,8 @@
     <Canvas.Resources>
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Default\Default.xaml" />
     </Canvas.Resources>
-    <Image Name="image"/>
+    <Image Name="image"
+           RenderOptions.BitmapScalingMode="HighQuality" SnapsToDevicePixels="True"/>
     <DockPanel Name="dpDesc" Width="{Binding ElementName=canvas, Path=ActualWidth}" Visibility="Collapsed">
         <local:ButtonEXT DockPanel.Dock="Right" IsLight="True" ItemBorder="0" Radius="30" Padding="7" ItemBackground="Transparent" ToolTip="关闭"
                          Image="pack://application:,,,/Paway.WPF;component/Images/pImage/close_white.png|pack://application:,,,/Paway.WPF;component/Images/pImage/close_red.png" 

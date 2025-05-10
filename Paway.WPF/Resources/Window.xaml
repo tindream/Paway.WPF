@@ -166,6 +166,7 @@
         <Setter Property="WindowStyle" Value="SingleBorderWindow" />
         <!--解决Chrome窗体下元素边缘模糊的问题，此参数会导致放大缩小动画抖动-->
         <Setter Property="UseLayoutRounding" Value="True"/>
+        <!--解决像素对齐问题，确保 UI 元素在屏幕上的渲染位置与物理像素精确对齐。-->
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="WindowChrome.WindowChrome">

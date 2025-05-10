@@ -165,6 +165,11 @@ namespace Paway.WPF
         [Description("编辑")]
         public virtual string Edit { get; set; } = "编辑";
         /// <summary>
+        /// 重置
+        /// </summary>
+        [Description("重置")]
+        public virtual string Reset { get; set; } = "重置";
+        /// <summary>
         /// 保存
         /// </summary>
         [Description("保存")]
