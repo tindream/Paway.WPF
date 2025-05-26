@@ -27,6 +27,8 @@ namespace Paway.Test
     {
         #region 属性
         public string Title => Config.Title;
+        private DependencyObject Root;
+        private Frame Frame;
 
         private double _dValue = 10;
         public double DValue
@@ -56,20 +58,13 @@ namespace Paway.Test
             set { _sValue = value; OnPropertyChanged(); }
         }
 
-        private MenuAuthType _menuType;
-        public MenuAuthType MenuType
-        {
-            get { return _menuType; }
-            set { if (_menuType != value) { _menuType = value; OnPropertyChanged(); } }
-        }
-
         public string Language
         {
             get { return Config.LanguageStr; }
             set { Config.LanguageStr = value; Config.InitLanguage(); OnPropertyChanged(); }
         }
-        public ObservableCollection<NameInfo> LanguageObList { get; private set; } = new ObservableCollection<NameInfo>();
-        public ObservableCollection<ListViewItemModel> GridList { get; } = new ObservableCollection<ListViewItemModel>();
+        public ObservableCollection<TestInfo> GridList { get; } = new ObservableCollection<TestInfo>();
+        public List<ListViewItemModel> List { get; } = new List<ListViewItemModel>();
 
         #endregion
 
@@ -89,11 +84,11 @@ namespace Paway.Test
                 case "颜色":
                     Method.ShowWindow(Config.Window, new SelectColorWindow());
                     break;
-                case "3D":
-                    MessageWindow.Hit(Config.Window, item);
+                case "3D模型":
+                    Frame.Content = ViewlLocator.GetInstance<Test3DPage>();
                     break;
-                case "空":
-                    Method.Hit(Config.Window, item);
+                case "登录页":
+                    Frame.Content = ViewlLocator.GetInstance<LoginPage>();
                     break;
                 default:
                     if (Config.LanguageList.Any(c => c == item))
@@ -104,82 +99,32 @@ namespace Paway.Test
             }
             return base.Action(item);
         }
-        protected override void Action(ListViewCustom listView1)
-        {
-            base.Action(listView1);
-            if (listView1.SelectedItem is IListViewItem info)
-            {
-                switch (info.Text)
-                {
-                    case "A":
-                    case "B":
-                    case "C":
-                    case "D":
-                        var menuType = info.Text.Parse<MenuAuthType>();
-                        if (MenuType != menuType)
-                        {
-                            if (listView1.Items.Find("Text", MenuType.Description()) is IListViewItem last)
-                            {
-                                last.Desc = "\uf0d7";
-                            }
-                            MenuType = menuType;
-                            info.Desc = "\uf0d8";
-                        }
-                        else
-                        {
-                            info.Desc = "\uf0d7";
-                            MenuType = MenuAuthType.None;
-                        }
-                        listView1.SelectedIndex = -1;
-                        break;
-                }
-            }
-        }
-        public ICommand ListViewMouseDown => new RelayCommand<MouseButtonEventArgs>(e =>
-        {
-            if (e.Source is ListViewEXT listView1)
-            {
-                var point = Mouse.GetPosition(listView1);
-                var obj = listView1.InputHitTest(point);
-                if (Method.Parent(obj, out ListViewItem viewItem))
-                {
-                    Method.WaterAdorner(e, viewItem, 0, 0);
-                }
-            }
-        });
-        public ICommand ForegroundChanged => new RelayCommand<SliderEXT>(slider =>
-        {
-            var color = Method.ColorSelector(slider.Value / 7);
-            Config.Foreground = color;
-        });
-        public ICommand BackgroundChanged => new RelayCommand<SliderEXT>(slider =>
-        {
-            var color = Method.ColorSelector(slider.Value / 7);
-            Config.Background = color;
-        });
 
         #endregion
 
         public TestWindowModel()
         {
-            LanguageObList.Add(new NameInfo("中文"));
-            LanguageObList.Add(new NameInfo("A"));
-            LanguageObList.Add(new NameInfo("B"));
-
-
-            GridList.Add(new ListViewItemModel("Hello"));
-            GridList.Add(new ListViewItemModel("你好123")
+            var index = 0;
+            for (int i = 0; i < 5; i++)
             {
-                IsEnabled = false,
-                Image = new ImageEXT(null, @"pack://application:,,,/Paway.Test;component/Images/close_white.png")
-            });
-            for (int i = 0; i < 10; i++) GridList.Add(new ListViewItemModel()
+                var info = new TestInfo { Name = $"Hello{i + 1}" };
+                for (int j = 0; j < i; j++) info.List.Add(new ListViewItemModel($"B{j + 1}") { Id = ++index });
+                GridList.Add(info);
+            }
+            for (int j = 0; j < 5; j++) List.Add(new ListViewItemModel($"A{j + 1}") { Id = ++index });
+            this.MessengerInstance.Register<TestLoadMessage>(this, msg =>
             {
-                Text = i % 3 == 0 ? "A" + i : null,
-                Desc = i % 4 == 0 ? "D" + i : "",
-                IsEnabled = i != 5,
-                Image = new ImageEXT(@"pack://application:,,,/Paway.Test;component/Images/close.png")
+                this.Root = msg.Obj;
+                if (Method.Find(Root, out Frame frame, "frame"))
+                {
+                    this.Frame = frame;
+                }
             });
         }
+    }
+    public class TestInfo : BaseModelInfo
+    {
+        public string Name { get; set; }
+        public List<ListViewItemModel> List { get; set; } = new List<ListViewItemModel>();
     }
 }

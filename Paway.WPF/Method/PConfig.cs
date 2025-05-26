@@ -130,6 +130,7 @@ namespace Paway.WPF
         private static Color _color = Color.FromArgb(255, 64, 158, 255);
         /// <summary>
         /// 主题颜色
+        /// <para>409EFF</para>
         /// </summary>
         public new static Color Color
         {
@@ -191,18 +192,22 @@ namespace Paway.WPF
 
         /// <summary>
         /// 成功色
+        /// <para>2DB84D</para>
         /// </summary>
         public new static Color Success { get; set; } = Color.FromArgb(255, 45, 184, 77);
         /// <summary>
         /// 警告色
+        /// <para>FF8900</para>
         /// </summary>
-        public new static Color Warn { get; set; } = Color.FromArgb(255, 255, 153, 0);
+        public new static Color Warn { get; set; } = Color.FromArgb(255, 255, 137, 0);
         /// <summary>
         /// 错误色
+        /// <para>F8331E</para>
         /// </summary>
         public new static Color Error { get; set; } = Color.FromArgb(255, 248, 51, 30);
         /// <summary>
         /// 禁用色
+        /// <para>DimGray 105,105,105 #696969</para>
         /// </summary>
         public new static Color Disable { get; set; } = Colors.DimGray;
 

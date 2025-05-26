@@ -50,6 +50,10 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ScrollBarColorProperty =
             DependencyProperty.RegisterAttached(nameof(ScrollBarColor), typeof(Brush), typeof(DataGridEXT), new PropertyMetadata(Colors.Black.ToBrush()));
+        /// <summary>
+        /// </summary>
+        internal static readonly DependencyProperty IFullRowProperty =
+            DependencyProperty.RegisterAttached(nameof(IFullRow), typeof(bool), typeof(DataGridEXT), new PropertyMetadata(true));
 
         /// <summary>
         /// 自定义边框圆角
@@ -72,6 +76,16 @@ namespace Paway.WPF
         {
             get { return (BrushEXT)GetValue(ItemBrushProperty); }
             set { SetValue(ItemBrushProperty, value); }
+        }
+        /// <summary>
+        /// 鼠标移动时绘制整行样式
+        /// </summary>
+        [Category("扩展")]
+        [Description("鼠标移动时绘制整行样式")]
+        internal bool IFullRow
+        {
+            get { return (bool)GetValue(IFullRowProperty); }
+            set { SetValue(IFullRowProperty, value); }
         }
         /// <summary>
         /// 标题列背景颜色
@@ -308,6 +322,7 @@ namespace Paway.WPF
         {
             base.OnApplyTemplate();
             ScrollViewer = Template.FindName("Part_ScrollViewer", this) as ScrollViewerEXT;
+            this.IFullRow = SelectionUnit == DataGridSelectionUnit.FullRow;
             if (base.ItemsSource != null)
             {
                 LoadColumns();
@@ -551,7 +566,10 @@ namespace Paway.WPF
                         RoutedEvent = UIElement.MouseLeftButtonDownEvent,
                         Source = this
                     };
-                    PMethod.BeginInvoke(() => ScrollViewer.RaiseEvent(eventArg));
+                    PMethod.BeginInvoke(arg =>
+                    {
+                        if (!arg.Handled) ScrollViewer.RaiseEvent(eventArg);
+                    }, e);
                 }
             }
             base.OnPreviewMouseLeftButtonDown(e);

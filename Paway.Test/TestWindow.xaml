@@ -31,42 +31,20 @@
                        Command="{Binding ItemClickCommand}" CommandParameter="关于"/>
         </WindowFunctionBar>
     </WindowEXT.FunctionBarRight>
-    <DockPanel>
+    <DockPanel x:Name="Root">
         <model:StatuItem IConnect="True" DockPanel.Dock="Bottom"/>
-        <ScrollViewerEXT>
-            <DockPanel Width="250">
-                <StackPanel DockPanel.Dock="Top">
-                    <Grid>
-                        <Border Background="{StaticResource ColorSelector}" Height="3" CornerRadius="2" Margin="50,1,2,2"/>
-                        <SliderEXT Title="前景色" x:Name="sliderTheme2" Maximum="7" Value="2.62" AutoToolTipPrecision="2" TickFrequency="0.01"
-                                 TrackColorLinear="Transparent;Transparent" TrackBackground="Transparent" >
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="ValueChanged">
-                                    <i:InvokeCommandAction Command="{Binding ForegroundChanged}" CommandParameter="{Binding ElementName=sliderTheme2}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </SliderEXT>
-                    </Grid>
-                    <Grid>
-                        <Border Background="{StaticResource ColorSelector}" Height="3" CornerRadius="2" Margin="50,1,2,2"/>
-                        <SliderEXT Title="背景色" x:Name="sliderTheme3" Maximum="7" Value="2.62" AutoToolTipPrecision="2" TickFrequency="0.01"
-                                 TrackColorLinear="Transparent;Transparent" TrackBackground="Transparent" >
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="ValueChanged">
-                                    <i:InvokeCommandAction Command="{Binding BackgroundChanged}" CommandParameter="{Binding ElementName=sliderTheme3}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </SliderEXT>
-                    </Grid>
-                </StackPanel>
-                <WrapPanel DockPanel.Dock="Bottom">
-                    <TextBoxEXT Keyboard="All"/>
-                    <TextBoxEXT Keyboard="Num"/>
-                    <ButtonEXT Content="3D" Click="Button_Click" Command="{Binding ItemClickCommand}" CommandParameter="3D"/>
-                    <ButtonEXT Content="空" Click="Button_Click2" Command="{Binding ItemClickCommand}" CommandParameter="空"/>
-                </WrapPanel>
-            </DockPanel>
-        </ScrollViewerEXT>
         <Frame Name="frame" NavigationUIVisibility="Hidden"/>
+        <ListViewEXT ItemsSource="{Binding List}" Width="200" ItemWidthType="OneColumn"/>
+        <DataGridEXT ItemsSource="{Binding GridList}" SelectionUnit="Cell" Name="datagrid1">
+            <DataGridEXT.Columns>
+                <DataGridTemplateColumn Header="List" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ListViewEXT ItemsSource="{Binding List}" ItemWidthType="OneColumn" SelectedValuePath="Id" SelectedValue="{Binding DataContext.IValue, RelativeSource={RelativeSource AncestorType={x:Type local:TestWindow}}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGridEXT.Columns>
+        </DataGridEXT>
     </DockPanel>
 </WindowEXT>

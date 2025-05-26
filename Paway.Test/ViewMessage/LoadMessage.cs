@@ -10,4 +10,5 @@ namespace Paway.Test
 {
     public class TipLoadMessage : LoadMessage { }
     public class MainLoadMessage : LoadMessage { }
+    public class TestLoadMessage : LoadMessage { }
 }

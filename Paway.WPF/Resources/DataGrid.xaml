@@ -10,11 +10,23 @@
     <local:TopRightRadiusConverter x:Key="topRightRadiusConverter"/>
     <local:TopRadiusConverter x:Key="topRadiusConverter"/>
     <local:NoRadiusConverter x:Key="noRadiusConverter"/>
+    <local:BoolSelector x:Key="boolSelector"/>
 
     <Style TargetType="{x:Type DataGridCell}">
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content.Text}"/>
         <Style.Triggers >
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <MultiBinding Converter="{StaticResource boolSelector}">
+                            <Binding Path="IFullRow" RelativeSource="{RelativeSource AncestorType={x:Type local:DataGridEXT}}"/>
+                            <Binding Source="{x:Static Brushes.Transparent}"/>
+                            <Binding Path="ItemBrush.Normal.Result" RelativeSource="{RelativeSource AncestorType={x:Type local:DataGridEXT}}" />
+                        </MultiBinding>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="{Binding ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}}" />
                 <Setter Property="BorderBrush" Value="{Binding ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}}" />
@@ -25,11 +37,16 @@
     <Style TargetType="{x:Type DataGridRow}">
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{Binding ItemBrush.Normal.Result, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}}"/>
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <MultiBinding Converter="{StaticResource boolSelector}">
+                            <Binding Path="IFullRow" RelativeSource="{RelativeSource AncestorType={x:Type local:DataGridEXT}}"/>
+                            <Binding Path="ItemBrush.Normal.Result" RelativeSource="{RelativeSource AncestorType={x:Type local:DataGridEXT}}" />
+                            <Binding Source="{x:Static Brushes.Transparent}"/>
+                        </MultiBinding>
+                    </Setter.Value>
+                </Setter>
             </Trigger>
-            <!--<Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="{Binding ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}}"/>
-            </Trigger>-->
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="IsSelected" Value="True"/>

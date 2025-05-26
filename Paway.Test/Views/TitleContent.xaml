@@ -4,33 +4,16 @@
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                    mc:Ignorable="d" 
+                   DataContext="{Binding Test, Source={StaticResource Locator}}"
                    d:DesignHeight="30" d:DesignWidth="800">
     <Separator />
     <Menu>
-        <MenuItem Header="发送反馈2" IsCheckable="True"/>
-        <MenuItem Header="发送反馈3">
-            <MenuItem Header="报告问题"
-                              IsCheckable="True" />
-            <MenuItem Header="提供反馈"
-                              IsCheckable="True" />
+        <MenuItem Header="测试菜单">
+            <MenuItem Header="报告问题" IsCheckable="True" />
             <Separator />
-            <MenuItem Header="设置..." Icon="pack://application:,,,/Paway.Test;component/Images/left.png"/>
-        </MenuItem>
-        <MenuItem Header="发送反馈">
-            <MenuItem Header="报告问题"
-                              IsCheckable="True" />
-            <MenuItem Header="提供反馈"
-                              IsCheckable="True" />
-            <Separator />
-            <MenuItem Header="设置..." />
-            <MenuItem Header="发送反馈C">
-                <MenuItem Header="报告问题"
-                              IsCheckable="True"/>
-                <MenuItem Header="提供反馈"
-                              IsCheckable="True" />
-                <Separator />
-                <MenuItem Header="设置..." />
-            </MenuItem>
+            <MenuItem Header="3D模型" Command="{Binding ItemClickCommand}" CommandParameter="3D模型"/>
+            <MenuItem Header="登录页" Command="{Binding ItemClickCommand}" CommandParameter="登录页"
+                      Icon="pack://application:,,,/Paway.Test;component/Images/refresh.png"/>
         </MenuItem>
     </Menu>
 </WindowFunctionBar>

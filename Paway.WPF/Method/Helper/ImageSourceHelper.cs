@@ -25,6 +25,7 @@ namespace Paway.WPF
         {
             try
             {
+                if (fileName.IsEmpty()) return null;
                 var source = new BitmapImage();
                 using (var fs = File.OpenRead(fileName))
                 {

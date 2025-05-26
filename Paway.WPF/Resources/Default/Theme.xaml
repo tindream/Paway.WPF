@@ -36,8 +36,8 @@
     <SolidColorBrush x:Key="Success" Color="#2DB84D" />
     <Color x:Key="SuccessKey">#2DB84D</Color>
     <!--警告-->
-    <SolidColorBrush x:Key="Warn" Color="#FF9900" />
-    <Color x:Key="WarnKey">#FF9900</Color>
+    <SolidColorBrush x:Key="Warn" Color="#FF8900" />
+    <Color x:Key="WarnKey">#FF8900</Color>
     <!--错误-->
     <SolidColorBrush x:Key="Error" Color="#F8331E" />
     <Color x:Key="ErrorKey">#F8331E</Color>

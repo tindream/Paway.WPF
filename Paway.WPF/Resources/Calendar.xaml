@@ -502,7 +502,7 @@
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
                                         <local:ButtonEXT x:Name="PART_GoClear" Margin="-2,-4,0,-2" Content="{Binding LanguageBase.Clear, Source={StaticResource LB}}" Radius="0" ItemBorder="0,1,0,0"
-                                                         ItemBackground="#A0FF9900"/>
+                                                         ItemBackground="#A0FF8900"/>
                                         <local:ButtonEXT x:Name="PART_GoToday" Margin="0,-4,-2,-2" Grid.Column="1" Content="{Binding LanguageBase.Today, Source={StaticResource LB}}" Radius="0" ItemBorder="0,1,0,0"/>
                                     </Grid>
                                 </Grid>
