@@ -11,6 +11,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Paway.Helper;
 
@@ -121,23 +122,83 @@ namespace Paway.WPF
             });
         }
         /// <summary>
-        /// 装饰器窗体
+        /// 控件装饰器显示到Window
+        /// <para>模拟弹框</para>
         /// <para>支持移动</para>
         /// </summary>
-        public static CustomAdorner AdornerWindow(FrameworkElement element, FrameworkElement content, int backAlpha = 100, bool iTop = false)
+        public static CustomAdorner AdornerWindow(Window window, FrameworkElement content, int backAlpha = 100, bool iTop = false)
         {
-            var adorner = CustomAdorner(element, content, true, false, iTop);
-            MoveAdorner(adorner, backAlpha);
+            var adorner = CustomAdorner(window, content, true, false, iTop);
+            var canvas = adorner.GetCanvas();
+            canvas.Background = Colors.Black.ToAlpha(backAlpha).ToBrush();
+            MoveAdorner(adorner);
             return adorner;
+        }
+        /// <summary>
+        /// PImage装饰器显示到Window
+        /// <para>模拟弹框</para>
+        /// </summary>
+        public static void PImageFullAdorner(Window window, string name, BitmapSource source)
+        {
+            var pImage = new PImage();
+            pImage.IClose = true;
+            pImage.IPoint = false;
+            pImage.Title = name;
+            pImage.Source = source;
+            PageFullAdorner(window, pImage);
+        }
+        /// <summary>
+        /// 控件装饰器显示到Window
+        /// <para>模拟弹框</para>
+        /// <para>支持移动</para>
+        /// </summary>
+        public static void PageFullAdorner(Window window, IPageFullAdorner page, int backAlpha = 100, bool iBingParentSize = true, bool iTop = false, bool iMove = false)
+        {
+            CustomAdorner Adorner = null;
+            page.CloseEvent += (sender, e) =>
+            {
+                if (Adorner != null && PMethod.Parent(Adorner.GetElement(), out Window ower))
+                {
+                    PMethod.ClearAdorner(ower, Adorner);
+                    Adorner = null;
+                }
+            };
+            if (!(page is FrameworkElement element)) throw new WarningException("page 不是有效的 FrameworkElement");
+            var iExit = false;
+            var exitTime = DateTime.MinValue;
+            window.PreviewKeyDown += (sender, e) =>
+            {
+                if (e.Key == Key.Escape)
+                {
+                    if (iExit && DateTime.Now.Subtract(exitTime).TotalMilliseconds < PConfig.DoubleInterval)
+                    {
+                        var handle = Adorner != null;
+                        {
+                            if (Adorner != null && PMethod.Parent(Adorner.GetElement(), out Window ower))
+                            {
+                                PMethod.ClearAdorner(ower, Adorner);
+                                Adorner = null;
+                            }
+                        }
+                        e.Handled = handle;
+                        return;
+                    }
+                    iExit = true;
+                    exitTime = DateTime.Now;
+                }
+            };
+            Adorner = PMethod.CustomAdorner(window, element, true, iBingParentSize, iTop);
+            var canvas = Adorner.GetCanvas();
+            canvas.Background = Colors.Black.ToAlpha(backAlpha).ToBrush();
+            if (iMove) MoveAdorner(Adorner);
         }
         /// <summary>
         /// 移动装饰器内控件
         /// </summary>
-        private static void MoveAdorner(CustomAdorner adorner, int backAlpha = 100)
+        private static void MoveAdorner(CustomAdorner adorner)
         {
             var canvas = adorner.GetCanvas();
             var element = adorner.GetElement();
-            canvas.Background = Colors.Black.ToAlpha(backAlpha).ToBrush();
             //正在拖动标记
             bool iMoving = false;
             //拖拽起点

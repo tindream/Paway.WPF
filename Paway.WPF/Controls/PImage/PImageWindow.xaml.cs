@@ -1,6 +1,4 @@
-﻿using GalaSoft.MvvmLight.Messaging;
-using Paway.WPF;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -16,32 +14,32 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Paway.Model
+namespace Paway.WPF
 {
     /// <summary>
-    /// ImageWindow.xaml 的交互逻辑
+    /// PImageWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class ImageWindow : WindowEXT
+    public partial class PImageWindow : WindowEXT
     {
         /// <summary>
         /// Image显示窗体
         /// </summary>
-        public ImageWindow()
+        public PImageWindow()
         {
             InitializeComponent();
         }
         /// <summary>
-        /// Image显示窗体
+        /// PImageWindow显示窗体
         /// </summary>
-        public ImageWindow(string name, BitmapSource source) : this()
+        public PImageWindow(string name, BitmapSource source) : this()
         {
             this.Title = name;
             this.image.Source = source;
         }
         /// <summary>
-        /// Image显示窗体
+        /// PImageWindow显示窗体
         /// </summary>
-        public ImageWindow(string name, string filePath) : this()
+        public PImageWindow(string name, string filePath) : this()
         {
             this.Title = name;
             this.image.Source = filePath.ToSource();

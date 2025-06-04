@@ -15,7 +15,7 @@ namespace Paway.WPF
     /// <summary>
     /// PImage.xaml 的交互逻辑
     /// </summary>
-    public partial class PImage
+    public partial class PImage : IPageFullAdorner
     {
         #region 扩展参数
         /// <summary>
@@ -232,6 +232,13 @@ namespace Paway.WPF
         {
             this.Source = source;
             this.Title = title;
+        }
+        /// <summary>
+        /// PImage装饰器显示到Window
+        /// </summary>
+        public void Adorner(Window window, string name, BitmapSource source)
+        {
+            PMethod.PageFullAdorner(window, this);
         }
 
         /// <summary>
