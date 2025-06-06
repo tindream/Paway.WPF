@@ -35,7 +35,8 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(IQuery), typeof(bool), typeof(ComboTree), new PropertyMetadata(false));
 
         /// <summary>
-        /// 重写
+        /// 获取或设置的值 System.Windows.Controls.Primitives.Selector.SelectedItem, ，获得通过 System.Windows.Controls.Primitives.Selector.SelectedValuePath。
+        /// <para>重写</para>
         /// </summary>
         public new object SelectedValue
         {
@@ -43,7 +44,8 @@ namespace Paway.WPF
             set { SetValue(SelectedValueProperty, value); }
         }
         /// <summary>
-        /// 重写
+        /// 获取或设置当前所选内容中的第一项或如果所选内容为空则返回 null
+        /// <para>重写</para>
         /// </summary>
         public new object SelectedItem
         {

@@ -93,10 +93,31 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty InterceptProperty =
             DependencyProperty.RegisterAttached(nameof(Intercept), typeof(bool), typeof(TextBoxEXT), new PropertyMetadata(true));
+        /// <summary>
+        /// </summary>
+        public static readonly new DependencyProperty ForegroundProperty =
+            DependencyProperty.RegisterAttached(nameof(Foreground), typeof(Brush), typeof(TextBoxEXT), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnForegroundChanged));
 
         #endregion
 
         #region 扩展
+        /// <summary>
+        /// 获取或设置当前所选内容中的第一项或如果所选内容为空则返回 null
+        /// <para>重写</para>
+        /// </summary>
+        public new Brush Foreground
+        {
+            get { return (Brush)GetValue(ForegroundProperty); }
+            set { SetValue(ForegroundProperty, value); }
+        }
+        private static void OnForegroundChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is TextBoxEXT textBox)
+            {
+                textBox.SetValue(TextBlock.ForegroundProperty, textBox.Foreground);
+                textBox.CaretBrush = textBox.Foreground;
+            }
+        }
         /// <summary>
         /// 虚拟键盘类型
         /// <para>默认值：自动</para>

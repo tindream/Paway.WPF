@@ -132,7 +132,8 @@ namespace Paway.WPF
             set { SetValue(TimesProperty, value); }
         }
         /// <summary>
-        /// 重写
+        /// 获取或设置的值 System.Windows.Controls.Primitives.Selector.SelectedItem, ，获得通过 System.Windows.Controls.Primitives.Selector.SelectedValuePath。
+        /// <para>重写</para>
         /// </summary>
         public new object SelectedValue
         {
