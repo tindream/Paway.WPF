@@ -405,6 +405,14 @@ namespace Paway.WPF
         /// </summary>
         public static void FullscreenWindow(UIElement element)
         {
+            var fullScreenWindow = new Window
+            {
+                WindowStyle = System.Windows.WindowStyle.None,
+                WindowState = WindowState.Maximized,
+                ResizeMode = ResizeMode.NoResize,
+                ShowInTaskbar = false,
+            };
+            if (PMethod.Find(element, out Window window)) fullScreenWindow.Owner = window;
             var parent = VisualTreeHelper.GetParent(element);
             ContentPresenter content = null;
             Panel panel = null;
@@ -418,14 +426,7 @@ namespace Paway.WPF
                 panel = panel2;
                 panel.Children.Remove(element);
             }
-            var fullScreenWindow = new Window
-            {
-                WindowStyle = System.Windows.WindowStyle.None,
-                WindowState = WindowState.Maximized,
-                ResizeMode = ResizeMode.NoResize,
-                ShowInTaskbar = false,
-                Content = element
-            };
+            fullScreenWindow.Content = element;
             fullScreenWindow.Closed += (sender, e) =>
             {
                 fullScreenWindow.Content = null;
@@ -433,7 +434,6 @@ namespace Paway.WPF
                 else panel?.Children.Add(element);
                 parent = null;
             };
-
             fullScreenWindow.ShowDialog();
         }
         #endregion

@@ -54,7 +54,7 @@ namespace Paway.WPF
         /// Identifies the Transition dependency property.
         /// </summary>
         public static readonly DependencyProperty TransitionTypeProperty =
-            DependencyProperty.Register(nameof(TransitionType), typeof(TransitionType), typeof(TransitionControl), new PropertyMetadata(TransitionType.None, OnTransitionPropertyChanged));
+            DependencyProperty.Register(nameof(TransitionType), typeof(TransitionType), typeof(TransitionControl), new PropertyMetadata(TransitionType.FadeIn, OnTransitionPropertyChanged));
         /// <summary>
         /// TransitionProperty property changed handler.
         /// </summary>
@@ -93,7 +93,8 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 过渡动画类型
-        /// <para>默认值：None</para>
+        /// <para>默认值：FadeIn</para>
+        /// <para>有效值：None, FadeIn, Left, Right, Top, Bottom, Width, Height, ScanX, ScanY</para>
         /// </summary>
         [Category("扩展")]
         [Description("过渡动画类型")]
@@ -105,6 +106,18 @@ namespace Paway.WPF
                 SetValue(TransitionTypeProperty, value);
                 Refresh();
             }
+        }
+        /// <summary>
+        /// 过渡动画类型（不触发动画）
+        /// <para>默认值：FadeIn</para>
+        /// <para>有效值：None, FadeIn, Left, Right, Top, Bottom, Width, Height, ScanX, ScanY</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("过渡动画类型（不触发动画）")]
+        public TransitionType TransitionTypeNoTrigger
+        {
+            get { return (TransitionType)GetValue(TransitionTypeProperty); }
+            set { SetValue(TransitionTypeProperty, value); }
         }
 
         #endregion
@@ -197,10 +210,6 @@ namespace Paway.WPF
             if (PreviousContentPresentationSite != null) PreviousContentPresentationSite.RenderTransform = null;
             switch (TransitionType)
             {
-                case TransitionType.None:
-                case TransitionType.FadeIn:
-                case TransitionType.FadeOut:
-                    break;
                 case TransitionType.Left:
                     AnimationHelper.Start(PreviousContentPresentationSite, TransitionType.ToRight, Value, Time);
                     break;
@@ -213,6 +222,16 @@ namespace Paway.WPF
                 case TransitionType.Bottom:
                     AnimationHelper.Start(PreviousContentPresentationSite, TransitionType.ToTop, Value, Time);
                     break;
+                case TransitionType.Width:
+                    AnimationHelper.Start(PreviousContentPresentationSite, TransitionType.Width, Value, Time);
+                    break;
+                case TransitionType.Height:
+                    AnimationHelper.Start(PreviousContentPresentationSite, TransitionType.Height, Value, Time);
+                    break;
+                case TransitionType.ScanX:
+                case TransitionType.ScanY:
+                    AnimationHelper.Start(PreviousContentPresentationSite, TransitionType, Value, 1, Time);
+                    break;
             }
             switch (TransitionType)
             {
@@ -222,9 +241,26 @@ namespace Paway.WPF
                 case TransitionType.Bottom:
                     AnimationHelper.Start(CurrentContentPresentationSite, TransitionType, Value, Time, OnTransitionCompleted);
                     break;
+                case TransitionType.Width:
+                    AnimationHelper.Start(CurrentContentPresentationSite, TransitionType.Width, CurrentContentPresentationSite.ActualWidth, 0, Time);
+                    break;
+                case TransitionType.Height:
+                    AnimationHelper.Start(CurrentContentPresentationSite, TransitionType.Height, CurrentContentPresentationSite.ActualHeight, 0, Time);
+                    break;
+                case TransitionType.ScanX:
+                case TransitionType.ScanY:
+                    AnimationHelper.Start(CurrentContentPresentationSite, TransitionType, 1, 0, Time);
+                    break;
             }
-            AnimationHelper.Start(PreviousContentPresentationSite, TransitionType.FadeOut, Value, Time);
-            AnimationHelper.Start(CurrentContentPresentationSite, TransitionType.FadeIn, Value, Time, OnTransitionCompleted);
+            switch (TransitionType)
+            {
+                case TransitionType.None:
+                    break;
+                default:
+                    AnimationHelper.Start(PreviousContentPresentationSite, TransitionType.FadeOut, Value, Time);
+                    AnimationHelper.Start(CurrentContentPresentationSite, TransitionType.FadeIn, Value, Time, OnTransitionCompleted);
+                    break;
+            }
         }
 
         #endregion

@@ -37,9 +37,9 @@ namespace Paway.WPF
         public static double GetHorizontalOffset(FrameworkElement target) => (double)target.GetValue(HorizontalOffsetProperty);
         private static void OnHorizontalOffsetChanged(DependencyObject target, DependencyPropertyChangedEventArgs e)
         {
-            if (target is ScrollViewer scrollViewer)
+            if (target is ScrollViewer scrollViewer && e.NewValue is double toValue)
             {
-                scrollViewer.ScrollToHorizontalOffset((double)e.NewValue);
+                scrollViewer.ScrollToHorizontalOffset(toValue);
             }
         }
 
@@ -61,15 +61,7 @@ namespace Paway.WPF
         {
             if (target is ScrollViewer scrollViewer && e.NewValue is double toValue)
             {
-                var current = scrollViewer.VerticalOffset;
-                if (toValue > 0 && scrollViewer.Tag is ScrollInfo scrollInfo && Math.Abs(toValue - current) > scrollInfo.Interval)
-                {
-                    scrollInfo.Pause(scrollViewer);
-                }
-                else
-                {
-                    scrollViewer.ScrollToVerticalOffset(toValue);
-                }
+                scrollViewer.ScrollToVerticalOffset(toValue);
             }
         }
 
@@ -91,68 +83,35 @@ namespace Paway.WPF
             {
                 storyboard.RepeatBehavior = RepeatBehavior.Forever;
             }
-            var animY = new DoubleAnimation(0, scrollViewer.ScrollableHeight, TimeSpan.FromSeconds(time))
+            if (scrollViewer.ScrollableHeight > 0)
             {
-                BeginTime = TimeSpan.FromSeconds(beginTime)
-            };
-            //animY.EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut };//EasingMode：滚动方式
-            //animY.AutoReverse = true;
-            Storyboard.SetTarget(animY, scrollViewer);
-            Storyboard.SetTargetName(animY, scrollViewer.Name);
-            Storyboard.SetTargetProperty(animY, new PropertyPath(ScrollViewerBehavior.VerticalOffsetProperty));
-            storyboard.Children.Add(animY);
-
-            scrollViewer.Tag = new ScrollInfo(storyboard, time, beginTime, scrollViewer.ScrollableHeight / time / 12);
+                var animY = new DoubleAnimation(0, scrollViewer.ScrollableHeight, TimeSpan.FromSeconds(time))
+                {
+                    BeginTime = TimeSpan.FromSeconds(beginTime)
+                };
+                //animY.EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut };//EasingMode：滚动方式
+                //animY.AutoReverse = true;
+                Storyboard.SetTarget(animY, scrollViewer);
+                Storyboard.SetTargetName(animY, scrollViewer.Name);
+                Storyboard.SetTargetProperty(animY, new PropertyPath(ScrollViewerBehavior.VerticalOffsetProperty));
+                storyboard.Children.Add(animY);
+            }
+            else if (scrollViewer.ScrollableWidth > 0)
+            {
+                var animX = new DoubleAnimation(0, scrollViewer.ScrollableWidth, TimeSpan.FromSeconds(time))
+                {
+                    BeginTime = TimeSpan.FromSeconds(beginTime)
+                };
+                //animY.EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut };//EasingMode：滚动方式
+                //animY.AutoReverse = true;
+                Storyboard.SetTarget(animX, scrollViewer);
+                Storyboard.SetTargetName(animX, scrollViewer.Name);
+                Storyboard.SetTargetProperty(animX, new PropertyPath(ScrollViewerBehavior.HorizontalOffsetProperty));
+                storyboard.Children.Add(animX);
+            }
             storyboard.Begin();
         }
 
         #endregion
-
-        /// <summary>
-        /// 自动滚动数据
-        /// </summary>
-        private class ScrollInfo
-        {
-            /// <summary>
-            /// 故事板
-            /// </summary>
-            public Storyboard Storyboard { get; set; }
-            /// <summary>
-            /// 间隔判断
-            /// </summary>
-            public double Interval { get; set; }
-            /// <summary>
-            /// 运行时间
-            /// </summary>
-            public double Time { get; set; }
-            /// <summary>
-            /// 延迟停止时间
-            /// </summary>
-            public double BeginTime { get; set; }
-            /// <summary>
-            /// 暂停时间
-            /// </summary>
-            public DateTime PauseTime { get; set; }
-
-            public ScrollInfo(Storyboard storyboard, double time, double beginTime, double interval)
-            {
-                this.Storyboard = storyboard;
-                this.Time = time;
-                this.BeginTime = beginTime;
-                this.Interval = interval;
-            }
-            public void Pause(ScrollViewer scrollViewer)
-            {
-                var autoTime = scrollViewer.VerticalOffset * this.Time / scrollViewer.ScrollableHeight + this.BeginTime;
-                this.PauseTime = DateTime.Now;
-                this.Storyboard.Pause();
-                this.Storyboard.Seek(TimeSpan.FromSeconds(autoTime));
-                Task.Run(() =>
-                {
-                    Thread.Sleep((int)(this.BeginTime * 1000 / 2));
-                    this.Storyboard.Resume();
-                });
-            }
-        }
     }
 }

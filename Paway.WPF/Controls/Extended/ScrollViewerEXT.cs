@@ -144,11 +144,11 @@ namespace Paway.WPF
         {
             var verticalOffset = endPoint.Y - startPoint.Value.Y;
             var horizontalOffset = endPoint.X - startPoint.Value.X;
-            if (verticalOffset != 0 && this.ScrollableHeight > 0 && this.VerticalScrollBarVisibility != ScrollBarVisibility.Hidden)
+            if (verticalOffset != 0 && this.ScrollableHeight > 0 && this.VerticalScrollBarVisibility != ScrollBarVisibility.Disabled)
             {
                 this.ScrollToVerticalOffset(this.VerticalOffset - verticalOffset);
             }
-            if (horizontalOffset != 0 && this.ScrollableWidth > 0 && this.HorizontalScrollBarVisibility != ScrollBarVisibility.Hidden)
+            if (horizontalOffset != 0 && this.ScrollableWidth > 0 && this.HorizontalScrollBarVisibility != ScrollBarVisibility.Disabled)
             {
                 this.ScrollToHorizontalOffset(this.HorizontalOffset - horizontalOffset);
             }
@@ -160,11 +160,11 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnMouseWheel(MouseWheelEventArgs e)
         {
-            if (this.ScrollableHeight > 0 && this.VerticalScrollBarVisibility != ScrollBarVisibility.Hidden)
+            if (this.ScrollableHeight > 0 && this.VerticalScrollBarVisibility != ScrollBarVisibility.Disabled)
             {
                 if (ScrollInterval != 0) this.ScrollToVerticalOffset(this.VerticalOffset - e.Delta / 120 * ScrollInterval);
             }
-            else if (this.ScrollableWidth > 0 && this.HorizontalScrollBarVisibility != ScrollBarVisibility.Hidden)
+            else if (this.ScrollableWidth > 0 && this.HorizontalScrollBarVisibility != ScrollBarVisibility.Disabled)
             {
                 if (ScrollInterval != 0) this.ScrollToHorizontalOffset(this.HorizontalOffset - e.Delta / 120 * 50);
                 else if (e.Delta > 0) this.LineLeft();
