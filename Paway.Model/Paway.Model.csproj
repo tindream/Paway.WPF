@@ -10,6 +10,7 @@
 		<Tags>WPF Model</Tags>
 		<AssemblyName>Paway.Model</AssemblyName>
 		<RootNamespace>Paway.Model</RootNamespace>
+		<PlatformTarget>AnyCPU</PlatformTarget>
 		<OutputPath>..\bin\$(Configuration)</OutputPath>
 	</PropertyGroup>
 

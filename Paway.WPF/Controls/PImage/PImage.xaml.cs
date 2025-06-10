@@ -246,7 +246,7 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
-            if (DateTime.Now.Subtract(clickTime).TotalMilliseconds < PConfig.DoubleInterval)
+            if (e.LeftButton == MouseButtonState.Pressed && DateTime.Now.Subtract(clickTime).TotalMilliseconds < PConfig.DoubleInterval)
             {
                 DoubleEvent?.Invoke(this, e);
                 if (e.Handled) return;
@@ -265,7 +265,7 @@ namespace Paway.WPF
                     clickTime = DateTime.Now;
                 }
             }
-            else
+            else if (e.LeftButton == MouseButtonState.Pressed)
             {
                 clickPoint = e.GetPosition(this);
                 clickTime = DateTime.Now;

@@ -39,7 +39,15 @@ namespace Paway.WPF
         {
             if (target is ScrollViewer scrollViewer && e.NewValue is double toValue)
             {
-                scrollViewer.ScrollToHorizontalOffset(toValue);
+                var current = scrollViewer.HorizontalOffset;
+                if (toValue > 0 && scrollViewer.Tag is ScrollInfo scrollInfo && Math.Abs(toValue - current) > scrollInfo.Interval)
+                {
+                    scrollInfo.Pause(scrollViewer);
+                }
+                else
+                {
+                    scrollViewer.ScrollToHorizontalOffset(toValue);
+                }
             }
         }
 
@@ -61,7 +69,15 @@ namespace Paway.WPF
         {
             if (target is ScrollViewer scrollViewer && e.NewValue is double toValue)
             {
-                scrollViewer.ScrollToVerticalOffset(toValue);
+                var current = scrollViewer.VerticalOffset;
+                if (toValue > 0 && scrollViewer.Tag is ScrollInfo scrollInfo && Math.Abs(toValue - current) > scrollInfo.Interval)
+                {
+                    scrollInfo.Pause(scrollViewer);
+                }
+                else
+                {
+                    scrollViewer.ScrollToVerticalOffset(toValue);
+                }
             }
         }
 
@@ -95,6 +111,7 @@ namespace Paway.WPF
                 Storyboard.SetTargetName(animY, scrollViewer.Name);
                 Storyboard.SetTargetProperty(animY, new PropertyPath(ScrollViewerBehavior.VerticalOffsetProperty));
                 storyboard.Children.Add(animY);
+                scrollViewer.Tag = new ScrollInfo(storyboard, time, beginTime, scrollViewer.ScrollableHeight / time / 12);
             }
             else if (scrollViewer.ScrollableWidth > 0)
             {
@@ -108,10 +125,72 @@ namespace Paway.WPF
                 Storyboard.SetTargetName(animX, scrollViewer.Name);
                 Storyboard.SetTargetProperty(animX, new PropertyPath(ScrollViewerBehavior.HorizontalOffsetProperty));
                 storyboard.Children.Add(animX);
+                scrollViewer.Tag = new ScrollInfo(storyboard, time, beginTime, scrollViewer.ScrollableWidth / time / 12);
             }
+            scrollViewer.PreviewMouseDown += ScrollViewer_PreviewMouseDown;
             storyboard.Begin();
+        }
+        private static void ScrollViewer_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (sender is ScrollViewer scrollViewer && scrollViewer.Tag is ScrollInfo scrollInfo)
+            {
+                scrollInfo.Pause(scrollViewer);
+            }
         }
 
         #endregion
+
+        /// <summary>
+        /// 自动滚动数据
+        /// </summary>
+        private class ScrollInfo
+        {
+            /// <summary>
+            /// 故事板
+            /// </summary>
+            public Storyboard Storyboard { get; set; }
+            /// <summary>
+            /// 间隔判断
+            /// </summary>
+            public double Interval { get; set; }
+            /// <summary>
+            /// 运行时间
+            /// </summary>
+            public double Time { get; set; }
+            /// <summary>
+            /// 延迟停止时间
+            /// </summary>
+            public double BeginTime { get; set; }
+            /// <summary>
+            /// 暂停序号，用于重复暂停
+            /// </summary>
+            private int PauseIndex;
+
+            public ScrollInfo(Storyboard storyboard, double time, double beginTime, double interval)
+            {
+                this.Storyboard = storyboard;
+                this.Time = time;
+                this.BeginTime = beginTime;
+                this.Interval = interval;
+            }
+            public void Pause(ScrollViewer scrollViewer)
+            {
+                var autoTime = 0d;
+                if (scrollViewer.ScrollableHeight > 0) autoTime = scrollViewer.VerticalOffset * this.Time / scrollViewer.ScrollableHeight + this.BeginTime;
+                else if (scrollViewer.ScrollableWidth > 0) autoTime = scrollViewer.HorizontalOffset * this.Time / scrollViewer.ScrollableWidth + this.BeginTime;
+                this.Storyboard.Pause();
+                this.Storyboard.Seek(TimeSpan.FromSeconds(autoTime));
+                var index = scrollViewer.Lock(() => { return ++this.PauseIndex; });
+                Task.Run(() =>
+                {
+                    Thread.Sleep((int)(this.BeginTime * 1000));
+                    if (index == this.PauseIndex)
+                    {
+                        if (scrollViewer is ScrollViewerEXT viewerEXT && viewerEXT.IDrag) this.Pause(scrollViewer);
+                        else this.Storyboard.Resume();
+                    }
+                });
+            }
+        }
     }
 }

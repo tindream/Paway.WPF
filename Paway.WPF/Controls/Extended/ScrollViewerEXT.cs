@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -88,8 +89,41 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public ScrollViewerEXT() { }
+        /// <summary>
+        /// 监听ScrollBar按下抬起状态
+        /// </summary>
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            if (Template.FindName("PART_VerticalScrollBar", this) is ScrollBar scrollBarV)
+            {
+                scrollBarV.PreviewMouseDown -= ScrollBar_PreviewMouseDown;
+                scrollBarV.PreviewMouseDown += ScrollBar_PreviewMouseDown;
+                scrollBarV.PreviewMouseUp -= ScrollBar_PreviewMouseUp;
+                scrollBarV.PreviewMouseUp += ScrollBar_PreviewMouseUp;
+            }
+            if (Template.FindName("PART_HorizontalScrollBar", this) is ScrollBar scrollBarH)
+            {
+                scrollBarH.PreviewMouseDown -= ScrollBar_PreviewMouseDown;
+                scrollBarH.PreviewMouseDown += ScrollBar_PreviewMouseDown;
+                scrollBarH.PreviewMouseUp -= ScrollBar_PreviewMouseUp;
+                scrollBarH.PreviewMouseUp += ScrollBar_PreviewMouseUp;
+            }
+        }
+        private void ScrollBar_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            this.IDrag = false;
+        }
+        private void ScrollBar_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.IDrag = true;
+        }
 
         #region 拖动滚动
+        /// <summary>
+        /// 正在拖动
+        /// </summary>
+        internal bool IDrag;
         private Point? startPoint;
         /// <summary>
         /// 按下开始拖动
@@ -102,6 +136,7 @@ namespace Paway.WPF
                 {
                     if (PMethod.Parent(this, out Window window)) window.Cursor = Cursors.Hand;
                     this.startPoint = e.GetPosition(this);
+                    this.IDrag = true;
                     //尝试将鼠标强制捕获到控件
                     CaptureMouse();
                     e.Handled = true;
@@ -131,6 +166,7 @@ namespace Paway.WPF
             {
                 Calc(e.GetPosition(this));
                 this.startPoint = null;
+                this.IDrag = false;
                 //当控件具有鼠标捕获的话，则释放该捕获。
                 ReleaseMouseCapture();
                 if (PMethod.Parent(this, out Window window)) window.Cursor = null;
