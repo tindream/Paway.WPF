@@ -127,8 +127,11 @@ namespace Paway.WPF
                 storyboard.Children.Add(animX);
                 scrollViewer.Tag = new ScrollInfo(storyboard, time, beginTime, scrollViewer.ScrollableWidth / time / 12);
             }
-            scrollViewer.PreviewMouseDown += ScrollViewer_PreviewMouseDown;
-            storyboard.Begin();
+            if (storyboard.Children.Count > 0)
+            {
+                scrollViewer.PreviewMouseDown += ScrollViewer_PreviewMouseDown;
+                storyboard.Begin();
+            }
         }
         private static void ScrollViewer_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {

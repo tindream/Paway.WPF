@@ -208,6 +208,20 @@ namespace Paway.WPF
             //this.ColumnHeaderHeight = 42;
             this.MouseDoubleClick += DataGridEXT_MouseDoubleClick;
         }
+        /// <summary>
+        /// 属性更新时重加载
+        /// </summary>
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+            if (base.ItemsSource != null && ScrollViewer != null)
+            {
+                if (e.Property == ItemsSourceProperty || e.Property == ICustomColumnHeaderProperty || e.Property == BorderThicknessProperty || e.Property == GridLinesVisibilityProperty)
+                {
+                    LoadColumns();
+                }
+            }
+        }
         private void DataGridEXT_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (PMethod.Parent(e.OriginalSource, out DataGridRow row))
@@ -286,21 +300,6 @@ namespace Paway.WPF
         /// </summary>
         private readonly List<DataGridColumn> columnsReady = new List<DataGridColumn>();
         /// <summary>
-        /// 获取或设置用于生成 System.Windows.Controls.ItemsControl 的内容的集合。
-        /// <para>重载数据绑定</para>
-        /// </summary>
-        [Bindable(true)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new IEnumerable ItemsSource
-        {
-            get { return base.ItemsSource; }
-            set
-            {
-                base.ItemsSource = value;
-                LoadColumns();
-            }
-        }
-        /// <summary>
         /// 初始化时缓存自定义列样式
         /// </summary>
         protected override void OnInitialized(EventArgs e)
@@ -321,8 +320,8 @@ namespace Paway.WPF
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            ScrollViewer = Template.FindName("Part_ScrollViewer", this) as ScrollViewerEXT;
             this.IFullRow = SelectionUnit == DataGridSelectionUnit.FullRow;
+            ScrollViewer = Template.FindName("Part_ScrollViewer", this) as ScrollViewerEXT;
             if (base.ItemsSource != null)
             {
                 LoadColumns();
@@ -386,23 +385,25 @@ namespace Paway.WPF
             if (ICustomColumnHeader)
             {
                 var fill = this.ColumnWidth.UnitType == DataGridLengthUnitType.Star || columns.Any(c => c.Width.UnitType == DataGridLengthUnitType.Star);
+                var iNoBorder = this.BorderThickness == new Thickness();
+                var iBorderStyleName = iNoBorder ? "NoBorder" : null;
+                var firstColumn = columns.Find(c => c.Visibility == Visibility.Visible);
+                var lastColumn = columns.FindLast(c => c.Visibility == Visibility.Visible);
                 if (fill)
                 {
-                    var firstColumn = columns.Find(c => c.Visibility == Visibility.Visible);
-                    var lastColumn = columns.FindLast(c => c.Visibility == Visibility.Visible);
                     if (firstColumn != null && lastColumn != null)
                     {
                         if (firstColumn.Equals(lastColumn))
                         {
-                            lastColumn.HeaderStyle = (Style)TryFindResource("Only1ColumnHeaderStyle");
+                            lastColumn.HeaderStyle = (Style)TryFindResource("OnlyOneColumnHeaderStyle" + iBorderStyleName);
                         }
                         else
                         {
-                            firstColumn.HeaderStyle = (Style)TryFindResource("FirstColumnHeaderStyle");
-                            lastColumn.HeaderStyle = (Style)TryFindResource("LastColumnHeaderStyle");
+                            firstColumn.HeaderStyle = (Style)TryFindResource("FirstColumnHeaderStyle" + iBorderStyleName);
+                            lastColumn.HeaderStyle = (Style)TryFindResource("LastColumnHeaderStyle" + iBorderStyleName);
                         }
                     }
-                    if (TryFindResource("NormalColumnHeaderStyle") is Style normalColumnHeaderStyle)
+                    if (TryFindResource("NormalColumnHeaderStyle" + iBorderStyleName) is Style normalColumnHeaderStyle)
                     {
                         foreach (var column in columns)
                         {
@@ -412,15 +413,24 @@ namespace Paway.WPF
                 }
                 else
                 {
-                    var firstColumn = columns.Find(c => c.Visibility == Visibility.Visible);
-                    if (firstColumn != null) firstColumn.HeaderStyle = (Style)TryFindResource("FirstColumnHeaderStyle");
-                    if (TryFindResource("NormalColumnHeaderStyle") is Style normalColumnHeaderStyle)
+                    if (firstColumn != null) firstColumn.HeaderStyle = (Style)TryFindResource("FirstColumnHeaderStyle" + iBorderStyleName);
+                    if (TryFindResource("NormalColumnHeaderStyle" + iBorderStyleName) is Style normalColumnHeaderStyle)
                     {
                         foreach (var column in columns)
                         {
                             if (!column.Equals(firstColumn)) column.HeaderStyle = normalColumnHeaderStyle;
                         }
                     }
+                }
+                if (firstColumn != null && iNoBorder)
+                {
+                    if (this.GridLinesVisibility == DataGridGridLinesVisibility.All || this.GridLinesVisibility == DataGridGridLinesVisibility.Vertical)
+                        firstColumn.CellStyle = (Style)TryFindResource("FirstColumnContentStyle");
+                }
+                if (lastColumn != null && !iNoBorder)
+                {
+                    if (this.GridLinesVisibility == DataGridGridLinesVisibility.All || this.GridLinesVisibility == DataGridGridLinesVisibility.Vertical)
+                        lastColumn.CellStyle = (Style)TryFindResource("LastColumnContentStyle");
                 }
             }
             this.Columns.Clear();

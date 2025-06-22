@@ -27,14 +27,6 @@ namespace Paway.WPF
             DependencyProperty.RegisterAttached(nameof(ColumnHeader), typeof(bool), typeof(ComboQuery), new PropertyMetadata(false));
         /// <summary>
         /// </summary>
-        public static readonly new DependencyProperty SelectedValueProperty =
-            DependencyProperty.RegisterAttached(nameof(SelectedValue), typeof(object), typeof(ComboQuery), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedValueChanged));
-        /// <summary>
-        /// </summary>
-        public static readonly new DependencyProperty SelectedItemProperty =
-            DependencyProperty.RegisterAttached(nameof(SelectedItem), typeof(object), typeof(ComboQuery));
-        /// <summary>
-        /// </summary>
         public static readonly DependencyProperty ColumnWidthProperty =
             DependencyProperty.RegisterAttached(nameof(ColumnWidth), typeof(DataGridLength), typeof(ComboQuery), new PropertyMetadata(new DataGridLength(1, DataGridLengthUnitType.Star)));
 
@@ -60,46 +52,6 @@ namespace Paway.WPF
             get { return (DataGridLength)GetValue(ColumnWidthProperty); }
             set { SetValue(ColumnWidthProperty, value); }
         }
-        /// <summary>
-        /// 获取或设置的值 System.Windows.Controls.Primitives.Selector.SelectedItem, ，获得通过 System.Windows.Controls.Primitives.Selector.SelectedValuePath。
-        /// <para>重写</para>
-        /// </summary>
-        public new object SelectedValue
-        {
-            get { return (object)GetValue(SelectedValueProperty); }
-            set { SetValue(SelectedValueProperty, value); }
-        }
-        /// <summary>
-        /// 获取或设置当前所选内容中的第一项或如果所选内容为空则返回 null
-        /// <para>重写</para>
-        /// </summary>
-        public new object SelectedItem
-        {
-            get { return (object)GetValue(SelectedItemProperty); }
-            set { SetValue(SelectedItemProperty, value); }
-        }
-        private static void OnSelectedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is ComboQuery view)
-            {
-                IEnumerable list = view.List ?? view.ItemsSource;
-                if (list != null)
-                {
-                    var id = view.SelectedValue.ToInt();
-                    if (list.Find(nameof(IId.Id), id) is IId item)
-                    {
-                        view.InitText(item);
-                    }
-                }
-            }
-        }
-        private void InitText(IId item)
-        {
-            this.SelectedItem = item;
-            this.last = this.DisplayMemberPath.IsEmpty() ? item.ToString() : item.GetValue(this.DisplayMemberPath).ToStrings();
-            this.Text = this.last;
-            if (this.List != null) this.ItemsSource = this.List;
-        }
 
         #endregion
 
@@ -120,6 +72,26 @@ namespace Paway.WPF
         public ComboQuery()
         {
             DefaultStyleKey = typeof(ComboQuery);
+            DependencyPropertyDescriptor.FromProperty(SelectedValueProperty, typeof(ComboQuery)).AddValueChanged(this, OnSelectedValueChanged);
+        }
+        private void OnSelectedValueChanged(object sender, EventArgs e)
+        {
+            IEnumerable list = this.List ?? this.ItemsSource;
+            if (list != null)
+            {
+                var id = this.SelectedValue.ToInt();
+                if (list.Find(nameof(IId.Id), id) is IId item)
+                {
+                    this.InitText(item);
+                }
+            }
+        }
+        private void InitText(IId item)
+        {
+            this.SelectedItem = item;
+            this.last = this.DisplayMemberPath.IsEmpty() ? item.ToString() : item.GetValue(this.DisplayMemberPath).ToStrings();
+            this.Text = this.last;
+            if (this.List != null) this.ItemsSource = this.List;
         }
 
         #region 关联选择

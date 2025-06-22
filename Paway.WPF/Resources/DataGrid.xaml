@@ -128,21 +128,46 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style x:Key="LastColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource ColumnHeaderStyle}">
-        <Setter Property="BorderThickness" Value="0,0,0,1"/>
-        <Setter Property="Tag" Value="{Binding Path=(local:DataGridMonitor.Radius), RelativeSource={RelativeSource Self}, Converter={StaticResource topRightRadiusConverter}}"/>
-    </Style>
     <Style x:Key="FirstColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource ColumnHeaderStyle}">
         <Setter Property="BorderThickness" Value="0,0,1,1"/>
         <Setter Property="Tag" Value="{Binding Path=(local:DataGridMonitor.Radius), RelativeSource={RelativeSource Self}, Converter={StaticResource topLeftRadiusConverter}}"/>
     </Style>
-    <Style x:Key="Only1ColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource ColumnHeaderStyle}">
+    <Style x:Key="LastColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource ColumnHeaderStyle}">
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="Tag" Value="{Binding Path=(local:DataGridMonitor.Radius), RelativeSource={RelativeSource Self}, Converter={StaticResource topRightRadiusConverter}}"/>
+    </Style>
+    <Style x:Key="OnlyOneColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource ColumnHeaderStyle}">
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
         <Setter Property="Tag" Value="{Binding Path=(local:DataGridMonitor.Radius), RelativeSource={RelativeSource Self}, Converter={StaticResource topRadiusConverter}}"/>
     </Style>
     <Style x:Key="NormalColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource ColumnHeaderStyle}">
         <Setter Property="BorderThickness" Value="0,0,1,1"/>
         <Setter Property="Tag" Value="{Binding Path=(local:DataGridMonitor.Radius), RelativeSource={RelativeSource Self}, Converter={StaticResource noRadiusConverter}}"/>
+    </Style>
+    
+    <Style x:Key="FirstColumnHeaderStyleNoBorder" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource ColumnHeaderStyle}">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Tag" Value="{Binding Path=(local:DataGridMonitor.Radius), RelativeSource={RelativeSource Self}, Converter={StaticResource topLeftRadiusConverter}}"/>
+    </Style>
+    <Style x:Key="LastColumnHeaderStyleNoBorder" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource ColumnHeaderStyle}">
+        <Setter Property="BorderThickness" Value="0,1,1,1"/>
+        <Setter Property="Tag" Value="{Binding Path=(local:DataGridMonitor.Radius), RelativeSource={RelativeSource Self}, Converter={StaticResource topRightRadiusConverter}}"/>
+    </Style>
+    <Style x:Key="OnlyOneColumnHeaderStyleNoBorder" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource ColumnHeaderStyle}">
+        <Setter Property="BorderThickness" Value="0,1,1,1"/>
+        <Setter Property="Tag" Value="{Binding Path=(local:DataGridMonitor.Radius), RelativeSource={RelativeSource Self}, Converter={StaticResource topRadiusConverter}}"/>
+    </Style>
+    <Style x:Key="NormalColumnHeaderStyleNoBorder" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource ColumnHeaderStyle}">
+        <Setter Property="BorderThickness" Value="0,1,1,1"/>
+        <Setter Property="Tag" Value="{Binding Path=(local:DataGridMonitor.Radius), RelativeSource={RelativeSource Self}, Converter={StaticResource noRadiusConverter}}"/>
+    </Style>
+
+    <Style x:Key="FirstColumnContentStyle" TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource {x:Type DataGridCell}}">
+        <Setter Property="BorderThickness" Value="1,0,0,0"/>
+        <Setter Property="BorderBrush" Value="LightGray"/>
+    </Style>
+    <Style x:Key="LastColumnContentStyle" TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource {x:Type DataGridCell}}">
+        <Setter Property="Margin" Value="0,0,-1,0"/>
     </Style>
 
     <Style TargetType="{x:Type local:DataGridEXT}" BasedOn="{StaticResource Config}">
@@ -164,12 +189,12 @@
         <Setter Property="GridLinesVisibility" Value="Horizontal"/>
         <Setter Property="HorizontalGridLinesBrush">
             <Setter.Value>
-                <SolidColorBrush Color="#E3E3E3"/>
+                <SolidColorBrush Color="LightGray"/>
             </Setter.Value>
         </Setter>
         <Setter Property="VerticalGridLinesBrush">
             <Setter.Value>
-                <SolidColorBrush Color="#E3E3E3"/>
+                <SolidColorBrush Color="LightGray"/>
             </Setter.Value>
         </Setter>
         <!--列-->

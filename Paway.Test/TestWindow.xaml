@@ -35,7 +35,7 @@
         <model:StatuItem IConnect="True" DockPanel.Dock="Bottom"/>
         <Frame Name="frame" NavigationUIVisibility="Hidden"/>
         <ListViewEXT ItemsSource="{Binding List}" Width="200" ItemWidthType="OneColumn"/>
-        <DataGridEXT ItemsSource="{Binding GridList}" SelectionUnit="Cell" Name="datagrid1">
+        <DataGridEXT ItemsSource="{Binding GridList}" SelectionUnit="Cell" Name="datagrid1" Margin="10" BorderThickness="1" GridLinesVisibility="All">
             <DataGridEXT.Columns>
                 <DataGridTemplateColumn Header="List" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
