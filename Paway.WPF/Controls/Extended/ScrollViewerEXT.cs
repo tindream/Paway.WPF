@@ -86,9 +86,24 @@ namespace Paway.WPF
 
         #endregion
 
+        #region 事件
+        /// <summary>
+        /// 数据绑定刷新事件
+        /// </summary>
+        public event Action ScrollableHeightChangedEvent;
+
+        #endregion
+
         /// <summary>
         /// </summary>
-        public ScrollViewerEXT() { }
+        public ScrollViewerEXT()
+        {
+            DependencyPropertyDescriptor.FromProperty(ScrollableHeightProperty, typeof(ScrollViewerEXT)).AddValueChanged(this, OnScrollableHeightChanged);
+        }
+        private void OnScrollableHeightChanged(object sender, EventArgs e)
+        {
+            ScrollableHeightChangedEvent?.Invoke();
+        }
         /// <summary>
         /// 监听ScrollBar按下抬起状态
         /// </summary>

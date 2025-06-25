@@ -296,6 +296,10 @@ namespace Paway.WPF
         /// </summary>
         private Type type;
         /// <summary>
+        /// 获取或设置控件的边框宽度（记录原始值）
+        /// </summary>
+        private Thickness NormalBorder { get; set; }
+        /// <summary>
         /// 外部自定义列
         /// </summary>
         private readonly List<DataGridColumn> columnsReady = new List<DataGridColumn>();
@@ -321,10 +325,25 @@ namespace Paway.WPF
         {
             base.OnApplyTemplate();
             this.IFullRow = SelectionUnit == DataGridSelectionUnit.FullRow;
+            this.NormalBorder = this.BorderThickness;
             ScrollViewer = Template.FindName("Part_ScrollViewer", this) as ScrollViewerEXT;
+            ScrollViewer.ScrollableHeightChangedEvent += ScrollViewer_ScrollableHeightChangedEvent;
             if (base.ItemsSource != null)
             {
                 LoadColumns();
+            }
+        }
+        private void ScrollViewer_ScrollableHeightChangedEvent()
+        {
+            if (this.ScrollViewer.ScrollableHeight > 0)
+            {
+                var iBorder = this.GridLinesVisibility == DataGridGridLinesVisibility.All || this.GridLinesVisibility == DataGridGridLinesVisibility.Vertical;
+                iBorder &= this.NormalBorder.Bottom == 0;
+                if (iBorder) this.BorderThickness = new Thickness(this.BorderThickness.Left, this.BorderThickness.Top, this.BorderThickness.Right, Math.Max(1, this.BorderThickness.Top));
+            }
+            else
+            {
+                this.BorderThickness = this.NormalBorder;
             }
         }
         private void LoadColumns()
@@ -384,10 +403,10 @@ namespace Paway.WPF
             }
             var firstColumn = columns.Find(c => c.Visibility == Visibility.Visible);
             var lastColumn = columns.FindLast(c => c.Visibility == Visibility.Visible);
-            var iNoBorder = this.BorderThickness == new Thickness();
             if (ICustomColumnHeader)
             {
                 var fill = this.ColumnWidth.UnitType == DataGridLengthUnitType.Star || columns.Any(c => c.Width.UnitType == DataGridLengthUnitType.Star);
+                var iNoBorder = this.BorderThickness == new Thickness();
                 var iBorderStyleName = iNoBorder ? "NoBorder" : null;
                 if (fill)
                 {
@@ -423,12 +442,12 @@ namespace Paway.WPF
                     }
                 }
             }
-            if (firstColumn != null && iNoBorder)
+            if (firstColumn != null && this.BorderThickness.Left == 0)
             {
                 if (this.GridLinesVisibility == DataGridGridLinesVisibility.All || this.GridLinesVisibility == DataGridGridLinesVisibility.Vertical)
                     firstColumn.CellStyle = (Style)TryFindResource("FirstColumnContentStyle");
             }
-            if (lastColumn != null && !iNoBorder)
+            if (lastColumn != null && this.BorderThickness.Right != 0)
             {
                 if (this.GridLinesVisibility == DataGridGridLinesVisibility.All || this.GridLinesVisibility == DataGridGridLinesVisibility.Vertical)
                     lastColumn.CellStyle = (Style)TryFindResource("LastColumnContentStyle");
