@@ -382,13 +382,13 @@ namespace Paway.WPF
                 }
                 if (!iReady) column.Visibility = property.IShow() ? Visibility.Visible : Visibility.Collapsed;
             }
+            var firstColumn = columns.Find(c => c.Visibility == Visibility.Visible);
+            var lastColumn = columns.FindLast(c => c.Visibility == Visibility.Visible);
+            var iNoBorder = this.BorderThickness == new Thickness();
             if (ICustomColumnHeader)
             {
                 var fill = this.ColumnWidth.UnitType == DataGridLengthUnitType.Star || columns.Any(c => c.Width.UnitType == DataGridLengthUnitType.Star);
-                var iNoBorder = this.BorderThickness == new Thickness();
                 var iBorderStyleName = iNoBorder ? "NoBorder" : null;
-                var firstColumn = columns.Find(c => c.Visibility == Visibility.Visible);
-                var lastColumn = columns.FindLast(c => c.Visibility == Visibility.Visible);
                 if (fill)
                 {
                     if (firstColumn != null && lastColumn != null)
@@ -422,16 +422,16 @@ namespace Paway.WPF
                         }
                     }
                 }
-                if (firstColumn != null && iNoBorder)
-                {
-                    if (this.GridLinesVisibility == DataGridGridLinesVisibility.All || this.GridLinesVisibility == DataGridGridLinesVisibility.Vertical)
-                        firstColumn.CellStyle = (Style)TryFindResource("FirstColumnContentStyle");
-                }
-                if (lastColumn != null && !iNoBorder)
-                {
-                    if (this.GridLinesVisibility == DataGridGridLinesVisibility.All || this.GridLinesVisibility == DataGridGridLinesVisibility.Vertical)
-                        lastColumn.CellStyle = (Style)TryFindResource("LastColumnContentStyle");
-                }
+            }
+            if (firstColumn != null && iNoBorder)
+            {
+                if (this.GridLinesVisibility == DataGridGridLinesVisibility.All || this.GridLinesVisibility == DataGridGridLinesVisibility.Vertical)
+                    firstColumn.CellStyle = (Style)TryFindResource("FirstColumnContentStyle");
+            }
+            if (lastColumn != null && !iNoBorder)
+            {
+                if (this.GridLinesVisibility == DataGridGridLinesVisibility.All || this.GridLinesVisibility == DataGridGridLinesVisibility.Vertical)
+                    lastColumn.CellStyle = (Style)TryFindResource("LastColumnContentStyle");
             }
             this.Columns.Clear();
             RefreshEvent?.Invoke(this);

@@ -76,7 +76,6 @@ namespace Paway.Model
         /// </summary>
         public StatuItem()
         {
-            DefaultStyleKey = typeof(StatuItem);
             InitializeComponent();
         }
     }

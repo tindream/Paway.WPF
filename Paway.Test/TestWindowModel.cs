@@ -63,6 +63,13 @@ namespace Paway.Test
             get { return Config.LanguageStr; }
             set { Config.LanguageStr = value; Config.InitLanguage(); OnPropertyChanged(); }
         }
+        public ICommand CurrentCellCommand => new RelayCommand<DataGridEXT>(e =>
+        {
+            if (e.CurrentCell.Column.Header.ToStrings() != "List")
+            {
+                IValue = -1;
+            }
+        });
         public ObservableCollection<TestInfo> GridList { get; } = new ObservableCollection<TestInfo>();
         public List<ListViewItemModel> List { get; } = new List<ListViewItemModel>();
 

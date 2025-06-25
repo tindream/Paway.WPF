@@ -33,27 +33,11 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty TitleProperty =
-            DependencyProperty.Register(nameof(Title), typeof(string), typeof(PImage), new PropertyMetadata(null, OnTitleChanged));
-        private static void OnTitleChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
-        {
-            if (obj is PImage view)
-            {
-                view.tbTitle.Text = view.Title;
-            }
-        }
+            DependencyProperty.Register(nameof(Title), typeof(string), typeof(PImage));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty SourceProperty =
-            DependencyProperty.Register(nameof(Source), typeof(BitmapSource), typeof(PImage), new PropertyMetadata(null, OnSourceChanged));
-        private static void OnSourceChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
-        {
-            if (obj is PImage view)
-            {
-                view.image.Source = view.Source;
-                view.bitmap = view.Source.ToBitmap();
-                view.Init();
-            }
-        }
+            DependencyProperty.Register(nameof(Source), typeof(BitmapSource), typeof(PImage));
         /// <summary>
         /// 允许移动
         /// <para>默认值：true</para>
@@ -129,7 +113,7 @@ namespace Paway.WPF
             DependencyProperty.Register(nameof(IReset), typeof(bool), typeof(PImage), new PropertyMetadata(false));
         /// <summary>
         /// 显示重置按钮
-        /// <para>默认值：true</para>
+        /// <para>默认值：false</para>
         /// </summary>
         [Category("扩展")]
         [Description("显示重置按钮")]
@@ -223,8 +207,19 @@ namespace Paway.WPF
         /// </summary>
         public PImage()
         {
-            DefaultStyleKey = typeof(PImage);
             InitializeComponent();
+            DependencyPropertyDescriptor.FromProperty(TitleProperty, typeof(PImage)).AddValueChanged(this, OnTitleChanged);
+            DependencyPropertyDescriptor.FromProperty(SourceProperty, typeof(PImage)).AddValueChanged(this, OnSourceChanged);
+        }
+        private void OnTitleChanged(object sender, EventArgs e)
+        {
+            this.tbTitle.Text = this.Title;
+        }
+        private void OnSourceChanged(object sender, EventArgs e)
+        {
+            this.image.Source = this.Source;
+            this.bitmap = this.Source.ToBitmap();
+            this.Init();
         }
         /// <summary>
         /// </summary>
