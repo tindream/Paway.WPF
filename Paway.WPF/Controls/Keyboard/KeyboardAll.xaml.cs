@@ -193,13 +193,13 @@ namespace Paway.WPF
                         if (this.iKeyboardNum)
                         {
                             viewItem.Text = this.iChina ? KeyList[key].NumCn : KeyList[key].NumEn;
-                            viewItem.Image = new ImageEXT();
+                            viewItem.Image = new ImageSourceEXT();
                         }
                         else
                         {
                             viewItem.Text = null;
                             var imageName = this.iCapsLock ? "caps_lock_2" : "caps_lock";
-                            viewItem.Image = new ImageEXT($"pack://application:,,,/Paway.WPF;component/Images/keyboard/{imageName}_white.png",
+                            viewItem.Image = new ImageSourceEXT($"pack://application:,,,/Paway.WPF;component/Images/keyboard/{imageName}_white.png",
                                 $"pack://application:,,,/Paway.WPF;component/Images/keyboard/{imageName}.png",
                                 $"pack://application:,,,/Paway.WPF;component/Images/keyboard/{imageName}_white.png");
                         }
@@ -226,7 +226,7 @@ namespace Paway.WPF
                     case "中英": viewItem.Text = this.iChina ? "中" : "英"; break;
                     case "caps lock":
                         var imageName = this.iCapsLock ? "caps_lock_2" : "caps_lock";
-                        viewItem.Image = new ImageEXT($"pack://application:,,,/Paway.WPF;component/Images/keyboard/{imageName}_white.png",
+                        viewItem.Image = new ImageSourceEXT($"pack://application:,,,/Paway.WPF;component/Images/keyboard/{imageName}_white.png",
                             $"pack://application:,,,/Paway.WPF;component/Images/keyboard/{imageName}.png",
                             $"pack://application:,,,/Paway.WPF;component/Images/keyboard/{imageName}_white.png");
                         break;

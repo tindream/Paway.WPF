@@ -60,7 +60,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ImageProperty =
-            DependencyProperty.RegisterAttached(nameof(Image), typeof(ImageEXT), typeof(ButtonEXT));
+            DependencyProperty.RegisterAttached(nameof(Image), typeof(ImageSourceEXT), typeof(ButtonEXT));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty KeysProperty =
@@ -239,9 +239,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展")]
         [Description("背景图片")]
-        public ImageEXT Image
+        public ImageSourceEXT Image
         {
-            get { return (ImageEXT)GetValue(ImageProperty); }
+            get { return (ImageSourceEXT)GetValue(ImageProperty); }
             set { SetValue(ImageProperty, value); }
         }
         /// <summary>

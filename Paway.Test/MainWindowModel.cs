@@ -283,12 +283,12 @@ namespace Paway.Test
             list.Add(new ListViewItemModel("你好123")
             {
                 IsEnabled = false,
-                Image = new ImageEXT(null, @"pack://application:,,,/Paway.Test;component/Images/close_white.png")
+                Image = new ImageSourceEXT(null, @"pack://application:,,,/Paway.Test;component/Images/close_white.png")
             });
             for (int i = 0; i < 20; i++) list.Add(new ListViewItemModel("A" + i, "D" + i)
             {
                 IsEnabled = i != 5,
-                Image = new ImageEXT(@"pack://application:,,,/Paway.Test;component/Images/close.png")
+                Image = new ImageSourceEXT(@"pack://application:,,,/Paway.Test;component/Images/close.png")
             });
             this.PagedList = new PagedCollectionView(list) { PageSize = 10 };
 
@@ -368,7 +368,7 @@ namespace Paway.Test
             PlotModel.InvalidatePlot(true);
             Method.BeginInvoke(() =>
             {
-                PlotHelper.AutoMaxMin(PlotModel, 10, 10);
+                PlotHelper.AutoMaxMin(PlotModel);
                 PlotModel.InvalidatePlot(true);
             });
         }

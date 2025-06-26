@@ -327,7 +327,7 @@ namespace Paway.WPF
             this.IFullRow = SelectionUnit == DataGridSelectionUnit.FullRow;
             this.NormalBorder = this.BorderThickness;
             ScrollViewer = Template.FindName("Part_ScrollViewer", this) as ScrollViewerEXT;
-            ScrollViewer.ScrollableHeightChangedEvent += ScrollViewer_ScrollableHeightChangedEvent;
+            if (ScrollViewer != null) ScrollViewer.ScrollableHeightChangedEvent += ScrollViewer_ScrollableHeightChangedEvent;
             if (base.ItemsSource != null)
             {
                 LoadColumns();

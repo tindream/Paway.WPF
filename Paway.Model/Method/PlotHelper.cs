@@ -17,11 +17,50 @@ namespace Paway.Model
     /// </summary>
     public class PlotHelper
     {
-        #region CategoryAxis
+        #region PieSeries
         /// <summary>
         /// 饼状图
         /// </summary>
-        public static PlotModel LoadCategoryAxis(List<double> valueList, List<string> labelList, Func<object, string, string, object, string, object, string> action = null)
+        public static PlotModel LoadPieSeries(List<double> valueList, List<string> labelList, List<Color> colorList)
+        {
+            var model = new PlotModel
+            {
+                PlotAreaBorderColor = OxyColor.FromArgb(255, 86, 162, 226),
+                PlotAreaBorderThickness = new OxyThickness(0)
+            };
+
+            var pie = new PieSeries
+            {
+                //InnerDiameter = 0.2,
+                //TickLabelDistance = 0,
+                //FillColor = OxyColor.FromArgb(255, 40, 255, 252),
+                //TextColor = OxyColors.White,//文本颜色
+                //BarWidth = 24,
+                //LabelFormatString = "{0:#,0.#}",
+                InsideLabelFormat = "{2:#}%({0})" + Environment.NewLine + "{1}",
+                OutsideLabelFormat = null,
+                TrackerFormatString = "{1}：{2:#,0.##}",
+            };
+            model.Series.Add(pie);
+
+            for (var i = 0; i < labelList.Count; i++)
+            {
+                pie.Slices.Add(new PieSlice(labelList[i], valueList[i]));
+            }
+            pie.Slices[0].Fill = OxyColor.FromArgb(colorList[0].A, colorList[0].R, colorList[0].G, colorList[0].B);
+            pie.Slices[1].Fill = OxyColor.FromArgb(colorList[1].A, colorList[1].R, colorList[1].G, colorList[1].B);
+            pie.Slices[2].Fill = OxyColor.FromArgb(colorList[2].A, colorList[2].R, colorList[2].G, colorList[2].B);
+
+            return model;
+        }
+
+        #endregion
+
+        #region CategoryAxis
+        /// <summary>
+        /// 柱状图
+        /// </summary>
+        public static PlotModel LoadCategoryAxis(List<double> valueList, List<string> labelList, List<Color> colorList, Func<object, string, string, object, string, object, string> action = null)
         {
             var model = new PlotModel
             {
@@ -38,8 +77,8 @@ namespace Paway.Model
                 IsZoomEnabled = false,//坐标轴缩放功能
                 IsPanEnabled = false,//图表缩放功能
                 Minimum = -0.5,
+                ItemsSource = labelList,
             };
-            foreach (var item in labelList) yAxis.ActualLabels.Add(item);
             model.Axes.Add(yAxis);
 
             var xAxis = new LinearAxis
@@ -60,27 +99,31 @@ namespace Paway.Model
             var series = new BarSeries
             {
                 FillColor = OxyColor.FromArgb(255, 40, 255, 252),
-                TextColor = OxyColors.White,//文本颜色
+                TextColor = OxyColors.Red,//文本颜色
                 BarWidth = 24,
-                LabelMargin = 5,
-                //LabelFormatString = "  {0:#,0.#}",
+                //LabelFormatString = "{0:#,0.#}",
+                LabelPlacement = LabelPlacement.Inside,
+                LabelFormatStringAction = (item, value) =>
+                {
+                    return $"  {value:#,0.#}";
+                },
                 TrackerFormatString = "{1}：{2:#,0.#}",
                 TrackerFormatStringAction = action
             };
             model.Series.Add(series);
-            UpdateLine(model, valueList, false);
+            UpdateLine(model, valueList, colorList, false);
 
             return model;
         }
         /// <summary>
         /// 更新值
         /// </summary>
-        public static void UpdateLine(PlotModel model, List<double> valueList, bool Invalidate = true)
+        public static void UpdateLine(PlotModel plotModel, List<double> valueList, List<Color> colorList, bool Invalidate = true)
         {
-            var series = model.Series[0] as BarSeries;
+            var series = plotModel.Series[0] as BarSeries;
             series.Items.Clear();
-            foreach (var item in valueList) series.Items.Add(new BarItem(item));
-            if (Invalidate) model.InvalidatePlot(true);
+            for (var i = 0; i < valueList.Count; i++) series.Items.Add(new BarItem(valueList[i]) { Color = OxyColor.FromArgb(colorList[i].A, colorList[i].R, colorList[i].G, colorList[i].B) });
+            if (Invalidate) plotModel.InvalidatePlot(true);
         }
 
         #endregion
@@ -208,7 +251,7 @@ namespace Paway.Model
         /// <summary>
         /// 添加曲线
         /// </summary>
-        public static void AddLine(PlotModel model, int index, string title, OxyColor color, List<double> valueList, Func<object, string, string, object, string, object, string> action = null, string stringFormat = "{2}: {4:#,0.#}")
+        public static void AddLine(PlotModel plotModel, int index, string title, OxyColor color, List<double> valueList, Func<object, string, string, object, string, object, string> action = null, string stringFormat = "{2}: {4:#,0.#}")
         {
             var line = new LinearBarSeries()
             {
@@ -224,15 +267,17 @@ namespace Paway.Model
                 TrackerFormatStringAction = action
             };
             for (var i = 0; i < valueList.Count; i++) line.Points.Add(new DataPoint(i * 7 + index, valueList[i]));
-            model.Series.Add(line);
+            plotModel.Series.Add(line);
         }
         /// <summary>
         /// 自动曲线最大最小值到坐标系
         /// </summary>
-        public static void AutoMaxMin(PlotModel plotModel, double max = double.NaN, double min = double.NaN)
+        public static void AutoMaxMin(PlotModel plotModel)
         {
             //根据报单笔数判断是否需要更新y轴刻度     
             //首先找出统计线中当前最大的节点
+            var min = double.NaN;
+            var max = double.NaN;
             for (int i = 0; i < plotModel.Series.Count; i++)
             {
                 var value = (plotModel.Series[i] as LineSeries).MaxY;
@@ -240,10 +285,6 @@ namespace Paway.Model
                 value = (plotModel.Series[i] as LineSeries).MinY;
                 if (min > value) min = value;
             }
-            var total = max - min;
-            total *= 0.1;
-            max += total;
-            min -= total;
 
             var leftAxis = plotModel.Axes.FirstOrDefault(c => c.Position == AxisPosition.Left);
             //如果当前的y轴最大刻度小于数据集中的最大值，放大

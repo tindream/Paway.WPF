@@ -16,8 +16,8 @@ namespace Paway.WPF
     /// <summary>
     /// 自定义默认、鼠标划过时、鼠标点击时的图片
     /// </summary>
-    [TypeConverter(typeof(ImageEXTConverter))]
-    public class ImageEXT : BaseModelInfo, IEquatable<ImageEXT>
+    [TypeConverter(typeof(ImageSourceEXTConverter))]
+    public class ImageSourceEXT : BaseModelInfo, IEquatable<ImageSourceEXT>
     {
         private ImageSource normal;
         /// <summary>
@@ -39,13 +39,13 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public ImageEXT() { }
+        public ImageSourceEXT() { }
         /// <summary>
         /// </summary>
-        public ImageEXT(string uri) : this(uri, uri, uri) { }
+        public ImageSourceEXT(string uri) : this(uri, uri, uri) { }
         /// <summary>
         /// </summary>
-        public ImageEXT(string normal, string mouse = null, string pressed = null)
+        public ImageSourceEXT(string normal, string mouse = null, string pressed = null)
         {
             if (normal != null) Normal = new BitmapImage(new Uri(normal));
 
@@ -57,7 +57,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// </summary>
-        public ImageEXT(ImageSource normal, ImageSource mouse = null, ImageSource pressed = null)
+        public ImageSourceEXT(ImageSource normal, ImageSource mouse = null, ImageSource pressed = null)
         {
             if (normal != null) Normal = normal;
             if (mouse != null) Mouse = mouse;
@@ -67,15 +67,15 @@ namespace Paway.WPF
         }
         /// <summary>
         /// </summary>
-        public bool Equals(ImageEXT other)
+        public bool Equals(ImageSourceEXT other)
         {
             return Normal.Equals(other.Normal) && Mouse.Equals(other.Mouse) && Pressed.Equals(other.Pressed);
         }
     }
     /// <summary>
-    /// 字符串转ImageEXT
+    /// 字符串转ImageSourceEXT
     /// </summary>
-    internal class ImageEXTConverter : TypeConverter
+    internal class ImageSourceEXTConverter : TypeConverter
     {
         /// <summary>
         /// </summary>
@@ -106,7 +106,7 @@ namespace Paway.WPF
                 try
                 {
                     var imageConverter = new ImageSourceConverter();
-                    return new ImageEXT(strs.Length > 0 ? (ImageSource)imageConverter.ConvertFrom(context, culture, strs[0]) : null,
+                    return new ImageSourceEXT(strs.Length > 0 ? (ImageSource)imageConverter.ConvertFrom(context, culture, strs[0]) : null,
                         strs.Length > 1 ? (ImageSource)imageConverter.ConvertFrom(context, culture, strs[1]) : null,
                         strs.Length > 2 ? (ImageSource)imageConverter.ConvertFrom(context, culture, strs[2]) : null);
                 }

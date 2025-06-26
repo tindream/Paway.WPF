@@ -38,7 +38,7 @@ namespace Paway.WPF
         /// <summary>
         /// 图片
         /// </summary>
-        ImageEXT Image { get; set; }
+        ImageSourceEXT Image { get; set; }
         /// <summary>
         /// 显示
         /// </summary>
@@ -153,12 +153,12 @@ namespace Paway.WPF
             }
             set { hit = value; OnPropertyChanged(); }
         }
-        private ImageEXT image;
+        private ImageSourceEXT image;
         /// <summary>
         /// 图片
         /// </summary>
         [NoShow]
-        public virtual ImageEXT Image
+        public virtual ImageSourceEXT Image
         {
             get { return image; }
             set { image = value; OnPropertyChanged(); }

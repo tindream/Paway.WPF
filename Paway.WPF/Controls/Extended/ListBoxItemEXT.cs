@@ -271,11 +271,11 @@ namespace Paway.WPF
             }
             set { _hit = value; OnPropertyChanged(); }
         }
-        private ImageEXT _image;
+        private ImageSourceEXT _image;
         /// <summary>
         /// 图片
         /// </summary>
-        public ImageEXT Image
+        public ImageSourceEXT Image
         {
             get { return _image; }
             set { _image = value; OnPropertyChanged(); }

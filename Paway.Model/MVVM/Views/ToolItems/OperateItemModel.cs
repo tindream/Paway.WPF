@@ -171,7 +171,7 @@ namespace Paway.Model
         /// 添加按钮
         /// <para>可指定图标、快捷键，可自定义</para>
         /// </summary>
-        protected void AddButton(object cmd, ImageEXT imageEXT = null, Key key = Key.None, int index = -1, Action<ButtonEXT> action = null)
+        protected void AddButton(object cmd, ImageSourceEXT imageEXT = null, Key key = Key.None, int index = -1, Action<ButtonEXT> action = null)
         {
             var content = cmd;
             if (key != Key.None) content = $"{cmd}({key})";
@@ -181,7 +181,7 @@ namespace Paway.Model
         /// 添加按钮
         /// <para>可指定图标位置、命令、提示、快捷键，可自定义</para>
         /// </summary>
-        protected void AddButton(ImageEXT imageEXT, Dock imageDock, object content, object cmd = null, Key key = Key.None, int index = -1, object toolTip = null, Action<ButtonEXT> action = null)
+        protected void AddButton(ImageSourceEXT imageEXT, Dock imageDock, object content, object cmd = null, Key key = Key.None, int index = -1, object toolTip = null, Action<ButtonEXT> action = null)
         {
             var btn = new ButtonEXT
             {
