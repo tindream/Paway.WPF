@@ -182,12 +182,11 @@ namespace Paway.WPF
                 CurrentContentPresentationSite.Content = newContent;
                 PreviousContentPresentationSite.Content = oldContent;
                 // 等待一帧后再执行动画
-                EventHandler handler = null;
-                handler = (s, e) =>
+                void handler(object s, EventArgs e)
                 {
                     CompositionTarget.Rendering -= handler;
                     PMethod.BeginInvoke(() => StartTransition());
-                };
+                }
                 CompositionTarget.Rendering += handler;
             }
         }

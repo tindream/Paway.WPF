@@ -16,6 +16,7 @@
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\ComboView.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\DataPager.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Expander.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Image.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\ListBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\ListView.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\ListViewCustom.xaml" />
