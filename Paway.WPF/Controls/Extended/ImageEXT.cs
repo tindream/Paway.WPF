@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Paway.WPF
 {
@@ -23,7 +24,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty SourceProperty =
-            DependencyProperty.Register(nameof(Source), typeof(ImageSource), typeof(ImageEXT));
+            DependencyProperty.Register(nameof(Source), typeof(BitmapSource), typeof(ImageEXT));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty StretchProperty =
@@ -51,10 +52,10 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展")]
         [Description("获取或设置图像")]
-        public ImageSource Source
+        public BitmapSource Source
         {
-            get { return (ImageSource)GetValue(TitleProperty); }
-            set { SetValue(TitleProperty, value); }
+            get { return (BitmapSource)GetValue(SourceProperty); }
+            set { SetValue(SourceProperty, value); }
         }
         /// <summary>
         /// 获取或设置图像填充方式
@@ -117,7 +118,11 @@ namespace Paway.WPF
         {
             if (e.LeftButton == MouseButtonState.Pressed && DateTime.Now.Subtract(clickTime).TotalMilliseconds < PConfig.DoubleInterval)
             {
-                DoubleEvent?.Invoke(this, e);
+                if (DoubleEvent != null) DoubleEvent.Invoke(this, e);
+                else if (PMethod.Parent(this, out Window window))
+                {
+                    PMethod.PImageFullAdorner(window, this.Title, this.Source);
+                }
             }
             else if (e.LeftButton == MouseButtonState.Pressed)
             {

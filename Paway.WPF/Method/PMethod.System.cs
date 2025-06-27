@@ -172,10 +172,12 @@ namespace Paway.WPF
             {
                 Title = title,
                 Filter = filter,
+                InitialDirectory = TConfig.FileDialogPath,
             };
             if (ofd.ShowDialog() == true)
             {
                 file = ofd.FileName;
+                TConfig.FileDialogPath = Path.GetDirectoryName(ofd.FileName);
                 return true;
             }
             return false;
@@ -191,10 +193,12 @@ namespace Paway.WPF
                 Title = title,
                 Filter = filter,
                 Multiselect = true,
+                InitialDirectory = TConfig.FileDialogPath,
             };
             if (ofd.ShowDialog() == true)
             {
                 files = ofd.FileNames;
+                TConfig.FileDialogPath = Path.GetDirectoryName(ofd.FileName);
                 return true;
             }
             return false;
@@ -242,15 +246,17 @@ namespace Paway.WPF
                 }
             }
             outFile = null;
-            var sfd = new SaveFileDialog()
+            var sfd = new SaveFileDialog
             {
                 Title = title ?? PConfig.LanguageBase.SelectFileLocation,
                 Filter = filter,
                 FileName = fileName,
+                InitialDirectory = TConfig.FileDialogPath,
             };
             if (sfd.ShowDialog() == true)
             {
                 outFile = sfd.FileName;
+                TConfig.FileDialogPath = Path.GetDirectoryName(sfd.FileName);
                 return true;
             }
             return false;
