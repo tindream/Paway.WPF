@@ -82,15 +82,20 @@ namespace Paway.WPF
         }
 
         /// <summary>
-        /// 自动垂直滚动
+        /// 自动滚动
         /// </summary>
         /// <param name="scrollViewer"></param>
-        /// <param name="time">滚动耗时(s)</param>
+        /// <param name="time">滚动耗时(s)(-1时默认30距离/s)</param>
         /// <param name="beginTime">开始延时(默认2s)</param>
         /// <param name="forever">无限重复(默认true)</param>
-        public static void AutoScroll(ScrollViewer scrollViewer, double time, double beginTime = 2, bool forever = true)
+        public static void AutoScroll(ScrollViewer scrollViewer, double time = -1, double beginTime = 2, bool forever = true)
         {
             if (beginTime <= 0) beginTime = 0.1;
+            if (time < 0)
+            {
+                if (scrollViewer.ScrollableHeight > 0) time = scrollViewer.ScrollableHeight / 30;
+                else if (scrollViewer.ScrollableWidth > 0) time = scrollViewer.ScrollableWidth / 30;
+            }
             var storyboard = new Storyboard
             {
                 Duration = new Duration(TimeSpan.FromSeconds(time + beginTime * 2))//上下滚动总时长

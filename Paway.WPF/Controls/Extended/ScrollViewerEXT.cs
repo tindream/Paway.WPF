@@ -224,14 +224,14 @@ namespace Paway.WPF
             base.OnMouseWheel(e);
         }
         /// <summary>
-        /// 自动垂直滚动
+        /// 自动滚动
         /// </summary>
-        /// <param name="time">滚动耗时(s)</param>
+        /// <param name="time">滚动耗时(s)(-1时默认30距离/s)</param>
         /// <param name="beginTime">开始延时(默认2s)</param>
         /// <param name="forever">无限重复(默认true)</param>
-        public void AutoScroll(double time, double beginTime = 2, bool forever = true)
+        public void AutoScroll(double time = -1, double beginTime = 2, bool forever = true)
         {
-            if (time < 0) time = 0;
+            PMethod.DoEvents();
             ScrollViewerBehavior.AutoScroll(this, time, beginTime, forever);
         }
     }

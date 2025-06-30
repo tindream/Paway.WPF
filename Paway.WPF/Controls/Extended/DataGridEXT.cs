@@ -750,6 +750,17 @@ namespace Paway.WPF
             }
             base.OnPreviewMouseWheel(e);
         }
+        /// <summary>
+        /// 自动滚动
+        /// <param name="time">滚动耗时(s)(-1时默认30距离/s)</param>
+        /// </summary>
+        public void AutoScroll(int time = -1)
+        {
+            if (ScrollViewer != null)
+            {
+                ScrollViewer.AutoScroll(time);
+            }
+        }
 
         #endregion
     }
