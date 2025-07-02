@@ -48,6 +48,25 @@ namespace Paway.WPF
             }
         }
         /// <summary>
+        /// Image转图片资源
+        /// </summary>
+        public static BitmapSource ToSource(this Image image)
+        {
+            var source = new BitmapImage();
+            using (var ms = new MemoryStream())
+            {
+                image.Save(ms, ImageFormat.Png);
+                ms.Seek(0, SeekOrigin.Begin);
+
+                source.BeginInit();
+                source.CacheOption = BitmapCacheOption.OnLoad;
+                source.StreamSource = ms;
+                source.EndInit();
+            }
+            source.Freeze(); // 可选：使对象跨线程可用
+            return source;
+        }
+        /// <summary>
         /// 内存流转图片资源
         /// </summary>
         public static BitmapSource ToSource(this byte[] buffer)
@@ -124,7 +143,7 @@ namespace Paway.WPF
         /// <summary>
         /// BitmapSource保存到文件
         /// </summary>
-        public static void Save(this BitmapSource bitmapSource, string fileName)
+        public static void Save(this BitmapSource bitmapSource, string fileName, int quality = 70)
         {
             using (var fileStream = new FileStream(fileName, FileMode.Create))
             {
@@ -135,7 +154,9 @@ namespace Paway.WPF
                     case ".jpg":
                     case ".jpeg":
                     default:
-                        encoder = new JpegBitmapEncoder();
+                        var encoderJPG = new JpegBitmapEncoder();
+                        encoderJPG.QualityLevel = quality;
+                        encoder = encoderJPG;
                         break;
                     case ".png":
                         encoder = new PngBitmapEncoder();
