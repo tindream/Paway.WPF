@@ -246,7 +246,7 @@ namespace Paway.Test
         public ICommand Teach => new RelayCommand<Button>(btn =>
         {
             MultiList[0].IsChecked = !MultiList[0].IsChecked;
-            var desc = string.Join(",", MultiList.ToList().FindAll(c => c.IsChecked).Select(c => c.Text));
+            var desc = MultiList.ToList().FindAll(c => c.IsChecked).Select(c => c.Text).Join();
             Method.Toast(btn, desc, 5000);
         });
 

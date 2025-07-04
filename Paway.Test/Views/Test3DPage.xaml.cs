@@ -35,14 +35,13 @@ namespace Paway.Test
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-
             ////导入mtl，obj 和纹理图片
-            var objFile = @"F:\IronMan.obj";
-            if (File.Exists(objFile))
-            {
-                Model3DGroup model1 = new ObjReader().Read(objFile);
-                model.Content = model1;
-            }
+            //var objFile = @"F:\IronMan.obj";
+            //if (File.Exists(objFile))
+            //{
+            //    Model3DGroup model1 = new ObjReader().Read(objFile);
+            //    model.Content = model1;
+            //}
 
             ////导入3ds格式模型
             //Model3DGroup model2 = new ModelImporter().Load(@"C:\Users\Administrator\Desktop\test\file.3ds");
@@ -50,12 +49,19 @@ namespace Paway.Test
 
             //Messenger.Default.Send(new MainLoadMessage() { });
         }
-
         private void ModelUIElement3D_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             ModelUIElement3D mui3d = sender as ModelUIElement3D;
             var model = mui3d.Model as GeometryModel3D;
             (model.Material as DiffuseMaterial).Brush = Brushes.Orange;
+        }
+        private void ButtonEXT_Click(object sender, RoutedEventArgs e)
+        {
+            if (PMethod.OpenFile("选择模型文件", out string file, "模型文件|*.3ds;*.obj;*.stl;*.lwo;*.off;*.ply"))
+            {
+                Model3DGroup model2 = new ModelImporter().Load(file);
+                model.Content = model2;
+            }
         }
     }
 }

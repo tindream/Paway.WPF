@@ -8,7 +8,7 @@
            xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
            xmlns:ip="http://www.galasoft.ch/mvvmlight"
            xmlns:oxy="http://oxyplot.org/wpf"
-           DataContext="{Binding Main, Source={StaticResource Locator}}"
+           DataContext="{Binding MainWindow, Source={StaticResource Locator}}"
            mc:Ignorable="d"
            HeaderHeight="40" ButtonAlignment="Top"
            Title="{Binding Title}" Height="800" Width="850" WindowStartupLocation="CenterScreen">

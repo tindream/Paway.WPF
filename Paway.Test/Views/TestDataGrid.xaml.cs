@@ -1,9 +1,12 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
+using Paway.Helper;
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,26 +15,28 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Paway.Test
 {
     /// <summary>
-    /// TipWindow.xaml 的交互逻辑
+    /// TestDataGrid.xaml 的交互逻辑
     /// </summary>
-    public partial class TipWindow : WindowEXT
+    public partial class TestDataGrid : Page
     {
-        public TipWindow()
+        /// <summary>
+        /// 合并行测试
+        /// </summary>
+        public TestDataGrid()
         {
             InitializeComponent();
         }
-        protected override void OnRender(DrawingContext drawingContext)
+        public override void OnApplyTemplate()
         {
-            base.OnRender(drawingContext);
-            Messenger.Default.Send(new TipLoadMessage() { Obj = this });
-            var desktopWorkingArea = SystemParameters.WorkArea;
-            this.Left = desktopWorkingArea.Width - this.ActualWidth - 50;
-            this.Top = 100;
+            base.OnApplyTemplate();
+            Messenger.Default.Send(new TestDataGridLoadMessage() { Obj = Root });
         }
     }
 }

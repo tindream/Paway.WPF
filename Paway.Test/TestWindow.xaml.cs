@@ -5,6 +5,7 @@ using Paway.Model;
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -42,9 +43,14 @@ namespace Paway.Test
             var fileInfos = directoryInfo.GetFiles("*.xml");
             foreach (var fileInfo in fileInfos) Config.LanguageList.Add(System.IO.Path.GetFileNameWithoutExtension(fileInfo.Name));
 
-            PMethod.LanguageMenuBinding(menu, Config.LanguageList, ViewModelLocator.Default.Test, ViewModelLocator.Default.Test.ItemClickCommand, nameof(ViewModelLocator.Default.Test.Language));
+            PMethod.LanguageMenuBinding(menu, Config.LanguageList, ViewModelLocator.Default.TestWindow, ViewModelLocator.Default.TestWindow.ItemClickCommand, nameof(ViewModelLocator.Default.TestWindow.Language));
 
             Messenger.Default.Send(new TestLoadMessage() { Obj = Root });
+        }
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            ViewModelLocator.Default.TestWindow.Close();
+            base.OnClosing(e);
         }
     }
 }

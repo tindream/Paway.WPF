@@ -12,8 +12,12 @@
     <DockPanel>
         <!--<SliderEXT Title="X" Height = "23" Width = "360" Maximum = "360" 
                    Value = "{Binding ElementName = rotate, Path=Angle}" DockPanel.Dock="Bottom" />-->
+        <WrapPanel DockPanel.Dock="Top">
+            <ButtonEXT  Content="选择模型" Click="ButtonEXT_Click"/>
+            <TextBlock Text="鼠标滚轮缩放，右键旋转 键盘Q=下，A=右，D=左，Z=上"/>
+        </WrapPanel>
         <Border BorderThickness="1" BorderBrush="Red" Margin="10">
-            <HelixToolkit:HelixViewport3D ZoomExtentsWhenLoaded="True">
+            <HelixToolkit:HelixViewport3D Name="viewport3D" ZoomExtentsWhenLoaded="True">
                 <!-- Remember to add light to the scene -->
                 <HelixToolkit:SunLight/>
                 <!--<ModelVisual3D>

@@ -63,15 +63,7 @@ namespace Paway.Test
             get { return Config.LanguageStr; }
             set { Config.LanguageStr = value; Config.InitLanguage(); OnPropertyChanged(); }
         }
-        public ICommand CurrentCellCommand => new RelayCommand<DataGridEXT>(e =>
-        {
-            if (e.CurrentCell.Column.Header.ToStrings() != "List")
-            {
-                IValue = -1;
-            }
-        });
-        public ObservableCollection<TestInfo> GridList { get; } = new ObservableCollection<TestInfo>();
-        public List<ListViewItemModel> List { get; } = new List<ListViewItemModel>();
+        private TipWindow tipWindow;
 
         #endregion
 
@@ -91,11 +83,26 @@ namespace Paway.Test
                 case "颜色":
                     Method.ShowWindow(Config.Window, new SelectColorWindow());
                     break;
+                case "报告问题":
+                    if (tipWindow == null)
+                    {
+                        tipWindow = new TipWindow();
+                        tipWindow.Show();
+                    }
+                    else
+                    {
+                        tipWindow.Close();
+                        tipWindow = null;
+                    }
+                    break;
                 case "3D模型":
-                    Frame.Content = ViewlLocator.GetInstance<Test3DPage>();
+                    Frame.Content = ViewModelLocator.GetViewInstance<Test3DPage>();
                     break;
                 case "登录页":
-                    Frame.Content = ViewlLocator.GetInstance<LoginPage>();
+                    Frame.Content = ViewModelLocator.GetViewInstance<LoginPage>();
+                    break;
+                case "DataGrid":
+                    Frame.Content = ViewModelLocator.GetViewInstance<TestDataGrid>();
                     break;
                 default:
                     if (Config.LanguageList.Any(c => c == item))
@@ -106,19 +113,15 @@ namespace Paway.Test
             }
             return base.Action(item);
         }
+        public void Close()
+        {
+            tipWindow?.Close();
+        }
 
         #endregion
 
         public TestWindowModel()
         {
-            var index = 0;
-            for (int i = 0; i < 5; i++)
-            {
-                var info = new TestInfo { Name = $"Hello{i + 1}" };
-                for (int j = 0; j < i; j++) info.List.Add(new ListViewItemModel($"B{j + 1}") { Id = ++index });
-                GridList.Add(info);
-            }
-            for (int j = 0; j < 5; j++) List.Add(new ListViewItemModel($"A{j + 1}") { Id = ++index });
             this.MessengerInstance.Register<TestLoadMessage>(this, msg =>
             {
                 this.Root = msg.Obj;
@@ -128,10 +131,5 @@ namespace Paway.Test
                 }
             });
         }
-    }
-    public class TestInfo : BaseModelInfo
-    {
-        public string Name { get; set; }
-        public List<ListViewItemModel> List { get; set; } = new List<ListViewItemModel>();
     }
 }

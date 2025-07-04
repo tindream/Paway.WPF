@@ -1,0 +1,35 @@
+﻿<Page x:Class="Paway.Test.TestDataGrid"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Paway.Test"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+      xmlns:ip="http://www.galasoft.ch/mvvmlight"
+      mc:Ignorable="d" 
+      UseLayoutRounding="True"
+      DataContext="{Binding TestDataGrid, Source={StaticResource Locator}}"
+      d:DesignHeight="450" d:DesignWidth="600"
+      Title="TestDataGrid">
+    <DockPanel x:Name="Root">
+        <StackPanel Width="200">
+            <ListViewEXT ItemsSource="{Binding List}" ItemWidthType="OneColumn" ClickMode="Press"/>
+        </StackPanel>
+        <DataGridEXT ItemsSource="{Binding GridList}" SelectionUnit="Cell" Name="datagrid1" Margin="10" BorderThickness="1" GridLinesVisibility="All">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="CurrentCellChanged">
+                    <ip:EventToCommand Command="{Binding CurrentCellCommand}" CommandParameter="{Binding ElementName=datagrid1}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <DataGridEXT.Columns>
+                <DataGridTemplateColumn Header="List" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ListViewCustom ItemsSource="{Binding List}" ItemWidthType="OneColumn" ClickMode="Press" SelectedValuePath="Id" SelectedValue="{Binding DataContext.IValue, RelativeSource={RelativeSource AncestorType={x:Type local:TestDataGrid}}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGridEXT.Columns>
+        </DataGridEXT>
+    </DockPanel>
+</Page>

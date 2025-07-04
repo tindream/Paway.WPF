@@ -5,10 +5,8 @@
            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
            xmlns:local="clr-namespace:Paway.Test"
            xmlns:model="clr-namespace:Paway.Model;assembly=Paway.Model"
-           xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
-           xmlns:ip="http://www.galasoft.ch/mvvmlight"
            mc:Ignorable="d"
-           DataContext="{Binding Test, Source={StaticResource Locator}}"
+           DataContext="{Binding TestWindow, Source={StaticResource Locator}}"
            Title="{Binding Title}" Height="470" Width="800" WindowStartupLocation="CenterScreen">
     <WindowEXT.FunctionBar>
         <WindowFunctionBar>
@@ -34,25 +32,5 @@
     <DockPanel x:Name="Root">
         <model:StatuItem IConnect="True" DockPanel.Dock="Bottom"/>
         <Frame Name="frame" NavigationUIVisibility="Hidden"/>
-        <StackPanel Width="200">
-            <ImageEXT Name="image" Source="Images/clear.png" Title="标题Hello World 123" Stretch="None" Height="50"/>
-            <ListViewEXT ItemsSource="{Binding List}" ItemWidthType="OneColumn" ClickMode="Press"/>
-        </StackPanel>
-        <DataGridEXT ItemsSource="{Binding GridList}" SelectionUnit="Cell" Name="datagrid1" Margin="10" BorderThickness="0" GridLinesVisibility="All">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="CurrentCellChanged">
-                    <ip:EventToCommand Command="{Binding CurrentCellCommand}" CommandParameter="{Binding ElementName=datagrid1}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-            <DataGridEXT.Columns>
-                <DataGridTemplateColumn Header="List" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ListViewCustom ItemsSource="{Binding List}" ItemWidthType="OneColumn" ClickMode="Press" SelectedValuePath="Id" SelectedValue="{Binding DataContext.IValue, RelativeSource={RelativeSource AncestorType={x:Type local:TestWindow}}}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGridEXT.Columns>
-        </DataGridEXT>
     </DockPanel>
 </WindowEXT>

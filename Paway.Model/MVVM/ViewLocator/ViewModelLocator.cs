@@ -71,7 +71,7 @@ namespace Paway.Model
         /// <summary>
         /// 创建单实例视图，如已存在时，从缓存列表获取
         /// </summary>
-        public T GetViewInstance<T>(object key = null) where T : FrameworkElement
+        public static T GetViewInstance<T>(object key = null) where T : FrameworkElement
         {
             var name = $"{typeof(T).FullName}_{key}";
             if (!dicView.ContainsKey(name))

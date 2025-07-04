@@ -8,7 +8,7 @@
            xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
            xmlns:ip="http://www.galasoft.ch/mvvmlight"
            Background="Transparent"
-           DataContext="{Binding Tip, Source={StaticResource Locator}}"
+           DataContext="{Binding TipWindow, Source={StaticResource Locator}}"
            Title="TipWindow" 
            Width="248" Height="248" HeaderHeight="0"
            WindowStyle="None" Topmost="True" ResizeMode="NoResize" AllowsTransparency="True" ShowInTaskbar="False">
