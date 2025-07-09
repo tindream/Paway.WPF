@@ -141,6 +141,26 @@ namespace Paway.WPF
             return bitmap;
         }
         /// <summary>
+        /// ImageSource转BitmapSource
+        /// </summary>
+        public static BitmapSource ToSource(this ImageSource imageSource)
+        {
+            if (imageSource is BitmapSource bitmapSource)
+            {
+                return bitmapSource;
+            }
+
+            var drawingVisual = new DrawingVisual();
+            using (var drawingContext = drawingVisual.RenderOpen())
+            {
+                drawingContext.DrawImage(imageSource, new Rect(0, 0, imageSource.Width, imageSource.Height));
+            }
+
+            var bitmap = new RenderTargetBitmap((int)imageSource.Width, (int)imageSource.Height, 96, 96, PixelFormats.Pbgra32);
+            bitmap.Render(drawingVisual);
+            return bitmap;
+        }
+        /// <summary>
         /// BitmapSource保存到文件
         /// </summary>
         public static void Save(this BitmapSource bitmapSource, string fileName, int quality = 70)

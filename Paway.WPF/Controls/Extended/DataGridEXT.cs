@@ -199,7 +199,7 @@ namespace Paway.WPF
 
         #region 构造
         /// <summary>
-        /// 构造
+        /// DataGrid扩展
         /// </summary>
         public DataGridEXT()
         {

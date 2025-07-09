@@ -138,12 +138,12 @@ namespace Paway.WPF
         /// PImage装饰器显示到Window
         /// <para>模拟弹框</para>
         /// </summary>
-        public static void PImageFullAdorner(Window window, string name, BitmapSource source)
+        public static void PImageFullAdorner(Window window, string title, BitmapSource source)
         {
             var pImage = new PImage();
             pImage.IClose = true;
             pImage.IPoint = false;
-            pImage.Title = name;
+            pImage.Title = title;
             pImage.Source = source;
             PageFullAdorner(window, pImage);
         }

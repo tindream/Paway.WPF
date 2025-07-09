@@ -24,7 +24,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty SourceProperty =
-            DependencyProperty.Register(nameof(Source), typeof(BitmapSource), typeof(ImageEXT));
+            DependencyProperty.Register(nameof(Source), typeof(ImageSource), typeof(ImageEXT));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty StretchProperty =
@@ -52,9 +52,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展")]
         [Description("获取或设置图像")]
-        public BitmapSource Source
+        public ImageSource Source
         {
-            get { return (BitmapSource)GetValue(SourceProperty); }
+            get { return (ImageSource)GetValue(SourceProperty); }
             set { SetValue(SourceProperty, value); }
         }
         /// <summary>
@@ -121,7 +121,7 @@ namespace Paway.WPF
                 if (DoubleEvent != null) DoubleEvent.Invoke(this, e);
                 else if (PMethod.Parent(this, out Window window))
                 {
-                    PMethod.PImageFullAdorner(window, this.Title, this.Source);
+                    PMethod.PImageFullAdorner(window, this.Title, this.Source.ToSource());
                 }
             }
             else if (e.LeftButton == MouseButtonState.Pressed)

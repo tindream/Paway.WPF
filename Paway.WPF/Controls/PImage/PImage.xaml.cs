@@ -231,7 +231,7 @@ namespace Paway.WPF
         /// <summary>
         /// PImage装饰器显示到Window
         /// </summary>
-        public void Adorner(Window window, string name, BitmapSource source)
+        public void Adorner(Window window)
         {
             PMethod.PageFullAdorner(window, this);
         }

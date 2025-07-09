@@ -19,7 +19,7 @@ namespace Paway.WPF
     {
         private readonly Canvas canvas;
         /// <summary>
-        /// 构造要将绑定到的装饰器的元素
+        /// 自定义动画装饰器
         /// <para>hitTest=true 不路由事件（不穿透）</para>
         /// <para>hitTest=false 路由事件（穿透）</para>
         /// </summary>
