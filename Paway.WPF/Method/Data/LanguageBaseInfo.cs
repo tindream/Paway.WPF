@@ -257,10 +257,10 @@ namespace Paway.WPF
         [Description("导出")]
         public virtual string Export { get; set; } = "导出";
         /// <summary>
-        /// /选择要保存的文件位置
+        /// 保存文件
         /// </summary>
-        [Description("选择要保存的文件位置")]
-        public virtual string SelectFileLocation { get; set; } = "选择要保存的文件位置";
+        [Description("保存文件")]
+        public virtual string SelectSaveFile { get; set; } = "保存文件";
         /// <summary>
         /// 正在导出..
         /// </summary>

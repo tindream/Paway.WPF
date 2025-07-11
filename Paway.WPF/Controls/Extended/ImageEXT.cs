@@ -110,7 +110,7 @@ namespace Paway.WPF
             tbTitle = Template.FindName("tbTitle", this) as TextBlock;
         }
 
-        #region 拖拽节点
+        #region 响应鼠标事件
         /// <summary>
         /// 双击重置
         /// </summary>

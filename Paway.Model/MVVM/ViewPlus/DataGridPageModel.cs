@@ -401,7 +401,7 @@ namespace Paway.Model
                     break;
                 case "导入":
                     var title = typeof(T).Description();
-                    if (PMethod.OpenFile(PConfig.LanguageBase.SelectImportFile, out string file))
+                    if (PMethod.OpenFile(out string file, PConfig.LanguageBase.SelectImportFile))
                     {
                         PMethod.ProgressAsync(PMethod.Window(DataGrid), PConfig.LanguageBase.Importing, adorner =>
                         {
@@ -419,7 +419,7 @@ namespace Paway.Model
                     break;
                 case "导出":
                     title = $"{typeof(T).Description()}{DateTime.Now:yyyy-MM-dd}.xlsx";
-                    if (PMethod.SaveFile(title, out file))
+                    if (PMethod.SaveFile(out file, title))
                     {
                         Export(file);
                     }

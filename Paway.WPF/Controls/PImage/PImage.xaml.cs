@@ -534,7 +534,7 @@ namespace Paway.WPF
         {
             if (this.Source is BitmapSource bitmapSource)
             {
-                if (PMethod.SaveFile($"{DateTime.Now:yyMMddHHMMss}", out string file, "Jpeg|*.jpg;*.jpeg|Png|*.png|Bmp|*.bmp"))
+                if (PMethod.SaveFile(out string file, "另存为", "Jpeg|*.jpg|Png|*.png"))
                 {
                     bitmapSource.Save(file);
                 }

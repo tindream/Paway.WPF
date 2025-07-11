@@ -57,7 +57,7 @@ namespace Paway.Test
         }
         private void ButtonEXT_Click(object sender, RoutedEventArgs e)
         {
-            if (PMethod.OpenFile("选择模型文件", out string file, "模型文件|*.3ds;*.obj;*.stl;*.lwo;*.off;*.ply"))
+            if (PMethod.OpenFile(out string file, "选择模型文件", "模型文件|*.3ds;*.obj;*.stl;*.lwo;*.off;*.ply"))
             {
                 Model3DGroup model2 = new ModelImporter().Load(file);
                 model.Content = model2;

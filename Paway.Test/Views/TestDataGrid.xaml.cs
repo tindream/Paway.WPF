@@ -38,5 +38,12 @@ namespace Paway.Test
             base.OnApplyTemplate();
             Messenger.Default.Send(new TestDataGridLoadMessage() { Obj = Root });
         }
+        private void ButtonEXT_Click(object sender, RoutedEventArgs e)
+        {
+            if (PMethod.OpenFile(out string file, null, "Jpeg|*.jpg|Png|*.png"))
+            {
+                pImage.Source = file.ToSource();
+            }
+        }
     }
 }

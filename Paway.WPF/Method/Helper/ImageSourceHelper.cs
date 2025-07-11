@@ -100,6 +100,18 @@ namespace Paway.WPF
         public static Bitmap ToBitmap(this BitmapSource bitmapSource)
         {
             if (bitmapSource == null) return null;
+            ////慢
+            //// 创建内存流
+            //using (MemoryStream ms = new MemoryStream())
+            //{
+            //    // 使用 BmpBitmapEncoder 将 BitmapSource 编码为 PNG 格式
+            //    BitmapEncoder enc = new PngBitmapEncoder();
+            //    enc.Frames.Add(BitmapFrame.Create(bitmapSource));
+            //    enc.Save(ms);
+
+            //    // 从内存流创建 Bitmap
+            //    return new Bitmap(ms);
+            //}
             // 如果源图像不是32bpp格式，先转换为Pbgra32格式
             if (bitmapSource.Format != PixelFormats.Pbgra32)
             {
@@ -172,7 +184,6 @@ namespace Paway.WPF
                 switch (extension)
                 {
                     case ".jpg":
-                    case ".jpeg":
                     default:
                         var encoderJPG = new JpegBitmapEncoder();
                         encoderJPG.QualityLevel = quality;
@@ -180,9 +191,6 @@ namespace Paway.WPF
                         break;
                     case ".png":
                         encoder = new PngBitmapEncoder();
-                        break;
-                    case ".bmp":
-                        encoder = new BmpBitmapEncoder();
                         break;
                 }
                 encoder.Frames.Add(BitmapFrame.Create(bitmapSource));

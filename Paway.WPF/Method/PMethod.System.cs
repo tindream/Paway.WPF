@@ -163,14 +163,14 @@ namespace Paway.WPF
 
         #region 导入导出框
         /// <summary>
-        /// 打开单个文件
+        /// 选择文件
         /// </summary>
-        public new static bool OpenFile(string title, out string file, string filter = "Excel 工作簿|*.xls;*.xlsx")
+        public new static bool OpenFile(out string file, string title = null, string filter = "Excel 工作簿|*.xls;*.xlsx")
         {
             file = null;
             var ofd = new OpenFileDialog
             {
-                Title = title,
+                Title = title ?? "选择文件",
                 Filter = filter,
                 InitialDirectory = TConfig.FileDialogPath,
             };
@@ -183,14 +183,14 @@ namespace Paway.WPF
             return false;
         }
         /// <summary>
-        /// 打开多个文件
+        /// 选择多个文件
         /// </summary>
-        public new static bool OpenFiles(string title, out string[] files, string filter = "Excel 工作簿|*.xls;*.xlsx")
+        public new static bool OpenFiles(out string[] files, string title = null, string filter = "Excel 工作簿|*.xls;*.xlsx")
         {
             files = new string[0];
             var ofd = new OpenFileDialog
             {
-                Title = title,
+                Title = title ?? "选择多个文件",
                 Filter = filter,
                 Multiselect = true,
                 InitialDirectory = TConfig.FileDialogPath,
@@ -204,16 +204,16 @@ namespace Paway.WPF
             return false;
         }
         /// <summary>
-        /// 保存到文件
+        /// 保存文件
         /// </summary>
-        public new static bool SaveFile(out string outFile, string filter = null, string title = null)
+        public new static bool SaveFile(out string outFile, string title = null, string filter = null)
         {
-            return SaveFile(null, out outFile, filter, title);
+            return SaveFileName(out outFile, null, title, filter);
         }
         /// <summary>
-        /// 保存到文件
+        /// 保存文件，并指定文件名称
         /// </summary>
-        public new static bool SaveFile(string fileName, out string outFile, string filter = null, string title = null)
+        public new static bool SaveFileName(out string outFile, string fileName, string title = null, string filter = null)
         {
             if (filter == null)
             {
@@ -248,7 +248,7 @@ namespace Paway.WPF
             outFile = null;
             var sfd = new SaveFileDialog
             {
-                Title = title ?? PConfig.LanguageBase.SelectFileLocation,
+                Title = title ?? PConfig.LanguageBase.SelectSaveFile,
                 Filter = filter,
                 FileName = fileName,
                 InitialDirectory = TConfig.FileDialogPath,
