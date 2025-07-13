@@ -122,7 +122,7 @@ namespace Paway.WPF
         {
             if (selecting) return;
             var gridView = sender as DataGridEXT;
-            if (gridView.CurrentCell != null && gridView.CurrentCell.Item != DependencyProperty.UnsetValue)
+            if (gridView.CurrentCell is DataGridCellInfo info && info.Item != DependencyProperty.UnsetValue)
             {
                 this.SelectedValue = this.SelectedValuePath.IsEmpty() ? gridView.CurrentCell.Item : gridView.CurrentCell.Item.GetValue(this.SelectedValuePath);
                 this.IsDropDownOpen = false;

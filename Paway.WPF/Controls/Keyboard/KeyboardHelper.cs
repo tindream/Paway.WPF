@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paway.Helper;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -22,12 +23,6 @@ namespace Paway.WPF
     {
         #region API
         /// <summary>
-        /// 欲测试的虚拟键键码。对字母、数字字符（A-Z、a-z、0-9），用它们实际的ASCII值
-        /// </summary>
-        [DllImport("user32.dll", EntryPoint = "GetKeyState")]
-        internal static extern int GetKeyState(int nVirtKey);
-
-        /// <summary>
         /// 于合成键盘事件和鼠标事件，用来模拟鼠标或者键盘操作。
         /// </summary>
         /// <param name="cInputs">函数第二个参数pInputs的数组个数</param>
@@ -35,33 +30,6 @@ namespace Paway.WPF
         /// <param name="cbSize">输入结构的大小（以字节为单位），可用sizeof( )方式获取</param>
         [DllImport("user32.dll", SetLastError = true)]
         internal static extern uint SendInput(uint cInputs, Input[] pInputs, int cbSize);
-
-        /// <summary>
-        /// 钩子(Hook)，是Windows消息处理机制的一个平台，应用程序可以在上面设置子程以监视指定窗口的某种消息，而且所监视的窗口可以是其他进程所创建的。
-        /// 当消息到达后，在目标窗口处理函数之前处理它。钩子机制允许应用程序截获处理window消息或特定事件。
-        /// </summary>
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        internal static extern IntPtr SetWindowsHookEx(int idHook, KeyboardHookDelegate lpfn, IntPtr hMod, uint dwThreadId);
-
-        /// <summary>
-        /// 卸载钩子
-        /// </summary>
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool UnhookWindowsHookEx(IntPtr hhk);
-
-        /// <summary>
-        /// <para>调用下一个钩子</para>
-        /// <para>会返回下一个钩子执行后的返回值; 0 表示失败</para>
-        /// </summary>
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        internal static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
-
-        /// <summary>
-        /// 获取一个应用程序或动态链接库的模块句柄
-        /// </summary>
-        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern IntPtr GetModuleHandle(string lpModuleName);
 
         #endregion
         #region API结构体
@@ -174,10 +142,6 @@ namespace Paway.WPF
         #endregion
         #region API常量
         /// <summary>
-        /// 此挂钩只能在Windows NT中被安装,用来对底层的键盘输入事件进行监视
-        /// </summary>
-        public const int WH_KEYBOARD_LL = 13;
-        /// <summary>
         /// 如果指定， 则 wScan 扫描代码由两个字节组成的序列组成，其中第一个字节的值为 0xE0。
         /// </summary>
         public const uint KEYEVENTF_EXTENDEDKEY = 1u;
@@ -194,12 +158,11 @@ namespace Paway.WPF
         #endregion
 
         #region 键盘钩子
-        private static IntPtr processPointer = IntPtr.Zero;
+        private static int processPointer;
         private static List<Action<int, bool>> callbacks;
         private static readonly HashSet<int> downKeys = new HashSet<int>();
 
-        internal delegate IntPtr KeyboardHookDelegate(int nCode, IntPtr wParam, IntPtr lParam);
-        private static readonly KeyboardHookDelegate keyboardHookDelegate = new KeyboardHookDelegate(HookCallback);
+        private static NativeMethods.HookProc hookDelegate = HookCallback;
         internal static void StartHook(Action<int, bool> callback)
         {
             if (callbacks == null)
@@ -211,21 +174,21 @@ namespace Paway.WPF
                 return;
             }
             callbacks.Add(callback);
-            processPointer = SetHook(keyboardHookDelegate);
+            processPointer = SetHook(hookDelegate);
         }
-        private static IntPtr SetHook(KeyboardHookDelegate hookDelegate)
+        private static int SetHook(NativeMethods.HookProc hookDelegate)
         {
-            IntPtr result;
+            int idHook;
             using (Process currentProcess = Process.GetCurrentProcess())
             {
                 using (ProcessModule mainModule = currentProcess.MainModule)
                 {
-                    result = SetWindowsHookEx(WH_KEYBOARD_LL, hookDelegate, GetModuleHandle(mainModule.ModuleName), 0u);
+                    idHook = NativeMethods.SetWindowsHookEx(HookType.WH_KEYBORARD_LL, hookDelegate, NativeMethods.GetModuleHandle(mainModule.ModuleName), 0);
                 }
             }
-            return result;
+            return idHook;
         }
-        private static IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
+        private static int HookCallback(int nCode, int wParam, IntPtr lParam)
         {
             if (nCode >= 0)
             {
@@ -259,12 +222,12 @@ namespace Paway.WPF
                     }
                 }
             }
-            return CallNextHookEx(processPointer, nCode, wParam, lParam);
+            return NativeMethods.CallNextHookEx(processPointer, nCode, wParam, lParam);
         }
         internal static void StopHook()
         {
             if (callbacks != null) callbacks.Clear();
-            UnhookWindowsHookEx(processPointer);
+            NativeMethods.UnhookWindowsHookEx(processPointer);
         }
 
         #endregion

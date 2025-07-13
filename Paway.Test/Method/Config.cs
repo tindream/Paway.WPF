@@ -14,7 +14,6 @@ namespace Paway.Test
     public class Config : PConfig
     {
         #region 常量
-        public static string Title = "测试系统";
         /// <summary>
         /// 图表绽放率
         /// </summary>

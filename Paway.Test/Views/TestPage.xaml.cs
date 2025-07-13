@@ -27,9 +27,13 @@ namespace Paway.Test
         {
             InitializeComponent();
         }
-
         private void ButtonEXT_Click(object sender, RoutedEventArgs e)
         {
+            if (PMethod.OpenFile(out string file, null, "All Image|*.jpg;*.png;*.bmp|Jpeg|*.jpg|Png|*.png|BMP|*.bmp"))
+            {
+                image.Source = file.ToSource();
+                pImage.Source = file.ToSource();
+            }
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Paway.Test
         public TipWindowModel TipWindow => GetModelInstance<TipWindowModel>();
         public TestWindowModel TestWindow => GetModelInstance<TestWindowModel>();
         public TestDataGridModel TestDataGrid => GetModelInstance<TestDataGridModel>();
+        public TestPageModel TestPage => GetModelInstance<TestPageModel>();
         public MainWindowModel MainWindow => GetModelInstance<MainWindowModel>();
     }
 }

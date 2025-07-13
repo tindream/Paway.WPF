@@ -9,11 +9,15 @@
       xmlns:ip="http://www.galasoft.ch/mvvmlight"
       mc:Ignorable="d" 
       UseLayoutRounding="True"
-      DataContext="{Binding Test, Source={StaticResource Locator}}"
+      DataContext="{Binding TestPage, Source={StaticResource Locator}}"
       d:DesignHeight="450" d:DesignWidth="600"
       Title="TestPage">
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="500" >
+            <TextBoxEXT />
+            <ImageEXT Name="image" Source="/Paway.Test;component/Images/progress.png" Height="100"/>
+            <PImage Name="pImage" ISave="True" Source="/Paway.Test;component/Images/progress.png" Height="100"/>
+            <ButtonEXT Content="选择" Click="ButtonEXT_Click"/>
             <CheckBoxEXT Content="A"/>
             <Border CornerRadius="5" HorizontalAlignment="Center" Margin="0,5,0,0" >
                 <ButtonEXT Content="Hello Kitty Baby" MinWidth="200" MaxWidth="600"  Type="Color" Margin="0" Padding="10" Command="{Binding ButtonCommand}" HorizontalContentAlignment="Left" />

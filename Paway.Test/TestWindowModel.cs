@@ -83,6 +83,9 @@ namespace Paway.Test
                 case "颜色":
                     Method.ShowWindow(Config.Window, new SelectColorWindow());
                     break;
+                case "测试页":
+                    Frame.Content = ViewModelLocator.GetViewInstance<TestPage>();
+                    break;
                 case "报告问题":
                     if (tipWindow == null)
                     {
@@ -128,6 +131,7 @@ namespace Paway.Test
                 if (Method.Find(Root, out Frame frame, "frame"))
                 {
                     this.Frame = frame;
+                    this.Frame.Content = ViewModelLocator.GetViewInstance<TestPage>();
                 }
             });
         }

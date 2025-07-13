@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using Paway.Helper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -15,10 +17,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using System.Xml;
-using Microsoft.Win32;
-using Paway.Helper;
 
 namespace Paway.WPF
 {
@@ -49,9 +50,6 @@ namespace Paway.WPF
         /// </summary>
         public static KeyDecodeInfo KeyToChar(Key key)
         {
-            bool iscap;
-            bool caplock;
-            bool shift;
             var keyDecode = new KeyDecodeInfo();
             keyDecode.Key = key;
 
@@ -75,10 +73,9 @@ namespace Paway.WPF
                 keyDecode.Type = 0;
             }
 
-            shift = keyDecode.Shift;
-            caplock = Console.CapsLock; //Keyboard.IsKeyToggled(Key.CapsLock);
-            iscap = (caplock && !shift) || (!caplock && shift);
-
+            var shift = keyDecode.Shift;
+            var caplock = Keyboard.GetKeyStates(Key.CapsLock) == KeyStates.Toggled;
+            var iscap = (caplock && !shift) || (!caplock && shift);
             switch (key)
             {
                 case Key.Enter: keyDecode.Character = '\n'; break;
@@ -165,7 +162,7 @@ namespace Paway.WPF
         /// <summary>
         /// 选择文件
         /// </summary>
-        public new static bool OpenFile(out string file, string title = null, string filter = "Excel 工作簿|*.xls;*.xlsx")
+        public static new bool OpenFile(out string file, string title = null, string filter = "Excel 工作簿|*.xls;*.xlsx")
         {
             file = null;
             var ofd = new OpenFileDialog
@@ -185,7 +182,7 @@ namespace Paway.WPF
         /// <summary>
         /// 选择多个文件
         /// </summary>
-        public new static bool OpenFiles(out string[] files, string title = null, string filter = "Excel 工作簿|*.xls;*.xlsx")
+        public static new bool OpenFiles(out string[] files, string title = null, string filter = "Excel 工作簿|*.xls;*.xlsx")
         {
             files = new string[0];
             var ofd = new OpenFileDialog
@@ -206,14 +203,14 @@ namespace Paway.WPF
         /// <summary>
         /// 保存文件
         /// </summary>
-        public new static bool SaveFile(out string outFile, string title = null, string filter = null)
+        public static new bool SaveFile(out string outFile, string title = null, string filter = null)
         {
             return SaveFileName(out outFile, null, title, filter);
         }
         /// <summary>
         /// 保存文件，并指定文件名称
         /// </summary>
-        public new static bool SaveFileName(out string outFile, string fileName, string title = null, string filter = null)
+        public static new bool SaveFileName(out string outFile, string fileName, string title = null, string filter = null)
         {
             if (filter == null)
             {
@@ -261,34 +258,50 @@ namespace Paway.WPF
             }
             return false;
         }
+        /// <summary>
+        /// 打开文件夹
+        /// </summary>
+        public static new bool OpenFolder(IntPtr ower, out string outPath, string title = null, string selectedPath = null)
+        {
+            FolderSelectDialog dialog = new FolderSelectDialog
+            {
+                Title = title ?? "打开文件夹",
+            };
+            if (selectedPath != null) dialog.InitialDirectory = selectedPath;
+            outPath = null;
+            if (dialog.ShowDialog(ower))
+            {
+                outPath = dialog.FileName;
+                return true;
+            }
+            return false;
+        }
 
         #endregion
 
         #region 对一个Handle控件进行截图
-        [DllImport("user32.dll")]
-        private static extern bool PrintWindow(IntPtr hwnd, IntPtr hdcBlt, uint nFlags);
         /// <summary>
         /// 对一个Handle控件进行截图
         /// </summary>
-        public static System.Drawing.Bitmap PrintWindow(FrameworkElement framework, IntPtr intptr)
+        public static BitmapSource PrintWindow(FrameworkElement framework, IntPtr intptr)
         {
-            // 获取宽高
-            int screenWidth = (int)framework.ActualWidth;
-            int screenHeight = (int)framework.ActualHeight;
+            // 获取控件的实际尺寸（考虑缩放和布局）
+            double actualHeight = framework.ActualHeight;
+            double actualWidth = framework.ActualWidth;
 
-            //创建图形
-            var bitmap = new System.Drawing.Bitmap(screenWidth, screenHeight, System.Drawing.Imaging.PixelFormat.Format16bppRgb555);
-            using (var g = System.Drawing.Graphics.FromImage(bitmap))
-            {
-                var hdc = g.GetHdc();
+            // 如果控件尺寸为0，则无法截图
+            if (actualHeight <= 0 || actualWidth <= 0) return null;
 
-                //调用api 把hwnd的内容用图形绘制到hdc 如果你有代码洁癖 可以不使用api 使用g.CopyFromScreen，请自行研究
-                var result = PrintWindow(intptr, hdc, 0);
-                g.ReleaseHdc(hdc);
-                g.Flush();
-                if (result) return bitmap;
-            }
-            return null;
+            // 创建 RenderTargetBitmap
+            var renderTargetBitmap = new RenderTargetBitmap(
+                (int)actualWidth,
+                (int)actualHeight,
+                96, 96, PixelFormats.Pbgra32);
+
+            // 渲染控件到 bitmap
+            renderTargetBitmap.Render(framework);
+
+            return renderTargetBitmap;
         }
 
         #endregion

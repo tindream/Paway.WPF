@@ -9,6 +9,7 @@
     <Separator />
     <Menu>
         <MenuItem Header="测试菜单">
+            <MenuItem Header="测试页" Command="{Binding ItemClickCommand}" CommandParameter="测试页"/>
             <MenuItem Header="报告问题" IsCheckable="True" Command="{Binding ItemClickCommand}" CommandParameter="报告问题"/>
             <Separator />
             <MenuItem Header="3D模型" Command="{Binding ItemClickCommand}" CommandParameter="3D模型"/>

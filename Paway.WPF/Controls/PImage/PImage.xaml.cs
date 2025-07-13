@@ -194,8 +194,6 @@ namespace Paway.WPF
         /// </summary>
         private DateTime clickTime;
 
-        private System.Drawing.Bitmap bitmap;
-
         #endregion
 
         /// <summary>
@@ -218,7 +216,6 @@ namespace Paway.WPF
         private void OnSourceChanged(object sender, EventArgs e)
         {
             this.image.Source = this.Source;
-            this.bitmap = this.Source.ToBitmap();
             this.Init();
         }
         /// <summary>
@@ -441,7 +438,7 @@ namespace Paway.WPF
                 var point = e.GetPosition(this);
                 if (GetPoint(point, out Point normal))
                 {
-                    var color = bitmap.GetPixel((int)normal.X, (int)normal.Y);
+                    var color = this.Source.PixelColor((int)normal.X, (int)normal.Y);
                     tbPoint.Text = $"{(int)normal.X}, {(int)normal.Y}";
                     tbColor.Text = $"[{color.R},{color.G},{color.B}]";
                 }

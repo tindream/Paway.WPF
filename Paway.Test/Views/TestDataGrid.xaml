@@ -13,8 +13,6 @@
       Title="TestDataGrid">
     <DockPanel x:Name="Root">
         <StackPanel Width="200">
-            <PImage Name="pImage" Source="/Paway.Test;component/Images/progress.png" Height="100"/>
-            <ButtonEXT Content="选择" Click="ButtonEXT_Click"/>
             <ListViewEXT ItemsSource="{Binding List}" ItemWidthType="OneColumn" ClickMode="Press"/>
         </StackPanel>
         <DataGridEXT ItemsSource="{Binding GridList}" SelectionUnit="Cell" Name="datagrid1" Margin="10" BorderThickness="1" GridLinesVisibility="All">

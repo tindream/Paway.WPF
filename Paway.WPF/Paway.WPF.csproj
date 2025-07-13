@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<UseWPF>true</UseWPF>
 		<UseWindowsForms>true</UseWindowsForms>
-		<TargetFrameworks>net45;netcoreapp3.1</TargetFrameworks>
+		<TargetFrameworks>net45;net48;net6.0-windows</TargetFrameworks>
 		<!--用于指示编译器是否生成文档文件的值-->
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<!--不自动生成程序集信息(版本号)-->
@@ -12,7 +12,7 @@
 		<RootNamespace>Paway.WPF</RootNamespace>
 		<PlatformTarget>AnyCPU</PlatformTarget>
 		<OutputPath>..\bin\$(Configuration)</OutputPath>
-		<NoWarn>0618,IDE0017,IDE0056,IDE0057,IDE0060,IDE0063,IDE0066</NoWarn>
+		<NoWarn>CS0109,CS0618;IDE0017,IDE0056,IDE0057,IDE0060,IDE0063,IDE0066</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -26,7 +26,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Paway.Helper" Version="2.7.4" />
+		<PackageReference Include="Paway.Helper" Version="3.0.0" />
+	</ItemGroup>
+	<ItemGroup Condition="$(TargetFramework) == 'net6.0-windows'">
+		<Compile Remove="Window\**" />
 	</ItemGroup>
 
 </Project>

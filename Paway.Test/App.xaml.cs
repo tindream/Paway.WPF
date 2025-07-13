@@ -24,6 +24,7 @@ namespace Paway.Test
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            Config.Title = "测试系统";
             Method.InitApp(App.Current, Config.Log, Config.Title);
             {//Test
             }

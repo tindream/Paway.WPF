@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paway.Helper;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -119,7 +120,7 @@ namespace Paway.WPF
         {
             switch (virtualKey)
             {
-                case (int)Keys.CapsLock: if (!keyUp) this.iCapsLock = KeyboardHelper.GetKeyState((int)Keys.CapsLock) == 0; this.ChangeCapsLock(); break;
+                case (int)Keys.CapsLock: if (!keyUp) this.iCapsLock = NativeMethods.GetKeyState((int)Keys.CapsLock) == 0; this.ChangeCapsLock(); break;
                 case (int)Keys.LShiftKey:
                 case (int)Keys.RShiftKey: if (keyUp) { PMethod.DoEvents(); this.ChangeChina(); } break;
             }

@@ -9,13 +9,14 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Color = System.Windows.Media.Color;
 
 namespace Paway.WPF
 {
     /// <summary>
     /// WPF图像转换器
     /// </summary>
-    public static class ImageSourceHelper
+    public static partial class ImageSourceHelper
     {
         #region 转换
         /// <summary>
@@ -48,25 +49,6 @@ namespace Paway.WPF
             }
         }
         /// <summary>
-        /// Image转图片资源
-        /// </summary>
-        public static BitmapSource ToSource(this Image image)
-        {
-            var source = new BitmapImage();
-            using (var ms = new MemoryStream())
-            {
-                image.Save(ms, ImageFormat.Png);
-                ms.Seek(0, SeekOrigin.Begin);
-
-                source.BeginInit();
-                source.CacheOption = BitmapCacheOption.OnLoad;
-                source.StreamSource = ms;
-                source.EndInit();
-            }
-            source.Freeze(); // 可选：使对象跨线程可用
-            return source;
-        }
-        /// <summary>
         /// 内存流转图片资源
         /// </summary>
         public static BitmapSource ToSource(this byte[] buffer)
@@ -81,76 +63,6 @@ namespace Paway.WPF
             }
             source.Freeze(); // 可选：使对象跨线程可用
             return source;
-        }
-        /// <summary>
-        /// 图像转图片资源
-        /// </summary>
-        public static BitmapSource ToSource(this Bitmap bitmap)
-        {
-            if (bitmap == null) return null;
-            var intPtr = bitmap.GetHbitmap();
-            var source = Imaging.CreateBitmapSourceFromHBitmap(intPtr, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-            NativeMethods.DeleteObject(intPtr);
-            source.Freeze(); // 可选：使对象跨线程可用
-            return source;
-        }
-        /// <summary>
-        /// BitmapSource转Bitmap
-        /// </summary>
-        public static Bitmap ToBitmap(this BitmapSource bitmapSource)
-        {
-            if (bitmapSource == null) return null;
-            ////慢
-            //// 创建内存流
-            //using (MemoryStream ms = new MemoryStream())
-            //{
-            //    // 使用 BmpBitmapEncoder 将 BitmapSource 编码为 PNG 格式
-            //    BitmapEncoder enc = new PngBitmapEncoder();
-            //    enc.Frames.Add(BitmapFrame.Create(bitmapSource));
-            //    enc.Save(ms);
-
-            //    // 从内存流创建 Bitmap
-            //    return new Bitmap(ms);
-            //}
-            // 如果源图像不是32bpp格式，先转换为Pbgra32格式
-            if (bitmapSource.Format != PixelFormats.Pbgra32)
-            {
-                var formattedBitmapSource = new FormatConvertedBitmap();
-                formattedBitmapSource.BeginInit();
-                formattedBitmapSource.Source = bitmapSource;
-                formattedBitmapSource.DestinationFormat = PixelFormats.Pbgra32;
-                formattedBitmapSource.EndInit();
-                bitmapSource = formattedBitmapSource;
-            }
-
-            // 获取图像参数
-            int width = bitmapSource.PixelWidth;
-            int height = bitmapSource.PixelHeight;
-            int stride = width * ((bitmapSource.Format.BitsPerPixel + 7) / 8);
-
-            // 创建字节数组来存储像素数据
-            byte[] pixels = new byte[height * stride];
-
-            // 复制像素数据
-            bitmapSource.CopyPixels(pixels, stride, 0);
-
-            // 创建 Bitmap 对象
-            Bitmap bitmap = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-
-            // 锁定 Bitmap 的位图数据
-            BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
-            try
-            {
-                // 将像素数据复制到 Bitmap
-                System.Runtime.InteropServices.Marshal.Copy(pixels, 0, bitmapData.Scan0, pixels.Length);
-            }
-            finally
-            {
-                // 解锁位图数据
-                bitmap.UnlockBits(bitmapData);
-            }
-
-            return bitmap;
         }
         /// <summary>
         /// ImageSource转BitmapSource
@@ -195,6 +107,41 @@ namespace Paway.WPF
                 }
                 encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
                 encoder.Save(fileStream);
+            }
+        }
+        /// <summary>
+        /// 获取图像坐标颜色
+        /// </summary>
+        public static Color PixelColor(this BitmapSource bitmapSource, int x, int y)
+        {
+            if (x < 0 || x >= bitmapSource.PixelWidth || y < 0 || y >= bitmapSource.PixelHeight)
+                return Colors.Transparent;
+
+            // 计算stride（每行的字节数）
+            int stride = (bitmapSource.PixelWidth * bitmapSource.Format.BitsPerPixel + 7) / 8;
+
+            // 创建足够大的数组来保存单个像素
+            byte[] pixel = new byte[bitmapSource.Format.BitsPerPixel / 8];
+
+            // 复制像素数据
+            bitmapSource.CopyPixels(new Int32Rect(x, y, 1, 1), pixel, stride, 0);
+
+            // 根据格式转换颜色
+            if (bitmapSource.Format == PixelFormats.Bgra32 || bitmapSource.Format == PixelFormats.Pbgra32)
+            {
+                return Color.FromArgb(pixel[3], pixel[2], pixel[1], pixel[0]);
+            }
+            else if (bitmapSource.Format == PixelFormats.Bgr32)
+            {
+                return Color.FromRgb(pixel[2], pixel[1], pixel[0]);
+            }
+            else if (bitmapSource.Format == PixelFormats.Indexed8)
+            {
+                return Color.FromRgb(pixel[0], pixel[0], pixel[0]);
+            }
+            else
+            {
+                return Color.FromRgb(pixel.Length > 2 ? pixel[2] : pixel[0], pixel.Length > 2 ? pixel[1] : pixel[0], pixel[0]);
             }
         }
 
