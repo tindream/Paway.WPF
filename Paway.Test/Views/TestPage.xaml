@@ -13,15 +13,21 @@
       d:DesignHeight="450" d:DesignWidth="600"
       Title="TestPage">
     <Grid>
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="500" >
-            <TextBoxEXT />
-            <ImageEXT Name="image" Source="/Paway.Test;component/Images/progress.png" Height="100"/>
-            <PImage Name="pImage" ISave="True" Source="/Paway.Test;component/Images/progress.png" Height="100"/>
-            <ButtonEXT Content="选择" Click="ButtonEXT_Click"/>
-            <CheckBoxEXT Content="A"/>
-            <Border CornerRadius="5" HorizontalAlignment="Center" Margin="0,5,0,0" >
-                <ButtonEXT Content="Hello Kitty Baby" MinWidth="200" MaxWidth="600"  Type="Color" Margin="0" Padding="10" Command="{Binding ButtonCommand}" HorizontalContentAlignment="Left" />
-            </Border>
-        </StackPanel>
+        <Border BorderBrush="LightGray" BorderThickness="1">
+            <DockPanel HorizontalAlignment="Center" Width="500" >
+                <CheckBoxEXT DockPanel.Dock="Top" Content="A"/>
+                <Border DockPanel.Dock="Top" CornerRadius="5" HorizontalAlignment="Center" Margin="0,5,0,0" >
+                    <ButtonEXT Content="Hello Kitty Baby" MinWidth="200" MaxWidth="600"  Type="Color" Margin="0" Padding="10" Command="{Binding ButtonCommand}" HorizontalContentAlignment="Left" />
+                </Border>
+                <TextBoxEXT DockPanel.Dock="Top"/>
+                <ButtonEXT DockPanel.Dock="Top" Content="选择" Click="ButtonEXT_Click"/>
+                <Border DockPanel.Dock="Top" BorderBrush="LightGray" BorderThickness="1">
+                    <ImageEXT Name="image" Source="/Paway.Test;component/Images/progress.png" Height="100"/>
+                </Border>
+                <Border DockPanel.Dock="Top" BorderBrush="LightGray" BorderThickness="1">
+                    <ImageEXT DockPanel.Dock="Top" Name="image2" IDoubleView="False" Title="Hello World" IMove="True" IZoom="True" Source="/Paway.Test;component/Images/progress.png" MinHeight="100"/>
+                </Border>
+            </DockPanel>
+        </Border>
     </Grid>
 </Page>

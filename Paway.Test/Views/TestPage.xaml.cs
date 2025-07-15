@@ -32,7 +32,7 @@ namespace Paway.Test
             if (PMethod.OpenFile(out string file, null, "All Image|*.jpg;*.png;*.bmp|Jpeg|*.jpg|Png|*.png|BMP|*.bmp"))
             {
                 image.Source = file.ToSource();
-                pImage.Source = file.ToSource();
+                image2.Source = file.ToSource();
             }
         }
     }

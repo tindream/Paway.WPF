@@ -135,24 +135,11 @@ namespace Paway.WPF
             return adorner;
         }
         /// <summary>
-        /// PImage装饰器显示到Window
-        /// <para>模拟弹框</para>
-        /// </summary>
-        public static void PImageFullAdorner(Window window, string title, BitmapSource source)
-        {
-            var pImage = new PImage();
-            pImage.IClose = true;
-            pImage.IPoint = false;
-            pImage.Title = title;
-            pImage.Source = source;
-            PageFullAdorner(window, pImage);
-        }
-        /// <summary>
         /// 控件装饰器显示到Window
         /// <para>模拟弹框</para>
         /// <para>支持移动</para>
         /// </summary>
-        public static void PageFullAdorner(Window window, IPageFullAdorner page, int backAlpha = 100, bool iBingParentSize = true, bool iTop = false, bool iMove = false)
+        public static void PageFullAdorner(Window window, IPageToWindowAdorner page, int backAlpha = 100, bool iBingParentSize = true, bool iTop = false, bool iMove = false)
         {
             CustomAdorner Adorner = null;
             page.CloseEvent += (sender, e) =>

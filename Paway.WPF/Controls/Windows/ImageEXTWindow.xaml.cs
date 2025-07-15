@@ -17,29 +17,29 @@ using System.Windows.Shapes;
 namespace Paway.WPF
 {
     /// <summary>
-    /// PImageWindow.xaml 的交互逻辑
+    /// ImageEXTWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class PImageWindow : WindowEXT
+    public partial class ImageEXTWindow : WindowEXT
     {
         /// <summary>
         /// Image显示窗体
         /// </summary>
-        public PImageWindow()
+        public ImageEXTWindow()
         {
             InitializeComponent();
         }
         /// <summary>
-        /// PImageWindow显示窗体
+        /// ImageEXTWindow显示窗体
         /// </summary>
-        public PImageWindow(string name, BitmapSource source) : this()
+        public ImageEXTWindow(string name, BitmapSource source) : this()
         {
             this.Title = name;
             this.image.Source = source;
         }
         /// <summary>
-        /// PImageWindow显示窗体
+        /// ImageEXTWindow显示窗体
         /// </summary>
-        public PImageWindow(string name, string filePath) : this()
+        public ImageEXTWindow(string name, string filePath) : this()
         {
             this.Title = name;
             this.image.Source = filePath.ToSource();
