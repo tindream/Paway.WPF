@@ -8,9 +8,9 @@ using System.Windows;
 namespace Paway.WPF
 {
     /// <summary>
-    /// Page页装饰到Window接口
+    /// 组件装饰到Window接口
     /// </summary>
-    public interface IPageToWindowAdorner : IFrameworkInputElement
+    public interface IWindowAdorner : IFrameworkInputElement
     {
         /// <summary>
         /// 关闭路由事件

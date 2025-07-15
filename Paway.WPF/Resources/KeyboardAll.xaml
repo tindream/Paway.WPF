@@ -1,0 +1,70 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:Paway.WPF">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Default\Default.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="{x:Type local:KeyboardAll}">
+        <Setter Property="UseLayoutRounding" Value="True"/>
+        <Setter Property="Height" Value="246"/>
+        <Setter Property="Width" Value="606"/>
+        <!--修改模板属性-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <!--控件模板-->
+                <ControlTemplate TargetType="{x:Type local:KeyboardAll}">
+                    <Border Background="#E5000000" BorderBrush="#3D3D3D" BorderThickness="1" CornerRadius="0" Padding="2">
+                        <local:ListViewCustom x:Name="listview1" ItemTemplate="{StaticResource KeyboardOne}" ItemRadius="3" ItemMargin="2" ItemPadding="0"
+                              ItemWidth="56" ItemHeight="56"
+                              ItemTextForeground="#FFF;#333;#FFF" ItemBackground="#333" FontSize="21">
+                            <local:ListBoxItemEXT Text="q" Tag="q" />
+                            <local:ListBoxItemEXT Text="w" Tag="w" />
+                            <local:ListBoxItemEXT Text="e" Tag="e" />
+                            <local:ListBoxItemEXT Text="r" Tag="r" />
+                            <local:ListBoxItemEXT Text="t" Tag="t" />
+                            <local:ListBoxItemEXT Text="y" Tag="y" />
+                            <local:ListBoxItemEXT Text="u" Tag="u" />
+                            <local:ListBoxItemEXT Text="i" Tag="i" />
+                            <local:ListBoxItemEXT Text="o" Tag="o" />
+                            <local:ListBoxItemEXT Text="p" Tag="p" />
+
+                            <local:ListBoxItemEXT Text="a" Tag="a" />
+                            <local:ListBoxItemEXT Text="s" Tag="s" />
+                            <local:ListBoxItemEXT Text="d" Tag="d" />
+                            <local:ListBoxItemEXT Text="f" Tag="f" />
+                            <local:ListBoxItemEXT Text="g" Tag="g" />
+                            <local:ListBoxItemEXT Text="h" Tag="h" />
+                            <local:ListBoxItemEXT Text="j" Tag="j" />
+                            <local:ListBoxItemEXT Text="k" Tag="k" />
+                            <local:ListBoxItemEXT Text="l" Tag="l" />
+                            <local:ListBoxItemEXT Text="英" FontSize="15" Tag="中英" />
+
+                            <local:ListBoxItemEXT Image="pack://application:,,,/Paway.WPF;component/Images/keyboard/caps_lock_white.png|pack://application:,,,/Paway.WPF;component/Images/keyboard/caps_lock.png|pack://application:,,,/Paway.WPF;component/Images/keyboard/caps_lock_white.png" 
+                                  Tag="caps lock" />
+                            <local:ListBoxItemEXT Text="z" Tag="z" />
+                            <local:ListBoxItemEXT Text="x" Tag="x" />
+                            <local:ListBoxItemEXT Text="c" Tag="c" />
+                            <local:ListBoxItemEXT Text="v" Tag="v" />
+                            <local:ListBoxItemEXT Text="b" Tag="b" />
+                            <local:ListBoxItemEXT Text="n" Tag="n" />
+                            <local:ListBoxItemEXT Text="m" Tag="m" />
+                            <local:ListBoxItemEXT Image="pack://application:,,,/Paway.WPF;component/Images/keyboard/backspace_white.png|pack://application:,,,/Paway.WPF;component/Images/keyboard/backspace.png|pack://application:,,,/Paway.WPF;component/Images/keyboard/backspace_white.png" 
+                                  ItemWidth="116" ItemHeight="56" Tag="backspace" />
+
+                            <local:ListBoxItemEXT Text="?123" FontSize="15" Tag="键盘" />
+                            <local:ListBoxItemEXT Text="." Tag="." />
+                            <local:ListBoxItemEXT Text="space" ItemWidth="296" ItemHeight="56" Tag="space" />
+                            <local:ListBoxItemEXT Image="pack://application:,,,/Paway.WPF;component/Images/keyboard/down_white.png|pack://application:,,,/Paway.WPF;component/Images/keyboard/down.png|pack://application:,,,/Paway.WPF;component/Images/keyboard/down_white.png" 
+                                  Tag="关闭" />
+                            <local:ListBoxItemEXT Text="Enter" ItemWidth="116" ItemHeight="56" Tag="enter" />
+                        </local:ListViewCustom>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

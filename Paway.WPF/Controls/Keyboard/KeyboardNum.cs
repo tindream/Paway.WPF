@@ -1,31 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Paway.Helper;
+using System;
+using System.ComponentModel;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Interop;
 using System.Windows.Media;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Keys = System.Windows.Forms.Keys;
+using System.Windows.Media.Imaging;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Paway.WPF
 {
     /// <summary>
-    /// KeyboardNum.xaml 的交互逻辑
+    /// 虚拟键盘-数字键盘
     /// </summary>
-    public partial class KeyboardNum : UserControl
+    public partial class KeyboardNum : ContentControl, IWindowAdorner
     {
         /// <summary>
-        /// 关闭事件
+        /// 关闭路由事件
         /// </summary>
-        public event Action CloseEvent;
+        public event EventHandler<RoutedEventArgs> CloseEvent;
         /// <summary>
         /// 点击空白处拖动窗体后事件
         /// </summary>
@@ -36,7 +32,16 @@ namespace Paway.WPF
         /// </summary>
         public KeyboardNum()
         {
-            InitializeComponent();
+            DefaultStyleKey = typeof(KeyboardNum);
+        }
+        /// <summary>
+        /// 获取模板控件
+        /// </summary>
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            var listview1 = Template.FindName("listview1", this) as ListViewCustom;
+            var listview2 = Template.FindName("listview2", this) as ListViewCustom;
             listview1.SelectionChanged += Listview_SelectionChanged;
             listview2.SelectionChanged += Listview_SelectionChanged;
             listview1.DragMovedEvent += Listview_DragMovedEvent;
@@ -67,7 +72,7 @@ namespace Paway.WPF
         }
         private void OnCloseEvent()
         {
-            if (CloseEvent != null) CloseEvent.Invoke();
+            if (CloseEvent != null) CloseEvent?.Invoke(this, new RoutedEventArgs());
             else this.Visibility = Visibility.Collapsed;
         }
     }

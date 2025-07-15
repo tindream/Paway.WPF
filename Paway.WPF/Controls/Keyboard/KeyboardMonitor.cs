@@ -59,7 +59,7 @@ namespace Paway.WPF
             if (PConfig.Keyboard == EnableType.None) return;
             if (keyboardAdorner != null || keyboardWindow != null)
             {
-                if (clickCount == 2) this.CloseKeyboard();
+                if (clickCount == 2) this.CloseKeyboard(this, new RoutedEventArgs());
                 return;
             }
             var keyboardType = Keyboard;
@@ -197,7 +197,7 @@ namespace Paway.WPF
         /// </summary>
         private void Element_LostFocus(object sender, RoutedEventArgs e)
         {
-            this.CloseKeyboard();
+            this.CloseKeyboard(sender, e);
         }
         private void Owner_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -206,11 +206,11 @@ namespace Paway.WPF
                 var point = e.GetPosition(element);
                 if (!boxRect.Contains(point) && !keyboardRect.Contains(point))
                 {
-                    this.CloseKeyboard();
+                    this.CloseKeyboard(sender, e);
                 }
             }
         }
-        private void CloseKeyboard()
+        private void CloseKeyboard(object sender, RoutedEventArgs e)
         {
             if (keyboardAdorner != null && PMethod.Parent(element, out Window owner) && owner.Content is FrameworkElement content)
             {

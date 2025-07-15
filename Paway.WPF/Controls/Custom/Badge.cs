@@ -1,10 +1,15 @@
 ﻿using Paway.Helper;
 using System;
 using System.ComponentModel;
+using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace Paway.WPF
 {
@@ -19,16 +24,33 @@ namespace Paway.WPF
 
         #endregion
 
+        private ScaleTransform ScaleWave;
+        private TextBlock TxtBlock;
+        private Rectangle RectWave;
         /// <summary>
+        /// 徽章
         /// </summary>
         public Badge()
         {
-            InitializeComponent();
+            DefaultStyleKey = typeof(Badge);
             AlwaysCenter = true;
             _storyboard_ScaleBigger = FindResource("Storyboard_ScaleBigger") as Storyboard;
             _storyboard_ScaleSmaller = FindResource("Storyboard_ScaleSmaller") as Storyboard;
             DependencyPropertyDescriptor.FromProperty(IsWavingProperty, typeof(Badge)).AddValueChanged(this, OnIsWavingChanged);
             DependencyPropertyDescriptor.FromProperty(AlwaysCenterProperty, typeof(Badge)).AddValueChanged(this, OnAlwaysCenterChanged);
+        }
+        /// <summary>
+        /// 获取模板控件
+        /// </summary>
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            ScaleWave = Template.FindName("ScaleWave", this) as ScaleTransform;
+            TxtBlock = Template.FindName("TxtBlock", this) as TextBlock;
+            this.TxtBlock.Text = this.Text;
+            RectWave = Template.FindName("RectWave", this) as Rectangle;
+
+            this.ChangeWaving();
         }
         private void OnAlwaysCenterChanged(object sender, EventArgs e)
         {
@@ -40,7 +62,7 @@ namespace Paway.WPF
         }
         private void OnIsWavingChanged(object sender, EventArgs e)
         {
-            this.ChangeWaving();
+            if (RectWave != null) this.ChangeWaving();
         }
         /// <summary>
         /// 监听Text更新
@@ -50,10 +72,9 @@ namespace Paway.WPF
             base.OnPropertyChanged(e);
             if (e.Property == TextProperty)
             {
+                if (TxtBlock == null) return;
                 if (!this.IsLoaded)
                 {
-                    this.Scale.ScaleX = 1;
-                    this.Scale.ScaleY = 1;
                     this.TxtBlock.Text = this.Text;
                     return;
                 }

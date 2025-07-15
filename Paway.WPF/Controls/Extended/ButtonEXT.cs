@@ -72,60 +72,24 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ShortcutKeyProperty =
-            DependencyProperty.RegisterAttached(nameof(ShortcutKey), typeof(Key), typeof(ButtonEXT), new PropertyMetadata(Key.None, OnKeyChanged));
+            DependencyProperty.RegisterAttached(nameof(ShortcutKey), typeof(Key), typeof(ButtonEXT), new PropertyMetadata(Key.None));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ShortKeyProperty =
-            DependencyProperty.RegisterAttached(nameof(ShortKey), typeof(Key), typeof(ButtonEXT), new PropertyMetadata(Key.None, OnKeyChanged));
-        private static void OnKeyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
-        {
-            if (obj is ButtonEXT view)
-            {
-                if (view.ShortcutKey != Key.None)
-                {
-                    view.Keys = $"({view.ShortcutKey})";
-                    if (view.Keys.Length > 5) view.Keys = $"({view.ShortcutKey.ToString().Substring(0, 3)})";
-                }
-                else if (view.ShortKey != Key.None)
-                {
-                    if (view.ShortKey != Key.None) view.Keys = $"({view.ShortKey})";
-                    if (view.Keys.Length > 5) view.Keys = $"({view.ShortKey.ToString().Substring(0, 3)})";
-                }
-                else if (view.Keys != null)
-                {
-                    view.Keys = null;
-                }
-            }
-        }
+            DependencyProperty.RegisterAttached(nameof(ShortKey), typeof(Key), typeof(ButtonEXT), new PropertyMetadata(Key.None));
 
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty IsLightProperty =
-            DependencyProperty.RegisterAttached(nameof(IsLight), typeof(bool), typeof(ButtonEXT),
-            new PropertyMetadata(false, OnColorTypeChanged));
+            DependencyProperty.RegisterAttached(nameof(IsLight), typeof(bool), typeof(ButtonEXT));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty IsLightAllProperty =
+            DependencyProperty.RegisterAttached(nameof(IsLightAll), typeof(bool), typeof(ButtonEXT));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty TypeProperty =
-            DependencyProperty.RegisterAttached(nameof(Type), typeof(ColorType), typeof(ButtonEXT),
-            new PropertyMetadata(ColorType.Color, OnColorTypeChanged));
-        private static void OnColorTypeChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
-        {
-            if (obj is ButtonEXT view)
-            {
-                if (view.Type != ColorType.None)
-                {
-                    var color = view.Type.Color();
-                    view.ItemBackground = new BrushEXT(color.ToAlpha(PConfig.Alpha));
-                }
-                if (view.IsLight)
-                {
-                    view.ItemBorder = new ThicknessEXT(1, 0);
-                    view.BorderBrush = Colors.LightGray.ToBrush();
-                    view.ItemForeground = new BrushEXT(null, Colors.White, Colors.White);
-                    view.ItemBackground.Normal = new ThemeForeground(Colors.Transparent);
-                }
-            }
-        }
+            DependencyProperty.RegisterAttached(nameof(Type), typeof(ColorType), typeof(ButtonEXT), new PropertyMetadata(ColorType.Color));
 
         #endregion
 
@@ -301,6 +265,17 @@ namespace Paway.WPF
             set { SetValue(IsLightProperty, value); }
         }
         /// <summary>
+        /// 轻颜色样式，无边框
+        /// <para>默认值：false</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("轻颜色样式，无边框")]
+        public bool IsLightAll
+        {
+            get { return (bool)GetValue(IsLightAllProperty); }
+            set { SetValue(IsLightAllProperty, value); }
+        }
+        /// <summary>
         /// 颜色样式
         /// <para>默认值：Color</para>
         /// </summary>
@@ -319,6 +294,51 @@ namespace Paway.WPF
         public ButtonEXT()
         {
             DefaultStyleKey = typeof(ButtonEXT);
+            DependencyPropertyDescriptor.FromProperty(IsLightProperty, typeof(ButtonEXT)).AddValueChanged(this, OnColorTypeChanged);
+            DependencyPropertyDescriptor.FromProperty(IsLightAllProperty, typeof(ButtonEXT)).AddValueChanged(this, OnColorTypeChanged);
+            DependencyPropertyDescriptor.FromProperty(TypeProperty, typeof(ButtonEXT)).AddValueChanged(this, OnColorTypeChanged);
+
+            DependencyPropertyDescriptor.FromProperty(ShortcutKeyProperty, typeof(ButtonEXT)).AddValueChanged(this, OnKeyChanged);
+            DependencyPropertyDescriptor.FromProperty(ShortKeyProperty, typeof(ButtonEXT)).AddValueChanged(this, OnKeyChanged);
+        }
+        private void OnKeyChanged(object sender, EventArgs e)
+        {
+            if (this.ShortcutKey != Key.None)
+            {
+                this.Keys = $"({this.ShortcutKey})";
+                if (this.Keys.Length > 5) this.Keys = $"({this.ShortcutKey.ToString().Substring(0, 3)})";
+            }
+            else if (this.ShortKey != Key.None)
+            {
+                if (this.ShortKey != Key.None) this.Keys = $"({this.ShortKey})";
+                if (this.Keys.Length > 5) this.Keys = $"({this.ShortKey.ToString().Substring(0, 3)})";
+            }
+            else if (this.Keys != null)
+            {
+                this.Keys = null;
+            }
+        }
+        private void OnColorTypeChanged(object sender, EventArgs e)
+        {
+            if (this.Type != ColorType.None)
+            {
+                var color = this.Type.Color();
+                this.ItemBackground = new BrushEXT(color.ToAlpha(PConfig.Alpha));
+            }
+            if (this.IsLightAll)
+            {
+                this.ItemBorder = new ThicknessEXT(0);
+            }
+            else if (this.IsLight)
+            {
+                this.ItemBorder = new ThicknessEXT(1, 0);
+            }
+            if (this.IsLight || this.IsLightAll)
+            {
+                this.BorderBrush = Colors.LightGray.ToBrush();
+                this.ItemForeground = new BrushEXT(null, Colors.White, Colors.White);
+                this.ItemBackground.Normal = new ThemeForeground(Colors.Transparent);
+            }
         }
         /// <summary>
         /// 监听顶层窗体按键

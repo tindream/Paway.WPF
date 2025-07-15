@@ -14,7 +14,7 @@ namespace Paway.WPF
     /// <summary>
     /// ImageEXT扩展
     /// </summary>
-    public partial class ImageEXT : ContentControl, IPageToWindowAdorner
+    public partial class ImageEXT : ContentControl, IWindowAdorner
     {
         #region 依赖属性
         /// <summary>

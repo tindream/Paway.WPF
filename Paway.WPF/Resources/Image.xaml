@@ -12,22 +12,22 @@
             <Setter.Value>
                 <!--控件模板-->
                 <ControlTemplate TargetType="{x:Type local:ImageEXT}" >
-                    <Canvas Background="Transparent" Name="canvas">
+                    <Canvas Background="Transparent"  Name="canvas">
                         <Image Name="image" RenderOptions.BitmapScalingMode="HighQuality" SnapsToDevicePixels="True"
                                Source="{Binding Source, RelativeSource={RelativeSource TemplatedParent}}"
                                Stretch="{Binding Stretch, RelativeSource={RelativeSource TemplatedParent}}"
                                StretchDirection="{Binding StretchDirection, RelativeSource={RelativeSource TemplatedParent}}"/>
                         <DockPanel Width="{Binding ElementName=canvas, Path=ActualWidth}" 
                                    Visibility="{Binding IShow, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource boolToVisible}}">
-                            <local:ButtonEXT DockPanel.Dock="Right" IsLight="True" ItemBorder="0" Radius="30" Padding="7" ItemBackground="Transparent" ToolTip="关闭"
+                            <local:ButtonEXT DockPanel.Dock="Right" IsLightAll="True" Radius="30" Padding="7" ItemBackground="Transparent" ToolTip="关闭"
                                              Image="pack://application:,,,/Paway.WPF;component/Images/pImage/close_white.png|pack://application:,,,/Paway.WPF;component/Images/pImage/close_red.png" 
                                              Command="{Binding ButtonClickCommand, RelativeSource={RelativeSource TemplatedParent}}" CommandParameter="关闭"
                                              Visibility="{Binding IClose, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource boolToVisible}}" />
-                            <local:ButtonEXT DockPanel.Dock="Right" IsLight="True" ItemBorder="0" Radius="30" Padding="7" ItemBackground="Transparent" ToolTip="重置"
+                            <local:ButtonEXT DockPanel.Dock="Right" IsLightAll="True" Radius="30" Padding="7" ItemBackground="Transparent" ToolTip="重置"
                                              Image="pack://application:,,,/Paway.WPF;component/Images/pImage/refresh_gray.png|pack://application:,,,/Paway.WPF;component/Images/pImage/refresh_white.png" 
                                              Command="{Binding ButtonClickCommand, RelativeSource={RelativeSource TemplatedParent}}" CommandParameter="重置"
                                              Visibility="{Binding IReset, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource boolToVisible}}" Cursor="Hand" />
-                            <local:ButtonEXT DockPanel.Dock="Right" IsLight="True" ItemBorder="0" Radius="30" Padding="7" ItemBackground="Transparent" ToolTip="保存"
+                            <local:ButtonEXT DockPanel.Dock="Right" IsLightAll="True" Radius="30" Padding="7" ItemBackground="Transparent" ToolTip="保存"
                                              Image="pack://application:,,,/Paway.WPF;component/Images/pImage/save_gray.png|pack://application:,,,/Paway.WPF;component/Images/pImage/save_white.png"    
                                              Command="{Binding ButtonClickCommand, RelativeSource={RelativeSource TemplatedParent}}" CommandParameter="保存"
                                              Visibility="{Binding ISave, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource boolToVisible}}"  />

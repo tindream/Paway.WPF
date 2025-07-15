@@ -1,0 +1,54 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:Paway.WPF">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Default\Default.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="{x:Type local:KeyboardNum}">
+        <Setter Property="UseLayoutRounding" Value="True"/>
+        <Setter Property="Height" Value="246"/>
+        <Setter Property="Width" Value="256"/>
+        <!--修改模板属性-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <!--控件模板-->
+                <ControlTemplate TargetType="{x:Type local:KeyboardNum}">
+                    <Border Background="#E5000000" BorderBrush="#3D3D3D" BorderThickness="1" CornerRadius="0" Padding="2">
+                        <DockPanel>
+                            <local:ListViewCustom x:Name="listview1" Width="70" DockPanel.Dock="Right" ItemTemplate="{StaticResource KeyboardOne}" ItemRadius="3" ItemMargin="2" ItemPadding="0"
+                                  ItemWidth="56" ItemHeight="56"
+                                  ItemTextForeground="#FFF;#333;#FFF" ItemBackground="#333" FontSize="21">
+                                <local:ListBoxItemEXT Image="pack://application:,,,/Paway.WPF;component/Images/keyboard/backspace_white.png|pack://application:,,,/Paway.WPF;component/Images/keyboard/backspace.png|pack://application:,,,/Paway.WPF;component/Images/keyboard/backspace_white.png" 
+                                      ItemWidth="66" ItemHeight="116" Tag="backspace" />
+                                <local:ListBoxItemEXT Text="Enter" ItemWidth="66" ItemHeight="116" Tag="enter" />
+                            </local:ListViewCustom>
+                            <local:ListViewCustom x:Name="listview2" ItemTemplate="{StaticResource KeyboardOne}" ItemRadius="3" ItemMargin="2" ItemPadding="0"
+                                  ItemWidth="56" ItemHeight="56"
+                                  ItemTextForeground="#FFF;#333;#FFF" ItemBackground="#333" FontSize="21">
+                                <local:ListBoxItemEXT Text="1" Tag="1" />
+                                <local:ListBoxItemEXT Text="2" Tag="2" />
+                                <local:ListBoxItemEXT Text="3" Tag="3" />
+
+                                <local:ListBoxItemEXT Text="4" Tag="4" />
+                                <local:ListBoxItemEXT Text="5" Tag="5" />
+                                <local:ListBoxItemEXT Text="6" Tag="6" />
+
+                                <local:ListBoxItemEXT Text="7" Tag="7" />
+                                <local:ListBoxItemEXT Text="8" Tag="8" />
+                                <local:ListBoxItemEXT Text="9" Tag="9" />
+
+                                <local:ListBoxItemEXT Text="." Tag="." />
+                                <local:ListBoxItemEXT Text="0" Tag="0" />
+                                <local:ListBoxItemEXT Text="-" Tag="-" />
+                            </local:ListViewCustom>
+                        </DockPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

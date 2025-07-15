@@ -24,7 +24,7 @@ namespace Paway.WPF
         /// <summary>
         /// 关闭事件
         /// </summary>
-        public event Action CloseEvent;
+        public event EventHandler<RoutedEventArgs> CloseEvent;
         /// <summary>
         /// 虚拟键盘-全键盘
         /// </summary>
@@ -42,7 +42,7 @@ namespace Paway.WPF
         }
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
-            if (CloseEvent != null) CloseEvent.Invoke();
+            if (CloseEvent != null) CloseEvent.Invoke(sender, e);
             else this.Close();
         }
         /// <summary>
@@ -56,9 +56,9 @@ namespace Paway.WPF
         {
             this.element?.Focus();
         }
-        private void KeyboardAll_CloseEvent()
+        private void KeyboardAll_CloseEvent(object sender, RoutedEventArgs e)
         {
-            CloseEvent?.Invoke();
+            CloseEvent?.Invoke(sender, e);
         }
         private void KeyboardAllWindow_SourceInitialized(object sender, EventArgs e)
         {

@@ -139,7 +139,7 @@ namespace Paway.WPF
         /// <para>模拟弹框</para>
         /// <para>支持移动</para>
         /// </summary>
-        public static void PageFullAdorner(Window window, IPageToWindowAdorner page, int backAlpha = 100, bool iBingParentSize = true, bool iTop = false, bool iMove = false)
+        public static void PageFullAdorner(Window window, IWindowAdorner page, int backAlpha = 100, bool iBingParentSize = true, bool iTop = false, bool iMove = false)
         {
             CustomAdorner Adorner = null;
             page.CloseEvent += (sender, e) =>

@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Paway.WPF">
     <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Badge.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Button.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Calendar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\CheckBox.xaml" />
@@ -17,6 +18,8 @@
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\DataPager.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Expander.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Image.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\KeyboardAll.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\KeyboardNum.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\ListBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\ListView.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\ListViewCustom.xaml" />
