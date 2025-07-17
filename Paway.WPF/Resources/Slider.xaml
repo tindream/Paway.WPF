@@ -6,6 +6,7 @@
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Default\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <local:ValueConverter x:Key="valueConverter" />
     <Style x:Key="DecreaseRepeatButtonLeft" TargetType="{x:Type RepeatButton}">
         <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True"/>
         <Setter Property="UIElement.Focusable" Value="False"/>
@@ -22,10 +23,10 @@
                                 <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
                                     <GradientStop 
                                         Offset="0"
-                                        Color="{Binding Path=TrackColorLinear.Start, RelativeSource={RelativeSource AncestorType={x:Type local:SliderEXT}}}" />
+                                        Color="{Binding Path=TrackColorLinear.Start, RelativeSource={RelativeSource AncestorType={x:Type local:SliderEXT}}, Converter={StaticResource valueConverter}}" />
                                     <GradientStop
                                         Offset="1"
-                                        Color="{Binding Path=TrackColorLinear.End, RelativeSource={RelativeSource AncestorType={x:Type local:SliderEXT}}}" />
+                                        Color="{Binding Path=TrackColorLinear.End, RelativeSource={RelativeSource AncestorType={x:Type local:SliderEXT}}, Converter={StaticResource valueConverter}}" />
                                 </LinearGradientBrush>
 
                             </Border.Background>
@@ -51,10 +52,10 @@
                                 <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
                                     <GradientStop 
                                         Offset="0"
-                                        Color="{Binding Path=TrackColorLinear.Start, RelativeSource={RelativeSource AncestorType={x:Type local:SliderEXT}}}" />
+                                        Color="{Binding Path=TrackColorLinear.Start, RelativeSource={RelativeSource AncestorType={x:Type local:SliderEXT}}, Converter={StaticResource valueConverter}}" />
                                     <GradientStop
                                         Offset="1"
-                                        Color="{Binding Path=TrackColorLinear.End, RelativeSource={RelativeSource AncestorType={x:Type local:SliderEXT}}}" />
+                                        Color="{Binding Path=TrackColorLinear.End, RelativeSource={RelativeSource AncestorType={x:Type local:SliderEXT}}, Converter={StaticResource valueConverter}}" />
                                 </LinearGradientBrush>
                             </Border.Background>
                         </Border>

@@ -11,6 +11,23 @@ using System.Windows.Data;
 namespace Paway.WPF
 {
     /// <summary>
+    /// 直接返回值，未转化
+    /// <para>防止绑定错误</para>
+    /// </summary>
+    internal class ValueConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return DependencyProperty.UnsetValue;
+        }
+    }
+
+    /// <summary>
     /// 多值相乘转换
     /// </summary>
     public class MoreValueMultiConverter : IMultiValueConverter
@@ -23,12 +40,20 @@ namespace Paway.WPF
             if (targetType == typeof(int))
             {
                 var result = 1;
-                for (var i = 0; i < value.Length; i++) result *= value[i].ToInt();
+                for (var i = 0; i < value.Length; i++)
+                {
+                    var param = value[i].ToInt();
+                    if (param > 0) result *= param;
+                }
                 return result;
             }
             {
                 var result = 1d;
-                for (var i = 0; i < value.Length; i++) result *= value[i].ToDouble();
+                for (var i = 0; i < value.Length; i++)
+                {
+                    var param = value[i].ToDouble();
+                    if (param > 0) result *= param;
+                }
                 return result;
             }
         }

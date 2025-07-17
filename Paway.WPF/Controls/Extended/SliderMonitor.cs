@@ -49,7 +49,7 @@ namespace Paway.WPF
 
         #endregion
 
-        #region 依赖属性
+        #region 依赖属性_按钮类型
         /// <summary>
         /// 按钮类型
         /// </summary>
