@@ -6,7 +6,7 @@
       mc:Ignorable="d" 
       UseLayoutRounding="True"
       xmlns:HelixToolkit="http://helix-toolkit.org/wpf"
-      DataContext="{Binding Test, Source={StaticResource Locator}}"
+      DataContext="{Binding TestWindow, Source={StaticResource Locator}}"
       d:DesignHeight="450" d:DesignWidth="600"
       Title="Test3D">
     <DockPanel>

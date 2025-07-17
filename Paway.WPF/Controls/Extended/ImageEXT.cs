@@ -40,10 +40,6 @@ namespace Paway.WPF
             DependencyProperty.Register(nameof(IClose), typeof(bool), typeof(ImageEXT));
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty IMoveProperty =
-            DependencyProperty.Register(nameof(IMove), typeof(bool), typeof(ImageEXT));
-        /// <summary>
-        /// </summary>
         public static readonly DependencyProperty IZoomProperty =
             DependencyProperty.Register(nameof(IZoom), typeof(bool), typeof(ImageEXT));
         /// <summary>
@@ -118,17 +114,6 @@ namespace Paway.WPF
             set { SetValue(StretchDirectionProperty, value); }
         }
 
-        /// <summary>
-        /// 允许移动
-        /// <para>默认值：false</para>
-        /// </summary>
-        [Category("扩展")]
-        [Description("允许移动")]
-        public bool IMove
-        {
-            get { return (bool)GetValue(IMoveProperty); }
-            set { SetValue(IMoveProperty, value); }
-        }
         /// <summary>
         /// 支持缩放
         /// <para>默认值：false</para>
@@ -339,7 +324,6 @@ namespace Paway.WPF
                         imageEXT.Source = this.Source;
                         imageEXT.IClose = true;
                         imageEXT.ISave = true;
-                        imageEXT.IMove = true;
                         imageEXT.IZoom = true;
                         imageEXT.IPoint = false;
                         imageEXT.IDoubleView = false;
@@ -390,6 +374,14 @@ namespace Paway.WPF
                 zoomPoint = e.GetPosition(this);
                 zoomRatioX = (zoomPoint.X - imagePoint.X) * 1.0 / imageSize.Width;
                 zoomRatioY = (zoomPoint.Y - imagePoint.Y) * 1.0 / imageSize.Height;
+                if (imageSize.Width / Source.PixelWidth >= 4)
+                {
+                    RenderOptions.SetBitmapScalingMode(this.image, BitmapScalingMode.NearestNeighbor);
+                }
+                else
+                {
+                    RenderOptions.SetBitmapScalingMode(this.image, BitmapScalingMode.HighQuality);
+                }
                 Zoom(e.Delta / 120);
             }
         }
@@ -407,7 +399,7 @@ namespace Paway.WPF
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
             base.OnMouseDown(e);
-            if (IMove && Source != null && e.LeftButton == MouseButtonState.Pressed)
+            if (IZoom && Source != null && e.LeftButton == MouseButtonState.Pressed)
             {
                 iMoving = true;
                 moveStart = e.GetPosition(this);
@@ -421,7 +413,7 @@ namespace Paway.WPF
         {
             base.OnMouseMove(e);
             IShow = true;
-            if (Source != null && (IMove || IPoint))
+            if (Source != null && (IZoom || IPoint))
             {
                 var point = e.GetPosition(this);
                 if (IPoint && GetPoint(point, out Point normal))

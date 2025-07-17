@@ -25,7 +25,7 @@
                     <ImageEXT Name="image" Source="/Paway.Test;component/Images/progress.png" Height="100"/>
                 </Border>
                 <Border DockPanel.Dock="Top" BorderBrush="LightGray" BorderThickness="1">
-                    <ImageEXT DockPanel.Dock="Top" Name="image2" IDoubleView="False" Title="Hello World" IMove="True" IZoom="True" Source="/Paway.Test;component/Images/progress.png" MinHeight="100"/>
+                    <ImageEXT DockPanel.Dock="Top" Name="image2" IDoubleView="False" Title="Hello World" IZoom="True" Source="/Paway.Test;component/Images/progress.png" MinHeight="100"/>
                 </Border>
             </DockPanel>
         </Border>

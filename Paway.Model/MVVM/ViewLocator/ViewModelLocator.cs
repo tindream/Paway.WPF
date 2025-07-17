@@ -22,25 +22,29 @@ namespace Paway.Model
         internal static ViewModelLocator Default => new ViewModelLocator();
 
         /// <summary>
-        /// 模型-主题设置
+        /// 模型-登录页
         /// </summary>
-        public ThemeViewModel ThemeView => GetModelInstance<ThemeViewModel>();
-        /// <summary>
-        /// 模型-颜色搭取器
-        /// </summary>
-        public SelectColorWindowModel SelectColor => GetModelInstance<SelectColorWindowModel>();
+        public virtual LoginPageModel Login => GetModelInstance<LoginPageModel>();
         /// <summary>
         /// 模型-单输入框通用窗体
         /// </summary>
         public NameWindowModel NameWindow => GetModelInstance<NameWindowModel>();
         /// <summary>
-        /// 模型-双输入框通用窗体
+        /// 模型-颜色搭取器
         /// </summary>
-        public ValueWindowModel ValueWindow => GetModelInstance<ValueWindowModel>();
+        public SelectColorWindowModel SelectColor => GetModelInstance<SelectColorWindowModel>();
+        /// <summary>
+        /// 模型-主题设置
+        /// </summary>
+        public ThemeViewModel ThemeView => GetModelInstance<ThemeViewModel>();
         /// <summary>
         /// 模型-状态栏
         /// </summary>
         public StatuItemModel StatuItem => GetModelInstance<StatuItemModel>();
+        /// <summary>
+        /// 模型-双输入框通用窗体
+        /// </summary>
+        public ValueWindowModel ValueWindow => GetModelInstance<ValueWindowModel>();
         /// <summary>
         /// 模型-欢迎页
         /// </summary>

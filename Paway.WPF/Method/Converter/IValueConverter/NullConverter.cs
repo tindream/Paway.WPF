@@ -21,7 +21,9 @@ namespace Paway.WPF
         public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
         {
             var index = 0;
-            while (value.Length > index && (value[index] == null || value[index] == DependencyProperty.UnsetValue ||
+            while (value.Length > index && (value[index] == null ||
+                (value[index] == DependencyProperty.UnsetValue) ||
+                (value[index] is string str && str.Equals(string.Empty)) ||
                 (value[index] is Thickness thickness && thickness == new Thickness(double.NaN)) ||
                 (value[index] is double dValue && dValue.Equals(double.NaN)) ||
                 (value[index] is SolidColorBrush solid && solid.Color == Colors.Transparent)))

@@ -14,5 +14,7 @@ namespace Paway.Test
         public TestDataGridModel TestDataGrid => GetModelInstance<TestDataGridModel>();
         public TestPageModel TestPage => GetModelInstance<TestPageModel>();
         public MainWindowModel MainWindow => GetModelInstance<MainWindowModel>();
+
+        public override Model.LoginPageModel Login => GetModelInstance<LoginPageModel>();
     }
 }
