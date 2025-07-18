@@ -30,6 +30,7 @@ namespace Paway.WPF
                 {
                     columnHeader.SetValue(RadiusProperty, dataGrid.Radius);
                     columnHeader.SetValue(HeaderBrushProperty, dataGrid.HeaderBrush);
+                    columnHeader.SetValue(HorizontalAlignmentProperty, dataGrid.HorizontalContentAlignment);
                 }
             }
         }
@@ -44,7 +45,7 @@ namespace Paway.WPF
 
         #endregion
 
-        #region 依赖属性
+        #region 依赖属性_自定义边框圆角
         /// <summary>
         /// 自定义边框圆角
         /// </summary>
@@ -74,6 +75,20 @@ namespace Paway.WPF
         {
             get { return (BrushEXT)GetValue(HeaderBrushProperty); }
             set { SetValue(HeaderBrushProperty, value); }
+        }
+
+        #endregion
+
+        #region 依赖属性_标题水平样式
+        /// <summary>
+        /// 标题水平样式
+        /// </summary>
+        public static readonly DependencyProperty HorizontalAlignmentProperty =
+                DependencyProperty.RegisterAttached(nameof(HorizontalAlignment), typeof(HorizontalAlignment), typeof(DataGridMonitor));
+        public HorizontalAlignment HorizontalAlignment
+        {
+            get { return (HorizontalAlignment)GetValue(HorizontalAlignmentProperty); }
+            set { SetValue(HorizontalAlignmentProperty, value); }
         }
 
         #endregion

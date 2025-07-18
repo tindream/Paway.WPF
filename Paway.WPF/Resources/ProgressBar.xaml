@@ -5,6 +5,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Default\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
+    <local:ValueConverter x:Key="valueConverter" />
 
     <Style TargetType="{x:Type local:ProgressBarEXT}" BasedOn="{StaticResource Config}">
         <Setter Property="local:ProgressBarEXT.IsMonitoring" Value="True"/>
@@ -26,10 +27,10 @@
                                 <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
                                     <GradientStop
                                         Offset="0"
-                                        Color="{Binding ForegroundColorLinear.Start, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        Color="{Binding ForegroundColorLinear.Start, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource valueConverter}}" />
                                     <GradientStop
                                         Offset="1"
-                                        Color="{Binding ForegroundColorLinear.End, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        Color="{Binding ForegroundColorLinear.End, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource valueConverter}}" />
                                 </LinearGradientBrush>
                             </Border.Background>
                             <Label Name="txt" Visibility="{TemplateBinding IText, Converter={StaticResource boolToVisible}}"

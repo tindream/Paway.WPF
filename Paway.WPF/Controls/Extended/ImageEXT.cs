@@ -24,7 +24,7 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty SourceProperty =
-            DependencyProperty.Register(nameof(Source), typeof(BitmapSource), typeof(ImageEXT));
+            DependencyProperty.Register(nameof(Source), typeof(ImageSource), typeof(ImageEXT));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty StretchProperty =
@@ -86,9 +86,9 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展")]
         [Description("获取或设置图像")]
-        public BitmapSource Source
+        public ImageSource Source
         {
-            get { return (BitmapSource)GetValue(SourceProperty); }
+            get { return (ImageSource)GetValue(SourceProperty); }
             set { SetValue(SourceProperty, value); }
         }
         /// <summary>
@@ -272,6 +272,7 @@ namespace Paway.WPF
         #endregion
 
         private Image image;
+        private BitmapSource bitmapSource;
         /// <summary>
         /// </summary>
         public ImageEXT()
@@ -281,7 +282,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// </summary>
-        public ImageEXT(BitmapSource source, string title = null) : this()
+        public ImageEXT(ImageSource source, string title = null) : this()
         {
             this.Source = source;
             this.Title = title;
@@ -295,6 +296,7 @@ namespace Paway.WPF
         }
         private void OnSourceChanged(object sender, EventArgs e)
         {
+            this.bitmapSource = this.Source.ToSource();
             if (this.image != null) this.Init();
         }
         /// <summary>
@@ -369,12 +371,12 @@ namespace Paway.WPF
         protected override void OnMouseWheel(MouseWheelEventArgs e)
         {
             base.OnMouseWheel(e);
-            if (Source != null && IZoom)
+            if (bitmapSource != null && IZoom)
             {
                 zoomPoint = e.GetPosition(this);
                 zoomRatioX = (zoomPoint.X - imagePoint.X) * 1.0 / imageSize.Width;
                 zoomRatioY = (zoomPoint.Y - imagePoint.Y) * 1.0 / imageSize.Height;
-                if (imageSize.Width / Source.PixelWidth >= 4)
+                if (imageSize.Width / bitmapSource.PixelWidth >= 4)
                 {
                     RenderOptions.SetBitmapScalingMode(this.image, BitmapScalingMode.NearestNeighbor);
                 }
@@ -399,7 +401,7 @@ namespace Paway.WPF
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
             base.OnMouseDown(e);
-            if (IZoom && Source != null && e.LeftButton == MouseButtonState.Pressed)
+            if (IZoom && bitmapSource != null && e.LeftButton == MouseButtonState.Pressed)
             {
                 iMoving = true;
                 moveStart = e.GetPosition(this);
@@ -413,12 +415,12 @@ namespace Paway.WPF
         {
             base.OnMouseMove(e);
             IShow = true;
-            if (Source != null && (IZoom || IPoint))
+            if (bitmapSource != null && (IZoom || IPoint))
             {
                 var point = e.GetPosition(this);
                 if (IPoint && GetPoint(point, out Point normal))
                 {
-                    var color = this.Source.PixelColor((int)normal.X, (int)normal.Y);
+                    var color = this.bitmapSource.PixelColor((int)normal.X, (int)normal.Y);
                     IShowText = $"{(int)normal.X}, {(int)normal.Y}[{color.R},{color.G},{color.B}]";
                 }
                 else
@@ -445,15 +447,15 @@ namespace Paway.WPF
         #region Method
         private void Init()
         {
-            if (Source == null)
+            if (bitmapSource == null)
             {
                 imagePoint = new Point(0, 0);
                 imageSize = new Size(0, 0);
             }
             else if (imagePoint == new Point(0, 0) && imageSize == new Size(0, 0))
             {
-                imageRatio = Source.PixelWidth * 1.0 / Source.PixelHeight;
-                imageSize = new Size(Source.PixelWidth, Source.PixelHeight);
+                imageRatio = bitmapSource.PixelWidth * 1.0 / bitmapSource.PixelHeight;
+                imageSize = new Size(bitmapSource.PixelWidth, bitmapSource.PixelHeight);
                 {
                     var w = ActualWidth * 1.0 / imageSize.Width;
                     var h = ActualHeight * 1.0 / imageSize.Height;
@@ -487,7 +489,7 @@ namespace Paway.WPF
         /// <param name="steps">鼠标滚轮步进数</param>
         private void Zoom(int steps)
         {
-            if (Source == null) return;
+            if (bitmapSource == null) return;
             double bit = 1;
             for (var i = 0; i < Math.Abs(steps); i++)
             {
@@ -497,10 +499,10 @@ namespace Paway.WPF
             {
                 var width = imageSize.Width * bit;
                 var height = imageSize.Height * bit;
-                if (width / Source.PixelWidth > 32.0)
+                if (width / bitmapSource.PixelWidth > 32.0)
                 {
-                    width = Source.PixelWidth * 32;
-                    height = Source.PixelHeight * 32;
+                    width = bitmapSource.PixelWidth * 32;
+                    height = bitmapSource.PixelHeight * 32;
                 }
                 if (imageSize.Width == width) return;
                 imageSize.Width = width;
@@ -510,19 +512,19 @@ namespace Paway.WPF
             {
                 var width = imageSize.Width / bit;
                 var height = imageSize.Height / bit;
-                if (Source.PixelWidth / width > 10.0)
+                if (bitmapSource.PixelWidth / width > 10.0)
                 {
-                    width = Source.PixelWidth / 10;
-                    height = Source.PixelHeight / 10;
+                    width = bitmapSource.PixelWidth / 10;
+                    height = bitmapSource.PixelHeight / 10;
                 }
                 if (imageSize.Width == width) return;
                 imageSize.Width = width;
                 imageSize.Height = height;
             }
-            if (Source.PixelWidth * 1.0 / imageSize.Width > 0.9 && Source.PixelWidth * 1.0 / imageSize.Width < 1.1)
+            if (bitmapSource.PixelWidth * 1.0 / imageSize.Width > 0.9 && bitmapSource.PixelWidth * 1.0 / imageSize.Width < 1.1)
             {
-                imageSize.Width = Source.PixelWidth;
-                imageSize.Height = Source.PixelHeight;
+                imageSize.Width = bitmapSource.PixelWidth;
+                imageSize.Height = bitmapSource.PixelHeight;
             }
             if (imageSize.Width < 3)
             {
@@ -568,19 +570,19 @@ namespace Paway.WPF
         public bool GetPoint(Point point, out Point result)
         {
             result = new Point(0, 0);
-            if (Source != null)
+            if (bitmapSource != null)
             {
                 var exist = true;
-                result.X = (point.X - imagePoint.X) * Source.PixelWidth / imageSize.Width;
-                result.Y = (point.Y - imagePoint.Y) * Source.PixelWidth / imageSize.Width;
+                result.X = (point.X - imagePoint.X) * bitmapSource.PixelWidth / imageSize.Width;
+                result.Y = (point.Y - imagePoint.Y) * bitmapSource.PixelWidth / imageSize.Width;
                 if (result.X < 0)
                 {
                     result.X = 0;
                     exist = false;
                 }
-                else if (result.X > Source.PixelWidth - 1)
+                else if (result.X > bitmapSource.PixelWidth - 1)
                 {
-                    result.X = Source.PixelWidth - 1;
+                    result.X = bitmapSource.PixelWidth - 1;
                     exist = false;
                 }
                 if (result.Y < 0)
@@ -588,9 +590,9 @@ namespace Paway.WPF
                     result.Y = 0;
                     exist = false;
                 }
-                else if (result.Y > Source.PixelHeight - 1)
+                else if (result.Y > bitmapSource.PixelHeight - 1)
                 {
-                    result.Y = Source.PixelHeight - 1;
+                    result.Y = bitmapSource.PixelHeight - 1;
                     exist = false;
                 }
                 return exist;
@@ -603,10 +605,10 @@ namespace Paway.WPF
         public Point ParsePoint(Point point)
         {
             var temp = new Point(0, 0);
-            if (Source != null)
+            if (bitmapSource != null)
             {
-                temp.X = point.X * imageSize.Width / Source.PixelWidth + imagePoint.X;
-                temp.Y = point.Y * imageSize.Width / Source.PixelWidth + imagePoint.Y;
+                temp.X = point.X * imageSize.Width / bitmapSource.PixelWidth + imagePoint.X;
+                temp.Y = point.Y * imageSize.Width / bitmapSource.PixelWidth + imagePoint.Y;
             }
             return temp;
         }
@@ -629,7 +631,7 @@ namespace Paway.WPF
                 case "关闭": CloseEvent?.Invoke(this, new RoutedEventArgs()); break;
                 case "重置": this.Reset(); break;
                 case "保存":
-                    if (this.Source is BitmapSource bitmapSource)
+                    if (this.bitmapSource != null)
                     {
                         if (PMethod.SaveFile(out string file, "另存为", "Jpeg|*.jpg|Png|*.png"))
                         {

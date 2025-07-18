@@ -120,10 +120,7 @@
                                                 <Binding Path="ItemPadding.Normal" RelativeSource="{RelativeSource AncestorType={x:Type local:ListViewCustom}}" />
                                             </MultiBinding>
                                         </Border.Padding>
-                                        <ContentPresenter Name="content"
-                                                          TextElement.FontSize="{Binding Path=ItemTextFontSize.Normal, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}" 
-                                                          HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}" 
-                                                          VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewCustom}}}" >
+                                        <ContentPresenter Name="content">
                                             <TextBlock.Foreground>
                                                 <MultiBinding Converter="{StaticResource nullSelector}">
                                                     <Binding Path="ItemTextForeground.Normal.Result" />

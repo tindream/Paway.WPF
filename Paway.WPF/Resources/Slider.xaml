@@ -5,8 +5,8 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Default\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
-
     <local:ValueConverter x:Key="valueConverter" />
+    
     <Style x:Key="DecreaseRepeatButtonLeft" TargetType="{x:Type RepeatButton}">
         <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True"/>
         <Setter Property="UIElement.Focusable" Value="False"/>

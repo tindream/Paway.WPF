@@ -31,7 +31,7 @@ namespace Paway.WPF
         /// <summary>
         /// ImageEXTWindow显示窗体
         /// </summary>
-        public ImageEXTWindow(string name, BitmapSource source) : this()
+        public ImageEXTWindow(string name, ImageSource source) : this()
         {
             this.Title = name;
             this.image.Source = source;
