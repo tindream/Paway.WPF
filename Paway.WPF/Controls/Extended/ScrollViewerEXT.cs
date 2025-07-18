@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace Paway.WPF
 {
@@ -15,6 +16,11 @@ namespace Paway.WPF
     /// </summary>
     public partial class ScrollViewerEXT : ScrollViewer
     {
+        /// <summary>
+        /// 自动滚动标记
+        /// </summary>
+        private bool iAutoScroll;
+
         #region 依赖属性
         /// <summary>
         /// </summary>
@@ -88,9 +94,13 @@ namespace Paway.WPF
 
         #region 事件
         /// <summary>
-        /// 数据绑定刷新事件
+        /// 滚动条高度变化事件
         /// </summary>
         public event Action ScrollableHeightChangedEvent;
+        /// <summary>
+        /// 滚动条宽度变化事件
+        /// </summary>
+        public event Action ScrollableWidthChangedEvent;
 
         #endregion
 
@@ -99,10 +109,24 @@ namespace Paway.WPF
         public ScrollViewerEXT()
         {
             DependencyPropertyDescriptor.FromProperty(ScrollableHeightProperty, typeof(ScrollViewerEXT)).AddValueChanged(this, OnScrollableHeightChanged);
+            DependencyPropertyDescriptor.FromProperty(ScrollableWidthProperty, typeof(ScrollViewerEXT)).AddValueChanged(this, OnScrollableWidthChanged);
         }
         private void OnScrollableHeightChanged(object sender, EventArgs e)
         {
+            IAutoScroll();
             ScrollableHeightChangedEvent?.Invoke();
+        }
+        private void OnScrollableWidthChanged(object sender, EventArgs e)
+        {
+            IAutoScroll();
+            ScrollableWidthChangedEvent?.Invoke();
+        }
+        private void IAutoScroll()
+        {
+            if (this.iAutoScroll && this.Tag is ScrollViewerScrollInfo scrollInfo)
+            {
+                ScrollViewerBehavior.AutoScroll(this, scrollInfo.Time, scrollInfo.BeginTime, scrollInfo.Forever);
+            }
         }
         /// <summary>
         /// 监听ScrollBar按下抬起状态
@@ -231,8 +255,26 @@ namespace Paway.WPF
         /// <param name="forever">无限重复(默认true)</param>
         public void AutoScroll(double time = -1, double beginTime = 2, bool forever = true)
         {
-            PMethod.DoEvents();
-            ScrollViewerBehavior.AutoScroll(this, time, beginTime, forever);
+            iAutoScroll = true;
+            if (this.ScrollableWidth > 0 || this.ScrollableHeight > 0)
+            {
+                ScrollViewerBehavior.AutoScroll(this, time, beginTime, forever);
+            }
+            else
+            {
+                this.Tag = new ScrollViewerScrollInfo(time, beginTime, forever);
+            }
+        }
+        /// <summary>
+        /// 停止自动滚动
+        /// </summary>
+        public void StopScroll()
+        {
+            if (this.Tag is ScrollViewerScrollInfo scrollInfo)
+            {
+                iAutoScroll = false;
+                scrollInfo.Pause(this);
+            }
         }
     }
 }

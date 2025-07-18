@@ -15,7 +15,7 @@
         <StackPanel Width="200">
             <ListViewEXT ItemsSource="{Binding List}" ItemWidthType="OneColumn" ClickMode="Press"/>
         </StackPanel>
-        <DataGridEXT ItemsSource="{Binding GridList}" SelectionUnit="Cell" Name="datagrid1" Margin="10" BorderThickness="1" GridLinesVisibility="All" HorizontalContentAlignment="Center">
+        <DataGridEXT ItemsSource="{Binding GridList}" SelectionUnit="Cell" Name="datagrid1" Margin="10" BorderThickness="0" GridLinesVisibility="All" HorizontalContentAlignment="Center">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="CurrentCellChanged">
                     <ip:EventToCommand Command="{Binding CurrentCellCommand}" CommandParameter="{Binding ElementName=datagrid1}"/>

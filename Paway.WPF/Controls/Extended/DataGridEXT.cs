@@ -216,7 +216,7 @@ namespace Paway.WPF
             base.OnPropertyChanged(e);
             if (base.ItemsSource != null && ScrollViewer != null)
             {
-                if (e.Property == ItemsSourceProperty || e.Property == ICustomColumnHeaderProperty || e.Property == BorderThicknessProperty || e.Property == GridLinesVisibilityProperty)
+                if (e.Property == ItemsSourceProperty || e.Property == ICustomColumnHeaderProperty || e.Property == GridLinesVisibilityProperty)
                 {
                     LoadColumns();
                 }
@@ -339,9 +339,16 @@ namespace Paway.WPF
             {
                 var iBorder = this.GridLinesVisibility == DataGridGridLinesVisibility.All || this.GridLinesVisibility == DataGridGridLinesVisibility.Vertical;
                 iBorder &= this.NormalBorder.Bottom == 0;
-                if (iBorder) this.BorderThickness = new Thickness(this.BorderThickness.Left, this.BorderThickness.Top, this.BorderThickness.Right, Math.Max(1, this.BorderThickness.Top));
+                if (iBorder)
+                {
+                    var borderThickness = new Thickness(this.BorderThickness.Left, this.BorderThickness.Top, this.BorderThickness.Right, Math.Max(1, this.BorderThickness.Top));
+                    if (this.BorderThickness != borderThickness)
+                    {
+                        this.BorderThickness = borderThickness;
+                    }
+                }
             }
-            else
+            else if (this.BorderThickness != this.NormalBorder)
             {
                 this.BorderThickness = this.NormalBorder;
             }
