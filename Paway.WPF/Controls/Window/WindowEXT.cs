@@ -153,6 +153,7 @@ namespace Paway.WPF
         #endregion
 
         /// <summary>
+        /// Window扩展
         /// </summary>
         public WindowEXT()
         {
@@ -174,7 +175,7 @@ namespace Paway.WPF
                 InvalidateMeasure();
             }
             IntPtr handle = new WindowInteropHelper(this).Handle;
-            HwndSource.FromHwnd(handle).AddHook(new HwndSourceHook(WndProc));
+            HwndSource.FromHwnd(handle).AddHook(WndProc);
         }
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {

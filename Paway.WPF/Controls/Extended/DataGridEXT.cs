@@ -763,10 +763,7 @@ namespace Paway.WPF
         /// </summary>
         public void AutoScroll(int time = -1)
         {
-            if (ScrollViewer != null)
-            {
-                ScrollViewer.AutoScroll(time);
-            }
+            ScrollViewer?.AutoScroll(time);
         }
 
         #endregion

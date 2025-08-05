@@ -132,7 +132,7 @@ namespace Paway.WPF
         }
         private CornerRadius Parse(string str)
         {
-            if (str.Contains(","))
+            if (str.Contains(','))
             {
                 var strs = str.Split(',');
                 if (strs.Length != 4) throw new WarningException("Parameter error");

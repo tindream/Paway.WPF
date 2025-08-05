@@ -28,6 +28,10 @@ namespace Paway.WPF
         /// <summary>
         /// 虚拟键盘-全键盘
         /// </summary>
+        public KeyboardAllWindow() : this(null, true) { }
+        /// <summary>
+        /// 虚拟键盘-全键盘
+        /// </summary>
         public KeyboardAllWindow(FrameworkElement element, bool iTitle = false, bool iKeyboardNum = false)
         {
             InitializeComponent();
@@ -38,12 +42,7 @@ namespace Paway.WPF
             keyboardAll.IKeyboardNum(iKeyboardNum);
             keyboardAll.CloseEvent += KeyboardAll_CloseEvent;
             keyboardAll.DragMovedEvent += KeyboardAll_DragMovedEvent;
-            btnClose.Click += BtnClose_Click;
-        }
-        private void BtnClose_Click(object sender, RoutedEventArgs e)
-        {
-            if (CloseEvent != null) CloseEvent.Invoke(sender, e);
-            else this.Close();
+            btnClose.Click += KeyboardAll_CloseEvent;
         }
         /// <summary>
         /// 焦点问题
@@ -58,7 +57,8 @@ namespace Paway.WPF
         }
         private void KeyboardAll_CloseEvent(object sender, RoutedEventArgs e)
         {
-            CloseEvent?.Invoke(sender, e);
+            if (CloseEvent != null) CloseEvent.Invoke(sender, e);
+            else this.Close();
         }
         private void KeyboardAllWindow_SourceInitialized(object sender, EventArgs e)
         {

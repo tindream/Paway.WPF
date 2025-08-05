@@ -213,7 +213,7 @@ namespace System.Windows.Data
         /// <param name="isDataInGroupOrder">Whether the source is already in the correct order for grouping</param>
         public PagedCollectionView(IEnumerable source, bool isDataSorted, bool isDataInGroupOrder)
         {
-            _sourceCollection = source ?? throw new ArgumentNullException("source");
+            _sourceCollection = source ?? throw new ArgumentNullException(nameof(source));
 
             SetFlag(CollectionViewFlags.IsDataSorted, isDataSorted);
             SetFlag(CollectionViewFlags.IsDataInGroupOrder, isDataInGroupOrder);
@@ -529,13 +529,13 @@ namespace System.Windows.Data
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
                 }
 
                 if (_culture != value)
                 {
                     _culture = value;
-                    OnPropertyChanged("Culture");
+                    OnPropertyChanged(nameof(Culture));
                 }
             }
         }
@@ -557,8 +557,8 @@ namespace System.Windows.Data
                 {
                     Debug.Assert(value == null || _newItem == null, "Old and new _newItem values are unexpectedly non null");
                     _newItem = value;
-                    OnPropertyChanged("IsAddingNew");
-                    OnPropertyChanged("CurrentAddItem");
+                    OnPropertyChanged(nameof(IsAddingNew));
+                    OnPropertyChanged(nameof(CurrentAddItem));
                 }
             }
         }
@@ -581,11 +581,11 @@ namespace System.Windows.Data
                     Debug.Assert(value == null || _editItem == null, "Old and new _editItem values are unexpectedly non null");
                     bool oldCanCancelEdit = CanCancelEdit;
                     _editItem = value;
-                    OnPropertyChanged("IsEditingItem");
-                    OnPropertyChanged("CurrentEditItem");
+                    OnPropertyChanged(nameof(IsEditingItem));
+                    OnPropertyChanged(nameof(CurrentEditItem));
                     if (oldCanCancelEdit != CanCancelEdit)
                     {
-                        OnPropertyChanged("CanCancelEdit");
+                        OnPropertyChanged(nameof(CanCancelEdit));
                     }
                 }
             }
@@ -649,7 +649,7 @@ namespace System.Windows.Data
                 {
                     _filter = value;
                     RefreshOrDefer();
-                    OnPropertyChanged("Filter");
+                    OnPropertyChanged(nameof(Filter));
                 }
             }
         }
@@ -752,7 +752,7 @@ namespace System.Windows.Data
                 if (CheckFlag(CollectionViewFlags.IsPageChanging) != value)
                 {
                     SetFlag(CollectionViewFlags.IsPageChanging, value);
-                    OnPropertyChanged("IsPageChanging");
+                    OnPropertyChanged(nameof(IsPageChanging));
                 }
             }
         }
@@ -883,7 +883,7 @@ namespace System.Windows.Data
                     }
 
                     _pageSize = value;
-                    OnPropertyChanged("PageSize");
+                    OnPropertyChanged(nameof(PageSize));
 
                     if (_pageSize == 0)
                     {
@@ -925,7 +925,7 @@ namespace System.Windows.Data
                     // if the count has changed
                     if (Count != oldCount)
                     {
-                        OnPropertyChanged("Count");
+                        OnPropertyChanged(nameof(Count));
                     }
 
                     // reset currency values
@@ -1287,7 +1287,7 @@ namespace System.Windows.Data
 
             // add the new item to the internal list
             _internalList.Insert(ConvertToInternalIndex(addIndex), newItem);
-            OnPropertyChanged("ItemCount");
+            OnPropertyChanged(nameof(ItemCount));
 
             object oldCurrentItem = CurrentItem;
             int oldCurrentPosition = CurrentPosition;
@@ -1430,7 +1430,7 @@ namespace System.Windows.Data
                     }
                 }
 
-                OnPropertyChanged("ItemCount");
+                OnPropertyChanged(nameof(ItemCount));
 
                 object oldCurrentItem = CurrentItem;
                 int oldCurrentPosition = CurrentPosition;
@@ -1989,7 +1989,7 @@ namespace System.Windows.Data
             // for indicies larger than the count
             if (index >= Count || index < 0)
             {
-                throw new ArgumentOutOfRangeException("index");
+                throw new ArgumentOutOfRangeException(nameof(index));
             }
 
             if (IsGrouping)
@@ -2131,7 +2131,7 @@ namespace System.Windows.Data
             // looks for (position >= this.Count).
             if (position < -1 || position > Count)
             {
-                throw new ArgumentOutOfRangeException("position");
+                throw new ArgumentOutOfRangeException(nameof(position));
             }
 
             if ((position != CurrentPosition || !IsCurrentInSync)
@@ -2145,16 +2145,16 @@ namespace System.Windows.Data
 
                 if (IsCurrentAfterLast != oldIsCurrentAfterLast)
                 {
-                    OnPropertyChanged("IsCurrentAfterLast");
+                    OnPropertyChanged(nameof(IsCurrentAfterLast));
                 }
 
                 if (IsCurrentBeforeFirst != oldIsCurrentBeforeFirst)
                 {
-                    OnPropertyChanged("IsCurrentBeforeFirst");
+                    OnPropertyChanged(nameof(IsCurrentBeforeFirst));
                 }
 
-                OnPropertyChanged("CurrentPosition");
-                OnPropertyChanged("CurrentItem");
+                OnPropertyChanged(nameof(CurrentPosition));
+                OnPropertyChanged(nameof(CurrentItem));
             }
 
             return IsCurrentInView;
@@ -2379,7 +2379,7 @@ namespace System.Windows.Data
         {
             if (index < 0 || index >= Count)
             {
-                throw new ArgumentOutOfRangeException("index", IndexOutOfRange);
+                throw new ArgumentOutOfRangeException(nameof(index), IndexOutOfRange);
             }
 
             if (IsEditingItem || IsAddingNew)
@@ -2688,13 +2688,13 @@ namespace System.Windows.Data
             }
 
             IsPageChanging = false;
-            OnPropertyChanged("PageIndex");
+            OnPropertyChanged(nameof(PageIndex));
             RaisePageChanged();
 
             // if the count has changed
             if (Count != oldCount)
             {
-                OnPropertyChanged("Count");
+                OnPropertyChanged(nameof(Count));
             }
 
             OnCollectionChanged(
@@ -2958,7 +2958,7 @@ namespace System.Windows.Data
         {
             if (args == null)
             {
-                throw new ArgumentNullException("args");
+                throw new ArgumentNullException(nameof(args));
             }
 
             unchecked
@@ -2979,14 +2979,14 @@ namespace System.Windows.Data
             // replaced within the collection.
             if (args.Action != NotifyCollectionChangedAction.Replace)
             {
-                OnPropertyChanged("Count");
+                OnPropertyChanged(nameof(Count));
             }
 
             bool listIsEmpty = IsEmpty;
             if (listIsEmpty != CheckFlag(CollectionViewFlags.CachedIsEmpty))
             {
                 SetFlag(CollectionViewFlags.CachedIsEmpty, listIsEmpty);
-                OnPropertyChanged("IsEmpty");
+                OnPropertyChanged(nameof(IsEmpty));
             }
         }
 
@@ -3032,7 +3032,7 @@ namespace System.Windows.Data
         {
             if (args == null)
             {
-                throw new ArgumentNullException("args");
+                throw new ArgumentNullException(nameof(args));
             }
 
             if (_currentChangedMonitor.Busy)
@@ -3486,7 +3486,7 @@ namespace System.Windows.Data
 
             if (args.Action != NotifyCollectionChangedAction.Replace)
             {
-                OnPropertyChanged("ItemCount");
+                OnPropertyChanged(nameof(ItemCount));
             }
         }
 
@@ -3639,22 +3639,22 @@ namespace System.Windows.Data
 
             if (CurrentItem != oldCurrentItem)
             {
-                OnPropertyChanged("CurrentItem");
+                OnPropertyChanged(nameof(CurrentItem));
             }
 
             if (CurrentPosition != oldCurrentPosition)
             {
-                OnPropertyChanged("CurrentPosition");
+                OnPropertyChanged(nameof(CurrentPosition));
             }
 
             if (IsCurrentAfterLast != oldIsCurrentAfterLast)
             {
-                OnPropertyChanged("IsCurrentAfterLast");
+                OnPropertyChanged(nameof(IsCurrentAfterLast));
             }
 
             if (IsCurrentBeforeFirst != oldIsCurrentBeforeFirst)
             {
-                OnPropertyChanged("IsCurrentBeforeFirst");
+                OnPropertyChanged(nameof(IsCurrentBeforeFirst));
             }
         }
 
@@ -3977,7 +3977,7 @@ namespace System.Windows.Data
                 }
             }
 
-            OnPropertyChanged("SortDescriptions");
+            OnPropertyChanged(nameof(SortDescriptions));
         }
 
         /// <summary>

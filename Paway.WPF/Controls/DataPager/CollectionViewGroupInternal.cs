@@ -120,7 +120,7 @@ namespace System.Windows.Data
 
                 if (oldIsBottomLevel != this.IsBottomLevel)
                 {
-                    this.OnPropertyChanged(new PropertyChangedEventArgs("IsBottomLevel"));
+                    this.OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsBottomLevel)));
                 }
             }
         }
@@ -424,10 +424,7 @@ namespace System.Windows.Data
         /// </summary>
         protected virtual void OnGroupByChanged()
         {
-            if (this.Parent != null)
-            {
-                this.Parent.OnGroupByChanged();
-            }
+            this.Parent?.OnGroupByChanged();
         }
 
         /// <summary>

@@ -28,6 +28,10 @@ namespace Paway.WPF
         /// <summary>
         /// 虚拟键盘-数字键盘
         /// </summary>
+        public KeyboardNumWindow() : this(null, true) { }
+        /// <summary>
+        /// 虚拟键盘-数字键盘
+        /// </summary>
         public KeyboardNumWindow(FrameworkElement element, bool iTitle = false)
         {
             InitializeComponent();
@@ -37,12 +41,7 @@ namespace Paway.WPF
             this.SourceInitialized += KeyboardNumWindow_SourceInitialized;
             keyboardNum.CloseEvent += KeyboardNum_CloseEvent;
             keyboardNum.DragMovedEvent += KeyboardNum_DragMovedEvent;
-            btnClose.Click += BtnClose_Click;
-        }
-        private void BtnClose_Click(object sender, RoutedEventArgs e)
-        {
-            if (CloseEvent != null) CloseEvent.Invoke(sender, e);
-            else this.Close();
+            btnClose.Click += KeyboardNum_CloseEvent;
         }
         /// <summary>
         /// 焦点问题
@@ -57,7 +56,8 @@ namespace Paway.WPF
         }
         private void KeyboardNum_CloseEvent(object sender, RoutedEventArgs e)
         {
-            CloseEvent?.Invoke(sender, e);
+            if (CloseEvent != null) CloseEvent.Invoke(sender, e);
+            else this.Close();
         }
         private void KeyboardNumWindow_SourceInitialized(object sender, EventArgs e)
         {

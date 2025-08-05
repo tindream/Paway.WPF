@@ -23,7 +23,7 @@ namespace Paway.WPF
         /// </summary>
         public WebBrowserHelper(WebBrowser webBrowser)
         {
-            _webBrowser = webBrowser ?? throw new ArgumentNullException("webBrowser");
+            _webBrowser = webBrowser ?? throw new ArgumentNullException(nameof(webBrowser));
             _webBrowser.Dispatcher.BeginInvoke(new Action(Attach), DispatcherPriority.Loaded);
         }
 

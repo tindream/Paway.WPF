@@ -47,7 +47,7 @@ namespace Paway.WPF
         /// </summary>
         public ThemeForeground()
         {
-            if (System.Threading.Thread.CurrentThread.ManagedThreadId != 1 && !DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+            if (Environment.CurrentManagedThreadId != 1 && !DesignerProperties.GetIsInDesignMode(new DependencyObject()))
             {
                 throw new WarningException("Resources cannot be called in threads");
             }

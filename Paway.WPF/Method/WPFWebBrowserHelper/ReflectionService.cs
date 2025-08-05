@@ -24,9 +24,9 @@ namespace Paway.WPF
         public static object ReflectGetProperty(this object target, string propertyName)
         {
             if (target == null)
-                throw new ArgumentNullException("target");
+                throw new ArgumentNullException(nameof(target));
             if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("propertyName can not be null or whitespace", "propertyName");
+                throw new ArgumentException("propertyName can not be null or whitespace", nameof(propertyName));
 
             var propertyInfo = target.GetType().GetProperty(propertyName, BindingFlags);
             if (propertyInfo == null)
@@ -39,9 +39,9 @@ namespace Paway.WPF
         public static object ReflectInvokeMethod(this object target, string methodName, Type[] argTypes, object[] parameters)
         {
             if (target == null)
-                throw new ArgumentNullException("target");
+                throw new ArgumentNullException(nameof(target));
             if (string.IsNullOrWhiteSpace(methodName))
-                throw new ArgumentException("methodName can not be null or whitespace", "methodName");
+                throw new ArgumentException("methodName can not be null or whitespace", nameof(methodName));
 
             var methodInfo = target.GetType().GetMethod(methodName, BindingFlags, null, argTypes, null);
             if (methodInfo == null)

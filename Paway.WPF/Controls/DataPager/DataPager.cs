@@ -159,7 +159,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty AutoEllipsisProperty =
             DependencyProperty.Register(
-                "AutoEllipsis",
+                nameof(AutoEllipsis),
                 typeof(bool),
                 typeof(DataPager),
                 new PropertyMetadata(OnAutoEllipsisPropertyChanged));
@@ -169,7 +169,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty CanChangePageProperty =
             DependencyProperty.Register(
-                "CanChangePage",
+                nameof(CanChangePage),
                 typeof(bool),
                 typeof(DataPager),
                 new PropertyMetadata(OnReadOnlyPropertyChanged));
@@ -179,7 +179,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty CanMoveToFirstPageProperty =
             DependencyProperty.Register(
-                "CanMoveToFirstPage",
+                nameof(CanMoveToFirstPage),
                 typeof(bool),
                 typeof(DataPager),
                 new PropertyMetadata(OnReadOnlyPropertyChanged));
@@ -189,7 +189,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty CanMoveToLastPageProperty =
             DependencyProperty.Register(
-                "CanMoveToLastPage",
+                nameof(CanMoveToLastPage),
                 typeof(bool),
                 typeof(DataPager),
                 new PropertyMetadata(OnReadOnlyPropertyChanged));
@@ -199,7 +199,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty CanMoveToNextPageProperty =
             DependencyProperty.Register(
-                "CanMoveToNextPage",
+                nameof(CanMoveToNextPage),
                 typeof(bool),
                 typeof(DataPager),
                 new PropertyMetadata(OnReadOnlyPropertyChanged));
@@ -209,7 +209,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty CanMoveToPreviousPageProperty =
             DependencyProperty.Register(
-                "CanMoveToPreviousPage",
+                nameof(CanMoveToPreviousPage),
                 typeof(bool),
                 typeof(DataPager),
                 new PropertyMetadata(OnReadOnlyPropertyChanged));
@@ -219,7 +219,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty DisplayModeProperty =
             DependencyProperty.Register(
-                "DisplayMode",
+                nameof(DisplayMode),
                 typeof(PagerDisplayMode),
                 typeof(DataPager),
                 new PropertyMetadata(DATAPAGER_defaultDisplayMode, OnDisplayModePropertyChanged));
@@ -229,7 +229,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty IsTotalItemCountFixedProperty =
             DependencyProperty.Register(
-                "IsTotalItemCountFixed",
+                nameof(IsTotalItemCountFixed),
                 typeof(bool),
                 typeof(DataPager),
                 new PropertyMetadata(true, OnIsTotalItemCountFixedPropertyChanged));
@@ -239,7 +239,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ItemCountProperty =
             DependencyProperty.Register(
-                "ItemCount",
+                nameof(ItemCount),
                 typeof(int),
                 typeof(DataPager),
                 new PropertyMetadata(OnReadOnlyPropertyChanged));
@@ -249,7 +249,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty NumericButtonCountProperty =
             DependencyProperty.Register(
-                "NumericButtonCount",
+                nameof(NumericButtonCount),
                 typeof(int),
                 typeof(DataPager),
                 new PropertyMetadata(DATAPAGER_defaultNumericButtonCount, OnNumericButtonCountPropertyChanged));
@@ -259,7 +259,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty NumericButtonStyleProperty =
             DependencyProperty.Register(
-                "NumericButtonStyle",
+                nameof(NumericButtonStyle),
                 typeof(Style),
                 typeof(DataPager),
                 new PropertyMetadata(OnNumericButtonStylePropertyChanged));
@@ -269,7 +269,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty PageCountProperty =
             DependencyProperty.Register(
-                "PageCount",
+                nameof(PageCount),
                 typeof(int),
                 typeof(DataPager),
                 new PropertyMetadata(OnReadOnlyPropertyChanged));
@@ -279,7 +279,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty PageIndexProperty =
             DependencyProperty.Register(
-                "PageIndex",
+                nameof(PageIndex),
                 typeof(int),
                 typeof(DataPager),
                 new PropertyMetadata(DATAPAGER_defaultPageIndex, OnPageIndexPropertyChanged));
@@ -289,7 +289,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty PageSizeProperty =
             DependencyProperty.Register(
-                "PageSize",
+                nameof(PageSize),
                 typeof(int),
                 typeof(DataPager),
                 new PropertyMetadata(OnPageSizePropertyChanged));
@@ -311,7 +311,7 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty SourceProperty =
             DependencyProperty.Register(
-                "Source",
+                nameof(Source),
                 typeof(IEnumerable),
                 typeof(DataPager),
                 new PropertyMetadata(OnSourcePropertyChanged));
@@ -945,7 +945,7 @@ namespace Paway.WPF
                 {
                     pager.SetValueNoCallback(e.Property, e.OldValue);
                     throw new ArgumentOutOfRangeException(
-                        "value",
+                        nameof(NumericButtonCount),
                         string.Format(
                             CultureInfo.InvariantCulture,
                             "{0} must be greater than or equal to {1}.",
@@ -999,7 +999,7 @@ namespace Paway.WPF
                 {
                     pager.SetValueNoCallback(e.Property, e.OldValue);
                     throw new ArgumentOutOfRangeException(
-                        "value",
+                       nameof(PageIndex),
                         "The PageIndex property can only be set to -1 when the Source property is null or the PageSize property is 0.");
                 }
 
@@ -1007,7 +1007,7 @@ namespace Paway.WPF
                 {
                     pager.SetValueNoCallback(e.Property, e.OldValue);
                     throw new ArgumentOutOfRangeException(
-                        "value",
+                        nameof(PageIndex),
                         string.Format(
                             CultureInfo.InvariantCulture,
                             "{0} must be greater than or equal to {1}.",
@@ -1065,7 +1065,7 @@ namespace Paway.WPF
                 {
                     pager.SetValueNoCallback(e.Property, e.OldValue);
                     throw new ArgumentOutOfRangeException(
-                        "value",
+                        nameof(PageSize),
                         string.Format(
                             CultureInfo.InvariantCulture,
                             "{0} must be greater than or equal to {1}.",

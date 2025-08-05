@@ -12,6 +12,7 @@
 		<PlatformTarget>AnyCPU</PlatformTarget>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<OutputPath>..\bin\$(Configuration)\Test</OutputPath>
+		<NoWarn>IDE0130</NoWarn>
 	</PropertyGroup>
 	<PropertyGroup>
 		<!--取消warning NETSDK1049警告-->

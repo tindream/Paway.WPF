@@ -12,6 +12,7 @@
 		<RootNamespace>Paway.Model</RootNamespace>
 		<PlatformTarget>AnyCPU</PlatformTarget>
 		<OutputPath>..\bin\$(Configuration)</OutputPath>
+		<NoWarn>IDE0130</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -24,12 +25,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Paway.WPF\Paway.WPF.csproj" />
-	</ItemGroup>
-	<ItemGroup>
 		<Reference Include="Microsoft.CSharp" />
-	</ItemGroup>
-	<ItemGroup>
+		<ProjectReference Include="..\Paway.WPF\Paway.WPF.csproj" />
 		<PackageReference Include="Paway.Utils" Version="3.0.0" />
 		<PackageReference Include="Paway.Runtime.Plot" Version="1.0.5" />
 		<PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />

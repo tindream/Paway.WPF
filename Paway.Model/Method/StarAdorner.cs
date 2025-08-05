@@ -110,11 +110,11 @@ namespace Paway.Model
             double t = a / v;//时间
             Duration dur = new Duration(new TimeSpan(0, 0, 0, 0, (int)(t * 1000)));
 
-            var storyboard = new Storyboard()
+            var storyboard = new Storyboard
             {
-                Duration = dur
+                Duration = dur,
+                RepeatBehavior = RepeatBehavior.Forever
             };
-            storyboard.RepeatBehavior = RepeatBehavior.Forever;
             //动画完成事件 再次设置此动画
             storyboard.Completed += (S, E) =>
             {

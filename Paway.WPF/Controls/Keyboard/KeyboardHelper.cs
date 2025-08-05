@@ -162,7 +162,7 @@ namespace Paway.WPF
         private static List<Action<int, bool>> callbacks;
         private static readonly HashSet<int> downKeys = new HashSet<int>();
 
-        private static NativeMethods.HookProc hookDelegate = HookCallback;
+        private readonly static NativeMethods.HookProc hookDelegate = HookCallback;
         internal static void StartHook(Action<int, bool> callback)
         {
             if (callbacks == null)
@@ -226,7 +226,7 @@ namespace Paway.WPF
         }
         internal static void StopHook()
         {
-            if (callbacks != null) callbacks.Clear();
+            callbacks?.Clear();
             NativeMethods.UnhookWindowsHookEx(processPointer);
         }
 

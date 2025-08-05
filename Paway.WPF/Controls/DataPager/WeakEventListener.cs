@@ -40,7 +40,7 @@ namespace Paway.WPF
         {
             if (null == instance)
             {
-                throw new ArgumentNullException("instance");
+                throw new ArgumentNullException(nameof(instance));
             }
 
             _weakInstance = new WeakReference(instance);

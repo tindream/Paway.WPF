@@ -76,11 +76,11 @@ namespace Paway.WPF
         }
         private void OnSelectedValueChanged(object sender, EventArgs e)
         {
-            IEnumerable list = this.List ?? this.ItemsSource;
+            dynamic list = this.List ?? this.ItemsSource;
             if (list != null)
             {
                 var id = this.SelectedValue.ToInt();
-                if (list.Find(nameof(IId.Id), id) is IId item)
+                if (list.Find((Predicate<IId>)(c => c.Id == id)) is IId item)
                 {
                     this.InitText(item);
                 }
