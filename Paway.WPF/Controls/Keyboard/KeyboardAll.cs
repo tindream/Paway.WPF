@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,6 +19,33 @@ namespace Paway.WPF
     /// </summary>
     public partial class KeyboardAll : ContentControl, IWindowAdorner
     {
+        /// <summary>
+        /// 获取输入法上下文
+        /// </summary>
+        [DllImport("imm32.dll")]
+        private static extern IntPtr ImmGetContext(IntPtr hWnd);
+
+        #region 依赖属性
+        /// <summary>
+        /// </summary>
+        internal static readonly DependencyProperty ImeStateProperty =
+            DependencyProperty.Register(nameof(ImeState), typeof(bool), typeof(KeyboardAll));
+        /// <summary>
+        /// 是否获取到窗口输入法状态
+        /// <para>判断同进程</para>
+        /// <para>无法获取时状态切换按钮显示为 中/英</para>
+        /// </summary>
+        [Category("扩展")]
+        [Browsable(false)]
+        [Description("是否获取到窗口输入法状态")]
+        public bool ImeState
+        {
+            get { return (bool)GetValue(ImeStateProperty); }
+            set { SetValue(ImeStateProperty, value); }
+        }
+
+        #endregion
+
         /// <summary>
         /// 大写
         /// </summary>
@@ -83,6 +111,11 @@ namespace Paway.WPF
         public KeyboardAll()
         {
             DefaultStyleKey = typeof(KeyboardAll);
+            InputMethod.Current.StateChanged += Current_StateChanged;
+        }
+        private void Current_StateChanged(object sender, InputMethodStateChangedEventArgs e)
+        {
+            this.ChangeChina();
         }
         /// <summary>
         /// 获取模板控件；监听键盘，切换中英文
@@ -93,6 +126,10 @@ namespace Paway.WPF
             this.listview1 = Template.FindName("listview1", this) as ListViewCustom;
             listview1.SelectionChanged += Listview1_SelectionChanged;
             listview1.DragMovedEvent += Listview1_DragMovedEvent;
+
+            IntPtr hWnd = NativeMethods.GetForegroundWindow();
+            IntPtr hImc = ImmGetContext(hWnd);
+            this.ImeState = hImc != IntPtr.Zero;
 
             KeyboardHelper.StartHook(new Action<int, bool>(this.KeyPressed));
             this.iChina = InputMethod.Current.ImeState == InputMethodState.On && InputMethod.Current.ImeConversionMode != ImeConversionModeValues.Alphanumeric;
@@ -118,8 +155,6 @@ namespace Paway.WPF
             switch (virtualKey)
             {
                 case (int)Keys.CapsLock: if (!keyUp) this.iCapsLock = NativeMethods.GetKeyState((int)Keys.CapsLock) == 0; this.ChangeCapsLock(); break;
-                case (int)Keys.LShiftKey:
-                case (int)Keys.RShiftKey: if (keyUp) { PMethod.DoEvents(); this.ChangeChina(); } break;
             }
         }
 
@@ -146,9 +181,11 @@ namespace Paway.WPF
                         break;
                     case "键盘": this.iKeyboardNum = !this.iKeyboardNum; this.ChangeKeyboardNum(); break;
                     case "中英":
-                        InputMethod.Current.ImeState = this.iChina ? InputMethodState.Off : InputMethodState.On;
-                        InputMethod.Current.ImeConversionMode = this.iChina ? ImeConversionModeValues.Alphanumeric : (ImeConversionModeValues.Native | ImeConversionModeValues.Symbol);
-                        ChangeChina();
+                    case "切换":
+                        var modifierKeys = new List<int> { (int)Keys.ShiftKey };
+                        KeyboardHelper.Send(modifierKeys, (int)Keys.None);
+                        //InputMethod.Current.ImeState = this.iChina ? InputMethodState.Off : InputMethodState.On;
+                        //InputMethod.Current.ImeConversionMode = this.iChina ? ImeConversionModeValues.Alphanumeric : (ImeConversionModeValues.Native | ImeConversionModeValues.Symbol);
                         break;
                     case "backspace": KeyboardHelper.Send(Keys.Back); break;
                     case "space": KeyboardHelper.Send(Keys.Space); break;
@@ -186,6 +223,7 @@ namespace Paway.WPF
                 var key = viewItem.Tag.ToString();
                 switch (key)
                 {
+                    case "切换": break;
                     case "中英": viewItem.Text = this.iChina ? "中" : "英"; break;
                     case "caps lock":
                         if (this.iKeyboardNum)
@@ -221,6 +259,7 @@ namespace Paway.WPF
                 var key = viewItem.Tag.ToString();
                 switch (key)
                 {
+                    case "切换": break;
                     case "中英": viewItem.Text = this.iChina ? "中" : "英"; break;
                     case "caps lock":
                         var imageName = this.iCapsLock ? "caps_lock_2" : "caps_lock";

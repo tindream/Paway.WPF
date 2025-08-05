@@ -9,7 +9,7 @@
                  Height="280" Width="606"
                  Background="Transparent"
                  Topmost="True" ShowInTaskbar="False" ShowActivated="False"
-                 ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen">
+                 ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True">
     <DockPanel>
         <DockPanel DockPanel.Dock="Top" Background="#3D3D3D" Name="dpTitle" Visibility="Collapsed">
             <local:ButtonEXT x:Name="btnClose" Command="{Binding ItemClickCommand}" CommandParameter="关闭" 

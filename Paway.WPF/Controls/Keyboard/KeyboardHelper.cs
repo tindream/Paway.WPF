@@ -239,12 +239,9 @@ namespace Paway.WPF
         }
         public static void Send(ICollection<int> modifierKeys, int virtualKey, bool iUnicode = false)
         {
-            if (virtualKey <= 0)
-            {
-                return;
-            }
             if (modifierKeys == null || modifierKeys.Count == 0)
             {
+                if (virtualKey <= 0) return;
                 Input input = CreateKeyDownInput(virtualKey, iUnicode);
                 Input input2 = CreateKeyUpInput(virtualKey, iUnicode);
                 Input[] inputs = new Input[]
@@ -265,8 +262,8 @@ namespace Paway.WPF
                 {
                     array[num++] = CreateKeyDownInput(keyCode, iUnicode);
                 }
-                array[num++] = CreateKeyDownInput(virtualKey, iUnicode);
-                array[num++] = CreateKeyUpInput(virtualKey, iUnicode);
+                if (virtualKey > 0) array[num++] = CreateKeyDownInput(virtualKey, iUnicode);
+                if (virtualKey > 0) array[num++] = CreateKeyUpInput(virtualKey, iUnicode);
                 foreach (int keyCode2 in modifierKeys)
                 {
                     array[num++] = CreateKeyUpInput(keyCode2, iUnicode);

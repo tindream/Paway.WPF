@@ -28,7 +28,10 @@ namespace Paway.WPF
         /// <summary>
         /// 虚拟键盘-全键盘
         /// </summary>
-        public KeyboardAllWindow() : this(null, true) { }
+        public KeyboardAllWindow() : this(null, true)
+        {
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        }
         /// <summary>
         /// 虚拟键盘-全键盘
         /// </summary>

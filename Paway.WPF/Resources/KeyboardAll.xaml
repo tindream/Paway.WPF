@@ -40,7 +40,8 @@
                             <local:ListBoxItemEXT Text="j" Tag="j" />
                             <local:ListBoxItemEXT Text="k" Tag="k" />
                             <local:ListBoxItemEXT Text="l" Tag="l" />
-                            <local:ListBoxItemEXT Text="英" FontSize="15" Tag="中英" />
+                            <local:ListBoxItemEXT Text="英" FontSize="15" Tag="中英" Visibility="{Binding ImeState, Converter={StaticResource boolToVisible}, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <local:ListBoxItemEXT Text="中/英" FontSize="15" Tag="切换" Visibility="{Binding ImeState, Converter={StaticResource boolToCollapsed}, RelativeSource={RelativeSource TemplatedParent}}"/>
 
                             <local:ListBoxItemEXT Image="pack://application:,,,/Paway.WPF;component/Images/keyboard/caps_lock_white.png|pack://application:,,,/Paway.WPF;component/Images/keyboard/caps_lock.png|pack://application:,,,/Paway.WPF;component/Images/keyboard/caps_lock_white.png" 
                                   Tag="caps lock" />
