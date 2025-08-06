@@ -17,6 +17,11 @@ namespace Paway.WPF
     /// </summary>
     public partial class PMethod : TMethod
     {
+        static PMethod()
+        {
+            PConfig.InitResources();
+        }
+
         #region Menu
         /// <summary>
         /// Menu菜单绑定多语言

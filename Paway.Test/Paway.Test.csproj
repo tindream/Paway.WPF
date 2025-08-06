@@ -12,11 +12,9 @@
 		<PlatformTarget>AnyCPU</PlatformTarget>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<OutputPath>..\bin\$(Configuration)\Test</OutputPath>
-		<NoWarn>IDE0130</NoWarn>
+		<NoWarn>NETSDK1049;IDE0130</NoWarn>
 	</PropertyGroup>
 	<PropertyGroup>
-		<!--取消warning NETSDK1049警告-->
-		<DependsOnNETStandard>false</DependsOnNETStandard>
 		<!--禁止自动生成绑定重定向-->
 		<AutoGenerateBindingRedirects>False</AutoGenerateBindingRedirects>
 	</PropertyGroup>

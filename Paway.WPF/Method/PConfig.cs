@@ -24,7 +24,20 @@ namespace Paway.WPF
         static PConfig()
         {
             FontAwesome = new FontFamily(new Uri(@"pack://application:,,,/Paway.WPF;component/Resource/"), "./#fontawesome");
+            if (!Application.Current.Resources.MergedDictionaries.Any(c => c.Source.ToStrings().Contains("Paway.xaml")))
+            {
+                // 创建资源字典
+                ResourceDictionary globalResources = new ResourceDictionary();
+                // 指定资源字典的源（确保"Resources.xaml"的生成操作设置为Page或Resource）
+                globalResources.Source = new Uri("/Paway.WPF;component/Themes/Paway.xaml", UriKind.Relative);
+                // 合并到应用程序资源
+                Application.Current.Resources.MergedDictionaries.Add(globalResources);
+            }
         }
+        /// <summary>
+        /// 加载全局资源
+        /// </summary>
+        internal static void InitResources() { }
 
         #region 全局配置
         /// <summary>

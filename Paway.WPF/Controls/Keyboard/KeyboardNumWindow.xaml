@@ -10,6 +10,9 @@
                  Background="Transparent"
                  Topmost="True" ShowInTaskbar="False" ShowActivated="False"
                  ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True">
+    <local:WindowEXT.Resources>
+        <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Default.xaml" />
+    </local:WindowEXT.Resources>
     <DockPanel>
         <DockPanel DockPanel.Dock="Top" Background="#3D3D3D" Name="dpTitle" Visibility="Collapsed">
             <local:ButtonEXT x:Name="btnClose" Command="{Binding ItemClickCommand}" CommandParameter="关闭" 
