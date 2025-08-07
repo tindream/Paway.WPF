@@ -21,7 +21,7 @@
 		</Compile>
 	</ItemGroup>
 	<ItemGroup>
-		<Resource Include="Resource\fontawesome.ttf" />
+		<Resource Include="Resources\Resource\fontawesome.ttf" />
 		<Resource Include="Images\**" />
 	</ItemGroup>
 

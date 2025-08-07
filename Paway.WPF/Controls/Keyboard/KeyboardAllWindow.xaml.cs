@@ -20,6 +20,7 @@ namespace Paway.WPF
     /// </summary>
     public partial class KeyboardAllWindow : WindowEXT
     {
+        private bool _firstRender;
         private readonly FrameworkElement element;
         /// <summary>
         /// 关闭事件
@@ -28,9 +29,20 @@ namespace Paway.WPF
         /// <summary>
         /// 虚拟键盘-全键盘
         /// </summary>
-        public KeyboardAllWindow() : this(null, true)
+        public KeyboardAllWindow() : this(null, true) { }
+        /// <summary>
+        /// 位置
+        /// </summary>
+        protected override void OnRender(DrawingContext drawingContext)
         {
-            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            base.OnRender(drawingContext);
+            if (!_firstRender)
+            {
+                _firstRender = true;
+                // 获取主屏幕的工作区大小（不包括任务栏）
+                this.Left = (SystemParameters.WorkArea.Width - this.ActualWidth) / 2;
+                this.Top = SystemParameters.WorkArea.Height - this.ActualHeight;
+            }
         }
         /// <summary>
         /// 虚拟键盘-全键盘

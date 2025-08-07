@@ -4,8 +4,6 @@
              xmlns:local="clr-namespace:Paway.Test" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:vm="clr-namespace:Paway.Test" 
-             xmlns:model="clr-namespace:Paway.Model;assembly=Paway.Model"
              d1p1:Ignorable="d" 
              StartupUri="TestWindow.xaml">
     <Application.Resources>
@@ -13,7 +11,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources\Default.xaml" />
                 <ResourceDictionary>
-                    <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
+                    <local:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
