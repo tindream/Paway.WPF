@@ -50,12 +50,8 @@ namespace Paway.WPF
         /// </summary>
         public static MessageWindow Hit(FrameworkElement element, string msg, LevelType level = LevelType.Info, int timeout = 3, double fontSize = 15, Action<TextBlock> action = null)
         {
-            if (window == null) window = new MessageWindow();
-            else
-            {
-                window.manualResetEvent.Set();
-                window = new MessageWindow();
-            }
+            if (window != null) window.manualResetEvent.Set();
+            window = new MessageWindow();
             window.parentElement = element;
             window.textBlock.Text = msg;
             window.textBlock.FontSize = fontSize;

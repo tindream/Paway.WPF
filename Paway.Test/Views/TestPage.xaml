@@ -17,7 +17,8 @@
             <DockPanel HorizontalAlignment="Center" Width="500" >
                 <CheckBoxEXT DockPanel.Dock="Top" Content="A"/>
                 <Border DockPanel.Dock="Top" CornerRadius="5" HorizontalAlignment="Center" Margin="0,5,0,0" >
-                    <ButtonEXT Content="Hello Kitty Baby" MinWidth="200" MaxWidth="600"  Type="Color" Margin="0" Padding="10" HorizontalContentAlignment="Left" />
+                    <ButtonEXT Content="Hello Kitty Baby" MinWidth="200" MaxWidth="600"  Type="Color" Margin="0" Padding="10" HorizontalContentAlignment="Left" 
+                               Click="ButtonEXT_Click_1"/>
                 </Border>
                 <TextBoxEXT DockPanel.Dock="Top"/>
                 <ButtonEXT DockPanel.Dock="Top" Content="选择" Click="ButtonEXT_Click"/>

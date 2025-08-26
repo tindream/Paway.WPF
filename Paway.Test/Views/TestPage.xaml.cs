@@ -35,5 +35,9 @@ namespace Paway.Test
                 image2.Source = file.ToSource();
             }
         }
+        private void ButtonEXT_Click_1(object sender, RoutedEventArgs e)
+        {
+            MessageWindow.Hit(this, "今夕是何年");
+        }
     }
 }

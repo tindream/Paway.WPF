@@ -23,7 +23,7 @@ namespace Paway.WPF
     {
         static PConfig()
         {
-            FontAwesome = new FontFamily(new Uri(@"pack://application:,,,/Paway.WPF;component/Resource/"), "./#fontawesome");
+            FontAwesome = new FontFamily(new Uri(@"pack://application:,,,/Paway.WPF;component/Resources/Resource/"), "./#fontawesome");
             if (!Application.Current.Resources.MergedDictionaries.Any(c => c.Source.ToStrings().Contains("Paway.xaml")))
             {
                 // 创建资源字典
