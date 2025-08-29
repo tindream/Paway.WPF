@@ -36,7 +36,7 @@ namespace Paway.WPF
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
-            if (!_firstRender)
+            if (element == null && !_firstRender)
             {
                 _firstRender = true;
                 // 获取主屏幕的工作区大小（不包括任务栏）
@@ -58,6 +58,11 @@ namespace Paway.WPF
             keyboardNum.DragMovedEvent += KeyboardNum_DragMovedEvent;
             btnClose.Click += KeyboardNum_CloseEvent;
         }
+        private void KeyboardNumWindow_SourceInitialized(object sender, EventArgs e)
+        {
+            var hwnd = this.Handle();
+            NativeMethods.SetWindowLong(hwnd, -20, (int)(Helper.WindowStyle.WS_DISABLED | Helper.WindowStyle.WS_EX_TOOLWINDOW));
+        }
         /// <summary>
         /// 焦点问题
         /// </summary>
@@ -73,12 +78,6 @@ namespace Paway.WPF
         {
             if (CloseEvent != null) CloseEvent.Invoke(sender, e);
             else this.Close();
-        }
-        private void KeyboardNumWindow_SourceInitialized(object sender, EventArgs e)
-        {
-            var hwnd = this.Handle();
-            //NativeMethods.SetWindowLong(hwnd, -16, unchecked((int)0x94000000));
-            NativeMethods.SetWindowLong(hwnd, -20, 0x08000088);
         }
     }
 }

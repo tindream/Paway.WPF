@@ -36,7 +36,7 @@ namespace Paway.WPF
         {
             var hwnd = this.Handle();
             NativeMethods.SetWindowLong(hwnd, -16, unchecked((int)0x94000000));
-            NativeMethods.SetWindowLong(hwnd, -20, 0x08000088);
+            NativeMethods.SetWindowLong(hwnd, -20, (int)(Helper.WindowStyle.WS_DISABLED | Helper.WindowStyle.WS_EX_NOHIT));
         }
 
         private static MessageWindow window;
@@ -48,11 +48,11 @@ namespace Paway.WPF
         /// 动画显示消息
         /// <para>同进程内点击窗体会获取焦点</para>
         /// </summary>
-        public static MessageWindow Hit(FrameworkElement element, string msg, LevelType level = LevelType.Info, int timeout = 3, double fontSize = 15, Action<TextBlock> action = null)
+        public static MessageWindow Hit(FrameworkElement parent, string msg, LevelType level = LevelType.Info, int timeout = 3, double fontSize = 15, Action<TextBlock> action = null)
         {
             if (window != null) window.manualResetEvent.Set();
             window = new MessageWindow();
-            window.parentElement = element;
+            window.parentElement = parent;
             window.textBlock.Text = msg;
             window.textBlock.FontSize = fontSize;
             var type = ColorType.Color;
@@ -65,7 +65,7 @@ namespace Paway.WPF
             window.textBlock.Foreground = Colors.White.ToBrush();
             window.border.Background = type.Color().ToAlpha(PConfig.Alpha).ToBrush();
             action?.Invoke(window.textBlock);
-            window.LoadParent(element, timeout);
+            window.LoadParent(parent, timeout);
             window.Show();
             window.textBlock.Margin = new Thickness(0);
             {
@@ -90,7 +90,6 @@ namespace Paway.WPF
             if (PMethod.Parent(element, out Window parentWindow))
             {
                 this.parentWindow = parentWindow;
-                this.textBlock.MouseDown += TextBlock_MouseDown;
                 parentWindow.Closing += ParentWindow_Closing;
                 parentWindow.LocationChanged += ParentWindow_LocationChanged;
                 parentWindow.SizeChanged += ParentWindow_LocationChanged;
@@ -121,10 +120,6 @@ namespace Paway.WPF
                 }
                 PMethod.Invoke(() => { this.PrevoewClose(); });
             });
-        }
-        private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            parentWindow.Focus();
         }
         private void PrevoewClose()
         {

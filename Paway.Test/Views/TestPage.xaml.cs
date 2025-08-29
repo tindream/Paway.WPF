@@ -37,7 +37,7 @@ namespace Paway.Test
         }
         private void ButtonEXT_Click_1(object sender, RoutedEventArgs e)
         {
-            MessageWindow.Hit(this, "今夕是何年");
+            "今夕是何年".Hit(this);
         }
     }
 }
