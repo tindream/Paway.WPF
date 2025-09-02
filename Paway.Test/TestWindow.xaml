@@ -15,6 +15,8 @@
     </WindowEXT.FunctionBar>
     <WindowEXT.FunctionBarRight>
         <WindowFunctionBar>
+            <ButtonEXT Content="主页" Margin="0" IsLight="True" ItemBorder="0" Radius="0"
+                       Command="{Binding ItemClickCommand}" CommandParameter="主页"/>
             <ButtonEXT Content="{Binding Language.Theme, Source={StaticResource L}}" Margin="0" IsLight="True" ItemBorder="0" Radius="0"
                        Command="{Binding ItemClickCommand}" CommandParameter="主题"/>
             <ButtonEXT Content="{Binding Language.Color, Source={StaticResource L}}" Margin="0" IsLight="True" ItemBorder="0" Radius="0"

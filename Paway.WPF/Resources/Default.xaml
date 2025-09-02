@@ -51,7 +51,7 @@
     <!--多语言-->
     <local:PConfig x:Key="LB"  />
     <!--文本图标-->
-    <FontFamily x:Key="FontAwesome">/Paway.WPF;component/Resource/#fontawesome</FontFamily>
+    <FontFamily x:Key="FontAwesome">/Paway.WPF;component/Resources/Resource/#fontawesome</FontFamily>
     <!--#endregion-->
 
     <!--#region 通用模板 -->

@@ -77,6 +77,9 @@ namespace Paway.Test
                     Method.Hit(Config.Window, version);
                     Messenger.Default.Send(new StatuMessage(version, true));
                     break;
+                case "主页":
+                    Method.ShowWindow(Config.Window, new MainWindow());
+                    break;
                 case "主题":
                     Method.ShowWindow(Config.Window, new ThemeWindow());
                     break;
