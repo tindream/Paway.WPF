@@ -39,7 +39,6 @@ namespace Paway.Test
 
         public MainWindow()
         {
-            Config.Window = this;
             InitializeComponent();
         }
 

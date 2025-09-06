@@ -40,7 +40,7 @@ namespace Paway.WPF
                     isCheckedBinding.Source = model;//绑定ViewModel类
                     isCheckedBinding.Path = new PropertyPath(languageName);//绑定MainWindow类下的Language属性。
                     isCheckedBinding.Mode = BindingMode.TwoWay;//绑定模式双向绑定
-                    isCheckedBinding.Converter = PConfig.Window.FindResource("valueToTrue") as IValueConverter;
+                    isCheckedBinding.Converter = new ValueToTrue();
                     isCheckedBinding.ConverterParameter = language;
                     menuItem.SetBinding(MenuItem.IsCheckedProperty, isCheckedBinding);//设置绑定到要绑定的控件
                 }

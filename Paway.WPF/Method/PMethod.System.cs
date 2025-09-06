@@ -922,28 +922,34 @@ namespace Paway.WPF
         /// <para>existTitle：不为空时，检查实例，实例存在时激活指定标题的窗体，未找到实例时 关闭当前进程名称的其它所有进程</para>
         /// <para>logFirstChanceException：记录异常，默认记录</para>
         /// </summary>
-        public static void InitApp(Application app, string logFile = "Log.xml", string existTitle = null, bool logFirstChanceException = true)
+        public new static bool InitApp(string logFile = "Log.xml", string existTitle = null, object key = null, bool logFirstChanceException = true)
         {
-            if (!existTitle.IsEmpty())
-            {
-                if (IsAppInstanceExist())
-                {//已经有实例在运行，则激活该实例的主窗体。
-                    var hWnd = Win32Helper.ActiveForm(existTitle);
-                    if (hWnd != IntPtr.Zero)
-                    {
-                        app.Shutdown();
-                        return;
-                    }
-                    else
-                    {
-                        KillProcesses();
-                    }
-                }
-            }
+            if (!InitAppInstance(existTitle, key, () => Application.Current.Shutdown())) return false;
+            InitAppError(logFile, logFirstChanceException);
             //禁用Backspace退格导航返回Page页
             NavigationCommands.BrowseBack.InputGestures.Clear();
-            app.DispatcherUnhandledException += App_DispatcherUnhandledException;
-            InitAppError(logFile, logFirstChanceException);
+            Application.Current.DispatcherUnhandledException += App_DispatcherUnhandledException;
+            Task.Run(() =>
+            {
+                try
+                {
+                    for (var i = 0; i < 1000; i++)
+                    {
+                        if (PMethod.Invoke(() => Application.Current.MainWindow) != null) break;
+                        Thread.Sleep(5);
+                    }
+                    PMethod.Invoke(() =>
+                    {
+                        PConfig.Window = Application.Current.MainWindow;
+                        if (PConfig.Window == null) "未获取到MainWindow".Warn();
+                    });
+                }
+                catch (Exception ex)
+                {
+                    $"获取MainWindow失败：{ex.Message()}".Warn();
+                }
+            });
+            return true;
         }
         private static void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {

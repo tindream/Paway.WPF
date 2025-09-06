@@ -32,7 +32,6 @@ namespace Paway.Test
     {
         public TestWindow()
         {
-            Config.Window = this;
             InitializeComponent();
         }
         public override void OnApplyTemplate()

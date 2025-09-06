@@ -25,7 +25,7 @@ namespace Paway.Test
         {
             base.OnStartup(e);
             Config.Title = "测试系统";
-            Method.InitApp(App.Current, Config.Log, Config.Title);
+            Method.InitApp(Config.Log, Config.Title);
             {//Test
             }
             //System.Diagnostics.PresentationTraceSources.DataBindingSource.Switch.Level = System.Diagnostics.SourceLevels.Critical;
