@@ -36,7 +36,7 @@ namespace Paway.WPF
         {
             var hwnd = this.Handle();
             NativeMethods.SetWindowLong(hwnd, -16, unchecked((int)0x94000000));
-            NativeMethods.SetWindowLong(hwnd, -20, (int)(Helper.WindowStyle.WS_DISABLED | Helper.WindowStyle.WS_EX_NOHIT));
+            NativeMethods.SetWindowLong(hwnd, -20, (int)(Helper.WindowStyle.WS_DISABLED | Helper.WindowStyle.WS_EX_TOOLWINDOW | Helper.WindowStyle.WS_EX_NOHIT));
         }
 
         private static MessageWindow window;

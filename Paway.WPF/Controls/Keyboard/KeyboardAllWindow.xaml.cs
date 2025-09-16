@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -63,13 +64,52 @@ namespace Paway.WPF
         {
             var hwnd = this.Handle();
             NativeMethods.SetWindowLong(hwnd, -20, (int)(Helper.WindowStyle.WS_DISABLED | Helper.WindowStyle.WS_EX_TOOLWINDOW));
+
+            // 创建并保持委托引用
+            _wndProcDelegate = new WndProcDelegate(WndProc);
+            // 替换窗口过程
+            _originalWndProc = NativeMethods.SetWindowLong(hwnd, -4, Marshal.GetFunctionPointerForDelegate(_wndProcDelegate));
         }
+        #region 阻止鼠标激活窗口
+        private const int MA_NOACTIVATE = 0x0003;
+        private IntPtr _originalWndProc;
+        private WndProcDelegate _wndProcDelegate;
+        // 定义窗口过程委托
+        private delegate IntPtr WndProcDelegate(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
+        [DllImport("user32.dll")]
+        private static extern IntPtr CallWindowProc(IntPtr lpPrevWndFunc, IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+        private IntPtr WndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam)
+        {
+            if (msg == (int)WindowsMessage.WM_MOUSEACTIVATE)
+            {
+                // 完全阻止鼠标激活窗口
+                return (IntPtr)MA_NOACTIVATE;
+            }
+            // 调用原始窗口过程处理其他消息
+            return CallWindowProc(_originalWndProc, hWnd, msg, wParam, lParam);
+        }
+        /// <summary>
+        /// 恢复原始窗口过程
+        /// </summary>
+        protected override void OnClosed(EventArgs e)
+        {
+            if (_originalWndProc != IntPtr.Zero)
+            {
+                NativeMethods.SetWindowLong(this.Handle(), -4, _originalWndProc);
+            }
+            // 释放委托引用
+            _wndProcDelegate = null;
+            base.OnClosed(e);
+        }
+
+        #endregion
+
         /// <summary>
         /// 焦点问题
         /// </summary>
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
-            this.element?.Focus();
+            //this.element?.Focus();
         }
         private void KeyboardAll_DragMovedEvent(object sender, MouseButtonEventArgs e)
         {
