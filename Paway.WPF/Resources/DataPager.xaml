@@ -152,7 +152,7 @@
                                                 <Storyboard>
                                                     <ColorAnimation Duration="0"
                                                                     Storyboard.TargetName="InnerBtnBorder"
-                                                                    Storyboard.TargetProperty="(BorderBrush).Color"
+                                                                    Storyboard.TargetProperty="BorderBrush.Color"
                                                                     To="Transparent" />
                                                 </Storyboard>
                                             </VisualState>
