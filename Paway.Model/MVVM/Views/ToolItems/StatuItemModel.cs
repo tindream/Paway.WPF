@@ -119,10 +119,6 @@ namespace Paway.Model
                 }
             });
         }
-        /// <summary>
-        /// 提前初始化
-        /// </summary>
-        public void Init() { }
 
         #region 系统消息
         /// <summary>

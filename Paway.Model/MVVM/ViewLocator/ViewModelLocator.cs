@@ -38,6 +38,10 @@ namespace Paway.Model
         /// </summary>
         public ThemeViewModel ThemeView => GetModelInstance<ThemeViewModel>();
         /// <summary>
+        /// 模型-操作栏
+        /// </summary>
+        public OperateItemModel OperateItem => GetModelInstance<OperateItemModel>();
+        /// <summary>
         /// 模型-状态栏
         /// </summary>
         public StatuItemModel StatuItem => GetModelInstance<StatuItemModel>();

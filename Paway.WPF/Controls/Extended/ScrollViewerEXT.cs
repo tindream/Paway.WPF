@@ -180,8 +180,19 @@ namespace Paway.WPF
                     CaptureMouse();
                     e.Handled = true;
                 }
+                else if (this.Parent is UIElement element)
+                {
+                    var eventArg = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, e.ChangedButton)
+                    {
+                        RoutedEvent = UIElement.MouseDownEvent,
+                        Source = this
+                    };
+                    //往上层抛出路由事件，以继续响应
+                    //element.RaiseEvent(eventArg);
+                }
             }
             base.OnMouseLeftButtonDown(e);
+            e.Handled = this.ScrollableHeight > 0 || this.ScrollableWidth > 0;
         }
         /// <summary>
         /// 移动位置

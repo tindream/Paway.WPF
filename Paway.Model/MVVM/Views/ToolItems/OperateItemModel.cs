@@ -23,6 +23,7 @@ namespace Paway.Model
     public partial class OperateItemModel : ViewModelBasePlus, IPageReload
     {
         #region 属性
+        private OperateItem operateItem;
         private DockPanel Panel;
         private bool iExit = false;
         private DateTime exitTime = DateTime.MinValue;
@@ -30,14 +31,13 @@ namespace Paway.Model
         #endregion
 
         #region 权限控制
-        private MenuAuthType _auth;
         /// <summary>
         /// 默认按钮权限
         /// </summary>
         public MenuAuthType Auth
         {
-            get { return _auth; }
-            set { _auth = value; OnPropertyChanged(); }
+            get { return operateItem?.Auth ?? MenuAuthType.None; }
+            set { operateItem.Auth = value; }
         }
 
         #endregion
@@ -153,62 +153,37 @@ namespace Paway.Model
         /// </summary>
         protected virtual void AuthNormal()
         {
-            this.Auth = MenuAuthType.Refresh | MenuAuthType.Save;
+            if (Auth == MenuAuthType.None) this.Auth = MenuAuthType.Refresh | MenuAuthType.Save;
         }
         /// <summary>
         /// 添加竖线
         /// </summary>
         protected void AddInterval(int index = -1, Action<Border> action = null)
         {
-            var border = new Border
-            {
-                Style = Panel.FindResource("Interval") as Style
-            };
-            action?.Invoke(border);
-            Panel.Children.Insert(index != -1 ? index : Panel.Children.Count - 1, border);
+            this.operateItem.AddInterval(index = -1, action);
         }
         /// <summary>
         /// 添加按钮
         /// <para>可指定图标、快捷键，可自定义</para>
         /// </summary>
-        protected void AddButton(object cmd, ImageSourceEXT imageEXT = null, Key key = Key.None, int index = -1, Action<ButtonEXT> action = null)
+        protected void AddButton(object content, ICommand command, ImageSourceEXT imageEXT = null, Key key = Key.None, int index = -1, Action<ButtonEXT> action = null)
         {
-            var content = cmd;
-            if (key != Key.None) content = $"{cmd}({key})";
-            AddButton(imageEXT, Dock.Top, content, cmd, key, index, cmd, action);
+            this.operateItem.AddButton(imageEXT, Dock.Top, content, command, content, key, index, content, action);
         }
         /// <summary>
         /// 添加按钮
         /// <para>可指定图标位置、命令、提示、快捷键，可自定义</para>
         /// </summary>
-        protected void AddButton(ImageSourceEXT imageEXT, Dock imageDock, object content, object cmd = null, Key key = Key.None, int index = -1, object toolTip = null, Action<ButtonEXT> action = null)
+        protected void AddButton(ImageSourceEXT imageEXT, Dock imageDock, object content, ICommand command, object cmd = null, Key key = Key.None, int index = -1, object toolTip = null, Action<ButtonEXT> action = null)
         {
-            var btn = new ButtonEXT
-            {
-                Style = Panel.FindResource("MenuButton") as Style,
-                ItemBorder = new ThicknessEXT(0),
-                Content = content,
-                ToolTip = toolTip ?? content,
-                Image = imageEXT,
-                ImageDock = imageDock,
-                Command = ItemClickCommand,
-                CommandParameter = cmd ?? content
-            };
-            if (key != Key.None)
-            {
-                btn.ShortcutKey = key;
-                btn.ShortcutControl = ModifierKeys.Control;
-            }
-            action?.Invoke(btn);
-            Panel.Children.Insert(index != -1 ? index : Panel.Children.Count - 1, btn);
+            this.operateItem.AddButton(imageEXT, imageDock, content, command, cmd, key, index, toolTip, action);
         }
         /// <summary>
         /// 添加自定义控件
         /// </summary>
         protected void AddUIElement(Func<UIElement> func, int index = -1)
         {
-            var element = func();
-            Panel.Children.Insert(index != -1 ? index : Panel.Children.Count - 1, element);
+            this.operateItem.AddUIElement(func, index);
         }
         #endregion
 
@@ -232,11 +207,15 @@ namespace Paway.Model
             Messenger.Default.Register<OperateLoadMessage>(this, msg =>
             {
                 //基类通知，如自定义菜单栏，此事件未触发，会被后续控件触发初始化
-                if (this.Panel == null && msg.Obj is DockPanel panel)
+                if (this.Panel == null && msg.Obj is OperateItem operateItem)
                 {
-                    this.Panel = panel;
-                    Messenger.Default.Register<KeyMessage>(this, panel.GetHashCode(), keyMsg => Action(keyMsg));
-                    if (Auth == MenuAuthType.None) AuthNormal();
+                    this.operateItem = operateItem;
+                    if (PMethod.Find(operateItem, out DockPanel panel, "dpOperateItem"))
+                    {
+                        this.Panel = panel;
+                        Messenger.Default.Register<KeyMessage>(this, panel.GetHashCode(), keyMsg => Action(keyMsg));
+                    }
+                    AuthNormal();
                 }
             });
         }
