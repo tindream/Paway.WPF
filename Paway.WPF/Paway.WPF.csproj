@@ -12,7 +12,7 @@
 		<RootNamespace>Paway.WPF</RootNamespace>
 		<PlatformTarget>AnyCPU</PlatformTarget>
 		<OutputPath>..\bin\$(Configuration)</OutputPath>
-		<NoWarn>CA1806;CS0109,CS0618;IDE0017,IDE0056,IDE0057,IDE0060,IDE0063,IDE0066,IDE0130</NoWarn>
+		<NoWarn>NU1900;CA1806;CS0109,CS0618;IDE0017,IDE0056,IDE0057,IDE0060,IDE0063,IDE0066,IDE0130</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>

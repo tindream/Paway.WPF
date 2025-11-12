@@ -205,16 +205,16 @@ namespace Paway.WPF
         /// </summary>
         public static new bool SaveFile(out string outFile, string title = null, string filter = null)
         {
-            return SaveFileName(out outFile, null, title, filter);
+            return SaveFile(null, out outFile, title, filter);
         }
         /// <summary>
         /// 保存文件，并指定文件名称
         /// </summary>
-        public static new bool SaveFileName(out string outFile, string fileName, string title = null, string filter = null)
+        public static new bool SaveFile(string fileName, out string outFile, string title = null, string filter = null)
         {
             if (filter == null)
             {
-                var extension = Path.GetExtension(fileName);
+                var extension = Path.GetExtension(fileName)?.ToLower();
                 switch (extension)
                 {
                     case ".xls":

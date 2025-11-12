@@ -234,15 +234,15 @@ namespace Paway.Model
         /// <summary>
         /// 显示设置页
         /// </summary>
-        protected virtual Window SetWindow() { return null; }
+        public virtual Window SetWindow() { return null; }
         /// <summary>
         /// 设置操作
         /// </summary>
-        protected virtual void OnSet(DependencyObject obj) { }
+        public virtual void OnSet(DependencyObject obj) { }
         /// <summary>
         /// 关闭操作
         /// </summary>
-        protected virtual void OnClose(DependencyObject obj) { }
+        public virtual void OnClose(DependencyObject obj) { }
         /// <summary>
         /// 通用动作命令
         /// </summary>

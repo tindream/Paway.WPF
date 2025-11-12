@@ -91,7 +91,7 @@ namespace Paway.WPF
         {
             using (var fileStream = new FileStream(fileName, FileMode.Create))
             {
-                var extension = Path.GetExtension(fileName);
+                var extension = Path.GetExtension(fileName)?.ToLower();
                 BitmapEncoder encoder = null;
                 switch (extension)
                 {

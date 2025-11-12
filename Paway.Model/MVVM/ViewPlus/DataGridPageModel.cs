@@ -138,7 +138,7 @@ namespace Paway.Model
         /// </summary>
         protected virtual List<T> Find()
         {
-            var list = server.Find<T>(this.sqlFilter); list.Sorted();
+            var list = server.Find<T>(this.sqlFilter); Cache.Update(list); list.Sorted();
             return list;
         }
         /// <summary>
@@ -198,7 +198,7 @@ namespace Paway.Model
             {
                 operateUser.UpdateOn = DateTime.Now;
             }
-            server.Update(info);
+            server.Update(info); Cache.Update(info, true);
         }
         /// <summary>
         /// 重载-自定义删除实体
@@ -418,8 +418,8 @@ namespace Paway.Model
                     }
                     break;
                 case "导出":
-                    title = $"{typeof(T).Description()}{DateTime.Now:yyyy-MM-dd}.xlsx";
-                    if (PMethod.SaveFile(out file, title))
+                    var fileName = $"{typeof(T).Description()}{DateTime.Now:yyyy-MM-dd}.xlsx";
+                    if (PMethod.SaveFile(fileName, out file))
                     {
                         Export(file);
                     }
@@ -469,7 +469,7 @@ namespace Paway.Model
                         updateList.Add(item);
                     }
                 }
-                server.Update(updateList, null, nameof(IIndex.Index)); List.Sorted();
+                server.Update(updateList, null, nameof(IIndex.Index)); Cache.Update(updateList, true); List.Sorted();
             }
         });
 
