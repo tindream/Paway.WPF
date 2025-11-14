@@ -37,7 +37,7 @@ namespace Paway.Model
         public MenuAuthType Auth
         {
             get { return operateItem?.Auth ?? MenuAuthType.None; }
-            set { operateItem.Auth = value; }
+            set { if (operateItem != null) operateItem.Auth = value; }
         }
 
         #endregion

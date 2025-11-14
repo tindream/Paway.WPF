@@ -150,7 +150,7 @@ namespace Paway.Model
             {
                 operateUser.CreateOn = DateTime.Now;
             }
-            server.Insert(info); Cache.Update(info, true);
+            server.Insert(info); Cache.Update(info, true); this.List.Add(info);
             var index = this.FilterList().FindIndex(c => c.Id == info.Id);
             if (!this.SearchReset() && index != -1) PMethod.Invoke(() => ObList.Insert(index, info));
             MoveTo(index, info);
@@ -180,7 +180,7 @@ namespace Paway.Model
             {
                 if (c is IOperateInfo operateUser) operateUser.CreateOn = timeNow;
             });
-            server.Insert(list); Cache.Update(list, true);
+            server.Insert(list); Cache.Update(list, true); this.List.AddRange(list);
             int index = 0;
             foreach (var info in list)
             {
@@ -215,7 +215,7 @@ namespace Paway.Model
             }
             try
             {
-                server.Delete(info); Cache.Delete(info);
+                server.Delete(info); Cache.Delete(info); this.List.Remove(info);
                 PMethod.Invoke(() => ObList.Remove(info));
             }
             finally
@@ -241,7 +241,7 @@ namespace Paway.Model
             }
             try
             {
-                server.Delete(list); Cache.Delete(list);
+                server.Delete(list); Cache.Delete(list); var ids = list.Select(c => c.Id).ToList(); this.List.RemoveAll(c => ids.Contains(c.Id));
                 PMethod.Invoke(() => { foreach (var info in list) ObList.Remove(info); });
             }
             finally

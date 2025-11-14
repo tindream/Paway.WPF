@@ -29,7 +29,8 @@ namespace Paway.WPF
                     tipText.SetBinding(TextBlock.TextProperty, binding);
                     return tipText;
                 }
-                return gridCell.Content;
+                return null;
+                //return gridCell.Content;
             }
             return null;
         }
