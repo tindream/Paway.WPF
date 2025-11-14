@@ -82,6 +82,10 @@ namespace Paway.Model
             set { if (_selectedItem != value) { _selectedItem = value; SelectedChanged(); OnPropertyChanged(); } }
         }
         /// <summary>
+        /// 列表是否缓存
+        /// </summary>
+        protected bool iCache;
+        /// <summary>
         /// 设置添加模型
         /// </summary>
 
@@ -138,7 +142,7 @@ namespace Paway.Model
         /// </summary>
         protected virtual List<T> Find()
         {
-            var list = server.Find<T>(this.sqlFilter); Cache.Update(list); list.Sorted();
+            var list = server.Find<T>(this.sqlFilter);
             return list;
         }
         /// <summary>
@@ -150,7 +154,7 @@ namespace Paway.Model
             {
                 operateUser.CreateOn = DateTime.Now;
             }
-            server.Insert(info); Cache.Update(info, true); this.List.Add(info);
+            server.Insert(info); Cache.Update(info, true); if (!this.iCache) Cache.UpdateList(OperType.Insert, this.List, new List<T> { info }, true);
             var index = this.FilterList().FindIndex(c => c.Id == info.Id);
             if (!this.SearchReset() && index != -1) PMethod.Invoke(() => ObList.Insert(index, info));
             MoveTo(index, info);
@@ -180,7 +184,7 @@ namespace Paway.Model
             {
                 if (c is IOperateInfo operateUser) operateUser.CreateOn = timeNow;
             });
-            server.Insert(list); Cache.Update(list, true); this.List.AddRange(list);
+            server.Insert(list); Cache.Update(list, true); if (!this.iCache) Cache.UpdateList(OperType.Insert, this.List, list, true);
             int index = 0;
             foreach (var info in list)
             {
@@ -198,7 +202,7 @@ namespace Paway.Model
             {
                 operateUser.UpdateOn = DateTime.Now;
             }
-            server.Update(info); Cache.Update(info, true);
+            server.Update(info); Cache.Update(info, true); if (!this.iCache) Cache.UpdateList(OperType.Update, this.List, new List<T> { info }, true);
         }
         /// <summary>
         /// 重载-自定义删除实体
@@ -215,7 +219,7 @@ namespace Paway.Model
             }
             try
             {
-                server.Delete(info); Cache.Delete(info); this.List.Remove(info);
+                server.Delete(info); Cache.Delete(info); if (!this.iCache) Cache.UpdateList(OperType.Delete, this.List, new List<T> { info });
                 PMethod.Invoke(() => ObList.Remove(info));
             }
             finally
@@ -241,7 +245,7 @@ namespace Paway.Model
             }
             try
             {
-                server.Delete(list); Cache.Delete(list); var ids = list.Select(c => c.Id).ToList(); this.List.RemoveAll(c => ids.Contains(c.Id));
+                server.Delete(list); Cache.Delete(list); if (!this.iCache) Cache.UpdateList(OperType.Delete, this.List, list);
                 PMethod.Invoke(() => { foreach (var info in list) ObList.Remove(info); });
             }
             finally
@@ -301,7 +305,7 @@ namespace Paway.Model
                     }
                 });
             }
-            server.Replace(updateList); Cache.Update(updateList, true);
+            server.Replace(updateList); Cache.Update(updateList, true); if (!this.iCache) Cache.UpdateList(OperType.Update, this.List, updateList, true);
             this.Reload();
         }
         /// <summary>
@@ -469,7 +473,7 @@ namespace Paway.Model
                         updateList.Add(item);
                     }
                 }
-                server.Update(updateList, null, nameof(IIndex.Index)); Cache.Update(updateList, true); List.Sorted();
+                server.Update(updateList, null, nameof(IIndex.Index)); Cache.Update(updateList, true); if (!this.iCache) Cache.UpdateList(OperType.Update, this.List, updateList, true);
             }
         });
 
@@ -481,10 +485,15 @@ namespace Paway.Model
         /// </summary>
         protected void Init(List<T> list, bool iReload = true)
         {
-            if (this.List == null) this.List = list;
+            if (this.List == null)
+            {
+                this.List = list;
+                this.iCache = list.GetHashCode() == Cache.CacheList[typeof(T)].GetHashCode();
+            }
             else
             {
-                PMethod.UpdateList(OperType.Reset, List, list);
+                Cache.Clear<T>();
+                Cache.Update(list, true); if (!this.iCache) Cache.UpdateList(OperType.Reset, List, list, true);
             }
             if (iReload) this.Reload();
         }

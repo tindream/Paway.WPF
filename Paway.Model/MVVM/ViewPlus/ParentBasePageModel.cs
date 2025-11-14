@@ -239,7 +239,7 @@ namespace Paway.Model
         {
             info.Load();
             base.Deleted(info);
-            base.server.Delete(info.DetailList); Cache.Delete(info.DetailList); var ids = info.DetailList.Select(c => c.Id).ToList(); this.List.RemoveAll(c => ids.Contains(c.Id));
+            base.server.Delete(info.DetailList); Cache.Delete(info.DetailList); if (!this.iCache) Cache.UpdateList(OperType.Delete, this.List, info.DetailList);
         }
 
         #endregion
