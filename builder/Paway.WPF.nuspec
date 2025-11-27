@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>Paway.WPF</id>
-		<version>2.0.0</version>
+		<version>2.0.1</version>
 		<title>Paway.WPF</title>
 		<authors>Tinn</authors>
 		<owners>Tinna</owners>
@@ -10,17 +10,17 @@
 		<license type="expression">MIT</license>
 		<projectUrl>https://github.com/tindream/Paway.WPF.git</projectUrl>
 		<description>WPF Extent</description>
-		<copyright>Copyright 2020-2024</copyright>
+		<copyright>Copyright 2020-2025</copyright>
 		<tags>WPF Extension Adorner Animation Helper</tags>
 		<dependencies>
 			<group targetFramework="net45">
-				<dependency id="Paway.Helper" version="3.0.0" />
+				<dependency id="Paway.Helper" version="3.0.1" />
 			</group>
 			<group targetFramework="net48">
-				<dependency id="Paway.Helper" version="3.0.0" />
+				<dependency id="Paway.Helper" version="3.0.1" />
 			</group>
 			<group targetFramework="net6.0-windows">
-				<dependency id="Paway.Helper" version="3.0.0" />
+				<dependency id="Paway.Helper" version="3.0.1" />
 			</group>
 		</dependencies>
 	</metadata>

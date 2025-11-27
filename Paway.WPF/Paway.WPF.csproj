@@ -26,7 +26,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Paway.Helper" Version="3.0.0" />
+		<PackageReference Include="Paway.Helper" Version="3.0.1" />
 	</ItemGroup>
 	<ItemGroup Condition="$(TargetFramework) == 'net45' or $(TargetFramework) == 'net48'">
 		<Reference Include="Microsoft.CSharp" />
