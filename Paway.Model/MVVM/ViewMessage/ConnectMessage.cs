@@ -41,22 +41,4 @@ namespace Paway.Model
             this.Message = msg;
         }
     }
-    /// <summary>
-    /// 连接消息2
-    /// </summary>
-    public class Connect2Message : ConnectMessage
-    {
-        /// <summary>
-        /// 连接消息2
-        /// </summary>
-        public Connect2Message() { }
-        /// <summary>
-        /// 连接消息2
-        /// </summary>
-        public Connect2Message(bool connectd) : base(connectd) { }
-        /// <summary>
-        /// 连接消息
-        /// </summary>
-        public Connect2Message(bool connectd, string msg) : base(connectd, msg) { }
-    }
 }

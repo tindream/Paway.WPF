@@ -66,15 +66,6 @@ namespace Paway.Model
             get { return _connectBrush; }
             set { if (_connectBrush != value) { _connectBrush = value; OnPropertyChanged(); } }
         }
-        private Brush _connect2Brush = ColorType.Warn.Color().ToBrush();
-        /// <summary>
-        /// 连接2状态
-        /// </summary>
-        public Brush Connect2Brush
-        {
-            get { return _connect2Brush; }
-            set { if (_connect2Brush != value) { _connect2Brush = value; OnPropertyChanged(); } }
-        }
 
         #endregion
 
@@ -88,17 +79,10 @@ namespace Paway.Model
             Messenger.Default.Register<StatuMessage>(this, msg => AddDesc(msg.Msg, msg.Level, msg.IHit, msg.Ower));
             Messenger.Default.Register<ConnectMessage>(this, msg =>
             {
-                Messenger.Default.Send(new StatuMessage(msg.Message ?? (msg.Connectd ? $"连接成功" : $"连接断开"), msg.Connectd ? LevelType.Debug : LevelType.Error));
+                if (!msg.Message.IsEmpty()) Messenger.Default.Send(new StatuMessage(msg.Message, msg.Connectd ? LevelType.Debug : LevelType.Error));
                 PMethod.BeginInvoke(() =>
                 {
                     ConnectBrush = msg.Connectd ? ColorType.Success.Color().ToBrush() : ColorType.Error.Color().ToBrush();
-                });
-            });
-            Messenger.Default.Register<Connect2Message>(this, msg =>
-            {
-                PMethod.BeginInvoke(() =>
-                {
-                    Connect2Brush = msg.Connectd ? ColorType.Success.Color().ToBrush() : ColorType.Error.Color().ToBrush();
                 });
             });
             Messenger.Default.Register<LoginMessage>(this, msg =>
