@@ -33,7 +33,7 @@ namespace Paway.Model
         public LevelMessage(string msg)
         {
             this.Msg = msg;
-            this.Level = LevelType.Debug;
+            this.Level = LevelType.Info;
         }
         /// <summary>
         /// 状态基础消息
