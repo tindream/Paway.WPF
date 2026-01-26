@@ -70,6 +70,10 @@ namespace Paway.Model
         #endregion
 
         /// <summary>
+        /// 提前初始化-以接收消息
+        /// </summary>
+        internal void Init() { }
+        /// <summary>
         /// 状态栏模型-需优先初始化Init()，以接收消息
         /// </summary>
         public StatuItemModel()

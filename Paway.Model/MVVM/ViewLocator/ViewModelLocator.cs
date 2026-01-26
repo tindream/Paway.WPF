@@ -18,6 +18,7 @@ namespace Paway.Model
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+            StatuItem.Init();
         }
         internal static ViewModelLocator Default => new ViewModelLocator();
 
