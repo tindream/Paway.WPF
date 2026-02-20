@@ -27,7 +27,7 @@
 	<ItemGroup>
 		<Reference Include="Microsoft.CSharp" />
 		<ProjectReference Include="..\Paway.WPF\Paway.WPF.csproj" />
-		<PackageReference Include="Paway.Utils" Version="3.0.1" />
+		<PackageReference Include="Paway.Utils" Version="2.7.7" />
 		<PackageReference Include="Paway.Runtime.Plot" Version="1.0.5" />
 		<PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
 	</ItemGroup>
