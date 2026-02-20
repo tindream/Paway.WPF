@@ -30,7 +30,7 @@
 		<Reference Include="Microsoft.CSharp" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Paway.Utils" Version="3.0.0" />
+		<PackageReference Include="Paway.Utils" Version="2.7.6" />
 		<PackageReference Include="Paway.Runtime.Plot" Version="1.0.5" />
 		<PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
 	</ItemGroup>
