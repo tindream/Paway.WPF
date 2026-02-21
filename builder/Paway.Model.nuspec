@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>Paway.Model</id>
-		<version>2.0.1</version>
+		<version>1.6.2</version>
 		<title>Paway.Model</title>
 		<authors>Tinn</authors>
 		<owners>Tinna</owners>
@@ -14,15 +14,15 @@
 		<tags>WPF Model</tags>
 		<dependencies>
 			<group targetFramework="net452">
-				<dependency id="Paway.Utils"			version="3.0.1" />
-				<dependency id="Paway.WPF"				version="2.0.1" />
+				<dependency id="Paway.Utils"			version="2.7.8" />
+				<dependency id="Paway.WPF"				version="1.6.2" />
 				<dependency id="MvvmLightLibs"			version="5.4.1.1" />
 				<!--<dependency id="Paway.Runtime.Plot"		version="1.0.5" />-->
 				<!--<dependency id="Paway.Runtime.Office"	version="8.11.4" />-->
 			</group>
 			<group targetFramework="net48">
-				<dependency id="Paway.Utils"			version="3.0.1" />
-				<dependency id="Paway.WPF"				version="2.0.1" />
+				<dependency id="Paway.Utils"			version="2.7.8" />
+				<dependency id="Paway.WPF"				version="1.6.2" />
 				<dependency id="MvvmLightLibs"			version="5.4.1.1" />
 				<!--<dependency id="Paway.Runtime.Plot"		version="1.0.5" />-->
 				<!--<dependency id="Paway.Runtime.Office"	version="8.11.4" />-->
