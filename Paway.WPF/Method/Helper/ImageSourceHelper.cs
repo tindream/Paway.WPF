@@ -1,5 +1,6 @@
 ﻿using Paway.Helper;
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -42,7 +43,7 @@ namespace Paway.WPF
             {
                 if (!TMethod.IsValidImageFile(fileName))
                 {
-                    throw new Exception("文件不是有效的图像格式！", ex);
+                    throw new WarningException("文件不是有效的图像格式！", ex);
                 }
                 // 如果文件头有效，可能是真的内存不足
                 throw new Exception("加载图像时内存不足！", ex);
