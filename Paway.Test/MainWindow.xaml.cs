@@ -5,6 +5,7 @@ using Paway.WPF;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -128,6 +129,12 @@ namespace Paway.Test
                 }
             }
             base.OnPreviewMouseMove(e);
+        }
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            //关闭时解绑，释放引用
+            plotView.Model = null;
+            base.OnClosing(e);
         }
     }
 }

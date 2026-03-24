@@ -362,50 +362,57 @@ namespace Paway.WPF
             var layer = new Grid() { Background = Colors.Black.ToAlpha(alpha).ToBrush() };
             //使用装饰器装载
             var desktopAdorner = CustomAdorner(owner, layer);
-
-            window.ShowInTaskbar = false;
-            window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            window.Closed += delegate
+            try
             {
-                //移除装饰器
-                ClearAdorner(owner, desktopAdorner);
-            };
-            if (iFocus) window.LostKeyboardFocus += delegate
-            {
-                if (!window.IsKeyboardFocusWithin) PMethod.BeginInvoke(() => window.Focus());
-            };
-            if (!(window is WindowEXT))
-            {
-                //window.Loaded += delegate { window.Activate(); };
-            }
-            //弹出消息框 
-            window.Owner = owner;
-            if (iEscExit)
-            {
-                var iExit = false;
-                var exitTime = DateTime.MinValue;
-                window.KeyDown += delegate (object sender, KeyEventArgs e)
+                window.ShowInTaskbar = false;
+                window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                window.Closed += delegate
                 {
-                    if (e.Key == Key.Escape)
-                    {
-                        if (iExit && DateTime.Now.Subtract(exitTime).TotalMilliseconds < PConfig.DoubleInterval)
-                        {
-                            if (window.DataContext is IWindowModel windowModel)
-                            {
-                                window.DialogResult = windowModel.OnCancel(window);
-                            }
-                            else
-                            {
-                                window.Close();
-                            }
-                            return;
-                        }
-                        iExit = true;
-                        exitTime = DateTime.Now;
-                    }
+                    //移除装饰器
+                    ClearAdorner(owner, desktopAdorner);
                 };
+                if (iFocus) window.LostKeyboardFocus += delegate
+                {
+                    if (!window.IsKeyboardFocusWithin) PMethod.BeginInvoke(() => window.Focus());
+                };
+                if (!(window is WindowEXT))
+                {
+                    //window.Loaded += delegate { window.Activate(); };
+                }
+                //弹出消息框 
+                window.Owner = owner;
+                if (iEscExit)
+                {
+                    var iExit = false;
+                    var exitTime = DateTime.MinValue;
+                    window.KeyDown += delegate (object sender, KeyEventArgs e)
+                    {
+                        if (e.Key == Key.Escape)
+                        {
+                            if (iExit && DateTime.Now.Subtract(exitTime).TotalMilliseconds < PConfig.DoubleInterval)
+                            {
+                                if (window.DataContext is IWindowModel windowModel)
+                                {
+                                    window.DialogResult = windowModel.OnCancel(window);
+                                }
+                                else
+                                {
+                                    window.Close();
+                                }
+                                return;
+                            }
+                            iExit = true;
+                            exitTime = DateTime.Now;
+                        }
+                    };
+                }
+                return window.ShowDialog();
             }
-            return window.ShowDialog();
+            finally
+            {
+                //移除装饰器（异常时）
+                ClearAdorner(owner, desktopAdorner);
+            }
         }
         /// <summary>
         /// 再次加载空窗体，达到释放资源的目的？
