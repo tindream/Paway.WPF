@@ -1,6 +1,4 @@
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
+using CommunityToolkit.Mvvm.Messaging;
 using Paway.Helper;
 using Paway.Model;
 using Paway.WPF;
@@ -80,16 +78,16 @@ namespace Paway.Model
         {
             PConfig.OperateLogEvent += msg => AddDesc(msg.Text);
             PConfig.StatuLogEvent += (msg, level, source) => AddDesc(msg, level);
-            Messenger.Default.Register<StatuMessage>(this, msg => AddDesc(msg.Msg, msg.Level, msg.IHit, msg.Ower));
-            Messenger.Default.Register<ConnectMessage>(this, msg =>
+            WeakReferenceMessenger.Default.Register<StatuMessage>(this, (obj, msg) => AddDesc(msg.Msg, msg.Level, msg.IHit, msg.Ower));
+            WeakReferenceMessenger.Default.Register<ConnectMessage>(this, (obj, msg) =>
             {
-                if (!msg.Message.IsEmpty()) Messenger.Default.Send(new StatuMessage(msg.Message, msg.Connectd ? LevelType.Info : LevelType.Error));
+                if (!msg.Message.IsEmpty()) WeakReferenceMessenger.Default.Send(new StatuMessage(msg.Message, msg.Connectd ? LevelType.Info : LevelType.Error));
                 PMethod.BeginInvoke(() =>
                 {
                     ConnectBrush = msg.Connectd ? ColorType.Success.Color().ToBrush() : ColorType.Error.Color().ToBrush();
                 });
             });
-            Messenger.Default.Register<LoginMessage>(this, msg =>
+            WeakReferenceMessenger.Default.Register<LoginMessage>(this, (obj, msg) =>
             {
                 var hour = DateTime.Now.Hour;
                 var hello = hour < 8 ? "早上好" : hour <= 11 ? "上午好" :

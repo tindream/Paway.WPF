@@ -1,5 +1,5 @@
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using OxyPlot;
 using OxyPlot.Annotations;
 using OxyPlot.Axes;
@@ -273,8 +273,8 @@ namespace Paway.Test
                 FontList.Add(info);
             }
 
-            this.MessengerInstance.Register<StatuMessage>(this, msg => Statu(msg.Msg));
-            this.MessengerInstance.Register<MainLoadMessage>(this, msg =>
+            WeakReferenceMessenger.Default.Register<StatuMessage>(this, (obj, msg) => Statu(msg.Msg));
+            WeakReferenceMessenger.Default.Register<MainLoadMessage>(this, (obj, msg) =>
             {
                 AddPlot();
             });

@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight.Messaging;
+﻿using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Win32;
 using Paway.Helper;
 using Paway.Model;
@@ -44,7 +44,7 @@ namespace Paway.Test
 
             PMethod.LanguageMenuBinding(menu, Config.LanguageList, ViewModelLocator.Default.TestWindow, ViewModelLocator.Default.TestWindow.ItemClickCommand, nameof(ViewModelLocator.Default.TestWindow.Language));
 
-            Messenger.Default.Send(new TestLoadMessage() { Obj = Root });
+            WeakReferenceMessenger.Default.Send(new TestLoadMessage() { Obj = Root });
         }
         protected override void OnClosing(CancelEventArgs e)
         {

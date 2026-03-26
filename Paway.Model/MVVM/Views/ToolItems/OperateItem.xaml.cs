@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight.Messaging;
+﻿using CommunityToolkit.Mvvm.Messaging;
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
@@ -104,7 +104,7 @@ namespace Paway.Model
         public OperateItem()
         {
             InitializeComponent();
-            Messenger.Default.Send(new OperateLoadMessage() { Obj = this });
+            WeakReferenceMessenger.Default.Send(new OperateLoadMessage() { Obj = this });
             this.Loaded += OperateItem_Loaded;
         }
         /// <summary>
@@ -122,7 +122,7 @@ namespace Paway.Model
         {
             if (!this.IsLoaded) return;
             var keyMsg = new KeyMessage(e.Key);
-            Messenger.Default.Send(keyMsg, this.dpOperateItem.GetHashCode());
+            WeakReferenceMessenger.Default.Send(keyMsg, this.dpOperateItem.GetHashCode());
             e.Handled = keyMsg.Handled;
         }
     }

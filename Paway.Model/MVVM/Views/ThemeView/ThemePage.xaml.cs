@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight.Messaging;
+﻿using CommunityToolkit.Mvvm.Messaging;
 using Paway.WPF;
 using System;
 using System.Collections.Generic;
@@ -51,7 +51,7 @@ namespace Paway.Model
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            Messenger.Default.Send(new ThemeLoadMessage());
+            WeakReferenceMessenger.Default.Send(new ThemeLoadMessage());
         }
     }
 }

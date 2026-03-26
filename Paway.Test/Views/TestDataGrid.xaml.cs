@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight.Messaging;
+﻿using CommunityToolkit.Mvvm.Messaging;
 using Paway.Helper;
 using Paway.WPF;
 using System;
@@ -36,7 +36,7 @@ namespace Paway.Test
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            Messenger.Default.Send(new TestDataGridLoadMessage() { Obj = Root });
+            WeakReferenceMessenger.Default.Send(new TestDataGridLoadMessage() { Obj = Root });
         }
     }
 }

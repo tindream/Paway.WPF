@@ -1,5 +1,3 @@
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
 using Paway.Helper;
 using Paway.WPF;
 using System.Collections.Generic;

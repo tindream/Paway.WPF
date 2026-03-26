@@ -1,6 +1,4 @@
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
+using CommunityToolkit.Mvvm.Messaging;
 using Paway.Helper;
 using Paway.Utils;
 using Paway.WPF;
@@ -73,7 +71,7 @@ namespace Paway.Model
         protected virtual void Export<T>(DependencyObject obj, List<T> list, string file, bool iOpen = true) where T : class
         {
             ExcelBuilder.Create(file, list).Build();
-            Messenger.Default.Send(new StatuMessage(PConfig.LanguageBase.ExportSuccess, obj));
+            WeakReferenceMessenger.Default.Send(new StatuMessage(PConfig.LanguageBase.ExportSuccess, obj));
             if (iOpen && PMethod.Ask(obj, PConfig.LanguageBase.ExportSuccessAndOpen))
             {
                 Process.Start(file);
@@ -118,7 +116,7 @@ namespace Paway.Model
                         if (tbSearch.Text.IsEmpty()) break;
                         if (iExit && DateTime.Now.Subtract(exitTime).TotalMilliseconds < PConfig.DoubleInterval)
                         {
-                            Messenger.Default.Send(new StatuMessage(PConfig.LanguageBase.QueryCancel));
+                            WeakReferenceMessenger.Default.Send(new StatuMessage(PConfig.LanguageBase.QueryCancel));
                             tbSearch.Text = null;
                             msg.Handled = true;
                         }
@@ -126,7 +124,7 @@ namespace Paway.Model
                         {
                             iExit = true;
                             exitTime = DateTime.Now;
-                            Messenger.Default.Send(new StatuMessage(PConfig.LanguageBase.QueryCancelAgain));
+                            WeakReferenceMessenger.Default.Send(new StatuMessage(PConfig.LanguageBase.QueryCancelAgain));
                             msg.Handled = true;
                         }
                     }
@@ -136,7 +134,7 @@ namespace Paway.Model
                     if ((Keyboard.Modifiers & ModifierKeys.Control) != ModifierKeys.Control) break;
                     if (PMethod.Find(Panel, out tbSearch, "tbSearch") && !tbSearch.IsKeyboardFocusWithin)
                     {
-                        Messenger.Default.Send(new StatuMessage(PConfig.LanguageBase.Query));
+                        WeakReferenceMessenger.Default.Send(new StatuMessage(PConfig.LanguageBase.Query));
                         tbSearch.Focus();
                         msg.Handled = true;
                     }
@@ -204,7 +202,7 @@ namespace Paway.Model
         /// </summary>
         public OperateItemModel()
         {
-            Messenger.Default.Register<OperateLoadMessage>(this, msg =>
+            WeakReferenceMessenger.Default.Register<OperateLoadMessage>(this, (obj, msg) =>
             {
                 //基类通知，如自定义菜单栏，此事件未触发，会被后续控件触发初始化
                 if (this.Panel == null && msg.Obj is OperateItem operateItem)
@@ -213,7 +211,7 @@ namespace Paway.Model
                     if (PMethod.Find(operateItem, out DockPanel panel, "dpOperateItem"))
                     {
                         this.Panel = panel;
-                        Messenger.Default.Register<KeyMessage>(this, panel.GetHashCode(), keyMsg => Action(keyMsg));
+                        WeakReferenceMessenger.Default.Register<KeyMessage, int>(this, panel.GetHashCode(), (objKey, msgKey) => Action(msgKey));
                     }
                     AuthNormal();
                 }

@@ -16,11 +16,11 @@
 	</PropertyGroup>
 	<PropertyGroup>
 		<!--禁止自动生成绑定重定向-->
-		<AutoGenerateBindingRedirects>False</AutoGenerateBindingRedirects>
+		<!--<AutoGenerateBindingRedirects>False</AutoGenerateBindingRedirects>-->
 	</PropertyGroup>
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
 		<!--删除.config文件-->
-		<Exec Command="del $(TargetDir)$(AssemblyName).exe.config" />
+		<!--<Exec Command="del $(TargetDir)$(AssemblyName).exe.config" />-->
 	</Target>
 
 	<ItemGroup>

@@ -1,6 +1,5 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
+﻿using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Paway.Helper;
 using Paway.Utils;
 using Paway.WPF;
@@ -268,7 +267,7 @@ namespace Paway.Model
                     action?.Invoke();
                 }, null, ex =>
                 {
-                    Messenger.Default.Send(new StatuMessage(ex));
+                    WeakReferenceMessenger.Default.Send(new StatuMessage(ex));
                 });
             });
         }
@@ -414,10 +413,10 @@ namespace Paway.Model
                             Import(list);
                         }, () =>
                         {
-                            Messenger.Default.Send(new StatuMessage($"{title} {PConfig.LanguageBase.ImportSuccess}", DataGrid));
+                            WeakReferenceMessenger.Default.Send(new StatuMessage($"{title} {PConfig.LanguageBase.ImportSuccess}", DataGrid));
                         }, error: ex =>
                         {
-                            Messenger.Default.Send(new StatuMessage(PConfig.LanguageBase.ImportError, ex, DataGrid));
+                            WeakReferenceMessenger.Default.Send(new StatuMessage(PConfig.LanguageBase.ImportError, ex, DataGrid));
                         });
                     }
                     break;

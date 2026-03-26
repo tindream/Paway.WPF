@@ -1,6 +1,4 @@
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
+using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Win32;
 using Paway.Helper;
 using Paway.Model;
@@ -143,7 +141,7 @@ namespace Paway.Model
                 var info = new FontInfo { Id = index++, Name = font.Source, FontFamily = font };
                 FontList.Add(info);
             }
-            Messenger.Default.Register<ThemeLoadMessage>(this, msg =>
+            WeakReferenceMessenger.Default.Register<ThemeLoadMessage>(this, (obj, msg) =>
             {
                 this.themeKeyboard = PConfig.Keyboard;
                 this.themeColor = PConfig.Color;

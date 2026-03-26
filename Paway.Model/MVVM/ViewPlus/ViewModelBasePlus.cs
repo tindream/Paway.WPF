@@ -1,6 +1,6 @@
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Paway.Helper;
 using Paway.WPF;
 using System;
@@ -20,27 +20,8 @@ namespace Paway.Model
     /// <summary>
     /// 模型基础处理
     /// </summary>
-    public class ViewModelBasePlus : ViewModelBase
+    public class ViewModelBasePlus : ObservableObject
     {
-        #region 属性
-        /// <summary>
-        /// 触发更新
-        /// </summary>
-        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            RaisePropertyChanged(propertyName);
-        }
-        /// <summary>
-        /// 触发更新
-        /// </summary>
-        public void OnPropertyChanged<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
-        {
-            field = value;
-            RaisePropertyChanged(propertyName);
-        }
-
-        #endregion
-
         #region 命令
         /// <summary>
         /// 按钮通用动作命令
@@ -57,7 +38,7 @@ namespace Paway.Model
             }
             catch (Exception ex)
             {
-                Messenger.Default.Send(new StatuMessage(ex, btn));
+                WeakReferenceMessenger.Default.Send(new StatuMessage(ex, btn));
             }
         });
 
@@ -76,8 +57,8 @@ namespace Paway.Model
             }
             catch (Exception ex)
             {
-                Messenger.Default.Send(new StatuMessage(ex, listView1));
-            }
+                WeakReferenceMessenger.Default.Send(new StatuMessage(ex, listView1));
+        }
         });
 
         /// <summary>
@@ -96,7 +77,7 @@ namespace Paway.Model
             }
             catch (Exception ex)
             {
-                Messenger.Default.Send(new StatuMessage(ex));
+                WeakReferenceMessenger.Default.Send(new StatuMessage(ex));
             }
         });
 

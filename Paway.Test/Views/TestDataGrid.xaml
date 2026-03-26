@@ -4,8 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Paway.Test"
-      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
-      xmlns:ip="http://www.galasoft.ch/mvvmlight"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
       mc:Ignorable="d" 
       UseLayoutRounding="True"
       DataContext="{Binding TestDataGrid, Source={StaticResource Locator}}"
@@ -18,7 +17,7 @@
         <DataGridEXT ItemsSource="{Binding GridList}" SelectionUnit="Cell" Name="datagrid1" Margin="10" BorderThickness="0" GridLinesVisibility="All" HorizontalContentAlignment="Center">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="CurrentCellChanged">
-                    <ip:EventToCommand Command="{Binding CurrentCellCommand}" CommandParameter="{Binding ElementName=datagrid1}"/>
+                    <i:InvokeCommandAction Command="{Binding CurrentCellCommand}" CommandParameter="{Binding ElementName=datagrid1}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <DataGridEXT.Columns>
