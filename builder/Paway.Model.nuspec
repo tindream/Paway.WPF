@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>Paway.Model</id>
-		<version>1.6.2</version>
+		<version>1.6.3</version>
 		<title>Paway.Model</title>
 		<authors>Tinn</authors>
 		<owners>Tinna</owners>
@@ -15,21 +15,21 @@
 		<dependencies>
 			<group targetFramework="net462">
 				<dependency id="Paway.Utils"					version="2.7.8" />
-				<dependency id="Paway.WPF"						version="1.6.2" />
+				<dependency id="Paway.WPF"						version="1.6.3" />
 				<dependency id="CommunityToolkit.Mvvm"			version="8.3.2" />
 				<dependency id="Microsoft.Xaml.Behaviors.Wpf"	version="1.1.135" />
 				<!--<dependency id="Paway.Runtime.Plot"				version="1.0.5" />-->
 			</group>
 			<group targetFramework="net48">
 				<dependency id="Paway.Utils"					version="2.7.8" />
-				<dependency id="Paway.WPF"						version="1.6.2" />
+				<dependency id="Paway.WPF"						version="1.6.3" />
 				<dependency id="CommunityToolkit.Mvvm"			version="8.3.2" />
 				<dependency id="Microsoft.Xaml.Behaviors.Wpf"	version="1.1.135" />
 				<!--<dependency id="Paway.Runtime.Plot"				version="1.0.5" />-->
 			</group>
 			<group targetFramework="net6.0-windows">
 				<dependency id="Paway.Utils"					version="2.7.8" />
-				<dependency id="Paway.WPF"						version="1.6.2" />
+				<dependency id="Paway.WPF"						version="1.6.3" />
 				<dependency id="CommunityToolkit.Mvvm"			version="8.3.2" />
 				<dependency id="Microsoft.Xaml.Behaviors.Wpf"	version="1.1.135" />
 				<!--<dependency id="Paway.Runtime.Plot"				version="1.0.5" />-->

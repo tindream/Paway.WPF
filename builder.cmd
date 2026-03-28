@@ -24,25 +24,25 @@
 @nuget pack builder\Paway.WPF.nuspec
 @nuget pack builder\Paway.Model.nuspec
 @echo ---------------copy-------------------------------------------------------
-@copy bin\Release\net45\Paway.WPF_Secure\Paway.WPF.dll					builder\Paway.WPF.1.6.2_net45\Paway.WPF.dll
-@copy bin\Release\net45\Paway.WPF_Secure\Paway.WPF.pdb					builder\Paway.WPF.1.6.2_net45\Paway.WPF.pdb
-@copy bin\Release\net45\Paway.WPF_Secure\Paway.WPF.xml					builder\Paway.WPF.1.6.2_net45\Paway.WPF.xml
-@copy bin\Release\net48\Paway.WPF_Secure\Paway.WPF.dll					builder\Paway.WPF.1.6.2_net48\Paway.WPF.dll
-@copy bin\Release\net48\Paway.WPF_Secure\Paway.WPF.pdb					builder\Paway.WPF.1.6.2_net48\Paway.WPF.pdb
-@copy bin\Release\net48\Paway.WPF_Secure\Paway.WPF.xml					builder\Paway.WPF.1.6.2_net48\Paway.WPF.xml
-@copy bin\Release\net6.0-windows\Paway.WPF_Secure\Paway.WPF.dll			builder\Paway.WPF.1.6.2_net6.0-windows\Paway.WPF.dll
-@copy bin\Release\net6.0-windows\Paway.WPF_Secure\Paway.WPF.pdb			builder\Paway.WPF.1.6.2_net6.0-windows\Paway.WPF.pdb
-@copy bin\Release\net6.0-windows\Paway.WPF_Secure\Paway.WPF.xml			builder\Paway.WPF.1.6.2_net6.0-windows\Paway.WPF.xml
+@copy bin\Release\net45\Paway.WPF_Secure\Paway.WPF.dll					builder\Paway.WPF.1.6.3_net45\Paway.WPF.dll
+@copy bin\Release\net45\Paway.WPF_Secure\Paway.WPF.pdb					builder\Paway.WPF.1.6.3_net45\Paway.WPF.pdb
+@copy bin\Release\net45\Paway.WPF_Secure\Paway.WPF.xml					builder\Paway.WPF.1.6.3_net45\Paway.WPF.xml
+@copy bin\Release\net48\Paway.WPF_Secure\Paway.WPF.dll					builder\Paway.WPF.1.6.3_net48\Paway.WPF.dll
+@copy bin\Release\net48\Paway.WPF_Secure\Paway.WPF.pdb					builder\Paway.WPF.1.6.3_net48\Paway.WPF.pdb
+@copy bin\Release\net48\Paway.WPF_Secure\Paway.WPF.xml					builder\Paway.WPF.1.6.3_net48\Paway.WPF.xml
+@copy bin\Release\net6.0-windows\Paway.WPF_Secure\Paway.WPF.dll			builder\Paway.WPF.1.6.3_net6.0-windows\Paway.WPF.dll
+@copy bin\Release\net6.0-windows\Paway.WPF_Secure\Paway.WPF.pdb			builder\Paway.WPF.1.6.3_net6.0-windows\Paway.WPF.pdb
+@copy bin\Release\net6.0-windows\Paway.WPF_Secure\Paway.WPF.xml			builder\Paway.WPF.1.6.3_net6.0-windows\Paway.WPF.xml
 
-@copy bin\Release\net462\Paway.Model_Secure\Paway.Model.dll				builder\Paway.Model.1.6.2_net462\Paway.Model.dll
-@copy bin\Release\net462\Paway.Model_Secure\Paway.Model.pdb				builder\Paway.Model.1.6.2_net462\Paway.Model.pdb
-@copy bin\Release\net462\Paway.Model_Secure\Paway.Model.xml				builder\Paway.Model.1.6.2_net462\Paway.Model.xml
-@copy bin\Release\net48\Paway.Model_Secure\Paway.Model.dll				builder\Paway.Model.1.6.2_net48\Paway.Model.dll
-@copy bin\Release\net48\Paway.Model_Secure\Paway.Model.pdb				builder\Paway.Model.1.6.2_net48\Paway.Model.pdb
-@copy bin\Release\net48\Paway.Model_Secure\Paway.Model.xml				builder\Paway.Model.1.6.2_net48\Paway.Model.xml
-@copy bin\Release\net6.0-windows\Paway.Model_Secure\Paway.Model.dll		builder\Paway.Model.1.6.2_net6.0-windows\Paway.Model.dll
-@copy bin\Release\net6.0-windows\Paway.Model_Secure\Paway.Model.pdb		builder\Paway.Model.1.6.2_net6.0-windows\Paway.Model.pdb
-@copy bin\Release\net6.0-windows\Paway.Model_Secure\Paway.Model.xml		builder\Paway.Model.1.6.2_net6.0-windows\Paway.Model.xml
+@copy bin\Release\net462\Paway.Model_Secure\Paway.Model.dll				builder\Paway.Model.1.6.3_net462\Paway.Model.dll
+@copy bin\Release\net462\Paway.Model_Secure\Paway.Model.pdb				builder\Paway.Model.1.6.3_net462\Paway.Model.pdb
+@copy bin\Release\net462\Paway.Model_Secure\Paway.Model.xml				builder\Paway.Model.1.6.3_net462\Paway.Model.xml
+@copy bin\Release\net48\Paway.Model_Secure\Paway.Model.dll				builder\Paway.Model.1.6.3_net48\Paway.Model.dll
+@copy bin\Release\net48\Paway.Model_Secure\Paway.Model.pdb				builder\Paway.Model.1.6.3_net48\Paway.Model.pdb
+@copy bin\Release\net48\Paway.Model_Secure\Paway.Model.xml				builder\Paway.Model.1.6.3_net48\Paway.Model.xml
+@copy bin\Release\net6.0-windows\Paway.Model_Secure\Paway.Model.dll		builder\Paway.Model.1.6.3_net6.0-windows\Paway.Model.dll
+@copy bin\Release\net6.0-windows\Paway.Model_Secure\Paway.Model.pdb		builder\Paway.Model.1.6.3_net6.0-windows\Paway.Model.pdb
+@copy bin\Release\net6.0-windows\Paway.Model_Secure\Paway.Model.xml		builder\Paway.Model.1.6.3_net6.0-windows\Paway.Model.xml
 
 @echo --------------------------------------------------------------------------- 
 @IF "%1" == "" @PAUSE
