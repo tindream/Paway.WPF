@@ -40,8 +40,11 @@
     <Color x:Key="WarnKey">#FF8900</Color>
     <!--错误-->
     <SolidColorBrush x:Key="Error" Color="#F8331E" />
-    <Color x:Key="ErrorKey">#F8331E</Color>
-    <!--错误-->
+    <Color x:Key="ErrorKey">#DB3340</Color>
+    <!--信息-->
+    <SolidColorBrush x:Key="Info" Color="#00BCD4" />
+    <Color x:Key="InfoKey">#00BCD4</Color>
+    <!--禁用-->
     <SolidColorBrush x:Key="Disable" Color="DimGray" />
     <Color x:Key="DisableKey">DimGray</Color>
 

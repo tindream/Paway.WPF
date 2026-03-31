@@ -42,6 +42,10 @@ namespace Paway.WPF
         /// </summary>
         Error,
         /// <summary>
+        /// 信息
+        /// </summary>
+        Info,
+        /// <summary>
         /// 禁用
         /// </summary>
         Disable,

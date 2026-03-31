@@ -219,6 +219,11 @@ namespace Paway.WPF
         /// </summary>
         public new static Color Error { get; set; } = Color.FromArgb(255, 248, 51, 30);
         /// <summary>
+        /// 信息色
+        /// <para>00BCD4</para>
+        /// </summary>
+        public new static Color Info { get; set; } = Color.FromArgb(255, 0, 188, 212);
+        /// <summary>
         /// 禁用色
         /// <para>DimGray 105,105,105 #696969</para>
         /// </summary>
