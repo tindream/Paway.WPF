@@ -6,10 +6,12 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media.TextFormatting;
 
@@ -29,6 +31,14 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ColumnWidthProperty =
             DependencyProperty.RegisterAttached(nameof(ColumnWidth), typeof(DataGridLength), typeof(ComboQuery), new PropertyMetadata(new DataGridLength(1, DataGridLengthUnitType.Star)));
+        /// <summary>
+        /// </summary>
+        public static readonly new DependencyProperty SelectedValueProperty =
+            DependencyProperty.RegisterAttached(nameof(SelectedValue), typeof(object), typeof(ComboQuery), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedValueChanged));
+        /// <summary>
+        /// </summary>
+        public static readonly new DependencyProperty SelectedItemProperty =
+            DependencyProperty.RegisterAttached(nameof(SelectedItem), typeof(object), typeof(ComboQuery));
 
         /// <summary>
         /// 下拉列表是否显示列
@@ -52,6 +62,24 @@ namespace Paway.WPF
             get { return (DataGridLength)GetValue(ColumnWidthProperty); }
             set { SetValue(ColumnWidthProperty, value); }
         }
+        /// <summary>
+        /// 获取或设置的值 System.Windows.Controls.Primitives.Selector.SelectedItem, ，获得通过 System.Windows.Controls.Primitives.Selector.SelectedValuePath。
+        /// <para>重写</para>
+        /// </summary>
+        public new object SelectedValue
+        {
+            get { return (object)GetValue(SelectedValueProperty); }
+            set { SetValue(SelectedValueProperty, value); }
+        }
+        /// <summary>
+        /// 获取或设置当前所选内容中的第一项或如果所选内容为空则返回 null
+        /// <para>重写</para>
+        /// </summary>
+        public new object SelectedItem
+        {
+            get { return (object)GetValue(SelectedItemProperty); }
+            set { SetValue(SelectedItemProperty, value); }
+        }
 
         #endregion
 
@@ -72,24 +100,24 @@ namespace Paway.WPF
         public ComboQuery()
         {
             DefaultStyleKey = typeof(ComboQuery);
-            DependencyPropertyDescriptor.FromProperty(SelectedValueProperty, typeof(ComboQuery)).AddValueChanged(this, OnSelectedValueChanged);
         }
-        private void OnSelectedValueChanged(object sender, EventArgs e)
+        private static void OnSelectedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            dynamic list = this.List ?? this.ItemsSource;
-            if (list != null)
+            if (d is ComboQuery view)
             {
-                var id = this.SelectedValue.ToInt();
-                if (list.Find((Predicate<IId>)(c => c.Id == id)) is IId item)
+                if (!view.SelectedValuePath.IsEmpty())
                 {
-                    this.InitText(item);
+                    view.SelectedItem = view.ItemsSource?.Find(view.SelectedValuePath, view.SelectedValue);
+                }
+                if (view.SelectedItem != null)
+                {
+                    view.InitText();
                 }
             }
         }
-        private void InitText(IId item)
+        private void InitText()
         {
-            this.SelectedItem = item;
-            this.last = this.DisplayMemberPath.IsEmpty() ? item.ToString() : item.GetValue(this.DisplayMemberPath).ToStrings();
+            this.last = this.DisplayMemberPath.IsEmpty() ? this.SelectedItem.ToString() : this.SelectedItem.GetValue(this.DisplayMemberPath).ToStrings();
             this.Text = this.last;
             if (this.List != null) this.ItemsSource = this.List;
         }
@@ -123,6 +151,11 @@ namespace Paway.WPF
             }
             this.KeyUp -= ComboQuery_KeyUp;
             this.KeyUp += ComboQuery_KeyUp;
+            if (this.ItemsSource != null && this.List == null)
+            {
+                this.List = this.ItemsSource.GenericType().GenericList();
+                foreach (var item in this.ItemsSource) this.List.Add(item);
+            }
         }
         private void Window_LocationChanged(object sender, EventArgs e)
         {
@@ -134,7 +167,9 @@ namespace Paway.WPF
         }
         private void GridView_RowDoubleEvent(object arg1, SelectItemEventArgs arg2)
         {
+            if (gridView.SelectedItem != null)
             {
+                this.SelectedItem = gridView.SelectedItem;
                 var value = this.SelectedValuePath.IsEmpty() ? arg2.Item : arg2.Item.GetValue(this.SelectedValuePath);
                 if (this.SelectedValue?.Equals(value) == true) this.Text = null;
                 this.SelectedValue = value;
@@ -144,7 +179,15 @@ namespace Paway.WPF
         }
         private void Popup_Opened(object sender, EventArgs e)
         {
-            var result = gridView.Select(this.SelectedValuePath, this.SelectedValue);
+            var result = false;
+            if (this.SelectedValuePath.IsEmpty())
+            {
+                result = gridView.Select(this.SelectedValue);
+            }
+            else
+            {
+                result = gridView.Select(this.SelectedValuePath, this.SelectedValue);
+            }
             if (result) textBox.Focus();
         }
         private void GridView_RefreshEvent(DataGridEXT obj)
@@ -155,7 +198,7 @@ namespace Paway.WPF
         #endregion
 
         #region 搜索
-        private List<dynamic> List;
+        private IList List;
         private string last;
         private void ComboQuery_KeyUp(object sender, KeyEventArgs e)
         {
@@ -169,11 +212,6 @@ namespace Paway.WPF
             }
             else
             {
-                if (this.ItemsSource != null && this.List == null)
-                {
-                    this.List = new List<dynamic>();
-                    foreach (var item in this.ItemsSource) this.List.Add(item);
-                }
                 if (FilterEvent != null)
                 {
                     var args = new CustomFilterEventArgs(text, e.RoutedEvent, gridView);
@@ -187,7 +225,10 @@ namespace Paway.WPF
                 {
                     var type = this.ItemsSource.GenericType();
                     var p = type.Predicate<dynamic>(gridView.Columns, text);
-                    this.ItemsSource = this.List.AsParallel().Where(p).ToList();
+                    var queryList = Enumerable.ToList(Enumerable.Where(ParallelEnumerable.AsParallel((dynamic)this.List), p));
+                    var resultList = this.ItemsSource.GenericType().GenericList();
+                    foreach (var item in queryList) resultList.Add(item);
+                    this.ItemsSource = resultList;
                 }
                 if (textBox.Text != text)
                 {//第一次搜索绑定出现输入框被清空

@@ -56,13 +56,13 @@
                                                 <Setter.Value>
                                                     <ControlTemplate TargetType="ListBoxItem">
                                                         <WrapPanel VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type local:ComboMulti}}}">
-                                                            <Path x:Name="path" Style="{StaticResource PathRight}" 
-                                                                  Stroke="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ComboMulti}}}"/>
+                                                            <!--<Path x:Name="path" Style="{StaticResource PathRight}" 
+                                                                  Stroke="{Binding Path=ItemBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:ComboMulti}}}"/>-->
                                                             <TextBlock x:Name="txt" Text="{Binding Text}" Padding="3,-1"/>
                                                         </WrapPanel>
                                                         <ControlTemplate.Triggers>
                                                             <Trigger Property="IsMouseOver" Value="true">
-                                                                <Setter TargetName="path" Property="Stroke" Value="#AAFF0000" />
+                                                                <!--<Setter TargetName="path" Property="Stroke" Value="#AAFF0000" />-->
                                                                 <Setter TargetName="txt" Property="Foreground" Value="{Binding Path=ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:ComboMulti}}}" />
                                                             </Trigger>
                                                         </ControlTemplate.Triggers>

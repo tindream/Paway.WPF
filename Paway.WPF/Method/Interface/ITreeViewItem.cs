@@ -216,9 +216,11 @@ namespace Paway.WPF
             return Text;
         }
         /// <summary>
+        /// TreeView数接口据定义
         /// </summary>
         public TreeViewItemModel()
         {
+            this.Id = this.GetHashCode();
             Children.CollectionChanged += Children_CollectionChanged;
         }
         private void Children_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -227,11 +229,19 @@ namespace Paway.WPF
         }
 
         /// <summary>
+        /// TreeView数接口据定义
         /// </summary>
         public TreeViewItemModel(string text, bool isGroup = false) : this()
         {
             this.Text = text;
             this.IsGroup = isGroup;
+        }
+        /// <summary>
+        /// TreeView数接口据定义
+        /// </summary>
+        public TreeViewItemModel(int id, string text, bool isGroup = false) : this(text, isGroup)
+        {
+            this.Id = id;
         }
         /// <summary>
         /// 添加子级

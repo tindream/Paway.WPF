@@ -53,7 +53,7 @@ namespace Paway.WPF
         /// <summary>
         /// 自动生成泛型谓词条件
         /// </summary>
-        public static Func<dynamic, bool> Predicate<dynamic>(this Type type, ObservableCollection<DataGridColumn> columns, string value, Func<dynamic, bool> action = null)
+        public static Func<T, bool> Predicate<T>(this Type type, ObservableCollection<DataGridColumn> columns, string value, Func<T, bool> action = null)
         {
             var list = new List<string>();
             foreach (var column in columns)

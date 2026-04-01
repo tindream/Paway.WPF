@@ -21,7 +21,7 @@
             <TextBlock Text="{Binding Desc}" Padding="10,6" FontSize="14" Margin="-3"></TextBlock>
         </StatusBar>
         <StackPanel DockPanel.Dock="Top">
-            <SliderEXT Title="字体" Minimum="0" Maximum="{Binding FontFamilyCount}" Value="{Binding FontFamilyIndex}"> 
+            <SliderEXT Title="字体" Minimum="0" Maximum="{Binding FontFamilyCount}" Value="{Binding FontFamilyIndex}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="TipValuesChanged">
                         <i:InvokeCommandAction Command="{Binding FontFamilyChanged}" PassEventArgsToCommand="True"/>
@@ -81,7 +81,7 @@
                 <Button Background="{StaticResource ThemeBackground}" Foreground="{StaticResource ThemeForeground}" BorderThickness="0" Content="背景色" Height="32" Width="100" />
                 <Button Background="{StaticResource ThemeBackgroundSub}" Foreground="{StaticResource ThemeForeground}" BorderThickness="0" Content="背景次色" Height="32" Width="100" />
                 <Button Background="{StaticResource ThemeBackgroundHigh}" Foreground="{StaticResource ThemeForeground}" BorderThickness="0" Content="背景深色" Height="32" Width="100" />
-                
+
                 <Button Background="Transparent" Foreground="{StaticResource ThemeForeground}" BorderThickness="0" Content="前景色" Height="32" Width="100" />
                 <Button Background="Transparent" Foreground="{StaticResource ThemeForegroundSub}" BorderThickness="0" Content="前景次色" Height="32" Width="100" />
                 <Button Background="Transparent" Foreground="{StaticResource ThemeForegroundLight}" BorderThickness="0" Content="前景浅色" Height="32" Width="100" />
@@ -93,18 +93,18 @@
                 <ComboBoxEXT ItemsSource="{IntList Count=20}" SelectedValue="{Binding Value}" HorizontalContentAlignment="Center" />
                 <ComboBoxEXT ItemsSource="{EnumList Type=model:MenuAuthType}" SelectedValue="{Binding Path=MenuAuthType, Converter={StaticResource enumConverter}}"/>
                 <ComboBoxEXT ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
-                <ComboBoxEXT ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}" HorizontalContentAlignment="Center" IsEditable="True"/>
-                <ComboMulti ItemsSource="{Binding MultiList}" HorizontalContentAlignment="Center" />
-                <ComboDate SelectedValue="{Binding DatePickerTime}" HorizontalContentAlignment="Center"/>
-                <ComboView ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}" HorizontalContentAlignment="Center"/>
-                <ComboQuery ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}" Water="输入搜索..." HorizontalContentAlignment="Center">
+                <ComboBoxEXT ItemsSource="{Binding GridList}" SelectedValuePath="Text" DisplayMemberPath="Text" SelectedValue="{Binding Text}" IsEditable="True"/>
+                <ComboMulti ItemsSource="{Binding MultiList}" />
+                <ComboDate SelectedValue="{Binding DatePickerTime}" />
+                <ComboView ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}" />
+                <ComboQuery ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}" Water="输入搜索..." >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="FilterEvent">
                             <i:InvokeCommandAction Command="{Binding CbxFilterCmd}" PassEventArgsToCommand="True"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ComboQuery>
-                <ComboTree ItemsSource="{Binding TreeList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding TreeId}" IQuery="True" HorizontalContentAlignment="Center"/>
+                <ComboTree ItemsSource="{Binding TreeList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding TreeId}" IQuery="True" />
                 <ComboTime/>
                 <TextBoxEXT Name="tb" Icon="Images/close.png" Animation="2" BorderThickness="0,0,0,1" Radius="0" MaxLength="4"
                             HorizontalContentAlignment="Center">

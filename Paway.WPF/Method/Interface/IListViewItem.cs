@@ -322,14 +322,26 @@ namespace Paway.WPF
             return Text;
         }
         /// <summary>
+        /// IListView数据模型
         /// </summary>
-        public ListViewItemModel() { }
+        public ListViewItemModel()
+        {
+            this.Id = this.GetHashCode();
+        }
         /// <summary>
+        /// IListView数据模型
         /// </summary>
         public ListViewItemModel(string text, string desc = null) : this()
         {
             this.Text = text;
             this.Desc = desc;
+        }
+        /// <summary>
+        /// IListView数据模型
+        /// </summary>
+        public ListViewItemModel(int id, string text, string desc = null) : this(text, desc)
+        {
+            this.Id = id;
         }
     }
 }

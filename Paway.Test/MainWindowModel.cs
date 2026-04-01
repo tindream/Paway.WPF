@@ -81,6 +81,19 @@ namespace Paway.Test
                 }
             }
         }
+        private string text;
+        public string Text
+        {
+            get { return text; }
+            set
+            {
+                if (text != value)
+                {
+                    text = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         private PlotModel plotModel;
         /// <summary>
@@ -291,6 +304,7 @@ namespace Paway.Test
                 Image = new ImageSourceEXT(@"pack://application:,,,/Paway.Test;component/Images/close.png")
             });
             this.PagedList = new PagedCollectionView(list) { PageSize = 10 };
+            this.id = list[0].Id;
 
             AddComboMulti();
             AddTree();

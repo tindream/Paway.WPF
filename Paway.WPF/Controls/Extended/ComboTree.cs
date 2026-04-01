@@ -23,8 +23,76 @@ namespace Paway.WPF
         #region 扩展
         /// <summary>
         /// </summary>
+        public static readonly new DependencyProperty SelectedValueProperty =
+            DependencyProperty.RegisterAttached(nameof(SelectedValue), typeof(object), typeof(ComboTree), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedValueChanged));
+        /// <summary>
+        /// </summary>
+        public static readonly new DependencyProperty SelectedItemProperty =
+            DependencyProperty.RegisterAttached(nameof(SelectedItem), typeof(object), typeof(ComboTree));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty IQueryProperty =
             DependencyProperty.RegisterAttached(nameof(IQuery), typeof(bool), typeof(ComboTree), new PropertyMetadata(false));
+
+        /// <summary>
+        /// 获取或设置的值 System.Windows.Controls.Primitives.Selector.SelectedItem, ，获得通过 System.Windows.Controls.Primitives.Selector.SelectedValuePath。
+        /// <para>重写</para>
+        /// </summary>
+        public new object SelectedValue
+        {
+            get { return (object)GetValue(SelectedValueProperty); }
+            set { SetValue(SelectedValueProperty, value); }
+        }
+        /// <summary>
+        /// 获取或设置当前所选内容中的第一项或如果所选内容为空则返回 null
+        /// <para>重写</para>
+        /// </summary>
+        public new object SelectedItem
+        {
+            get { return (object)GetValue(SelectedItemProperty); }
+            set { SetValue(SelectedItemProperty, value); }
+        }
+        private static void OnSelectedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is ComboTree tree)
+            {
+                IEnumerable list = tree.List ?? tree.ItemsSource;
+                if (list != null)
+                {
+                    if (!tree.SelectedValuePath.IsEmpty())
+                    {
+                        foreach (ITreeViewItem item2 in list)
+                        {
+                            if (tree.InitText(item2)) break;
+                        }
+                    }
+                    else if (tree.SelectedItem is ITreeViewItem item) tree.InitText2(item);
+                }
+            }
+        }
+        private bool InitText(ITreeViewItem item)
+        {
+            if (!item.IsGroup && item.GetValue(this.SelectedValuePath)?.Equals(this.SelectedValue) == true)
+            {
+                this.SelectedItem = item;
+                this.InitText2(item);
+                return true;
+            }
+            else if (item.Children.Count > 0)
+            {
+                foreach (var temp in item.Children)
+                {
+                    if (InitText(temp)) return true;
+                }
+            }
+            return false;
+        }
+        private void InitText2(ITreeViewItem item)
+        {
+            this.last = this.DisplayMemberPath.IsEmpty() ? item.ToString() : item.GetValue(this.DisplayMemberPath).ToStrings();
+            this.Text = this.last;
+            if (this.List != null) this.ItemsSource = this.List;
+        }
         /// <summary>
         /// 启用搜索框
         /// <para>默认值：false</para>
@@ -66,38 +134,6 @@ namespace Paway.WPF
         public ComboTree()
         {
             DefaultStyleKey = typeof(ComboTree);
-            DependencyPropertyDescriptor.FromProperty(SelectedValueProperty, typeof(ComboTree)).AddValueChanged(this, OnSelectedValueChanged);
-        }
-        private void OnSelectedValueChanged(object sender, EventArgs e)
-        {
-            IEnumerable list = this.List ?? this.ItemsSource;
-            if (list != null)
-            {
-                var id = this.SelectedValue.ToInt();
-                foreach (ITreeViewItem item in list)
-                {
-                    if (this.InitText(item, id)) break;
-                }
-            }
-        }
-        private bool InitText(ITreeViewItem item, int id)
-        {
-            if (!item.IsGroup && item.Id == id)
-            {
-                this.SelectedItem = item;
-                this.last = this.DisplayMemberPath.IsEmpty() ? item.ToString() : item.GetValue(this.DisplayMemberPath).ToStrings();
-                this.Text = this.last;
-                if (this.List != null) this.ItemsSource = this.List;
-                return true;
-            }
-            else if (item.Children.Count > 0)
-            {
-                foreach (var temp in item.Children)
-                {
-                    if (InitText(temp, id)) return true;
-                }
-            }
-            return false;
         }
 
         #region 关联选择
@@ -159,10 +195,10 @@ namespace Paway.WPF
             var treeView = sender as TreeViewEXT;
             if (treeView.SelectedItem is ITreeViewItem item && !item.IsGroup)
             {
-                var id = this.SelectedValuePath.IsEmpty() ? item : item.GetValue(this.SelectedValuePath);
-                if (this.SelectedValue.Equals(id))
-                    this.Text = null;
-                this.SelectedValue = id;
+                this.SelectedItem = item;
+                var value = this.SelectedValuePath.IsEmpty() ? item : item.GetValue(this.SelectedValuePath);
+                if (this.SelectedValue?.Equals(value) == true) this.Text = null;
+                this.SelectedValue = value;
                 this.IsDropDownOpen = false;
                 textBox.Focus();
             }
@@ -176,6 +212,7 @@ namespace Paway.WPF
                 {
                     if (isInit && !this.IQuery)
                     {
+                        this.SelectedItem = item;
                         this.SelectedValue = this.SelectedValuePath.IsEmpty() ? item : item.GetValue(this.SelectedValuePath);
                         PMethod.BeginInvoke(() => { this.IsDropDownOpen = false; });
                     }

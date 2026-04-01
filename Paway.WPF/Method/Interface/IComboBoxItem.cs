@@ -56,12 +56,25 @@ namespace Paway.WPF
             return Text;
         }
         /// <summary>
+        /// IComboMulti数据模型
         /// </summary>
-        public ComboBoxItemModel() { }
+        public ComboBoxItemModel()
+        {
+            this.Id = this.GetHashCode();
+        }
         /// <summary>
+        /// IComboMulti数据模型
         /// </summary>
         public ComboBoxItemModel(string text) : this()
         {
+            this.Text = text;
+        }
+        /// <summary>
+        /// IComboMulti数据模型
+        /// </summary>
+        public ComboBoxItemModel(int id, string text) : this(text)
+        {
+            this.Id = id;
             this.Text = text;
         }
     }
