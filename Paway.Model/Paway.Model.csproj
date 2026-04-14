@@ -12,7 +12,7 @@
 		<RootNamespace>Paway.Model</RootNamespace>
 		<PlatformTarget>AnyCPU</PlatformTarget>
 		<OutputPath>..\bin\$(Configuration)</OutputPath>
-		<NoWarn>IDE0130</NoWarn>
+		<NoWarn>NU1900;IDE0130</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -26,7 +26,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Paway.WPF\Paway.WPF.csproj" />
-		<PackageReference Include="Paway.Utils" Version="2.7.8" />
+		<PackageReference Include="Paway.Utils" Version="2.7.9" />
 		<PackageReference Include="Paway.Runtime.Plot" Version="1.0.5" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
 		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
