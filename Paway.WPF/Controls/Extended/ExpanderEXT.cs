@@ -290,7 +290,7 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
         {
-            if (MoveResizer)
+            if (MoveResizer && _pressed)
             {
                 _pressed = false;
                 this.ReleaseMouseCapture();

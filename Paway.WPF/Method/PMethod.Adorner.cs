@@ -212,9 +212,12 @@ namespace Paway.WPF
             };
             element.PreviewMouseUp += (sender, e) =>
             {
-                iMoving = false;
-                //当控件具有鼠标捕获的话，则释放该捕获。
-                element.ReleaseMouseCapture();
+                if (iMoving)
+                {
+                    iMoving = false;
+                    //当控件具有鼠标捕获的话，则释放该捕获。
+                    element.ReleaseMouseCapture();
+                }
             };
             element.MouseMove += (sender, e) =>
             {

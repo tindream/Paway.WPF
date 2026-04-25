@@ -393,7 +393,11 @@ namespace Paway.WPF
         protected override void OnPreviewMouseUp(MouseButtonEventArgs e)
         {
             base.OnPreviewMouseUp(e);
-            iMoving = false;
+            if (iMoving)
+            {
+                iMoving = false;
+                ReleaseMouseCapture();
+            }
         }
         /// <summary>
         /// 按键按下开始移动
@@ -405,6 +409,7 @@ namespace Paway.WPF
             {
                 iMoving = true;
                 moveStart = e.GetPosition(this);
+                CaptureMouse();
                 e.Handled = true;
             }
         }
