@@ -1,0 +1,38 @@
+﻿<Page x:Class="Paway.Test.TestButton"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Paway.Test"
+      xmlns:model="clr-namespace:Paway.Model;assembly=Paway.Model"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+      mc:Ignorable="d" 
+      UseLayoutRounding="True"
+      DataContext="{Binding TestButton, Source={StaticResource Locator}}"
+      d:DesignHeight="450" d:DesignWidth="600"
+      Title="TestButton">
+    <Border BorderBrush="LightGray" Margin="20" Background="{StaticResource ThemeBackground}">
+        <Grid>
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TransitionControl Name="transition" Height="0">
+                <Path Style="{StaticResource PathRound}" Fill="Red"/>
+            </TransitionControl>
+            <ButtonEXT></ButtonEXT>
+            <ButtonEXT Name="btnCancel" Content="取消"  
+                               Type="Warn" IsLight="True"
+                               ImageStretch="None"
+                               CommandParameter="{Binding ElementName=btn}" Click="Cancel_Click" 
+                               Image="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_white.png"/>
+            <ButtonEXT Name="btn" Grid.Column="1"
+                             Content="{FontImage Type=Adjust}" Click="Commit_Click" 
+                             CommandParameter="{Binding ElementName=btn}"/>
+            <Badge Name="badge" Grid.Column="0" IsWaving="True" HorizontalAlignment="Right" Text="1" Background="{StaticResource Error}" VerticalAlignment="Top" Height="20" Margin="-6"/>
+        </Grid>
+    </Border>
+</Page>

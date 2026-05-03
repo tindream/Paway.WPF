@@ -1,0 +1,25 @@
+﻿<Page x:Class="Paway.Test.TestPathPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Paway.Test"
+      xmlns:model="clr-namespace:Paway.Model;assembly=Paway.Model"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+      mc:Ignorable="d" 
+      UseLayoutRounding="True"
+      d:DesignHeight="450" d:DesignWidth="600"
+      Title="TestPathPage">
+    <Border BorderBrush="LightGray" Margin="20">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30">
+            <Path Style="{StaticResource PathRound}" Width="28"/>
+            <Path Style="{StaticResource PathTriangle}" Width="32"/>
+            <Path Style="{StaticResource PathTriangleDown}" Width="32"/>
+            <Path Style="{StaticResource PathTriangleRight}" Width="24"/>
+            <Path Style="{StaticResource PathRect}" Width="28"/>
+            <Path Style="{StaticResource PathRight}" Width="24" />
+            <Path Style="{StaticResource PathQuestion}" Width="18"/>
+            <Path Style="{StaticResource PathClose}"/>
+        </StackPanel>
+    </Border>
+</Page>

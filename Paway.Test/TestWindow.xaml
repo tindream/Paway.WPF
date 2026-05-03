@@ -4,10 +4,11 @@
            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
            xmlns:local="clr-namespace:Paway.Test"
+           xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
            xmlns:model="clr-namespace:Paway.Model;assembly=Paway.Model"
            mc:Ignorable="d"
            DataContext="{Binding TestWindow, Source={StaticResource Locator}}"
-           Title="{Binding Title}" Height="470" Width="800" WindowStartupLocation="CenterScreen">
+           Title="{Binding Title}" Height="470" Width="800" WindowStartupLocation="CenterScreen" TextPadding="155,0,0,0">
     <WindowEXT.FunctionBar>
         <WindowFunctionBar>
             <local:TitleContent/>
@@ -19,8 +20,6 @@
                        Command="{Binding ItemClickCommand}" CommandParameter="主页"/>
             <ButtonEXT Content="{Binding Language.Theme, Source={StaticResource L}}" Margin="0" IsLight="True" ItemBorder="0" Radius="0"
                        Command="{Binding ItemClickCommand}" CommandParameter="主题"/>
-            <ButtonEXT Content="{Binding Language.Color, Source={StaticResource L}}" Margin="0" IsLight="True" ItemBorder="0" Radius="0"
-                       Command="{Binding ItemClickCommand}" CommandParameter="颜色"/>
             <Menu>
                 <MenuItem Header="{Binding Language}" Padding="12,0" Name="menu">
                     <MenuItem Header="中文" IsChecked="{Binding Language, Converter={StaticResource valueToTrue}, ConverterParameter=中文}" Command="{Binding ItemClickCommand}" CommandParameter="中文"/>
@@ -33,6 +32,34 @@
     </WindowEXT.FunctionBarRight>
     <DockPanel x:Name="Root">
         <model:StatuItem IConnect="True" DockPanel.Dock="Bottom"/>
-        <Frame Name="frame" NavigationUIVisibility="Hidden"/>
+        <ListViewEXT Name="listView1" IsLight="True" ItemHeight="30" ItemWidth="150" Width="150" Cursor="Hand" ItemBorder="0,1,1,1" Margin="0,-30,2,0">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding SelectionCommand}" CommandParameter="{Binding ElementName=listView1}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <ListBoxItemEXT Text="颜色"/>
+            <ListBoxItemEXT Text="组件" IsNormal="True"/>
+            <ListBoxItemEXT Text="TextBox"/>
+            <ListBoxItemEXT Text="Button"/>
+            <ListBoxItemEXT Text="ComboBox"/>
+            <ListBoxItemEXT Text="Radio"/>
+            <ListBoxItemEXT Text="CheckBox"/>
+            <ListBoxItemEXT Text="ProgressBar"/>
+            <ListBoxItemEXT Text="Image"/>
+            <ListBoxItemEXT Text="DataGrid"/>
+            <ListBoxItemEXT Text="TabControl"/>
+            <ListBoxItemEXT Text="Expander"/>
+            <ListBoxItemEXT Text="TreeView"/>
+            <ListBoxItemEXT Text="PlotView"/>
+            <ListBoxItemEXT Text="Page" IsNormal="True"/>
+            <ListBoxItemEXT Text="Path"/>
+            <ListBoxItemEXT Text="登录页"/>
+            <ListBoxItemEXT Text="3D模型"/>
+            <ListBoxItemEXT Text="Window" IsNormal="True"/>
+            <ListBoxItemEXT Text="悬浮窗"/>
+            <ListBoxItemEXT Text="选择颜色"/>
+        </ListViewEXT>
+        <Frame Name="frame" NavigationUIVisibility="Hidden" Background="{StaticResource MosaicBrush}"/>
     </DockPanel>
 </WindowEXT>

@@ -19,25 +19,13 @@ using System.Windows.Shapes;
 namespace Paway.Test
 {
     /// <summary>
-    /// TestPage.xaml 的交互逻辑
+    /// Empty.xaml 的交互逻辑
     /// </summary>
-    public partial class TestPage : Page
+    public partial class Empty : Page
     {
-        public TestPage()
+        public Empty()
         {
             InitializeComponent();
-        }
-        private void ButtonEXT_Click(object sender, RoutedEventArgs e)
-        {
-            if (PMethod.OpenFile(out string file, null, "All Image|*.jpg;*.png;*.bmp|Jpeg|*.jpg|Png|*.png|BMP|*.bmp"))
-            {
-                image.Source = file.ToSource();
-                image2.Source = file.ToSource();
-            }
-        }
-        private void ButtonEXT_Click_1(object sender, RoutedEventArgs e)
-        {
-            "今夕是何年".Hit(this);
         }
     }
 }

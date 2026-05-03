@@ -1,0 +1,34 @@
+﻿<Page x:Class="Paway.Test.TestComboBox"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Paway.Test"
+      xmlns:model="clr-namespace:Paway.Model;assembly=Paway.Model"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+      mc:Ignorable="d" 
+      UseLayoutRounding="True"
+      DataContext="{Binding TestComboBox, Source={StaticResource Locator}}"
+      d:DesignHeight="450" d:DesignWidth="600"
+      Title="TestComboBox">
+    <Border BorderBrush="LightGray" Margin="20" Background="{StaticResource ThemeBackground}">
+        <StackPanel>
+            <ComboBoxEXT ItemsSource="{IntList Count=20}" SelectedValue="{Binding Value}" HorizontalContentAlignment="Center" />
+            <ComboBoxEXT ItemsSource="{EnumList Type=model:MenuAuthType}" SelectedValue="{Binding Path=MenuAuthType, Converter={StaticResource enumConverter}}"/>
+            <ComboBoxEXT ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}"/>
+            <ComboBoxEXT ItemsSource="{Binding GridList}" SelectedValuePath="Text" DisplayMemberPath="Text" SelectedValue="{Binding Text}" IsEditable="True"/>
+            <ComboMulti ItemsSource="{Binding MultiList}" />
+            <ComboDate SelectedValue="{Binding DatePickerTime}" />
+            <ComboView ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}" />
+            <ComboQuery ItemsSource="{Binding GridList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding Id}" Water="输入搜索..." >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="FilterEvent">
+                        <i:InvokeCommandAction Command="{Binding CbxFilterCmd}" PassEventArgsToCommand="True"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboQuery>
+            <ComboTree ItemsSource="{Binding TreeList}" SelectedValuePath="Id" DisplayMemberPath="Text" SelectedValue="{Binding TreeId}" IQuery="True" />
+            <ComboTime/>
+        </StackPanel>
+    </Border>
+</Page>

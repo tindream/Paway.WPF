@@ -1,0 +1,31 @@
+﻿<Page x:Class="Paway.Test.TestTextBox"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Paway.Test"
+      xmlns:model="clr-namespace:Paway.Model;assembly=Paway.Model"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+      mc:Ignorable="d" 
+      UseLayoutRounding="True"
+      DataContext="{Binding TestTextBox, Source={StaticResource Locator}}"
+      d:DesignHeight="450" d:DesignWidth="600"
+      Title="TestTextBox">
+    <Border BorderBrush="LightGray" Margin="20" Background="{StaticResource ThemeBackground}">
+        <StackPanel>
+            <TextBoxEXT Name="tb" Icon="pack://application:,,,/Paway.Test;component/Images/close.png" Animation="2" BorderThickness="0,0,0,1" Radius="0" MaxLength="4"
+                            HorizontalContentAlignment="Center">
+                <Binding Path="Pad">
+                    <Binding.ValidationRules>
+                        <RegexValidationRule RegexType="Word" MinLength="2" MaxLength="4"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBoxEXT>
+            <PasswordBox PasswordBoxEXT.Icon="pack://application:,,,/Paway.Test;component/Images/close.png"
+                             HorizontalContentAlignment="Center"
+                             PasswordBoxEXT.Password="{Binding Pad}"
+                             PasswordBoxEXT.Radius="0"
+                             PasswordBoxEXT.Animation="2" BorderThickness="0,0,0,1"/>
+        </StackPanel>
+    </Border>
+</Page>

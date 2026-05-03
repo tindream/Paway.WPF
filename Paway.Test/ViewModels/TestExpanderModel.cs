@@ -1,3 +1,4 @@
+using CommunityToolkit.Mvvm.Input;
 using OxyPlot;
 using OxyPlot.Annotations;
 using OxyPlot.Axes;
@@ -20,20 +21,8 @@ using System.Windows.Media;
 
 namespace Paway.Test
 {
-    public class TestPageModel : ViewModelBasePlus
+    public class TestExpanderModel : ViewModelBasePlus
     {
-        #region 属性
-        private int _iValue;
-        public int IValue
-        {
-            get { return _iValue; }
-            set { _iValue = value; OnPropertyChanged(); }
-        }
-
-        #endregion
-
-        public TestPageModel()
-        {
-        }
+        public TestExpanderModel() { }
     }
 }

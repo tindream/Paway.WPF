@@ -8,14 +8,14 @@
                    d:DesignHeight="30" d:DesignWidth="800">
     <Separator />
     <Menu>
-        <MenuItem Header="测试菜单">
-            <MenuItem Header="测试页" Command="{Binding ItemClickCommand}" CommandParameter="测试页"/>
-            <MenuItem Header="报告问题" IsCheckable="True" Command="{Binding ItemClickCommand}" CommandParameter="报告问题"/>
-            <Separator />
-            <MenuItem Header="3D模型" Command="{Binding ItemClickCommand}" CommandParameter="3D模型"/>
+        <MenuItem Header="菜单">
             <MenuItem Header="登录页" Command="{Binding ItemClickCommand}" CommandParameter="登录页"
                       Icon="pack://application:,,,/Paway.Test;component/Images/refresh.png"/>
-            <MenuItem Header="DataGrid" Command="{Binding ItemClickCommand}" CommandParameter="DataGrid"/>
+            <MenuItem Header="3D模型" Command="{Binding ItemClickCommand}" CommandParameter="3D模型"
+                      Icon="pack://application:,,,/Paway.Test;component/Images/down.png"/>
+            <Separator />
+            <MenuItem Header="悬浮窗" IsCheckable="True" Command="{Binding ItemClickCommand}" CommandParameter="悬浮窗"/>
+            <MenuItem Header="选择颜色" Command="{Binding ItemClickCommand}" CommandParameter="选择颜色"/>
         </MenuItem>
     </Menu>
 </WindowFunctionBar>

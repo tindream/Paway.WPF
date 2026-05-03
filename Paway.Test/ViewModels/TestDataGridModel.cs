@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -23,7 +24,15 @@ namespace Paway.Test
 {
     public class TestDataGridModel : ViewModelBasePlus
     {
-        #region 属性
+        #region 属性 
+
+        private bool _isSelected = true;
+        public bool IsSelected
+        {
+            get { return _isSelected; }
+            set { _isSelected = value; OnPropertyChanged(); }
+        }
+
         private int _iValue;
         public int IValue
         {
@@ -39,6 +48,7 @@ namespace Paway.Test
         });
         public ObservableCollection<TestDataGridInfo> GridList { get; } = new ObservableCollection<TestDataGridInfo>();
         public List<ListViewItemModel> List { get; } = new List<ListViewItemModel>();
+        public PagedCollectionView PagedList { get; private set; }
 
         #endregion
 
@@ -52,6 +62,7 @@ namespace Paway.Test
                 GridList.Add(info);
             }
             for (int j = 0; j < 5; j++) List.Add(new ListViewItemModel($"A{j + 1}") { Id = ++index });
+            this.PagedList = new PagedCollectionView(GridList) { PageSize = 10 };
         }
     }
     public class TestDataGridInfo : BaseModelInfo

@@ -33,15 +33,15 @@
                         <i:InvokeCommandAction Command="{Binding ListViewMouseDown}" PassEventArgsToCommand="True"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-                <ListBoxItemEXT Text="呼叫" ItemRadius="16,0,0,0" />
-                <ListBoxItemEXT IsNormal="True"/>
-                <ListBoxItemEXT Text="软键盘" ItemRadius="0,16,0,0" />
-                <ListBoxItemEXT Text="投影" />
+                <ListBoxItemEXT Text="A" ItemRadius="16,0,0,0" />
+                <ListBoxItemEXT Text="B"/>
+                <ListBoxItemEXT Text="C" ItemRadius="0,16,0,0" />
+                <ListBoxItemEXT Text="D" />
                 <ListBoxItemEXT Tag="收缩" ItemPadding="0,19,0,0" />
-                <ListBoxItemEXT Text="结束投影" />
-                <ListBoxItemEXT Text="发起同屏" ItemRadius="0,0,0,16" />
-                <ListBoxItemEXT Text="加入同屏" />
-                <ListBoxItemEXT Text="结束同屏" ItemRadius="0,0,16,0" />
+                <ListBoxItemEXT Text="E" />
+                <ListBoxItemEXT Text="F" ItemRadius="0,0,0,16" />
+                <ListBoxItemEXT Text="G" />
+                <ListBoxItemEXT Text="。" ItemRadius="0,0,16,0" />
             </ListViewEXT>
         </Border>
     </Grid>

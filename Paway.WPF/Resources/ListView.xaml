@@ -417,7 +417,7 @@
                                     </DataTrigger>
                                     <MultiDataTrigger>
                                         <MultiDataTrigger.Conditions>
-                                            <Condition Binding="{Binding IsNormal}" Value="False"/>
+                                            <Condition Binding="{Binding IsNormal}" Value="True"/>
                                             <Condition Binding="{Binding IsEnabled}" Value="False"/>
                                         </MultiDataTrigger.Conditions>
                                         <Setter Property="Opacity" Value="0.6"/>

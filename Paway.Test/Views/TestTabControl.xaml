@@ -1,0 +1,22 @@
+﻿<Page x:Class="Paway.Test.TestTabControl"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Paway.Test"
+      xmlns:model="clr-namespace:Paway.Model;assembly=Paway.Model"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+      mc:Ignorable="d" 
+      UseLayoutRounding="True"
+      DataContext="{Binding TestTabControl, Source={StaticResource Locator}}"
+      d:DesignHeight="450" d:DesignWidth="600"
+      Title="TestTabControl">
+    <Border BorderBrush="LightGray" Margin="20" Background="{StaticResource ThemeBackground}">
+        <TabControlEXT MenuMode="False">
+            <TabItem Cursor="Hand" Header="音乐电台">
+                <TextBlock Text="Hello"/>
+            </TabItem>
+            <TabItem Cursor="Hand" Header="Mv电台"/>
+        </TabControlEXT>
+    </Border>
+</Page>

@@ -10,25 +10,46 @@
       DataContext="{Binding TestDataGrid, Source={StaticResource Locator}}"
       d:DesignHeight="450" d:DesignWidth="600"
       Title="TestDataGrid">
-    <DockPanel x:Name="Root">
-        <StackPanel Width="200">
-            <ListViewEXT ItemsSource="{Binding List}" ItemWidthType="OneColumn" ClickMode="Press"/>
-        </StackPanel>
-        <DataGridEXT ItemsSource="{Binding GridList}" SelectionUnit="Cell" Name="datagrid1" Margin="10" BorderThickness="0" GridLinesVisibility="All" HorizontalContentAlignment="Center">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="CurrentCellChanged">
-                    <i:InvokeCommandAction Command="{Binding CurrentCellCommand}" CommandParameter="{Binding ElementName=datagrid1}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-            <DataGridEXT.Columns>
-                <DataGridTemplateColumn Header="List" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ListViewCustom ItemsSource="{Binding List}" ItemWidthType="OneColumn" ClickMode="Press" SelectedValuePath="Id" SelectedValue="{Binding DataContext.IValue, RelativeSource={RelativeSource AncestorType={x:Type local:TestDataGrid}}}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGridEXT.Columns>
-        </DataGridEXT>
-    </DockPanel>
+    <Page.Resources>
+        <FrameworkElement x:Key="ProxyElement" DataContext="{Binding}"/>
+    </Page.Resources>
+    <Border x:Name="Root" BorderBrush="LightGray" Margin="20" Background="{StaticResource ThemeBackground}">
+        <DockPanel>
+            <!--只是将ProxyElement添加到树-->
+            <ContentControl Content="{StaticResource ProxyElement}" Visibility="Collapsed"/>
+            <DataPager DockPanel.Dock="Bottom" Name="dataPager" Margin="0,0,0,3" Source="{Binding PagedList}"/>
+            <DataGridEXT ItemsSource="{Binding PagedList}" SelectionUnit="Cell" Name="datagrid1" BorderThickness="0" GridLinesVisibility="All" HorizontalContentAlignment="Center">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="CurrentCellChanged">
+                        <i:InvokeCommandAction Command="{Binding CurrentCellCommand}" CommandParameter="{Binding ElementName=datagrid1}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <DataGridEXT.Columns>
+                    <DataGridTemplateColumn Header="List" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ListViewCustom ItemsSource="{Binding List}" ItemWidthType="OneColumn" ClickMode="Press" SelectedValuePath="Id" SelectedValue="{Binding DataContext.IValue, RelativeSource={RelativeSource AncestorType={x:Type local:TestDataGrid}}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="IsSelected" Visibility="{Binding DataContext.IsSelected, Source={StaticResource ProxyElement}, Converter={StaticResource boolToVisible}}">
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <DockPanel>
+                                    <CheckBoxEXT IsChecked="{Binding DataContext.IsSelected, RelativeSource={RelativeSource AncestorType={x:Type local:TestDataGrid}}}" Padding="10,6,4,6" Margin="-8,-10,-2,-10"/>
+                                </DockPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DockPanel>
+                                    <CheckBoxEXT IsChecked="{Binding IsPressed, UpdateSourceTrigger=PropertyChanged}"/>
+                                </DockPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGridEXT.Columns>
+            </DataGridEXT>
+        </DockPanel>
+    </Border>
 </Page>

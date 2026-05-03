@@ -8,7 +8,8 @@
       xmlns:HelixToolkit="http://helix-toolkit.org/wpf"
       DataContext="{Binding TestWindow, Source={StaticResource Locator}}"
       d:DesignHeight="450" d:DesignWidth="600"
-      Title="Test3D">
+      Title="Test3D"
+      Background="{StaticResource ThemeBackground}">
     <DockPanel>
         <!--<SliderEXT Title="X" Height = "23" Width = "360" Maximum = "360" 
                    Value = "{Binding ElementName = rotate, Path=Angle}" DockPanel.Dock="Bottom" />-->

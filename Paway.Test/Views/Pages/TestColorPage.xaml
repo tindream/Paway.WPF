@@ -1,0 +1,36 @@
+﻿<Page x:Class="Paway.Test.TestColorPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Paway.Test"
+      xmlns:model="clr-namespace:Paway.Model;assembly=Paway.Model"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+      mc:Ignorable="d" 
+      UseLayoutRounding="True"
+      d:DesignHeight="450" d:DesignWidth="600"
+      Title="TestColorPage">
+    <Border BorderBrush="LightGray" Margin="20">
+        <WrapPanel HorizontalAlignment="Center">
+            <StackPanel>
+                <Button Background="{StaticResource Success}" BorderThickness="0" Content="成功" Height="48" Width="150" Foreground="White"/>
+                <Button Background="{StaticResource Warn}" BorderThickness="0" Content="警告" Height="48" Width="150" Foreground="White"/>
+                <Button Background="{StaticResource Error}" BorderThickness="0" Content="错误" Height="48" Width="150" Foreground="White"/>
+
+                <Button Background="{StaticResource ThemeColor}" BorderThickness="0" Content="主题颜色" Height="48" Width="150" Foreground="White"/>
+                <Button Background="{StaticResource ThemeColorSub}" BorderThickness="0" Content="主题次色" Height="48" Width="150" Foreground="White"/>
+                <Button Background="{StaticResource ThemeColorLight}" BorderThickness="0" Content="主题浅色" Height="48" Width="150" Foreground="White"/>
+                <Button Background="{StaticResource ThemeColorHigh}" BorderThickness="0" Content="主题深色" Height="48" Width="150" Foreground="White"/>
+               </StackPanel>
+            <StackPanel>
+                <Button Background="{StaticResource ThemeBackground}" Foreground="{StaticResource ThemeForeground}" BorderThickness="0" Content="背景色" Height="48" Width="150" />
+                <Button Background="{StaticResource ThemeBackgroundSub}" Foreground="{StaticResource ThemeForeground}" BorderThickness="0" Content="背景次色" Height="48" Width="150" />
+                <Button Background="{StaticResource ThemeBackgroundHigh}" Foreground="{StaticResource ThemeForeground}" BorderThickness="0" Content="背景深色" Height="48" Width="150" />
+
+                <Button Background="Transparent" Foreground="{StaticResource ThemeForeground}" BorderThickness="0" Content="前景色" Height="48" Width="150" />
+                <Button Background="Transparent" Foreground="{StaticResource ThemeForegroundSub}" BorderThickness="0" Content="前景次色" Height="48" Width="150" />
+                <Button Background="Transparent" Foreground="{StaticResource ThemeForegroundLight}" BorderThickness="0" Content="前景浅色" Height="48" Width="150" />
+            </StackPanel>
+        </WrapPanel>
+    </Border>
+</Page>
