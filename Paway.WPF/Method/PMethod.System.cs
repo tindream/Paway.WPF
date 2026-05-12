@@ -931,7 +931,11 @@ namespace Paway.WPF
         /// </summary>
         public new static bool InitApp(string logFile = "Log.xml", string existTitle = null, object key = null, bool logFirstChanceException = true)
         {
-            if (!InitAppInstance(existTitle, key, () => Application.Current.Shutdown())) return false;
+            if (!InitAppInstance(existTitle, key))
+            {
+                Application.Current.Shutdown();
+                return false;
+            }
             InitAppError(logFile, logFirstChanceException);
             //禁用Backspace退格导航返回Page页
             NavigationCommands.BrowseBack.InputGestures.Clear();

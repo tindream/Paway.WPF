@@ -5,7 +5,7 @@
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:local="clr-namespace:Paway.WPF"
                  mc:Ignorable="d"
-                 Title="KeyboardNumWindow" 
+                 Title="虚拟键盘" 
                  Height="280" Width="256"
                  Background="Transparent"
                  Topmost="True" ShowInTaskbar="False" ShowActivated="False"

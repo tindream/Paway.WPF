@@ -32,20 +32,6 @@ namespace Paway.WPF
         /// </summary>
         public KeyboardNumWindow() : this(null, true) { }
         /// <summary>
-        /// 位置
-        /// </summary>
-        protected override void OnRender(DrawingContext drawingContext)
-        {
-            base.OnRender(drawingContext);
-            if (element == null && !_firstRender)
-            {
-                _firstRender = true;
-                // 获取主屏幕的工作区大小（不包括任务栏）
-                this.Left = (SystemParameters.WorkArea.Width - this.ActualWidth) / 2;
-                this.Top = SystemParameters.WorkArea.Height - this.ActualHeight;
-            }
-        }
-        /// <summary>
         /// 虚拟键盘-数字键盘
         /// </summary>
         public KeyboardNumWindow(FrameworkElement element, bool iTitle = false)
@@ -58,6 +44,20 @@ namespace Paway.WPF
             keyboardNum.CloseEvent += KeyboardNum_CloseEvent;
             keyboardNum.DragMovedEvent += KeyboardNum_DragMovedEvent;
             btnClose.Click += KeyboardNum_CloseEvent;
+        }
+        /// <summary>
+        /// 位置
+        /// </summary>
+        protected override void OnRender(DrawingContext drawingContext)
+        {
+            base.OnRender(drawingContext);
+            if (element == null && !_firstRender)
+            {
+                _firstRender = true;
+                // 获取主屏幕的工作区大小（不包括任务栏）
+                this.Left = (SystemParameters.WorkArea.Width - this.ActualWidth) / 2;
+                this.Top = SystemParameters.WorkArea.Height - this.ActualHeight;
+            }
         }
         private void KeyboardNumWindow_SourceInitialized(object sender, EventArgs e)
         {

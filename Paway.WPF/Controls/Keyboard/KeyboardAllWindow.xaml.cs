@@ -32,20 +32,6 @@ namespace Paway.WPF
         /// </summary>
         public KeyboardAllWindow() : this(null, true) { }
         /// <summary>
-        /// 位置
-        /// </summary>
-        protected override void OnRender(DrawingContext drawingContext)
-        {
-            base.OnRender(drawingContext);
-            if (element == null && !_firstRender)
-            {
-                _firstRender = true;
-                // 获取主屏幕的工作区大小（不包括任务栏）
-                this.Left = (SystemParameters.WorkArea.Width - this.ActualWidth) / 2;
-                this.Top = SystemParameters.WorkArea.Height - this.ActualHeight;
-            }
-        }
-        /// <summary>
         /// 虚拟键盘-全键盘
         /// </summary>
         public KeyboardAllWindow(FrameworkElement element, bool iTitle = false, bool iKeyboardNum = false)
@@ -59,6 +45,20 @@ namespace Paway.WPF
             keyboardAll.CloseEvent += KeyboardAll_CloseEvent;
             keyboardAll.DragMovedEvent += KeyboardAll_DragMovedEvent;
             btnClose.Click += KeyboardAll_CloseEvent;
+        }
+        /// <summary>
+        /// 位置
+        /// </summary>
+        protected override void OnRender(DrawingContext drawingContext)
+        {
+            base.OnRender(drawingContext);
+            if (element == null && !_firstRender)
+            {
+                _firstRender = true;
+                // 获取主屏幕的工作区大小（不包括任务栏）
+                this.Left = (SystemParameters.WorkArea.Width - this.ActualWidth) / 2;
+                this.Top = SystemParameters.WorkArea.Height - this.ActualHeight;
+            }
         }
         private void KeyboardAllWindow_SourceInitialized(object sender, EventArgs e)
         {
