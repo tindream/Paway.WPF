@@ -18,6 +18,15 @@ namespace Paway.Model
     public partial class StatuItemModel : ViewModelBasePlus
     {
         #region 属性
+        private string _timeNow;
+        /// <summary>
+        /// 当前时间
+        /// </summary>
+        public string TimeNow
+        {
+            get { return _timeNow; }
+            set { if (_timeNow != value) { _timeNow = value; OnPropertyChanged(); } }
+        }
         private string _userName;
         /// <summary>
         /// 用户
@@ -36,14 +45,14 @@ namespace Paway.Model
             get { return _desc; }
             set { _desc = value; OnPropertyChanged(); }
         }
-        private string _timeNow;
+        private string _host;
         /// <summary>
-        /// 当前时间
+        /// 主机
         /// </summary>
-        public string TimeNow
+        public string Host
         {
-            get { return _timeNow; }
-            set { if (_timeNow != value) { _timeNow = value; OnPropertyChanged(); } }
+            get { return _host; }
+            set { _host = value; OnPropertyChanged(); }
         }
 
         private Brush _descBrush = ColorType.High.Color().ToBrush();
@@ -64,6 +73,10 @@ namespace Paway.Model
             get { return _connectBrush; }
             set { if (_connectBrush != value) { _connectBrush = value; OnPropertyChanged(); } }
         }
+        /// <summary>
+        /// 时间更新外部处理事件
+        /// </summary>
+        public event Func<string> TimeChangeEvent;
 
         #endregion
 
@@ -96,11 +109,11 @@ namespace Paway.Model
             });
             Task.Run(() =>
             {
-                this.TimeNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss dddd");
+                this.TimeNow = TimeChangeEvent != null ? TimeChangeEvent.Invoke() : DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss dddd");
                 Thread.Sleep(1000 - DateTime.Now.Millisecond);
                 while (true)
                 {
-                    this.TimeNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss dddd");
+                    this.TimeNow = TimeChangeEvent != null ? TimeChangeEvent.Invoke() : DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss dddd");
                     Thread.Sleep(1000);
                 }
             });

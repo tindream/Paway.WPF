@@ -20,6 +20,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using System.Xml;
+using Keys = System.Windows.Forms.Keys;
 
 namespace Paway.WPF
 {
@@ -154,6 +155,30 @@ namespace Paway.WPF
             }
 
             return keyDecode;
+        }
+        /// <summary>
+        /// WPF KeyEventArgs 转换为 WinForms KeyEventArgs
+        /// </summary>
+        public static System.Windows.Forms.KeyEventArgs ConvertToWinFormsKeyEventArgs(KeyEventArgs wpfArgs)
+        {
+            // 1. 转换WPF按键为WinForms按键
+            Keys winFormsKey = (Keys)KeyInterop.VirtualKeyFromKey(wpfArgs.Key);
+
+            // 2. 转换修饰键（Ctrl/Shift/Alt）
+            Keys modifierKeys = Keys.None;
+            if (wpfArgs.KeyboardDevice.IsKeyDown(Key.LeftCtrl) || wpfArgs.KeyboardDevice.IsKeyDown(Key.RightCtrl))
+                modifierKeys |= Keys.Control;
+            if (wpfArgs.KeyboardDevice.IsKeyDown(Key.LeftShift) || wpfArgs.KeyboardDevice.IsKeyDown(Key.RightShift))
+                modifierKeys |= Keys.Shift;
+            if (wpfArgs.KeyboardDevice.IsKeyDown(Key.LeftAlt) || wpfArgs.KeyboardDevice.IsKeyDown(Key.RightAlt))
+                modifierKeys |= Keys.Alt;
+
+            // 3. 构造WinForms事件参数
+            var winFormsArgs = new System.Windows.Forms.KeyEventArgs(winFormsKey | modifierKeys);
+            // 4. 同步 Handled 状态
+            winFormsArgs.Handled = wpfArgs.Handled;
+
+            return winFormsArgs;
         }
 
         #endregion
