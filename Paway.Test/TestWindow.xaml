@@ -53,6 +53,7 @@
             <ListBoxItemEXT Text="TreeView"/>
             <ListBoxItemEXT Text="PlotView"/>
             <ListBoxItemEXT Text="Page" IsNormal="True"/>
+            <ListBoxItemEXT Text="动画"/>
             <ListBoxItemEXT Text="Path"/>
             <ListBoxItemEXT Text="登录页"/>
             <ListBoxItemEXT Text="3D模型"/>

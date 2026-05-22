@@ -43,6 +43,22 @@ namespace Paway.WPF
     }
 
     /// <summary>
+    /// null转Visible
+    /// </summary>
+    internal class NullToVisible : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var result = value == null || value.Equals(string.Empty) || value == DBNull.Value;
+            if (parameter != null || (parameter is bool p && !p)) result = !result;
+            return result ? Visibility.Visible : Visibility.Collapsed;
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    /// <summary>
     /// null转Collapsed
     /// </summary>
     internal class NullToCollapsed : IValueConverter
@@ -58,16 +74,33 @@ namespace Paway.WPF
             throw new NotImplementedException();
         }
     }
+
     /// <summary>
-    /// null转Visible
+    /// null转True
     /// </summary>
-    internal class NullToVisible : IValueConverter
+    internal class NullToTrue : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var result = value == null || value.Equals(string.Empty) || value == DBNull.Value;
             if (parameter != null || (parameter is bool p && !p)) result = !result;
-            return result ? Visibility.Visible : Visibility.Collapsed;
+            return result;
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    /// <summary>
+    /// null转False
+    /// </summary>
+    internal class NullToFalse : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var result = value == null || value.Equals(string.Empty) || value == DBNull.Value;
+            if (parameter != null || (parameter is bool p && !p)) result = !result;
+            return !result ;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

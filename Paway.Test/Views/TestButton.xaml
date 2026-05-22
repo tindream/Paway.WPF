@@ -12,27 +12,25 @@
       d:DesignHeight="450" d:DesignWidth="600"
       Title="TestButton">
     <Border BorderBrush="LightGray" Margin="20" Background="{StaticResource ThemeBackground}">
-        <Grid>
-            <Grid.ColumnDefinitions >
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+        <StackPanel >
+
             <TransitionControl Name="transition" Height="0">
                 <Path Style="{StaticResource PathRound}" Fill="Red"/>
             </TransitionControl>
-            <ButtonEXT></ButtonEXT>
             <ButtonEXT Name="btnCancel" Content="取消"  
-                               Type="Warn" IsLight="True"
-                               ImageStretch="None"
-                               CommandParameter="{Binding ElementName=btn}" Click="Cancel_Click" 
-                               Image="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_white.png"/>
-            <ButtonEXT Name="btn" Grid.Column="1"
-                             Content="{FontImage Type=Adjust}" Click="Commit_Click" 
-                             CommandParameter="{Binding ElementName=btn}"/>
-            <Badge Name="badge" Grid.Column="0" IsWaving="True" HorizontalAlignment="Right" Text="1" Background="{StaticResource Error}" VerticalAlignment="Top" Height="20" Margin="-6"/>
-        </Grid>
+                       Type="Warn" IsLight="True"
+                       CommandParameter="{Binding ElementName=btn}" Click="Cancel_Click" 
+                       Image="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_white.png"/>
+
+            <Grid>
+                <ButtonEXT Name="btn" Click="Commit_Click" Content="{FontImage Type=Adjust}" 
+                       CommandParameter="{Binding ElementName=btn}" Height="30"/>
+                <Badge Name="badge" IsWaving="True" HorizontalAlignment="Right" Text="1" Background="{StaticResource Error}" Height="20" Margin="-6" VerticalAlignment="Top"/>
+            </Grid>
+
+            <ButtonEXT Content="Success"  Type="Success"/>
+            <ButtonEXT Content="Error"  Type="Error"/>
+            
+        </StackPanel>
     </Border>
 </Page>

@@ -60,6 +60,8 @@
     <local:NullSelector x:Key="nullSelector"/>
     <local:NullToVisible x:Key="nullToVisible"/>
     <local:NullToCollapsed x:Key="nullToCollapsed"/>
+    <local:NullToTrue x:Key="nullToTrue"/>
+    <local:NullToFalse x:Key="nullToFalse"/>
     <local:NullToDoubleConverter x:Key="nullToDoubleConverter" />
     <local:NullToColorConverter x:Key="nullToColorConverter" />
     <!--#endregion-->
