@@ -864,7 +864,7 @@ namespace Paway.WPF
                             else
                             {
                                 ex.Log();
-                                ShowError(element, ex.Message());
+                                Show(element, ex.Message(), LevelType.Error);
                             }
                         });
                     }

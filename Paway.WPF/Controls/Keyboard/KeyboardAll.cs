@@ -86,7 +86,7 @@ namespace Paway.WPF
             KeyList.Add("a", new KeyboardKeyInfo("a", "A", (int)Keys.A, "@", (int)Keys.D2, true, "@", (int)Keys.D2, true));
             KeyList.Add("s", new KeyboardKeyInfo("s", "S", (int)Keys.S, "#", (int)Keys.D3, true, "#", (int)Keys.D3, true));
             KeyList.Add("d", new KeyboardKeyInfo("d", "D", (int)Keys.D, "%", (int)Keys.D5, true, "%", (int)Keys.D5, true));
-            KeyList.Add("f", new KeyboardKeyInfo("f", "F", (int)Keys.F, "/", (int)Keys.OemQuestion, false, "/", BitConverter.ToUInt16(Encoding.Unicode.GetBytes("/"), 0), false, true));
+            KeyList.Add("f", new KeyboardKeyInfo("f", "F", (int)Keys.F, "*", (int)Keys.D8, true, "*", (int)Keys.D8, true));
             KeyList.Add("g", new KeyboardKeyInfo("g", "G", (int)Keys.G, "(", (int)Keys.D9, true, "（", BitConverter.ToUInt16(Encoding.Unicode.GetBytes("（"), 0), false, true));
             KeyList.Add("h", new KeyboardKeyInfo("h", "H", (int)Keys.H, ")", (int)Keys.D0, true, "）", BitConverter.ToUInt16(Encoding.Unicode.GetBytes("）"), 0), false, true));
             KeyList.Add("j", new KeyboardKeyInfo("j", "J", (int)Keys.J, "+", (int)Keys.Add, true, "+", (int)Keys.Add, true));
@@ -94,12 +94,12 @@ namespace Paway.WPF
             KeyList.Add("l", new KeyboardKeyInfo("l", "L", (int)Keys.L, "=", (int)Keys.Oemplus, false, "=", (int)Keys.Oemplus, false));
 
             KeyList.Add("caps lock", new KeyboardKeyInfo(null, null, 0, ",", (int)Keys.Oemcomma, false, "，", BitConverter.ToUInt16(Encoding.Unicode.GetBytes("，"), 0), false, true));
-            KeyList.Add("z", new KeyboardKeyInfo("z", "Z", (int)Keys.Z, ":", (int)Keys.OemSemicolon, true, "：", BitConverter.ToUInt16(Encoding.Unicode.GetBytes("："), 0), false, true));
-            KeyList.Add("x", new KeyboardKeyInfo("x", "X", (int)Keys.X, ";", (int)Keys.OemSemicolon, false, "；", BitConverter.ToUInt16(Encoding.Unicode.GetBytes("；"), 0), false, true));
-            KeyList.Add("c", new KeyboardKeyInfo("c", "C", (int)Keys.C, "'", (int)Keys.OemQuotes, false, "’", BitConverter.ToUInt16(Encoding.Unicode.GetBytes("’"), 0), false, true));
-            KeyList.Add("v", new KeyboardKeyInfo("v", "V", (int)Keys.V, "\"", (int)Keys.OemQuotes, true, "”", BitConverter.ToUInt16(Encoding.Unicode.GetBytes("”"), 0), false, true));
-            KeyList.Add("b", new KeyboardKeyInfo("b", "B", (int)Keys.B, "!", (int)Keys.D1, true, "！", BitConverter.ToUInt16(Encoding.Unicode.GetBytes("！"), 0), false, true));
-            KeyList.Add("n", new KeyboardKeyInfo("n", "N", (int)Keys.N, "?", (int)Keys.OemQuestion, true, "？", BitConverter.ToUInt16(Encoding.Unicode.GetBytes("？"), 0), false, true));
+            KeyList.Add("z", new KeyboardKeyInfo("z", "Z", (int)Keys.Z, ";", (int)Keys.OemSemicolon, false, "；", BitConverter.ToUInt16(Encoding.Unicode.GetBytes("；"), 0), false, true));
+            KeyList.Add("x", new KeyboardKeyInfo("x", "X", (int)Keys.X, "'", (int)Keys.OemQuotes, false, "’", BitConverter.ToUInt16(Encoding.Unicode.GetBytes("’"), 0), false, true));
+            KeyList.Add("c", new KeyboardKeyInfo("c", "C", (int)Keys.C, "\"", (int)Keys.OemQuotes, true, "”", BitConverter.ToUInt16(Encoding.Unicode.GetBytes("”"), 0), false, true));
+            KeyList.Add("v", new KeyboardKeyInfo("v", "V", (int)Keys.V, "!", (int)Keys.D1, true, "！", BitConverter.ToUInt16(Encoding.Unicode.GetBytes("！"), 0), false, true));
+            KeyList.Add("b", new KeyboardKeyInfo("b", "B", (int)Keys.B, "?", (int)Keys.OemQuestion, true, "？", BitConverter.ToUInt16(Encoding.Unicode.GetBytes("？"), 0), false, true));
+            KeyList.Add("n", new KeyboardKeyInfo("n", "N", (int)Keys.N, "/", (int)Keys.OemQuestion, false, "/", BitConverter.ToUInt16(Encoding.Unicode.GetBytes("/"), 0), false, true));
             KeyList.Add("m", new KeyboardKeyInfo("m", "M", (int)Keys.M, "\\", (int)Keys.OemPipe, false, "、", BitConverter.ToUInt16(Encoding.Unicode.GetBytes("、"), 0), false, true));
 
             KeyList.Add(".", new KeyboardKeyInfo(".", ".", (int)Keys.Decimal, ".", (int)Keys.Decimal, false, "。", BitConverter.ToUInt16(Encoding.Unicode.GetBytes("。"), 0), false, true));

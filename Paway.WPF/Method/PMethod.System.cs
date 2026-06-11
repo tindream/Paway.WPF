@@ -492,25 +492,34 @@ namespace Paway.WPF
         #region Window系统消息框
         /// <summary>
         /// Window系统消息框
-        /// <para>该消息框显示消息、 标题栏标题、 OK按钮和Warning图标。</para>
+        /// <para>该消息框显示消息、 标题栏标题、 OK按钮和指定图标(默认Information)。</para>
         /// </summary>
-        public static void ShowWarning(DependencyObject parent, string msg)
+        public static void Show(DependencyObject parent, string msg, LevelType level = LevelType.Info)
         {
-            Show(parent, msg, LevelType.Warn);
-        }
-        /// <summary>
-        /// Window系统消息框
-        /// <para>该消息框显示消息、 标题栏标题、 OK按钮和Error图标。</para>
-        /// </summary>
-        public static void ShowError(DependencyObject parent, string msg)
-        {
-            Show(parent, msg, LevelType.Error);
+            if (!Parent(parent, out Window window)) return;
+            Invoke(obj =>
+            {
+                switch (level)
+                {
+                    default:
+                    case LevelType.Info:
+                        MessageBox.Show(window, obj, window.Title, MessageBoxButton.OK, MessageBoxImage.Information);
+                        break;
+                    case LevelType.Warn:
+                        MessageBox.Show(window, obj, window.Title, MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case LevelType.Error:
+                    case LevelType.Fatal:
+                        MessageBox.Show(window, obj, window.Title, MessageBoxButton.OK, MessageBoxImage.Error);
+                        break;
+                }
+            }, msg);
         }
         /// <summary>
         /// Window系统消息框
         /// <para>该消息框显示消息、 标题栏标题、 OK按钮和指定图标(默认Information)。</para>
         /// </summary>
-        public static void Show(DependencyObject parent, string msg, LevelType level = LevelType.Info)
+        public static void ShowBeginInvoke(DependencyObject parent, string msg, LevelType level = LevelType.Info)
         {
             if (!Parent(parent, out Window window)) return;
             BeginInvoke(obj =>

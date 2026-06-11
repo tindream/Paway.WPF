@@ -63,6 +63,19 @@ namespace Paway.WPF
         public bool IUnicode { get; set; }
 
         public KeyboardKeyInfo() { }
+        /// <summary>
+        /// 定义按键
+        /// </summary>
+        /// <param name="allLower">全键盘-小写</param>
+        /// <param name="allUp">全键盘-大写</param>
+        /// <param name="allValue">全键盘-值</param>
+        /// <param name="numEn">数字键盘-英文模式</param>
+        /// <param name="numEnV">数字键盘-英文模式-值</param>
+        /// <param name="iNumEnShift">数字键盘-英文模式-需要Shift标记</param>
+        /// <param name="numCn">数字键盘-中文模式</param>
+        /// <param name="numCnV">数字键盘-中文模式-值</param>
+        /// <param name="iNumCnShift">数字键盘-中文模式-需要Shift标记</param>
+        /// <param name="iUnicode">数字键盘-中文模式-启用Unicode模式标记</param>
         public KeyboardKeyInfo(string allLower, string allUp, int allValue, string numEn, int numEnV, bool iNumEnShift, string numCn, int numCnV, bool iNumCnShift, bool iUnicode = false)
         {
             this.AllLower = allLower;

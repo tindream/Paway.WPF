@@ -317,7 +317,7 @@ namespace Paway.WPF
             if (e.LeftButton == MouseButtonState.Pressed && DateTime.Now.Subtract(clickTime).TotalMilliseconds < PConfig.DoubleInterval)
             {
                 if (DoubleEvent != null) DoubleEvent.Invoke(this, e);
-                else if (IDoubleView)
+                else if (IDoubleView && this.Source != null)
                 {
                     if (PMethod.Parent(this, out Window window))
                     {
