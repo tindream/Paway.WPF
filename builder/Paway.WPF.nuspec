@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>Paway.WPF</id>
-		<version>1.6.4</version>
+		<version>1.6.5</version>
 		<title>Paway.WPF</title>
 		<authors>Tinn</authors>
 		<owners>Tinna</owners>
@@ -13,21 +13,21 @@
 		<copyright>Copyright 2020-2026</copyright>
 		<tags>WPF Extension Adorner Animation Helper</tags>
 		<dependencies>
-			<group targetFramework="net45">
-				<dependency id="Paway.Helper" version="2.7.9" />
+			<group targetFramework="net462">
+				<dependency id="Paway.Helper" version="2.8.0" />
 			</group>
 			<group targetFramework="net48">
-				<dependency id="Paway.Helper" version="2.7.9" />
+				<dependency id="Paway.Helper" version="2.8.0" />
 			</group>
 			<group targetFramework="net6.0-windows">
-				<dependency id="Paway.Helper" version="2.7.9" />
+				<dependency id="Paway.Helper" version="2.8.0" />
 			</group>
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="..\bin\release\net45\Paway.WPF_Secure\Paway.WPF.dll"				target="lib\net45" />
-		<file src="..\bin\release\net45\Paway.WPF_Secure\Paway.WPF.pdb"				target="lib\net45" />
-		<file src="..\bin\release\net45\Paway.WPF.xml"								target="lib\net45" />
+		<file src="..\bin\release\net462\Paway.WPF_Secure\Paway.WPF.dll"			target="lib\net462" />
+		<file src="..\bin\release\net462\Paway.WPF_Secure\Paway.WPF.pdb"			target="lib\net462" />
+		<file src="..\bin\release\net462\Paway.WPF.xml"								target="lib\net462" />
 		<file src="..\bin\release\net48\Paway.WPF_Secure\Paway.WPF.dll"				target="lib\net48" />
 		<file src="..\bin\release\net48\Paway.WPF_Secure\Paway.WPF.pdb"				target="lib\net48" />
 		<file src="..\bin\release\net48\Paway.WPF.xml"								target="lib\net48" />
