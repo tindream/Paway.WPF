@@ -85,37 +85,40 @@ namespace Paway.WPF
         public bool ShowDialog(IntPtr hWndOwner)
         {
             bool flag = false;
-
+            Type typeIFileDialog = null;
             if (Environment.OSVersion.Version.Major >= 6)
             {
                 var r = new Reflector("System.Windows.Forms");
 
                 uint num = 0;
-                Type typeIFileDialog = r.GetType("FileDialogNative.IFileDialog");
-                object dialog = r.Call(ofd, "CreateVistaDialog");
-                r.Call(ofd, "OnBeforeVistaDialog", dialog);
-
-                uint options = (uint)r.CallAs(typeof(System.Windows.Forms.FileDialog), ofd, "GetOptions");
-                options |= (uint)r.GetEnum("FileDialogNative.FOS", "FOS_PICKFOLDERS");
-                r.CallAs(typeIFileDialog, dialog, "SetOptions", options);
-
-                object pfde = r.New("FileDialog.VistaDialogEvents", ofd);
-                object[] parameters = new object[] { pfde, num };
-                r.CallAs2(typeIFileDialog, dialog, "Advise", parameters);
-                num = (uint)parameters[1];
-                try
+                typeIFileDialog = r.GetType("FileDialogNative.IFileDialog");
+                if (typeIFileDialog != null)
                 {
-                    int num2 = (int)r.CallAs(typeIFileDialog, dialog, "Show", hWndOwner);
-                    flag = 0 == num2;
-                    if (flag) PConfig.FileDialogPath = this.FileName;
-                }
-                finally
-                {
-                    r.CallAs(typeIFileDialog, dialog, "Unadvise", num);
-                    GC.KeepAlive(pfde);
+                    object dialog = r.Call(ofd, "CreateVistaDialog");
+                    r.Call(ofd, "OnBeforeVistaDialog", dialog);
+
+                    uint options = (uint)r.CallAs(typeof(System.Windows.Forms.FileDialog), ofd, "GetOptions");
+                    options |= (uint)r.GetEnum("FileDialogNative.FOS", "FOS_PICKFOLDERS");
+                    r.CallAs(typeIFileDialog, dialog, "SetOptions", options);
+
+                    object pfde = r.New("FileDialog.VistaDialogEvents", ofd);
+                    object[] parameters = new object[] { pfde, num };
+                    r.CallAs2(typeIFileDialog, dialog, "Advise", parameters);
+                    num = (uint)parameters[1];
+                    try
+                    {
+                        int num2 = (int)r.CallAs(typeIFileDialog, dialog, "Show", hWndOwner);
+                        flag = 0 == num2;
+                        if (flag) PConfig.FileDialogPath = this.FileName;
+                    }
+                    finally
+                    {
+                        r.CallAs(typeIFileDialog, dialog, "Unadvise", num);
+                        GC.KeepAlive(pfde);
+                    }
                 }
             }
-            else
+            if (typeIFileDialog == null)
             {
                 var fbd = new FolderBrowserDialog();
                 fbd.Description = this.Title;

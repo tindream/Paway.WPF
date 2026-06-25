@@ -2,16 +2,15 @@
 	<PropertyGroup>
 		<UseWPF>true</UseWPF>
 		<OutputType>WinExe</OutputType>
-		<TargetFrameworks>net48</TargetFrameworks>
+		<TargetFrameworks>net462;net48;net6.0-windows</TargetFrameworks>
 		<!--不自动生成程序集信息(版本号)-->
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<AssemblyName>Paway.KeyboardAll</AssemblyName>
 		<RootNamespace>Paway.KeyboardAll</RootNamespace>
 		<PlatformTarget>AnyCPU</PlatformTarget>
-		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-		<OutputPath>..\bin\$(Configuration)\KeyboardAll</OutputPath>
-		<NoWarn>NETSDK1049</NoWarn>
+		<OutputPath>..\bin\$(Configuration)</OutputPath>
+		<NoWarn>NETSDK1049,NETSDK1138</NoWarn>
 		<ApplicationIcon>logo.ico</ApplicationIcon>
 	</PropertyGroup>
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
@@ -21,7 +20,6 @@
 	<ItemGroup>
 		<Resource Include="logo.ico" />
 	</ItemGroup>
-
 
 	<ItemGroup>
 		<ProjectReference Include="..\Paway.WPF\Paway.WPF.csproj" />
