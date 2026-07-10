@@ -2,15 +2,16 @@
 	<PropertyGroup>
 		<UseWPF>true</UseWPF>
 		<OutputType>WinExe</OutputType>
-		<TargetFrameworks>net462;net48;net6.0-windows</TargetFrameworks>
+		<TargetFrameworks>net48</TargetFrameworks>
 		<!--不自动生成程序集信息(版本号)-->
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<AssemblyName>Paway.KeyboardAll</AssemblyName>
-		<RootNamespace>Paway.KeyboardAll</RootNamespace>
+		<AssemblyName>Paway.Keyboard</AssemblyName>
+		<RootNamespace>Paway.Keyboard</RootNamespace>
 		<PlatformTarget>AnyCPU</PlatformTarget>
-		<OutputPath>..\bin\$(Configuration)</OutputPath>
-		<NoWarn>NETSDK1049,NETSDK1138</NoWarn>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<OutputPath>..\bin\$(Configuration)\Keyboard</OutputPath>
+		<NoWarn>NETSDK1049</NoWarn>
 		<ApplicationIcon>logo.ico</ApplicationIcon>
 	</PropertyGroup>
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">

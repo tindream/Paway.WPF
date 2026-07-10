@@ -46,14 +46,14 @@ namespace Paway.WPF
         /// <summary>
         /// 自动生成泛型谓词条件
         /// </summary>
-        public static Func<T, bool> Predicate<T>(this ObservableCollection<DataGridColumn> columns, string value, Func<T, bool> action = null)
+        public static Func<T, bool> Predicate<T>(this ObservableCollection<DataGridColumn> columns, string value, Func<T, bool> filter = null)
         {
-            return typeof(T).Predicate(columns, value, action);
+            return typeof(T).Predicate(columns, value, filter);
         }
         /// <summary>
         /// 自动生成泛型谓词条件
         /// </summary>
-        public static Func<T, bool> Predicate<T>(this Type type, ObservableCollection<DataGridColumn> columns, string value, Func<T, bool> action = null)
+        public static Func<T, bool> Predicate<T>(this Type type, ObservableCollection<DataGridColumn> columns, string value, Func<T, bool> filter = null)
         {
             var list = new List<string>();
             foreach (var column in columns)
@@ -66,7 +66,7 @@ namespace Paway.WPF
                 }
                 list.Add(name);
             }
-            return type.Predicate(list, value, action);
+            return type.Predicate(list, value, filter);
         }
 
         #endregion

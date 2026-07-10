@@ -8,7 +8,6 @@ using System.Windows.Markup;
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
 
-[assembly: AssemblyCopyright("Copyright ©  2020-2024")]
 [assembly: AssemblyDescription("WPF Extension Adorner Animation Helper")]
 [assembly: AssemblyTitle("WPF Extension Adorner Animation Helper")]
 [assembly: AssemblyProduct("Paway.WPF")]

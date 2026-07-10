@@ -8,9 +8,9 @@ using System.Windows;
 // 与程序集关联的信息。
 
 [assembly: AssemblyCopyright("Copyright ©  2025-2025")]
-[assembly: AssemblyDescription("KeyboardAll")]
-[assembly: AssemblyTitle("WPKeyboardAll")]
-[assembly: AssemblyProduct("Paway.KeyboardAll")]
+[assembly: AssemblyDescription("Keyboard")]
+[assembly: AssemblyTitle("WPF Keyboard")]
+[assembly: AssemblyProduct("Paway.Keyboard")]
 
 // 将 ComVisible 设置为 false 会使此程序集中的类型
 //对 COM 组件不可见。如果需要从 COM 访问此程序集中的类型
