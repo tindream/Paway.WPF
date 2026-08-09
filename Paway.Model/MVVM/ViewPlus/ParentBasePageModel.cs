@@ -153,7 +153,7 @@ namespace Paway.Model
         /// <summary>
         /// 设置添加窗体
         /// </summary>
-        protected override Window AddWindow()
+        protected override bool AddWindow()
         {
             if (ViewModel().Info.Id == 0) ViewModel().Info.ParentId = ParentInfo.Id;
             return base.AddWindow();

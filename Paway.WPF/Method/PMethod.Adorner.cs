@@ -816,29 +816,29 @@ namespace Paway.WPF
         /// </summary>
         public static Task ProgressAsync(FrameworkElement element, Action action, Action success = null,
             Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null,
-            HorizontalAlignment? alignment = HorizontalAlignment.Center)
+            HorizontalAlignment? alignment = HorizontalAlignment.Center, int? width = null)
         {
-            return ProgressAsync(element, null, adorner => action?.Invoke(), success, error, completed, iProgressBar, iProgressRound, fontSize, alignment);
+            return ProgressAsync(element, null, adorner => action?.Invoke(), success, error, completed, iProgressBar, iProgressRound, fontSize, alignment, width);
         }
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
         public static Task ProgressAsync(FrameworkElement element, Action<CustomAdorner> action, Action success = null,
             Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null,
-            HorizontalAlignment? alignment = HorizontalAlignment.Center)
+            HorizontalAlignment? alignment = HorizontalAlignment.Center, int? width = null)
         {
-            return ProgressAsync(element, null, action, success, error, completed, iProgressBar, iProgressRound, fontSize, alignment);
+            return ProgressAsync(element, null, action, success, error, completed, iProgressBar, iProgressRound, fontSize, alignment, width);
         }
         /// <summary>
         /// 模式显示Window忙提示框，执行完成后关闭
         /// </summary>
         public static Task ProgressAsync(FrameworkElement element, object msg, Action<CustomAdorner> action, Action success = null,
             Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null,
-            HorizontalAlignment? alignment = HorizontalAlignment.Center)
+            HorizontalAlignment? alignment = HorizontalAlignment.Center, int? width = null)
         {
             return Invoke(() =>
             {
-                var progress = ProgressAdorner(element, msg, iProgressBar, iProgressRound, fontSize, alignment);
+                var progress = ProgressAdorner(element, msg, iProgressBar, iProgressRound, fontSize, alignment, width);
                 if (progress == null) throw new WarningException("Decorator not found on control");
                 return Task.Run(() =>
                 {
@@ -889,7 +889,7 @@ namespace Paway.WPF
         /// <para>当前控件</para>
         /// </summary>
         public static CustomAdorner ProgressAdorner(FrameworkElement element, object msg = null, bool iProgressBar = false,
-            bool iProgressRound = true, int? fontSize = null, HorizontalAlignment? alignment = HorizontalAlignment.Center)
+            bool iProgressRound = true, int? fontSize = null, HorizontalAlignment? alignment = HorizontalAlignment.Center, int? width = null)
         {
             if (element != null)
             {
@@ -903,7 +903,7 @@ namespace Paway.WPF
                     BorderBrush = Colors.LightGray.ToBrush(),
                     BorderThickness = new Thickness(1),
                     Background = Colors.White.ToAlpha(PConfig.Alpha).ToBrush(),
-                    Width = 350,
+                    Width = width ?? 350,
                 };
                 Panel panel = new DockPanel();
                 if (!iProgressRound) panel = new Grid();

@@ -135,7 +135,7 @@ namespace Paway.Model
         /// <summary>
         /// 设置添加窗体
         /// </summary>
-        protected virtual Window AddWindow() { return null; }
+        protected virtual bool AddWindow() { return false; }
         /// <summary>
         /// 重载-自定义查询列表
         /// </summary>
@@ -376,8 +376,7 @@ namespace Paway.Model
                     return base.Action(item);
                 case "添加":
                     ViewModel().Info = new T();
-                    var add = AddWindow();
-                    if (add != null && PMethod.ShowWindow(DataGrid, add) == true)
+                    if (AddWindow())
                     {
                         Insert(ViewModel().Info);
                     }
@@ -386,8 +385,7 @@ namespace Paway.Model
                     if (SelectedInfo() is T info)
                     {
                         ViewModel().Info = info;
-                        var edit = AddWindow();
-                        if (edit != null && PMethod.ShowWindow(DataGrid, edit) == true)
+                        if (AddWindow())
                         {
                             Updated(info);
                         }
