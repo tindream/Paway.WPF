@@ -831,37 +831,37 @@ namespace Paway.WPF
         /// 同步调用
         /// <para>任何与 Application 不在同一个线程的代码，都可能遭遇 Application.Current 为 null。如Shutdown关闭</para>
         /// </summary>
-        public static void Invoke(Action action, Action<Exception> error = null)
+        public static bool Invoke(Action action, Action<Exception> error = null)
         {
             try
             {
-                Application.Current?.Dispatcher.Invoke(() =>
-                {
-                    action.Invoke();
-                });
+                if (Application.Current == null) return false;
+                Application.Current.Dispatcher.Invoke(() => action.Invoke());
+                return true;
             }
             catch (Exception ex)
             {
                 if (error == null) ex.Log();
                 else error.Invoke(ex);
+                return false;
             }
         }
         /// <summary>
         /// 带参数同步调用
         /// </summary>
-        public static void Invoke<T>(Action<T> action, T t, Action<Exception> error = null)
+        public static bool Invoke<T>(Action<T> action, T t, Action<Exception> error = null)
         {
             try
             {
-                Application.Current?.Dispatcher.Invoke(new Action<T>(arg =>
-                {
-                    action.Invoke(arg);
-                }), t);
+                if (Application.Current == null) return false;
+                Application.Current.Dispatcher.Invoke(new Action<T>(arg => action.Invoke(arg)), t);
+                return true;
             }
             catch (Exception ex)
             {
                 if (error == null) ex.Log();
                 else error.Invoke(ex);
+                return false;
             }
         }
         /// <summary>
@@ -871,10 +871,8 @@ namespace Paway.WPF
         {
             try
             {
-                return Application.Current == null ? default : Application.Current.Dispatcher.Invoke(() =>
-                {
-                    return action.Invoke();
-                });
+                if (Application.Current == null) return default;
+                return Application.Current.Dispatcher.Invoke(() => action.Invoke());
             }
             catch (Exception ex)
             {
@@ -890,10 +888,8 @@ namespace Paway.WPF
         {
             try
             {
-                return Application.Current == null ? default : (O)Application.Current.Dispatcher.Invoke(new Func<T, O>(arg =>
-                {
-                    return action.Invoke(arg);
-                }), t);
+                if (Application.Current == null) return default;
+                return (O)Application.Current.Dispatcher.Invoke(new Func<T, O>(arg => action.Invoke(arg)), t);
             }
             catch (Exception ex)
             {
@@ -905,11 +901,12 @@ namespace Paway.WPF
         /// <summary>
         /// 异步调用
         /// </summary>
-        public static void BeginInvoke(Action action, Action<Exception> error = null)
+        public static DispatcherOperation BeginInvoke(Action action, Action<Exception> error = null)
         {
             try
             {
-                Application.Current?.Dispatcher.BeginInvoke(new Action(() =>
+                if (Application.Current == null) return default;
+                return Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     try
                     {
@@ -926,16 +923,18 @@ namespace Paway.WPF
             {
                 if (error == null) ex.Log();
                 else error.Invoke(ex);
+                return default;
             }
         }
         /// <summary>
         /// 带参数异步调用
         /// </summary>
-        public static void BeginInvoke<T>(Action<T> action, T t, Action<Exception> error = null)
+        public static DispatcherOperation BeginInvoke<T>(Action<T> action, T t, Action<Exception> error = null)
         {
             try
             {
-                Application.Current?.Dispatcher.BeginInvoke(new Action<T>(arg =>
+                if (Application.Current == null) return default;
+                return Application.Current.Dispatcher.BeginInvoke(new Action<T>(arg =>
                 {
                     try
                     {
@@ -952,6 +951,7 @@ namespace Paway.WPF
             {
                 if (error == null) ex.Log();
                 else error.Invoke(ex);
+                return default;
             }
         }
 
@@ -983,15 +983,21 @@ namespace Paway.WPF
                         if (PMethod.Invoke(() => Application.Current.MainWindow) != null) break;
                         Thread.Sleep(5);
                     }
-                    PMethod.Invoke(() =>
+                    for (var i = 0; i < 1000; i++)
                     {
-                        PConfig.Window = Application.Current.MainWindow;
-                        if (PConfig.Window == null) "未获取到MainWindow".Warn();
-                    });
+                        var result = PMethod.Invoke(() =>
+                        {
+                            PConfig.Window = Application.Current.MainWindow;
+                            PConfig.Handle = PConfig.Window.Handle();
+                            if (PConfig.Window == null) "获取MainWindow失败".Warn();
+                        });
+                        if (result) break;
+                        Thread.Sleep(5);
+                    }
                 }
                 catch (Exception ex)
                 {
-                    $"获取MainWindow失败：{ex.Message()}".Warn();
+                    ex.Log("获取MainWindow失败");
                 }
             });
             return true;

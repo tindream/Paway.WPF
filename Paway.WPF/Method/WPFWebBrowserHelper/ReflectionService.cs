@@ -8,7 +8,7 @@ namespace Paway.WPF
 {
     /// <summary>
     /// </summary>
-    public static class ReflectionService
+    internal static class ReflectionService
     {
         /// <summary>
         /// </summary>
@@ -21,7 +21,7 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public static object ReflectGetProperty(this object target, string propertyName)
+        public static object ReflectGetProperty(object target, string propertyName)
         {
             if (target == null)
                 throw new ArgumentNullException(nameof(target));
@@ -36,7 +36,7 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public static object ReflectInvokeMethod(this object target, string methodName, Type[] argTypes, object[] parameters)
+        public static object ReflectInvokeMethod(object target, string methodName, Type[] argTypes, object[] parameters)
         {
             if (target == null)
                 throw new ArgumentNullException(nameof(target));

@@ -33,14 +33,14 @@ namespace Paway.WPF
         {
             if (_cookie != null)
             {
-                _cookie.ReflectInvokeMethod("Disconnect", new Type[] { }, null);
+                ReflectionService.ReflectInvokeMethod(_cookie, "Disconnect", new Type[] { }, null);
                 _cookie = null;
             }
         }
 
         private void Attach()
         {
-            var axIWebBrowser2 = _webBrowser.ReflectGetProperty("AxIWebBrowser2");
+            var axIWebBrowser2 = ReflectionService.ReflectGetProperty(_webBrowser, "AxIWebBrowser2");
             var webBrowserEvent = new WebBrowserEvent(this);
             var cookieType = typeof(WebBrowser).Assembly.GetType("MS.Internal.Controls.ConnectionPointCookie");
             _cookie = Activator.CreateInstance(
