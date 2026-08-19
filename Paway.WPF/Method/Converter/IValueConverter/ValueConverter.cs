@@ -157,6 +157,10 @@ namespace Paway.WPF
                 var valueReg = parameter.ToInt();
                 result = valueNormal > valueReg;
             }
+            else
+            {
+                result = value.ToDouble() > parameter.ToDouble();
+            }
             return result;
         }
         /// <summary>
@@ -184,6 +188,10 @@ namespace Paway.WPF
                 var valueNormal = value.GetHashCode();
                 var valueReg = parameter.ToInt();
                 result = valueNormal < valueReg;
+            }
+            else
+            {
+                result = value.ToDouble() < parameter.ToDouble();
             }
             return result;
         }

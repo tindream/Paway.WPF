@@ -128,18 +128,19 @@ namespace Paway.WPF
         }
 
         /// <summary>
-        /// 添加文本并换行
+        /// 添加文本段落并换行
         /// </summary>
-        public void AddLine(string content, Action action)
+        public void AddLine(string content, Action custom)
         {
-            AddLine(content, null, action);
+            AddLine(content, null, custom);
         }
         /// <summary>
-        /// 添加URL并换行
+        /// 添加URL段落
+        /// <para>iAppend=true:追加URL到现有段落</para>
         /// </summary>
-        public void AddLine(string title, string url)
+        public void AddLine(string title, string url, Color? color = null, Action custom = null, bool line = true, bool iAppend = false)
         {
-            AddLine(title, () =>
+            AddLine(title, color, () =>
             {
                 if (string.IsNullOrEmpty(url)) return;
                 url = url.Replace("&", "^&");
@@ -148,126 +149,68 @@ namespace Paway.WPF
                     UseShellExecute = false,
                     CreateNoWindow = true
                 });
-            });
-        }
-        /// <summary>
-        /// 添加文本
-        /// </summary>
-        public void AddText(string content, Action action)
-        {
-            AddLine(content, null, action, false);
-        }
-        /// <summary>
-        /// 添加文本
-        /// </summary>
-        public void AddText(string content, Color color)
-        {
-            AddLine(content, color, null, false);
+            }, line, iAppend);
         }
         /// <summary>
         /// 添加文本并换行
+        /// <para>iAppend=true:追加文本到现有段落</para>
         /// </summary>
-        public void AddLine(string content = null, Color? color = null, Action action = null, bool line = true)
+        public void AddLine(string content = null, Color? color = null, Action custom = null, bool line = true, bool iAppend = false)
         {
-            var range = new TextRange(this.CaretPosition, this.Document.ContentEnd);
-            var isLast = range.Text.Replace(Environment.NewLine, string.Empty).IsEmpty() && (range.Text.IndexOf(Environment.NewLine) == range.Text.LastIndexOf(Environment.NewLine));
-            if (Document.Blocks.Count <= 0)
+            if (!content.IsEmpty())
             {
-                Document.Blocks.Add(new Paragraph());
-            }
-            Paragraph block = (Paragraph)Document.Blocks.LastBlock;
-            Run run = new Run(content);
-            if (action == null)
-            {
-                if (color != null) { run.Foreground = color.Value.ToBrush(); }
-                block.Inlines.Add(run);
-            }
-            else
-            {
-                Hyperlink hl = new Hyperlink(run);
-                if (color != null) { hl.Foreground = color.Value.ToBrush(); }
-                hl.Click += delegate { action(); };
-                hl.MouseLeftButtonDown += delegate { action(); };
-                block.Inlines.Add(hl);
+                Paragraph block;
+                if (iAppend)
+                {
+                    if (Document.Blocks.Count <= 0) Document.Blocks.Add(new Paragraph());
+                    block = (Paragraph)Document.Blocks.LastBlock;
+                }
+                else
+                {
+                    block = new Paragraph();
+                    Document.Blocks.Add(block);
+                }
+                var run = new Run(content);
+                if (custom == null)
+                {
+                    if (color != null) { run.Foreground = color.Value.ToBrush(); }
+                    block.Inlines.Add(run);
+                }
+                else
+                {
+                    Hyperlink hl = new Hyperlink(run);
+                    if (color != null) { hl.Foreground = color.Value.ToBrush(); }
+                    hl.Click += delegate { custom(); };
+                    hl.MouseLeftButtonDown += delegate { custom(); };
+                    block.Inlines.Add(hl);
+                }
             }
             if (line) Document.Blocks.Add(new Paragraph());
-            AutoShow(isLast);
+            AutoLast();
+        }
+        /// <summary>
+        /// 插入水平分割线并换行
+        /// </summary>
+        public void AddLine(Color color)
+        {
+            if (Document.Blocks.Count <= 0) Document.Blocks.Add(new Paragraph());
+            var block = (Paragraph)Document.Blocks.LastBlock;
+            block.Padding = new Thickness(0, 4, 0, 4);
+
+            //底部边框 = 分割线
+            block.BorderThickness = new Thickness(0, 0, 0, 1);
+            block.BorderBrush = new SolidColorBrush(color);
+
+            Document.Blocks.Add(new Paragraph());
         }
         /// <summary>
         /// 滚动到最后或显示
         /// </summary>
-        public void AutoShow(bool isLast = true)
+        public void AutoLast()
         {
-            if (isLast)
-            {
-                if (this.ScrollViewer == null) PMethod.BeginInvoke(() => { this.ScrollViewer?.ScrollToEnd(); });
-                else this.ScrollViewer.ScrollToEnd();
-                this.CaretPosition = this.Document.ContentEnd;
-            }
-            else
-            {//无效
-                var currObj = this.CaretPosition.Parent;
-                if (currObj is FrameworkElement fe)
-                {
-                    fe.BringIntoView();
-                }
-                else if (currObj is FrameworkContentElement fce)
-                {
-                    fce.BringIntoView();
-                }
-            }
-        }
-
-        /// <summary>
-        /// 添加文本
-        /// </summary>
-        public void Add(string content, Action action)
-        {
-            Add(content, null, action);
-        }
-        /// <summary>
-        /// 添加URL
-        /// </summary>
-        public void Add(string title, string url)
-        {
-            Add(title, () =>
-            {
-                if (string.IsNullOrEmpty(url)) return;
-                url = url.Replace("&", "^&");
-                Process.Start(new ProcessStartInfo("cmd", $"/c start {url}")
-                {
-                    UseShellExecute = false,
-                    CreateNoWindow = true
-                });
-            });
-        }
-        /// <summary>
-        /// 添加文本
-        /// </summary>
-        public void Add(string content = null, Color? color = null, Action action = null)
-        {
-            var range = new TextRange(this.CaretPosition, this.Document.ContentEnd);
-            var isLast = range.Text.Replace(Environment.NewLine, string.Empty).IsEmpty() && (range.Text.IndexOf(Environment.NewLine) == range.Text.LastIndexOf(Environment.NewLine));
-            if (Document.Blocks.Count <= 0)
-            {
-                Document.Blocks.Add(new Paragraph());
-            }
-            Paragraph block = (Paragraph)Document.Blocks.LastBlock;
-            Run run = new Run(content);
-            if (action == null)
-            {
-                if (color != null) { run.Foreground = color.Value.ToBrush(); }
-                block.Inlines.Add(run);
-            }
-            else
-            {
-                Hyperlink hl = new Hyperlink(run);
-                if (color != null) { hl.Foreground = color.Value.ToBrush(); }
-                hl.Click += delegate { action(); };
-                hl.MouseLeftButtonDown += delegate { action(); };
-                block.Inlines.Add(hl);
-            }
-            AutoShow(isLast);
+            this.CaretPosition = this.Document.ContentEnd;
+            if (this.ScrollViewer == null) PMethod.BeginInvoke(() => { this.ScrollViewer?.ScrollToEnd(); });
+            else this.ScrollViewer.ScrollToEnd();
         }
 
         #endregion

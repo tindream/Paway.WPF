@@ -111,7 +111,7 @@ namespace Paway.Model
             {
                 this.TimeNow = TimeChangeEvent != null ? TimeChangeEvent.Invoke() : DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss dddd");
                 Thread.Sleep(1000 - DateTime.Now.Millisecond);
-                while (true)
+                while (!PConfig.IClose)
                 {
                     this.TimeNow = TimeChangeEvent != null ? TimeChangeEvent.Invoke() : DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss dddd");
                     Thread.Sleep(1000);

@@ -94,13 +94,14 @@ namespace Paway.WPF
                 parentWindow.LocationChanged += ParentWindow_LocationChanged;
                 parentWindow.SizeChanged += ParentWindow_LocationChanged;
             }
+            var taskHandle = Win32Helper.TaskHandle();
             Task.Run(() =>
             {
                 var iShow = true;
                 for (var i = 0; timeout == 0 || i < timeout * 25; i++)
                 {
                     IntPtr current = NativeMethods.GetForegroundWindow();
-                    if (current != this.Handle)
+                    if (current != this.Handle && current != taskHandle)
                     {
                         if (iShow)
                         {

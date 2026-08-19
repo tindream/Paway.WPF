@@ -40,10 +40,25 @@ namespace Paway.WPF
         internal static void InitResources() { }
 
         #region 全局配置
+        private static Window _window;
         /// <summary>
         /// 主窗体
         /// </summary>
-        public static Window Window { get; set; }
+        public static Window Window
+        {
+            get { return _window; }
+            set
+            {
+                if (_window != null) _window.Closed -= Window_Closed;
+                _window = value;
+                Handle = PMethod.Invoke(() => value.Handle());
+                _window.Closed += Window_Closed;
+            }
+        }
+        private static void Window_Closed(object sender, EventArgs e)
+        {
+            IClose = true;
+        }
         private static LanguageBaseInfo languageBase;
         /// <summary>
         /// 多语言包

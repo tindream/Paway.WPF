@@ -988,7 +988,6 @@ namespace Paway.WPF
                         var result = PMethod.Invoke(() =>
                         {
                             PConfig.Window = Application.Current.MainWindow;
-                            PConfig.Handle = PConfig.Window.Handle();
                             if (PConfig.Window == null) "获取MainWindow失败".Warn();
                         });
                         if (result) break;
