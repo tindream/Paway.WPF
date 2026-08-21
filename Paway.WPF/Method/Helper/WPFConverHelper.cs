@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -28,7 +29,7 @@ namespace Paway.WPF
         {
             if (PMethod.Parent(obj, out Window window))
             {
-                return new WindowInteropHelper(window).Handle;
+                return Handle(window);
             }
             return IntPtr.Zero;
         }
@@ -37,7 +38,10 @@ namespace Paway.WPF
         /// </summary>
         public static IntPtr Handle(this Window window)
         {
-            return new WindowInteropHelper(window).Handle;
+            var helper = new WindowInteropHelper(window);
+            var handle = helper.Handle;
+            if (handle == IntPtr.Zero) handle = helper.EnsureHandle();
+            return handle;
         }
 
         #endregion

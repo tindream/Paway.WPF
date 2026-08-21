@@ -174,7 +174,7 @@ namespace Paway.WPF
             {
                 InvalidateMeasure();
             }
-            IntPtr handle = new WindowInteropHelper(this).Handle;
+            IntPtr handle = this.Handle();
             HwndSource.FromHwnd(handle).AddHook(WndProc);
         }
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)

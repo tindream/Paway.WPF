@@ -51,6 +51,7 @@
             <ListBoxItemEXT Text="TabControl"/>
             <ListBoxItemEXT Text="Expander"/>
             <ListBoxItemEXT Text="TreeView"/>
+            <ListBoxItemEXT Text="ListView"/>
             <ListBoxItemEXT Text="PlotView"/>
             <ListBoxItemEXT Text="Page" IsNormal="True"/>
             <ListBoxItemEXT Text="动画"/>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paway.Helper;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -12,7 +13,6 @@ using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Threading;
 using System.Xml;
-using Paway.Helper;
 
 namespace Paway.WPF
 {
@@ -51,8 +51,8 @@ namespace Paway.WPF
             {
                 if (_window != null) _window.Closed -= Window_Closed;
                 _window = value;
-                Handle = PMethod.Invoke(() => value.Handle());
-                _window.Closed += Window_Closed;
+                value.Closed += Window_Closed;
+                Handle = value.Handle();
             }
         }
         private static void Window_Closed(object sender, EventArgs e)

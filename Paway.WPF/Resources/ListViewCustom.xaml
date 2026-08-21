@@ -41,6 +41,7 @@
                     <Setter Property="IsSelected" Value="{Binding IsSelected}" />
                     <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
                     <Setter Property="Visibility" Value="{Binding Visibility}" />
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                     <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
                     <Setter Property="Template">
                         <Setter.Value>

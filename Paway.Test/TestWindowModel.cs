@@ -98,6 +98,9 @@ namespace Paway.Test
                 case "TreeView":
                     Frame.Content = ViewModelLocator.GetViewInstance<TestTreeView>();
                     break;
+                case "ListView":
+                    Frame.Content = ViewModelLocator.GetViewInstance<TestListView>();
+                    break;
                 case "PlotView":
                     Frame.Content = ViewModelLocator.GetViewInstance<TestPlotView>();
                     break;
