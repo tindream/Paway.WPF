@@ -335,9 +335,9 @@ namespace Paway.Model
         /// <summary>
         /// 按钮列表-点击命令处理
         /// </summary>
-        protected override void Action(ListViewCustom listView1)
+        protected override void Action(ListViewCustom listView1, SelectionChangedEventArgs e)
         {
-            base.Action(listView1);
+            base.Action(listView1, e);
             if (listView1.SelectedItem is IListViewItem item)
             {
                 Selectioned(listView1, item);

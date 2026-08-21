@@ -49,6 +49,7 @@ namespace Paway.Test
         protected override void OnClosing(CancelEventArgs e)
         {
             ViewModelLocator.Default.TestWindow.Close();
+            WeakReferenceMessenger.Default.Send(new TipCloseMessage());
             base.OnClosing(e);
         }
     }

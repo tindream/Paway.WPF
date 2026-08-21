@@ -18,11 +18,11 @@
         <StackPanel HorizontalAlignment="Center" Margin="0,10" VerticalAlignment="Center" Width="500">
             <DockPanel>
                 <TextBlock Style="{StaticResource TitleBlock}" Text="主题颜色：" />
-                <ListViewEXT x:Name="listView1" ItemBorder="4" ItemBrush="Transparent;;" ItemMargin="2" ItemHeight="75" ItemWidth="100" 
+                <ListViewEXT ItemBorder="4" ItemBrush="Transparent;;" ItemMargin="2" ItemHeight="75" ItemWidth="100" 
                              ItemTextForeground="White" ItemDescDock="Bottom" ItemDescFontSize="10" ItemDescPadding="3" ItemDescForeground="#F9F9F9">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction Command="{Binding SelectionCommand}" CommandParameter="{Binding ElementName=listView1}"/>
+                            <i:InvokeCommandAction Command="{Binding SelectionCommand}" PassEventArgsToCommand="True"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <ListBoxItemEXT Text="Element" ItemBackground="#409EFE" Tag="#409EFF" Desc="默认"/>

@@ -38,6 +38,14 @@ namespace Paway.Test
         }
         public ObservableCollection<TreeViewItemModel> TreeList { get; private set; } = new ObservableCollection<TreeViewItemModel>();
 
+        public ICommand SelectedItemChanged => new RelayCommand<TreeViewEXT>(treeView =>
+        {
+            if (treeView.SelectedItem is ITreeViewItem item)
+            {
+                this.TreeId = item.Id;
+            }
+        });
+
         public TestTreeViewModel()
         {
             AddTree();

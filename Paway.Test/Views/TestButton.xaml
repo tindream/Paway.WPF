@@ -18,13 +18,11 @@
                 <Path Style="{StaticResource PathRound}" Fill="Red"/>
             </TransitionControl>
             <ButtonEXT Name="btnCancel" Content="取消"  
-                       Type="Warn" IsLight="True"
-                       CommandParameter="{Binding ElementName=btn}" Click="Cancel_Click" 
+                       Type="Warn" IsLight="True" Click="Cancel_Click" 
                        Image="pack://application:,,,/Paway.Test;component/Images/close.png|pack://application:,,,/Paway.Test;component/Images/close_white.png"/>
 
             <Grid>
-                <ButtonEXT Name="btn" Click="Commit_Click" Content="{FontImage Type=Adjust}" 
-                       CommandParameter="{Binding ElementName=btn}" Height="30"/>
+                <ButtonEXT Name="btn" Click="Commit_Click" Content="{FontImage Type=Adjust}" Height="30"/>
                 <Badge Name="badge" IsWaving="True" HorizontalAlignment="Right" Text="1" Background="{StaticResource Error}" Height="20" Margin="-6" VerticalAlignment="Top"/>
             </Grid>
 

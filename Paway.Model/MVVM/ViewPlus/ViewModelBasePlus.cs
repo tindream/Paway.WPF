@@ -20,8 +20,19 @@ namespace Paway.Model
     /// <summary>
     /// 模型基础处理
     /// </summary>
-    public class ViewModelBasePlus : ObservableObject
+    public class ViewModelBasePlus : ObservableObject, IPageReload
     {
+        #region 页面加载
+        /// <summary>
+        /// 加载状态
+        /// </summary>
+        public bool ILoad { get; set; }
+        /// <summary>
+        /// 在Loaded第一次触发或重加载时调用
+        /// </summary>
+        public virtual void PageReload() { }
+
+        #endregion
         #region 命令
         /// <summary>
         /// 按钮通用动作命令
@@ -30,35 +41,40 @@ namespace Paway.Model
         /// <summary>
         /// 点击按钮
         /// </summary>
-        public ICommand ButtonClickCommand => new RelayCommand<ButtonEXT>(btn =>
+        public ICommand ButtonClickCommand => new RelayCommand<RoutedEventArgs>(e =>
         {
-            try
+            if (e.Source is ButtonEXT btn)
             {
-                Action(btn);
-            }
-            catch (Exception ex)
-            {
-                WeakReferenceMessenger.Default.Send(new StatuMessage(ex, btn));
+                try
+                {
+                    Action(btn);
+                }
+                catch (Exception ex)
+                {
+                    WeakReferenceMessenger.Default.Send(new StatuMessage(ex, btn));
+                }
             }
         });
-
         /// <summary>
         /// 列表通用动作命令
         /// </summary>
-        protected virtual void Action(ListViewCustom listView1) { }
+        protected virtual void Action(ListViewCustom listView1, SelectionChangedEventArgs e) { }
         /// <summary>
         /// 选中列表项
         /// </summary>
-        public ICommand SelectionCommand => new RelayCommand<ListViewCustom>(listView1 =>
+        public ICommand SelectionCommand => new RelayCommand<SelectionChangedEventArgs>(e =>
         {
-            try
+            if (e.Source is ListViewCustom listView1)
             {
-                Action(listView1);
+                try
+                {
+                    Action(listView1, e);
+                }
+                catch (Exception ex)
+                {
+                    WeakReferenceMessenger.Default.Send(new StatuMessage(ex, listView1));
+                }
             }
-            catch (Exception ex)
-            {
-                WeakReferenceMessenger.Default.Send(new StatuMessage(ex, listView1));
-        }
         });
 
         /// <summary>

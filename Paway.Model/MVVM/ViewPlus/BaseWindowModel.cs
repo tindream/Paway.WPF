@@ -20,10 +20,6 @@ namespace Paway.Model
     public class BaseWindowModel : ViewModelBasePlus, IWindowModel
     {
         #region 属性
-        /// <summary>
-        /// 加载状态
-        /// </summary>
-        public bool ILoad { get; set; }
         private string title;
         /// <summary>
         /// 标题

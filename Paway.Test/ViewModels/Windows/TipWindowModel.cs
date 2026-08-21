@@ -19,12 +19,6 @@ namespace Paway.Test
     {
         #region 属性
         private TipWindow tipWindow;
-        private double tipWidth = 80;
-        public double TipWidth
-        {
-            get { return tipWidth; }
-            set { tipWidth = value; OnPropertyChanged(); }
-        }
         private bool _iAll;
         public bool IAll
         {
@@ -32,8 +26,6 @@ namespace Paway.Test
             set
             {
                 _iAll = value;
-                if (value) TipWidth = 248;
-                else TipWidth = 80;
                 OnPropertyChanged();
                 TipAnimation();
             }
@@ -52,19 +44,7 @@ namespace Paway.Test
                 AnimationHelper.Start(element, TransitionType.ScanX, 1, 3, time);
                 AnimationHelper.Start(element, TransitionType.ScanY, 1, 3, time);
             }
-            var desktopWorkingArea = SystemParameters.WorkArea;
-            if (this.tipWindow.Left < 0)
-            {
-                AnimationHelper.Start(this.tipWindow, Window.LeftProperty, this.tipWindow.Left, 0, time);
-            }
-            if (this.tipWindow.Left > desktopWorkingArea.Width - this.tipWindow.ActualWidth)
-            {
-                AnimationHelper.Start(this.tipWindow, Window.LeftProperty, this.tipWindow.Left, desktopWorkingArea.Width - this.tipWindow.ActualWidth, time);
-            }
-            if (this.tipWindow.Top > desktopWorkingArea.Height - this.tipWindow.ActualHeight)
-            {
-                AnimationHelper.Start(this.tipWindow, Window.TopProperty, this.tipWindow.Top, desktopWorkingArea.Height - this.tipWindow.ActualHeight, time);
-            }
+            WeakReferenceMessenger.Default.Send(new TipStateMessage());
         }
 
         #endregion
@@ -82,9 +62,9 @@ namespace Paway.Test
                 }
             }
         });
-        protected override void Action(ListViewCustom listView1)
+        protected override void Action(ListViewCustom listView1, SelectionChangedEventArgs e)
         {
-            base.Action(listView1);
+            base.Action(listView1, e);
             if (listView1.SelectedItem is IListViewItem info)
             {
                 switch (info.Text)

@@ -18,7 +18,7 @@ namespace Paway.Model
     /// <summary>
     /// 通用工具栏模型
     /// </summary>
-    public partial class OperateItemModel : ViewModelBasePlus, IPageReload
+    public partial class OperateItemModel : ViewModelBasePlus
     {
         #region 属性
         private OperateItem operateItem;
@@ -183,18 +183,6 @@ namespace Paway.Model
         {
             this.operateItem.AddUIElement(func, index);
         }
-        #endregion
-
-        #region 页重加载
-        /// <summary>
-        /// 加载状态
-        /// </summary>
-        public bool ILoad { get; set; }
-        /// <summary>
-        /// 在Loaded第一次触发或重加载时调用
-        /// </summary>
-        public virtual void PageReload() { }
-
         #endregion
 
         /// <summary>

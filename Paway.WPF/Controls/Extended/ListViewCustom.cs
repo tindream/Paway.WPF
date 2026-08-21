@@ -589,7 +589,8 @@ namespace Paway.WPF
                     RoutedEvent = UIElement.MouseLeftButtonDownEvent,
                     Source = this
                 };
-                if (PMethod.Parent(e.OriginalSource, out downItem))
+                if (PMethod.Parent(e.OriginalSource, out Button _)) { }
+                else if (PMethod.Parent(e.OriginalSource, out downItem))
                 {
                     if (INormal)
                     {

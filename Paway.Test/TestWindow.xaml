@@ -32,10 +32,10 @@
     </WindowEXT.FunctionBarRight>
     <DockPanel x:Name="Root">
         <model:StatuItem IConnect="True" DockPanel.Dock="Bottom"/>
-        <ListViewEXT Name="listView1" IsLight="True" ItemHeight="30" ItemWidth="150" Width="150" Cursor="Hand" ItemBorder="0,1,1,1" Margin="0,-30,2,0">
+        <ListViewEXT IsLight="True" ItemHeight="30" ItemWidth="150" Width="150" Cursor="Hand" ItemBorder="0,1,1,1" Margin="0,-30,2,0">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding SelectionCommand}" CommandParameter="{Binding ElementName=listView1}"/>
+                    <i:InvokeCommandAction Command="{Binding SelectionCommand}" PassEventArgsToCommand="True"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <ListBoxItemEXT Text="颜色"/>

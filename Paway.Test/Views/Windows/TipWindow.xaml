@@ -12,22 +12,22 @@
            Width="248" Height="248" HeaderHeight="0"
            WindowStyle="None" Topmost="True" ResizeMode="NoResize" AllowsTransparency="True" ShowInTaskbar="False">
     <Grid>
-        <Border Name="borderOne" Width="{Binding TipWidth}" Height="{Binding TipWidth}" BorderBrush="{StaticResource ThemeColor}" BorderThickness="15" CornerRadius="40" Visibility="{Binding IAll, Converter={StaticResource boolToCollapsed}}" RenderTransformOrigin="0.5,0.5">
+        <Border Name="borderOne" Width="80" Height="80" BorderBrush="{StaticResource ThemeColor}" BorderThickness="15" CornerRadius="40" Visibility="{Binding IAll, Converter={StaticResource boolToCollapsed}}" RenderTransformOrigin="0.5,0.5">
             <Border.RenderTransform>
                 <ScaleTransform CenterX="94" CenterY="94"/>
             </Border.RenderTransform>
             <ButtonEXT Content="O" Width="52" Height="52" Margin="-1,-1,0,0" Radius="30" FontSize="21" Command="{Binding ItemClickCommand}" CommandParameter="展开"/>
         </Border>
-        <Border Name="borderAll" Width="{Binding TipWidth}" Height="{Binding TipWidth}" BorderBrush="#C8D3D3F3" BorderThickness="5" CornerRadius="20" Visibility="{Binding IAll, Converter={StaticResource boolToVisible}}" RenderTransformOrigin="0.5,0.5">
+        <Border Name="borderAll" BorderBrush="#C8D3D3F3" BorderThickness="5" CornerRadius="20" Visibility="{Binding IAll, Converter={StaticResource boolToVisible}}" RenderTransformOrigin="0.5,0.5">
             <Border.RenderTransform>
                 <TransformGroup/>
             </Border.RenderTransform>
-            <ListViewEXT x:Name="listView3" IsLight="True" Type="Color" ItemTextForeground="White"
+            <ListViewEXT IsLight="True" Type="Color" ItemTextForeground="White"
                          ItemWidth="80" ItemHeight="80" ItemBackground="200;160;240" ItemTextFontSize="17"
                          ItemImageWidth="42" ItemImageStretch="Uniform">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding SelectionCommand}" CommandParameter="{Binding ElementName=listView3}"/>
+                        <i:InvokeCommandAction Command="{Binding SelectionCommand}" PassEventArgsToCommand="True"/>
                     </i:EventTrigger>
                     <i:EventTrigger EventName="PreviewMouseDown">
                         <i:InvokeCommandAction Command="{Binding ListViewMouseDown}" PassEventArgsToCommand="True"/>

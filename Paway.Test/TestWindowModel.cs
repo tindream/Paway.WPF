@@ -67,9 +67,9 @@ namespace Paway.Test
         #endregion
 
         #region 命令
-        protected override void Action(ListViewCustom listView1)
+        protected override void Action(ListViewCustom listView1, SelectionChangedEventArgs e)
         {
-            base.Action(listView1);
+            base.Action(listView1, e);
             if (listView1.SelectedItem is IListViewItem info)
             {
                 Action(info.Text);

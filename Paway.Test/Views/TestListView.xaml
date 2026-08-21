@@ -12,12 +12,12 @@
       d:DesignHeight="450" d:DesignWidth="600"
       Title="Empty">
     <Border BorderBrush="LightGray" Margin="20" Background="{StaticResource ThemeBackground}">
-        <ListViewEXT x:Name="listView3" IsLight="True" Type="Color" ItemTextForeground="White" Width="238"
-                         ItemWidth="80" ItemHeight="80" ItemBackground="200;160;240" ItemTextFontSize="17"
-                         ItemImageWidth="24" ItemImageStretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center" ItemImageDock="Right">
+        <ListViewEXT IsLight="True" Type="Color" ItemTextForeground="White" Width="238"
+                     ItemWidth="80" ItemHeight="80" ItemBackground="200;160;240" ItemTextFontSize="17"
+                     ItemImageWidth="24" ItemImageStretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center" ItemImageDock="Right">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding SelectionCommand}" CommandParameter="{Binding ElementName=listView3}"/>
+                    <i:InvokeCommandAction Command="{Binding SelectionCommand}" PassEventArgsToCommand="True"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <ListBoxItemEXT Text="A" Desc="Desc" ItemRadius="16,0,0,0"/>

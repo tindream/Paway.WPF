@@ -53,7 +53,7 @@ namespace Paway.Model
         /// <summary>
         /// 主题颜色
         /// </summary>
-        protected override void Action(ListViewCustom listView1)
+        protected override void Action(ListViewCustom listView1, SelectionChangedEventArgs e)
         {
             if (listView1.SelectedItem is ListBoxItemEXT selectedItem)
             {
