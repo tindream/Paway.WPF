@@ -10,6 +10,7 @@ namespace Paway.Model
 {
     /// <summary>
     /// 页重加载接口
+    /// <para>ViewModelLocator单实例模式下触发</para>
     /// </summary>
     public interface IPageReload
     {

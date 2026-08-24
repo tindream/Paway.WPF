@@ -1,6 +1,7 @@
 ﻿using Paway.Helper;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -90,6 +91,11 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty TypeProperty =
             DependencyProperty.RegisterAttached(nameof(Type), typeof(ColorType), typeof(ButtonEXT), new PropertyMetadata(ColorType.Color));
+
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty IMoveProperty =
+            DependencyProperty.RegisterAttached(nameof(IMove), typeof(bool), typeof(ButtonEXT));
 
         #endregion
 
@@ -285,6 +291,18 @@ namespace Paway.WPF
         {
             get { return (ColorType)GetValue(TypeProperty); }
             set { SetValue(TypeProperty, value); }
+
+        }
+        /// <summary>
+        /// 允许移动外层Window
+        /// <para>默认值：false</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("允许移动外层Window")]
+        public bool IMove
+        {
+            get { return (bool)GetValue(IMoveProperty); }
+            set { SetValue(IMoveProperty, value); }
         }
 
         #endregion
@@ -392,11 +410,7 @@ namespace Paway.WPF
         {
             if (e.ButtonState == MouseButtonState.Pressed && e.ClickCount == 1)
             {
-                if (this.AllowDrop)
-                {
-                    _lastMouseDown = e.GetPosition(this);
-                    //e.Handled = true;
-                }
+                _lastMouseDown = e.GetPosition(this);
             }
             base.OnPreviewMouseLeftButtonDown(e);
         }
@@ -423,7 +437,21 @@ namespace Paway.WPF
                     (Math.Abs(currentPosition.Y - _lastMouseDown.Value.Y) > SystemParameters.MinimumVerticalDragDistance))
                 {
                     _lastMouseDown = null;
-                    DragDrop.DoDragDrop(this, this, DragDropEffects.Move);
+                    if (this.AllowDrop)
+                    {
+                        DragDrop.DoDragDrop(this, this, DragDropEffects.Move);
+                    }
+                    else if (IMove)
+                    {
+                        this.ReleaseMouseCapture();
+                        if (PMethod.Parent(this, out Window window))
+                        {
+                            if ((bool)window.GetValue(WindowMonitor.IsDragMoveEnabledProperty))
+                            {
+                                window.DragMove();
+                            }
+                        }
+                    }
                 }
             }
             base.OnPreviewMouseMove(e);

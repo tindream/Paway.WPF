@@ -29,12 +29,12 @@ namespace Paway.WPF
             if (height < radius) height = radius;
 
             var percent = 0.33;
-            if (values.Length >= 7)
+            if (values.Length > 6)
             {
                 var min = values[4].ToDouble();
                 var max = values[5].ToDouble();
                 var value = values[6].ToDouble();
-                var rate = values.Length >= 8 ? values[7].ToDouble() : 1;
+                var rate = values.Length > 7 ? values[7].ToDouble() / 360 : 1;
                 value = min + (value - min) * rate;
                 value = value > max ? max : value;
                 value = value < min ? min : value;

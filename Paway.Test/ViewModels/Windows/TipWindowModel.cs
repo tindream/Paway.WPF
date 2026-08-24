@@ -67,6 +67,7 @@ namespace Paway.Test
             base.Action(listView1, e);
             if (listView1.SelectedItem is IListViewItem info)
             {
+                if (!info.Text.IsEmpty()) info.Text.Hit(this.tipWindow);
                 switch (info.Text)
                 {
                     case "A":

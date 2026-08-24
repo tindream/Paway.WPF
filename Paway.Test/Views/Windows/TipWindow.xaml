@@ -16,13 +16,14 @@
             <Border.RenderTransform>
                 <ScaleTransform CenterX="94" CenterY="94"/>
             </Border.RenderTransform>
-            <ButtonEXT Content="O" Width="52" Height="52" Margin="-1,-1,0,0" Radius="30" FontSize="21" Command="{Binding ItemClickCommand}" CommandParameter="展开"/>
+            <ButtonEXT Content="O" Width="52" Height="52" Margin="-1,-1,0,0" Radius="30" FontSize="21" Command="{Binding ItemClickCommand}" CommandParameter="展开"
+                       IMove="True"/>
         </Border>
         <Border Name="borderAll" BorderBrush="#C8D3D3F3" BorderThickness="5" CornerRadius="20" Visibility="{Binding IAll, Converter={StaticResource boolToVisible}}" RenderTransformOrigin="0.5,0.5">
             <Border.RenderTransform>
                 <TransformGroup/>
             </Border.RenderTransform>
-            <ListViewEXT IsLight="True" Type="Color" ItemTextForeground="White"
+            <ListViewEXT IsLight="True" Type="Color" ItemTextForeground="White" IMove="True"
                          ItemWidth="80" ItemHeight="80" ItemBackground="200;160;240" ItemTextFontSize="17"
                          ItemImageWidth="42" ItemImageStretch="Uniform">
                 <i:Interaction.Triggers>

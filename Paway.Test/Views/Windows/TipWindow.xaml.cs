@@ -65,6 +65,7 @@ namespace Paway.Test
                 this.iLoad = true;
                 PConfig.Window.LocationChanged += Window_LocationChanged;
                 PConfig.Window.SizeChanged += Window_LocationChanged;
+                PConfig.Window.StateChanged += Window_LocationChanged;
                 this.AutoHide();
                 Window_LocationChanged2(false);
                 WeakReferenceMessenger.Default.Send(new TipLoadMessage() { Obj = this });

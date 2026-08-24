@@ -24,7 +24,7 @@
                               RenderTransformOrigin="0.5,0.5">
                             <Path.RenderTransform>
                                 <TransformGroup>
-                                    <RotateTransform Angle="{Binding AngleTransform, RelativeSource={RelativeSource AncestorType={x:Type local:ProgressRound}}}"/>
+                                    <RotateTransform Angle="{Binding AngleStart, RelativeSource={RelativeSource AncestorType={x:Type local:ProgressRound}}}"/>
                                 </TransformGroup>
                             </Path.RenderTransform>
                             <Path.Data>
@@ -47,7 +47,7 @@
                               RenderTransformOrigin="0.5,0.5">
                             <Path.RenderTransform>
                                 <TransformGroup>
-                                    <RotateTransform Angle="{Binding AngleTransform, RelativeSource={RelativeSource AncestorType={x:Type local:ProgressRound}}}"/>
+                                    <RotateTransform Angle="{Binding AngleStart, RelativeSource={RelativeSource AncestorType={x:Type local:ProgressRound}}}"/>
                                 </TransformGroup>
                             </Path.RenderTransform>
                             <Path.Data>
@@ -59,7 +59,7 @@
                                     <Binding Path="Minimum" RelativeSource="{RelativeSource TemplatedParent}"></Binding>
                                     <Binding Path="Maximum" RelativeSource="{RelativeSource TemplatedParent}"></Binding>
                                     <Binding Path="Value" RelativeSource="{RelativeSource TemplatedParent}"></Binding>
-                                    <Binding Path="AngleRate" RelativeSource="{RelativeSource TemplatedParent}"></Binding>
+                                    <Binding Path="Angle" RelativeSource="{RelativeSource TemplatedParent}"></Binding>
                                 </MultiBinding>
                             </Path.Data>
                         </Path>

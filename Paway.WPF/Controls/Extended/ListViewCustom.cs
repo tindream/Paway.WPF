@@ -599,7 +599,7 @@ namespace Paway.WPF
                     }
                     else
                     {
-                        if (this.AllowDrop) _lastMouseDown = e.GetPosition(this);
+                        _lastMouseDown = e.GetPosition(this);
                         IsPressed(true);
                         if (ClickMode == ClickMode.Press || SelectionMode != SelectionMode.Single)
                         {
@@ -619,12 +619,10 @@ namespace Paway.WPF
                             {
                                 ScrollViewer.RaiseEvent(eventArg);
                             }
-                            else ToMove(eventArg);
                         });
                     }
                 }
                 else if (ScrollViewer != null && (ScrollViewer.ScrollableHeight > 0 || ScrollViewer.ScrollableWidth > 0)) { }
-                else ToMove(eventArg);
             }
             base.OnPreviewMouseDown(e);
         }
@@ -670,7 +668,7 @@ namespace Paway.WPF
             {
                 IsPressed(false);
             }
-            if (this.AllowDrop && e.LeftButton == MouseButtonState.Pressed && _lastMouseDown != null)
+            if (e.LeftButton == MouseButtonState.Pressed && _lastMouseDown != null)
             {
                 Point currentPosition = e.GetPosition(this);
                 if ((Math.Abs(currentPosition.X - _lastMouseDown.Value.X) > SystemParameters.MinimumHorizontalDragDistance) ||
@@ -678,9 +676,21 @@ namespace Paway.WPF
                 {
                     try
                     {
-                        if (PMethod.Parent(e.OriginalSource, out fromItem))
+                        if (this.AllowDrop)
                         {
-                            DragDrop.DoDragDrop(this, fromItem, DragDropEffects.Move);
+                            if (PMethod.Parent(e.OriginalSource, out fromItem))
+                            {
+                                DragDrop.DoDragDrop(this, fromItem, DragDropEffects.Move);
+                            }
+                        }
+                        else if (IMove)
+                        {
+                            var eventArg = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, MouseButton.Left)
+                            {
+                                RoutedEvent = UIElement.MouseLeftButtonDownEvent,
+                                Source = this
+                            };
+                            ToMove(eventArg);
                         }
                     }
                     finally

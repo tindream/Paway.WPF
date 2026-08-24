@@ -100,7 +100,7 @@ namespace Paway.WPF
         {
             var result = value == null || value.Equals(string.Empty) || value == DBNull.Value;
             if (parameter != null || (parameter is bool p && !p)) result = !result;
-            return !result ;
+            return !result;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

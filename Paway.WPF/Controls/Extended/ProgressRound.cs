@@ -33,24 +33,11 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty AngleProperty =
-            DependencyProperty.RegisterAttached(nameof(Angle), typeof(double), typeof(ProgressRound), new PropertyMetadata(360d, OnBackgroundAngleChanged));
+            DependencyProperty.RegisterAttached(nameof(Angle), typeof(double), typeof(ProgressRound), new PropertyMetadata(360d));
         /// <summary>
         /// </summary>
-        internal static readonly DependencyProperty AngleTransformProperty =
-            DependencyProperty.RegisterAttached(nameof(AngleTransform), typeof(double), typeof(ProgressRound));
-        /// <summary>
-        /// </summary>
-        internal static readonly DependencyProperty AngleRateProperty =
-            DependencyProperty.RegisterAttached(nameof(AngleRate), typeof(double), typeof(ProgressRound), new PropertyMetadata(1d));
-        private static void OnBackgroundAngleChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
-        {
-            if (obj is ProgressRound view)
-            {
-                var iForward = view.IForward ? 1 : -1;
-                view.AngleTransform = iForward * -view.Angle / 2;
-                view.AngleRate = view.Angle / 360;
-            }
-        }
+        public static readonly DependencyProperty AngleStartProperty =
+            DependencyProperty.RegisterAttached(nameof(AngleStart), typeof(double), typeof(ProgressRound));
 
         #endregion
 
@@ -100,22 +87,15 @@ namespace Paway.WPF
             set { SetValue(AngleProperty, value); }
         }
         /// <summary>
-        /// 圆环旋转角度(内部自动)
+        /// 圆环旋转角度
         /// <para>默认值：0</para>
         /// </summary>
-        internal double AngleTransform
+        [Category("扩展")]
+        [Description("圆环旋转角度")]
+        public double AngleStart
         {
-            get { return (double)GetValue(AngleTransformProperty); }
-            set { SetValue(AngleTransformProperty, value); }
-        }
-        /// <summary>
-        /// 圆环刻度值系数(内部自动)
-        /// <para>默认值：1</para>
-        /// </summary>
-        internal double AngleRate
-        {
-            get { return (double)GetValue(AngleRateProperty); }
-            set { SetValue(AngleRateProperty, value); }
+            get { return (double)GetValue(AngleStartProperty); }
+            set { SetValue(AngleStartProperty, value); }
         }
 
         #endregion
