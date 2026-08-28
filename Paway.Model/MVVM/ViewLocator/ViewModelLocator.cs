@@ -1,3 +1,4 @@
+using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -9,16 +10,13 @@ namespace Paway.Model
     /// </summary>
     public class ViewModelLocator
     {
-        /// <summary>
-        /// 视图-模型管理器
-        /// </summary>
-        public ViewModelLocator()
+        private static ViewModelLocator _default;
+        static ViewModelLocator()
         {
-            //CommunityToolkit没有内置 IOC 容器
-            //ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-            StatuItem.Init();
+            _default = new ViewModelLocator();
+            GetModelInstance<StatuItemModel>().Init();
         }
-        internal static ViewModelLocator Default => new ViewModelLocator();
+        internal static ViewModelLocator Default => _default;
 
         /// <summary>
         /// 模型-登录页
@@ -99,6 +97,22 @@ namespace Paway.Model
                 pageReload.PageReload();
             }
             return dicView[name];
+        }
+        /// <summary>
+        /// 清除所有实例与注册
+        /// </summary>
+        public static void Clear()
+        {
+            foreach (var model in viewModelList)
+            {
+                WeakReferenceMessenger.Default.UnregisterAll(model.Value);
+            }
+            foreach (var view in dicView)
+            {
+                WeakReferenceMessenger.Default.UnregisterAll(view.Value);
+            }
+            viewModelList.Clear();
+            dicView.Clear();
         }
     }
 }

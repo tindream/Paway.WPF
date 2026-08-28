@@ -985,6 +985,7 @@ namespace Paway.WPF
                     }
                     for (var i = 0; i < 1000; i++)
                     {
+                        if (PConfig.Window != null) break;
                         var result = PMethod.Invoke(() =>
                         {
                             PConfig.Window = Application.Current.MainWindow;

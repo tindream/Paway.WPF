@@ -4,8 +4,15 @@ namespace Paway.Test
 {
     public class ViewModelLocator : Model.ViewModelLocator
     {
-        public static ViewModelLocator Default => new ViewModelLocator();
-        public TestWindowModel TestWindow => GetModelInstance<TestWindowModel>();
+        private static ViewModelLocator _default;
+        private static TestWindowModel _main;
+        static ViewModelLocator()
+        {
+            _default = new ViewModelLocator();
+            _main = new TestWindowModel();
+        }
+        public static ViewModelLocator Default => _default;
+        public TestWindowModel TestWindow => _main;
 
         public TipWindowModel TipWindow => GetModelInstance<TipWindowModel>();
 

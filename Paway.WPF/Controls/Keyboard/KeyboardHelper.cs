@@ -1,5 +1,6 @@
 ﻿using Paway.Helper;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -237,24 +238,13 @@ namespace Paway.WPF
         {
             Send(null, (int)virtualKey, iUnicode);
         }
+        public static void Send(Keys modifierKey, Keys virtualKey, bool iUnicode = false)
+        {
+            Send(new List<int> { (int)modifierKey }, (int)virtualKey, iUnicode);
+        }
         public static void Send(ICollection<int> modifierKeys, int virtualKey, bool iUnicode = false)
         {
-            if (modifierKeys == null || modifierKeys.Count == 0)
-            {
-                if (virtualKey <= 0) return;
-                Input input = CreateKeyDownInput(virtualKey, iUnicode);
-                Input input2 = CreateKeyUpInput(virtualKey, iUnicode);
-                Input[] inputs = new Input[]
-                {
-                    input,
-                    input2
-                };
-                if (SendInput(2u, inputs, Marshal.SizeOf(typeof(Input))) == 0u)
-                {
-                    throw new InvalidOperationException("Could not send key. VirtualKeyboardNativeMethodXs.SendInput function returned 0.");
-                }
-            }
-            else
+            if (modifierKeys == null) modifierKeys = new List<int>();
             {
                 Input[] array = new Input[modifierKeys.Count * 2 + 2];
                 int num = 0;
@@ -268,6 +258,7 @@ namespace Paway.WPF
                 {
                     array[num++] = CreateKeyUpInput(keyCode2, iUnicode);
                 }
+
                 if (SendInput((uint)array.Length, array, Marshal.SizeOf(typeof(Input))) == 0u)
                 {
                     throw new InvalidOperationException("Could not send key. VirtualKeyboardNativeMethodXs.SendInput function returned 0.");

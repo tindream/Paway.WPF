@@ -182,8 +182,7 @@ namespace Paway.WPF
                     case "键盘": this.iKeyboardNum = !this.iKeyboardNum; this.ChangeKeyboardNum(); break;
                     case "中英":
                     case "切换":
-                        var modifierKeys = new List<int> { (int)Keys.ShiftKey };
-                        KeyboardHelper.Send(modifierKeys, (int)Keys.None);
+                        KeyboardHelper.Send(Keys.ShiftKey, (int)Keys.None);
                         //InputMethod.Current.ImeState = this.iChina ? InputMethodState.Off : InputMethodState.On;
                         //InputMethod.Current.ImeConversionMode = this.iChina ? ImeConversionModeValues.Alphanumeric : (ImeConversionModeValues.Native | ImeConversionModeValues.Symbol);
                         break;
@@ -200,9 +199,7 @@ namespace Paway.WPF
         {
             var value = this.iKeyboardNum ? (this.iChina ? KeyList[key].NumCnV : KeyList[key].NumEnV) : KeyList[key].AllValue;
             var iModifierKey = this.iKeyboardNum && (this.iChina ? KeyList[key].INumCnShift : KeyList[key].INumEnShift);
-            var modifierKeys = new List<int>();
-            if (iModifierKey) modifierKeys.Add((int)Keys.ShiftKey);
-            KeyboardHelper.Send(modifierKeys, value, this.iKeyboardNum && this.iChina && KeyList[key].IUnicode);
+            KeyboardHelper.Send(iModifierKey ? Keys.ShiftKey : Keys.None, (Keys)value, this.iKeyboardNum && this.iChina && KeyList[key].IUnicode);
         }
         /// <summary>
         /// 切换中英文键盘
