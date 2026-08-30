@@ -26,7 +26,7 @@ namespace Paway.WPF
         {
             if (obj is DataGridColumnHeader columnHeader)
             {
-                if (PMethod.Parent(columnHeader, out DataGridEXT dataGrid))
+                if (columnHeader.Parent(out DataGridEXT dataGrid))
                 {
                     columnHeader.SetValue(RadiusProperty, dataGrid.Radius);
                     columnHeader.SetValue(HeaderBrushProperty, dataGrid.HeaderBrush);

@@ -219,7 +219,7 @@ namespace Paway.WPF
         }
         private void TreeViewEXT_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (PMethod.Parent(e.OriginalSource, out TreeViewItem item) && item.DataContext is ITreeViewItem treeItem && !treeItem.IsGroup)
+            if (e.OriginalSource is DependencyObject dependency && dependency.Parent(out TreeViewItem item) && item.DataContext is ITreeViewItem treeItem && !treeItem.IsGroup)
             {
                 RowDoubleEvent?.Invoke(this, new SelectItemEventArgs(item.DataContext, e.RoutedEvent, this));
             }
@@ -340,7 +340,7 @@ namespace Paway.WPF
         {
             if (this.fromItem != null)
             {
-                if (PMethod.Parent(e.OriginalSource, out TreeViewItem item) && item.DataContext is ITreeViewItem toItem)
+                if (e.OriginalSource is DependencyObject dependency && dependency.Parent(out TreeViewItem item) && item.DataContext is ITreeViewItem toItem)
                 {
                     if (IsFilter(fromItem, toItem, type, e.RoutedEvent))
                     {
@@ -379,7 +379,7 @@ namespace Paway.WPF
         {
             if (this.fromItem != null)
             {
-                if (PMethod.Parent(e.OriginalSource, out TreeViewItem item) && item.DataContext is ITreeViewItem toItem)
+                if (e.OriginalSource is DependencyObject dependency && dependency.Parent(out TreeViewItem item) && item.DataContext is ITreeViewItem toItem)
                 {
                     var iSame = fromItem.Parent == toItem.Parent;
                     RemoveItem(fromItem);

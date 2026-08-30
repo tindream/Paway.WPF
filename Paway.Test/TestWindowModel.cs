@@ -122,7 +122,7 @@ namespace Paway.Test
                 case "ProgressBar":
                     Frame.Content = ViewModelLocator.GetViewInstance<TestProgressBar>();
                     break;
-                    
+
                 case "主题":
                     Method.ShowWindow(Config.Window, new ThemeWindow());
                     break;
@@ -178,7 +178,7 @@ namespace Paway.Test
             WeakReferenceMessenger.Default.Register<TestLoadMessage>(this, (obj, msg) =>
             {
                 this.Root = msg.Obj;
-                if (Method.Find(Root, out Frame frame, "frame"))
+                if (Root.Find(out Frame frame, "frame"))
                 {
                     this.Frame = frame;
                     this.Frame.Content = ViewModelLocator.GetViewInstance<TestColorPage>();

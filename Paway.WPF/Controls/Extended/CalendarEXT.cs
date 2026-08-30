@@ -81,7 +81,7 @@ namespace Paway.WPF
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            if (PMethod.Child(this, out CalendarItem item, iParent: false))
+            if (this.Child(out CalendarItem item))
             {
                 item.Loaded -= Item_Loaded;
                 item.Loaded += Item_Loaded;
@@ -89,15 +89,18 @@ namespace Paway.WPF
         }
         private void Item_Loaded(object sender, RoutedEventArgs e)
         {
-            if (PMethod.Child(sender, out ButtonEXT goToday, "PART_GoToday", false))
+            if (sender is DependencyObject dependency)
             {
-                goToday.Click -= GoToday_Click;
-                goToday.Click += GoToday_Click;
-            }
-            if (PMethod.Child(sender, out ButtonEXT goClear, "PART_GoClear", false))
-            {
-                goClear.Click -= GoClear_Click;
-                goClear.Click += GoClear_Click;
+                if (dependency.Child(out ButtonEXT goToday, "PART_GoToday"))
+                {
+                    goToday.Click -= GoToday_Click;
+                    goToday.Click += GoToday_Click;
+                }
+                if (dependency.Child(out ButtonEXT goClear, "PART_GoClear"))
+                {
+                    goClear.Click -= GoClear_Click;
+                    goClear.Click += GoClear_Click;
+                }
             }
         }
         private void GoClear_Click(object sender, RoutedEventArgs e)

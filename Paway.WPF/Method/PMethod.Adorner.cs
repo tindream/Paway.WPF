@@ -144,7 +144,7 @@ namespace Paway.WPF
             CustomAdorner Adorner = null;
             page.CloseEvent += (sender, e) =>
             {
-                if (Adorner != null && PMethod.Parent(Adorner.GetElement(), out Window ower))
+                if (Adorner != null && Parent(Adorner.GetElement(), out Window ower))
                 {
                     PMethod.ClearAdorner(ower, Adorner);
                     Adorner = null;
@@ -161,7 +161,7 @@ namespace Paway.WPF
                     {
                         var handle = Adorner != null;
                         {
-                            if (Adorner != null && PMethod.Parent(Adorner.GetElement(), out Window ower))
+                            if (Adorner != null && Parent(Adorner.GetElement(), out Window ower))
                             {
                                 PMethod.ClearAdorner(ower, Adorner);
                                 Adorner = null;

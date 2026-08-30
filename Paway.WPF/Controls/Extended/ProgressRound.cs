@@ -119,7 +119,7 @@ namespace Paway.WPF
         {
             if (IDrag && e.ButtonState == MouseButtonState.Pressed && e.ClickCount == 1)
             {
-                if (PMethod.Parent(this, out Window window)) window.Cursor = Cursors.Hand;
+                if (this.Parent(out Window window)) window.Cursor = Cursors.Hand;
                 this.startPoint = e.GetPosition(this);
                 //尝试将鼠标强制捕获到控件
                 CaptureMouse();
@@ -151,7 +151,7 @@ namespace Paway.WPF
                 this.startPoint = null;
                 //当控件具有鼠标捕获的话，则释放该捕获。
                 ReleaseMouseCapture();
-                if (PMethod.Parent(this, out Window window)) window.Cursor = null;
+                if (this.Parent(out Window window)) window.Cursor = null;
             }
             base.OnPreviewMouseLeftButtonUp(e);
         }

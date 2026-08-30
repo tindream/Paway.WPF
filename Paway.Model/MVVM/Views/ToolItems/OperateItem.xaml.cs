@@ -112,7 +112,7 @@ namespace Paway.Model
         /// </summary>
         private void OperateItem_Loaded(object sender, RoutedEventArgs e)
         {
-            if (PMethod.Parent(this, out Window window))
+            if (this.Parent(out Window window))
             {
                 window.PreviewKeyDown += Window_PreviewKeyDown;
             }

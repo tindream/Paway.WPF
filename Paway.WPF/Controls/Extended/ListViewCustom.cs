@@ -589,46 +589,49 @@ namespace Paway.WPF
                     RoutedEvent = UIElement.MouseLeftButtonDownEvent,
                     Source = this
                 };
-                if (PMethod.Parent(e.OriginalSource, out Button _)) { }
-                else if (PMethod.Parent(e.OriginalSource, out downItem))
+                if (e.OriginalSource is DependencyObject dependency)
                 {
-                    if (INormal)
+                    if (dependency.Parent(out Button _)) { }
+                    else if (dependency.Parent(out downItem))
                     {
-                        downItem = null;
-                        e.Handled = true;
-                    }
-                    else
-                    {
-                        _lastMouseDown = e.GetPosition(this);
-                        IsPressed(true);
-                        if (ClickMode == ClickMode.Press || SelectionMode != SelectionMode.Single)
+                        if (INormal)
                         {
-                            OnPreviewItemClick(e);
-                            this.ReleaseMouseCapture();
+                            downItem = null;
+                            e.Handled = true;
                         }
                         else
                         {
-                            e.Handled = true;
+                            _lastMouseDown = e.GetPosition(this);
+                            IsPressed(true);
+                            if (ClickMode == ClickMode.Press || SelectionMode != SelectionMode.Single)
+                            {
+                                OnPreviewItemClick(e);
+                                this.ReleaseMouseCapture();
+                            }
+                            else
+                            {
+                                e.Handled = true;
+                            }
+                        }
+                        if (IMove)
+                        {
+                            this.BeginInvoke(() =>
+                            {
+                                if (ScrollViewer != null && (ScrollViewer.ScrollableHeight > 0 || ScrollViewer.ScrollableWidth > 0))
+                                {
+                                    ScrollViewer.RaiseEvent(eventArg);
+                                }
+                            });
                         }
                     }
-                    if (IMove)
-                    {
-                        PMethod.BeginInvoke(() =>
-                        {
-                            if (ScrollViewer != null && (ScrollViewer.ScrollableHeight > 0 || ScrollViewer.ScrollableWidth > 0))
-                            {
-                                ScrollViewer.RaiseEvent(eventArg);
-                            }
-                        });
-                    }
+                    else if (ScrollViewer != null && (ScrollViewer.ScrollableHeight > 0 || ScrollViewer.ScrollableWidth > 0)) { }
                 }
-                else if (ScrollViewer != null && (ScrollViewer.ScrollableHeight > 0 || ScrollViewer.ScrollableWidth > 0)) { }
             }
             base.OnPreviewMouseDown(e);
         }
         private void ToMove(MouseButtonEventArgs eventArg)
         {
-            if (PMethod.Parent(this, out Window window))
+            if (this.Parent(out Window window))
             {
                 OnPreviewMouseClick(eventArg);
                 if (!eventArg.Handled && (bool)window.GetValue(WindowMonitor.IsDragMoveEnabledProperty))
@@ -678,7 +681,7 @@ namespace Paway.WPF
                     {
                         if (this.AllowDrop)
                         {
-                            if (PMethod.Parent(e.OriginalSource, out fromItem))
+                            if (e.OriginalSource is DependencyObject dependency && dependency.Parent(out fromItem))
                             {
                                 DragDrop.DoDragDrop(this, fromItem, DragDropEffects.Move);
                             }
@@ -728,7 +731,7 @@ namespace Paway.WPF
                 {
                     var point = Mouse.GetPosition(this);
                     var obj = this.InputHitTest(point);
-                    if (PMethod.Parent(obj, out ListViewItem viewItem) && viewItem.Equals(downItem))
+                    if (obj is DependencyObject dependency && dependency.Parent(out ListViewItem viewItem) && viewItem.Equals(downItem))
                     {
                         IsSelected(true);
                     }
@@ -791,9 +794,8 @@ namespace Paway.WPF
         }
         private void DragCheck(DragEventArgs e, DragType type)
         {
-            if (this.fromItem != null)
+            if (this.fromItem != null && e.OriginalSource is DependencyObject dependency && dependency.Parent(out ListViewItem toItem))
             {
-                PMethod.Parent(e.OriginalSource, out ListViewItem toItem);
                 if (IsFilter(fromItem, toItem, type, e.RoutedEvent))
                 {
                     e.Effects = DragDropEffects.None;

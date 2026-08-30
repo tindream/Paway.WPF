@@ -166,7 +166,7 @@ namespace Paway.WPF
                 treeView.SelectedItemChanged -= TreeView_SelectedItemChanged;
                 treeView.SelectedItemChanged += TreeView_SelectedItemChanged;
             }
-            if (PMethod.Parent(this, out Window window))
+            if (this.Parent(out Window window))
             {
                 window.LocationChanged -= Window_LocationChanged;
                 window.LocationChanged += Window_LocationChanged;
@@ -214,7 +214,7 @@ namespace Paway.WPF
                     {
                         this.SelectedItem = item;
                         this.SelectedValue = this.SelectedValuePath.IsEmpty() ? item : item.GetValue(this.SelectedValuePath);
-                        PMethod.BeginInvoke(() => { this.IsDropDownOpen = false; });
+                        this.BeginInvoke(() => { this.IsDropDownOpen = false; });
                     }
                 }
                 else
@@ -263,7 +263,7 @@ namespace Paway.WPF
                     this.ItemsSource = list;
                     if (id > 0)
                     {
-                        PMethod.BeginInvoke(() =>
+                        this.BeginInvoke(() =>
                         {
                             treeView.Selected(id);
                             textBox.Focus();

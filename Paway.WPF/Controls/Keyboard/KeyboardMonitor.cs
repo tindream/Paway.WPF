@@ -79,7 +79,7 @@ namespace Paway.WPF
             }
             if (keyboardType == KeyboardType.None) return;
 
-            if (PMethod.Parent(element, out Window owner) && owner.Content is FrameworkElement content)
+            if (element.Parent(out Window owner) && owner.Content is FrameworkElement content)
             {
                 if (keyboardType == KeyboardType.Auto && element is TextBoxBase)
                 {
@@ -136,7 +136,7 @@ namespace Paway.WPF
                 {
                     point = element.TransformToAncestor(owner).Transform(new Point(0, 0));
                 }
-                else if (PMethod.Parent(element, out Adorner adorner))
+                else if (element.Parent(out Adorner adorner))
                 {
                     point = element.TransformToAncestor(adorner).Transform(new Point(0, 0));
                 }
@@ -212,7 +212,7 @@ namespace Paway.WPF
         }
         private void CloseKeyboard(object sender, RoutedEventArgs e)
         {
-            if (keyboardAdorner != null && PMethod.Parent(element, out Window owner) && owner.Content is FrameworkElement content)
+            if (keyboardAdorner != null && element.Parent(out Window owner) && owner.Content is FrameworkElement content)
             {
                 owner.PreviewMouseLeftButtonDown -= Owner_PreviewMouseLeftButtonDown;
                 var myAdornerLayer = PMethod.ReloadAdorner(content);
@@ -222,7 +222,7 @@ namespace Paway.WPF
                 keyboardAdorner = null;
                 KeyboardHelper.StopHook();
             }
-            if (keyboardWindow != null && PMethod.Parent(element, out owner))
+            if (keyboardWindow != null && element.Parent(out owner))
             {
                 owner.PreviewMouseLeftButtonDown -= Owner_PreviewMouseLeftButtonDown;
                 keyboardWindow.Close();

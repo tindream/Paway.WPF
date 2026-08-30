@@ -144,7 +144,7 @@ namespace Paway.WPF
                 gridView.RowDoubleEvent -= GridView_RowDoubleEvent;
                 gridView.RowDoubleEvent += GridView_RowDoubleEvent;
             }
-            if (PMethod.Parent(this, out Window window))
+            if (this.Parent(out Window window))
             {
                 window.LocationChanged -= Window_LocationChanged;
                 window.LocationChanged += Window_LocationChanged;

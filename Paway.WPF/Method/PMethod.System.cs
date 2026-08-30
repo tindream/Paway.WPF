@@ -398,7 +398,7 @@ namespace Paway.WPF
                 };
                 if (iFocus) window.LostKeyboardFocus += delegate
                 {
-                    if (!window.IsKeyboardFocusWithin) PMethod.BeginInvoke(() => window.Focus());
+                    if (!window.IsKeyboardFocusWithin) BeginInvoke(() => window.Focus());
                 };
                 if (!(window is WindowEXT))
                 {
@@ -463,7 +463,7 @@ namespace Paway.WPF
                 ResizeMode = ResizeMode.NoResize,
                 ShowInTaskbar = false,
             };
-            if (PMethod.Find(element, out Window window)) fullScreenWindow.Owner = window;
+            if (Find(element, out Window window)) fullScreenWindow.Owner = window;
             var parent = VisualTreeHelper.GetParent(element);
             ContentPresenter content = null;
             Panel panel = null;
@@ -597,120 +597,7 @@ namespace Paway.WPF
 
         #endregion
 
-        #region 返回指定控件的上下层控件
-        /// <summary>
-        /// 返回控件树中指定类型控件
-        /// </summary>
-        public static bool Find<T>(object obj, out T parent, string name = null) where T : FrameworkElement
-        {
-            parent = null;
-            if (!(obj is DependencyObject dependency)) return false;
-            if (Child(obj, out parent, name))
-            {
-                return true;
-            }
-            var hasParent = false;
-            while (dependency != null)
-            {
-                if (dependency is T t)
-                {
-                    if (name == null || t.Name == name)
-                    {
-                        parent = t;
-                        return true;
-                    }
-                }
-                var temp = VisualTreeHelper.GetParent(dependency);
-                if (temp == null) break;
-                dependency = temp;
-                hasParent = true;
-            }
-            if (hasParent && Child(dependency, out parent, name))
-            {
-                return true;
-            }
-            return false;
-        }
-        /// <summary>
-        /// 返回控件的顶层指定类型控件
-        /// </summary>
-        public static bool Parent<T>(object obj, out T parent, string name = null) where T : FrameworkElement
-        {
-            if (obj is T t1)
-            {
-                if (name == null || t1.Name == name)
-                {
-                    parent = t1;
-                    return true;
-                }
-            }
-            parent = null;
-            if (!(obj is DependencyObject dependency)) return false;
-            dependency = VisualTreeHelper.GetParent(dependency);
-            while (dependency != null)
-            {
-                if (dependency is T t)
-                {
-                    if (name == null || t.Name == name)
-                    {
-                        parent = t;
-                        return true;
-                    }
-                }
-                dependency = VisualTreeHelper.GetParent(dependency);
-            }
-            return false;
-        }
-        /// <summary>
-        /// 查找指定类型子(同级)控件
-        /// </summary>
-        /// <typeparam name="T">查找控件类型</typeparam>
-        /// <param name="obj">控件</param>
-        /// <param name="child">返回指定类型控件</param>
-        /// <param name="name">指定控件名称</param>
-        /// <param name="iParent">指定搜索同级控件</param>
-        /// <param name="func">外部条件，在多子项时判断</param>
-        /// <returns></returns>
-        public static bool Child<T>(object obj, out T child, string name = null, bool iParent = true, Func<T, bool> func = null) where T : FrameworkElement
-        {
-            child = null;
-            if (!(obj is DependencyObject dependency)) return false;
-            if (iParent)
-            {
-                var parent = VisualTreeHelper.GetParent(dependency);
-                if (parent != null) dependency = parent;
-            }
-            var count = VisualTreeHelper.GetChildrenCount(dependency);
-            for (int i = count - 1; i >= 0; i--)
-            {
-                var value = VisualTreeHelper.GetChild(dependency, i);
-                if (value is T temp)
-                {
-                    if ((name == null || temp.Name == name) && func?.Invoke(temp) != false)
-                    {
-                        child = temp;
-                        return true;
-                    }
-                }
-                if (Child(value, out child, name, false, func))
-                {
-                    return true;
-                }
-            }
-            while (dependency is ContentControl control)
-            {
-                dependency = control.Content as DependencyObject;
-                if (dependency is T temp)
-                {
-                    if ((name == null || temp.Name == name) && func?.Invoke(temp) != false)
-                    {
-                        child = temp;
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
+        #region 控件输入值有效性检查
         /// <summary>
         /// 获取所有子控件中的验证错误列表
         /// </summary>
@@ -831,7 +718,7 @@ namespace Paway.WPF
         /// 同步调用
         /// <para>任何与 Application 不在同一个线程的代码，都可能遭遇 Application.Current 为 null。如Shutdown关闭</para>
         /// </summary>
-        public static bool Invoke(Action action, Action<Exception> error = null)
+        internal static bool Invoke(Action action, Action<Exception> error = null)
         {
             try
             {
@@ -849,7 +736,7 @@ namespace Paway.WPF
         /// <summary>
         /// 带参数同步调用
         /// </summary>
-        public static bool Invoke<T>(Action<T> action, T t, Action<Exception> error = null)
+        internal static bool Invoke<T>(Action<T> action, T t, Action<Exception> error = null)
         {
             try
             {
@@ -867,7 +754,7 @@ namespace Paway.WPF
         /// <summary>
         /// 同步调用，并返回结果
         /// </summary>
-        public static T Invoke<T>(Func<T> action, Action<Exception> error = null)
+        internal static T Invoke<T>(Func<T> action, Action<Exception> error = null)
         {
             try
             {
@@ -884,7 +771,7 @@ namespace Paway.WPF
         /// <summary>
         /// 带参数同步调用，并返回结果
         /// </summary>
-        public static O Invoke<T, O>(Func<T, O> action, T t, Action<Exception> error = null)
+        internal static O Invoke<T, O>(Func<T, O> action, T t, Action<Exception> error = null)
         {
             try
             {
@@ -901,7 +788,7 @@ namespace Paway.WPF
         /// <summary>
         /// 异步调用
         /// </summary>
-        public static DispatcherOperation BeginInvoke(Action action, Action<Exception> error = null)
+        internal static DispatcherOperation BeginInvoke(Action action, Action<Exception> error = null)
         {
             try
             {
@@ -929,7 +816,7 @@ namespace Paway.WPF
         /// <summary>
         /// 带参数异步调用
         /// </summary>
-        public static DispatcherOperation BeginInvoke<T>(Action<T> action, T t, Action<Exception> error = null)
+        internal static DispatcherOperation BeginInvoke<T>(Action<T> action, T t, Action<Exception> error = null)
         {
             try
             {
@@ -957,6 +844,114 @@ namespace Paway.WPF
 
         #endregion
 
+        #region 返回指定控件的上下层控件
+        /// <summary>
+        /// 返回控件树中指定类型控件
+        /// </summary>
+        internal static bool Find<T>(DependencyObject dependency, out T parent, string name = null) where T : FrameworkElement
+        {
+            parent = null;
+            if (Child(dependency, out parent, name))
+            {
+                return true;
+            }
+            var hasParent = false;
+            while (dependency != null)
+            {
+                if (dependency is T t)
+                {
+                    if (name == null || t.Name == name)
+                    {
+                        parent = t;
+                        return true;
+                    }
+                }
+                var temp = VisualTreeHelper.GetParent(dependency);
+                if (temp == null) break;
+                dependency = temp;
+                hasParent = true;
+            }
+            if (hasParent && Child(dependency, out parent, name))
+            {
+                return true;
+            }
+            return false;
+        }
+        /// <summary>
+        /// 返回控件的顶层指定类型控件
+        /// </summary>
+        internal static bool Parent<T>(DependencyObject dependency, out T parent, string name = null) where T : FrameworkElement
+        {
+            if (dependency is T t1)
+            {
+                if (name == null || t1.Name == name)
+                {
+                    parent = t1;
+                    return true;
+                }
+            }
+            parent = null;
+            dependency = VisualTreeHelper.GetParent(dependency);
+            while (dependency != null)
+            {
+                if (dependency is T t)
+                {
+                    if (name == null || t.Name == name)
+                    {
+                        parent = t;
+                        return true;
+                    }
+                }
+                dependency = VisualTreeHelper.GetParent(dependency);
+            }
+            return false;
+        }
+        /// <summary>
+        /// 查找指定类型子(同级)控件
+        /// </summary>
+        /// <typeparam name="T">查找控件类型</typeparam>
+        /// <param name="dependency">控件</param>
+        /// <param name="child">返回指定类型控件</param>
+        /// <param name="name">指定控件名称</param>
+        /// <param name="func">外部条件，在多子项时判断</param>
+        /// <returns></returns>
+        internal static bool Child<T>(DependencyObject dependency, out T child, string name = null, Func<T, bool> func = null) where T : FrameworkElement
+        {
+            child = null;
+            var count = VisualTreeHelper.GetChildrenCount(dependency);
+            for (int i = count - 1; i >= 0; i--)
+            {
+                var value = VisualTreeHelper.GetChild(dependency, i);
+                if (value is T temp)
+                {
+                    if ((name == null || temp.Name == name) && func?.Invoke(temp) != false)
+                    {
+                        child = temp;
+                        return true;
+                    }
+                }
+                if (Child(value, out child, name, func))
+                {
+                    return true;
+                }
+            }
+            while (dependency is ContentControl control)
+            {
+                dependency = control.Content as DependencyObject;
+                if (dependency is T temp)
+                {
+                    if ((name == null || temp.Name == name) && func?.Invoke(temp) != false)
+                    {
+                        child = temp;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        #endregion
+
         #region Init
         /// <summary>
         /// 初始化App
@@ -980,13 +975,13 @@ namespace Paway.WPF
                 {
                     for (var i = 0; i < 1000; i++)
                     {
-                        if (PMethod.Invoke(() => Application.Current.MainWindow) != null) break;
+                        if (Invoke(() => Application.Current.MainWindow) != null) break;
                         Thread.Sleep(5);
                     }
                     for (var i = 0; i < 1000; i++)
                     {
                         if (PConfig.Window != null) break;
-                        var result = PMethod.Invoke(() =>
+                        var result = Invoke(() =>
                         {
                             PConfig.Window = Application.Current.MainWindow;
                             if (PConfig.Window == null) "获取MainWindow失败".Warn();

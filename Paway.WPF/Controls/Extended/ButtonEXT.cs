@@ -364,7 +364,7 @@ namespace Paway.WPF
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            if (Command != null && PMethod.Parent(this, out Window window))
+            if (Command != null && this.Parent(out Window window))
             {
                 window.KeyDown += Window_PreviewKeyDown;
             }
@@ -444,7 +444,7 @@ namespace Paway.WPF
                     else if (IMove)
                     {
                         this.ReleaseMouseCapture();
-                        if (PMethod.Parent(this, out Window window))
+                        if (this.Parent(out Window window))
                         {
                             if ((bool)window.GetValue(WindowMonitor.IsDragMoveEnabledProperty))
                             {

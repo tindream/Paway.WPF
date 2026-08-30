@@ -56,7 +56,7 @@ namespace Paway.WPF
         {
             var trackButtonWidth = 0.0;
             var showTrackText = false;
-            if (PMethod.Parent(this, out SliderEXT slider))
+            if (this.Parent(out SliderEXT slider))
             {
                 trackButtonWidth = slider.TrackButtonWidth;
                 showTrackText = slider.ShowTrackText;

@@ -71,7 +71,7 @@ namespace Paway.WPF
         {
             if (e.ButtonState == MouseButtonState.Pressed && e.ClickCount == 1)
             {
-                if (PMethod.Parent(this, out Window window)) window.Cursor = Cursors.Hand;
+                if (this.Parent(out Window window)) window.Cursor = Cursors.Hand;
                 this.startPoint = e.GetPosition(this);
                 //尝试将鼠标强制捕获到控件
                 CaptureMouse();
@@ -103,7 +103,7 @@ namespace Paway.WPF
                 this.startPoint = null;
                 //当控件具有鼠标捕获的话，则释放该捕获。
                 ReleaseMouseCapture();
-                if (PMethod.Parent(this, out Window window)) window.Cursor = null;
+                if (this.Parent(out Window window)) window.Cursor = null;
             }
             base.OnPreviewMouseLeftButtonUp(e);
         }
@@ -157,7 +157,7 @@ namespace Paway.WPF
             //锁定长宽比
             this.Height = this.ActualWidth;
             base.OnRenderSizeChanged(sizeInfo);
-            if (PMethod.Child(this, out this.path_Pointer, "Path_Pointer", false))
+            if (this.Child(out this.path_Pointer, "Path_Pointer"))
             {
                 path_Pointer.Width = this.ActualWidth / 2 - 7 + 1;
                 path_Pointer.Margin = new Thickness(0, 0, path_Pointer.Width, 0);

@@ -95,7 +95,7 @@ namespace Paway.Model
             WeakReferenceMessenger.Default.Register<ConnectMessage>(this, (obj, msg) =>
             {
                 if (!msg.Message.IsEmpty()) WeakReferenceMessenger.Default.Send(new StatuMessage(msg.Message, msg.Connectd ? LevelType.Info : LevelType.Error));
-                PMethod.BeginInvoke(() =>
+                this.BeginInvoke(() =>
                 {
                     ConnectBrush = msg.Connectd ? ColorType.Success.Color().ToBrush() : ColorType.Error.Color().ToBrush();
                 });
@@ -127,7 +127,7 @@ namespace Paway.Model
         {
             this.Desc = msg;
             msg.Log(level);
-            PMethod.BeginInvoke(() =>
+            this.BeginInvoke(() =>
             {
                 switch (level)
                 {

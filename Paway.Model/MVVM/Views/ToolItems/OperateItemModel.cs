@@ -111,7 +111,7 @@ namespace Paway.Model
             {
                 case Key.Escape:
                     if ((Auth & MenuAuthType.Search) != MenuAuthType.Search) break;
-                    if (PMethod.Find(Panel, out TextBoxEXT tbSearch, "tbSearch"))
+                    if (Panel.Find(out TextBoxEXT tbSearch, "tbSearch"))
                     {
                         if (tbSearch.Text.IsEmpty()) break;
                         if (iExit && DateTime.Now.Subtract(exitTime).TotalMilliseconds < PConfig.DoubleInterval)
@@ -132,7 +132,7 @@ namespace Paway.Model
                 case Key.F:
                     if ((Auth & MenuAuthType.Search) != MenuAuthType.Search) break;
                     if ((Keyboard.Modifiers & ModifierKeys.Control) != ModifierKeys.Control) break;
-                    if (PMethod.Find(Panel, out tbSearch, "tbSearch") && !tbSearch.IsKeyboardFocusWithin)
+                    if (Panel.Find(out tbSearch, "tbSearch") && !tbSearch.IsKeyboardFocusWithin)
                     {
                         WeakReferenceMessenger.Default.Send(new StatuMessage(PConfig.LanguageBase.Query));
                         tbSearch.Focus();
@@ -196,7 +196,7 @@ namespace Paway.Model
                 if (this.Panel == null && msg.Obj is OperateItem operateItem)
                 {
                     this.operateItem = operateItem;
-                    if (PMethod.Find(operateItem, out DockPanel panel, "dpOperateItem"))
+                    if (operateItem.Find(out DockPanel panel, "dpOperateItem"))
                     {
                         this.Panel = panel;
                         WeakReferenceMessenger.Default.Register<KeyMessage, int>(this, panel.GetHashCode(), (objKey, msgKey) => Action(msgKey));

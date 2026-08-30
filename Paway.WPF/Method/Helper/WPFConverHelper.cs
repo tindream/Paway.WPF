@@ -27,7 +27,7 @@ namespace Paway.WPF
         /// </summary>
         public static IntPtr Handle(this DependencyObject obj)
         {
-            if (PMethod.Parent(obj, out Window window))
+            if (obj.Parent(out Window window))
             {
                 return Handle(window);
             }

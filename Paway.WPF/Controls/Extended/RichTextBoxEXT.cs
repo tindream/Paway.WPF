@@ -209,7 +209,7 @@ namespace Paway.WPF
         public void AutoLast()
         {
             this.CaretPosition = this.Document.ContentEnd;
-            if (this.ScrollViewer == null) PMethod.BeginInvoke(() => { this.ScrollViewer?.ScrollToEnd(); });
+            if (this.ScrollViewer == null) this.BeginInvoke(() => { this.ScrollViewer?.ScrollToEnd(); });
             else this.ScrollViewer.ScrollToEnd();
         }
 

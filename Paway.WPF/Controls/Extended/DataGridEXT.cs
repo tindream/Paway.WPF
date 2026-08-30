@@ -224,7 +224,7 @@ namespace Paway.WPF
         }
         private void DataGridEXT_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (PMethod.Parent(e.OriginalSource, out DataGridRow row))
+            if (e.OriginalSource is DependencyObject dependency && dependency.Parent(out DataGridRow row))
             {
                 RowDoubleEvent?.Invoke(this, new SelectItemEventArgs(row.Item, e.RoutedEvent, this));
             }
@@ -534,7 +534,7 @@ namespace Paway.WPF
                 if (this.SelectionUnit == DataGridSelectionUnit.FullRow) row.IsSelected = true;
                 row.Focus();
                 if (!iCell) return true;
-                if (PMethod.Child(row, out DataGridCellsPresenter presenter, iParent: false))
+                if (row.Child(out DataGridCellsPresenter presenter))
                 {
                     for (int i = 0; i < this.Columns.Count; i++)
                     {
@@ -559,7 +559,7 @@ namespace Paway.WPF
         {
             var point = e.GetPosition(this);
             var obj = this.InputHitTest(point);
-            if (PMethod.Parent(obj, out DataGridRow row))
+            if (obj is DependencyObject dependency && dependency.Parent(out DataGridRow row))
             {
                 return row;
             }
@@ -582,12 +582,12 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            if (e.ButtonState == MouseButtonState.Pressed && e.ClickCount == 1)
+            if (e.ButtonState == MouseButtonState.Pressed && e.ClickCount == 1 && e.OriginalSource is DependencyObject dependency)
             {
                 if (this.AllowDrop)
                 {
                     _lastMouseDown = e.GetPosition(this);
-                    if (PMethod.Parent(e.OriginalSource, out DataGridRow row))
+                    if (dependency.Parent(out DataGridRow row))
                     {
                         if (this.SelectedItem != null && this.SelectedItem.Equals(row.Item))
                         {
@@ -595,14 +595,14 @@ namespace Paway.WPF
                         }
                     }
                 }
-                else if (this.SelectionMode == DataGridSelectionMode.Single && PMethod.Parent(e.OriginalSource, out DataGridRow row))
+                else if (this.SelectionMode == DataGridSelectionMode.Single && dependency.Parent(out DataGridRow row))
                 {//直接拖动控件滚动条
                     var eventArg = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, e.ChangedButton)
                     {
                         RoutedEvent = UIElement.MouseLeftButtonDownEvent,
                         Source = this
                     };
-                    PMethod.BeginInvoke(arg =>
+                    this.BeginInvoke(arg =>
                     {
                         if (!arg.Handled) ScrollViewer.RaiseEvent(eventArg);
                     }, e);
@@ -634,7 +634,7 @@ namespace Paway.WPF
                 {
                     try
                     {
-                        if (PMethod.Parent(e.OriginalSource, out fromItem))
+                        if (e.OriginalSource is DependencyObject dependency && dependency.Parent(out fromItem))
                         {
                             DragDrop.DoDragDrop(this, fromItem, DragDropEffects.Move);
                         }
@@ -673,9 +673,8 @@ namespace Paway.WPF
         }
         private void DragCheck(DragEventArgs e, DragType type)
         {
-            if (this.fromItem != null)
+            if (this.fromItem != null && e.OriginalSource is DependencyObject dependency && dependency.Parent(out DataGridRow toItem))
             {
-                PMethod.Parent(e.OriginalSource, out DataGridRow toItem);
                 if (IsFilter(fromItem, toItem, type, e.RoutedEvent))
                 {
                     e.Effects = DragDropEffects.None;
@@ -707,7 +706,7 @@ namespace Paway.WPF
                 {
                     var fromInfo = fromItem.Item;
                     list.Remove(fromItem.Item);
-                    if (PMethod.Parent(e.OriginalSource, out DataGridRow toItem))
+                    if (e.OriginalSource is DependencyObject dependency && dependency.Parent(out DataGridRow toItem))
                     {
                         var toIndex = list.IndexOf(toItem.Item);
                         var moveList = this.type.GenericList();

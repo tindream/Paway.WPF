@@ -61,7 +61,7 @@ namespace Paway.Model
         /// </summary>
         protected override void Refresh(Action action = null)
         {
-            base.Refresh(() => PMethod.Invoke(() => this.PageReload()));
+            base.Refresh(() => this.Invoke(() => this.PageReload()));
         }
         /// <summary>
         /// 在Loaded第一次触发或重加载时调用

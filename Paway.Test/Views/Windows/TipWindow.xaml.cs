@@ -127,13 +127,13 @@ namespace Paway.Test
                         if (iShow)
                         {
                             iShow = false;
-                            PMethod.BeginInvoke(() => { AnimationHelper.Start(this, TransitionType.Opacity, 0, 125, iReset: false); });
+                            this.BeginInvoke(() => { AnimationHelper.Start(this, TransitionType.Opacity, 0, 125, iReset: false); });
                         }
                     }
                     else if (!iShow)
                     {
                         iShow = true;
-                        PMethod.BeginInvoke(() => { AnimationHelper.Start(this, TransitionType.Opacity, 1, 125, iReset: false); });
+                        this.BeginInvoke(() => { AnimationHelper.Start(this, TransitionType.Opacity, 1, 125, iReset: false); });
                     }
                     Thread.Sleep(100);
                 }

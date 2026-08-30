@@ -266,7 +266,7 @@ namespace Paway.WPF
         protected override void OnPreviewMouseMove(MouseEventArgs e)
         {
             base.OnPreviewMouseMove(e);
-            if (IAnimation && Mouse.DirectlyOver != null && PMethod.Parent(Mouse.DirectlyOver, out ListViewItem listViewItem) && this.moveItem != listViewItem)
+            if (IAnimation && Mouse.DirectlyOver is DependencyObject dependency && dependency.Parent(out ListViewItem listViewItem) && this.moveItem != listViewItem)
             {
                 if (this.moveItem != null) PMethod.Animation(moveItem, false);
                 this.moveItem = listViewItem;

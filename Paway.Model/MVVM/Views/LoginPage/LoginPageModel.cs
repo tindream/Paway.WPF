@@ -220,7 +220,7 @@ namespace Paway.Model
             if (Password.IsEmpty())
             {
                 PMethod.Hit(Root, PConfig.LanguageBase.PleaseInputPasswordWater);
-                if (PMethod.Find(Root, out PasswordBox tbPassword, "tbPassword")) tbPassword.Focus();
+                if (Root.Find(out PasswordBox tbPassword, "tbPassword")) tbPassword.Focus();
                 return false;
             }
             return true;
@@ -258,11 +258,11 @@ namespace Paway.Model
                             PMethod.Hit(Root, PConfig.LanguageBase.PleaseInputUserNameWater);
                             if (IUserList)
                             {
-                                if (PMethod.Find(Root, out ComboBoxEXT cbxUserName, "cbxUserName")) cbxUserName.Focus();
+                                if (Root.Find(out ComboBoxEXT cbxUserName, "cbxUserName")) cbxUserName.Focus();
                             }
                             else
                             {
-                                if (PMethod.Find(Root, out TextBoxEXT tbUserName, "tbUserName")) tbUserName.Focus();
+                                if (Root.Find(out TextBoxEXT tbUserName, "tbUserName")) tbUserName.Focus();
                             }
                             return true;
                         }

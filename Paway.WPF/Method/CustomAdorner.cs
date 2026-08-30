@@ -90,9 +90,9 @@ namespace Paway.WPF
         {
             if (canvas != null)
             {
-                PMethod.BeginInvoke(() =>
+                this.BeginInvoke(() =>
                 {
-                    if (PMethod.Child(canvas, out TextBlock textBlock, iParent: false))
+                    if (canvas.Child(out TextBlock textBlock))
                     {
                         if (action != null) action(textBlock);
                         else textBlock.Text = msg == null ? PConfig.Loading : msg.ToStrings();
@@ -107,14 +107,14 @@ namespace Paway.WPF
         {
             if (canvas != null)
             {
-                PMethod.BeginInvoke(() =>
+                this.BeginInvoke(() =>
                 {
-                    if (PMethod.Child(canvas, out ProgressBarEXT progressBar, iParent: false))
+                    if (canvas.Child(out ProgressBarEXT progressBar))
                     {
                         if (action != null) action(progressBar);
                         else progressBar.AnimationValue = value;
                     }
-                    else if (PMethod.Child(canvas, out ProgressRound progressRound, iParent: false))
+                    else if (canvas.Child(out ProgressRound progressRound))
                     {
                         if (action != null) action(progressRound);
                         else progressRound.AnimationValue = value;

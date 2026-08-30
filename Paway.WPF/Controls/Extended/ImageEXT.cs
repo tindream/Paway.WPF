@@ -319,7 +319,7 @@ namespace Paway.WPF
                 if (DoubleEvent != null) DoubleEvent.Invoke(this, e);
                 else if (IDoubleView && this.Source != null)
                 {
-                    if (PMethod.Parent(this, out Window window))
+                    if (this.Parent(out Window window))
                     {
                         var imageEXT = new ImageEXT();
                         imageEXT.Title = this.Title;

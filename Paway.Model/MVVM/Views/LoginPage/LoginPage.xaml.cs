@@ -41,7 +41,7 @@ namespace Paway.Model
         {
             base.OnApplyTemplate();
             WeakReferenceMessenger.Default.Send(new LoginLoadMessage() { Obj = Root, MenuItem = menu });
-            PMethod.BeginInvoke(() =>
+            this.BeginInvoke(() =>
             {
                 if (this.DataContext is LoginPageModel login)
                 {

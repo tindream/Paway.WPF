@@ -155,12 +155,12 @@ namespace Paway.Model
             }
             server.Insert(info); Cache.Update(info, true); if (!this.iCache) Cache.UpdateList(OperType.Insert, this.List, new List<T> { info }, true);
             var index = this.FilterList().FindIndex(c => c.Id == info.Id);
-            if (!this.SearchReset() && index != -1) PMethod.Invoke(() => ObList.Insert(index, info));
+            if (!this.SearchReset() && index != -1) this.Invoke(() => ObList.Insert(index, info));
             MoveTo(index, info);
         }
         private void MoveTo(int index, T info)
         {
-            PMethod.BeginInvoke(() =>
+            this.BeginInvoke(() =>
             {
                 if (IPage)
                 {
@@ -188,7 +188,7 @@ namespace Paway.Model
             foreach (var info in list)
             {
                 index = this.FilterList().FindIndex(c => c.Id == info.Id);
-                if (!this.SearchReset()) PMethod.Invoke(() => ObList.Insert(index, info));
+                if (!this.SearchReset()) this.Invoke(() => ObList.Insert(index, info));
             }
             MoveTo(index, list.Last());
         }
@@ -219,7 +219,7 @@ namespace Paway.Model
             try
             {
                 server.Delete(info); Cache.Delete(info); if (!this.iCache) Cache.UpdateList(OperType.Delete, this.List, new List<T> { info });
-                PMethod.Invoke(() => ObList.Remove(info));
+                this.Invoke(() => ObList.Remove(info));
             }
             finally
             {
@@ -245,7 +245,7 @@ namespace Paway.Model
             try
             {
                 server.Delete(list); Cache.Delete(list); if (!this.iCache) Cache.UpdateList(OperType.Delete, this.List, list);
-                PMethod.Invoke(() => { foreach (var info in list) ObList.Remove(info); });
+                this.Invoke(() => { foreach (var info in list) ObList.Remove(info); });
             }
             finally
             {
@@ -259,7 +259,7 @@ namespace Paway.Model
         /// </summary>
         protected override void Refresh(Action action = null)
         {
-            PMethod.BeginInvoke(() =>
+            this.BeginInvoke(() =>
             {
                 PMethod.ProgressAsync(PMethod.Window(DataGrid), () =>
                 {
@@ -358,7 +358,7 @@ namespace Paway.Model
         {
             if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {
-                if (PMethod.Find(DataGrid, out TextBoxEXT tbSearch, "tbSearch"))
+                if (DataGrid.Find(out TextBoxEXT tbSearch, "tbSearch"))
                 {
                     if (tbSearch.IsKeyboardFocusWithin) return;
                 }
@@ -532,7 +532,7 @@ namespace Paway.Model
         /// </summary>
         protected virtual void ReloadObList()
         {
-            PMethod.Invoke(() =>
+            this.Invoke(() =>
             {
                 ObList.Clear();
                 var list = showList ?? this.FilterList();

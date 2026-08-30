@@ -87,7 +87,7 @@ namespace Paway.WPF
             var point = element.PointToScreen(new Point(0, 0));
             this.Left = point.X + (element.ActualWidth - this.Width) / 2;
             this.Top = point.Y + (element.ActualHeight - this.Height) / 2;
-            if (PMethod.Parent(element, out Window parentWindow))
+            if (element.Parent(out Window parentWindow))
             {
                 this.parentWindow = parentWindow;
                 parentWindow.Closing += ParentWindow_Closing;
@@ -106,7 +106,7 @@ namespace Paway.WPF
                         if (iShow)
                         {
                             iShow = false;
-                            PMethod.BeginInvoke(() => { AnimationHelper.Start(this, TransitionType.Opacity, 0, 125, iReset: false); });
+                            this.BeginInvoke(() => { AnimationHelper.Start(this, TransitionType.Opacity, 0, 125, iReset: false); });
                         }
                     }
                     else
@@ -114,12 +114,12 @@ namespace Paway.WPF
                         if (!iShow)
                         {
                             iShow = true;
-                            PMethod.BeginInvoke(() => { AnimationHelper.Start(this, TransitionType.Opacity, 1, 125, iReset: false); });
+                            this.BeginInvoke(() => { AnimationHelper.Start(this, TransitionType.Opacity, 1, 125, iReset: false); });
                         }
                     }
                     if (manualResetEvent.WaitOne(40)) break;
                 }
-                PMethod.Invoke(() => { this.PrevoewClose(); });
+                this.Invoke(() => { this.PrevoewClose(); });
             });
         }
         private void PrevoewClose()

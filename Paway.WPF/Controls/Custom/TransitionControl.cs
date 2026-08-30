@@ -185,7 +185,7 @@ namespace Paway.WPF
                 void handler(object s, EventArgs e)
                 {
                     CompositionTarget.Rendering -= handler;
-                    PMethod.BeginInvoke(() => StartTransition());
+                    this.BeginInvoke(() => StartTransition());
                 }
                 CompositionTarget.Rendering += handler;
             }

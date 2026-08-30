@@ -56,7 +56,7 @@ namespace Paway.Test
             {
                 var point = Mouse.GetPosition(listView1);
                 var obj = listView1.InputHitTest(point);
-                if (Method.Parent(obj, out ListViewItem viewItem))
+                if (obj is DependencyObject dependency && dependency.Parent(out ListViewItem viewItem))
                 {
                     Method.WaterAdorner(e, viewItem, 0, 0);
                 }
