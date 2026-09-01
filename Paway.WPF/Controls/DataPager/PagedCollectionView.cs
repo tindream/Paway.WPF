@@ -2615,6 +2615,7 @@ namespace System.Windows.Data
         /// <param name="index">Index of item involved in the collection change</param>
         private void AdjustCurrencyForRemove(int index)
         {
+            if (index < 0) return;
             // adjust current index if deletion is earlier
             if (index < CurrentPosition)
             {
