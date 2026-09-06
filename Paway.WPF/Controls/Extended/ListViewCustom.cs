@@ -156,13 +156,21 @@ namespace Paway.WPF
         [Category("扩展")]
         [Description("普通项，不响应鼠标事件")]
         public bool INormal { get; set; }
+        private bool _iMove = true;
         /// <summary>
-        /// 移动项，兼容移动
-        /// <para>默认值：false</para>
+        /// 移动项
+        /// <para>默认值：true</para>
         /// </summary>
         [Category("扩展")]
         [Description("移动项，兼容移动")]
-        public bool IMove { get; set; }
+        public bool IMove { get { return _iMove; } set { _iMove = value; } }
+        /// <summary>
+        /// 移动窗体
+        /// <para>默认值：false</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("移动窗体")]
+        public bool IMoveWindow { get; set; }
         /// <summary>
         /// 指定何时应引发事件
         /// <para>默认值：未设置</para>
@@ -584,11 +592,6 @@ namespace Paway.WPF
             downItem = null;
             if (e.ButtonState == MouseButtonState.Pressed)
             {
-                var eventArg = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, e.ChangedButton)
-                {
-                    RoutedEvent = UIElement.MouseLeftButtonDownEvent,
-                    Source = this
-                };
                 if (e.OriginalSource is DependencyObject dependency)
                 {
                     if (dependency.Parent(out Button _)) { }
@@ -613,18 +616,7 @@ namespace Paway.WPF
                                 e.Handled = true;
                             }
                         }
-                        if (IMove)
-                        {
-                            this.BeginInvoke(() =>
-                            {
-                                if (ScrollViewer != null && (ScrollViewer.ScrollableHeight > 0 || ScrollViewer.ScrollableWidth > 0))
-                                {
-                                    ScrollViewer.RaiseEvent(eventArg);
-                                }
-                            });
-                        }
                     }
-                    else if (ScrollViewer != null && (ScrollViewer.ScrollableHeight > 0 || ScrollViewer.ScrollableWidth > 0)) { }
                 }
             }
             base.OnPreviewMouseDown(e);
@@ -686,7 +678,19 @@ namespace Paway.WPF
                                 DragDrop.DoDragDrop(this, fromItem, DragDropEffects.Move);
                             }
                         }
-                        else if (IMove)
+                        else if (IMove && (ScrollViewer.ScrollableHeight > 0 || ScrollViewer.ScrollableWidth > 0))
+                        {
+                            this.BeginInvoke(() =>
+                            {
+                                var eventArg = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, MouseButton.Left)
+                                {
+                                    RoutedEvent = UIElement.MouseLeftButtonDownEvent,
+                                    Source = this
+                                };
+                                ScrollViewer.RaiseEvent(eventArg);
+                            });
+                        }
+                        else if (IMoveWindow)
                         {
                             var eventArg = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, MouseButton.Left)
                             {

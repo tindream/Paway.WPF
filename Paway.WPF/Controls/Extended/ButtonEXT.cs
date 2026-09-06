@@ -94,8 +94,8 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
-        public static readonly DependencyProperty IMoveProperty =
-            DependencyProperty.RegisterAttached(nameof(IMove), typeof(bool), typeof(ButtonEXT));
+        public static readonly DependencyProperty IMoveWindowProperty =
+            DependencyProperty.RegisterAttached(nameof(IMoveWindow), typeof(bool), typeof(ButtonEXT));
 
         #endregion
 
@@ -299,10 +299,10 @@ namespace Paway.WPF
         /// </summary>
         [Category("扩展")]
         [Description("允许移动外层Window")]
-        public bool IMove
+        public bool IMoveWindow
         {
-            get { return (bool)GetValue(IMoveProperty); }
-            set { SetValue(IMoveProperty, value); }
+            get { return (bool)GetValue(IMoveWindowProperty); }
+            set { SetValue(IMoveWindowProperty, value); }
         }
 
         #endregion
@@ -441,7 +441,7 @@ namespace Paway.WPF
                     {
                         DragDrop.DoDragDrop(this, this, DragDropEffects.Move);
                     }
-                    else if (IMove)
+                    else if (IMoveWindow)
                     {
                         this.ReleaseMouseCapture();
                         if (this.Parent(out Window window))

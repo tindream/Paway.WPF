@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.SymbolStore;
 using System.Linq;
 using System.Text;
@@ -577,6 +578,8 @@ namespace Paway.WPF
         /// 拖拽起始行
         /// </summary>
         private DataGridRow fromItem;
+        private double _startVerticalOffset;
+        private double rowHeight;
         /// <summary>
         /// 按下记录位置
         /// </summary>
@@ -584,9 +587,9 @@ namespace Paway.WPF
         {
             if (e.ButtonState == MouseButtonState.Pressed && e.ClickCount == 1 && e.OriginalSource is DependencyObject dependency)
             {
+                _lastMouseDown = e.GetPosition(this);
                 if (this.AllowDrop)
                 {
-                    _lastMouseDown = e.GetPosition(this);
                     if (dependency.Parent(out DataGridRow row))
                     {
                         if (this.SelectedItem != null && this.SelectedItem.Equals(row.Item))
@@ -595,17 +598,29 @@ namespace Paway.WPF
                         }
                     }
                 }
-                else if (this.SelectionMode == DataGridSelectionMode.Single && dependency.Parent(out DataGridRow row))
-                {//直接拖动控件滚动条
-                    var eventArg = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, e.ChangedButton)
-                    {
-                        RoutedEvent = UIElement.MouseLeftButtonDownEvent,
-                        Source = this
-                    };
-                    this.BeginInvoke(arg =>
-                    {
-                        if (!arg.Handled) ScrollViewer.RaiseEvent(eventArg);
-                    }, e);
+                else if (this.SelectionMode == DataGridSelectionMode.Single)
+                {
+                    if (ScrollViewer.CanContentScroll)
+                    { //启用虚拟化时
+                        _startVerticalOffset = ScrollViewer.VerticalOffset;
+                        rowHeight = this.RowHeight;
+                        if (rowHeight.Equals(double.NaN) && dependency.Parent(out DataGridRow row))
+                        {
+                            rowHeight = row.ActualHeight;
+                        }
+                    }
+                    else
+                    { //直接拖动控件滚动条
+                        var eventArg = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, e.ChangedButton)
+                        {
+                            RoutedEvent = UIElement.MouseLeftButtonDownEvent,
+                            Source = this
+                        };
+                        this.BeginInvoke(arg =>
+                        {
+                            if (!arg.Handled) ScrollViewer.RaiseEvent(eventArg);
+                        }, e);
+                    }
                 }
             }
             base.OnPreviewMouseLeftButtonDown(e);
@@ -629,19 +644,32 @@ namespace Paway.WPF
             if (e.LeftButton == MouseButtonState.Pressed && _lastMouseDown != null)
             {
                 Point currentPosition = e.GetPosition(this);
-                if ((Math.Abs(currentPosition.X - _lastMouseDown.Value.X) > SystemParameters.MinimumHorizontalDragDistance) ||
-                    (Math.Abs(currentPosition.Y - _lastMouseDown.Value.Y) > SystemParameters.MinimumVerticalDragDistance))
+                if (this.AllowDrop)
                 {
-                    try
+                    if ((Math.Abs(currentPosition.X - _lastMouseDown.Value.X) > SystemParameters.MinimumHorizontalDragDistance) ||
+                        (Math.Abs(currentPosition.Y - _lastMouseDown.Value.Y) > SystemParameters.MinimumVerticalDragDistance))
                     {
-                        if (e.OriginalSource is DependencyObject dependency && dependency.Parent(out fromItem))
+                        try
                         {
-                            DragDrop.DoDragDrop(this, fromItem, DragDropEffects.Move);
+                            if (e.OriginalSource is DependencyObject dependency && dependency.Parent(out fromItem))
+                            {
+                                DragDrop.DoDragDrop(this, fromItem, DragDropEffects.Move);
+                            }
+                        }
+                        finally
+                        {
+                            fromItem = null;
                         }
                     }
-                    finally
+                }
+                else if (this.SelectionMode == DataGridSelectionMode.Single && ScrollViewer?.ScrollableHeight > 0)
+                {
+                    if (!rowHeight.Equals(double.NaN))
                     {
-                        fromItem = null;
+                        double deltaY = ((currentPosition.Y - _lastMouseDown.Value.Y) / rowHeight).ToInt();
+                        // 按行偏移滚动
+                        ScrollViewer.ScrollToVerticalOffset(_startVerticalOffset - deltaY);
+                        Trace.WriteLine("GO=" + (_startVerticalOffset - deltaY));
                     }
                 }
             }
