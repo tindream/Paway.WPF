@@ -207,6 +207,8 @@ namespace Paway.WPF
             //AutoGenerateColumns = true;
             //this.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
             //this.ColumnHeaderHeight = 42;
+            System.Windows.Controls.ScrollViewer.SetCanContentScroll(this, true);
+            VirtualizingPanel.SetScrollUnit(this, ScrollUnit.Pixel);
             this.MouseDoubleClick += DataGridEXT_MouseDoubleClick;
         }
         /// <summary>
@@ -578,8 +580,6 @@ namespace Paway.WPF
         /// 拖拽起始行
         /// </summary>
         private DataGridRow fromItem;
-        private double _startVerticalOffset;
-        private double rowHeight;
         /// <summary>
         /// 按下记录位置
         /// </summary>
@@ -600,27 +600,16 @@ namespace Paway.WPF
                 }
                 else if (this.SelectionMode == DataGridSelectionMode.Single)
                 {
-                    if (ScrollViewer.CanContentScroll)
-                    { //启用虚拟化时
-                        _startVerticalOffset = ScrollViewer.VerticalOffset;
-                        rowHeight = this.RowHeight;
-                        if (rowHeight.Equals(double.NaN) && dependency.Parent(out DataGridRow row))
-                        {
-                            rowHeight = row.ActualHeight;
-                        }
-                    }
-                    else
-                    { //直接拖动控件滚动条
-                        var eventArg = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, e.ChangedButton)
-                        {
-                            RoutedEvent = UIElement.MouseLeftButtonDownEvent,
-                            Source = this
-                        };
-                        this.BeginInvoke(arg =>
-                        {
-                            if (!arg.Handled) ScrollViewer.RaiseEvent(eventArg);
-                        }, e);
-                    }
+                    //直接拖动控件滚动条
+                    var eventArg = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, e.ChangedButton)
+                    {
+                        RoutedEvent = UIElement.MouseLeftButtonDownEvent,
+                        Source = this
+                    };
+                    this.BeginInvoke(arg =>
+                    {
+                        if (!arg.Handled) ScrollViewer.RaiseEvent(eventArg);
+                    }, e);
                 }
             }
             base.OnPreviewMouseLeftButtonDown(e);
@@ -660,16 +649,6 @@ namespace Paway.WPF
                         {
                             fromItem = null;
                         }
-                    }
-                }
-                else if (this.SelectionMode == DataGridSelectionMode.Single && ScrollViewer?.ScrollableHeight > 0)
-                {
-                    if (!rowHeight.Equals(double.NaN))
-                    {
-                        double deltaY = ((currentPosition.Y - _lastMouseDown.Value.Y) / rowHeight).ToInt();
-                        // 按行偏移滚动
-                        ScrollViewer.ScrollToVerticalOffset(_startVerticalOffset - deltaY);
-                        Trace.WriteLine("GO=" + (_startVerticalOffset - deltaY));
                     }
                 }
             }

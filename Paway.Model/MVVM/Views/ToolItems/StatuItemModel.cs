@@ -75,6 +75,7 @@ namespace Paway.Model
         }
         /// <summary>
         /// 时间更新外部处理事件
+        /// <para>默认为：yyyy-MM-dd HH:mm:ss dddd</para>
         /// </summary>
         public event Func<string> TimeChangeEvent;
 
