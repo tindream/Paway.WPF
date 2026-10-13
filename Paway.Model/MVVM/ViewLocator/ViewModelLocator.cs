@@ -11,13 +11,19 @@ namespace Paway.Model
     public class ViewModelLocator
     {
         private static ViewModelLocator _default;
+        private static StatuItemModel _statuItem;
         static ViewModelLocator()
         {
             _default = new ViewModelLocator();
-            GetModelInstance<StatuItemModel>().Init();
+            _statuItem = new StatuItemModel();
+            _statuItem.Init();
         }
         internal static ViewModelLocator Default => _default;
 
+        /// <summary>
+        /// 模型-状态栏
+        /// </summary>
+        public StatuItemModel StatuItem => _statuItem;
         /// <summary>
         /// 模型-登录页
         /// </summary>
@@ -38,10 +44,6 @@ namespace Paway.Model
         /// 模型-操作栏
         /// </summary>
         public OperateItemModel OperateItem => GetModelInstance<OperateItemModel>();
-        /// <summary>
-        /// 模型-状态栏
-        /// </summary>
-        public StatuItemModel StatuItem => GetModelInstance<StatuItemModel>();
         /// <summary>
         /// 模型-双输入框通用窗体
         /// </summary>
