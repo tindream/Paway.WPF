@@ -21,6 +21,8 @@ namespace Paway.WPF
     /// </summary>
     public partial class ListViewCustom : ListView
     {
+        private bool _fontSizeSubscribed;
+
         #region 依赖属性
         /// <summary>
         /// </summary>
@@ -402,8 +404,22 @@ namespace Paway.WPF
         public ListViewCustom()
         {
             DefaultStyleKey = typeof(ListViewCustom);
-            PConfig.FontSizeChanged += Config_FontSizeChanged;
+            //PConfig 为静态事件，控件移除时必须解绑，否则实例无法回收
+            SubscribeFontSizeChanged();
             this.SelectionChanged += ListViewCustom_SelectionChanged;
+            this.Unloaded += ListViewCustom_Unloaded;
+        }
+        private void SubscribeFontSizeChanged()
+        {
+            if (_fontSizeSubscribed) return;
+            PConfig.FontSizeChanged += Config_FontSizeChanged;
+            _fontSizeSubscribed = true;
+        }
+        private void ListViewCustom_Unloaded(object sender, RoutedEventArgs e)
+        {
+            if (!_fontSizeSubscribed) return;
+            PConfig.FontSizeChanged -= Config_FontSizeChanged;
+            _fontSizeSubscribed = false;
         }
         private ScrollViewerEXT ScrollViewer;
         /// <summary>

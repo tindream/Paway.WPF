@@ -24,20 +24,37 @@ namespace Paway.WPF
         static PConfig()
         {
             FontAwesome = new FontFamily(new Uri(@"pack://application:,,,/Paway.WPF;component/Resources/Resource/"), "./#fontawesome");
-            if (Application.Current?.Resources.MergedDictionaries.Any(c => c.Source.ToStrings().Contains("Paway.xaml")) == false)
-            {
-                // 创建资源字典
-                ResourceDictionary globalResources = new ResourceDictionary();
-                // 指定资源字典的源（确保"Resources.xaml"的生成操作设置为Page或Resource）
-                globalResources.Source = new Uri("/Paway.WPF;component/Themes/Paway.xaml", UriKind.Relative);
-                // 合并到应用程序资源
-                Application.Current.Resources.MergedDictionaries.Add(globalResources);
-            }
+            MergeThemeResource();
         }
         /// <summary>
         /// 加载全局资源
+        /// <para>静态构造时 Application 可能尚未创建，此时本次合并不生效；此方法可在之后重试</para>
         /// </summary>
-        internal static void InitResources() { }
+        internal static void InitResources()
+        {
+            MergeThemeResource();
+        }
+        /// <summary>
+        /// 合并主题资源字典（幂等）
+        /// </summary>
+        private static void MergeThemeResource()
+        {
+            var application = Application.Current;
+            if (application == null) return;
+            var dictionaries = application.Resources.MergedDictionaries;
+            foreach (var item in dictionaries)
+            {
+                if (item.Source != null && item.Source.ToStrings().Contains("Paway.xaml")) return;
+            }
+            // 创建资源字典
+            var globalResources = new ResourceDictionary
+            {
+                // 指定资源字典的源（确保"Resources.xaml"的生成操作设置为Page或Resource）
+                Source = new Uri("/Paway.WPF;component/Themes/Paway.xaml", UriKind.Relative)
+            };
+            // 合并到应用程序资源
+            dictionaries.Add(globalResources);
+        }
 
         #region 全局配置
         private static Window _window;
@@ -49,8 +66,10 @@ namespace Paway.WPF
             get { return _window; }
             set
             {
+                if (ReferenceEquals(_window, value)) return;
                 if (_window != null) _window.Closed -= Window_Closed;
                 _window = value;
+                if (value == null) return;
                 value.Closed += Window_Closed;
                 Handle = value.Handle();
             }

@@ -24,7 +24,7 @@
                 <TransformGroup/>
             </Border.RenderTransform>
             <ListViewEXT IsLight="True" Type="Color" ItemTextForeground="White" IMove="True"
-                         ItemWidth="80" ItemHeight="80" ItemBackground="200;160;240" ItemTextFontSize="17"
+                         ItemWidth="80" ItemHeight="80" ItemBackground="200;160;240"
                          ItemImageWidth="42" ItemImageStretch="Uniform">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">

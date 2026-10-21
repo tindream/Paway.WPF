@@ -23,9 +23,28 @@ namespace Paway.Test
     /// </summary>
     public partial class TestPathPage : Page
     {
+        Path pathRed, pathBlue;
         public TestPathPage()
         {
             InitializeComponent();
+        }
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            this.pathBlue = transition.Content as Path;
+            this.pathRed = new Path
+            {
+                Style = this.FindResource("PathRound") as Style,
+                Fill = new SolidColorBrush(Colors.Red),
+                Width = 28,
+            };
+        }
+        private void ButtonEXT_Click(object sender, RoutedEventArgs e)
+        {
+            var type = (TransitionType)Method.Random((int)TransitionType.Left, (int)TransitionType.Bottom + 1);
+            transition.TransitionType = type;
+            if (transition.Content != pathBlue) transition.Content = this.pathBlue;
+            else transition.Content = this.pathRed;
         }
     }
 }

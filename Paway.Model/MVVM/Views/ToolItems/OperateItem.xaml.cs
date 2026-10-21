@@ -112,6 +112,8 @@ namespace Paway.Model
         /// </summary>
         private void OperateItem_Loaded(object sender, RoutedEventArgs e)
         {
+            //模型可能晚于视图创建，构造时的消息会丢失，加载后再通知一次（接收方有重复判断）
+            WeakReferenceMessenger.Default.Send(new OperateLoadMessage() { Obj = this });
             if (this.Parent(out Window window))
             {
                 window.PreviewKeyDown += Window_PreviewKeyDown;
@@ -122,7 +124,7 @@ namespace Paway.Model
         {
             if (!this.IsLoaded) return;
             var keyMsg = new KeyMessage(e.Key);
-            WeakReferenceMessenger.Default.Send(keyMsg, this.dpOperateItem.GetHashCode());
+            WeakReferenceMessenger.Default.Send(keyMsg, OperateItemModel.KeyToken(this.dpOperateItem));
             e.Handled = keyMsg.Handled;
         }
     }

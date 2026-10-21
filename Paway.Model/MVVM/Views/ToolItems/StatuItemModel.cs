@@ -90,8 +90,9 @@ namespace Paway.Model
         /// </summary>
         public StatuItemModel()
         {
-            PConfig.OperateLogEvent += msg => AddDesc(msg.Text);
-            PConfig.StatuLogEvent += (msg, level, source) => AddDesc(msg, level);
+            //用具名方法而非 lambda，才能在 Unregister 时真正解绑静态事件
+            PConfig.OperateLogEvent += OperateLogAdd;
+            PConfig.StatuLogEvent += StatuLogAdd;
             WeakReferenceMessenger.Default.Register<StatuMessage>(this, (obj, msg) => AddDesc(msg.Msg, msg.Level, msg.IHit, msg.Ower));
             WeakReferenceMessenger.Default.Register<ConnectMessage>(this, (obj, msg) =>
             {
@@ -108,16 +109,32 @@ namespace Paway.Model
                             hour <= 13 ? "中午好" : hour < 18 ? "下午好" : "晚上好";
                 this.UserName = $"{hello}, {msg.UserName}";
             });
-            Task.Run(() =>
+            //原先用 Task.Run + while(true) + Thread.Sleep(1000)：永久占用一个线程池线程
+            this.timer = new Timer(_ => UpdateTime(), null, 0, 1000);
+        }
+        private Timer timer;
+        private void OperateLogAdd(OperateInfo msg) { AddDesc(msg.Text); }
+        private void StatuLogAdd(string msg, LevelType level, object source) { AddDesc(msg, level); }
+        private void UpdateTime()
+        {
+            if (PConfig.IClose)
             {
-                this.TimeNow = TimeChangeEvent != null ? TimeChangeEvent.Invoke() : DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss dddd");
-                Thread.Sleep(1000 - DateTime.Now.Millisecond);
-                while (!PConfig.IClose)
-                {
-                    this.TimeNow = TimeChangeEvent != null ? TimeChangeEvent.Invoke() : DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss dddd");
-                    Thread.Sleep(1000);
-                }
-            });
+                //主窗体已关闭，停止计时并解绑，避免关闭流程中继续处理日志
+                Unregister();
+                return;
+            }
+            this.TimeNow = TimeChangeEvent != null ? TimeChangeEvent.Invoke() : DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss dddd");
+        }
+        /// <summary>
+        /// 解绑静态事件与定时器
+        /// </summary>
+        internal void Unregister()
+        {
+            PConfig.OperateLogEvent -= OperateLogAdd;
+            PConfig.StatuLogEvent -= StatuLogAdd;
+            WeakReferenceMessenger.Default.UnregisterAll(this);
+            this.timer?.Dispose();
+            this.timer = null;
         }
 
         #region 系统消息

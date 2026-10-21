@@ -45,11 +45,15 @@ namespace Paway.Model
 
             for (var i = 0; i < labelList.Count; i++)
             {
-                pie.Slices.Add(new PieSlice(labelList[i], valueList[i]));
+                var slice = new PieSlice(labelList[i], i < valueList.Count ? valueList[i] : 0);
+                //原来硬编码只给前3块着色，且块数不足3时直接越界
+                if (colorList != null && i < colorList.Count)
+                {
+                    var color = colorList[i];
+                    slice.Fill = OxyColor.FromArgb(color.A, color.R, color.G, color.B);
+                }
+                pie.Slices.Add(slice);
             }
-            pie.Slices[0].Fill = OxyColor.FromArgb(colorList[0].A, colorList[0].R, colorList[0].G, colorList[0].B);
-            pie.Slices[1].Fill = OxyColor.FromArgb(colorList[1].A, colorList[1].R, colorList[1].G, colorList[1].B);
-            pie.Slices[2].Fill = OxyColor.FromArgb(colorList[2].A, colorList[2].R, colorList[2].G, colorList[2].B);
 
             return model;
         }
@@ -120,9 +124,21 @@ namespace Paway.Model
         /// </summary>
         public static void UpdateLine(PlotModel plotModel, List<double> valueList, List<Color> colorList, bool Invalidate = true)
         {
-            var series = plotModel.Series[0] as BarSeries;
+            if (!(plotModel.Series.FirstOrDefault() is BarSeries series)) return;
             series.Items.Clear();
-            for (var i = 0; i < valueList.Count; i++) series.Items.Add(new BarItem(valueList[i]) { Color = OxyColor.FromArgb(colorList[i].A, colorList[i].R, colorList[i].G, colorList[i].B) });
+            for (var i = 0; i < valueList.Count; i++)
+            {
+                //颜色列表可短于数值列表，超出时不再着色
+                if (colorList != null && i < colorList.Count)
+                {
+                    var color = colorList[i];
+                    series.Items.Add(new BarItem(valueList[i]) { Color = OxyColor.FromArgb(color.A, color.R, color.G, color.B) });
+                }
+                else
+                {
+                    series.Items.Add(new BarItem(valueList[i]));
+                }
+            }
             if (Invalidate) plotModel.InvalidatePlot(true);
         }
 
@@ -241,10 +257,11 @@ namespace Paway.Model
                 //MarkerType = MarkerType.Circle,
                 //InterpolationAlgorithm = InterpolationAlgorithms.CatmullRomSpline,
                 //Smooth = true,
-                TrackerFormatString = $"{Environment.NewLine}{0}: {4:0,0.00}"
+                //注意：这里是 OxyPlot 的格式串，不能用 $"" 插值，否则 {0}/{4} 会被 C# 当占位表达式求值 
+                TrackerFormatString = Environment.NewLine + "{0}: {4:0,0.00}"
             };
             if (color != null) line.Color = OxyColor.FromRgb(color.Value.R, color.Value.G, color.Value.B);
-            if (first) line.TrackerFormatString = $"时间: {2}{Environment.NewLine}{0}: {4:0,0.00}";
+            if (first) line.TrackerFormatString = "时间: {2}" + Environment.NewLine + "{0}: {4:0,0.00}";
             plotModel.Series.Add(line);
             return line;
         }
@@ -278,18 +295,21 @@ namespace Paway.Model
             //首先找出统计线中当前最大的节点
             var min = double.NaN;
             var max = double.NaN;
-            for (int i = 0; i < plotModel.Series.Count; i++)
+            foreach (var item in plotModel.Series)
             {
-                var value = (plotModel.Series[i] as LineSeries).MaxY;
-                if (max < value) max = value;
-                value = (plotModel.Series[i] as LineSeries).MinY;
-                if (min > value) min = value;
+                //Series 可能含 BarSeries/LinearBarSeries，直接 as 后解引用会空引用
+                if (!(item is LineSeries series)) continue;
+                var value = series.MaxY;
+                if (!double.IsNaN(value) && (double.IsNaN(max) || max < value)) max = value;
+                value = series.MinY;
+                if (!double.IsNaN(value) && (double.IsNaN(min) || min > value)) min = value;
             }
 
             var leftAxis = plotModel.Axes.FirstOrDefault(c => c.Position == AxisPosition.Left);
+            if (leftAxis == null) return;
             //如果当前的y轴最大刻度小于数据集中的最大值，放大
-            if (!min.Equals(double.NaN)) leftAxis.Minimum = min;
-            if (!max.Equals(double.NaN)) leftAxis.Maximum = max;
+            if (!double.IsNaN(min)) leftAxis.Minimum = min;
+            if (!double.IsNaN(max)) leftAxis.Maximum = max;
         }
 
         #endregion

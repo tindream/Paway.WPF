@@ -969,26 +969,25 @@ namespace Paway.WPF
             //禁用Backspace退格导航返回Page页
             NavigationCommands.BrowseBack.InputGestures.Clear();
             Application.Current.DispatcherUnhandledException += App_DispatcherUnhandledException;
+            PConfig.InitResources();
             Task.Run(() =>
             {
                 try
                 {
-                    for (var i = 0; i < 1000; i++)
-                    {
-                        if (Invoke(() => Application.Current.MainWindow) != null) break;
-                        Thread.Sleep(5);
-                    }
+                    //等待主窗体创建（最多约5秒）
                     for (var i = 0; i < 1000; i++)
                     {
                         if (PConfig.Window != null) break;
-                        var result = Invoke(() =>
+                        Invoke(() =>
                         {
-                            PConfig.Window = Application.Current.MainWindow;
-                            if (PConfig.Window == null) "获取MainWindow失败".Warn();
+                            //主窗体未创建时赋值会触发异常并刷日志，这里先判空
+                            var mainWindow = Application.Current?.MainWindow;
+                            if (mainWindow != null && PConfig.Window == null) PConfig.Window = mainWindow;
                         });
-                        if (result) break;
+                        if (PConfig.Window != null) break;
                         Thread.Sleep(5);
                     }
+                    if (PConfig.Window == null) "获取MainWindow失败".Warn();
                 }
                 catch (Exception ex)
                 {

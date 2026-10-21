@@ -26,7 +26,7 @@ namespace Paway.Test
     public partial class TipWindow : WindowEXT
     {
         private bool iLoad;
-        private bool iClose;
+        //private bool iClose;
         public TipWindow()
         {
             InitializeComponent();
@@ -54,7 +54,7 @@ namespace Paway.Test
         protected override void OnClosing(CancelEventArgs e)
         {
             ViewModelLocator.Default.TipWindow.IAll = false;
-            e.Cancel = !iClose;
+            //e.Cancel = !iClose;
             base.OnClosing(e);
         }
         protected override void OnRender(DrawingContext drawingContext)
@@ -75,7 +75,7 @@ namespace Paway.Test
                 });
                 WeakReferenceMessenger.Default.Register<TipCloseMessage>(this, (obj, msg) =>
                 {
-                    this.iClose = true;
+                    //this.iClose = true;
                     this.Close();
                 });
             }

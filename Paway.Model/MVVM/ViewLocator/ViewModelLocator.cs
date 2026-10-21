@@ -22,6 +22,7 @@ namespace Paway.Model
 
         /// <summary>
         /// 模型-状态栏
+        /// <para>进程级单例，被 XAML 直接绑定，不参与 Clear 重置</para>
         /// </summary>
         public StatuItemModel StatuItem => _statuItem;
         /// <summary>
@@ -55,50 +56,50 @@ namespace Paway.Model
 
         /// <summary>
         /// 单实例模型已注册列表
+        /// <para>用 object 而非 dynamic：dynamic 每次取值都要走 DLR 绑定，这里只有装箱后的引用</para>
         /// </summary>
-        private static readonly Dictionary<string, dynamic> viewModelList = new Dictionary<string, dynamic>();
+        private static readonly Dictionary<string, object> viewModelList = new Dictionary<string, object>();
         /// <summary>
         /// 创建单实例模型，如已存在时，从缓存列表获取
         /// </summary>
         public static T GetModelInstance<T>(string key = null) where T : class
         {
-            var name = typeof(T).FullName;
-            if (!viewModelList.ContainsKey(name))
+            //key 原实现未参与缓存键，传不同 key 会拿到同一个实例
+            var name = $"{typeof(T).FullName}_{key}";
+            if (!viewModelList.TryGetValue(name, out object obj))
             {
-                var obj = Activator.CreateInstance<T>();
+                obj = Activator.CreateInstance<T>();
                 viewModelList.Add(name, obj);
             }
-            return viewModelList[name];
+            return (T)obj;
         }
 
         /// <summary>
         /// 单实例视图列表
         /// </summary>
-        private static readonly Dictionary<string, dynamic> dicView = new Dictionary<string, dynamic>();
+        private static readonly Dictionary<string, object> dicView = new Dictionary<string, object>();
         /// <summary>
         /// 创建单实例视图，如已存在时，从缓存列表获取
         /// </summary>
         public static T GetViewInstance<T>(object key = null) where T : FrameworkElement
         {
             var name = $"{typeof(T).FullName}_{key}";
-            if (!dicView.ContainsKey(name))
+            if (dicView.TryGetValue(name, out object value))
             {
-                var obj = Activator.CreateInstance<T>();
-                if (obj.DataContext is IPageReload pageReload) obj.Loaded += (sender, e) =>
+                if (((FrameworkElement)value).DataContext is IPageReload pageReload) pageReload.PageReload();
+                return (T)value;
+            }
+            var obj = Activator.CreateInstance<T>();
+            if (obj.DataContext is IPageReload reload) obj.Loaded += (sender, e) =>
+            {
+                if (!reload.ILoad)
                 {
-                    if (!pageReload.ILoad)
-                    {
-                        pageReload.ILoad = true;
-                        pageReload.PageReload();
-                    }
-                };
-                dicView.Add(name, obj);
-            }
-            else if (((FrameworkElement)dicView[name]).DataContext is IPageReload pageReload)
-            {
-                pageReload.PageReload();
-            }
-            return dicView[name];
+                    reload.ILoad = true;
+                    reload.PageReload();
+                }
+            };
+            dicView.Add(name, obj);
+            return obj;
         }
         /// <summary>
         /// 清除所有实例与注册
@@ -115,6 +116,8 @@ namespace Paway.Model
             }
             viewModelList.Clear();
             dicView.Clear();
+            //Statuitem 模型被状态栏 XAML 直接绑定且不在上述缓存中，这里不重置，
+            //否则清除后仍在显示的状态栏将收不到消息
         }
     }
 }

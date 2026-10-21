@@ -185,16 +185,36 @@ namespace Paway.WPF
                 void handler(object s, EventArgs e)
                 {
                     CompositionTarget.Rendering -= handler;
+                    _renderHandler = null;
                     this.BeginInvoke(() => StartTransition());
                 }
+                //CompositionTarget.Rendering 是静态事件，重复订阅/未解绑都会导致控件无法回收
+                if (_renderHandler != null) CompositionTarget.Rendering -= _renderHandler;
+                _renderHandler = handler;
                 CompositionTarget.Rendering += handler;
             }
+        }
+        private EventHandler _renderHandler;
+        /// <summary>
+        /// 控件移除时解绑静态渲染事件，避免内存泄漏
+        /// </summary>
+        protected override void OnVisualParentChanged(DependencyObject oldParent)
+        {
+            base.OnVisualParentChanged(oldParent);
+            if (VisualParent == null) ClearRenderHandler();
+        }
+        private void ClearRenderHandler()
+        {
+            if (_renderHandler == null) return;
+            CompositionTarget.Rendering -= _renderHandler;
+            _renderHandler = null;
         }
         /// <summary>
         /// Aborts the transition and releases the previous content.
         /// </summary>
         private void AbortTransition()
         {
+            ClearRenderHandler();
             if (PreviousContentPresentationSite != null)
             {
                 PreviousContentPresentationSite.Content = null;

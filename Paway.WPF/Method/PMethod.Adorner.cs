@@ -129,7 +129,9 @@ namespace Paway.WPF
         public static CustomAdorner AdornerWindow(Window window, FrameworkElement content, int backAlpha = 100, bool iTop = false)
         {
             var adorner = CustomAdorner(window, content, true, false, iTop);
-            var canvas = adorner.GetCanvas();
+            //Invoke 失败（非UI线程或Application未创建）时返回 null
+            var canvas = adorner?.GetCanvas();
+            if (canvas == null) return null;
             canvas.Background = Colors.Black.ToAlpha(backAlpha).ToBrush();
             MoveAdorner(adorner);
             return adorner;
@@ -175,6 +177,7 @@ namespace Paway.WPF
                 }
             };
             Adorner = PMethod.CustomAdorner(window, element, true, iBingParentSize, iTop);
+            if (Adorner == null) return;
             var canvas = Adorner.GetCanvas();
             canvas.Background = Colors.Black.ToAlpha(backAlpha).ToBrush();
             if (iMove) MoveAdorner(Adorner);

@@ -37,42 +37,54 @@ namespace Paway.Model
         /// 关闭处理
         /// </summary>
         public virtual bool? OnCancel(Window wd) { return false; }
+        private readonly ICommand cancel;
         /// <summary>
         /// 点击关闭
         /// </summary>
-        public ICommand Cancel => new RelayCommand<Window>(wd =>
-        {
-            try
-            {
-                var result = OnCancel(wd);
-                if (wd != null) wd.DialogResult = result;
-            }
-            catch (Exception ex)
-            {
-                WeakReferenceMessenger.Default.Send(new StatuMessage(ex, wd));
-            }
-        });
+        public ICommand Cancel => cancel;
 
         /// <summary>
         /// 提交处理
         /// </summary>
         public virtual bool? OnCommit(Window wd) { return true; }
+        private readonly ICommand commit;
         /// <summary>
         /// 点击提交
         /// </summary>
-        public ICommand Commit => new RelayCommand<Window>(wd =>
-        {
-            try
-            {
-                var result = OnCommit(wd);
-                if (wd != null) wd.DialogResult = result;
-            }
-            catch (Exception ex)
-            {
-                WeakReferenceMessenger.Default.Send(new StatuMessage(ex, wd));
-            }
-        });
+        public ICommand Commit => commit;
 
         #endregion
+
+        /// <summary>
+        /// Window基础模型
+        /// </summary>
+        public BaseWindowModel()
+        {
+            //命令对象只创建一次，避免每次绑定取值都新建
+            this.cancel = new RelayCommand<Window>(wd =>
+            {
+                try
+                {
+                    var result = OnCancel(wd);
+                    if (wd != null) wd.DialogResult = result;
+                }
+                catch (Exception ex)
+                {
+                    WeakReferenceMessenger.Default.Send(new StatuMessage(ex, wd));
+                }
+            });
+            this.commit = new RelayCommand<Window>(wd =>
+            {
+                try
+                {
+                    var result = OnCommit(wd);
+                    if (wd != null) wd.DialogResult = result;
+                }
+                catch (Exception ex)
+                {
+                    WeakReferenceMessenger.Default.Send(new StatuMessage(ex, wd));
+                }
+            });
+        }
     }
 }

@@ -24,7 +24,7 @@ namespace Paway.Model
         /// <summary>
         /// 星星PathData
         /// </summary>
-        private readonly Geometry pathStar = Geometry.Parse("M16.001007,0L20.944,10.533997 32,12.223022 23.998993,20.421997 25.889008,32 16.001007,26.533997 6.1109924,32 8,20.421997 0,12.223022 11.057007,10.533997z");
+        private static readonly Geometry pathStar = Geometry.Parse("M16.001007,0L20.944,10.533997 32,12.223022 23.998993,20.421997 25.889008,32 16.001007,26.533997 6.1109924,32 8,20.421997 0,12.223022 11.057007,10.533997z");
         /// <summary>
         /// 星星运动的最大速度
         /// </summary>
@@ -71,13 +71,16 @@ namespace Paway.Model
                     RenderTransformOrigin = new Point(0.5, 0.5),
                     RenderTransform = new RotateTransform() { Angle = 0 }
                 };
+                //容器尚未完成测量时 ActualWidth/Height 为 0，原写法 Next 的上限会变成负数而抛异常
+                var maxX = (int)(container.ActualWidth - size);
+                var maxY = (int)(container.ActualHeight - size);
                 StarInfo starInfo = new StarInfo()
                 {
                     Star = star,
-                    X = _random.Next(0, (int)(container.ActualWidth - star.Width)),
+                    X = maxX > 0 ? _random.Next(0, maxX) : 0,
                     XV = (double)_random.Next(-_starVMax, _starVMax) / 60,
                     XT = _random.Next(6, 301),//帧
-                    Y = _random.Next(0, (int)(container.ActualHeight - star.Height)),
+                    Y = maxY > 0 ? _random.Next(0, maxY) : 0,
                     YV = (double)_random.Next(-_starVMax, _starVMax) / 60,
                     YT = _random.Next(6, 301),//帧
                 };
@@ -98,7 +101,10 @@ namespace Paway.Model
             byte r = (byte)_random.Next(128, 256);
             byte g = (byte)_random.Next(128, 256);
             byte b = (byte)_random.Next(128, 256);
-            return new SolidColorBrush(Color.FromArgb(255, r, g, b));
+            var brush = new SolidColorBrush(Color.FromArgb(255, r, g, b));
+            //冻结后可跨线程使用、渲染线程无需再校验，60颗星星同时动画时开销明显下降
+            brush.Freeze();
+            return brush;
         }
         /// <summary>
         /// 星星旋转动画
@@ -114,11 +120,6 @@ namespace Paway.Model
             {
                 Duration = dur,
                 RepeatBehavior = RepeatBehavior.Forever
-            };
-            //动画完成事件 再次设置此动画
-            storyboard.Completed += (S, E) =>
-            {
-                //SetStarRotateAnimation(star);
             };
 
             DoubleAnimation da = new DoubleAnimation()

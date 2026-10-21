@@ -11,15 +11,20 @@
       d:DesignHeight="450" d:DesignWidth="600"
       Title="TestPathPage">
     <Border BorderBrush="LightGray" Margin="20">
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30">
-            <Path Style="{StaticResource PathRound}" Width="28"/>
-            <Path Style="{StaticResource PathTriangle}" Width="32"/>
-            <Path Style="{StaticResource PathTriangleDown}" Width="32"/>
-            <Path Style="{StaticResource PathTriangleRight}" Width="24"/>
-            <Path Style="{StaticResource PathRect}" Width="28"/>
-            <Path Style="{StaticResource PathRight}" Width="24" />
-            <Path Style="{StaticResource PathQuestion}" Width="18"/>
-            <Path Style="{StaticResource PathClose}"/>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30">
+                <TransitionControl Name="transition" >
+                    <Path Style="{StaticResource PathRound}" Width="28" />
+                </TransitionControl>
+                <Path Style="{StaticResource PathTriangle}" Width="32"/>
+                <Path Style="{StaticResource PathTriangleDown}" Width="32"/>
+                <Path Style="{StaticResource PathTriangleRight}" Width="24"/>
+                <Path Style="{StaticResource PathRect}" Width="28"/>
+                <Path Style="{StaticResource PathRight}" Width="24" />
+                <Path Style="{StaticResource PathQuestion}" Width="18"/>
+                <Path Style="{StaticResource PathClose}"/>
+            </StackPanel>
+            <ButtonEXT Content="动画"  Type="Success" Click="ButtonEXT_Click"/>
         </StackPanel>
     </Border>
 </Page>

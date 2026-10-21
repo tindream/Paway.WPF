@@ -185,9 +185,11 @@ namespace Paway.Model
             });
             server.Insert(list); Cache.Update(list, true); if (!this.iCache) Cache.UpdateList(OperType.Insert, this.List, list, true);
             int index = 0;
+            //FilterList 每次都会新建完整列表，循环内重复调用是 O(n^2)；此期间 List 已一次性更新完，可提到循环外
+            var filterList = this.FilterList();
             foreach (var info in list)
             {
-                index = this.FilterList().FindIndex(c => c.Id == info.Id);
+                index = filterList.FindIndex(c => c.Id == info.Id);
                 if (!this.SearchReset()) this.Invoke(() => ObList.Insert(index, info));
             }
             MoveTo(index, list.Last());
@@ -223,9 +225,7 @@ namespace Paway.Model
             }
             finally
             {
-                if (index >= DataGrid.Items.Count) index = DataGrid.Items.Count - 1;
-                if (DataGrid.SelectionUnit == DataGridSelectionUnit.FullRow) DataGrid.SelectedIndex = index;
-                else if (index >= 0) DataGrid.Select(this.FilterList()[index].Id, true);
+                SelectAfterDeleted(index);
             }
         }
         /// <summary>
@@ -249,10 +249,24 @@ namespace Paway.Model
             }
             finally
             {
-                if (index >= DataGrid.Items.Count) index = DataGrid.Items.Count - 1;
-                if (DataGrid.SelectionUnit == DataGridSelectionUnit.FullRow) DataGrid.SelectedIndex = index;
-                else if (index >= 0) DataGrid.Select(this.FilterList()[index].Id, true);
+                SelectAfterDeleted(index);
             }
+        }
+        /// <summary>
+        /// 删除后定位选中行
+        /// <para>索引按视图行数与过滤列表双重校验，避免在 finally 中抛越界异常掩盖真实错误</para>
+        /// </summary>
+        private void SelectAfterDeleted(int index)
+        {
+            if (index >= DataGrid.Items.Count) index = DataGrid.Items.Count - 1;
+            if (DataGrid.SelectionUnit == DataGridSelectionUnit.FullRow)
+            {
+                DataGrid.SelectedIndex = index;
+                return;
+            }
+            if (index < 0) return;
+            var filterList = this.FilterList();
+            if (index < filterList.Count) DataGrid.Select(filterList[index].Id, true);
         }
         /// <summary>
         /// 重载-自定义刷新操作
@@ -325,13 +339,11 @@ namespace Paway.Model
         #endregion
 
         #region 操作命令
+        private readonly ICommand rowDoubleCommand;
         /// <summary>
         /// 双击命令
         /// </summary>
-        public ICommand RowDoubleCommand => new RelayCommand<SelectItemEventArgs>(e =>
-        {
-            ItemClickCommand.Execute("编辑");
-        });
+        public ICommand RowDoubleCommand => rowDoubleCommand;
         /// <summary>
         /// 按钮列表-点击命令处理
         /// </summary>
@@ -451,10 +463,12 @@ namespace Paway.Model
 
         #endregion
         #region 拖拽排序
+        private readonly ICommand dragCompletedCmd;
         /// <summary>
         /// 拖拽排序
         /// </summary>
-        public ICommand DragCompletedCmd => new RelayCommand<DataGridDragEventArgs>(e =>
+        public ICommand DragCompletedCmd => dragCompletedCmd;
+        private void DragCompleted(DataGridDragEventArgs e)
         {
             var timeNow = DateTime.Now;
             if (typeof(IIndex).IsAssignableFrom(typeof(T)))
@@ -472,7 +486,7 @@ namespace Paway.Model
                 }
                 server.Update(updateList, null, nameof(IIndex.Index)); Cache.Update(updateList, true); if (!this.iCache) Cache.UpdateList(OperType.Update, this.List, updateList, true);
             }
-        });
+        }
 
         #endregion
 
@@ -482,10 +496,13 @@ namespace Paway.Model
         /// </summary>
         protected void Init(List<T> list, bool iReload = true)
         {
+            if (list == null) list = new List<T>();
             if (this.List == null)
             {
                 this.List = list;
-                this.iCache = list.GetHashCode() == Cache.CacheList[typeof(T)].GetHashCode();
+                //原先用 GetHashCode 比较两个 List 实例：List 未重写 GetHashCode，比较的是对象标识，
+                //几乎恒不相等；且 CacheList 缺键时会抛 KeyNotFoundException。此处语义应为“是否为同一缓存实例”
+                this.iCache = Cache.CacheList.TryGetValue(typeof(T), out object cacheList) && ReferenceEquals(list, cacheList);
             }
             else
             {
@@ -574,6 +591,9 @@ namespace Paway.Model
         public DataGridPageModel()
         {
             this.PagedList = new PagedCollectionView(ObList) { PageSize = 20 };
+            //命令对象只创建一次，避免每次绑定取值都新建
+            this.rowDoubleCommand = new RelayCommand<SelectItemEventArgs>(e => ItemClickCommand.Execute("编辑"));
+            this.dragCompletedCmd = new RelayCommand<DataGridDragEventArgs>(DragCompleted);
         }
     }
 }

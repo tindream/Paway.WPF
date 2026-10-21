@@ -158,7 +158,7 @@ namespace Paway.Model
         /// </summary>
         protected void AddInterval(int index = -1, Action<Border> action = null)
         {
-            this.operateItem.AddInterval(index = -1, action);
+            this.operateItem.AddInterval(index, action);
         }
         /// <summary>
         /// 添加按钮
@@ -186,6 +186,18 @@ namespace Paway.Model
         #endregion
 
         /// <summary>
+        /// 按键消息 token 表
+        /// <para>按键消息需要一个稳定且唯一的 token；原先用 GetHashCode 存在碰撞，
+        /// 且对象回收后 hash 可能被新对象复用，导致消息投递给错误的目标</para>
+        /// </summary>
+        private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<DockPanel, string> keyTokens
+            = new System.Runtime.CompilerServices.ConditionalWeakTable<DockPanel, string>();
+        internal static string KeyToken(DockPanel panel)
+        {
+            return keyTokens.GetValue(panel, p => Guid.NewGuid().ToString("N"));
+        }
+
+        /// <summary>
         /// 通用工具栏模型
         /// </summary>
         public OperateItemModel()
@@ -199,7 +211,7 @@ namespace Paway.Model
                     if (operateItem.Find(out DockPanel panel, "dpOperateItem"))
                     {
                         this.Panel = panel;
-                        WeakReferenceMessenger.Default.Register<KeyMessage, int>(this, panel.GetHashCode(), (objKey, msgKey) => Action(msgKey));
+                        WeakReferenceMessenger.Default.Register<KeyMessage, string>(this, KeyToken(panel), (objKey, msgKey) => Action(msgKey));
                     }
                     AuthNormal();
                 }

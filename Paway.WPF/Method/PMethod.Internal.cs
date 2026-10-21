@@ -30,6 +30,7 @@ namespace Paway.WPF
         /// </summary>
         internal static void Animation(FrameworkElement obj, bool value, string line1Name = "line1", string line2Name = "line2")
         {
+            //Child 已保证两个线控件不为空
             if (!Child(obj, out Line line1, line1Name)) return;
             if (!Child(obj, out Line line2, line2Name)) return;
             var storyboard = new Storyboard();
@@ -38,39 +39,24 @@ namespace Paway.WPF
                 var itemWidth = (int)(obj.ActualWidth / 2);
                 var itemWidth2 = obj.ActualWidth - itemWidth;
                 var animTime = PMethod.AnimTime(itemWidth) / 2;
-                var animX1 = new DoubleAnimation(line1.X2, itemWidth, new Duration(TimeSpan.FromMilliseconds(animTime)));
-                var animX2 = new DoubleAnimation(line2.X2, itemWidth2, new Duration(TimeSpan.FromMilliseconds(animTime)));
-                if (line1 != null)
-                {
-                    Storyboard.SetTargetName(animX1, line1.Name);
-                    Storyboard.SetTargetProperty(animX1, new PropertyPath(Line.X2Property));
-                    storyboard.Children.Add(animX1);
-                }
-                if (line2 != null)
-                {
-                    Storyboard.SetTargetName(animX2, line2.Name);
-                    Storyboard.SetTargetProperty(animX2, new PropertyPath(Line.X2Property));
-                    storyboard.Children.Add(animX2);
-                }
+                var duration = new Duration(TimeSpan.FromMilliseconds(animTime));
+                AddLineAnimation(storyboard, line1, itemWidth, duration);
+                AddLineAnimation(storyboard, line2, itemWidth2, duration);
             }
             else
             {
-                var animX1 = new DoubleAnimation(line1.X2, 0, new Duration(TimeSpan.FromMilliseconds(100)));
-                var animX2 = new DoubleAnimation(line2.X2, 0, new Duration(TimeSpan.FromMilliseconds(100)));
-                if (line1 != null)
-                {
-                    Storyboard.SetTargetName(animX1, line1.Name);
-                    Storyboard.SetTargetProperty(animX1, new PropertyPath(Line.X2Property));
-                    storyboard.Children.Add(animX1);
-                }
-                if (line2 != null)
-                {
-                    Storyboard.SetTargetName(animX2, line2.Name);
-                    Storyboard.SetTargetProperty(animX2, new PropertyPath(Line.X2Property));
-                    storyboard.Children.Add(animX2);
-                }
+                var duration = new Duration(TimeSpan.FromMilliseconds(100));
+                AddLineAnimation(storyboard, line1, 0, duration);
+                AddLineAnimation(storyboard, line2, 0, duration);
             }
-            if (line1 != null) storyboard.Begin(line1);
+            storyboard.Begin(line1);
+        }
+        private static void AddLineAnimation(Storyboard storyboard, Line line, double to, Duration duration)
+        {
+            var animation = new DoubleAnimation(line.X2, to, duration);
+            Storyboard.SetTargetName(animation, line.Name);
+            Storyboard.SetTargetProperty(animation, new PropertyPath(Line.X2Property));
+            storyboard.Children.Add(animation);
         }
 
         /// <summary>

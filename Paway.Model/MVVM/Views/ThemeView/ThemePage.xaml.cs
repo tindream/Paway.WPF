@@ -30,8 +30,14 @@ namespace Paway.Model
         {
             InitializeComponent();
             this.Unloaded += ThemePage_Unloaded;
-            Application.Current.Dispatcher.ShutdownStarted += Dispatcher_ShutdownStarted;
+            //原先用实例方法订阅全局 Dispatcher.ShutdownStarted 且从不解绑，每个页面实例都会被永久持有
+            if (!iShutdownHooked && Application.Current != null)
+            {
+                iShutdownHooked = true;
+                Application.Current.Dispatcher.ShutdownStarted += Dispatcher_ShutdownStarted;
+            }
         }
+        private static bool iShutdownHooked;
         /// <summary>
         /// 离开时还原主题
         /// </summary>
@@ -42,7 +48,7 @@ namespace Paway.Model
         /// <summary>
         /// 关闭主窗体时还原主题
         /// </summary>
-        private void Dispatcher_ShutdownStarted(object sender, EventArgs e)
+        private static void Dispatcher_ShutdownStarted(object sender, EventArgs e)
         {
             ViewModelLocator.Default.ThemeView.Restore();
         }

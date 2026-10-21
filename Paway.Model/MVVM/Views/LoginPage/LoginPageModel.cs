@@ -302,7 +302,8 @@ namespace Paway.Model
             {
                 this.Root = msg.Obj;
                 this.menuItem = msg.MenuItem;
-                PMethod.LanguageMenuBinding(menuItem, LanguageObList.ToList(), this, ItemClickCommand, nameof(Language));
+                //MenuItem 为可选参数，未提供时不应绑定多语言菜单
+                if (menuItem != null) PMethod.LanguageMenuBinding(menuItem, LanguageObList.ToList(), this, ItemClickCommand, nameof(Language));
             });
         }
     }

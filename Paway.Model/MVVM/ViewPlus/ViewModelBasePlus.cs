@@ -38,65 +38,79 @@ namespace Paway.Model
         /// 按钮通用动作命令
         /// </summary>
         protected virtual void Action(ButtonEXT btn) { }
+        private readonly ICommand buttonClickCommand;
         /// <summary>
         /// 点击按钮
         /// </summary>
-        public ICommand ButtonClickCommand => new RelayCommand<RoutedEventArgs>(e =>
-        {
-            if (e.Source is ButtonEXT btn)
-            {
-                try
-                {
-                    Action(btn);
-                }
-                catch (Exception ex)
-                {
-                    WeakReferenceMessenger.Default.Send(new StatuMessage(ex, btn));
-                }
-            }
-        });
+        public ICommand ButtonClickCommand => buttonClickCommand;
         /// <summary>
         /// 列表通用动作命令
         /// </summary>
         protected virtual void Action(ListViewCustom listView1, SelectionChangedEventArgs e) { }
+        private readonly ICommand selectionCommand;
         /// <summary>
         /// 选中列表项
         /// </summary>
-        public ICommand SelectionCommand => new RelayCommand<SelectionChangedEventArgs>(e =>
-        {
-            if (e.Source is ListViewCustom listView1)
-            {
-                try
-                {
-                    Action(listView1, e);
-                }
-                catch (Exception ex)
-                {
-                    WeakReferenceMessenger.Default.Send(new StatuMessage(ex, listView1));
-                }
-            }
-        });
+        public ICommand SelectionCommand => selectionCommand;
 
         /// <summary>
         /// 通用动作命令
         /// <para>默认返回值 true</para>
         /// </summary>
         public virtual bool Action(string item) { return true; }
+        private readonly ICommand itemClickCommand;
         /// <summary>
         /// 点击列表项
         /// </summary>
-        public ICommand ItemClickCommand => new RelayCommand<string>(item =>
-        {
-            try
-            {
-                Action(item);
-            }
-            catch (Exception ex)
-            {
-                WeakReferenceMessenger.Default.Send(new StatuMessage(ex));
-            }
-        });
+        public ICommand ItemClickCommand => itemClickCommand;
 
         #endregion
+
+        /// <summary>
+        /// 模型基础处理
+        /// </summary>
+        public ViewModelBasePlus()
+        {
+            //命令对象只创建一次：原先写成表达式属性，每次绑定取值都会 new 一个 RelayCommand
+            this.buttonClickCommand = new RelayCommand<RoutedEventArgs>(e =>
+            {
+                if (e.Source is ButtonEXT btn)
+                {
+                    try
+                    {
+                        Action(btn);
+                    }
+                    catch (Exception ex)
+                    {
+                        WeakReferenceMessenger.Default.Send(new StatuMessage(ex, btn));
+                    }
+                }
+            });
+            this.selectionCommand = new RelayCommand<SelectionChangedEventArgs>(e =>
+            {
+                if (e.Source is ListViewCustom listView1)
+                {
+                    try
+                    {
+                        Action(listView1, e);
+                    }
+                    catch (Exception ex)
+                    {
+                        WeakReferenceMessenger.Default.Send(new StatuMessage(ex, listView1));
+                    }
+                }
+            });
+            this.itemClickCommand = new RelayCommand<string>(item =>
+            {
+                try
+                {
+                    Action(item);
+                }
+                catch (Exception ex)
+                {
+                    WeakReferenceMessenger.Default.Send(new StatuMessage(ex));
+                }
+            });
+        }
     }
 }
