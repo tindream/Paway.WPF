@@ -502,7 +502,7 @@ namespace Paway.Model
                 this.List = list;
                 //原先用 GetHashCode 比较两个 List 实例：List 未重写 GetHashCode，比较的是对象标识，
                 //几乎恒不相等；且 CacheList 缺键时会抛 KeyNotFoundException。此处语义应为“是否为同一缓存实例”
-                this.iCache = Cache.CacheList.TryGetValue(typeof(T), out object cacheList) && ReferenceEquals(list, cacheList);
+                this.iCache = Cache.IEquals<T>(list);
             }
             else
             {

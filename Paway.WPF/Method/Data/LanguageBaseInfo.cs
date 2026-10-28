@@ -150,6 +150,21 @@ namespace Paway.WPF
         [Description("刷新")]
         public virtual string Refresh { get; set; } = "刷新";
         /// <summary>
+        /// 还原
+        /// </summary>
+        [Description("还原")]
+        public virtual string Restore { get; set; } = "还原";
+        /// <summary>
+        /// 最大化
+        /// </summary>
+        [Description("最大化")]
+        public virtual string Maximize { get; set; } = "最大化";
+        /// <summary>
+        /// 最小化
+        /// </summary>
+        [Description("最小化")]
+        public virtual string Minimize { get; set; } = "最小化";
+        /// <summary>
         /// 搜索
         /// </summary>
         [Description("搜索")]

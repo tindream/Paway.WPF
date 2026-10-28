@@ -205,9 +205,9 @@ namespace Paway.WPF
             this.Storyboard.Pause();
             this.Storyboard.Seek(TimeSpan.FromSeconds(autoTime));
             var index = scrollViewer.Lock(() => { return ++this.PauseIndex; });
-            Task.Run(() =>
+            Task.Run(async () =>
             {
-                Thread.Sleep((int)(this.BeginTime * 1000));
+                await Task.Delay((int)(this.BeginTime * 1000));
                 if (index == this.PauseIndex)
                 {
                     if (scrollViewer is ScrollViewerEXT viewerEXT && viewerEXT.IDrag) this.Pause(scrollViewer);

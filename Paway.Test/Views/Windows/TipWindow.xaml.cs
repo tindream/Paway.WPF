@@ -110,7 +110,7 @@ namespace Paway.Test
             var handle = this.Handle();
             var taskHandle = Win32Helper.TaskHandle();
             var currentProcessId = Process.GetCurrentProcess().Id;
-            Task.Run(() =>
+            Task.Run(async () =>
             {
                 var iShow = true;
                 while (!Config.IClose)
@@ -127,15 +127,15 @@ namespace Paway.Test
                         if (iShow)
                         {
                             iShow = false;
-                            this.BeginInvoke(() => { AnimationHelper.Start(this, TransitionType.Opacity, 0, 125, iReset: false); });
+                            _ = this.BeginInvoke(() => { AnimationHelper.Start(this, TransitionType.Opacity, 0, 125, iReset: false); });
                         }
                     }
                     else if (!iShow)
                     {
                         iShow = true;
-                        this.BeginInvoke(() => { AnimationHelper.Start(this, TransitionType.Opacity, 1, 125, iReset: false); });
+                        _ = this.BeginInvoke(() => { AnimationHelper.Start(this, TransitionType.Opacity, 1, 125, iReset: false); });
                     }
-                    Thread.Sleep(100);
+                    await Task.Delay(100);
                 }
             });
         }

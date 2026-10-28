@@ -102,7 +102,7 @@
     </Style>
 
     <Style x:Key="MinimizeButtonStyle" TargetType="Button" BasedOn="{StaticResource WindowTitleBarButtonStyle}">
-        <Setter Property="ToolTip" Value="Minimize" />
+        <Setter Property="ToolTip" Value="{Binding LanguageBase.Minimize, Source={StaticResource LB}}" />
         <Setter Property="ContentTemplate" Value="{StaticResource MinimizeBlack}" />
         <Setter Property="Command" Value="{Binding Source={x:Static SystemCommands.MinimizeWindowCommand}}" />
         <Style.Triggers>
@@ -115,7 +115,7 @@
         </Style.Triggers>
     </Style>
     <Style x:Key="MaximizeButtonStyle" TargetType="Button" BasedOn="{StaticResource WindowTitleBarButtonStyle}">
-        <Setter Property="ToolTip" Value="Maximize" />
+        <Setter Property="ToolTip" Value="{Binding LanguageBase.Maximize, Source={StaticResource LB}}" />
         <Setter Property="ContentTemplate" Value="{StaticResource MaximizeBlack}" />
         <Setter Property="Command" Value="{Binding Source={x:Static SystemCommands.MaximizeWindowCommand}}" />
         <Style.Triggers>
@@ -128,7 +128,7 @@
         </Style.Triggers>
     </Style>
     <Style x:Key="RestoreButtonStyle" TargetType="Button" BasedOn="{StaticResource WindowTitleBarButtonStyle}">
-        <Setter Property="ToolBar.ToolTip" Value="Restore" />
+        <Setter Property="ToolTip" Value="{Binding LanguageBase.Restore, Source={StaticResource LB}}" />
         <Setter Property="ContentTemplate" Value="{StaticResource RestoreBlack}" />
         <Setter Property="Command" Value="{Binding Source={x:Static SystemCommands.RestoreWindowCommand}}" />
         <Style.Triggers>
@@ -141,7 +141,7 @@
         </Style.Triggers>
     </Style>
     <Style x:Key="CloseButtonStyle" TargetType="Button" BasedOn="{StaticResource WindowTitleBarButtonStyle}">
-        <Setter Property="ToolTip" Value="Close" />
+        <Setter Property="ToolTip" Value="{Binding LanguageBase.Close, Source={StaticResource LB}}" />
         <Setter Property="ContentTemplate" Value="{StaticResource CloseBlack}" />
         <Setter Property="Command" Value="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}" />
         <Style.Triggers>

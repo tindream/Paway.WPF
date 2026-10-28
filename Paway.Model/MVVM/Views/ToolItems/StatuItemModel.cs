@@ -109,22 +109,18 @@ namespace Paway.Model
                             hour <= 13 ? "中午好" : hour < 18 ? "下午好" : "晚上好";
                 this.UserName = $"{hello}, {msg.UserName}";
             });
-            //原先用 Task.Run + while(true) + Thread.Sleep(1000)：永久占用一个线程池线程
-            this.timer = new Timer(_ => UpdateTime(), null, 0, 1000);
+            Task.Run(async () =>
+            {
+                while (!PConfig.IClose)
+                {
+                    this.TimeNow = TimeChangeEvent != null ? TimeChangeEvent.Invoke() : DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss dddd");
+                    await Task.Delay(1000 - DateTime.Now.Millisecond);
+                }
+                Unregister();
+            });
         }
-        private Timer timer;
         private void OperateLogAdd(OperateInfo msg) { AddDesc(msg.Text); }
         private void StatuLogAdd(string msg, LevelType level, object source) { AddDesc(msg, level); }
-        private void UpdateTime()
-        {
-            if (PConfig.IClose)
-            {
-                //主窗体已关闭，停止计时并解绑，避免关闭流程中继续处理日志
-                Unregister();
-                return;
-            }
-            this.TimeNow = TimeChangeEvent != null ? TimeChangeEvent.Invoke() : DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss dddd");
-        }
         /// <summary>
         /// 解绑静态事件与定时器
         /// </summary>
@@ -133,8 +129,6 @@ namespace Paway.Model
             PConfig.OperateLogEvent -= OperateLogAdd;
             PConfig.StatuLogEvent -= StatuLogAdd;
             WeakReferenceMessenger.Default.UnregisterAll(this);
-            this.timer?.Dispose();
-            this.timer = null;
         }
 
         #region 系统消息
