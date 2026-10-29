@@ -1,4 +1,4 @@
-using CommunityToolkit.Mvvm.Messaging;
+﻿using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Win32;
 using Paway.Helper;
 using Paway.Model;
@@ -127,6 +127,8 @@ namespace Paway.Model
                 PConfig.FontSize = this.themeFontSize;
                 PConfig.FontFamily = this.themeFontFamily;
             }
+            //iSave 若不复位，第二次打开设置窗后“取消”将永远不还原主题（模型是 Locator 单例）
+            this.iSave = false;
         }
 
         /// <summary>

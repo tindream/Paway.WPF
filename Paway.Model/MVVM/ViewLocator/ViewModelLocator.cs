@@ -1,4 +1,4 @@
-using CommunityToolkit.Mvvm.Messaging;
+﻿using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -60,18 +60,27 @@ namespace Paway.Model
         /// </summary>
         private static readonly Dictionary<string, object> viewModelList = new Dictionary<string, object>();
         /// <summary>
+        /// 缓存字典的同步锁
+        /// <para>GetModelInstance/GetViewInstance 是 public static，可能被多线程同时调用；
+        /// Dictionary 并发写入会抛“已添加了具有相同键的项”，甚至在扩容时读到损坏的桶结构</para>
+        /// </summary>
+        private static readonly object cacheLock = new object();
+        /// <summary>
         /// 创建单实例模型，如已存在时，从缓存列表获取
         /// </summary>
         public static T GetModelInstance<T>(string key = null) where T : class
         {
             //key 原实现未参与缓存键，传不同 key 会拿到同一个实例
             var name = $"{typeof(T).FullName}_{key}";
-            if (!viewModelList.TryGetValue(name, out object obj))
+            lock (cacheLock)
             {
-                obj = Activator.CreateInstance<T>();
-                viewModelList.Add(name, obj);
+                if (!viewModelList.TryGetValue(name, out object obj))
+                {
+                    obj = Activator.CreateInstance<T>();
+                    viewModelList.Add(name, obj);
+                }
+                return (T)obj;
             }
-            return (T)obj;
         }
 
         /// <summary>
@@ -84,38 +93,44 @@ namespace Paway.Model
         public static T GetViewInstance<T>(object key = null) where T : FrameworkElement
         {
             var name = $"{typeof(T).FullName}_{key}";
-            if (dicView.TryGetValue(name, out object value))
+            lock (cacheLock)
             {
-                if (((FrameworkElement)value).DataContext is IPageReload pageReload) pageReload.PageReload();
-                return (T)value;
-            }
-            var obj = Activator.CreateInstance<T>();
-            if (obj.DataContext is IPageReload reload) obj.Loaded += (sender, e) =>
-            {
-                if (!reload.ILoad)
+                if (dicView.TryGetValue(name, out object value))
                 {
-                    reload.ILoad = true;
-                    reload.PageReload();
+                    if (((FrameworkElement)value).DataContext is IPageReload pageReload) pageReload.PageReload();
+                    return (T)value;
                 }
-            };
-            dicView.Add(name, obj);
-            return obj;
+                var obj = Activator.CreateInstance<T>();
+                if (obj.DataContext is IPageReload reload) obj.Loaded += (sender, e) =>
+                {
+                    if (!reload.ILoad)
+                    {
+                        reload.ILoad = true;
+                        reload.PageReload();
+                    }
+                };
+                dicView.Add(name, obj);
+                return obj;
+            }
         }
         /// <summary>
         /// 清除所有实例与注册
         /// </summary>
         public static void Clear()
         {
-            foreach (var model in viewModelList)
+            lock (cacheLock)
             {
-                WeakReferenceMessenger.Default.UnregisterAll(model.Value);
+                foreach (var model in viewModelList)
+                {
+                    WeakReferenceMessenger.Default.UnregisterAll(model.Value);
+                }
+                foreach (var view in dicView)
+                {
+                    WeakReferenceMessenger.Default.UnregisterAll(view.Value);
+                }
+                viewModelList.Clear();
+                dicView.Clear();
             }
-            foreach (var view in dicView)
-            {
-                WeakReferenceMessenger.Default.UnregisterAll(view.Value);
-            }
-            viewModelList.Clear();
-            dicView.Clear();
             //Statuitem 模型被状态栏 XAML 直接绑定且不在上述缓存中，这里不重置，
             //否则清除后仍在显示的状态栏将收不到消息
         }

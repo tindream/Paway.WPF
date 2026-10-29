@@ -351,11 +351,8 @@ namespace Paway.WPF
                 case Key.Enter:
                     if (this.Items.Count > 0)
                     {
-                        if (treeView.SelectedItem is IId)
-                        {
-                            TreeView_MouseDoubleClick(treeView, null);
-                        }
-                        else if (this.Items[0] is IId item2)
+                        //未选中时取第一项，最后统一确认一次；原先分支内已调用一次、下面又无条件调用一次，会重复赋值
+                        if (!(treeView.SelectedItem is IId) && this.Items[0] is IId item2)
                         {
                             treeView.Selected(item2.Id);
                         }

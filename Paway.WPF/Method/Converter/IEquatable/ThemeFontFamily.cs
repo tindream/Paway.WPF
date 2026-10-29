@@ -35,7 +35,7 @@ namespace Paway.WPF
         /// </summary>
         public ThemeFontFamily()
         {
-            PConfig.FontFamilyChanged += Config_FontFamilyChanged;
+            PConfig.FontFamilyChangedWeak.Subscribe(Config_FontFamilyChanged);
         }
         private void Config_FontFamilyChanged(string obj)
         {

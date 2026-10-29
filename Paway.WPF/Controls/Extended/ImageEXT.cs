@@ -24,7 +24,11 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty SourceProperty =
-            DependencyProperty.Register(nameof(Source), typeof(ImageSource), typeof(ImageEXT));
+            DependencyProperty.Register(nameof(Source), typeof(ImageSource), typeof(ImageEXT), new PropertyMetadata(null, OnSourceChangedCallback));
+        private static void OnSourceChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as ImageEXT)?.OnSourceChanged(d, EventArgs.Empty);
+        }
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty StretchProperty =
@@ -278,7 +282,6 @@ namespace Paway.WPF
         public ImageEXT()
         {
             DefaultStyleKey = typeof(ImageEXT);
-            DependencyPropertyDescriptor.FromProperty(SourceProperty, typeof(ImageEXT)).AddValueChanged(this, OnSourceChanged);
         }
         /// <summary>
         /// </summary>

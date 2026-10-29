@@ -180,8 +180,8 @@ namespace Paway.WPF
                 {
                     Hyperlink hl = new Hyperlink(run);
                     if (color != null) { hl.Foreground = color.Value.ToBrush(); }
+                    //只订阅 Click：鼠标点击会同时触发 MouseLeftButtonDown 与 Click，两个都订阅会让回调执行两次
                     hl.Click += delegate { custom(); };
-                    hl.MouseLeftButtonDown += delegate { custom(); };
                     block.Inlines.Add(hl);
                 }
             }

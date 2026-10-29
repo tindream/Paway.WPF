@@ -105,21 +105,27 @@ namespace Paway.WPF
         #endregion
 
         /// <summary>
+        /// ScrollViewer扩展
+        /// </summary> 
+        public ScrollViewerEXT() { }
+        /// <summary>
+        /// 可滚动范围变化时触发自动滚动与对外事件
+        /// <para>用 OnPropertyChanged 取代 DependencyPropertyDescriptor.AddValueChanged：后者以弱Key/强Value保存订阅，
+        /// 委托目标反向钉住Key导致实例永不回收；ScrollViewerEXT 是各列表控件的模板子元素，泄漏会连带整个控件子树</para>
         /// </summary>
-        public ScrollViewerEXT()
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
-            DependencyPropertyDescriptor.FromProperty(ScrollableHeightProperty, typeof(ScrollViewerEXT)).AddValueChanged(this, OnScrollableHeightChanged);
-            DependencyPropertyDescriptor.FromProperty(ScrollableWidthProperty, typeof(ScrollViewerEXT)).AddValueChanged(this, OnScrollableWidthChanged);
-        }
-        private void OnScrollableHeightChanged(object sender, EventArgs e)
-        {
-            IAutoScroll();
-            ScrollableHeightChangedEvent?.Invoke();
-        }
-        private void OnScrollableWidthChanged(object sender, EventArgs e)
-        {
-            IAutoScroll();
-            ScrollableWidthChangedEvent?.Invoke();
+            base.OnPropertyChanged(e);
+            if (e.Property == ScrollableHeightProperty)
+            {
+                IAutoScroll();
+                ScrollableHeightChangedEvent?.Invoke();
+            }
+            else if (e.Property == ScrollableWidthProperty)
+            {
+                IAutoScroll();
+                ScrollableWidthChangedEvent?.Invoke();
+            }
         }
         private void IAutoScroll()
         {
@@ -180,19 +186,10 @@ namespace Paway.WPF
                     CaptureMouse();
                     e.Handled = true;
                 }
-                else if (this.Parent is UIElement element)
-                {
-                    var eventArg = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, e.ChangedButton)
-                    {
-                        RoutedEvent = UIElement.MouseDownEvent,
-                        Source = this
-                    };
-                    //往上层抛出路由事件，以继续响应
-                    //element.RaiseEvent(eventArg);
-                }
             }
             base.OnMouseLeftButtonDown(e);
-            e.Handled = this.ScrollableHeight > 0 || this.ScrollableWidth > 0;
+            //原先无条件赋值会把基类/子元素已置位的 true 覆盖成 false，导致已消费的事件继续冒泡
+            if (this.ScrollableHeight > 0 || this.ScrollableWidth > 0) e.Handled = true;
         }
         /// <summary>
         /// 移动位置

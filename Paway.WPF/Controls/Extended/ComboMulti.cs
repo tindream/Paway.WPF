@@ -48,6 +48,8 @@ namespace Paway.WPF
             base.OnApplyTemplate();
             _ListBoxV = Template.FindName("PART_ListBox", this) as ListBox;
             _ListBoxH = Template.FindName("PART_ListBoxChk", this) as ListBox;
+            //自定义模板缺失部件时直接返回，否则下面解引用会抛 NullReferenceException
+            if (_ListBoxV == null || _ListBoxH == null) return;
             _ListBoxH.ItemsSource = CheckedItems;
             _ListBoxV.SelectionChanged -= ListBoxV_SelectionChanged;
             _ListBoxV.SelectionChanged += ListBoxV_SelectionChanged;

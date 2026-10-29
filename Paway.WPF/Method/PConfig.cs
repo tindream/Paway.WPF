@@ -126,6 +126,16 @@ namespace Paway.WPF
         internal const int Interval = 40;
 
         /// <summary>
+        /// 主题事件弱引用通道
+        /// <para>供库内部按实例创建的转换器类型订阅，避免静态事件强引用导致实例永不回收</para>
+        /// </summary>
+        internal static readonly WeakEventSource<string> FontFamilyChangedWeak = new WeakEventSource<string>();
+        internal static readonly WeakEventSource<double> FontSizeChangedWeak = new WeakEventSource<double>();
+        internal static readonly WeakEventSource<Color> ColorChangedWeak = new WeakEventSource<Color>();
+        internal static readonly WeakEventSource<Color> ForegroundChangedWeak = new WeakEventSource<Color>();
+        internal static readonly WeakEventSource<Color> BackgroundChangedWeak = new WeakEventSource<Color>();
+
+        /// <summary>
         /// 主题文本字体变化事件
         /// </summary>
         public static event Action<string> FontFamilyChanged;
@@ -143,6 +153,7 @@ namespace Paway.WPF
                     var old = _fontFamily;
                     _fontFamily = value;
                     FontFamilyChanged?.Invoke(old);
+                    FontFamilyChangedWeak.Raise(old);
                 }
             }
         }
@@ -166,6 +177,7 @@ namespace Paway.WPF
                     var old = _fontSize;
                     _fontSize = value;
                     FontSizeChanged?.Invoke(old);
+                    FontSizeChangedWeak.Raise(old);
                 }
             }
         }
@@ -189,6 +201,7 @@ namespace Paway.WPF
                     var old = _color;
                     _color = value;
                     ColorChanged?.Invoke(old);
+                    ColorChangedWeak.Raise(old);
                 }
             }
         }
@@ -211,6 +224,7 @@ namespace Paway.WPF
                     var old = _foreground;
                     _foreground = value;
                     ForegroundChanged?.Invoke(old);
+                    ForegroundChangedWeak.Raise(old);
                 }
             }
         }
@@ -233,6 +247,7 @@ namespace Paway.WPF
                     var old = background;
                     background = value;
                     BackgroundChanged?.Invoke(old);
+                    BackgroundChangedWeak.Raise(old);
                 }
             }
         }

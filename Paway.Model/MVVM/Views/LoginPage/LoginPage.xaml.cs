@@ -57,7 +57,9 @@ namespace Paway.Model
             base.OnPreviewMouseLeftButtonDown(e);
             if (e.ClickCount == 2)
             {
-                var version = $"V{Assembly.GetEntryAssembly().GetName().Version}";
+                //被非托管宿主启动或作为插件加载时 GetEntryAssembly 可能为 null
+                var entry = Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly();
+                var version = $"V{entry.GetName().Version}";
                 WeakReferenceMessenger.Default.Send(new StatuMessage(version, true));
             }
         }

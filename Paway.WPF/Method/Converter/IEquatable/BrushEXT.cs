@@ -86,7 +86,7 @@ namespace Paway.WPF
         {
             this.normal = new ThemeForeground(Colors.LightGray);
             OnPressedMouse();
-            PConfig.ColorChanged += Config_ColorChanged;
+            PConfig.ColorChangedWeak.Subscribe(Config_ColorChanged);
         }
         private void Config_ColorChanged(Color obj)
         {

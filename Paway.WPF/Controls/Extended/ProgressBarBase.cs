@@ -39,9 +39,12 @@ namespace Paway.WPF
         }
         private static void UpdateText(ProgressBarBase bar)
         {
+            var range = bar.Maximum - bar.Minimum;
+            if (range <= 0 || double.IsNaN(range)) return;
             if (bar.Dot == -2)
             {
-                var value = (bar.Maximum - bar.Minimum) / bar.SmallChange;
+                //SmallChange 为 0 时 (range / 0) 得到 Infinity，原 while 判断恒真 → UI 线程死循环
+                var value = bar.SmallChange > 0 ? range / bar.SmallChange : 1;
                 while (value / 10 >= 0.5)
                 {
                     bar.Dot++;
@@ -49,7 +52,7 @@ namespace Paway.WPF
                 }
                 if (bar.Dot < 0) bar.Dot = 0;
             }
-            var text = $"{((bar.Value - bar.Minimum) * 100 / (bar.Maximum - bar.Minimum)).Rounds(bar.Dot)}%";
+            var text = $"{((bar.Value - bar.Minimum) * 100 / range).Rounds(bar.Dot)}%";
             if (bar.ProgressValue != text) bar.SetValue(ProgressValueProperty, text);
         }
         /// <summary>

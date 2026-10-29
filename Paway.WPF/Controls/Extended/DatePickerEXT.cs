@@ -113,9 +113,8 @@ namespace Paway.WPF
         {
             base.OnApplyTemplate();
             popup = this.GetTemplateChild("PART_Popup") as Popup;
-            if (popup != null)
+            if (popup?.Child is Calendar calendar)
             {
-                var calendar = popup.Child as Calendar;
                 calendar.Loaded -= Calendar_Loaded;
                 calendar.Loaded += Calendar_Loaded;
             }

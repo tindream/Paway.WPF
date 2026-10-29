@@ -120,6 +120,13 @@ namespace Paway.WPF
         /// </summary>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            return Test(value, parameter);
+        }
+        /// <summary>
+        /// 判断逻辑（静态复用，避免每次转换都实例化一个转换器对象）
+        /// </summary>
+        internal static bool Test(object value, object parameter)
+        {
             bool result;
             if (value == null || value == DBNull.Value) result = false;
             else if (value is Enum)
@@ -148,6 +155,13 @@ namespace Paway.WPF
         /// 值转True
         /// </summary>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return Test(value, parameter);
+        }
+        /// <summary>
+        /// 判断逻辑（静态复用，避免每次转换都实例化一个转换器对象）
+        /// </summary>
+        internal static bool Test(object value, object parameter)
         {
             bool result = false;
             if (value == null || value == DBNull.Value) result = false;
@@ -181,6 +195,13 @@ namespace Paway.WPF
         /// </summary>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            return Test(value, parameter);
+        }
+        /// <summary>
+        /// 判断逻辑（静态复用，避免每次转换都实例化一个转换器对象）
+        /// </summary>
+        internal static bool Test(object value, object parameter)
+        {
             bool result = false;
             if (value == null || value == DBNull.Value) result = false;
             else if (value is Enum)
@@ -210,6 +231,13 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            return Test(value, parameter);
+        }
+        /// <summary>
+        /// 判断逻辑（静态复用，避免每次转换都实例化一个转换器对象）
+        /// </summary>
+        internal static bool Test(object value, object parameter)
+        {
             bool result = false;
             if (value == null || value == DBNull.Value) result = false;
             else if (value is Enum)
@@ -234,6 +262,13 @@ namespace Paway.WPF
         /// 值转True(多枚举值)
         /// </summary>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return Test(value, parameter);
+        }
+        /// <summary>
+        /// 判断逻辑（静态复用，避免每次转换都实例化一个转换器对象）
+        /// </summary>
+        internal static bool Test(object value, object parameter)
         {
             bool result;
             if (value == null || value == DBNull.Value) result = false;
@@ -272,6 +307,13 @@ namespace Paway.WPF
         /// 值转True(多参数)
         /// </summary>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return Test(value, parameter);
+        }
+        /// <summary>
+        /// 判断逻辑（静态复用，避免每次转换都实例化一个转换器对象）
+        /// </summary>
+        internal static bool Test(object value, object parameter)
         {
             bool result;
             var valueParameter = parameter.ToInt();
@@ -314,7 +356,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)new ValueToTrue().Convert(value, targetType, parameter, culture);
+            var result = ValueToTrue.Test(value, parameter);
             return !result;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -330,7 +372,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)new ValueThanToTrue().Convert(value, targetType, parameter, culture);
+            var result = ValueThanToTrue.Test(value, parameter);
             return !result;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -346,7 +388,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)new ValueLessToTrue().Convert(value, targetType, parameter, culture);
+            var result = ValueLessToTrue.Test(value, parameter);
             return !result;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -362,7 +404,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)new ValueUnionToTrue().Convert(value, targetType, parameter, culture);
+            var result = ValueUnionToTrue.Test(value, parameter);
             return !result;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -377,7 +419,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)new ValueMoreToTrue().Convert(value, targetType, parameter, culture);
+            var result = ValueMoreToTrue.Test(value, parameter);
             return !result;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -393,7 +435,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)new ValueToMoreTrue().Convert(value, targetType, parameter, culture);
+            var result = ValueToMoreTrue.Test(value, parameter);
             return !result;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -409,7 +451,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)new ValueToTrue().Convert(value, targetType, parameter, culture);
+            var result = ValueToTrue.Test(value, parameter);
             return result ? Visibility.Visible : Visibility.Collapsed;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -424,7 +466,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)new ValueThanToTrue().Convert(value, targetType, parameter, culture);
+            var result = ValueThanToTrue.Test(value, parameter);
             return result ? Visibility.Visible : Visibility.Collapsed;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -439,7 +481,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)new ValueLessToTrue().Convert(value, targetType, parameter, culture);
+            var result = ValueLessToTrue.Test(value, parameter);
             return result ? Visibility.Visible : Visibility.Collapsed;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -454,7 +496,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)new ValueUnionToTrue().Convert(value, targetType, parameter, culture);
+            var result = ValueUnionToTrue.Test(value, parameter);
             return result ? Visibility.Visible : Visibility.Collapsed;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -469,7 +511,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)new ValueMoreToTrue().Convert(value, targetType, parameter, culture);
+            var result = ValueMoreToTrue.Test(value, parameter);
             return result ? Visibility.Visible : Visibility.Collapsed;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -484,7 +526,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)new ValueToMoreTrue().Convert(value, targetType, parameter, culture);
+            var result = ValueToMoreTrue.Test(value, parameter);
             return result ? Visibility.Visible : Visibility.Collapsed;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -500,7 +542,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)new ValueToTrue().Convert(value, targetType, parameter, culture);
+            var result = ValueToTrue.Test(value, parameter);
             return result ? Visibility.Collapsed : Visibility.Visible;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -515,7 +557,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)new ValueThanToTrue().Convert(value, targetType, parameter, culture);
+            var result = ValueThanToTrue.Test(value, parameter);
             return result ? Visibility.Collapsed : Visibility.Visible;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -530,7 +572,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)new ValueLessToTrue().Convert(value, targetType, parameter, culture);
+            var result = ValueLessToTrue.Test(value, parameter);
             return result ? Visibility.Collapsed : Visibility.Visible;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -545,7 +587,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)new ValueUnionToTrue().Convert(value, targetType, parameter, culture);
+            var result = ValueUnionToTrue.Test(value, parameter);
             return result ? Visibility.Collapsed : Visibility.Visible;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -560,7 +602,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)new ValueMoreToTrue().Convert(value, targetType, parameter, culture);
+            var result = ValueMoreToTrue.Test(value, parameter);
             return result ? Visibility.Collapsed : Visibility.Visible;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -575,7 +617,7 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (bool)new ValueToMoreTrue().Convert(value, targetType, parameter, culture);
+            var result = ValueToMoreTrue.Test(value, parameter);
             return result ? Visibility.Collapsed : Visibility.Visible;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

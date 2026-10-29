@@ -36,7 +36,7 @@ namespace Paway.WPF
         /// </summary>
         public ThemeFontSize()
         {
-            PConfig.FontSizeChanged += Config_FontSizeChanged;
+            PConfig.FontSizeChangedWeak.Subscribe(Config_FontSizeChanged);
         }
         private void Config_FontSizeChanged(double obj)
         {

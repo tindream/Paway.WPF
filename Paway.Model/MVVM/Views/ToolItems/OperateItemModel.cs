@@ -1,4 +1,4 @@
-using CommunityToolkit.Mvvm.Messaging;
+﻿using CommunityToolkit.Mvvm.Messaging;
 using Paway.Helper;
 using Paway.Utils;
 using Paway.WPF;
@@ -74,7 +74,8 @@ namespace Paway.Model
             WeakReferenceMessenger.Default.Send(new StatuMessage(PConfig.LanguageBase.ExportSuccess, obj));
             if (iOpen && PMethod.Ask(obj, PConfig.LanguageBase.ExportSuccessAndOpen))
             {
-                Process.Start(file);
+                //.NET Core / .NET 5+ 起 UseShellExecute 默认 false，直接 Process.Start(文件路径) 会抛 Win32Exception
+                Process.Start(new ProcessStartInfo(file) { UseShellExecute = true });
             }
         }
 

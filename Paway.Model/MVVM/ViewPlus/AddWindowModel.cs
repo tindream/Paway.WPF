@@ -64,7 +64,8 @@ namespace Paway.Model
                 return null;
             }
             if (info is IChecked @checked) @checked.Checked();
-            else if (Cache.Any<T>(c => c.Compare(info))) throw new WarningException($"[{typeof(T).Description()}]{info} {PConfig.LanguageBase.Exist}");
+            //Compare 是业务键比较（不含 Id），编辑时缓存里自身必然命中，必须排除自身
+            else if (Cache.Any<T>(c => c.Id != info.Id && c.Compare(info))) throw new WarningException($"[{typeof(T).Description()}]{info} {PConfig.LanguageBase.Exist}");
             if (info.Id == 0 && info is IIndex index)
             {
                 var tList = Cache.FindAll<T>();

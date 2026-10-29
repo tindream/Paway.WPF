@@ -73,24 +73,33 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ShortcutKeyProperty =
-            DependencyProperty.RegisterAttached(nameof(ShortcutKey), typeof(Key), typeof(ButtonEXT), new PropertyMetadata(Key.None));
+            DependencyProperty.RegisterAttached(nameof(ShortcutKey), typeof(Key), typeof(ButtonEXT), new PropertyMetadata(Key.None, OnKeyChangedCallback));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ShortKeyProperty =
-            DependencyProperty.RegisterAttached(nameof(ShortKey), typeof(Key), typeof(ButtonEXT), new PropertyMetadata(Key.None));
+            DependencyProperty.RegisterAttached(nameof(ShortKey), typeof(Key), typeof(ButtonEXT), new PropertyMetadata(Key.None, OnKeyChangedCallback));
 
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty IsLightProperty =
-            DependencyProperty.RegisterAttached(nameof(IsLight), typeof(bool), typeof(ButtonEXT));
+            DependencyProperty.RegisterAttached(nameof(IsLight), typeof(bool), typeof(ButtonEXT), new PropertyMetadata(false, OnColorTypeChangedCallback));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty IsLightAllProperty =
-            DependencyProperty.RegisterAttached(nameof(IsLightAll), typeof(bool), typeof(ButtonEXT));
+            DependencyProperty.RegisterAttached(nameof(IsLightAll), typeof(bool), typeof(ButtonEXT), new PropertyMetadata(false, OnColorTypeChangedCallback));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty TypeProperty =
-            DependencyProperty.RegisterAttached(nameof(Type), typeof(ColorType), typeof(ButtonEXT), new PropertyMetadata(ColorType.Color));
+            DependencyProperty.RegisterAttached(nameof(Type), typeof(ColorType), typeof(ButtonEXT), new PropertyMetadata(ColorType.Color, OnColorTypeChangedCallback));
+
+        private static void OnColorTypeChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as ButtonEXT)?.OnColorTypeChanged(d, EventArgs.Empty);
+        }
+        private static void OnKeyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as ButtonEXT)?.OnKeyChanged(d, EventArgs.Empty);
+        }
 
         /// <summary>
         /// </summary>
@@ -312,12 +321,7 @@ namespace Paway.WPF
         public ButtonEXT()
         {
             DefaultStyleKey = typeof(ButtonEXT);
-            DependencyPropertyDescriptor.FromProperty(IsLightProperty, typeof(ButtonEXT)).AddValueChanged(this, OnColorTypeChanged);
-            DependencyPropertyDescriptor.FromProperty(IsLightAllProperty, typeof(ButtonEXT)).AddValueChanged(this, OnColorTypeChanged);
-            DependencyPropertyDescriptor.FromProperty(TypeProperty, typeof(ButtonEXT)).AddValueChanged(this, OnColorTypeChanged);
-
-            DependencyPropertyDescriptor.FromProperty(ShortcutKeyProperty, typeof(ButtonEXT)).AddValueChanged(this, OnKeyChanged);
-            DependencyPropertyDescriptor.FromProperty(ShortKeyProperty, typeof(ButtonEXT)).AddValueChanged(this, OnKeyChanged);
+            this.Unloaded += ButtonEXT_Unloaded;
         }
         private void OnKeyChanged(object sender, EventArgs e)
         {
@@ -364,10 +368,24 @@ namespace Paway.WPF
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+            ReleaseKeyWindow();
             if (Command != null && this.Parent(out Window window))
             {
+                this.keyWindow = window;
+                window.KeyDown -= Window_PreviewKeyDown;
                 window.KeyDown += Window_PreviewKeyDown;
             }
+        }
+        private Window keyWindow;
+        private void ReleaseKeyWindow()
+        {
+            if (this.keyWindow == null) return;
+            this.keyWindow.KeyDown -= Window_PreviewKeyDown;
+            this.keyWindow = null;
+        }
+        private void ButtonEXT_Unloaded(object sender, RoutedEventArgs e)
+        {
+            ReleaseKeyWindow();
         }
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {

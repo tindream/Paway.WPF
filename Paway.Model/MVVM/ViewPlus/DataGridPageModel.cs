@@ -48,6 +48,9 @@ namespace Paway.Model
         /// </summary>
         protected virtual List<T> FilterList()
         {
+            //List 只在 Init 中赋值；搜索框在页面 Init 之前触发（模板恢复文本、VM 被 Locator 复用）时
+            //原写法会抛 NullReferenceException，而该异常发生在绑定写回路径上，会直接冒成未处理异常
+            if (List == null) return new List<T>();
             return List.FindAll(c => c != null && listFilter?.Invoke(c) != false);
         }
         /// <summary>
@@ -190,7 +193,9 @@ namespace Paway.Model
             foreach (var info in list)
             {
                 index = filterList.FindIndex(c => c.Id == info.Id);
-                if (!this.SearchReset()) this.Invoke(() => ObList.Insert(index, info));
+                //与单条插入保持一致：被过滤条件排除时 FindIndex 返回 -1，ObList.Insert(-1,…) 会抛 ArgumentOutOfRangeException，
+                //而异常会被 Invoke 静默吞掉，表现为导入少了数据
+                if (!this.SearchReset() && index != -1) this.Invoke(() => ObList.Insert(index, info));
             }
             MoveTo(index, list.Last());
         }

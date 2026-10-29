@@ -74,11 +74,11 @@ namespace Paway.WPF
             this.Value = value.ToBrush();
             if (iBack)
             {
-                PConfig.BackgroundChanged += Config_BackgroundChanged;
+                PConfig.BackgroundChangedWeak.Subscribe(Config_BackgroundChanged);
             }
             else
             {
-                PConfig.ForegroundChanged += Config_ForegroundChanged;
+                PConfig.ForegroundChangedWeak.Subscribe(Config_ForegroundChanged);
             }
         }
         /// <summary>

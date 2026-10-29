@@ -251,12 +251,19 @@ namespace Paway.WPF
         {
             DefaultStyleKey = typeof(TextBoxEXT);
             new KeyboardMonitor(this);
-            DependencyPropertyDescriptor.FromProperty(ForegroundProperty, typeof(TextBoxEXT)).AddValueChanged(this, OnForegroundChanged);
         }
-        private void OnForegroundChanged(object sender, EventArgs e)
+        /// <summary>
+        /// 前景色变化时同步光标与内部文本颜色
+        /// <para>用 OnPropertyChanged 取代 DependencyPropertyDescriptor.AddValueChanged，避免属性描述符反向强引用导致的控件泄漏</para>
+        /// </summary>
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
-            this.SetValue(TextBlock.ForegroundProperty, this.Foreground);
-            this.CaretBrush = this.Foreground;
+            base.OnPropertyChanged(e);
+            if (e.Property == ForegroundProperty)
+            {
+                this.SetValue(TextBlock.ForegroundProperty, this.Foreground);
+                this.CaretBrush = this.Foreground;
+            }
         }
         /// <summary>
         /// Water未自定义设置时绑定多语言

@@ -47,7 +47,7 @@ namespace Paway.WPF
         /// </summary>
         public ColorLinear()
         {
-            PConfig.ColorChanged += Config_ColorChanged;
+            PConfig.ColorChangedWeak.Subscribe(Config_ColorChanged);
         }
         private void Config_ColorChanged(Color obj)
         {
@@ -142,7 +142,7 @@ namespace Paway.WPF
                 }
                 if (strs.Length > 2)
                 {
-                    if (!string.IsNullOrEmpty(strs[2])) alpha = Convert.ToInt32(strs[3], culture);
+                    if (!string.IsNullOrEmpty(strs[2])) alpha = Convert.ToInt32(strs[2], culture);
                     else if (old != null) alpha = old.Alpha;
                 }
                 return new ColorLinear(start, end, alpha, old);

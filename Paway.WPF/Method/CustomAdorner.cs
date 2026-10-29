@@ -46,7 +46,10 @@ namespace Paway.WPF
             };
             element.Loaded += (sender, e) =>
             {
-                if (storyboardFunc == null) return;
+                //Loaded 会在每次重新挂回可视树时再次触发；置顶重排会把 Adorner 移除再加回，
+                //若不加守卫，动画会整体重播，且旧时钟被替换后不再触发 Completed，导致通知框永久残留
+                if (storyboardFunc == null || this.animationStarted) return;
+                this.animationStarted = true;
                 var storyboard = storyboardFunc();
                 storyboard.CurrentTimeInvalidated += (sender2, e2) =>
                 {
@@ -62,6 +65,11 @@ namespace Paway.WPF
                 storyboard.Begin(element, true);
             };
         }
+
+        /// <summary>
+        /// 入场动画是否已启动，保证只启动一次
+        /// </summary>
+        private bool animationStarted;
 
         #region 对外提供接口
         /// <summary>

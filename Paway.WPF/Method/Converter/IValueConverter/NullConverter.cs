@@ -24,8 +24,9 @@ namespace Paway.WPF
             while (value.Length > index && (value[index] == null ||
                 (value[index] == DependencyProperty.UnsetValue) ||
                 (value[index] is string str && str.Equals(string.Empty)) ||
-                (value[index] is Thickness thickness && thickness == new Thickness(double.NaN)) ||
-                (value[index] is double dValue && dValue.Equals(double.NaN)) ||
+                //Thickness 逐字段用 == 比较，NaN == NaN 恒为 false，原写法永远不成立
+                (value[index] is Thickness thickness && IsNaN(thickness)) ||
+                (value[index] is double dValue && double.IsNaN(dValue)) ||
                 (value[index] is SolidColorBrush solid && solid.Color == Colors.Transparent)))
             {
                 index++;
@@ -33,6 +34,14 @@ namespace Paway.WPF
             if (value.Length > index) return value[index];
             else if (value.Length > 0) return value[value.Length - 1];
             else return null;
+        }
+        /// <summary>
+        /// 判断是否为未设置的 Thickness（任一分量为 NaN）
+        /// </summary>
+        private static bool IsNaN(Thickness thickness)
+        {
+            return double.IsNaN(thickness.Left) || double.IsNaN(thickness.Top) ||
+                double.IsNaN(thickness.Right) || double.IsNaN(thickness.Bottom);
         }
         /// <summary>
         /// </summary>

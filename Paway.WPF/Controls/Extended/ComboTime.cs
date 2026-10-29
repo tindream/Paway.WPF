@@ -21,19 +21,24 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty TimeTypeProperty =
-            DependencyProperty.RegisterAttached(nameof(TimeType), typeof(TimePickerType), typeof(ComboTime), new PropertyMetadata(TimePickerType.HourMinute));
+            DependencyProperty.RegisterAttached(nameof(TimeType), typeof(TimePickerType), typeof(ComboTime), new PropertyMetadata(TimePickerType.HourMinute, OnValueChangedCallback));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty HourProperty =
-            DependencyProperty.RegisterAttached(nameof(Hour), typeof(int), typeof(ComboTime), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+            DependencyProperty.RegisterAttached(nameof(Hour), typeof(int), typeof(ComboTime), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnValueChangedCallback));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty MinuteProperty =
-            DependencyProperty.RegisterAttached(nameof(Minute), typeof(int), typeof(ComboTime), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+            DependencyProperty.RegisterAttached(nameof(Minute), typeof(int), typeof(ComboTime), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnValueChangedCallback));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty SecondProperty =
-            DependencyProperty.RegisterAttached(nameof(Second), typeof(int), typeof(ComboTime), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+            DependencyProperty.RegisterAttached(nameof(Second), typeof(int), typeof(ComboTime), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnValueChangedCallback));
+
+        private static void OnValueChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as ComboTime)?.OnValueChanged(d, EventArgs.Empty);
+        }
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty TimesProperty =
@@ -105,11 +110,17 @@ namespace Paway.WPF
         public ComboTime()
         {
             DefaultStyleKey = typeof(ComboTime);
-            DependencyPropertyDescriptor.FromProperty(TimeTypeProperty, typeof(ComboTime)).AddValueChanged(this, OnValueChanged);
-            DependencyPropertyDescriptor.FromProperty(HourProperty, typeof(ComboTime)).AddValueChanged(this, OnValueChanged);
-            DependencyPropertyDescriptor.FromProperty(MinuteProperty, typeof(ComboTime)).AddValueChanged(this, OnValueChanged);
-            DependencyPropertyDescriptor.FromProperty(SecondProperty, typeof(ComboTime)).AddValueChanged(this, OnValueChanged);
-            DependencyPropertyDescriptor.FromProperty(SelectedValueProperty, typeof(ComboTime)).AddValueChanged(this, OnSelectedValueValueChanged);
+        }
+        /// <summary>
+        /// 选中值变化时回填时分秒
+        /// </summary>
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+            if (e.Property == System.Windows.Controls.Primitives.Selector.SelectedValueProperty)
+            {
+                OnSelectedValueValueChanged(this, EventArgs.Empty);
+            }
         }
         private void OnSelectedValueValueChanged(object sender, EventArgs e)
         {

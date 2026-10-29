@@ -64,8 +64,9 @@ namespace Paway.WPF
                         var list = myAdornerLayer.GetAdorners(element);
                         if (list != null)
                         {
-                            var adornerList = list.ToList().ConvertAll(c => (CustomAdorner)c);
-                            if (adornerList.Any(c => c != null && c.ITop))
+                            //GetAdorners 返回该元素上的全部 Adorner，其中可能包含第三方 Adorner；
+                            //原先 ConvertAll 强制转换会在存在第三方 Adorner 时抛 InvalidCastException
+                            if (list.OfType<CustomAdorner>().Any(c => c.ITop))
                             {
                                 var topList = new List<Adorner>();
                                 var normalList = new List<Adorner>();

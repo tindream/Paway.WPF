@@ -21,8 +21,6 @@ namespace Paway.WPF
     /// </summary>
     public partial class ListViewCustom : ListView
     {
-        private bool _fontSizeSubscribed;
-
         #region 依赖属性
         /// <summary>
         /// </summary>
@@ -404,22 +402,9 @@ namespace Paway.WPF
         public ListViewCustom()
         {
             DefaultStyleKey = typeof(ListViewCustom);
-            //PConfig 为静态事件，控件移除时必须解绑，否则实例无法回收
-            SubscribeFontSizeChanged();
+            //主题事件经由弱引用通道订阅：只弱引用本实例，控件被移除后无需手工退订即可回收
+            PConfig.FontSizeChangedWeak.Subscribe(Config_FontSizeChanged);
             this.SelectionChanged += ListViewCustom_SelectionChanged;
-            this.Unloaded += ListViewCustom_Unloaded;
-        }
-        private void SubscribeFontSizeChanged()
-        {
-            if (_fontSizeSubscribed) return;
-            PConfig.FontSizeChanged += Config_FontSizeChanged;
-            _fontSizeSubscribed = true;
-        }
-        private void ListViewCustom_Unloaded(object sender, RoutedEventArgs e)
-        {
-            if (!_fontSizeSubscribed) return;
-            PConfig.FontSizeChanged -= Config_FontSizeChanged;
-            _fontSizeSubscribed = false;
         }
         private ScrollViewerEXT ScrollViewer;
         /// <summary>
@@ -694,7 +679,8 @@ namespace Paway.WPF
                                 DragDrop.DoDragDrop(this, fromItem, DragDropEffects.Move);
                             }
                         }
-                        else if (IMove && (ScrollViewer.ScrollableHeight > 0 || ScrollViewer.ScrollableWidth > 0))
+                        //自定义模板可能不含 PART_ScrollViewer，ScrollViewer 为 null 时不能直接解引用
+                        else if (IMove && this.ScrollViewer != null && (ScrollViewer.ScrollableHeight > 0 || ScrollViewer.ScrollableWidth > 0))
                         {
                             this.BeginInvoke(() =>
                             {
@@ -769,7 +755,7 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnPreviewMouseWheel(MouseWheelEventArgs e)
         {
-            if (ScrollViewer.ScrollableHeight == 0 && ScrollViewer.ScrollableWidth == 0)
+            if (this.ScrollViewer == null || (ScrollViewer.ScrollableHeight == 0 && ScrollViewer.ScrollableWidth == 0))
             {
                 var eventArg = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta)
                 {

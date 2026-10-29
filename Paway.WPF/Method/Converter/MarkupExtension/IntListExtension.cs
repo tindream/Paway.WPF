@@ -47,8 +47,11 @@ namespace Paway.WPF
         /// </summary>
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            var list = new List<int>();
-            for (var i = Start; list.Count < Count; i += Interval)
+            //Interval 为 0 或负数时 i 不递增，原循环条件恒真 → XAML 解析阶段直接卡死 UI 线程
+            var interval = Interval > 0 ? Interval : 1;
+            var count = Count > 0 ? Count : 0;
+            var list = new List<int>(count);
+            for (var i = Start; list.Count < count; i += interval)
             {
                 list.Add(i);
             }

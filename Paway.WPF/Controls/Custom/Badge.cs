@@ -36,8 +36,6 @@ namespace Paway.WPF
             AlwaysCenter = true;
             _storyboard_ScaleBigger = FindResource("Storyboard_ScaleBigger") as Storyboard;
             _storyboard_ScaleSmaller = FindResource("Storyboard_ScaleSmaller") as Storyboard;
-            DependencyPropertyDescriptor.FromProperty(IsWavingProperty, typeof(Badge)).AddValueChanged(this, OnIsWavingChanged);
-            DependencyPropertyDescriptor.FromProperty(AlwaysCenterProperty, typeof(Badge)).AddValueChanged(this, OnAlwaysCenterChanged);
         }
         /// <summary>
         /// 获取模板控件
@@ -52,7 +50,7 @@ namespace Paway.WPF
 
             this.ChangeWaving();
         }
-        private void OnAlwaysCenterChanged(object sender, EventArgs e)
+        private void OnAlwaysCenterChanged()
         {
             this.SizeChanged -= this.Badge_SizeChanged;
             if (this.AlwaysCenter)
@@ -60,16 +58,27 @@ namespace Paway.WPF
                 this.SizeChanged += this.Badge_SizeChanged;
             }
         }
-        private void OnIsWavingChanged(object sender, EventArgs e)
+        private void OnIsWavingChanged()
         {
             if (RectWave != null) this.ChangeWaving();
         }
         /// <summary>
         /// 监听Text更新
+        /// <para>IsWaving/AlwaysCenter 原先用 DependencyPropertyDescriptor.AddValueChanged 订阅：该实现以弱Key/强Value保存订阅，
+        /// 委托目标反向钉住Key，Badge 作为模板子元素被大量创建，会连带整棵控件子树与数据一起泄漏；
+        /// 改为 OnPropertyChanged 后不产生额外 GC Root，也无需手工退订</para>
         /// </summary>
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
+            if (e.Property == IsWavingProperty)
+            {
+                this.OnIsWavingChanged();
+            }
+            else if (e.Property == AlwaysCenterProperty)
+            {
+                this.OnAlwaysCenterChanged();
+            }
             if (e.Property == TextProperty)
             {
                 if (TxtBlock == null) return;

@@ -242,7 +242,8 @@ namespace Paway.WPF
         /// <summary>
         /// 滚动标记
         /// </summary>
-        private string scrollFlag;
+        private double scrollFlagV;
+        private double scrollFlagH;
         /// <summary>
         /// 获取滚动条
         /// </summary>
@@ -265,7 +266,12 @@ namespace Paway.WPF
                 }
                 _lastMouseDown = e.GetPosition(this);
                 IsGroup = list.Any(c => c.IsGroup);
-                if (scrollViewer != null) scrollFlag = $"V{scrollViewer.VerticalOffset}H{scrollViewer.HorizontalOffset}";
+                if (scrollViewer != null)
+                {
+                    //原先把两个 double 拼成字符串做比较，鼠标移动每帧都产生临时字符串；直接存数值零分配
+                    scrollFlagV = scrollViewer.VerticalOffset;
+                    scrollFlagH = scrollViewer.HorizontalOffset;
+                }
             }
             base.OnPreviewMouseLeftButtonDown(e);
         }
@@ -287,7 +293,7 @@ namespace Paway.WPF
         {
             if (e.LeftButton == MouseButtonState.Pressed && _lastMouseDown != null)
             {
-                if (scrollViewer != null && scrollFlag != $"V{scrollViewer.VerticalOffset}H{scrollViewer.HorizontalOffset}")
+                if (scrollViewer != null && (scrollFlagV != scrollViewer.VerticalOffset || scrollFlagH != scrollViewer.HorizontalOffset))
                 {
                     _lastMouseDown = null;
                     return;
@@ -366,7 +372,7 @@ namespace Paway.WPF
             if (result != null) return result.Value;
             if (toItem == null) return IsGroup && !fromItem.IsGroup;
             if (fromItem.IsGroup == toItem.IsGroup && fromItem.Id == toItem.Id) return true;
-            foreach (var item in fromItem.Children.ToList())
+            foreach (var item in fromItem.Children)
             {
                 if (IsFilter(item, toItem, type, routed)) return true;
             }

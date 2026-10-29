@@ -381,6 +381,8 @@ namespace Paway.WPF
                     thumb.ToolTip = toolTip;
                 }
             }
+            //模板无 Thumb 或自定义模板时 toolTip 仍为 null，原代码直接解引用会抛 NullReferenceException
+            if (toolTip == null) return;
             OnTipValuesChanged(value, e.RoutedEvent);
             if (toolTip.IsOpen)
             {

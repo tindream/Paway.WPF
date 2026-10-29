@@ -287,7 +287,12 @@ namespace Paway.WPF
             /// </summary>
             public int Compare(object x, object y)
             {
-                return Comparer * (x.GetValue(Name) as string).Compare(y.GetValue(Name) as string);
+                //单元格为空时 GetValue 返回 null，原先 (… as string).Compare(…) 会抛 NullReferenceException
+                var valueX = x?.GetValue(Name) as string;
+                var valueY = y?.GetValue(Name) as string;
+                if (valueX == null) return valueY == null ? 0 : -Comparer;
+                if (valueY == null) return Comparer;
+                return Comparer * string.Compare(valueX, valueY, StringComparison.CurrentCulture);
             }
         }
 
@@ -329,6 +334,8 @@ namespace Paway.WPF
             base.OnApplyTemplate();
             this.IFullRow = SelectionUnit == DataGridSelectionUnit.FullRow;
             this.NormalBorder = this.BorderThickness;
+            //OnApplyTemplate 在切换主题/重建模板时会被多次调用，必须先解绑旧的 ScrollViewer 再订阅
+            if (this.ScrollViewer != null) this.ScrollViewer.ScrollableHeightChangedEvent -= ScrollViewer_ScrollableHeightChangedEvent;
             ScrollViewer = Template.FindName("Part_ScrollViewer", this) as ScrollViewerEXT;
             if (ScrollViewer != null) ScrollViewer.ScrollableHeightChangedEvent += ScrollViewer_ScrollableHeightChangedEvent;
             if (base.ItemsSource != null)
@@ -338,7 +345,7 @@ namespace Paway.WPF
         }
         private void ScrollViewer_ScrollableHeightChangedEvent()
         {
-            if (this.ScrollViewer.ScrollableHeight > 0)
+            if (this.ScrollViewer?.ScrollableHeight > 0)
             {
                 var iBorder = this.GridLinesVisibility == DataGridGridLinesVisibility.All || this.GridLinesVisibility == DataGridGridLinesVisibility.Vertical;
                 iBorder &= this.NormalBorder.Bottom == 0;

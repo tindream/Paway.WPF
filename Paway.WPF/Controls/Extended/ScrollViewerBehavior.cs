@@ -135,6 +135,8 @@ namespace Paway.WPF
             }
             if (storyboard.Children.Count > 0)
             {
+                //先退订再订阅：ScrollableHeight/Width 持续变化会反复进入本方法，只加不减会导致处理器无界叠加
+                scrollViewer.PreviewMouseDown -= ScrollViewer_PreviewMouseDown;
                 scrollViewer.PreviewMouseDown += ScrollViewer_PreviewMouseDown;
                 storyboard.Begin();
             }
@@ -205,14 +207,15 @@ namespace Paway.WPF
             this.Storyboard.Pause();
             this.Storyboard.Seek(TimeSpan.FromSeconds(autoTime));
             var index = scrollViewer.Lock(() => { return ++this.PauseIndex; });
-            Task.Run(async () =>
+            var delay = (int)(this.BeginTime * 1000);
+            //Storyboard 是 DispatcherObject，Resume 必须回到所属 UI 线程执行；
+            //原先在 Task.Run 续体中直接调用会抛 InvalidOperationException，且异常被丢弃，表现为“暂停后永不恢复”
+            scrollViewer.BeginInvoke(async () =>
             {
-                await Task.Delay((int)(this.BeginTime * 1000));
-                if (index == this.PauseIndex)
-                {
-                    if (scrollViewer is ScrollViewerEXT viewerEXT && viewerEXT.IDrag) this.Pause(scrollViewer);
-                    else this.Storyboard.Resume();
-                }
+                await Task.Delay(delay);
+                if (index != this.PauseIndex) return;
+                if (scrollViewer is ScrollViewerEXT viewerEXT && viewerEXT.IDrag) this.Pause(scrollViewer);
+                else this.Storyboard?.Resume();
             });
         }
     }
