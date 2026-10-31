@@ -538,25 +538,40 @@ namespace Paway.WPF
         /// </summary>
         public bool Select(object item, bool iCell = false)
         {
+            if (item == null) return false;
             this.ScrollIntoView(item);
             if (this.ItemContainerGenerator.ContainerFromItem(item) is DataGridRow row)
             {
-                if (this.SelectionUnit == DataGridSelectionUnit.FullRow) row.IsSelected = true;
-                row.Focus();
-                if (!iCell) return true;
-                if (row.Child(out DataGridCellsPresenter presenter))
+                return SelectRow(row, iCell);
+            }
+            //虚拟化下 ScrollIntoView 只是登记滚动请求，行容器尚未生成，立即取必为 null；
+            //原实现因此总是返回 false（ComboView 打开下拉后当前项从不高亮）
+            this.BeginInvoke(arg =>
+            {
+                if (this.ItemContainerGenerator.ContainerFromItem(arg) is DataGridRow delayRow)
                 {
-                    for (int i = 0; i < this.Columns.Count; i++)
+                    SelectRow(delayRow, iCell);
+                }
+            }, item);
+            return false;
+        }
+        private bool SelectRow(DataGridRow row, bool iCell)
+        {
+            if (this.SelectionUnit == DataGridSelectionUnit.FullRow) row.IsSelected = true;
+            row.Focus();
+            if (!iCell) return true;
+            if (row.Child(out DataGridCellsPresenter presenter))
+            {
+                for (int i = 0; i < this.Columns.Count; i++)
+                {
+                    if (this.Columns[i].Visibility == Visibility.Visible)
                     {
-                        if (this.Columns[i].Visibility == Visibility.Visible)
+                        if (presenter.ItemContainerGenerator.ContainerFromIndex(i) is DataGridCell cell)
                         {
-                            if (presenter.ItemContainerGenerator.ContainerFromIndex(i) is DataGridCell cell)
-                            {
-                                cell.IsSelected = true;
-                                cell.Focus();
-                            }
-                            return true;
+                            cell.IsSelected = true;
+                            cell.Focus();
                         }
+                        return true;
                     }
                 }
             }
@@ -615,7 +630,8 @@ namespace Paway.WPF
                     };
                     this.BeginInvoke(arg =>
                     {
-                        if (!arg.Handled) ScrollViewer.RaiseEvent(eventArg);
+                        //ScrollViewer 只在 OnApplyTemplate 里赋值，自定义模板/主题切换期间为 null
+                        if (!arg.Handled) ScrollViewer?.RaiseEvent(eventArg);
                     }, e);
                 }
             }
@@ -719,10 +735,25 @@ namespace Paway.WPF
                 if (source is ListCollectionView list)
                 {
                     var fromInfo = fromItem.Item;
-                    list.Remove(fromItem.Item);
-                    if (e.OriginalSource is DependencyObject dependency && dependency.Parent(out DataGridRow toItem))
+                    if (fromInfo == null)
                     {
-                        var toIndex = list.IndexOf(toItem.Item);
+                        base.OnDrop(e);
+                        return;
+                    }
+                    list.Remove(fromInfo);
+                    DataGridRow toItem = null;
+                    if (e.OriginalSource is DependencyObject dependency) dependency.Parent(out toItem);
+                    //toItem.Item 可能不在当前视图（占位行/已翻页），IndexOf 返回 -1；
+                    //原实现的 while (list.Count > toIndex) 在 toIndex=-1 时恒真，会把列表搬空后抛越界
+                    var toIndex = toItem != null ? list.IndexOf(toItem.Item) : -1;
+                    if (toIndex < 0 || toIndex >= list.Count)
+                    {
+                        list.AddNewItem(fromInfo);
+                        list.CommitNew();
+                        OnDragCompleted(fromItem, toItem, e.RoutedEvent);
+                    }
+                    else
+                    {
                         var moveList = this.type.GenericList();
                         while (list.Count > toIndex)
                         {
@@ -737,12 +768,6 @@ namespace Paway.WPF
                         list.CommitNew();
                         moveList.Clear();
                         OnDragCompleted(fromItem, toItem, e.RoutedEvent);
-                    }
-                    else
-                    {
-                        list.AddNewItem(fromInfo);
-                        list.CommitNew();
-                        OnDragCompleted(fromItem, null, e.RoutedEvent);
                     }
                 }
             }
@@ -759,7 +784,7 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnPreviewMouseWheel(MouseWheelEventArgs e)
         {
-            if (ScrollViewer.ScrollableHeight == 0 && ScrollViewer.ScrollableWidth == 0)
+            if (ScrollViewer != null && ScrollViewer.ScrollableHeight == 0 && ScrollViewer.ScrollableWidth == 0)
             {
                 var eventArg = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta)
                 {

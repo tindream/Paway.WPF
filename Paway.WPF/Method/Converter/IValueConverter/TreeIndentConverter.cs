@@ -18,16 +18,17 @@ namespace Paway.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            double colunwidth = 10;
-            double left = 0.0;
+            const double colunwidth = 10;
+            var left = 0.0;
 
-            UIElement element = value as TreeViewItem;
-            while (element.GetType() != typeof(TreeView))
+            //容器生成初期 value 可能为 null 或 UnsetValue，原实现在此处必 NRE（TreeView 模板高频路径）
+            DependencyObject element = value as DependencyObject;
+            //从父级开始累计，起始项自身不计入缩进（与原逻辑一致）
+            if (element != null) element = VisualTreeHelper.GetParent(element);
+            while (element != null && !(element is TreeView))
             {
-                element = (UIElement)VisualTreeHelper.GetParent(element);
-                if (element == null) break;
-                if (element.GetType() == typeof(TreeViewItem))
-                    left += colunwidth;
+                if (element is TreeViewItem) left += colunwidth;
+                element = VisualTreeHelper.GetParent(element);
             }
             return new Thickness(left, 0, 0, 0);
         }

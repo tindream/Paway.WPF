@@ -152,6 +152,8 @@ namespace Paway.WPF
 
         #endregion
 
+        private bool _chromeFixed;
+
         /// <summary>
         /// Window扩展
         /// </summary>
@@ -163,6 +165,7 @@ namespace Paway.WPF
         }
         private void WindowEXT_Loaded(object sender, RoutedEventArgs e)
         {
+            this.FixWindowChrome();
             if (ShowActivated) this.Activate();
         }
         /// <summary>
@@ -174,8 +177,40 @@ namespace Paway.WPF
             {
                 InvalidateMeasure();
             }
+            this.FixWindowChrome();
             IntPtr handle = this.Handle();
             HwndSource.FromHwnd(handle).AddHook(WndProc);
+        }
+        /// <summary>
+        /// 修正 WindowChrome 占用的非客户区
+        /// <para>WindowChrome 默认保留 ResizeBorderThickness（系统为 4px）与 CaptionHeight 两块非客户区，
+        /// 这两块由系统接管，鼠标按下不会进入 WPF，表现为「窗口边缘按下无法拖动窗体」</para>
+        /// <para>以下两种情况需要修正：不可调整大小的窗体不需要调整边框；没有标题栏的窗体不该占用顶部内容区</para>
+        /// </summary>
+        private void FixWindowChrome()
+        {
+            if (_chromeFixed) return;
+            var chrome = WindowChrome.GetWindowChrome(this);
+            if (chrome == null) return;
+            var noResize = this.ResizeMode == ResizeMode.NoResize;
+            var noHeader = this.HeaderHeight <= 0;
+            if (!noResize && !noHeader)
+            {
+                _chromeFixed = true;
+                return;
+            }
+            //WindowChrome 实例可能来自样式共享，改动会影响其它窗体，这里按窗体复制一份
+            var copy = new WindowChrome
+            {
+                CaptionHeight = noHeader ? 0 : chrome.CaptionHeight,
+                ResizeBorderThickness = noResize ? new Thickness(0) : chrome.ResizeBorderThickness,
+                GlassFrameThickness = chrome.GlassFrameThickness,
+                CornerRadius = chrome.CornerRadius,
+                UseAeroCaptionButtons = chrome.UseAeroCaptionButtons,
+                NonClientFrameEdges = chrome.NonClientFrameEdges,
+            };
+            WindowChrome.SetWindowChrome(this, copy);
+            _chromeFixed = true;
         }
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {

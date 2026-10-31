@@ -18,6 +18,8 @@ namespace Paway.WPF
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
+            //绑定尚未就绪时会传入 DependencyProperty.UnsetValue 或少于4个值，原实现直接越界
+            if (values == null || values.Length < 4) return Geometry.Empty;
             var width = values[0].ToDouble(); if (width < 0) width = 0;
             var height = values[1].ToDouble(); if (height < 0) height = 0;
             var iForward = values[2].ToBool() ? 1 : 0;
@@ -27,6 +29,7 @@ namespace Paway.WPF
             else radius = values[3].ToDouble();
             if (width < radius) width = radius;
             if (height < radius) height = radius;
+            if (width <= 0 || height <= 0) return Geometry.Empty;
 
             var percent = 0.33;
             if (values.Length > 6)
@@ -38,7 +41,10 @@ namespace Paway.WPF
                 value = min + (value - min) * rate;
                 value = value > max ? max : value;
                 value = value < min ? min : value;
-                percent = (value - min) / (max - min);
+                //Minimum == Maximum（数据未加载/单值进度）时原实现除零得到 NaN，
+                //拼进 path 后 PathGeometry.Parse 每帧抛 FormatException
+                var span = max - min;
+                percent = span <= 0 ? 0 : (value - min) / span;
             }
 
             var point2X = (height - radius) / 2 * Math.Cos((2 * percent - 0.5) * Math.PI) + height / 2;
@@ -46,24 +52,33 @@ namespace Paway.WPF
             var point2Y = height / 2 - (height - radius) / 2 * Math.Sin((2 * percent + 0.5) * Math.PI);
 
             string path;
-            if (percent == 0)
+            string start = "M " + width / 2 + "," + radius / 2 + " A " + (width - radius) / 2 + "," + (width - radius) / 2 + $" 0 0 {iForward} ";
+            if (percent <= 0)
             {
-                path = "";
+                //percent 为 0 时路径为空字符串，PathGeometry.Parse("") 会抛异常
+                return Geometry.Empty;
             }
             else if (percent < 0.5)
             {
-                path = "M " + width / 2 + "," + radius / 2 + " A " + (width - radius) / 2 + "," + (width - radius) / 2 + $" 0 0 {iForward} " + point2X + "," + point2Y + "";
+                path = start + point2X + "," + point2Y + "";
             }
             else if (percent == 0.5)
             {
-                path = "M " + width / 2 + "," + radius / 2 + " A " + (width - radius) / 2 + "," + (width - radius) / 2 + $" 0 0 {iForward} " + width / 2 + "," + (height - radius / 2);
+                path = start + width / 2 + "," + (height - radius / 2);
             }
             else
             {
-                path = "M " + width / 2 + "," + radius / 2 + " A " + (width - radius) / 2 + "," + (width - radius) / 2 + $" 0 0 {iForward} " + width / 2 + "," + (height - radius / 2) +
-                    " A " + (width - radius) / 2 + "," + (width - radius) / 2 + $" 0 0 {iForward} " + point2X + "," + point2Y + "";
+                path = start + width / 2 + "," + (height - radius / 2) + $" A " + (width - radius) / 2 + "," + (width - radius) / 2 + $" 0 0 {iForward} " + point2X + "," + point2Y + "";
             }
-            return PathGeometry.Parse(path);
+            try
+            {
+                return PathGeometry.Parse(path);
+            }
+            catch (FormatException)
+            {
+                //极端尺寸下仍可能拼出非法坐标，宁可少画一个圆环也不要每帧刷异常
+                return Geometry.Empty;
+            }
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

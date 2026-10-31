@@ -65,31 +65,46 @@ namespace Paway.WPF
             if (this.normalWidth == 0) this.normalWidth = this.Width;
             if (this.normalHeight == 0) this.normalHeight = this.Height;
             Size size = new Size(base.ActualWidth, base.ActualHeight);
-            int tickCount = (int)((this.Maximum - this.Minimum) / this.TickFrequency);
-            if ((this.Maximum - this.Minimum) % this.TickFrequency > 0) tickCount++;
+            //Maximum == Minimum 或 TickFrequency <= 0 时下面会除零得到 NaN/∞，绘制出非法坐标
+            var range = this.Maximum - this.Minimum;
+            if (range <= 0 || this.TickFrequency <= 0) return;
+            int tickCount = (int)(range / this.TickFrequency);
+            if (range % this.TickFrequency > 0) tickCount++;
             var horizontal = size.Width > size.Height;
             var length = horizontal ? size.Width : size.Height;
 
             // Calculate tick's setting 
-            var tickFrequencySize = length * this.TickFrequency / (this.Maximum - this.Minimum);
+            var tickFrequencySize = length * this.TickFrequency / range;
             // Draw each tick text 
             var color = PConfig.Foreground.AddLight(30).ToBrush();
             var maxWidth = 0.0;
             var maxHeight = 0.0;
-            var pen = new Pen(this.Fill, 1);
-            if (showTrackText)
+            //Fill 为 null 时 new Pen 会抛异常
+            var pen = new Pen(this.Fill ?? Brushes.Transparent, 1);
+            if (pen.CanFreeze) pen.Freeze();
+
+            //每个刻度值只计算一次：原实现测量与绘制两轮循环各抛一遍 TrackValueChanged，产生 2N 次路由事件
+            var values = new double[tickCount + 1];
+            for (var i = 0; i <= tickCount; i++)
             {
+                var value = (this.Minimum + this.TickFrequency * (horizontal ? i : tickCount - i)).ToDouble();
+                values[i] = OnTrackValueChanged(value);
+            }
+
+            //复用同一个 FormattedText：原实现每帧分配 2×tickCount 个（含 Typeface），滚动/拖动时是明确的GC热点
+            var drawText = showTrackText && this.Name == "TopTick";
+            var texts = drawText ? new FormattedText[tickCount + 1] : null;
+            if (drawText)
+            {
+                var pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
                 for (var i = 0; i <= tickCount; i++)
                 {
-                    var value = (this.Minimum + this.TickFrequency * (horizontal ? i : tickCount - i)).ToDouble();
-                    value = OnTrackValueChanged(value);
-                    //var pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
-                    var formattedText = new FormattedText(value.ToString(), CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana"), 8, color);
-                    if (this.Name == "TopTick")
-                    {
-                        if (maxWidth < formattedText.Width) maxWidth = formattedText.Width;
-                        if (maxHeight < formattedText.Height) maxHeight = formattedText.Height;
-                    }
+                    //FormattedText.Text 只读，只能按刻度各建一个；但测量与绘制共用同一批对象，不再重复分配
+                    var formattedText = new FormattedText(values[i].ToString(), CultureInfo.GetCultureInfo("en-us"),
+                        FlowDirection.LeftToRight, tickTypeface, 8, color, pixelsPerDip);
+                    texts[i] = formattedText;
+                    if (maxWidth < formattedText.Width) maxWidth = formattedText.Width;
+                    if (maxHeight < formattedText.Height) maxHeight = formattedText.Height;
                 }
             }
             if (horizontal)
@@ -104,23 +119,25 @@ namespace Paway.WPF
             }
             for (var i = 0; i <= tickCount; i++)
             {
-                var value = (this.Minimum + this.TickFrequency * (horizontal ? i : tickCount - i)).ToDouble();
-                value = OnTrackValueChanged(value);
-                //var pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
-                var formattedText = new FormattedText(value.ToString(), CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight, new Typeface("Verdana"), 8, color);
-
                 var x = tickFrequencySize * i;
                 if (horizontal)
                 {
                     dc.DrawLine(pen, new Point(x, maxHeight + showTrackTextLength), new Point(x, maxHeight + showTrackTextLength + this.normalHeight));
-                    if (this.Name == "TopTick" && showTrackText) dc.DrawText(formattedText, new Point(x - formattedText.Width / 2, maxHeight - formattedText.Height));
+                    if (drawText)
+                    {
+                        dc.DrawText(texts[i], new Point(x - texts[i].Width / 2, maxHeight - texts[i].Height));
+                    }
                 }
                 else
                 {
                     dc.DrawLine(pen, new Point(maxWidth + showTrackTextLength, x), new Point(maxWidth + showTrackTextLength + this.normalWidth, x));
-                    if (this.Name == "TopTick" && showTrackText) dc.DrawText(formattedText, new Point(maxWidth - formattedText.Width, x - formattedText.Height / 2));
+                    if (drawText)
+                    {
+                        dc.DrawText(texts[i], new Point(maxWidth - texts[i].Width, x - texts[i].Height / 2));
+                    }
                 }
             }
         }
+        private static readonly Typeface tickTypeface = new Typeface("Verdana");
     }
 }

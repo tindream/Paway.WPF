@@ -28,7 +28,7 @@ namespace Paway.Model
         /// <summary>
         /// 模型-登录页
         /// </summary>
-        public virtual LoginPageModel Login => GetModelInstance<LoginPageModel>();
+        public virtual LoginPageModel Login => null;
         /// <summary>
         /// 模型-单输入框通用窗体
         /// </summary>
@@ -76,6 +76,13 @@ namespace Paway.Model
             {
                 if (!viewModelList.TryGetValue(name, out object obj))
                 {
+                    //LoginPageModel 等基类是 abstract：Activator.CreateInstance 会抛 MissingMethodException，
+                    //且在 XAML 绑定里被吞掉，表现为“页面空白但无任何报错”。这里给出可定位的异常信息。
+                    if (typeof(T).IsAbstract)
+                    {
+                        throw new InvalidOperationException(
+                            $"{typeof(T).FullName} 是抽象类型，无法由 Locator 直接创建；请在宿主的 ViewModelLocator 派生类中重写对应属性。");
+                    }
                     obj = Activator.CreateInstance<T>();
                     viewModelList.Add(name, obj);
                 }

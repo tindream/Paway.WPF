@@ -16,7 +16,7 @@ namespace System.Windows.Data
     /// <summary>
     /// PagedCollectionView view over an IEnumerable.
     /// </summary>
-    public sealed class PagedCollectionView : ICollectionView, IPagedCollectionView, IEditableCollectionView, INotifyPropertyChanged
+    public sealed class PagedCollectionView : ICollectionView, IPagedCollectionView, IEditableCollectionView, INotifyPropertyChanged, IDisposable
     {
         private const string OperationNotAllowedDuringAddOrEdit = "'{0}' is not allowed during an AddNew or EditItem transaction.";
         private const string InvalidPageSize = "PageSize cannot have a negative value.";
@@ -246,7 +246,25 @@ namespace System.Windows.Data
             // If we implement INotifyCollectionChanged
             if (!_pollForChanges)
             {
-                (source as INotifyCollectionChanged).CollectionChanged += (sender, args) => { ProcessCollectionChanged(args); };
+                //用具名委托保存订阅，才能在 Dispose 时解绑：
+                //源集合常是 App/Service 级长生命周期对象，匿名 lambda 会把它反向钉住本视图及其绑定目标
+                _sourceCollectionChanged = (sender, args) => { ProcessCollectionChanged(args); };
+                ((INotifyCollectionChanged)source).CollectionChanged += _sourceCollectionChanged;
+            }
+        }
+        private bool _disposed;
+        private readonly NotifyCollectionChangedEventHandler _sourceCollectionChanged;
+        /// <summary>
+        /// 解除对源集合的订阅
+        /// <para>视图被替换/页面关闭后应调用，否则长生命周期的源集合会一直持有本视图</para>
+        /// </summary>
+        public void Dispose()
+        {
+            if (_disposed) return;
+            _disposed = true;
+            if (_sourceCollectionChanged != null && _sourceCollection is INotifyCollectionChanged notify)
+            {
+                notify.CollectionChanged -= _sourceCollectionChanged;
             }
         }
 
@@ -3464,6 +3482,18 @@ namespace System.Windows.Data
 
                 // calling Refresh, will fire the collectionchanged event
                 RefreshOrDefer();
+                return;
+            }
+
+            //Move 与多元素变更没有增量维护实现：原代码只处理 "单个 Add/Remove/Replace"，
+            //Move 之后 _internalList 与源集合顺序永久错位，后续所有 Index/GetItemAt/分页偏移全部错误，
+            //多元素事件也只取 NewItems[0]。这里统一降级为整表刷新，保证顺序与源集合一致。
+            if (args.Action == NotifyCollectionChangedAction.Move ||
+                (args.NewItems != null && args.NewItems.Count > 1) ||
+                (args.OldItems != null && args.OldItems.Count > 1))
+            {
+                RefreshOrDefer();
+                OnPropertyChanged(nameof(ItemCount));
                 return;
             }
 

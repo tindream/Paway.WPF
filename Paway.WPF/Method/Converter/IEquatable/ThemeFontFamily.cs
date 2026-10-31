@@ -54,6 +54,7 @@ namespace Paway.WPF
         /// </summary>
         public bool Equals(ThemeFontFamily other)
         {
+            if (other is null) return false;//x.Equals(null) 会选中强类型重载，原实现直接 NRE
             return Value.Equals(other.Value);
         }
     }

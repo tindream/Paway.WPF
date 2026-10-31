@@ -50,7 +50,14 @@ namespace Paway.WPF
         /// </summary>
         public static MessageWindow Hit(FrameworkElement parent, string msg, LevelType level = LevelType.Info, int timeout = 3, double fontSize = 15, Action<TextBlock> action = null)
         {
-            if (window != null) window.manualResetEvent.Set();
+            if (parent == null) return null;
+            //关闭上一个提示：事件可能已随窗体关闭而释放，需容错
+            var old = window;
+            if (old != null)
+            {
+                try { old.manualResetEvent.Set(); }
+                catch (ObjectDisposedException) { }
+            }
             window = new MessageWindow();
             window.parentElement = parent;
             window.textBlock.Text = msg;
@@ -79,7 +86,21 @@ namespace Paway.WPF
         /// </summary>
         public static void HitClose()
         {
-            window?.manualResetEvent.Set();
+            try { window?.manualResetEvent.Set(); }
+            catch (ObjectDisposedException) { }
+        }
+        /// <summary>
+        /// 关闭时解除静态引用与事件订阅
+        /// </summary>
+        protected override void OnClosed(EventArgs e)
+        {
+            //静态字段持有窗体与父元素：不清空会把已关闭的提示窗及其整棵可视树一直钉在内存里
+            if (ReferenceEquals(window, this)) window = null;
+            try { this.manualResetEvent.Set(); }
+            catch (ObjectDisposedException) { }
+            this.UnhookParent();
+            this.parentElement = null;
+            base.OnClosed(e);
         }
         private void LoadParent(FrameworkElement element, int timeout)
         {
@@ -97,37 +118,56 @@ namespace Paway.WPF
             var taskHandle = Win32Helper.TaskHandle();
             Task.Run(() =>
             {
-                var iShow = true;
-                for (var i = 0; timeout == 0 || i < timeout * 25; i++)
+                try
                 {
-                    IntPtr current = NativeMethods.GetForegroundWindow();
-                    if (current != this.Handle && current != taskHandle)
+                    var iShow = true;
+                    for (var i = 0; timeout == 0 || i < timeout * 25; i++)
                     {
-                        if (iShow)
+                        IntPtr current = NativeMethods.GetForegroundWindow();
+                        if (current != this.Handle && current != taskHandle)
                         {
-                            iShow = false;
-                            this.BeginInvoke(() => { AnimationHelper.Start(this, TransitionType.Opacity, 0, 125, iReset: false); });
+                            if (iShow)
+                            {
+                                iShow = false;
+                                this.BeginInvoke(() => { AnimationHelper.Start(this, TransitionType.Opacity, 0, 125, iReset: false); });
+                            }
                         }
-                    }
-                    else
-                    {
-                        if (!iShow)
+                        else
                         {
-                            iShow = true;
-                            this.BeginInvoke(() => { AnimationHelper.Start(this, TransitionType.Opacity, 1, 125, iReset: false); });
+                            if (!iShow)
+                            {
+                                iShow = true;
+                                this.BeginInvoke(() => { AnimationHelper.Start(this, TransitionType.Opacity, 1, 125, iReset: false); });
+                            }
                         }
+                        if (manualResetEvent.WaitOne(40)) break;
                     }
-                    if (manualResetEvent.WaitOne(40)) break;
                 }
-                this.Invoke(() => { this.PrevoewClose(); });
+                catch (ObjectDisposedException) { }//窗体已关闭，无需再处理
+                finally
+                {
+                    this.Invoke(() => { this.PrevoewClose(); });
+                    //ManualResetEvent 持有内核句柄，不释放则每次提示泄漏一个
+                    manualResetEvent.Dispose();
+                }
             });
         }
         private void PrevoewClose()
         {
+            this.UnhookParent();
+            this.Close();
+        }
+        /// <summary>
+        /// 解除父窗体事件订阅
+        /// </summary>
+        private void UnhookParent()
+        {
+            var parentWindow = this.parentWindow;
+            if (parentWindow == null) return;
+            this.parentWindow = null;
             parentWindow.Closing -= ParentWindow_Closing;
             parentWindow.LocationChanged -= ParentWindow_LocationChanged;
             parentWindow.SizeChanged -= ParentWindow_LocationChanged;
-            this.Close();
         }
         private void ParentWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -135,6 +175,7 @@ namespace Paway.WPF
         }
         private void ParentWindow_LocationChanged(object sender, EventArgs e)
         {
+            if (parentElement == null) return;
             var point = parentElement.PointToScreen(new Point(0, 0));
             this.Left = point.X + (parentElement.ActualWidth - this.Width) / 2;
             this.Top = point.Y + (parentElement.ActualHeight - this.Height) / 2;

@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace Paway.Model
 {
@@ -109,15 +110,35 @@ namespace Paway.Model
                             hour <= 13 ? "中午好" : hour < 18 ? "下午好" : "晚上好";
                 this.UserName = $"{hello}, {msg.UserName}";
             });
-            Task.Run(async () =>
+            //原实现是 Task.Run 里的无限 while 循环：
+            //1) 循环体抛异常会静默终止时钟且无任何日志；2) 宿主不设置 PConfig.Window 时循环永不退出；
+            //3) TimeChangeEvent 在后台线程回调，宿主一旦改成 TwoWay 绑定或加转换器即跨线程异常。
+            //DispatcherTimer 在UI线程触发，天然安全且可停止。
+            if (timeTimer == null)
             {
-                while (!PConfig.IClose)
-                {
-                    this.TimeNow = TimeChangeEvent != null ? TimeChangeEvent.Invoke() : DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss dddd");
-                    await Task.Delay(1000 - DateTime.Now.Millisecond);
-                }
+                timeTimer = new DispatcherTimer(DispatcherPriority.Background) { Interval = TimeSpan.FromSeconds(1) };
+                timeTimer.Tick += TimeTimer_Tick;
+            }
+            timeTimer.Start();
+        }
+        private DispatcherTimer timeTimer;
+        private void TimeTimer_Tick(object sender, EventArgs e)
+        {
+            //主窗体关闭后停止计时并解绑静态事件（原先由循环退出时顺带调用）
+            if (PConfig.IClose)
+            {
                 Unregister();
-            });
+                return;
+            }
+            try
+            {
+                this.TimeNow = TimeChangeEvent != null ? TimeChangeEvent.Invoke() : DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss dddd");
+            }
+            catch (Exception ex)
+            {
+                //单个宿主回调异常不应让时钟静默停摆
+                ex.Log("刷新状态栏时间失败");
+            }
         }
         private void OperateLogAdd(OperateInfo msg) { AddDesc(msg.Text); }
         private void StatuLogAdd(string msg, LevelType level, object source) { AddDesc(msg, level); }
@@ -126,6 +147,12 @@ namespace Paway.Model
         /// </summary>
         internal void Unregister()
         {
+            if (timeTimer != null)
+            {
+                timeTimer.Stop();
+                timeTimer.Tick -= TimeTimer_Tick;
+                timeTimer = null;
+            }
             PConfig.OperateLogEvent -= OperateLogAdd;
             PConfig.StatuLogEvent -= StatuLogAdd;
             WeakReferenceMessenger.Default.UnregisterAll(this);

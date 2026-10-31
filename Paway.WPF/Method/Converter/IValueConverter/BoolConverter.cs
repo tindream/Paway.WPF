@@ -71,13 +71,17 @@ namespace Paway.WPF
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var result = value is bool b && b;
-            if (parameter != null || (parameter is bool p && !p)) result = !result;
+            //传入任意 ConverterParameter 即取反；原写法 "parameter != null || (parameter is bool p && !p)"
+            //后半段是永远执行不到的死代码，容易误读为“参数为false才取反”
+            if (parameter != null) result = !result;
             return result ? Visibility.Visible : Visibility.Collapsed;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var result = value is Visibility visibility && visibility == Visibility.Visible;
-            if (parameter != null || (parameter is bool p && !p)) result = !result;
+            //传入任意 ConverterParameter 即取反；原写法 "parameter != null || (parameter is bool p && !p)"
+            //后半段是永远执行不到的死代码，容易误读为“参数为false才取反”
+            if (parameter != null) result = !result;
             return result;
         }
     }
@@ -89,13 +93,17 @@ namespace Paway.WPF
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var result = value is bool b && b;
-            if (parameter != null || (parameter is bool p && !p)) result = !result;
+            //传入任意 ConverterParameter 即取反；原写法 "parameter != null || (parameter is bool p && !p)"
+            //后半段是永远执行不到的死代码，容易误读为“参数为false才取反”
+            if (parameter != null) result = !result;
             return result ? Visibility.Collapsed : Visibility.Visible;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var result = value is Visibility visibility && visibility == Visibility.Collapsed;
-            if (parameter != null || (parameter is bool p && !p)) result = !result;
+            //传入任意 ConverterParameter 即取反；原写法 "parameter != null || (parameter is bool p && !p)"
+            //后半段是永远执行不到的死代码，容易误读为“参数为false才取反”
+            if (parameter != null) result = !result;
             return result;
         }
     }

@@ -1333,7 +1333,8 @@ namespace Paway.WPF
             if (this.PagedSource != null)
             {
                 int oldPageIndex = this.PagedSource.PageIndex;
-                if (oldPageIndex != this.PageCount)
+                //最后一页索引是 PageCount-1，原实现用 oldPageIndex != PageCount，永远不成立
+                if (oldPageIndex < this.PageCount - 1)
                 {
                     this.PageMoveHandler(oldPageIndex, -1, this.PagedSource.MoveToLastPage);
                 }
@@ -2004,9 +2005,11 @@ namespace Paway.WPF
         /// </summary>
         private void UpdatePageCount()
         {
-            if (this.PagedSource.PageSize > 0)
+            //Source 从分页视图切到普通集合/null 时（或迟到的 Count 变更通知）此处会 NRE
+            var pagedSource = this.PagedSource;
+            if (pagedSource != null && pagedSource.PageSize > 0)
             {
-                this.PageCount = Math.Max(1, (int)Math.Ceiling((double)this.PagedSource.ItemCount / this.PagedSource.PageSize));
+                this.PageCount = Math.Max(1, (int)Math.Ceiling((double)pagedSource.ItemCount / pagedSource.PageSize));
             }
             else
             {

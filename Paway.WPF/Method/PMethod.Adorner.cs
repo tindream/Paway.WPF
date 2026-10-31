@@ -840,48 +840,54 @@ namespace Paway.WPF
             Action<Exception> error = null, Action completed = null, bool iProgressBar = false, bool iProgressRound = true, int? fontSize = null,
             HorizontalAlignment? alignment = HorizontalAlignment.Center, int? width = null)
         {
-            return Invoke(() =>
+            //原实现把整个流程包在 Invoke(Func<Task>) 里：Invoke 捕获异常后 return default，
+            //即返回 null Task，await 调用方必 NRE，且失败原因被吞掉
+            Exception invokeError = null;
+            var progress = Invoke(() => ProgressAdorner(element, msg, iProgressBar, iProgressRound, fontSize, alignment, width), ex => invokeError = ex);
+            if (progress == null)
             {
-                var progress = ProgressAdorner(element, msg, iProgressBar, iProgressRound, fontSize, alignment, width);
-                if (progress == null) throw new WarningException("Decorator not found on control");
-                return Task.Run(() =>
+                var ex = invokeError ?? (Exception)new WarningException("Decorator not found on control");
+                InvokeError(error, ex);
+                //保证契约：任何情况下都不返回 null Task
+                return Task.FromException(ex);
+            }
+            return Task.Run(() =>
+            {
+                try
                 {
-                    try
-                    {
-                        action.Invoke(progress);
-                        if (success != null)
-                        {
-                            BeginInvoke(() =>
-                            {
-                                success.Invoke();
-                            }, ex => InvokeError(error, ex));
-                        }
-                    }
-                    catch (Exception ex)
+                    action.Invoke(progress);
+                    if (success != null)
                     {
                         BeginInvoke(() =>
                         {
-                            if (error != null)
-                            {
-                                error.Invoke(ex);
-                            }
-                            else
-                            {
-                                ex.Log();
-                                Show(element, ex.Message(), LevelType.Error);
-                            }
-                        });
+                            success.Invoke();
+                        }, ex => InvokeError(error, ex));
                     }
-                    finally
+                }
+                catch (Exception ex)
+                {
+                    BeginInvoke(() =>
                     {
-                        ProgressClose(progress);
-                        if (completed != null)
+                        if (error != null)
                         {
-                            BeginInvoke(() => completed.Invoke(), ex => InvokeError(error, ex));
+                            error.Invoke(ex);
                         }
+                        else
+                        {
+                            ex.Log();
+                            Show(element, ex.Message(), LevelType.Error);
+                        }
+                    });
+                }
+                finally
+                {
+                    ProgressClose(progress);
+                    if (completed != null)
+                    {
+                        BeginInvoke(() => completed.Invoke(), ex => InvokeError(error, ex));
                     }
-                });
-            }, ex => InvokeError(error, ex));
+                }
+            });
         }
         private static void InvokeError(Action<Exception> error, Exception ex)
         {

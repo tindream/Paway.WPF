@@ -22,17 +22,24 @@ namespace Paway.WPF
         /// </summary>
         public static void ClipWindowShades(FrameworkElement element, double start = 2, double black = 4, double height = 8)
         {
-            var pg = new PathGeometry();
-            //设置矩形区域大小
-            var rg = new RectangleGeometry();
-            for (var i = 0; i < element.ActualHeight / height; i++)
+            if (element == null) return;
+            //height 为 0 时 ActualHeight/height 为 +∞，原实现会在UI线程死循环
+            if (height <= 0) return;
+            var count = (int)(element.ActualHeight / height);
+            if (count <= 0)
             {
-                rg.Rect = new Rect(0, start + i * height, element.ActualWidth, black);
-                //合并几何图形
-                pg = Geometry.Combine(pg, rg, GeometryCombineMode.Union, null);
-
+                element.Clip = null;
+                return;
             }
-            element.Clip = pg;
+            //原实现每次 Geometry.Combine 都重建整个几何（O(n²)），条形多时明显掉帧；
+            //矩形互不重叠，直接用 GeometryGroup 合并，O(n)
+            var group = new GeometryGroup();
+            var width = element.ActualWidth;
+            for (var i = 0; i < count; i++)
+            {
+                group.Children.Add(new RectangleGeometry(new Rect(0, start + i * height, width, black)));
+            }
+            element.Clip = group;
         }
     }
 }

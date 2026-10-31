@@ -70,6 +70,7 @@ namespace Paway.WPF
         /// </summary>
         public bool Equals(DoubleEXT other)
         {
+            if (other is null) return false;//x.Equals(null) 会选中强类型重载，原实现直接 NRE
             return Normal.Equals(other.Normal) && Mouse.Equals(other.Mouse) && Pressed.Equals(other.Pressed);
         }
     }
@@ -126,9 +127,9 @@ namespace Paway.WPF
         /// </summary>
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
-            if (destinationType == typeof(string))
-                return base.ConvertTo(context, culture, value, destinationType);
-            return value.ToString();
+            //原实现两个分支写反：非 string 目标返回了字符串。目标为 string 时取 ToString，其余交给基类
+            if (destinationType == typeof(string)) return value?.ToString();
+            return base.ConvertTo(context, culture, value, destinationType);
         }
     }
 }

@@ -996,18 +996,32 @@ namespace Paway.WPF
             });
             return true;
         }
+        /// <summary>
+        /// 未经处理的UI异常通知
+        /// <para>默认把异常标记为已处理（只记录日志，进程继续运行）</para>
+        /// <para>宿主可在处理函数内把 e.Handled 置为 false，让异常继续向上抛出（进程通常会退出）</para>
+        /// </summary>
+        public static event Action<DispatcherUnhandledExceptionEventArgs> UnhandledException;
         private static void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
+            //先给出默认处置（存活），再把参数交给宿主，宿主改 e.Handled 才真正起作用
+            e.Handled = true;
             try
             {
-                var desc = $"未经处理的UI异常";
-                e.Exception.Log(desc);
-                e.Handled = true;
+                e.Exception.Log("未经处理的UI异常");
+                UnhandledException?.Invoke(e);
             }
             catch (Exception ex)
             {
-                var desc = $"不可恢复的未经处理UI异常";
-                ex.Log(desc);
+                //日志或宿主回调自身出错：保持默认处置继续运行，不把二次异常抛回 Dispatcher
+                try
+                {
+                    ex.Log("未经处理UI异常的处理流程失败");
+                }
+                catch
+                {
+                    // ignored
+                }
             }
         }
 

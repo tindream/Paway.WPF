@@ -23,6 +23,7 @@ namespace Paway.Model
     /// </summary>
     public partial class OperateItem
     {
+        private Window keyWindow;
         #region 扩展参数
         /// <summary>
         /// </summary>
@@ -106,6 +107,7 @@ namespace Paway.Model
             InitializeComponent();
             WeakReferenceMessenger.Default.Send(new OperateLoadMessage() { Obj = this });
             this.Loaded += OperateItem_Loaded;
+            this.Unloaded += OperateItem_Unloaded;
         }
         /// <summary>
         /// 监听顶层窗体按键
@@ -114,11 +116,25 @@ namespace Paway.Model
         {
             //模型可能晚于视图创建，构造时的消息会丢失，加载后再通知一次（接收方有重复判断）
             WeakReferenceMessenger.Default.Send(new OperateLoadMessage() { Obj = this });
-            if (this.Parent(out Window window))
+            if (this.Parent(out Window window) && keyWindow != window)
             {
-                window.PreviewKeyDown += Window_PreviewKeyDown;
+                //主窗体生命周期远长于工具栏：不退订会让每次导航都多挂一个委托，
+                //旧工具栏及其整页可视树被主窗体钉住（经典 WPF 强引用泄漏）
+                if (keyWindow != null) keyWindow.PreviewKeyDown -= Window_PreviewKeyDown;
+                keyWindow = window;
+                keyWindow.PreviewKeyDown += Window_PreviewKeyDown;
             }
-            this.Loaded -= OperateItem_Loaded;
+        }
+        /// <summary>
+        /// 从可视树移除时解绑，避免换页后仍响应快捷键
+        /// </summary>
+        private void OperateItem_Unloaded(object sender, RoutedEventArgs e)
+        {
+            if (keyWindow != null)
+            {
+                keyWindow.PreviewKeyDown -= Window_PreviewKeyDown;
+                keyWindow = null;
+            }
         }
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {

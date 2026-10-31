@@ -47,11 +47,19 @@ namespace Paway.WPF
         /// </summary>
         public ThemeForeground()
         {
-            if (Environment.CurrentManagedThreadId != 1 && !DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+            //原先用“托管线程Id是否为1”判断UI线程：副UI线程(每个窗口独立Dispatcher)、单元测试、
+            //宿主从非主线程启动时线程Id都不是1，会误判并抛异常，且异常点远离调用栈。
+            //改为真正的UI线程判断：Application未创建时无法判断，放行。
+            var app = Application.Current;
+            if (app != null && !app.Dispatcher.CheckAccess() && !InDesignMode)
             {
                 throw new WarningException("Resources cannot be called in threads");
             }
         }
+        /// <summary>
+        /// 是否处于设计器模式（避免每次构造都新建DependencyObject探测）
+        /// </summary>
+        private static readonly bool InDesignMode = DesignerProperties.GetIsInDesignMode(new DependencyObject());
         private void Config_ForegroundChanged(Color obj)
         {
             if (this.Value is SolidColorBrush value && value.Color.R == obj.R && value.Color.G == obj.G && value.Color.B == obj.B)
@@ -85,7 +93,9 @@ namespace Paway.WPF
         /// </summary>
         public bool Equals(ThemeForeground other)
         {
-            return Result.Equals(other.Result);
+            //x.Equals(null) 会优先选中强类型重载，原实现直接 NRE
+            if (other is null) return false;
+            return Equals(Result, other.Result);
         }
     }
     /// <summary>
@@ -130,9 +140,9 @@ namespace Paway.WPF
         /// </summary>
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
-            if (destinationType == typeof(string))
-                return base.ConvertTo(context, culture, value, destinationType);
-            return value.ToString();
+            //原实现两个分支写反：非 string 目标返回了字符串。目标为 string 时取 ToString，其余交给基类
+            if (destinationType == typeof(string)) return value?.ToString();
+            return base.ConvertTo(context, culture, value, destinationType);
         }
     }
 }

@@ -456,8 +456,28 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
         {
-            ResetItemWidth();
+            //拖动窗口时每个像素都会触发一次 O(n) 全量遍历，且逐项写模型属性会连带每项多个绑定重算；
+            //这里按 60ms 合并为一次，避免缩放时CPU飙高
+            BeginResetItemWidth();
             base.OnRenderSizeChanged(sizeInfo);
+        }
+        private System.Windows.Threading.DispatcherTimer resetTimer;
+        private void BeginResetItemWidth()
+        {
+            if (resetTimer == null)
+            {
+                resetTimer = new System.Windows.Threading.DispatcherTimer(System.Windows.Threading.DispatcherPriority.Background)
+                {
+                    Interval = TimeSpan.FromMilliseconds(60)
+                };
+                resetTimer.Tick += (sender, e) =>
+                {
+                    resetTimer.Stop();
+                    ResetItemWidth();
+                };
+            }
+            resetTimer.Stop();
+            resetTimer.Start();
         }
         /// <summary>
         /// 等宽处理
