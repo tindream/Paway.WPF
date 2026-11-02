@@ -65,11 +65,22 @@ namespace Paway.Model
         protected override void SelectedChanged()
         {
             base.SelectedChanged();
-            DetailList.Clear();
-            if (SelectedItem != null)
+            //批量填充明细时挂起分页视图重算，避免逐条 Add 触发逐次分页通知
+            //（编辑/新增事务中不允许挂起，此时为 null，退化为逐条添加）
+            IDisposable defer = this.DetailPagedList == null || this.DetailPagedList.IsAddingNew || this.DetailPagedList.IsEditingItem
+                ? null : this.DetailPagedList.DeferRefresh();
+            try
             {
-                SelectedItem.Load();
-                foreach (var item in SelectedItem.DetailList) DetailList.Add(item);
+                DetailList.Clear();
+                if (SelectedItem != null)
+                {
+                    SelectedItem.Load();
+                    foreach (var item in SelectedItem.DetailList) DetailList.Add(item);
+                }
+            }
+            finally
+            {
+                if (defer != null) defer.Dispose();
             }
         }
         /// <summary>

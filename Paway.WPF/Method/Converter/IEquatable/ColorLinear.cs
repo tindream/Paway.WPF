@@ -94,6 +94,24 @@ namespace Paway.WPF
             if (other is null) return false;//x.Equals(null) 会选中强类型重载，原实现直接 NRE
             return Start.Equals(other.Start) && End.Equals(other.End) && Alpha.Equals(other.Alpha);
         }
+        /// <summary>
+        /// 与非泛型调用保持一致
+        /// </summary>
+        public override bool Equals(object obj)
+        {
+            return obj is ColorLinear other && Equals(other);
+        }
+        /// <summary>
+        /// </summary>
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hash = Start.GetHashCode();
+                hash = (hash * 397) ^ End.GetHashCode();
+                return (hash * 397) ^ Alpha;
+            }
+        }
     }
     /// <summary>
     /// 字符串转ColorLinear

@@ -86,6 +86,24 @@ namespace Paway.WPF
             if (other is null) return false;//x.Equals(null) 会选中强类型重载，原实现直接 NRE
             return Normal.Equals(other.Normal) && Mouse.Equals(other.Mouse) && Pressed.Equals(other.Pressed);
         }
+        /// <summary>
+        /// 与非泛型调用保持一致
+        /// </summary>
+        public override bool Equals(object obj)
+        {
+            return obj is ThicknessEXT other && Equals(other);
+        }
+        /// <summary>
+        /// </summary>
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hash = Normal.GetHashCode();
+                hash = (hash * 397) ^ Mouse.GetHashCode();
+                return (hash * 397) ^ Pressed.GetHashCode();
+            }
+        }
     }
     /// <summary>
     /// 字符串转ThicknessEXT

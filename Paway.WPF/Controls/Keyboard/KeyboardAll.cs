@@ -111,7 +111,19 @@ namespace Paway.WPF
         public KeyboardAll()
         {
             DefaultStyleKey = typeof(KeyboardAll);
+            //InputMethod.Current 是按线程常驻的单例，直接订阅会让每个键位控件被它永久持有；
+            //随可视树挂载/卸载成对订阅退订（键盘关闭即从装饰层移除，会触发 Unloaded）
+            this.Loaded += KeyboardAll_Loaded;
+            this.Unloaded += KeyboardAll_Unloaded;
+        }
+        private void KeyboardAll_Loaded(object sender, RoutedEventArgs e)
+        {
+            InputMethod.Current.StateChanged -= Current_StateChanged;
             InputMethod.Current.StateChanged += Current_StateChanged;
+        }
+        private void KeyboardAll_Unloaded(object sender, RoutedEventArgs e)
+        {
+            InputMethod.Current.StateChanged -= Current_StateChanged;
         }
         private void Current_StateChanged(object sender, InputMethodStateChangedEventArgs e)
         {

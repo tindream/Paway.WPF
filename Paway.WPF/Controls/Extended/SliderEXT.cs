@@ -106,14 +106,18 @@ namespace Paway.WPF
         {
             if (obj is SliderEXT slider)
             {
-                slider.Loaded += delegate
-                {
-                    if (((CornerRadius)slider.GetValue(RadiusLeftProperty)).TopLeft != slider.Radius.TopLeft)
-                        slider.SetValue(RadiusLeftProperty, new CornerRadius(slider.Radius.TopLeft, 0, 0, slider.Radius.BottomLeft));
-                    if (((CornerRadius)slider.GetValue(RadiusBottomProperty)).BottomLeft != slider.Radius.BottomLeft)
-                        slider.SetValue(RadiusBottomProperty, new CornerRadius(0, 0, slider.Radius.BottomRight, slider.Radius.BottomLeft));
-                };
+                //先退订再挂，避免重复设置 Radius 时 Loaded 上叠加多个匿名委托
+                slider.Loaded -= Slider_RadiusLoaded;
+                slider.Loaded += Slider_RadiusLoaded;
             }
+        }
+        private static void Slider_RadiusLoaded(object sender, RoutedEventArgs e)
+        {
+            if (!(sender is SliderEXT slider)) return;
+            if (((CornerRadius)slider.GetValue(RadiusLeftProperty)).TopLeft != slider.Radius.TopLeft)
+                slider.SetValue(RadiusLeftProperty, new CornerRadius(slider.Radius.TopLeft, 0, 0, slider.Radius.BottomLeft));
+            if (((CornerRadius)slider.GetValue(RadiusBottomProperty)).BottomLeft != slider.Radius.BottomLeft)
+                slider.SetValue(RadiusBottomProperty, new CornerRadius(0, 0, slider.Radius.BottomRight, slider.Radius.BottomLeft));
         }
 
         #endregion

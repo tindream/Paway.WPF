@@ -24,18 +24,22 @@ namespace Paway.WPF
             if (obj is Progress progress)
             {
                 //LayoutUpdated 在设计器设计可观察效果，但运行过程中一直触发
-                progress.Loaded += delegate
-                {
-                    var width = 20d;
-                    var height = 20d;
-                    //if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(progress) == false)
-                    {
-                        width = double.IsNaN(progress.Width) == false ? progress.Width : progress.ActualWidth;
-                        height = double.IsNaN(progress.Height) == false ? progress.Height : progress.ActualHeight;
-                    }
-                    progress.TemplateSettings = new ProgressTemplate(Math.Min(width, height));
-                };
+                //Loaded 会在每次重新挂回可视树时再次触发，用 -= 先去掉再挂，避免重复设置模板参数
+                progress.Loaded -= Progress_Loaded;
+                progress.Loaded += Progress_Loaded;
             }
+        }
+        private static void Progress_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!(sender is Progress progress)) return;
+            var width = 20d;
+            var height = 20d;
+            //if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(progress) == false)
+            {
+                width = double.IsNaN(progress.Width) == false ? progress.Width : progress.ActualWidth;
+                height = double.IsNaN(progress.Height) == false ? progress.Height : progress.ActualHeight;
+            }
+            progress.TemplateSettings = new ProgressTemplate(Math.Min(width, height));
         }
         /// <summary>
         /// 启用监听

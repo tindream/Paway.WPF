@@ -556,10 +556,29 @@ namespace Paway.Model
         {
             this.Invoke(() =>
             {
-                ObList.Clear();
-                var list = showList ?? this.FilterList();
-                foreach (var item in list) ObList.Add(item);
+                //批量填充时先挂起分页视图的重算：否则每 Add 一条都会走一次分页过滤与通知，
+                //几千行数据就是几千次无意义的重算
+                var defer = Defer(this.PagedList);
+                try
+                {
+                    ObList.Clear();
+                    var list = showList ?? this.FilterList();
+                    foreach (var item in list) ObList.Add(item);
+                }
+                finally
+                {
+                    if (defer != null) defer.Dispose();
+                }
             });
+        }
+        /// <summary>
+        /// 挂起分页视图刷新
+        /// <para>编辑/新增事务中 PagedCollectionView 不允许挂起，此时返回 null 退化为逐条添加</para>
+        /// </summary>
+        private static IDisposable Defer(PagedCollectionView view)
+        {
+            if (view == null || view.IsAddingNew || view.IsEditingItem) return null;
+            return view.DeferRefresh();
         }
         /// <summary>
         /// 默认权限

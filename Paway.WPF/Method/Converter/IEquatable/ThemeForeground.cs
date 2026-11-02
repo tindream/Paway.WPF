@@ -97,6 +97,19 @@ namespace Paway.WPF
             if (other is null) return false;
             return Equals(Result, other.Result);
         }
+        /// <summary>
+        /// 与非泛型调用保持一致
+        /// </summary>
+        public override bool Equals(object obj)
+        {
+            return obj is ThemeForeground other && Equals(other);
+        }
+        /// <summary>
+        /// </summary>
+        public override int GetHashCode()
+        {
+            return Result == null ? 0 : Result.GetHashCode();
+        }
     }
     /// <summary>
     /// 字符串转ThemeBackground

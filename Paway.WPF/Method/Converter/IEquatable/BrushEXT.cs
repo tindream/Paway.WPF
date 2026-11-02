@@ -171,6 +171,26 @@ namespace Paway.WPF
             if (other is null) return false;//x.Equals(null) 会选中强类型重载，原实现直接 NRE
             return Normal.Result.Equals(other.Normal.Result) && Mouse.Equals(other.Mouse) && Pressed.Equals(other.Pressed) && Alpha.Equals(other.Alpha);
         }
+        /// <summary>
+        /// 与非泛型调用保持一致
+        /// <para>只实现 IEquatable 时 Equals(object) 会退化为引用比较，缓存对象按值比较的结果会不一致</para>
+        /// </summary>
+        public override bool Equals(object obj)
+        {
+            return obj is BrushEXT other && Equals(other);
+        }
+        /// <summary>
+        /// </summary>
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hash = Normal?.Result == null ? 0 : Normal.Result.GetHashCode();
+                hash = (hash * 397) ^ (Mouse == null ? 0 : Mouse.GetHashCode());
+                hash = (hash * 397) ^ (Pressed == null ? 0 : Pressed.GetHashCode());
+                return (hash * 397) ^ Alpha;
+            }
+        }
     }
     /// <summary>
     /// 字符串转BrushEXT

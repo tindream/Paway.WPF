@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Paway.Helper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,6 +20,14 @@ namespace Paway.WPF
     {
         #region 启用监听，获取Slider属性并设置到Thumb、RepeatButton
         /// <summary>
+        /// 每个 SliderEXT 只订阅一次的按钮样式回调
+        /// <para>原实现每次设置附加属性都用一个捕获 Thumb 的匿名委托订阅 SliderEXT.OnButtonTypeEvent：
+        /// 滑块长期存活而 Thumb 随模板重建，旧 Thumb 被回调永久持有（模板重复应用时还会累积回调）。
+        /// 这里改为每个滑块一个回调，回调内按需取当前模板中的 Thumb，不持有任何 Thumb 引用。</para>
+        /// </summary>
+        private static readonly ConditionalWeakTable<SliderEXT, Action> handlerList = new ConditionalWeakTable<SliderEXT, Action>();
+
+        /// <summary>
         /// 启用监听，获取Slider属性并设置到Thumb、RepeatButton
         /// </summary>
         public static readonly DependencyProperty IsMonitoringProperty =
@@ -28,15 +38,24 @@ namespace Paway.WPF
             {
                 if (thumb.TemplatedParent is SliderEXT sliderEXT)
                 {
-                    sliderEXT.OnButtonTypeEvent += () =>
+                    if (!handlerList.TryGetValue(sliderEXT, out Action handler))
                     {
-                        thumb.SetValue(ButtonTypeProperty, sliderEXT.ButtonType);
-                        thumb.SetValue(ButtonImageProperty, sliderEXT.ButtonImage);
-                    };
+                        var slider = sliderEXT;
+                        handler = () => ApplyThumb(slider);
+                        handlerList.Add(slider, handler);
+                        sliderEXT.OnButtonTypeEvent += handler;
+                    }
                     thumb.SetValue(ButtonTypeProperty, sliderEXT.ButtonType);
                     thumb.SetValue(ButtonImageProperty, sliderEXT.ButtonImage);
                 }
             }
+        }
+        private static void ApplyThumb(SliderEXT slider)
+        {
+            //回调时才取当前模板中的 Thumb，模板重建后自动指向新实例
+            if (!slider.Child(out Thumb current)) return;
+            current.SetValue(ButtonTypeProperty, slider.ButtonType);
+            current.SetValue(ButtonImageProperty, slider.ButtonImage);
         }
         /// <summary>
         /// 启用监听

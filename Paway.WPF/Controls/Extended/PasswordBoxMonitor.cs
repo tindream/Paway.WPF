@@ -24,11 +24,20 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty IsMonitoringProperty =
             DependencyProperty.RegisterAttached(nameof(IsMonitoring), typeof(bool), typeof(PasswordBoxMonitor), new PropertyMetadata(false, OnIsMonitoringChanged));
+        /// <summary>
+        /// 记录已经挂过键盘监听的密码框，避免重复创建（重复创建会再订阅一组同样的元素事件）
+        /// </summary>
+        private static readonly DependencyProperty KeyboardMonitorProperty =
+            DependencyProperty.RegisterAttached(nameof(KeyboardMonitor), typeof(object), typeof(PasswordBoxMonitor));
         private static void OnIsMonitoringChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             if (obj is PasswordBox pad)
             {
-                new KeyboardMonitor(pad);
+                //KeyboardMonitor 的构造会订阅 PreviewMouseDown/GotFocus/LostFocus，重复创建等于重复挂监听
+                if (pad.GetValue(KeyboardMonitorProperty) == null)
+                {
+                    pad.SetValue(KeyboardMonitorProperty, new KeyboardMonitor(pad));
+                }
                 if (PasswordBoxEXT.GetWater(pad) == null)
                 {
                     PasswordBoxEXT.SetWater(pad, PConfig.LanguageBase.PleaseInputPasswordWater);
@@ -44,14 +53,22 @@ namespace Paway.WPF
                 pad.PasswordChanged -= PasswordChanged;
                 pad.MouseEnter -= Pad_MouseEnter;
                 pad.MouseLeave -= Pad_MouseLeave;
+                pad.KeyDown -= Pad_KeyDown;
                 if ((bool)e.NewValue)
                 {
                     pad.PasswordChanged += PasswordChanged;
                     pad.MouseEnter += Pad_MouseEnter;
                     pad.MouseLeave += Pad_MouseLeave;
+                    pad.KeyDown += Pad_KeyDown;
                 }
-                pad.KeyDown += (sender, ke) => PMethod.OnKeyDown(ke);
             }
+        }
+        /// <summary>
+        /// 回车、Tab移动焦点（静态方法，重复设置时可用 -= 去重）
+        /// </summary>
+        private static void Pad_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            PMethod.OnKeyDown(e);
         }
         private static void PasswordChanged(object sender, RoutedEventArgs e)
         {

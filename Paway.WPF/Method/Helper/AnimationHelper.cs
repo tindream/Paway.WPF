@@ -33,22 +33,30 @@ namespace Paway.WPF
         {
             obj.SetValue(ValueProperty, value);
         }
+        /// <summary>
+        /// 控件尚未加载时暂存的动画类型
+        /// </summary>
+        private static readonly DependencyProperty PendingTypeProperty =
+            DependencyProperty.RegisterAttached("PendingType", typeof(TransitionType?), typeof(AnimationHelper));
         private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is FrameworkElement element && e.NewValue is TransitionType type)
+            if (!(d is FrameworkElement element) || !(e.NewValue is TransitionType type)) return;
+            if (element.IsLoaded)
             {
-                if (element.IsLoaded)
-                {
-                    Start(element, type);
-                }
-                else
-                {
-                    element.Loaded += delegate
-                    {
-                        Start(element, type);
-                    };
-                }
+                Start(element, type);
+                return;
             }
+            //原实现每次设置都往 Loaded 上叠一个匿名委托（Loaded 会在每次重新挂回可视树时触发，
+            //且匿名委托无法退订），重复设置会累积执行；这里只保留一个待执行回调
+            element.SetValue(PendingTypeProperty, type);
+            element.Loaded -= Element_Loaded;
+            element.Loaded += Element_Loaded;
+        }
+        private static void Element_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!(sender is FrameworkElement element)) return;
+            element.Loaded -= Element_Loaded;
+            if (element.GetValue(PendingTypeProperty) is TransitionType pending) Start(element, pending);
         }
         /// <summary>
         /// 启动动画

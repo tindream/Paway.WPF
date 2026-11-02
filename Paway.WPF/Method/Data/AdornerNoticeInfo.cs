@@ -34,6 +34,10 @@ namespace Paway.WPF
         /// 标记
         /// </summary>
         public object Tag { get; set; }
+        /// <summary>
+        /// 通知对应的装饰器，关闭时用于从装饰层移除
+        /// </summary>
+        internal CustomAdorner Adorner { get; set; }
 
         /// <summary>
         /// </summary>

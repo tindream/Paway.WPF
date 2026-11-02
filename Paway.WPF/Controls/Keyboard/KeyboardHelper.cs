@@ -175,7 +175,9 @@ namespace Paway.WPF
                 return;
             }
             callbacks.Add(callback);
-            processPointer = SetHook(hookDelegate);
+            //钩子只装一次：原实现每加一个回调就 SetWindowsHookEx 一次并覆盖句柄，
+            //旧句柄因此永远无法卸载，键盘反复弹出后每敲一个键都要过 N 个钩子
+            if (processPointer == 0) processPointer = SetHook(hookDelegate);
         }
         private static int SetHook(NativeMethods.HookProc hookDelegate)
         {
@@ -217,9 +219,12 @@ namespace Paway.WPF
                 }
                 if (!flag)
                 {
-                    foreach (Action<int, bool> action in callbacks)
+                    var list = callbacks;
+                    //按索引遍历：回调里可能再次 StartHook/StopHook 改动列表，
+                    //foreach 会抛“集合已修改”，异常抛在钩子里会导致按键被系统吞掉
+                    for (var i = 0; list != null && i < list.Count; i++)
                     {
-                        action(num, arg);
+                        list[i](num, arg);
                     }
                 }
             }
@@ -228,7 +233,10 @@ namespace Paway.WPF
         internal static void StopHook()
         {
             callbacks?.Clear();
+            //句柄归零，下次 StartHook 才会重新安装；重复 Unhook 无效句柄会失败
+            if (processPointer == 0) return;
             NativeMethods.UnhookWindowsHookEx(processPointer);
+            processPointer = 0;
         }
 
         #endregion

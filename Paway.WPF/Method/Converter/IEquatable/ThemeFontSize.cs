@@ -58,6 +58,19 @@ namespace Paway.WPF
             if (other is null) return false;//x.Equals(null) 会选中强类型重载，原实现直接 NRE
             return Value.Equals(other.Value);
         }
+        /// <summary>
+        /// 与非泛型调用保持一致
+        /// </summary>
+        public override bool Equals(object obj)
+        {
+            return obj is ThemeFontSize other && Equals(other);
+        }
+        /// <summary>
+        /// </summary>
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
     }
     /// <summary>
     /// 字符串转ThemeFontSize

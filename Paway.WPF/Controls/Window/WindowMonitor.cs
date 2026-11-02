@@ -27,10 +27,17 @@ namespace Paway.WPF
             get { return (bool)GetValue(IsBindingToSystemCommandsProperty); }
             set { SetValue(IsBindingToSystemCommandsProperty, value); }
         }
+        /// <summary>
+        /// 已挂载系统命令（重复设置附加属性时不再重复添加 CommandBinding）
+        /// </summary>
+        private static readonly DependencyProperty IsCommandsActiveProperty =
+            DependencyProperty.RegisterAttached("IsCommandsActive", typeof(bool), typeof(WindowMonitor), new PropertyMetadata(false));
         private static void OnIsBindingToSystemCommandsChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
             if ((bool)args.NewValue && obj is Window window)
             {
+                if ((bool)window.GetValue(IsCommandsActiveProperty)) return;
+                window.SetValue(IsCommandsActiveProperty, true);
                 var service = new WindowCommandHelper(window);
                 service.ActiveCommands();
             }

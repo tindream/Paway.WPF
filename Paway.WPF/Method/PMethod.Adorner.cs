@@ -144,44 +144,50 @@ namespace Paway.WPF
         /// </summary>
         public static void PageFullAdorner(Window window, IWindowAdorner page, int backAlpha = 100, bool iBingParentSize = true, bool iTop = false, bool iMove = false)
         {
-            CustomAdorner Adorner = null;
-            page.CloseEvent += (sender, e) =>
-            {
-                if (Adorner != null && Parent(Adorner.GetElement(), out Window ower))
-                {
-                    PMethod.ClearAdorner(ower, Adorner);
-                    Adorner = null;
-                }
-            };
             if (!(page is FrameworkElement element)) throw new WarningException("page 不是有效的 FrameworkElement");
+            CustomAdorner adorner = null;
             var iExit = false;
             var exitTime = DateTime.MinValue;
-            window.PreviewKeyDown += (sender, e) =>
+
+            //统一关闭：移除装饰器并退订窗体按键监听
+            //原实现只移除装饰器，PreviewKeyDown 的匿名委托会永久留在窗体上（每预览一次图片累积一个，
+            //并且一直持有装饰器与页面实例），这里改为显式退订。
+            Action close = null;
+            KeyEventHandler keyDown = (sender, e) =>
             {
-                if (e.Key == Key.Escape)
+                if (e.Key != Key.Escape) return;
+                if (iExit && DateTime.Now.Subtract(exitTime).TotalMilliseconds < PConfig.DoubleInterval)
                 {
-                    if (iExit && DateTime.Now.Subtract(exitTime).TotalMilliseconds < PConfig.DoubleInterval)
-                    {
-                        var handle = Adorner != null;
-                        {
-                            if (Adorner != null && Parent(Adorner.GetElement(), out Window ower))
-                            {
-                                PMethod.ClearAdorner(ower, Adorner);
-                                Adorner = null;
-                            }
-                        }
-                        e.Handled = handle;
-                        return;
-                    }
-                    iExit = true;
-                    exitTime = DateTime.Now;
+                    var handle = adorner != null;
+                    if (close != null) close();
+                    e.Handled = handle;
+                    return;
+                }
+                iExit = true;
+                exitTime = DateTime.Now;
+            };
+            close = () =>
+            {
+                window.PreviewKeyDown -= keyDown;
+                if (adorner != null && Parent(adorner.GetElement(), out Window ower))
+                {
+                    PMethod.ClearAdorner(ower, adorner);
+                    adorner = null;
                 }
             };
-            Adorner = PMethod.CustomAdorner(window, element, true, iBingParentSize, iTop);
-            if (Adorner == null) return;
-            var canvas = Adorner.GetCanvas();
+            page.CloseEvent += (sender, e) => { if (close != null) close(); };
+            window.PreviewKeyDown += keyDown;
+
+            adorner = PMethod.CustomAdorner(window, element, true, iBingParentSize, iTop);
+            if (adorner == null)
+            {
+                //装饰器创建失败（非UI线程等），不要把按键监听留在窗体上
+                window.PreviewKeyDown -= keyDown;
+                return;
+            }
+            var canvas = adorner.GetCanvas();
             canvas.Background = Colors.Black.ToAlpha(backAlpha).ToBrush();
-            if (iMove) MoveAdorner(Adorner);
+            if (iMove) MoveAdorner(adorner);
         }
         /// <summary>
         /// 移动装饰器内控件
@@ -322,7 +328,8 @@ namespace Paway.WPF
                     if (time == 0) time = 3000;
                     else if (time < 0) time = int.MaxValue - 125;
                     if (tag != null) NoticeClear(tag);
-                    var noticeAdorner = new CustomAdorner(element, border,
+                    CustomAdorner noticeAdorner = null;
+                    noticeAdorner = new CustomAdorner(element, border,
                         xFunc: () =>
                         {
                             var right = window is WindowEXT || (window.WindowStyle == System.Windows.WindowStyle.None && window.ResizeMode == ResizeMode.NoResize) ? 2 : 16;
@@ -339,6 +346,8 @@ namespace Paway.WPF
                                 {
                                     adornerIndex++;
                                     temp = new AdornerNoticeInfo(adornerIndex, code, border, tag);
+                                    //记录所属装饰器，关闭时才能一并从装饰层移除（常驻消息不会走到自动完成分支）
+                                    temp.Adorner = noticeAdorner;
                                     adornerNoticeList.Add(temp);
                                 }
                                 location = adornerNoticeList.Where(c => c.Index < temp?.Index).Sum(c => c.Height);
@@ -407,8 +416,26 @@ namespace Paway.WPF
                 {
                     storyboard1.Remove(adornerNotice.Border);
                 }
+                //原实现只做退场动画：列表项与装饰器都留在原地，
+                //常驻消息（time<0）走不到自动完成分支，会永久占用静态列表并影响后续消息的堆叠位置
+                NoticeRemove(adornerNotice);
                 completed?.Invoke();
             });
+        }
+        /// <summary>
+        /// 从通知列表与装饰层移除
+        /// </summary>
+        private static void NoticeRemove(AdornerNoticeInfo adornerNotice)
+        {
+            lock (adornerNoticeLock)
+            {
+                adornerNoticeList.Remove(adornerNotice);
+            }
+            var adorner = adornerNotice.Adorner;
+            if (adorner == null) return;
+            var myAdornerLayer = AdornerLayer.GetAdornerLayer(adorner.AdornedElement);
+            if (myAdornerLayer == null) return;
+            lock (myAdornerLayer) myAdornerLayer.Remove(adorner);
         }
         private static readonly object adornerNoticeLock = new object();
         /// <summary>

@@ -484,7 +484,10 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
         {
-            ResetItemWidth();
+            //逐条添加时 OnItemsChanged 会反复触发，原来每次都同步跑一遍 O(n) 的全量重算，
+            //批量填充 N 条就是 O(n²)（且逐项写宽度会连带每个绑定重算）。
+            //这里与尺寸变化共用同一个合并器，一轮批量操作只算一次。
+            BeginResetItemWidth();
             base.OnItemsChanged(e);
         }
         /// <summary>

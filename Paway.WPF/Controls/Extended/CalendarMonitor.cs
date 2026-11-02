@@ -52,29 +52,33 @@ namespace Paway.WPF
         }
         private static void ButtonBrush(Button buttom)
         {
-            buttom.Loaded += delegate
+            //用静态方法订阅，模板重复应用时不会累积匿名委托（每次挂回可视树都会重新触发 Loaded）
+            buttom.Loaded -= Button_Loaded;
+            buttom.Loaded += Button_Loaded;
+        }
+        private static void Button_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!(sender is Button buttom)) return;
+            if (buttom.Parent is FrameworkElement element)
             {
-                if (buttom.Parent is FrameworkElement element)
+                if (element.TemplatedParent is CalendarItem calendarItem1)
                 {
-                    if (element.TemplatedParent is CalendarItem calendarItem1)
+                    if (calendarItem1.TemplatedParent is CalendarEXT calendar)
                     {
-                        if (calendarItem1.TemplatedParent is CalendarEXT calendar)
+                        buttom.SetValue(ItemBrushProperty, calendar.ItemBrush);
+                    }
+                    else if (calendarItem1.TemplatedParent is Calendar calendar1)
+                    {
+                        if (calendar1.Parent is FrameworkElement element1)
                         {
-                            buttom.SetValue(ItemBrushProperty, calendar.ItemBrush);
-                        }
-                        else if (calendarItem1.TemplatedParent is Calendar calendar1)
-                        {
-                            if (calendar1.Parent is FrameworkElement element1)
+                            if (element1.TemplatedParent is DatePickerEXT datePicker)
                             {
-                                if (element1.TemplatedParent is DatePickerEXT datePicker)
-                                {
-                                    buttom.SetValue(ItemBrushProperty, datePicker.ItemBrush);
-                                }
+                                buttom.SetValue(ItemBrushProperty, datePicker.ItemBrush);
                             }
                         }
                     }
                 }
-            };
+            }
         }
         /// <summary>
         /// 启用监听
