@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<UseWPF>true</UseWPF>
 		<UseWindowsForms>true</UseWindowsForms>
-		<TargetFrameworks>net462;net48;net6.0-windows</TargetFrameworks>
+		<TargetFrameworks>net462;net48;net8.0-windows</TargetFrameworks>
 		<!--用于指示编译器是否生成文档文件的值-->
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<!--不自动生成程序集信息(版本号)-->
@@ -15,6 +15,10 @@
 		<NoWarn>NU1900;IDE0130</NoWarn>
 		<!-- 屏蔽TFM兼容警告 -->
 		<SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
+		<!-- 清除全部语言目录 -->
+		<SatelliteResourceLanguages>none</SatelliteResourceLanguages>
+		<!-- NPOI 传递依赖的 SkiaSharp Linux/Android 原生库,Windows 端用不到 -->
+		<ShouldIncludeNativeSkiaSharp>false</ShouldIncludeNativeSkiaSharp>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -27,11 +31,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Paway.Utils" Version="2.8.2" />
 		<ProjectReference Include="..\Paway.WPF\Paway.WPF.csproj" />
-		<PackageReference Include="Paway.Utils" Version="2.8.0" />
 		<PackageReference Include="Paway.Runtime.Plot" Version="1.0.5" />
-		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
-		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.161" />
 	</ItemGroup>
 	<ItemGroup Condition="$(TargetFramework) == 'net462' or $(TargetFramework) == 'net48'">
 		<Reference Include="Microsoft.CSharp" />

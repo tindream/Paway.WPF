@@ -13,6 +13,10 @@
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<OutputPath>..\bin\$(Configuration)\Test</OutputPath>
 		<NoWarn>NU1900;IDE0130</NoWarn>
+		<!-- 清除全部语言目录 -->
+		<SatelliteResourceLanguages>none</SatelliteResourceLanguages>
+		<!-- NPOI 传递依赖的 SkiaSharp Linux/Android 原生库,Windows 端用不到 -->
+		<ShouldIncludeNativeSkiaSharp>false</ShouldIncludeNativeSkiaSharp>
 	</PropertyGroup>
 	<PropertyGroup>
 		<!--禁止自动生成绑定重定向-->
@@ -42,7 +46,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="HelixToolkit.Wpf" Version="3.1.2" />
-		<PackageReference Include="System.Data.SQLite" Version="2.0.3" />
+		<PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.14" />
 	</ItemGroup>
 
 </Project>
