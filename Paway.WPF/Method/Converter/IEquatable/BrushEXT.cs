@@ -32,6 +32,7 @@ namespace Paway.WPF
         /// <para>默认值：160</para>
         /// </summary>
         public Brush Mouse { get { return mouse; } set { mouse = value; OnPressedMouse(); OnPropertyChanged(); } }
+        private Brush mousePressed;
         /// <summary>
         /// 鼠标划过时的未选中颜色
         /// <para>默认值：180</para>
@@ -40,13 +41,19 @@ namespace Paway.WPF
         {
             get
             {
-                //Mouse 声明类型是 Brush：被赋为渐变画刷或 null 时强转得到 null，原实现必 NRE
-                if (Mouse is SolidColorBrush mouse)
-                {
-                    return mouse.Color.ToAlpha(mouse.Color.A + Alpha / 2).ToBrush();
-                }
-                return Pressed;
+                //每次读取都新建画刷：模板里以绑定方式取值，虚拟化列表滚动时会产生大量短命对象
+                if (mousePressed == null) mousePressed = CalcMousePressed();
+                return mousePressed;
             }
+        }
+        private Brush CalcMousePressed()
+        {
+            //Mouse 声明类型是 Brush：被赋为渐变画刷或 null 时强转得到 null，原实现必 NRE
+            if (Mouse is SolidColorBrush mouse)
+            {
+                return mouse.Color.ToAlpha(mouse.Color.A + Alpha / 2).ToBrush();
+            }
+            return Pressed;
         }
 
         private Brush pressed = PMethod.ThemeColor(PConfig.Alpha + PConfig.Interval).ToBrush();
@@ -57,6 +64,7 @@ namespace Paway.WPF
         public Brush Pressed { get { return pressed; } set { pressed = value; OnPressedMouse(); OnPropertyChanged(); } }
         private void OnPressedMouse()
         {
+            this.mousePressed = null;
             if (Mouse is SolidColorBrush mouse && Pressed is SolidColorBrush pressed)
             {
                 var a = (pressed.Color.A - mouse.Color.A) / 2;
@@ -75,7 +83,21 @@ namespace Paway.WPF
         /// <summary>
         /// 颜色Alpha值变量
         /// </summary>
-        public int Alpha { get; set; } = PConfig.Interval;
+        private int alpha = PConfig.Interval;
+        /// <summary>
+        /// 颜色Alpha值变量
+        /// </summary>
+        public int Alpha
+        {
+            get { return alpha; }
+            set
+            {
+                if (alpha == value) return;
+                alpha = value;
+                OnPressedMouse();//派生颜色依赖 Alpha，需一并失效
+                OnPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// </summary>

@@ -180,6 +180,10 @@ namespace Paway.WPF
         /// 暂停序号，用于重复暂停
         /// </summary>
         private int PauseIndex;
+        /// <summary>
+        /// 已请求停止，延时回调不再自动恢复
+        /// </summary>
+        private bool IStop;
 
         public ScrollViewerScrollInfo(Storyboard storyboard, double time, double beginTime, double interval, bool forever) : this(time, beginTime, forever)
         {
@@ -195,6 +199,7 @@ namespace Paway.WPF
         public void Pause(ScrollViewer scrollViewer)
         {
             if (this.Storyboard == null) return;
+            if (this.IStop) return;
             var autoTime = this.Time;
             if (autoTime == -1)
             {
@@ -213,10 +218,22 @@ namespace Paway.WPF
             scrollViewer.BeginInvoke(async () =>
             {
                 await Task.Delay(delay);
-                if (index != this.PauseIndex) return;
+                if (index != this.PauseIndex || this.IStop) return;
                 if (scrollViewer is ScrollViewerEXT viewerEXT && viewerEXT.IDrag) this.Pause(scrollViewer);
                 else this.Storyboard?.Resume();
             });
+        }
+        /// <summary>
+        /// 停止自动滚动
+        /// <para>不能用 Storyboard.Stop()：移除动画后偏移量会立刻回落到属性基值(顶部)。
+        /// 这里用 Pause 停住并置停止标记，使延时恢复回调失效</para>
+        /// </summary>
+        public void Stop()
+        {
+            if (this.Storyboard == null) return;
+            this.IStop = true;
+            this.PauseIndex++;
+            this.Storyboard.Pause();
         }
     }
 }

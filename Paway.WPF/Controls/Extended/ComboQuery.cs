@@ -179,6 +179,8 @@ namespace Paway.WPF
         }
         private void Popup_Opened(object sender, EventArgs e)
         {
+            //自定义模板可能不含 PART_DataGrid，此时 gridView 为 null
+            if (gridView == null) return;
             var result = false;
             if (this.SelectedValuePath.IsEmpty())
             {
@@ -202,6 +204,7 @@ namespace Paway.WPF
         private string last;
         private void ComboQuery_KeyUp(object sender, KeyEventArgs e)
         {
+            if (textBox == null) return;
             var text = textBox.Text;
             if (last == text) return;
             last = text;
@@ -221,13 +224,18 @@ namespace Paway.WPF
                         this.ItemsSource = args.List;
                     }
                 }
-                else if (this.List != null)
+                else if (this.List != null && gridView != null)
                 {
+                    //去掉 dynamic + PLINQ：每次按键都要经过 DLR 调用点与线程池调度，
+                    //下拉数据量下比顺序遍历慢一个量级，且连续输入会反复抖动线程池
                     var type = this.ItemsSource.GenericType();
-                    var p = type.Predicate<dynamic>(gridView.Columns, text);
-                    var queryList = Enumerable.ToList(Enumerable.Where(ParallelEnumerable.AsParallel((dynamic)this.List), p));
-                    var resultList = this.ItemsSource.GenericType().GenericList();
-                    foreach (var item in queryList) resultList.Add(item);
+                    var p = type.Predicate<object>(gridView.Columns, text);
+                    var resultList = type.GenericList();
+                    for (var i = 0; i < this.List.Count; i++)
+                    {
+                        var item = this.List[i];
+                        if (item != null && p(item)) resultList.Add(item);
+                    }
                     this.ItemsSource = resultList;
                 }
                 if (textBox.Text != text)
@@ -243,6 +251,11 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
+            if (gridView == null)
+            {
+                base.OnPreviewKeyDown(e);
+                return;
+            }
             switch (e.Key)
             {
                 case Key.Right:
@@ -296,6 +309,7 @@ namespace Paway.WPF
         }
         private bool Selected()
         {
+            if (gridView == null) return false;
             if (gridView.SelectedItem is IId item)
             {
                 return gridView.Select(item.Id, true);

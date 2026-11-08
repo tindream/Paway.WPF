@@ -33,6 +33,7 @@
 		</Compile>
 		<None Update="Log.xml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<Visible>false</Visible>
 		</None>
 	</ItemGroup>
 	<ItemGroup>

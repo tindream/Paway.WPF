@@ -275,13 +275,14 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 停止自动滚动
+        /// <para>原实现走 Pause，延时后会被自动恢复，等于没停</para>
         /// </summary>
         public void StopScroll()
         {
             if (this.Tag is ScrollViewerScrollInfo scrollInfo)
             {
                 iAutoScroll = false;
-                scrollInfo.Pause(this);
+                scrollInfo.Stop();
             }
         }
     }

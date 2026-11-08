@@ -146,11 +146,15 @@ namespace Paway.WPF
         {
             base.OnApplyTemplate();
             IsEditable = false;
-            if (this.ItemsSource != null) this.type = this.ItemsSource.GenericType();
+            //ItemsSource 被置空后 type 仍是旧值，会导致下面 foreach 遍历 null
+            this.type = this.ItemsSource?.GenericType();
             if (typeof(ITreeViewItem).IsAssignableFrom(type))
             {
                 this.List = new List<ITreeViewItem>();
                 foreach (ITreeViewItem item in this.ItemsSource) this.List.Add(item);
+                //模板重建(换主题/重设样式)时本方法会被再次调用，Childs 不清空会累积重复项，
+                //表现为搜索下拉里出现重复节点、且越用越多
+                this.Childs.Clear();
                 LoadChilds(this.List);
             }
             if (Template.FindName("PART_Popup", this) is Popup popup)
@@ -225,8 +229,10 @@ namespace Paway.WPF
         }
         private void Popup_Opened(object sender, EventArgs e)
         {
+            //自定义模板可能不含 PART_TreeView
+            if (treeView == null) return;
             isInit = treeView.Selected(this.SelectedValue.ToInt());
-            if (isInit) textBox.Focus();
+            if (isInit) textBox?.Focus();
         }
 
         #endregion
@@ -237,6 +243,7 @@ namespace Paway.WPF
         private string last;
         private void ComboTree_KeyUp(object sender, KeyEventArgs e)
         {
+            if (textBox == null || treeView == null) return;
             var text = textBox.Text;
             if (last == text) return;
             last = text;
@@ -275,24 +282,23 @@ namespace Paway.WPF
         }
         private List<ITreeViewItem> LoadQuery(List<ITreeViewItem> list)
         {
-            var result = false;
             var resultList = new List<ITreeViewItem>();
+            //父节点按 Id 建索引：原先在循环里 resultList.Find 查找父级，匹配项多时是 O(n²)
+            var index = new Dictionary<int, ITreeViewItem>();
             foreach (var item in list)
             {
-                if (item.Parent != null)
+                if (item.Parent == null) continue;
+                if (!index.TryGetValue(item.Parent.Id, out var parent))
                 {
-                    result = true;
-                    var parent = resultList.Find(c => c.Id == item.Parent.Id);
-                    if (parent == null)
-                    {
-                        parent = item.Parent.Clone();
-                        parent.Parent = item.Parent.Parent.Clone();
-                        resultList.Add(parent);
-                    }
-                    parent.Add(item);
+                    parent = item.Parent.Clone();
+                    //顶层节点的爷爷节点为 null，原先直接解引用会抛 NullReferenceException
+                    parent.Parent = item.Parent.Parent?.Clone();
+                    index[item.Parent.Id] = parent;
+                    resultList.Add(parent);
                 }
+                parent.Add(item);
             }
-            if (result) return LoadQuery(resultList);
+            if (resultList.Count > 0) return LoadQuery(resultList);
             return list;
         }
         /// <summary>

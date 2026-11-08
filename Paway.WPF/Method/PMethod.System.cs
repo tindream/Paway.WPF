@@ -851,6 +851,9 @@ namespace Paway.WPF
         internal static bool Find<T>(DependencyObject dependency, out T parent, string name = null) where T : FrameworkElement
         {
             parent = null;
+            //调用方常把可能为 null 的控件引用直接传进来(如尚未加载的模板部件)，
+            //VisualTreeHelper 对 null 会抛 ArgumentNullException，这里统一按“未找到”处理
+            if (dependency == null) return false;
             if (Child(dependency, out parent, name))
             {
                 return true;
@@ -882,6 +885,11 @@ namespace Paway.WPF
         /// </summary>
         internal static bool Parent<T>(DependencyObject dependency, out T parent, string name = null) where T : FrameworkElement
         {
+            if (dependency == null)
+            {
+                parent = null;
+                return false;
+            }
             if (dependency is T t1)
             {
                 if (name == null || t1.Name == name)
@@ -918,6 +926,7 @@ namespace Paway.WPF
         internal static bool Child<T>(DependencyObject dependency, out T child, string name = null, Func<T, bool> func = null) where T : FrameworkElement
         {
             child = null;
+            if (dependency == null) return false;
             var count = VisualTreeHelper.GetChildrenCount(dependency);
             for (int i = count - 1; i >= 0; i--)
             {

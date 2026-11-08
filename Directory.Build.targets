@@ -1,0 +1,24 @@
+<Project>
+
+  <!--
+    隐藏第三方 NuGet 包"链接"(该 <Link>)进项目的虚拟项。
+    典型情况:
+      Paway.Runtime.CefSharp        -> runtime\*\*.*  被 Link 成 locales\...
+      SQLitePCLRaw.lib.e_sqlite3    -> runtimes\win-*\native\e_sqlite3.dll
+    这些项都没有声明 Visible=false，Visual Studio 会把它们渲染成项目下的
+    locales / runtimes 之类的"假文件夹"。
+
+    本文件由 Microsoft.Common.targets 在 NuGet 包 targets 之后导入，
+    因此这里的 Update 能命中包内声明的项。这里只改可见性，
+    不删除项，所以"复制到输出目录"的行为完全不变。
+  -->
+  <ItemGroup>
+    <None Update="@(None)">
+      <Visible Condition="'%(Link)' != ''">false</Visible>
+    </None>
+    <Content Update="@(Content)">
+      <Visible Condition="'%(Link)' != ''">false</Visible>
+    </Content>
+  </ItemGroup>
+
+</Project>

@@ -62,6 +62,15 @@ namespace Paway.WPF
         /// </summary>
         public static readonly DependencyProperty ISaveProperty =
             DependencyProperty.Register(nameof(ISave), typeof(bool), typeof(ImageEXT));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty RadiusProperty =
+            DependencyProperty.Register(nameof(Radius), typeof(CornerRadius), typeof(ImageEXT),
+                new PropertyMetadata(new CornerRadius(0), OnRadiusChanged));
+        private static void OnRadiusChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as ImageEXT)?.UpdateClip();
+        }
 
         /// <summary>
         /// </summary>
@@ -184,6 +193,18 @@ namespace Paway.WPF
             get { return (bool)GetValue(ISaveProperty); }
             set { SetValue(ISaveProperty, value); }
         }
+        /// <summary>
+        /// 裁剪圆角
+        /// <para>默认值：0(自动跟随父级Border的内圆角)</para>
+        /// <para>WPF的Border不会裁剪子元素，图像会盖到圆角外，此属性用于按圆角裁掉溢出部分</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("裁剪圆角，0时自动跟随父级Border的内圆角")]
+        public CornerRadius Radius
+        {
+            get { return (CornerRadius)GetValue(RadiusProperty); }
+            set { SetValue(RadiusProperty, value); }
+        }
 
         /// <summary>
         /// 显示操作栏
@@ -282,6 +303,12 @@ namespace Paway.WPF
         public ImageEXT()
         {
             DefaultStyleKey = typeof(ImageEXT);
+            //模板未应用时拿不到父级，加载完成后再算一次圆角裁剪
+            this.Loaded += ImageEXT_Loaded;
+        }
+        private void ImageEXT_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.UpdateClip();
         }
         /// <summary>
         /// </summary>
@@ -367,6 +394,7 @@ namespace Paway.WPF
         {
             base.OnRenderSizeChanged(sizeInfo);
             this.Reset();
+            this.UpdateClip();
         }
         /// <summary>
         /// 滚轮滚动时缩放
@@ -486,6 +514,8 @@ namespace Paway.WPF
         }
         private void LoadImage()
         {
+            //Reset 可能早于模板应用(OnRenderSizeChanged)，此时 image 尚未取到
+            if (this.image == null) return;
             this.image.Width = imageSize.Width;
             this.image.Height = imageSize.Height;
             Canvas.SetLeft(image, imagePoint.X);
@@ -568,6 +598,95 @@ namespace Paway.WPF
             imagePoint.X = x;
             imagePoint.Y = y;
             this.LoadImage();
+        }
+
+        #endregion
+        #region 圆角裁剪
+        /// <summary>
+        /// 更新圆角裁剪
+        /// <para>WPF 的 Border 只绘制圆角边框、不会裁剪子元素，图像会溢出到圆角外；
+        /// 这里按圆角裁剪自身(Clip 同时参与命中测试，圆角外不再响应鼠标)</para>
+        /// <para>Radius 为 0(默认)时自动跟随父级 Border 的内圆角</para>
+        /// </summary>
+        private void UpdateClip()
+        {
+            if (this.ActualWidth <= 0 || this.ActualHeight <= 0)
+            {
+                this.Clip = null;
+                return;
+            }
+            var radius = this.Radius;
+            if (IsEmpty(radius)) radius = ParentRadius(this);
+            //没有圆角时保持模板上的矩形裁剪(ClipToBounds)
+            this.Clip = IsEmpty(radius) ? null : CreateRoundedGeometry(new Rect(0, 0, this.ActualWidth, this.ActualHeight), radius);
+        }
+        /// <summary>
+        /// 父级 Border 的内圆角
+        /// <para>只穿透纯布局面板，避免把外层窗体/皮肤容器的圆角误认为自己的</para>
+        /// </summary>
+        private static CornerRadius ParentRadius(DependencyObject element)
+        {
+            var current = element;
+            for (var i = 0; i < 4; i++)
+            {
+                current = VisualTreeHelper.GetParent(current);
+                if (current == null) return new CornerRadius(0);
+                if (current is Border border) return InnerRadius(border.CornerRadius, border.BorderThickness);
+                if (!(current is Panel)) return new CornerRadius(0);
+            }
+            return new CornerRadius(0);
+        }
+        /// <summary>
+        /// 边框内圆角 = 外圆角 - 对应方向的边框宽度
+        /// </summary>
+        private static CornerRadius InnerRadius(CornerRadius radius, Thickness thickness)
+        {
+            return new CornerRadius(
+                Math.Max(0, radius.TopLeft - thickness.Left),
+                Math.Max(0, radius.TopRight - thickness.Top),
+                Math.Max(0, radius.BottomRight - thickness.Right),
+                Math.Max(0, radius.BottomLeft - thickness.Bottom));
+        }
+        private static bool IsEmpty(CornerRadius radius)
+        {
+            return radius.TopLeft <= 0 && radius.TopRight <= 0 && radius.BottomRight <= 0 && radius.BottomLeft <= 0;
+        }
+        private static double Corner(double radius, double max)
+        {
+            if (radius <= 0) return 0;
+            return radius > max ? max : radius;
+        }
+        /// <summary>
+        /// 生成圆角矩形路径(四角半径可不同)
+        /// </summary>
+        private static Geometry CreateRoundedGeometry(Rect rect, CornerRadius radius)
+        {
+            //半径超过矩形一半时路径会自交，需按短边收拢
+            var max = Math.Min(rect.Width, rect.Height) / 2;
+            var topLeft = Corner(radius.TopLeft, max);
+            var topRight = Corner(radius.TopRight, max);
+            var bottomRight = Corner(radius.BottomRight, max);
+            var bottomLeft = Corner(radius.BottomLeft, max);
+            var geometry = new StreamGeometry();
+            using (var context = geometry.Open())
+            {
+                context.BeginFigure(new Point(rect.Left + topLeft, rect.Top), true, true);
+                context.LineTo(new Point(rect.Right - topRight, rect.Top), true, false);
+                AddCorner(context, new Point(rect.Right, rect.Top + topRight), topRight);
+                context.LineTo(new Point(rect.Right, rect.Bottom - bottomRight), true, false);
+                AddCorner(context, new Point(rect.Right - bottomRight, rect.Bottom), bottomRight);
+                context.LineTo(new Point(rect.Left + bottomLeft, rect.Bottom), true, false);
+                AddCorner(context, new Point(rect.Left, rect.Bottom - bottomLeft), bottomLeft);
+                context.LineTo(new Point(rect.Left, rect.Top + topLeft), true, false);
+                AddCorner(context, new Point(rect.Left + topLeft, rect.Top), topLeft);
+            }
+            geometry.Freeze();
+            return geometry;
+        }
+        private static void AddCorner(StreamGeometryContext context, Point point, double radius)
+        {
+            if (radius <= 0) return;
+            context.ArcTo(point, new Size(radius, radius), 0, false, SweepDirection.Clockwise, true, false);
         }
 
         #endregion

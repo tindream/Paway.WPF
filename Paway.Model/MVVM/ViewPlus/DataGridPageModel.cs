@@ -478,10 +478,21 @@ namespace Paway.Model
             var timeNow = DateTime.Now;
             if (typeof(IIndex).IsAssignableFrom(typeof(T)))
             {
+                //原先在循环里 List.Find 按 Id 查找，整体 O(n²)；拖拽排序常见于几千行，先建索引再顺序回填
+                var map = new Dictionary<int, T>(List?.Count ?? 0);
+                if (List != null)
+                {
+                    for (var i = 0; i < List.Count; i++)
+                    {
+                        var cache = List[i];
+                        if (cache != null) map[cache.Id] = cache;
+                    }
+                }
                 var updateList = new List<T>();
                 for (var i = 0; i < ObList.Count; i++)
                 {
-                    var item = List.Find(c => c != null && c.Id == ObList[i].Id);
+                    var current = ObList[i];
+                    if (current == null || !map.TryGetValue(current.Id, out var item)) continue;
                     if (item is IIndex index)
                     {
                         index.Index = i;

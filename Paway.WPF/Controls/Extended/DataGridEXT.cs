@@ -515,9 +515,11 @@ namespace Paway.WPF
         {
             for (int i = 0; i < this.Items.Count; i++)
             {
-                if (this.Items[i].GetValue(name).Equals(value))
+                var item = this.Items[i];
+                //单元格为空时 GetValue 返回 null，原先 X.Equals(value) 会在空值列上抛 NullReferenceException
+                if (item != null && object.Equals(item.GetValue(name), value))
                 {
-                    return Select(this.Items[i], iCell);
+                    return Select(item, iCell);
                 }
             }
             return false;

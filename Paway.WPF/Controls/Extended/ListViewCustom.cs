@@ -458,7 +458,8 @@ namespace Paway.WPF
         {
             //拖动窗口时每个像素都会触发一次 O(n) 全量遍历，且逐项写模型属性会连带每项多个绑定重算；
             //这里按 60ms 合并为一次，避免缩放时CPU飙高
-            BeginResetItemWidth();
+            //默认配置(等宽类型 None)下重置是空操作，不再每像素重启一次定时器
+            if (ItemWidthType != ItemWidthType.None) BeginResetItemWidth();
             base.OnRenderSizeChanged(sizeInfo);
         }
         private System.Windows.Threading.DispatcherTimer resetTimer;
@@ -487,7 +488,7 @@ namespace Paway.WPF
             //逐条添加时 OnItemsChanged 会反复触发，原来每次都同步跑一遍 O(n) 的全量重算，
             //批量填充 N 条就是 O(n²)（且逐项写宽度会连带每个绑定重算）。
             //这里与尺寸变化共用同一个合并器，一轮批量操作只算一次。
-            BeginResetItemWidth();
+            if (ItemWidthType != ItemWidthType.None) BeginResetItemWidth();
             base.OnItemsChanged(e);
         }
         /// <summary>

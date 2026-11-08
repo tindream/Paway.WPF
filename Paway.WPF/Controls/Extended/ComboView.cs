@@ -121,7 +121,7 @@ namespace Paway.WPF
         private void GridView_CurrentCellChanged(object sender, EventArgs e)
         {
             if (selecting) return;
-            var gridView = sender as DataGridEXT;
+            if (!(sender is DataGridEXT gridView)) return;
             if (gridView.CurrentCell is DataGridCellInfo info && info.Item != DependencyProperty.UnsetValue)
             {
                 this.SelectedValue = this.SelectedValuePath.IsEmpty() ? gridView.CurrentCell.Item : gridView.CurrentCell.Item.GetValue(this.SelectedValuePath);
@@ -130,6 +130,8 @@ namespace Paway.WPF
         }
         private void Popup_Opened(object sender, EventArgs e)
         {
+            //自定义模板可能不含 PART_DataGrid
+            if (gridView == null) return;
             try
             {
                 selecting = true;
