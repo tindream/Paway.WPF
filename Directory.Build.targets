@@ -21,4 +21,16 @@
     </Content>
   </ItemGroup>
 
+  <!--
+    net462/net48 下同时引用 .NET Framework 程序集与 netstandard2.0 包时，
+    ResolveAssemblyReference 会对 mscorlib 报 MSB3277 版本冲突。
+    实际结果是选中主版本 mscorlib 4.0.0.0（正确行为），属信息性诊断，
+    不影响编译产物与运行时表现。
+
+    抑制放在各 csproj 的 NoWarn 里（追加式 $(NoWarn);MSB3277）：
+    这里不能用 Directory.Build.props 直接赋值，各项目是 <NoWarn>xxx</NoWarn>
+    整体覆盖的写法会把 props 的值冲掉；也不能用 BeforeTargets target 补，
+    RAR 的警告不读那个时机设置的属性。
+  -->
+
 </Project>

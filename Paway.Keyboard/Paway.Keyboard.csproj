@@ -11,7 +11,7 @@
 		<PlatformTarget>AnyCPU</PlatformTarget>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<OutputPath>..\bin\$(Configuration)\Keyboard</OutputPath>
-		<NoWarn>NETSDK1049</NoWarn>
+		<NoWarn>$(NoWarn);NETSDK1049;MSB3277</NoWarn>
 		<ApplicationIcon>logo.ico</ApplicationIcon>
 	</PropertyGroup>
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">

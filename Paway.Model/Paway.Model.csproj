@@ -12,7 +12,7 @@
 		<RootNamespace>Paway.Model</RootNamespace>
 		<PlatformTarget>AnyCPU</PlatformTarget>
 		<OutputPath>..\bin\$(Configuration)</OutputPath>
-		<NoWarn>NU1900;IDE0130</NoWarn>
+		<NoWarn>$(NoWarn);NU1900;IDE0130;MSB3277</NoWarn>
 		<!-- 屏蔽TFM兼容警告 -->
 		<SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
 		<!-- 清除全部语言目录 -->

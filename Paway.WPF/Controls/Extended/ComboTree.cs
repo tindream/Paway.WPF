@@ -28,7 +28,8 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly new DependencyProperty SelectedItemProperty =
-            DependencyProperty.RegisterAttached(nameof(SelectedItem), typeof(object), typeof(ComboTree));
+            DependencyProperty.RegisterAttached(nameof(SelectedItem), typeof(object), typeof(ComboTree),
+                new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedItemChanged));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty IQueryProperty =
@@ -51,6 +52,16 @@ namespace Paway.WPF
         {
             get { return (object)GetValue(SelectedItemProperty); }
             set { SetValue(SelectedItemProperty, value); }
+        }
+        private static void OnSelectedItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is ComboTree tree && e.NewValue is ITreeViewItem item)
+            {
+                //外部只赋 SelectedItem 时同步 SelectedValue 与文本：Popup 打开时按 SelectedValue 定位节点，
+                //不同步的话单独绑定 SelectedItem 不生效
+                tree.SelectedValue = tree.SelectedValuePath.IsEmpty() ? item : item.GetValue(tree.SelectedValuePath);
+                tree.InitText2(item);
+            }
         }
         private static void OnSelectedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -199,10 +210,11 @@ namespace Paway.WPF
             var treeView = sender as TreeViewEXT;
             if (treeView.SelectedItem is ITreeViewItem item && !item.IsGroup)
             {
-                this.SelectedItem = item;
+                //SelectedItem 的 setter 会立刻同步 SelectedValue，必须先按旧值判断是否重复选中，
+                //否则判定恒为 true；重复选中时 SelectedItem 不变、DP 回调不触发，需手动恢复显示文本
                 var value = this.SelectedValuePath.IsEmpty() ? item : item.GetValue(this.SelectedValuePath);
-                if (this.SelectedValue?.Equals(value) == true) this.Text = null;
-                this.SelectedValue = value;
+                if (this.SelectedValue?.Equals(value) == true) this.InitText2(item);
+                this.SelectedItem = item;
                 this.IsDropDownOpen = false;
                 textBox.Focus();
             }
@@ -217,7 +229,6 @@ namespace Paway.WPF
                     if (isInit && !this.IQuery)
                     {
                         this.SelectedItem = item;
-                        this.SelectedValue = this.SelectedValuePath.IsEmpty() ? item : item.GetValue(this.SelectedValuePath);
                         this.BeginInvoke(() => { this.IsDropDownOpen = false; });
                     }
                 }

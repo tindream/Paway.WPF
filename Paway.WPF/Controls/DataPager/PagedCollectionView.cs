@@ -847,7 +847,8 @@ namespace System.Windows.Data
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException(InvalidPageSize);
+                    //原来把消息文本当成 paramName 传入，异常信息里参数名是整句英文，排查时误导
+                    throw new ArgumentOutOfRangeException(nameof(value), InvalidPageSize);
                 }
 
                 // if the Refresh is currently deferred, cache the desired PageSize

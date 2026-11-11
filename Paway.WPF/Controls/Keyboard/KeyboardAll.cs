@@ -287,7 +287,7 @@ namespace Paway.WPF
         }
         private void OnCloseEvent()
         {
-            if (CloseEvent != null) CloseEvent?.Invoke(this, new RoutedEventArgs());
+            if (CloseEvent != null) CloseEvent.Invoke(this, new RoutedEventArgs());
             else this.Visibility = Visibility.Collapsed;
         }
     }

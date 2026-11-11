@@ -1729,7 +1729,7 @@ namespace Paway.WPF
                             // The single toggle button needs to be checked.
                             button.IsChecked = true;
                         }
-                        else if (this.PagedSource != null && this.PagedSource.PageIndex == index - 1)
+                        else if (this.PagedSource.PageIndex == index - 1)
                         {
                             try
                             {

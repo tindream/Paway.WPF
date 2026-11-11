@@ -38,7 +38,8 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly new DependencyProperty SelectedItemProperty =
-            DependencyProperty.RegisterAttached(nameof(SelectedItem), typeof(object), typeof(ComboQuery));
+            DependencyProperty.RegisterAttached(nameof(SelectedItem), typeof(object), typeof(ComboQuery),
+                new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedItemChanged));
 
         /// <summary>
         /// 下拉列表是否显示列
@@ -101,16 +102,28 @@ namespace Paway.WPF
         {
             DefaultStyleKey = typeof(ComboQuery);
         }
+        private static void OnSelectedItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is ComboQuery view && e.NewValue != null)
+            {
+                //外部只赋 SelectedItem 时同步 SelectedValue 与显示文本，否则该属性写完没有任何效果
+                view.SelectedValue = view.SelectedValuePath.IsEmpty() ? e.NewValue : e.NewValue.GetValue(view.SelectedValuePath);
+                //SelectedValue 的回调会按路径重新 Find 并覆盖 SelectedItem，可能为 null，这里必须重读
+                if (view.SelectedItem != null) view.InitText();
+            }
+        }
         private static void OnSelectedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is ComboQuery view)
             {
                 if (!view.SelectedValuePath.IsEmpty())
                 {
+                    //赋值会触发 OnSelectedItemChanged 同步文本，这里不再重复调用 InitText
                     view.SelectedItem = view.ItemsSource?.Find(view.SelectedValuePath, view.SelectedValue);
                 }
-                if (view.SelectedItem != null)
+                else if (view.SelectedItem != null)
                 {
+                    //未设 SelectedValuePath 时 SelectedItem 不变、回调不会触发，文本只能在这里刷新
                     view.InitText();
                 }
             }
@@ -169,10 +182,11 @@ namespace Paway.WPF
         {
             if (gridView.SelectedItem != null)
             {
-                this.SelectedItem = gridView.SelectedItem;
+                //SelectedItem 的 setter 会立刻同步 SelectedValue，必须先按旧值判断是否重复选中，
+                //否则判定恒为 true；重复选中时 SelectedItem 不变、DP 回调不触发，需手动恢复显示文本
                 var value = this.SelectedValuePath.IsEmpty() ? arg2.Item : arg2.Item.GetValue(this.SelectedValuePath);
-                if (this.SelectedValue?.Equals(value) == true) this.Text = null;
-                this.SelectedValue = value;
+                if (this.SelectedValue?.Equals(value) == true) this.InitText();
+                this.SelectedItem = gridView.SelectedItem;
             }
             IsDropDownOpen = false;
             textBox.Focus();

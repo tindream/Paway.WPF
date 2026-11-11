@@ -82,6 +82,7 @@ namespace Paway.WPF
         public static string ToText(this Uri uri)
         {
             var info = Application.GetResourceStream(uri);
+            if (info?.Stream == null) return null;
             using (var reader = new StreamReader(info.Stream, Encoding.UTF8))
             {
                 var txt = reader.ReadToEnd();
@@ -94,11 +95,17 @@ namespace Paway.WPF
         public static byte[] ToBuffer(this Uri uri)
         {
             var info = Application.GetResourceStream(uri);
-            using (info.Stream)
+            if (info?.Stream == null) return null;
+            using (var stream = info.Stream)
             {
-                var buffer = new byte[info.Stream.Length];
-                info.Stream.Read(buffer, 0, buffer.Length);
-                return buffer;
+                //Stream.Read 不保证一次读满（跨程序集资源/NETModule 流会分块返回），
+                //原实现按 Length 分配后单次 Read，分块时尾部补零导致数据损坏；用 CopyTo 循环读取
+                var capacity = stream.CanSeek ? (int)stream.Length : 0;
+                using (var memory = new MemoryStream(capacity))
+                {
+                    stream.CopyTo(memory);
+                    return memory.ToArray();
+                }
             }
         }
 
