@@ -17,7 +17,8 @@ using System.Windows.Media;
 namespace Paway.WPF
 {
     /// <summary>
-    /// WPF转换器
+    /// WPF转换器 
+    /// <para>扩展帮助类</para>
     /// </summary>
     public static partial class WPFConverHelper
     {

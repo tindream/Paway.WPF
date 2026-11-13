@@ -7,3 +7,4 @@ using System.Reflection;
 [assembly: AssemblyCompany("Tinn")]
 [assembly: AssemblyTrademark("Paway")]
 [assembly: AssemblyCulture("")]
+[assembly: AssemblyCopyright("Copyright ©  2020-2026")]

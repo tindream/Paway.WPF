@@ -138,7 +138,8 @@ namespace Paway.WPF
         }
         private double Parse(string str)
         {
-            double.TryParse(str, out double result);
+            //XAML 数值固定按不变文化解析：逗号作小数点的区域设置下，默认解析会失败并把值静默当成 0
+            if (!double.TryParse(str, NumberStyles.Float, CultureInfo.InvariantCulture, out var result)) return 0;
             return result;
         }
         /// <summary>

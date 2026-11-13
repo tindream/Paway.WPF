@@ -235,7 +235,9 @@ namespace Paway.WPF
             callbacks?.Clear();
             //句柄归零，下次 StartHook 才会重新安装；重复 Unhook 无效句柄会失败
             if (processPointer == 0) return;
-            NativeMethods.UnhookWindowsHookEx(processPointer);
+            //卸载失败(BOOL 返回 0)时保留句柄：置 0 会让钩子留在系统里却再也拿不到句柄，
+            //而且下次 StartHook 会重复安装一个钩子
+            if (NativeMethods.UnhookWindowsHookEx(processPointer) == 0) return;
             processPointer = 0;
         }
 

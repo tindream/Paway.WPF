@@ -16,7 +16,8 @@ using System.Windows.Threading;
 namespace Paway.WPF
 {
     /// <summary>
-    /// 窗体帮助类
+    /// 窗体
+    /// <para>扩展帮助类</para>
     /// </summary>
     public static partial class WindowHelper
     {

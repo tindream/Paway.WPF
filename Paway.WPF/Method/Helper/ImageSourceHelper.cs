@@ -16,6 +16,7 @@ namespace Paway.WPF
 {
     /// <summary>
     /// WPF图像转换器
+    /// <para>扩展帮助类</para>
     /// </summary>
     public static partial class ImageSourceHelper
     {

@@ -155,10 +155,17 @@ namespace Paway.WPF
             {
                 var strs = str.Split(',');
                 if (strs.Length != 4) throw new WarningException("Parameter error");
-                return new Thickness(Convert.ToDouble(strs[0]), Convert.ToDouble(strs[1]), Convert.ToDouble(strs[2]), Convert.ToDouble(strs[3]));
+                return new Thickness(ParseDouble(strs[0]), ParseDouble(strs[1]), ParseDouble(strs[2]), ParseDouble(strs[3]));
             }
-            double.TryParse(str, out double result);
-            return new Thickness(result);
+            return new Thickness(ParseDouble(str));
+        }
+        /// <summary>
+        /// XAML 数值固定按不变文化解析：逗号作小数点的区域设置下，默认解析会失败并把值静默当成 0
+        /// </summary>
+        private static double ParseDouble(string str)
+        {
+            if (!double.TryParse(str, NumberStyles.Float, CultureInfo.InvariantCulture, out var result)) return 0;
+            return result;
         }
         /// <summary>
         /// </summary>

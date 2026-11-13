@@ -40,7 +40,7 @@ namespace Paway.Test
         {
             get
             {
-                if (_token == null) _token = EncryptHelper.MD5($"{Id}_{Config.Suffix}");
+                if (_token == null) _token = EncryptHelper.MD5($"{Id}_{Password}_{TConfig.Suffix}_{DateTime.Now.DayOfYear / 7}");
                 return _token;
             }
         }
