@@ -188,8 +188,8 @@ namespace Paway.WPF
                 }
             }
             base.OnMouseLeftButtonDown(e);
-            //原先无条件赋值会把基类/子元素已置位的 true 覆盖成 false，导致已消费的事件继续冒泡
-            if (this.ScrollableHeight > 0 || this.ScrollableWidth > 0) e.Handled = true;
+            //无滚动条时标记未处理，由上级继续处理
+            e.Handled = this.ScrollableHeight > 0 || this.ScrollableWidth > 0;
         }
         /// <summary>
         /// 移动位置

@@ -69,14 +69,7 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            if (e.ButtonState == MouseButtonState.Pressed && e.ClickCount == 1)
-            {
-                if (this.Parent(out Window window)) window.Cursor = Cursors.Hand;
-                this.startPoint = e.GetPosition(this);
-                //尝试将鼠标强制捕获到控件
-                CaptureMouse();
-                e.Handled = true;
-            }
+            ProgressDragHelper.Down(this, true, e, ref startPoint);
             base.OnPreviewMouseLeftButtonDown(e);
         }
         /// <summary>
@@ -84,12 +77,7 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnPreviewMouseMove(MouseEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed && startPoint != null)
-            {
-                var movePoint = e.GetPosition(this);
-                Calc(movePoint);
-                this.startPoint = movePoint;
-            }
+            ProgressDragHelper.Move(this, e, ref startPoint);
             base.OnPreviewMouseMove(e);
         }
         /// <summary>
@@ -97,36 +85,8 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnPreviewMouseLeftButtonUp(MouseButtonEventArgs e)
         {
-            if (startPoint != null)
-            {
-                Calc(e.GetPosition(this));
-                this.startPoint = null;
-                //当控件具有鼠标捕获的话，则释放该捕获。
-                ReleaseMouseCapture();
-                if (this.Parent(out Window window)) window.Cursor = null;
-            }
+            ProgressDragHelper.Up(this, e, ref startPoint);
             base.OnPreviewMouseLeftButtonUp(e);
-        }
-        /// <summary>
-        /// 计算移动距离
-        /// </summary>
-        private void Calc(Point endPoint)
-        {
-            var x = Math.Pow(endPoint.X - startPoint.Value.X, 2.0);
-            if (endPoint.X < startPoint.Value.X) x *= -1;
-            var y = Math.Pow(endPoint.Y - startPoint.Value.Y, 2.0);
-            if (endPoint.Y > startPoint.Value.Y) y *= -1;
-            var interval = Math.Sqrt(Math.Abs(x + y));
-            if (x + y < 0) interval *= -1;
-            var percent = interval * 0.35 / this.ActualWidth;
-            if ((Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.Shift) percent /= 3;
-            else if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control) percent *= 3;
-            var temp = this.Value + (this.Maximum - this.Minimum) * percent;
-            var count = (temp / this.SmallChange).ToInt();
-            temp = (count * this.SmallChange).Clear();
-            if (temp > this.Maximum) temp = this.Maximum;
-            else if (temp < this.Minimum) temp = this.Minimum;
-            if (this.Value != temp) this.Value = temp;
         }
 
         #endregion

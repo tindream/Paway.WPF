@@ -58,6 +58,10 @@ namespace Paway.WPF
         /// 中英文标记
         /// </summary>
         private bool iChina;
+        /// <summary>
+        /// 是否已订阅 InputMethod.StateChanged
+        /// </summary>
+        private bool imeSubscribed;
         private ListViewCustom listview1;
         /// <summary>
         /// 关闭路由事件
@@ -118,11 +122,16 @@ namespace Paway.WPF
         }
         private void KeyboardAll_Loaded(object sender, RoutedEventArgs e)
         {
-            InputMethod.Current.StateChanged -= Current_StateChanged;
+            //InputMethod.StateChanged 在没有已订阅句柄时退订会抛 ArgumentException，
+            //不能用「先退订再订阅」防重复，必须自己记录订阅状态
+            if (imeSubscribed) return;
+            imeSubscribed = true;
             InputMethod.Current.StateChanged += Current_StateChanged;
         }
         private void KeyboardAll_Unloaded(object sender, RoutedEventArgs e)
         {
+            if (!imeSubscribed) return;
+            imeSubscribed = false;
             InputMethod.Current.StateChanged -= Current_StateChanged;
         }
         private void Current_StateChanged(object sender, InputMethodStateChangedEventArgs e)

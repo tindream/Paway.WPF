@@ -1,5 +1,6 @@
-﻿
-namespace System.ComponentModel
+﻿using System.ComponentModel;
+using System;
+namespace Paway.WPF
 {
     /// <summary>
     /// Event argument used for page index change notifications. The requested page move

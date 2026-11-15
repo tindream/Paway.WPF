@@ -1,5 +1,5 @@
-﻿
-namespace System.ComponentModel
+﻿using System;
+namespace Paway.WPF
 {
     /// <summary>
     /// Interface used to drive paging of collection views.

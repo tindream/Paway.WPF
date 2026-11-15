@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -158,7 +159,11 @@ namespace Paway.WPF
 
         #region 大小拖动控制
         private bool _pressed;
-        private Point _prevPoint;
+        private Point _startPoint;
+        /// <summary>
+        /// 按下时的内容尺寸
+        /// </summary>
+        private double _startSize;
         private bool? LeftDirection;
         private bool? TopDirection;
         /// <summary>
@@ -173,48 +178,46 @@ namespace Paway.WPF
                 SetCursor(point);
                 return;
             }
-            double vertiChange, horiChange;
-            vertiChange = horiChange = 0;
             var pointScr = this.PointToScreen(point);
             if (LeftDirection.HasValue)
             {//左右拉伸
-                horiChange = pointScr.X - _prevPoint.X;
+                var horiChange = pointScr.X - _startPoint.X;
                 if (LeftDirection.Value) horiChange *= -1;
-                var value = this.ActualWidth + horiChange;
-                var contentValue = value - this.BorderThickness.Left - this.BorderThickness.Right;
+                var contentValue = _startSize + horiChange;
                 if (this.Content is FrameworkElement content)
                 {
                     var minWidth = content.MinWidth;
                     if (minWidth == 0) minWidth = 100;
                     var maxWidth = content.MaxWidth;
                     if (double.IsInfinity(maxWidth)) maxWidth = (this.Parent as FrameworkElement).ActualWidth - 100;
-                    if (contentValue > minWidth && value < maxWidth)
+                    if (contentValue > minWidth && contentValue < maxWidth)
                     {
                         content.Width = contentValue;
+                        _startSize = contentValue;
                     }
                     else return;
                 }
             }
             if (TopDirection.HasValue)
             {//上下拉伸
-                vertiChange = pointScr.Y - _prevPoint.Y;
+                var vertiChange = pointScr.Y - _startPoint.Y;
                 if (TopDirection.Value) vertiChange *= -1;
-                var value = this.ActualHeight + vertiChange;
-                var contentValue = value - this.BorderThickness.Top - this.BorderThickness.Bottom - 30;
+                var contentValue = _startSize + vertiChange;
                 if (this.Content is FrameworkElement content)
                 {
                     var minHeight = content.MinHeight;
                     if (minHeight == 0) minHeight = 100;
                     var maxHeight = content.MaxHeight;
                     if (double.IsInfinity(maxHeight)) maxHeight = (this.Parent as FrameworkElement).ActualHeight - 100;
-                    if (contentValue > minHeight && value < maxHeight)
+                    if (contentValue > minHeight && contentValue < maxHeight)
                     {
                         content.Height = contentValue;
+                        _startSize = contentValue;
                     }
                     else return;
                 }
             }
-            _prevPoint = pointScr;
+            _startPoint = pointScr;
             if (ResizeEvent != null)
             {
                 var args = new RoutedEventArgs(e.RoutedEvent, this);
@@ -262,15 +265,17 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            if (e.ButtonState == MouseButtonState.Pressed && MoveResizer && (LeftDirection.HasValue || TopDirection.HasValue))
+            if (e.ButtonState == MouseButtonState.Pressed && MoveResizer && (LeftDirection.HasValue || TopDirection.HasValue) && this.Content is FrameworkElement content)
             {
                 var point = e.GetPosition(this);
                 _pressed = true;
-                _prevPoint = this.PointToScreen(point);
+                _startPoint = this.PointToScreen(point);
+                if (LeftDirection.HasValue) _startSize = double.IsNaN(content.Width) ? content.ActualWidth : content.Width;
+                else _startSize = double.IsNaN(content.Height) ? content.ActualHeight : content.Height;
                 this.CaptureMouse();
                 e.Handled = true;
             }
-            base.OnPreviewMouseDown(e);
+            base.OnPreviewMouseLeftButtonDown(e);
         }
         /// <summary>
         /// </summary>
@@ -295,7 +300,7 @@ namespace Paway.WPF
                 _pressed = false;
                 this.ReleaseMouseCapture();
             }
-            base.OnMouseUp(e);
+            base.OnMouseLeftButtonUp(e);
         }
         #endregion
     }

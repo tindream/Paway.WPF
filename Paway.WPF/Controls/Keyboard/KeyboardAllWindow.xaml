@@ -1,4 +1,4 @@
-﻿<local:WindowEXT x:Class="Paway.WPF.KeyboardAllWindow"
+﻿<local:KeyboardWindowBase x:Class="Paway.WPF.KeyboardAllWindow"
                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -22,4 +22,4 @@
         </DockPanel>
         <local:KeyboardAll x:Name="keyboardAll"/>
     </DockPanel>
-</local:WindowEXT>
+</local:KeyboardWindowBase>

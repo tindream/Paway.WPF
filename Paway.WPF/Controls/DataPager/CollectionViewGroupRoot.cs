@@ -1,5 +1,14 @@
-﻿
-namespace System.Windows.Data
+﻿using Paway.Helper;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Collections;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Windows.Data;
+using System;
+namespace Paway.WPF
 {
     using System;
     using System.Collections;
