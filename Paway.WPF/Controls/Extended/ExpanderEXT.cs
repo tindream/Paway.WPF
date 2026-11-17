@@ -167,6 +167,7 @@ namespace Paway.WPF
         private bool? LeftDirection;
         private bool? TopDirection;
         /// <summary>
+        /// 鼠标抬起拉伸设置大小
         /// </summary>
         protected override void OnMouseMove(MouseEventArgs e)
         {
@@ -262,6 +263,7 @@ namespace Paway.WPF
             }
         }
         /// <summary>
+        /// 鼠标按下准备移动
         /// </summary>
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
@@ -292,6 +294,7 @@ namespace Paway.WPF
             base.OnMouseEnter(e);
         }
         /// <summary>
+        /// 鼠标抬起停止移动
         /// </summary>
         protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
         {

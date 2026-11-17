@@ -6,7 +6,7 @@
         <ResourceDictionary Source="pack://application:,,,/Paway.WPF;component\Resources\Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <local:ValueConverter x:Key="valueConverter" />
-    
+
     <Style x:Key="DecreaseRepeatButtonLeft" TargetType="{x:Type RepeatButton}">
         <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True"/>
         <Setter Property="UIElement.Focusable" Value="False"/>
@@ -43,11 +43,11 @@
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RepeatButton">
-                    <Border Width="{TemplateBinding FrameworkElement.Width}"
-                            Height="{TemplateBinding FrameworkElement.Height}"
-                            Background="Transparent">
+                    <Border Background="Transparent"
+                            Width="{TemplateBinding FrameworkElement.Width}"
+                            Height="{TemplateBinding FrameworkElement.Height}">
                         <Border CornerRadius="{Binding Path=RadiusBottom, RelativeSource={RelativeSource AncestorType={x:Type local:SliderEXT}}}"
-                            Width="{Binding Path=TrackHeight, RelativeSource={RelativeSource AncestorType={x:Type local:SliderEXT}}}" >
+                                Width="{Binding Path=TrackHeight, RelativeSource={RelativeSource AncestorType={x:Type local:SliderEXT}}}" >
                             <Border.Background>
                                 <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
                                     <GradientStop 
@@ -230,9 +230,9 @@
     </ControlTemplate>
     <ControlTemplate x:Key="SliderHorizontal" TargetType="{x:Type local:SliderEXT}">
         <Border Name="border"
+                Background="{TemplateBinding Panel.Background}"
                 BorderThickness="{TemplateBinding Border.BorderThickness}"
-                BorderBrush="{TemplateBinding Border.BorderBrush}"
-                Background="{TemplateBinding Panel.Background}">
+                BorderBrush="{TemplateBinding Border.BorderBrush}">
             <DockPanel>
                 <TextBlock x:Name="tbTitle" Visibility="{Binding Title, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullToCollapsed}}"
                            IsHitTestVisible="False" MinWidth="{TemplateBinding TitleMinWidth}"
@@ -262,11 +262,11 @@
                          Visibility="Collapsed"
                          Grid.Row="2" />
                     <Border Name="TrackBackground"
-                        Background="{TemplateBinding TrackBackground}"
-                        CornerRadius="{TemplateBinding Radius}"
-                        Height="{TemplateBinding TrackHeight}"
-                        VerticalAlignment="Center"
-                        Grid.Row="1">
+                            Background="{TemplateBinding TrackBackground}"
+                            CornerRadius="{TemplateBinding Radius}"
+                            Height="{TemplateBinding TrackHeight}"
+                            VerticalAlignment="Center"
+                            Grid.Row="1">
                         <Canvas Margin="-6,-1">
                             <Rectangle Name="PART_SelectionRange"
                                    Fill="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"
@@ -321,9 +321,9 @@
     </ControlTemplate>
     <ControlTemplate x:Key="SliderVertical" TargetType="{x:Type local:SliderEXT}">
         <Border Name="border"
+                Background="{TemplateBinding Panel.Background}"
                 BorderThickness="{TemplateBinding Border.BorderThickness}"
-                BorderBrush="{TemplateBinding Border.BorderBrush}"
-                Background="{TemplateBinding Panel.Background}">
+                BorderBrush="{TemplateBinding Border.BorderBrush}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />

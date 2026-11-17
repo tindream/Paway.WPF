@@ -18,7 +18,7 @@ namespace Paway.Keyboard
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            if (!PMethod.InitApp("无日志", "虚拟键盘"))
+            if (!PMethod.InitAppInstance("虚拟键盘"))
             {
                 Application.Current.Shutdown();
                 return;

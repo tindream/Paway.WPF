@@ -25,6 +25,7 @@ namespace Paway.WPF
         private WndProcDelegate wndProc;
         private IntPtr originalProc;
         private bool installed;
+        private IntPtr handle;
 
         internal NoActivateWindowHook(Window window)
         {
@@ -34,7 +35,7 @@ namespace Paway.WPF
 
         private void Window_SourceInitialized(object sender, EventArgs e)
         {
-            var handle = window.Handle();
+            this.handle = window.Handle();
             if (handle == IntPtr.Zero) return;
             //0x08000000 在扩展样式位上是 WS_EX_NOACTIVATE，配合 WS_EX_TOOLWINDOW 不占任务栏
             SetWindowLong32(handle, GWL_EXSTYLE, (int)(Helper.WindowStyle.WS_DISABLED | Helper.WindowStyle.WS_EX_TOOLWINDOW));
@@ -58,8 +59,7 @@ namespace Paway.WPF
             window.SourceInitialized -= Window_SourceInitialized;
             if (!installed) return;
             installed = false;
-            var handle = window.Handle();
-            if (handle != IntPtr.Zero) SetWindowProc(handle, originalProc);
+            if (this.handle != IntPtr.Zero) SetWindowProc(this.handle, originalProc);
             originalProc = IntPtr.Zero;
             wndProc = null;
         }

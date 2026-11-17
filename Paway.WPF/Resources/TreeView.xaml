@@ -199,6 +199,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="local:TreeViewEXT" >
                     <Border Name="border"
+                            Background="{TemplateBinding Background}"
                             BorderThickness="{TemplateBinding Border.BorderThickness}"
                             BorderBrush="{Binding Path=ItemBrush.Normal.Result, RelativeSource={RelativeSource TemplatedParent}}">
                         <local:ScrollViewerEXT x:Name="Part_ScrollViewer"

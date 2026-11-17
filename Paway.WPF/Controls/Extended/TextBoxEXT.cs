@@ -110,7 +110,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 水印内容
-        /// <para>默认值：未设置</para>
+        /// <para>默认值：请输入..</para>
         /// </summary>
         [Category("扩展")]
         [Description("水印内容")]

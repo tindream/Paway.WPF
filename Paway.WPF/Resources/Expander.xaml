@@ -165,6 +165,7 @@
                     <Border Name="border" 
                             BorderBrush="{Binding Path=ItemBrush.Normal.Result, RelativeSource={RelativeSource TemplatedParent}}"
                             CornerRadius="{TemplateBinding Radius}"
+                            Background="{TemplateBinding Background}"
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid>
                             <DockPanel x:Name="PART_Root">

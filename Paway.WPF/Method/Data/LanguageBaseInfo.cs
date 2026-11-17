@@ -190,7 +190,7 @@ namespace Paway.WPF
         [Description("保存")]
         public virtual string Save { get; set; } = "保存";
         /// <summary>
-        /// 已存在
+        /// 请选择
         /// </summary>
         [Description("请选择")]
         public virtual string PleaseSelect { get; set; } = "请选择";

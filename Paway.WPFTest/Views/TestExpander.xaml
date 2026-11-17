@@ -13,7 +13,7 @@
       Title="TestExpander">
     <Border BorderBrush="LightGray" Margin="20" Background="{StaticResource ThemeBackground}">
         <DockPanel>
-            <ExpanderEXT ExpandDirection="Left" DockPanel.Dock="Left" Header="Left">
+            <ExpanderEXT ExpandDirection="Left" DockPanel.Dock="Left" Header="Left" Padding="5">
                 <Label Width="200"/>
             </ExpanderEXT>
             <ExpanderEXT ExpandDirection="Right" DockPanel.Dock="Right" Header="Right">
