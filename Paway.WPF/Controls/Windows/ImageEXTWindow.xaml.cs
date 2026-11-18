@@ -42,7 +42,7 @@ namespace Paway.WPF
         public ImageEXTWindow(string name, string filePath) : this()
         {
             this.Title = name;
-            this.image.Source = filePath.ToSource();
+            this.image.SourcePath = filePath;//赋值时已加载图像
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Paway.Helper;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -23,6 +25,14 @@ namespace Paway.WPF
             DependencyProperty.Register(nameof(Title), typeof(string), typeof(ImageEXT));
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty SourcePathProperty =
+            DependencyProperty.Register(nameof(SourcePath), typeof(string), typeof(ImageEXT), new PropertyMetadata(null, OnSourcePathChanged));
+        private static void OnSourcePathChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as ImageEXT)?.OnSourcePathChanged((string)e.NewValue);
+        }
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty SourceProperty =
             DependencyProperty.Register(nameof(Source), typeof(ImageSource), typeof(ImageEXT), new PropertyMetadata(null, OnSourceChangedCallback));
         private static void OnSourceChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -40,12 +50,16 @@ namespace Paway.WPF
 
         /// <summary>
         /// </summary>
+        public static readonly DependencyProperty IMenuProperty =
+            DependencyProperty.Register(nameof(IMenu), typeof(bool), typeof(ImageEXT));
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty ICloseProperty =
             DependencyProperty.Register(nameof(IClose), typeof(bool), typeof(ImageEXT));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty IZoomProperty =
-            DependencyProperty.Register(nameof(IZoom), typeof(bool), typeof(ImageEXT));
+            DependencyProperty.Register(nameof(IZoom), typeof(bool), typeof(ImageEXT), new PropertyMetadata(true));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty IPointProperty =
@@ -57,11 +71,23 @@ namespace Paway.WPF
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty IDoubleViewProperty =
-            DependencyProperty.Register(nameof(IDoubleView), typeof(bool), typeof(ImageEXT), new PropertyMetadata(true));
+            DependencyProperty.Register(nameof(IDoubleView), typeof(bool), typeof(ImageEXT));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty ISaveProperty =
             DependencyProperty.Register(nameof(ISave), typeof(bool), typeof(ImageEXT));
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty IFolderProperty =
+            DependencyProperty.Register(nameof(IFolder), typeof(bool), typeof(ImageEXT), new PropertyMetadata(true, OnIFolderChanged));
+        private static void OnIFolderChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as ImageEXT)?.UpdateIFolderShow();
+        }
+        /// <summary>
+        /// </summary>
+        internal static readonly DependencyProperty IFolderShowProperty =
+            DependencyProperty.Register(nameof(IFolderShow), typeof(bool), typeof(ImageEXT));
         /// <summary>
         /// </summary>
         public static readonly DependencyProperty RadiusProperty =
@@ -93,6 +119,18 @@ namespace Paway.WPF
         {
             get { return (string)GetValue(TitleProperty); }
             set { SetValue(TitleProperty, value); }
+        }
+        /// <summary>
+        /// 获取或设置图像文件路径
+        /// <para>赋值时自动加载图像(等于同时设置Source)，并用于右键菜单"打开文件所在的位置"</para>
+        /// <para>默认值：null</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("获取或设置图像文件路径，赋值时自动加载图像")]
+        public string SourcePath
+        {
+            get { return (string)GetValue(SourcePathProperty); }
+            set { SetValue(SourcePathProperty, value); }
         }
         /// <summary>
         /// 获取或设置图像
@@ -129,7 +167,7 @@ namespace Paway.WPF
 
         /// <summary>
         /// 支持缩放
-        /// <para>默认值：false</para>
+        /// <para>默认值：true</para>
         /// </summary>
         [Category("扩展")]
         [Description("支持缩放")]
@@ -137,6 +175,17 @@ namespace Paway.WPF
         {
             get { return (bool)GetValue(IZoomProperty); }
             set { SetValue(IZoomProperty, value); }
+        }
+        /// <summary>
+        /// 显示右键菜单
+        /// <para>默认值：false</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("显示右键菜单")]
+        public bool IMenu
+        {
+            get { return (bool)GetValue(IMenuProperty); }
+            set { SetValue(IMenuProperty, value); }
         }
         /// <summary>
         /// 显示关闭按钮
@@ -173,7 +222,7 @@ namespace Paway.WPF
         }
         /// <summary>
         /// 双击显示视图
-        /// <para>默认值：true</para>
+        /// <para>默认值：false</para>
         /// </summary>
         [Category("扩展")]
         [Description("双击显示视图")]
@@ -192,6 +241,29 @@ namespace Paway.WPF
         {
             get { return (bool)GetValue(ISaveProperty); }
             set { SetValue(ISaveProperty, value); }
+        }
+        /// <summary>
+        /// 显示文件夹按钮与右键菜单
+        /// <para>默认值：true</para>
+        /// <para>需要同时设置SourcePath，没有来源文件时不显示</para>
+        /// </summary>
+        [Category("扩展")]
+        [Description("显示文件夹按钮与右键菜单(需同时设置SourcePath)")]
+        public bool IFolder
+        {
+            get { return (bool)GetValue(IFolderProperty); }
+            set { SetValue(IFolderProperty, value); }
+        }
+        /// <summary>
+        /// 文件夹按钮与右键菜单的实际显示(IFolder 且 SourcePath 不为空)
+        /// </summary>
+        [Browsable(false)]
+        [Category("扩展")]
+        [Description("文件夹按钮与右键菜单的实际显示")]
+        public bool IFolderShow
+        {
+            get { return (bool)GetValue(IFolderShowProperty); }
+            set { SetValue(IFolderShowProperty, value); }
         }
         /// <summary>
         /// 裁剪圆角
@@ -330,6 +402,31 @@ namespace Paway.WPF
             if (this.image != null) this.Init();
         }
         /// <summary>
+        /// 设置文件路径时自动加载图像
+        /// <para>空路径只表示没有来源文件，不清空已有图像</para>
+        /// <para>文件不存在或不是有效图像时保持原图：这里是XAML赋值也会走到的回调，不能把异常抛出去</para>
+        /// </summary>
+        private void OnSourcePathChanged(string path)
+        {
+            this.UpdateIFolderShow();
+            if (path.IsEmpty()) return;
+            try
+            {
+                this.Source = path.ToSource();
+            }
+            catch
+            {
+                //保持原图
+            }
+        }
+        /// <summary>
+        /// 更新文件夹按钮与右键菜单的显示条件：IFolder 且 SourcePath 不为空
+        /// </summary>
+        private void UpdateIFolderShow()
+        {
+            this.IFolderShow = this.IFolder && !this.SourcePath.IsEmpty();
+        }
+        /// <summary>
         /// 获取模板控件
         /// </summary>
         public override void OnApplyTemplate()
@@ -339,6 +436,15 @@ namespace Paway.WPF
         }
 
         #region 响应鼠标事件
+        /// <summary>
+        /// 右键菜单打开前判断是否允许显示
+        /// <para>ContextMenu 挂在模板内的 Canvas 上，事件从 Canvas 冒泡到控件，在这里统一拦掉</para>
+        /// </summary>
+        protected override void OnContextMenuOpening(ContextMenuEventArgs e)
+        {
+            base.OnContextMenuOpening(e);
+            if (!this.IMenu) e.Handled = true;
+        }
         /// <summary>
         /// 双击响应事件与重置 或 显示视图
         /// </summary>
@@ -352,13 +458,13 @@ namespace Paway.WPF
                     if (this.Parent(out Window window))
                     {
                         var imageEXT = new ImageEXT();
-                        imageEXT.Title = this.Title;
+                        this.Clone(imageEXT);
+                        imageEXT.SourcePath = this.SourcePath;
                         imageEXT.Source = this.Source;
-                        imageEXT.IClose = true;
-                        imageEXT.ISave = true;
-                        imageEXT.IZoom = true;
-                        imageEXT.IPoint = false;
+                        imageEXT.IFolder = this.IFolder;
+                        imageEXT.Radius = this.Radius;
                         imageEXT.IDoubleView = false;
+                        imageEXT.IClose = true;
                         PMethod.PageFullAdorner(window, imageEXT);
                     }
                     return;
@@ -757,6 +863,10 @@ namespace Paway.WPF
             {
                 case "关闭": CloseEvent?.Invoke(this, new RoutedEventArgs()); break;
                 case "重置": this.Reset(); break;
+                case "打开文件位置":
+                    if (this.SourcePath.IsEmpty() || !File.Exists(this.SourcePath)) break;
+                    Process.Start("explorer.exe", $"/select,\"{this.SourcePath}\"");
+                    break;
                 case "保存":
                     if (this.bitmapSource != null)
                     {

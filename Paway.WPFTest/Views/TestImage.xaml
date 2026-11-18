@@ -15,7 +15,7 @@
         <DockPanel>
             <ButtonEXT DockPanel.Dock="Top" Content="选择" Click="SelectImage"/>
             <Border CornerRadius="0,0,10,10" BorderThickness="1" BorderBrush="LightGray" ClipToBounds="True">
-                <ImageEXT Name="image" IDoubleView="False" Title="Hello World" IZoom="True" Source="/Paway.Test;component/Images/progress.png" MinHeight="100"/>
+                <ImageEXT Name="image" Title="Hello World" Source="/Paway.Test;component/Images/progress.png" MinHeight="100"/>
             </Border>
         </DockPanel>
     </Border>

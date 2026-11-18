@@ -144,11 +144,7 @@ namespace Paway.WPF
             {
                 if (string.IsNullOrEmpty(url)) return;
                 url = url.Replace("&", "^&");
-                Process.Start(new ProcessStartInfo("cmd", $"/c start {url}")
-                {
-                    UseShellExecute = false,
-                    CreateNoWindow = true
-                });
+                Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { UseShellExecute = false, CreateNoWindow = true });
             }, line, iAppend);
         }
         /// <summary>
