@@ -13,6 +13,7 @@ namespace Paway.WPF
     /// </summary>
     public class ExpanderEXT : Expander
     {
+        private double lastSize = double.NaN;
         #region 依赖属性
         /// <summary>
         /// </summary>
@@ -96,18 +97,25 @@ namespace Paway.WPF
             this.PART_Root = this.GetTemplateChild("PART_Root") as FrameworkElement;
             if (this.PART_Root != null)
             {
-                var suffix = "Y";
-                switch (ExpandDirection)
+                if (this.IsExpanded)
                 {
-                    case ExpandDirection.Down:
-                    case ExpandDirection.Up:
-                        break;
-                    case ExpandDirection.Left:
-                    case ExpandDirection.Right:
-                        suffix = ExpandDirection.ToString();
-                        break;
+                    var suffix = "Y";
+                    switch (ExpandDirection)
+                    {
+                        case ExpandDirection.Down:
+                        case ExpandDirection.Up:
+                            break;
+                        case ExpandDirection.Left:
+                        case ExpandDirection.Right:
+                            suffix = ExpandDirection.ToString();
+                            break;
+                    }
+                    VisualStateManager.GoToElementState(this.PART_Root, $"Storyboard_Expanded_{suffix}", true);
                 }
-                VisualStateManager.GoToElementState(this.PART_Root, this.IsExpanded ? $"Storyboard_Expanded_{suffix}" : $"Storyboard_Collapsed_{suffix}", true);
+                else
+                {
+                    this.OnCollapsed();
+                }
             }
         }
         /// <summary>
@@ -123,10 +131,14 @@ namespace Paway.WPF
                 {
                     case ExpandDirection.Down:
                     case ExpandDirection.Up:
+                        this.lastSize = this.Height;
+                        this.Height = double.NaN;
                         break;
                     case ExpandDirection.Left:
                     case ExpandDirection.Right:
                         suffix = ExpandDirection.ToString();
+                        this.lastSize = this.Width;
+                        this.Width = double.NaN;
                         break;
                 }
                 VisualStateManager.GoToElementState(this.PART_Root, $"Storyboard_Collapsed_{suffix}", true);
@@ -145,10 +157,12 @@ namespace Paway.WPF
                 {
                     case ExpandDirection.Down:
                     case ExpandDirection.Up:
+                        this.Height = this.lastSize;
                         break;
                     case ExpandDirection.Left:
                     case ExpandDirection.Right:
                         suffix = ExpandDirection.ToString();
+                        this.Width = this.lastSize;
                         break;
                 }
                 VisualStateManager.GoToElementState(this.PART_Root, $"Storyboard_Expanded_{suffix}", true);
@@ -185,15 +199,13 @@ namespace Paway.WPF
                 var horiChange = pointScr.X - _startPoint.X;
                 if (LeftDirection.Value) horiChange *= -1;
                 var contentValue = _startSize + horiChange;
-                if (this.Content is FrameworkElement content)
                 {
-                    var minWidth = content.MinWidth;
+                    var minWidth = this.MinWidth;
                     if (minWidth == 0) minWidth = 100;
-                    var maxWidth = content.MaxWidth;
-                    if (double.IsInfinity(maxWidth)) maxWidth = (this.Parent as FrameworkElement).ActualWidth - 100;
-                    if (contentValue > minWidth && contentValue < maxWidth)
+                    var maxWidth = this.MaxWidth;
+                    if (contentValue > minWidth && (double.IsInfinity(maxWidth) || contentValue < maxWidth))
                     {
-                        content.Width = contentValue;
+                        this.Width = contentValue;
                         _startSize = contentValue;
                     }
                     else return;
@@ -204,15 +216,13 @@ namespace Paway.WPF
                 var vertiChange = pointScr.Y - _startPoint.Y;
                 if (TopDirection.Value) vertiChange *= -1;
                 var contentValue = _startSize + vertiChange;
-                if (this.Content is FrameworkElement content)
                 {
-                    var minHeight = content.MinHeight;
+                    var minHeight = this.MinHeight;
                     if (minHeight == 0) minHeight = 100;
-                    var maxHeight = content.MaxHeight;
-                    if (double.IsInfinity(maxHeight)) maxHeight = (this.Parent as FrameworkElement).ActualHeight - 100;
-                    if (contentValue > minHeight && contentValue < maxHeight)
+                    var maxHeight = this.MaxHeight;
+                    if (contentValue > minHeight && (double.IsInfinity(maxHeight) || contentValue < maxHeight))
                     {
-                        content.Height = contentValue;
+                        this.Height = contentValue;
                         _startSize = contentValue;
                     }
                     else return;
@@ -267,13 +277,13 @@ namespace Paway.WPF
         /// </summary>
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            if (e.ButtonState == MouseButtonState.Pressed && MoveResizer && (LeftDirection.HasValue || TopDirection.HasValue) && this.Content is FrameworkElement content)
+            if (e.ButtonState == MouseButtonState.Pressed && MoveResizer && (LeftDirection.HasValue || TopDirection.HasValue))
             {
                 var point = e.GetPosition(this);
                 _pressed = true;
                 _startPoint = this.PointToScreen(point);
-                if (LeftDirection.HasValue) _startSize = double.IsNaN(content.Width) ? content.ActualWidth : content.Width;
-                else _startSize = double.IsNaN(content.Height) ? content.ActualHeight : content.Height;
+                if (LeftDirection.HasValue) _startSize = this.ActualWidth;
+                else _startSize = this.ActualHeight;
                 this.CaptureMouse();
                 e.Handled = true;
             }

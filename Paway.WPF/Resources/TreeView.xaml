@@ -9,7 +9,7 @@
     <Style x:Key="DefaultTreeViewItem" TargetType="{x:Type TreeViewItem}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Margin" Value="0" />
-        <Setter Property="Padding" Value="{Binding Padding, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
+        <Setter Property="Padding" Value="{Binding Path=(local:AncestorBridge.Host).Padding, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TreeViewItem}">
@@ -79,7 +79,7 @@
                                     </ToggleButton>
                                     <ContentPresenter x:Name="PART_Header" Grid.Column="1" 
                                                       ContentSource="Header"
-                                                      TextElement.Foreground="{Binding Path=ItemForeground.Normal.Result,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}" 
+                                                      TextElement.Foreground="{Binding Path=(local:AncestorBridge.Host).ItemForeground.Normal.Result, RelativeSource={RelativeSource Self}}" 
                                                       HorizontalAlignment="Stretch"/>
                                 </Grid>
                             </Grid>
@@ -98,9 +98,9 @@
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="itemBackground" Property="Background" 
-                                    Value="{Binding Path=ItemBackground.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
+                                    Value="{Binding Path=(local:AncestorBridge.Host).ItemBackground.Pressed, RelativeSource={RelativeSource Self}}"/>
                             <Setter TargetName="PART_Header" Property="TextBlock.Foreground" 
-                                                Value="{Binding Path=ItemForeground.Pressed,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
+                                                Value="{Binding Path=(local:AncestorBridge.Host).ItemForeground.Pressed, RelativeSource={RelativeSource Self}}"/>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -108,9 +108,9 @@
                                 <Condition Property="IsMouseOver" SourceName="itemBackground" Value="true"/>
                             </MultiTrigger.Conditions>
                             <Setter TargetName="itemBackground" Property="Background" 
-                                    Value="{Binding Path=ItemBackground.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
+                                    Value="{Binding Path=(local:AncestorBridge.Host).ItemBackground.Mouse, RelativeSource={RelativeSource Self}}"/>
                             <Setter TargetName="PART_Header" Property="TextBlock.Foreground" 
-                                                Value="{Binding Path=ItemForeground.Mouse,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
+                                                Value="{Binding Path=(local:AncestorBridge.Host).ItemForeground.Mouse, RelativeSource={RelativeSource Self}}"/>
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -118,7 +118,7 @@
                                 <Condition Property="IsSelected" Value="true"/>
                             </MultiTrigger.Conditions>
                             <Setter TargetName="itemBackground" Property="Background" 
-                                    Value="{Binding Path=ItemBackground.PressedMouse,RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
+                                    Value="{Binding Path=(local:AncestorBridge.Host).ItemBackground.PressedMouse, RelativeSource={RelativeSource Self}}"/>
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="0.6"/>
@@ -136,13 +136,13 @@
                     <Border Background="#62ACF9" Width="40" Height="40" CornerRadius="4" HorizontalAlignment="Left" Margin="0">
                         <TextBlock Text="{Binding ShortName}" FontSize="23" Foreground="White" HorizontalAlignment="Center"/>
                     </Border>
-                    <DockPanel Margin="{Binding Padding, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}">
+                    <DockPanel Margin="{Binding Path=(local:AncestorBridge.Host).Padding, RelativeSource={RelativeSource Self}}">
                         <TextBlock Text="{Binding Desc}" 
-                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}, Converter={StaticResource valueMultiConverter}}" 
+                                   FontSize="{Binding Path=(local:AncestorBridge.Host).FontSize, RelativeSource={RelativeSource Self}, Converter={StaticResource valueMultiConverter}}" 
                                    Foreground="Gray" DockPanel.Dock="Right" Margin="0,0,3,0"/>
                         <DockPanel>
                             <TextBlock Text="{Binding Subtitle}" 
-                                       FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}, Converter={StaticResource valueMultiConverter}}" 
+                                       FontSize="{Binding Path=(local:AncestorBridge.Host).FontSize, RelativeSource={RelativeSource Self}, Converter={StaticResource valueMultiConverter}}" 
                                        Foreground="Gray" DockPanel.Dock="Bottom"/>
                             <TextBlock Text="{Binding Text}"/>
                         </DockPanel>
@@ -159,7 +159,7 @@
     </HierarchicalDataTemplate>
     <HierarchicalDataTemplate x:Key="DefaultTreeNode" ItemsSource="{Binding Children}">
         <Grid Background="Transparent">
-            <Grid Margin="{Binding Padding, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"
+            <Grid Margin="{Binding Path=(local:AncestorBridge.Host).Padding, RelativeSource={RelativeSource Self}}"
                   Visibility="{Binding Visibility,ElementName=groupinginfo,Converter={StaticResource visibleReverse}}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -167,7 +167,7 @@
                 </Grid.ColumnDefinitions>
                 <local:CheckBoxEXT x:Name="cbx" IsChecked="{Binding Path=IsChecked}" 
                           Margin="1,0"
-                          Visibility="{Binding Path=ICheckBox, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
+                          Visibility="{Binding Path=(local:AncestorBridge.Host).ICheckBox, RelativeSource={RelativeSource Self}}"/>
                 <TextBlock Grid.Column="1" Text="{Binding Text}"/>
             </Grid>
             <Grid x:Name="groupinginfo" 
@@ -181,13 +181,16 @@
                 </Grid.ColumnDefinitions>
                 <local:CheckBoxEXT IsChecked="{Binding Path=IsChecked}" 
                           Margin="1,0"
-                          Visibility="{Binding Path=ICheckBox, RelativeSource={RelativeSource AncestorType={x:Type local:TreeViewEXT}}}"/>
+                          Visibility="{Binding Path=(local:AncestorBridge.Host).ICheckBox, RelativeSource={RelativeSource Self}}"/>
                 <TextBlock Grid.Column="1" Text="{Binding Texts}" HorizontalAlignment="Left"/>
             </Grid>
         </Grid>
     </HierarchicalDataTemplate>
 
     <Style TargetType="{x:Type local:TreeViewEXT}" BasedOn="{StaticResource Config}">
+        <!-- 把自己作为"宿主"沿树传给子元素（容器、单元格、标签页），
+             免得样式里的 FindAncestor 在容器尚未入树时找不到源、刷一堆 Data Error -->
+        <Setter Property="local:AncestorBridge.Host" Value="{Binding RelativeSource={RelativeSource Self}}"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Visible" />

@@ -30,16 +30,16 @@
                 <Setter Property="Background">
                     <Setter.Value>
                         <MultiBinding Converter="{StaticResource boolSelector}">
-                            <Binding Path="IFullRow" RelativeSource="{RelativeSource AncestorType={x:Type local:DataGridEXT}}"/>
+                            <Binding Path="(local:AncestorBridge.Host).IFullRow" RelativeSource="{RelativeSource Self}"/>
                             <Binding Source="{x:Static Brushes.Transparent}"/>
-                            <Binding Path="ItemBrush.Normal.Result" RelativeSource="{RelativeSource AncestorType={x:Type local:DataGridEXT}}" />
+                            <Binding Path="(local:AncestorBridge.Host).ItemBrush.Normal.Result" RelativeSource="{RelativeSource Self}" />
                         </MultiBinding>
                     </Setter.Value>
                 </Setter>
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="{Binding ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}}" />
-                <Setter Property="BorderBrush" Value="{Binding ItemBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}}" />
+                <Setter Property="Background" Value="{Binding Path=(local:AncestorBridge.Host).ItemBrush.Pressed, RelativeSource={RelativeSource Self}}" />
+                <Setter Property="BorderBrush" Value="{Binding Path=(local:AncestorBridge.Host).ItemBrush.Pressed, RelativeSource={RelativeSource Self}}" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -50,8 +50,8 @@
                 <Setter Property="Background">
                     <Setter.Value>
                         <MultiBinding Converter="{StaticResource boolSelector}">
-                            <Binding Path="IFullRow" RelativeSource="{RelativeSource AncestorType={x:Type local:DataGridEXT}}"/>
-                            <Binding Path="ItemBrush.Normal.Result" RelativeSource="{RelativeSource AncestorType={x:Type local:DataGridEXT}}" />
+                            <Binding Path="(local:AncestorBridge.Host).IFullRow" RelativeSource="{RelativeSource Self}"/>
+                            <Binding Path="(local:AncestorBridge.Host).ItemBrush.Normal.Result" RelativeSource="{RelativeSource Self}" />
                             <Binding Source="{x:Static Brushes.Transparent}"/>
                         </MultiBinding>
                     </Setter.Value>
@@ -62,8 +62,8 @@
                     <Condition Property="IsSelected" Value="True"/>
                     <Condition Property="IsMouseOver" Value="True"/>
                 </MultiTrigger.Conditions>
-                <Setter Property="Background" Value="{Binding ItemBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}}" />
-                <Setter Property="BorderBrush" Value="{Binding ItemBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}}" />
+                <Setter Property="Background" Value="{Binding Path=(local:AncestorBridge.Host).ItemBrush.Mouse, RelativeSource={RelativeSource Self}}" />
+                <Setter Property="BorderBrush" Value="{Binding Path=(local:AncestorBridge.Host).ItemBrush.Mouse, RelativeSource={RelativeSource Self}}" />
             </MultiTrigger>
         </Style.Triggers>
     </Style>
@@ -130,11 +130,11 @@
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Foreground" Value="White"/>
-                <Setter Property="Background" Value="{Binding Path=HeaderBrush.Mouse, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}}"/>
+                <Setter Property="Background" Value="{Binding Path=(local:AncestorBridge.Host).HeaderBrush.Mouse, RelativeSource={RelativeSource Self}}"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Foreground" Value="White"/>
-                <Setter Property="Background" Value="{Binding Path=HeaderBrush.Pressed, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}}"/>
+                <Setter Property="Background" Value="{Binding Path=(local:AncestorBridge.Host).HeaderBrush.Pressed, RelativeSource={RelativeSource Self}}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -181,6 +181,9 @@
     </Style>
 
     <Style TargetType="{x:Type local:DataGridEXT}" BasedOn="{StaticResource Config}">
+        <!-- 把自己作为"宿主"沿树传给子元素（容器、单元格、标签页），
+             免得样式里的 FindAncestor 在容器尚未入树时找不到源、刷一堆 Data Error -->
+        <Setter Property="local:AncestorBridge.Host" Value="{Binding RelativeSource={RelativeSource Self}}"/>
         <Setter Property="ICustomColumnHeader" Value="True"/>
         <!--使其平滑滚动，默认是整行滚动-->
         <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
@@ -227,7 +230,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="DataGrid">
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
-                            CornerRadius="{Binding Radius, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}}"
+                            CornerRadius="{Binding Path=(local:AncestorBridge.Host).Radius, RelativeSource={RelativeSource Self}}"
                             Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
                         <local:ScrollViewerEXT x:Name="Part_ScrollViewer" Focusable="false">
                             <local:ScrollViewerEXT.Template>
@@ -251,7 +254,7 @@
                                                    Maximum="{TemplateBinding ScrollableHeight}"
                                                    Orientation="Vertical" 
                                                    Style="{StaticResource for_scrollbar}"
-                                                   Width="{Binding ScrollBarWidth, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}}"
+                                                   Width="{Binding Path=(local:AncestorBridge.Host).ScrollBarWidth, RelativeSource={RelativeSource Self}}"
                                                    Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" 
                                                    Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" 
                                                    ViewportSize="{TemplateBinding ViewportHeight}"/>
@@ -260,7 +263,7 @@
                                                    Maximum="{TemplateBinding ScrollableWidth}"
                                                    Orientation="Horizontal" VerticalAlignment="Bottom"
                                                    Style="{StaticResource for_scrollbar}"
-                                                   Height="{Binding ScrollBarWidth, RelativeSource={RelativeSource AncestorType={x:Type local:DataGridEXT}}}"
+                                                   Height="{Binding Path=(local:AncestorBridge.Host).ScrollBarWidth, RelativeSource={RelativeSource Self}}"
                                                    Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" 
                                                    Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" 
                                                    ViewportSize="{TemplateBinding ViewportWidth}"/>

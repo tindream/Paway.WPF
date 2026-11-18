@@ -13,17 +13,17 @@
       Title="TestExpander">
     <Border BorderBrush="LightGray" Margin="20" Background="{StaticResource ThemeBackground}">
         <DockPanel>
-            <ExpanderEXT ExpandDirection="Left" DockPanel.Dock="Left" Header="Left" Padding="5">
-                <Label Width="200"/>
+            <ExpanderEXT ExpandDirection="Left" DockPanel.Dock="Left" Header="Left" Padding="5" IsExpanded="True" Width="200">
+                <TextBoxEXT />
             </ExpanderEXT>
-            <ExpanderEXT ExpandDirection="Right" DockPanel.Dock="Right" Header="Right">
-                <Label Width="200"/>
+            <ExpanderEXT ExpandDirection="Right" DockPanel.Dock="Right" Header="Right"  Width="200">
+                <TextBoxEXT/>
             </ExpanderEXT>
-            <ExpanderEXT ExpandDirection="Up" DockPanel.Dock="Top" Header="Up">
-                <Label Height="200"/>
+            <ExpanderEXT ExpandDirection="Up" DockPanel.Dock="Top" Header="Up"  Height="200">
+                <TextBoxEXT />
             </ExpanderEXT>
-            <ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="Down">
-                <Label Height="200"/>
+            <ExpanderEXT ExpandDirection="Down" DockPanel.Dock="Bottom" Header="Down" Height="200">
+                <TextBoxEXT />
             </ExpanderEXT>
             <Border/>
         </DockPanel>
