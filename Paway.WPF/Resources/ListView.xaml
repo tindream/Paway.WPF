@@ -27,6 +27,8 @@
                             Background="{TemplateBinding Background}"
                             Padding="{TemplateBinding Padding}">
                         <local:ScrollViewerEXT x:Name="Part_ScrollViewer" 
+                                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                                HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                                VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
                             <WrapPanel  x:Name="WrapPanel" Orientation="{Binding Orientation, RelativeSource={RelativeSource AncestorType={x:Type local:ListViewEXT}}}" IsItemsHost="True" />

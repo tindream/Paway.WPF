@@ -69,7 +69,7 @@
                                        VerticalAlignment="Top" 
                                        HorizontalAlignment="Left"/>
                             <ScrollViewer x:Name="SubMenuScrollViewer"
-                                      Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
+                                          Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
                                 <Grid RenderOptions.ClearTypeHint="Enabled">
                                     <Canvas HorizontalAlignment="Left"
                                         Height="0"

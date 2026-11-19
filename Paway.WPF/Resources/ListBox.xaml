@@ -21,6 +21,8 @@
                             Background="{TemplateBinding Panel.Background}"
                             CornerRadius="{TemplateBinding Radius}">
                         <local:ScrollViewerEXT x:Name="Part_ScrollViewer"
+                                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                                HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                                VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
                             <ItemsPresenter />

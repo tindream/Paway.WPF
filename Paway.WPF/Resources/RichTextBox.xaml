@@ -32,6 +32,8 @@
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 CornerRadius="{TemplateBinding Radius}"/>
                         <local:ScrollViewerEXT x:Name="Part_ScrollViewer" Margin="{TemplateBinding BorderThickness}" Focusable="False" 
+                                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                                HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                                VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
                             <ScrollViewer x:Name="PART_ContentHost" 

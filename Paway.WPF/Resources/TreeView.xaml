@@ -206,10 +206,12 @@
                             BorderThickness="{TemplateBinding Border.BorderThickness}"
                             BorderBrush="{Binding Path=ItemBrush.Normal.Result, RelativeSource={RelativeSource TemplatedParent}}">
                         <local:ScrollViewerEXT x:Name="Part_ScrollViewer"
-                                      HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
-                                      VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
-                                      Background="{TemplateBinding Panel.Background}"
-                                      Focusable="False">
+                                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                               HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                               VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                               Background="{TemplateBinding Panel.Background}"
+                                               Focusable="False">
                             <ItemsPresenter />
                         </local:ScrollViewerEXT>
                     </Border>

@@ -45,7 +45,8 @@
                                        Source="{TemplateBinding Icon}"
                                        Stretch="{TemplateBinding IconStretch}"/>
                                 <ScrollViewer x:Name="PART_ContentHost" Grid.Column="1"
-                                              VerticalAlignment="Center"
+                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                               HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                               VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
                                 </ScrollViewer>

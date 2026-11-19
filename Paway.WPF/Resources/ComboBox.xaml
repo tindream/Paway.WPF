@@ -131,6 +131,8 @@
                                 <Line X1="1.5" X2="{Binding ActualWidth, ElementName=border, Converter={StaticResource valueAddConverter}, ConverterParameter=-1.5}" 
                                       Y1="1" Y2="1" StrokeThickness="2" Stroke="Transparent" RenderOptions.EdgeMode="Aliased" />
                                 <ScrollViewer CanContentScroll="True"
+                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                               HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                               VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
                                     <!--StackPanel 用于显示子级，方法是将 IsItemsHost 设置为 True-->
