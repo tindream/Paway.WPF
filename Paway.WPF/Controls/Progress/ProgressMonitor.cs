@@ -32,13 +32,8 @@ namespace Paway.WPF
         private static void Progress_Loaded(object sender, RoutedEventArgs e)
         {
             if (!(sender is Progress progress)) return;
-            var width = 20d;
-            var height = 20d;
-            //if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(progress) == false)
-            {
-                width = double.IsNaN(progress.Width) == false ? progress.Width : progress.ActualWidth;
-                height = double.IsNaN(progress.Height) == false ? progress.Height : progress.ActualHeight;
-            }
+            var width = double.IsNaN(progress.Width) == false ? progress.Width : progress.ActualWidth;
+            var height = double.IsNaN(progress.Height) == false ? progress.Height : progress.ActualHeight;
             progress.TemplateSettings = new ProgressTemplate(Math.Min(width, height));
         }
         /// <summary>

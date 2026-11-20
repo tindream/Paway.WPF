@@ -14,7 +14,7 @@
     <Border BorderBrush="LightGray" Margin="20" Background="{StaticResource ThemeBackground}">
         <StackPanel>
             <Progress Width="40" Height="40" />
-            <ProgressBarEXT Value="{Binding Value}" Minimum="-20" Maximum="50" Name="progress" SmallChange="0.2"/>
+            <ProgressBarEXT Value="{Binding Value}" Minimum="0" Maximum="100" Name="progress" SmallChange="0.2"/>
             <ProgressRound Value="{Binding Value}" Width="70" IDrag="True" Angle="280" AngleStart="-140"/>
             <ProgressBoard Value="{Binding Value}" Width="70" />
         </StackPanel>

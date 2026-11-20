@@ -33,13 +33,22 @@
                                         Color="{Binding ForegroundColorLinear.End, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource valueConverter}}" />
                                 </LinearGradientBrush>
                             </Border.Background>
-                            <Label Name="txt" Visibility="{TemplateBinding IText, Converter={StaticResource boolToVisible}}"
-                                   FontSize="{TemplateBinding FontSize,Converter={StaticResource valueMultiConverter}}"
-                                   Opacity="0.8" 
-                                   Padding="5,5"
-                                   Foreground="{TemplateBinding Foreground}"
-                                   Content="{TemplateBinding ProgressValue}"/>
                         </Border>
+                        <!--
+                            进度文本独立于 PART_Indicator：
+                            ProgressBar 会按进度比例给 PART_Indicator 写入显式宽度，文本若在其内部
+                            被窄宽度测量，Value 较小时会被裁成空白。
+                            放到轨道层叠层后由 ProgressBarBase 计算偏移量，居中跟随指示器，
+                            装不下时贴左、超出部分向右溢出显示
+                        -->
+                        <Label Name="txt" Visibility="{TemplateBinding IText, Converter={StaticResource boolToVisible}}"
+                               FontSize="{TemplateBinding FontSize,Converter={StaticResource valueMultiConverter}}"
+                               Opacity="0.8" 
+                               Padding="5"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Foreground="{TemplateBinding Foreground}"
+                               Content="{TemplateBinding ProgressValue}"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Orientation" Value="Vertical">

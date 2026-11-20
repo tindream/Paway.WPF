@@ -49,14 +49,14 @@
                             <VisualStateGroup x:Name="ActiveStates">
                                 <VisualState x:Name="Inactive" />
                                 <VisualState x:Name="Active">
+                                    <!--
+                                        这里只保留"纯渲染线程可独立动画"的属性：Opacity、RotateTransform.Angle。
+                                        原先还有一段 ObjectAnimationUsingKeyFrames 把 Ring.Visibility 设为 Visible，
+                                        它属于依赖动画：每次 Forever 循环重放都会在 UI 线程写一次 Visibility，
+                                        一旦值真的变化就会触发 measure/arrange + 渲染重新提交，
+                                        UI 一忙就直接表现为指针卡一下。改为下方 ControlTemplate.Triggers 静态设置。
+                                    -->
                                     <Storyboard RepeatBehavior="Forever">
-                                        <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="Ring" Storyboard.TargetProperty="Visibility">
-                                            <DiscreteObjectKeyFrame KeyTime="0">
-                                                <DiscreteObjectKeyFrame.Value>
-                                                    <Visibility>Visible</Visibility>
-                                                </DiscreteObjectKeyFrame.Value>
-                                            </DiscreteObjectKeyFrame>
-                                        </ObjectAnimationUsingKeyFrames>
                                         <DoubleAnimationUsingKeyFrames Storyboard.TargetName="E1" Storyboard.TargetProperty="Opacity" BeginTime="0">
                                             <DiscreteDoubleKeyFrame KeyTime="0" Value="1" />
                                             <DiscreteDoubleKeyFrame KeyTime="0:0:3.21" Value="1" />
@@ -226,6 +226,15 @@
                             </Canvas>
                         </Grid>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <!--
+                            显隐用普通 Trigger 静态切换：只在 IsActive 变化时计算一次，
+                            不再进入 Forever 动画时钟里反复求值
+                        -->
+                        <Trigger Property="IsActive" Value="True">
+                            <Setter TargetName="Ring" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
