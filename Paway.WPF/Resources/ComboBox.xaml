@@ -197,7 +197,7 @@
                          "HorizontalContentAlignment ← FindAncestor ItemsControl" 的绑定生效 -->
                     <Setter Property="Padding" Value="{Binding Path=(local:AncestorBridge.Host).Padding, RelativeSource={RelativeSource Self}}"/>
                     <Setter Property="HorizontalContentAlignment" Value="{Binding Path=(local:AncestorBridge.Host).HorizontalContentAlignment, RelativeSource={RelativeSource Self}}"/>
-                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="VerticalContentAlignment" Value="{Binding Path=(local:AncestorBridge.Host).VerticalContentAlignment, RelativeSource={RelativeSource Self}}"/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate  TargetType="{x:Type ComboBoxItem}">

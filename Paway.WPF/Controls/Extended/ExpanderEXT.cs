@@ -14,6 +14,10 @@ namespace Paway.WPF
     public class ExpanderEXT : Expander
     {
         private double lastSize = double.NaN;
+        /// <summary>
+        /// 折叠动画期间临时限制的最大尺寸（展开时还原）
+        /// </summary>
+        private double? lastMaxSize;
         #region 依赖属性
         /// <summary>
         /// </summary>
@@ -132,12 +136,19 @@ namespace Paway.WPF
                     case ExpandDirection.Down:
                     case ExpandDirection.Up:
                         this.lastSize = this.Height;
+                        //折叠动画要到下一帧才生效，此前的布局会按自动尺寸重新测量内容，
+                        //内容较多（含滚动条）时会先撑满父容器再收起，表现为“闪现更大范围”，
+                        //这里先锁定当前实际尺寸，保证动画过程中尺寸只减不增
+                        this.lastMaxSize = this.MaxHeight;
+                        if (this.ActualHeight > 0) this.MaxHeight = this.ActualHeight;
                         this.Height = double.NaN;
                         break;
                     case ExpandDirection.Left:
                     case ExpandDirection.Right:
                         suffix = ExpandDirection.ToString();
                         this.lastSize = this.Width;
+                        this.lastMaxSize = this.MaxWidth;
+                        if (this.ActualWidth > 0) this.MaxWidth = this.ActualWidth;
                         this.Width = double.NaN;
                         break;
                 }
@@ -157,11 +168,21 @@ namespace Paway.WPF
                 {
                     case ExpandDirection.Down:
                     case ExpandDirection.Up:
+                        if (this.lastMaxSize.HasValue)
+                        {
+                            this.MaxHeight = this.lastMaxSize.Value;
+                            this.lastMaxSize = null;
+                        }
                         this.Height = this.lastSize;
                         break;
                     case ExpandDirection.Left:
                     case ExpandDirection.Right:
                         suffix = ExpandDirection.ToString();
+                        if (this.lastMaxSize.HasValue)
+                        {
+                            this.MaxWidth = this.lastMaxSize.Value;
+                            this.lastMaxSize = null;
+                        }
                         this.Width = this.lastSize;
                         break;
                 }
